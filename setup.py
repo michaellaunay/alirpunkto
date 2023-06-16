@@ -19,6 +19,9 @@ requires = [
     'pyramid_zodbconn',
     'transaction',
     'ZODB',
+    'pytz',
+    'deform',
+    'pyramid_handlers'
 ]
 
 tests_require = [

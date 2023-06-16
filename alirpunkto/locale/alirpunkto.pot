@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "welcome_msg"
+msgstr "Welcome"
+
+msgid "username_label"
+msgstr "Username"
+
+msgid "password_label"
+msgstr "Password"
+
+msgid "login_label"
+msgstr "Login"
+
+msgid "register_label"
+msgstr "Create account"
+
+msgid "forgot_password_label"
+msgstr "Forgot password?"
+
+msgid "Full name as in ID"
+msgstr ""
+
+msgid "Birthdate"
+msgstr ""
+
+msgid "Nationality"
+msgstr ""
+
+msgid "Cooperator number"
+msgstr ""
+
+msgid "Pseudonym"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "First interaction language"
+msgstr ""
+
+msgid "Second interaction language"
+msgstr ""
+
+msgid "Usual first name"
+msgstr ""
+
+msgid "Usual surname"
+msgstr ""
+
+msgid "Postal code"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Forgot Password"
+msgstr ""
+
+msgid "Forgot your password?"
+msgstr ""
+
+msgid "Enter your email address:"
+msgstr ""
+
+msgid "Submit"
+msgstr ""

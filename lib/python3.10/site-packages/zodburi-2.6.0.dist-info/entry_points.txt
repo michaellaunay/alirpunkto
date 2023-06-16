@@ -1,0 +1,6 @@
+[zodburi.resolvers]
+demo = zodburi.resolvers:demo_storage_resolver
+file = zodburi.resolvers:file_storage_resolver
+memory = zodburi.resolvers:mapping_storage_resolver
+zconfig = zodburi.resolvers:zconfig_resolver
+zeo = zodburi.resolvers:client_storage_resolver

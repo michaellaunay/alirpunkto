@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:tal="http://xml.zope.org/namespaces/tal">
+  <body>
+    <form method="POST">
+      <div>
+        <label>${_('Full name as in ID')}:</label>
+        <input type="text" name="fullname" tal:attributes="value request.POST.fullname" />
+      </div>
+
+      <div>
+        <label>${_('Birthdate')}:</label> 
+        <input type="date" name="birthdate" tal:attributes="value request.POST.birthdate" />
+      </div>
+
+      <div>
+        <label>${_('Nationality')}:</label>
+        <input type="text" name="nationality" tal:attributes="value request.POST.nationality" />
+      </div>
+
+      <div>
+        <label>${_('Cooperator number')}:</label>
+        <input type="text" name="cooperative_number" tal:attributes="value request.POST.cooperative_number" />
+      </div>
+
+      <div>
+        <label>${_('Pseudonym')}:</label>
+        <input type="text" name="pseudonym" tal:attributes="value request.POST.pseudonym" required />
+      </div>
+
+      <div>
+        <label>${_('Email')}:</label>
+        <input type="email" name="email" tal:attributes="value request.POST.email" required />
+      </div>
+
+      <div>
+        <label>${_('First interaction language')}:</label>
+        <input type="text" name="lang1" tal:attributes="value request.POST.lang1" required />
+      </div>
+
+      <div>
+        <label>${_('Second interaction language')}:</label>
+        <input type="text" name="lang2" tal:attributes="value request.POST.lang2" required />
+      </div>
+
+      <div>
+        <label>${_('Usual first name')}:</label>
+        <input type="text" name="usual_name" tal:attributes="value request.POST.usual_name" />
+      </div>
+
+      <div>
+        <label>${_('Usual surname')}:</label>
+        <input type="text" name="usual_surname" tal:attributes="value request.POST.usual_surname" />
+      </div>
+
+      <div>
+        <label>${_('Postal code')}:</label>
+        <input type="text" name="postal_code" tal:attributes="value request.POST.postal_code" />
+      </div>
+
+      <div>
+        <label>${_('City')}:</label>
+        <input type="text" name="city" tal:attributes="value request.POST.city" />
+      </div>
+
+      <div>
+        <label>${_('Country')}:</label>
+        <input type="text" name="country" tal:attributes="value request.POST.country" />
+      </div>
+
+      <input type="submit" value="${_('Register')}" />
+    </form>
+  </body>
+</html>
+

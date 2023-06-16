@@ -13,47 +13,38 @@ Clone this repository
 ```bash
 cd YourWorkingFolder
 git clone git@github.com:michaellaunay/alirpunkto.git
+python3 -m venv alirpunkto
 cd alirpunkto
-```
-
-Create a virtual environment named pyramid, for example
-```bash
-python3 -m venv pyramid
 ```
 
 Activate this virtual environment
 ```bash
-source pyramid/bin/activate
+source bin/activate
 ```
 
-Update it
+Update
 ```bash
-pip install --upgrade pip setuptools
+bin/pip install --upgrade pip setuptools
 ```
 
-Install Pyramid
-```bash
-pip install pyramid
-```
+We need ZODB to store vote and session informations.
 
-The initial workspace was created with the commands below.
-Normally, you won't have to do this again
-```bash
-pip install cookiecutter
-cookiecutter gh:Pylons/pyramid-cookiecutter-starter
-```
-And select these options
-```
-project_name: alirpunkto
-repo_name: alirpunkto
-Select template_language:
-2 - chameleon
-Choose from 1, 2, 3 [1]: 2
-Select backend:
-3 - zodb
-Choose from 1, 2, 3 [1]: 3
-```
+# Getting Started
 
-We need ZODB to store vote information.
+- Change directory into your newly created project if not already there. Your
+  current directory should be the same as this README.txt file and setup.py.
 
+    cd alirpunkto
+
+- Install the project in editable mode with its testing requirements.
+
+    env/bin/pip install -e ".[testing]"
+
+- Run your project's tests.
+
+    bin/pytest
+
+- Run your project.
+
+    bin/pserve development.ini
 

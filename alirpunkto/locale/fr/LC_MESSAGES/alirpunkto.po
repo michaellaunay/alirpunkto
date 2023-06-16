@@ -1,0 +1,85 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Michael Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"Language: fr\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2023-06-15 23:26+0200\n"
+"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "welcome_msg"
+msgstr "Bienvenue"
+
+msgid "username_label"
+msgstr "Identifiant"
+
+msgid "password_label"
+msgstr "Mot de passe"
+
+msgid "login_label"
+msgstr "Se connecter"
+
+msgid "register_label"
+msgstr "Créer un compte"
+
+msgid "forgot_password_label"
+msgstr "Mot de passe oublié ?"
+
+msgid "Full name as in ID"
+msgstr "Nom complet comme sur la carte d'identité"
+
+msgid "Birthdate"
+msgstr "Date de naissance"
+
+msgid "Nationality"
+msgstr "Nationalité"
+
+msgid "Cooperator number"
+msgstr "Numéro de coopérateur"
+
+msgid "Pseudonym"
+msgstr "Pseudonyme"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "First interaction language"
+msgstr "Première langue d'interaction"
+
+msgid "Second interaction language"
+msgstr "Deuxième langue d'interaction"
+
+msgid "Usual first name"
+msgstr "Prénom usuel"
+
+msgid "Usual surname"
+msgstr "Nom usuel"
+
+msgid "Postal code"
+msgstr "Code postal"
+
+msgid "City"
+msgstr "Ville"
+
+msgid "Country"
+msgstr "Pays"
+
+msgid "Register"
+msgstr "S'inscrire"
+
+msgid "Forgot Password"
+msgstr "Mot de passe oublié"
+
+msgid "Forgot your password?"
+msgstr "Vous avez oublié votre mot de passe ?"
+
+msgid "Enter your email address:"
+msgstr "Entrez votre adresse e-mail :"
+
+msgid "Submit"
+msgstr "Envoyer"

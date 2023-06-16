@@ -1,0 +1,5 @@
+[console_scripts]
+runzeo = ZEO.runzeo:main
+zeo-nagios = ZEO.nagios:main
+zeoctl = ZEO.zeoctl:main
+zeopack = ZEO.scripts.zeopack:main
