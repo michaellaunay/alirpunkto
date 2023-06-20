@@ -1,3 +1,0 @@
-<div>
-  <p class="form-control-static" id="${oid|field.oid}">${year}/${month}/${day}</p>
-</div>
