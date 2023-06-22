@@ -2,7 +2,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
 
-@view_config(route_name='login', renderer='../templates/login.pt')
+@view_config(route_name='login', renderer='alirpunkto:templates/login.pt')
 def login_view(request):
     """Login view.
 

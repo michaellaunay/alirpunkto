@@ -49,6 +49,20 @@ cd alirpunkto
 env/bin/pip install -e ".[testing]"
 ```
 
+- Create de var folder
+
+```bash
+mkdir var
+```
+
+- Create the secret file with your keys
+
+```bash
+cp .env.example .env
+```
+
+And change the secrets inside.
+
 - Run your project's tests.
 
 ```bash

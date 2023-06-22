@@ -26,56 +26,56 @@ msgstr "Create account"
 msgid "forgot_password_label"
 msgstr "Forgot password?"
 
-msgid "Full name as in ID"
-msgstr ""
+msgid "full_name_as_in_id"
+msgstr "Full name as in ID"
 
-msgid "Birthdate"
-msgstr ""
+msgid "birthdate_label"
+msgstr "Birthdate"
 
-msgid "Nationality"
-msgstr ""
+msgid "nationality_label"
+msgstr "Nationality"
 
-msgid "Cooperator number"
-msgstr ""
+msgid "cooperator_number_label"
+msgstr "Cooperator number"
 
-msgid "Pseudonym"
-msgstr ""
+msgid "pseudonym_label"
+msgstr "Pseudonym"
 
-msgid "Email"
-msgstr ""
+msgid "email_label"
+msgstr "Email"
 
-msgid "First interaction language"
-msgstr ""
+msgid "first_interaction_language_label"
+msgstr "First interaction language"
 
-msgid "Second interaction language"
-msgstr ""
+msgid "second_interaction_language_label"
+msgstr "Second interaction language"
 
-msgid "Usual first name"
-msgstr ""
+msgid "usual_first_name_label"
+msgstr "Usual first name"
 
-msgid "Usual surname"
-msgstr ""
+msgid "usual_surname_label"
+msgstr "Usual surname"
 
-msgid "Postal code"
-msgstr ""
+msgid "postal_code_label"
+msgstr "Postal code"
 
-msgid "City"
-msgstr ""
+msgid "city_label"
+msgstr "City"
 
-msgid "Country"
-msgstr ""
+msgid "country_label"
+msgstr "Country"
 
-msgid "Register"
-msgstr ""
+msgid "register_label"
+msgstr "Register"
 
-msgid "Forgot Password"
-msgstr ""
+msgid "forgot_password_head"
+msgstr "Forgot Password"
 
-msgid "Forgot your password?"
-msgstr ""
+msgid "forgot_your_password_title"
+msgstr "Forgot your password?"
 
-msgid "Enter your email address:"
-msgstr ""
+msgid "enter_your_email_address_label"
+msgstr "Enter your email address:"
 
-msgid "Submit"
-msgstr ""
+msgid "submit_button"
+msgstr "Submit"

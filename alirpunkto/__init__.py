@@ -1,4 +1,5 @@
 import os, pytz
+from dotenv import load_dotenv
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
 from pyramid.i18n import get_localizer, TranslationStringFactory
@@ -8,11 +9,27 @@ import logging
 
 from .models import appmaker
 
+load_dotenv() # take environment variables from .env.
+
+# SECRET_KEY is used for cookie signing
+# This information is stored in environment variables
+# See https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/security.html
+SECRET_KEY = os.getenv("SECRET_KEY")
+
+# LDAP informations are stored in environment variables
+LDAP_SERVER = os.getenv("LDAP_SERVER") 
+LDAP_BASE_DN = os.getenv("LDAP_BASE_DN")
+LDAP_LOGIN = os.getenv("LDAP_LOGIN")
+LDAP_PASSWORD = os.getenv("LDAP_PASSWORD")
+
+# logging configuration
 log = logging.getLogger('alirpunkto')
 
+# TranslationStringFactory is used to translate strings
 _ = TranslationStringFactory('alirpunkto')
 
-DEFAULT_SESSION_TIMEOUT = 25200
+# Default session timeout is getting from environment variable or set to 7 hours
+DEFAULT_SESSION_TIMEOUT = int(os.getenv("DEFAULT_SESSION_TIMEOUT", 7*60*60))
 
 EUROPEAN_LOCALES = {
     'esp': _('Esperanto'),
@@ -58,6 +75,8 @@ LANGUAGES_TITLES = {'en': 'English',
 
 @subscriber(NewRequest)
 def add_localizer(event):
+    """add_localizer is used to add the localizer to the request
+    """
     request = event.request
     localizer = get_localizer(request)
     
@@ -69,12 +88,26 @@ def add_localizer(event):
     request.registry.localizer = localizer
     request.registry.translate = auto_translate
 
+def add_renderer_globals(event):
+    """add_renderer_globals is used to add the localizer to the renderer globals
+    """
+    request = event['request'] # get the request from the event
+    event['_'] = request.registry.translate # add the auto_translate function to the renderer globals
+    event['localizer'] = request.localizer # add the localizer to the renderer globals
 
 def get_time_zone(request):
     #TODO get user timezone
     return pytz.timezone('Europe/Paris')
 
 def locale_negotiator(request):
+    """locale_negotiator is used to get the locale from the request
+
+    Args:
+        request (pyramid.request.Request): the request
+
+    Returns:
+        str: the locale
+    """
     locale = default_locale_negotiator(request)
     if locale is None and getattr(request, 'accept_language', None):
         locale = request.accept_language.best_match(AVAILABLE_LANGUAGES)
@@ -82,6 +115,8 @@ def locale_negotiator(request):
     return locale
 
 def root_factory(request):
+    """root_factory is used to create the root object of the ZODB database
+    """
     conn = get_connection(request)
     return appmaker(conn.root())
 
@@ -102,4 +137,6 @@ def main(global_config, **settings):
         config.scan()
         config.add_translation_dirs('alirpunkto:locale/')
         config.set_locale_negotiator(locale_negotiator)       
+        config.add_request_method(get_time_zone, 'tz', reify=True) # add tz to the request
+        config.add_subscriber(add_renderer_globals, 'pyramid.events.BeforeRender')
     return config.make_wsgi_app()

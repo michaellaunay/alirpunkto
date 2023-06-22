@@ -1,29 +1,24 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:tal="http://xml.zope.org/namespaces/tal" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-<head>
-    <title i18n:translate="Login" i18n:domain="alirpunkto">Login</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta1/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h1 class="text-center" i18n:translate="welcome_msg">Welcome</h1>
-        <form method="POST" action="${request.route_url('login')}">
-            <div class="mb-3">
-                <label class="form-label" i18n:translate="username_label">Username</label>
-                <input type="text" class="form-control" name="username" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" i18n:translate="password_label">Password</label>
-                <input type="password" class="form-control" name="password" required>
-            </div>
-            <div class="mb-3">
-                <input type="submit" class="btn btn-primary" value="Login" i18n:attributes="value login_label">
-                <a class="btn btn-secondary" href="${request.route_url('register')}">Create account</a>
-            </div>
-            <div class="mb-3">
-                <a href="${request.route_url('forgot_password')}" i18n:translate="forgot_password_label">Forgot password?</a>
-            </div>
-        </form>
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+        <div class="container">
+            <h1 class="text-center" i18n:translate="welcome_msg">Welcome</h1>
+            <form method="POST" action="${request.route_url('login')}">
+                <div class="mb-3">
+                    <label class="form-label" i18n:translate="username_label">Username</label>
+                    <input type="text" class="form-control" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" i18n:translate="password_label">Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-primary" value="Login" i18n:attributes="value login_label">
+                    <a class="btn btn-secondary" href="${request.route_url('register')}">Create account</a>
+                </div>
+                <div class="mb-3">
+                    <a href="${request.route_url('forgot_password')}" i18n:translate="forgot_password_label">Forgot password?</a>
+                </div>
+            </form>
+        </div>
     </div>
-</body>
-</html>
+</div>

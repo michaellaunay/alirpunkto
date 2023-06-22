@@ -28,58 +28,58 @@ msgid "register_label"
 msgstr "Créer un compte"
 
 msgid "forgot_password_label"
-msgstr "Mot de passe oublié ?"
-
-msgid "Full name as in ID"
-msgstr "Nom complet comme sur la carte d'identité"
-
-msgid "Birthdate"
-msgstr "Date de naissance"
-
-msgid "Nationality"
-msgstr "Nationalité"
-
-msgid "Cooperator number"
-msgstr "Numéro de coopérateur"
-
-msgid "Pseudonym"
-msgstr "Pseudonyme"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "First interaction language"
-msgstr "Première langue d'interaction"
-
-msgid "Second interaction language"
-msgstr "Deuxième langue d'interaction"
-
-msgid "Usual first name"
-msgstr "Prénom usuel"
-
-msgid "Usual surname"
-msgstr "Nom usuel"
-
-msgid "Postal code"
-msgstr "Code postal"
-
-msgid "City"
-msgstr "Ville"
-
-msgid "Country"
-msgstr "Pays"
-
-msgid "Register"
-msgstr "S'inscrire"
-
-msgid "Forgot Password"
-msgstr "Mot de passe oublié"
-
-msgid "Forgot your password?"
 msgstr "Vous avez oublié votre mot de passe ?"
 
-msgid "Enter your email address:"
-msgstr "Entrez votre adresse e-mail :"
+msgid "full_name_as_in_id"
+msgstr "Nom complet comme sur la carte d'identité"
 
-msgid "Submit"
+msgid "birthdate_label"
+msgstr "Date de naissance"
+
+msgid "nationality_label"
+msgstr "Nationalité"
+
+msgid "cooperator_number_label"
+msgstr "Numéro de coopérateur"
+
+msgid "pseudonym_label"
+msgstr "Pseudonyme"
+
+msgid "email_label"
+msgstr "Courriel"
+
+msgid "first_interaction_language_label"
+msgstr "Première langue d'interaction"
+
+msgid "second_interaction_language_label"
+msgstr "Deuxième langue d'interaction"
+
+msgid "usual_first_name_label"
+msgstr "Prénom usuel"
+
+msgid "usual_surname_label"
+msgstr "Nom usuel"
+
+msgid "postal_code_label"
+msgstr "Code postal"
+
+msgid "city_label"
+msgstr "Ville"
+
+msgid "country_label"
+msgstr "Pays"
+
+msgid "register_label"
+msgstr "S'inscrire"
+
+msgid "forgot_password_head"
+msgstr "Mot de passe oublié"
+
+msgid "forgot_your_password_title"
+msgstr "Forgot your password?"
+
+msgid "enter_your_email_address_label"
+msgstr "Entrez votre adresse de courrier électronique :"
+
+msgid "submit_button"
 msgstr "Envoyer"

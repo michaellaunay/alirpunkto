@@ -4,6 +4,7 @@
 *$py.class
 *~
 .coverage
+.env
 coverage.xml
 build/
 dist/
@@ -11,6 +12,9 @@ dist/
 nosetests.xml
 env*/
 tmp/
+var/
+bin/
+lib/
 Data*.fs*
 *.sublime-project
 *.sublime-workspace

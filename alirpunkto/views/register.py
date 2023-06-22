@@ -1,4 +1,7 @@
-# In your Pyramid views.py
+# description: Register view
+# author: Michaël Launay
+# date: 2023-06-15
+
 
 import deform
 from deform import schema, ValidationFailure
@@ -14,67 +17,68 @@ import deform
 from deform import schema
 
 class RegisterForm(schema.CSRFSchema):
+    """Register form schema."""
     fullname = colander.SchemaNode(
         colander.String(),
-        title=_('Full name as in ID'),
+        title=_('full_name_as_in_id_label'),
         missing=""
     )
     birthdate = colander.SchemaNode(
         colander.Date(),
-        title=_('Birthdate (Cooperators only)'),
+        title=_('birthdate_label'),
         missing=""
     )
     nationality = colander.SchemaNode(
         colander.String(),
-        title=_('Nationality (Cooperators only, EU countries)'),
+        title=_('nationality_label'),
         missing=""
     )
     cooperative_number = colander.SchemaNode(
         colander.String(),
-        title=_('Cooperator number (Cooperators only)'),
+        title=_('cooperator_number_label'),
         missing=""
     )
     pseudonym = colander.SchemaNode(
         colander.String(),
-        title=_('Pseudonym'),
+        title=_('pseudonym_label'),
         validator=colander.Length(min=2)
     )
     email = colander.SchemaNode(
         colander.String(),
-        title=_('Email'),
+        title=_('email_label'),
         validator=colander.Email()
     )
     lang1 = colander.SchemaNode(
         colander.String(),
-        title=_('First interaction language'),
+        title=_('first_interaction_language_label'),
     )
     lang2 = colander.SchemaNode(
         colander.String(),
-        title=_('Second interaction language'),
+        title=_('second_interaction_language_label'),
     )
     usual_name = colander.SchemaNode(
         colander.String(),
-        title=_('Usual first name (Cooperators/Donators only)'),
+        title=_('usual_first_name_label'),
         missing=""
     )
     usual_surname = colander.SchemaNode(
         colander.String(),
-        title=_('Usual surname (Cooperators/Donators only)'),
+        title=_('usual_surname_label'),
         missing=""
     )
     postal_code = colander.SchemaNode(
         colander.String(),
-        title=_('Postal code (Cooperators/Donators only)'),
+        title=_('postal_code_label'),
         missing=""
     )
     city = colander.SchemaNode(
         colander.String(),
-        title=_('City (Cooperators/Donators only)'),
+        title=_('city_label'),
         missing=""
     )
     country = colander.SchemaNode(
         colander.String(),
-        title=_('Country (Cooperators/Donators only)'),
+        title=_('country_label'),
         missing=""
     )
 
@@ -85,8 +89,8 @@ class RegisterHandler(object):
         self.request = request
         self.schema = RegisterForm().bind(request=self.request)
 
-    @view_config(route_name='register', renderer='templates/register.pt')
-    @action(renderer='templates/register.pt')
+    @view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
+    @action(renderer='alirpunkto:templates/register.pt')
     def register(self):
         form = deform.Form(self.schema, buttons=('submit',))
 

@@ -11,11 +11,15 @@ import colander
 import deform
 from deform import schema
 
-@view_config(route_name='forgot_password', renderer='templates/forgot_password.pt')
+@view_config(route_name='forgot_password', renderer='../templates/forgot_password.pt')
 def forgot_password(request):
-    # Votre code pour gérer l'oubli du mot de passe va ici
-    # Vous pouvez utiliser la fonction send_email pour envoyer un email
-    # à l'utilisateur avec un lien pour réinitialiser son mot de passe
+    """Forgot password view.
+    Send an email to the user with a link to reset his password
+    
+    Args:
+        request (pyramid.request.Request): the request
+    """
     #@TODO: send an email to the user with a link to reset his password
+
 
     return {}
