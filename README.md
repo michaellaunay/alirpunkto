@@ -27,6 +27,11 @@ Update
 bin/pip install --upgrade pip setuptools
 ```
 
+Install pyramid
+```bash
+pip install pyramid pyramid_chameleon
+```
+
 We need ZODB to store vote and session informations.
 
 # Getting Started
@@ -34,15 +39,23 @@ We need ZODB to store vote and session informations.
 - Change directory into your newly created project if not already there. Your
   current directory should be the same as this README.txt file and setup.py.
 
-    cd alirpunkto
+```bash
+cd alirpunkto
+```
 
 - Install the project in editable mode with its testing requirements.
 
-    env/bin/pip install -e ".[testing]"
+```bash
+env/bin/pip install -e ".[testing]"
+```
 
 - Run your project's tests.
 
-    bin/pytest
+```bash
+bin/pytest
+```
+
+You should have no error !
 
 - Run your project.
 
