@@ -84,7 +84,7 @@ msgid "forgot_password_head"
 msgstr "Mot de passe oublié"
 
 msgid "forgot_your_password_title"
-msgstr "Forgot your password?"
+msgstr "Mot de passe oublié ?"
 
 msgid "enter_your_email_address_label"
 msgstr "Entrez votre adresse de courrier électronique :"

@@ -15,7 +15,7 @@ import colander
 import deform
 from deform import schema
 
-@view_config(route_name='forgot_password', renderer='../templates/forgot_password.pt')
+@view_config(route_name='forgot_password', renderer='alirpunkto:templates/forgot_password.pt')
 def forgot_password(request):
     """Forgot password view.
     Send an email to the user with a link to reset his password
