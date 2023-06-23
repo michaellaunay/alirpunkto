@@ -3,7 +3,6 @@
         <div class="container">
             <form method="POST">
                 <span tal:replace="structure form" i18n:translate="">Form Content</span>
-                <input type="submit" value="Submit" i18n:attributes="value submit_button">
             </form>
         </div>
     </div>
