@@ -1,3 +1,7 @@
+# description: forgot password view
+# author: Michaël Launay
+# date: 2023-06-15
+
 import deform
 from deform import schema, ValidationFailure
 from pyramid_handlers import action

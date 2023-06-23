@@ -1,3 +1,7 @@
+# description: Login view
+# author: Michaël Launay
+# date: 2023-06-15
+
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
