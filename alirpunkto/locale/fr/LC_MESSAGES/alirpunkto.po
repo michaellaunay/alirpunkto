@@ -32,9 +32,6 @@ msgstr "Mot de passe"
 msgid "login_label"
 msgstr "Se connecter"
 
-msgid "register_label"
-msgstr "Créer un compte"
-
 msgid "register_link"
 msgstr "Créer un compte"
 
