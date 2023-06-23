@@ -20,7 +20,7 @@ def login_view(request):
             headers = remember(request, username)
             return HTTPFound(location=request.route_url('home'), headers=headers)
         else:
-            return {'error': request.translate(_('Invalid username or password'))}
+            return {'error': request.translate(_('invalid_username_or_password'))}
 
     return {}
 

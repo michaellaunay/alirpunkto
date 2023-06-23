@@ -10,10 +10,8 @@ from pyramid_handlers import action
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 
-from pyramid.i18n import TranslationStringFactory
-
-# TranslationStringFactory is used to translate strings
-_ = TranslationStringFactory('alirpunkto')
+# _ is used to translate strings
+from .. import _
 
 class RegisterForm(schema.CSRFSchema):
     """Register form schema."""

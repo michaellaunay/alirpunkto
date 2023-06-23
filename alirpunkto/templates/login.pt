@@ -1,6 +1,6 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
-        <div class="container">
+        <div class="container"  i18n:domain="alirpunkto">
             <h1 class="text-center" i18n:translate="welcome_msg">Welcome</h1>
             <form method="POST" action="${request.route_url('login')}">
                 <div class="mb-3">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="mb-3">
                     <input type="submit" class="btn btn-primary" value="Login" i18n:attributes="value login_label">
-                    <a class="btn btn-secondary" href="${request.route_url('register')}">Create account</a>
+                    <a class="btn btn-secondary" href="${request.route_url('register')}" i18n:translate="register_link">Create account</a>
                 </div>
                 <div class="mb-3">
                     <a href="${request.route_url('forgot_password')}" i18n:translate="forgot_password_label">Forgot password?</a>
