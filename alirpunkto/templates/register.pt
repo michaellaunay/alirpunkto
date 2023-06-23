@@ -2,75 +2,9 @@
     <div metal:fill-slot="content">
         <div class="container">
             <form method="POST">
-                <div>
-                    <label i18n:translate="full_name_as_in_id_label">Full name as in id</label>
-                    <input type="text" name="fullname" tal:attributes="value request.POST.fullname" />
-                </div>
-
-                <div>
-                    <label i18n:translate="birthdate_label">Birthdate</label> 
-                    <input type="date" name="birthdate" tal:attributes="value request.POST.birthdate" />
-                </div>
-
-                <div>
-                    <label i18n:translate="nationality_label">Nationality</label>
-                    <input type="text" name="nationality" tal:attributes="value request.POST.nationality" />
-                </div>
-
-                <div>
-                    <label i18n:translate="cooperator_number_label">Cooperator number</label>
-                    <input type="text" name="cooperative_number" tal:attributes="value request.POST.cooperative_number" />
-                </div>
-
-                <div>
-                    <label i18n:translate="pseudonym_label">Pseudonym</label>
-                    <input type="text" name="pseudonym" tal:attributes="value request.POST.pseudonym" required />
-                </div>
-
-                <div>
-                    <label i18n:translate="email_label">Email</label>
-                    <input type="email" name="email" tal:attributes="value request.POST.email" required />
-                </div>
-
-                <div>
-                    <label i18n:translate="first_interaction_language_label">First interaction language</label>
-                    <input type="text" name="lang1" tal:attributes="value request.POST.lang1" required />
-                </div>
-
-                <div>
-                    <label i18n:translate="second_interaction_language_label">Second interaction language</label>
-                    <input type="text" name="lang2" tal:attributes="value request.POST.lang2" required />
-                </div>
-
-                <div>
-                    <label i18n:translate="usual_first_name_label">Usual first name</label>
-                    <input type="text" name="usual_name" tal:attributes="value request.POST.usual_name" />
-                </div>
-
-                <div>
-                    <label i18n:translate="usual_surname_label">Usual surname</label>
-                    <input type="text" name="usual_surname" tal:attributes="value request.POST.usual_surname" />
-                </div>
-
-                <div>
-                    <label i18n:translate="postal_code_label">Postal code</label>
-                    <input type="text" name="postal_code" tal:attributes="value request.POST.postal_code" />
-                </div>
-
-                <div>
-                    <label i18n:translate="city_label">City</label>
-                    <input type="text" name="city" tal:attributes="value request.POST.city" />
-                </div>
-
-                <div>
-                    <label i18n:translate="country_label">Country</label>
-                    <input type="text" name="country" tal:attributes="value request.POST.country" />
-                </div>
-
-                <input type="submit" value="Submit" i18n:attributes="value submit_button" />
+                <span tal:replace="structure form" i18n:translate="">Form Content</span>
+                <input type="submit" value="Submit" i18n:attributes="value submit_button">
             </form>
         </div>
     </div>
 </div>
-
-

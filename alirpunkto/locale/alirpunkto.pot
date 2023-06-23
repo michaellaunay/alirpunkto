@@ -26,7 +26,7 @@ msgstr "Create account"
 msgid "forgot_password_label"
 msgstr "Forgot password?"
 
-msgid "full_name_as_in_id"
+msgid "full_name_as_in_id_label"
 msgstr "Full name as in ID"
 
 msgid "birthdate_label"

@@ -5,16 +5,15 @@
 
 import deform
 from deform import schema, ValidationFailure
+import colander
 from pyramid_handlers import action
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 
 from pyramid.i18n import TranslationStringFactory
-_ = TranslationStringFactory('alirpunkto')
 
-import colander
-import deform
-from deform import schema
+# TranslationStringFactory is used to translate strings
+_ = TranslationStringFactory('alirpunkto')
 
 class RegisterForm(schema.CSRFSchema):
     """Register form schema."""
@@ -82,25 +81,20 @@ class RegisterForm(schema.CSRFSchema):
         missing=""
     )
 
-    
 
-class RegisterHandler(object):
-    def __init__(self, request):
-        self.request = request
-        self.schema = RegisterForm().bind(request=self.request)
+@view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
+def register(request):
+    schema = RegisterForm().bind(request=request)
+    translator = request.localizer.translate
+    form = deform.Form(schema, buttons=('submit',), translator=translator)
 
-    @view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
-    @action(renderer='alirpunkto:templates/register.pt')
-    def register(self):
-        form = deform.Form(self.schema, buttons=('submit',))
+    if 'submit' in request.POST:
+        controls = request.POST.items()
+        try:
+            appstruct = form.validate(controls)
+            # @TODO Utiliser appstruct pour créer un nouvel utilisateur ici...
+            return HTTPFound(location=request.route_url('success'))
+        except ValidationFailure as e:
+            return {'form': e.render()}
 
-        if 'submit' in self.request.POST:
-            controls = self.request.POST.items()
-            try:
-                appstruct = form.validate(controls)
-                # Utilisez appstruct pour créer un nouvel utilisateur ici...
-                return HTTPFound(location=self.request.route_url('success'))
-            except ValidationFailure as e:
-                return {'form': e.render()}
-
-        return {'form': form.render()}
+    return {'form': form.render()}
