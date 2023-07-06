@@ -29,7 +29,7 @@ bin/pip install --upgrade pip setuptools
 
 Install pyramid
 ```bash
-pip install pyramid pyramid_chameleon
+pip install pyramid pyramid_chameleon python-dotenv ldap3
 ```
 
 We need ZODB to store vote and session informations.
@@ -46,7 +46,7 @@ cd alirpunkto
 - Install the project in editable mode with its testing requirements.
 
 ```bash
-env/bin/pip install -e ".[testing]"
+bin/pip install -e ".[testing]"
 ```
 
 - Create de var folder
