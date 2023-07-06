@@ -11,6 +11,9 @@
                     <label class="form-label" i18n:translate="password_label">Password</label>
                     <input type="password" class="form-control" name="password" required>
                 </div>
+                <div>
+                    <input type="hidden" name="form.submitted" value="true">
+                </div>
                 <div class="mb-3">
                     <input type="submit" class="btn btn-primary" value="Login" i18n:attributes="value login_label">
                     <a class="btn btn-secondary" href="${request.route_url('register')}" i18n:translate="register_link">Create account</a>

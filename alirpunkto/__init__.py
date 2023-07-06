@@ -19,6 +19,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # LDAP informations are stored in environment variables
 LDAP_SERVER = os.getenv("LDAP_SERVER") 
 LDAP_BASE_DN = os.getenv("LDAP_BASE_DN")
+LDAP_OU = os.getenv("LDAP_OU")
 LDAP_LOGIN = os.getenv("LDAP_LOGIN")
 LDAP_PASSWORD = os.getenv("LDAP_PASSWORD")
 
@@ -131,6 +132,7 @@ def main(global_config, **settings):
         config.include('pyramid_zodbconn')
         config.include('.routes')
         config.set_root_factory(root_factory)
+        config.add_route('home', '/')
         config.add_route('login', '/login')
         config.add_route('register', '/register')
         config.add_route('forgot_password', '/forgot_password')
