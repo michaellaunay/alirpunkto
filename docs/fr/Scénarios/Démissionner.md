@@ -1,13 +1,13 @@
 # Résumé
 
-Scénario de désabonnement
+Scénario de démission.
 
 # Étapes
 
 1. Le Membre se connecte à AlirPunkto ;
 2. AlirPunkto retourne la page de profil du Membre ;
 3. Le Membre demande à désactiver son compte ;
-4. AlirPunkto affiche une page de confirmation avec les implications du désabonnement ;
+4. AlirPunkto affiche une page de confirmation avec les implications de la démission ;
 5. Si le Membre confirme :
     1. AlirPunkto change l'état de l'objet `membership` de type `Membership` à l'état "PendingUnsubscription", et enregistre la demande ;
     2. AlirPunkto enregistre en base de données le changement d'état ;

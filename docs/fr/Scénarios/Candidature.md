@@ -18,7 +18,7 @@ Procédure d'inscription à AlirPunkto.
 3. Le candidat demande à créer un compte ;
 4. AlirPunkto demande le mail du candidat ;
 5. AlirPunkto interroge LDAP pour vérifier que le mail n'est pas déjà utilisé ;
-6. S’il l'est déjà , alors AlirPunkto affiche un message d'erreur indiquant que ce mail est déjà utilisé et invite le candidat à se connecter et abandonne la procédure de candidature.
+6. S’il l'est déjà et que le compte associé est actif ou résilié depuis moins de quarante jours, alors AlirPunkto affiche un message d'erreur indiquant que ce mail est déjà utilisé et invite le candidat à se connecter et abandonne la procédure de candidature.
 7. Sinon le mail n'est pas utilisé alors :
 8. AlirPunkto crée un objet `candidature` de type `Candidature` à l'état "Draft", avec un `OID` unique et enregistre l'e-mail ;
 9. AlirPunkto enregistre en base de données la candidature;
@@ -58,7 +58,7 @@ Procédure d'inscription à AlirPunkto.
 36. AlirPunkto affiche la vue de soumission de la candidature qui prévient le candidat qu'il va devoir soit transmettre par e-mail une copie de sa pièce d'identité, soit la montrer en visio-conférence à 3 vérificateurs ;
 37. Le candidat accepte la soumission ;
 38. AlirPunkto indique au candidat que sa pièce d'identité sera soit à envoyer aux vérificateurs soit qu'il doit prendre rendez-vous avec eux ;
-39. AlirPunkto tire au sort 3 vérificateurs parmi les membres du LDAP si possible, sinon l'administrateur ;
+39. AlirPunkto tire au sort 3 vérificateurs parmi les membres actifs du LDAP si possible, sinon l'administrateur ;
 40. AlirPunkto enregistre les vérificateurs dans le dictionnaire `verifiers` de la `candidature` ;
 41. AlirPunkto enregistre la date de soumission dans la `candidature` ;
 42. AlirPunkto positionne l'état de la `candidature` à "Pending" ;
