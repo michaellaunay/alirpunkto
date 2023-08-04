@@ -1,7 +1,7 @@
-## Résumé
+# Résumé
 
-Détaille la procédure d'inscription à AlirPunkto.
-## Acteurs
+Procédure d'inscription à AlirPunkto.
+# Acteurs
 
 - Le candidat ;
 - Le serveur Open LDAP
@@ -9,9 +9,9 @@ Détaille la procédure d'inscription à AlirPunkto.
 - L'administrateur
 - Les membres certifiés ayant un compte actif.
 
-## Prérequis
+# Prérequis
 
-## Étapes
+# Étapes
 
 1. Le Candidat se connecte à AlirPunkto ;
 2. AlirPunkto retourne la page d'accueil avec le lien d'inscription ;
@@ -55,11 +55,11 @@ Détaille la procédure d'inscription à AlirPunkto.
 33. AlirPunkto met l'état de la `candidature` à `UniqueData`  ;
 34. AlirPunkto enregistre la date ;
 35. AlirPunkto enregistre en base de données cet objet ;
-36. AlirPunkto rentre dans la vue de soumission de la candidature ;
-37. AlirPunkto prévient le candidat qu'il doit déposer une copie de sa pièce d'identité sur le site ;
+36. AlirPunkto affiche la vue de soumission de la candidature qui prévient le candidat qu'il va devoir soit transmettre par e-mail une copie de sa pièce d'identité, soit la montrer en visio-conférence à 3 vérificateurs ;
+37. Le candidat accepte la soumission ;
 38. AlirPunkto indique au candidat que sa pièce d'identité sera soit à envoyer aux vérificateurs soit qu'il doit prendre rendez-vous avec eux ;
 39. AlirPunkto tire au sort 3 vérificateurs parmi les membres du LDAP si possible, sinon l'administrateur ;
-40. AlirPunkto enregistre les vérificateurs dans le dictionnaire `voters` de la `candidature` ;
+40. AlirPunkto enregistre les vérificateurs dans le dictionnaire `verifiers` de la `candidature` ;
 41. AlirPunkto enregistre la date de soumission dans la `candidature` ;
 42. AlirPunkto positionne l'état de la `candidature` à "Pending" ;
 43. AlirPunkto ajoute un attribut "votes" qui est un dictionnaire vide  à la `candidature`;
@@ -93,37 +93,37 @@ Détaille la procédure d'inscription à AlirPunkto.
 	1. AlirPunkto enregistre l'état de la `candidature` à `Refused` ;
 	2. AlirPunkto enregistre la `Candidature` dans la base de donnée ;
 63. AlirPunkto envoie un mail de refus ou d'acceptation au nouveau membre selon l'état final de la candidature.
-## Scénarios alternatifs
+# Scénarios alternatifs
 
-### Le candidat ne reçoit pas le mail ou ne confirme jamais
+## Le candidat ne reçoit pas le mail ou ne confirme jamais
 
 Le scéduleur d'AlirPunkto cherche les `candidatures` dans l'état "EmailValidation" arrivées à 1 jour de l'échéance et relance le candidat.
 
-### Relance des vérificateurs
+## Relance des vérificateurs
 
 Le planificateur (scheduler) d'AlirPunkto cherche les `candidatures` dans l'état "Pending" arrivées  à un jour de l'échéance ; 
 AlirPunkto relance par e-mail les vérificateurs.
 
-### Arrivée à échéance du vote
+## Arrivée à échéance du vote
 
 Le planificateur (scheduler) d'AlirPunkto cherche les `candidatures` dans l'état "Pending" arrivée à échéance ; 
 
 Si la candidature a reçu plus de votes favorables alors traitement favorable (C.f. ci dessus)
 Sinon traitement du refus.
 
-### Interruption pendant le processus
+## Interruption pendant le processus
 
 Une coupure a empêché le candidat de finir le processus de soumission.
 Le candidat active le lien d'un des mails reçus lors du  par Alirpunkto et reprend le processus à partir du dernier état enregistré dans la candidature.
-## Informations supplémentaires
+# Informations supplémentaires
 
 Voir les tickets de KuneAgi : 
 https://gitlab.com/cosmopoliticalcoop/KuneAgi/-/issues/3 (Sauf lieu de naissance)
 https://gitlab.com/cosmopoliticalcoop/KuneAgi/-/issues/126
 
-## Datas
+# Datas
 
-### Les données demandées
+## Les données demandées
 
 - gender : Genre, énuméré(Monsieur, Madame, Non déterminé) ;
 - fullname : Nom complet (nom et prénom tel que sur la carte d'ID), chaîne de caractères ;
@@ -164,7 +164,7 @@ classDiagram
     }
 ```
  
-### Les états de la Candidature
+## Les états de la Candidature
 
 1. **Draft**: La candidature est à l'état brouillon
 2. **Email Validation**: L'état où l'email du candidat est en attente de validation.
@@ -203,9 +203,9 @@ stateDiagram
     Pending --> Refused : Majority Refused
 
 ```
-## Divers
+# Divers
 
-### Exemple de scheduler
+## Exemple de scheduler
 
 ```python
 import atexit
