@@ -19,7 +19,7 @@ Registration process for AlirPunkto.
 2. AlirPunkto returns the homepage with the registration link;
 3. The Applicant requests to create an account;
 4. AlirPunkto offers the Applicant a choice between two options, presenting two buttons, each with a tooltip providing additional information about the meaning and implications of each of the two statuses:
-    • regular member of the Community;
+    • ordinary member of the Community;
     • Cooperator.
 5. The Applicant chooses one of the two options by clicking the corresponding button;
 6. AlirPunkto requests the Applicant's email address;
@@ -27,7 +27,7 @@ Registration process for AlirPunkto.
 8. AlirPunkto queries LDAP to verify that the email address is not already used by an active user or one who has canceled within less than the Quarantine period (Quantitative Parameter Affecting Internal Processes, the default value of which, defined in §3,4,1 of the statutes of Cosmopolitical.coop, is 180 days);
 9. If the email address is already in use then : 
 	1. AlirPunkto displays an error message indicating that this email address is already used and invites the Applicant to log in and abandons the application process
-10. Otherwise, if the email address is not in use (nominal case):
+10. Else, if the email address is not in use (nominal case):
 11. AlirPunkto creates an `application` object of type `Application` in the "Draft" state, with a unique `OID`, and records the information provided by the Applicant;
 12. AlirPunkto saves the application in the database;
 13. AlirPunkto randomly generates a very simple operation to solve in the form "(four + three) * (seven + five) + two" (Multiplication of the sum of two numbers between 2 and 9 written in full added to a number between 1 and 9 in full);
@@ -76,7 +76,7 @@ Registration process for AlirPunkto.
     • 3. AlirPunkto adds an entry in the LDAP.
     • 4. AlirPunkto sends a congratulatory email to the new member.
     • 5. AlirPunkto changes the `candidature` status to `ApprovedOrdinaryCommunityMember`.
-36. Otherwise [if the Applicant has chosen the "Cooperator" option], the following procedure is carried out (nominal case):
+36. Else [if the Applicant has chosen the "Cooperator" option], the following procedure is carried out (nominal case):
 37. AlirPunkto queries the LDAP to ensure that the combination of names, first names, and date of birth is not already used by an active user or one who has resigned less than the Quarantine period (Quantitative Parameter Affecting Internal Processes).
 38. If the combination of names, first names, and date of birth is already in use, then the Applicant is already registered:
     1. AlirPunkto displays an error message and invites the Applicant to log in, abandoning the application procedure.
@@ -101,7 +101,7 @@ Registration process for AlirPunkto.
     1. AlirPunko sends a page to the Applicant's browser containing a button to assist in writing the email.
     2. This button contains a "mailto" link that opens the Applicant's email addressed to the Applicant, with the Verifiers in blind copy (BCc field), with a pre-filled subject and body in the Applicant's preferred language, inviting the Verifier to select a date and time slot for the video conference among those offered by the Applicant (which the Applicant determines, before a deadline for submitting identity data equal to a configurable notice period before the verifiers' voting end date), and containing links to free video conferencing services.
     3. The Applicant clicks the button, adds to the pre-filled email the proposed appointment dates and times, and a video conference link, and sends the email to all Verifiers at once.
-57. Otherwise, [if the Applicant chose the "by email attachment" verification method]:
+57. Else, [if the Applicant chose the "by email attachment" verification method]:
     1. AlirPunko sends a page to the Applicant's browser containing a button to assist in writing the email.
     2. This button contains a "mailto" link that opens the Applicant's email addressed to the Applicant, with the Verifiers in blind copy (BCc field), with a pre-filled subject and body in the Applicant's preferred language to accompany the sending of the partial copy of the ID.
     3. The Applicant clicks the button, attaches to the pre-filled email an incomplete copy of their official identity document (e.g., masking the number and place of birth) and sends the email to all Verifiers at once.
@@ -139,7 +139,7 @@ AlirPunkto sends a reminder email to the verifiers.
 The AlirPunkto scheduler searches for `candidatures` in the "Pending" state that have reached the deadline; 
 
 If the application has received more favorable votes, then it receives favorable treatment (see above). 
-Otherwise, it's treated as a refusal.
+Else, it's treated as a refusal.
 
 ## Interruption During the Process
 
