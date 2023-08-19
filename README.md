@@ -29,7 +29,7 @@ bin/pip install --upgrade pip setuptools
 
 Install pyramid
 ```bash
-pip install pyramid pyramid_chameleon python-dotenv ldap3 pyramid_beaker
+pip install pyramid pyramid_chameleon python-dotenv ldap3 pyramid_beaker pyramid_mailer
 ```
 
 We need ZODB to store vote and session informations.

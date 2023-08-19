@@ -1,9 +1,31 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <div class="container" i18n:domain="alirpunkto">
-            <h1 class="text-center" i18n:translate="welcome_msg">Welcome</h1>
-            <div>
-                All the applications you need to manage your business in one place.
+            <div tal:condition="not logged_in">
+                <h1 i18n:translate="welcome">Welcome to Alirpunkto, the centralized service for applications of ${site_name}.</h1>
+                <p i18n:translate="all_applications_msg">All the applications you need to participate in Cosmopolitical in one place.</p>
+                <p i18n:translate="register_or_login_msg">Register or login now to get started.</p>
+                <a class="button" href="${request.route_url('login')}" i18n:translate="login_label">Login</a>
+                <a class="button" href="${request.route_url('register')" i18n:translate="register_label">Register</a>
+            </div>
+            <div tal:condition="logged_in">
+                <h1 i18n:translate="logged_in_msg">Alirpunkto, the centralized service for applications of ${site_name}</h1>
+                <p i18n:translate="logged_in_msg">You are logged in as ${user.name}.</p>
+                <p>
+                    <span i18n:translate="log_out_invitation_msg">You can log out by clic</span> <a class="button" href="${request.route_url('logout')}" i18n:translate="logout_label">Log out</a>
+                </p>
+                <p i18n:translate="all_applications_msg">All the applications you need to participate in Cosmopolitical in one place.</p>
+                <p i18n:translate="choose_application_msg">Choose the application you want to join:</p>
+                <ul>
+
+                    <li tal:repeat="app_id applications">
+                        <!-- Display the application logo -->
+                        <img tal:attributes="src applications[app_id]['logo_file']" alt="" />
+                        
+                        <!-- Display the application name and link -->
+                        <a tal:attributes="href applications[app_id]['url']; title applications[app_id].get('description', '')" tal:content="applications[app_id]['name']">Application Link</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

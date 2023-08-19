@@ -1,12 +1,14 @@
 import os, pytz
+from collections import defaultdict
 from dotenv import load_dotenv
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
 from pyramid.i18n import get_localizer, TranslationStringFactory
 from pyramid.i18n import Localizer, default_locale_negotiator
 from pyramid.events import NewRequest, subscriber
+from pyramid.config import Configurator
+from pyramid_mailer.mailer import Mailer
 import logging
-
 from .models import appmaker
 
 load_dotenv() # take environment variables from .env.
@@ -22,6 +24,7 @@ LDAP_BASE_DN = os.getenv("LDAP_BASE_DN")
 LDAP_OU = os.getenv("LDAP_OU")
 LDAP_LOGIN = os.getenv("LDAP_LOGIN")
 LDAP_PASSWORD = os.getenv("LDAP_PASSWORD")
+MAIL_SENDER = os.getenv("MAIL_SENDER")
 
 # logging configuration
 log = logging.getLogger('alirpunkto')
@@ -125,15 +128,58 @@ def root_factory(request):
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
+    load_dotenv() # take environment variables from .env.
+
     with Configurator(settings=settings) as config:
         config.include('pyramid_chameleon')
         config.include('pyramid_tm')
         config.include('pyramid_retry')
         config.include('pyramid_zodbconn')
+        # Use os.environ.get() for replacing the default values if exist
+        settings.setdefault('mail.username', os.environ.get('MAIL_USERNAME', 'default_username'))
+        settings.setdefault('mail.password', os.environ.get('MAIL_PASSWORD', 'default_password'))
+        settings.setdefault('mail.host', os.environ.get('MAIL_HOST', 'localhost'))
+        settings.setdefault('mail.port', os.environ.get('MAIL_PORT', '25'))
+        settings.setdefault('mail.tls', os.environ.get('MAIL_TLS', 'false'))
+        settings.setdefault('mail.ssl', os.environ.get('MAIL_SSL', 'false'))
+
+        # Prefix for application-related settings
+        PARAM = "applications."
+        try : # Check if applications parameters are well defined in the configuration file
+            # Extract settings items with the PARAM prefix into tuples (name, key) and value.
+            l_applications = [(tuple(key[len(PARAM):].split(".")), value)
+                                for key, value in settings.items()
+                                if key.startswith(PARAM)]
+
+            # Initialize dictionary for applications using defaultdict
+            applications = defaultdict(dict)
+
+            # Populate the 'applications' dictionary from 'l_applications'.
+            for (name, k), v in l_applications:
+                applications[name][k] = v
+            # Verify for each application that the required parameters are defined (name, logo, url)
+            for app_name, app in applications.items():
+                if not 'name' in app:
+                    raise Exception(f"Application {app_name} has no name")
+                if not 'logo_file' in app:
+                    raise Exception(f"Application {app_name} has no logo")
+                if not 'url' in app:
+                    raise Exception(f"Application {app_name} has no url")
+            
+            # I didn't find a way to pass the applications dictionary to the views...
+            # So I store it in the registry
+            config.registry.settings['applications'] = applications
+
+        except Exception as e:
+            log.error(f"Error while parsing applications settings: {e}")
+            raise
+
+        config.include('pyramid_mailer')
         config.include('.routes')
         config.set_root_factory(root_factory)
         config.add_route('home', '/')
         config.add_route('login', '/login')
+        config.add_route('logout', '/logout')
         config.add_route('register', '/register')
         config.add_route('forgot_password', '/forgot_password')
         config.scan()
