@@ -22,21 +22,23 @@ log = getLogger('alirpunkto')
 
 @unique
 class CandidatureStates(Enum) :
-    DRAFT = "Draft: The application is in draft mode."
-    EMAIL_VALIDATION = "Email Validation: The state where the Applicant's email address is awaiting validation."
-    CONFIRMED_HUMAN = "ConfirmedHuman: The Applicant's email address is verified, and humanity proof is provided."
-    UNIQUE_DATA = "UniqueData: The Applicant has entered their personal identification data."
-    PENDING = "Pending: After the submission of the application and while waiting for verification by the verifiers."
-    APPROVED = "Approved: The application has been accepted."
-    REFUSED = "Refused: The application has been denied."
+    """States of candidatures.
+    """
+    DRAFT = "candidature_states_draft_value" # "Draft: The application is in draft mode."
+    EMAIL_VALIDATION = "candidature_states_email_validation_value" # "Email Validation: The state where the Applicant's email address is awaiting validation."
+    CONFIRMED_HUMAN = "candidature_states_confirmed_human_value" # "ConfirmedHuman: The Applicant's email address is verified, and humanity proof is provided."
+    UNIQUE_DATA = "candidature_states_unique_data_value" # "UniqueData: The Applicant has entered their personal identification data."
+    PENDING = "candidature_states_pending_value" # "Pending: After the submission of the application and while waiting for verification by the verifiers."
+    APPROVED = "candidature_states_approved_value" # "Approved: The application has been accepted."
+    REFUSED = "candidature_states_refused_value" # "Refused: The application has been denied."
 
     @classmethod
     def get_i18n_id(cls, name:str) -> str:
-        """Get the i18n id of the state.
+        """Get the i18n id of the candidature state.
         Args:
-            name: The name of the state.
+            name: The name of the candidature state.
         Returns:
-            The i18n id of the state.
+            The i18n id of the candidature state.
         """
         match name:
             case cls.DRAFT.name :
@@ -70,14 +72,14 @@ class CandidatureStates(Enum) :
             case _ :
                 # should never happen
                 log.error(f"Unknown candidature state: {name}")
-                return(f"candidature_states_{name.lower()}")
+                return(f"name.lower()")
 
 @unique
 class CandidatureTypes(Enum) :
     """Types of candidatures.
     """
-    ORDINARY = "Ordinary: A candidature for an ordinary member."
-    COOPERATOR = "Cooperator: A candidature for a cooperator member."
+    ORDINARY = "candidature_types_ordinary_value" # "Ordinary: A candidature for an ordinary member."
+    COOPERATOR = "candidature_types_cooperator_value" # "Cooperator: A candidature for a cooperator member."
     @classmethod
     def get_i18n_id(cls, name:str) -> str:
         """Get the i18n id of the candidature type.
@@ -101,12 +103,12 @@ class CandidatureTypes(Enum) :
                 return(f"name.lower()")
 
 @unique
-class VoteTypes(Enum) :
-    """Types of votes.
+class VotingChoice(Enum) :
+    """Voting choices.
     """
-    YES = "Yes: The vote is positive."
-    NO = "No: The vote is negative."
-    ABSTAIN = "Abstain: The vote is neutral."
+    YES = "vote_types_yes_value" # "Yes: The vote is positive."
+    NO = "vote_types_no_value" # "No: The vote is negative."
+    ABSTAIN = "vote_types_abstain_value" # "Abstain: The vote is neutral."
 
     @classmethod
     def get_i18n_id(cls, name:str) -> str:

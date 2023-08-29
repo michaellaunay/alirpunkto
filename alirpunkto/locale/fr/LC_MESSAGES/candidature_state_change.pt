@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modification de l'état de votre candidature</title>
+</head>
+<body>
+    <h1>Évolution de votre candidature</h1>
+    
+    <p>Bonjour <span tal:replace="user">Nom du postulant</span>,</p>
+    
+    <p>Votre candidature sur la plateforme <span tal:replace="site_url">URL</span> en tant que <span tal:replace="candidature_type">Rôle 
+    <span tal:condition="python:candidature.state == CandidatureState.APPROUVED"> a été acceptée</span>
+    <span tal:condition="python:candidature.state == CandidatureState.REJECTED"> a été rejetée</span>
+    <span tal:condition="python:candidature.state not in [CandidatureState.APPROUVED, CandidatureState.REJECTED]"> est en cours de traitement est a changée d'état</span>
+    .
+    </p>
+    
+    <p>Voici les détails de son évolution :</p>
+    <ul>
+        <li>Candidature ID : <span tal:replace="python:Candidature.oid">ID de la candidature</span></li>
+        <li>Date de la Transition : <span tal:replace="python:Candidature.modifications[-1]">Dernière transition</span></li>
+        <li>Nouveau Statut : <span tal:replace="python:Candidature.state">Nouvel état de la candidature</span></li>
+    </ul>
+    
+    <p>Merci pour votre participation.</p>
+    
+    <p>Cordialement,</p>
+    <p>L'équipe de <span tal:replace="site">Nom du site</span></p>
+</body>
+</html>

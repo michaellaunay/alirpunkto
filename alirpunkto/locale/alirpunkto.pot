@@ -93,3 +93,75 @@ msgstr "Enter your email address:"
 
 msgid "submit_button"
 msgstr "Submit"
+
+msgid "candidature_states_draft_value"
+msgstr "Draft: The application is in draft mode."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Email Validation: The state where the Applicant's email address is awaiting validation."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "ConfirmedHuman: The Applicant's email address is verified, and proof of humanity is provided (we have verified that you are not a robot)."
+
+msgid "candidature_states_unique_data_value" 
+msgstr "UniqueData: The Applicant has entered their personal identification data, and we have verified that no current or recent Cooperator or Ordinary Member of the Community has the same data."
+
+msgid "candidature_states_pending_value"
+msgstr "Pending: The application has been submitted. The personal identification data has been transmitted to the Verifiers, but they have not provided their feedback yet."
+
+msgid "candidature_states_approved_value"
+msgstr "Approved: The application has been accepted."
+
+msgid "candidature_states_refused_value"
+msgstr "Refused: The application has been denied."
+
+msgid "candidature_states_draft"
+msgstr "draft"
+
+msgid "candidature_states_email_validation"
+msgstr "email_validation"
+
+msgid "candidature_states_confirmed_human"
+msgstr "confirmed_human"
+
+msgid "candidature_states_unique_data"
+msgstr "unique_data"
+
+msgid "candidature_states_pending"
+msgstr "pending"
+
+msgid "candidature_states_approved"
+msgstr "approved"
+
+msgid "candidature_states_refused"
+msgstr "refused"
+
+msgid "candidature_types_ordinary_value"
+msgstr "Ordinary: A candidature for an ordinary member."
+
+msgid "Ordinary: An application for an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
+msgstr "Cooperator: An application for a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
+
+msgid "candidature_types_ordinary"
+msgstr "ordinary member"
+
+msgid "candidature_types_cooperator"
+msgstr "cooperator member"
+
+msgid "vote_types_yes_value"
+msgstr "Yes: The vote is positive."
+
+msgid "vote_types_no_value"
+msgstr "No: The vote is negative."
+
+msgid "vote_types_abstain_value"
+msgstr "Abstain: The vote is neutral."
+
+msgid "vote_types_yes"
+msgstr "yes"
+
+msgid "vote_types_no"
+msgstr "no"
+
+msgid "vote_types_abstain"
+msgstr "abstain"

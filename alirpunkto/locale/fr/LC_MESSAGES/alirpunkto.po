@@ -91,3 +91,76 @@ msgstr "Entrez votre adresse de courrier électronique :"
 
 msgid "submit_button"
 msgstr "Envoyer"
+
+msgid "candidature_states_draft_value"
+msgstr "Brouillon : La candidature est en mode brouillon."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Validation par e-mail : L'état où l'adresse e-mail du candidat est en attente de validation."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "Humain confirmé : L'adresse e-mail du candidat est vérifiée et une preuve d'humanité est fournie."
+
+msgid "candidature_states_unique_data_value" 
+msgstr "Données uniques : Le candidat a saisi ses données d'identification personnelles."
+
+msgid "candidature_states_pending_value"
+msgstr "En attente : Après la soumission de la candidature et en attendant la vérification par les vérificateurs."
+
+msgid "candidature_states_approved_value"
+msgstr "Approuvé : La candidature a été acceptée."
+
+msgid "candidature_states_refused_value"
+msgstr "Refusé : La candidature a été refusée."
+
+msgid "candidature_states_draft"
+msgstr "brouillon"
+
+msgid "candidature_states_email_validation"
+msgstr "validation_par_email"
+
+msgid "candidature_states_confirmed_human"
+msgstr "humain_confirme"
+
+msgid "candidature_states_unique_data"
+msgstr "donnees_uniques"
+
+msgid "candidature_states_pending"
+msgstr "en_attente"
+
+msgid "candidature_states_approved"
+msgstr "approuve"
+
+msgid "candidature_states_refused"
+msgstr "refuse"
+
+msgid "Ordinary: An application for an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
+msgstr "Ordinaire : Une candidature pour un membre ordinaire de la communauté = avec un processus d'inscription simplifié, aucune obligation financière, mais sans droits de décision."
+
+msgid "Cooperator: An application for a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
+msgstr "Coopérateur : Une candidature pour un membre à part entière de la coopérative, un coopérateur = avec un processus d'inscription complet assurant le principe 'une personne = un vote', l'obligation d'acheter au moins une part et de payer une cotisation annuelle, et des droits de décision complets."
+
+
+msgid "candidature_types_ordinary"
+msgstr "membre ordinaire"
+
+msgid "candidature_types_cooperator"
+msgstr "membre coopérateur"
+
+msgid "vote_types_yes_value"
+msgstr "Oui : Le vote est positif."
+
+msgid "vote_types_no_value"
+msgstr "Non : Le vote est négatif."
+
+msgid "vote_types_abstain_value"
+msgstr "Abstention : Le vote est neutre."
+
+msgid "vote_types_yes"
+msgstr "oui"
+
+msgid "vote_types_no"
+msgstr "non"
+
+msgid "vote_types_abstain"
+msgstr "abstention"

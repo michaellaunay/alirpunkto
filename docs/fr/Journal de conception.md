@@ -213,4 +213,18 @@ Pour chiffrer cet OID, je propose de le concaténer avec une graine générée a
 
 # 2023-08-28
 Réécriture de Candidature.py
-Utilisation d'énuméré pour les états, les types de candidatures, et les votes.
+Utilisation d'énumérés pour les états, les types de candidatures, et les votes.
+
+# 2023-08-29
+Remplacement des chaînes de caractères des Enums par des ID i18n :
+
+**Utilisation de Clés I18n** : Plutôt que de stocker les valeurs textuelles directement dans l'enum, j'utilise des clés d'internationalisation (I18n keys). Ces clés serviront de références pour les chaînes traduites. Exemple :
+
+```python
+from enum import Enum
+
+class VoteOutcome(Enum):
+	YES = "vote.outcome.yes"
+	NO = "vote.outcome.no"
+	ABSTAIN = "vote.outcome.abstain"
+```
