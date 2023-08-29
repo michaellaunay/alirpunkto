@@ -16,7 +16,7 @@ from pyramid.request import Request
 from pyramid.httpexceptions import HTTPFound
 from .. import _
 from ..schemas.register_form import RegisterForm
-from ..models.candidature import Candidature, CandidatureStates, Candidatures, CandidatureTypes, VoteTypes
+from ..models.candidature import Candidature, CandidatureStates, Candidatures, CandidatureTypes, VotingChoice
 from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection

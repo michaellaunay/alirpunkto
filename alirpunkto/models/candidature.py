@@ -416,7 +416,7 @@ class Candidature(Persistent):
         self._change_seed()
     
     @property
-    def votes(self)-> {str: VoteTypes}:
+    def votes(self)-> {str: VotingChoice}:
         """ Get the votes of the candidature.
         Returns:
             A copy of votes of the candidature.
@@ -424,11 +424,11 @@ class Candidature(Persistent):
         return self._votes.copy()
     
     @votes.setter
-    def votes(self, value:{VoteTypes: int}):
+    def votes(self, value:{VotingChoice: int}):
         """ Set the votes of the candidature.
 
         Args:
-            value ({VoteTypes: int}): The new votes of the candidature.
+            value ({VotingChoice: int}): The new votes of the candidature.
 
         Raises:
             TypeError: The votes must be a dict.
