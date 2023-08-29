@@ -1,9 +1,64 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
-        <div class="container" i18n:domain="alirpunkto">
+        <tal:block define="status python:candidature.state.name" i18n:domain="alirpunkto">
+            <div tal:condition="python: not status or status == 'DRAFT'">
+                <form method="POST">
+                    <!-- Email Field -->
+                    <div class="register_email">
+                        <label i18n:translate="email_label" title="Enter your email address here." i18n:attributes="title email_title_label">Email</label>
+                        <input type="email" name="email" title="Your email address will be used for account verification and communication." i18n:attributes="title email_title_input">
+                    </div>
+
+                    <!-- Type of Registration -->
+                    <div class="register_choice">
+                        <label i18n:translate="type_of_registration" title="Select the type of registration that suits you."  i18n:attributes="title type_registration_label">Please choice your type of registration</label>
+                        <select name="choice" title="Different types of memberships offer different benefits." i18n:attributes="title type_registration_choice">
+                            <option value="ORDINARY" i18n:translate="ordinary_member_choice" title="Choose this if you want to be an ordinary member." i18n:attributes="title ordinary_member_title">Ordinary Member</option>
+                            <option value="COOPERATOR" i18n:translate="cooperator_choice" title="Choose this if you want to actively cooperate and contribute." i18n:attributes="">Cooperator</option>
+                        </select>
+                    </div>
+                    <!-- Submit Button -->
+                    <input type="submit" value="Submit" name="submit" i18n:attributes="value submit_button" title="Click to submit your registration." i18n:attributes="title submit_registration_title">
+                </form>
+            </div>
+
+            <div tal:condition="status == 'EMAIL_VALIDATION'">
+                <form method="POST">
+                    <!-- Enter result Field -->
+                    <label i18n:translate="enter_result_label" title="Enter the result of the operation or the code you received." i18n:attributes="title result_label_title">Enter result:</label>
+                    <input type="text" name="result" title="Please enter the code you received in your email to verify your address." i18n:attributes="title result_input_title">
+
+                    <!-- Verify Button -->
+                    <input type="submit" value="Verify" i18n:attributes="value verify_button" title="Click to verify the entered code." i18n:attributes="title submit_email_validation_title">
+
+                </form>
+            </div>
+
+
+        <div tal:condition="status == 'CONFIRMED_HUMAN'">
             <form method="POST">
                 <span tal:replace="structure form">Form Content</span>
             </form>
         </div>
+
+        <div class="container" tal:condition="status == 'UNIQUE_DATA'">
+            <form method="POST">
+                <label>Identity Verification:</label>
+                <select name="identity_verification">
+                    <option value="email">Send copy by email</option>
+                    <option value="video">Video Conference</option>
+                </select>
+                <input type="submit" value="Proceed">
+            </form>
+        </div>
+
+        <div tal:condition="status == 'PENDING'">
+            Waiting for verification...
+        </div>
+
+        <div tal:condition="error">
+            <p tal:content="error">Error message here</p>
+        </div>
+        </tal:block>
     </div>
 </div>

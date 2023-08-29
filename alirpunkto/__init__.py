@@ -9,7 +9,9 @@ from pyramid.events import NewRequest, subscriber
 from pyramid.config import Configurator
 from pyramid_mailer.mailer import Mailer
 import logging
+import transaction
 from .models import appmaker
+from .models.candidature import Candidatures
 
 load_dotenv() # take environment variables from .env.
 
@@ -120,9 +122,18 @@ def locale_negotiator(request):
 
 def root_factory(request):
     """root_factory is used to create the root object of the ZODB database
+    and to create the candidatures singletons.
     """
     conn = get_connection(request)
-    return appmaker(conn.root())
+    root = appmaker(conn.root())
+
+    # Create the candidatures singletons if it doesn't exist
+    if 'candidatures' not in root:
+        root['candidatures'] = Candidatures.get_instance(zodb=conn)
+        transaction.commit()
+    else:
+        Candidatures.set_instance(root['candidatures'])
+    return root
 
 
 def main(global_config, **settings):
@@ -142,6 +153,15 @@ def main(global_config, **settings):
         settings.setdefault('mail.port', os.environ.get('MAIL_PORT', '25'))
         settings.setdefault('mail.tls', os.environ.get('MAIL_TLS', 'false'))
         settings.setdefault('mail.ssl', os.environ.get('MAIL_SSL', 'false'))
+        # Create a mailer object
+        mailer = Mailer.from_settings(settings)
+        # get secret key from environment variable
+        config.registry['mailer'] = mailer
+        secret = os.getenv('SECRET_KEY')
+        # check if secret is not empty an make it accessible from the views
+        if not secret:
+            raise ValueError("You must provide a value for session.secret")
+        config.add_settings({'session.secret': secret})
 
         # Prefix for application-related settings
         PARAM = "applications."

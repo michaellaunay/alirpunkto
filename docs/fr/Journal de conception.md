@@ -203,3 +203,14 @@ Je modifie le scénario Candidature.
 
 # 2023-08-04
 J'ai totalement récris le scénario Candidature pour fusionner la vérification du mail avec le captcha que j'ai remplacé par une opération simple consistant  à résoudre une formule de la forme "(quatre + trois ) * (sept + cinq) + deux" (Multiplication de la somme de deux chiffres compris entre 2 et 9 écrits en toutes lettres additionnés d'un chiffre compris entre 1 et 9 en toutes lettres), il suffit d'avoir un dictionnaire de traduction pour toute les langues pour "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf".
+
+# 2023-08-21
+J'ai entièrement revu le code de `register.py`.
+J'y ai ajouté une énumération pour les états des candidatures.
+Dans `register`, je réalise un match sur les états de la candidature et je traite la requête différemment selon cet état.
+Afin de reprendre la procédure à n'importe quel point, je suggère d'ajouter, en tant que paramètre de l'URL, l'OID chiffré de la candidature.
+Pour chiffrer cet OID, je propose de le concaténer avec une graine générée aléatoirement et conservée dans l'objet Candidature. Le tout serait alors chiffré en utilisant le secret de l'application.
+
+# 2023-08-28
+Réécriture de Candidature.py
+Utilisation d'énuméré pour les états, les types de candidatures, et les votes.

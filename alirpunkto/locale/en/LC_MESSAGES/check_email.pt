@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <title>Registration on AlirPunkto</title>
+</head>
+<body>
+
+    <h1>Welcome to the platform <span tal:replace="site_name"></span></h1>
+    <p>To verify your email address, please solve the following equation (pay attention to the parentheses) and then enter the result in digits in the field of the registration form at the following URL:</p>
+    <a tal:attributes="href string:${site_url}/${page_register}?oid=${OID}">
+        <span tal:replace="site_url"></span>/<span tal:replace="page_register"></span>?oid=<span tal:replace="OID"></span>
+    </a>
+    
+    <p>Thank you for the attention you are giving us.</p>
+    
+    <footer>
+        <p>Sincerely,</p>
+        <p>The team at <span tal:replace="site_name"></span></p>
+    </footer>
+
+</body>
+</html>

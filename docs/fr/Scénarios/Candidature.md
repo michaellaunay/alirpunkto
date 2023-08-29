@@ -178,8 +178,8 @@ stateDiagram
 
     Draft --> EmailValidation: Email soumis
     EmailValidation --> ConfirmedHuman: Vérification de l'humanité
-    ConfirmedHuman --> UniqueData: Email validé
-    UniqueData --> Pending : Données personnelles saisies
+    ConfirmedHuman --> UniqueDatas: Email validé
+    UniqueDatas --> Pending : Données personnelles saisies
     Pending --> Approved: Vérification réussie
     Pending --> Refused: Vérification échouée
 

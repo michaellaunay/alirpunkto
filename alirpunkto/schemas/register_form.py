@@ -76,3 +76,5 @@ class RegisterForm(schema.CSRFSchema):
         title=_('country_label'),
         missing=""
     )
+
+

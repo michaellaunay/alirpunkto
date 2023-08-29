@@ -12,6 +12,7 @@ https://docs.pylonsproject.org/projects/pyramid/en/latest/tutorials/wiki2/authen
 from pyramid.authentication import AuthTktCookieHelper
 from pyramid.csrf import CookieCSRFStoragePolicy
 from pyramid.request import RequestLocalCache
+
 from .models import users
 
 class AlirPunktoSecurityPolicy:
@@ -52,3 +53,5 @@ def includeme(config):
     config.set_default_csrf_options(require_csrf=True)
 
     config.set_security_policy(AlirPunktoSecurityPolicy(settings['auth.secret']))
+
+
