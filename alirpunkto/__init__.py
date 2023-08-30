@@ -38,7 +38,7 @@ _ = TranslationStringFactory('alirpunkto')
 DEFAULT_SESSION_TIMEOUT = int(os.getenv("DEFAULT_SESSION_TIMEOUT", 7*60*60))
 
 EUROPEAN_LOCALES = {
-    'esp': _('Esperanto'),
+    'eo': _('Esperanto'),
     'bg': _('български'),
     'cs': _('čeština'),
     'da': _('dansk'),
