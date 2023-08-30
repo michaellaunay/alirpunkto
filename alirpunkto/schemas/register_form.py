@@ -51,30 +51,5 @@ class RegisterForm(schema.CSRFSchema):
         colander.String(),
         title=_('second_interaction_language_label'),
     )
-    usual_name = colander.SchemaNode(
-        colander.String(),
-        title=_('usual_first_name_label'),
-        missing=""
-    )
-    usual_surname = colander.SchemaNode(
-        colander.String(),
-        title=_('usual_surname_label'),
-        missing=""
-    )
-    postal_code = colander.SchemaNode(
-        colander.String(),
-        title=_('postal_code_label'),
-        missing=""
-    )
-    city = colander.SchemaNode(
-        colander.String(),
-        title=_('city_label'),
-        missing=""
-    )
-    country = colander.SchemaNode(
-        colander.String(),
-        title=_('country_label'),
-        missing=""
-    )
 
 

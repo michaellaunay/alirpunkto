@@ -124,9 +124,9 @@ msgid "candidature_states_refused"
 msgstr "refused"
 
 msgid "candidature_types_ordinary_value"
-msgstr "Ordinary: A candidature for an ordinary member."
+msgstr "Ordinary: An application for an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
 
-msgid "Ordinary: An application for an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
+msgid "candidature_types_cooperator_value"
 msgstr "Cooperator: An application for a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
 
 msgid "candidature_types_ordinary"
