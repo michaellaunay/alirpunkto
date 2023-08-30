@@ -1,0 +1,181 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+
+msgid "welcome_msg"
+msgstr "Bonvenon"
+
+msgid "username_label"
+msgstr "Uzantonomo"
+
+msgid "password_label"
+msgstr "Pasvorto"
+
+msgid "login_label"
+msgstr "Ensaluto"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Nevalida uzantonomo aŭ pasvorto"
+
+msgid "register_link"
+msgstr "Krei konton"
+
+msgid "forgot_password_label"
+msgstr "Forgesis pasvorton?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Plena nomo kiel en la identigilo"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Plena familiinomo kiel en la identigilo"
+
+msgid "birthdate_label"
+msgstr "Naskiĝtago"
+
+msgid "nationality_label"
+msgstr "Nacieco"
+
+msgid "cooperator_number_label"
+msgstr "Cooperaciula numero"
+
+msgid "pseudonym_label"
+msgstr "Pseŭdonimo"
+
+msgid "email_label"
+msgstr "Retpoŝto"
+
+msgid "first_interaction_language_label"
+msgstr "Unua interagolingvo"
+
+msgid "second_interaction_language_label"
+msgstr "Dua interagolingvo"
+
+msgid "register_label"
+msgstr "Registri"
+
+msgid "forgot_password_head"
+msgstr "Forgesis Pasvorton"
+
+msgid "forgot_your_password_title"
+msgstr "Ĉu vi forgesis vian pasvorton?"
+
+msgid "enter_your_email_address_label"
+msgstr "Entajpu vian retadreson:"
+
+msgid "submit_button"
+msgstr "Submeti"
+
+msgstr ""
+
+msgid "candidature_states_draft_value"
+msgstr "Malprojekto: La aplikado estas en malprojekta reĝimo."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Retpoŝta Validigo: La stato kie la retpoŝta adreso de la petanto atendas validigon."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "KonfirmitaHomo: La retpoŝta adreso de la petanto estas konfirmita, kaj pruvo de homaro estas provizita (ni konfirmis ke vi ne estas roboto)."
+
+msgid "candidature_states_unique_data_value"
+msgstr "UnikaDatumo: La petanto enigis siajn personajn identigajn datumojn, kaj ni konfirmis ke neniu aktuala aŭ lastatempa Kooperativo aŭ Ordinara Membro de la Komunumo havas la samajn datumojn."
+
+msgid "candidature_states_pending_value"
+msgstr "Pendanta: La aplikado estas sendita. La personaj identigaj datumoj estas transdonitaj al la Kontrolantoj, sed ili ankoraŭ ne donis sian feedback-on."
+
+msgid "candidature_states_approved_value"
+msgstr "Aprobita: La aplikado estas akceptita."
+
+msgid "candidature_states_refused_value"
+msgstr "Rifuzita: La aplikado estas rifuzita."
+
+msgid "candidature_states_draft"
+msgstr "malprojekto"
+
+msgid "candidature_states_email_validation"
+msgstr "retŝposta_validigo"
+
+msgid "candidature_states_confirmed_human"
+msgstr "konfirmita_homo"
+
+msgid "candidature_states_unique_data"
+msgstr "unika_dato"
+
+msgid "candidature_states_pending"
+msgstr "pendanta"
+
+msgid "candidature_states_approved"
+msgstr "aprobita"
+
+msgid "candidature_states_refused"
+msgstr "rifuzita"
+
+msgid "candidature_types_ordinary_value"
+msgstr "Ordinara: Aplikado por Ordinara Membro de la Komunumo = kun simpligita registra proceduro, nenia financa devo, sed sen decido-faraj rajtoj."
+
+msgid "candidature_types_cooperator_value"
+msgstr "Koopera: Aplikado por plena membro de la Kooperativo, Koopero = kun kompletigita registra proceduro certigante la principon 'unu persono = unu voĉo', la devo aĉeti almenaŭ unu parton kaj pagi jaran kontribuon, kaj plenaj decido-faraj rajtoj."
+
+msgid "candidature_types_ordinary"
+msgstr "ordinara membro"
+
+msgid "candidature_types_cooperator"
+msgstr "koopera membro"
+
+msgid "vote_types_yes_value"
+msgstr "Jes: La voĉdono estas pozitiva."
+
+msgid "vote_types_no_value"
+msgstr "Ne: La voĉdono estas negativa."
+
+msgid "vote_types_abstain_value"
+msgstr "Senpartii: La voĉdono estas neŭtrala."
+
+msgid "vote_types_yes"
+msgstr "jes"
+
+msgid "vote_types_no"
+msgstr "ne"
+
+msgid "vote_types_abstain"
+msgstr "senpartii"
+
+msgid "zero"
+msgstr "nulo"
+
+msgid "one"
+msgstr "unu"
+
+msgid "two"
+msgstr "du"
+
+msgid "three"
+msgstr "tri"
+
+msgid "four"
+msgstr "kvar"
+
+msgid "five"
+msgstr "kvin"
+
+msgid "six"
+msgstr "ses"
+
+msgid "seven"
+msgstr "sep"
+
+msgid "eight"
+msgstr "ok"
+
+msgid "nine"
+msgstr "naŭ"
+
+msgid "email_validation_subject"
+msgstr "Solvu la defion kaj entajpu la respondon en la portalo"
+
+msgid "email_candidature_state_changed"
+msgstr "Ŝanĝo en la stato de via kandidaturo"
