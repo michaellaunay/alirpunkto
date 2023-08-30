@@ -42,6 +42,9 @@ msgstr "Forgot password?"
 msgid "full_name_as_in_id_label"
 msgstr "Full name as in ID"
 
+msgid "full_surname_as_in_id_label"
+msgstr "Full surname as in ID"
+
 msgid "birthdate_label"
 msgstr "Birthdate"
 
@@ -55,28 +58,13 @@ msgid "pseudonym_label"
 msgstr "Pseudonym"
 
 msgid "email_label"
-msgstr "Email"
+msgstr "Email adress"
 
 msgid "first_interaction_language_label"
 msgstr "First interaction language"
 
 msgid "second_interaction_language_label"
 msgstr "Second interaction language"
-
-msgid "usual_first_name_label"
-msgstr "Usual first name"
-
-msgid "usual_surname_label"
-msgstr "Usual surname"
-
-msgid "postal_code_label"
-msgstr "Postal code"
-
-msgid "city_label"
-msgstr "City"
-
-msgid "country_label"
-msgstr "Country"
 
 msgid "register_label"
 msgstr "Register"
@@ -135,6 +123,9 @@ msgstr "approved"
 msgid "candidature_states_refused"
 msgstr "refused"
 
+msgid "candidature_types_ordinary_value"
+msgstr "Ordinary: A candidature for an ordinary member."
+
 msgid "Ordinary: An application for an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
 msgstr "Cooperator: An application for a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
 
@@ -163,34 +154,34 @@ msgid "vote_types_abstain"
 msgstr "abstain"
 
 msgid "zero"
-msgstr "zéro"
+msgstr "zero"
 
 msgid "one"
-msgstr "un"
+msgstr "one"
 
 msgid "two"
-msgstr "deux"
+msgstr "two"
 
 msgid "three"
-msgstr "trois"
+msgstr "three"
 
 msgid "four"
-msgstr "quatre"
+msgstr "four"
 
 msgid "five"
-msgstr "cinq"
+msgstr "five"
 
 msgid "six"
 msgstr "six"
 
 msgid "seven"
-msgstr "sept"
+msgstr "seven"
 
 msgid "eight"
-msgstr "huit"
+msgstr "eight"
 
 msgid "nine"
-msgstr "neuf"
+msgstr "nine"
 
 msgid "email_validation_subject"
 msgstr "Solve the Challenge and Enter the Answer on the Portal"

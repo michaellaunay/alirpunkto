@@ -1,7 +1,7 @@
 # Alirpunkto pot file.
 # Copyright (C) 2023 Michaël Launay
 # This file is distributed under the same license as the Alirpunkto package.
-# Michaël Launay <michaellaunay@ecreall.com>, 2023.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
 #
 #, fuzzy
 msgid ""
@@ -63,21 +63,6 @@ msgstr "First interaction language"
 
 msgid "second_interaction_language_label"
 msgstr "Second interaction language"
-
-msgid "usual_first_name_label"
-msgstr "Usual first name"
-
-msgid "usual_surname_label"
-msgstr "Usual surname"
-
-msgid "postal_code_label"
-msgstr "Postal code"
-
-msgid "city_label"
-msgstr "City"
-
-msgid "country_label"
-msgstr "Country"
 
 msgid "register_label"
 msgstr "Register"
@@ -167,34 +152,34 @@ msgid "vote_types_abstain"
 msgstr "abstain"
 
 msgid "zero"
-msgstr "zéro"
+msgstr "zero"
 
 msgid "one"
-msgstr "un"
+msgstr "one"
 
 msgid "two"
-msgstr "deux"
+msgstr "two"
 
 msgid "three"
-msgstr "trois"
+msgstr "three"
 
 msgid "four"
-msgstr "quatre"
+msgstr "four"
 
 msgid "five"
-msgstr "cinq"
+msgstr "five"
 
 msgid "six"
 msgstr "six"
 
 msgid "seven"
-msgstr "sept"
+msgstr "seven"
 
-msgid "eight"
-msgstr "huit"
+msgid "seven"
+msgstr "seven"
 
 msgid "nine"
-msgstr "neuf"
+msgstr "nine"
 
 msgid "email_validation_subject"
 msgstr "Solve the Challenge and Enter the Answer on the Portal"

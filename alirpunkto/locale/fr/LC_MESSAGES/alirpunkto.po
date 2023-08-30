@@ -62,21 +62,6 @@ msgstr "Première langue d'interaction"
 msgid "second_interaction_language_label"
 msgstr "Deuxième langue d'interaction"
 
-msgid "usual_first_name_label"
-msgstr "Prénom usuel"
-
-msgid "usual_surname_label"
-msgstr "Nom usuel"
-
-msgid "postal_code_label"
-msgstr "Code postal"
-
-msgid "city_label"
-msgstr "Ville"
-
-msgid "country_label"
-msgstr "Pays"
-
 msgid "register_label"
 msgstr "S'inscrire"
 
