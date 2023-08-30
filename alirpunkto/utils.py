@@ -9,7 +9,7 @@ from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection
 from persistent import Persistent
 from pyramid.security import ALL_PERMISSIONS, Allow
-from .. import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
+from . import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
 from ldap3 import Server, Connection, ALL, NTLM
 from validate_email import validate_email
 from dataclasses import dataclass

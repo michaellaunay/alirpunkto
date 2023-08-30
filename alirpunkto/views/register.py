@@ -203,7 +203,6 @@ def handle_email_validation_state(request, candidature):
     ar = AssetResolver("alirpunkto")
     resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/check_email.pt')
 
-    import pdb; pdb.set_trace()
     if request.params['challenge'].strip() != str(attended_result):
         return {'form': form.render(), 'candidature': candidature, 'error': _('invalid_challenge')}
     # The challenge is valid, we can continue
