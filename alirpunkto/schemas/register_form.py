@@ -17,6 +17,11 @@ class RegisterForm(schema.CSRFSchema):
         title=_('full_name_as_in_id_label'),
         missing=""
     )
+    fullsurname = colander.SchemaNode(
+        colander.String(),
+        title=_('full_surname_as_in_id_label'),
+        missing=""
+    )
     #@TODO Gender (Mal, Femal, Undefined)
     birthdate = colander.SchemaNode(
         colander.Date(),

@@ -43,6 +43,9 @@ msgstr "Forgot password?"
 msgid "full_name_as_in_id_label"
 msgstr "Full name as in ID"
 
+msgid "full_surname_as_in_id_label"
+msgstr "Full surname as in ID"
+
 msgid "birthdate_label"
 msgstr "Birthdate"
 

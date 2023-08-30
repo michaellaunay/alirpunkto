@@ -41,6 +41,9 @@ msgstr "Vous avez oublié votre mot de passe ?"
 msgid "full_name_as_in_id_label"
 msgstr "Nom complet comme sur la carte d'identité"
 
+msgid "full_surname_as_in_id_label"
+msgstr "Prénom complet comme sur la carte d'identité"
+
 msgid "birthdate_label"
 msgstr "Date de naissance"
 
