@@ -164,3 +164,39 @@ msgstr "non"
 
 msgid "vote_types_abstain"
 msgstr "abstention"
+
+msgid "zero"
+msgstr "zéro"
+
+msgid "one"
+msgstr "un"
+
+msgid "two"
+msgstr "deux"
+
+msgid "three"
+msgstr "trois"
+
+msgid "four"
+msgstr "quatre"
+
+msgid "five"
+msgstr "cinq"
+
+msgid "six"
+msgstr "six"
+
+msgid "seven"
+msgstr "sept"
+
+msgid "eight"
+msgstr "huit"
+
+msgid "nine"
+msgstr "neuf"
+
+msgid "email_validation_subject"
+msgstr "Email de validation : Résolvez l'énigme et saisissez votre réponse sur le portail" 
+
+msgid "email_candidature_state_changed"
+msgstr "Modification de l'état de votre candidature"

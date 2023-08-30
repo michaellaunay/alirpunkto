@@ -14,7 +14,6 @@ from pyramid_handlers import action
 from pyramid.view import view_config
 from pyramid.request import Request
 from pyramid.httpexceptions import HTTPFound
-from .. import _
 from ..schemas.register_form import RegisterForm
 from ..models.candidature import Candidature, CandidatureStates, Candidatures, CandidatureTypes, VotingChoice
 from pyramid_mailer import get_mailer
@@ -22,13 +21,27 @@ from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection
 from persistent import Persistent
 from pyramid.security import ALL_PERMISSIONS, Allow
-from .. import MAIL_SENDER
-from .. import LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
+from .. import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
 from ldap3 import Server, Connection, ALL, NTLM
 from validate_email import validate_email
 from dataclasses import dataclass
 from pyramid.renderers import render_to_response
 from pyramid.i18n import Translator
+import random
+import hashlib
+from cryptography.fernet import Fernet
+from pyramid.path import package_path
+from pyramid.path import AssetResolver
+from transaction import commit
+import logging
+log = logging.getLogger("alirpunkto")
+from ..models import appmaker
+from ..utils import (get_candidatures,
+                    decrypt_oid,
+                    encrypt_oid,
+                    generate_math_challenge,
+                    is_valid_email,
+                    get_candidature_by_oid)
 
 @view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
 def register(request):
@@ -54,8 +67,8 @@ def register(request):
         # If the candidature is not in the request, try to retrieve it from the URL
         encrypted_oid = request.params.get("oid", None)
         if encrypted_oid:
-            decrypted_oid = decrypt_oid(encrypted_oid)
-            candidature = get_candidature_by_oid(decrypted_oid)
+            decrypted_oid = decrypt_oid(encrypted_oid, request.registry.settings['session.secret'])
+            candidature = get_candidature_by_oid(decrypted_oid, request)
         else:
             candidature = Candidature() # Create a new candidature
             request.session['candidature'] = candidature # Store the candidature in the session
@@ -102,7 +115,11 @@ def handle_draft_state(request, candidature):
     email = request.params['email']
     choice = request.params['choice']
     lang = request.params.get('lang', 'en')
-    template_path = f"templates/{lang}/LC/check_email.pt"
+
+    ar = AssetResolver("alirpunkto")
+    resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/check_email.pt')    
+
+    template_path = resolver.abspath()
 
     # Check email with LDAP
     err = is_valid_email(email, request)
@@ -115,23 +132,33 @@ def handle_draft_state(request, candidature):
     if err != None:
         return {'form': form.render(), 'candidature': candidature, 'error': err['error']}
     candidature.email = email
-    #@TODO retourner l'oid
     # Create Candidature object
-    if choice == CandidatureTypes.ORDINARY:
+    if choice == CandidatureTypes.ORDINARY.name:
         candidature.type = CandidatureTypes.ORDINARY
-    elif choice == CandidatureTypes.COOPERATOR:
+    elif choice == CandidatureTypes.COOPERATOR.name:
         candidature.type = CandidatureTypes.COOPERATOR
     else:  
         error = _('invalid_choice')
         return {'form': form.render(), 'candidature': candidature, 'error': error}
-    # Send email
+
+    # Generate math challenge for the check email, and memorize it in the candidature
     challenge = generate_math_challenge()
-    candidature.state = CandidatureStates.EMAIL_VALIDATION
+    candidature.challenge = challenge
+    # Prepare the email informations
     subject = _('email_validation_subject')
-    # Fill the email body from the page template and the challenge
-    parametter = encrypt_oid(candidature.oid, candidature.seed, request.registry.settings['session.secret'])
-    url = request.route_url('register', _query={'oid': oid})
-    body = render_to_response(template_path, {'challenge': challenge[0], 'url':url}, request=request).text
+    parametter = encrypt_oid(candidature.oid,
+        candidature.seed,
+        request.registry.settings['session.secret'])
+    url = request.route_url('register', _query={'oid': parametter})
+    site_url = request.route_url('home')
+    site_name = request.registry.settings.get('site_name')
+    # Fill the email body from the `check_email.pt` page template and the informations above
+    body = render_to_response(template_path,
+        {'challenge': challenge[0],
+        'page_register_whith_oid':url,
+        'site_url':site_url,
+        'site_name':site_name},
+        request=request).text
     # Create the email message
     message = Message(
         subject=subject,
@@ -139,9 +166,25 @@ def handle_draft_state(request, candidature):
         body=body
     )
     # Send the email
-    mailer = get_mailer(request)
+    mailer = request.registry['mailer']
     status = mailer.send(message)
+    if status == None:
+        log.error(f"Error while sending check_email to {email}")
+        return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
+    # Because the email is sent asynchronously, we need to change the state of the candidature before sending the email
+    log.info(f"check_email will be sent to {email}, URL {url}, OID {candidature.oid}")
+    # Change the state of the candidature
+    candidature.state = CandidatureStates.EMAIL_VALIDATION
+    #
+    candidatures = get_candidatures(request)
 
+    candidatures[candidature.oid] = candidature
+    # Add candidature to the list of ongoing candidatures
+    candidatures.monitored_candidatures[candidature.oid] = candidature
+    # Commit the candidature to the database
+    transaction = request.tm
+    transaction.commit()
+    return {'form': form.render(), 'candidature': candidature}
                 
 def handle_email_validation_state(request, candidature):
     """Handle the email validation state.
@@ -151,16 +194,54 @@ def handle_email_validation_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    challenge = generate_math_challenge()
-    candidature = request.session['candidature']
     email = candidature.email
+    attended_result = candidature.challenge[1]
+    schema = RegisterForm().bind(request=request)
+    form = deform.Form(schema, buttons=('submit',), translator=Translator)
 
-    
-    # Send email (pseudo code)
-    send_challenge_email(email, challenge)
-    
-    # Redirect or inform the user
-    return HTTPFound(location=request.route_url('email_validation'))
+    lang = request.params.get('lang', 'en')
+    ar = AssetResolver("alirpunkto")
+    resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/check_email.pt')
+
+    import pdb; pdb.set_trace()
+    if request.params['challenge'].strip() != str(attended_result):
+        return {'form': form.render(), 'candidature': candidature, 'error': _('invalid_challenge')}
+    # The challenge is valid, we can continue
+    candidature.state = CandidatureStates.CONFIRMED_HUMAN
+    # Prepare the email informations
+    subject = _('email_candidature_state_changed')
+    parametter = encrypt_oid(candidature.oid,
+        candidature.seed,
+        request.registry.settings['session.secret'])
+    url = request.route_url('register', _query={'oid': parametter})
+    site_url = request.route_url('home')
+    site_name = request.registry.settings.get('site_name')
+    # Fill the email body from the `check_email.pt` page template and the informations above
+    body = render_to_response(template_path,
+        {'page_register_whith_oid':url,
+        'site_url':site_url,
+        'site_name':site_name},
+        request=request).text
+    # Create the email message
+    message = Message(
+        subject=subject,
+        recipients=email,
+        body=body
+    )
+    # Send the email
+    mailer = request.registry['mailer']
+    status = mailer.send(message)
+    if status == None:
+        log.error(f"Error while sending check_email to {email}")
+        return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
+    # Because the email is sent asynchronously, we need to change the state of the candidature before sending the email
+    log.info(f"candidature_state_change will be sent to {email}, URL {url}, OID {candidature.oid}")
+    # Change the state of the candidature
+    candidature.state = CandidatureStates.EMAIL_VALIDATION
+    # Commit the change of candidature to the database
+    transaction = request.tm
+    transaction.commit()
+    return {'form': form.render(), 'candidature': candidature}
 
 def handle_confirmed_human_state(request, candidature):
     """Handle the confirmed human state.
@@ -216,113 +297,3 @@ def handle_default_state(request, candidature):
     """
     pass
 
-def is_valid_email(email, request):
-    """Check if the email is valid and not used in LDAP.
-
-    Args:
-        email (str): the email to check
-        request (pyramid.request.Request): the request
-
-    Returns:
-        error: the error if the email is not valid
-        None: if the email is valid
-    """
-    if not validate_email(email, check_mx=True):
-        return {'error': _('invalid_email')}
-    try:
-        server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
-        ldap_login=f"uid={LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" # define the user to authenticate
-        conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
-        # Verify that the email is not already registered
-        conn.search(LDAP_BASE_DN, '(uid={})'.format(email), attributes=['cn']) # search for the user in the LDAP directory
-        # Verify that the email is not already registered
-        if len(conn.entries) == 0:
-            # If already registered, display an error message
-            return {'error': _('email_allready_exist')}
-    # The email is valid and not already used
-    except:
-        return {'error': _('ldap_error')}
-    return None
-
-def is_valid_unique_pseudo(pseudonym, request):
-    """Check if pseudonym is valid and is not already used.
-
-    Args:
-        pseudonym (str): the pseudonym to check
-        request (pyramid.request.Request): the request
-
-    Returns:
-        error: the error if the email is not valid or already used
-        None: if the email is valid and not already used
-    """
-    server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
-    ldap_login=f"uid={LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" # define the user to authenticate
-    conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
-    # Verify that the pseudonym is not already registered
-    conn.search(LDAP_BASE_DN, '(uid={})'.format(pseudonym, attributes=['cn'])) # search for the user in the LDAP directory
-    # Verify that the candidate is not already registered
-    if len(conn.entries) == 0:
-        # If already registered, display an error message
-        return {'error': _('pseudonym_allready_exists')}
-    return None
-
-def generate_math_challenge():
-    """Generate a math challenge.
-    return:
-        tuple: a tuple containing the str math challenge and 0 to 9 numvers uses to generate the challenge
-    """
-    numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-    num1 = random.choice(numbers)
-    str_num1 = _(num1)
-    num2 = random.choice(numbers)
-    str_num2 = _(num2)
-    num3 = random.choice(numbers)
-    str_num3 = _(num3)
-    num4 = random.choice(numbers)
-    str_num4 = _(num4)
-    num5 = random.choice(numbers)
-    str_num5 = _(num5)
-
-    return (f"({str_num1} + {str_num2}) * ({str_num3} + {str_num4}) + {str_num5}", num1 + num2 * num3 + num4 + num5)
-
-def get_candidature_from_request(request: Request)->Candidature:
-    """Get the candidature from the request.
-    Args:
-        request (pyramid.request.Request): the request
-    Returns:
-        Candidature: the candidature
-    """
-    encrypted_oid = request.params.get("oid")
-
-    decrypted_oid = decrypt_oid(encrypted_oid)
-    return get_candidature_by_oid(decrypted_oid)
-
-
-def decrypt_oid(encrypted_oid: str, seed:str, secret:str)->str:
-    """ Function to decrypt the OID using the SECRET and return the decrypted OID
-    Args:
-        encrypted_oid (str): The encrypted OID
-        secret (str): The secret to use to decrypt the OID
-    Returns:
-        str: The decrypted OID
-    """
-    m = hashlib.sha256()
-    m.update((encrypted_oid + secret).encode())
-    return m.hexdigest()
-
-
-def encrypt_oid(oid, seed, secret) -> tuple[str,str]:
-    """ Function to encrypt the OID using the SECRET and return the encrypted OID
-    Args:
-        oid (str): The OID to encrypt
-        seed_size (int): The seed size
-        secret (str): The secret to use to encrypt the OID
-    Returns:
-        str: The encrypted OID
-    """
-    concatenated_string = oid + seed
-    m = hashlib.sha256()
-    m.update((concatenated_string + secret).encode())
-    # On supprime la graine
-    enc = m.hexdigest()
-    return enc

@@ -6,7 +6,7 @@
                 <p i18n:translate="all_applications_msg">All the applications you need to participate in Cosmopolitical in one place.</p>
                 <p i18n:translate="register_or_login_msg">Register or login now to get started.</p>
                 <a class="button" href="${request.route_url('login')}" i18n:translate="login_label">Login</a>
-                <a class="button" href="${request.route_url('register')" i18n:translate="register_label">Register</a>
+                <a class="button" href="${request.route_url('register')}" i18n:translate="register_label">Register</a>
             </div>
             <div tal:condition="logged_in">
                 <h1 i18n:translate="logged_in_msg">Alirpunkto, the centralized service for applications of ${site_name}</h1>

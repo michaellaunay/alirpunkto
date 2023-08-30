@@ -20,6 +20,8 @@ import string
 SEED_LENGTH = 10
 log = getLogger('alirpunkto')
 
+
+
 @unique
 class CandidatureStates(Enum) :
     """States of candidatures.
@@ -190,7 +192,17 @@ class Candidatures(PersistentMapping):
         if Candidatures._instance is not None:
             raise RuntimeError("Candidatures is a singleton, use Candidatures.get_instance().")
         super().__init__()
+        self._monitored_candidatures = PersistentMapping()
 
+    @property
+    def monitored_candidatures(self)-> PersistentMapping:
+        """ Get the monitored candidatures.
+        A monitored candidature is a candidature that is not in DRAFT or APPROUVED or REFUSED state and needs to be monitored.
+        For exemple, It could be necessary to send them a reminder email to the verifiers if the expiration date is approaching.
+        Returns:
+            The monitored candidatures.
+        """
+        return self._monitored_candidatures
 
 def random_string(length:int, chars:str = string.ascii_lowercase + string.digits) -> str:
     """ Generate a random string of a given length.
@@ -203,25 +215,40 @@ def random_string(length:int, chars:str = string.ascii_lowercase + string.digits
     """
     return ''.join(random.choice(chars) for _ in range(length))
 
+class CandidatureFunctions:
+    """A class to store functions used by the Candidature class.
+    Easy to mook for testing.
+    """
+    func_now = datetime.now
+    func_uuid = uuid4
+    @staticmethod
+    def now() -> datetime:
+        """Get the current datetime.
+        Returns:
+            The current datetime.
+        """
+        return CandidatureFunctions.func_now()
+    @staticmethod
+    def uuid() -> str:
+        """Get a unique identifier (UUID).
+        Returns:
+            A unique identifier (UUID).
+        """
+        return CandidatureFunctions.func_uuid()
+
 class Candidature(Persistent):
     """A candidature in the ZODB.
     """
 
     __acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]
 
-    def __init__(self, data = None, func_now = datetime.now, func_uuid = uuid4):
+    def __init__(self, data = None):
         """    Initialize a new Candidature object.
 
         Args:
             data (Optional[Type]): Initial data for the candidature. Defaults to None.
-            func_now (Callable[[], datetime], optional): A function that returns the current datetime. 
-                                                        Useful for testing. Defaults to datetime.now.
-            func_uuid (Callable[[], str], optional): A function that generates a unique identifier (UUID). 
-                                                        Useful for testing. Defaults to uuid4.
 
         Attributes:
-            _func_now (Callable[[], datetime]): A function that returns the current datetime.
-            _func_uuid (Callable[[], str]): A function that generates a unique identifier (UUID).
             _data (Type): The data for the candidature.
             _voters (List): A list to keep track of voters.
             _modifications (List[Tuple[datetime, str]]): A list to record modifications, each entry is a tuple 
@@ -236,11 +263,9 @@ class Candidature(Persistent):
             RuntimeError: Raised if an instance already exists with same oid.
 
         """
-        self._func_now = func_now
-        self._func_uuid = func_uuid
         self._data = data
         self._voters = []
-        self._modifications = [(func_now(), "Creation")]
+        self._modifications = [(CandidatureFunctions.now(), "Creation")]
         self._state = CandidatureStates.DRAFT
         self._type = None
         self._email = None
@@ -249,14 +274,14 @@ class Candidature(Persistent):
         # get a random seed
         self._change_seed()
         # get a unique object id
-        self._oid = Candidature.generate_unique_oid(func_uuid=func_uuid)
+        self._oid = Candidature.generate_unique_oid()
     
     def _change_seed(self):
         """Change the seed of the candidature.
         """
         old_seed = self._seed if self._seed else "None"
         self._seed = random_string(SEED_LENGTH)
-        self._modifications.append((self._func_now(), f"seed:{old_seed} -> {self._seed}"))
+        self._modifications.append((CandidatureFunctions.now(), f"seed:{old_seed} -> {self._seed}"))
         self._p_changed = True # mark the object as changed
 
     @property
@@ -290,7 +315,7 @@ class Candidature(Persistent):
         
         old_state = self._state.name if self._state else "None"
         self._state = value
-        self._modifications.append((self._func_now(), f"state:{old_state} -> {value.name}"))
+        self._modifications.append((CandidatureFunctions.now(), f"state:{old_state} -> {value.name}"))
         self._change_seed()
     
     @property
@@ -307,7 +332,6 @@ class Candidature(Persistent):
 
         Args:
             value (CandidatureTypes): The new type of the candidature.
-            func_now: A function that returns the current datetime, could be change for testing.
 
         Raises:
             TypeError: The type must be an instance of CandidatureTypes.
@@ -317,7 +341,7 @@ class Candidature(Persistent):
         
         old_type = self._type.name if self._type else "None"
         self._type = value
-        self._modifications.append((self._func_now(), f"type:{old_type} -> {value.name}"))
+        self._modifications.append((CandidatureFunctions.now(), f"type:{old_type} -> {value.name}"))
         self._change_seed()
 
     @property
@@ -343,7 +367,7 @@ class Candidature(Persistent):
         
         old_email = self._email if self._email else "None"
         self._email = value
-        self._modifications.append((self._func_now(), f"email:{old_email} -> {value}"))
+        self._modifications.append((CandidatureFunctions.now(), f"email:{old_email} -> {value}"))
         self._change_seed()
 
     @property
@@ -385,7 +409,7 @@ class Candidature(Persistent):
         
         old_data = self._data if self._data else "None"
         self._data = value
-        self._modifications.append((self._func_now(), f"data:{old_data} -> {value}"))
+        self._modifications.append((CandidatureFunctions.now(), f"data:{old_data} -> {value}"))
         self._change_seed()
 
     @property
@@ -402,7 +426,6 @@ class Candidature(Persistent):
 
         Args:
             value ([str]): The new voters of the candidature.
-            func_now: A function that returns the current datetime, could be change for testing.
 
         Raises:
             TypeError: The voters must be a list.
@@ -412,7 +435,7 @@ class Candidature(Persistent):
         
         old_voters = self._voters if self._voters else "None"
         self._voters = value
-        self._modifications.append((self._func_now(), f"voters:{old_voters} -> {value}"))
+        self._modifications.append((CandidatureFunctions.now(), f"voters:{old_voters} -> {value}"))
         self._change_seed()
     
     @property
@@ -438,23 +461,21 @@ class Candidature(Persistent):
         
         old_votes = self._votes if self._votes else "None"
         self._votes = value
-        self._modifications.append((self._func_now(), f"votes:{old_votes} -> {value}"))
+        self._modifications.append((CandidatureFunctions.now(), f"votes:{old_votes} -> {value}"))
         self._change_seed()
 
     @staticmethod
-    def generate_unique_oid(candidatures:Candidatures = None, max_retries:int = 10, func_uuid:Callable = uuid4):
+    def generate_unique_oid(candidatures:Candidatures = None, max_retries:int = 10):
         """
         Generate a unique Object Identifier (OID) for a new Candidature object.
 
-        This function tries to generate a unique OID by using the provided `func_uuid` function.
+        This function tries to generate a unique OID by using the CandidatureFunctions.uuid function.
         It checks for uniqueness by looking into the existing `candidatures` mapping.
 
         Args:
             candidatures (Candidatures, optional): The mapping of existing candidatures to check for OID uniqueness. 
                                                 Defaults to the singleton instance of the Candidatures class.
             max_retries (int, optional): Maximum number of attempts to generate a unique OID. Defaults to 10.
-            func_uuid (Callable[[], str], optional): A function that generates a unique identifier (UUID). 
-                                                    Useful for testing. Defaults to uuid4.
 
         Returns:
             str: A unique OID.
@@ -466,7 +487,7 @@ class Candidature(Persistent):
             # get the singleton instance
             candidatures = Candidatures.get_instance()
         for _ in range(max_retries):
-            oid = str(func_uuid())
+            oid = str(CandidatureFunctions.uuid())
             if oid not in candidatures:
                 return oid
         raise ValueError(f"Failed to generate a unique OID after {max_retries} attempts.")

@@ -228,3 +228,73 @@ class VoteOutcome(Enum):
 	NO = "vote.outcome.no"
 	ABSTAIN = "vote.outcome.abstain"
 ```
+
+2023-08-30
+Face au problème d'envoi de mail, j'ai ajouté l'option `file` pour enregistrer les logs d'envoi en mode `debug` dans un fichier.
+```ini
+[handlers]
+keys = console, file
+
+[logger_yourapp]
+level = DEBUG
+handlers = file
+qualname = AlirPunkto
+propagate = 0
+
+[handler_file]
+class = handlers.TimedRotatingFileHandler
+args = ('var/log/alirpunkto.log', 'midnight', 1, 7)
+level = DEBUG
+formatter = generic
+```
+
+Les message ne partaient pas car ils sont encapsulé dans une transaction et ne parte que si la transaction est commitée 
+
+
+## Deux types de retour sur les vues
+
+Dans le code de ma vue 'register.py' il y a deux type de return : 
+```python
+return HTTPFound(location=request.route_url('success'))
+return {'form': form.render(), 'candidature': candidature}
+```
+
+## monitored_candidatures
+
+Pour pouvoir gérer les relances, j'ai ajouté au singleton Candidatures un attribut _monitored_candidatures et son getter.
+
+## Utilisation de Fernet pour le chiffrement et déchiffrement des OID
+
+L'algorithme Fernet est une méthode de chiffrement symétrique développée pour être simple, rapide et sécurisée, tout en fournissant une vérification d'intégrité pour détecter toute modification non autorisée des données chiffrées.
+
+Le processus de chiffrement avec Fernet se déroule comme suit :
+
+1. **Génération de la clé :** Une clé secrète aléatoire est générée. Cette clé est utilisée pour chiffrer et déchiffrer les données.
+
+2. **Préparation du message :** Le message à chiffrer est converti en octets (binaire) si ce n'est pas déjà le cas.
+
+3. **Création de l'objet Fernet :** En utilisant la clé secrète générée, un objet Fernet est créé. Cet objet encapsule les détails nécessaires pour effectuer le chiffrement et le déchiffrement.
+
+4. **Chiffrement :** Le message est chiffré en utilisant l'objet Fernet. Le processus de chiffrement implique les étapes suivantes :
+   - Un vecteur d'initialisation (IV) est généré de manière aléatoire.
+   - Le message est chiffré à l'aide d'une combinaison de l'algorithme AES (Advanced Encryption Standard) en mode CBC (Cipher Block Chaining) et du mode de remplissage PKCS7.
+   - Le message chiffré est ensuite authentifié en utilisant le HMAC (Hash-based Message Authentication Code) avec l'algorithme SHA-256. Le HMAC garantit l'intégrité des données en produisant un code d'authentification basé sur le contenu du message chiffré.
+
+5. **Création du token :** Le vecteur d'initialisation, le message chiffré et le code HMAC sont combinés pour former un "token" unique qui contient toutes les informations nécessaires pour déchiffrer et vérifier l'intégrité du message.
+
+6. **Stockage du token :** Le token résultant est généralement renvoyé à l'utilisateur ou stocké dans un fichier ou une base de données.
+
+Le processus de déchiffrement suit essentiellement les mêmes étapes dans l'ordre inverse. L'objet Fernet est utilisé pour extraire le vecteur d'initialisation, puis déchiffrer le message en utilisant la clé secrète. Le code HMAC est recalculé à partir du message déchiffré et comparé au code HMAC d'origine pour vérifier que le message n'a pas été altéré.
+
+## Modification du mécanisme de Secret des fichier .ini
+
+Les secrets doivent être généré avec le script generate_secret.py
+
+```bash
+cd $ALIR_PUNKTO_PROJECT
+python3 alirpunkto/generate_secret.py
+```
+Ce qui donne quelque chose comme
+```
+SECRET_KEY="guCg0fbfPn3iazG_X5Xwk4qG1Z94vDtE4BxkmJLb-gw=" 
+```

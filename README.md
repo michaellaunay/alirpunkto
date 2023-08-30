@@ -29,7 +29,7 @@ bin/pip install --upgrade pip setuptools
 
 Install pyramid
 ```bash
-pip install pyramid pyramid_chameleon python-dotenv ldap3 pyramid_beaker pyramid_mailer py3dns validate_email
+pip install pyramid pyramid_chameleon python-dotenv ldap3 pyramid_beaker pyramid_mailer py3dns validate_email cryptography
 ```
 
 We need ZODB to store vote and session informations.
@@ -52,16 +52,22 @@ bin/pip install -e ".[testing]"
 - Create de var folder
 
 ```bash
-mkdir var
+mkdir -p var/log
 ```
 
-- Create the secret file with your keys
+- Create the secret file containing your keys
 
 ```bash
 cp .env.example .env
 ```
 
-And change the secrets inside.
+Generate a secret whith 
+
+```bash
+python3 alirpunkto/generate_secret.py
+```
+
+And change the SECRET_KEY inside the .env file.
 
 - Run your project's tests.
 
