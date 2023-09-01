@@ -16,7 +16,7 @@ from pyramid.httpexceptions import HTTPFound
 from ..schemas.register_form import RegisterForm
 from ..models.candidature import (
     Candidature, CandidatureStates, Candidatures,
-    CandidatureTypes, VotingChoice
+    CandidatureTypes, VotingChoice, SEED_LENGTH
 )
 from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
@@ -70,7 +70,7 @@ def register(request):
         # If the candidature is not in the request, try to retrieve it from the URL
         encrypted_oid = request.params.get("oid", None)
         if encrypted_oid:
-            decrypted_oid = decrypt_oid(encrypted_oid, request.registry.settings['session.secret'])
+            decrypted_oid = decrypt_oid(encrypted_oid, SEED_LENGTH, request.registry.settings['session.secret'])
             candidature = get_candidature_by_oid(decrypted_oid, request)
         else:
             candidature = Candidature() # Create a new candidature
@@ -126,7 +126,6 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
 
     # Check email with LDAP
     err = is_valid_email(email, request)
-    candidature.email = email
     schema = RegisterForm().bind(request=request)
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
     if choice not in [x for x in dir(CandidatureTypes) if not x.startswith("_")]:
@@ -151,7 +150,7 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     subject = _('email_validation_subject')
     parametter = encrypt_oid(candidature.oid,
         candidature.seed,
-        request.registry.settings['session.secret'])
+        request.registry.settings['session.secret']).decode()
     url = request.route_url('register', _query={'oid': parametter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
@@ -165,6 +164,7 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     # Create the email message
     message = Message(
         subject=subject,
+        sender=request.registry.settings['mail.default_sender'],
         recipients=email,
         body=body
     )
@@ -187,7 +187,6 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     # Commit the candidature to the database
     transaction = request.tm
     try:
-        import pdb; pdb.set_trace()
         transaction.commit()
         return {'form': form.render(), 'candidature': candidature}
     except Exception as e:
@@ -233,6 +232,7 @@ def handle_email_validation_state(request, candidature):
     # Create the email message
     message = Message(
         subject=subject,
+        sender=request.registry.settings['mail.default_sender'],
         recipients=email,
         body=body
     )

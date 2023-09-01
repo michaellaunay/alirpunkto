@@ -139,58 +139,39 @@ class VotingChoice(Enum) :
                 return(f"vote_types_{name.lower()}")
 
 class Candidatures(PersistentMapping):
-    """A singleton mapping of candidatures.
+    """A mapping to store candidatures in the ZODB.
+    Coulb be used as a singleton if all calls are made through get_instance.
     """
     _instance = None
 
     @staticmethod
-    def get_instance(zodb:Connection = None) -> Type['Candidatures']:
+    def get_instance(connection:Connection = None) -> Type['Candidatures']:
         """Get the singleton instance. Not thread safe !
         Args:
-            zodb: The ZODB connection, could be change for testing.
+            connection: The ZODB connection, could be change for testing.
         Returns:
             The singleton instance.
         Raises:
-            TypeError: The zodb argument must be an instance of ZODB.Connection.Connection
+            TypeError: The connection argument must be an instance of ZODB.Connection.Connection
         """
-        # Check if singleton is allready store in a ZODB
         if Candidatures._instance is not None:
             return Candidatures._instance
-        # Check if a ZODB is provided
-        if zodb:
-            if not isinstance(zodb, Connection):
-                raise TypeError("The zodb argument must be an instance of ZODB.Connection.Connection")
-            root = zodb.root()
-            if 'candidatures' not in root:
-                root['candidatures'] = Candidatures()
-                transaction.commit()
-                # if successfull, store the singleton in the class
-                Candidatures._instance = root['candidatures']
-            return Candidatures._instance
 
-        else:
-            raise ValueError("The zodb argument must be provided the first time.")
-    
-    def set_instance(instance:Type['Candidatures']):
-        """Set the singleton instance. Not thread safe !
-        Args:
-            instance: The singleton instance.
-        Raises:
-            TypeError: The instance argument must be an instance of Candidatures
-        """
-        if instance is Candidatures._instance:
-            return
-        if not isinstance(instance, Candidatures):
-            raise TypeError("The instance argument must be an instance of Candidatures")
-        if Candidatures._instance is not None and instance is not Candidatures._instance:
-            raise RuntimeError("Candidatures is a singleton, use Candidatures.set_instance(...) once at the beginning.")
-        Candidatures._instance = instance
+        # Check if a ZODB is provided
+        if not isinstance(connection, Connection):
+            raise TypeError("The connection argument must be an instance of ZODB.Connection.Connection")
+
+        # check if root exists
+        root = connection.root()
+        if 'candidatures' not in root:
+            connection.root()['candidatures'] = Candidatures()
+            transaction.commit()
+        Candidatures._instance = connection.root()['candidatures']
+        return root['candidatures']
 
     def __init__(self):
         """Constructor.
         """
-        if Candidatures._instance is not None:
-            raise RuntimeError("Candidatures is a singleton, use Candidatures.get_instance().")
         super().__init__()
         self._monitored_candidatures = PersistentMapping()
 

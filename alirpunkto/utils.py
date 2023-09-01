@@ -24,6 +24,7 @@ from transaction import commit
 import logging
 log = logging.getLogger("alirpunkto")
 from .models import appmaker
+import base64
 
 def get_candidatures(request)->Candidatures:
     """Get the candidatures from the request.
@@ -34,10 +35,7 @@ def get_candidatures(request)->Candidatures:
     """
     conn = get_connection(request)
     root = appmaker(conn.root())
-    # Create the candidatures singletons if it doesn't exist
-    if 'candidatures' not in root:
-        root['candidatures'] = Candidatures.get_instance(zodb=conn)
-    return root['candidatures']
+    return Candidatures.get_instance(connection=conn)
 
 def is_valid_email(email, request):
     """Check if the email is valid and not used in LDAP.
@@ -162,8 +160,10 @@ def decrypt_oid(encrypted_oid: str, seed_size:int, secret:str)->[str,str]:
         str: The seed
     """
     fernet = Fernet(secret)
+    decoded_encrypted_oid = base64.urlsafe_b64decode(encrypted_oid)
     decrypted_message = fernet.decrypt(encrypted_oid).decode()
-    return decrypted_message[:seed_size], decrypted_message[seed_size:]
+    index = len(decrypted_message)-seed_size
+    return decrypted_message[:index], decrypted_message[index:]
 
 
 def encrypt_oid(oid, seed, secret) -> str:
@@ -178,4 +178,5 @@ def encrypt_oid(oid, seed, secret) -> str:
     concatenated_string = oid + seed
     fernet = Fernet(secret)
     encrypted_message = fernet.encrypt(concatenated_string.encode())
+    encoded_encrypted_message = base64.urlsafe_b64encode(encrypted_message).decode()
     return encrypted_message

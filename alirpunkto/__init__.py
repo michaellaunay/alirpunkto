@@ -26,7 +26,14 @@ LDAP_BASE_DN = os.getenv("LDAP_BASE_DN")
 LDAP_OU = os.getenv("LDAP_OU")
 LDAP_LOGIN = os.getenv("LDAP_LOGIN")
 LDAP_PASSWORD = os.getenv("LDAP_PASSWORD")
+MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_SENDER = os.getenv("MAIL_SENDER")
+MAIL_SERVER = os.getenv("MAIL_SERVER")
+MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+MAIL_PORT = os.getenv("MAIL_PORT")
+MAIL_HOST = os.getenv("MAIL_HOST")
+MAIL_TLS = os.getenv("MAIL_TLS")
+MAIL_SSL = os.getenv("MAIL_SSL")
 
 # logging configuration
 log = logging.getLogger('alirpunkto')
@@ -126,13 +133,7 @@ def root_factory(request):
     """
     conn = get_connection(request)
     root = appmaker(conn.root())
-
-    # Create the candidatures singletons if it doesn't exist
-    if 'candidatures' not in root:
-        root['candidatures'] = Candidatures.get_instance(zodb=conn)
-        transaction.commit()
-    else:
-        Candidatures.set_instance(root['candidatures'])
+    Candidatures.get_instance(connection=conn)
     return root
 
 
@@ -147,15 +148,21 @@ def main(global_config, **settings):
         config.include('pyramid_retry')
         config.include('pyramid_zodbconn')
         # Use os.environ.get() for replacing the default values if exist
-        settings.setdefault('mail.username', os.environ.get('MAIL_USERNAME', 'default_username'))
-        settings.setdefault('mail.password', os.environ.get('MAIL_PASSWORD', 'default_password'))
-        settings.setdefault('mail.host', os.environ.get('MAIL_HOST', 'localhost'))
-        settings.setdefault('mail.port', os.environ.get('MAIL_PORT', '25'))
-        settings.setdefault('mail.tls', os.environ.get('MAIL_TLS', 'false'))
-        settings.setdefault('mail.ssl', os.environ.get('MAIL_SSL', 'false'))
+        settings['mail.username'] = MAIL_USERNAME if MAIL_USERNAME else os.environ.get('MAIL_USERNAME', None)
+        if settings['mail.username'] == "None":
+            settings['mail.username'] = None
+        settings['mail.password'] = MAIL_PASSWORD if MAIL_PASSWORD else os.environ.get('MAIL_PASSWORD', None)
+        if settings['mail.password'] == "None":
+            settings['mail.password'] = None
+        settings['mail.default_sender'] = MAIL_SENDER if MAIL_SENDER else os.environ.get('MAIL_SENDER', 'default_sender')
+        settings['mail.host'] = MAIL_HOST if MAIL_HOST else os.environ.get('MAIL_HOST', 'localhost')
+        settings['mail.port'] = MAIL_PORT if MAIL_PORT else os.environ.get('MAIL_PORT', '25')
+        settings['mail.tls'] = MAIL_TLS if MAIL_TLS else os.environ.get('MAIL_TLS', 'false')
+        settings['mail.ssl'] = MAIL_SSL if MAIL_SSL else os.environ.get('MAIL_SSL', 'false')
+        # get secret key from environment variable
+        config.registry.settings["mail.default_sender"] = settings['mail.default_sender'] # I didn't find a way to pass the default_sender to the views...
         # Create a mailer object
         mailer = Mailer.from_settings(settings)
-        # get secret key from environment variable
         config.registry['mailer'] = mailer
         secret = os.getenv('SECRET_KEY')
         # check if secret is not empty an make it accessible from the views
