@@ -275,6 +275,8 @@ class Candidature(Persistent):
         self._change_seed()
         # get a unique object id
         self._oid = Candidature.generate_unique_oid()
+        # memorize the previous state and seed
+        self._previous_state = [(self._state, self._seed)]
     
     def _change_seed(self):
         """Change the seed of the candidature.
@@ -314,6 +316,7 @@ class Candidature(Persistent):
             raise TypeError("The state must be an instance of CandidatureStates.")
         
         old_state = self._state.name if self._state else "None"
+        self._previous_state.append((self._state, self._seed))
         self._state = value
         self._modifications.append((CandidatureFunctions.now(), f"state:{old_state} -> {value.name}"))
         self._change_seed()
@@ -463,6 +466,13 @@ class Candidature(Persistent):
         self._votes = value
         self._modifications.append((CandidatureFunctions.now(), f"votes:{old_votes} -> {value}"))
         self._change_seed()
+    
+    def rollback(self):
+        """Rollback the candidature to the previous state.
+        """
+        if len(self._modifications) > 1:
+            self._state, self._seed = self._modifications.pop()
+            self._p_changed = True
 
     @staticmethod
     def generate_unique_oid(candidatures:Candidatures = None, max_retries:int = 10):

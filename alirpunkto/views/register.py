@@ -8,20 +8,25 @@
 # date: 2023-06-15
 
 import deform
-from deform import schema, ValidationFailure
-import colander
+from deform import ValidationFailure
 from pyramid_handlers import action
 from pyramid.view import view_config
 from pyramid.request import Request
 from pyramid.httpexceptions import HTTPFound
 from ..schemas.register_form import RegisterForm
-from ..models.candidature import Candidature, CandidatureStates, Candidatures, CandidatureTypes, VotingChoice
+from ..models.candidature import (
+    Candidature, CandidatureStates, Candidatures,
+    CandidatureTypes, VotingChoice
+)
 from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection
 from persistent import Persistent
 from pyramid.security import ALL_PERMISSIONS, Allow
-from .. import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
+from .. import (
+    _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN,
+    LDAP_LOGIN, LDAP_PASSWORD
+)
 from ldap3 import Server, Connection, ALL, NTLM
 from validate_email import validate_email
 from dataclasses import dataclass
@@ -36,12 +41,10 @@ from transaction import commit
 import logging
 log = logging.getLogger("alirpunkto")
 from ..models import appmaker
-from ..utils import (get_candidatures,
-                    decrypt_oid,
-                    encrypt_oid,
-                    generate_math_challenge,
-                    is_valid_email,
-                    get_candidature_by_oid)
+from ..utils import (
+    get_candidatures, decrypt_oid, encrypt_oid,
+    generate_math_challenge, is_valid_email, get_candidature_by_oid
+)
 
 @view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
 def register(request):
@@ -104,7 +107,7 @@ def register(request):
         form = deform.Form(schema, buttons=('submit',), translator=translator)
     return {'form': form.render(), 'candidature': candidature, 'error': error}
 
-def handle_draft_state(request, candidature):
+def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     """Handle the draft state.
     Args:
         request (pyramid.request.Request): the request
@@ -183,8 +186,14 @@ def handle_draft_state(request, candidature):
     candidatures.monitored_candidatures[candidature.oid] = candidature
     # Commit the candidature to the database
     transaction = request.tm
-    transaction.commit()
-    return {'form': form.render(), 'candidature': candidature}
+    try:
+        import pdb; pdb.set_trace()
+        transaction.commit()
+        return {'form': form.render(), 'candidature': candidature}
+    except Exception as e:
+        candidature.rollback()
+        log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+        return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
                 
 def handle_email_validation_state(request, candidature):
     """Handle the email validation state.
@@ -239,8 +248,13 @@ def handle_email_validation_state(request, candidature):
     candidature.state = CandidatureStates.EMAIL_VALIDATION
     # Commit the change of candidature to the database
     transaction = request.tm
-    transaction.commit()
-    return {'form': form.render(), 'candidature': candidature}
+    try:
+        transaction.commit()
+        return {'form': form.render(), 'candidature': candidature}
+    except Exception as e:
+        candidature.rollback()
+        log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+        return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
 
 def handle_confirmed_human_state(request, candidature):
     """Handle the confirmed human state.
