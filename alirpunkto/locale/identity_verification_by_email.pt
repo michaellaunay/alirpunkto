@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Identity Verification - AlirPunkto</title>
+</head>
+<body>
+
+    <h1>Identity Verification for AlirPunkto Membership</h1>
+    <p>Dear Verifiers,</p>
+
+    <p>I am writing to complete the identity verification process for my application for AlirPunkto membership. Attached to this email, you will find a partial copy of my official identity document.</p>
+
+    <p>Please note that certain sensitive information has been masked for security reasons. However, the document should contain enough information for you to verify my identity according to the AlirPunkto registration process.</p>
+
+    <p>I kindly request that you review the attached document at your earliest convenience to either confirm or refute my application for membership.</p>
+
+    <p>Thank you for your time and consideration in this matter. Should you have any further questions or need additional information, please do not hesitate to reach out to me directly.</p>
+
+    <p>Best regards,<br>
+    <strong><span tal:replace="full_name">Your Name</span></strong></p>
+
+    <p>Attachment: [Name of the ID document file]</p>
+
+    <hr>
+    <p><small>This email has been generated with the assistance of <span tal:replace="site_name">AlirPunkto</span>'s identity verification feature. If you are a verifier and have received this email in error, please inform the AlirPunkto administrator.</small></p>
+
+</body>
+</html>
