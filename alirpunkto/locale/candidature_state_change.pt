@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Change in the Status of Your Application</title>
+    <title>Change in the Status of Your Application to the <span tal:replace="site">Site Name</span></title>
 </head>
 <body>
     <h1>Evolution of Your Application</h1>
     
     <p>Hello <span tal:replace="user">Applicant's Name</span>,</p>
     
-    <p>Your application on the platform <span tal:replace="site_url">URL</span> as a <span tal:replace="candidature_type">Role 
+    <p>Your application on the platform <span tal:replace="site_url">URL</span> as a <span tal:replace="candidature_type">Role</span> 
     <span tal:condition="python:candidature.state == CandidatureState.APPROUVED">has been accepted</span>
     <span tal:condition="python:candidature.state == CandidatureState.REJECTED">has been rejected</span>
     <span tal:condition="python:candidature.state not in [CandidatureState.APPROUVED, CandidatureState.REJECTED]">is under processing and has changed its status</span>
