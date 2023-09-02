@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal">
 <head>
-    <title>Registration on AlirPunkto</title>
+    <title>Registration to <span tal:replace="site_name"></span></title>
 </head>
 <body>
 
-    <h1>Welcome to the platform <span tal:replace="site_name"></span></h1>
-    <p>To verify your email address, please solve the following equation (pay attention to the parentheses) and then enter the result in digits in the field of the registration form at the following URL:</p>
+    <h1>Thank you for starting your registration to the platform <span tal:replace="site_name"></span>!</h1>
+    <p>To enable us to verify your email address, and that you are indeed a human (and not a robot), please provide the result of the following calculation (pay attention to the parentheses) and then enter the result in digits in the field of the registration form at the following URL:</p>
     <a tal:attributes="href string:${page_register_whith_oid}">
         <span tal:replace="string:${page_register_whith_oid}"></span>
     </a>
     
-    <p>Thank you for the attention you are giving us.</p>
+    <p>Thank you for your interest in our activities. We look forward to the pleasure of welcoming you!</p>
     
     <footer>
         <p>Sincerely,</p>
