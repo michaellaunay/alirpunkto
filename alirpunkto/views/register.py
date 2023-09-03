@@ -165,7 +165,7 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     message = Message(
         subject=subject,
         sender=request.registry.settings['mail.default_sender'],
-        recipients=email,
+        recipients=[email],
         body=body
     )
     # Send the email
@@ -187,6 +187,9 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     # Commit the candidature to the database
     transaction = request.tm
     try:
+        if log.isEnabledFor(logging.DEBUG):
+            log.debug(f"handle_email_validation_state email : {message.__dict__}")
+
         transaction.commit()
         return {'form': form.render(), 'candidature': candidature}
     except Exception as e:
@@ -233,7 +236,7 @@ def handle_email_validation_state(request, candidature):
     message = Message(
         subject=subject,
         sender=request.registry.settings['mail.default_sender'],
-        recipients=email,
+        recipients=[email],
         body=body
     )
     # Send the email
@@ -249,6 +252,9 @@ def handle_email_validation_state(request, candidature):
     # Commit the change of candidature to the database
     transaction = request.tm
     try:
+        import pdb; pdb.set_trace()
+        if log.isEnabledFor(logging.DEBUG):
+            log.debug(f"handle_email_validation_state email : {message.__dict__}")
         transaction.commit()
         return {'form': form.render(), 'candidature': candidature}
     except Exception as e:
