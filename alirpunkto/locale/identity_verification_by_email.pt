@@ -12,12 +12,11 @@
 
     <p>Please note that certain sensitive information has been masked for security reasons. However, the document contain the information that you need to verify my identity according to the <span tal:replace="site">Site Name</span> registration process.</p>
 
-    <p>I kindly request that you review the attached document at your earliest convenience, but no later than ### to either confirm or refute the adequation between:
+    <p>I kindly request that you review the attached document at your earliest convenience, but no later than ### to either confirm or refute the adequation between:</p>
 <ul>
    <li>the identity information that you received directly by e-mail from the IT platform of the <span tal:replace="site">Site Name</span> and </li>
    <li>the identity information that you can read on the attached partial copy of my official identity document.</li>
 </ul>
-</p>
 
     <p>Thank you for your time and consideration in this matter. Should you have any further questions or need additional information, please do not hesitate to reach out to me directly.</p>
 
