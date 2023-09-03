@@ -18,7 +18,7 @@
    <li>the identity information that you can read on the attached partial copy of my official identity document.</li>
 </ul>
 
-    <p>Thank you for your time and consideration in this matter. Should you have any further questions or need additional information, please do not hesitate to reach out to me directly.</p>
+    <p>I thank you very warmly in advance for supporting the process of my registration as a Cooperator to the <span tal:replace="site">Site Name</span>. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
 
     <p>Best regards,<br>
     <strong><span tal:replace="full_name">Your Name</span></strong></p>
