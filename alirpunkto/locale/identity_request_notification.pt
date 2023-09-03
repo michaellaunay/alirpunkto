@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
     <title>Your registation to <span tal:replace="site_name"></span>. Next steps</title>
