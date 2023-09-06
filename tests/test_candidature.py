@@ -55,7 +55,6 @@ def test_candidature_rollback():
 
 def test_candidature_uuid():
     candidatures = Candidatures.get_instance(connection=mocked_zodb)
-    POPULATION = 5
     tries = [0, 2, 0, 0, 3, 3, 2, 3, 2, 0, 0, 0, 5, 5, 2, 0, 0, 4, 1]  # A pseudo random list of integers between 0 and POPULATION
     # Can be generated with the following code:
     # POPULATION = 6
