@@ -298,3 +298,6 @@ Ce qui donne quelque chose comme
 ```
 SECRET_KEY="guCg0fbfPn3iazG_X5Xwk4qG1Z94vDtE4BxkmJLb-gw=" 
 ```
+
+# 2023-09-05
+Le passage du seed dans les url des mails pose problème, car nous ne changeons l'état des candidatures qu'après transmission du mail. Il faut donc envoyer l'état attendu et non le seed dans la fonction de calcul du hash pour l'url.

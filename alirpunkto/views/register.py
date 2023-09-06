@@ -70,8 +70,12 @@ def register(request):
         # If the candidature is not in the request, try to retrieve it from the URL
         encrypted_oid = request.params.get("oid", None)
         if encrypted_oid:
-            decrypted_oid = decrypt_oid(encrypted_oid, SEED_LENGTH, request.registry.settings['session.secret'])
+            decrypted_oid, state = decrypt_oid(encrypted_oid, SEED_LENGTH, request.registry.settings['session.secret'])
             candidature = get_candidature_by_oid(decrypted_oid, request)
+            form = RegisterForm().bind(request=request)
+            if state != candidature.state:
+                error = _('url_is_obsolete')
+                return {'form': form.render(), 'candidature': candidature, 'error': error}
         else:
             candidature = Candidature() # Create a new candidature
             request.session['candidature'] = candidature # Store the candidature in the session
@@ -118,6 +122,7 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     email = request.params['email']
     choice = request.params['choice']
     lang = request.params.get('lang', 'en')
+    future_state = CandidatureStates.EMAIL_VALIDATION
 
     ar = AssetResolver("alirpunkto")
     resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/check_email.pt')    
@@ -149,7 +154,7 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     # Prepare the email informations
     subject = _('email_validation_subject')
     parametter = encrypt_oid(candidature.oid,
-        candidature.seed,
+        future_state,
         request.registry.settings['session.secret']).decode()
     url = request.route_url('register', _query={'oid': parametter})
     site_url = request.route_url('home')
@@ -177,7 +182,7 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     # Because the email is sent asynchronously, we need to change the state of the candidature before sending the email
     log.info(f"check_email will be sent to {email}, URL {url}, OID {candidature.oid}")
     # Change the state of the candidature
-    candidature.state = CandidatureStates.EMAIL_VALIDATION
+    candidature.state = future_state
     #
     candidatures = get_candidatures(request)
 
@@ -205,6 +210,7 @@ def handle_email_validation_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
+    import pdb; pdb.set_trace()
     email = candidature.email
     attended_result = candidature.challenge[1]
     schema = RegisterForm().bind(request=request)

@@ -26,10 +26,10 @@
                 <form method="POST">
                     <!-- Enter result Field -->
                     <label i18n:translate="enter_result_label" title="Enter the result of the operation or the code you received." i18n:attributes="title result_label_title">Enter result:</label>
-                    <input type="text" name="result" title="Please enter the code you received in your email to verify your address." i18n:attributes="title result_input_title">
+                    <input type="text" name="result" title="Please enter the result of the question you received in your email to verify your address." i18n:attributes="title result_input_title">
 
                     <!-- Verify Button -->
-                    <input type="submit" value="Verify" i18n:attributes="value verify_button" title="Click to verify the entered code." i18n:attributes="title submit_email_validation_title">
+                    <input type="submit" value="Submit"  name="submit" i18n:attributes="value verify_button" title="Click to verify the entered code." i18n:attributes="title submit_email_validation_title">
 
                 </form>
             </div>

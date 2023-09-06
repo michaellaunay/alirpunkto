@@ -150,10 +150,11 @@ def generate_key(secret:str)->bytes:
     return sha256.digest()
 
 
-def decrypt_oid(encrypted_oid: str, seed_size:int, secret:str)->[str,str]:
+def decrypt_oid(encrypted_oid: str, state_name_size:int, secret:str)->[str,str]:
     """ Function to decrypt the OID using the SECRET and return the decrypted OID
     Args:
         encrypted_oid (str): The encrypted OID
+        state_name_size (int): The size of the state name
         secret (str): The secret to use to decrypt the OID
     Returns:
         str: The decrypted OID
@@ -162,20 +163,20 @@ def decrypt_oid(encrypted_oid: str, seed_size:int, secret:str)->[str,str]:
     fernet = Fernet(secret)
     decoded_encrypted_oid = base64.urlsafe_b64decode(encrypted_oid)
     decrypted_message = fernet.decrypt(encrypted_oid).decode()
-    index = len(decrypted_message)-seed_size
+    index = len(decrypted_message)-state_name_size
     return decrypted_message[:index], decrypted_message[index:]
 
 
-def encrypt_oid(oid, seed, secret) -> str:
+def encrypt_oid(oid, state_name, secret) -> str:
     """ Function to encrypt the OID using the SECRET and return the encrypted OID
     Args:
         oid (str): The OID to encrypt
-        seed_size (int): The seed size
+        state_name (str): The state name to add to the OID (the future state of the candidature)
         secret (str): The secret to use to encrypt the OID
     Returns:
         str: The encrypted OID
     """
-    concatenated_string = oid + seed
+    concatenated_string = oid + state_name
     fernet = Fernet(secret)
     encrypted_message = fernet.encrypt(concatenated_string.encode())
     encoded_encrypted_message = base64.urlsafe_b64encode(encrypted_message).decode()
