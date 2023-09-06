@@ -58,17 +58,22 @@ def test_candidature_uuid():
     POPULATION = 5
     tries = [0, 2, 0, 0, 3, 3, 2, 3, 2, 0, 0, 0, 5, 5, 2, 0, 0, 4, 1]  # A pseudo random list of integers between 0 and POPULATION
     # Can be generated with the following code:
+    # POPULATION = 6
     # references = set(range(0,POPULATION))
     # # until the tries list contains one occurence of each references items
     # while set(tries).intersection(references) != references:
     #     tries.append(random.randint(0,POPULATION))
     our_uuid = cycle(tries)
     CandidatureFunctions.func_uuid = lambda: f"test{next(our_uuid):0>5}"
+    unique_uuids = set([CandidatureFunctions.func_uuid() for x in range(0,len(tries))])
     # Because we create exact POPULATION candidatures, we are sure that the uuid will be unique
     # Populating the candidatures
-    for indice in range(0, POPULATION):
+    for indice in range(0, len(unique_uuids)):
         candidature = Candidature()
         candidatures[candidature.oid] = candidature
+    # Ensure uniqueness of Candidature UUIDs
+    for uuid in unique_uuids:
+        assert uuid in candidatures
 
     
 # @TODO: test candidature functions
