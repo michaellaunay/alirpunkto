@@ -56,7 +56,7 @@
             Waiting for verification...
         </div>
 
-        <div tal:condition="error">
+        <div tal:condition="error" class="error">
             <p tal:content="error">Error message here</p>
         </div>
         </tal:block>

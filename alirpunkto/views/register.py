@@ -70,10 +70,16 @@ def register(request):
         # If the candidature is not in the request, try to retrieve it from the URL
         encrypted_oid = request.params.get("oid", None)
         if encrypted_oid:
-            decrypted_oid, state = decrypt_oid(encrypted_oid, SEED_LENGTH, request.registry.settings['session.secret'])
+            decrypted_oid, seed = decrypt_oid(
+                encrypted_oid,
+                SEED_LENGTH,
+                request.registry.settings['session.secret'])
             candidature = get_candidature_by_oid(decrypted_oid, request)
             form = RegisterForm().bind(request=request)
-            if state != candidature.state:
+            # Because we use the seed of the candidature to encrypt the oid,
+            # before changing his state, we need to check if the seed in the url
+            # is obsolete (if the previous_seed is different)
+            if seed != candidature.get_previous_seed():
                 error = _('url_is_obsolete')
                 return {'form': form.render(), 'candidature': candidature, 'error': error}
         else:
@@ -133,7 +139,7 @@ def handle_draft_state(request: Request, candidature:Candidature) -> HTTPFound:
     err = is_valid_email(email, request)
     schema = RegisterForm().bind(request=request)
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
-    if choice not in [x for x in dir(CandidatureTypes) if not x.startswith("_")]:
+    if choice not in CandidatureTypes.get_names():
         return {'form': form.render(), 'candidature': candidature,'error': _('invalid_choice')}
     candidature.type = getattr(CandidatureTypes,choice)
     if err != None:
@@ -210,8 +216,6 @@ def handle_email_validation_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    import pdb; pdb.set_trace()
-    email = candidature.email
     attended_result = candidature.challenge[1]
     schema = RegisterForm().bind(request=request)
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
@@ -258,7 +262,6 @@ def handle_email_validation_state(request, candidature):
     # Commit the change of candidature to the database
     transaction = request.tm
     try:
-        import pdb; pdb.set_trace()
         if log.isEnabledFor(logging.DEBUG):
             log.debug(f"handle_email_validation_state email : {message.__dict__}")
         transaction.commit()

@@ -4,10 +4,11 @@
 # Author: Michaël Launay
 
 from typing import Type, Callable, Tuple, List
+from dataclasses import dataclass
 from persistent import Persistent
 from persistent.mapping import PersistentMapping
 from datetime import datetime
-from pyramid.security import Allow, ALL_PERMISSIONS
+from pyramid.authorization import Allow, ALL_PERMISSIONS
 from enum import Enum, unique
 from uuid import uuid4
 from ZODB.FileStorage import FileStorage
@@ -76,6 +77,15 @@ class CandidatureStates(Enum) :
                 log.error(f"Unknown candidature state: {name}")
                 return(f"name.lower()")
 
+    @staticmethod
+    def get_names() -> List[str]:
+        """Get the names of the candidature states.
+        Returns:
+            The names of the candidature states.
+        """
+        return [name for name, member in CandidatureStates.__members__.items()]
+
+
 @unique
 class CandidatureTypes(Enum) :
     """Types of candidatures.
@@ -103,6 +113,14 @@ class CandidatureTypes(Enum) :
                 # should never happen
                 log.error(f"Unknown candidature type: {name}")
                 return(f"name.lower()")
+
+    @staticmethod
+    def get_names() -> List[str]:
+        """Get the names of the candidature types.
+        Returns:
+            The names of the candidature types.
+        """
+        return [name for name, member in CandidatureStates.__members__.items()]
 
 @unique
 class VotingChoice(Enum) :
@@ -137,6 +155,28 @@ class VotingChoice(Enum) :
                 # should never happen
                 log.error(f"Unknown vote type: {name}")
                 return(f"vote_types_{name.lower()}")
+
+    @staticmethod
+    def get_names() -> List[str]:
+        """Get the names of the candidature voting choice.
+        Returns:
+            The names of the voting choice.
+        """
+        return [name for name, member in CandidatureStates.__members__.items()]    
+
+@dataclass
+class CandidatureEvent:
+    """An event.
+    """
+    datetime:datetime # the datetime of the event
+    state:CandidatureStates # the state of the candidature
+    seed:str # the seed of the candidature at the moment of the event
+    def __repr__(self):
+        return f"<CandidatureEvent({self.datetime=!r}, {self.state=!r}, {self.seed=!r})>"
+    def __str__(self):
+        return f"({self.datetime}, {self.state}, {self.seed})"
+    def __iter__(self):
+        return iter((self.datetime, self.state, self.seed))
 
 class Candidatures(PersistentMapping):
     """A mapping to store candidatures in the ZODB.
@@ -232,8 +272,9 @@ class Candidature(Persistent):
         Attributes:
             _data (Type): The data for the candidature.
             _voters (List): A list to keep track of voters.
-            _modifications (List[Tuple[datetime, str]]): A list to record modifications, each entry is a tuple 
-                                                            containing the datetime and the modification message.
+            _modifications (List[CandidatureEvent]): A list to record
+                modifications, each entry is a dataclass containing the
+                datetime, the state and the modification message.
             _state (CandidatureStates): The current state of the candidature.
             _type (CandidatureTypes or None): The type of the candidature.
             _email (str or None): The email associated with the candidature.
@@ -246,25 +287,23 @@ class Candidature(Persistent):
         """
         self._data = data
         self._voters = []
-        self._modifications = [(CandidatureFunctions.now(), "Creation")]
         self._state = CandidatureStates.DRAFT
         self._type = None
         self._email = None
         self._votes = {}
         self._seed = None
-        # get a random seed
-        self._change_seed()
         # get a unique object id
         self._oid = Candidature.generate_unique_oid()
-        # memorize the previous state and seed
-        self._previous_state = [(self._state, self._seed)]
+        # get a random seed and record the creation
+        self._modifications = []
+        self._change_seed()
     
     def _change_seed(self):
         """Change the seed of the candidature.
         """
         old_seed = self._seed if self._seed else "None"
         self._seed = random_string(SEED_LENGTH)
-        self._modifications.append((CandidatureFunctions.now(), f"seed:{old_seed} -> {self._seed}"))
+        self._modifications.append(CandidatureEvent(CandidatureFunctions.now(), self._state, self._seed))
         self._p_changed = True # mark the object as changed
 
     @property
@@ -297,9 +336,7 @@ class Candidature(Persistent):
             raise TypeError("The state must be an instance of CandidatureStates.")
         
         old_state = self._state.name if self._state else "None"
-        self._previous_state.append((self._state, self._seed))
         self._state = value
-        self._modifications.append((CandidatureFunctions.now(), f"state:{old_state} -> {value.name}"))
         self._change_seed()
     
     @property
@@ -355,10 +392,10 @@ class Candidature(Persistent):
         self._change_seed()
 
     @property
-    def modifications(self)-> List[Tuple[datetime, str]]:
+    def modifications(self)-> List[CandidatureEvent]:
         """ Get the modifications of the candidature.
         Returns:
-            A copy of modifications of the candidature.
+            A copy of modifications of the candidature as a list of CandidatureEvent.
         """
         return self._modifications.copy()
     
@@ -447,12 +484,27 @@ class Candidature(Persistent):
         self._votes = value
         self._modifications.append((CandidatureFunctions.now(), f"votes:{old_votes} -> {value}"))
         self._change_seed()
+
+    def get_previous_state(self)-> CandidatureStates:
+        """ Get the previous state of the candidature.
+        Returns:
+            The previous state of the candidature.
+        """
+        return self._modifications[-2].state if len(self._modifications) > 1 else None
+    
+    def get_previous_seed(self)-> str:
+        """ Get the previous seed of the candidature.
+        Returns:
+            The previous seed of the candidature.
+        """
+        return self._modifications[-2].seed if len(self._modifications) > 1 else None
     
     def rollback(self):
         """Rollback the candidature to the previous state.
         """
         if len(self._modifications) > 1:
-            self._state, self._seed = self._modifications.pop()
+            self._modifications.pop()
+            date, self._state, self._seed = self._modifications[-1]
             self._p_changed = True
 
     @staticmethod

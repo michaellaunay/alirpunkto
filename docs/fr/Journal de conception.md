@@ -301,3 +301,8 @@ SECRET_KEY="guCg0fbfPn3iazG_X5Xwk4qG1Z94vDtE4BxkmJLb-gw="
 
 # 2023-09-05
 Le passage du seed dans les url des mails pose problème, car nous ne changeons l'état des candidatures qu'après transmission du mail. Il faut donc envoyer l'état attendu et non le seed dans la fonction de calcul du hash pour l'url.
+
+# 2023-09-06
+Retour en arrière on conserve le seed mais on utilise celui de l'état que l'on a quitté.
+Modifie le code pour enregistrer dans les modifications de candidature le tuple (date, état, seed) sous forme d'objets et non plus sous forme de text. Ajoute les fonctions de parcours de l'historique et permettant de décrirere les transitions.
+
