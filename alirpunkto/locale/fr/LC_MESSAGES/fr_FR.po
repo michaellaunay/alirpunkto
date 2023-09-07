@@ -1,0 +1,216 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-09-07 23:54+0200\n"
+"Last-Translator: \n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+msgid "welcome_msg"
+msgstr "Bienvenue"
+
+msgid "username_label"
+msgstr "Nom d'utilisateur"
+
+msgid "password_label"
+msgstr "Mot de passe"
+
+msgid "login_label"
+msgstr "Connexion"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Nom d'utilisateur ou mot de passe invalide"
+
+msgid "register_link"
+msgstr "Créer un compte"
+
+msgid "forgot_password_label"
+msgstr "Mot de passe oublié?"
+
+msgid "full_name_as_in_id_label"
+msgstr ""
+"Prénom(s) complet(s) tel(s) qu'il(s) figure(nt) sur vos documents d'identité "
+"officiels"
+
+msgid "full_surname_as_in_id_label"
+msgstr ""
+"Nom(s) de famille complet(s) tel(s) qu'il(s) figure(nt) dans vos documents "
+"d'identité officiels"
+
+msgid "birthdate_label"
+msgstr "Date de naissance"
+
+msgid "nationality_label"
+msgstr "Nationalité"
+
+msgid "cooperator_number_label"
+msgstr "Numéro de coopérateur"
+
+msgid "pseudonym_label"
+msgstr "Pseudonyme"
+
+msgid "email_label"
+msgstr "Adresse email"
+
+msgid "first_interaction_language_label"
+msgstr ""
+"La langue dans laquelle vous préférez que nous interagissions avec vous"
+
+msgid "second_interaction_language_label"
+msgstr ""
+"La langue que vous acceptez comme second choix pour que nous interagission "
+"avec vous"
+
+msgid "register_label"
+msgstr "S'inscrire"
+
+msgid "forgot_password_head"
+msgstr "Mot de passe oublié"
+
+msgid "forgot_your_password_title"
+msgstr "Mot de passe oublié?"
+
+msgid "enter_your_email_address_label"
+msgstr "Veuillez saisir votre adresse de courriel:"
+
+msgid "submit_button"
+msgstr "Soumettre"
+
+msgid "candidature_states_draft_value"
+msgstr "Brouillon : La demande est en mode brouillon."
+
+msgid "candidature_states_email_validation_value"
+msgstr ""
+"Validation de l'adresse électronique : État dans lequel l'adresse "
+"électronique du demandeur est en attente de validation."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr ""
+"ConfirméHumain : L'adresse électronique du demandeur est vérifiée et une "
+"preuve d'humanité est fournie (nous avons vérifié que vous n'êtes pas un "
+"robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Données uniques : Le demandeur a saisi ses données d'identification "
+"personnelle et nous avons vérifié qu'aucun coopérateur ou membre ordinaire "
+"de la Communauté, actuel ou récent, ne possède les mêmes données."
+
+msgid "candidature_states_pending_value"
+msgstr ""
+"En attente : La demande a été soumise. Les données d'identification "
+"personnelle ont été transmises aux vérificateurs, mais ceux-ci n'ont pas "
+"encore donné leur avis."
+
+msgid "candidature_states_approved_value"
+msgstr "Approuvé : La demande a été acceptée."
+
+msgid "candidature_states_refused_value"
+msgstr "Refusée : La demande a été refusée."
+
+msgid "candidature_states_draft"
+msgstr "brouillon"
+
+msgid "candidature_states_email_validation"
+msgstr "validation_adresse_courriel"
+
+msgid "candidature_states_confirmed_human"
+msgstr "confirmé_humain"
+
+msgid "candidature_states_unique_data"
+msgstr "données_uniques"
+
+msgid "candidature_states_pending"
+msgstr "en attente"
+
+msgid "candidature_states_approved"
+msgstr "approuvé"
+
+msgid "candidature_states_refused"
+msgstr "refusée"
+
+msgid "candidature_types_ordinary_value"
+msgstr ""
+"Ordinaire : Une demande d'inscription pour un Membre Ordinaire de la "
+"Communauté = avec un processus d'inscription simplifié, pas d'obligation "
+"financière, mais pas de droits de décision."
+
+msgid "candidature_types_cooperator_value"
+msgstr ""
+"Coopérateur : Une demande d'inscription pour devenir membre à part entière "
+"de la Coopérative, un Coopérateur = avec un processus d'inscription complet "
+"garantissant le principe \"une personne = une voix\", l'obligation d'acheter "
+"au moins une part sociale et de payer une contribution annuelle, et les "
+"pleins droits de décision."
+
+msgid "candidature_types_ordinary"
+msgstr "Membre ordinaire de la Communauté"
+
+msgid "candidature_types_cooperator"
+msgstr "Coopérateur = membre à part entière de la coopérative"
+
+msgid "vote_types_yes_value"
+msgstr "Oui : le vote est positif."
+
+msgid "vote_types_no_value"
+msgstr "Non : le vote est négatif."
+
+msgid "vote_types_abstain_value"
+msgstr "S'abstenir : Le vote est neutre."
+
+msgid "vote_types_yes"
+msgstr "oui"
+
+msgid "vote_types_no"
+msgstr "non"
+
+msgid "vote_types_abstain"
+msgstr "abstention"
+
+msgid "zero"
+msgstr "zéro"
+
+msgid "one"
+msgstr "un"
+
+msgid "two"
+msgstr "deux"
+
+msgid "three"
+msgstr "trois"
+
+msgid "four"
+msgstr "quatre"
+
+msgid "five"
+msgstr "cinq"
+
+msgid "six"
+msgstr "six"
+
+msgid "seven"
+msgstr "sept"
+
+msgid "eight"
+msgstr "huit"
+
+msgid "nine"
+msgstr "neuf"
+
+msgid "email_validation_subject"
+msgstr "Résoudre le problème et entrer la réponse sur le portail"
+
+msgid "email_candidature_state_changed"
+msgstr "Changement de statut de votre inscription"
