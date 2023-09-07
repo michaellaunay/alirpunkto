@@ -41,10 +41,10 @@ msgid "forgot_password_label"
 msgstr "Forgot password?"
 
 msgid "full_name_as_in_id_label"
-msgstr "Full name as in ID"
+msgstr "Full name(s) as in your official identity documents"
 
 msgid "full_surname_as_in_id_label"
-msgstr "Full surname as in ID"
+msgstr "Full surname(s) as in your official identity documents"
 
 msgid "birthdate_label"
 msgstr "Birthdate"
@@ -59,13 +59,13 @@ msgid "pseudonym_label"
 msgstr "Pseudonym"
 
 msgid "email_label"
-msgstr "Email"
+msgstr "Email address"
 
 msgid "first_interaction_language_label"
-msgstr "First interaction language"
+msgstr "The language you prefer for us to interact with you"
 
 msgid "second_interaction_language_label"
-msgstr "Second interaction language"
+msgstr "The language you accept as a second choice for us to interact with you"
 
 msgid "register_label"
 msgstr "Register"
@@ -131,10 +131,10 @@ msgid "candidature_types_cooperator_value"
 msgstr "Cooperator: An application for a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
 
 msgid "candidature_types_ordinary"
-msgstr "ordinary member"
+msgstr "Ordinary Member of the Community"
 
 msgid "candidature_types_cooperator"
-msgstr "cooperator member"
+msgstr "Cooperator = full member of the Cooperative"
 
 msgid "vote_types_yes_value"
 msgstr "Yes: The vote is positive."
@@ -178,8 +178,8 @@ msgstr "six"
 msgid "seven"
 msgstr "seven"
 
-msgid "seven"
-msgstr "seven"
+msgid "eight"
+msgstr "eight"
 
 msgid "nine"
 msgstr "nine"
@@ -188,4 +188,4 @@ msgid "email_validation_subject"
 msgstr "Solve the Challenge and Enter the Answer on the Portal"
 
 msgid "email_candidature_state_changed"
-msgstr "Change in the status of your candidature"
+msgstr "Change in the status of your Application"
