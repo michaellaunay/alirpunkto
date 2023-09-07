@@ -7,6 +7,7 @@
 
     <h1>Thank you for starting your registration to the platform <span tal:replace="site_name"></span>!</h1>
     <p>To enable us to verify your email address, and that you are indeed a human (and not a robot), please provide the result of the following calculation (pay attention to the parentheses) and then enter the result in digits in the field of the registration form at the following URL:</p>
+    <p tal:content="challenge">The challenge</p>
     <a tal:attributes="href string:${page_register_whith_oid}">
         <span tal:replace="string:${page_register_whith_oid}"></span>
     </a>

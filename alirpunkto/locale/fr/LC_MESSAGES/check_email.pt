@@ -7,6 +7,7 @@
 
     <h1>Bienvenue sur la plateforme <span tal:replace="site_name"></span></h1>
     <p>Pour vérifier votre adresse e-mail, veuillez résoudre l'équation suivante (faites attention aux parenthèses) et ensuite entrer le résultat en chiffres dans le champ du formulaire d'inscription à l'URL suivante :</p>
+    <p tal:content="challenge">The challenge</p>
     <a tal:attributes="href string:${site_url}/${page_register}?oid=${OID}">
         <span tal:replace="site_url"></span>/<span tal:replace="page_register"></span>?oid=<span tal:replace="OID"></span>
     </a>
