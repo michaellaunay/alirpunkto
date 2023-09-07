@@ -1,0 +1,192 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-09-08 00:26+0200\n"
+"Last-Translator: \n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+msgid "welcome_msg"
+msgstr "Benvenuto"
+
+msgid "username_label"
+msgstr "Nome utente"
+
+msgid "password_label"
+msgstr "Password"
+
+msgid "login_label"
+msgstr "Accedi"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Nome Utente o Password non valido"
+
+msgid "register_link"
+msgstr "Crea un account"
+
+msgid "forgot_password_label"
+msgstr "Password dimenticata?"
+
+#, fuzzy
+msgid "full_name_as_in_id_label"
+msgstr "Nome/i completo/i come da documento d'identità ufficiale"
+
+#, fuzzy
+msgid "full_surname_as_in_id_label"
+msgstr "Cognome/i completo/i come da documento d'identità ufficiale"
+
+msgid "birthdate_label"
+msgstr "Data di nascita"
+
+msgid "nationality_label"
+msgstr "Nazionalità"
+
+msgid "cooperator_number_label"
+msgstr "Numero de cooperatore"
+
+msgid "pseudonym_label"
+msgstr "Pseudonimo"
+
+msgid "email_label"
+msgstr "Indirizzo email"
+
+msgid "first_interaction_language_label"
+msgstr "La lingua che preferite per interagire con noi"
+
+msgid "second_interaction_language_label"
+msgstr "La lingua che accettate come seconda scelta per interagire con voi"
+
+msgid "register_label"
+msgstr "Registrati"
+
+msgid "forgot_password_head"
+msgstr "Password dimenticata"
+
+msgid "forgot_your_password_title"
+msgstr "Hai dimenticato la password?"
+
+msgid "enter_your_email_address_label"
+msgstr "Inserisci il tuo indirizzo email"
+
+msgid "submit_button"
+msgstr "Invia"
+
+msgid "candidature_states_draft_value"
+msgstr "Bozza: L'applicazione è in modalità bozza."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Convalida dell'e-mail: Lo stato in cui l'indirizzo e-mail del Richiedente è in attesa di convalida."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "ConfermatoUmano: l'indirizzo e-mail del Richiedente è verificato e viene fornita una prova di umanità (abbiamo verificato che non siete un robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr "DateUnici: Il Richiedente ha inserito i propri dati di identificazione personale e noi abbiamo verificato che nessun Cooperatore o Socio Ordinario della Comunità, attuale o recente, possiede gli stessi dati."
+
+msgid "candidature_states_pending_value"
+msgstr "In attesa: La domanda è stata presentata. I dati di identificazione personale sono stati trasmessi ai Verificatori, ma questi non hanno ancora fornito il loro feedback."
+
+msgid "candidature_states_approved_value"
+msgstr "Approvato: La domanda è stata accettata."
+
+msgid "candidature_states_refused_value"
+msgstr "Rifiutato: La domanda è stata respinta."
+
+msgid "candidature_states_draft"
+msgstr "bozza"
+
+msgid "candidature_states_email_validation"
+msgstr "convalida_email"
+
+msgid "candidature_states_confirmed_human"
+msgstr "confermato_umano"
+
+msgid "candidature_states_unique_data"
+msgstr "dati_unici"
+
+msgid "candidature_states_pending"
+msgstr "in attesa"
+
+msgid "candidature_states_approved"
+msgstr "approvato"
+
+msgid "candidature_states_refused"
+msgstr "rifiutato"
+
+msgid "candidature_types_ordinary_value"
+msgstr "Ordinario: Una domanda per diventare Membro Ordinario della Comunità = con un processo di registrazione semplificato, nessun obbligo finanziario, ma nessun diritto decisionale."
+
+msgid "candidature_types_cooperator_value"
+msgstr "Cooperatore: Una domanda per diventare socio a tutti gli effetti della Cooperativa, un Cooperatore = con un processo di registrazione completo che garantisce il principio \"una persona = un voto\", l'obbligo di acquistare almeno un'azione e di pagare un contributo annuale, e pieni diritti decisionali."
+
+msgid "candidature_types_ordinary"
+msgstr "Membro ordinario della Comunità"
+
+msgid "candidature_types_cooperator"
+msgstr "Cooperatore = socio a pieno titolo della Cooperativa"
+
+msgid "vote_types_yes_value"
+msgstr "Sì: il voto è positivo."
+
+msgid "vote_types_no_value"
+msgstr "No: il voto è negativo."
+
+msgid "vote_types_abstain_value"
+msgstr "Astenzione: Il voto è neutro."
+
+msgid "vote_types_yes"
+msgstr "sì"
+
+msgid "vote_types_no"
+msgstr "no"
+
+msgid "vote_types_abstain"
+msgstr "astenersi"
+
+msgid "zero"
+msgstr "zero"
+
+msgid "one"
+msgstr "uno"
+
+msgid "two"
+msgstr "due"
+
+msgid "three"
+msgstr "tre"
+
+msgid "four"
+msgstr "quattro"
+
+msgid "five"
+msgstr "cinque"
+
+msgid "six"
+msgstr "sei"
+
+msgid "seven"
+msgstr "sette"
+
+msgid "eight"
+msgstr "otto"
+
+msgid "nine"
+msgstr "nove"
+
+msgid "email_validation_subject"
+msgstr "Risolvere la sfida e inserire la risposta nel portale"
+
+msgid "email_candidature_state_changed"
+msgstr "Modifica dello stato della domanda"
