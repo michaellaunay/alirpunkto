@@ -1,0 +1,186 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-09-08 00:08+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+"X-Poedit-Basepath: .\n"
+
+msgid "welcome_msg"
+msgstr "Willkommen"
+
+msgid "username_label"
+msgstr "Benutzername"
+
+msgid "password_label"
+msgstr "Passwort zurücksetzen"
+
+msgid "login_label"
+msgstr "Anmelden"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Ungültiger Benutzername oder Passwort"
+
+msgid "register_link"
+msgstr "Konto erstellen"
+
+msgid "forgot_password_label"
+msgstr "Passwort vergessen?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Vollständige(r) Vorname(n) wie in Ihren offiziellen Ausweispapieren"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Vollständige(r) Nachname(n) wie in Ihren offiziellen Ausweispapieren"
+
+msgid "birthdate_label"
+msgstr "Geburtstag"
+
+msgid "nationality_label"
+msgstr "Staatsangehörigkeit"
+
+msgid "cooperator_number_label"
+msgstr "Genossenschaftlernummer"
+
+msgid "pseudonym_label"
+msgstr "Pseudonym"
+
+msgid "email_label"
+msgstr "E-Mail-Adresse"
+
+msgid "first_interaction_language_label"
+msgstr "Die von dir bevorzugte Sprache, in der wir mit Ihnen kommunizieren"
+
+msgid "second_interaction_language_label"
+msgstr "Die Sprache, die Sie als zweite Wahl akzeptieren, damit wir mit Ihnen kommunizieren können"
+
+msgid "register_label"
+msgstr "Registrieren"
+
+msgid "forgot_password_head"
+msgstr "Passwort vergessen"
+
+msgid "forgot_your_password_title"
+msgstr "Passwort vergessen?"
+
+msgid "enter_your_email_address_label"
+msgstr "Geben Sie Ihre E-Mail-Adresse ein:"
+
+msgid "submit_button"
+msgstr "Senden"
+
+msgid "candidature_states_draft_value"
+msgstr "Entwurf: Die Anwendung befindet sich im Entwurfsmodus."
+
+msgid "candidature_states_email_validation_value"
+msgstr "E-Mail-Überprüfung: Der Status, in dem die E-Mail-Adresse des Antragstellers auf ihre Validierung wartet."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "BestätigterMensch: Die E-Mail-Adresse des Bewerbers ist verifiziert und der Nachweis der Menschlichkeit ist erbracht (wir haben überprüft, dass Sie kein Roboter sind)."
+
+msgid "candidature_states_unique_data_value"
+msgstr "EindeutigeDaten: Der Antragsteller hat seine persönlichen Identifikationsdaten eingegeben, und wir haben überprüft, dass kein aktueller oder kürzlich abgemeldeter Genossenschafter oder ordentliches Mitglied der Gemeinschaft dieselben Daten hat."
+
+msgid "candidature_states_pending_value"
+msgstr "Anhängig: Der Antrag wurde eingereicht. Die persönlichen Identifikationsdaten wurden an die Prüfer übermittelt, aber sie haben noch keine Rückmeldung gegeben."
+
+msgid "candidature_states_approved_value"
+msgstr "Genehmigt: Der Antrag wurde angenommen."
+
+msgid "candidature_states_refused_value"
+msgstr "Abgelehnt: Der Antrag wurde abgelehnt."
+
+msgid "candidature_states_draft"
+msgstr "Entwurf"
+
+msgid "candidature_states_email_validation"
+msgstr "email_validierung"
+
+msgid "candidature_states_confirmed_human"
+msgstr "bestätigt_menschlich"
+
+msgid "candidature_states_unique_data"
+msgstr "eindeutige_Daten"
+
+msgid "candidature_states_pending"
+msgstr "ausstehend"
+
+msgid "candidature_states_approved"
+msgstr "genehmigt"
+
+msgid "candidature_states_refused"
+msgstr "abgelehnt"
+
+msgid "candidature_types_ordinary_value"
+msgstr "Ordentlich: Ein Antrag auf eine ordentliche Mitgliedschaft in der Gemeinschaft = mit vereinfachtem Registrierungsverfahren, ohne finanzielle Verpflichtungen, aber ohne Entscheidungsrechte."
+
+msgid "candidature_types_cooperator_value"
+msgstr "Genossenschaftler: Ein Antrag auf Vollmitgliedschaft in der Genossenschaft, ein Genossenschaftler = mit einem vollständigen Registrierungsprozess, der das Prinzip \"eine Person = eine Stimme\" gewährleistet, der Pflicht zum Kauf von mindestens einem Anteil und zur Zahlung eines Jahresbeitrags sowie vollen Entscheidungsrechten."
+
+msgid "candidature_types_ordinary"
+msgstr "Ordentliches Mitglied der Gemeinschaft"
+
+msgid "candidature_types_cooperator"
+msgstr "Genossenschaftler = Vollmitglied der Genossenschaft"
+
+msgid "vote_types_yes_value"
+msgstr "Ja: Die Abstimmung ist positiv."
+
+msgid "vote_types_no_value"
+msgstr "Nein: Die Abstimmung ist negativ."
+
+msgid "vote_types_abstain_value"
+msgstr "Enthaltung: Die Abstimmung ist neutral."
+
+msgid "vote_types_yes"
+msgstr "ja"
+
+msgid "vote_types_no"
+msgstr "nein"
+
+msgid "vote_types_abstain"
+msgstr "enthaltung"
+
+msgid "zero"
+msgstr "null"
+
+msgid "one"
+msgstr "eins"
+
+msgid "two"
+msgstr "zwei"
+
+msgid "three"
+msgstr "drei"
+
+msgid "four"
+msgstr "vier"
+
+msgid "five"
+msgstr "Fünf"
+
+msgid "six"
+msgstr "sechs"
+
+msgid "seven"
+msgstr "sieben"
+
+msgid "eight"
+msgstr "acht"
+
+msgid "nine"
+msgstr "neun"
+
+msgid "email_validation_subject"
+msgstr "Lösen Sie die Aufgabe und geben Sie die Antwort in das Portal ein"
+
+msgid "email_candidature_state_changed"
+msgstr "Änderung des Status Ihrer Bewerbung"
