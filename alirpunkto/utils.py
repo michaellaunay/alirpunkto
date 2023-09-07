@@ -2,6 +2,7 @@
 # author: Michaël Launay
 # date: 2023-09-30
 
+from typing import Dict
 from pyramid.request import Request
 from .models.candidature import Candidature, CandidatureStates, Candidatures, CandidatureTypes, VotingChoice
 from pyramid_mailer import get_mailer
@@ -14,6 +15,7 @@ from ldap3 import Server, Connection, ALL, NTLM
 from validate_email import validate_email
 from dataclasses import dataclass
 from pyramid.renderers import render_to_response
+from pyramid.response import Response
 from pyramid.i18n import Translator
 import random
 import hashlib
@@ -89,6 +91,41 @@ def is_valid_unique_pseudo(pseudonym, request):
         # If already registered, display an error message
         return {'error': _('pseudonym_allready_exists')}
     return None
+
+def send_email(request, subject: str, recipients: list, template_path: str, template_vars: Dict= {}) -> bool:
+    """
+    Generic function to send emails.
+    
+    Args:
+        request: The incoming Pyramid request object.
+        subject: Subject of the email.
+        recipients: List of email addresses to send the email to.
+        template_path: Path to the email body template.
+        template_vars: Variables to be used in the template.
+        
+    Returns:
+        bool: True if email is sent successfully, otherwise False.
+    """
+    body = render_to_response(template_path, request=request, value=template_vars).text
+    sender = request.registry.settings['mail.default_sender']
+    message = Message(
+        subject=subject,
+        sender=sender,
+        recipients=recipients,
+        body=body
+    )
+
+    log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {body}")
+
+    mailer = request.registry['mailer']
+    status = mailer.send(message)
+    
+    if status is None:
+        log.error(f"Error while preparing sending email {subject} to {recipients}")
+        return False
+    else:
+        log.info(f"Email {subject} will be sent to {recipients}")
+        return True
 
 def generate_math_challenge():
     """Generate a math challenge.

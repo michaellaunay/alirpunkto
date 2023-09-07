@@ -313,6 +313,7 @@ class Candidature(Persistent):
             _oid (str): A unique object identifier.
             _seed (str): A random string used to generate the OID.
             _email_send_status_history (List[CandidatureEmailEvent]): A list to record email send status history.
+            _challenge (Tuple[str, int]): A tuple containing the string math challenge and the solution in integer.
         Raises:
             RuntimeError: Raised if an instance already exists with same oid.
 
@@ -325,6 +326,7 @@ class Candidature(Persistent):
         self._votes = {}
         self._seed = None
         self._email_send_status_history = []
+        self._challenge = None
         # get a unique object id
         self._oid = Candidature.generate_unique_oid()
         # get a random seed and record the creation
@@ -442,6 +444,31 @@ class Candidature(Persistent):
         old_email = self._email if self._email else "None"
         self._email = value
         self._memorize_changes("email", old_email, value)
+
+    @property
+    def challenge(self)-> Tuple[str, int]:
+        """ Get the challenge of the candidature.
+        Returns:
+            The challenge of the candidature.
+        """
+        return self._challenge
+    
+    @challenge.setter
+    def challenge(self, value:Tuple[str, int]):
+        """ Set the challenge of the candidature.
+
+        Args:
+            value (Tuple[str, int]): The new challenge of the candidature.
+
+        Raises:
+            TypeError: The challenge must be a tuple.
+        """
+        if not isinstance(value, tuple):
+            raise TypeError("The challenge must be a tuple.")
+        
+        old_challenge = self._challenge if self._challenge else "None"
+        self._challenge = value
+        self._memorize_changes("challenge", old_challenge, value)
 
     @property
     def modifications(self)-> List[CandidatureEvent]:
@@ -589,6 +616,12 @@ class Candidature(Persistent):
             email_seed = random_string(SEED_LENGTH)
         else:
             email_seed = self._email_send_status_history[-1].seed if self._email_send_status_history else "None"
+        self._email_send_status_history.append(CandidatureEmailEvent(
+            datetime=CandidatureFunctions.now(), 
+            state=value,
+            function_name=procedure_name,
+            seed=email_seed
+        ))
         self._memorize_changes("add_email_send_status", old_status, value.name)
 
         
