@@ -299,10 +299,39 @@ Ce qui donne quelque chose comme
 SECRET_KEY="guCg0fbfPn3iazG_X5Xwk4qG1Z94vDtE4BxkmJLb-gw=" 
 ```
 
-# 2023-09-05
-Le passage du seed dans les url des mails pose problème, car nous ne changeons l'état des candidatures qu'après transmission du mail. Il faut donc envoyer l'état attendu et non le seed dans la fonction de calcul du hash pour l'url.
+# 2023-09-05  
+Le passage du seed dans les URL des e-mails pose problème, car nous ne changeons l'état des candidatures qu'après l'envoi du mail. Il faut donc envoyer l'état attendu, et non le seed, dans la fonction de calcul du hash pour l'URL.
 
-# 2023-09-06
-Retour en arrière on conserve le seed mais on utilise celui de l'état que l'on a quitté.
-Modifie le code pour enregistrer dans les modifications de candidature le tuple (date, état, seed) sous forme d'objets et non plus sous forme de text. Ajoute les fonctions de parcours de l'historique et permettant de décrirere les transitions.
+# 2023-09-06  
+Retour en arrière : on conserve le seed, mais on utilise celui de l'état que l'on a quitté.  
+Modifiez le code pour enregistrer dans les modifications de la candidature le tuple (date, état, seed) sous forme d'objets et non plus sous forme de texte. Ajoutez les fonctions permettant de parcourir l'historique et de décrire les transitions.
 
+# 2023-09-07  
+Il y a un problème profond avec l'état des candidatures.  
+Si l'on effectue le changement d'état avant l'envoi des e-mails, et que celui-ci échoue, le candidat reste bloqué dans un état où il n'a pas reçu son e-mail.  
+La solution la plus simple serait d'associer un état à l'envoi de l'e-mail et de relancer les e-mails non envoyés. Cela permettrait de valider les actions du candidat et de reprendre là où les choses n'ont pas bien fonctionné, sans avoir à solliciter à nouveau le candidat.  
+La liste des modifications est actuellement inconsistante dans la classe "Candidature". Je vais donc procéder à l'homogénéisation de la liste des modifications en utilisant le module `inspect` pour enregistrer le nom de la fonction ayant modifié les variables membres de la candidature.
+Pour des raisons de performance je n'ai pas utilisé le module `inspect` :
+```python
+import inspect
+
+def _change_seed(self,
+				function_name:str = None,
+				previous_value:Any = None,
+				new_value:Any = None):
+
+"""Change the seed of the candidature and memorize candidature changes.
+Args:
+function_name: The name of the function that triggered the change.
+previous_value: The previous value of the candidature property.
+new_value: The new value of the candidature property.
+"""
+	current_frame = inspect.currentframe()
+	function_name = function_name if function_name else current_frame.f_code.co_name
+...
+```
+J'ai mis le nom des méthodes dans les appels.
+
+J'ai supprimé tout le mécanisme de rollback, qui n'a plus de raison d'être avec l'ajout des états d'envoi de mail.
+
+Dans "Candidature", je mémorise la date, l'état de l'envoi du mail (voir l'énumération "CandidatureEmailSendStatus"), et le nom de la procédure d'envoi de mail. Ce dernier doit permettre de rappeler la procédure de préparation et d'envoi du mail pour les relances et les erreurs (Un match voire l'usage de `inspect`).

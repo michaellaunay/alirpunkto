@@ -28,7 +28,7 @@ def test_candidature_init():
     assert isinstance(seed, str)
     assert candidature.oid is not None
     assert len(candidature.modifications) == 1
-    assert candidature.modifications[0] == CandidatureEvent(datetime(2023, 1, 1), CandidatureStates.DRAFT, seed)
+    assert candidature.modifications[0] == CandidatureEvent(datetime(2023, 1, 1), "__init__", None, CandidatureStates.DRAFT, seed)
 
 def test_candidature_state():
     candidatures = Candidatures.get_instance(connection=mocked_zodb)
@@ -37,21 +37,11 @@ def test_candidature_state():
     candidature.state = CandidatureStates.EMAIL_VALIDATION
     assert candidature.state == CandidatureStates.EMAIL_VALIDATION
     assert len(candidature.modifications) == 2
-    assert candidature.get_previous_state() == initial_state
+    assert candidature.modifications[-1].function_name == "state"
+    assert candidature.modifications[-1].value_before == initial_state.name
+    assert candidature.modifications[-1].value_after == CandidatureStates.EMAIL_VALIDATION.name
+    assert candidature.modifications[-1].seed == candidature.seed
 
-def test_candidature_rollback():
-    candidatures = Candidatures.get_instance(connection=mocked_zodb)
-    candidature = Candidature()
-    initial_state = candidature.state # Normally DRAFT
-    initial_seed = candidature.seed
-    candidature.state = CandidatureStates.EMAIL_VALIDATION
-    assert candidature.state == CandidatureStates.EMAIL_VALIDATION
-    assert len(candidature.modifications) == 2
-    assert candidature.seed != initial_seed
-    candidature.rollback()
-    assert candidature.state == initial_state
-    assert candidature.seed == initial_seed
-    assert len(candidature.modifications) == 1
 
 def test_candidature_uuid():
     candidatures = Candidatures.get_instance(connection=mocked_zodb)

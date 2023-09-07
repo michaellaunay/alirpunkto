@@ -3,7 +3,7 @@
 # Creation date: 2023-07-22
 # Author: Michaël Launay
 
-from typing import Type, Callable, Tuple, List
+from typing import Type, Callable, Tuple, List, Any, Optional
 from dataclasses import dataclass
 from persistent import Persistent
 from persistent.mapping import PersistentMapping
@@ -83,7 +83,15 @@ class CandidatureStates(Enum) :
         Returns:
             The names of the candidature states.
         """
-        return [name for name, member in CandidatureStates.__members__.items()]
+        return CandidatureStates.__members__.keys()
+
+@unique
+class CandidatureEmailSendStatus(Enum):
+    """Status of the email sent to the applicant.
+    """
+    IN_PREPARATION = "candidature_email_send_status_in_preparation_value" # "In Preparation: The email is being prepared."
+    SENT = "candidature_email_send_status_sent_value" # "Sent: The email has been sent."
+    ERROR = "candidature_email_send_status_error_value" # "Error: An error occured while sending the email."
 
 
 @unique
@@ -120,7 +128,7 @@ class CandidatureTypes(Enum) :
         Returns:
             The names of the candidature types.
         """
-        return [name for name, member in CandidatureStates.__members__.items()]
+        return CandidatureTypes.__members__.keys()
 
 @unique
 class VotingChoice(Enum) :
@@ -162,21 +170,44 @@ class VotingChoice(Enum) :
         Returns:
             The names of the voting choice.
         """
-        return [name for name, member in CandidatureStates.__members__.items()]    
+        return VotingChoice.__members__.keys()
 
 @dataclass
 class CandidatureEvent:
     """An event.
     """
     datetime:datetime # the datetime of the event
-    state:CandidatureStates # the state of the candidature
+    function_name:str # the name of the function that triggered the event
+    value_before:Any # the value of the candidature before the event
+    value_after:Any # the value of the candidature after the event
     seed:str # the seed of the candidature at the moment of the event
     def __repr__(self):
-        return f"<CandidatureEvent({self.datetime=!r}, {self.state=!r}, {self.seed=!r})>"
+        return f"<CandidatureEvent({self.datetime}, "\
+                f"{self.function_name}, "\
+                f"{self.value_before}, "\
+                f"{self.value_after}, "\
+                f"{self.seed})>"
     def __str__(self):
-        return f"({self.datetime}, {self.state}, {self.seed})"
+        value_before = self.value_before if not self.value_before is None else "None"
+        value_after = self.value_after if not self.value_after is None else "None"
+        return f"(datetime={self.datetime}, "\
+                f"function_name={self.function_name}, "\
+                f"value_before={value_before}, "\
+                f"value_after={value_after}, "\
+                f"seed={self.seed})"
     def __iter__(self):
-        return iter((self.datetime, self.state, self.seed))
+        value_before = self.value_before if not self.value_before is None else "None"
+        value_after = self.value_after if not self.value_after is None else "None"
+        return iter((self.datetime, self.function_name, value_before, value_after, self.seed))
+
+@dataclass
+class CandidatureEmailEvent:
+    """An email send event
+    """
+    datetime:datetime # the datetime of the event
+    state:CandidatureEmailSendStatus # the state of the email
+    function_name:str # the name of the function that triggered the event
+    seed:str # the seed of the email send event
 
 class Candidatures(PersistentMapping):
     """A mapping to store candidatures in the ZODB.
@@ -274,13 +305,14 @@ class Candidature(Persistent):
             _voters (List): A list to keep track of voters.
             _modifications (List[CandidatureEvent]): A list to record
                 modifications, each entry is a dataclass containing the
-                datetime, the state and the modification message.
+                datetime, the function name, the previous value, the new value.
             _state (CandidatureStates): The current state of the candidature.
             _type (CandidatureTypes or None): The type of the candidature.
             _email (str or None): The email associated with the candidature.
             _votes (Dict): A dictionary to keep track of votes.
             _oid (str): A unique object identifier.
-
+            _seed (str): A random string used to generate the OID.
+            _email_send_status_history (List[CandidatureEmailEvent]): A list to record email send status history.
         Raises:
             RuntimeError: Raised if an instance already exists with same oid.
 
@@ -292,19 +324,41 @@ class Candidature(Persistent):
         self._email = None
         self._votes = {}
         self._seed = None
+        self._email_send_status_history = []
         # get a unique object id
         self._oid = Candidature.generate_unique_oid()
         # get a random seed and record the creation
         self._modifications = []
-        self._change_seed()
-    
-    def _change_seed(self):
-        """Change the seed of the candidature.
+        self._memorize_changes("__init__", None, self._state)
+
+    def _memorize_changes(
+        self, 
+        function_name: Optional[str] = None, 
+        previous_value: Optional[Any] = None, 
+        new_value: Optional[Any] = None
+        ) -> None:
+        """Memorize changes to the candidature and generate a new seed.
+        
+        Args:
+            function_name (Optional[str]): The name of the function that triggered the change. Defaults to "_change_seed".
+            previous_value (Optional[Any]): The previous value of the candidature property. Defaults to None.
+            new_value (Optional[Any]): The new value of the candidature property. Defaults to None.
         """
-        old_seed = self._seed if self._seed else "None"
-        self._seed = random_string(SEED_LENGTH)
-        self._modifications.append(CandidatureEvent(CandidatureFunctions.now(), self._state, self._seed))
-        self._p_changed = True # mark the object as changed
+        function_name = function_name or "_change_seed"  # Fallback to "_change_seed" if function_name is None
+        old_seed = self._seed or "None"  # Fallback to "None" if self._seed is None
+
+        self._seed = random_string(SEED_LENGTH) 
+
+        event = CandidatureEvent(
+            datetime=CandidatureFunctions.now(), 
+            function_name=function_name,
+            value_before=previous_value,
+            value_after=new_value,
+            seed=self._seed
+        )
+
+        self._modifications.append(event)
+        self._p_changed = True  # Mark the object as changed
 
     @property
     def seed(self)-> str:
@@ -337,7 +391,7 @@ class Candidature(Persistent):
         
         old_state = self._state.name if self._state else "None"
         self._state = value
-        self._change_seed()
+        self._memorize_changes("state", old_state, value.name)
     
     @property
     def type(self)-> CandidatureTypes:
@@ -362,8 +416,7 @@ class Candidature(Persistent):
         
         old_type = self._type.name if self._type else "None"
         self._type = value
-        self._modifications.append((CandidatureFunctions.now(), f"type:{old_type} -> {value.name}"))
-        self._change_seed()
+        self._memorize_changes("type", old_type, value.name)
 
     @property
     def email(self)-> str:
@@ -388,8 +441,7 @@ class Candidature(Persistent):
         
         old_email = self._email if self._email else "None"
         self._email = value
-        self._modifications.append((CandidatureFunctions.now(), f"email:{old_email} -> {value}"))
-        self._change_seed()
+        self._memorize_changes("email", old_email, value)
 
     @property
     def modifications(self)-> List[CandidatureEvent]:
@@ -430,8 +482,7 @@ class Candidature(Persistent):
         
         old_data = self._data if self._data else "None"
         self._data = value
-        self._modifications.append((CandidatureFunctions.now(), f"data:{old_data} -> {value}"))
-        self._change_seed()
+        self._memorize_changes("data", old_data, value)
 
     @property
     def voters(self)-> [str]:
@@ -456,8 +507,7 @@ class Candidature(Persistent):
         
         old_voters = self._voters if self._voters else "None"
         self._voters = value
-        self._modifications.append((CandidatureFunctions.now(), f"voters:{old_voters} -> {value}"))
-        self._change_seed()
+        self._memorize_changes("voters", old_voters, value)
     
     @property
     def votes(self)-> {str: VotingChoice}:
@@ -482,30 +532,8 @@ class Candidature(Persistent):
         
         old_votes = self._votes if self._votes else "None"
         self._votes = value
-        self._modifications.append((CandidatureFunctions.now(), f"votes:{old_votes} -> {value}"))
-        self._change_seed()
+        self._memorize_changes("votes", old_votes, value)
 
-    def get_previous_state(self)-> CandidatureStates:
-        """ Get the previous state of the candidature.
-        Returns:
-            The previous state of the candidature.
-        """
-        return self._modifications[-2].state if len(self._modifications) > 1 else None
-    
-    def get_previous_seed(self)-> str:
-        """ Get the previous seed of the candidature.
-        Returns:
-            The previous seed of the candidature.
-        """
-        return self._modifications[-2].seed if len(self._modifications) > 1 else None
-    
-    def rollback(self):
-        """Rollback the candidature to the previous state.
-        """
-        if len(self._modifications) > 1:
-            self._modifications.pop()
-            date, self._state, self._seed = self._modifications[-1]
-            self._p_changed = True
 
     @staticmethod
     def generate_unique_oid(candidatures:Candidatures = None, max_retries:int = 10):
@@ -535,4 +563,34 @@ class Candidature(Persistent):
                 return oid
         raise ValueError(f"Failed to generate a unique OID after {max_retries} attempts.")
 
+    @property
+    def email_send_status_history(self)-> List[CandidatureEmailEvent]:
+        """ Get the email send status history of the candidature.
+        Returns:
+            A copy of email send status history of the candidature.
+        """
+        return self._email_send_status_history.copy()    
+    
+    def add_email_send_status(self, value:CandidatureEmailSendStatus, procedure_name:str):
+        """ Add an email send status to the candidature.
+        Args:
+            value (CandidatureEmailSendStatus): The new status of the email sent to the applicant.
+            procedure_name (str): The name of the procedure used to send the email to the applicant.
+
+        Raises:
+            TypeError: The status must be an instance of CandidatureEmailSendStatus.
+        """
+        if not isinstance(value, CandidatureEmailSendStatus):
+            raise TypeError("The status must be an instance of CandidatureEmailSendStatus.")
+        old_status = self._email_send_status_history[-1].state if self._email_send_status_history else "None"
+
+        # if the status is IN_PREPARATION, generate a new seed
+        if value == CandidatureEmailSendStatus.IN_PREPARATION:
+            email_seed = random_string(SEED_LENGTH)
+        else:
+            email_seed = self._email_send_status_history[-1].seed if self._email_send_status_history else "None"
+        self._memorize_changes("add_email_send_status", old_status, value.name)
+
+        
+    
 
