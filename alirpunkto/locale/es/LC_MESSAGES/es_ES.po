@@ -1,0 +1,191 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-09-08 00:20+0200\n"
+"Last-Translator: \n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+msgid "welcome_msg"
+msgstr "Bienvenido"
+
+msgid "username_label"
+msgstr "Nombre de usuario"
+
+msgid "password_label"
+msgstr "Contraseña"
+
+msgid "login_label"
+msgstr "Iniciar sesión"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Usuario o contraseña incorrectos"
+
+msgid "register_link"
+msgstr "Crear una cuenta"
+
+msgid "forgot_password_label"
+msgstr "¿Olvidaste tu contraseña?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Nombre(s) completo(s) que figura(n) en su documento oficial de identidad"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Apellido(s) completo(s) que figura(n) en su documento oficial de identidad"
+
+msgid "birthdate_label"
+msgstr "Fecha de nacimiento"
+
+msgid "nationality_label"
+msgstr "Nacionalidad"
+
+msgid "cooperator_number_label"
+msgstr "Número de cooperador"
+
+msgid "pseudonym_label"
+msgstr "Seudónimo"
+
+msgid "email_label"
+msgstr "Dirección de correo electrónico"
+
+msgid "first_interaction_language_label"
+msgstr "El idioma que prefiere para que interactuemos con usted"
+
+msgid "second_interaction_language_label"
+msgstr "El idioma que acepta como segunda opción para que interactuemos con usted"
+
+msgid "register_label"
+msgstr "Registrarse"
+
+msgid "forgot_password_head"
+msgstr "¿Se te olvidó tu contraseña?"
+
+msgid "forgot_your_password_title"
+msgstr "¿Olvidaste tu contraseña?"
+
+msgid "enter_your_email_address_label"
+msgstr "Introduzca su correo electrónico:"
+
+msgid "submit_button"
+msgstr "Enviar"
+
+msgid "candidature_states_draft_value"
+msgstr "Borrador: La aplicación está en modo borrador."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Validación de correo electrónico: El estado en el que la dirección de correo electrónico del Solicitante está pendiente de validación."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "HumanoConfirmado: Se verifica la dirección de correo electrónico del solicitante y se proporciona una prueba de humanidad (hemos comprobado que no es un robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr "DatosUnicos: El Solicitante ha introducido sus datos de identificación personal, y hemos verificado que ningún Cooperador o Miembro Ordinario de la Comunidad actual o reciente tiene los mismos datos."
+
+msgid "candidature_states_pending_value"
+msgstr "Pendiente: La solicitud ha sido presentada. Los datos de identificación personal se han transmitido a los Verificadores, pero aún no han enviado sus comentarios."
+
+msgid "candidature_states_approved_value"
+msgstr "Aprobada: La solicitud ha sido aceptada."
+
+msgid "candidature_states_refused_value"
+msgstr "Denegada: La solicitud ha sido denegada."
+
+msgid "candidature_states_draft"
+msgstr "borrador"
+
+msgid "candidature_states_email_validation"
+msgstr "validación_email"
+
+msgid "candidature_states_confirmed_human"
+msgstr "humano_confirmado"
+
+msgid "candidature_states_unique_data"
+msgstr "datos_únicos"
+
+msgid "candidature_states_pending"
+msgstr "pendiente"
+
+msgid "candidature_states_approved"
+msgstr "aprobado"
+
+msgid "candidature_states_refused"
+msgstr "rechazado"
+
+msgid "candidature_types_ordinary_value"
+msgstr "Ordinario: Una solicitud de Miembro Ordinario de la Comunidad = con proceso de registro simplificado, sin obligación financiera, pero sin derechos de decisión."
+
+msgid "candidature_types_cooperator_value"
+msgstr "Cooperador: Una solicitud de socio de pleno derecho de la Cooperativa, un Cooperador = con un proceso de registro completo que garantiza el principio de \"una persona = un voto\", la obligación de adquirir al menos una acción y de pagar una aportación anual, y plenos derechos de toma de decisiones."
+
+msgid "candidature_types_ordinary"
+msgstr "Miembro ordinario de la Comunidad"
+
+msgid "candidature_types_cooperator"
+msgstr "Cooperador = socio de pleno derecho de la Cooperativa"
+
+msgid "vote_types_yes_value"
+msgstr "Sí: El voto es positivo."
+
+msgid "vote_types_no_value"
+msgstr "No: El voto es negativo."
+
+msgid "vote_types_abstain_value"
+msgstr "Abstencion: El voto es neutro."
+
+msgid "vote_types_yes"
+msgstr "sí"
+
+msgid "vote_types_no"
+msgstr "no"
+
+msgid "vote_types_abstain"
+msgstr "abstencion"
+
+#, fuzzy
+msgid "zero"
+msgstr "cero"
+
+msgid "one"
+msgstr "uno"
+
+msgid "two"
+msgstr "dos"
+
+msgid "three"
+msgstr "tres"
+
+msgid "four"
+msgstr "cuatro"
+
+msgid "five"
+msgstr "cinco"
+
+msgid "six"
+msgstr "seis"
+
+msgid "seven"
+msgstr "siete"
+
+msgid "eight"
+msgstr "ocho"
+
+msgid "nine"
+msgstr "nueve"
+
+msgid "email_validation_subject"
+msgstr "Resuelva el reto e introduzca la respuesta en el portal"
+
+msgid "email_candidature_state_changed"
+msgstr "Cambio en el estado de su solicitud"
