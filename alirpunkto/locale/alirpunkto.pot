@@ -189,3 +189,16 @@ msgstr "Solve the Challenge and Enter the Answer on the Portal"
 
 msgid "email_candidature_state_changed"
 msgstr "Change in the status of your Application"
+
+msgid "invalid_challenge"
+msgstr "Your answer is incorrect. Please enter a new one."
+
+msgid "invalid_email"
+msgstr "There is an issue with your email address, please verify it."
+
+msgid "invalid_choice"
+msgstr "Your choice is not valid, please enter it again."
+
+msgid "invalid_username_or_password"
+msgstr "Invalid username or password. Please try again."
+

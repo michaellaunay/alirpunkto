@@ -67,8 +67,8 @@ def register(request):
     candidature = None
     error = None
     # Check if the candidature is already in the request
-    if hasattr(request, 'candidature'):
-        candidature = request.candidature
+    if 'candidature' in request.session :
+        candidature = request.session['candidature']
     else:
         # If the candidature is not in the request, try to retrieve it from the URL
         encrypted_oid = request.params.get("oid", None)
@@ -78,11 +78,12 @@ def register(request):
                 SEED_LENGTH,
                 request.registry.settings['session.secret'])
             candidature = get_candidature_by_oid(decrypted_oid, request)
-            form = RegisterForm().bind(request=request)
-            
+            schema = RegisterForm().bind(request=request)
+            form = deform.Form(schema, buttons=('submit',), translator=translator)
             if seed != candidature.email_send_status_history[-1].seed:
                 error = _('url_is_obsolete')
-                return {'form': form.render(), 'candidature': candidature, 'error': error}
+                return {'form': form.render(), 'candidature': candidature, 'error': error, 'url_obsolete': True}
+            request.session['candidature'] = candidature
         else:
             candidature = Candidature() # Create a new candidature
             request.session['candidature'] = candidature # Store the candidature in the session
@@ -220,6 +221,48 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
         log.error(f"Error while commiting candidature {candidature.oid} : {e}")
         return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
 
+def send_confirm_validation_email(request: Request, candidature: Candidature, email_content: Dict) -> Dict:
+    """Send the confirmation email to the candidate.
+    Args:
+        request (pyramid.request.Request): the request
+        candidature (Candidature): the candidature
+        email_content (dict): the content of the email
+    Returns:
+        dict: the result of the email sending
+    """
+    lang = request.params.get('lang', 'en')
+    ar = AssetResolver("alirpunkto")
+    resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/candidature_state_change.pt')    
+    template_path = resolver.abspath()
+    
+    subject = _('email_candidature_state_changed')
+    email = candidature.email
+    seed = candidature.email_send_status_history[-1].seed
+    parametter = encrypt_oid(candidature.oid, seed, request.registry.settings['session.secret']).decode()
+    
+    url = request.route_url('register', _query={'oid': parametter})
+    site_url = request.route_url('home')
+    site_name = request.registry.settings.get('site_name')
+    
+    template_vars = {
+        'page_register_with_oid': url,
+        'site_url': site_url,
+        'site_name': site_name,
+        'candidature': candidature,
+        'CandidatureStates': CandidatureStates,
+        site_name: site_name
+    }
+    
+    # Use the send_email from utils.py
+    success = send_email(request, subject, [email], template_path, template_vars)
+    
+    if success:
+        candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_confirm_validation_email")
+        return {'success': True}
+    else:
+        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
+        return {'error': _('email_not_sent')}
+
 def handle_email_validation_state(request, candidature):
     """Handle the email validation state.
     Args:
@@ -231,9 +274,8 @@ def handle_email_validation_state(request, candidature):
     
     # Extract the expected result of the challenge from the candidature
     attended_result = candidature.challenge[1]
-    
     if request.params['result'].strip() != str(attended_result):
-        return {'error': 'invalid_challenge'}
+        return {'error': 'invalid_challenge', 'candidature': candidature}
     
     # Correct, we can continue and change the state of the candidature
     candidature.state = CandidatureStates.CONFIRMED_HUMAN
@@ -256,14 +298,26 @@ def handle_email_validation_state(request, candidature):
         'site_url': site_url,
         'site_name': site_name
     }
-    
-    send_result = send_validation_email(request, candidature, email_content)
-    
+    candidature.add_email_send_status(CandidatureEmailSendStatus.IN_PREPARATION, "send_confirm_validation_email")
+    send_result = send_confirm_validation_email(request, candidature, email_content)
+    schema = RegisterForm().bind(request=request)
+    form = deform.Form(schema, buttons=('submit',), translator=Translator)
     if 'error' in send_result:
+        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
         schema = RegisterForm().bind(request=request)
         form = deform.Form(schema, buttons=('submit',), translator=Translator)
         return {'form': form.render(), 'candidature': candidature, 'error': send_result['error']}
-    
+    else:
+        candidatures = get_candidatures(request)
+        candidatures.monitored_candidatures[candidature.oid] = candidature
+        transaction = request.tm
+        try:
+            transaction.commit()
+            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_confirm_validation_email")
+        except Exception as e:
+            log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
+            return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}    
     return {'form': form.render(), 'candidature': candidature}
 
 def handle_confirmed_human_state(request, candidature):

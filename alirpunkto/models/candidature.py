@@ -598,31 +598,31 @@ class Candidature(Persistent):
         """
         return self._email_send_status_history.copy()    
     
-    def add_email_send_status(self, value:CandidatureEmailSendStatus, procedure_name:str):
+    def add_email_send_status(self, status:CandidatureEmailSendStatus, procedure_name:str):
         """ Add an email send status to the candidature.
         Args:
-            value (CandidatureEmailSendStatus): The new status of the email sent to the applicant.
+            status (CandidatureEmailSendStatus): The new status of the email sent to the applicant.
             procedure_name (str): The name of the procedure used to send the email to the applicant.
 
         Raises:
             TypeError: The status must be an instance of CandidatureEmailSendStatus.
         """
-        if not isinstance(value, CandidatureEmailSendStatus):
+        if not isinstance(status, CandidatureEmailSendStatus):
             raise TypeError("The status must be an instance of CandidatureEmailSendStatus.")
         old_status = self._email_send_status_history[-1].state if self._email_send_status_history else "None"
 
         # if the status is IN_PREPARATION, generate a new seed
-        if value == CandidatureEmailSendStatus.IN_PREPARATION:
+        if status == CandidatureEmailSendStatus.IN_PREPARATION:
             email_seed = random_string(SEED_LENGTH)
         else:
             email_seed = self._email_send_status_history[-1].seed if self._email_send_status_history else "None"
         self._email_send_status_history.append(CandidatureEmailEvent(
             datetime=CandidatureFunctions.now(), 
-            state=value,
+            state=status,
             function_name=procedure_name,
             seed=email_seed
         ))
-        self._memorize_changes("add_email_send_status", old_status, value.name)
+        self._memorize_changes("add_email_send_status", old_status, status)
 
         
     
