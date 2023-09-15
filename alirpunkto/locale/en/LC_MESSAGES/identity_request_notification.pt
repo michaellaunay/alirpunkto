@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Identity Verification Notification - AlirPunkto</title>
+<html tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Identity Verification Notification - AlirPunkto</title>
 </head>
-<body>
+<body tal:omit-tag="textual">
 
-    <h1>Hello <span tal:replace="full_name">Applicant's Name</span>,</h1>
-    <p>Thank you for submitting your application to AlirPunkto. Before finalizing your membership status, we need to verify certain identity information.</p>
+    <h1 tal:omit-tag="textual">Hello <span tal:replace="full_name">Applicant's Name</span>,</h1>
+    <p tal:omit-tag="textual">Thank you for submitting your application to AlirPunkto. Before finalizing your membership status, we need to verify certain identity information.</p>
 
-    <p>Depending on the option you chose during registration, here are the next steps:</p>
+    <p tal:omit-tag="textual">Depending on the option you chose during registration, here are the next steps:</p>
 
-    <h2>If you chose the "Ordinary Community Member" option:</h2>
-    <ol>
-        <li>Congratulations, you are now an "Ordinary Community Member"!</li>
-        <li>Your membership number has been determined.</li>
-        <li>A congratulatory email has been sent to you.</li>
-        <li>Your application status is now "ApprovedOrdinaryCommunityMember".</li>
+    <h2 tal:omit-tag="textual">If you chose the "Ordinary Community Member" option:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Congratulations, you are now an "Ordinary Community Member"!</li>
+        <li tal:omit-tag="textual">Your membership number has been determined.</li>
+        <li tal:omit-tag="textual">A congratulatory email has been sent to you.</li>
+        <li tal:omit-tag="textual">Your application status is now "ApprovedOrdinaryCommunityMember".</li>
     </ol>
 
-    <h2>If you chose the "Cooperator" option:</h2>
-    <p>You will need to provide the following information, as they appear in your official documents:</p>
-    <ul>
-        <li>Your first names, transcribed in Latin characters if necessary (for Greek and Bulgarian),</li>
-        <li>Your surnames,</li>
-        <li>Your date of birth,</li>
-        <li>Your nationality (from EU Member States only).</li>
+    <h2 tal:omit-tag="textual">If you chose the "Cooperator" option:</h2>
+    <p tal:omit-tag="textual">You will need to provide the following information, as they appear in your official documents:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Your first names, transcribed in Latin characters if necessary (for Greek and Bulgarian),</li>
+        <li tal:omit-tag="textual">Your surnames,</li>
+        <li tal:omit-tag="textual">Your date of birth,</li>
+        <li tal:omit-tag="textual">Your nationality (from EU Member States only).</li>
     </ul>
 
-    <p><strong>There are two methods for sending this information:</strong></p>
-    <ol>
-        <li><strong>Via Video Conference</strong>: A button will guide you in drafting a pre-filled email, in which you can propose appointment dates and times for a video conference with our verifiers.</li>
-        <li><strong>Via Email Attachment</strong>: A button will assist you in writing a pre-filled email, to which you can attach a partial copy of your identity document (e.g., masking the number and place of birth).</li>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">There are two methods for sending this information:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via Video Conference</strong>: A button will guide you in drafting a pre-filled email, in which you can propose appointment dates and times for a video conference with our verifiers.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via Email Attachment</strong>: A button will assist you in writing a pre-filled email, to which you can attach a partial copy of your identity document (e.g., masking the number and place of birth).</li>
     </ol>
 
-    <p>Each verifier will then verify the conformity of the information you provided with that on your official identity document. You will receive an email from them to either confirm or refute your application.</p>
+    <p tal:omit-tag="textual">Each verifier will then verify the conformity of the information you provided with that on your official identity document. You will receive an email from them to either confirm or refute your application.</p>
 
-    <p>Should email sending fail for any reason, an error message will be logged and an attempt will be made to send an email to the administrator.</p>
+    <p tal:omit-tag="textual">Should email sending fail for any reason, an error message will be logged and an attempt will be made to send an email to the administrator.</p>
 
-    <p>We remind you that the notice period for identity data submission is limited, so please act quickly.</p>
+    <p tal:omit-tag="textual">We remind you that the notice period for identity data submission is limited, so please act quickly.</p>
 
-    <p>If you have any questions or need further clarification, please do not hesitate to contact us.</p>
+    <p tal:omit-tag="textual">If you have any questions or need further clarification, please do not hesitate to contact us.</p>
 
-    <p>Best regards,<br>
-    <strong>The AlirPunkto Team</strong></p>
+    <p tal:omit-tag="textual">Best regards,<br>
+    <strong tal:omit-tag="textual">The AlirPunkto Team</strong></p>
 
-    <hr>
-    <p><small>Note: This notification has been generated automatically. Please do not reply directly to this message.</small></p>
+     tal:omit-tag="textual"<hr>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note: This notification has been generated automatically. Please do not reply directly to this message.</small></p>
 
 </body>
 </html>

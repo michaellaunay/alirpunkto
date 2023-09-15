@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Change in the Status of Your Application</title>
+<html tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Change in the Status of Your Application</title>
 </head>
-<body>
-    <h1>Evolution of Your Application</h1>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Evolution of Your Application</h1>
     
-    <p>Hello <span tal:replace="user" tal:condition="exists:user">Applicant's Name</span>,</p>
+    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p>
     
-    <p>Your application on the platform <span tal:replace="site_url">URL</span> as a <span tal:replace="python:candidature.type">Role 
-    <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">has been accepted</span>
-    <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">has been rejected</span>
-    <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">is under processing and has changed its status</span>
-    .
+    <p tal:omit-tag="textual tal:omit-tag="textual"">Your application on the platform <span tal:replace="site_url">URL</span> as a <span tal:replace="python:candidature.type">Role</span>
+        <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">has been accepted</span>
+        <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">has been rejected</span>
+        <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">is under processing and has changed its status</span>
+        .
     </p>
     
-    <p>Here are the details of its evolution:</p>
-    <ul>
-        <li>Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
-        <li>Transition Date: <span tal:replace="python:candidature.modifications[-1]">Last transition</span></li>
-        <li>New Status: <span tal:replace="python:candidature.state">New application status</span></li>
+    <p  tal:omit-tag="textual">Here are the details of its evolution:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
+        <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1]">Last transition</span></li>
+        <li tal:omit-tag="textual">New Status: <span tal:replace="python:candidature.state">New application status</span></li>
     </ul>
     
-    <p>Thank you for your participation.</p>
+    <p tal:omit-tag="textual">Thank you for your participation.</p>
     
-    <p>Best regards,</p>
-    <p>The team of <span tal:replace="site_name">Site Name</span></p>
+    <p tal:omit-tag="textual">Best regards,</p>
+    <p tal:omit-tag="textual">The team of <span tal:replace="site_name">Site Name</span></p>
 </body>
 </html>

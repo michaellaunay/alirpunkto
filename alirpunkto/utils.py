@@ -106,16 +106,21 @@ def send_email(request, subject: str, recipients: list, template_path: str, temp
     Returns:
         bool: True if email is sent successfully, otherwise False.
     """
-    body = render_to_response(template_path, request=request, value=template_vars).text
+    text_body = render_to_response(template_path, request=request, value={**template_vars, "textual":True}).text
+    for i in range(5, 1, -1):
+        text_body = text_body.replace("\n"*i, "\n")
+    text_body = text_body.replace("<!DOCTYPE html>\n", "")
+    html_body = render_to_response(template_path, request=request, value={**template_vars, "textual":False}).body
     sender = request.registry.settings['mail.default_sender']
     message = Message(
         subject=subject,
         sender=sender,
         recipients=recipients,
-        body=body
+        body=text_body[text_body.find(">\n")+2:].replace("\n\n\n\n","\n").replace("\n\n\n","\n").replace("\n\n","\n"),
+        html=html_body
     )
 
-    log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {body}")
+    log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {text_body}")
 
     mailer = request.registry['mailer']
     status = mailer.send(message)

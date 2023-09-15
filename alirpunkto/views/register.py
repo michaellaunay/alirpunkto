@@ -135,7 +135,7 @@ def send_validation_email(request: Request, candidature: 'Candidature', email: s
     
     lang = request.params.get('lang', 'en')
     ar = AssetResolver("alirpunkto")
-    resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/check_email.pt')    
+    resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/check_email.pt')
     template_path = resolver.abspath()
 
     subject = _('email_validation_subject')

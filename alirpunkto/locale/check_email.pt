@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:tal="http://xml.zope.org/namespaces/tal">
-<head>
-    <title>Registration to <span tal:replace="site_name"></span></title>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Registration on AlirPunkto</title>
 </head>
-<body>
+<body tal:omit-tag="textual">
 
-    <h1>Thank you for starting your registration to the platform <span tal:replace="site_name"></span>!</h1>
-    <p>To enable us to verify your email address, and that you are indeed a human (and not a robot), please provide the result of the following calculation (pay attention to the parentheses) and then enter the result in digits in the field of the registration form at the following URL:</p>
-    <p tal:content="challenge">The challenge</p>
-    <a tal:attributes="href string:${page_register_whith_oid}">
+    <h1 tal:omit-tag="textual">Welcome to the platform <span tal:replace="site_name"></span></h1>
+    <p tal:omit-tag="textual">To verify your email address, please solve the following equation (pay attention to the parentheses) and then enter the result in digits in the field of the registration form at the following URL:</p>
+    <p tal:content="challenge" tal:omit-tag="textual">The challenge</p>
+    <a tal:attributes="href string:${page_register_whith_oid}" tal:omit-tag="textual">
         <span tal:replace="string:${page_register_whith_oid}"></span>
     </a>
     
-    <p>Thank you for your interest in our activities. We look forward to the pleasure of welcoming you!</p>
+    <p tal:omit-tag="textual">Thank you for the attention you are giving us.</p>
     
-    <footer>
-        <p>Sincerely,</p>
-        <p>The team at <span tal:replace="site_name"></span></p>
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Sincerely,</p>
+        <p tal:omit-tag="textual">The team at <span tal:replace="site_name">Site</span></p>
     </footer>
 
 </body>

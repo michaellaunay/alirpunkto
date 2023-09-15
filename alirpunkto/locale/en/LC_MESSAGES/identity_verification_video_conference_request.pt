@@ -1,40 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Request for Identity Verification via Video Conference - AlirPunkto</title>
+<html tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Request for Identity Verification via Video Conference - AlirPunkto</title>
 </head>
-<body>
+<body tal:omit-tag="textual">
 
-    <h1>Identity Verification via Video Conference for Membership in AlirPunkto</h1>
+    <h1 tal:omit-tag="textual">Identity Verification via Video Conference for Membership in AlirPunkto</h1>
 
-    <p>Dear Verifiers,</p>
+    <p tal:omit-tag="textual">Dear Verifiers,</p>
 
-    <p>I am writing to complete the verification process for my membership in AlirPunkto. I would like to propose a video conference meeting for this purpose.</p>
+    <p tal:omit-tag="textual">I am writing to complete the verification process for my membership in AlirPunkto. I would like to propose a video conference meeting for this purpose.</p>
 
-    <p>Here are some time slots that I am suggesting for the video conference:</p>
-    <ul>
-        <li>Monday, September 6th, from 10am to 12pm (Adjust according to your availability)</li>
-        <li>Tuesday, September 7th, from 2pm to 4pm (Adjust according to your availability)</li>
-        <li>Wednesday, September 8th, from 9am to 11am (Adjust according to your availability)</li>
+    <p tal:omit-tag="textual">Here are some time slots that I am suggesting for the video conference:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Monday, September 6th, from 10am to 12pm (Adjust according to your availability)</li>
+        <li tal:omit-tag="textual">Tuesday, September 7th, from 2pm to 4pm (Adjust according to your availability)</li>
+        <li tal:omit-tag="textual">Wednesday, September 8th, from 9am to 11am (Adjust according to your availability)</li>
     </ul>
 
-    <p>The video conference can be conducted through the following platforms:</p>
-    <ul>
-        <li>Jitsi Meet</li>
-        <li>Zoom</li>
-        <li>Microsoft Teams</li>
-        <li>Google Meet</li>
+    <p tal:omit-tag="textual">The video conference can be conducted through the following platforms:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Jitsi Meet</li>
+        <li tal:omit-tag="textual">Zoom</li>
+        <li tal:omit-tag="textual">Microsoft Teams</li>
+        <li tal:omit-tag="textual">Google Meet</li>
     </ul>
 
-    <p>Please kindly select a time slot and platform that suits you, and confirm your selection with me.</p>
+    <p tal:omit-tag="textual">Please kindly select a time slot and platform that suits you, and confirm your selection with me.</p>
 
-    <p>Thank you in advance for your cooperation in this matter. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
+    <p tal:omit-tag="textual">Thank you in advance for your cooperation in this matter. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
 
-    <p>Sincerely,<br>
-    <strong>[Your Name]</strong></p>
+    <p tal:omit-tag="textual">Sincerely,<br>
+    <strong tal:omit-tag="textual">[Your Name]</strong></p>
 
-    <hr>
-    <p><small>This email was generated with the help of AlirPunkto's identity verification function. If you are a verifier and have received this email in error, please inform the AlirPunkto administrator.</small></p>
+    <hr tal:omit-tag="textual">
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email was generated with the help of AlirPunkto's identity verification function. If you are a verifier and have received this email in error, please inform the AlirPunkto administrator.</small></p>
 
 </body>
 </html>
