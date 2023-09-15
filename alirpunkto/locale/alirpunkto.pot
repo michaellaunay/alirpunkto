@@ -185,10 +185,10 @@ msgid "nine"
 msgstr "nine"
 
 msgid "email_validation_subject"
-msgstr "Solve the Challenge and Enter the Answer on the Portal"
+msgstr "Verifying that you are an human. Solve the challenge and enter the answer on the portal"
 
 msgid "email_candidature_state_changed"
-msgstr "Change in the status of your Application"
+msgstr "Change in the status of your application to the portal"
 
 msgid "invalid_challenge"
 msgstr "Your answer is incorrect. Please enter a new one."
