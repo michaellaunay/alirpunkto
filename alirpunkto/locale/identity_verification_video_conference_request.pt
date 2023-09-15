@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Request for Identity Verification via Video Conference - AlirPunkto</title>
+    <title tal:omit-tag="textual">en - <span tal:omit-tag="textual" tal:replace="site">Site Name</span> - Please verify my identity as a new potential Cooperator via Video Conference</title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Identity Verification via Video Conference for Membership in AlirPunkto</h1>
+    <h1 tal:omit-tag="textual">en - Identity Verification for <span tal:omit-tag="textual" tal:replace="site">Site Name</span> Membership via Video Conference</h1>
 
     <p tal:omit-tag="textual">Dear Verifiers,</p>
 
-    <p tal:omit-tag="textual">I am writing to complete the verification process for my membership in AlirPunkto. I would like to propose a video conference meeting for this purpose.</p>
+    <p tal:omit-tag="textual">I am writing to you to complete the identity verification process for my application to become a Cooperator of the <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. I would like to propose a video conference meeting for this purpose.</p>
 
-    <p tal:omit-tag="textual">Here are some time slots that I am suggesting for the video conference:</p>
+    <p tal:omit-tag="textual">Here are some time slots that I am suggesting for the video conference. I live in Germany (Please adjust according to your country / region of residence. This is necessary for your correspondent to know your time zone.). This video conference should last no longer than 10 minutes: (plase provide at least 3 options, if possible at different times of the day and on different days including during the week-end, all of them no later than ###)</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Monday, September 6th, from 10am to 12pm (Adjust according to your availability)</li>
-        <li tal:omit-tag="textual">Tuesday, September 7th, from 2pm to 4pm (Adjust according to your availability)</li>
-        <li tal:omit-tag="textual">Wednesday, September 8th, from 9am to 11am (Adjust according to your availability)</li>
+        <li tal:omit-tag="textual">Monday, 04 September 2023, at 17:30 hours my time; (Adjust according to your availability)</li>
+        <li tal:omit-tag="textual">Tuesday, 05 September 2023, at 20:30 hours my time; (Adjust according to your availability)</li>
+        <li tal:omit-tag="textual">Saturday, 09 September 2023, at 10:00 hours my time. (Adjust according to your availability)</li>
     </ul>
 
-    <p tal:omit-tag="textual">The video conference can be conducted through the following platforms:</p>
-    <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Jitsi Meet</li>
-        <li tal:omit-tag="textual">Zoom</li>
-        <li tal:omit-tag="textual">Microsoft Teams</li>
-        <li tal:omit-tag="textual">Google Meet</li>
-    </ul>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Please be aware that we may live in different time zones! Please transpose these time slots to your own time zone.</strong></p>
 
-    <p tal:omit-tag="textual">Please kindly select a time slot and platform that suits you, and confirm your selection with me.</p>
+    <p tal:omit-tag="textual">The video conference will take place using the following link:</p> 
+(please insert here the link that you have prepared for this videoconference. Here are our suggestions of platforms that you can use to create the videoconference and provide the corresponding link:
+    <ul>
+        <li><a href="https://meet.jit.si/">Jitsi Meet</a> (free and open-source software)</li>
+        <li><a href="https://framatalk.org/abc/en/">Framatalk</a> (free and open-source software)</li>
+        <li><a href="https://zoom.us/">Zoom</a> (proprietary software)</li>
+        <li><a href="https://www.microsoft.com/en-gb/microsoft-teams/log-in">Microsoft Teams</a> (proprietary software, platform behind paywall)</li>
+        <li><a href="https://meet.google.com/?pli=1">Google Meet</a> (proprietary software, cost-free access to the platform)</li>
+    </ul>)
 
-    <p tal:omit-tag="textual">Thank you in advance for your cooperation in this matter. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
+    <p tal:omit-tag="textual">Please kindly select a time slot that suits you, and send me an e-mail containing your selection.</p>
+
+    <p tal:omit-tag="textual">>I thank you very warmly in advance for supporting the process of my registration as a Cooperator to the <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
 
     <p tal:omit-tag="textual">Sincerely,<br>
     <strong tal:omit-tag="textual">[Your Name]</strong></p>
 
     <hr tal:omit-tag="textual">
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email was generated with the help of AlirPunkto's identity verification function. If you are a verifier and have received this email in error, please inform the AlirPunkto administrator.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email has been generated with the assistance of <span tal:replace="site">Site Name</span>'s identity verification feature. If you are not the Verifier assigned to the application of <span tal:omit-tag="textual" tal:replace="full_name">Your Name</span>< and have received this email in error, please inform the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> administrator.</small></p>
 
 </body>
 </html>
