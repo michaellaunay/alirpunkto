@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Identity Verification - AlirPunkto</title>
+    <title tal:omit-tag="textual">en - <span tal:omit-tag="textual" tal:replace="site">Site Name</span> - Please verify my identity as a new potential Cooperator</title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Identity Verification for AlirPunkto Membership</h1>
+    <h1 tal:omit-tag="textual">Identity Verification for <span tal:omit-tag="textual" tal:replace="site">Site Name</span> Membership</h1>
     <p tal:omit-tag="textual">Dear Verifiers,</p>
 
-    <p tal:omit-tag="textual">I am writing to complete the identity verification process for my application for AlirPunkto membership. Attached to this email, you will find a partial copy of my official identity document.</p>
+    <p tal:omit-tag="textual">I am writing to you to complete the identity verification process for my application to become a Cooperator of the <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Attached to this email, you will find a partial copy of my official identity document.</p>
 
-    <p tal:omit-tag="textual">Please note that certain sensitive information has been masked for security reasons. However, the document should contain enough information for you to verify my identity according to the AlirPunkto registration process.</p>
+    <p tal:omit-tag="textual">Please note that certain sensitive information has been masked for security reasons. However, the document contain the information that you need to verify my identity according to the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> registration process.</p>
 
-    <p tal:omit-tag="textual">I kindly request that you review the attached document at your earliest convenience to either confirm or refute my application for membership.</p>
+    <p tal:omit-tag="textual">I kindly request that you review the attached document at your earliest convenience, but no later than ### to either confirm or refute the adequation between:</p>
+<ul tal:omit-tag="textual">
+   <li tal:omit-tag="textual">the identity information that you received directly by e-mail from the IT platform of the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> and </li>
+   <li tal:omit-tag="textual">the identity information that you can read on the attached partial copy of my official identity document.</li>
+</ul>
 
-    <p tal:omit-tag="textual">Thank you for your time and consideration in this matter. Should you have any further questions or need additional information, please do not hesitate to reach out to me directly.</p>
+    <p tal:omit-tag="textual">I thank you very warmly in advance for supporting the process of my registration as a Cooperator to the <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
 
     <p tal:omit-tag="textual">Best regards,<br>
     <strong tal:omit-tag="textual"><span tal:replace="full_name">Your Name</span></strong></p>
@@ -22,7 +26,7 @@
     <p tal:omit-tag="textual">Attachment: [Name of the ID document file]</p>
 
     <hr tal:omit-tag="textual">
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email has been generated with the assistance of <span tal:replace="site_name">AlirPunkto</span>'s identity verification feature. If you are a verifier and have received this email in error, please inform the AlirPunkto administrator.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email has been generated with the assistance of <span tal:omit-tag="textual" tal:replace="site">Site Name</span>'s identity verification feature. If you are not the Verifier assigned to the application of <span tal:omit-tag="textual" tal:replace="full_name">Your Name</span>< and have received this email in error, please inform the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> administrator.</small></p>
 
 </body>
 </html>
