@@ -1,0 +1,220 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-09-15 13:56+0200\n"
+"Last-Translator: \n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+msgid "welcome_msg"
+msgstr "Bine ați venit"
+
+msgid "username_label"
+msgstr "Utilizator"
+
+msgid "password_label"
+msgstr "Parola"
+
+msgid "login_label"
+msgstr "Autentificare"
+
+#: views/login.py:23
+#, fuzzy
+msgid "invalid_username_or_password"
+msgstr "Nume de utilizator sau parolă invalidă. Vă rugăm să încercați din nou."
+
+msgid "register_link"
+msgstr "Creează cont"
+
+msgid "forgot_password_label"
+msgstr "Ai uitat parola?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Prenumele complete, așa cum figurează în documentele oficiale de identitate"
+
+#, fuzzy
+msgid "full_surname_as_in_id_label"
+msgstr "Numele de familie complet(e), așa cum figurează în documentele de identitate oficiale"
+
+msgid "birthdate_label"
+msgstr "Data nașterii"
+
+msgid "nationality_label"
+msgstr "Naţionalitate"
+
+#, fuzzy
+msgid "cooperator_number_label"
+msgstr "Numărul cooperatorului"
+
+#, fuzzy
+msgid "pseudonym_label"
+msgstr "Pseudonimul"
+
+msgid "email_label"
+msgstr "Adresă email"
+
+#, fuzzy
+msgid "first_interaction_language_label"
+msgstr "Limba în care preferați să interacționăm cu dvs"
+
+#, fuzzy
+msgid "second_interaction_language_label"
+msgstr "Limba pe care o acceptați ca o a doua opțiune pentru a interacționa cu dvs"
+
+msgid "register_label"
+msgstr "Înregistrare"
+
+msgid "forgot_password_head"
+msgstr "Am uitat parola"
+
+msgid "forgot_your_password_title"
+msgstr "Ai uitat parola?"
+
+#, fuzzy
+msgid "enter_your_email_address_label"
+msgstr "Te rugăm să-ți introduci adresa de email"
+
+msgid "submit_button"
+msgstr "Trimite"
+
+#, fuzzy
+msgid "candidature_states_draft_value"
+msgstr "Proiect: Aplicația se află în modul proiect."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Validarea E-mailului: Starea în care adresa de e-mail a solicitantului este în așteptare de validare."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "UmanConfirmat: Adresa de e-mail a solicitantului este verificată și este furnizată o dovadă de umanitate (am verificat că nu sunteți un robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr "DateUnice: Solicitantul a introdus datele sale de identificare personală și am verificat că niciun Cooperator sau membru obișnuit al Comunității, actual sau recent, nu are aceleași date."
+
+#, fuzzy
+msgid "candidature_states_pending_value"
+msgstr "În așteptare: Cererea a fost depusă. Datele de identificare personală au fost transmise verificatorilor, dar aceștia nu au transmis încă un feedback."
+
+#, fuzzy
+msgid "candidature_states_approved_value"
+msgstr "Aprobat: Cererea a fost acceptată."
+
+#, fuzzy
+msgid "candidature_states_refused_value"
+msgstr "Refuzat: Cererea a fost respinsă."
+
+msgid "candidature_states_draft"
+msgstr "schița"
+
+msgid "candidature_states_email_validation"
+msgstr "Validarea_E-mailului"
+
+msgid "candidature_states_confirmed_human"
+msgstr "uman_confirmat"
+
+msgid "candidature_states_unique_data"
+msgstr "date_unice"
+
+msgid "candidature_states_pending"
+msgstr "în așteptare"
+
+msgid "candidature_states_approved"
+msgstr "aprobat"
+
+msgid "candidature_states_refused"
+msgstr "refuzat"
+
+msgid "candidature_types_ordinary_value"
+msgstr "Ordinar: O cerere pentru un Membru Ordinar al Comunității = cu un proces de înregistrare simplificat, fără obligații financiare, dar fără drepturi de decizie."
+
+msgid "candidature_types_cooperator_value"
+msgstr "Cooperator: O cerere de membru cu drepturi depline al Cooperativei, un Cooperator = cu un proces de înregistrare complet care asigură principiul \"o persoană = un vot\", obligația de a cumpăra cel puțin o cotă socială și de a plăti o contribuție anuală, precum și drepturi depline de decizie."
+
+msgid "candidature_types_ordinary"
+msgstr "Membru Ordinar al Comunității"
+
+#, fuzzy
+msgid "candidature_types_cooperator"
+msgstr "Cooperator = membru cu drepturi depline al Cooperativei"
+
+#, fuzzy
+msgid "vote_types_yes_value"
+msgstr "Da: votul este pozitiv."
+
+#, fuzzy
+msgid "vote_types_no_value"
+msgstr "Nu: votul este negativ."
+
+#, fuzzy
+msgid "vote_types_abstain_value"
+msgstr "Abțineri: Votul este neutru."
+
+msgid "vote_types_yes"
+msgstr "da"
+
+msgid "vote_types_no"
+msgstr "nu"
+
+#, fuzzy
+msgid "vote_types_abstain"
+msgstr "se abțin"
+
+msgid "zero"
+msgstr "zero"
+
+msgid "one"
+msgstr "unu"
+
+msgid "two"
+msgstr "doi"
+
+msgid "three"
+msgstr "trei"
+
+msgid "four"
+msgstr "patru"
+
+msgid "five"
+msgstr "cinci"
+
+msgid "six"
+msgstr "șase"
+
+msgid "seven"
+msgstr "șapte"
+
+msgid "eight"
+msgstr "opt"
+
+msgid "nine"
+msgstr "nouă"
+
+#, fuzzy
+msgid "email_validation_subject"
+msgstr "Verificarea faptului că sunteți un om. Rezolvați provocarea și introduceți răspunsul pe portal"
+
+#, fuzzy
+msgid "email_candidature_state_changed"
+msgstr "Schimbarea statutului cererii dumneavoastră pe portal"
+
+#, fuzzy
+msgid "invalid_challenge"
+msgstr "Răspunsul dumneavoastră este incorect. Vă rugăm să introduceți unul nou."
+
+#, fuzzy
+msgid "invalid_email"
+msgstr "Există o problemă cu adresa dvs. de e-mail, vă rugăm să o verificați."
+
+#, fuzzy
+msgid "invalid_choice"
+msgstr "Alegerea dvs. nu este validă, vă rugăm să o introduceți din nou."
