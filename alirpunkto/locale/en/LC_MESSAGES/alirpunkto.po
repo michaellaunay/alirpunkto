@@ -205,7 +205,7 @@ msgid "invalid_choice"
 msgstr "Your choice is not valid, please enter it again."
 
 msgid "challenge_instruction_text"
-msgstr "Please solve the following four simple operations and fill in the corresponding fields to confirm your email address."
+msgstr "Please provide the solutions to the four simple operations received in your verification email and fill in the corresponding fields to confirm your email address."
 
 msgid "enter_result_label_A"
 msgstr "Enter result for operation A:"

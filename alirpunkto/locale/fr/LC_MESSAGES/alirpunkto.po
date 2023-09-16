@@ -203,7 +203,7 @@ msgid "invalid_choice"
 msgstr "Votre choix n'est pas valide, veuillez le saisir à nouveau."
 
 msgid "challenge_instruction_text"
-msgstr "Veuillez résoudre les quatre opérations simples suivantes et remplir les champs correspondants pour confirmer votre adresse e-mail."
+msgstr "Please provide the solutions to the four simple operations received in your verification email and fill in the corresponding fields to confirm your email address."
 
 msgid "enter_result_label_A"
 msgstr "Entrez le résultat pour l'opération A :"
