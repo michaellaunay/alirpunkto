@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Change in the Status of Your application to the <span tal:omit-tag="textual" tal:replace="site">Site Name</span></title>
+    <title tal:omit-tag="textual">Change in the Status of Your Application</title>
 </head>
 <body tal:omit-tag="textual">
-    <h1 tal:omit-tag="textual">Evolution of Your application</h1>
+    <h1 tal:omit-tag="textual">Evolution of Your Application</h1>
     
-    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p>
+    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p >
     
     <p tal:omit-tag="textual">Your application on the platform <span tal:replace="site_url">URL</span> as a <span tal:replace="python:candidature.type">Role</span>
         <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">has been accepted</span>

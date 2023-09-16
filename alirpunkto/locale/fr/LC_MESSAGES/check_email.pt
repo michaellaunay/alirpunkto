@@ -1,22 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:tal="http://xml.zope.org/namespaces/tal">
-<head>
-    <title>Inscription sur AlirPunkto</title>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Inscription à <span tal:replace="site_name"></span></title>
 </head>
-<body>
+<body tal:omit-tag="textual">
 
-    <h1>Bienvenue sur la plateforme <span tal:replace="site_name"></span></h1>
-    <p>Pour vérifier votre adresse e-mail, veuillez résoudre l'équation suivante (faites attention aux parenthèses) et ensuite entrer le résultat en chiffres dans le champ du formulaire d'inscription à l'URL suivante :</p>
-    <p tal:content="challenge">The challenge</p>
-    <a tal:attributes="href string:${site_url}/${page_register}?oid=${OID}">
-        <span tal:replace="site_url"></span>/<span tal:replace="page_register"></span>?oid=<span tal:replace="OID"></span>
+    <h1 tal:omit-tag="textual">Merci de commencer votre inscription à la plateforme <span tal:replace="site_name"></span></h1>
+    <p tal:omit-tag="textual">Pour vérifier votre adresse e-mail et vous assurer que vous êtes bien un humain (et non un robot), nous avons conçu une série de calculs simples. Veuillez résoudre les quatre calculs étiquetés de A à D et entrer les résultats respectifs dans les champs correspondants sur la page d'inscription liée ci-dessous.</p>
+    <div omit-tag="textual">
+    
+        <p tal:omit-tag="textual">L'opération A est <span tal:content="challenge_A" tal:omit-tag="textual">Le premier défi</span></p>
+        <p tal:omit-tag="textual">L'opération B est <span tal:content="challenge_B" tal:omit-tag="textual">Le deuxième défi</span></p>
+        <p tal:omit-tag="textual">L'opération C est <span tal:content="challenge_C" tal:omit-tag="textual">Le troisième défi</span></p>
+        <p tal:omit-tag="textual">L'opération D est <span tal:content="challenge_D" tal:omit-tag="textual">Le quatrième défi</span></p>
+    </div>
+    <a tal:attributes="href string:${page_register_whith_oid}" tal:omit-tag="textual">
+        <span tal:replace="string:${page_register_whith_oid}"></span>
     </a>
     
-    <p>Nous vous remercions pour l'attention que vous nous portez.</p>
+    <p tal:omit-tag="textual">Merci de l'intérêt que vous portez à nos activités. Nous avons hâte de vous accueillir prochainement !</p>
     
-    <footer>
-        <p>Cordialement,</p>
-        <p>L'équipe de <span tal:replace="site_name"></span></p>
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Cordialement,</p>
+        <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Site</span></p>
     </footer>
 
 </body>

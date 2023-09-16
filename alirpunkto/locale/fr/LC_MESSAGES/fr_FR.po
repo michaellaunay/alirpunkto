@@ -209,6 +209,12 @@ msgstr "huit"
 msgid "nine"
 msgstr "neuf"
 
+msgid "times"
+msgstr  "fois"
+
+msgid "plus"
+msgstr "plus"
+
 msgid "email_validation_subject"
 msgstr ""
 "Vérification que vous êtes bien un être humain. Résoudre le défi et entrer "
@@ -225,3 +231,51 @@ msgstr "Il y a un problème avec votre adresse e-mail, veuillez la vérifier."
 
 msgid "invalid_choice"
 msgstr "Votre choix n'est pas valide, veuillez le saisir à nouveau."
+
+msgid "invalid_username_or_password"
+msgstr "Nom d'utilisateur ou mot de passe invalide. Veuillez réessayer."
+
+msgid "challenge_instruction_text"
+msgstr "Veuillez résoudre les quatre opérations simples suivantes et remplir les champs correspondants pour confirmer votre adresse e-mail."
+
+msgid "enter_result_label_A"
+msgstr "Entrez le résultat pour l'opération A :"
+
+msgid "result_label_title_A"
+msgstr "Entrez le résultat de l'opération A ou le code que vous avez reçu."
+
+msgid "result_input_title_A"
+msgstr "Veuillez entrer le résultat de l'opération A que vous avez reçu dans votre e-mail pour vérifier votre adresse."
+
+msgid "enter_result_label_B"
+msgstr "Entrez le résultat pour l'opération B :"
+
+msgid "result_label_title_B"
+msgstr "Entrez le résultat de l'opération B ou le code que vous avez reçu."
+
+msgid "result_input_title_B"
+msgstr "Veuillez entrer le résultat de l'opération B que vous avez reçu dans votre e-mail pour vérifier votre adresse."
+
+msgid "enter_result_label_C"
+msgstr "Entrez le résultat pour l'opération C :"
+
+msgid "result_label_title_C"
+msgstr "Entrez le résultat de l'opération C ou le code que vous avez reçu."
+
+msgid "result_input_title_C"
+msgstr "Veuillez entrer le résultat de l'opération C que vous avez reçu dans votre e-mail pour vérifier votre adresse."
+
+msgid "enter_result_label_D"
+msgstr "Entrez le résultat pour l'opération D :"
+
+msgid "result_label_title_D"
+msgstr "Entrez le résultat de l'opération D ou le code que vous avez reçu."
+
+msgid "result_input_title_D"
+msgstr "Veuillez entrer le résultat de l'opération D que vous avez reçu dans votre e-mail pour vérifier votre adresse."
+
+msgid "verify_button"
+msgstr "Envoyer"
+
+msgid "submit_email_validation_title"
+msgstr "Cliquez pour vérifier les codes saisis."

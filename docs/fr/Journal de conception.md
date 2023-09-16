@@ -335,3 +335,7 @@ J'ai mis le nom des méthodes dans les appels.
 J'ai supprimé tout le mécanisme de rollback, qui n'a plus de raison d'être avec l'ajout des états d'envoi de mail.
 
 Dans "Candidature", je mémorise la date, l'état de l'envoi du mail (voir l'énumération "CandidatureEmailSendStatus"), et le nom de la procédure d'envoi de mail. Ce dernier doit permettre de rappeler la procédure de préparation et d'envoi du mail pour les relances et les erreurs (Un match voire l'usage de `inspect`).
+
+# 2023-09-16
+Le système de vérification par résolution d'équation pose deux problèmes : l'espace des possibles n'est pas suffisant, et la notion de parenthèse est compliqué pour certains.
+Il a donc été décider de réaliser quatre opérations simples : un premier nombre aléatoire de 1 à 9 est multiplié par un deuxième nombre aléatoire de 1 à 9 le tout additionné d'un troisième nombre aléatoire de 1 à 9, chacune des opérations est numérotée de A à D et le résultat doit être reporté dans les champs appelés A à D.

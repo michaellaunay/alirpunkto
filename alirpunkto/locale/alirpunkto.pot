@@ -184,6 +184,12 @@ msgstr "eight"
 msgid "nine"
 msgstr "nine"
 
+msgid "times"
+msgstr  "times"
+
+msgid "plus"
+msgstr "plus"
+
 msgid "email_validation_subject"
 msgstr "Verifying that you are an human. Solve the challenge and enter the answer on the portal"
 
@@ -202,3 +208,47 @@ msgstr "Your choice is not valid, please enter it again."
 msgid "invalid_username_or_password"
 msgstr "Invalid username or password. Please try again."
 
+msgid "challenge_instruction_text"
+msgstr "Please solve the following four simple operations and fill in the corresponding fields to confirm your email address."
+
+msgid "enter_result_label_A"
+msgstr "Enter result for operation A:"
+
+msgid "result_label_title_A"
+msgstr "Enter the result of the operation A or the code you received."
+
+msgid "result_input_title_A"
+msgstr "Please enter the result of the operation A you received in your email to verify your address."
+
+msgid "enter_result_label_B"
+msgstr "Enter result for operation B:"
+
+msgid "result_label_title_B"
+msgstr "Enter the result of the operation B or the code you received."
+
+msgid "result_input_title_B"
+msgstr "Please enter the result of the operation B you received in your email to verify your address."
+
+msgid "enter_result_label_C"
+msgstr "Enter result for operation C:"
+
+msgid "result_label_title_C"
+msgstr "Enter the result of the operation C or the code you received."
+
+msgid "result_input_title_C"
+msgstr "Please enter the result of the operation C you received in your email to verify your address."
+
+msgid "enter_result_label_D"
+msgstr "Enter result for operation D:"
+
+msgid "result_label_title_D"
+msgstr "Enter the result of the operation D or the code you received."
+
+msgid "result_input_title_D"
+msgstr "Please enter the result of the operation D you received in your email to verify your address."
+
+msgid "verify_button"
+msgstr "Submit"
+
+msgid "submit_email_validation_title"
+msgstr "Click to verify the entered codes."

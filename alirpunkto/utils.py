@@ -132,26 +132,28 @@ def send_email(request, subject: str, recipients: list, template_path: str, temp
         log.info(f"Email {subject} will be sent to {recipients}")
         return True
 
-def generate_math_challenge():
-    """Generate a math challenge.
+
+def generate_math_challenges():
+    """Generate four simple math challenges.
     return:
-        tuple: A tuple containing the string math challenge and the solution in integer.
+        dict: A dictionary containing the math challenges and their solutions.
     """
+    challenges = {}
     numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
     number_dict = {word: index for index, word in enumerate(numbers)}
-    num1 = random.choice(numbers)
-    str_num1 = _(num1)
-    num2 = random.choice(numbers)
-    str_num2 = _(num2)
-    num3 = random.choice(numbers)
-    str_num3 = _(num3)
-    num4 = random.choice(numbers)
-    str_num4 = _(num4)
-    num5 = random.choice(numbers)
-    str_num5 = _(num5)
-
-    return (f"({str_num1} + {str_num2}) * ({str_num3} + {str_num4}) + {str_num5}",
-        (number_dict[num1] + number_dict[num2]) * (number_dict[num3] + number_dict[num4]) + number_dict[num5])
+    for label in ["A", "B", "C", "D"]:
+        num1 = random.randint(1, 9)
+        str_num1 = _(num1)
+        num2 = random.randint(1, 9)
+        str_num2 = _(num2)
+        num3 = random.randint(1, 9)
+        str_num3 = _(num3)
+        str_times = _("times")
+        str_plus = _("plus")
+        challenge_str = f"{str_num1} {str_times} {str_num2} {str_plus} {str_num3}"
+        challenge_solution = num1 * num2 + num3
+        challenges[label] = (challenge_str, challenge_solution)
+    return challenges
 
 def get_candidature_by_oid(oid, request):
     """Get the candidature by its oid.

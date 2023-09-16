@@ -3,7 +3,7 @@
 # Creation date: 2023-07-22
 # Author: Michaël Launay
 
-from typing import Type, Callable, Tuple, List, Any, Optional
+from typing import Type, Callable, Tuple, List, Any, Optional, Dict
 from dataclasses import dataclass
 from persistent import Persistent
 from persistent.mapping import PersistentMapping
@@ -454,17 +454,17 @@ class Candidature(Persistent):
         return self._challenge
     
     @challenge.setter
-    def challenge(self, value:Tuple[str, int]):
+    def challenge(self, value:Dict[str, Tuple[str, int]]):
         """ Set the challenge of the candidature.
 
         Args:
-            value (Tuple[str, int]): The new challenge of the candidature.
+            value (Dict[str, Tuple[str, int]]): The new challenge of the candidature.
 
         Raises:
-            TypeError: The challenge must be a tuple.
+            TypeError: The challenge must be a dict of tuple.
         """
-        if not isinstance(value, tuple):
-            raise TypeError("The challenge must be a tuple.")
+        if not isinstance(value, dict):
+            raise TypeError("The challenge must be a dictionary with strings as keys and tuples as values.")
         
         old_challenge = self._challenge if self._challenge else "None"
         self._challenge = value

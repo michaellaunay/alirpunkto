@@ -45,7 +45,7 @@ log = logging.getLogger("alirpunkto")
 from ..models import appmaker
 from ..utils import (
     get_candidatures, decrypt_oid, encrypt_oid,
-    generate_math_challenge, is_valid_email, get_candidature_by_oid,
+    generate_math_challenges, is_valid_email, get_candidature_by_oid,
     send_email
 )
 
@@ -108,9 +108,6 @@ def register(request):
                     # @TODO Gestion d'autres états ou d'une erreur éventuelle
                     return handle_default_state(request, candidature)
 
-            #@TODO update
-                # Generate math challenge
-            
             return HTTPFound(location=request.route_url('success'))
         except ValidationFailure as e:
             return {'form': e.render()}
@@ -119,7 +116,7 @@ def register(request):
         form = deform.Form(schema, buttons=('submit',), translator=translator)
     return {'form': form.render(), 'candidature': candidature, 'error': error}
 
-def send_validation_email(request: Request, candidature: 'Candidature', email: str, challenge: Tuple) -> bool:
+def send_validation_email(request: Request, candidature: 'Candidature', email: str, challenge: Dict) -> bool:
     """
     Send the validation email to the candidate.
     
@@ -147,7 +144,10 @@ def send_validation_email(request: Request, candidature: 'Candidature', email: s
     site_name = request.registry.settings.get('site_name')
     
     template_vars = {
-        'challenge': challenge[0],
+        'challenge_A': challenge["A"][0],
+        'challenge_B': challenge["B"][0],
+        'challenge_C': challenge["C"][0],
+        'challenge_D': challenge["D"][0],
         'page_register_whith_oid': url,
         'site_url': site_url,
         'site_name': site_name
@@ -193,7 +193,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
         return {'form': form.render(), 'candidature': candidature, 'error': error}
 
     # Generate math challenge for the check email, and memorize it in the candidature
-    challenge = generate_math_challenge()
+    challenge = generate_math_challenges()
     candidature.challenge = challenge
 
     # Send the validation email
@@ -246,6 +246,10 @@ def send_confirm_validation_email(request: Request, candidature: Candidature, em
     
     template_vars = {
         'page_register_with_oid': url,
+        'challenge_A': candidature.challenge["A"][0],
+        'challenge_B': candidature.challenge["B"][0],
+        'challenge_C': candidature.challenge["C"][0],
+        'challenge_D': candidature.challenge["D"][0],
         'site_url': site_url,
         'site_name': site_name,
         'candidature': candidature,
@@ -273,10 +277,13 @@ def handle_email_validation_state(request, candidature):
     """
     
     # Extract the expected result of the challenge from the candidature
-    attended_result = candidature.challenge[1]
-    if request.params['result'].strip() != str(attended_result):
-        return {'error': 'invalid_challenge', 'candidature': candidature}
-    
+    attended_results = candidature.challenge
+    for key, attended_result in attended_results.items():
+        attended_result = str(attended_result[1])
+        label = f"result_{key}"
+        if request.params[label].strip() != attended_result:
+            return {'error': 'invalid_challenge', 'candidature': candidature}
+        
     # Correct, we can continue and change the state of the candidature
     candidature.state = CandidatureStates.CONFIRMED_HUMAN
     

@@ -6,13 +6,19 @@
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Thank you for starting your registration to the platform <span tal:replace="site_name"></span></h1>
-    <p tal:omit-tag="textual">To enable us to verify your email address, and that you are indeed a human (and not a robot), please provide the result of the following calculation (pay attention to the parentheses) and then enter the result in digits in the field of the registration form at the following URL:</p>
-    <p tal:content="challenge" tal:omit-tag="textual">The challenge</p>
+    <p tal:omit-tag="textual">To verify your email address and ensure you're a human (not a robot), we've devised a series of simple calculations. Please solve the four calculations labeled from A to D and enter the respective results in the corresponding fields on the registration page linked below.</p>
+    <div omit-tag="textual">
+
+        <p tal:omit-tag="textual">Operation A is <span tal:content="challenge_A" tal:omit-tag="textual">The first challenge</span></p>
+        <p tal:omit-tag="textual">Operation B is <span tal:content="challenge_B" tal:omit-tag="textual">The second challenge</span></p>
+        <p tal:omit-tag="textual">Operation C is <span tal:content="challenge_C" tal:omit-tag="textual">The third challenge</span></p>
+        <p tal:omit-tag="textual">Operation D is <span tal:content="challenge_D" tal:omit-tag="textual">The fours challenge</span></p>
+    </div>
     <a tal:attributes="href string:${page_register_whith_oid}" tal:omit-tag="textual">
         <span tal:replace="string:${page_register_whith_oid}"></span>
     </a>
-    
-    <p tal:omit-tag="textual">Thank you for your interest in our activities. We look forward to the pleasure of welcoming you!</p>
+
+    <p tal:omit-tag="textual">Thank you for your interest in our activities. We look forward to welcoming you soon!</p>
     
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Sincerely,</p>

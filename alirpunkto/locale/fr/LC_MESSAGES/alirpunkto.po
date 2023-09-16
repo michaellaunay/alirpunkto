@@ -32,6 +32,9 @@ msgstr "Mot de passe"
 msgid "login_label"
 msgstr "Se connecter"
 
+msgid "invalid_username_or_password"
+msgstr "Nom d'utilisateur ou mot de passe invalide"
+
 msgid "register_link"
 msgstr "Créer un compte"
 
@@ -122,12 +125,11 @@ msgstr "approuve"
 msgid "candidature_states_refused"
 msgstr "refuse"
 
-msgid "Ordinary: An application for an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
+msgid "candidature_types_ordinary_value"
 msgstr "Ordinaire : Une candidature pour un membre ordinaire de la communauté = avec un processus d'inscription simplifié, aucune obligation financière, mais sans droits de décision."
 
-msgid "Cooperator: An application for a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
+msgid "candidature_types_cooperator_value"
 msgstr "Coopérateur : Une candidature pour un membre à part entière de la coopérative, un coopérateur = avec un processus d'inscription complet assurant le principe 'une personne = un vote', l'obligation d'acheter au moins une part et de payer une cotisation annuelle, et des droits de décision complets."
-
 
 msgid "candidature_types_ordinary"
 msgstr "membre ordinaire"
@@ -184,7 +186,63 @@ msgid "nine"
 msgstr "neuf"
 
 msgid "email_validation_subject"
-msgstr "Email de validation : Résolvez l'énigme et saisissez votre réponse sur le portail" 
+msgstr ""
+"Vérification que vous êtes bien un être humain. Résoudre le défi et entrer "
+"les réponses sur le portail"
 
 msgid "email_candidature_state_changed"
-msgstr "Modification de l'état de votre candidature"
+msgstr "Changement du statut de votre demande sur le portail"
+
+msgid "invalid_challenge"
+msgstr "Votre réponse est incorrecte. Veuillez en saisir une nouvelle."
+
+msgid "invalid_email"
+msgstr "Il y a un problème avec votre adresse e-mail, veuillez la vérifier."
+
+msgid "invalid_choice"
+msgstr "Votre choix n'est pas valide, veuillez le saisir à nouveau."
+
+msgid "challenge_instruction_text"
+msgstr "Veuillez résoudre les quatre opérations simples suivantes et remplir les champs correspondants pour confirmer votre adresse e-mail."
+
+msgid "enter_result_label_A"
+msgstr "Entrez le résultat pour l'opération A :"
+
+msgid "result_label_title_A"
+msgstr "Entrez le résultat de l'opération A ou le code que vous avez reçu."
+
+msgid "result_input_title_A"
+msgstr "Veuillez entrer le résultat de l'opération A que vous avez reçu dans votre e-mail pour vérifier votre adresse."
+
+msgid "enter_result_label_B"
+msgstr "Entrez le résultat pour l'opération B :"
+
+msgid "result_label_title_B"
+msgstr "Entrez le résultat de l'opération B ou le code que vous avez reçu."
+
+msgid "result_input_title_B"
+msgstr "Veuillez entrer le résultat de l'opération B que vous avez reçu dans votre e-mail pour vérifier votre adresse."
+
+msgid "enter_result_label_C"
+msgstr "Entrez le résultat pour l'opération C :"
+
+msgid "result_label_title_C"
+msgstr "Entrez le résultat de l'opération C ou le code que vous avez reçu."
+
+msgid "result_input_title_C"
+msgstr "Veuillez entrer le résultat de l'opération C que vous avez reçu dans votre e-mail pour vérifier votre adresse."
+
+msgid "enter_result_label_D"
+msgstr "Entrez le résultat pour l'opération D :"
+
+msgid "result_label_title_D"
+msgstr "Entrez le résultat de l'opération D ou le code que vous avez reçu."
+
+msgid "result_input_title_D"
+msgstr "Veuillez entrer le résultat de l'opération D que vous avez reçu dans votre e-mail pour vérifier votre adresse."
+
+msgid "verify_button"
+msgstr "Envoyer"
+
+msgid "submit_email_validation_title"
+msgstr "Cliquez pour vérifier les codes saisis."

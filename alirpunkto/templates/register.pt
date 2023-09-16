@@ -25,13 +25,35 @@
 
                 <div tal:condition="status == 'EMAIL_VALIDATION'">
                     <form method="POST">
-                        <!-- Enter result Field -->
-                        <label i18n:translate="enter_result_label" title="Enter the result of the operation or the code you received." i18n:attributes="title result_label_title">Enter result:</label>
-                        <input type="text" name="result" title="Please enter the result of the question you received in your email to verify your address." i18n:attributes="title result_input_title">
+                        <!-- Instructions -->
+                        <p i18n:translate="challenge_instruction_text">Please enter the results of the challenges you received in your email to verify your address.</p>
 
+                        <!-- Challenge A Field -->
+                        <div class="challenge-item">
+                            <label i18n:translate="enter_result_label_A" title="Enter the result of the operation for Challenge A." i18n:attributes="title result_label_title_A">Enter result for Challenge A:</label>
+                            <input type="text" name="result_A" title="Please enter the result of Challenge A." i18n:attributes="title result_input_title_A">
+                        </div>
+
+                        <!-- Challenge B Field -->
+                        <div class="challenge-item">
+                            <label i18n:translate="enter_result_label_B" title="Enter the result of the operation for Challenge B." i18n:attributes="title result_label_title_B">Enter result for Challenge B:</label>
+                            <input type="text" name="result_B" title="Please enter the result of Challenge B." i18n:attributes="title result_input_title_B">
+                        </div>
+
+                        <!-- Challenge C Field -->
+                        <div class="challenge-item">
+                            <label i18n:translate="enter_result_label_C" title="Enter the result of the operation for Challenge C." i18n:attributes="title result_label_title_C">Enter result for Challenge C:</label>
+                            <input type="text" name="result_C" title="Please enter the result of Challenge C." i18n:attributes="title result_input_title_C">
+                        </div>
+
+                        <!-- Challenge D Field -->
+                        <div class="challenge-item">
+                            <label i18n:translate="enter_result_label_D" title="Enter the result of the operation for Challenge D." i18n:attributes="title result_label_title_D">Enter result for Challenge D:</label>
+                            <input type="text" name="result_D" title="Please enter the result of Challenge D." i18n:attributes="title result_input_title_D">
+                        </div>
+                        
                         <!-- Verify Button -->
-                        <input type="submit" value="Submit"  name="submit" i18n:attributes="value verify_button" title="Click to verify the entered code." i18n:attributes="title submit_email_validation_title">
-
+                        <input type="submit" value="Submit"  name="submit" i18n:attributes="value verify_button" title="Click to verify the entered codes." i18n:attributes="title submit_email_validation_title">
                     </form>
                 </div>
 
