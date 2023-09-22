@@ -29,7 +29,6 @@ from .. import (
     _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN,
     LDAP_LOGIN, LDAP_PASSWORD
 )
-from ldap3 import Server, Connection, ALL, NTLM
 from validate_email import validate_email
 from dataclasses import dataclass
 from pyramid.renderers import render_to_response
@@ -46,7 +45,7 @@ from ..models import appmaker
 from ..utils import (
     get_candidatures, decrypt_oid, encrypt_oid,
     generate_math_challenges, is_valid_email, get_candidature_by_oid,
-    send_email
+    send_email, register_user_to_ldap
 )
 
 @view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
@@ -324,8 +323,8 @@ def handle_email_validation_state(request, candidature):
         except Exception as e:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
-            return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}    
-    return {'form': form.render(), 'candidature': candidature}
+            return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
+    return {'form': form.render(), 'candidature': candidature, 'CandidaturTypes': CandidatureTypes}
 
 def handle_confirmed_human_state(request, candidature):
     """Handle the confirmed human state.
@@ -338,8 +337,47 @@ def handle_confirmed_human_state(request, candidature):
         HTTPFound: the HTTP found response
     """
     #@TODO
-    schema = RegisterForm().bind(request=request)
-    form = deform.Form(schema, buttons=('submit',), translator=translator)
+    min_length = 8
+    max_length = 64
+    candidatures = get_candidatures(request)
+    if candidature.type == CandidatureTypes.ORDINARY:
+        password = request.params['password']
+        password_confirm = request.params['password_confirm']
+        pseudonym = request.params['pseudonym']
+        #!!!!! TODO éviter injection dans LDAP !!!!!
+        if password != password_confirm:
+            return {'error': _('passwords_dont_match'), 'candidature': candidature}
+        if len(password) < min_length:
+            return {'error': _('password_too_short')+_("password_minimum_length").format(min_length), 'candidature': candidature}
+        if len(password) > max_length:
+            return {'error': _('password_too_long')+_("password_maximum_length").format(max_length), 'candidature': candidature}
+        if not any(char.isdigit() for char in password):
+            return {'error': _('password_must_contain_digit'), 'candidature': candidature}
+        if not any(char.isupper() for char in password):
+            return {'error': _('password_must_contain_uppercase'), 'candidature': candidature}
+        if not any(char.islower() for char in password):
+            return {'error': _('password_must_contain_lowercase'), 'candidature': candidature}
+        if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
+            return {'error': _('password_must_contain_special_char'), 'candidature': candidature}
+        if len(pseudonym) < min_length:
+            return {'error': _('pseudonym_too_short')+_("pseudonym_minimum_length").format(min_length), 'candidature': candidature}
+        if len(pseudonym) > max_length:
+            return {'error': _('pseudonym_too_long')+_("pseudonym_maximum_length").format(max_length), 'candidature': candidature}
+        
+        register_user_to_ldap(request, candidature, password)
+        candidatures.monitored_candidatures.pop(candidature.oid, None)
+        candidature.state = CandidatureStates.APPROVED
+        transaction = request.tm
+        try:
+            transaction.commit()
+            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_candidature_approuved_email")
+        except Exception as e:
+            log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_approuved_email")
+        return {'form': form.render(), 'candidature': candidature}
+    else:
+        schema = RegisterForm().bind(request=request)
+        form = deform.Form(schema, buttons=('submit',), translator=translator)
     return {'form': form.render()}
 
 

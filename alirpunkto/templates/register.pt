@@ -2,6 +2,7 @@
     <div metal:fill-slot="content">
         <tal:block define="status python:candidature.state.name" i18n:domain="alirpunkto">
             <div class="container" tal:condition="python: not hasattr(context,'url_obsolete') or not url_obsolete">
+                <!-- DRAFT Status Section -->
                 <div tal:condition="python: not status or status == 'DRAFT'">
                     <form method="POST">
                         <!-- Email Field -->
@@ -23,6 +24,7 @@
                     </form>
                 </div>
 
+                <!-- EMAIL_VALIDATION Status Section -->
                 <div tal:condition="status == 'EMAIL_VALIDATION'">
                     <form method="POST">
                         <!-- Instructions -->
@@ -57,13 +59,23 @@
                     </form>
                 </div>
 
-
+            <!-- CONFIRMED_HUMAN Status Section -->
             <div tal:condition="status == 'CONFIRMED_HUMAN'">
-                <form method="POST">
-                    <span tal:replace="structure form">Form Content</span>
-                </form>
+                <div tal:condition="python:candidature.type=CandidatureTypes.COOPERATOR" ral:omit-tag="">
+                    <form method="POST">
+                        <span tal:replace="structure form">Form Content</span>
+                    </form>
+                </div>
+                <div tal:condition="python:candidature.type=CandidatureTypes.ORDINARY" ral:omit-tag="">
+                    <form method="POST">
+                        <input type="text" name="pseudonyme" title="Enter your pseudonyme here." i18n:attributes="title pseudonyme_title_label">
+                        <input type="password" name="password" title="Enter your password here." i18n:attributes="title password_title_label">
+                        <input type="password" name="password_confirm" title="Confirm your password here." i18n:attributes="title password_confirm_title_label">
+                        <input type="submit" value="Submit"  name="submit" i18n:attributes="value verify_button" title="Click to validate ." i18n:attributes="title submit_password_and_pseudonyme">
+                    </form>
             </div>
 
+            <!-- UNIQUE_DATA Status Section -->
             <div class="container" tal:condition="status == 'UNIQUE_DATA'">
                 <form method="POST">
                     <label>Identity Verification:</label>
@@ -75,9 +87,18 @@
                 </form>
             </div>
 
+            <!-- PENDING Status Section -->
             <div tal:condition="status == 'PENDING'">
                 Waiting for verification...
             </div>
+
+            <!-- APPROVED Status Section -->
+            <div tal:condition="status == 'APPROVED'">
+                <h3 i18n:translate="approved_heading">Congratulations on Your Approval!</h3>
+                <p i18n:translate="approved_description">Your application has been approved. You can now log in using the pseudonym and password you provided during the application process.</p>
+                <a href="login_page_url" class="login-button" i18n:attributes="href login_page_url; inner-text login_button_label">Login</a>
+            </div>
+
         </div>
 
         <div tal:condition="exists:error" tal:omit-tag="">

@@ -224,3 +224,49 @@ def encrypt_oid(oid, seed, secret) -> str:
     encrypted_message = fernet.encrypt(concatenated_string.encode())
     encoded_encrypted_message = base64.urlsafe_b64encode(encrypted_message).decode()
     return encrypted_message
+
+from ldap3 import MODIFY_ADD
+
+def register_user_to_ldap(pseudonym: str, password: str, email: str, request):
+    """
+    Register a user to the LDAP directory.
+    
+    Args:
+        pseudonym (str): The pseudonym of the user.
+        password (str): The password for the user.
+        email (str): The email of the user.
+        request (pyramid.request.Request): the request.
+    
+    Returns:
+        dict: a dictionary containing the result of the registration.
+    """
+    
+    # First, check if the pseudonym is unique
+    error = is_valid_unique_pseudo(pseudonym, request)
+    if error:
+        return error
+
+    # Continue to register the user to LDAP
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login=f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
+
+    # DN for the new entry
+    dn = f"uid={pseudonym},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={pseudonym},{LDAP_BASE_DN}"
+
+    # Attributes for the new user
+    attributes = {
+        'objectClass': ['top', 'inetOrgPerson'],  # Adjust this based on your LDAP schema
+        'uid': pseudonym,
+        'mail': email,
+        'userPassword': password,  # Might want to hash this based on your LDAP setup
+        'cn': pseudonym
+    }
+
+    # Add the new user to LDAP
+    success = conn.add(dn, attributes=attributes)
+    
+    if success:
+        return {'status': 'success', 'message': _('registration_successful')}
+    else:
+        return {'status': 'failure', 'message': _('registration_failed')}

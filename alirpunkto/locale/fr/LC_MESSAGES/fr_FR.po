@@ -216,9 +216,7 @@ msgid "plus"
 msgstr "plus"
 
 msgid "email_validation_subject"
-msgstr ""
-"Vérification que vous êtes bien un être humain. Résoudre le défi et entrer "
-"la réponse sur le portail"
+msgstr "Vérification que vous êtes bien un être humain. Résoudre le défi et entrer la réponse sur le portail"
 
 msgid "email_candidature_state_changed"
 msgstr "Changement du statut de votre demande sur le portail"
@@ -279,3 +277,39 @@ msgstr "Envoyer"
 
 msgid "submit_email_validation_title"
 msgstr "Cliquez pour vérifier les codes saisis."
+
+msgid "passwords_dont_match"
+msgstr "Les mots de passe ne correspondent pas."
+
+msgid "password_too_short"
+msgstr "Le mot de passe est trop court."
+
+msgid "password_minimum_length"
+msgstr "Le mot de passe doit contenir au moins {} caractères."
+
+msgid "password_too_long"
+msgstr "Le mot de passe est trop long."
+
+msgid "password_maximum_length"
+msgstr "Le mot de passe ne doit pas dépasser %s caractères."
+
+msgid "password_must_contain_digit"
+msgstr "Le mot de passe doit contenir au moins un chiffre."
+
+msgid "password_must_contain_uppercase"
+msgstr "Le mot de passe doit contenir au moins une lettre majuscule."
+
+msgid "password_must_contain_lowercase"
+msgstr "Le mot de passe doit contenir au moins une lettre minuscule."
+
+msgid "password_must_contain_special_char"
+msgstr "Le mot de passe doit contenir l'un des caractères '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "pseudonyme_title_label"
+msgstr "Entrez votre pseudonyme ici."
+
+msgid "password_title_label"
+msgstr "Entrez votre mot de passe ici."
+
+msgid "password_confirm_title_label"
+msgstr "Confirmez votre mot de passe ici."

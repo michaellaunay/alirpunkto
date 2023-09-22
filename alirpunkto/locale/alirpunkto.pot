@@ -252,3 +252,39 @@ msgstr "Submit"
 
 msgid "submit_email_validation_title"
 msgstr "Click to verify the entered codes."
+
+msgid "passwords_dont_match"
+msgstr "Passwords don't match."
+
+msgid "password_too_short"
+msgstr "Password is too short."
+
+msgid "password_minimum_length"
+msgstr "Password must be at least {} characters long."
+
+msgid "password_too_long"
+msgstr "Password is too long."
+
+msgid "password_maximum_length"
+msgstr "Password should not exceed %s characters."
+
+msgid "password_must_contain_digit"
+msgstr "Password must contain at least one digit."
+
+msgid "password_must_contain_uppercase"
+msgstr "Password must contain at least one uppercase letter."
+
+msgid "password_must_contain_lowercase"
+msgstr "Password must contain at least one lowercase letter."
+
+msgid "password_must_contain_special_char"
+msgstr "Password must contain one of the characters in '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "pseudonyme_title_label"
+msgstr "Enter your pseudonym here."
+
+msgid "password_title_label"
+msgstr "Enter your password here."
+
+msgid "password_confirm_title_label"
+msgstr "Confirm your password here."
