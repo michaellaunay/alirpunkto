@@ -279,7 +279,7 @@ msgstr "Password must contain at least one lowercase letter."
 msgid "password_must_contain_special_char"
 msgstr "Password must contain at least one of the characters among the following: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
-msgid "pseudonyme_title_label"
+msgid "pseudonym_title_label"
 msgstr "Please enter here the pseudonym that will identify you for the whole duration of your activity on our IT platform. We STRONGLY recommend that you select a pseudonym that makes tracking back to your real identity impossible (or extremely difficult). Thereby, you protect the confidentiality of your opinions (i.e. personal data that are the purpose of a specific protection under the General Data Protection Regulation - GDPR) against any form of external pressure in real life (e.g. by your employer or your customers). Be very careful! Once you have chosen it, you will NEVER be able to change this pseudonym afterwards. Choose it with care! "
 
 msgid "password_title_label"
@@ -287,3 +287,17 @@ msgstr "Please enter your password here."
 
 msgid "password_confirm_title_label"
 msgstr "Please confirm your password here."
+
+msgid "password_confirm"
+msgstr "Confirm your password."
+
+msgid "type_of_registration"
+msgstr "Type of Registration"
+
+msgid "type_registration_label"
+msgstr "Select the type of registration that suits you."
+
+msgid "type_registration_choice"
+msgstr "Different types of memberships offer different benefits."
+
+

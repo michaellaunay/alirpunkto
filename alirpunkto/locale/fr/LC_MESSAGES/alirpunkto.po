@@ -83,6 +83,9 @@ msgstr "Entrez votre adresse de courrier électronique :"
 msgid "submit_button"
 msgstr "Envoyer"
 
+msgid "submit"
+msgstr "Envoyer"
+
 msgid "candidature_states_draft_value"
 msgstr "Brouillon : La candidature est en mode brouillon."
 
@@ -203,7 +206,7 @@ msgid "invalid_choice"
 msgstr "Votre choix n'est pas valide, veuillez le saisir à nouveau."
 
 msgid "challenge_instruction_text"
-msgstr "Please provide the solutions to the four simple operations received in your verification email and fill in the corresponding fields to confirm your email address."
+msgstr "Veuillez fournir les solutions aux quatre opérations simples reçues dans votre email de vérification et remplissez les champs correspondants pour confirmer votre adresse email."
 
 msgid "enter_result_label_A"
 msgstr "Entrez le résultat pour l'opération A :"
@@ -246,3 +249,13 @@ msgstr "Envoyer"
 
 msgid "submit_email_validation_title"
 msgstr "Cliquez pour vérifier les codes saisis."
+
+msgid "type_of_registration"
+msgstr "Type d'enregistrement"
+
+msgid "type_registration_label"
+msgstr "Sélectionnez le type d'enregistrement qui vous convient."
+
+msgid "type_registration_choice"
+msgstr "Différents types d'adhésions offrent différents avantages."
+

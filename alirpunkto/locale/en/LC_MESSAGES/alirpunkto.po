@@ -276,7 +276,7 @@ msgstr "Password must contain at least one lowercase letter."
 msgid "password_must_contain_special_char"
 msgstr "Password must contain one of the characters in '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
-msgid "pseudonyme_title_label"
+msgid "pseudonym_title_label"
 msgstr "Enter your pseudonym here."
 
 msgid "password_title_label"
@@ -284,3 +284,15 @@ msgstr "Enter your password here."
 
 msgid "password_confirm_title_label"
 msgstr "Confirm your password here."
+
+msgid "password_confirm"
+msgstr "Confirm your password."
+
+msgid "type_of_registration"
+msgstr "Type of Registration"
+
+msgid "type_registration_label"
+msgstr "Select the type of registration that suits you."
+
+msgid "type_registration_choice"
+msgstr "Different types of memberships offer different benefits."

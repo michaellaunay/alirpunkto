@@ -8,24 +8,24 @@
                         <!-- Email Field -->
                         <div class="register_email">
                             <label i18n:translate="email_label" title="Enter your email address here." i18n:attributes="title email_title_label">Email</label>
-                            <input type="email" name="email" title="Your email address will be used for account verification and communication." i18n:attributes="title email_title_input">
+                            <input class="email-input" type="email" name="email" title="Your email address will be used for account verification and communication." i18n:attributes="title email_title_input">
                         </div>
 
                         <!-- Type of Registration -->
                         <div class="register_choice">
                             <label i18n:translate="type_of_registration" title="Select the type of registration that suits you."  i18n:attributes="title type_registration_label">Please choice your type of registration</label>
                             <select name="choice" title="Different types of memberships offer different benefits." i18n:attributes="title type_registration_choice">
-                                <option value="ORDINARY" i18n:translate="ordinary_member_choice" title="Choose this if you want to be an ordinary member." i18n:attributes="title ordinary_member_title">Ordinary Member</option>
-                                <option value="COOPERATOR" i18n:translate="cooperator_choice" title="Choose this if you want to actively cooperate and contribute." i18n:attributes="">Cooperator</option>
+                                <option value="ORDINARY" i18n:translate="candidature_types_ordinary" title="Choose this if you want to be an ordinary member." i18n:attributes="title candidature_types_ordinary_value">Ordinary Member</option>
+                                <option value="COOPERATOR" i18n:translate="candidature_types_cooperator" title="Choose this if you want to actively cooperate and contribute." i18n:attributes="title candidature_types_cooperator_value">Cooperator</option>
                             </select>
                         </div>
                         <!-- Submit Button -->
-                        <input type="submit" value="Submit" name="submit" i18n:attributes="value submit_button" title="Click to submit your registration." i18n:attributes="title submit_registration_title">
+                        <input type="submit" value="Submit" name="submit" title="Click to submit your registration." i18n:attributes="title submit_registration_title; value submit_button">
                     </form>
                 </div>
 
                 <!-- EMAIL_VALIDATION Status Section -->
-                <div tal:condition="status == 'EMAIL_VALIDATION'">
+                <div tal:condition="python:status == 'EMAIL_VALIDATION'">
                     <form method="POST">
                         <!-- Instructions -->
                         <p i18n:translate="challenge_instruction_text">Please enter the results of the challenges you received in your email to verify your address.</p>
@@ -55,28 +55,32 @@
                         </div>
                         
                         <!-- Verify Button -->
-                        <input type="submit" value="Submit"  name="submit" i18n:attributes="value verify_button" title="Click to verify the entered codes." i18n:attributes="title submit_email_validation_title">
+                        <input type="submit" value="Submit"  name="submit" title="Click to verify the entered codes." i18n:attributes="title submit_email_validation_title; value verify_button">
                     </form>
                 </div>
 
             <!-- CONFIRMED_HUMAN Status Section -->
-            <div tal:condition="status == 'CONFIRMED_HUMAN'">
-                <div tal:condition="python:candidature.type=CandidatureTypes.COOPERATOR" ral:omit-tag="">
+            <div tal:condition="python:status == 'CONFIRMED_HUMAN'">
+                <div tal:condition="python:candidature.type==CandidatureTypes.COOPERATOR" tal:omit-tag="">
                     <form method="POST">
                         <span tal:replace="structure form">Form Content</span>
                     </form>
                 </div>
-                <div tal:condition="python:candidature.type=CandidatureTypes.ORDINARY" ral:omit-tag="">
+                <div tal:condition="python:candidature.type==CandidatureTypes.ORDINARY" tal:omit-tag="">
                     <form method="POST">
-                        <input type="text" name="pseudonyme" title="Enter your pseudonyme here." i18n:attributes="title pseudonyme_title_label">
+                        <label i18n:translate="pseudonym_label" title="Enter your pseudonym here." i18n:attributes="title pseudonym_title_label">Pseudonyme</label>
+                        <input type="text" name="pseudonym" title="Enter your pseudonym here." i18n:attributes="title pseudonym_title_label">
+                        <label i18n:translate="password_label" title="Enter your password here." i18n:attributes="title password_title_label">Password</label>
                         <input type="password" name="password" title="Enter your password here." i18n:attributes="title password_title_label">
+                        <label i18n:translate="password_confirm_label" title="Confirm your password here." i18n:attributes="title password_confirm_title_label">Confirm Password</label>
                         <input type="password" name="password_confirm" title="Confirm your password here." i18n:attributes="title password_confirm_title_label">
-                        <input type="submit" value="Submit"  name="submit" i18n:attributes="value verify_button" title="Click to validate ." i18n:attributes="title submit_password_and_pseudonyme">
+                        <input type="submit" value="Submit"  name="submit" title="Click to validate ." i18n:attributes="title submit_password_and_pseudonym; value verify_button">
                     </form>
+                </div>
             </div>
 
             <!-- UNIQUE_DATA Status Section -->
-            <div class="container" tal:condition="status == 'UNIQUE_DATA'">
+            <div class="container" tal:condition="python:status == 'UNIQUE_DATA'">
                 <form method="POST">
                     <label>Identity Verification:</label>
                     <select name="identity_verification">
@@ -88,12 +92,12 @@
             </div>
 
             <!-- PENDING Status Section -->
-            <div tal:condition="status == 'PENDING'">
+            <div tal:condition="python:status == 'PENDING'">
                 Waiting for verification...
             </div>
 
             <!-- APPROVED Status Section -->
-            <div tal:condition="status == 'APPROVED'">
+            <div tal:condition="python:status == 'APPROVED'">
                 <h3 i18n:translate="approved_heading">Congratulations on Your Approval!</h3>
                 <p i18n:translate="approved_description">Your application has been approved. You can now log in using the pseudonym and password you provided during the application process.</p>
                 <a href="login_page_url" class="login-button" i18n:attributes="href login_page_url; inner-text login_button_label">Login</a>

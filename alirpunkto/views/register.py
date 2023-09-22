@@ -48,6 +48,9 @@ from ..utils import (
     send_email, register_user_to_ldap
 )
 
+MIN_PASSWORD_LENGTH = 12 # Minimum password length
+MAX_PASSWORD_LENGTH = 92 # Maximum password length
+
 @view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
 def register(request):
     """Register view.
@@ -64,7 +67,8 @@ def register(request):
     """
     translator = request.localizer.translate
     candidature = None
-    error = None
+    schema = RegisterForm().bind(request=request)
+    form = deform.Form(schema, buttons=('submit',), translator=translator)
     # Check if the candidature is already in the request
     if 'candidature' in request.session :
         candidature = request.session['candidature']
@@ -81,7 +85,7 @@ def register(request):
             form = deform.Form(schema, buttons=('submit',), translator=translator)
             if seed != candidature.email_send_status_history[-1].seed:
                 error = _('url_is_obsolete')
-                return {'form': form.render(), 'candidature': candidature, 'error': error, 'url_obsolete': True}
+                return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': error, 'url_obsolete': True}
             request.session['candidature'] = candidature
         else:
             candidature = Candidature() # Create a new candidature
@@ -107,13 +111,9 @@ def register(request):
                     # @TODO Gestion d'autres états ou d'une erreur éventuelle
                     return handle_default_state(request, candidature)
 
-            return HTTPFound(location=request.route_url('success'))
         except ValidationFailure as e:
-            return {'form': e.render()}
-    else:
-        schema = RegisterForm().bind(request=request)
-        form = deform.Form(schema, buttons=('submit',), translator=translator)
-    return {'form': form.render(), 'candidature': candidature, 'error': error}
+            return {'form': e.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def send_validation_email(request: Request, candidature: 'Candidature', email: str, challenge: Dict) -> bool:
     """
@@ -165,60 +165,61 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
     Returns:
         HTTPFound: the HTTP found response
     """
-    email = request.params['email']
-    choice = request.params['choice']
-    lang = request.params.get('lang', 'en')
-
-    err = is_valid_email(email, request)
     schema = RegisterForm().bind(request=request)
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
 
-    if choice not in CandidatureTypes.get_names():
-        return {'form': form.render(), 'candidature': candidature,'error': _('invalid_choice')}
-    candidature.type = getattr(CandidatureTypes,choice)
+    if 'submit' in request.POST:
+        email = request.params['email']
+        choice = request.params['choice']
+        lang = request.params.get('lang', 'en')
 
-    if err is not None:
-        return {'form': form.render(), 'candidature': candidature, 'error': err['error']}
-    
-    candidature.email = email
+        err = is_valid_email(email, request)
 
-    # update the candidature
-    if choice == CandidatureTypes.ORDINARY.name:
-        candidature.type = CandidatureTypes.ORDINARY
-    elif choice == CandidatureTypes.COOPERATOR.name:
-        candidature.type = CandidatureTypes.COOPERATOR
-    else:  
-        error = _('invalid_choice')
-        return {'form': form.render(), 'candidature': candidature, 'error': error}
+        if choice not in CandidatureTypes.get_names():
+            return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes,'error': _('invalid_choice')}
+        candidature.type = getattr(CandidatureTypes, choice)
 
-    # Generate math challenge for the check email, and memorize it in the candidature
-    challenge = generate_math_challenges()
-    candidature.challenge = challenge
+        if err is not None:
+            return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': err['error']}
+        
+        candidature.email = email
 
-    # Send the validation email
-    candidature.add_email_send_status(CandidatureEmailSendStatus.IN_PREPARATION, "send_validation_email")
+        # update the candidature
+        if choice == CandidatureTypes.ORDINARY.name:
+            candidature.type = CandidatureTypes.ORDINARY
+        elif choice == CandidatureTypes.COOPERATOR.name:
+            candidature.type = CandidatureTypes.COOPERATOR
+        else:  
+            error = _('invalid_choice')
+            return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': error}
 
-    if not send_validation_email(request, candidature, email, challenge=challenge):
-        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_validation_email")
-        return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
+        # Generate math challenge for the check email, and memorize it in the candidature
+        challenge = generate_math_challenges()
+        candidature.challenge = challenge
 
-    # Change the state of the candidature
-    candidature.state = CandidatureStates.EMAIL_VALIDATION
+        # Send the validation email
+        candidature.add_email_send_status(CandidatureEmailSendStatus.IN_PREPARATION, "send_validation_email")
 
-    candidatures = get_candidatures(request)
-    candidatures[candidature.oid] = candidature
-    candidatures.monitored_candidatures[candidature.oid] = candidature
+        if not send_validation_email(request, candidature, email, challenge=challenge):
+            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_validation_email")
+            return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': _('email_not_sent')}
 
-    # Commit the candidature to the database
-    transaction = request.tm
-    try:
-        transaction.commit()
-        candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_validation_email")
-        return {'form': form.render(), 'candidature': candidature}
-    except Exception as e:
-        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_validation_email")
-        log.error(f"Error while commiting candidature {candidature.oid} : {e}")
-        return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
+        # Change the state of the candidature
+        candidature.state = CandidatureStates.EMAIL_VALIDATION
+
+        candidatures = get_candidatures(request)
+        candidatures[candidature.oid] = candidature
+        candidatures.monitored_candidatures[candidature.oid] = candidature
+
+        # Commit the candidature to the database
+        transaction = request.tm
+        try:
+            transaction.commit()
+            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_validation_email")
+        except Exception as e:
+            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_validation_email")
+            log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+    return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def send_confirm_validation_email(request: Request, candidature: Candidature, email_content: Dict) -> Dict:
     """Send the confirmation email to the candidate.
@@ -274,57 +275,53 @@ def handle_email_validation_state(request, candidature):
     Returns:
         HTTPFound or other responses based on the logic
     """
-    
-    # Extract the expected result of the challenge from the candidature
-    attended_results = candidature.challenge
-    for key, attended_result in attended_results.items():
-        attended_result = str(attended_result[1])
-        label = f"result_{key}"
-        if request.params[label].strip() != attended_result:
-            return {'error': 'invalid_challenge', 'candidature': candidature}
-        
-    # Correct, we can continue and change the state of the candidature
-    candidature.state = CandidatureStates.CONFIRMED_HUMAN
-    
-    # Préparer les informations nécessaires pour l'email
-    subject = 'email_candidature_state_changed'
-    parametter = encrypt_oid(
-        candidature.oid,
-        candidature.seed,
-        request.registry.settings['session.secret']
-    )
-    url = request.route_url('register', _query={'oid': parametter})
-    site_url = request.route_url('home')
-    site_name = request.registry.settings.get('site_name')
-    
-    # Créer le contenu de l'email à partir des informations ci-dessus
-    email_content = {
-        'subject': subject,
-        'page_register_with_oid': url,
-        'site_url': site_url,
-        'site_name': site_name
-    }
-    candidature.add_email_send_status(CandidatureEmailSendStatus.IN_PREPARATION, "send_confirm_validation_email")
-    send_result = send_confirm_validation_email(request, candidature, email_content)
     schema = RegisterForm().bind(request=request)
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
-    if 'error' in send_result:
-        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
-        schema = RegisterForm().bind(request=request)
-        form = deform.Form(schema, buttons=('submit',), translator=Translator)
-        return {'form': form.render(), 'candidature': candidature, 'error': send_result['error']}
-    else:
-        candidatures = get_candidatures(request)
-        candidatures.monitored_candidatures[candidature.oid] = candidature
-        transaction = request.tm
-        try:
-            transaction.commit()
-            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_confirm_validation_email")
-        except Exception as e:
-            log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+    if 'submit' in request.POST:
+        # Extract the expected result of the challenge from the candidature
+        attended_results = candidature.challenge
+        for key, attended_result in attended_results.items():
+            attended_result = str(attended_result[1])
+            label = f"result_{key}"
+            if request.params[label].strip() != attended_result:
+                return {'error': _('invalid_challenge'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            
+        # Correct, we can continue and change the state of the candidature
+        candidature.state = CandidatureStates.CONFIRMED_HUMAN
+        
+        # Préparer les informations nécessaires pour l'email
+        subject = 'email_candidature_state_changed'
+        parametter = encrypt_oid(
+            candidature.oid,
+            candidature.seed,
+            request.registry.settings['session.secret']
+        )
+        url = request.route_url('register', _query={'oid': parametter})
+        site_url = request.route_url('home')
+        site_name = request.registry.settings.get('site_name')
+        
+        # Créer le contenu de l'email à partir des informations ci-dessus
+        email_content = {
+            'subject': subject,
+            'page_register_with_oid': url,
+            'site_url': site_url,
+            'site_name': site_name
+        }
+        candidature.add_email_send_status(CandidatureEmailSendStatus.IN_PREPARATION, "send_confirm_validation_email")
+        send_result = send_confirm_validation_email(request, candidature, email_content)
+        if 'error' in send_result:
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
-            return {'form': form.render(), 'candidature': candidature, 'error': _('email_not_sent')}
-    return {'form': form.render(), 'candidature': candidature, 'CandidaturTypes': CandidatureTypes}
+        else:
+            candidatures = get_candidatures(request)
+            candidatures.monitored_candidatures[candidature.oid] = candidature
+            transaction = request.tm
+            try:
+                transaction.commit()
+                candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_confirm_validation_email")
+            except Exception as e:
+                log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+                candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
+    return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def handle_confirmed_human_state(request, candidature):
     """Handle the confirmed human state.
@@ -336,50 +333,50 @@ def handle_confirmed_human_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    #@TODO
-    min_length = 8
-    max_length = 64
-    candidatures = get_candidatures(request)
-    if candidature.type == CandidatureTypes.ORDINARY:
-        password = request.params['password']
-        password_confirm = request.params['password_confirm']
-        pseudonym = request.params['pseudonym']
-        #!!!!! TODO éviter injection dans LDAP !!!!!
-        if password != password_confirm:
-            return {'error': _('passwords_dont_match'), 'candidature': candidature}
-        if len(password) < min_length:
-            return {'error': _('password_too_short')+_("password_minimum_length").format(min_length), 'candidature': candidature}
-        if len(password) > max_length:
-            return {'error': _('password_too_long')+_("password_maximum_length").format(max_length), 'candidature': candidature}
-        if not any(char.isdigit() for char in password):
-            return {'error': _('password_must_contain_digit'), 'candidature': candidature}
-        if not any(char.isupper() for char in password):
-            return {'error': _('password_must_contain_uppercase'), 'candidature': candidature}
-        if not any(char.islower() for char in password):
-            return {'error': _('password_must_contain_lowercase'), 'candidature': candidature}
-        if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
-            return {'error': _('password_must_contain_special_char'), 'candidature': candidature}
-        if len(pseudonym) < min_length:
-            return {'error': _('pseudonym_too_short')+_("pseudonym_minimum_length").format(min_length), 'candidature': candidature}
-        if len(pseudonym) > max_length:
-            return {'error': _('pseudonym_too_long')+_("pseudonym_maximum_length").format(max_length), 'candidature': candidature}
-        
-        register_user_to_ldap(request, candidature, password)
-        candidatures.monitored_candidatures.pop(candidature.oid, None)
-        candidature.state = CandidatureStates.APPROVED
-        transaction = request.tm
-        try:
-            transaction.commit()
-            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_candidature_approuved_email")
-        except Exception as e:
-            log.error(f"Error while commiting candidature {candidature.oid} : {e}")
-            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_approuved_email")
-        return {'form': form.render(), 'candidature': candidature}
-    else:
-        schema = RegisterForm().bind(request=request)
-        form = deform.Form(schema, buttons=('submit',), translator=translator)
-    return {'form': form.render()}
+    schema = RegisterForm().bind(request=request)
+    form = deform.Form(schema, buttons=('submit',), translator=Translator)
+    if 'submit' in request.POST:
+        min_length = MIN_PASSWORD_LENGTH
+        max_length = MAX_PASSWORD_LENGTH
+        candidatures = get_candidatures(request)
+        if candidature.type == CandidatureTypes.ORDINARY:
+            password = request.params['password']
+            password_confirm = request.params['password_confirm']
+            pseudonym = request.params['pseudonym']
+            #!!!!! TODO éviter injection dans LDAP !!!!!
+            if password != password_confirm:
+                return {'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            if len(password) < min_length:
+                return {'error': _('password_too_short')+_("password_minimum_length").format(min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            if len(password) > max_length:
+                return {'error': _('password_too_long')+_("password_maximum_length").format(max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            if not any(char.isdigit() for char in password):
+                return {'error': _('password_must_contain_digit'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            if not any(char.isupper() for char in password):
+                return {'error': _('password_must_contain_uppercase'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            if not any(char.islower() for char in password):
+                return {'error': _('password_must_contain_lowercase'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
+                return {'error': _('password_must_contain_special_char'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            if len(pseudonym) < min_length:
+                return {'error': _('pseudonym_too_short')+_("pseudonym_minimum_length").format(min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            if len(pseudonym) > max_length:
+                return {'error': _('pseudonym_too_long')+_("pseudonym_maximum_length").format(max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            #!! Vérifier l'unicité du pseudonyme dans LDAP !!
+            candidature.password = password
+            candidature.pseudonym = pseudonyme
 
+            register_user_to_ldap(request, candidature, password)
+            candidatures.monitored_candidatures.pop(candidature.oid, None)
+            candidature.state = CandidatureStates.APPROVED
+            transaction = request.tm
+            try:
+                transaction.commit()
+                candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_candidature_approuved_email")
+            except Exception as e:
+                log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+                candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_approuved_email")
+    return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def handle_unique_data_state(request, candidature):
     """Handle the unique data state.
