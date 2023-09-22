@@ -45,7 +45,7 @@ from ..models import appmaker
 from ..utils import (
     get_candidatures, decrypt_oid, encrypt_oid,
     generate_math_challenges, is_valid_email, get_candidature_by_oid,
-    send_email, register_user_to_ldap
+    send_email, register_user_to_ldap, is_valid_unique_pseudo
 )
 
 MIN_PASSWORD_LENGTH = 12 # Minimum password length
@@ -362,11 +362,13 @@ def handle_confirmed_human_state(request, candidature):
                 return {'error': _('pseudonym_too_short')+_("pseudonym_minimum_length").format(min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(pseudonym) > max_length:
                 return {'error': _('pseudonym_too_long')+_("pseudonym_maximum_length").format(max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            #!! Vérifier l'unicité du pseudonyme dans LDAP !!
-            candidature.password = password
-            candidature.pseudonym = pseudonyme
 
-            register_user_to_ldap(request, candidature, password)
+            candidature.password = password
+            candidature.pseudonym = pseudonym            
+
+            result = register_user_to_ldap(request, candidature, password)
+            if result['status'] == 'error':
+                return {'error': result['message'], 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             candidatures.monitored_candidatures.pop(candidature.oid, None)
             candidature.state = CandidatureStates.APPROVED
             transaction = request.tm

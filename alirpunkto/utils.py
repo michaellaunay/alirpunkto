@@ -11,7 +11,7 @@ from pyramid_zodbconn import get_connection
 from persistent import Persistent
 from pyramid.security import ALL_PERMISSIONS, Allow
 from . import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
-from ldap3 import Server, Connection, ALL, NTLM
+from ldap3 import Server, Connection, ALL, NTLM, MODIFY_ADD
 from validate_email import validate_email
 from dataclasses import dataclass
 from pyramid.renderers import render_to_response
@@ -27,6 +27,7 @@ import logging
 log = logging.getLogger("alirpunkto")
 from .models import appmaker
 import base64
+import bcrypt
 
 def get_candidatures(request)->Candidatures:
     """Get the candidatures from the request.
@@ -225,7 +226,40 @@ def encrypt_oid(oid, seed, secret) -> str:
     encoded_encrypted_message = base64.urlsafe_b64encode(encrypted_message).decode()
     return encrypted_message
 
-from ldap3 import MODIFY_ADD
+def hash_password(password: str) -> bytes:
+    """
+    Hash a given password using bcrypt.
+
+    Args:
+        password (str): The password to hash.
+
+    Returns:
+        bytes: The hashed password, which also contains the salt.
+    """
+    
+    # Generate a salt for hashing. The salt is automatically generated.
+    salt = bcrypt.gensalt()
+
+    # Hash the password using the salt. The resulting hash also includes the salt.
+    hashed_password = bcrypt.hashpw(password.encode(), salt)
+
+    return hashed_password
+
+def check_password(provided_password: str, stored_hash: bytes) -> bool:
+    """
+    Verify a password against a stored hash using bcrypt.
+
+    Args:
+        provided_password (str): The password to verify.
+        stored_hash (bytes): The stored bcrypt hash against which to verify the password.
+
+    Returns:
+        bool: True if the password matches the stored hash, otherwise False.
+    """
+    
+    # Check a password. Returns True if the password matches, otherwise False.
+    return bcrypt.checkpw(provided_password.encode(), stored_hash)
+
 
 def register_user_to_ldap(pseudonym: str, password: str, email: str, request):
     """
@@ -255,11 +289,12 @@ def register_user_to_ldap(pseudonym: str, password: str, email: str, request):
     dn = f"uid={pseudonym},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={pseudonym},{LDAP_BASE_DN}"
 
     # Attributes for the new user
+    hashed_password = hashlib.sha256(password.encode()).hexdigest() # Hash the password for security
     attributes = {
         'objectClass': ['top', 'inetOrgPerson'],  # Adjust this based on your LDAP schema
         'uid': pseudonym,
         'mail': email,
-        'userPassword': password,  # Might want to hash this based on your LDAP setup
+        'userPassword': hashed_password,
         'cn': pseudonym
     }
 

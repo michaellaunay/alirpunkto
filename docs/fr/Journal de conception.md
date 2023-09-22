@@ -339,3 +339,75 @@ Dans "Candidature", je mémorise la date, l'état de l'envoi du mail (voir l'én
 # 2023-09-16
 Le système de vérification par résolution d'équation pose deux problèmes : l'espace des possibles n'est pas suffisant, et la notion de parenthèse est compliqué pour certains.
 Il a donc été décider de réaliser quatre opérations simples : un premier nombre aléatoire de 1 à 9 est multiplié par un deuxième nombre aléatoire de 1 à 9 le tout additionné d'un troisième nombre aléatoire de 1 à 9, chacune des opérations est numérotée de A à D et le résultat doit être reporté dans les champs appelés A à D.
+
+# 2023-09-23
+Pour un stockage sécurisé des mots de passe, nous utilisons `bcrypt` qui est l'une des méthodes les plus couramment recommandées, car elle prend en compte le salage et les hachages itératifs, rendant les attaques par force brute beaucoup plus difficiles.
+Mise  en œuvre:
+
+1. Tout d'abord, nous devons installer la bibliothèque `bcrypt` via pip:
+
+```
+pip install bcrypt
+```
+
+2. Voici un exemple de code pour hacher un mot de passe avec bcrypt:
+
+```python
+import bcrypt
+
+def hash_password(password: str) -> bytes:
+    # Générer un "sel" pour le hachage. Le "sel" est généré automatiquement.
+    salt = bcrypt.gensalt()
+
+    # Hasher le mot de passe avec le sel. Le hachage résultant contient également le sel.
+    hashed_password = bcrypt.hashpw(password.encode(), salt)
+
+    return hashed_password
+
+def check_password(provided_password: str, stored_hash: bytes) -> bool:
+    # Vérifier un mot de passe. Retourne True si le mot de passe correspond, sinon False.
+    return bcrypt.checkpw(provided_password.encode(), stored_hash)
+
+# Exemple d'utilisation:
+password = "my_secure_password"
+hashed_pw = hash_password(password)
+
+# Vérifier un mot de passe :
+is_valid = check_password("some_password_to_check", hashed_pw)
+print(is_valid)
+```
+
+**Points clés:**
+
+- `bcrypt.gensalt()` génère un nouveau "sel" pour chaque hachage. C'est crucial pour garantir que chaque hachage est unique, même pour des mots de passe identiques.
+  
+- Le "sel" est stocké avec le hachage, donc nous n'avons pas besoin de le stocker séparément. Lors de la vérification du mot de passe, le sel est extrait du hachage stocké et utilisé pour vérifier le mot de passe fourni.
+
+- La fonction `bcrypt.checkpw()` est utilisée pour vérifier les mots de passe, garantissant que la méthode correcte est utilisée pour extraire le sel et vérifier le hachage.
+
+Expliquons étape par étape :
+
+1. **Hachage du mot de passe**:
+
+    ```python
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password.encode(), salt)
+    ```
+
+   - `gensalt()` génère un "sel" aléatoire. Un sel est une séquence aléatoire qui est combinée avec le mot de passe avant d'être hachée. Ceci est fait pour éviter les attaques par table de hachage précalculée (comme les attaques de table arc-en-ciel).
+  
+   - `hashpw(password.encode(), salt)` hache le mot de passe fourni (`password`) avec le sel généré. Le résultat est une chaîne de bytes qui contient à la fois le sel et le hachage du mot de passe. C'est pourquoi nous n'avons pas besoin de stocker le sel séparément: il est inclus dans le hachage produit.
+
+2. **Vérification du mot de passe**:
+
+    ```python
+    return bcrypt.checkpw(provided_password.encode(), stored_hash)
+    ```
+
+   - Lors de la vérification, nous utilisons la fonction `checkpw()`. Nous lui fournissons le mot de passe saisi par l'utilisateur et le hachage stocké (qui a été stocké dans la base de données lors de la création ou de la modification du mot de passe).
+
+   - La fonction `checkpw` extrait le sel du hachage stocké et utilise ce sel pour hacher le `provided_password`. Si le hachage résultant correspond au hachage stocké, cela signifie que le mot de passe fourni est correct.
+
+Grâce à cette méthode, même si deux utilisateurs ont le même mot de passe, leurs hachages stockés seront différents en raison des sels différents utilisés. De plus, étant donné que le sel est intégré au hachage, nous n'avons pas besoin de le gérer ou de le stocker séparément.
+
+`bcrypt` a été conçu pour le hachage des mots de passe, en étant intentionnellement lent et coûteux en termes de ressources, ce qui le rend difficile à attaquer en utilisant des attaques par force brute.

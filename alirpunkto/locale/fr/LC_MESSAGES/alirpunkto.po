@@ -259,3 +259,29 @@ msgstr "Sélectionnez le type d'enregistrement qui vous convient."
 msgid "type_registration_choice"
 msgstr "Différents types d'adhésions offrent différents avantages."
 
+msgid "passwords_dont_match"
+msgstr "Les mots de passe ne correspondent pas."
+
+msgid "password_too_short"
+msgstr "Le mot de passe est trop court."
+
+msgid "password_minimum_length"
+msgstr "Le mot de passe doit comporter au moins {} caractères."
+
+msgid "password_too_long"
+msgstr "Le mot de passe est trop long."
+
+msgid "password_maximum_length"
+msgstr "Le mot de passe ne doit pas dépasser %s caractères."
+
+msgid "password_must_contain_digit"
+msgstr "Le mot de passe doit contenir au moins un chiffre."
+
+msgid "password_must_contain_uppercase"
+msgstr "Le mot de passe doit contenir au moins une lettre majuscule."
+
+msgid "password_must_contain_lowercase"
+msgstr "Le mot de passe doit contenir au moins une lettre minuscule."
+
+msgid "password_must_contain_special_char"
+msgstr "Le mot de passe doit contenir l'un des caractères suivants : '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."

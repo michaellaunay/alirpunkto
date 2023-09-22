@@ -21,7 +21,15 @@ requires = [
     'ZODB',
     'pytz',
     'deform',
-    'pyramid_handlers'
+    'pyramid_handlers',
+    "python-dotenv",
+    "ldap3",
+    "pyramid_beaker",
+    "pyramid_mailer",
+    "py3dns",
+    "validate_email",
+    "cryptography",
+    "bcrypt"
 ]
 
 tests_require = [
