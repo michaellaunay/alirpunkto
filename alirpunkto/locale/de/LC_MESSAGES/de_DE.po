@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2023-09-15 10:01+0200\n"
+"PO-Revision-Date: 2023-09-22 10:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -201,6 +201,12 @@ msgstr "acht"
 msgid "nine"
 msgstr "neun"
 
+msgid "times"
+msgstr "mal"
+
+msgid "plus"
+msgstr "plus"
+
 msgid "email_validation_subject"
 msgstr ""
 "Wir überprüfen,  dass Sie ein Mensch sind. Lösen Sie die Aufgabe und geben "
@@ -218,3 +224,116 @@ msgstr ""
 
 msgid "invalid_choice"
 msgstr "Ihre Auswahl ist ungültig, bitte geben Sie sie erneut ein."
+
+msgid "challenge_instruction_text"
+msgstr ""
+"Bitte rechnen Sie die Ergebnisse der folgenden vier einfachen mathematischen "
+"Operationen aus und füllen Sie die entsprechenden Felder aus, um Ihre E-Mail-"
+"Adresse zu bestätigen."
+
+msgid "enter_result_label_A"
+msgstr "Bitte geben Sie das Ergebnis der mathematischen Operation A ein:"
+
+msgid "result_label_title_A"
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der Rechenoperation A."
+
+msgid "result_input_title_A"
+msgstr ""
+"Damit wir Ihre E-Mail-Adresse verifizieren können, tragen Sie bitte das "
+"Ergebnis der Operation A ein, das Sie per E-Mail erhalten haben."
+
+msgid "enter_result_label_B"
+msgstr "Bitte geben Sie das Ergebnis für die mathematische Operation B ein:"
+
+msgid "result_label_title_B"
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der Rechenoperation B."
+
+msgid "result_input_title_B"
+msgstr ""
+"Damit wir Ihre E-Mail-Adresse verifizieren können, geben Sie bitte das "
+"Ergebnis der Operation B an, das Sie per E-Mail erhalten haben."
+
+msgid "enter_result_label_C"
+msgstr "Bitte geben Sie das Ergebnis für die mathematische Operation C ein:"
+
+msgid "result_label_title_C"
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der mathematischen Operation C."
+
+msgid "result_input_title_C"
+msgstr ""
+"Damit wir Ihre E-Mail-Adresse verifizieren können, geben Sie bitte das "
+"Ergebnis der Operation C an, das Sie per E-Mail erhalten haben."
+
+msgid "enter_result_label_D"
+msgstr "Bitte geben Sie das Ergebnis der mathematischen Operation D ein:"
+
+msgid "result_label_title_D"
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der mathematischen Operation D."
+
+msgid "result_input_title_D"
+msgstr ""
+"Damit wir Ihre E-Mail-Adresse verifizieren können, geben Sie bitte das "
+"Ergebnis der Operation D an, das Sie per E-Mail erhalten haben."
+
+msgid "verify_button"
+msgstr "Senden"
+
+msgid "submit_email_validation_title"
+msgstr "Klicken Sie , um die eingegebenen Codes zu überprüfen."
+
+msgid "passwords_dont_match"
+msgstr "Passwörter stimmen nicht überein."
+
+msgid "password_too_short"
+msgstr "Dein Passwort ist zu kurz. "
+
+msgid "password_minimum_length"
+msgstr "Das Passwort muss mindestens {} Zeichen lang sein."
+
+msgid "password_too_long"
+msgstr "Das Passwort ist zu lang."
+
+msgid "password_maximum_length"
+msgstr "Das Passwort sollte nicht länger als %s Zeichen sein."
+
+msgid "password_must_contain_digit"
+msgstr "Das Passwort muss mindestens eine Ziffer enthalten."
+
+msgid "password_must_contain_uppercase"
+msgstr "Das Passwort muss mindestens einen Großbuchstaben enthalten."
+
+msgid "password_must_contain_lowercase"
+msgstr "Das Passwort muss mindestens einen Kleinbuchstaben enthalten."
+
+msgid "password_must_contain_special_char"
+msgstr ""
+"Das Passwort muss mindestens eines der folgenden Zeichen enthalten: '@', "
+"'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "pseudonyme_title_label"
+msgstr ""
+"Bitte geben Sie hier das Pseudonym ein, das Sie für die gesamte Dauer Ihrer "
+"Tätigkeit auf unserer IT-Plattform identifizieren wird. Wir empfehlen Ihnen "
+"DRINGEND, ein Pseudonym zu wählen, das die Rückverfolgung zu Ihrer "
+"wirklichen Identität unmöglich (oder äußerst schwierig) macht. Auf diese "
+"Weise schützen Sie die Vertraulichkeit Ihrer Meinungen (d.h. "
+"personenbezogene Daten, die einem besonderen Schutz gemäß der Allgemeinen "
+"Datenschutzverordnung - GDPR - unterliegen) vor jeder Form von Druck von "
+"außen im wirklichen Leben (z.B. durch Ihren Arbeitgeber oder Ihre Kunden). "
+"Seien Sie sehr vorsichtig! Wenn Sie sich einmal für ein Pseudonym "
+"entschieden haben, können Sie dieses Pseudonym NIE wieder ändern. Wählen Sie "
+"es mit Bedacht!"
+
+msgid "password_title_label"
+msgstr "Bitte geben Sie hier Ihr Passwort ein."
+
+msgid "password_confirm_title_label"
+msgstr "Bitte bestätigen Sie hier Ihr Passwort."
