@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Your Application Has Been Approved</title>
+    <title tal:omit-tag="textual">Your Application has been approved</title>
 </head>
 <body tal:omit-tag="textual">
-    <h1 tal:omit-tag="textual">Congratulations on Your Approved Application!</h1>
+    <h1 tal:omit-tag="textual">Congratulations on your Approved Application!</h1>
     
     <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p>
     
@@ -19,7 +19,7 @@
 
     <p tal:omit-tag="textual">Now that your application has been approved, you can log in to our platform using the pseudonym and password you provided during the application process.</p>
     
-    <p tal:omit-tag="textual">Thank you for showing interest in joining us. We look forward to working together.</p>
+    <p tal:omit-tag="textual">Thank you for showing interest in joining us. We look forward to working together with you!</p>
     
     <p tal:omit-tag="textual">Best regards,</p>
     <p tal:omit-tag="textual">The team of <span tal:replace="site_name">Site Name</span></p>
