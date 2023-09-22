@@ -33,7 +33,6 @@ msgstr "Login"
 msgid "invalid_username_or_password"
 msgstr "Invalid username or password"
 
-
 msgid "register_link"
 msgstr "Create account"
 
@@ -77,7 +76,7 @@ msgid "forgot_your_password_title"
 msgstr "Forgot your password?"
 
 msgid "enter_your_email_address_label"
-msgstr "Enter your email address:"
+msgstr "Please enter your email address:"
 
 msgid "submit_button"
 msgstr "Submit"
@@ -212,37 +211,37 @@ msgid "challenge_instruction_text"
 msgstr "Please comppute the results of the following four simple mathematical operations and fill in the corresponding fields to confirm your email address."
 
 msgid "enter_result_label_A"
-msgstr "Enter result for mathematical operation A:"
+msgstr "Please enter the result for mathematical operation A:"
 
 msgid "result_label_title_A"
-msgstr "Enter the code you received per e-mail or the result of the mathematical operation A."
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation A."
 
 msgid "result_input_title_A"
 msgstr "In order for us to verify your e-mail address, please enter the result, which you received per e-mail, of the operation A ."
 
 msgid "enter_result_label_B"
-msgstr "Enter result for mathematical operation B:"
+msgstr "Please enter the result for mathematical operation B:"
 
 msgid "result_label_title_B"
-msgstr "Enter the code you received per e-mail or the result of the mathematical operation B."
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation B."
 
 msgid "result_input_title_B"
 msgstr "In order for us to verify your e-mail address, please enter the result, which you received per e-mail, of the operation B."
 
 msgid "enter_result_label_C"
-msgstr "Enter result for mathematical operation C:"
+msgstr "Please enter the result for mathematical operation C:"
 
 msgid "result_label_title_C"
-msgstr "Enter the code you received per e-mail or the result of the mathematical operation C."
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation C."
 
 msgid "result_input_title_C"
 msgstr "In order for us to verify your e-mail address, please enter the result, which you received per e-mail, of the operation C."
 
 msgid "enter_result_label_D"
-msgstr "Enter result for mathematical operation D:"
+msgstr "Please enter the result for mathematical operation D:"
 
 msgid "result_label_title_D"
-msgstr "Enter the code you received per e-mail or the result of the mathematical operation D."
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation D."
 
 msgid "result_input_title_D"
 msgstr "In order for us to verify your e-mail address, please enter the result, which you received per e-mail, of the operation D."
