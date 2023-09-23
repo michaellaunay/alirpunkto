@@ -261,21 +261,20 @@ def check_password(provided_password: str, stored_hash: bytes) -> bool:
     return bcrypt.checkpw(provided_password.encode(), stored_hash)
 
 
-def register_user_to_ldap(pseudonym: str, password: str, email: str, request):
+def register_user_to_ldap(request, candidature, password):
     """
     Register a user to the LDAP directory.
     
     Args:
-        pseudonym (str): The pseudonym of the user.
-        password (str): The password for the user.
-        email (str): The email of the user.
         request (pyramid.request.Request): the request.
+        candidature (Candidature): the candidature of the user to register.
     
     Returns:
         dict: a dictionary containing the result of the registration.
     """
     
     # First, check if the pseudonym is unique
+    pseudonym = candidature.pseudonym
     error = is_valid_unique_pseudo(pseudonym, request)
     if error:
         return error
@@ -295,7 +294,8 @@ def register_user_to_ldap(pseudonym: str, password: str, email: str, request):
         'uid': pseudonym,
         'mail': email,
         'userPassword': hashed_password,
-        'cn': pseudonym
+        'cn': pseudonym,
+        'number': candidature.oid
     }
 
     # Add the new user to LDAP

@@ -347,9 +347,9 @@ def handle_confirmed_human_state(request, candidature):
             if password != password_confirm:
                 return {'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(password) < min_length:
-                return {'error': _('password_too_short')+_("password_minimum_length").format(min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'error': _('password_too_short')+": "+_("password_minimum_length").format(min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(password) > max_length:
-                return {'error': _('password_too_long')+_("password_maximum_length").format(max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'error': _('password_too_long')+": "+_("password_maximum_length").format(max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if not any(char.isdigit() for char in password):
                 return {'error': _('password_must_contain_digit'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if not any(char.isupper() for char in password):
@@ -359,11 +359,10 @@ def handle_confirmed_human_state(request, candidature):
             if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
                 return {'error': _('password_must_contain_special_char'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(pseudonym) < min_length:
-                return {'error': _('pseudonym_too_short')+_("pseudonym_minimum_length").format(min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'error': _('pseudonym_too_short')+": "+_("pseudonym_minimum_length").format(min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(pseudonym) > max_length:
-                return {'error': _('pseudonym_too_long')+_("pseudonym_maximum_length").format(max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'error': _('pseudonym_too_long')+": "+_("pseudonym_maximum_length").format(max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
-            candidature.password = password
             candidature.pseudonym = pseudonym            
 
             result = register_user_to_ldap(request, candidature, password)
