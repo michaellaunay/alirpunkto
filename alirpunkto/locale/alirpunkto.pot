@@ -30,22 +30,22 @@ msgid "login_label"
 msgstr "Login"
 
 msgid "welcome_msg"
-msgstr "Welcome to Alirpunkto, the centralized service for applications of ${site_name}."
+msgstr "Welcome to Alirpunkto, the centralized service for the applications used in the IT infrastructure of ${site_name}."
 
 msgid "all_applications_msg"
-msgstr "All the applications you need to participate in Cosmopolitical in one place."
+msgstr "All the applications you need to participate in the activities of ${site_name} in one place."
 
 msgid "register_or_login_msg"
 msgstr "Register or login now to get started."
 
 msgid "logged_in_msg_title"
-msgstr "Alirpunkto, the centralized service for applications of ${site_name}" 
+msgstr "Alirpunkto, the centralized service for the applications used in the IT infrastructure of ${site_name}" 
 
 msgid "logged_in_msg"
 msgstr "You are logged in as ${user.name}."
 
 msgid "log_out_invitation_msg"
-msgstr "You can log out by clic"
+msgstr "You can log out by clicking here"
 
 msgid "logout_label"
 msgstr "Log out"
