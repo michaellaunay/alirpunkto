@@ -289,7 +289,7 @@ def handle_email_validation_state(request, candidature):
         # Correct, we can continue and change the state of the candidature
         candidature.state = CandidatureStates.CONFIRMED_HUMAN
         
-        # Préparer les informations nécessaires pour l'email
+        # Prepare the necessary information for the email
         subject = 'email_candidature_state_changed'
         parametter = encrypt_oid(
             candidature.oid,
@@ -300,7 +300,7 @@ def handle_email_validation_state(request, candidature):
         site_url = request.route_url('home')
         site_name = request.registry.settings.get('site_name')
         
-        # Créer le contenu de l'email à partir des informations ci-dessus
+        # Create the email content from the above information
         email_content = {
             'subject': subject,
             'page_register_with_oid': url,

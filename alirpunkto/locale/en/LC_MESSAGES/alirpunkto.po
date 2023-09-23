@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "welcome_msg"
+msgid "welcome"
 msgstr "Welcome"
 
 msgid "username_label"
@@ -28,6 +28,30 @@ msgstr "Password"
 
 msgid "login_label"
 msgstr "Login"
+
+msgid "welcome_msg"
+msgstr "Welcome to Alirpunkto, the centralized service for applications of ${site_name}."
+
+msgid "all_applications_msg"
+msgstr "All the applications you need to participate in Cosmopolitical in one place."
+
+msgid "register_or_login_msg"
+msgstr "Register or login now to get started."
+
+msgid "logged_in_msg_title"
+msgstr "Alirpunkto, the centralized service for applications of ${site_name}" 
+
+msgid "logged_in_msg"
+msgstr "You are logged in as ${user.name}."
+
+msgid "log_out_invitation_msg"
+msgstr "You can log out by clic"
+
+msgid "logout_label"
+msgstr "Log out"
+
+msgid "choose_application_msg"
+msgstr "Choose the application you want to join:"
 
 #: views/login.py:23
 msgid "invalid_username_or_password"

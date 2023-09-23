@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-msgid "welcome_msg"
+msgid "welcome"
 msgstr "Bienvenue"
 
 msgid "username_label"
@@ -31,6 +31,30 @@ msgstr "Mot de passe"
 
 msgid "login_label"
 msgstr "Se connecter"
+
+msgid "welcome_msg"
+msgstr "Bienvenue sur Alirpunkto, le service centralisé pour les applications de ${site_name}."
+
+msgid "all_applications_msg"
+msgstr "Toutes les applications dont vous avez besoin pour participer à Cosmopolitical en un seul endroit."
+
+msgid "register_or_login_msg"
+msgstr "Inscrivez-vous ou connectez-vous maintenant pour commencer."
+
+msgid "logged_in_msg_title"
+msgstr "Alirpunkto, le service centralisé pour les applications de ${site_name}" 
+
+msgid "logged_in_msg"
+msgstr "Vous êtes connecté(e) en tant que ${user.name}."
+
+msgid "log_out_invitation_msg"
+msgstr "Vous pouvez vous déconnecter en cliquant"
+
+msgid "logout_label"
+msgstr "Déconnexion"
+
+msgid "choose_application_msg"
+msgstr "Choisissez l'application à laquelle vous souhaitez vous joindre :"
 
 msgid "invalid_username_or_password"
 msgstr "Nom d'utilisateur ou mot de passe invalide"
