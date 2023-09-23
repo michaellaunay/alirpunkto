@@ -73,7 +73,7 @@
                         <label i18n:translate="password_label" title="Enter your password here." i18n:attributes="title password_title_label">Password</label>
                         <input type="password" name="password" title="Enter your password here." i18n:attributes="title password_title_label">
                         <label i18n:translate="password_confirm_label" title="Confirm your password here." i18n:attributes="title password_confirm_title_label">Confirm Password</label>
-                        <input type="password" name="password_confirm" title="Confirm your password here." i18n:attributes="title password_confirm_title_label">
+                        <input type="password" name="password_confirm" title="Confirm your password here." i18n:attributes="title password_confirm_title">
                         <input type="submit" value="Submit"  name="submit" title="Click to validate ." i18n:attributes="title submit_password_and_pseudonym; value verify_button">
                     </form>
                 </div>

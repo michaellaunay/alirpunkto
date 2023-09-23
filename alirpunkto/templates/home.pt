@@ -10,7 +10,7 @@
             </div>
             <div tal:condition="logged_in">
                 <h1 i18n:translate="logged_in_msg_title">Alirpunkto, the centralized service for applications of ${site_name}</h1>
-                <p i18n:translate="logged_in_msg">You are logged in as ${user.name}.</p>
+                <p i18n:translate="logged_in_msg">You are logged in as ${user}.</p>
                 <p>
                     <span i18n:translate="log_out_invitation_msg">You can log out by clic</span> <a class="button" href="${request.route_url('logout')}" i18n:translate="logout_label">Log out</a>
                 </p>

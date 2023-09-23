@@ -411,3 +411,36 @@ Expliquons étape par étape :
 Grâce à cette méthode, même si deux utilisateurs ont le même mot de passe, leurs hachages stockés seront différents en raison des sels différents utilisés. De plus, étant donné que le sel est intégré au hachage, nous n'avons pas besoin de le gérer ou de le stocker séparément.
 
 `bcrypt` a été conçu pour le hachage des mots de passe, en étant intentionnellement lent et coûteux en termes de ressources, ce qui le rend difficile à attaquer en utilisant des attaques par force brute.
+
+## Bogue i18n chamaleon
+
+J'ai dans la template `home.pt` des `i18n:translate` qui contiennent des variables:
+```zpt
+<h1 i18n:translate="welcome_msg">Welcome to Alirpunkto, the centralized service for applications of ${site_name}.</h1>
+```
+Si on enlève le i18n:translate `${site_name}` site_name est bien remplacé par la valeur de la variable, mais sinon cela affiche :
+```txt
+Bienvenue sur Alirpunkto, le service centralisé pour les applications de ${site_name}.
+```
+Si
+```po
+msgid "welcome_msg"
+msgstr "Bienvenue sur Alirpunkto, le service centralisé pour les applications de ${site_name}."
+```
+Et si je ne mets pas de `$` dans le msgid
+```txt
+Bienvenue sur Alirpunkto, le service centralisé pour les applications de {site_name}.
+```
+si
+```po
+msgid "welcome_msg"
+msgstr "Bienvenue sur Alirpunkto, le service centralisé pour les applications de {site_name}."
+```
+Je n'ai pas trouvé comment faire en sorte que cela fonctionne, sauf à éclater avec des `spans`, mais c'est pas ce que je veux.
+Mon code python de ma vue `home.py`
+```python
+@view_config(route_name='home', renderer='alirpunkto:templates/home.pt')
+def home_view(request):
+	...
+    return {'logged_in': logged_in, 'site_name': site_name, 'user': user, 'applications': applications }
+```

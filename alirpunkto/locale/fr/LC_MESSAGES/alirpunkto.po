@@ -33,7 +33,7 @@ msgid "login_label"
 msgstr "Se connecter"
 
 msgid "welcome_msg"
-msgstr "Bienvenue sur Alirpunkto, le service centralisé pour les applications de ${site_name}."
+msgstr "Bienvenue sur Alirpunkto, le service centralisé pour les applications de {site_name}."
 
 msgid "all_applications_msg"
 msgstr "Toutes les applications dont vous avez besoin pour participer à Cosmopolitical en un seul endroit."
@@ -42,10 +42,10 @@ msgid "register_or_login_msg"
 msgstr "Inscrivez-vous ou connectez-vous maintenant pour commencer."
 
 msgid "logged_in_msg_title"
-msgstr "Alirpunkto, le service centralisé pour les applications de ${site_name}" 
+msgstr "Alirpunkto, le service centralisé pour les applications de {site_name}" 
 
 msgid "logged_in_msg"
-msgstr "Vous êtes connecté(e) en tant que ${user.name}."
+msgstr "Vous êtes connecté(e) en tant que {user}."
 
 msgid "log_out_invitation_msg"
 msgstr "Vous pouvez vous déconnecter en cliquant"
@@ -55,6 +55,15 @@ msgstr "Déconnexion"
 
 msgid "choose_application_msg"
 msgstr "Choisissez l'application à laquelle vous souhaitez vous joindre :"
+
+msgid "password_confirm_label"
+msgstr "Confirmez le mot de passe"
+
+msgid "password_confirm_title_label"
+msgstr "Confirmez votre mot de passe ici."
+
+msgid "password_confirm_title"
+msgstr "Confirmez votre mot de passe ici."
 
 msgid "invalid_username_or_password"
 msgstr "Nom d'utilisateur ou mot de passe invalide"
