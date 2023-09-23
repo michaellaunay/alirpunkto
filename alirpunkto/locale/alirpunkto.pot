@@ -328,6 +328,6 @@ msgid "type_registration_label"
 msgstr "Select the type of registration that suits you."
 
 msgid "type_registration_choice"
-msgstr "Different types of memberships offer different benefits."
+msgstr "Each type of registration comes with a specific set of rights, benefits and obligations."
 
 
