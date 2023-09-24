@@ -88,7 +88,7 @@ def is_valid_unique_pseudo(pseudonym, request):
     # Verify that the pseudonym is not already registered
     conn.search(LDAP_BASE_DN, '(uid={})'.format(pseudonym, attributes=['cn'])) # search for the user in the LDAP directory
     # Verify that the candidate is not already registered
-    if len(conn.entries) == 0:
+    if len(conn.entries) != 0:
         # If already registered, display an error message
         return {'error': _('pseudonym_allready_exists')}
     return None
@@ -288,11 +288,11 @@ def register_user_to_ldap(request, candidature, password):
     dn = f"uid={pseudonym},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={pseudonym},{LDAP_BASE_DN}"
 
     # Attributes for the new user
-    hashed_password = hashlib.sha256(password.encode()).hexdigest() # Hash the password for security
+    hashed_password = hash_password(password)
     attributes = {
         'objectClass': ['top', 'inetOrgPerson'],  # Adjust this based on your LDAP schema
         'uid': pseudonym,
-        'mail': email,
+        'mail': candidature.email,
         'userPassword': hashed_password,
         'cn': pseudonym,
         'number': candidature.oid

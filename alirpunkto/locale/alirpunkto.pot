@@ -63,7 +63,7 @@ msgstr "Create account"
 msgid "password_confirm_label"
 msgstr "Confirm Password"
 
-msgid "password_confirm_title_label"
+msgid "password_confirm_title"
 msgstr "Confirm your password"
 
 msgid "forgot_password_label"

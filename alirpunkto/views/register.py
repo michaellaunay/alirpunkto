@@ -245,7 +245,7 @@ def send_confirm_validation_email(request: Request, candidature: Candidature, em
     site_name = request.registry.settings.get('site_name')
     
     template_vars = {
-        'page_register_with_oid': url,
+        'page_register_whith_oid': url,
         'challenge_A': candidature.challenge["A"][0],
         'challenge_B': candidature.challenge["B"][0],
         'challenge_C': candidature.challenge["C"][0],
@@ -254,7 +254,6 @@ def send_confirm_validation_email(request: Request, candidature: Candidature, em
         'site_name': site_name,
         'candidature': candidature,
         'CandidatureStates': CandidatureStates,
-        site_name: site_name
     }
     
     # Use the send_email from utils.py
@@ -295,7 +294,7 @@ def handle_email_validation_state(request, candidature):
             candidature.oid,
             candidature.seed,
             request.registry.settings['session.secret']
-        )
+        ).decode()
         url = request.route_url('register', _query={'oid': parametter})
         site_url = request.route_url('home')
         site_name = request.registry.settings.get('site_name')
@@ -365,6 +364,7 @@ def handle_confirmed_human_state(request, candidature):
 
             candidature.pseudonym = pseudonym            
 
+            import pdb; pdb.set_trace()
             result = register_user_to_ldap(request, candidature, password)
             if result['status'] == 'error':
                 return {'error': result['message'], 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}

@@ -18,8 +18,13 @@
     <p>Voici les détails de son évolution :</p>
     <ul>
         <li>Candidature ID : <span tal:replace="python:Candidature.oid">ID de la candidature</span></li>
-        <li>Date de la Transition : <span tal:replace="python:Candidature.modifications[-1]">Dernière transition</span></li>
+        <li>Date de la Transition : <span tal:replace="python:candidature.modifications[-1].datetime">Dernière transition</span></li>
         <li>Nouveau Statut : <span tal:replace="python:Candidature.state">Nouvel état de la candidature</span></li>
+        <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            <a tal:attributes="href string:${page_register_whith_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_whith_oid}"></span>
+            </a>
+        </li>
     </ul>
     
     <p>Merci pour votre participation.</p>

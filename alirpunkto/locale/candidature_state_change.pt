@@ -18,8 +18,13 @@
     <p  tal:omit-tag="textual">Here are the details of its evolution:</p>
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
-        <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1][0] if len(candidature.modifications) else ''">Last transition</span></li>
+        <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1].datetime">Last transition</span></li>
         <li tal:omit-tag="textual">New Status: <span tal:replace="python:candidature.state">New application status</span></li>
+        <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            <a tal:attributes="href string:${page_register_whith_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_whith_oid}"></span>
+            </a>
+        </li>
     </ul>
     
     <p tal:omit-tag="textual">Thank you for your participation.</p>
