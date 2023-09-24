@@ -444,3 +444,59 @@ def home_view(request):
 	...
     return {'logged_in': logged_in, 'site_name': site_name, 'user': user, 'applications': applications }
 ```
+
+# 2023-09-24
+
+Pour enrichir le schéma ldap, il faut obtenir un numéro d'entreprise unique dont le numéro s'obtient au prés de l'IANA.
+
+Pour ajouter un nouvel attribut `CandidatureType` à notre fichier de schéma LDIF, nous devrons ajouter une nouvelle entrée `attributeTypes`. `CandidatureType` sera stocké comme une chaîne de caractères et utilisons la syntaxe `1.3.6.1.4.1.1466.115.121.1.15` qui est pour `DirectoryString`.
+
+```ldif
+attributeTypes: ( 1.3.6.1.4.1.OUR_OID_NUMBER.1
+  NAME 'candidatureNumber'
+  DESC 'Candidature Number for the user'
+  EQUALITY numericStringMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.36
+  SINGLE-VALUE )
+
+attributeTypes: ( 1.3.6.1.4.1.OUR_OID_NUMBER.2
+  NAME 'CandidatureType'
+  DESC 'Type of Candidature for the user'
+  EQUALITY caseIgnoreMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE )
+```
+
+Notons que j'ai modifié le OID en `.2` pour `CandidatureType` pour le distinguer de `candidatureNumber` qui a `.1`. Chaque OID est unique !
+
+Explication du fichier LDIF :
+
+1. **attributeTypes**: Il définit un nouvel attribut pour le schéma LDAP. C'est une extension standard pour décrire les objets dans un annuaire LDAP.
+
+2. **NAME**: Le nom de l'attribut tel qu'il apparaîtra dans les entrées LDAP.
+
+3. **DESC**: Une brève description de ce que fait cet attribut.
+
+4. **EQUALITY**: Cela détermine comment les valeurs de cet attribut seront comparées. Par exemple, `caseIgnoreMatch` est couramment utilisé pour les chaînes de caractères où la casse n'a pas d'importance.
+
+5. **SYNTAX**: Ceci spécifie le type de données pour l'attribut. Par exemple, `1.3.6.1.4.1.1466.115.121.1.15` est pour une chaîne de caractères.
+
+6. **SINGLE-VALUE**: Cela signifie que l'attribut ne peut avoir qu'une seule valeur. Si nous voulons que l'attribut puisse avoir plusieurs valeurs, il faudra omettre cette option.
+
+N'oublions pas de remplacer `OUR_OID_NUMBER` par le nombre OID que nous avons obtenu pour notre organisation ou application. L'OID doit être unique à votre organisation pour éviter les conflits avec d'autres extensions de schéma.
+
+## Comment avoir un OID unique
+L'OID (Object Identifier) est une chaîne de nombres qui identifie de manière unique un type d'objet ou un attribut dans divers standards, dont LDAP. 
+
+Pour une entreprise nous devons faire une demande 
+2. **IANA Private Enterprise Numbers**: Si nous ne disposons pas d'un préfixe OID, une solution courante est d'utiliser notre Private Enterprise Number (PEN) attribué par l'Internet Assigned Numbers Authority (IANA). Vous pouvez demander un PEN gratuitement auprès de l'IANA. Une fois que vous avez un PEN, vous pouvez utiliser ce nombre comme base pour vos OIDs en ajoutant vos propres sous-identifiants. Par exemple, si votre PEN est `12345`, vous pourriez avoir des OIDs comme `1.3.6.1.4.1.12345.1`, `1.3.6.1.4.1.12345.2`, etc.
+
+   - Pour demander un PEN, allons sur le [site de l'IANA](https://www.iana.org/assignments/enterprise-numbers/).
+
+3. **Générer un OID temporaire**: Si nous développons uniquement pour des tests internes et n'avons pas l'intention de publier ou de partager notre schéma, nous pourrions utiliser un OID généré de manière arbitraire. Cependant, c'est risqué pour la production ou pour des environnements où le schéma pourrait être partagé, car il pourrait y avoir des collisions.
+
+4. **Registres nationaux**: Certains pays ont des registres nationaux où vous pouvez demander un OID. Cependant, les processus et la disponibilité peuvent varier.
+
+Il est recommandé d'obtenir un OID officiel si nous prévoyons de déployer notre schéma dans un environnement de production ou de le partager avec d'autres.
+
+Je vais le faire au nom de Logikascium.
