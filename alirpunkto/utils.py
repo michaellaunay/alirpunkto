@@ -295,12 +295,16 @@ def register_user_to_ldap(request, candidature, password):
         'mail': candidature.email,
         'userPassword': hashed_password,
         'cn': pseudonym,
-        'number': candidature.oid
+        'employeeNumber': candidature.oid, # Use the oid as employeeNumber
+        'employeeType': candidature.type.name, # Use the type as employeeType
     }
 
     # Add the new user to LDAP
-    success = conn.add(dn, attributes=attributes)
-    
+    try:
+        success = conn.add(dn, attributes=attributes)
+    except Exception as e:
+        log.error(f"Error while adding user {pseudonym} to LDAP: {e}")
+        success = False
     if success:
         return {'status': 'success', 'message': _('registration_successful')}
     else:
