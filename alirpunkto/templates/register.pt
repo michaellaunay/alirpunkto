@@ -112,8 +112,11 @@
         </div>
 
         <div tal:condition="exists:error" tal:omit-tag="">
-            <div class="error" tal:condition="error">
+            <div class="error" tal:condition="exists:error">
                 <p tal:content="error">Error message here</p>
+            </div>
+            <div class="error" tal:condition="exists:error_details">
+                <p tal:content="error_details">Error details message here</p>
             </div>
         </div>
         </tal:block>

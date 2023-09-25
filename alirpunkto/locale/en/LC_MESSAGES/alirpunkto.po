@@ -30,19 +30,19 @@ msgid "login_label"
 msgstr "Login"
 
 msgid "welcome_msg"
-msgstr "Welcome to Alirpunkto, the centralized service for the applications used in the IT infrastructure of {site_name}."
+msgstr "Welcome to Alirpunkto, the centralized service for the applications used in the IT infrastructure of ${site_name}."
 
 msgid "all_applications_msg"
-msgstr "All the applications you need to participate in Cosmopolitical in one place."
+msgstr "All the applications you need to participate in the activities of ${site_name} in one place."
 
 msgid "register_or_login_msg"
 msgstr "Register or login now to get started."
 
 msgid "logged_in_msg_title"
-msgstr "Alirpunkto, the centralized service for the applications used in the IT infrastructure of {site_name}" 
+msgstr "Alirpunkto, the centralized service for the applications used in the IT infrastructure of ${site_name}" 
 
 msgid "logged_in_msg"
-msgstr "You are logged in as {user}."
+msgstr "You are logged in as ${user}."
 
 msgid "log_out_invitation_msg"
 msgstr "You can log out by clic"
@@ -286,13 +286,13 @@ msgid "password_too_short"
 msgstr "Password is too short."
 
 msgid "password_minimum_length"
-msgstr "Password must be at least {} characters long."
+msgstr "Password must be at least ${password_minimum_length} characters long."
 
 msgid "password_too_long"
 msgstr "Password is too long."
 
 msgid "password_maximum_length"
-msgstr "Password should not exceed %s characters."
+msgstr "Password should not exceed ${password_maximum_length} characters."
 
 msgid "password_must_contain_digit"
 msgstr "Password must contain at least one digit."

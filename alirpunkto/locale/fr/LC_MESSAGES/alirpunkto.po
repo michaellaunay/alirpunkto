@@ -33,7 +33,7 @@ msgid "login_label"
 msgstr "Se connecter"
 
 msgid "welcome_msg"
-msgstr "Bienvenue sur Alirpunkto, le service centralisé pour les applications de {site_name}."
+msgstr "Bienvenue sur Alirpunkto, le service centralisé pour les applications de ${site_name}."
 
 msgid "all_applications_msg"
 msgstr "Toutes les applications dont vous avez besoin pour participer à Cosmopolitical en un seul endroit."
@@ -42,10 +42,10 @@ msgid "register_or_login_msg"
 msgstr "Inscrivez-vous ou connectez-vous maintenant pour commencer."
 
 msgid "logged_in_msg_title"
-msgstr "Alirpunkto, le service centralisé pour les applications de {site_name}" 
+msgstr "Alirpunkto, le service centralisé pour les applications de ${site_name}" 
 
 msgid "logged_in_msg"
-msgstr "Vous êtes connecté(e) en tant que {user}."
+msgstr "Vous êtes connecté(e) en tant que ${user}."
 
 msgid "log_out_invitation_msg"
 msgstr "Vous pouvez vous déconnecter en cliquant"
@@ -299,13 +299,13 @@ msgid "password_too_short"
 msgstr "Le mot de passe est trop court."
 
 msgid "password_minimum_length"
-msgstr "Le mot de passe doit comporter au moins {} caractères."
+msgstr "Le mot de passe doit comporter au moins ${password_minimum_length} caractères."
 
 msgid "password_too_long"
 msgstr "Le mot de passe est trop long."
 
 msgid "password_maximum_length"
-msgstr "Le mot de passe ne doit pas dépasser %s caractères."
+msgstr "Le mot de passe ne doit pas dépasser ${password_maximum_length} caractères."
 
 msgid "password_must_contain_digit"
 msgstr "Le mot de passe doit contenir au moins un chiffre."
