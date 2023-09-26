@@ -222,9 +222,7 @@ msgid "nine"
 msgstr "neuf"
 
 msgid "email_validation_subject"
-msgstr ""
-"Vérification que vous êtes bien un être humain. Résoudre le défi et entrer "
-"les réponses sur le portail"
+msgstr "Êtes-vous un être humain ? Pouvez-vous résoudre ce défi et saisir les réponses sur le site ?"
 
 msgid "email_candidature_state_changed"
 msgstr "Changement du statut de votre demande sur le portail"

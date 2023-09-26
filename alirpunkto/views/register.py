@@ -125,20 +125,21 @@ def register(request):
             return {'form': e.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
     return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
-def send_validation_email(request: Request, candidature: 'Candidature', email: str, challenge: Dict) -> bool:
+def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
     """
     Send the validation email to the candidate.
     
     Args:
         request: The request object.
         candidature: The candidature object.
-        email: The email to send to.
-        challenge: The math challenge for email validation.
         
     Returns:
         bool: True if the email is successfully sent, False otherwise.
     """
     template_path = get_local_template(request, 'locale/{lang}/LC_MESSAGES/check_email.pt').abspath()
+
+    email = candidature.email # The email to send to.
+    challenge = candidature.challenge # The math challenge for email validation.
 
     subject = _('email_validation_subject')
     seed = candidature.email_send_status_history[-1].seed
@@ -209,7 +210,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
         # Send the validation email
         candidature.add_email_send_status(CandidatureEmailSendStatus.IN_PREPARATION, "send_validation_email")
 
-        if not send_validation_email(request, candidature, email, challenge=challenge):
+        if not send_validation_email(request, candidature):
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_validation_email")
             return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': _('email_not_sent')}
 
@@ -230,12 +231,11 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
     return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
-def send_confirm_validation_email(request: Request, candidature: Candidature, email_content: Dict) -> Dict:
+def send_confirm_validation_email(request: Request, candidature: Candidature) -> Dict:
     """Send the confirmation email to the candidate.
     Args:
         request (pyramid.request.Request): the request
         candidature (Candidature): the candidature
-        email_content (dict): the content of the email
     Returns:
         dict: the result of the email sending
     """
@@ -244,8 +244,15 @@ def send_confirm_validation_email(request: Request, candidature: Candidature, em
     subject = _('email_candidature_state_changed')
     email = candidature.email
     seed = candidature.email_send_status_history[-1].seed
-    parametter = encrypt_oid(candidature.oid, seed, request.registry.settings['session.secret']).decode()
-    
+            # Prepare the necessary information for the email
+    subject = _('email_candidature_state_changed')
+
+    parametter = encrypt_oid(
+        candidature.oid,
+        candidature.seed,
+        request.registry.settings['session.secret']
+    ).decode()
+  
     url = request.route_url('register', _query={'oid': parametter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
@@ -297,26 +304,8 @@ def handle_email_validation_state(request, candidature):
         transaction = request.tm
         transaction.commit() # User is a human, we can commit the new candidature state
         
-        # Prepare the necessary information for the email
-        subject = 'email_candidature_state_changed'
-        parametter = encrypt_oid(
-            candidature.oid,
-            candidature.seed,
-            request.registry.settings['session.secret']
-        ).decode()
-        url = request.route_url('register', _query={'oid': parametter})
-        site_url = request.route_url('home')
-        site_name = request.registry.settings.get('site_name')
-        
-        # Create the email content from the above information
-        email_content = {
-            'subject': subject,
-            'page_register_with_oid': url,
-            'site_url': site_url,
-            'site_name': site_name
-        }
         candidature.add_email_send_status(CandidatureEmailSendStatus.IN_PREPARATION, "send_confirm_validation_email")
-        send_result = send_confirm_validation_email(request, candidature, email_content)
+        send_result = send_confirm_validation_email(request, candidature)
         if 'error' in send_result:
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
         else:
