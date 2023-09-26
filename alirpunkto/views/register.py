@@ -45,11 +45,40 @@ from ..models import appmaker
 from ..utils import (
     get_candidatures, decrypt_oid, encrypt_oid,
     generate_math_challenges, is_valid_email, get_candidature_by_oid,
-    send_email, register_user_to_ldap, is_valid_unique_pseudo
+    send_email, register_user_to_ldap, is_valid_unique_pseudo,
+    get_preferred_language
 )
 
 MIN_PASSWORD_LENGTH = 12 # Minimum password length
 MAX_PASSWORD_LENGTH = 92 # Maximum password length
+
+def get_local_template(request, pattern_path):
+    """
+    Return the local template for the given pattern path according to the user's language preference.
+
+    This function attempts to resolve the template path based on the user's preferred language.
+    If the resolution fails, it falls back to the default English language.
+
+    Args:
+        request (Request): The request object, used to determine the user's preferred language.
+        pattern_path (str): The pattern path for which the local template is requested.
+
+    Returns:
+        resolver (object): The resolved pattern handler.
+
+    Raises:
+        (No explicit exceptions are raised, but errors are logged)
+    """
+
+    lang = get_preferred_language(request)
+    ar = AssetResolver("alirpunkto")
+    try:
+        resolver = ar.resolve(pattern_path.format(lang=lang))
+    except:
+        log.error(f"Error while resolving locale file for {lang} for {pattern_path}, fallback to en")
+        resolver = ar.resolve(pattern_path.format(lang="en"))
+    return resolver
+
 
 @view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
 def register(request):
@@ -129,10 +158,7 @@ def send_validation_email(request: Request, candidature: 'Candidature', email: s
         bool: True if the email is successfully sent, False otherwise.
     """
     
-    lang = request.params.get('lang', 'en')
-    ar = AssetResolver("alirpunkto")
-    resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/check_email.pt')
-    template_path = resolver.abspath()
+    template_path = get_local_template(request, 'locale/{lang}/LC_MESSAGES/check_email.pt').abspath()
 
     subject = _('email_validation_subject')
     seed = candidature.email_send_status_history[-1].seed
@@ -173,10 +199,8 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
 
     if 'submit' in request.POST:
-        import pdb; pdb.set_trace()
         email = request.params['email']
         choice = request.params['choice']
-        lang = request.params.get('lang', 'en')
 
         err = is_valid_email(email, request)
 
@@ -235,10 +259,7 @@ def send_confirm_validation_email(request: Request, candidature: Candidature, em
     Returns:
         dict: the result of the email sending
     """
-    lang = request.params.get('lang', 'en')
-    ar = AssetResolver("alirpunkto")
-    resolver = ar.resolve(f'locale/{lang}/LC_MESSAGES/candidature_state_change.pt')    
-    template_path = resolver.abspath()
+    template_path = get_local_template(request, 'locale/{lang}/LC_MESSAGES/candidature_state_change.pt').abspath()
     
     subject = _('email_candidature_state_changed')
     email = candidature.email

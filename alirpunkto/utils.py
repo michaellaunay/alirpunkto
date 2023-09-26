@@ -10,7 +10,7 @@ from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection
 from persistent import Persistent
 from pyramid.security import ALL_PERMISSIONS, Allow
-from . import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
+from . import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD, EUROPEAN_LOCALES
 from ldap3 import Server, Connection, ALL, NTLM, MODIFY_ADD
 from validate_email import validate_email
 from dataclasses import dataclass
@@ -28,6 +28,19 @@ log = logging.getLogger("alirpunkto")
 from .models import appmaker
 import base64
 import bcrypt
+
+def get_preferred_language(request: Request)->str:
+    """Get the preferred language from the request.
+    Args:
+        request (pyramid.request.Request): the request
+    Returns:
+        str: the preferred language
+    """
+    # Get the preferred language from the request
+    preferred_language = request.accept_language.best_match(EUROPEAN_LOCALES)
+    if preferred_language is None:
+        preferred_language = "en"
+    return preferred_language
 
 def get_candidatures(request)->Candidatures:
     """Get the candidatures from the request.
