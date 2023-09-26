@@ -7,46 +7,27 @@
 # author: Michaël Launay
 # date: 2023-06-15
 
-from typing import Dict, Union, Tuple
+from typing import Dict
 import deform
 from deform import ValidationFailure
-from pyramid_handlers import action
 from pyramid.view import view_config
 from pyramid.request import Request
 from pyramid.httpexceptions import HTTPFound
 from ..schemas.register_form import RegisterForm
 from ..models.candidature import (
-    Candidature, CandidatureStates, Candidatures,
-    CandidatureTypes, VotingChoice, SEED_LENGTH,
+    Candidature, CandidatureStates, 
+    CandidatureTypes, SEED_LENGTH,
     CandidatureEmailSendStatus
 )
-from pyramid_mailer import get_mailer
-from pyramid_mailer.message import Message
-from pyramid_zodbconn import get_connection
-from persistent import Persistent
-from pyramid.security import ALL_PERMISSIONS, Allow
-from .. import (
-    _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN,
-    LDAP_LOGIN, LDAP_PASSWORD
-)
-from validate_email import validate_email
-from dataclasses import dataclass
-from pyramid.renderers import render_to_response
+from .. import _
 from pyramid.i18n import Translator
-import random
-import hashlib
-from cryptography.fernet import Fernet
-from pyramid.path import package_path
 from pyramid.path import AssetResolver
-from transaction import commit
 import logging
 log = logging.getLogger("alirpunkto")
-from ..models import appmaker
 from ..utils import (
     get_candidatures, decrypt_oid, encrypt_oid,
     generate_math_challenges, is_valid_email, get_candidature_by_oid,
-    send_email, register_user_to_ldap, is_valid_unique_pseudo,
-    get_preferred_language
+    send_email, register_user_to_ldap, get_preferred_language
 )
 
 MIN_PASSWORD_LENGTH = 12 # Minimum password length
@@ -157,7 +138,6 @@ def send_validation_email(request: Request, candidature: 'Candidature', email: s
     Returns:
         bool: True if the email is successfully sent, False otherwise.
     """
-    
     template_path = get_local_template(request, 'locale/{lang}/LC_MESSAGES/check_email.pt').abspath()
 
     subject = _('email_validation_subject')

@@ -4,25 +4,16 @@
 
 from typing import Dict
 from pyramid.request import Request
-from .models.candidature import Candidature, CandidatureStates, Candidatures, CandidatureTypes, VotingChoice
-from pyramid_mailer import get_mailer
+from .models.candidature import Candidature, Candidatures
 from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection
-from persistent import Persistent
-from pyramid.security import ALL_PERMISSIONS, Allow
 from . import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD, EUROPEAN_LOCALES
-from ldap3 import Server, Connection, ALL, NTLM, MODIFY_ADD
+from ldap3 import Server, Connection, ALL
 from validate_email import validate_email
-from dataclasses import dataclass
 from pyramid.renderers import render_to_response
-from pyramid.response import Response
-from pyramid.i18n import Translator
 import random
 import hashlib
 from cryptography.fernet import Fernet
-from pyramid.path import package_path
-from pyramid.path import AssetResolver
-from transaction import commit
 import logging
 log = logging.getLogger("alirpunkto")
 from .models import appmaker
@@ -50,7 +41,6 @@ def get_candidatures(request)->Candidatures:
         Candidatures: the candidatures
     """
     conn = get_connection(request)
-    root = appmaker(conn.root())
     return Candidatures.get_instance(connection=conn)
 
 def is_valid_email(email, request):
@@ -127,13 +117,13 @@ def send_email(request, subject: str, recipients: list, template_path: str, temp
     html_body = render_to_response(template_path, request=request, value={**template_vars, "textual":False}).body
     sender = request.registry.settings['mail.default_sender']
     message = Message(
+        charset="utf-8",
         subject=subject,
         sender=sender,
         recipients=recipients,
         body=text_body[text_body.find(">\n")+2:].replace("\n\n\n\n","\n").replace("\n\n\n","\n").replace("\n\n","\n"),
         html=html_body
     )
-
     log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {text_body}")
 
     mailer = request.registry['mailer']

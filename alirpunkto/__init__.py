@@ -19,12 +19,11 @@ load_dotenv() # take environment variables from .env.
 # This information is stored in environment variables
 # See https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/security.html
 SECRET_KEY = os.getenv("SECRET_KEY")
-
 # LDAP informations are stored in environment variables
-LDAP_SERVER = os.getenv("LDAP_SERVER") 
-LDAP_BASE_DN = os.getenv("LDAP_BASE_DN")
+LDAP_SERVER = os.getenv("LDAP_SERVER")
+LDAP_BASE_DN = os.environ.get("LDAP_BASE_DN")
 LDAP_OU = os.getenv("LDAP_OU")
-LDAP_LOGIN = os.getenv("LDAP_LOGIN")
+LDAP_LOGIN = os.environ.get("LDAP_LOGIN")
 LDAP_PASSWORD = os.getenv("LDAP_PASSWORD")
 MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_SENDER = os.getenv("MAIL_SENDER")
