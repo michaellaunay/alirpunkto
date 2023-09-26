@@ -534,3 +534,123 @@ Et `${site_name}` dans le msgstr pour le msgid
 ```pot
 
 ```
+
+# 2023-09-26
+# Traduction de la doc i18nmessageid
+[i18nmessageid](https://zopei18nmessageid.readthedocs.io/en/latest/narr.html#example-usage)
+Utilisation de zope.i18nmessageid
+## Justification
+
+Pour traduire n'importe quel texte, nous devons être capables de découvrir le domaine source du texte. Un domaine source est un identifiant qui identifie un projet produisant des chaînes de caractères sources de programme. Les chaînes sources se trouvent sous forme de littéraux dans les programmes Python, de texte dans les templates, et de certains textes dans les données XML. Le projet implique une langue source et un contexte d'application.
+Messages et Domaines
+
+On peut considérer un domaine source comme une collection de messages et de chaînes de traduction associées. Le domaine aide à lever l'ambiguïté des messages en fonction du contexte : par exemple, le message dont la chaîne source est "draw" signifie une chose dans un jeu de tir à la première personne, et une autre dans un logiciel graphique : dans le premier cas, le domaine du message pourrait être "ok_corral", tandis que dans le second, il pourrait être "gimp".
+
+Nous devons souvent créer des chaînes unicode qui seront affichées par des vues séparées. La vue ne peut pas traduire la chaîne sans connaître son domaine source. Un littéral de chaîne ou unicode ne contient pas d'informations de domaine, donc nous utilisons des instances de la classe Message. Les messages sont des chaînes unicode qui portent un domaine source de traduction et éventuellement une traduction par défaut.
+Factories de Messages
+
+Les messages sont créés par une factory de messages appartenant à un domaine de traduction donné. Chaque factory de messages est créée en instanciant une MessageFactory, en passant le domaine correspondant au projet qui gère les traductions correspondantes.
+
+```python
+
+>>> from zope.i18nmessageid import MessageFactory
+>>> factory = MessageFactory('monprojet')
+>>> foo = factory('foo')
+>>> foo.domain
+'monprojet'
+```
+
+Le projet Zope utilise le domaine "zope" pour ses messages. Ce package exporte une factory déjà créée pour ce domaine :
+```python
+>>> from zope.i18nmessageid import ZopeMessageFactory as _z_
+>>> foo = _z_('foo')
+>>> foo.domain
+'zope'
+```
+
+Exemple d'utilisation
+
+Dans cet exemple, nous créons une factory de messages et l'assignons à _. Par convention, nous utilisons _ comme nom de notre factory pour être compatible avec les outils d'extraction de chaînes traduisibles comme xgettext. Nous appelons ensuite _ avec une chaîne qui doit être traduisible :
+
+```python
+>>> from zope.i18nmessageid import MessageFactory, Message
+>>> _ = MessageFactory("futurama")
+>>> robot = _(u"message-robot", u"${name} est un robot.")
+```
+Les messages semblent d'abord être des chaînes unicode :
+
+```python
+>>> robot == u'message-robot'
+True
+>>> isinstance(robot, unicode)
+True
+```
+
+Les informations supplémentaires de domaine, par défaut et de mappage sont disponibles via des attributs :
+
+```python
+>>> robot.default == u'${name} est un robot.'
+True
+>>> robot.mapping
+>>> robot.domain
+'futurama'
+```
+Les attributs du message sont considérés comme faisant partie de l'objet message immuable. Ils ne peuvent pas être modifiés une fois l'id du message créé :
+```python
+>>> robot.domain = "planetexpress"
+Traceback (most recent call last):
+...
+TypeError: attribut en lecture seule
+
+>>> robot.default = u"${name} n'est pas un robot."
+Traceback (most recent call last):
+...
+TypeError: attribut en lecture seule
+
+>>> robot.mapping = {u'name': u'Bender'}
+Traceback (most recent call last):
+...
+TypeError: attribut en lecture seule
+```
+
+Si vous devez changer leurs informations, vous devrez créer un nouvel id de message :
+
+```python
+>>> new_robot = Message(robot, mapping={u'name': u'Bender'})
+>>> new_robot == u'message-robot'
+True
+>>> new_robot.domain
+'futurama'
+>>> new_robot.default == u'${name} est un robot.'
+True
+>>> new_robot.mapping == {u'name': u'Bender'}
+True
+
+Enfin, les messages sont réductibles pour le pickling :
+
+>>> callable, args = new_robot.__reduce__()
+>>> callable is Message
+True
+>>> args == (u'message-robot',
+...          'futurama',
+...          u'${name} est un robot.',
+...          {u'name': u'Bender'})
+True
+
+>>> fembot = Message(u'fembot')
+>>> callable, args = fembot.__reduce__()
+>>> callable is Message
+True
+>>> args == (u'fembot', None, None, None)
+True
+```
+Le pickling et l'unpickling fonctionnent, ce qui signifie que nous pouvons stocker les IDs de message dans une base de données :
+
+```python
+>>> from pickle import dumps, loads
+>>> pystate = dumps(new_robot)
+>>> pickle_bot = loads(pystate)
+>>> (pickle_bot,
+...  pickle_bot.domain,
+...
+```

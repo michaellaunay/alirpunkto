@@ -153,8 +153,12 @@ def send_validation_email(request: Request, candidature: 'Candidature', email: s
     }
 
     # Use the send_email from utils.py
-    success = send_email(request, subject, [email], template_path, template_vars)
-
+    # Put on the stack the action of sending the email wich is done during the commit
+    try:
+        success = send_email(request, subject, [email], template_path, template_vars)
+    except Exception as e:
+        log.error(f"Error while sending email to {email} : {e}")
+        success = False
     return success
 
 def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
@@ -169,6 +173,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
 
     if 'submit' in request.POST:
+        import pdb; pdb.set_trace()
         email = request.params['email']
         choice = request.params['choice']
         lang = request.params.get('lang', 'en')
@@ -246,10 +251,6 @@ def send_confirm_validation_email(request: Request, candidature: Candidature, em
     
     template_vars = {
         'page_register_whith_oid': url,
-        'challenge_A': candidature.challenge["A"][0],
-        'challenge_B': candidature.challenge["B"][0],
-        'challenge_C': candidature.challenge["C"][0],
-        'challenge_D': candidature.challenge["D"][0],
         'site_url': site_url,
         'site_name': site_name,
         'candidature': candidature,
@@ -257,7 +258,12 @@ def send_confirm_validation_email(request: Request, candidature: Candidature, em
     }
     
     # Use the send_email from utils.py
-    success = send_email(request, subject, [email], template_path, template_vars)
+    try:
+        # Stack email sending action to be executed at commit
+        success = send_email(request, subject, [email], template_path, template_vars)
+    except Exception as e:
+        log.error(f"Error while sending email to {email} : {e}")
+        success = False
     
     if success:
         candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_confirm_validation_email")
@@ -287,6 +293,8 @@ def handle_email_validation_state(request, candidature):
             
         # Correct, we can continue and change the state of the candidature
         candidature.state = CandidatureStates.CONFIRMED_HUMAN
+        transaction = request.tm
+        transaction.commit() # User is a human, we can commit the new candidature state
         
         # Prepare the necessary information for the email
         subject = 'email_candidature_state_changed'
@@ -322,6 +330,7 @@ def handle_email_validation_state(request, candidature):
                 candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
     return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
+
 def handle_confirmed_human_state(request, candidature):
     """Handle the confirmed human state.
 
@@ -346,9 +355,9 @@ def handle_confirmed_human_state(request, candidature):
             if password != password_confirm:
                 return {'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(password) < min_length:
-                return {'error': _('password_too_short'), 'error_details':_("password_minimum_length").format(password_minimum_length=min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'error': _('password_too_short'), 'error_details':_("password_minimum_length", mapping={'password_minimum_length':min_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(password) > max_length:
-                return {'error': _('password_too_long'), 'error_details':_("password_maximum_length").format(password_maximum_length=max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'error': _('password_too_long'), 'error_details':_("password_maximum_length", mapping={'password_maximum_length':max_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if not any(char.isdigit() for char in password):
                 return {'error': _('password_must_contain_digit'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if not any(char.isupper() for char in password):
@@ -358,9 +367,9 @@ def handle_confirmed_human_state(request, candidature):
             if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
                 return {'error': _('password_must_contain_special_char'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(pseudonym) < min_length:
-                return {'error': _('pseudonym_too_short')+": "+_("pseudonym_minimum_length").format(min_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'error': _('pseudonym_too_short'), 'error_details':_("pseudonym_minimum_length", mapping={'password_minimum_length':min_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(pseudonym) > max_length:
-                return {'error': _('pseudonym_too_long')+": "+_("pseudonym_maximum_length").format(max_length), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'error': _('pseudonym_too_long'), 'error_details':_("pseudonym_maximum_length", mapping={'password_maximum_length':max_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
             candidature.pseudonym = pseudonym            
 
