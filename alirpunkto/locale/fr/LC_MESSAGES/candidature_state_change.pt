@@ -8,7 +8,7 @@
     
     <p>Bonjour <span tal:replace="user">Nom du postulant</span>,</p>
     
-    <p>Votre candidature sur la plateforme <span tal:replace="site_url">URL</span> en tant que <span tal:replace="candidature_type">Rôle 
+    <p>Votre candidature sur la plateforme <span tal:replace="site_url">URL</span> en tant que <span tal:replace="candidature.type">Rôle 
     <span tal:condition="python:candidature.state == CandidatureState.APPROUVED"> a été acceptée</span>
     <span tal:condition="python:candidature.state == CandidatureState.REJECTED"> a été rejetée</span>
     <span tal:condition="python:candidature.state not in [CandidatureState.APPROUVED, CandidatureState.REJECTED]"> est en cours de traitement est a changée d'état</span>

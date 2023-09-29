@@ -1,6 +1,6 @@
 import os, pytz
 from collections import defaultdict
-from dotenv import load_dotenv
+from dotenv import load_dotenv, get_key, find_dotenv
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
 from pyramid.i18n import get_localizer, TranslationStringFactory
@@ -14,21 +14,26 @@ from .models import appmaker
 from .models.candidature import Candidatures
 
 load_dotenv() # take environment variables from .env.
-
 # SECRET_KEY is used for cookie signing
 # This information is stored in environment variables
 # See https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/security.html
-SECRET_KEY = os.getenv("SECRET_KEY")
+# Using get_key() instead of os.getenv() as os.getenv() does not 
+# handle values containing `=` properly.A
+SECRET_KEY = get_key(find_dotenv(), "SECRET_KEY")
+# check if secret is not empty an make it accessible from the views
+if not SECRET_KEY:
+    raise ValueError("You must provide a base64 value for SECRET_KEY")
+
 # LDAP informations are stored in environment variables
 LDAP_SERVER = os.getenv("LDAP_SERVER")
-LDAP_BASE_DN = os.environ.get("LDAP_BASE_DN")
-LDAP_OU = os.getenv("LDAP_OU")
-LDAP_LOGIN = os.environ.get("LDAP_LOGIN")
-LDAP_PASSWORD = os.getenv("LDAP_PASSWORD")
+LDAP_BASE_DN = get_key(find_dotenv(), "LDAP_BASE_DN")
+LDAP_OU = get_key(find_dotenv(), "LDAP_OU")
+LDAP_LOGIN = get_key(find_dotenv(), "LDAP_LOGIN")
+LDAP_PASSWORD = get_key(find_dotenv(), "LDAP_PASSWORD")
 MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_SENDER = os.getenv("MAIL_SENDER")
 MAIL_SERVER = os.getenv("MAIL_SERVER")
-MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+MAIL_PASSWORD = get_key(find_dotenv(), "MAIL_PASSWORD")
 MAIL_PORT = os.getenv("MAIL_PORT")
 MAIL_HOST = os.getenv("MAIL_HOST")
 MAIL_TLS = os.getenv("MAIL_TLS")
@@ -163,11 +168,7 @@ def main(global_config, **settings):
         # Create a mailer object
         mailer = Mailer.from_settings(settings)
         config.registry['mailer'] = mailer
-        secret = os.getenv('SECRET_KEY')
-        # check if secret is not empty an make it accessible from the views
-        if not secret:
-            raise ValueError("You must provide a value for session.secret")
-        config.add_settings({'session.secret': secret})
+        config.add_settings({'session.secret': SECRET_KEY})
 
         # Prefix for application-related settings
         PARAM = "applications."

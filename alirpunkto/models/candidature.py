@@ -314,6 +314,7 @@ class Candidature(Persistent):
             _seed (str): A random string used to generate the OID.
             _email_send_status_history (List[CandidatureEmailEvent]): A list to record email send status history.
             _challenge (Tuple[str, int]): A tuple containing the string math challenge and the solution in integer.
+            _pseudonyme (str): The pseudonyme of the candidature.
         Raises:
             RuntimeError: Raised if an instance already exists with same oid.
 
@@ -327,6 +328,7 @@ class Candidature(Persistent):
         self._seed = None
         self._email_send_status_history = []
         self._challenge = None
+        self._pseudonyme = None
         # get a unique object id
         self._oid = Candidature.generate_unique_oid()
         # get a random seed and record the creation
@@ -469,6 +471,31 @@ class Candidature(Persistent):
         old_challenge = self._challenge if self._challenge else "None"
         self._challenge = value
         self._memorize_changes("challenge", old_challenge, value)
+
+    @property
+    def pseudonyme(self)-> str:
+        """ Get the pseudonyme of the candidature.
+        Returns:
+            The pseudonyme of the candidature.
+        """
+        return self._pseudonyme
+    
+    @pseudonyme.setter
+    def pseudonyme(self, value:str):
+        """ Set the pseudonyme of the candidature.
+
+        Args:
+            value (str): The new pseudonyme of the candidature.
+
+        Raises:
+            TypeError: The pseudonyme must be a string.
+        """
+        if not isinstance(value, str):
+            raise TypeError("The pseudonyme must be a string.")
+        
+        old_pseudonyme = self._pseudonyme if self._pseudonyme else "None"
+        self._pseudonyme = value
+        self._memorize_changes("pseudonyme", old_pseudonyme, value)
 
     @property
     def modifications(self)-> List[CandidatureEvent]:

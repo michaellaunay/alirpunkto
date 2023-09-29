@@ -256,6 +256,8 @@ def send_confirm_validation_email(request: Request, candidature: Candidature) ->
     url = request.route_url('register', _query={'oid': parametter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
+    #We don't have user yet so we use the email parts befor the @ or pseudonym if it exists
+    user = candidature.pseudonym if hasattr(candidature, "pseudonym") else email.split('@')[0]
     
     template_vars = {
         'page_register_whith_oid': url,
@@ -263,6 +265,7 @@ def send_confirm_validation_email(request: Request, candidature: Candidature) ->
         'site_name': site_name,
         'candidature': candidature,
         'CandidatureStates': CandidatureStates,
+        'user': user
     }
     
     # Use the send_email from utils.py
