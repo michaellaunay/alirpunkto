@@ -8,7 +8,7 @@ import secrets
 import base64
 from cryptography.fernet import Fernet
 
-key = secrets.token_bytes(32)
-key_base64 = base64.urlsafe_b64encode(key)
-
-print(f"""SECRET_KEY="{key_base64.decode('utf-8')}" """)
+if __name__ == "__main__":
+    key = secrets.token_bytes(32)
+    key_base64 = base64.urlsafe_b64encode(key)
+    print(f"""SECRET_KEY="{key_base64.decode('utf-8')}" """)
