@@ -154,7 +154,7 @@ def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
         'challenge_B': challenge["B"][0],
         'challenge_C': challenge["C"][0],
         'challenge_D': challenge["D"][0],
-        'page_register_whith_oid': url,
+        'page_register_with_oid': url,
         'site_url': site_url,
         'site_name': site_name
     }
@@ -260,7 +260,7 @@ def send_confirm_validation_email(request: Request, candidature: Candidature) ->
     user = candidature.pseudonym if hasattr(candidature, "pseudonym") else email.split('@')[0]
     
     template_vars = {
-        'page_register_whith_oid': url,
+        'page_register_with_oid': url,
         'site_url': site_url,
         'site_name': site_name,
         'candidature': candidature,

@@ -5,20 +5,20 @@
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Merci de commencer votre inscription à la plateforme <span tal:replace="site_name"></span></h1>
-    <p tal:omit-tag="textual">Pour vérifier votre adresse e-mail et vous assurer que vous êtes bien un humain (et non un robot), nous avons conçu une série de calculs simples. Veuillez résoudre les quatre calculs étiquetés de A à D et entrer les résultats respectifs dans les champs correspondants sur la page d'inscription liée ci-dessous.</p>
+    <h1 tal:omit-tag="textual">Merci de commencer votre inscription sur la plateforme <span tal:replace="site_name"></span></h1>
+    <p tal:omit-tag="textual">Pour vérifier votre adresse e-mail et vous assurer que vous êtes un humain (et non un robot), nous avons conçu une série de 4 opérations mathématiques simples. Veuillez effectuer les quatre opérations mathématiques étiquetées de A à D ci-dessous et entrez leurs résultats dans les champs correspondants sur la page d'inscription liée ci-dessous.</p>
     <div omit-tag="textual">
-    
+
         <p tal:omit-tag="textual">L'opération A est <span tal:content="challenge_A" tal:omit-tag="textual">Le premier défi</span></p>
         <p tal:omit-tag="textual">L'opération B est <span tal:content="challenge_B" tal:omit-tag="textual">Le deuxième défi</span></p>
         <p tal:omit-tag="textual">L'opération C est <span tal:content="challenge_C" tal:omit-tag="textual">Le troisième défi</span></p>
         <p tal:omit-tag="textual">L'opération D est <span tal:content="challenge_D" tal:omit-tag="textual">Le quatrième défi</span></p>
     </div>
-    <a tal:attributes="href string:${page_register_whith_oid}" tal:omit-tag="textual">
-        <span tal:replace="string:${page_register_whith_oid}"></span>
+    <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+        <span tal:replace="string:${page_register_with_oid}"></span>
     </a>
-    
-    <p tal:omit-tag="textual">Merci de l'intérêt que vous portez à nos activités. Nous avons hâte de vous accueillir prochainement !</p>
+
+    <p tal:omit-tag="textual">Merci pour votre intérêt pour nos activités. Nous avons hâte de vous accueillir bientôt !</p>
     
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Cordialement,</p>

@@ -14,8 +14,8 @@
         <p tal:omit-tag="textual">Operation C is <span tal:content="challenge_C" tal:omit-tag="textual">The third challenge</span></p>
         <p tal:omit-tag="textual">Operation D is <span tal:content="challenge_D" tal:omit-tag="textual">The fourth challenge</span></p>
     </div>
-    <a tal:attributes="href string:${page_register_whith_oid}" tal:omit-tag="textual">
-        <span tal:replace="string:${page_register_whith_oid}"></span>
+    <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+        <span tal:replace="string:${page_register_with_oid}"></span>
     </a>
 
     <p tal:omit-tag="textual">Thank you for your interest in our activities. We look forward to welcoming you soon!</p>

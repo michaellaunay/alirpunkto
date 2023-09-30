@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Votre candidature a été approuvée</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Félicitations pour votre candidature approuvée !</h1>
+    
+    <p tal:omit-tag="textual">Bonjour <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du Candidat</span>,</p>
+    
+    <p tal:omit-tag="textual">Nous sommes ravis de vous informer que votre candidature sur la plateforme <span tal:replace="site_url">URL</span> pour le rôle de <span tal:replace="python:candidature.type">Rôle</span> a été approuvée.</p>
+    
+    <p tal:omit-tag="textual">Voici les détails :</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID de candidature : <span tal:replace="python:candidature.oid">ID de la candidature</span></li>
+        <li tal:omit-tag="textual">Date d'approbation : <span tal:replace="python:candidature.modifications[-1]">Dernière transition</span></li>
+        <li tal:omit-tag="textual">Statut : Approuvé</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Maintenant que votre candidature a été approuvée, vous pouvez vous connecter à notre plateforme en utilisant le pseudonyme et le mot de passe que vous avez fournis pendant le processus de candidature.</p>
+    
+    <p tal:omit-tag="textual">Merci de l'intérêt que vous avez montré pour nous rejoindre. Nous avons hâte de travailler ensemble avec vous !</p>
+    
+    <p tal:omit-tag="textual">Meilleures salutations,</p>
+    <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Nom du Site</span></p>
+</body>
+</html>
+
