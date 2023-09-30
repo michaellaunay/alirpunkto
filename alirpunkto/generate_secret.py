@@ -1,4 +1,5 @@
-# Generate a secret key for Fernet
+# This script is used to generate a secret key for Fernet when executed as a standalone script.
+# When imported in alirpunkto, it verifies library compatibility.
 # author: Michaël Launay
 # date: 2023-09-30
 
