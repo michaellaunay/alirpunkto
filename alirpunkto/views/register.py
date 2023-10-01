@@ -80,8 +80,9 @@ def register(request):
     schema = RegisterForm().bind(request=request)
     form = deform.Form(schema, buttons=('submit',), translator=translator)
     # Check if the candidature is already in the request
-    if 'candidature' in request.session :
-        candidature = request.session['candidature']
+    candidatures = get_candidatures(request)
+    if 'candidature_oid' in request.session and request.session['candidature_oid'] in candidatures :
+        candidature = candidatures[request.session['candidature_oid']]
     else:
         # If the candidature is not in the request, try to retrieve it from the URL
         encrypted_oid = request.params.get("oid", None)
@@ -96,14 +97,13 @@ def register(request):
             if seed != candidature.email_send_status_history[-1].seed:
                 error = _('url_is_obsolete')
                 return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': error, 'url_obsolete': True}
-            request.session['candidature'] = candidature
+            request.session['candidature_oid'] = candidature.oid
         else:
             candidature = Candidature() # Create a new candidature
-            request.session['candidature'] = candidature # Store the candidature in the session
+            request.session['candidature_oid'] = candidature.oid # Store the candidature oid in the session
     if 'submit' in request.POST:
         controls = request.POST.items()
         try:
-            candidature = request.session['candidature']
             match candidature.state:
                 case CandidatureStates.DRAFT:
                     return handle_draft_state(request, candidature)
@@ -249,7 +249,7 @@ def send_confirm_validation_email(request: Request, candidature: Candidature) ->
 
     parametter = encrypt_oid(
         candidature.oid,
-        candidature.seed,
+        seed,
         request.registry.settings['session.secret']
     ).decode()
   

@@ -125,7 +125,7 @@ def send_email(request, subject: str, recipients: list, template_path: str, temp
     log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {text_body}")
 
     mailer = request.registry['mailer']
-    status = mailer.send(message)
+    status = mailer.send(message) # Remember the message is not sent until the transaction is committed
     
     if status is None:
         log.error(f"Error while preparing sending email {subject} to {recipients}")

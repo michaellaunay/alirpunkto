@@ -588,7 +588,6 @@ class Candidature(Persistent):
         self._votes = value
         self._memorize_changes("votes", old_votes, value)
 
-
     @staticmethod
     def generate_unique_oid(candidatures:Candidatures = None, max_retries:int = 10):
         """

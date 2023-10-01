@@ -52,7 +52,7 @@ bin/pip install -e ".[testing]"
 - Create de var folder
 
 ```bash
-mkdir -p var/log var/datas var/filestorage
+mkdir -p var/log var/datas var/filestorage var/sessions
 ```
 
 - Create the secret file containing your keys

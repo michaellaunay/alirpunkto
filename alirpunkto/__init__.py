@@ -1,4 +1,4 @@
-import os, pytz
+import os, pytz, hashlib
 from collections import defaultdict
 from dotenv import load_dotenv, get_key, find_dotenv
 from pyramid.config import Configurator
@@ -12,13 +12,14 @@ import logging
 import transaction
 from .models import appmaker
 from .models.candidature import Candidatures
+from pyramid.session import SignedCookieSessionFactory
 
 load_dotenv() # take environment variables from .env.
 # SECRET_KEY is used for cookie signing
 # This information is stored in environment variables
 # See https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/security.html
 # Using get_key() instead of os.getenv() as os.getenv() does not 
-# handle values containing `=` properly.A
+# handle values containing `=` properly.
 SECRET_KEY = get_key(find_dotenv(), "SECRET_KEY")
 # check if secret is not empty an make it accessible from the views
 if not SECRET_KEY:
@@ -144,9 +145,15 @@ def root_factory(request):
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
-    load_dotenv() # take environment variables from .env.
 
     with Configurator(settings=settings) as config:
+        # set session factory
+        hash_object = hashlib.sha256()
+        hash_object.update(SECRET_KEY.encode('utf-8'))
+        derived_secret = hash_object.hexdigest()
+        session_factory = SignedCookieSessionFactory(derived_secret, timeout=DEFAULT_SESSION_TIMEOUT)        
+        config.set_session_factory(session_factory)
+
         config.include('pyramid_chameleon')
         config.include('pyramid_tm')
         config.include('pyramid_retry')
