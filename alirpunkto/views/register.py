@@ -20,7 +20,7 @@ from ..models.candidature import (
     CandidatureEmailSendStatus
 )
 from .. import _
-from pyramid.i18n import Translator
+from pyramid.i18n import Translator, get_localizer
 from pyramid.path import AssetResolver
 import logging
 log = logging.getLogger("alirpunkto")
@@ -96,7 +96,10 @@ def register(request):
             form = deform.Form(schema, buttons=('submit',), translator=translator)
             if seed != candidature.email_send_status_history[-1].seed:
                 error = _('url_is_obsolete')
-                return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': error, 'url_obsolete': True}
+                return {'form': form.render(), 'candidature': candidature,
+                    'CandidatureTypes': CandidatureTypes,
+                    'error': error,
+                    'url_obsolete': True}
             request.session['candidature_oid'] = candidature.oid
         else:
             candidature = Candidature() # Create a new candidature
@@ -140,8 +143,8 @@ def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
 
     email = candidature.email # The email to send to.
     challenge = candidature.challenge # The math challenge for email validation.
-
-    subject = _('email_validation_subject')
+    localizer = get_localizer(request)
+    subject = localizer.translate(_('email_validation_subject'))
     seed = candidature.email_send_status_history[-1].seed
     parametter = encrypt_oid(candidature.oid, seed, request.registry.settings['session.secret']).decode()
     
@@ -204,7 +207,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
             return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': error}
 
         # Generate math challenge for the check email, and memorize it in the candidature
-        challenge = generate_math_challenges()
+        challenge = generate_math_challenges(request)
         candidature.challenge = challenge
 
         # Send the validation email
@@ -231,7 +234,8 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
     return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
-def send_confirm_validation_email(request: Request, candidature: Candidature) -> Dict:
+def send_confirm_validation_email(request: Request,
+    candidature: Candidature) -> Dict:
     """Send the confirmation email to the candidate.
     Args:
         request (pyramid.request.Request): the request
@@ -239,14 +243,33 @@ def send_confirm_validation_email(request: Request, candidature: Candidature) ->
     Returns:
         dict: the result of the email sending
     """
-    template_path = get_local_template(request, 'locale/{lang}/LC_MESSAGES/candidature_state_change.pt').abspath()
-    
-    subject = _('email_candidature_state_changed')
+    return send_candidature_state_change_email(request,
+        candidature,
+        "send_confirm_validation_email")
+
+def send_candidature_state_change_email(request: Request,
+    candidature: Candidature,
+    sending_function_name,
+    template_name = None,
+    subject = None) -> Dict:
+    """Send the candidature state change email to the candidate.
+    Args:
+        request (pyramid.request.Request): the request
+        candidature (Candidature): the candidature
+        sending_function_name (str): the name of the function that sends the email
+        template_name (str): the name of the template to use or None to use the default template
+        subject (str): the subject of the email or None to use the default subject
+    Returns:
+        dict: the result of the email sending
+    """
+    template_name = template_name if template_name else 'locale/{lang}/LC_MESSAGES/candidature_state_change.pt'
+    template_path = get_local_template(request, template_name).abspath()
+    localizer = get_localizer(request)
+    subject = subject if subject else localizer.translate(_('email_candidature_state_changed'))
     email = candidature.email
     seed = candidature.email_send_status_history[-1].seed
-            # Prepare the necessary information for the email
-    subject = _('email_candidature_state_changed')
 
+    # Prepare the necessary information for the email
     parametter = encrypt_oid(
         candidature.oid,
         seed,
@@ -277,10 +300,10 @@ def send_confirm_validation_email(request: Request, candidature: Candidature) ->
         success = False
     
     if success:
-        candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_confirm_validation_email")
+        candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, sending_function_name)
         return {'success': True}
     else:
-        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
+        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, sending_function_name)
         return {'error': _('email_not_sent')}
 
 def handle_email_validation_state(request, candidature):

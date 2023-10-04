@@ -8,6 +8,7 @@ from .models.candidature import Candidature, Candidatures
 from pyramid_mailer.message import Message, Attachment
 from pyramid_zodbconn import get_connection
 from . import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD, EUROPEAN_LOCALES
+from pyramid.i18n import get_localizer
 from ldap3 import Server, Connection, ALL
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
@@ -135,23 +136,26 @@ def send_email(request, subject: str, recipients: list, template_path: str, temp
         return True
 
 
-def generate_math_challenges():
+def generate_math_challenges(request: Request)->Dict[str, str]:
     """Generate four simple math challenges.
+    Args:
+        request (pyramid.request.Request): the request
     return:
         dict: A dictionary containing the math challenges and their solutions.
     """
     challenges = {}
     numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
     number_dict = {word: index for index, word in enumerate(numbers)}
+    localizer = get_localizer(request)
     for label in ["A", "B", "C", "D"]:
         num1 = random.randint(1, 9)
-        str_num1 = _(num1)
+        str_num1 = localizer.translate(_(num1))
         num2 = random.randint(1, 9)
-        str_num2 = _(num2)
+        str_num2 = localizer.translate(_(num2))
         num3 = random.randint(1, 9)
-        str_num3 = _(num3)
-        str_times = _("times")
-        str_plus = _("plus")
+        str_num3 = localizer.translate(_(num3))
+        str_times = localizer.translate(_("times"))
+        str_plus = localizer.translate(_("plus"))
         challenge_str = f"{str_num1} {str_times} {str_num2} {str_plus} {str_num3}"
         challenge_solution = num1 * num2 + num3
         challenges[label] = (challenge_str, challenge_solution)

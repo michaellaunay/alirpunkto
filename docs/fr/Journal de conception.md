@@ -654,3 +654,23 @@ Le pickling et l'unpickling fonctionnent, ce qui signifie que nous pouvons stock
 ...  pickle_bot.domain,
 ...
 ```
+
+2023-10-04
+
+La fonction `_` renvoyée par `TranslationStringFactory` est une fonction qui crée des instances de `TranslationString`, qui doivent ensuite être traduites par un `Localizer`. Le `Localizer` utilise la langue de la requête pour déterminer la traduction correcte à utiliser.
+
+Quand nous faisons `_("welcome")`, cela crée une instance de `TranslationString`, qui n'est pas automatiquement traduite en chaîne de caractères. Nous devons utiliser un `Localizer` pour obtenir la traduction réelle. C'est pourquoi lorsque nous faisons `localizer.translate(_("welcome"))`, nous obtenons la traduction correcte.
+
+Ainsi :
+```python
+>>> from pyramid.i18n import get_localizer, TranslationStringFactory
+>>> _ = TranslationStringFactory("alirpunkto")
+>>> _
+<function TranslationStringFactory.<locals>.create at 0x7fcb8f3a7640>  
+>>> _("welcome")  
+'welcome'  
+>>> # Mais il faut faire
+>>> localizer = get_localizer(request)  
+>>> localizer.translate(_("welcome"))  
+'Bienvenue'
+```

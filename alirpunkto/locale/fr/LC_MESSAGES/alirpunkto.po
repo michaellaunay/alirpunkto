@@ -221,6 +221,12 @@ msgstr "huit"
 msgid "nine"
 msgstr "neuf"
 
+msgid "times"
+msgstr "fois"
+
+msgid "plus"
+msgstr "plus"
+
 msgid "email_validation_subject"
 msgstr "Êtes-vous un être humain ? Pouvez-vous résoudre ce défi et saisir les réponses sur le site ?"
 
