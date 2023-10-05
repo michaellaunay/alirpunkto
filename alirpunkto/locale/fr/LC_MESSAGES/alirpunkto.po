@@ -322,3 +322,9 @@ msgstr "Le mot de passe doit contenir au moins une lettre minuscule."
 
 msgid "password_must_contain_special_char"
 msgstr "Le mot de passe doit contenir l'un des caractères suivants : '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "approved_heading"
+msgstr "Félicitations pour votre approbation !"
+
+msgid "approved_description"
+msgstr "Votre candidature a été approuvée. Vous pouvez maintenant vous connecter en utilisant le pseudonyme et le mot de passe que vous avez fournis lors du processus de candidature."

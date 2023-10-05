@@ -1,7 +1,7 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <div class="container" i18n:domain="alirpunkto">
-            <h1 class="text-center" i18n:translate="welcome_msg">Welcome</h1>
+            <h1 i18n:translate="welcome_msg">Welcome to Alirpunkto, the centralized service for applications of <tal:var i18n:name="site_name">${site_name}</tal:var>.</h1>
             <form method="POST" action="${request.route_url('login')}">
                 <div class="mb-3">
                     <label class="form-label" i18n:translate="username_label">Username</label>

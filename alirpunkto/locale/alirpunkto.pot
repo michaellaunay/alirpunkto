@@ -330,4 +330,9 @@ msgstr "Select the type of registration that suits you."
 msgid "type_registration_choice"
 msgstr "Each type of registration comes with a specific set of rights, benefits and obligations."
 
+msgid "approved_heading"
+msgstr "Congratulations on Your Approval!"
+
+msgid "approved_description"
+msgstr "Your application has been approved. You can now log in using the pseudonym and password you provided during the application process."
 
