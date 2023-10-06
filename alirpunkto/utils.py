@@ -231,41 +231,6 @@ def encrypt_oid(oid, seed, secret) -> str:
     encoded_encrypted_message = base64.urlsafe_b64encode(encrypted_message).decode()
     return encrypted_message
 
-def hash_password(password: str) -> bytes:
-    """
-    Hash a given password using bcrypt.
-
-    Args:
-        password (str): The password to hash.
-
-    Returns:
-        bytes: The hashed password, which also contains the salt.
-    """
-    
-    # Generate a salt for hashing. The salt is automatically generated.
-    salt = bcrypt.gensalt()
-
-    # Hash the password using the salt. The resulting hash also includes the salt.
-    hashed_password = bcrypt.hashpw(password.encode(), salt)
-
-    return hashed_password
-
-def check_password(provided_password: str, stored_hash: bytes) -> bool:
-    """
-    Verify a password against a stored hash using bcrypt.
-
-    Args:
-        provided_password (str): The password to verify.
-        stored_hash (bytes): The stored bcrypt hash against which to verify the password.
-
-    Returns:
-        bool: True if the password matches the stored hash, otherwise False.
-    """
-    
-    # Check a password. Returns True if the password matches, otherwise False.
-    return bcrypt.checkpw(provided_password.encode(), stored_hash)
-
-
 def register_user_to_ldap(request, candidature, password):
     """
     Register a user to the LDAP directory.
@@ -287,23 +252,22 @@ def register_user_to_ldap(request, candidature, password):
     # Continue to register the user to LDAP
     server = Server(LDAP_SERVER, get_info=ALL)
     ldap_login=f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    log.debug(f"LDAP Connection{LDAP_LOGIN=},{LDAP_OU=},{LDAP_BASE_DN=},{LDAP_PASSWORD=},{LDAP_SERVER=}")  
     conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
 
     # DN for the new entry
     dn = f"uid={pseudonym},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={pseudonym},{LDAP_BASE_DN}"
-
     # Attributes for the new user
-    hashed_password = hash_password(password)
     attributes = {
         'objectClass': ['top', 'inetOrgPerson'],  # Adjust this based on your LDAP schema
         'uid': pseudonym,
         'mail': candidature.email,
-        'userPassword': hashed_password,
+        'userPassword': password,
         'cn': pseudonym,
         'employeeNumber': candidature.oid, # Use the oid as employeeNumber
         'employeeType': candidature.type.name, # Use the type as employeeType
     }
-
+    log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
     # Add the new user to LDAP
     try:
         success = conn.add(dn, attributes=attributes)

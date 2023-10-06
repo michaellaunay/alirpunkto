@@ -52,7 +52,7 @@ def check_password(username:str, password:str) -> Union[None, User]:
     """
     server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
     ldap_login=f"uid={username},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={username},{LDAP_BASE_DN}" # define the user to authenticate
-    import pdb; pdb.set_trace()
+    log.debug(f"Trying to authenticate {ldap_login=} {ldap_login=}")
     conn = Connection(server, ldap_login, password, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
     conn.search(LDAP_BASE_DN, '(uid={})'.format(username), attributes=['cn']) # search for the user in the LDAP directory
     if len(conn.entries) == 0:
