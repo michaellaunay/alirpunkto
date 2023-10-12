@@ -336,3 +336,110 @@ msgstr "Congratulations on Your Approval!"
 msgid "approved_description"
 msgstr "Your application has been approved. You can now log in using the pseudonym and password you provided during the application process."
 
+msgid "invalid_pseudonym"
+msgstr "Invalid pseudonym. It should be between 12 to 64 characters long and can only contain letters (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-), and no spaces."
+
+msgid "Select_a_country"
+msgstr "Select a country"
+
+msgid "Austria"
+msgstr "Austria"
+
+msgid "Belgium"
+msgstr "Belgium"
+
+msgid "Bulgaria"
+msgstr "Bulgaria"
+
+msgid "Cyprus"
+msgstr "Cyprus"
+
+msgid "Czech_Republic"
+msgstr "Czech Republic"
+
+msgid "Germany"
+msgstr "Germany"
+
+msgid "Denmark"
+msgstr "Denmark"
+
+msgid "Estonia"
+msgstr "Estonia"
+
+msgid "Spain"
+msgstr "Spain"
+
+msgid "Finland"
+msgstr "Finland"
+
+msgid "France"
+msgstr "France"
+
+msgid "Greece"
+msgstr "Greece"
+
+msgid "Croatia"
+msgstr "Croatia"
+
+msgid "Hungary"
+msgstr "Hungary"
+
+msgid "Ireland"
+msgstr "Ireland"
+
+msgid "Italy"
+msgstr "Italy"
+
+msgid "Lithuania"
+msgstr "Lithuania"
+
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+msgid "Latvia"
+msgstr "Latvia"
+
+msgid "Malta"
+msgstr "Malta"
+
+msgid "Netherlands"
+msgstr "Netherlands"
+
+msgid "Poland"
+msgstr "Poland"
+
+msgid "Portugal"
+msgstr "Portugal"
+
+msgid "Romania"
+msgstr "Romania"
+
+msgid "Sweden"
+msgstr "Sweden"
+
+msgid "Slovenia"
+msgstr "Slovenia"
+
+msgid "Slovakia"
+msgstr "Slovakia"
+
+msgid "United_Kingdom"
+msgstr "United Kingdom"
+
+msgid "Other_outside_Europe_"
+msgstr "Other (outside Europe)"
+
+msgid "full_name_as_in_id_required"
+msgstr "Full Name is required."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Full Surname is required."
+
+msgid "birthdate_required"
+msgstr "Birthdate is required."
+
+msgid "nationality_required"
+msgstr "Nationality is required."
+
+msgid "first_interaction_language_required"
+msgstr "The first interaction language is required."

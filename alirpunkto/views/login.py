@@ -12,6 +12,9 @@ from ldap3 import Server, Connection, ALL, NTLM
 from .. import _
 from .. import LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
 from ..models.users import User
+from logging import getLogger
+
+log = getLogger('alirpunkto')
 
 @view_config(route_name='login', renderer='alirpunkto:templates/login.pt')
 def login_view(request):
@@ -63,7 +66,6 @@ def check_password(username:str, password:str) -> Union[None, User]:
         email = user_entry.mail.value
     else:
         email = "undefined@example.com"
-        log = logging.getLogger(__name__)
         log.warning(f"User {username} has no email address")
     user = User.create_user(name, email)
     return user

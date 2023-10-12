@@ -328,3 +328,111 @@ msgstr "Félicitations pour votre approbation !"
 
 msgid "approved_description"
 msgstr "Votre candidature a été approuvée. Vous pouvez maintenant vous connecter en utilisant le pseudonyme et le mot de passe que vous avez fournis lors du processus de candidature."
+
+msgid "invalid_pseudonym"
+msgstr "Pseudonyme non valide. Il doit contenir entre 12 et 64 caractères et peut uniquement inclure des lettres (A-Z, a-z), des chiffres (0-9), des underscores (_), des points (.), des tirets (-) et ne doit pas contenir d'espaces."
+
+msgid "Select_a_country"
+msgstr "Select a country"
+
+msgid "Austria"
+msgstr "Austria"
+
+msgid "Belgium"
+msgstr "Belgium"
+
+msgid "Bulgaria"
+msgstr "Bulgaria"
+
+msgid "Cyprus"
+msgstr "Cyprus"
+
+msgid "Czech_Republic"
+msgstr "Czech Republic"
+
+msgid "Germany"
+msgstr "Germany"
+
+msgid "Denmark"
+msgstr "Denmark"
+
+msgid "Estonia"
+msgstr "Estonia"
+
+msgid "Spain"
+msgstr "Spain"
+
+msgid "Finland"
+msgstr "Finland"
+
+msgid "France"
+msgstr "France"
+
+msgid "Greece"
+msgstr "Greece"
+
+msgid "Croatia"
+msgstr "Croatia"
+
+msgid "Hungary"
+msgstr "Hungary"
+
+msgid "Ireland"
+msgstr "Ireland"
+
+msgid "Italy"
+msgstr "Italy"
+
+msgid "Lithuania"
+msgstr "Lithuania"
+
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+msgid "Latvia"
+msgstr "Latvia"
+
+msgid "Malta"
+msgstr "Malta"
+
+msgid "Netherlands"
+msgstr "Netherlands"
+
+msgid "Poland"
+msgstr "Poland"
+
+msgid "Portugal"
+msgstr "Portugal"
+
+msgid "Romania"
+msgstr "Romania"
+
+msgid "Sweden"
+msgstr "Sweden"
+
+msgid "Slovenia"
+msgstr "Slovenia"
+
+msgid "Slovakia"
+msgstr "Slovakia"
+
+msgid "United_Kingdom"
+msgstr "United Kingdom"
+
+msgid "Other_outside_Europe"
+msgstr "Other (outside Europe)"
+
+msgid "full_name_as_in_id_required"
+msgstr "Le nom complet est requis."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Le prénom complet est requis."
+
+msgid "birthdate_required"
+msgstr "La date de naissance est requise."
+
+msgid "nationality_required"
+msgstr "La nationalité est requise."
+
+msgid "first_interaction_language_required"
+msgstr "La première langue d'interaction est requise."

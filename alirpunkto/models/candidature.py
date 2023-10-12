@@ -314,7 +314,7 @@ class Candidature(Persistent):
             _seed (str): A random string used to generate the OID.
             _email_send_status_history (List[CandidatureEmailEvent]): A list to record email send status history.
             _challenge (Tuple[str, int]): A tuple containing the string math challenge and the solution in integer.
-            _pseudonyme (str): The pseudonyme of the candidature.
+            _pseudonym (str): The pseudonym of the candidature.
         Raises:
             RuntimeError: Raised if an instance already exists with same oid.
 
@@ -328,7 +328,7 @@ class Candidature(Persistent):
         self._seed = None
         self._email_send_status_history = []
         self._challenge = None
-        self._pseudonyme = None
+        self._pseudonym = None
         # get a unique object id
         self._oid = Candidature.generate_unique_oid()
         # get a random seed and record the creation
@@ -473,29 +473,29 @@ class Candidature(Persistent):
         self._memorize_changes("challenge", old_challenge, value)
 
     @property
-    def pseudonyme(self)-> str:
-        """ Get the pseudonyme of the candidature.
+    def pseudonym(self)-> str:
+        """ Get the pseudonym of the candidature.
         Returns:
-            The pseudonyme of the candidature.
+            The pseudonym of the candidature.
         """
-        return self._pseudonyme
+        return self._pseudonym
     
-    @pseudonyme.setter
-    def pseudonyme(self, value:str):
-        """ Set the pseudonyme of the candidature.
+    @pseudonym.setter
+    def pseudonym(self, value:str):
+        """ Set the pseudonym of the candidature.
 
         Args:
-            value (str): The new pseudonyme of the candidature.
+            value (str): The new pseudonym of the candidature.
 
         Raises:
-            TypeError: The pseudonyme must be a string.
+            TypeError: The pseudonym must be a string.
         """
         if not isinstance(value, str):
-            raise TypeError("The pseudonyme must be a string.")
+            raise TypeError("The pseudonym must be a string.")
         
-        old_pseudonyme = self._pseudonyme if self._pseudonyme else "None"
-        self._pseudonyme = value
-        self._memorize_changes("pseudonyme", old_pseudonyme, value)
+        old_pseudonym = self._pseudonym if self._pseudonym else "None"
+        self._pseudonym = value
+        self._memorize_changes("pseudonym", old_pseudonym, value)
 
     @property
     def modifications(self)-> List[CandidatureEvent]:

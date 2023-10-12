@@ -29,6 +29,11 @@ from ..utils import (
     generate_math_challenges, is_valid_email, get_candidature_by_oid,
     send_email, register_user_to_ldap, get_preferred_language
 )
+import re
+
+MIN_PSEUDONYM_LENGTH = 12 # Minimum pseudonym length
+MAX_PSEUDONYM_LENGTH = 64 # Maximum pseudonym length
+pseudonym_pattern = re.compile(f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$')
 
 MIN_PASSWORD_LENGTH = 12 # Minimum password length
 MAX_PASSWORD_LENGTH = 92 # Maximum password length
@@ -115,7 +120,6 @@ def register(request):
                 case CandidatureStates.CONFIRMED_HUMAN:
                     return handle_confirmed_human_state(request, candidature)
                 case CandidatureStates.UNIQUE_DATA:
-                    # @TODO Traitez l'étape UNIQUE_DATA ici
                     return handle_unique_data_state(request, candidature)
                 case CandidatureStates.PENDING:
                     # @TODO Traitez l'étape PENDING ici
@@ -126,7 +130,12 @@ def register(request):
 
         except ValidationFailure as e:
             return {'form': e.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-    return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    appstruct = {
+        'cooperative_number': candidature.oid,
+        'pseudonym': candidature.pseudonym,
+        'email': candidature.email,
+    }
+    return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
     """
@@ -346,7 +355,6 @@ def handle_email_validation_state(request, candidature):
                 candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
     return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
-
 def handle_confirmed_human_state(request, candidature):
     """Handle the confirmed human state.
 
@@ -367,7 +375,9 @@ def handle_confirmed_human_state(request, candidature):
             password = request.params['password']
             password_confirm = request.params['password_confirm']
             pseudonym = request.params['pseudonym']
-            #!!!!! TODO éviter injection dans LDAP !!!!!
+            if not pseudonym_pattern.match(pseudonym):
+                return {'error': _('invalid_pseudonym'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            
             if password != password_confirm:
                 return {'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             if len(password) < min_length:
