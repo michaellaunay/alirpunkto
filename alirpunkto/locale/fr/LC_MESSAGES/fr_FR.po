@@ -1,0 +1,512 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-10-13 10:18+0200\n"
+"Last-Translator: \n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+msgid "welcome"
+msgstr "Bienvenue"
+
+msgid "username_label"
+msgstr "Nom d'utilisateur"
+
+msgid "password_label"
+msgstr "Mot de passe"
+
+msgid "login_label"
+msgstr "Connexion"
+
+msgid "welcome_msg"
+msgstr ""
+
+msgid "all_applications_msg"
+msgstr ""
+"Toutes les applications dont vous avez besoin pour participer aux activités "
+"de {site_name} en un seul endroit."
+
+msgid "register_or_login_msg"
+msgstr "Inscrivez-vous ou connectez-vous pour commencer."
+
+msgid "logged_in_msg_title"
+msgstr ""
+"Alirpunkto, le service centralisé pour les applications utilisées dans "
+"l'infrastructure informatique de {site_name}"
+
+msgid "logged_in_msg"
+msgstr "Vous êtes connecté en tant que {user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Vous pouvez vous déconnecter en cliquant ici"
+
+msgid "logout_label"
+msgstr "Se déconnecter"
+
+msgid "choose_application_msg"
+msgstr "Choisissez l'application à laquelle vous souhaitez vous connecter :"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr ""
+"Nom d'utilisateur ou mot de passe invalide. Veuillez essayer à nouveau."
+
+msgid "register_link"
+msgstr "Créer un compte"
+
+msgid "password_confirm_label"
+msgstr "Veuillez confirmer votre mot de passe"
+
+msgid "password_confirm_title"
+msgstr "Veuillez confirmer votre mot de passe"
+
+msgid "forgot_password_label"
+msgstr "Mot de passe oublié?"
+
+msgid "full_name_as_in_id_label"
+msgstr ""
+"Prénom(s) complet(s) tel(s) qu'il(s) figure(nt) sur vos documents d'identité "
+"officiels"
+
+msgid "full_surname_as_in_id_label"
+msgstr ""
+"Nom(s) de famille complet(s) tel(s) qu'il(s) figure(nt) dans vos documents "
+"d'identité officiels"
+
+msgid "birthdate_label"
+msgstr "Date de naissance"
+
+msgid "nationality_label"
+msgstr "Nationalité (parmi celles de l'Union Européenne)"
+
+msgid "cooperator_number_label"
+msgstr "Numéro de coopérateur"
+
+msgid "pseudonym_label"
+msgstr "Pseudonyme"
+
+msgid "email_label"
+msgstr "Adresse email"
+
+msgid "first_interaction_language_label"
+msgstr ""
+"La langue dans laquelle vous préférez que nous interagissions avec vous"
+
+msgid "second_interaction_language_label"
+msgstr ""
+"La langue que vous acceptez comme second choix pour que nous interagission "
+"avec vous"
+
+msgid "register_label"
+msgstr "S'inscrire"
+
+msgid "forgot_password_head"
+msgstr "Mot de passe oublié"
+
+msgid "forgot_your_password_title"
+msgstr "Mot de passe oublié?"
+
+msgid "enter_your_email_address_label"
+msgstr "Veuillez saisir votre adresse de courriel:"
+
+msgid "submit_button"
+msgstr "Soumettre"
+
+msgid "candidature_states_draft_value"
+msgstr "Brouillon : La demande est en mode brouillon."
+
+msgid "candidature_states_email_validation_value"
+msgstr ""
+"Validation de l'adresse électronique : État dans lequel l'adresse "
+"électronique du demandeur est en attente de validation."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr ""
+"ConfirméHumain : L'adresse électronique du demandeur est vérifiée et une "
+"preuve d'humanité est fournie (nous avons vérifié que vous n'êtes pas un "
+"robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Données uniques : Le demandeur a saisi ses données d'identification "
+"personnelle et nous avons vérifié qu'aucun coopérateur ou membre ordinaire "
+"de la Communauté, actuel ou récent, ne possède les mêmes données."
+
+msgid "candidature_states_pending_value"
+msgstr ""
+"En attente : La demande a été soumise. Les données d'identification "
+"personnelle ont été transmises aux vérificateurs, mais ceux-ci n'ont pas "
+"encore donné leur avis."
+
+msgid "candidature_states_approved_value"
+msgstr "Approuvé : La demande a été acceptée."
+
+msgid "candidature_states_refused_value"
+msgstr "Refusée : La demande a été refusée."
+
+msgid "candidature_states_draft"
+msgstr "brouillon"
+
+msgid "candidature_states_email_validation"
+msgstr "validation_adresse_courriel"
+
+msgid "candidature_states_confirmed_human"
+msgstr "confirmé_humain"
+
+msgid "candidature_states_unique_data"
+msgstr "données_uniques"
+
+msgid "candidature_states_pending"
+msgstr "en attente"
+
+msgid "candidature_states_approved"
+msgstr "approuvé"
+
+msgid "candidature_states_refused"
+msgstr "refusée"
+
+msgid "candidature_types_ordinary_value"
+msgstr ""
+"Ordinaire : Une demande d'inscription pour un Membre Ordinaire de la "
+"Communauté = avec un processus d'inscription simplifié, pas d'obligation "
+"financière, mais pas de droits de décision."
+
+msgid "candidature_types_cooperator_value"
+msgstr ""
+"Coopérateur : Une demande d'inscription pour devenir membre à part entière "
+"de la Coopérative, un Coopérateur = avec un processus d'inscription complet "
+"garantissant le principe \"une personne = une voix\", l'obligation d'acheter "
+"au moins une part sociale et de payer une contribution annuelle, et les "
+"pleins droits de décision."
+
+msgid "candidature_types_ordinary"
+msgstr "Membre ordinaire de la Communauté"
+
+msgid "candidature_types_cooperator"
+msgstr "Coopérateur = membre à part entière de la coopérative"
+
+msgid "vote_types_yes_value"
+msgstr "Oui : le vote est positif."
+
+msgid "vote_types_no_value"
+msgstr "Non : le vote est négatif."
+
+msgid "vote_types_abstain_value"
+msgstr "S'abstenir : Le vote est neutre."
+
+msgid "vote_types_yes"
+msgstr "oui"
+
+msgid "vote_types_no"
+msgstr "non"
+
+msgid "vote_types_abstain"
+msgstr "abstention"
+
+msgid "zero"
+msgstr "zéro"
+
+msgid "one"
+msgstr "un"
+
+msgid "two"
+msgstr "deux"
+
+msgid "three"
+msgstr "trois"
+
+msgid "four"
+msgstr "quatre"
+
+msgid "five"
+msgstr "cinq"
+
+msgid "six"
+msgstr "six"
+
+msgid "seven"
+msgstr "sept"
+
+msgid "eight"
+msgstr "huit"
+
+msgid "nine"
+msgstr "neuf"
+
+msgid "times"
+msgstr "fois"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "email_validation_subject"
+msgstr ""
+"Vérification que vous êtes bien un être humain. Résoudre le défi et entrer "
+"la réponse sur le portail"
+
+msgid "email_candidature_state_changed"
+msgstr "Changement du statut de votre demande sur le portail"
+
+msgid "invalid_challenge"
+msgstr "Votre réponse est incorrecte. Veuillez en saisir une nouvelle."
+
+msgid "invalid_email"
+msgstr "Il y a un problème avec votre adresse e-mail, veuillez la vérifier."
+
+msgid "invalid_choice"
+msgstr "Votre choix n'est pas valide, veuillez le saisir à nouveau."
+
+msgid "challenge_instruction_text"
+msgstr ""
+"Veuillez calculer les résultats des quatre opérations mathématiques simples "
+"suivantes et remplir les champs correspondants pour confirmer votre adresse "
+"électronique."
+
+msgid "enter_result_label_A"
+msgstr "Veuillez saisir le résultat de l'opération mathématique A :"
+
+msgid "result_label_title_A"
+msgstr ""
+"Veuillez saisir le code que vous avez reçu par e-mail ou le résultat de "
+"l'opération mathématique A."
+
+msgid "result_input_title_A"
+msgstr ""
+"Afin que nous puissions vérifier votre adresse e-mail, veuillez indiquer le "
+"résultat de l'opération A que vous avez reçu par e-mail."
+
+msgid "enter_result_label_B"
+msgstr "Veuillez saisir le résultat de l'opération mathématique B :"
+
+msgid "result_label_title_B"
+msgstr ""
+"Veuillez saisir le code que vous avez reçu par e-mail ou le résultat de "
+"l'opération mathématique B."
+
+msgid "result_input_title_B"
+msgstr ""
+"Afin que nous puissions vérifier votre adresse e-mail, veuillez indiquer le "
+"résultat de l'opération B que vous avez reçu par e-mail."
+
+msgid "enter_result_label_C"
+msgstr "Veuillez saisir le résultat de l'opération mathématique C :"
+
+msgid "result_label_title_C"
+msgstr ""
+"Veuillez saisir le code que vous avez reçu par e-mail ou le résultat de "
+"l'opération mathématique C."
+
+msgid "result_input_title_C"
+msgstr ""
+"Afin que nous puissions vérifier votre adresse e-mail, veuillez indiquer le "
+"résultat de l'opération C que vous avez reçu par e-mail."
+
+msgid "enter_result_label_D"
+msgstr "Veuillez saisir le résultat de l'opération mathématique D :"
+
+msgid "result_label_title_D"
+msgstr ""
+"Veuillez saisir le code que vous avez reçu par e-mail ou le résultat de "
+"l'opération mathématique D."
+
+msgid "result_input_title_D"
+msgstr ""
+"Afin que nous puissions vérifier votre adresse e-mail, veuillez indiquer le "
+"résultat de l'opération D que vous avez reçu par e-mail."
+
+msgid "verify_button"
+msgstr "Soumettre"
+
+msgid "submit_email_validation_title"
+msgstr "Cliquez pour vérifier les codes saisis."
+
+msgid "passwords_dont_match"
+msgstr "Les mots de passe ne correspondent pas."
+
+msgid "password_too_short"
+msgstr "Le mot de passe est trop court."
+
+msgid "password_minimum_length"
+msgstr ""
+"Le mot de passe doit comporter au moins  ${password_minimum_length} "
+"caractères."
+
+msgid "password_too_long"
+msgstr "Le mot de passe est trop long."
+
+msgid "password_maximum_length"
+msgstr ""
+"Le mot de passe ne doit pas dépasser ${password_maximum_length}  caractères."
+
+msgid "password_must_contain_digit"
+msgstr "Le mot de passe doit contenir au moins un chiffre."
+
+msgid "password_must_contain_uppercase"
+msgstr "Le mot de passe doit contenir au moins une lettre majuscule."
+
+msgid "password_must_contain_lowercase"
+msgstr "Le mot de passe doit contenir au moins une lettre minuscule."
+
+msgid "password_must_contain_special_char"
+msgstr ""
+"Le mot de passe doit contenir au moins un des caractères suivants : '@', "
+"'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "pseudonym_title_label"
+msgstr ""
+"Veuillez saisir ici le pseudonyme qui vous identifiera pendant toute la "
+"durée de votre activité sur notre plate-forme informatique. Nous vous "
+"recommandons VIVEMENT de choisir un pseudonyme qui rende impossible (ou "
+"extrêmement difficile) la reconstitution de votre véritable identité. Vous "
+"protégez ainsi la confidentialité de vos opinions (c'est-à-dire les données "
+"personnelles qui font l'objet d'une protection spécifique en vertu du "
+"Règlement général sur la protection des données - RGPD) contre toute forme "
+"de pression extérieure dans la vie réelle (par exemple, de la part de votre "
+"employeur ou de vos clients). Soyez très prudent.e ! Une fois que vous "
+"l'avez choisi, vous ne pourrez PLUS JAMAIS changer ce pseudonyme par la "
+"suite. Choisissez-le avec soin ! "
+
+msgid "password_title_label"
+msgstr "Veuillez saisir votre mot de passe ici."
+
+msgid "password_confirm_title_label"
+msgstr "Veuillez confirmer votre mot de passe ici."
+
+msgid "password_confirm"
+msgstr "Veuillez confirmer votre mot de passe."
+
+msgid "type_of_registration"
+msgstr "Type d'inscription"
+
+msgid "type_registration_label"
+msgstr "Choisissez le type d'inscription qui vous convient."
+
+msgid "type_registration_choice"
+msgstr ""
+"Chaque type d'inscription s'accompagne d'un ensemble spécifique de droits, "
+"d'avantages et d'obligations."
+
+msgid "approved_heading"
+msgstr "Félicitations pour l'approbation de votre candidature !"
+
+msgid "approved_description"
+msgstr ""
+"Votre candidature a été approuvée. Vous pouvez maintenant vous connecter en "
+"utilisant le pseudonyme et le mot de passe que vous avez fournis lors de la "
+"procédure de candidature."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Pseudonyme non valide. Il doit comporter entre 5 et 20 caractères et ne peut "
+"contenir que des lettres (A-Z, a-z), des chiffres (0-9), des traits de "
+"soulignement (_), des points (.), des traits d'union (-), et aucun espace."
+
+msgid "Select_a_country"
+msgstr "Sélectionnez un État membre de l'Union européenne"
+
+msgid "Austria"
+msgstr "AT - Autriche"
+
+msgid "Belgium"
+msgstr "BE - Belgique"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgarie"
+
+msgid "Cyprus"
+msgstr "CY - Chypre"
+
+msgid "Czech_Republic"
+msgstr "CZ - Tchéquie"
+
+msgid "Germany"
+msgstr "DE - Allemagne"
+
+msgid "Denmark"
+msgstr "DK - Danemark"
+
+msgid "Estonia"
+msgstr "EE - Estonie"
+
+msgid "Spain"
+msgstr "ES - Espagne"
+
+msgid "Finland"
+msgstr "FI - Finlande"
+
+msgid "France"
+msgstr "FR - France"
+
+msgid "Greece"
+msgstr "GR - Grèce"
+
+msgid "Croatia"
+msgstr "RH - Croatie"
+
+msgid "Hungary"
+msgstr "HU - Hongrie"
+
+msgid "Ireland"
+msgstr "IE - Irlande"
+
+msgid "Italy"
+msgstr "IT - Italie"
+
+msgid "Lithuania"
+msgstr "LT - Lituanie"
+
+msgid "Luxembourg"
+msgstr "LU - Luxembourg"
+
+msgid "Latvia"
+msgstr "LV - Lettonie"
+
+msgid "Malta"
+msgstr "MT - Malte"
+
+msgid "Netherlands"
+msgstr "NL - Pays-Bas"
+
+msgid "Poland"
+msgstr "PL - Pologne"
+
+msgid "Portugal"
+msgstr "PT - Portugal"
+
+msgid "Romania"
+msgstr "RO - Roumanie"
+
+msgid "Sweden"
+msgstr "SE - Suède"
+
+msgid "Slovenia"
+msgstr "SI - Slovénie"
+
+msgid "Slovakia"
+msgstr "SK - Slovaquie"
+
+msgid "full_name_as_in_id_required"
+msgstr "Le(s) prénom(s) complet(s) est (sont) exigé(s)."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Le(s) nom(s) de famille complet(s) est (sont) exigé(s)."
+
+msgid "birthdate_required"
+msgstr "La date de naissance est exigée."
+
+msgid "nationality_required"
+msgstr "La nationalité est exigée."
+
+msgid "first_interaction_language_required"
+msgstr "La première langue d'interaction est exigée."
