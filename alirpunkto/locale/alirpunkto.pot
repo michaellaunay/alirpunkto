@@ -79,7 +79,7 @@ msgid "birthdate_label"
 msgstr "Birthdate"
 
 msgid "nationality_label"
-msgstr "Nationality"
+msgstr "Nationality (among those of the European Union)"
 
 msgid "cooperator_number_label"
 msgstr "Cooperator number"
@@ -121,7 +121,7 @@ msgid "candidature_states_confirmed_human_value"
 msgstr "ConfirmedHuman: The Applicant's email address is verified, and proof of humanity is provided (we have verified that you are not a robot)."
 
 msgid "candidature_states_unique_data_value" 
-msgstr "UniqueData: The Applicant has entered their personal identification data, and we have verified that no current or recent Cooperator or Ordinary Member of the Community has the same data."
+msgstr "UniqueData: The Applicant has entered his/her personal identification data, and we have verified that no current or recent Cooperator or Ordinary Member of the Community has the same data."
 
 msgid "candidature_states_pending_value"
 msgstr "Pending: The application has been submitted. The personal identification data has been transmitted to the Verifiers, but they have not provided their feedback yet."
@@ -154,10 +154,10 @@ msgid "candidature_states_refused"
 msgstr "refused"
 
 msgid "candidature_types_ordinary_value"
-msgstr "Ordinary: An application for an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
+msgstr "Ordinary: An application to become an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
 
 msgid "candidature_types_cooperator_value"
-msgstr "Cooperator: An application for a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle and that s/he is a citizen of the European Union, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
+msgstr "Cooperator: An application to become a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle and that s/he is a citizen of the European Union, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
 
 msgid "candidature_types_ordinary"
 msgstr "Ordinary Member of the Community"
@@ -247,7 +247,7 @@ msgid "result_label_title_A"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation A."
 
 msgid "result_input_title_A"
-msgstr "In order for us to verify your e-mail address, please enter the result, which you received per e-mail, of the operation A ."
+msgstr "In order for us to verify your e-mail address, please enter the result of the operation A that you received per e-mail."
 
 msgid "enter_result_label_B"
 msgstr "Please enter the result for mathematical operation B:"
@@ -256,7 +256,7 @@ msgid "result_label_title_B"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation B."
 
 msgid "result_input_title_B"
-msgstr "In order for us to verify your e-mail address, please enter the result, which you received per e-mail, of the operation B."
+msgstr "In order for us to verify your e-mail address, please enter the result of the operation B that you received per e-mail."
 
 msgid "enter_result_label_C"
 msgstr "Please enter the result for mathematical operation C:"
@@ -265,7 +265,7 @@ msgid "result_label_title_C"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation C."
 
 msgid "result_input_title_C"
-msgstr "In order for us to verify your e-mail address, please enter the result, which you received per e-mail, of the operation C."
+msgstr "In order for us to verify your e-mail address, please enter the resultof the operation C that you received per e-mail."
 
 msgid "enter_result_label_D"
 msgstr "Please enter the result for mathematical operation D:"
@@ -274,7 +274,7 @@ msgid "result_label_title_D"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation D."
 
 msgid "result_input_title_D"
-msgstr "In order for us to verify your e-mail address, please enter the result, which you received per e-mail, of the operation D."
+msgstr "In order for us to verify your e-mail address, please enter the result of the operation D that you received per e-mail."
 
 msgid "verify_button"
 msgstr "Submit"
