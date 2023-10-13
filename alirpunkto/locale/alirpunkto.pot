@@ -265,7 +265,7 @@ msgid "result_label_title_C"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation C."
 
 msgid "result_input_title_C"
-msgstr "In order for us to verify your e-mail address, please enter the resultof the operation C that you received per e-mail."
+msgstr "In order for us to verify your e-mail address, please enter the result of the operation C that you received per e-mail."
 
 msgid "enter_result_label_D"
 msgstr "Please enter the result for mathematical operation D:"
@@ -337,7 +337,7 @@ msgid "approved_description"
 msgstr "Your application has been approved. You can now log in using the pseudonym and password you provided during the application process."
 
 msgid "invalid_pseudonym"
-msgstr "Invalid pseudonym. It should be between 12 to 64 characters long and can only contain letters (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-), and no spaces."
+msgstr "Invalid pseudonym. It should be between 5 and 20 characters long and can only contain letters (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-), and no spaces."
 
 msgid "Select_a_country"
 msgstr "Select a Member State of the European Union"
