@@ -3,17 +3,17 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2023-09-22 10:51+0200\n"
+"PO-Revision-Date: 2023-10-13 10:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 "X-Poedit-Basepath: .\n"
 
-msgid "welcome_msg"
+msgid "welcome"
 msgstr "Willkommen"
 
 msgid "username_label"
@@ -25,12 +25,46 @@ msgstr "Passwort zurücksetzen"
 msgid "login_label"
 msgstr "Anmelden"
 
+msgid "welcome_msg"
+msgstr "Willkommen"
+
+msgid "all_applications_msg"
+msgstr ""
+"Alle Anwendungen, die Sie zur Teilnahme an den Aktivitäten von {site_name} "
+"benötigen, an einem Ort."
+
+msgid "register_or_login_msg"
+msgstr "Registrieren Sie sich oder melden Sie sich jetzt an, um loszulegen."
+
+msgid "logged_in_msg_title"
+msgstr ""
+"Alirpunkto, der zentrale Dienst für die Anwendungen, die in der IT-"
+"Infrastruktur von {site_name} benutzt werden"
+
+msgid "logged_in_msg"
+msgstr "Sie sind als {user} eingeloggt."
+
+msgid "log_out_invitation_msg"
+msgstr "Sie können sich abmelden, indem Sie hier klicken"
+
+msgid "logout_label"
+msgstr "Abmelden"
+
+msgid "choose_application_msg"
+msgstr "Wählen Sie die Anwendung, der Sie benutzen möchten:"
+
 #: views/login.py:23
 msgid "invalid_username_or_password"
 msgstr "Ungültiger Benutzername oder Passwort"
 
 msgid "register_link"
 msgstr "Konto erstellen"
+
+msgid "password_confirm_label"
+msgstr "Bitte bestätigen Sie Ihr Passwort."
+
+msgid "password_confirm_title"
+msgstr "Bitte bestätigen Sie Ihr Passwort."
 
 msgid "forgot_password_label"
 msgstr "Passwort vergessen?"
@@ -45,7 +79,7 @@ msgid "birthdate_label"
 msgstr "Geburtstag"
 
 msgid "nationality_label"
-msgstr "Staatsangehörigkeit"
+msgstr "Staatsangehörigkeit (unter den Mitgliedstaaten der Europäischen Union)"
 
 msgid "cooperator_number_label"
 msgstr "Genossenschaftlernummer"
@@ -318,7 +352,7 @@ msgstr ""
 "Das Passwort muss mindestens eines der folgenden Zeichen enthalten: '@', "
 "'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
-msgid "pseudonyme_title_label"
+msgid "pseudonym_title_label"
 msgstr ""
 "Bitte geben Sie hier das Pseudonym ein, das Sie für die gesamte Dauer Ihrer "
 "Tätigkeit auf unserer IT-Plattform identifizieren wird. Wir empfehlen Ihnen "
@@ -337,3 +371,131 @@ msgstr "Bitte geben Sie hier Ihr Passwort ein."
 
 msgid "password_confirm_title_label"
 msgstr "Bitte bestätigen Sie hier Ihr Passwort."
+
+msgid "password_confirm"
+msgstr "Bitte bestätigen Sie Ihr Passwort."
+
+msgid "type_of_registration"
+msgstr "Art der Registrierung"
+
+msgid "type_registration_label"
+msgstr "Wählen Sie die für Sie passende Art der Registrierung."
+
+msgid "type_registration_choice"
+msgstr ""
+"Jede Art der Registrierung ist mit einer Reihe von Rechten, Vorteilen und "
+"Pflichten verbunden."
+
+msgid "approved_heading"
+msgstr "Herzlichen Glückwunsch zu Ihrer Zulassung!"
+
+msgid "approved_description"
+msgstr ""
+"Ihre Bewerbung wurde genehmigt. Sie können sich nun mit dem Pseudonym und "
+"dem Passwort anmelden, das Sie während des Bewerbungsprozesses angegeben "
+"haben."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Ungültiges Pseudonym. Es sollte zwischen 5 und 20 Zeichen lang sein und darf "
+"nur Buchstaben (A-Z, a-z), Zahlen (0-9), Unterstriche (_), Punkte (.), "
+"Bindestriche (-) und keine Leerzeichen enthalten."
+
+msgid "Select_a_country"
+msgstr "Wählen Sie einen Mitgliedstaat der Europäischen Union"
+
+msgid "Austria"
+msgstr "AT - Österreich"
+
+msgid "Belgium"
+msgstr "BE - Belgien"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgarien"
+
+msgid "Cyprus"
+msgstr "CY - Zypern"
+
+msgid "Czech_Republic"
+msgstr "CZ - Tschechien"
+
+msgid "Germany"
+msgstr "DE - Deutschland"
+
+msgid "Denmark"
+msgstr "DK - Dänemark"
+
+msgid "Estonia"
+msgstr "EE - Estland"
+
+msgid "Spain"
+msgstr "ES - Spanien"
+
+msgid "Finland"
+msgstr "FI - Finnland"
+
+msgid "France"
+msgstr "FR - Frankreich"
+
+msgid "Greece"
+msgstr "GR - Griechenland"
+
+msgid "Croatia"
+msgstr "HR - Kroatien"
+
+msgid "Hungary"
+msgstr "HU - Ungarn"
+
+msgid "Ireland"
+msgstr "IE - Irland"
+
+msgid "Italy"
+msgstr "IT - Italien"
+
+msgid "Lithuania"
+msgstr "LT - Litauen"
+
+msgid "Luxembourg"
+msgstr "LU - Luxemburg"
+
+msgid "Latvia"
+msgstr "LV - Lettland"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Niederlande"
+
+msgid "Poland"
+msgstr "PL - Polen"
+
+msgid "Portugal"
+msgstr "PT - Portugal"
+
+msgid "Romania"
+msgstr "RO - Rumänien"
+
+msgid "Sweden"
+msgstr "SE - Schweden"
+
+msgid "Slovenia"
+msgstr "SI - Slowenien"
+
+msgid "Slovakia"
+msgstr "SK - Slowakei"
+
+msgid "full_name_as_in_id_required"
+msgstr "Vollständige(r) Name(n) ist (sind) erforderlich."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Vollständige(r) Nachname(n) ist/sind erforderlich."
+
+msgid "birthdate_required"
+msgstr "Das Geburtsdatum ist erforderlich."
+
+msgid "nationality_required"
+msgstr "Die Staatsangehörigkeit ist erforderlich."
+
+msgid "first_interaction_language_required"
+msgstr "Die erste Interaktionssprache ist erforderlich."
