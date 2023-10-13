@@ -31,8 +31,8 @@ from ..utils import (
 )
 import re
 
-MIN_PSEUDONYM_LENGTH = 12 # Minimum pseudonym length
-MAX_PSEUDONYM_LENGTH = 64 # Maximum pseudonym length
+MIN_PSEUDONYM_LENGTH = 5 # Minimum pseudonym length
+MAX_PSEUDONYM_LENGTH = 20 # Maximum pseudonym length
 pseudonym_pattern = re.compile(f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$')
 
 MIN_PASSWORD_LENGTH = 12 # Minimum password length
