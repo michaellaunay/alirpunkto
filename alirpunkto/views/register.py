@@ -74,7 +74,7 @@ def register(request):
     The site check the email by sending a confirmation email to the candidate
     with a challenge.
     If the candidate is not already registered, the site collects their 
-    information and sends them a confirmation email.
+    information and sends the a confirmation email.
     The site then creates a candidature object and randomly selects three
     members from the LDAP directory (if possible, otherwise the administrator)
     as voters. The voters are then invited to vote on the candidature.
@@ -83,7 +83,7 @@ def register(request):
     translator = request.localizer.translate
     candidature = None
     schema = RegisterForm().bind(request=request)
-    form = deform.Form(schema, buttons=('submit',), translator=translator)
+    form = deform.Form(schema, buttons=[deform.Button('submit',_('submit'))], translator=translator)
     # Check if the candidature is already in the request
     candidatures = get_candidatures(request)
     if 'candidature_oid' in request.session and request.session['candidature_oid'] in candidatures :
@@ -122,7 +122,6 @@ def register(request):
                 case CandidatureStates.UNIQUE_DATA:
                     return handle_unique_data_state(request, candidature)
                 case CandidatureStates.PENDING:
-                    # @TODO Traitez l'étape PENDING ici
                     return handle_pending_state(request, candidature)
                 case _:
                     # @TODO Gestion d'autres états ou d'une erreur éventuelle
@@ -135,7 +134,7 @@ def register(request):
         'pseudonym': candidature.pseudonym,
         'email': candidature.email,
     }
-    return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
     """
@@ -371,47 +370,56 @@ def handle_confirmed_human_state(request, candidature):
         min_length = MIN_PASSWORD_LENGTH
         max_length = MAX_PASSWORD_LENGTH
         candidatures = get_candidatures(request)
+
+        password = request.params['password']
+        password_confirm = request.params['password_confirm']
+        pseudonym = request.params['pseudonym']
+        if not pseudonym_pattern.match(pseudonym):
+            return {'error': _('invalid_pseudonym'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        
+        if password != password_confirm:
+            return {'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        if len(password) < min_length:
+            return {'error': _('password_too_short'), 'error_details':_("password_minimum_length", mapping={'password_minimum_length':min_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        if len(password) > max_length:
+            return {'error': _('password_too_long'), 'error_details':_("password_maximum_length", mapping={'password_maximum_length':max_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        if not any(char.isdigit() for char in password):
+            return {'error': _('password_must_contain_digit'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        if not any(char.isupper() for char in password):
+            return {'error': _('password_must_contain_uppercase'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        if not any(char.islower() for char in password):
+            return {'error': _('password_must_contain_lowercase'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
+            return {'error': _('password_must_contain_special_char'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        if len(pseudonym) < min_length:
+            return {'error': _('pseudonym_too_short'), 'error_details':_("pseudonym_minimum_length", mapping={'password_minimum_length':min_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        if len(pseudonym) > max_length:
+            return {'error': _('pseudonym_too_long'), 'error_details':_("pseudonym_maximum_length", mapping={'password_maximum_length':max_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+
+        candidature.pseudonym = pseudonym            
+
+        result = register_user_to_ldap(request, candidature, password)
+        if result['status'] == 'error':
+            return {'error': result['message'], 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+
         if candidature.type == CandidatureTypes.ORDINARY:
-            password = request.params['password']
-            password_confirm = request.params['password_confirm']
-            pseudonym = request.params['pseudonym']
-            if not pseudonym_pattern.match(pseudonym):
-                return {'error': _('invalid_pseudonym'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            
-            if password != password_confirm:
-                return {'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            if len(password) < min_length:
-                return {'error': _('password_too_short'), 'error_details':_("password_minimum_length", mapping={'password_minimum_length':min_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            if len(password) > max_length:
-                return {'error': _('password_too_long'), 'error_details':_("password_maximum_length", mapping={'password_maximum_length':max_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            if not any(char.isdigit() for char in password):
-                return {'error': _('password_must_contain_digit'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            if not any(char.isupper() for char in password):
-                return {'error': _('password_must_contain_uppercase'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            if not any(char.islower() for char in password):
-                return {'error': _('password_must_contain_lowercase'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
-                return {'error': _('password_must_contain_special_char'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            if len(pseudonym) < min_length:
-                return {'error': _('pseudonym_too_short'), 'error_details':_("pseudonym_minimum_length", mapping={'password_minimum_length':min_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-            if len(pseudonym) > max_length:
-                return {'error': _('pseudonym_too_long'), 'error_details':_("pseudonym_maximum_length", mapping={'password_maximum_length':max_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-
-            candidature.pseudonym = pseudonym            
-
-            result = register_user_to_ldap(request, candidature, password)
-            if result['status'] == 'error':
-                return {'error': result['message'], 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             candidatures.monitored_candidatures.pop(candidature.oid, None)
             candidature.state = CandidatureStates.APPROVED
-            transaction = request.tm
-            try:
-                transaction.commit()
-                candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_candidature_approuved_email")
-            except Exception as e:
-                log.error(f"Error while commiting candidature {candidature.oid} : {e}")
-                candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_approuved_email")
-    return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        else:
+            candidature.state = CandidatureStates.UNIQUE_DATA
+        transaction = request.tm
+        try:
+            transaction.commit()
+            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_candidature_approuved_email")
+        except Exception as e:
+            log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_approuved_email")
+    appstruct = {
+        'cooperative_number': candidature.oid,
+        'pseudonym': candidature.pseudonym,
+        'email': candidature.email,
+    }
+    return {'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def handle_unique_data_state(request, candidature):
     """Handle the unique data state.
@@ -423,8 +431,28 @@ def handle_unique_data_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    #@TODO
-    pass
+    schema = RegisterForm().bind(request=request)
+    form = deform.Form(schema, buttons=('submit',), translator=Translator)
+    if 'submit' in request.POST:
+        #Get identity Verification method
+
+        candidatures = get_candidatures(request)
+        candidature.state = CandidatureStates.PENDING
+        transaction = request.tm
+        try:
+            transaction.commit()
+            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_candidature_pending_email")
+        except Exception as e:
+            log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_pending_email")
+    appstruct = {
+        'cooperative_number': candidature.oid,
+        'pseudonym': candidature.pseudonym,
+        'email': candidature.email,
+    }
+    return {'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+
+
 
 def handle_pending_state(request, candidature):
     """Handle the pending state.
