@@ -25,7 +25,6 @@ class RegisterForm(schema.CSRFSchema):
         messages={'required': _('full_surname_as_in_id_required')},
         missing=""
     )
-    #@TODO Gender (Mal, Femal, Undefined)
     birthdate = colander.SchemaNode(
         colander.Date(),
         title=_('birthdate_label'),
@@ -70,8 +69,6 @@ class RegisterForm(schema.CSRFSchema):
             ('SE', _('Sweden')),
             ('SI', _('Slovenia')),
             ('SK', _('Slovakia')),
-            ('UK', _('United Kingdom')),
-            ('OTHER', _('Other (outside Europe)')),
         ]),
         missing=""
     )
