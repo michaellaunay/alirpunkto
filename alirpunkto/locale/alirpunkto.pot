@@ -340,100 +340,94 @@ msgid "invalid_pseudonym"
 msgstr "Invalid pseudonym. It should be between 12 to 64 characters long and can only contain letters (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-), and no spaces."
 
 msgid "Select_a_country"
-msgstr "Select a country"
+msgstr "Select a Member State of the European Union"
 
 msgid "Austria"
-msgstr "Austria"
+msgstr "AT - Austria"
 
 msgid "Belgium"
-msgstr "Belgium"
+msgstr "BE - Belgium"
 
 msgid "Bulgaria"
-msgstr "Bulgaria"
+msgstr "BG - Bulgaria"
 
 msgid "Cyprus"
-msgstr "Cyprus"
+msgstr "CY - Cyprus"
 
 msgid "Czech_Republic"
-msgstr "Czech Republic"
+msgstr "CZ - Czechia"
 
 msgid "Germany"
-msgstr "Germany"
+msgstr "DE - Germany"
 
 msgid "Denmark"
-msgstr "Denmark"
+msgstr "DK - Denmark"
 
 msgid "Estonia"
-msgstr "Estonia"
+msgstr "EE - Estonia"
 
 msgid "Spain"
-msgstr "Spain"
+msgstr "ES - Spain"
 
 msgid "Finland"
-msgstr "Finland"
+msgstr "FI - Finland"
 
 msgid "France"
-msgstr "France"
+msgstr "FR - France"
 
 msgid "Greece"
-msgstr "Greece"
+msgstr "GR - Greece"
 
 msgid "Croatia"
-msgstr "Croatia"
+msgstr "HR - Croatia"
 
 msgid "Hungary"
-msgstr "Hungary"
+msgstr "HU - Hungary"
 
 msgid "Ireland"
-msgstr "Ireland"
+msgstr "IE - Ireland"
 
 msgid "Italy"
-msgstr "Italy"
+msgstr "IT - Italy"
 
 msgid "Lithuania"
-msgstr "Lithuania"
+msgstr "LT - Lithuania"
 
 msgid "Luxembourg"
-msgstr "Luxembourg"
+msgstr "LU - Luxembourg"
 
 msgid "Latvia"
-msgstr "Latvia"
+msgstr "LV - Latvia"
 
 msgid "Malta"
-msgstr "Malta"
+msgstr "MT - Malta"
 
 msgid "Netherlands"
-msgstr "Netherlands"
+msgstr "NL - Netherlands"
 
 msgid "Poland"
-msgstr "Poland"
+msgstr "PL - Poland"
 
 msgid "Portugal"
-msgstr "Portugal"
+msgstr "PT - Portugal"
 
 msgid "Romania"
-msgstr "Romania"
+msgstr "RO - Romania"
 
 msgid "Sweden"
-msgstr "Sweden"
+msgstr "SE - Sweden"
 
 msgid "Slovenia"
-msgstr "Slovenia"
+msgstr "SI - Slovenia"
 
 msgid "Slovakia"
-msgstr "Slovakia"
-
-msgid "United_Kingdom"
-msgstr "United Kingdom"
-
-msgid "Other_outside_Europe_"
-msgstr "Other (outside Europe)"
+msgstr "SK - Slovakia"
 
 msgid "full_name_as_in_id_required"
-msgstr "Full Name is required."
+msgstr "Full Name(s) is(are) required."
 
 msgid "full_surname_as_in_id_required"
-msgstr "Full Surname is required."
+msgstr "Full Surname(s) is(are) required."
 
 msgid "birthdate_required"
 msgstr "Birthdate is required."
