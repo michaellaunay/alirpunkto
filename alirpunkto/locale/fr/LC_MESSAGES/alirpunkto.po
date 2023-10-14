@@ -436,3 +436,7 @@ msgstr "La nationalité est requise."
 
 msgid "first_interaction_language_required"
 msgstr "La première langue d'interaction est requise."
+
+msgid "pending_description"
+msgstr "Votre demande est en cours d'examen. Vous serez notifié par e-mail une fois qu'elle aura été approuvée."
+

@@ -61,7 +61,7 @@
 
             <!-- CONFIRMED_HUMAN Status Section -->
             <div tal:condition="python:status == 'CONFIRMED_HUMAN'">
-                <form method="POST">
+                <form method="POST" tal:condition="python:candidature.type==CandidatureTypes.ORDINARY">
                     <div>
                         <label i18n:translate="pseudonym_label" title="Enter your pseudonym here." i18n:attributes="title pseudonym_title_label">Pseudonym</label>
                         <input type="text" name="pseudonym" title="Enter your pseudonym here." i18n:attributes="title pseudonym_title_label">
@@ -76,17 +76,13 @@
                     </div>
                     <input type="submit" value="Submit"  name="submit" title="Click to validate ." i18n:attributes="title submit_password_and_pseudonym; value verify_button">
                 </form>
+                <div tal:condition="python:candidature.type==CandidatureTypes.COOPERATOR" tal:omit-tag="">                    
+                    <span tal:replace="structure form">Form Content</span>
+                </div>
             </div>
 
             <!-- UNIQUE_DATA Status Section -->
             <div class="container" tal:condition="python:status == 'UNIQUE_DATA'">
-                <form method="POST">
-                    <span tal:replace="structure form">Form Content</span>
-                </form>
-            </div>
-
-            <!-- PENDING Status Section -->
-            <div tal:condition="python:status == 'PENDING'">
                 <form method="POST">
                     <label>Identity Verification:</label>
                     <select name="identity_verification">
@@ -95,7 +91,11 @@
                     </select>
                     <input type="submit" value="Proceed">
                 </form>
+            </div>
 
+            <!-- PENDING Status Section -->
+            <div tal:condition="python:status == 'PENDING'">
+                <p i18n:translate="pending_description">Your application is being reviewed. You will be notified by email once it has been approved.</p>
             </div>
 
             <!-- APPROVED Status Section -->

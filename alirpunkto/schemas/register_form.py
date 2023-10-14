@@ -1,13 +1,14 @@
 # Description: Schema for the register form.
 # Creation date: 2023-07-22
 # Author: Michaël Launay
-
+import datetime
 import colander
 from pyramid.i18n import TranslationStringFactory
 from deform import ValidationFailure
 from deform import schema
 from deform.widget import SelectWidget, TextInputWidget, DateInputWidget
 from .. import _, EUROPEAN_LOCALES
+from ..utils import is_valid_password, is_valid_unique_pseudonym
 
 locales_as_choices = [(key, value) for key, value in EUROPEAN_LOCALES.items()]
 
@@ -31,8 +32,8 @@ class RegisterForm(schema.CSRFSchema):
         messages={'required': _('birthdate_required')},
         widget=DateInputWidget(),
         validator=colander.Range(
-            min=colander.Date('1900-01-01'),
-            max=colander.Date('2023-12-31')
+            min=datetime.date(1900, 1, 1),
+            max=datetime.date(2020, 12, 31)
         ),
         missing=""
     )
@@ -82,7 +83,25 @@ class RegisterForm(schema.CSRFSchema):
     pseudonym = colander.SchemaNode(
         colander.String(),
         title=_('pseudonym_label'),
-        widget=TextInputWidget(readonly=True),  # The field is visible but not editable
+        widget=TextInputWidget(),
+        validator=colander.Function(is_valid_unique_pseudonym),
+        messages={'required': _('pseudonym_required')},
+        missing=""
+    )
+    password = colander.SchemaNode(
+        colander.String(),
+        title=_('password_label'),
+        widget=TextInputWidget(type='password'),
+        validator=colander.Function(is_valid_password),
+        messages={'required': _('password_required')},
+        missing=""
+    )
+    password_confirm = colander.SchemaNode(
+        colander.String(),
+        title=_('password_confirm_label'),
+        widget=TextInputWidget(type='password'),
+        messages={'required': _('confirm_password_required')},
+        missing=""
     )
     email = colander.SchemaNode(
         colander.String(),

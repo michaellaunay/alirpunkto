@@ -19,6 +19,15 @@ import logging
 log = logging.getLogger("alirpunkto")
 import base64
 import bcrypt
+import re
+
+MIN_PSEUDONYM_LENGTH = 5 # Minimum pseudonym length
+MAX_PSEUDONYM_LENGTH = 20 # Maximum pseudonym length
+
+pseudonym_pattern = re.compile(f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$')
+
+MIN_PASSWORD_LENGTH = 12 # Minimum password length
+MAX_PASSWORD_LENGTH = 92 # Maximum password length
 
 def get_preferred_language(request: Request)->str:
     """Get the preferred language from the request.
@@ -72,19 +81,24 @@ def is_valid_email(email, request):
         return {'error': _('ldap_error')}
     return None
 
-
-
-def is_valid_unique_pseudo(pseudonym, request):
+def is_valid_unique_pseudonym(pseudonym):
     """Check if pseudonym is valid and is not already used.
 
     Args:
         pseudonym (str): the pseudonym to check
-        request (pyramid.request.Request): the request
 
     Returns:
         error: the error if the email is not valid or already used
         None: if the email is valid and not already used
     """
+    if not pseudonym_pattern.match(pseudonym):
+        return {'error': _('invalid_pseudonym')}
+
+    if len(pseudonym) < MIN_PSEUDONYM_LENGTH:
+        return {'error': _('pseudonym_too_short'), 'error_details':_("pseudonym_minimum_length")}
+    if len(pseudonym) > MAX_PSEUDONYM_LENGTH:
+        return {'error': _('pseudonym_too_long'), 'error_details':_("pseudonym_maximum_length")}
+
     server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
     ldap_login=f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}" # define the user to authenticate
     conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
@@ -94,6 +108,32 @@ def is_valid_unique_pseudo(pseudonym, request):
     if len(conn.entries) != 0:
         # If already registered, display an error message
         return {'error': _('pseudonym_allready_exists')}
+    # The pseudonym is valid and not already used
+    return None
+
+def is_valid_password(password):
+    """Check if the password is valid.
+
+    Args:
+        password (str): the password to check
+
+    Returns:
+        error: the error if the password is not valid
+        None: if the password is valid
+    """
+    if len(password) < MIN_PASSWORD_LENGTH:
+        return {'error': _('password_too_short'), 'error_details':_("password_minimum_length", mapping={'password_minimum_length':MIN_PASSWORD_LENGTH})}
+    if len(password) > MAX_PASSWORD_LENGTH:
+        return {'error': _('password_too_long'), 'error_details':_("password_maximum_length", mapping={'password_maximum_length':MAX_PASSWORD_LENGTH})}
+    if not any(char.isdigit() for char in password):
+        return {'error': _('password_must_contain_digit')}
+    if not any(char.isupper() for char in password):
+        return {'error': _('password_must_contain_uppercase')}
+    if not any(char.islower() for char in password):
+        return {'error': _('password_must_contain_lowercase')}
+    if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
+        return {'error': _('password_must_contain_special_char')}
+    # The password is valid
     return None
 
 def send_email(request, subject: str, recipients: list, template_path: str, template_vars: Dict= {}) -> bool:

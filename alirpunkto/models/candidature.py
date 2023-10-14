@@ -287,6 +287,17 @@ class CandidatureFunctions:
             A unique identifier (UUID).
         """
         return CandidatureFunctions.func_uuid()
+    
+@dataclass
+class CandidatureData:
+    fullname: str
+    fullsurname: str
+    nationality: str
+    birthdate: str
+    password: str
+    password_confirm: str
+    lang1: str
+    lang2: str
 
 class Candidature(Persistent):
     """A candidature in the ZODB.
@@ -301,7 +312,7 @@ class Candidature(Persistent):
             data (Optional[Type]): Initial data for the candidature. Defaults to None.
 
         Attributes:
-            _data (Type): The data for the candidature.
+            _data (CandidatureData): The data for the candidature.
             _voters (List): A list to keep track of voters.
             _modifications (List[CandidatureEvent]): A list to record
                 modifications, each entry is a dataclass containing the
@@ -514,7 +525,7 @@ class Candidature(Persistent):
         return self._oid
 
     @property
-    def data(self)-> Type:
+    def data(self)-> CandidatureData:
         """ Get the data of the candidature.
         Returns:
             The data of the candidature.
@@ -522,17 +533,17 @@ class Candidature(Persistent):
         return self._data
     
     @data.setter
-    def data(self, value:Type):
+    def data(self, value:CandidatureData):
         """ Set the data of the candidature.
 
         Args:
-            value (Type): The new data of the candidature.
+            value (CandidatureData): The new data of the candidature.
 
         Raises:
-            TypeError: The data must be a Type.
+            TypeError: The data must be a CandidatureData.
         """
-        if not isinstance(value, Type):
-            raise TypeError("The data must be a Type.")
+        if not isinstance(value, CandidatureData):
+            raise TypeError("The data must be a CandidatureData.")
         
         old_data = self._data if self._data else "None"
         self._data = value

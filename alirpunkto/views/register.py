@@ -7,6 +7,8 @@
 # author: Michaël Launay
 # date: 2023-06-15
 
+from dataclasses import dataclass
+import datetime
 from typing import Dict
 import deform
 from deform import ValidationFailure
@@ -17,7 +19,7 @@ from ..schemas.register_form import RegisterForm
 from ..models.candidature import (
     Candidature, CandidatureStates, 
     CandidatureTypes, SEED_LENGTH,
-    CandidatureEmailSendStatus
+    CandidatureEmailSendStatus, CandidatureData
 )
 from .. import _
 from pyramid.i18n import Translator, get_localizer
@@ -27,16 +29,9 @@ log = logging.getLogger("alirpunkto")
 from ..utils import (
     get_candidatures, decrypt_oid, encrypt_oid,
     generate_math_challenges, is_valid_email, get_candidature_by_oid,
-    send_email, register_user_to_ldap, get_preferred_language
+    send_email, register_user_to_ldap, get_preferred_language,
+    is_valid_password, is_valid_unique_pseudonym
 )
-import re
-
-MIN_PSEUDONYM_LENGTH = 5 # Minimum pseudonym length
-MAX_PSEUDONYM_LENGTH = 20 # Maximum pseudonym length
-pseudonym_pattern = re.compile(f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$')
-
-MIN_PASSWORD_LENGTH = 12 # Minimum password length
-MAX_PASSWORD_LENGTH = 92 # Maximum password length
 
 def get_local_template(request, pattern_path):
     """
@@ -365,60 +360,61 @@ def handle_confirmed_human_state(request, candidature):
         HTTPFound: the HTTP found response
     """
     schema = RegisterForm().bind(request=request)
+    appstruct = {
+        'cooperative_number': candidature.oid,
+        'email': candidature.email,
+    }
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
     if 'submit' in request.POST:
-        min_length = MIN_PASSWORD_LENGTH
-        max_length = MAX_PASSWORD_LENGTH
         candidatures = get_candidatures(request)
-
         password = request.params['password']
         password_confirm = request.params['password_confirm']
         pseudonym = request.params['pseudonym']
-        if not pseudonym_pattern.match(pseudonym):
-            return {'error': _('invalid_pseudonym'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        is_valid_password_result = is_valid_password(password)
+        if is_valid_password_result:
+            is_valid_password_result.update({'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes})
+            return is_valid_password_result
         
         if password != password_confirm:
-            return {'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-        if len(password) < min_length:
-            return {'error': _('password_too_short'), 'error_details':_("password_minimum_length", mapping={'password_minimum_length':min_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-        if len(password) > max_length:
-            return {'error': _('password_too_long'), 'error_details':_("password_maximum_length", mapping={'password_maximum_length':max_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-        if not any(char.isdigit() for char in password):
-            return {'error': _('password_must_contain_digit'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-        if not any(char.isupper() for char in password):
-            return {'error': _('password_must_contain_uppercase'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-        if not any(char.islower() for char in password):
-            return {'error': _('password_must_contain_lowercase'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-        if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
-            return {'error': _('password_must_contain_special_char'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-        if len(pseudonym) < min_length:
-            return {'error': _('pseudonym_too_short'), 'error_details':_("pseudonym_minimum_length", mapping={'password_minimum_length':min_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-        if len(pseudonym) > max_length:
-            return {'error': _('pseudonym_too_long'), 'error_details':_("pseudonym_maximum_length", mapping={'password_maximum_length':max_length}), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            return {'form': form.render(appstruct=appstruct, i18n=True), 'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
-        candidature.pseudonym = pseudonym            
-
-        result = register_user_to_ldap(request, candidature, password)
-        if result['status'] == 'error':
-            return {'error': result['message'], 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+        is_valid_pseudo_result = is_valid_unique_pseudonym(pseudonym)
+        if is_valid_pseudo_result:
+            is_valid_pseudo_result.update({'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes})
+            return is_valid_pseudo_result
+        
+        candidature.pseudonym = pseudonym
 
         if candidature.type == CandidatureTypes.ORDINARY:
+            result = register_user_to_ldap(request, candidature, password)
+            if result['status'] == 'error':
+                return {'form': form.render(appstruct=appstruct, i18n=True), 'error': result['message'], 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             candidatures.monitored_candidatures.pop(candidature.oid, None)
             candidature.state = CandidatureStates.APPROVED
-        else:
+            email_template = "send_candidature_approuved_email"
+
+        elif candidature.type == CandidatureTypes.COOPERATOR:
+            try:
+                parameters = {k: request.params[k] for k in CandidatureData.__dataclass_fields__.keys() if k in request.params}
+                parameters['birthdate'] = datetime.datetime.strptime(request.params['date'], '%Y-%m-%d').date()
+                data = CandidatureData(**parameters)
+                candidature.data = data
+            except ValidationFailure as e:
+                return {'form': form.render(appstruct=appstruct, i18n=True), 'form': e.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            candidature.pseudonym = request.params['pseudonym']
             candidature.state = CandidatureStates.UNIQUE_DATA
+            email_template = "send_candidature_pending_email"
+
+        else:
+            return {'form': form.render(appstruct=appstruct, i18n=True), 'error': _('invalid_choice'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+
         transaction = request.tm
         try:
             transaction.commit()
-            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_candidature_approuved_email")
+            candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, email_template)
         except Exception as e:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
-            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_approuved_email")
-    appstruct = {
-        'cooperative_number': candidature.oid,
-        'pseudonym': candidature.pseudonym,
-        'email': candidature.email,
-    }
+            candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, email_template)
     return {'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def handle_unique_data_state(request, candidature):
@@ -445,11 +441,7 @@ def handle_unique_data_state(request, candidature):
         except Exception as e:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_pending_email")
-    appstruct = {
-        'cooperative_number': candidature.oid,
-        'pseudonym': candidature.pseudonym,
-        'email': candidature.email,
-    }
+
     return {'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 
