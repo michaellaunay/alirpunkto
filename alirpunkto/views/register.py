@@ -129,7 +129,7 @@ def register(request):
         'pseudonym': candidature.pseudonym,
         'email': candidature.email,
     }
-    return {'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
     """
@@ -372,15 +372,15 @@ def handle_confirmed_human_state(request, candidature):
         pseudonym = request.params['pseudonym']
         is_valid_password_result = is_valid_password(password)
         if is_valid_password_result:
-            is_valid_password_result.update({'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes})
+            is_valid_password_result.update({'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes})
             return is_valid_password_result
         
         if password != password_confirm:
-            return {'form': form.render(appstruct=appstruct, i18n=True), 'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            return {'form': form.render(appstruct=appstruct), 'error': _('passwords_dont_match'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
         is_valid_pseudo_result = is_valid_unique_pseudonym(pseudonym)
         if is_valid_pseudo_result:
-            is_valid_pseudo_result.update({'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes})
+            is_valid_pseudo_result.update({'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes})
             return is_valid_pseudo_result
         
         candidature.pseudonym = pseudonym
@@ -388,7 +388,7 @@ def handle_confirmed_human_state(request, candidature):
         if candidature.type == CandidatureTypes.ORDINARY:
             result = register_user_to_ldap(request, candidature, password)
             if result['status'] == 'error':
-                return {'form': form.render(appstruct=appstruct, i18n=True), 'error': result['message'], 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'form': form.render(appstruct=appstruct), 'error': result['message'], 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             candidatures.monitored_candidatures.pop(candidature.oid, None)
             candidature.state = CandidatureStates.APPROVED
             email_template = "send_candidature_approuved_email"
@@ -400,13 +400,13 @@ def handle_confirmed_human_state(request, candidature):
                 data = CandidatureData(**parameters)
                 candidature.data = data
             except ValidationFailure as e:
-                return {'form': form.render(appstruct=appstruct, i18n=True), 'form': e.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                return {'form': form.render(appstruct=appstruct), 'form': e.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
             candidature.pseudonym = request.params['pseudonym']
             candidature.state = CandidatureStates.UNIQUE_DATA
             email_template = "send_candidature_pending_email"
 
         else:
-            return {'form': form.render(appstruct=appstruct, i18n=True), 'error': _('invalid_choice'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            return {'form': form.render(appstruct=appstruct), 'error': _('invalid_choice'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
         transaction = request.tm
         try:
@@ -415,7 +415,9 @@ def handle_confirmed_human_state(request, candidature):
         except Exception as e:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, email_template)
-    return {'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    
+    localizer = get_localizer(request)
+    return {'form': form.render(appstruct=appstruct, translator=localizer.translate), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def handle_unique_data_state(request, candidature):
     """Handle the unique data state.
@@ -442,7 +444,7 @@ def handle_unique_data_state(request, candidature):
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_pending_email")
 
-    return {'form': form.render(appstruct=appstruct, i18n=True), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 
 

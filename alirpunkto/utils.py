@@ -285,7 +285,7 @@ def register_user_to_ldap(request, candidature, password):
     
     # First, check if the pseudonym is unique
     pseudonym = candidature.pseudonym
-    error = is_valid_unique_pseudo(pseudonym, request)
+    error = is_valid_unique_pseudonym(pseudonym)
     if error:
         return error
 

@@ -8,7 +8,8 @@ from typing import Union
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
-from ldap3 import Server, Connection, ALL, NTLM
+from ldap3 import Server, Connection, ALL
+from ldap3.core.exceptions import LDAPBindError
 from .. import _
 from .. import LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
 from ..models.users import User
@@ -40,7 +41,7 @@ def login_view(request):
             return HTTPFound(location=request.route_url('home'), headers=headers)
         else:
             request.session['logged_in'] = False
-            return {'error': request.translate(_('invalid_username_or_password'))}
+            return {'error': _('invalid_username_or_password'), 'site_name': site_name}
     return {'logged_in': True if user else False, 'site_name': site_name, 'user': username}
 
 def check_password(username:str, password:str) -> Union[None, User]:
@@ -56,8 +57,12 @@ def check_password(username:str, password:str) -> Union[None, User]:
     server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
     ldap_login=f"uid={username},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={username},{LDAP_BASE_DN}" # define the user to authenticate
     log.debug(f"Trying to authenticate {ldap_login=} {ldap_login=}")
-    conn = Connection(server, ldap_login, password, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
-    conn.search(LDAP_BASE_DN, '(uid={})'.format(username), attributes=['cn']) # search for the user in the LDAP directory
+    try:
+        conn = Connection(server, ldap_login, password, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
+        conn.search(LDAP_BASE_DN, '(uid={})'.format(username), attributes=['cn']) # search for the user in the LDAP directory
+    except LDAPBindError as e:
+        log.debug(f"Error while authenticating {username}: {e}")
+        return None
     if len(conn.entries) == 0:
         return None
     user_entry = conn.entries[0]

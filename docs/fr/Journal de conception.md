@@ -674,3 +674,32 @@ Ainsi :
 >>> localizer.translate(_("welcome"))  
 'Bienvenue'
 ```
+
+# 2023-10-18
+
+Traduction en français de [Deform Internationalization](https://docs.pylonsproject.org/projects/deform/en/latest/i18n.htm)l
+En suivant le mécanisme de d'initialisation de la traduction les formulaires ont été traduit :
+## Internationalisation des schema deform
+Deform est entièrement internationalisable et localisable. Des fichiers gettext .mo existent dans les paquets deform et colander qui contiennent des traductions (actuellement incomplètes) vers différentes langues dans le but d'afficher des messages d'erreur localisés.
+
+Voici comment commencer avec l'internationalisation (i18n) dans Pyramid :
+
+python
+
+`import deform  from pkg_resources import resource_filename from pyramid.i18n import get_localizer from pyramid.threadlocal import get_current_request  def main(global_config, **settings):     config = Configurator(settings=settings)     config.add_translation_dirs(         'colander:locale',         'deform:locale',     )      def traducteur(term):         return get_localizer(get_current_request()).translate(term)      chemin_template_deform = resource_filename('deform', 'templates/')     zpt_renderer = deform.ZPTRendererFactory(         [chemin_template_deform],         translator=traducteur,     )     deform.Form.set_default_renderer(zpt_renderer)`
+
+Consultez la démo d'internationalisation pour voir comment les messages d'erreur et de statut de Deform peuvent être localisés. Cette démonstration utilise les fonctionnalités d'internationalisation et de localisation de Pyramid pour afficher les messages d'erreur Deform dans les rendus de formulaire Chameleon.
+
+**Explication** :
+
+Deform est un outil qui peut être utilisé avec l'internationalisation, ce qui signifie qu'il peut s'adapter à différentes langues et régions. En particulier, il a des fichiers `.mo` qui permettent de traduire des messages d'erreur dans différentes langues, bien que ces traductions ne soient pas encore complètes.
+
+Le code donné est un exemple de la manière dont vous pourriez configurer l'internationalisation dans une application Pyramid qui utilise Deform.
+
+1. On importe les modules nécessaires.
+2. Dans la fonction `main`, on configure Pyramid pour utiliser les répertoires de traduction fournis par `deform` et `colander`.
+3. On définit une fonction `traducteur` qui prend un terme et renvoie sa traduction. Cette fonction utilise le localiseur de Pyramid pour obtenir la traduction.
+4. On définit où Deform peut trouver ses templates et on configure Deform pour utiliser notre fonction `traducteur` lors de la génération de ses rendus.
+5. Enfin, on configure Deform pour utiliser un rendu spécifique par défaut.
+
+La démo mentionnée à la fin est probablement un exemple concret montrant comment ces messages d'erreur traduits apparaissent dans une application réelle.

@@ -13,6 +13,10 @@ import transaction
 from .models import appmaker
 from .models.candidature import Candidatures
 from pyramid.session import SignedCookieSessionFactory
+import deform
+from pkg_resources import resource_filename
+from pyramid.i18n import get_localizer
+from pyramid.threadlocal import get_current_request
 
 load_dotenv() # take environment variables from .env.
 # SECRET_KEY is used for cookie signing
@@ -217,8 +221,17 @@ def main(global_config, **settings):
         config.add_route('register', '/register')
         config.add_route('forgot_password', '/forgot_password')
         config.scan()
-        config.add_translation_dirs('alirpunkto:locale/')
+        config.add_translation_dirs('alirpunkto:locale/', 'colander:locale/', 'deform:locale/')
         config.set_locale_negotiator(locale_negotiator)       
         config.add_request_method(get_time_zone, 'tz', reify=True) # add tz to the request
         config.add_subscriber(add_renderer_globals, 'pyramid.events.BeforeRender')
+        deform_template_dir = resource_filename('deform', 'templates/')
+        def translator(term):
+            return get_localizer(get_current_request()).translate(term)
+        zpt_renderer = deform.ZPTRendererFactory(
+            [deform_template_dir],
+            translator=translator,
+        )
+    deform.Form.set_default_renderer(zpt_renderer)
+
     return config.make_wsgi_app()
