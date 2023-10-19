@@ -61,24 +61,7 @@
 
             <!-- CONFIRMED_HUMAN Status Section -->
             <div tal:condition="python:status == 'CONFIRMED_HUMAN'">
-                <form method="POST" tal:condition="python:candidature.type==CandidatureTypes.ORDINARY">
-                    <div>
-                        <label i18n:translate="pseudonym_label" title="Enter your pseudonym here." i18n:attributes="title pseudonym_title_label">Pseudonym</label>
-                        <input type="text" name="pseudonym" title="Enter your pseudonym here." i18n:attributes="title pseudonym_title_label">
-                    </div>
-                    <div>
-                        <label i18n:translate="password_label" title="Enter your password here." i18n:attributes="title password_title_label">Password</label>
-                        <input type="password" name="password" title="Enter your password here." i18n:attributes="title password_title_label">
-                    </div>
-                    <div>
-                        <label i18n:translate="password_confirm_label" title="Confirm your password here." i18n:attributes="title password_confirm_title_label">Confirm Password</label>
-                        <input type="password" name="password_confirm" title="Confirm your password here." i18n:attributes="title password_confirm_title">
-                    </div>
-                    <input type="submit" value="Submit"  name="submit" title="Click to validate ." i18n:attributes="title submit_password_and_pseudonym; value verify_button">
-                </form>
-                <div tal:condition="python:candidature.type==CandidatureTypes.COOPERATOR" tal:omit-tag="">                    
-                    <span tal:replace="structure form">Form Content</span>
-                </div>
+                <span tal:replace="structure form">Form Content</span>
             </div>
 
             <!-- UNIQUE_DATA Status Section -->

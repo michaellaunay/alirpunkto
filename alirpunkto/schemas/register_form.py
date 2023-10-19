@@ -84,7 +84,7 @@ class RegisterForm(schema.CSRFSchema):
         colander.String(),
         title=_('pseudonym_label'),
         widget=TextInputWidget(),
-        validator=colander.Function(is_valid_unique_pseudonym),
+        #validator=colander.Function(is_valid_unique_pseudonym),
         messages={'required': _('pseudonym_required')},
         missing=""
     )
@@ -119,4 +119,12 @@ class RegisterForm(schema.CSRFSchema):
         title=_('second_interaction_language_label'),
         widget=SelectWidget(values=locales_as_choices),
     )
+    def prepare_for_ordinary(self):
+        """Prepare the form for an ordinary user."""
+        self.children.remove(self.get('fullname'))
+        self.children.remove(self.get('fullsurname'))
+        self.children.remove(self.get('birthdate'))
+        self.children.remove(self.get('nationality'))
+        self.children.remove(self.get('lang1'))
+        self.children.remove(self.get('lang2'))
 

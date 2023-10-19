@@ -75,10 +75,7 @@ def register(request):
     as voters. The voters are then invited to vote on the candidature.
  
     """
-    translator = request.localizer.translate
     candidature = None
-    schema = RegisterForm().bind(request=request)
-    form = deform.Form(schema, buttons=[deform.Button('submit',_('submit'))], translator=translator)
     # Check if the candidature is already in the request
     candidatures = get_candidatures(request)
     if 'candidature_oid' in request.session and request.session['candidature_oid'] in candidatures :
@@ -92,11 +89,9 @@ def register(request):
                 SEED_LENGTH,
                 request.registry.settings['session.secret'])
             candidature = get_candidature_by_oid(decrypted_oid, request)
-            schema = RegisterForm().bind(request=request)
-            form = deform.Form(schema, buttons=('submit',), translator=translator)
             if seed != candidature.email_send_status_history[-1].seed:
                 error = _('url_is_obsolete')
-                return {'form': form.render(), 'candidature': candidature,
+                return {'candidature': candidature,
                     'CandidatureTypes': CandidatureTypes,
                     'error': error,
                     'url_obsolete': True}
@@ -104,32 +99,20 @@ def register(request):
         else:
             candidature = Candidature() # Create a new candidature
             request.session['candidature_oid'] = candidature.oid # Store the candidature oid in the session
-    if 'submit' in request.POST:
-        controls = request.POST.items()
-        try:
-            match candidature.state:
-                case CandidatureStates.DRAFT:
-                    return handle_draft_state(request, candidature)
-                case CandidatureStates.EMAIL_VALIDATION:
-                    return handle_email_validation_state(request, candidature)
-                case CandidatureStates.CONFIRMED_HUMAN:
-                    return handle_confirmed_human_state(request, candidature)
-                case CandidatureStates.UNIQUE_DATA:
-                    return handle_unique_data_state(request, candidature)
-                case CandidatureStates.PENDING:
-                    return handle_pending_state(request, candidature)
-                case _:
-                    # @TODO Gestion d'autres états ou d'une erreur éventuelle
-                    return handle_default_state(request, candidature)
-
-        except ValidationFailure as e:
-            return {'form': e.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
-    appstruct = {
-        'cooperative_number': candidature.oid,
-        'pseudonym': candidature.pseudonym,
-        'email': candidature.email,
-    }
-    return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    match candidature.state:
+        case CandidatureStates.DRAFT:
+            return handle_draft_state(request, candidature)
+        case CandidatureStates.EMAIL_VALIDATION:
+            return handle_email_validation_state(request, candidature)
+        case CandidatureStates.CONFIRMED_HUMAN:
+            return handle_confirmed_human_state(request, candidature)
+        case CandidatureStates.UNIQUE_DATA:
+            return handle_unique_data_state(request, candidature)
+        case CandidatureStates.PENDING:
+            return handle_pending_state(request, candidature)
+        case _:
+            # @TODO Gestion d'autres états ou d'une erreur éventuelle
+            return handle_default_state(request, candidature)
 
 def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
     """
@@ -182,9 +165,6 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
     Returns:
         HTTPFound: the HTTP found response
     """
-    schema = RegisterForm().bind(request=request)
-    form = deform.Form(schema, buttons=('submit',), translator=Translator)
-
     if 'submit' in request.POST:
         email = request.params['email']
         choice = request.params['choice']
@@ -192,11 +172,11 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
         err = is_valid_email(email, request)
 
         if choice not in CandidatureTypes.get_names():
-            return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes,'error': _('invalid_choice')}
+            return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes,'error': _('invalid_choice')}
         candidature.type = getattr(CandidatureTypes, choice)
 
         if err is not None:
-            return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': err['error']}
+            return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': err['error']}
         
         candidature.email = email
 
@@ -207,7 +187,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
             candidature.type = CandidatureTypes.COOPERATOR
         else:  
             error = _('invalid_choice')
-            return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': error}
+            return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': error}
 
         # Generate math challenge for the check email, and memorize it in the candidature
         challenge = generate_math_challenges(request)
@@ -218,7 +198,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
 
         if not send_validation_email(request, candidature):
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_validation_email")
-            return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': _('email_not_sent')}
+            return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': _('email_not_sent')}
 
         # Change the state of the candidature
         candidature.state = CandidatureStates.EMAIL_VALIDATION
@@ -235,7 +215,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
         except Exception as e:
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_validation_email")
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
-    return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def send_confirm_validation_email(request: Request,
     candidature: Candidature) -> Dict:
@@ -317,8 +297,6 @@ def handle_email_validation_state(request, candidature):
     Returns:
         HTTPFound or other responses based on the logic
     """
-    schema = RegisterForm().bind(request=request)
-    form = deform.Form(schema, buttons=('submit',), translator=Translator)
     if 'submit' in request.POST:
         # Extract the expected result of the challenge from the candidature
         attended_results = candidature.challenge
@@ -344,10 +322,20 @@ def handle_email_validation_state(request, candidature):
             try:
                 transaction.commit()
                 candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_confirm_validation_email")
+                schema = RegisterForm().bind(request=request)
+                appstruct = {
+                    'cooperative_number': candidature.oid,
+                    'email': candidature.email,
+                }
+                if candidature.type == CandidatureTypes.ORDINARY:
+                    schema.prepare_for_ordinary()
+                form = deform.Form(schema, buttons=('submit',), translator=Translator)
+                return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+                
             except Exception as e:
                 log.error(f"Error while commiting candidature {candidature.oid} : {e}")
                 candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
-    return {'form': form.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def handle_confirmed_human_state(request, candidature):
     """Handle the confirmed human state.
@@ -364,12 +352,23 @@ def handle_confirmed_human_state(request, candidature):
         'cooperative_number': candidature.oid,
         'email': candidature.email,
     }
+    if candidature.type == CandidatureTypes.ORDINARY:
+        schema.prepare_for_ordinary()
+
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
     if 'submit' in request.POST:
+
+        try:
+            items = request.POST.items()
+            appstruct.update(dict(items))
+            #form.validate(items) #@TODO resolve the error 
+        except ValidationFailure as e:
+            return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
         candidatures = get_candidatures(request)
         password = request.params['password']
         password_confirm = request.params['password_confirm']
         pseudonym = request.params['pseudonym']
+        appstruct['pseudonym'] = pseudonym
         is_valid_password_result = is_valid_password(password)
         if is_valid_password_result:
             is_valid_password_result.update({'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes})
@@ -394,13 +393,19 @@ def handle_confirmed_human_state(request, candidature):
             email_template = "send_candidature_approuved_email"
 
         elif candidature.type == CandidatureTypes.COOPERATOR:
+            appstruct['fullname'] = request.params['fullname']
+            appstruct['fullsurname'] = request.params['fullsurname']
+            appstruct['nationality'] = request.params['nationality']
+            appstruct['lang1'] = request.params['lang1']
+            appstruct['lang2'] = request.params['lang2']
+            parameters = {k: request.params[k] for k in CandidatureData.__dataclass_fields__.keys() if k in request.params}
             try:
-                parameters = {k: request.params[k] for k in CandidatureData.__dataclass_fields__.keys() if k in request.params}
                 parameters['birthdate'] = datetime.datetime.strptime(request.params['date'], '%Y-%m-%d').date()
-                data = CandidatureData(**parameters)
-                candidature.data = data
-            except ValidationFailure as e:
-                return {'form': form.render(appstruct=appstruct), 'form': e.render(), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            except ValueError:
+                return {'form': form.render(appstruct=appstruct), 'error': _('invalid_date'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+            data = CandidatureData(**parameters)
+            candidature.data = data
+
             candidature.pseudonym = request.params['pseudonym']
             candidature.state = CandidatureStates.UNIQUE_DATA
             email_template = "send_candidature_pending_email"
@@ -416,8 +421,7 @@ def handle_confirmed_human_state(request, candidature):
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, email_template)
     
-    localizer = get_localizer(request)
-    return {'form': form.render(appstruct=appstruct, translator=localizer.translate), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 def handle_unique_data_state(request, candidature):
     """Handle the unique data state.

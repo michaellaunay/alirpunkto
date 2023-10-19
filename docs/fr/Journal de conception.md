@@ -655,7 +655,7 @@ Le pickling et l'unpickling fonctionnent, ce qui signifie que nous pouvons stock
 ...
 ```
 
-2023-10-04
+# 2023-10-04
 
 La fonction `_` renvoyée par `TranslationStringFactory` est une fonction qui crée des instances de `TranslationString`, qui doivent ensuite être traduites par un `Localizer`. Le `Localizer` utilise la langue de la requête pour déterminer la traduction correcte à utiliser.
 
@@ -703,3 +703,13 @@ Le code donné est un exemple de la manière dont vous pourriez configurer l'int
 5. Enfin, on configure Deform pour utiliser un rendu spécifique par défaut.
 
 La démo mentionnée à la fin est probablement un exemple concret montrant comment ces messages d'erreur traduits apparaissent dans une application réelle.
+
+# 2023-10-19
+@TODO supprimer de l'historique des candidatures les mots de passe lors du set data !!!!
+@TODO Utiliser aussi des schemas DeForm pour :
+- la saisie de l'adresse mail,
+- du challenge,
+
+Utilisation du schéma pour la saisie du pseudo, du mot de passe et confirmation du mot de passe pour les membres ordinaires.
+Y ajouter les validateurs.
+Là il y a une faiblesse sur les contrôles des saisies.
