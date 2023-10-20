@@ -4,6 +4,8 @@
             <div class="container" tal:condition="python: not hasattr(context,'url_obsolete') or not url_obsolete">
                 <!-- DRAFT Status Section -->
                 <div tal:condition="python: not status or status == 'DRAFT'">
+                    <div>@TODO EXPLAIN WHAT IS COSMOPOLITICAL AND THE TYPE OF REGISTRATION
+                    </div>
                     <form method="POST">
                         <!-- Email Field -->
                         <div class="register_email">
@@ -26,6 +28,8 @@
 
                 <!-- EMAIL_VALIDATION Status Section -->
                 <div tal:condition="python:status == 'EMAIL_VALIDATION'">
+                    <div>@TODO EXPLAIN WHAT IS EMAIL VALIDATION
+                    </div>
                     <form method="POST">
                         <!-- Instructions -->
                         <p i18n:translate="challenge_instruction_text">Please enter the results of the challenges you received in your email to verify your address.</p>
@@ -61,18 +65,25 @@
 
             <!-- CONFIRMED_HUMAN Status Section -->
             <div tal:condition="python:status == 'CONFIRMED_HUMAN'">
+                <div>@TODO EXPLAIN HOW TO FILL THE CHALLENGE
+                </div>
                 <span tal:replace="structure form">Form Content</span>
             </div>
 
             <!-- UNIQUE_DATA Status Section -->
             <div class="container" tal:condition="python:status == 'UNIQUE_DATA'">
-                <form method="POST">
-                    <label>Identity Verification:</label>
-                    <select name="identity_verification">
-                        <option value="email">Send copy by email</option>
-                        <option value="video">Video Conference</option>
-                    </select>
-                    <input type="submit" value="Proceed">
+                <div>@TODO EXPLAIN WHY WE NEED THIS DATA 
+                </div>
+                <label i18n:translate="identity_verification_label">Identity Verification</label>
+                <select id="identity_verification">
+                    <option value="email" i18n:translate="Send_id_copy_by_email">Send a copy of your identity card by email.</option>
+                    <option value="video" i18n:translate="Send_video_conference_link">Send a video conference date.</option>
+                </select>
+                <button onclick="sendEmail()">${_("Proceed")}</button>
+                <form method="post" action="/path_to_your_server_endpoint">
+                    <div i18n:translate="confirm_sent_emails_to_validators">Please confirm you have sent the emails to the validators.</div>
+                    <label i18n:translate="sent_confirmation_label">Sent confirmation</label>
+                    <input type="submit" value="Confirm"  name="confirm" title="Confirm you sent the emails." i18n:attributes="title submit_email_confirmation_title; value confirm_email_send_button_label">
                 </form>
             </div>
 

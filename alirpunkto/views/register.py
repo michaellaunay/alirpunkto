@@ -433,8 +433,6 @@ def handle_unique_data_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    schema = RegisterForm().bind(request=request)
-    form = deform.Form(schema, buttons=('submit',), translator=Translator)
     if 'submit' in request.POST:
         #Get identity Verification method
 
@@ -448,7 +446,7 @@ def handle_unique_data_state(request, candidature):
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_pending_email")
 
-    return {'form': form.render(appstruct=appstruct), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
 
 
@@ -462,8 +460,7 @@ def handle_pending_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    #@TODO
-    pass
+    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error':"Not yet implemented"}
 
 def handle_default_state(request, candidature):
     """Handle the default state.
@@ -475,5 +472,5 @@ def handle_default_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    pass
+    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error':"Not yet implemented"}
 
