@@ -271,6 +271,32 @@ def encrypt_oid(oid, seed, secret) -> str:
     encoded_encrypted_message = base64.urlsafe_b64encode(encrypted_message).decode()
     return encrypted_message
 
+def random_voters(request: Request)->list[tuple[str, str]]:
+    """Randomly select 3 voters to validate the candidate's personal data.
+    For this, retrieve from LDAP the list of members who are cooperators, then
+    randomly choose 3 if there are enough; otherwise, offer what is available..
+    Args:
+        request (pyramid.request.Request): the request
+    Returns:
+        list: the list of voters as (email, fullsurname)
+    """
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login=f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
+    conn.search(LDAP_BASE_DN, '(employeeType=cooperator)', attributes=['cn'])
+    voters = []
+    for entry in conn.entries:
+        voters.append(entry.cn.value)
+    random.shuffle(voters) # Shuffle the list of voters
+    voters = voters[:3] # Return the first 3 voters
+    voters_info = []
+    for voter in voters:
+        conn.search(LDAP_BASE_DN, '(cn={})'.format(voter), attributes=['mail'])
+        voter_email = conn.entries[0].mail.value
+        voter_fullsurname = conn.entries[0].sn.value
+        voters_info.append((voter_email, voter_fullsurname))
+    return voters_info
+
 def register_user_to_ldap(request, candidature, password):
     """
     Register a user to the LDAP directory.

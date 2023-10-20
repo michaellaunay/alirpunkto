@@ -19,7 +19,8 @@ from ..schemas.register_form import RegisterForm
 from ..models.candidature import (
     Candidature, CandidatureStates, 
     CandidatureTypes, SEED_LENGTH,
-    CandidatureEmailSendStatus, CandidatureData
+    CandidatureEmailSendStatus, CandidatureData,
+    Voter
 )
 from .. import _
 from pyramid.i18n import Translator, get_localizer
@@ -30,7 +31,7 @@ from ..utils import (
     get_candidatures, decrypt_oid, encrypt_oid,
     generate_math_challenges, is_valid_email, get_candidature_by_oid,
     send_email, register_user_to_ldap, get_preferred_language,
-    is_valid_password, is_valid_unique_pseudonym
+    is_valid_password, is_valid_unique_pseudonym, random_voters
 )
 
 def get_local_template(request, pattern_path):
@@ -433,6 +434,14 @@ def handle_unique_data_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
+    if not candidature.voters:
+        transaction = request.tm
+        try:
+            candidature.voters = [Voter(email, surname) for (email,surname) in random_voters(request)]
+            transaction.commit()
+        except Exception as e:
+            log.error(f"Error while commiting candidature {candidature.oid} : {e}")
+            return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': _('voters_not_selected')}
     if 'submit' in request.POST:
         #Get identity Verification method
 
@@ -446,7 +455,7 @@ def handle_unique_data_state(request, candidature):
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_pending_email")
 
-    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
+    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'voters': candidature.voters}
 
 
 

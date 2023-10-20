@@ -1,7 +1,8 @@
-
 function sendEmail() {
     const verificationType = document.getElementById("identity_verification").value;
-    
+    const button = document.querySelector("[data-emails]");
+    const emails = button.getAttribute("data-emails");
+
     let emailSubject, emailBody;
 
     if (verificationType === "email") {
@@ -12,5 +13,5 @@ function sendEmail() {
         emailBody = "Please click on the link below to join the video conference for your identity verification.";
     }
 
-    window.location.href = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = `mailto:?cc=${encodeURIComponent(emails)}&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 }

@@ -299,6 +299,14 @@ class CandidatureData:
     lang1: str
     lang2: str
 
+@dataclass
+class Voter:
+    """A voter.
+    """
+    email:str
+    fullsurname:str
+    vote:VotingChoice = None
+
 class Candidature(Persistent):
     """A candidature in the ZODB.
     """
