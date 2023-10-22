@@ -210,7 +210,7 @@ def get_candidature_by_oid(oid, request):
         Candidature: the candidature
     """
     candidatures = get_candidatures(request)
-    return candidatures[oid]
+    return candidatures[oid] if oid in candidatures else None
 
 def get_candidature_from_request(request: Request)->Candidature:
     """Get the candidature from the request.

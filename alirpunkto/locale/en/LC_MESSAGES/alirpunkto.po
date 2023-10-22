@@ -443,3 +443,6 @@ msgstr "The first interaction language is required."
 
 msgid "pending_description"
 msgstr "Your application is being reviewed. You will be notified by email once it has been approved."
+
+msgid "candidature_not_found"
+msgstr "Candidature not found."

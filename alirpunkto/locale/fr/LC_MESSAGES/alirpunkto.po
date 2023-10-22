@@ -440,3 +440,8 @@ msgstr "La première langue d'interaction est requise."
 msgid "pending_description"
 msgstr "Votre demande est en cours d'examen. Vous serez notifié par e-mail une fois qu'elle aura été approuvée."
 
+msgid "candidature_not_found"
+msgstr "Candidature introuvable."
+
+msgid "voters_not_selected"
+msgstr[fr] "Électeurs non sélectionnés."

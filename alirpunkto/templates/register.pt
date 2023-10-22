@@ -1,118 +1,185 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
-        <tal:block define="status python:candidature.state.name" i18n:domain="alirpunkto">
-            <div class="container" tal:condition="python: not hasattr(context,'url_obsolete') or not url_obsolete">
+        <tal:block define="status python:candidature.state.name if candidature else None"
+            i18n:domain="alirpunkto">
+            <div class="container"
+                tal:condition="python: (not hasattr(context,'url_obsolete') or not url_obsolete) and candidature">
                 <!-- DRAFT Status Section -->
                 <div tal:condition="python: not status or status == 'DRAFT'">
-                    <div>The CosmoPolitical Cooperative is a pan-European cooperative for radical transformation towards social justice, sustainability and democracy. It supports individuals and transforms the existing economic, social and political system towards a just, sustainable, and happy society, called the Society of Agreement. You can participate in two ways: (1) as an Ordinary Member of our Community, with a simple registration process, no financial commitments, but no voting rights; or (2) as a Cooperator, a full member of our Cooperative, with a registration process ensuring that a given person can register once only (to ensure the democratic principle "one person = one vote") and that only citizens of the European Union are Cooperators, with the commitment to purchase at least one share and to pay a yearly contribution, and full voting rights. 
+                    <div>The CosmoPolitical Cooperative is a pan-European cooperative for radical
+                        transformation towards social justice, sustainability and democracy. It
+                        supports individuals and transforms the existing economic, social and
+                        political system towards a just, sustainable, and happy society, called the
+                        Society of Agreement. You can participate in two ways: (1) as an Ordinary
+                        Member of our Community, with a simple registration process, no financial
+                        commitments, but no voting rights; or (2) as a Cooperator, a full member of
+                        our Cooperative, with a registration process ensuring that a given person
+                        can register once only (to ensure the democratic principle "one person = one
+                        vote") and that only citizens of the European Union are Cooperators, with
+                        the commitment to purchase at least one share and to pay a yearly
+                        contribution, and full voting rights.
                     </div>
                     <form method="POST">
                         <!-- Email Field -->
                         <div class="register_email">
-                            <label i18n:translate="email_label" title="Enter your email address here." i18n:attributes="title email_title_label">Email</label>
-                            <input class="email-input" type="email" name="email" title="Your email address will be used for account verification and communication." i18n:attributes="title email_title_input">
+                            <label i18n:translate="email_label"
+                                title="Enter your email address here."
+                                i18n:attributes="title email_title_label">Email</label>
+                            <input class="email-input" type="email" name="email"
+                                title="Your email address will be used for account verification and communication."
+                                i18n:attributes="title email_title_input">
                         </div>
 
                         <!-- Type of Registration -->
                         <div class="register_choice">
-                            <label i18n:translate="type_of_registration" title="Select the type of registration that suits you."  i18n:attributes="title type_registration_label">Please choice your type of registration</label>
-                            <select name="choice" title="Different types of memberships offer different benefits." i18n:attributes="title type_registration_choice">
-                                <option value="ORDINARY" i18n:translate="candidature_types_ordinary" title="Choose this if you want to be an ordinary member." i18n:attributes="title candidature_types_ordinary_value">Ordinary Member</option>
-                                <option value="COOPERATOR" i18n:translate="candidature_types_cooperator" title="Choose this if you want to actively cooperate and contribute." i18n:attributes="title candidature_types_cooperator_value">Cooperator</option>
+                            <label i18n:translate="type_of_registration"
+                                title="Select the type of registration that suits you."
+                                i18n:attributes="title type_registration_label">Please choice your
+                                type of registration</label>
+                            <select name="choice"
+                                title="Different types of memberships offer different benefits."
+                                i18n:attributes="title type_registration_choice">
+                                <option value="ORDINARY" i18n:translate="candidature_types_ordinary"
+                                    title="Choose this if you want to be an ordinary member."
+                                    i18n:attributes="title candidature_types_ordinary_value">Ordinary
+                                    Member</option>
+                                <option value="COOPERATOR"
+                                    i18n:translate="candidature_types_cooperator"
+                                    title="Choose this if you want to actively cooperate and contribute."
+                                    i18n:attributes="title candidature_types_cooperator_value">
+                                    Cooperator</option>
                             </select>
                         </div>
                         <!-- Submit Button -->
-                        <input type="submit" value="Submit" name="submit" title="Click to submit your registration." i18n:attributes="title submit_registration_title; value submit_button">
+                        <input type="submit" value="Submit" name="submit"
+                            title="Click to submit your registration."
+                            i18n:attributes="title submit_registration_title; value submit_button">
                     </form>
                 </div>
 
                 <!-- EMAIL_VALIDATION Status Section -->
                 <div tal:condition="python:status == 'EMAIL_VALIDATION'">
-                    <div>The first step in your registration process is to validate that you are a human being, and not a robot. For this, we verify that you can receive and understand an e-mail that we will send to you: what we request from you is simple for a human being, much more complex for a robot.
+                    <div>The first step in your registration process is to validate that you are a
+                        human being, and not a robot. For this, we verify that you can receive and
+                        understand an e-mail that we will send to you: what we request from you is
+                        simple for a human being, much more complex for a robot.
                     </div>
                     <form method="POST">
                         <!-- Instructions -->
-                        <p i18n:translate="challenge_instruction_text">Please enter the results of the challenges you received in your email to verify your address.</p>
+                        <p i18n:translate="challenge_instruction_text">Please enter the results of
+                            the challenges you received in your email to verify your address.</p>
 
                         <!-- Challenge A Field -->
                         <div class="challenge-item">
-                            <label i18n:translate="enter_result_label_A" title="Enter the result of the operation for Challenge A." i18n:attributes="title result_label_title_A">Enter result for Challenge A:</label>
-                            <input type="text" name="result_A" title="Please enter the result of Challenge A." i18n:attributes="title result_input_title_A">
+                            <label i18n:translate="enter_result_label_A"
+                                title="Enter the result of the operation for Challenge A."
+                                i18n:attributes="title result_label_title_A">Enter result for
+                                Challenge A:</label>
+                            <input type="text" name="result_A"
+                                title="Please enter the result of Challenge A."
+                                i18n:attributes="title result_input_title_A">
                         </div>
 
                         <!-- Challenge B Field -->
                         <div class="challenge-item">
-                            <label i18n:translate="enter_result_label_B" title="Enter the result of the operation for Challenge B." i18n:attributes="title result_label_title_B">Enter result for Challenge B:</label>
-                            <input type="text" name="result_B" title="Please enter the result of Challenge B." i18n:attributes="title result_input_title_B">
+                            <label i18n:translate="enter_result_label_B"
+                                title="Enter the result of the operation for Challenge B."
+                                i18n:attributes="title result_label_title_B">Enter result for
+                                Challenge B:</label>
+                            <input type="text" name="result_B"
+                                title="Please enter the result of Challenge B."
+                                i18n:attributes="title result_input_title_B">
                         </div>
 
                         <!-- Challenge C Field -->
                         <div class="challenge-item">
-                            <label i18n:translate="enter_result_label_C" title="Enter the result of the operation for Challenge C." i18n:attributes="title result_label_title_C">Enter result for Challenge C:</label>
-                            <input type="text" name="result_C" title="Please enter the result of Challenge C." i18n:attributes="title result_input_title_C">
+                            <label i18n:translate="enter_result_label_C"
+                                title="Enter the result of the operation for Challenge C."
+                                i18n:attributes="title result_label_title_C">Enter result for
+                                Challenge C:</label>
+                            <input type="text" name="result_C"
+                                title="Please enter the result of Challenge C."
+                                i18n:attributes="title result_input_title_C">
                         </div>
 
                         <!-- Challenge D Field -->
                         <div class="challenge-item">
-                            <label i18n:translate="enter_result_label_D" title="Enter the result of the operation for Challenge D." i18n:attributes="title result_label_title_D">Enter result for Challenge D:</label>
-                            <input type="text" name="result_D" title="Please enter the result of Challenge D." i18n:attributes="title result_input_title_D">
+                            <label i18n:translate="enter_result_label_D"
+                                title="Enter the result of the operation for Challenge D."
+                                i18n:attributes="title result_label_title_D">Enter result for
+                                Challenge D:</label>
+                            <input type="text" name="result_D"
+                                title="Please enter the result of Challenge D."
+                                i18n:attributes="title result_input_title_D">
                         </div>
-                        
+
                         <!-- Verify Button -->
-                        <input type="submit" value="Submit"  name="submit" title="Click to verify the entered codes." i18n:attributes="title submit_email_validation_title; value verify_button">
+                        <input type="submit" value="Submit" name="submit"
+                            title="Click to verify the entered codes."
+                            i18n:attributes="title submit_email_validation_title; value verify_button">
                     </form>
                 </div>
 
-            <!-- CONFIRMED_HUMAN Status Section -->
-            <div tal:condition="python:status == 'CONFIRMED_HUMAN'">
-                <div>@TODO EXPLAIN HOW TO FILL THE CHALLENGE
+                <!-- CONFIRMED_HUMAN Status Section -->
+                <div tal:condition="python:status == 'CONFIRMED_HUMAN'">
+                    <div>@TODO EXPLAIN HOW TO FILL THE CHALLENGE
+                    </div>
+                    <span tal:replace="structure form">Form Content</span>
                 </div>
-                <span tal:replace="structure form">Form Content</span>
-            </div>
 
-            <!-- UNIQUE_DATA Status Section -->
-            <div class="container" tal:condition="python:status == 'UNIQUE_DATA'">
-                <div>@TODO EXPLAIN WHY WE NEED THIS DATA 
-                </div>
-                <label i18n:translate="identity_verification_label">Identity Verification</label>
-                <select id="identity_verification">
-                    <option value="email" i18n:translate="Send_id_copy_by_email">Send a copy of your identity card by email.</option>
-                    <option value="video" i18n:translate="Send_video_conference_link">Send a video conference date.</option>
-                </select>
-                <!-- Add data-emails attribute to store voter emails -->
-                <button onclick="sendEmail()" 
+                <!-- UNIQUE_DATA Status Section -->
+                <div class="container" tal:condition="python:status == 'UNIQUE_DATA'">
+                    <div>@TODO EXPLAIN WHY WE NEED THIS DATA
+                    </div>
+                    <label i18n:translate="identity_verification_label">Identity Verification</label>
+                    <select id="identity_verification">
+                        <option value="email" i18n:translate="Send_id_copy_by_email">Send a copy of
+                            your identity card by email.</option>
+                        <option value="video" i18n:translate="Send_video_conference_link">Send a
+                            video conference date.</option>
+                    </select>
+                    <!-- Add data-emails attribute to store voter emails -->
+                    <button onclick="sendEmail()"
                         data-emails="${','.join([voter.email for voter in candidature.voters])}"
-                        >${_("Proceed")}</button>
-                <form method="post" action="/path_to_your_server_endpoint">
-                    <div i18n:translate="confirm_sent_emails_to_validators">Please confirm you have sent the emails to the validators.</div>
-                    <label i18n:translate="sent_confirmation_label">Sent confirmation</label>
-                    <input type="submit" value="Confirm"  name="confirm" title="Confirm you sent the emails." i18n:attributes="title submit_email_confirmation_title; value confirm_email_send_button_label">
-                </form>
-            </div>
+                    >
+                        ${_("Proceed")}</button>
+                    <form method="post" action="/path_to_your_server_endpoint">
+                        <div i18n:translate="confirm_sent_emails_to_validators">Please confirm you
+                            have sent the emails to the validators.</div>
+                        <label i18n:translate="sent_confirmation_label">Sent confirmation</label>
+                        <input type="submit" value="Confirm" name="confirm"
+                            title="Confirm you sent the emails."
+                            i18n:attributes="title submit_email_confirmation_title; value confirm_email_send_button_label">
+                    </form>
+                </div>
 
 
-            <!-- PENDING Status Section -->
-            <div tal:condition="python:status == 'PENDING'">
-                <p i18n:translate="pending_description">Your application is being reviewed. You will be notified by email once it has been approved.</p>
+                <!-- PENDING Status Section -->
+                <div tal:condition="python:status == 'PENDING'">
+                    <p i18n:translate="pending_description">Your application is being reviewed. You
+                        will be notified by email once it has been approved.</p>
+                </div>
+
+                <!-- APPROVED Status Section -->
+                <div tal:condition="python:status == 'APPROVED'">
+                    <h3 i18n:translate="approved_heading">Congratulations on Your Approval!</h3>
+                    <p i18n:translate="approved_description">Your application has been approved. You
+                        can now log in using the pseudonym and password you provided during the
+                        application process.</p>
+                    <a href="login" class="login-button"
+                        i18n:attributes="href login_page_url; inner-text login_button_label">Login</a>
+                </div>
+
             </div>
 
-            <!-- APPROVED Status Section -->
-            <div tal:condition="python:status == 'APPROVED'">
-                <h3 i18n:translate="approved_heading">Congratulations on Your Approval!</h3>
-                <p i18n:translate="approved_description">Your application has been approved. You can now log in using the pseudonym and password you provided during the application process.</p>
-                <a href="login" class="login-button" i18n:attributes="href login_page_url; inner-text login_button_label">Login</a>
+            <div tal:condition="exists:error" tal:omit-tag="">
+                <div class="error">
+                    <p tal:content="error">Error message here</p>
+                </div>
+                <div class="error" tal:condition="exists:error_details">
+                    <p tal:content="error_details">Error details message here</p>
+                </div>
             </div>
-
-        </div>
-
-        <div tal:condition="exists:error" tal:omit-tag="">
-            <div class="error" tal:condition="exists:error">
-                <p tal:content="error">Error message here</p>
-            </div>
-            <div class="error" tal:condition="exists:error_details">
-                <p tal:content="error_details">Error details message here</p>
-            </div>
-        </div>
         </tal:block>
     </div>
 </div>

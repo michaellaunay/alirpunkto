@@ -90,6 +90,11 @@ def register(request):
                 SEED_LENGTH,
                 request.registry.settings['session.secret'])
             candidature = get_candidature_by_oid(decrypted_oid, request)
+            if candidature is None:
+                error = _('candidature_not_found')
+                return {'candidature': candidature,
+                    'CandidatureTypes': CandidatureTypes,
+                    'error': error}
             if seed != candidature.email_send_status_history[-1].seed:
                 error = _('url_is_obsolete')
                 return {'candidature': candidature,
