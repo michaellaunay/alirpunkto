@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html tal:omit-tag="textual">
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
 <head tal:omit-tag="textual">
     <title tal:omit-tag="textual">Identity Verification - AlirPunkto</title>
 </head>
@@ -16,12 +19,12 @@
 
     <p tal:omit-tag="textual">Thank you for your time and consideration in this matter. Should you have any further questions or need additional information, please do not hesitate to reach out to me directly.</p>
 
-    <p tal:omit-tag="textual">Best regards,<br>
+    <p tal:omit-tag="textual">Best regards,<br />
     <strong tal:omit-tag="textual"><span tal:replace="full_name">Your Name</span></strong></p>
 
     <p tal:omit-tag="textual">Attachment: [Name of the ID document file]</p>
 
-    <hr tal:omit-tag="textual">
+    <hr tal:omit-tag="textual" />
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email has been generated with the assistance of <span tal:replace="site_name">AlirPunkto</span>'s identity verification feature. If you are a verifier and have received this email in error, please inform the AlirPunkto administrator.</small></p>
 
 </body>

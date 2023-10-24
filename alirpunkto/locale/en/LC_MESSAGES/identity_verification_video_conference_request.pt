@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html tal:omit-tag="textual">
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
 <head tal:omit-tag="textual">
     <title tal:omit-tag="textual">Request for Identity Verification via Video Conference - AlirPunkto</title>
 </head>
@@ -30,10 +33,10 @@
 
     <p tal:omit-tag="textual">Thank you in advance for your cooperation in this matter. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
 
-    <p tal:omit-tag="textual">Sincerely,<br>
+    <p tal:omit-tag="textual">Sincerely,<br />
     <strong tal:omit-tag="textual">[Your Name]</strong></p>
 
-    <hr tal:omit-tag="textual">
+    <hr tal:omit-tag="textual" />
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email was generated with the help of AlirPunkto's identity verification function. If you are a verifier and have received this email in error, please inform the AlirPunkto administrator.</small></p>
 
 </body>

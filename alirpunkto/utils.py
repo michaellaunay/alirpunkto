@@ -155,7 +155,7 @@ def send_email(request, subject: str, recipients: list, template_path: str, temp
         text_body = text_body.replace("\n"*i, "\n")
     text_body = text_body.replace("<!DOCTYPE html>\n", "").replace("\n\n\n\n","\n").replace("\n\n\n","\n").replace("\n\n","\n")
     html_body = render_to_response(template_path, request=request, value={**template_vars, "textual":False}).body
-    sender = request.registry.settings['mail.default_sender']
+    sender = request.registry.settings['mail.defaultconn_sender']
     message = Message(
         subject=subject,
         sender=sender,
@@ -331,7 +331,8 @@ def register_user_to_ldap(request, candidature, password):
         'userPassword': password,
         'cn': pseudonym,
         'employeeNumber': candidature.oid, # Use the oid as employeeNumber
-        'employeeType': candidature.type.name, # Use the type as employeeType
+        'employeeType': candidature.type.name, # Use the type as employeeType,
+        'sn': candidature.fullsurname if candidature.fullsurname else pseudonym,
     }
     log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
     # Add the new user to LDAP

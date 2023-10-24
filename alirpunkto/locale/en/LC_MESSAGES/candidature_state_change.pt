@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html tal:omit-tag="textual">
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
 <head tal:omit-tag="textual">
     <title tal:omit-tag="textual">Change in the Status of Your Application</title>
 </head>

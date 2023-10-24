@@ -59,7 +59,7 @@ def check_password(username:str, password:str) -> Union[None, User]:
     log.debug(f"Trying to authenticate {ldap_login=} {ldap_login=}")
     try:
         conn = Connection(server, ldap_login, password, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
-        conn.search(LDAP_BASE_DN, '(uid={})'.format(username), attributes=['cn']) # search for the user in the LDAP directory
+        conn.search(LDAP_BASE_DN, '(uid={})'.format(username), attributes=['cn','mail', 'employeeNumber']) # search for the user in the LDAP directory
     except LDAPBindError as e:
         log.debug(f"Error while authenticating {username}: {e}")
         return None
@@ -67,10 +67,16 @@ def check_password(username:str, password:str) -> Union[None, User]:
         return None
     user_entry = conn.entries[0]
     name = user_entry.cn.value
+    employeeNumber = ""
     if "mail" in user_entry:
         email = user_entry.mail.value
     else:
         email = "undefined@example.com"
         log.warning(f"User {username} has no email address")
-    user = User.create_user(name, email)
+    if "employeeNumber" in user_entry:
+        employeeNumber = user_entry.employeeNumber.value
+    else:
+        log.warning(f"User {username} has no employeeNumber")
+    
+    user = User.create_user(name, email, employeeNumber)
     return user

@@ -713,3 +713,37 @@ La démo mentionnée à la fin est probablement un exemple concret montrant comm
 Utilisation du schéma pour la saisie du pseudo, du mot de passe et confirmation du mot de passe pour les membres ordinaires.
 Y ajouter les validateurs.
 Là il y a une faiblesse sur les contrôles des saisies.
+
+# 2023-10-23
+
+L'erreur LDAP venait de l'obligation de fournir `sn`
+Pour déboguer, j'ai mis un point d'arrêt sur le `add` d'une entrée ldap en python, puis j'ai exécuté :
+```python
+print(conn.last_error)
+```
+et j'ai obtenu:
+```
+(Pdb) print(conn.last_error)
+objectClassViolation
+```
+
+Explication de chat GPT
+````
+Les attributs que j'ai fournis à ldap semblent corrects pour une entrée utilisant la classe d'objet `inetOrgPerson`. Cependant, l'erreur `objectClassViolation` indique toujours une incohérence avec le schéma LDAP.
+
+En examinant les attributs que vous avez fournis, quelques points à vérifier :
+
+1. **Attribut `sn` manquant** : La classe d'objet `inetOrgPerson` nécessite généralement que vous fournissiez un attribut `sn` (pour "surname" ou "nom de famille"). C'est souvent un attribut obligatoire. Vous devez ajouter cet attribut à votre dictionnaire d'attributs.
+
+2. **Vérifier les autres attributs** :
+    - Assurez-vous que l'attribut `uid` est unique dans votre LDAP pour la branche ou la base DN que vous ciblez.
+    - Assurez-vous que l'attribut `userPassword` est bien encodé. Dans certaines configurations LDAP, vous devez utiliser une méthode spécifique pour encoder le mot de passe. Par exemple, vous pourriez avoir besoin de le hacher en utilisant SHA ou SSHA.
+
+3. **Chemin complet de DN** : Assurez-vous que le DN que vous créez est correct et que la base DN (`LDAP_BASE_DN`) et l'unité organisationnelle (`LDAP_OU`) existent bien dans l'annuaire LDAP. Vous semblez avoir ajouté une logique pour gérer le cas où `LDAP_OU` pourrait être nul, mais assurez-vous que la valeur de `dn` est correcte et valide pour votre LDAP.
+
+4. **Autres classes d'objet ou attributs** : Assurez-vous qu'il n'y a pas d'autres exigences pour votre configuration spécifique d'OpenLDAP qui nécessiteraient une autre classe d'objet ou un autre attribut à être fourni.
+
+5. **Logs OpenLDAP** : Vous pouvez également consulter les logs du serveur OpenLDAP lui-même. Si le serveur est configuré pour enregistrer des informations détaillées, il pourrait y avoir plus d'informations sur pourquoi l'ajout a échoué.
+
+Je vous suggère de commencer par ajouter l'attribut `sn` à votre dictionnaire d'attributs et de réessayer. Si cela ne résout pas le problème, passez aux autres étapes de dépannage.
+```

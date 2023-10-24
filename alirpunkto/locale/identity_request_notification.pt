@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html tal:omit-tag="textual">
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
 <head tal:omit-tag="textual">
     <title tal:omit-tag="textual">Your registation to <span tal:omit-tag="textual" tal:replace="site_name"></span>. Next steps</title>
 </head>
@@ -33,7 +36,7 @@
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">There are two methods for you to transmit this information related to your official ID documents to the Verifiers:</strong></p>
     <ol tal:omit-tag="textual">
         <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via Video Conferencing</strong>: A button will guide you in drafting a pre-filled email, in which you can propose appointment dates and times for a single or separate video conference(s) with the Verifiers assigned to you. During this (these) videoconference(s), you will show your official ID document to the Verifiers via your camera, making sure that e.g. the number of the ID document and the place of birth remains hidden, so as to avoid (for security reasons) having a full copy of this document displayed.</li>
-        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">>Via Email Attachment</strong>: A button will assist you in writing a pre-filled email, to which you can attach a partial copy of your official ID document (e.g., masking the number and place of birth).</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via Email Attachment</strong>: A button will assist you in writing a pre-filled email, to which you can attach a partial copy of your official ID document (e.g., masking the number and place of birth).</li>
     </ol>
 
     <p tal:omit-tag="textual">Each Verifier will then check the conformity of the information you provided on the registration form of our IT platform with that on your official identity document. Each Verifier will then independently vote on our IT platform on this verification of conformity. If a majority of Verifiers accepts that the information that you provided on our registration platform matches that on your official ID documents, wde will have the pleasure to welcome you as a Cooperator!</p>
@@ -44,11 +47,10 @@
 
     <p tal:omit-tag="textual">If you have any questions or need further clarification, please do not hesitate to contact us.</p>
 
-    <p tal:omit-tag="textual">Best regards,<br>
+    <p tal:omit-tag="textual">Best regards,<br />
     <strong tal:omit-tag="textual">The <span tal:omit-tag="textual" tal:replace="site_name"></span> Team</strong></p>
 
-     tal:omit-tag="textual"<hr>
+     tal:omit-tag="textual"<hr />
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note: This notification has been generated automatically. Please do not reply directly to this message.</small></p>
-
 </body>
 </html>

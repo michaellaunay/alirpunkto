@@ -1,3 +1,6 @@
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal">
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <tal:block define="status python:candidature.state.name if candidature else None"
@@ -6,7 +9,7 @@
                 tal:condition="python: (not hasattr(context,'url_obsolete') or not url_obsolete) and candidature">
                 <!-- DRAFT Status Section -->
                 <div tal:condition="python: not status or status == 'DRAFT'">
-                    <div i18n:tanslate="cosmopolitical_cooperative_description">The CosmoPolitical Cooperative is a pan-European cooperative for radical
+                    <div i18n:translate="cosmopolitical_cooperative_description">The CosmoPolitical Cooperative is a pan-European cooperative for radical
                         transformation towards social justice, sustainability and democracy. It
                         supports individuals and transforms the existing economic, social and
                         political system towards a just, sustainable, and happy society, called the
@@ -27,7 +30,7 @@
                                 i18n:attributes="title email_title_label">Email</label>
                             <input class="email-input" type="email" name="email"
                                 title="Your email address will be used for account verification and communication."
-                                i18n:attributes="title email_title_input">
+                                i18n:attributes="title email_title_input" />
                         </div>
 
                         <!-- Type of Registration -->
@@ -53,7 +56,7 @@
                         <!-- Submit Button -->
                         <input type="submit" value="Submit" name="submit"
                             title="Click to submit your registration."
-                            i18n:attributes="title submit_registration_title; value submit_button">
+                            i18n:attributes="title submit_registration_title; value submit_button" />
                     </form>
                 </div>
 
@@ -77,7 +80,7 @@
                                 Challenge A:</label>
                             <input type="text" name="result_A"
                                 title="Please enter the result of Challenge A."
-                                i18n:attributes="title result_input_title_A">
+                                i18n:attributes="title result_input_title_A" />
                         </div>
 
                         <!-- Challenge B Field -->
@@ -88,7 +91,7 @@
                                 Challenge B:</label>
                             <input type="text" name="result_B"
                                 title="Please enter the result of Challenge B."
-                                i18n:attributes="title result_input_title_B">
+                                i18n:attributes="title result_input_title_B" />
                         </div>
 
                         <!-- Challenge C Field -->
@@ -99,7 +102,7 @@
                                 Challenge C:</label>
                             <input type="text" name="result_C"
                                 title="Please enter the result of Challenge C."
-                                i18n:attributes="title result_input_title_C">
+                                i18n:attributes="title result_input_title_C" />
                         </div>
 
                         <!-- Challenge D Field -->
@@ -110,13 +113,13 @@
                                 Challenge D:</label>
                             <input type="text" name="result_D"
                                 title="Please enter the result of Challenge D."
-                                i18n:attributes="title result_input_title_D">
+                                i18n:attributes="title result_input_title_D" />
                         </div>
 
                         <!-- Verify Button -->
                         <input type="submit" value="Submit" name="submit"
                             title="Click to verify the entered codes."
-                            i18n:attributes="title submit_email_validation_title; value verify_button">
+                            i18n:attributes="title submit_email_validation_title; value verify_button" />
                     </form>
                 </div>
 
@@ -149,7 +152,7 @@
                         <label i18n:translate="sent_confirmation_label">Sent confirmation</label>
                         <input type="submit" value="Confirm" name="confirm"
                             title="Confirm you sent the emails."
-                            i18n:attributes="title submit_email_confirmation_title; value confirm_email_send_button_label">
+                            i18n:attributes="title submit_email_confirmation_title; value confirm_email_send_button_label" />
                     </form>
                 </div>
 
@@ -183,3 +186,4 @@
         </tal:block>
     </div>
 </div>
+</html>

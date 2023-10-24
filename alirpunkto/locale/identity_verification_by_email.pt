@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html tal:omit-tag="textual">
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
     <title tal:omit-tag="textual">en - <span tal:omit-tag="textual" tal:replace="site">Site Name</span> - Please verify my identity as a new potential Cooperator</title>
 </head>
@@ -20,13 +22,13 @@
 
     <p tal:omit-tag="textual">I thank you very warmly in advance for supporting the process of my registration as a Cooperator to the <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
 
-    <p tal:omit-tag="textual">Best regards,<br>
+    <p tal:omit-tag="textual">Best regards,<br />
     <strong tal:omit-tag="textual"><span tal:replace="full_name">Your Name</span></strong></p>
 
     <p tal:omit-tag="textual">Attachment: [Name of the ID document file]</p>
 
-    <hr tal:omit-tag="textual">
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email has been generated with the assistance of <span tal:omit-tag="textual" tal:replace="site">Site Name</span>'s identity verification feature. If you are not the Verifier assigned to the application of <span tal:omit-tag="textual" tal:replace="full_name">Your Name</span>< and have received this email in error, please inform the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> administrator.</small></p>
+    <hr tal:omit-tag="textual" />
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email has been generated with the assistance of <span tal:omit-tag="textual" tal:replace="site">Site Name</span>'s identity verification feature. If you are not the Verifier assigned to the application of <span tal:omit-tag="textual" tal:replace="full_name">Your Name</span> and have received this email in error, please inform the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> administrator.</small></p>
 
 </body>
 </html>

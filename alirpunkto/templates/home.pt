@@ -1,3 +1,6 @@
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal">
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <div class="container" i18n:domain="alirpunkto">
@@ -30,3 +33,4 @@
         </div>
     </div>
 </div>
+</html>

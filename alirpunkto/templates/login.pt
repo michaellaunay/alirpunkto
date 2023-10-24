@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal">
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <div class="container" i18n:domain="alirpunkto">
@@ -5,17 +9,17 @@
             <form method="POST" action="${request.route_url('login')}">
                 <div class="mb-3">
                     <label class="form-label" i18n:translate="username_label">Username</label>
-                    <input type="text" class="form-control" name="username" required>
+                    <input type="text" class="form-control" name="username" required="required" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label" i18n:translate="password_label">Password</label>
-                    <input type="password" class="form-control" name="password" required>
+                    <input type="password" class="form-control" name="password" required="required" />
                 </div>
                 <div>
-                    <input type="hidden" name="form.submitted" value="true">
+                    <input type="hidden" name="form.submitted" value="true" />
                 </div>
                 <div class="mb-3">
-                    <input type="submit" class="btn btn-primary" value="Login" i18n:attributes="value login_label">
+                    <input type="submit" class="btn btn-primary" value="Login" i18n:attributes="value login_label" />
                     <a class="btn btn-secondary" href="${request.route_url('register')}" i18n:translate="register_link">Create account</a>
                 </div>
                 <div class="mb-3">
@@ -33,3 +37,4 @@
         </div>
     </div>
 </div>
+</html>
