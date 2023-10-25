@@ -8,6 +8,7 @@ from pyramid.security import remember
 from ldap3 import Server, Connection, ALL, NTLM
 from .. import _
 from pyramid.settings import aslist
+from json import loads
 
 def is_authenticated(request):
     # Check if the user is authenticated
@@ -30,4 +31,5 @@ def home_view(request):
         logged_in = request.session['logged_in'] = False
     site_name = request.registry.settings.get('site_name', 'AlirPunkto')
     user = request.session.get('user', None)
+    user = loads(user) if user else {'name':'unknown'}
     return {'logged_in': logged_in, 'site_name': site_name, 'user': user, 'applications': applications }

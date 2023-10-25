@@ -35,7 +35,7 @@ def login_view(request):
         if user is not None:
             headers = remember(request, username)
             request.session['logged_in'] = True
-            request.session['user'] = user
+            request.session['user'] = user.to_json()
             request.session['created_at'] = datetime.datetime.now().isoformat()
             request.session['site_name'] = site_name
             return HTTPFound(location=request.route_url('home'), headers=headers)

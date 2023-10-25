@@ -1,4 +1,5 @@
 import os, pytz, hashlib
+from typing import Any
 from collections import defaultdict
 from dotenv import load_dotenv, get_key, find_dotenv
 from pyramid.config import Configurator
@@ -18,8 +19,6 @@ import deform
 from pkg_resources import resource_filename
 from pyramid.i18n import get_localizer
 from pyramid.threadlocal import get_current_request
-import json
-from .models.users import User
 
 load_dotenv() # take environment variables from .env.
 # SECRET_KEY is used for cookie signing
@@ -235,12 +234,7 @@ def main(global_config, **settings):
             [deform_template_dir],
             translator=translator,
         )
-        class UserEncoder(json.JSONEncoder):
-            def default(self, obj):
-                if isinstance(obj, User):
-                    return obj.toJSON()
-                return json.JSONEncoder.default(self, obj)
-        config.add_renderer('User', UserEncoder())
+
     deform.Form.set_default_renderer(zpt_renderer)
 
     return config.make_wsgi_app()

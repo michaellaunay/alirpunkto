@@ -39,19 +39,13 @@ class User(Persistent):
     def __repr__(self):
         return f"<User {self.name=!r} {self.email=!r} {self.oid=!r}>"
     
-    def toJSON(self):
+    def to_json(self):
         """Return a json representation of the user
         """
-        return json.dumps(self, default=lambda o: o.__dict__, 
-            sort_keys=True, indent=4)
-    
-  
-    # define iterable
-    def __iter__(self):
-        return iter([self.name, self.email, self.oid])
-    
+        return json.dumps({'name': self.name, 'email': self.email, 'oid': self.oid})
+ 
     @classmethod
-    def from_json(cls, data, request = None):
+    def from_json(cls, data:dict):
         """Create a User instance from json data
 
         """
