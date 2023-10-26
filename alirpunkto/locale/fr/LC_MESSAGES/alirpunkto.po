@@ -465,3 +465,27 @@ msgstr ""
 "et non un robot. Pour cela, nous vérifions que vous pouvez recevoir et comprendre un e-mail que "
 "nous vous enverrons : ce que nous vous demandons est simple pour un être humain, mais beaucoup "
 "plus complexe pour un robot."
+
+msgid "identity_verification_label"
+msgstr "Vérification d'identité"
+
+msgid "Send_id_copy_by_email"
+msgstr "Envoyer une copie de votre carte d'identité par email."
+
+msgid "Send_video_conference_link"
+msgstr "Envoyer une date de visioconférence."
+
+msgid "Proceed"
+msgstr "Continuer"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Veuillez confirmer que vous avez envoyé les emails aux validateurs."
+
+msgid "sent_confirmation_label"
+msgstr "Confirmation d'envoi"
+
+msgid "submit_email_confirmation_title"
+msgstr "Confirmez que vous avez envoyé les emails."
+
+msgid "confirm_email_send_button_label"
+msgstr "Confirmer"

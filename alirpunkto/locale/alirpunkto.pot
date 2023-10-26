@@ -464,3 +464,27 @@ msgstr ""
 "human being, and not a robot. For this, we verify that you can receive and"
 "understand an e-mail that we will send to you: what we request from you is"
 "simple for a human being, much more complex for a robot."
+
+msgid "identity_verification_label"
+msgstr "Identity Verification"
+
+msgid "Send_id_copy_by_email"
+msgstr "Send a copy of your identity card by email."
+
+msgid "Send_video_conference_link"
+msgstr "Send a video conference date."
+
+msgid "Proceed"
+msgstr "Proceed"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Please confirm you have sent the emails to the validators."
+
+msgid "sent_confirmation_label"
+msgstr "Sent confirmation"
+
+msgid "submit_email_confirmation_title"
+msgstr "Confirm you sent the emails."
+
+msgid "confirm_email_send_button_label"
+msgstr "Confirm"
