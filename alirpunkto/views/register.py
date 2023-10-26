@@ -442,7 +442,11 @@ def handle_unique_data_state(request, candidature):
     if not candidature.voters:
         transaction = request.tm
         try:
-            candidature.voters = [Voter(email, surname) for (email,surname) in random_voters(request)]
+            voters = random_voters(request)
+            candidature.voters = [
+                Voter(voter["mail"], voter["sn"])
+                for voter in voters
+            ]
             transaction.commit()
         except Exception as e:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")

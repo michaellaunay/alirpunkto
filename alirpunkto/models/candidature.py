@@ -558,7 +558,7 @@ class Candidature(Persistent):
         self._memorize_changes("data", old_data, value)
 
     @property
-    def voters(self)-> [str]:
+    def voters(self)-> [Voter]:
         """ Get the voters of the candidature.
         Returns:
             A copy of voters of the candidature.
@@ -566,16 +566,16 @@ class Candidature(Persistent):
         return self._voters[:]
     
     @voters.setter
-    def voters(self, value:[str]):
+    def voters(self, value:list[Voter]):
         """ Set the voters of the candidature.
 
         Args:
-            value ([str]): The new voters of the candidature.
+            value ([Voter]): The new voters of the candidature.
 
         Raises:
             TypeError: The voters must be a list.
         """
-        if not isinstance(value, list) or not isinstance(value, tuple):
+        if not isinstance(value, list) and not isinstance(value, tuple):
             raise TypeError("The voters must be a list or a tuple.")
         
         old_voters = self._voters if self._voters else "None"

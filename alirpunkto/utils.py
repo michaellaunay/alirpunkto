@@ -7,9 +7,17 @@ from pyramid.request import Request
 from .models.candidature import Candidature, Candidatures
 from pyramid_mailer.message import Message, Attachment
 from pyramid_zodbconn import get_connection
-from . import _, MAIL_SENDER, LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD, EUROPEAN_LOCALES
+from . import (
+    _,
+    LDAP_SERVER,
+    LDAP_OU,
+    LDAP_BASE_DN,
+    LDAP_LOGIN,
+    LDAP_PASSWORD,
+    EUROPEAN_LOCALES,
+)
 from pyramid.i18n import get_localizer
-from ldap3 import Server, Connection, ALL
+from ldap3 import Server, Connection, ALL, SUBTREE
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
 import random
@@ -240,62 +248,127 @@ def generate_key(secret:str)->bytes:
     return sha256.digest()
 
 
-def decrypt_oid(encrypted_oid: str, seed_size:int, secret:str)->[str,str]:
-    """ Function to decrypt the OID using the SECRET and return the decrypted OID
+def decrypt_oid(encrypted_oid: str, seed_size: int, secret: str) -> [str, str]:
+    """Decrypt the OID using the SECRET and return the decrypted OID and seed.
+
     Args:
-        encrypted_oid (str): The encrypted OID
-        secret (str): The secret to use to decrypt the OID
+        encrypted_oid (str): The encrypted OID.
+        seed_size (int): The size of the seed.
+        secret (str): The secret to use to decrypt the OID.
+
     Returns:
-        str: The decrypted OID
-        str: The seed
+        tuple: The decrypted OID and the seed.
     """
     fernet = Fernet(secret)
     decoded_encrypted_oid = base64.urlsafe_b64decode(encrypted_oid)
-    decrypted_message = fernet.decrypt(encrypted_oid).decode()
-    index = len(decrypted_message)-seed_size
+    decrypted_message = fernet.decrypt(decoded_encrypted_oid).decode()
+    index = len(decrypted_message) - seed_size
     return decrypted_message[:index], decrypted_message[index:]
 
+def encrypt_oid(oid: str, seed: str, secret: str) -> str:
+    """Encrypt the OID using the SECRET and return the encrypted OID.
 
-def encrypt_oid(oid, seed, secret) -> str:
-    """ Function to encrypt the OID using the SECRET and return the encrypted OID
     Args:
-        oid (str): The OID to encrypt
-        seed_size (int): The seed size
-        secret (str): The secret to use to encrypt the OID
+        oid (str): The OID to encrypt.
+        seed (str): The seed.
+        secret (str): The secret to use to encrypt the OID.
+
     Returns:
-        str: The encrypted OID
+        str: The encrypted OID.
     """
     concatenated_string = oid + seed
     fernet = Fernet(secret)
     encrypted_message = fernet.encrypt(concatenated_string.encode())
-    encoded_encrypted_message = base64.urlsafe_b64encode(encrypted_message).decode()
-    return encrypted_message
+    encoded_encrypted_message = base64.urlsafe_b64encode(
+        encrypted_message).decode()
+    
+    return encoded_encrypted_message
 
-def random_voters(request: Request)->list[tuple[str, str]]:
-    """Randomly select 3 voters to validate the candidate's personal data.
-    For this, retrieve from LDAP the list of members who are cooperators, then
-    randomly choose 3 if there are enough; otherwise, offer what is available..
+
+
+from typing import List, Dict
+
+def get_potential_voters(conn: Connection) -> List[Dict[str, str]]:
+    """Fetch potential voters from LDAP.
+
     Args:
-        request (pyramid.request.Request): the request
+        conn (Connection): The LDAP connection object.
+
     Returns:
-        list: the list of voters as (email, fullsurname)
+        list: List of potential voters.
+    """
+    filter_str = '(&(employeeType=cooperator)(cn=*)(sn=*)(mail=*))'
+    conn.search(LDAP_BASE_DN, filter_str, attributes=['cn', 'mail', 'sn'])
+    return conn.entries
+
+
+def get_admin(conn: Connection):
+    """Fetch the admin details from LDAP.
+
+    Args:
+        conn (Connection): The LDAP connection object.
+
+    Returns:
+        dict: Admin details if found, otherwise None.
+    """
+    search_filter = "(&(objectclass=*)(cn=*)(mail=*)(sn=*))"
+    results = conn.search(
+        LDAP_BASE_DN,
+        search_filter,
+        search_scope=SUBTREE,
+        attributes=['cn', 'mail']
+    )
+    if not results:
+        return None
+    return conn.entries[0]
+
+
+def random_voters(request: Request) -> List[Dict[str, str]]:
+    """
+    Randomly select 3 voters to validate the candidate's personal data.
+    
+    Args:
+        request (pyramid.request.Request): The request.
+
+    Returns:
+        list: A list of voters in the format: 
+            [{'cn': 'name', 'sn': 'surname', 'mail': 'email'}, ...]
     """
     server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login=f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-    conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
-    conn.search(LDAP_BASE_DN, '(employeeType=cooperator)', attributes=['cn'])
-    voters = []
-    for entry in conn.entries:
-        voters.append(entry.cn.value)
-    random.shuffle(voters) # Shuffle the list of voters
-    voters = voters[:3] # Return the first 3 voters
-    voters_info = []
-    for voter in voters:
-        conn.search(LDAP_BASE_DN, '(cn={})'.format(voter), attributes=['mail'])
-        voter_email = conn.entries[0].mail.value
-        voter_fullsurname = conn.entries[0].sn.value
-        voters_info.append((voter_email, voter_fullsurname))
-    return voters_info
+    ldap_login = f"{LDAP_LOGIN},{LDAP_OU if LDAP_OU else ''},{LDAP_BASE_DN}"
+    while ',,' in ldap_login:
+        ldap_login = ldap_login.replace(',,', ',')
+    with Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) as conn:
+        potential_voters = get_potential_voters(conn)
+        random.shuffle(potential_voters)
+        selected_voters = potential_voters[:3]
+
+        voters = [
+            {
+                'cn': voter.cn.value,
+                'sn': voter.sn.value,
+                'mail': voter.mail.value
+            }
+            for voter in selected_voters
+        ]
+
+        # If there are fewer than 3 voters, add the admin
+        if len(voters) < 3:
+            admin = get_admin(conn)
+            if admin:
+                voters.append(
+                    {
+                        'cn': admin.cn.value,
+                        'sn': 'Admin',
+                        'mail': admin.mail.value
+                    }
+                )
+            else:
+                # Handle the case where the admin is not found
+                log.error("No admin found in LDAP")
+                return []
+
+        return voters[:3]  # Ensure only top 3 are returned
 
 def register_user_to_ldap(request, candidature, password):
     """

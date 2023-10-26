@@ -1,17 +1,14 @@
 import os, pytz, hashlib
-from typing import Any
 from collections import defaultdict
 from dotenv import load_dotenv, get_key, find_dotenv
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
 from pyramid.i18n import get_localizer, TranslationStringFactory
-from pyramid.i18n import Localizer, default_locale_negotiator
+from pyramid.i18n import default_locale_negotiator
 from pyramid.events import NewRequest, subscriber
 from pyramid.config import Configurator
 from pyramid_mailer.mailer import Mailer
-from pyramid.renderers import JSON
 import logging
-import transaction
 from .models import appmaker
 from .models.candidature import Candidatures
 from pyramid.session import SignedCookieSessionFactory
