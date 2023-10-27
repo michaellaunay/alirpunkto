@@ -27,5 +27,7 @@ def logout_view(request):
         request.session['created_at'] = None
     else:
         request.session['logged_in'] = False
-    forget(request)
+    if 'candidature_oid' in request.session:
+        del request.session['candidature_oid']
+    #forget(request)
     return HTTPFound(location=request.route_url('home'))

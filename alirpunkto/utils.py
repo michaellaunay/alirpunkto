@@ -4,9 +4,15 @@
 
 from typing import Dict
 from pyramid.request import Request
-from .models.candidature import Candidature, Candidatures
+from .models.candidature import (
+    Candidature,
+    Candidatures,
+    CandidatureEmailSendStatus,
+    CandidatureStates,
+)
 from pyramid_mailer.message import Message, Attachment
 from pyramid_zodbconn import get_connection
+from pyramid.path import AssetResolver
 from . import (
     _,
     LDAP_SERVER,
@@ -405,7 +411,7 @@ def register_user_to_ldap(request, candidature, password):
         'cn': pseudonym,
         'employeeNumber': candidature.oid, # Use the oid as employeeNumber
         'employeeType': candidature.type.name, # Use the type as employeeType,
-        'sn': candidature.fullsurname if candidature.fullsurname else pseudonym,
+        'sn': getattr(candidature, "fullsurname", pseudonym) or pseudonym, # Use the fullsurname as sn
     }
     log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
     # Add the new user to LDAP
@@ -418,3 +424,145 @@ def register_user_to_ldap(request, candidature, password):
         return {'status': 'success', 'message': _('registration_successful')}
     else:
         return {'status': 'failure', 'message': _('registration_failed')}
+
+def get_local_template(request, pattern_path):
+    """
+    Return the local template for the given pattern path according to the user's language preference.
+
+    This function attempts to resolve the template path based on the user's preferred language.
+    If the resolution fails, it falls back to the default English language.
+
+    Args:
+        request (Request): The request object, used to determine the user's preferred language.
+        pattern_path (str): The pattern path for which the local template is requested.
+
+    Returns:
+        resolver (object): The resolved pattern handler.
+
+    Raises:
+        (No explicit exceptions are raised, but errors are logged)
+    """
+
+    lang = get_preferred_language(request)
+    ar = AssetResolver("alirpunkto")
+    try:
+        resolver = ar.resolve(pattern_path.format(lang=lang))
+    except:
+        log.error(f"Error while resolving locale file for {lang} for {pattern_path}, fallback to en")
+        resolver = ar.resolve(pattern_path.format(lang="en"))
+    return resolver
+
+def send_confirm_validation_email(request: Request,
+    candidature: Candidature) -> Dict:
+    """Send the confirmation email to the candidate.
+    Args:
+        request (pyramid.request.Request): the request
+        candidature (Candidature): the candidature
+    Returns:
+        dict: the result of the email sending
+    """
+    return send_candidature_state_change_email(request,
+        candidature,
+        "send_confirm_validation_email")
+
+def send_candidature_state_change_email(request: Request,
+    candidature: Candidature,
+    sending_function_name,
+    template_name = None,
+    subject = None) -> Dict:
+    """Send the candidature state change email to the candidate.
+    Args:
+        request (pyramid.request.Request): the request
+        candidature (Candidature): the candidature
+        sending_function_name (str): the name of the function that sends the email
+        template_name (str): the name of the template to use or None to use the default template
+        subject (str): the subject of the email or None to use the default subject
+    Returns:
+        dict: the result of the email sending
+    """
+    template_name = template_name if template_name else 'locale/{lang}/LC_MESSAGES/candidature_state_change.pt'
+    template_path = get_local_template(request, template_name).abspath()
+    localizer = get_localizer(request)
+    subject = subject if subject else localizer.translate(_('email_candidature_state_changed'))
+    email = candidature.email
+    seed = candidature.email_send_status_history[-1].seed
+
+    # Prepare the necessary information for the email
+    parametter = encrypt_oid(
+        candidature.oid,
+        seed,
+        request.registry.settings['session.secret']
+    )
+  
+    url = request.route_url('register', _query={'oid': parametter})
+    site_url = request.route_url('home')
+    site_name = request.registry.settings.get('site_name')
+    #We don't have user yet so we use the email parts befor the @ or pseudonym if it exists
+    user = candidature.pseudonym if hasattr(candidature, "pseudonym") else email.split('@')[0]
+    
+    template_vars = {
+        'page_register_with_oid': url,
+        'site_url': site_url,
+        'site_name': site_name,
+        'candidature': candidature,
+        'CandidatureStates': CandidatureStates,
+        'user': user
+    }
+    
+    # Use the send_email from utils.py
+    try:
+        # Stack email sending action to be executed at commit
+        success = send_email(request, subject, [email], template_path, template_vars)
+    except Exception as e:
+        log.error(f"Error while sending email to {email} : {e}")
+        success = False
+    
+    if success:
+        candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, sending_function_name)
+        return {'success': True}
+    else:
+        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, sending_function_name)
+        return {'error': _('email_not_sent')}
+
+def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
+    """
+    Send the validation email to the candidate.
+    
+    Args:
+        request: The request object.
+        candidature: The candidature object.
+        
+    Returns:
+        bool: True if the email is successfully sent, False otherwise.
+    """
+    template_path = get_local_template(request, 'locale/{lang}/LC_MESSAGES/check_email.pt').abspath()
+
+    email = candidature.email # The email to send to.
+    challenge = candidature.challenge # The math challenge for email validation.
+    localizer = get_localizer(request)
+    subject = localizer.translate(_('email_validation_subject'))
+    seed = candidature.email_send_status_history[-1].seed
+    parametter = encrypt_oid(candidature.oid, seed, request.registry.settings['session.secret'])
+    
+    url = request.route_url('register', _query={'oid': parametter})
+    site_url = request.route_url('home')
+    site_name = request.registry.settings.get('site_name')
+    
+    template_vars = {
+        'challenge_A': challenge["A"][0],
+        'challenge_B': challenge["B"][0],
+        'challenge_C': challenge["C"][0],
+        'challenge_D': challenge["D"][0],
+        'page_register_with_oid': url,
+        'site_url': site_url,
+        'site_name': site_name
+    }
+
+    # Use the send_email from utils.py
+    # Put on the stack the action of sending the email wich is done during the commit
+    try:
+        success = send_email(request, subject, [email], template_path, template_vars)
+    except Exception as e:
+        log.error(f"Error while sending email to {email} : {e}")
+        success = False
+    return success

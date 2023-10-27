@@ -22,45 +22,19 @@ from ..models.candidature import (
     CandidatureEmailSendStatus, CandidatureData,
     Voter
 )
-from .. import _
+from .. import _, MAIL_SIGNATURE
 from pyramid.i18n import Translator, get_localizer
-from pyramid.path import AssetResolver
 import logging
 log = logging.getLogger("alirpunkto")
 from ..utils import (
-    get_candidatures, decrypt_oid, encrypt_oid,
+    get_candidatures, decrypt_oid,
     generate_math_challenges, is_valid_email, get_candidature_by_oid,
-    send_email, register_user_to_ldap, get_preferred_language,
-    is_valid_password, is_valid_unique_pseudonym, random_voters
+    register_user_to_ldap,
+    is_valid_password, is_valid_unique_pseudonym, random_voters,
+    send_validation_email,
+    send_confirm_validation_email,
+    send_candidature_state_change_email,
 )
-
-def get_local_template(request, pattern_path):
-    """
-    Return the local template for the given pattern path according to the user's language preference.
-
-    This function attempts to resolve the template path based on the user's preferred language.
-    If the resolution fails, it falls back to the default English language.
-
-    Args:
-        request (Request): The request object, used to determine the user's preferred language.
-        pattern_path (str): The pattern path for which the local template is requested.
-
-    Returns:
-        resolver (object): The resolved pattern handler.
-
-    Raises:
-        (No explicit exceptions are raised, but errors are logged)
-    """
-
-    lang = get_preferred_language(request)
-    ar = AssetResolver("alirpunkto")
-    try:
-        resolver = ar.resolve(pattern_path.format(lang=lang))
-    except:
-        log.error(f"Error while resolving locale file for {lang} for {pattern_path}, fallback to en")
-        resolver = ar.resolve(pattern_path.format(lang="en"))
-    return resolver
-
 
 @view_config(route_name='register', renderer='alirpunkto:templates/register.pt')
 def register(request):
@@ -116,52 +90,13 @@ def register(request):
             return handle_unique_data_state(request, candidature)
         case CandidatureStates.PENDING:
             return handle_pending_state(request, candidature)
+        case CandidatureStates.APPROVED:
+            return handle_pending_state(request, candidature)
+        case CandidatureStates.REFUSED:
+            return handle_pending_state(request, candidature)
         case _:
             # @TODO Gestion d'autres états ou d'une erreur éventuelle
             return handle_default_state(request, candidature)
-
-def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
-    """
-    Send the validation email to the candidate.
-    
-    Args:
-        request: The request object.
-        candidature: The candidature object.
-        
-    Returns:
-        bool: True if the email is successfully sent, False otherwise.
-    """
-    template_path = get_local_template(request, 'locale/{lang}/LC_MESSAGES/check_email.pt').abspath()
-
-    email = candidature.email # The email to send to.
-    challenge = candidature.challenge # The math challenge for email validation.
-    localizer = get_localizer(request)
-    subject = localizer.translate(_('email_validation_subject'))
-    seed = candidature.email_send_status_history[-1].seed
-    parametter = encrypt_oid(candidature.oid, seed, request.registry.settings['session.secret']).decode()
-    
-    url = request.route_url('register', _query={'oid': parametter})
-    site_url = request.route_url('home')
-    site_name = request.registry.settings.get('site_name')
-    
-    template_vars = {
-        'challenge_A': challenge["A"][0],
-        'challenge_B': challenge["B"][0],
-        'challenge_C': challenge["C"][0],
-        'challenge_D': challenge["D"][0],
-        'page_register_with_oid': url,
-        'site_url': site_url,
-        'site_name': site_name
-    }
-
-    # Use the send_email from utils.py
-    # Put on the stack the action of sending the email wich is done during the commit
-    try:
-        success = send_email(request, subject, [email], template_path, template_vars)
-    except Exception as e:
-        log.error(f"Error while sending email to {email} : {e}")
-        success = False
-    return success
 
 def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
     """Handle the draft state.
@@ -223,77 +158,6 @@ def handle_draft_state(request: Request, candidature: Candidature) -> HTTPFound:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
     return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
-def send_confirm_validation_email(request: Request,
-    candidature: Candidature) -> Dict:
-    """Send the confirmation email to the candidate.
-    Args:
-        request (pyramid.request.Request): the request
-        candidature (Candidature): the candidature
-    Returns:
-        dict: the result of the email sending
-    """
-    return send_candidature_state_change_email(request,
-        candidature,
-        "send_confirm_validation_email")
-
-def send_candidature_state_change_email(request: Request,
-    candidature: Candidature,
-    sending_function_name,
-    template_name = None,
-    subject = None) -> Dict:
-    """Send the candidature state change email to the candidate.
-    Args:
-        request (pyramid.request.Request): the request
-        candidature (Candidature): the candidature
-        sending_function_name (str): the name of the function that sends the email
-        template_name (str): the name of the template to use or None to use the default template
-        subject (str): the subject of the email or None to use the default subject
-    Returns:
-        dict: the result of the email sending
-    """
-    template_name = template_name if template_name else 'locale/{lang}/LC_MESSAGES/candidature_state_change.pt'
-    template_path = get_local_template(request, template_name).abspath()
-    localizer = get_localizer(request)
-    subject = subject if subject else localizer.translate(_('email_candidature_state_changed'))
-    email = candidature.email
-    seed = candidature.email_send_status_history[-1].seed
-
-    # Prepare the necessary information for the email
-    parametter = encrypt_oid(
-        candidature.oid,
-        seed,
-        request.registry.settings['session.secret']
-    ).decode()
-  
-    url = request.route_url('register', _query={'oid': parametter})
-    site_url = request.route_url('home')
-    site_name = request.registry.settings.get('site_name')
-    #We don't have user yet so we use the email parts befor the @ or pseudonym if it exists
-    user = candidature.pseudonym if hasattr(candidature, "pseudonym") else email.split('@')[0]
-    
-    template_vars = {
-        'page_register_with_oid': url,
-        'site_url': site_url,
-        'site_name': site_name,
-        'candidature': candidature,
-        'CandidatureStates': CandidatureStates,
-        'user': user
-    }
-    
-    # Use the send_email from utils.py
-    try:
-        # Stack email sending action to be executed at commit
-        success = send_email(request, subject, [email], template_path, template_vars)
-    except Exception as e:
-        log.error(f"Error while sending email to {email} : {e}")
-        success = False
-    
-    if success:
-        candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, sending_function_name)
-        return {'success': True}
-    else:
-        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, sending_function_name)
-        return {'error': _('email_not_sent')}
 
 def handle_email_validation_state(request, candidature):
     """Handle the email validation state.
@@ -419,6 +283,7 @@ def handle_confirmed_human_state(request, candidature):
         else:
             return {'form': form.render(appstruct=appstruct), 'error': _('invalid_choice'), 'candidature': candidature, 'CandidatureTypes': CandidatureTypes}
 
+        send_candidature_state_change_email(request, candidature, email_template)
         transaction = request.tm
         try:
             transaction.commit()
@@ -450,8 +315,19 @@ def handle_unique_data_state(request, candidature):
             transaction.commit()
         except Exception as e:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
-            return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error': _('voters_not_selected')}
-    if 'submit' in request.POST:
+            return {
+                'candidature': candidature,
+                'CandidatureTypes': CandidatureTypes,
+                'error': _('voters_not_selected'),
+                'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                'signature': MAIL_SIGNATURE.format(
+                    site_name=request.registry.settings.get('site_name'),
+                    fullname = candidature.data.fullname,
+                    fullsurname = candidature.data.fullsurname,
+                )
+            }
+
+    if 'confirm' in request.POST:
         #Get identity Verification method
 
         candidatures = get_candidatures(request)
@@ -460,11 +336,27 @@ def handle_unique_data_state(request, candidature):
         try:
             transaction.commit()
             candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, "send_candidature_pending_email")
+            transaction.commit()
+            return {
+                'candidature': candidature,
+                'CandidatureTypes': CandidatureTypes,
+            }
+
         except Exception as e:
             log.error(f"Error while commiting candidature {candidature.oid} : {e}")
             candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_candidature_pending_email")
 
-    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'voters': candidature.voters}
+    return {
+        'candidature': candidature,
+        'CandidatureTypes': CandidatureTypes,
+        'voters': candidature.voters,
+        'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+        'signature': MAIL_SIGNATURE.format(
+            site_name=request.registry.settings.get('site_name'),
+            fullname = candidature.data.fullname,
+            fullsurname = candidature.data.fullsurname if getattr(candidature.data, 'fullsurname', "Alirpunkto team") else "",
+        )
+    }
 
 
 
@@ -478,7 +370,10 @@ def handle_pending_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error':"Not yet implemented"}
+    return {
+        'candidature': candidature,
+        'CandidatureTypes': CandidatureTypes,
+    }
 
 def handle_default_state(request, candidature):
     """Handle the default state.
@@ -490,5 +385,5 @@ def handle_default_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error':"Not yet implemented"}
+    return {'candidature': candidature, 'CandidatureTypes': CandidatureTypes, 'error':"handle_default_state Not yet implemented"}
 

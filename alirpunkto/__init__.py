@@ -42,6 +42,7 @@ MAIL_PORT = os.getenv("MAIL_PORT")
 MAIL_HOST = os.getenv("MAIL_HOST")
 MAIL_TLS = os.getenv("MAIL_TLS")
 MAIL_SSL = os.getenv("MAIL_SSL")
+MAIL_SIGNATURE = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name}")
 
 # logging configuration
 log = logging.getLogger('alirpunkto')
@@ -173,6 +174,7 @@ def main(global_config, **settings):
         settings['mail.port'] = MAIL_PORT if MAIL_PORT else os.environ.get('MAIL_PORT', '25')
         settings['mail.tls'] = MAIL_TLS if MAIL_TLS else os.environ.get('MAIL_TLS', 'false')
         settings['mail.ssl'] = MAIL_SSL if MAIL_SSL else os.environ.get('MAIL_SSL', 'false')
+
         # get secret key from environment variable
         config.registry.settings["mail.default_sender"] = settings['mail.default_sender'] # I didn't find a way to pass the default_sender to the views...
         # Create a mailer object
@@ -218,6 +220,7 @@ def main(global_config, **settings):
         config.add_route('login', '/login')
         config.add_route('logout', '/logout')
         config.add_route('register', '/register')
+        config.add_route('vote', '/vote')
         config.add_route('forgot_password', '/forgot_password')
         config.scan()
         config.add_translation_dirs('alirpunkto:locale/', 'colander:locale/', 'deform:locale/')

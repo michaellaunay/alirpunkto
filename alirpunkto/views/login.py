@@ -38,6 +38,11 @@ def login_view(request):
             request.session['user'] = user.to_json()
             request.session['created_at'] = datetime.datetime.now().isoformat()
             request.session['site_name'] = site_name
+            # redirect to the page the user wanted to access before login
+            if 'redirect_url' in request.session:
+                redirect_url = request.session['redirect_url']
+                del request.session['redirect_url']
+                return HTTPFound(location=redirect_url, headers=headers)
             return HTTPFound(location=request.route_url('home'), headers=headers)
         else:
             request.session['logged_in'] = False
@@ -56,7 +61,7 @@ def check_password(username:str, password:str) -> Union[None, User]:
     """
     server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
     ldap_login=f"uid={username},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={username},{LDAP_BASE_DN}" # define the user to authenticate
-    log.debug(f"Trying to authenticate {ldap_login=} {ldap_login=}")
+    log.debug(f"Trying to authenticate {ldap_login=} with {password=}")
     try:
         conn = Connection(server, ldap_login, password, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
         conn.search(LDAP_BASE_DN, '(uid={})'.format(username), attributes=['cn','mail', 'employeeNumber']) # search for the user in the LDAP directory

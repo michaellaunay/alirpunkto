@@ -144,9 +144,12 @@
                     <!-- Add data-emails attribute to store voter emails -->
                     <button onclick="sendEmail()"
                         data-emails="${','.join([voter.email for voter in candidature.voters])}"
+                        data-user-email="${candidature.email}"
+                        data-voting-url="${voting_url}"
+                        data-signature="${signature}"
                     >
                         ${_("Proceed")}</button>
-                    <form method="post" action="/path_to_your_server_endpoint">
+                    <form method="POST">
                         <div i18n:translate="confirm_sent_emails_to_validators">Please confirm you
                             have sent the emails to the validators.</div>
                         <label i18n:translate="sent_confirmation_label">Sent confirmation</label>
