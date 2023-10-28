@@ -6,7 +6,7 @@
         <div class="container" i18n:domain="alirpunkto">
             <div tal:condition="not logged_in">
                 <h1 i18n:translate="welcome_msg">Welcome to Alirpunkto, the centralized service for applications of <tal:var i18n:name="site_name">${site_name}</tal:var>.</h1>
-                <p i18n:translate="all_applications_msg">All the applications you need to participate in Cosmopolitical in one place.</p>
+                <p i18n:translate="all_applications_msg">All the applications you need to participate in the activities of <tal:var i18n:name="site_name">${site_name}</tal:var> in one place.</p>
                 <p i18n:translate="register_or_login_msg">Register or login now to get started.</p>
                 <a class="button" href="${request.route_url('login')}" i18n:translate="login_label">Login</a>
                 <a class="button" href="${request.route_url('register')}" i18n:translate="register_label">Register</a>
@@ -17,7 +17,7 @@
                 <p>
                     <span i18n:translate="log_out_invitation_msg">You can log out by clicking</span> <a class="button" href="${request.route_url('logout')}" i18n:translate="logout_label">Log out</a>
                 </p>
-                <p i18n:translate="all_applications_msg">All the applications you need to participate in Cosmopolitical in one place.</p>
+                <p i18n:translate="all_applications_msg">All the applications you need to participate in the activities of <tal:var i18n:name="site_name">${site_name}</tal:var> in one place.</p>
                 <p i18n:translate="choose_application_msg">Choose the application you want to join:</p>
                 <ul>
 
