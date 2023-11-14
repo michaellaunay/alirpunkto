@@ -6,6 +6,7 @@ import logging
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import forget
+from alirpunkto.models.candidature import CANDIDATURE_OID
 
 @view_config(route_name='logout')
 def logout_view(request):
@@ -27,7 +28,7 @@ def logout_view(request):
         request.session['created_at'] = None
     else:
         request.session['logged_in'] = False
-    if 'candidature_oid' in request.session:
-        del request.session['candidature_oid']
+    if CANDIDATURE_OID in request.session:
+        del request.session[CANDIDATURE_OID] #
     #forget(request)
     return HTTPFound(location=request.route_url('home'))
