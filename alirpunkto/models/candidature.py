@@ -18,7 +18,10 @@ import transaction
 import random
 import string
 
+# Constants
+CANDIDATURE_OID = 'candidature_oid'
 SEED_LENGTH = 10
+
 log = getLogger('alirpunkto')
 
 
@@ -27,13 +30,23 @@ log = getLogger('alirpunkto')
 class CandidatureStates(Enum) :
     """States of candidatures.
     """
-    DRAFT = "candidature_states_draft_value" # "Draft: The application is in draft mode."
-    EMAIL_VALIDATION = "candidature_states_email_validation_value" # "Email Validation: The state where the Applicant's email address is awaiting validation."
-    CONFIRMED_HUMAN = "candidature_states_confirmed_human_value" # "ConfirmedHuman: The Applicant's email address is verified, and humanity proof is provided."
-    UNIQUE_DATA = "candidature_states_unique_data_value" # "UniqueData: The Applicant has entered their personal identification data."
-    PENDING = "candidature_states_pending_value" # "Pending: After the submission of the application and while waiting for verification by the verifiers."
-    APPROVED = "candidature_states_approved_value" # "Approved: The application has been accepted."
-    REFUSED = "candidature_states_refused_value" # "Refused: The application has been denied."
+    # Draft: The application is in draft mode.
+    DRAFT = "candidature_states_draft_value"
+    # Email Validation: The state where the Applicant's email address is
+    # awaiting validation.
+    EMAIL_VALIDATION = "candidature_states_email_validation_value"
+    # ConfirmedHuman: The Applicant's email address is verified, and humanity
+    # proof is provided.
+    CONFIRMED_HUMAN = "candidature_states_confirmed_human_value"
+    # UniqueData: The Applicant has entered their personal identification data.
+    UNIQUE_DATA = "candidature_states_unique_data_value"
+    # Pending: After the submission of the application and while waiting for
+    # verification by the verifiers.
+    PENDING = "candidature_states_pending_value" 
+    # Approved: The application has been accepted.
+    APPROVED = "candidature_states_approved_value"
+    # Refused: The application has been denied.
+    REFUSED = "candidature_states_refused_value"
 
     @classmethod
     def get_i18n_id(cls, name:str) -> str:
@@ -89,17 +102,22 @@ class CandidatureStates(Enum) :
 class CandidatureEmailSendStatus(Enum):
     """Status of the email sent to the applicant.
     """
-    IN_PREPARATION = "candidature_email_send_status_in_preparation_value" # "In Preparation: The email is being prepared."
-    SENT = "candidature_email_send_status_sent_value" # "Sent: The email has been sent."
-    ERROR = "candidature_email_send_status_error_value" # "Error: An error occured while sending the email."
+    #  In Preparation: The email is being prepared.
+    IN_PREPARATION = "candidature_email_send_status_in_preparation_value"
+    # Sent: The email has been sent.
+    SENT = "candidature_email_send_status_sent_value"
+    # Error: An error occured while sending the email.
+    ERROR = "candidature_email_send_status_error_value"
 
 
 @unique
 class CandidatureTypes(Enum) :
     """Types of candidatures.
     """
-    ORDINARY = "candidature_types_ordinary_value" # "Ordinary: A candidature for an ordinary member."
-    COOPERATOR = "candidature_types_cooperator_value" # "Cooperator: A candidature for a cooperator member."
+    # Ordinary: A candidature for an ordinary member.
+    ORDINARY = "candidature_types_ordinary_value"
+    # Cooperator: A candidature for a cooperator member.
+    COOPERATOR = "candidature_types_cooperator_value"
     @classmethod
     def get_i18n_id(cls, name:str) -> str:
         """Get the i18n id of the candidature type.
@@ -198,7 +216,14 @@ class CandidatureEvent:
     def __iter__(self):
         value_before = self.value_before if not self.value_before is None else "None"
         value_after = self.value_after if not self.value_after is None else "None"
-        return iter((self.datetime, self.function_name, value_before, value_after, self.seed))
+        return iter(
+            (
+                self.datetime,
+                self.function_name,
+                value_before,
+                value_after, self.seed
+            )
+        )
 
 @dataclass
 class CandidatureEmailEvent:
@@ -223,14 +248,24 @@ class Candidatures(PersistentMapping):
         Returns:
             The singleton instance.
         Raises:
-            TypeError: The connection argument must be an instance of ZODB.Connection.Connection
+            TypeError: The connection argument must be an instance of 
+                    ZODB.Connection.Connection
         """
         if Candidatures._instance is not None:
+            #check if the zodb connexion is still alive then return the instance
+            try:
+                'test' in Candidatures._instance
+            except Exception as e:
+                log.error(f"Error while getting candidatures instance: {e}")
+                raise e
             return Candidatures._instance
 
         # Check if a ZODB is provided
         if not isinstance(connection, Connection):
-            raise TypeError("The connection argument must be an instance of ZODB.Connection.Connection")
+            raise TypeError(
+                "The connection argument must be an instance of "
+                "ZODB.Connection.Connection"
+            )
 
         # check if root exists
         root = connection.root()
@@ -249,14 +284,19 @@ class Candidatures(PersistentMapping):
     @property
     def monitored_candidatures(self)-> PersistentMapping:
         """ Get the monitored candidatures.
-        A monitored candidature is a candidature that is not in DRAFT or APPROUVED or REFUSED state and needs to be monitored.
-        For exemple, It could be necessary to send them a reminder email to the verifiers if the expiration date is approaching.
+        A monitored candidature is a candidature that is not in DRAFT or
+          APPROUVED or REFUSED state and needs to be monitored.
+        For exemple, It could be necessary to send them a reminder email
+          to the verifiers if the expiration date is approaching.
         Returns:
             The monitored candidatures.
         """
         return self._monitored_candidatures
 
-def random_string(length:int, chars:str = string.ascii_lowercase + string.digits) -> str:
+def random_string(
+        length:int,
+        chars:str = string.ascii_lowercase + string.digits
+    ) -> str:
     """ Generate a random string of a given length.
     Could be overloaded for testing.
     Args:
@@ -317,7 +357,8 @@ class Candidature(Persistent):
         """    Initialize a new Candidature object.
 
         Args:
-            data (Optional[Type]): Initial data for the candidature. Defaults to None.
+            data (Optional[Type]): Initial data for the candidature.
+             Defaults to None.
 
         Attributes:
             _data (CandidatureData): The data for the candidature.
@@ -331,8 +372,10 @@ class Candidature(Persistent):
             _votes (Dict): A dictionary to keep track of votes.
             _oid (str): A unique object identifier.
             _seed (str): A random string used to generate the OID.
-            _email_send_status_history (List[CandidatureEmailEvent]): A list to record email send status history.
-            _challenge (Tuple[str, int]): A tuple containing the string math challenge and the solution in integer.
+            _email_send_status_history (List[CandidatureEmailEvent]): A list to
+             record email send status history.
+            _challenge (Tuple[str, int]): A tuple containing the string math
+             challenge and the solution in integer.
             _pseudonym (str): The pseudonym of the candidature.
         Raises:
             RuntimeError: Raised if an instance already exists with same oid.
@@ -363,12 +406,17 @@ class Candidature(Persistent):
         """Memorize changes to the candidature and generate a new seed.
         
         Args:
-            function_name (Optional[str]): The name of the function that triggered the change. Defaults to "_change_seed".
-            previous_value (Optional[Any]): The previous value of the candidature property. Defaults to None.
-            new_value (Optional[Any]): The new value of the candidature property. Defaults to None.
+            function_name (Optional[str]): The name of the function that
+             triggered the change. Defaults to "_change_seed".
+            previous_value (Optional[Any]): The previous value of the
+             candidature property. Defaults to None.
+            new_value (Optional[Any]): The new value of the candidature
+            property. Defaults to None.
         """
-        function_name = function_name or "_change_seed"  # Fallback to "_change_seed" if function_name is None
-        old_seed = self._seed or "None"  # Fallback to "None" if self._seed is None
+        # Fallback to "_change_seed" if function_name is None
+        function_name = function_name or "_change_seed"
+        # Fallback to "None" if self._seed is None
+        old_seed = self._seed or "None"
 
         self._seed = random_string(SEED_LENGTH) 
 
@@ -410,7 +458,9 @@ class Candidature(Persistent):
             TypeError: The state must be an instance of CandidatureStates.
         """
         if not isinstance(value, CandidatureStates):
-            raise TypeError("The state must be an instance of CandidatureStates.")
+            raise TypeError(
+                "The state must be an instance of CandidatureStates."
+            )
         
         old_state = self._state.name if self._state else "None"
         self._state = value
@@ -435,7 +485,9 @@ class Candidature(Persistent):
             TypeError: The type must be an instance of CandidatureTypes.
         """
         if not isinstance(value, CandidatureTypes):
-            raise TypeError("The type must be an instance of CandidatureTypes.")
+            raise TypeError(
+                "The type must be an instance of CandidatureTypes."
+            )
         
         old_type = self._type.name if self._type else "None"
         self._type = value
@@ -485,7 +537,10 @@ class Candidature(Persistent):
             TypeError: The challenge must be a dict of tuple.
         """
         if not isinstance(value, dict):
-            raise TypeError("The challenge must be a dictionary with strings as keys and tuples as values.")
+            raise TypeError(
+                "The challenge must be a dictionary with strings as keys and "
+                "tuples as values."
+            )
         
         old_challenge = self._challenge if self._challenge else "None"
         self._challenge = value
@@ -520,7 +575,8 @@ class Candidature(Persistent):
     def modifications(self)-> List[CandidatureEvent]:
         """ Get the modifications of the candidature.
         Returns:
-            A copy of modifications of the candidature as a list of CandidatureEvent.
+            A copy of modifications of the candidature as a list of
+             CandidatureEvent.
         """
         return self._modifications.copy()
     
@@ -608,23 +664,31 @@ class Candidature(Persistent):
         self._memorize_changes("votes", old_votes, value)
 
     @staticmethod
-    def generate_unique_oid(candidatures:Candidatures = None, max_retries:int = 10):
+    def generate_unique_oid(
+        candidatures:Candidatures = None,
+        max_retries:int = 10
+        )-> str:
         """
         Generate a unique Object Identifier (OID) for a new Candidature object.
 
-        This function tries to generate a unique OID by using the CandidatureFunctions.uuid function.
-        It checks for uniqueness by looking into the existing `candidatures` mapping.
+        This function tries to generate a unique OID by using the 
+         CandidatureFunctions.uuid function.
+        It checks for uniqueness by looking into the existing `candidatures`
+         mapping.
 
         Args:
-            candidatures (Candidatures, optional): The mapping of existing candidatures to check for OID uniqueness. 
-                                                Defaults to the singleton instance of the Candidatures class.
-            max_retries (int, optional): Maximum number of attempts to generate a unique OID. Defaults to 10.
+            candidatures (Candidatures, optional): The mapping of existing
+             candidatures to check for OID uniqueness. 
+             Defaults to the singleton instance of the Candidatures class.
+            max_retries (int, optional): Maximum number of attempts to generate
+             a unique OID. Defaults to 10.
 
         Returns:
             str: A unique OID.
 
         Raises:
-            ValueError: If a unique OID cannot be generated after `max_retries` attempts.
+            ValueError: If a unique OID cannot be generated after `max_retries`
+             attempts.
         """
         if candidatures is None:
             # get the singleton instance
@@ -633,7 +697,9 @@ class Candidature(Persistent):
             oid = str(CandidatureFunctions.uuid())
             if oid not in candidatures:
                 return oid
-        raise ValueError(f"Failed to generate a unique OID after {max_retries} attempts.")
+        raise ValueError(
+            f"Failed to generate a unique OID after {max_retries} attempts."
+        )
 
     @property
     def email_send_status_history(self)-> List[CandidatureEmailEvent]:
@@ -643,24 +709,41 @@ class Candidature(Persistent):
         """
         return self._email_send_status_history.copy()    
     
-    def add_email_send_status(self, status:CandidatureEmailSendStatus, procedure_name:str):
+    def add_email_send_status(
+            self,
+            status:CandidatureEmailSendStatus,
+            procedure_name:str
+        ):
         """ Add an email send status to the candidature.
         Args:
-            status (CandidatureEmailSendStatus): The new status of the email sent to the applicant.
-            procedure_name (str): The name of the procedure used to send the email to the applicant.
+            status (CandidatureEmailSendStatus): The new status of the email
+             sent to the applicant.
+            procedure_name (str): The name of the procedure used to send the
+             email to the applicant.
 
         Raises:
-            TypeError: The status must be an instance of CandidatureEmailSendStatus.
+            TypeError: The status must be an instance of
+             CandidatureEmailSendStatus.
         """
         if not isinstance(status, CandidatureEmailSendStatus):
-            raise TypeError("The status must be an instance of CandidatureEmailSendStatus.")
-        old_status = self._email_send_status_history[-1].state if self._email_send_status_history else "None"
+            raise TypeError(
+                "The status must be an instance of CandidatureEmailSendStatus."
+            )
+        old_status = (
+            self._email_send_status_history[-1].state 
+            if self._email_send_status_history
+            else "None"
+        )
 
         # if the status is IN_PREPARATION, generate a new seed
         if status == CandidatureEmailSendStatus.IN_PREPARATION:
             email_seed = random_string(SEED_LENGTH)
         else:
-            email_seed = self._email_send_status_history[-1].seed if self._email_send_status_history else "None"
+            email_seed = (
+                self._email_send_status_history[-1].seed
+                if self._email_send_status_history
+                else "None"
+            )
         self._email_send_status_history.append(CandidatureEmailEvent(
             datetime=CandidatureFunctions.now(), 
             state=status,

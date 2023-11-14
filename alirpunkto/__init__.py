@@ -9,6 +9,7 @@ from pyramid.events import NewRequest, subscriber
 from pyramid.config import Configurator
 from pyramid_mailer.mailer import Mailer
 import logging
+
 from .models import appmaker
 from .models.candidature import Candidatures
 from pyramid.session import SignedCookieSessionFactory
@@ -84,6 +85,10 @@ EUROPEAN_LOCALES = {
 EUROPEAN_ZONES = [tz for tz in pytz.all_timezones if tz.startswith('Europe')]
 
 def get_locales():
+    """Return the list of available locales.
+    Returns:
+        list: The list of available locales.
+    """
     dir_ = os.listdir(os.path.join(os.path.dirname(__file__),
                                    '.', 'locale'))
     return list(filter(lambda x: not x.endswith('.pot'), dir_)) + ['en']
