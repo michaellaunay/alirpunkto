@@ -515,6 +515,10 @@ def handle_confirmed_human_state(request, candidature):
                 CandidatureEmailSendStatus.ERROR,
                 email_template
             )
+        if candidature.type == CandidatureTypes.COOPERATOR:
+            if err := prepare_for_cooperator(request, candidature):
+                return err
+            return get_template_parameters_for_cooperator(request, candidature)
     
     return {
         'form': form.render(appstruct=appstruct),
@@ -522,15 +526,18 @@ def handle_confirmed_human_state(request, candidature):
         'CandidatureTypes': CandidatureTypes
     }
 
-def handle_unique_data_state(request, candidature):
-    """Handle the unique data state.
+def prepare_for_cooperator(
+        request:Request,
+        candidature:Candidature
+    ) -> Optional[dict]:
+    """Prepare the candidature for a cooperator.
 
     Args:
         request (pyramid.request.Request): the request
         candidature (Candidature): the candidature
 
     Returns:
-        HTTPFound: the HTTP found response
+        Optional[dict]: the error dictionary or None
     """
     if not candidature.voters:
         transaction = request.tm
@@ -559,7 +566,48 @@ def handle_unique_data_state(request, candidature):
                     fullsurname = candidature.data.fullsurname,
                 )
             }
+    return None
 
+def get_template_parameters_for_cooperator(
+        request:Request,
+        candidature:Candidature
+    )->dict:
+    """Get the template parameters for a cooperator.
+    Args:
+        request (pyramid.request.Request): the request
+        candidature (Candidature): the candidature
+    Returns:
+        dict: the template parameters
+    """
+    return {
+        'candidature': candidature,
+        'CandidatureTypes': CandidatureTypes,
+        'voters': candidature.voters,
+        'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+        'signature': MAIL_SIGNATURE.format(
+            site_name=request.registry.settings.get('site_name'),
+            fullname = candidature.data.fullname,
+            fullsurname = candidature.data.fullsurname if getattr(
+                candidature.data,
+                'fullsurname',
+                "Alirpunkto team"
+            ) else "",
+        )
+    }
+
+
+def handle_unique_data_state(request, candidature):
+    """Handle the unique data state.
+
+    Args:
+        request (pyramid.request.Request): the request
+        candidature (Candidature): the candidature
+
+    Returns:
+        HTTPFound: the HTTP found response
+    """
+    if not candidature.voters:
+        prepare_for_cooperator(request, candidature)
     if 'confirm' in request.POST:
         #Get identity Verification method
 
@@ -587,22 +635,7 @@ def handle_unique_data_state(request, candidature):
                 "send_candidature_pending_email"
             )
 
-    return {
-        'candidature': candidature,
-        'CandidatureTypes': CandidatureTypes,
-        'voters': candidature.voters,
-        'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
-        'signature': MAIL_SIGNATURE.format(
-            site_name=request.registry.settings.get('site_name'),
-            fullname = candidature.data.fullname,
-            fullsurname = candidature.data.fullsurname if getattr(
-                candidature.data,
-                'fullsurname',
-                "Alirpunkto team"
-            ) else "",
-        )
-    }
-
+    return get_template_parameters_for_cooperator(request, candidature)
 
 
 def handle_pending_state(request, candidature):
