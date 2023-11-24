@@ -22,7 +22,7 @@
 
     <p tal:omit-tag="textual">Now that your application has been approved, you can log in to our platform using the pseudonym and password you provided during the application process.</p>
     
-    <p tal:omit-tag="textual">Thank you for showing interest in joining us. We look forward to working together with you!</p>
+    <p tal:omit-tag="textual">Thank you for joining us! We are happy to welcome you in our Community, and look forward to working together with you!</p>
     
     <p tal:omit-tag="textual">Best regards,</p>
     <p tal:omit-tag="textual">The team of <span tal:replace="site_name">Site Name</span></p>
