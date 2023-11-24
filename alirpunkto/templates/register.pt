@@ -56,7 +56,8 @@
                         <!-- Submit Button -->
                         <input type="submit" value="Submit" name="submit"
                             title="Click to submit your registration."
-                            i18n:attributes="title submit_registration_title; value submit_button" />
+                            i18n:attributes="title submit_registration_title; value submit_button"
+                        />
                     </form>
                 </div>
 
@@ -164,7 +165,10 @@
                         <label i18n:translate="sent_confirmation_label">Sent confirmation</label>
                         <input type="submit" value="Confirm" name="confirm"
                             title="Confirm you sent the emails."
-                            i18n:attributes="title submit_email_confirmation_title; value confirm_email_send_button_label" />
+                            i18n:attributes="title submit_email_confirmation_title; value confirm_email_send_button_label"
+                            id="submit_button"
+                            disabled="true" 
+                        />
                     </form>
                 </div>
 

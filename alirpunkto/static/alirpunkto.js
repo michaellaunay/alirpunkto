@@ -35,4 +35,5 @@ function sendEmail() {
     }
 
     window.location.href = `mailto:${encodeURIComponent(userEmail)}?bcc=${encodeURIComponent(emails)}&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    document.getElementById("submit_button").disabled = false;
 }
