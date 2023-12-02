@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
-<head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Changement de Statut de Votre Candidature</title>
-</head>
-<body tal:omit-tag="textual">
-    <h1 tal:omit-tag="textual">Évolution de Votre Candidature</h1>
-    
-    <p tal:omit-tag="textual">Bonjour <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du Candidat</span>,</p >
-    
-    <p tal:omit-tag="textual">Votre candidature sur la plateforme <span tal:replace="site_url">URL</span> en tant que <span tal:replace="python:candidature.type">Rôle</span>
-        <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">a été acceptée</span>
-        <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">a été refusée</span>
-        <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">est en cours de traitement et a changé de statut</span>
-        .
-    </p>
-    
-    <p  tal:omit-tag="textual">Voici les détails de son évolution :</p>
-    <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">ID de la Candidature : <span tal:replace="python:candidature.oid">ID de la Candidature</span></li>
-        <li tal:omit-tag="textual">Date de Transition : <span tal:replace="python:candidature.modifications[-1].datetime">Dernière transition</span></li>
-        <li tal:omit-tag="textual">Nouveau Statut : <span tal:replace="python:candidature.state">Nouveau statut de la candidature</span></li>
-        <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
-            <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
-            <span tal:replace="string:${page_register_with_oid}"></span>
-            </a>
-        </li>
-    </ul>
-    
-    <p tal:omit-tag="textual">Merci pour votre participation.</p>
-    
-    <p tal:omit-tag="textual">Cordialement,</p>
-    <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Nom du Site</span></p>
-</body>
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Changement de statut de votre candidature</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Évolution de votre candidature vers <span tal:replace="site_name">nom du site</span></h1>
+        <p tal:omit-tag="textual">Bonjour<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du candidat</span>,
+        </p>
+        </p> <p tal:omit-tag="textual">Votre candidature sur la plateforme
+            <span tal:replace="site_url">URL</span> en tant que 
+            <span tal:replace="python:candidature.type">Rôle</span>
+            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">a été acceptée</span>
+            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">a été rejetée</span>
+            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">est en cours de traitement et a changé d'état</span> . 
+        </p>
+        </p> tal:omit-tag="textual">Voici les détails de son évolution:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Identification de la candidature : <span tal:replace="python:candidature.oid">Identification de la candidature</span></li>
+            <li tal:omit-tag="textual">Date de transition : <span tal:replace="python:candidature.modifications[-1].datetime">Dernière transition</span></li>
+            <li tal:omit-tag="textual">Nouveau statut : <span tal:replace="python:candidature.state">Nouvel état de la candidature</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Si vous le souhaitez, vous pouvez interrompre votre processus d'inscription maintenant. Vous pourrez la reprendre plus tard en cliquant sur le lien ci-dessous.
+            </li>
+            <li:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Merci de votre participation.</p> <p style="text-align : justify ;">Merci de votre participation.
+        <p tal:omit-tag="textual">Meilleures salutations,</p>
+        </p> <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Nom du site</span></p> <p>L'équipe de <span tal:replace="site_name">Nom du site</span><p>.
+    </body>
 </html>
