@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Înregistrarea dumneavoastră la <span tal:omit-tag="textual" tal:replace="site_name"></span>. Următorii pași</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Bună ziua <span tal:replace="full_name">Numele solicitantului</span>,</h1>
+    <p tal:omit-tag="textual">Mulțumim că ați trimis aplicația dumneavoastră la <span tal:replace="site_name"></span>! </p>
+
+    <p tal:omit-tag="textual">În funcție de opțiunea pe care ați ales-o în timpul înregistrării, iată care sunt următorii pași:</p>
+
+    <h2 tal:omit-tag="textual">Dacă ați ales opțiunea "Membru ordinar al comunității":</h2>.
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Felicitări, sunteți acum un "Membru ordinar al comunității"!</li>
+        <li tal:omit-tag="textual">Numărul dvs. de membru a fost determinat.</li>
+        <li tal:omit-tag="textual">V-a fost trimis un e-mail de felicitare.</li>
+        <li tal:omit-tag="textual">Statul cererii dumneavoastră este acum "ApprovedOrdinaryCommunityMember".</li>
+        <li tal:omit-tag="textual">Nu mai este nevoie de nicio acțiune suplimentară din partea dumneavoastră. Conectați-vă la spațiul nostru <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">workspace</a> și începeți să interacționați cu ceilalți membri ai Comunității!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Dacă ați ales opțiunea "Cooperator":</h2>
+    <p tal:omit-tag="textual">Vă veți avea dreptul de a participa pe deplin la procesele noastre decizionale și la voturile noastre. În aceste procese și voturi, dorim să păstrăm principiul democratic "o persoană = un vot". Ar fi incorect ca o anumită persoană să poată vota de mai multe ori, utilizând mai multe conturi pe platforma noastră IT. Prin urmare, trebuie să facem legătura între contul dvs. personal și dvs. și să ne asigurăm că sunteți identificat pe platforma noastră IT într-un mod care nu poate fi confundat cu identitatea unei alte persoane, adică cu un set unic de identificatori.</p>
+    <p tal:omit-tag="textual">În plus, dorim să ne asigurăm că numai cetățenii Uniunii Europene sunt cooperatori. Motivul este că vom pretinde dreptul de a participa la alegerile publice din Uniunea Europeană ca organizație unică la scara UE și trebuie să demonstrăm că reprezentăm doar cetățenii UE (și nu "interese străine").</p>
+    <p tal:omit-tag="textual">Pentru a atinge aceste obiective, vă vom solicita să furnizați următoarele informații, așa cum apar în documentele dumneavoastră oficiale de identitate:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Toate prenumele dumneavoastră (în transcrierea lor oficială în caractere latine pentru greacă și bulgară),</li>
+        <li tal:omit-tag="textual">Toate numele de familie la naștere (în transcrierea lor oficială în caractere latine pentru greacă și bulgară),</li>
+        <li tal:omit-tag="textual">Data nașterii dumneavoastră,</li>
+        <li tal:omit-tag="textual">Naționalitatea dvs. (numai dintre naționalitățile statelor membre ale UE).</li>
+    </ul>
+    <p tal:omit-tag="textual">Vă veți furniza aceste informații pe platforma noastră de înregistrare, iar un set de 3 până la 7 cooperatori selectați aleatoriu, numiți Verificatori, vor verifica dacă informațiile pe care le-ați furnizat pe platforma noastră de înregistrare corespund cu cele din documentele dvs. oficiale de identitate. Prin urmare, veți transmite imagini parțiale ale documentelor dvs. de identitate oficiale direct acestor verificatori, fără a utiliza (din motive de securitate) platforma noastră IT.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Există două metode prin care puteți transmite aceste fotografii parțiale ale documentelor dumneavoastră oficiale de identitate către verificatori:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via videoconferință</strong>: Un buton vă va ghida în redactarea unui e-mail precompletat, în care puteți propune datele și orele de programare pentru o conferință (sau conferințe video) unică sau separată cu verificatorii care v-au fost atribuiți. În timpul acestei (acestor) videoconferințe, le veți arăta verificatorilor documentul dvs. de identitate oficial prin intermediul camerei dvs. de filmat, asigurându-vă că, de exemplu, numărul documentului de identitate și locul nașterii rămân ascunse, pentru a evita (din motive de securitate) afișarea unei copii complete a acestui document.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via e-mail atașat</strong>: Un buton vă va ajuta să scrieți un e-mail precompletat, la care puteți atașa o copie parțială a documentului oficial de identitate (de exemplu, mascând numărul și locul nașterii).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Care verificator va verifica apoi conformitatea informațiilor pe care le-ați furnizat în formularul de înregistrare al platformei noastre informatice cu cele din documentul dumneavoastră oficial de identitate. Fiecare Verificator va vota apoi în mod independent pe platforma noastră IT cu privire la această verificare a conformității. În cazul în care majoritatea verificatorilor acceptă că informațiile pe care le-ați furnizat pe platforma noastră de înregistrare corespund cu cele de pe documentele dvs. oficiale de identitate, wde va avea plăcerea de a vă primi în calitate de Cooperator!</p>
+
+    <p tal:omit-tag="textual">În cazul în care trimiterea e-mailului eșuează din orice motiv, se va înregistra un mesaj de eroare și se va încerca trimiterea unui e-mail către administrator.</p>
+
+    <p tal:omit-tag="textual">Vă reamintim că timpul alocat pentru a efectua acest proces de verificare este limitat, așa că vă rugăm să acționați rapid.</p>
+
+    <p tal:omit-tag="textual">Dacă aveți întrebări sau aveți nevoie de clarificări suplimentare, nu ezitați să ne contactați.</p>
+
+    <p tal:omit-tag="textual">Cele mai bune salutări,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Echipa <span tal:omit-tag="textual" tal:replace="site_name"></span></strong></p>
+
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Această notificare a fost generată automat. Vă rugăm să nu răspundeți direct la acest mesaj.</small></p>
+</body>
+</html>
