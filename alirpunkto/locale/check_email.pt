@@ -22,6 +22,7 @@
             <p tal:omit-tag="textual">Operation D is <span tal:content="challenge_D"
                     tal:omit-tag="textual">The fourth challenge</span></p>
         </div>
+        <p tal:omit-tag="textual">Link to the registration page on which to provide the results of the operations A to D above:</p>
         <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
             <span tal:replace="string:${page_register_with_oid}"></span>
         </a>
