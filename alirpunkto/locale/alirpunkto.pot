@@ -157,7 +157,7 @@ msgid "candidature_types_ordinary_value"
 msgstr "Ordinary: An application to become an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
 
 msgid "candidature_types_cooperator_value"
-msgstr "Cooperator: An application to become a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle and that s/he is a citizen of the European Union, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
+msgstr "Cooperator: An application to become a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle and that the Applicant is a citizen of the European Union, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
 
 msgid "candidature_types_ordinary"
 msgstr "Ordinary Member of the Community"
@@ -247,7 +247,7 @@ msgid "result_label_title_A"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation A."
 
 msgid "result_input_title_A"
-msgstr "In order for us to verify your e-mail address, please enter the result of the operation A that you received per e-mail."
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation A that you received per e-mail."
 
 msgid "enter_result_label_B"
 msgstr "Please enter the result for mathematical operation B:"
@@ -256,7 +256,7 @@ msgid "result_label_title_B"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation B."
 
 msgid "result_input_title_B"
-msgstr "In order for us to verify your e-mail address, please enter the result of the operation B that you received per e-mail."
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation B that you received per e-mail."
 
 msgid "enter_result_label_C"
 msgstr "Please enter the result for mathematical operation C:"
@@ -265,7 +265,7 @@ msgid "result_label_title_C"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation C."
 
 msgid "result_input_title_C"
-msgstr "In order for us to verify your e-mail address, please enter the result of the operation C that you received per e-mail."
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation C that you received per e-mail."
 
 msgid "enter_result_label_D"
 msgstr "Please enter the result for mathematical operation D:"
@@ -274,7 +274,7 @@ msgid "result_label_title_D"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation D."
 
 msgid "result_input_title_D"
-msgstr "In order for us to verify your e-mail address, please enter the result of the operation D that you received per e-mail."
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation D that you received per e-mail."
 
 msgid "verify_button"
 msgstr "Submit"
@@ -337,7 +337,7 @@ msgid "approved_description"
 msgstr "Your application has been approved. You can now log in using the pseudonym and password you provided during the application process."
 
 msgid "invalid_pseudonym"
-msgstr "Invalid pseudonym. It should be between 5 and 20 characters long and can only contain letters (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-), and no spaces."
+msgstr "Invalid pseudonym. It should be between 5 and 20 characters long and can only contain letters (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-), and spaces."
 
 msgid "Select_a_country"
 msgstr "Select a Member State of the European Union"
@@ -442,7 +442,7 @@ msgid "pending_description"
 msgstr "Your application is being reviewed. You will be notified by email once it has been approved."
 
 msgid "candidature_not_found"
-msgstr "Candidature not found."
+msgstr "Application not found."
 
 msgid "cosmopolitical_cooperative_description"
 msgstr ""
@@ -478,7 +478,7 @@ msgid "Proceed"
 msgstr "Proceed"
 
 msgid "confirm_sent_emails_to_validators"
-msgstr "Please confirm you have sent the emails to the validators."
+msgstr "Please confirm you have sent the emails to the Verifiers."
 
 msgid "sent_confirmation_label"
 msgstr "Sent confirmation"
