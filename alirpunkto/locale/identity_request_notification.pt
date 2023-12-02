@@ -47,10 +47,9 @@
 
     <p tal:omit-tag="textual">If you have any questions or need further clarification, please do not hesitate to contact us.</p>
 
-    <p tal:omit-tag="textual">Best regards,<br />
+    <p tal:omit-tag="textual">Best regards,</p>
     <strong tal:omit-tag="textual">The <span tal:omit-tag="textual" tal:replace="site_name"></span> Team</strong></p>
 
-     tal:omit-tag="textual"<hr />
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note: This notification has been generated automatically. Please do not reply directly to this message.</small></p>
 </body>
 </html>
