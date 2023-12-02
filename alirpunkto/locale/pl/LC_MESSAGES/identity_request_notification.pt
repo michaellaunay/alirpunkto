@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Państwa rejestracja w <span tal:omit-tag="textual" tal:replace="site_name"></span>. Następne kroki</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Witam Państwa <span tal:replace="full_name">Imię i nazwisko wnioskodawcy</span>,</h1>.
+    <p tal:omit-tag="textual">Dziękujemy za przesłanie aplikacji do <span tal:replace="site_name"></span>! </p>
+
+    <p tal:omit-tag="textual">W zależności od opcji wybranej podczas rejestracji, oto kolejne kroki:</p>
+
+    <h2 tal:omit-tag="textual">Jeśli wybrali Państwo opcję "Zwykły członek społeczności":</h2>.
+    <ol tal:omit-tag="textual">.
+        <li tal:omit-tag="textual">Gratulacje, jest Pan teraz "Zwykłym członkiem społeczności"! </li>.
+        <li tal:omit-tag="textual">Państwa numer członkowski został ustalony.</li>
+        <li tal:omit-tag="textual">Wysłano do Pana/Pani e-mail z gratulacjami.</li>
+        <li tal:omit-tag="textual">Twój status aplikacji to teraz "ApprovedOrdinaryCommunityMember".</li>
+        <li tal:omit-tag="textual">Państwo nie muszą podejmować żadnych dalszych działań. Proszę połączyć się z naszą <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">przestrzenią roboczą</a> i rozpocząć interakcję z innymi członkami społeczności!</li>.
+    </ol>
+
+    <h2 tal:omit-tag="textual">Jeśli wybrali Państwo opcję "Współpracownik":</h2>
+    <p tal:omit-tag="textual">Będą Państwo uprawnieni do pełnego uczestnictwa w naszych procesach decyzyjnych i głosowaniach. W tych procesach i głosowaniach chcemy zachować demokratyczną zasadę "jedna osoba = jeden głos". Byłoby niesprawiedliwe, gdyby dana osoba mogła głosować kilka razy, korzystając z kilku kont na naszej platformie informatycznej. Dlatego musimy powiązać Państwa konto z Państwem osobiście i upewnić się, że są Państwo identyfikowani na naszej platformie informatycznej w sposób, który nie może być mylony z tożsamością innej osoby, tj. za pomocą unikalnego zestawu identyfikatorów.</p>
+    <p tal:omit-tag="textual">Ponadto chcemy zapewnić, że współpracownikami będą wyłącznie obywatele Unii Europejskiej. Powodem tego jest to, że będziemy ubiegać się o prawo do udziału w wyborach publicznych w Unii Europejskiej jako pojedyncza organizacja w skali UE i musimy wykazać, że reprezentujemy wyłącznie obywateli UE (a nie "interesy zagraniczne").</p>
+    <p tal:omit-tag="textual">Aby osiągnąć te cele, poprosimy Państwa o podanie następujących informacji, które znajdują się w Państwa oficjalnych dokumentach tożsamości:</p>
+    <ul tal:omit-tag="textual">.
+        <li tal:omit-tag="textual">Wszystkie Pana/Pani imiona i nazwiska (w oficjalnej transkrypcji na alfabet łaciński dla języka greckiego i bułgarskiego),</li>
+        <li tal:omit-tag="textual">Wszystkie nazwiska rodowe w chwili urodzenia (w oficjalnej transkrypcji alfabetem łacińskim dla języka greckiego i bułgarskiego),</li>
+        <li tal:omit-tag="textual">Pańska data urodzenia,</li>
+        <li tal:omit-tag="textual">Państwa narodowość (tylko spośród narodowości państw członkowskich UE).</li>
+    </ul>
+    <p tal:omit-tag="textual">Podadzą Państwo te informacje na naszej platformie rejestracyjnej, a zestaw od 3 do 7 losowo wybranych Współpracowników, zwanych Weryfikatorami, sprawdzi, czy informacje podane na naszej platformie rejestracyjnej są zgodne z informacjami zawartymi w Państwa oficjalnych dokumentach tożsamości. W związku z tym będą Państwo przesyłać częściowe zdjęcia swoich oficjalnych dokumentów tożsamości bezpośrednio do tych Weryfikatorów, bez (ze względów bezpieczeństwa) korzystania z naszej platformy informatycznej.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Istnieją dwie metody przesyłania częściowych zdjęć Państwa oficjalnych dokumentów tożsamości do Weryfikatorów:</strong></p>
+    <ol tal:omit-tag="textual">.
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Przez wideokonferencję</strong>: Przycisk poprowadzi Pana/Panią przez przygotowanie wstępnie wypełnionej wiadomości e-mail, w której może Pan/Pani zaproponować daty i godziny spotkań dla pojedynczej lub oddzielnych wideokonferencji z przypisanymi Panu/Pani Weryfikatorami. Podczas tej (tych) wideokonferencji pokaże Pan(i) Weryfikatorom swój oficjalny dokument tożsamości za pomocą kamery, upewniając się, że np. numer dokumentu tożsamości i miejsce urodzenia pozostają ukryte, aby uniknąć (ze względów bezpieczeństwa) wyświetlania pełnej kopii tego dokumentu.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual" >Przez załącznik e-mail</strong>: Przycisk pomoże Państwu w napisaniu wstępnie wypełnionej wiadomości e-mail, do której można załączyć częściową kopię oficjalnego dokumentu tożsamości (np. maskując numer i miejsce urodzenia).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Każdy Weryfikator sprawdzi następnie zgodność informacji podanych przez Państwa w formularzu rejestracyjnym na naszej platformie informatycznej z informacjami zawartymi w Państwa oficjalnym dokumencie tożsamości. Każdy Weryfikator przeprowadzi następnie niezależne głosowanie na naszej platformie informatycznej w sprawie tej weryfikacji zgodności. Jeśli większość Weryfikatorów uzna, że informacje podane przez Pana/Panią na naszej platformie rejestracyjnej są zgodne z informacjami zawartymi w Pana/Pani oficjalnych dokumentach tożsamości, będziemy mieli przyjemność powitać Pana/Panią jako Współpracownika!</p>
+
+    <p tal:omit-tag="textual">Jeśli wysyłanie wiadomości e-mail nie powiedzie się z jakiegokolwiek powodu, zostanie zarejestrowany komunikat o błędzie i zostanie podjęta próba wysłania wiadomości e-mail do administratora.</p>
+
+    <p tal:omit-tag="textual">Przypominamy, że czas przeznaczony na przeprowadzenie tego procesu weryfikacji jest ograniczony, więc prosimy działać szybko.</p>
+
+    <p tal:omit-tag="textual">Jeśli mają Państwo jakiekolwiek pytania lub potrzebują dalszych wyjaśnień, prosimy o kontakt.</p>
+
+    <p tal:omit-tag="textual">Pozdrawiamy,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Zespół <span tal:omit-tag="textual" tal:replace="site_name"></span></strong></p>
+
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Uwaga: To powiadomienie zostało wygenerowane automatycznie. Proszę nie odpowiadać bezpośrednio na tę wiadomość.</small></p>
+</body>
+</html>
