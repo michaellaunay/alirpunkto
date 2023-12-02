@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Votre inscription à <span tal:omit-tag="textual" tal:replace="site_name"></span>. Prochaines étapes</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Bonjour <span tal:replace="full_name">Nom du demandeur</span>,</h1>
+    <p tal:omit-tag="textual">Merci d'avoir soumis votre candidature à <span tal:replace="site_name"></span> ! </p>
+
+    <p tal:omit-tag="textual">En fonction de l'option que vous avez choisie lors de votre inscription, voici les étapes suivantes :</p> 
+
+    <h2 tal:omit-tag="textual">Si vous avez choisi l'option "Membre ordinaire de la Communauté"</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Félicitations, vous êtes maintenant un "Membre ordinaire de la Communauté"!</li>
+        <li tal:omit-tag="textual">Votre numéro de membre a été déterminé.</li>
+        <li tal:omit-tag="textual">Un courriel de félicitations vous a été envoyé.</li>
+        <li tal:omit-tag="textual">Votre statut de candidature est maintenant "ApprovedOrdinaryCommunityMember".</li>
+        <li:omit-tag="textual">Aucune autre action n'est nécessaire de votre part. Connectez-vous à notre <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">espace de travail</a> et commencez à interagir avec vos homologues de la Communauté!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Si vous avez choisi l'option "Coopérateur"</h2>
+    <p tal:omit-tag="textual">Vous aurez le droit de participer pleinement à nos processus de décision et à nos votes. Dans ces processus et ces votes, nous voulons préserver le principe démocratique "une personne = une voix". Il serait injuste qu'une même personne puisse voter plusieurs fois en utilisant plusieurs comptes sur notre plateforme informatique. Nous devons donc relier votre compte à votre personne et veiller à ce que vous soyez identifié.e sur notre plate-forme informatique d'une manière qui ne puisse être confondue avec l'identité d'une autre personne, c'est-à-dire avec un ensemble unique d'identifiants.</p>
+    <p tal:omit-tag="textual">En outre, nous voulons nous assurer que seul.e.s les citoyen.ne.s de l'Union européenne sont des coopérateurs. La raison en est que nous revendiquerons le droit de participer aux élections publiques dans l'Union européenne en tant qu'organisation unique à l'échelle de l'UE, et que nous devrons démontrer que nous représentons uniquement les citoyen.ne.s de l'UE (et non des "intérêts étrangers").</p> 
+   <p tal:omit-tag="textual">Afin d'atteindre ces objectifs, nous vous demanderons de fournir les informations suivantes, telles qu'elles figurent sur vos documents d'identité officiels :</p> 
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Tous vos prénoms (dans leur transcription officielle en caractères latins pour le grec et le bulgare),</li>
+        <li tal:omit-tag="textual">Tous vos noms de famille à la naissance (dans leur transcription officielle en caractères latins pour le grec et le bulgare),</li>
+        <li tal:omit-tag="textual">Votre date de naissance,</li>
+        <li tal:omit-tag="textual">Votre nationalité (parmi les nationalités des États membres de l'UE uniquement).</li>
+    </ul>
+    <p tal:omit-tag="textual">Vous fournirez ces informations sur notre plateforme d`inscription, et un ensemble de 3 à 7 coopérateurs sélectionnés de manière aléatoire, appelés les vérificateurs, vérifieront que les informations que vous avez fournies sur notre plateforme d`inscription correspondent à celles figurant sur vos documents d`identité officiels. Vous transmettrez donc des images partielles de vos documents d'identité officiels directement à ces vérificateurs, sans passer (pour des raisons de sécurité) par notre plate-forme informatique.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Vous disposez de deux méthodes pour transmettre ces images partielles de vos documents d'identité officiels aux vérificateurs:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Par visioconférence</strong> : Un bouton vous guidera dans la rédaction d'un courriel pré-rempli, dans lequel vous pourrez proposer des dates et heures de rendez-vous pour une ou plusieurs visioconférence(s) unique(s) ou séparée(s) avec les Vérificateurs qui vous ont été attribués. Au cours de cette (ces) vidéoconférence(s), vous montrerez votre document d'identité officiel aux vérificateurs via votre caméra, en veillant à ce que, par exemple, le numéro du document d'identité et le lieu de naissance restent cachés, afin d'éviter (pour des raisons de sécurité) qu'une copie intégrale de ce document ne soit affichée.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Par le biais d'une pièce jointe à un courriel</strong> : Un bouton vous aidera à rédiger un courriel prérempli, auquel vous pouvez joindre une copie partielle de votre document d'identité officiel (par exemple, en masquant le numéro et le lieu de naissance).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Chaque Vérificateur vérifiera ensuite la conformité des informations que vous avez fournies sur le formulaire d'enregistrement de notre plateforme informatique avec celles figurant sur votre document d'identité officiel. Chaque Vérificateur votera ensuite indépendamment sur notre plateforme informatique sur cette vérification de conformité. Si une majorité de Vérificateurs accepte que les informations que vous avez fournies sur notre plateforme d'enregistrement correspondent à celles de vos documents d'identité officiels, nous aurons le plaisir de vous accueillir en tant que Coopérateur !</p> 
+
+    <p tal:omit-tag="textual">Si l'envoi du courrier électronique échoue pour une raison quelconque, un message d'erreur sera enregistré et une tentative d'envoi d'un courrier électronique à l'administrateur sera effectuée.</p>
+
+    <p tal:omit-tag="textual">Nous vous rappelons que le temps qui vous est alloué pour effectuer ce processus de vérification est limité, veuillez donc agir rapidement.</p>
+
+    <p tal:omit-tag="textual">Si vous avez des questions ou si vous avez besoin d'éclaircissements supplémentaires, n'hésitez pas à nous contacter.</p> 
+
+    <p tal:omit-tag="textual"">Sincères salutations,<br/>
+    <strong tal:omit-tag="textual">L'équipe de <span tal:omit-tag="textual" tal:replace="site_name"></span></strong></p>
+
+     tal:omit-tag="textual"<hr />
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note : Cette notification a été générée automatiquement. Veuillez ne pas répondre directement à ce message.</small></p> 
+</body>
+</html>
