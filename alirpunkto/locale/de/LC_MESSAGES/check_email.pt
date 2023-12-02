@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registrierung auf <span tal:replace="site_name"></span></title>
+    </head>
+    <body tal:omit-tag=" textual">
+
+        <h1 tal:omit-tag="textual">Danke, dass Sie Ihre Registrierung auf der Plattform <span tal:replace="site_name"></span></h1>
+        <p tal:omit-tag="textual">Um Ihre E-Mail-Adresse zu verifizieren und sicherzustellen, dass Sie ein Mensch (und kein Roboter) sind, haben wir uns eine Reihe von 4 einfachen mathematischen Operationen ausgedacht. Bitte führen Sie die vier mathematischen Operationen von A bis D aus und tragen Sie die Ergebnisse in die entsprechenden Felder auf der unten verlinkten Registrierungsseite ein.</p>
+        <div omit-tag=" textual">
+            <p tal:omit-tag="textual">Operation A ist <span tal:content="Herausforderung_A"
+                    tal:omit-tag="textual">Die erste Herausforderung</span></p>
+            <p tal:omit-tag="textual">Operation B ist <span tal:content="Herausforderung_B"
+                    tal:omit-tag="textual">Die zweite Herausforderung</span></p>
+            <p tal:omit-tag="textual">Operation C ist <span tal:content="Herausforderung_C"
+                    tal:omit-tag="textual">Die dritte Herausforderung</span></p>
+            <p tal:omit-tag="textual">Operation D ist <span tal:content="Herausforderung_D"
+                    tal:omit-tag="textual">Die vierte Herausforderung</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link zur Registrierungsseite, auf der Sie die Ergebnisse der obigen Operationen A bis D angeben können:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string: ${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Wir danken Ihnen für Ihr Interesse an unseren Aktivitäten. Wir freuen uns darauf, Sie bald bei uns begrüßen zu dürfen!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
+            <p tal:omit-tag="textual">Das Team von <span tal:replace="site_name">Site</span></p>
+        </footer>
+
+    </body>
+</html>
