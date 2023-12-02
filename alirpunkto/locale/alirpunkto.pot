@@ -469,10 +469,10 @@ msgid "identity_verification_label"
 msgstr "Identity Verification"
 
 msgid "Send_id_copy_by_email"
-msgstr "Send a copy of your identity card by email."
+msgstr "Send a scan of a part of your official identity document by email."
 
 msgid "Send_video_conference_link"
-msgstr "Send a video conference date."
+msgstr "Send proposals for the date and timeslot of a video conference."
 
 msgid "Proceed"
 msgstr "Proceed"
@@ -481,7 +481,7 @@ msgid "confirm_sent_emails_to_validators"
 msgstr "Please confirm you have sent the emails to the Verifiers."
 
 msgid "sent_confirmation_label"
-msgstr "Sent confirmation"
+msgstr "Confirmation that the emails were sent to the Verifiers"
 
 msgid "submit_email_confirmation_title"
 msgstr "Confirm you sent the emails."
