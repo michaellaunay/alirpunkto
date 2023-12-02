@@ -15,7 +15,7 @@
 
     <h2 tal:omit-tag="textual">Se ha scelto l'opzione "Membro ordinario della comunità":</h2>
     <ol tal:omit-tag="textual">.
-        <li tal:omit-tag="textual">Congratulazioni, ora lei è un "Membro ordinario della Comunità"!
+        <li tal:omit-tag="textual">Congratulazioni, ora lei è un "Membro ordinario della Comunità"!</li>
         <li tal:omit-tag="textual">Il suo numero di iscrizione è stato determinato.</li>
         <li tal:omit-tag="textual">Le è stata inviata un'e-mail di congratulazioni.</li>
         <li tal:omit-tag="textual">Lo stato della sua domanda di adesione è ora " ApprovedOrdinaryCommunityMember ".</li>
