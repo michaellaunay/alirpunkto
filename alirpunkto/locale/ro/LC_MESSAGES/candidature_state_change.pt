@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Schimbare în statutul candidaturii dumneavoastră</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Evoluția candidaturii dumneavoastră la <span tal:replace="site_name">Numele site-ului</span></h1>
+        <p tal:omit-tag="textual">Bună ziua<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Numele candidatului</span>,
+        </p>
+        <p tal:omit-tag="textual">Aplicația dvs. pe platformă
+            <span tal:replace="site_url">URL</span> ca un 
+            <span tal:replace="python:candidature.type">Rolul</span>.
+            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">a fost acceptată</span>
+            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">a fost respins</span>
+            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">este în curs de procesare și și-a schimbat statutul</span> . 
+        </p>
+        <p tal:omit-tag="textual">Iată detalii despre evoluția sa:</p> <p>.
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Identificarea candidaturii: <span tal:replace="python:candidature.oid">Identificarea candidaturii</span></li>.
+            <li tal:omit-tag="textual">Data de tranziție: <span tal:replace="python:candidature.modifications[-1].datetime">Ultima tranziție</span></li>.
+            <li tal:omit-tag="textual">Statut nou: <span tal:replace="python:candidature.state">Statutul noii candidaturi</span></li>.
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">: <li tal:omit-tag="textual" tal:condition="exist:page_register_with_oid">
+            Dacă aveți nevoie, puteți întrerupe acum procesul de înregistrare. Îl veți putea relua mai târziu, făcând clic pe link-ul de mai jos.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span> <span tal:replace="string:${page_register_with_oid}"></span>.
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Mulțumim pentru participare.</p> <p>.
+        <p tal:omit-tag="textual">Cele mai bune salutări,</p>
+        <p tal:omit-tag="textual">Echipa de la <span tal:replace="site_name">Site Name</span></p>
+    </body>
+</html>
