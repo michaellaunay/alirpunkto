@@ -47,10 +47,8 @@
 
     <p tal:omit-tag="textual">Si vous avez des questions ou si vous avez besoin d'éclaircissements supplémentaires, n'hésitez pas à nous contacter.</p> 
 
-    <p tal:omit-tag="textual"">Sincères salutations,<br/>
+    <p tal:omit-tag="textual"">Sincères salutations,</p>
     <strong tal:omit-tag="textual">L'équipe de <span tal:omit-tag="textual" tal:replace="site_name"></span></strong></p>
-
-     tal:omit-tag="textual"<hr />
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note : Cette notification a été générée automatiquement. Veuillez ne pas répondre directement à ce message.</small></p> 
 </body>
 </html>
