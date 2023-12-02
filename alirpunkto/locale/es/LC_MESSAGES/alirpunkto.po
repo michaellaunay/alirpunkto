@@ -1,0 +1,571 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-12-02 12:08+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+"X-Poedit-Basepath: .\n"
+
+msgid "welcome"
+msgstr "Willkommen"
+
+msgid "username_label"
+msgstr "Benutzername"
+
+msgid "password_label"
+msgstr "Passwort zurücksetzen"
+
+msgid "login_label"
+msgstr "Anmelden"
+
+msgid "welcome_msg"
+msgstr ""
+"Willkommen bei Alirpunkto, dem zentralen Dienst für die in der IT-"
+"Infrastruktur von ${site_name} verwendeten Anwendungen."
+
+msgid "all_applications_msg"
+msgstr ""
+"Alle Anwendungen, die Sie zur Teilnahme an den Aktivitäten von {site_name} "
+"benötigen, an einem Ort."
+
+msgid "register_or_login_msg"
+msgstr "Registrieren Sie sich oder melden Sie sich jetzt an, um loszulegen."
+
+msgid "logged_in_msg_title"
+msgstr ""
+"Alirpunkto, der zentrale Dienst für die Anwendungen, die in der IT-"
+"Infrastruktur von {site_name} benutzt werden"
+
+msgid "logged_in_msg"
+msgstr "Sie sind als {user} eingeloggt."
+
+msgid "log_out_invitation_msg"
+msgstr "Sie können sich abmelden, indem Sie hier klicken"
+
+msgid "logout_label"
+msgstr "Abmelden"
+
+msgid "choose_application_msg"
+msgstr "Wählen Sie die Anwendung, der Sie benutzen möchten:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Ungültiger Benutzername oder Passwort. Bitte versuchen Sie es erneut."
+
+msgid "register_link"
+msgstr "Konto erstellen"
+
+msgid "password_confirm_label"
+msgstr "Passwort bestätigen"
+
+msgid "password_confirm_title"
+msgstr "Bitte bestätigen Sie Ihr Passwort"
+
+msgid "forgot_password_label"
+msgstr "Passwort vergessen?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Vollständige(r) Vorname(n) wie in Ihren offiziellen Ausweispapieren"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Vollständige(r) Nachname(n) wie in Ihren offiziellen Ausweispapieren"
+
+msgid "birthdate_label"
+msgstr "Geburtstag"
+
+msgid "nationality_label"
+msgstr "Staatsangehörigkeit (unter den Mitgliedstaaten der Europäischen Union)"
+
+msgid "cooperator_number_label"
+msgstr "Genossenschaftlernummer"
+
+msgid "pseudonym_label"
+msgstr "Pseudonym"
+
+msgid "email_label"
+msgstr "E-Mail-Adresse"
+
+msgid "first_interaction_language_label"
+msgstr "Die von dir bevorzugte Sprache, in der wir mit Ihnen kommunizieren"
+
+msgid "second_interaction_language_label"
+msgstr ""
+"Die Sprache, die Sie als zweite Wahl akzeptieren, damit wir mit Ihnen "
+"kommunizieren können"
+
+msgid "register_label"
+msgstr "Registrieren"
+
+msgid "forgot_password_head"
+msgstr "Passwort vergessen"
+
+msgid "forgot_your_password_title"
+msgstr "Passwort vergessen?"
+
+msgid "enter_your_email_address_label"
+msgstr "Geben Sie Ihre E-Mail-Adresse ein:"
+
+msgid "submit_button"
+msgstr "Senden"
+
+msgid "candidature_states_draft_value"
+msgstr "Entwurf: Die Anwendung befindet sich im Entwurfsmodus."
+
+msgid "candidature_states_email_validation_value"
+msgstr ""
+"E-Mail-Überprüfung: Der Status, in dem die E-Mail-Adresse des Antragstellers "
+"auf ihre Validierung wartet."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr ""
+"BestätigterMensch: Die E-Mail-Adresse des Bewerbers ist verifiziert und der "
+"Nachweis der Menschlichkeit ist erbracht (wir haben überprüft, dass Sie kein "
+"Roboter sind)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"EindeutigeDaten: Der Antragsteller hat seine persönlichen "
+"Identifikationsdaten eingegeben, und wir haben überprüft, dass kein "
+"aktueller oder kürzlich abgemeldeter Genossenschafter oder ordentliches "
+"Mitglied der Gemeinschaft dieselben Daten hat."
+
+msgid "candidature_states_pending_value"
+msgstr ""
+"Anhängig: Der Antrag wurde eingereicht. Die persönlichen "
+"Identifikationsdaten wurden an die Prüfer übermittelt, aber sie haben noch "
+"keine Rückmeldung gegeben."
+
+msgid "candidature_states_approved_value"
+msgstr "Genehmigt: Der Antrag wurde angenommen."
+
+msgid "candidature_states_refused_value"
+msgstr "Abgelehnt: Der Antrag wurde abgelehnt."
+
+msgid "candidature_states_draft"
+msgstr "Entwurf"
+
+msgid "candidature_states_email_validation"
+msgstr "email_validierung"
+
+msgid "candidature_states_confirmed_human"
+msgstr "bestätigt_menschlich"
+
+msgid "candidature_states_unique_data"
+msgstr "eindeutige_Daten"
+
+msgid "candidature_states_pending"
+msgstr "ausstehend"
+
+msgid "candidature_states_approved"
+msgstr "genehmigt"
+
+msgid "candidature_states_refused"
+msgstr "abgelehnt"
+
+msgid "candidature_types_ordinary_value"
+msgstr ""
+"Ordentlich: Ein Antrag auf eine ordentliche Mitgliedschaft in der "
+"Gemeinschaft = mit vereinfachtem Registrierungsverfahren, ohne finanzielle "
+"Verpflichtungen, aber ohne Entscheidungsrechte."
+
+msgid "candidature_types_cooperator_value"
+msgstr ""
+"Genossenschaftler: Ein Antrag auf Vollmitgliedschaft in der Genossenschaft, "
+"ein Cooperator = mit einem vollständigen Registrierungsverfahren, das den "
+"Grundsatz \"eine Person = eine Stimme\" gewährleistet und sicherstellt, dass "
+"der Antragsteller ein Bürger der Europäischen Union ist, die Verpflichtung, "
+"mindestens einen Anteil zu erwerben und einen Jahresbeitrag zu zahlen, sowie "
+"volle Entscheidungsrechte."
+
+msgid "candidature_types_ordinary"
+msgstr "Ordentliches Mitglied der Gemeinschaft"
+
+msgid "candidature_types_cooperator"
+msgstr "Genossenschaftler = Vollmitglied der Genossenschaft"
+
+msgid "vote_types_yes_value"
+msgstr "Ja: Die Abstimmung ist positiv."
+
+msgid "vote_types_no_value"
+msgstr "Nein: Die Abstimmung ist negativ."
+
+msgid "vote_types_abstain_value"
+msgstr "Enthaltung: Die Abstimmung ist neutral."
+
+msgid "vote_types_yes"
+msgstr "ja"
+
+msgid "vote_types_no"
+msgstr "nein"
+
+msgid "vote_types_abstain"
+msgstr "enthaltung"
+
+msgid "zero"
+msgstr "null"
+
+msgid "one"
+msgstr "eins"
+
+msgid "two"
+msgstr "zwei"
+
+msgid "three"
+msgstr "drei"
+
+msgid "four"
+msgstr "vier"
+
+msgid "five"
+msgstr "Fünf"
+
+msgid "six"
+msgstr "sechs"
+
+msgid "seven"
+msgstr "sieben"
+
+msgid "eight"
+msgstr "acht"
+
+msgid "nine"
+msgstr "neun"
+
+msgid "times"
+msgstr "mal"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "email_validation_subject"
+msgstr ""
+"Wir überprüfen,  dass Sie ein Mensch sind. Lösen Sie die Aufgabe und geben "
+"Sie die Antwort auf dem Portal ein"
+
+msgid "email_candidature_state_changed"
+msgstr "Änderung des Status Ihrer Bewerbung im Portal"
+
+msgid "invalid_challenge"
+msgstr "Ihre Antwort ist falsch. Bitte geben Sie eine neue ein."
+
+msgid "invalid_email"
+msgstr ""
+"Es gibt ein Problem mit Ihrer E-Mail-Adresse, bitte überprüfen Sie sie."
+
+msgid "invalid_choice"
+msgstr "Ihre Auswahl ist ungültig, bitte geben Sie sie erneut ein."
+
+msgid "challenge_instruction_text"
+msgstr ""
+"Bitte rechnen Sie die Ergebnisse der folgenden vier einfachen mathematischen "
+"Operationen aus und füllen Sie die entsprechenden Felder aus, um Ihre E-Mail-"
+"Adresse zu bestätigen."
+
+msgid "enter_result_label_A"
+msgstr "Bitte geben Sie das Ergebnis der mathematischen Operation A ein:"
+
+msgid "result_label_title_A"
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der Rechenoperation A."
+
+msgid "result_input_title_A"
+msgstr ""
+"Damit wir Ihre E-Mail-Adresse verifizieren können und wissen, dass Sie ein "
+"Mensch (und kein Roboter) sind, geben Sie bitte das Ergebnis der Operation A "
+"ein, die Sie per E-Mail erhalten haben."
+
+msgid "enter_result_label_B"
+msgstr "Bitte geben Sie das Ergebnis für die mathematische Operation B ein:"
+
+msgid "result_label_title_B"
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der Rechenoperation B."
+
+msgid "result_input_title_B"
+msgstr ""
+"Damit wir Ihre E-Mail-Adresse verifizieren können und wissen, dass Sie ein "
+"Mensch (und kein Roboter) sind, geben Sie bitte das Ergebnis der Operation B "
+"ein, die Sie per E-Mail erhalten haben."
+
+msgid "enter_result_label_C"
+msgstr "Bitte geben Sie das Ergebnis für die mathematische Operation C ein:"
+
+msgid "result_label_title_C"
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der mathematischen Operation C."
+
+msgid "result_input_title_C"
+msgstr ""
+"Damit wir Ihre E-Mail-Adresse verifizieren können und wissen, dass Sie ein "
+"Mensch (und kein Roboter) sind, geben Sie bitte das Ergebnis der Operation C "
+"ein, die Sie per E-Mail erhalten haben."
+
+msgid "enter_result_label_D"
+msgstr "Bitte geben Sie das Ergebnis der mathematischen Operation D ein:"
+
+msgid "result_label_title_D"
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der mathematischen Operation D."
+
+msgid "result_input_title_D"
+msgstr ""
+"Damit wir Ihre E-Mail-Adresse verifizieren können und wissen, dass Sie ein "
+"Mensch (und kein Roboter) sind, geben Sie bitte das Ergebnis der Operation D "
+"ein, die Sie per E-Mail erhalten haben."
+
+msgid "verify_button"
+msgstr "Senden"
+
+msgid "submit_email_validation_title"
+msgstr "Klicken Sie , um die eingegebenen Codes zu überprüfen."
+
+msgid "passwords_dont_match"
+msgstr "Passwörter stimmen nicht überein."
+
+msgid "password_too_short"
+msgstr "Das Passwort ist zu kurz."
+
+msgid "password_minimum_length"
+msgstr ""
+"Das Passwort muss mindestens ${password_minimum_length} Zeichen lang sein."
+
+msgid "password_too_long"
+msgstr "Das Passwort ist zu lang."
+
+msgid "password_maximum_length"
+msgstr ""
+"Das Passwort sollte nicht länger als ${password_maximum_length} Zeichen sein."
+
+msgid "password_must_contain_digit"
+msgstr "Das Passwort muss mindestens eine Ziffer enthalten."
+
+msgid "password_must_contain_uppercase"
+msgstr "Das Passwort muss mindestens einen Großbuchstaben enthalten."
+
+msgid "password_must_contain_lowercase"
+msgstr "Das Passwort muss mindestens einen Kleinbuchstaben enthalten."
+
+msgid "password_must_contain_special_char"
+msgstr ""
+"Das Passwort muss mindestens eines der folgenden Zeichen enthalten: '@', "
+"'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "pseudonym_title_label"
+msgstr ""
+"Bitte geben Sie hier das Pseudonym ein, das Sie für die gesamte Dauer Ihrer "
+"Tätigkeit auf unserer IT-Plattform identifizieren wird. Wir empfehlen Ihnen "
+"DRINGEND, ein Pseudonym zu wählen, das die Rückverfolgung zu Ihrer "
+"wirklichen Identität unmöglich (oder äußerst schwierig) macht. Auf diese "
+"Weise schützen Sie die Vertraulichkeit Ihrer Meinungen (d.h. "
+"personenbezogene Daten, die einem besonderen Schutz gemäß der Allgemeinen "
+"Datenschutzverordnung - GDPR - unterliegen) vor jeder Form von Druck von "
+"außen im wirklichen Leben (z.B. durch Ihren Arbeitgeber oder Ihre Kunden). "
+"Seien Sie sehr vorsichtig! Wenn Sie sich einmal für ein Pseudonym "
+"entschieden haben, können Sie dieses Pseudonym NIE wieder ändern. Wählen Sie "
+"es mit Bedacht! "
+
+msgid "password_title_label"
+msgstr "Bitte geben Sie hier Ihr Passwort ein."
+
+msgid "password_confirm_title_label"
+msgstr "Bitte bestätigen Sie hier Ihr Passwort."
+
+msgid "password_confirm"
+msgstr "Bitte bestätigen Sie Ihr Passwort."
+
+msgid "type_of_registration"
+msgstr "Art der Registrierung"
+
+msgid "type_registration_label"
+msgstr "Wählen Sie die für Sie passende Art der Registrierung."
+
+msgid "type_registration_choice"
+msgstr ""
+"Jede Art der Registrierung ist mit einer Reihe von Rechten, Vorteilen und "
+"Pflichten verbunden."
+
+msgid "approved_heading"
+msgstr "Herzlichen Glückwunsch zu Ihrer Zulassung!"
+
+msgid "approved_description"
+msgstr ""
+"Ihre Bewerbung wurde genehmigt. Sie können sich nun mit dem Pseudonym und "
+"dem Passwort anmelden, das Sie während des Bewerbungsprozesses angegeben "
+"haben."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Ungültiges Pseudonym. Es sollte zwischen 5 und 20 Zeichen lang sein und darf "
+"nur Buchstaben (A-Z, a-z), Zahlen (0-9), Unterstriche (_), Punkte (.), "
+"Bindestriche (-) und Leerzeichen enthalten."
+
+msgid "Select_a_country"
+msgstr "Wählen Sie einen Mitgliedstaat der Europäischen Union"
+
+msgid "Austria"
+msgstr "AT - Österreich"
+
+msgid "Belgium"
+msgstr "BE - Belgien"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgarien"
+
+msgid "Cyprus"
+msgstr "CY - Zypern"
+
+msgid "Czech_Republic"
+msgstr "CZ - Tschechien"
+
+msgid "Germany"
+msgstr "DE - Deutschland"
+
+msgid "Denmark"
+msgstr "DK - Dänemark"
+
+msgid "Estonia"
+msgstr "EE - Estland"
+
+msgid "Spain"
+msgstr "ES - Spanien"
+
+msgid "Finland"
+msgstr "FI - Finnland"
+
+msgid "France"
+msgstr "FR - Frankreich"
+
+msgid "Greece"
+msgstr "GR - Griechenland"
+
+msgid "Croatia"
+msgstr "HR - Kroatien"
+
+msgid "Hungary"
+msgstr "HU - Ungarn"
+
+msgid "Ireland"
+msgstr "IE - Irland"
+
+msgid "Italy"
+msgstr "IT - Italien"
+
+msgid "Lithuania"
+msgstr "LT - Litauen"
+
+msgid "Luxembourg"
+msgstr "LU - Luxemburg"
+
+msgid "Latvia"
+msgstr "LV - Lettland"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Niederlande"
+
+msgid "Poland"
+msgstr "PL - Polen"
+
+msgid "Portugal"
+msgstr "PT - Portugal"
+
+msgid "Romania"
+msgstr "RO - Rumänien"
+
+msgid "Sweden"
+msgstr "SE - Schweden"
+
+msgid "Slovenia"
+msgstr "SI - Slowenien"
+
+msgid "Slovakia"
+msgstr "SK - Slowakei"
+
+msgid "full_name_as_in_id_required"
+msgstr "Vollständige(r) Name(n) ist (sind) erforderlich."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Vollständige(r) Nachname(n) ist/sind erforderlich."
+
+msgid "birthdate_required"
+msgstr "Das Geburtsdatum ist erforderlich."
+
+msgid "nationality_required"
+msgstr "Die Staatsangehörigkeit ist erforderlich."
+
+msgid "first_interaction_language_required"
+msgstr "Die erste Interaktionssprache ist erforderlich."
+
+msgid "pending_description"
+msgstr ""
+"Ihre Bewerbung wird derzeit geprüft. Sie werden per E-Mail benachrichtigt, "
+"sobald sie genehmigt wurde."
+
+msgid "candidature_not_found"
+msgstr "Bewerbung nicht gefunden."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"Die KosmoPolitische Genossenschaft ist eine paneuropäische Genossenschaft "
+"für einen radikalen Wandel hin zu sozialer Gerechtigkeit, Nachhaltigkeit und "
+"Demokratie. Sie unterstützt Einzelpersonen und transformiert das bestehende "
+"wirtschaftliche, soziale und politische System in Richtung einer gerechten, "
+"nachhaltigen und glücklichen Gesellschaft, der sogenannten Gesellschaft der "
+"Vereinbarung. Sie können sich auf zwei Arten beteiligen: (1) als "
+"ordentliches Mitglied unserer Gemeinschaft, mit einem einfachen "
+"Registrierungsverfahren, ohne finanzielle Verpflichtungen, aber ohne "
+"Stimmrecht; oder (2) als Genossenschaftler, ein vollwertiges Mitglied "
+"unserer Genossenschaft, mit einem Registrierungsverfahren, das sicherstellt, "
+"dass eine bestimmte Person sich nur einmal registrieren lassen kann (um das "
+"demokratische Prinzip \"eine Person = eine Stimme\" zu gewährleisten) und "
+"dass nur Bürger der Europäischen Union Kooperatoren sind, mit der "
+"Verpflichtung, mindestens einen Anteil zu erwerben und einen jährlichen "
+"Beitrag zu zahlen, sowie mit vollem Stimmrecht."
+
+msgid "human_verification_description"
+msgstr ""
+"Der erste Schritt bei Ihrer Anmeldung besteht darin, zu bestätigen, dass Sie "
+"ein Mensch und kein Roboter sind. Zu diesem Zweck überprüfen wir, ob Sie "
+"eine E-Mail, die wir Ihnen senden, empfangen und verstehen können: Was wir "
+"von Ihnen verlangen, ist für einen Menschen einfach, für einen Roboter viel "
+"komplexer."
+
+msgid "identity_verification_label"
+msgstr "Identitätsprüfung"
+
+msgid "Send_id_copy_by_email"
+msgstr ""
+"Senden Sie einen Scan eines Teils Ihres amtlichen Ausweises per E-Mail."
+
+msgid "Send_video_conference_link"
+msgstr ""
+"Senden Sie Vorschläge für das Datum und den Zeitrahmen einer Videokonferenz."
+
+msgid "Proceed"
+msgstr "Fortfahren"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr ""
+"Bitte bestätigen Sie, dass Sie die E-Mails an die Überprüfer gesendet haben."
+
+msgid "sent_confirmation_label"
+msgstr "Bestätigung, dass die E-Mails an die Überprüfer gesendet wurden"
+
+msgid "submit_email_confirmation_title"
+msgstr "Bestätigen Sie, dass Sie die E-Mails gesendet haben."
+
+msgid "confirm_email_send_button_label"
+msgstr "Bestätigen"
