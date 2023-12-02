@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Înregistrare la <span tal:replace="site_name"></span></title>.
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Mulțumim că ați început înregistrarea la platforma <span tal:replace="site_name"></span></h1>.
+        <p tal:omit-tag="textual">Pentru a verifica adresa dvs. de e-mail și a ne asigura că sunteți un om (nu un robot), am conceput o serie de 4 operații matematice simple. Vă rugăm să efectuați cele patru operații matematice etichetate de la A la D de mai jos și să introduceți rezultatele lor în câmpurile corespunzătoare de pe pagina de înregistrare legată mai jos.</p>>.
+        <div omit-tag="textual">
+            <p tal:omit-tag="textual">Operația A este <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Prima provocare</span></span></p>
+            <p tal:omit-tag="textual" >Operația B este <span tal:content="challenge_B"
+                    tal:omit-tag="textual">A doua provocare</span></p>
+            <p tal:omit-tag="textual" >Operația C este <span tal:content="challenge_C"
+                    tal:omit-tag="textual">A treia provocare</span></p>
+            <p tal:omit-tag="textual" >Operația D este <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Cea de-a patra provocare</span></p>
+        </div>
+        <p tal:tal:omit-tag="textual">Link către pagina de înregistrare pe care să se furnizeze rezultatele operațiilor de la A la D de mai sus:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>.
+        </a>
+
+        <p tal:omit-tag="textual">Vă mulțumim pentru interesul dumneavoastră față de activitățile noastre. Așteptăm cu nerăbdare să vă întâmpinăm în curând!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Cu respect,</p>
+            <p tal:omit-tag="textual">Echipa de la <span tal:replace="site_name">Site</span></p>
+        </footer>
+
+    </body>
+</html>
