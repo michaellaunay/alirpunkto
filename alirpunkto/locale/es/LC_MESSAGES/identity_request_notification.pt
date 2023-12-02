@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Si tiene alguna pregunta o necesita más aclaraciones, no dude en ponerse en contacto con nosotros.</p>
 
     <p tal:omit-tag="textual">Un cordial saludo,</p>
-    <strong tal:omit-tag="textual">El <span tal:omit-tag="textual" tal:replace="site_name"></span> Equipo</strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">El <span tal:omit-tag="textual" tal:replace="site_name"></span> Equipo</strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Esta notificación se ha generado automáticamente. Por favor, no responda directamente a este mensaje.</small></p>
 </body>
