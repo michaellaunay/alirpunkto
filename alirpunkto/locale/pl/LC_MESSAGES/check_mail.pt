@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Rejestracja do <span tal:replace="site_name"></span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Dziękujemy za rozpoczęcie rejestracji na platformie <span tal:replace=" site_name"></span></h1>.
+        <p tal:omit-tag="textual">Aby zweryfikować Twój adres e-mail i upewnić się, że jesteś człowiekiem (a nie robotem), opracowaliśmy serię 4 prostych operacji matematycznych. Proszę wykonać cztery operacje matematyczne oznaczone od A do D poniżej i wprowadzić ich wyniki w odpowiednich polach na stronie rejestracji połączonej poniżej.</p>
+        <div omit-tag="textual">
+            <p tal:omit-tag="textual">Operacja A to <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Pierwsze wyzwanie</span></p>
+            <p tal:omit-tag="textual">Operacja B to <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Drugie wyzwanie</span></p>
+            <p tal:omit-tag="textual">Operacja C to <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Trzecie wyzwanie</span></p>
+            <p tal:omit-tag="textual">Operacja D to <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Czwarte wyzwanie</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link do strony rejestracji, na której należy podać wyniki operacji od A do D powyżej:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">.
+            <span tal:replace="string:${page_register_with_oid}"></span>.
+        </a>
+
+        <p tal:omit-tag="textual">Dziękujemy za zainteresowanie naszą działalnością. Czekamy na Państwa wkrótce! </p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Z poważaniem,</p>
+            <p tal:omit-tag="textual">Zespół w <span tal:replace="site_name">Site</span></p>
+        </footer>
+
+    </body>
+</html>
