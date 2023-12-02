@@ -11,9 +11,10 @@ from pyramid.security import remember
 from ldap3 import Server, Connection, ALL
 from ldap3.core.exceptions import LDAPBindError
 from .. import _
-from .. import LDAP_SERVER, LDAP_OU, LDAP_BASE_DN, LDAP_LOGIN, LDAP_PASSWORD
+from .. import LDAP_SERVER, LDAP_OU, LDAP_BASE_DN
 from ..models.users import User
 from logging import getLogger
+from ..utils import is_admin, get_admin_user
 
 log = getLogger('alirpunkto')
 
@@ -31,23 +32,38 @@ def login_view(request):
     if 'form.submitted' in request.params:
         username = request.params['username']
         password = request.params['password']
-        user = check_password(username, password)
+        if is_admin(username, password):
+            # The user is the ldap admin
+            user = get_admin_user()
+        else:
+            user = check_password(username, password)
         if user is not None:
             headers = remember(request, username)
             request.session['logged_in'] = True
             request.session['user'] = user.to_json()
-            request.session['created_at'] = datetime.datetime.now().isoformat()
+            current_time = datetime.datetime.now().isoformat()
+            request.session['created_at'] = current_time
             request.session['site_name'] = site_name
             # redirect to the page the user wanted to access before login
             if 'redirect_url' in request.session:
                 redirect_url = request.session['redirect_url']
                 del request.session['redirect_url']
                 return HTTPFound(location=redirect_url, headers=headers)
-            return HTTPFound(location=request.route_url('home'), headers=headers)
+            return HTTPFound(
+                location=request.route_url('home'),
+                headers=headers
+            )
         else:
             request.session['logged_in'] = False
-            return {'error': _('invalid_username_or_password'), 'site_name': site_name}
-    return {'logged_in': True if user else False, 'site_name': site_name, 'user': username}
+            return {
+                'error': _('invalid_username_or_password'),
+                'site_name': site_name
+            }
+    return {
+        'logged_in': True if user else False,
+        'site_name': site_name,
+        'user': username
+    }
 
 def check_password(username:str, password:str) -> Union[None, User]:
     """Check in ldap if the password is correct for the given username.
@@ -59,12 +75,21 @@ def check_password(username:str, password:str) -> Union[None, User]:
     Returns:
         User: a User instance if the password is correct, None otherwise
     """
-    server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
-    ldap_login=f"uid={username},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={username},{LDAP_BASE_DN}" # define the user to authenticate
+    # define an unsecure LDAP server, requesting info on DSE and schema
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login=(
+        f"uid={username},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU
+        else f"uid={username},{LDAP_BASE_DN}"
+    ) # define the user to authenticate
     log.debug(f"Trying to authenticate {ldap_login=} with {password=}")
     try:
-        conn = Connection(server, ldap_login, password, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
-        conn.search(LDAP_BASE_DN, '(uid={})'.format(username), attributes=['cn','mail', 'employeeNumber']) # search for the user in the LDAP directory
+        # define an unsecure LDAP connection, using the credentials above
+        conn = Connection(server, ldap_login, password, auto_bind=True)
+        conn.search(
+            LDAP_BASE_DN,
+            '(uid={})'.format(username),
+            attributes=['cn','mail', 'employeeNumber']
+        ) # search for the user in the LDAP directory
     except LDAPBindError as e:
         log.debug(f"Error while authenticating {username}: {e}")
         return None

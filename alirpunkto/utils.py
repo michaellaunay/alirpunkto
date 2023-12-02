@@ -2,13 +2,14 @@
 # author: Michaël Launay
 # date: 2023-09-30
 
-from typing import Dict
+from typing import Dict, Union
 from pyramid.request import Request
 from .models.candidature import (
     Candidature,
     Candidatures,
     CandidatureEmailSendStatus,
     CandidatureStates,
+    LDAP_ADMIN_OID
 )
 from pyramid_mailer.message import Message, Attachment
 from pyramid_zodbconn import get_connection
@@ -20,6 +21,7 @@ from . import (
     LDAP_BASE_DN,
     LDAP_LOGIN,
     LDAP_PASSWORD,
+    MAIL_SENDER,
     EUROPEAN_LOCALES,
 )
 from pyramid.i18n import get_localizer
@@ -32,13 +34,15 @@ from cryptography.fernet import Fernet
 import logging
 log = logging.getLogger("alirpunkto")
 import base64
-import bcrypt
 import re
+from .models.users import User
 
 MIN_PSEUDONYM_LENGTH = 5 # Minimum pseudonym length
 MAX_PSEUDONYM_LENGTH = 20 # Maximum pseudonym length
 
-pseudonym_pattern = re.compile(f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$')
+pseudonym_pattern = re.compile(
+    f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$'
+)
 
 MIN_PASSWORD_LENGTH = 12 # Minimum password length
 MAX_PASSWORD_LENGTH = 92 # Maximum password length
@@ -80,12 +84,24 @@ def is_valid_email(email, request):
     if not validate_email(email, check_mx=True):
         return {'error': _('invalid_email')}
     try:
-        server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
-        ldap_login=f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"# define the user to authenticate
-        conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
+         # define an unsecure LDAP server, requesting info on DSE and schema
+        server = Server(LDAP_SERVER, get_info=ALL)
+        ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+            if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+        )# define the user to authenticate
+         # define an unsecure LDAP connection, using the credentials above
+        conn = Connection(
+            server,
+            ldap_login,
+            LDAP_PASSWORD,
+            auto_bind=True
+        )
 
         # Verify that the email is not already registered
-        conn.search(LDAP_BASE_DN, '(uid={})'.format(email), attributes=['cn']) # search for the user in the LDAP directory
+        conn.search(
+            LDAP_BASE_DN,
+            '(uid={})'.format(email),
+            attributes=['cn']) # search for the user in the LDAP directory
         # Verify that the email is not already registered
         if len(conn.entries) != 0:
             # If already registered, display an error message
@@ -109,15 +125,31 @@ def is_valid_unique_pseudonym(pseudonym):
         return {'error': _('invalid_pseudonym')}
 
     if len(pseudonym) < MIN_PSEUDONYM_LENGTH:
-        return {'error': _('pseudonym_too_short'), 'error_details':_("pseudonym_minimum_length")}
+        return {
+            'error': _('pseudonym_too_short'),
+            'error_details':_("pseudonym_minimum_length")
+        }
     if len(pseudonym) > MAX_PSEUDONYM_LENGTH:
-        return {'error': _('pseudonym_too_long'), 'error_details':_("pseudonym_maximum_length")}
-
-    server = Server(LDAP_SERVER, get_info=ALL) # define an unsecure LDAP server, requesting info on DSE and schema
-    ldap_login=f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}" # define the user to authenticate
-    conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) # define an unsecure LDAP connection, using the credentials above
+        return {
+            'error': _('pseudonym_too_long'),
+            'error_details':_("pseudonym_maximum_length")
+        }
+    # define an unsecure LDAP server, requesting info on DSE and schema
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login= (f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+        ) # define the user to authenticate
+    conn = Connection(
+        server,
+        ldap_login,
+        LDAP_PASSWORD,
+        auto_bind=True
+    ) # define an unsecure LDAP connection, using the credentials above
     # Verify that the pseudonym is not already registered
-    conn.search(LDAP_BASE_DN, '(uid={})'.format(pseudonym, attributes=['cn'])) # search for the user in the LDAP directory
+    conn.search(
+        LDAP_BASE_DN,
+        '(uid={})'.format(pseudonym, attributes=['cn'])
+    ) # search for the user in the LDAP directory
     # Verify that the candidate is not already registered
     if len(conn.entries) != 0:
         # If already registered, display an error message
@@ -136,21 +168,38 @@ def is_valid_password(password):
         None: if the password is valid
     """
     if len(password) < MIN_PASSWORD_LENGTH:
-        return {'error': _('password_too_short'), 'error_details':_("password_minimum_length", mapping={'password_minimum_length':MIN_PASSWORD_LENGTH})}
+        return {
+            'error': _('password_too_short'),
+            'error_details':_("password_minimum_length",
+            mapping={'password_minimum_length':MIN_PASSWORD_LENGTH})
+        }
     if len(password) > MAX_PASSWORD_LENGTH:
-        return {'error': _('password_too_long'), 'error_details':_("password_maximum_length", mapping={'password_maximum_length':MAX_PASSWORD_LENGTH})}
+        return {
+            'error': _('password_too_long'),
+            'error_details':_("password_maximum_length",
+            mapping={'password_maximum_length':MAX_PASSWORD_LENGTH})
+        }
     if not any(char.isdigit() for char in password):
         return {'error': _('password_must_contain_digit')}
     if not any(char.isupper() for char in password):
         return {'error': _('password_must_contain_uppercase')}
     if not any(char.islower() for char in password):
         return {'error': _('password_must_contain_lowercase')}
-    if not any(char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='] for char in password):
+    if not any(
+        char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '=']
+        for char in password
+    ):
         return {'error': _('password_must_contain_special_char')}
     # The password is valid
     return None
 
-def send_email(request, subject: str, recipients: list, template_path: str, template_vars: Dict= {}) -> bool:
+def send_email(
+        request:Request,
+        subject:str,
+        recipients:list,
+        template_path:str,
+        template_vars:Dict= {}
+    ) -> bool:
     """
     Generic function to send emails.
     
@@ -164,11 +213,22 @@ def send_email(request, subject: str, recipients: list, template_path: str, temp
     Returns:
         bool: True if email is sent successfully, otherwise False.
     """
-    text_body = render_to_response(template_path, request=request, value={**template_vars, "textual":True}).text
+    text_body = render_to_response(
+        template_path,
+        request=request,
+        value={**template_vars, "textual":True}
+    ).text
     for i in range(5, 1, -1):
         text_body = text_body.replace("\n"*i, "\n")
-    text_body = text_body.replace("<!DOCTYPE html>\n", "").replace("\n\n\n\n","\n").replace("\n\n\n","\n").replace("\n\n","\n")
-    html_body = render_to_response(template_path, request=request, value={**template_vars, "textual":False}).body
+    text_body = text_body.replace("<!DOCTYPE html>\n", "") \
+                     .replace("\n\n\n\n", "\n") \
+                     .replace("\n\n\n", "\n") \
+                     .replace("\n\n", "\n")
+    html_body = render_to_response(
+        template_path,
+        request=request,
+        value={**template_vars, "textual":False}
+    ).body
     sender = request.registry.settings['mail.default_sender']
     message = Message(
         subject=subject,
@@ -235,7 +295,11 @@ def get_candidature_from_request(request: Request)->Candidature:
     """
     encrypted_oid = request.params.get("oid")
 
-    decrypted_oid, seed = decrypt_oid(encrypted_oid, Candidature.SEED_SIZE, request.registry.settings['session.secret'])
+    decrypted_oid, seed = decrypt_oid(
+        encrypted_oid,
+        Candidature.SEED_SIZE,
+        request.registry.settings['session.secret']
+    )
     candidature = get_candidature_by_oid(decrypted_oid, request)
     if seed != candidature.seed:
         raise Exception("Seed mismatch")
@@ -308,15 +372,23 @@ def get_potential_voters(conn: Connection) -> List[Dict[str, str]]:
     return conn.entries
 
 
-def get_admin(conn: Connection):
+def get_admin(conn: Connection = None):
     """Fetch the admin details from LDAP.
 
     Args:
-        conn (Connection): The LDAP connection object.
+        conn (Connection): The LDAP connection object, if None the connection
+                            will be open.
 
     Returns:
         dict: Admin details if found, otherwise None.
     """
+    if not conn:
+        server = Server(LDAP_SERVER, get_info=ALL)
+        ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+            if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+        )
+        conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
+
     search_filter = "(&(objectclass=*)(cn=*)(mail=*)(sn=*))"
     results = conn.search(
         LDAP_BASE_DN,
@@ -328,6 +400,31 @@ def get_admin(conn: Connection):
         return None
     return conn.entries[0]
 
+def get_admin_user()->  User:
+        """return the admin User from LDAP Admin information or from settings.
+
+        Returns:
+            User: The admin from the ldap admin information if exists, 
+                otherwise the admin from the settings
+        """
+        admin_informations = None
+        try:
+            admin_informations = get_admin()
+        except Exception as e:
+            log.warning(
+                f"Error while fetching the admin informations from LDAP: {e}"
+            )
+            # If an error occurs, create user from settings
+        name = (
+            admin_informations.cn.value if hasattr(admin_informations, "cn")
+            else LDAP_LOGIN
+        )
+        mail = (admin_informations.mail.value
+                if hasattr(admin_informations, "mail") else MAIL_SENDER
+        )
+        oid = LDAP_ADMIN_OID
+        admin_user = User(name, mail, oid)
+        return admin_user
 
 def random_voters(request: Request) -> List[Dict[str, str]]:
     """
@@ -396,22 +493,31 @@ def register_user_to_ldap(request, candidature, password):
 
     # Continue to register the user to LDAP
     server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login=f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-    log.debug(f"LDAP Connection{LDAP_LOGIN=},{LDAP_OU=},{LDAP_BASE_DN=},{LDAP_PASSWORD=},{LDAP_SERVER=}")  
+    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    )
+    log.debug(
+        f"LDAP Connection{LDAP_LOGIN=},{LDAP_OU=},{LDAP_BASE_DN=},"
+        f"{LDAP_PASSWORD=},{LDAP_SERVER=}"
+    )
     conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
 
     # DN for the new entry
-    dn = f"uid={pseudonym},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"uid={pseudonym},{LDAP_BASE_DN}"
+    dn = (f"uid={pseudonym},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"uid={pseudonym},{LDAP_BASE_DN}"
+    )
     # Attributes for the new user
     attributes = {
-        'objectClass': ['top', 'inetOrgPerson'],  # Adjust this based on your LDAP schema
+        # Adjust this based on your LDAP schema
+        'objectClass': ['top', 'inetOrgPerson'],
         'uid': pseudonym,
         'mail': candidature.email,
         'userPassword': password,
         'cn': pseudonym,
         'employeeNumber': candidature.oid, # Use the oid as employeeNumber
         'employeeType': candidature.type.name, # Use the type as employeeType,
-        'sn': getattr(candidature, "fullsurname", pseudonym) or pseudonym, # Use the fullsurname as sn
+         # Use the fullsurname as sn
+        'sn': getattr(candidature, "fullsurname", pseudonym) or pseudonym,
     }
     log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
     # Add the new user to LDAP
@@ -424,6 +530,24 @@ def register_user_to_ldap(request, candidature, password):
         return {'status': 'success', 'message': _('registration_successful')}
     else:
         return {'status': 'failure', 'message': _('registration_failed')}
+
+def is_admin(username:str, password:str)-> bool:
+    """
+    Determines if the provided username and password match the credentials of the LDAP administrator.
+
+    This function checks if the given username and password combination is the same as that of the LDAP 
+    administrator. It is intended for use in contexts where LDAP (Lightweight Directory Access Protocol) 
+    authentication is implemented, and there is a need to verify if a user has administrative privileges.
+
+    Args:
+    username (str): The username to be checked.
+    password (str): The password corresponding to the username.
+
+    Returns:
+    bool: Returns True if the provided username and password match the LDAP administrator's credentials, 
+    otherwise returns False.
+    """
+    return (username.strip(), password.strip())== (LDAP_LOGIN, LDAP_PASSWORD)
 
 def get_local_template(request, pattern_path):
     """
@@ -448,7 +572,10 @@ def get_local_template(request, pattern_path):
     try:
         resolver = ar.resolve(pattern_path.format(lang=lang))
     except:
-        log.error(f"Error while resolving locale file for {lang} for {pattern_path}, fallback to en")
+        log.error(
+            f"Error while resolving locale file for {lang} for {pattern_path}"
+            f", fallback to en."
+        )
         resolver = ar.resolve(pattern_path.format(lang="en"))
     return resolver
 
@@ -480,10 +607,15 @@ def send_candidature_state_change_email(request: Request,
     Returns:
         dict: the result of the email sending
     """
-    template_name = template_name if template_name else 'locale/{lang}/LC_MESSAGES/candidature_state_change.pt'
+    template_name = (template_name
+        if template_name
+        else 'locale/{lang}/LC_MESSAGES/candidature_state_change.pt'
+    )
     template_path = get_local_template(request, template_name).abspath()
     localizer = get_localizer(request)
-    subject = subject if subject else localizer.translate(_('email_candidature_state_changed'))
+    subject = (subject if subject
+        else localizer.translate(_('email_candidature_state_changed'))
+    )
     email = candidature.email
     seed = candidature.email_send_status_history[-1].seed
 
@@ -498,7 +630,9 @@ def send_candidature_state_change_email(request: Request,
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     #We don't have user yet so we use the email parts befor the @ or pseudonym if it exists
-    user = candidature.pseudonym if hasattr(candidature, "pseudonym") else email.split('@')[0]
+    user = (candidature.pseudonym if hasattr(candidature, "pseudonym")
+            else email.split('@')[0]
+    )
     
     template_vars = {
         'page_register_with_oid': url,
@@ -512,19 +646,30 @@ def send_candidature_state_change_email(request: Request,
     # Use the send_email from utils.py
     try:
         # Stack email sending action to be executed at commit
-        success = send_email(request, subject, [email], template_path, template_vars)
+        success = send_email(
+            request,
+            subject,
+            [email],
+            template_path,
+            template_vars
+        )
     except Exception as e:
         log.error(f"Error while sending email to {email} : {e}")
         success = False
     
     if success:
-        candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, sending_function_name)
+        candidature.add_email_send_status(
+            CandidatureEmailSendStatus.SENT, sending_function_name)
         return {'success': True}
     else:
-        candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, sending_function_name)
+        candidature.add_email_send_status(
+            CandidatureEmailSendStatus.ERROR, sending_function_name)
         return {'error': _('email_not_sent')}
 
-def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
+def send_validation_email(
+        request: Request,
+        candidature: 'Candidature'
+    ) -> bool:
     """
     Send the validation email to the candidate.
     
@@ -535,14 +680,21 @@ def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
     Returns:
         bool: True if the email is successfully sent, False otherwise.
     """
-    template_path = get_local_template(request, 'locale/{lang}/LC_MESSAGES/check_email.pt').abspath()
+    template_path = get_local_template(
+        request,
+        'locale/{lang}/LC_MESSAGES/check_email.pt'
+    ).abspath()
 
     email = candidature.email # The email to send to.
     challenge = candidature.challenge # The math challenge for email validation.
     localizer = get_localizer(request)
     subject = localizer.translate(_('email_validation_subject'))
     seed = candidature.email_send_status_history[-1].seed
-    parametter = encrypt_oid(candidature.oid, seed, request.registry.settings['session.secret'])
+    parametter = encrypt_oid(
+        candidature.oid,
+        seed,
+        request.registry.settings['session.secret']
+    )
     
     url = request.route_url('register', _query={'oid': parametter})
     site_url = request.route_url('home')
@@ -561,7 +713,13 @@ def send_validation_email(request: Request, candidature: 'Candidature') -> bool:
     # Use the send_email from utils.py
     # Put on the stack the action of sending the email wich is done during the commit
     try:
-        success = send_email(request, subject, [email], template_path, template_vars)
+        success = send_email(
+            request,
+            subject,
+            [email],
+            template_path,
+            template_vars
+        )
     except Exception as e:
         log.error(f"Error while sending email to {email} : {e}")
         success = False

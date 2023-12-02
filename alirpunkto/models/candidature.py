@@ -21,10 +21,9 @@ import string
 # Constants
 CANDIDATURE_OID = 'candidature_oid'
 SEED_LENGTH = 10
+LDAP_ADMIN_OID = "00000000-0000-0000-0000-000000000000"
 
 log = getLogger('alirpunkto')
-
-
 
 @unique
 class CandidatureStates(Enum) :

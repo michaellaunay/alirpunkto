@@ -728,7 +728,7 @@ objectClassViolation
 ```
 
 Explication de chat GPT
-````
+```
 Les attributs que j'ai fournis à ldap semblent corrects pour une entrée utilisant la classe d'objet `inetOrgPerson`. Cependant, l'erreur `objectClassViolation` indique toujours une incohérence avec le schéma LDAP.
 
 En examinant les attributs que vous avez fournis, quelques points à vérifier :
@@ -747,3 +747,45 @@ En examinant les attributs que vous avez fournis, quelques points à vérifier :
 
 Je vous suggère de commencer par ajouter l'attribut `sn` à votre dictionnaire d'attributs et de réessayer. Si cela ne résout pas le problème, passez aux autres étapes de dépannage.
 ```
+
+# 2023-12-02
+
+Les problèmes suivants ont été identifiés dans l'application AlirPunkto qui demande d'améliorer l'architecture:
+
+## Problème 1: Perte de Connexion avec le Serveur de Mail
+C.f Issue #46
+
+**Situation Actuelle**:
+- Lors des tests, si la connexion avec le serveur de mail est perdue, le changement d'état de la candidature est effectué sans que l'utilisateur ne reçoive de mail.
+- Ce problème affecte le processus de vérification de l'humanité de l'utilisateur (le défi mathématique).
+
+**Solution Proposée**:
+1. **Gestion des Exceptions**: Mettre en place une gestion robuste des exceptions pour la fonction d'envoi de mail. Si l'envoi échoue, l'exception doit être capturée.
+2. **Renvoi**: En cas d'échec, programmer des tentatives répétées d'envoi du mail à intervalles réguliers.
+3. **Confirmation de l'État de la Candidature**: Changer l'état de la candidature, mais indiquer le problème au candidat en l'invitant à de revenir plus tard et de recommencer la procédure ce qui déclenchera un nouvel envoi du dernier mail.
+4. **Feedback Utilisateur**: Informer l'utilisateur sur le portail de l'échec de l'envoi du mail et de la tentative de renvoi.
+
+### Problème 2: Recréation d'une Candidature Existante
+C.f Issue #47
+
+**Situation Actuelle**:
+- Si une candidature existante est recréée, l'utilisateur est redirigé directement vers l'état correspondant, ce qui représente une faille de sécurité.
+
+**Solution Proposée**:
+1. **Vérification de l'Unicité**: Avant de créer une nouvelle candidature, vérifier si une candidature similaire existe déjà.
+2. **Redirection Sécurisée**: Si une candidature existante est détectée, ne pas rediriger directement l'utilisateur. Au lieu de cela, renvoyer le dernier mail et demander de suivre le lien mis dans le mail.
+3. **Message d'information**: Fournir un message explicite indiquant pourquoi la création de la candidature n'est pas permise.
+
+## Solution pour les Mails
+
+- Mettre en place un système de file d'attente pour les mails. Cela permet de réessayer l'envoi des mails en cas d'échec initial.
+- Si un utilisateur cherche à recréer une candidature déjà existante qui ne soit pas à l'état  APPROVED ou REJECTED, alors lui renvoyer le dernier mail avec le lien à suivre pour reprendre là où il s'est arrêté, prévenir sur le portail qu'il doit suivre le lien qu'il contient.
+
+### Implémentation Technique
+
+1. **File d'Attente de Mail**: Voir si l'on doit utiliser une bibliothèque de file d'attente comme `RQ` (Redis Queue) pour gérer les tentatives d'envoi de mail.
+
+## Problème 3 
+C.f issue #48
+
+Le test d'unicité des mails ne fonctionne que partiellement, car elle n'est vérifiée que dans ldap et non pas aussi dans les candidatures en cours.

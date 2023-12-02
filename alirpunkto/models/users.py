@@ -2,17 +2,15 @@
 Define the user model which is used to store users in the zodb database.
 """
 # description: User model
-
+from typing import Union
 from persistent import Persistent
-from pyramid.security import Allow, ALL_PERMISSIONS
-from ldap3 import Connection
 import json
 
 
 # User class
 class User(Persistent):
     """A user in the LDAP directory."""
-
+    _admin_user = None
     def __init__(self, name:str, email:str, oid:str) -> None:
         """Create a user from the LDAP directory.
         attr:
@@ -50,4 +48,3 @@ class User(Persistent):
 
         """
         return cls(data['name'], data['email'], data['oid'])
-
