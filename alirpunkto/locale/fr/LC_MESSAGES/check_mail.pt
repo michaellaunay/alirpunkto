@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Inscription à <span tal:replace="site_name"></span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Merci de commencer votre inscription sur la plateforme <span
+                tal:replace=" site_name "></span></h1>
+        <p tal:omit-tag="textual">Pour vérifier votre adresse électronique et nous assurer que vous êtes un être humain (et non un robot), nous avons conçu une série de quatre opérations mathématiques simples. Veuillez effectuer les quatre opérations mathématiques indiquées de A à D ci-dessous et saisir les résultats dans les champs correspondants sur la page d'inscription dont le lien figure ci-dessous.</p>
+        <div omit-tag="textual">
+            <p tal:omit-tag="textual">L'opération A est <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Le premier défi</span></p> 
+            <p tal:omit-tag="textual">L'opération B est <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Le deuxième défi</span></p> 
+            <p tal:omit-tag="textual">L'opération C est <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Le troisième défi</span></p>
+            <p tal:omit-tag="textual">L'opération D est <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Le quatrième défi</span></p>
+        </div>
+        <p tal:omit-tag="textual">Lien vers la page d'enregistrement sur laquelle fournir les résultats des opérations A à D ci-dessus:</p> 
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Nous vous remercions de l'intérêt que vous portez à nos activités. Nous nous réjouissons d'avoir bientôt le plaisir de vous accueillir !</p> <p>
+
+        <footer tal:omit-tag="textual">
+            </p> <p tal:omit-tag="textual"">Sincères salutations,</p>
+            </p> <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Site</span></p> <p>L'équipe de <span tal:replace="site_name">Site</span>.
+        </footer>
+
+    </body>
+</html>
