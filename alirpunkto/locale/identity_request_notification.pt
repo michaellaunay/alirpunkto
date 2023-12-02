@@ -28,7 +28,7 @@
     <p tal:omit-tag="textual">In order to achieve these goals, we will request you to provide the following information, as they appear in your official identity documents:</p>
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">All your given names (in their official transcription in Latin characters for Greek and Bulgarian),</li>
-        <li tal:omit-tag="textual">All your family names (in their official transcription in Latin characters for Greek and Bulgarian),</li>
+        <li tal:omit-tag="textual">All your family names at birth (in their official transcription in Latin characters for Greek and Bulgarian),</li>
         <li tal:omit-tag="textual">Your date of birth,</li>
         <li tal:omit-tag="textual">Your nationality (among the nationalities of EU Member States only).</li>
     </ul>
