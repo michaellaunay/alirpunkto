@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">La sua registrazione a <span tal:omit-tag="textual" tal:replace="site_name"></span>. I prossimi passi</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Ciao <span tal:replace="full_name">Nome del Richiedente</span>,</h1>
+    <p tal:omit-tag="textual">Grazie per aver inviato la sua candidatura a <span tal:replace=" site_name"></span>! </p>
+
+    <p tal:omit-tag="textual">In base all'opzione che ha scelto durante la registrazione, ecco i passi successivi:</p>
+
+    <h2 tal:omit-tag="textual">Se ha scelto l'opzione "Membro ordinario della comunità":</h2>
+    <ol tal:omit-tag="textual">.
+        <li tal:omit-tag="textual">Congratulazioni, ora lei è un "Membro ordinario della Comunità"!
+        <li tal:omit-tag="textual">Il suo numero di iscrizione è stato determinato.</li>
+        <li tal:omit-tag="textual">Le è stata inviata un'e-mail di congratulazioni.</li>
+        <li tal:omit-tag="textual">Lo stato della sua domanda di adesione è ora " ApprovedOrdinaryCommunityMember ".</li>
+        <li tal:omit-tag="textual">Non sono necessarie altre azioni da parte sua. Si colleghi al nostro <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">spazio di lavoro</a> e inizi ad interagire con i suoi colleghi della Comunità!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Se ha scelto l'opzione "Cooperatore":</h2>
+    <p tal:omit-tag="textual" >Avrà diritto a partecipare pienamente ai nostri processi decisionali e alle nostre votazioni. In questi processi e votazioni, vogliamo preservare il principio democratico di 'una persona = un voto'. Sarebbe ingiusto se una persona potesse votare più volte utilizzando diversi account sulla nostra piattaforma informatica. Dobbiamo quindi collegare il suo account a lei personalmente e assicurarci che lei sia identificato sulla nostra piattaforma informatica in modo da non poter essere confuso con l'identità di un'altra persona, cioè con un insieme unico di identificatori.</p>
+    <p tal:omit-tag="textual">Inoltre, vogliamo assicurarci che solo i cittadini dell'Unione Europea siano Cooperatori. Il motivo è che rivendicheremo il diritto di partecipare alle elezioni pubbliche nell'Unione Europea come un'unica organizzazione su scala europea, e dovremo dimostrare di rappresentare solo i cittadini dell'UE (e non "interessi stranieri").</p>
+    <p tal:omit-tag="textual">Per raggiungere questi obiettivi, le chiederemo di fornire le seguenti informazioni, così come appaiono nei suoi documenti d'identità ufficiali:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">tutti i suoi nomi (nella loro trascrizione ufficiale in caratteri latini per il greco e il bulgaro),</li>
+        <li tal:omit-tag="textual">Tutti i suoi cognomi alla nascita (nella loro trascrizione ufficiale in caratteri latini per il greco e il bulgaro),</li>
+        <li tal:omit-tag="textual">La sua data di nascita,</li>
+        <li tal:omit-tag="textual">La sua nazionalità (solo tra le nazionalità degli Stati membri dell'Unione Europea).</li>
+    </ul>
+    <p tal:omit-tag="textual">Fornirà queste informazioni sulla nostra piattaforma di registrazione, e un gruppo di 3-7 Cooperatori selezionati in modo aleatorio, chiamati Verificatori, verificheranno che le informazioni da lei fornite sulla nostra piattaforma di registrazione corrispondano a quelle presenti sui suoi documenti d'identità ufficiali. A questo punto, trasmetterà le immagini parziali dei suoi documenti d'identità ufficiali direttamente a questi Verificatori, senza utilizzare (per motivi di sicurezza) la nostra piattaforma informatica.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Ci sono due metodi per trasmettere queste immagini parziali dei suoi documenti d'identità ufficiali ai Verificatori:</strong></p>
+    <ol tal:omit-tag="textual">.
+<li tal:omit-tag="textual"><strong tal:omit-tag="textual" <strong>Via videoconferenza</strong>: Un pulsante la guiderà nella redazione di un'e-mail precompilata, nella quale potrà proporre date e orari di appuntamento per una o più videoconferenze separate con i Verificatori a lei assegnati. Durante questa/e videoconferenza/e, mostrerà il suo documento d'identità ufficiale ai Verificatori tramite la sua fotocamera, facendo attenzione che, ad esempio, il numero del documento d'identità e il luogo di nascita rimangano nascosti, in modo da evitare (per motivi di sicurezza) che venga visualizzata una copia completa di questo documento.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual" >Via Allegato Email</strong>: Un pulsante la assisterà nella scrittura di un'e-mail precompilata, alla quale potrà allegare una copia parziale del suo documento d'identità ufficiale (ad esempio, mascherando il numero e il luogo di nascita).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Ogni Verificatore verificherà quindi la conformità delle informazioni da lei fornite nel modulo di registrazione della nostra piattaforma informatica con quelle contenute nel suo documento d'identità ufficiale. Ogni Verificatore voterà poi in modo indipendente sulla nostra piattaforma informatica su questa verifica di conformità. Se la maggioranza dei Verificatori accetta che le informazioni da lei fornite sulla nostra piattaforma di registrazione corrispondono a quelle contenute nei suoi documenti d'identità ufficiali, avremo il piacere di darle il benvenuto come Cooperatore!</p>
+
+    <p tal:omit-tag="textual">Se l'invio dell'e-mail non dovesse andare a buon fine per qualsiasi motivo, verrà registrato un messaggio di errore e si tenterà di inviare un'e-mail all'amministratore.</p>
+
+    <p tal:omit-tag="textual">Le ricordiamo che il tempo a sua disposizione per eseguire questo processo di verifica è limitato, quindi la preghiamo di agire rapidamente.</p>
+
+    <p tal:omit-tag="textual">Se ha domande o necessita di ulteriori chiarimenti, non esiti a contattarci.</p>
+
+    <p tal:omit-tag="textual">Buoni saluti,</p>
+    <strong tal:omit-tag="textual">Il <span tal:omit-tag="textual" tal:replace=" site_name"></span> Team</strong></p>
+
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: questa notifica è stata generata automaticamente. La preghiamo di non rispondere direttamente a questo messaggio.</small></p>
+</body>
+</html>
