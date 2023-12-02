@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag=" textual">
+    <title tal:omit-tag="textual">Ihre Anmeldung zu <span tal:omit-tag="textual" tal:replace="site_name"></span>. Nächste Schritte</title>
+</head>
+<body tal:omit-tag=" textual">
+
+    <h1 tal:omit-tag="textual">Hallo <span tal:replace="full_name">Name des Antragstellers</span>,</h1>
+    <p tal:omit-tag="textual">Danke, dass Sie Ihre Bewerbung bei <span tal:replace="site_name"></span> eingereicht haben! </p>
+
+    <p tal:omit-tag="textual">Abhängig von der Option, die Sie bei der Anmeldung gewählt haben, sind hier die nächsten Schritte:</p>
+
+    <h2 tal:omit-tag="textual">Wenn Sie die Option "Gewöhnliches Mitglied der Gemeinschaft" gewählt haben:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Glückwunsch, Sie sind jetzt ein "Gewöhnliches Mitglied der Gemeinschaft"!</li>
+        <li tal:omit-tag="textual">Ihre Mitgliedsnummer wurde ermittelt.</li>
+        <li tal:omit-tag="textual">Eine Glückwunsch-E-Mail wurde an Sie gesendet.</li>
+        <li tal:omit-tag="textual">Ihr Antragsstatus lautet jetzt "ApprovedOrdinaryCommunityMember".</li>
+        <li tal:omit-tag="textual">Es sind keine weiteren Schritte Ihrerseits erforderlich. Verbinden Sie sich mit unserem <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">Arbeitsbereich</a> und beginnen Sie, mit den anderen Mitgliedern der Gemeinschaft zu interagieren!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Wenn Sie die Option " Genossenschafter" gewählt haben:</h2>
+    <p tal:omit-tag="textual">Sie haben das Recht, in vollem Umfang an unseren Entscheidungsprozessen und an unseren Abstimmungen teilzunehmen. Bei diesen Prozessen und Abstimmungen wollen wir das demokratische Prinzip 'eine Person = eine Stimme' wahren. Es wäre unfair, wenn eine bestimmte Person durch die Verwendung mehrerer Konten auf unserer IT-Plattform mehrmals abstimmen könnte. Daher müssen wir Ihr Konto mit Ihrer Person in Verbindung bringen und sicherstellen, dass Sie auf unserer IT-Plattform so identifiziert werden, dass eine Verwechslung mit der Identität einer anderen Person ausgeschlossen ist, d.h. mit einem eindeutigen Satz von Identifikatoren.</p>
+    <p tal:omit-tag="textual">Außerdem möchten wir sicherstellen, dass nur Bürger.innen der Europäischen Union Genossenschafter sind. Der Grund dafür ist, dass wir das Recht beanspruchen werden, an öffentlichen Wahlen in der Europäischen Union als eine einzige Organisation auf EU-Ebene teilzunehmen, und dass wir nachweisen müssen, dass wir nur EU-Bürger.innen (und keine "ausländischen Interessen") vertreten.</p>
+    <p tal:omit-tag="textual">Um diese Ziele zu erreichen, bitten wir Sie um die folgenden Angaben, wie sie in Ihren offiziellen Ausweisdokumenten stehen:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Alle Ihre Vornamen (in ihrer offiziellen Transkription in lateinischen Buchstaben für Griechisch und Bulgarisch),</li>
+        <li tal:omit-tag="textual">Alle Ihre Familiennamen bei der Geburt (in ihrer offiziellen Transkription in lateinischen Buchstaben für Griechisch und Bulgarisch),</li>
+        <li tal:omit-tag="textual">Ihr Geburtsdatum,</li>
+        <li tal:omit-tag="textual">Ihre Staatsangehörigkeit (nur unter den Staatsangehörigkeiten der EU-Mitgliedstaaten).</li>
+    </ul>
+    <p tal:omit-tag="textual">Sie geben diese Informationen auf unserer Anmeldeplattform an, und eine Gruppe von 3 bis 7 zufällig ausgewählten Genossenschaftern, die so genannten Überprüfer, überprüfen, ob die von Ihnen auf unserer Anmeldeplattform angegebenen Informationen mit denen auf Ihren offiziellen Ausweisdokumenten übereinstimmen. Sie übermitteln daher Teilbilder Ihrer amtlichen Ausweisdokumente direkt an diese Überprüfer, ohne (aus Gründen der Sicherheit) unsere IT-Plattform zu nutzen.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Sie haben zwei Möglichkeiten, diese Teilbilder Ihrer amtlichen Ausweisdokumente an die Überprüfer zu übermitteln:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Durch Videokonferenz</strong>: Eine Schaltfläche leitet Sie an, eine vorausgefüllte E-Mail zu verfassen, in der Sie Termine für eine einzelne oder mehrere Videokonferenzen mit den Ihnen zugewiesenen Überprüfern vorschlagen können. Während dieser Videokonferenz(en) zeigen Sie den Überprüfern über Ihre Kamera Ihr offizielles Ausweisdokument, wobei Sie darauf achten, dass z.B. die Nummer des Ausweisdokuments und der Geburtsort verborgen bleiben, um (aus Sicherheitsgründen) zu vermeiden, dass eine vollständige Kopie dieses Dokuments angezeigt wird.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via Email Anhang</strong>: Eine Schaltfläche hilft Ihnen beim Verfassen einer vorausgefüllten E-Mail, an die Sie eine Teilkopie Ihres offiziellen Ausweisdokuments anhängen können (z.B. Maskierung der Nummer und des Geburtsorts).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Jeder Überprüfer wird dann die Übereinstimmung der von Ihnen auf dem Anmeldeformular unserer IT-Plattform gemachten Angaben mit denen auf Ihrem amtlichen Ausweisdokument überprüfen. Jeder Prüfer stimmt dann unabhängig auf unserer IT-Plattform über diese Überprüfung der Übereinstimmung ab. Wenn eine Mehrheit der Überprüfer akzeptiert, dass die von Ihnen auf unserer Anmeldeplattform gemachten Angaben mit denen auf Ihren offiziellen Ausweisdokumenten übereinstimmen, dürfen wir Sie als Genossenschafter begrüßen!</p>
+
+    <p tal:omit-tag="textual">Wenn der E-Mail-Versand aus irgendeinem Grund fehlschlägt, wird eine Fehlermeldung protokolliert und ein Versuch unternommen, eine E-Mail an den Administrator zu senden.</p>
+
+    <p tal:omit-tag="textual">Wir weisen Sie darauf hin, dass die Zeit, die Ihnen für diesen Überprüfungsprozess zur Verfügung steht, begrenzt ist, also handeln Sie bitte schnell.</p>
+
+    <p tal:omit-tag="textual">Wenn Sie Fragen haben oder weitere Informationen benötigen, zögern Sie bitte nicht, uns zu kontaktieren.</p>
+
+    <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
+    <strong tal:omit-tag="textual">Das <span tal:omit-tag="textual" tal:replace="site_name"></span> Team</strong></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Hinweis: Diese Mitteilung wurde automatisch generiert. Bitte antworten Sie nicht direkt auf diese Nachricht.</small></p>
+</body>
+</html>
