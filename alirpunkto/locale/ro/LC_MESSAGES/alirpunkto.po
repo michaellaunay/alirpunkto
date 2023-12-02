@@ -1,0 +1,660 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-12-02 13:10+0100\n"
+"Last-Translator: \n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "welcome"
+msgstr "Bine ați venit"
+
+msgid "username_label"
+msgstr "Utilizator"
+
+msgid "password_label"
+msgstr "Parola"
+
+msgid "login_label"
+msgstr "Autentificare"
+
+msgid "welcome_msg"
+msgstr "Bine ați venit"
+
+#, fuzzy
+msgid "all_applications_msg"
+msgstr ""
+"Toate aplicațiile de care aveți nevoie pentru a participa la activitățile "
+"din ${site_name} într-un singur loc."
+
+#, fuzzy
+msgid "register_or_login_msg"
+msgstr "Înregistrați-vă sau conectați-vă acum pentru a începe."
+
+#, fuzzy
+msgid "logged_in_msg_title"
+msgstr ""
+"Alirpunkto, serviciul centralizat pentru aplicațiile utilizate în "
+"infrastructura IT a ${site_name}"
+
+#, fuzzy
+msgid "logged_in_msg"
+msgstr "Sunteți autentificat ca ${user}."
+
+#, fuzzy
+msgid "log_out_invitation_msg"
+msgstr "Vă puteți deconecta făcând clic aici"
+
+msgid "logout_label"
+msgstr "Deconectare"
+
+#, fuzzy
+msgid "choose_application_msg"
+msgstr "Alegeți aplicația la care doriți să vă alăturați:"
+
+#: views/login.py:23
+#, fuzzy
+msgid "invalid_username_or_password"
+msgstr "Nume de utilizator sau parolă invalidă. Vă rugăm să încercați din nou."
+
+msgid "register_link"
+msgstr "Creează cont"
+
+msgid "password_confirm_label"
+msgstr "Confirmați noua parolă"
+
+msgid "password_confirm_title"
+msgstr "Confirmă parola"
+
+msgid "forgot_password_label"
+msgstr "Ai uitat parola?"
+
+msgid "full_name_as_in_id_label"
+msgstr ""
+"Prenumele complete, așa cum figurează în documentele oficiale de identitate"
+
+msgid "full_surname_as_in_id_label"
+msgstr ""
+"Numele de familie complet(e), așa cum figurează în documentele de identitate "
+"oficiale"
+
+msgid "birthdate_label"
+msgstr "Data nașterii"
+
+msgid "nationality_label"
+msgstr "Naţionalitate"
+
+msgid "cooperator_number_label"
+msgstr "Numărul cooperatorului"
+
+msgid "pseudonym_label"
+msgstr "Pseudonimul"
+
+msgid "email_label"
+msgstr "Adresă email"
+
+msgid "first_interaction_language_label"
+msgstr "Limba în care preferați să interacționăm cu dvs"
+
+msgid "second_interaction_language_label"
+msgstr ""
+"Limba pe care o acceptați ca o a doua opțiune pentru a interacționa cu dvs"
+
+msgid "register_label"
+msgstr "Înregistrare"
+
+msgid "forgot_password_head"
+msgstr "Am uitat parola"
+
+msgid "forgot_your_password_title"
+msgstr "Ai uitat parola?"
+
+#, fuzzy
+msgid "enter_your_email_address_label"
+msgstr "Te rugăm să-ți introduci adresa de email"
+
+msgid "submit_button"
+msgstr "Trimite"
+
+#, fuzzy
+msgid "candidature_states_draft_value"
+msgstr "Proiect: Aplicația se află în modul proiect."
+
+msgid "candidature_states_email_validation_value"
+msgstr ""
+"Validarea E-mailului: Starea în care adresa de e-mail a solicitantului este "
+"în așteptare de validare."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr ""
+"UmanConfirmat: Adresa de e-mail a solicitantului este verificată și este "
+"furnizată o dovadă de umanitate (am verificat că nu sunteți un robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"DateUnice: Solicitantul a introdus datele sale de identificare personală și "
+"am verificat că niciun Cooperator sau membru obișnuit al Comunității, actual "
+"sau recent, nu are aceleași date."
+
+#, fuzzy
+msgid "candidature_states_pending_value"
+msgstr ""
+"În așteptare: Cererea a fost depusă. Datele de identificare personală au "
+"fost transmise verificatorilor, dar aceștia nu au transmis încă un feedback."
+
+#, fuzzy
+msgid "candidature_states_approved_value"
+msgstr "Aprobat: Cererea a fost acceptată."
+
+#, fuzzy
+msgid "candidature_states_refused_value"
+msgstr "Refuzat: Cererea a fost respinsă."
+
+msgid "candidature_states_draft"
+msgstr "schița"
+
+msgid "candidature_states_email_validation"
+msgstr "Validarea_E-mailului"
+
+msgid "candidature_states_confirmed_human"
+msgstr "uman_confirmat"
+
+msgid "candidature_states_unique_data"
+msgstr "date_unice"
+
+msgid "candidature_states_pending"
+msgstr "în așteptare"
+
+msgid "candidature_states_approved"
+msgstr "aprobat"
+
+msgid "candidature_states_refused"
+msgstr "refuzat"
+
+msgid "candidature_types_ordinary_value"
+msgstr ""
+"Ordinar: O cerere pentru un Membru Ordinar al Comunității = cu un proces de "
+"înregistrare simplificat, fără obligații financiare, dar fără drepturi de "
+"decizie."
+
+msgid "candidature_types_cooperator_value"
+msgstr ""
+"Cooperator: O cerere pentru a deveni membru cu drepturi depline al "
+"Cooperativei, un Cooperator = cu un proces de înregistrare complet care să "
+"asigure principiul \"o persoană = un vot\" și faptul că solicitantul este "
+"cetățean al Uniunii Europene, obligația de a achiziționa cel puțin o acțiune "
+"și de a plăti o contribuție anuală, precum și drepturi depline de decizie."
+
+msgid "candidature_types_ordinary"
+msgstr "Membru Ordinar al Comunității"
+
+#, fuzzy
+msgid "candidature_types_cooperator"
+msgstr "Cooperator = membru cu drepturi depline al Cooperativei"
+
+#, fuzzy
+msgid "vote_types_yes_value"
+msgstr "Da: votul este pozitiv."
+
+#, fuzzy
+msgid "vote_types_no_value"
+msgstr "Nu: votul este negativ."
+
+#, fuzzy
+msgid "vote_types_abstain_value"
+msgstr "Abțineri: Votul este neutru."
+
+msgid "vote_types_yes"
+msgstr "da"
+
+msgid "vote_types_no"
+msgstr "nu"
+
+#, fuzzy
+msgid "vote_types_abstain"
+msgstr "se abțin"
+
+msgid "zero"
+msgstr "zero"
+
+msgid "one"
+msgstr "unu"
+
+msgid "two"
+msgstr "doi"
+
+msgid "three"
+msgstr "trei"
+
+msgid "four"
+msgstr "patru"
+
+msgid "five"
+msgstr "cinci"
+
+msgid "six"
+msgstr "șase"
+
+msgid "seven"
+msgstr "șapte"
+
+msgid "eight"
+msgstr "opt"
+
+msgid "nine"
+msgstr "nouă"
+
+msgid "times"
+msgstr "vizualizari"
+
+msgid "plus"
+msgstr "la care se adauga"
+
+#, fuzzy
+msgid "email_validation_subject"
+msgstr ""
+"Verificarea faptului că sunteți un om. Calculați rezultatele unor operații "
+"matematice simple și introduceți aceste rezultate pe portal"
+
+#, fuzzy
+msgid "email_candidature_state_changed"
+msgstr "Schimbarea statutului cererii dumneavoastră pe portal"
+
+#, fuzzy
+msgid "invalid_challenge"
+msgstr ""
+"Răspunsul dumneavoastră este incorect. Vă rugăm să introduceți unul nou."
+
+#, fuzzy
+msgid "invalid_email"
+msgstr "Există o problemă cu adresa dvs. de e-mail, vă rugăm să o verificați."
+
+#, fuzzy
+msgid "invalid_choice"
+msgstr "Alegerea dvs. nu este validă, vă rugăm să o introduceți din nou."
+
+#, fuzzy
+msgid "challenge_instruction_text"
+msgstr ""
+"Vă rugăm să calculați rezultatele următoarelor patru operații matematice "
+"simple și să completați câmpurile corespunzătoare pentru a vă confirma "
+"adresa de e-mail."
+
+#, fuzzy
+msgid "enter_result_label_A"
+msgstr "Vă rugăm să introduceți rezultatul operației matematice A:"
+
+#, fuzzy
+msgid "result_label_title_A"
+msgstr ""
+"Vă rugăm să introduceți codul pe care l-ați primit prin e-mail sau "
+"rezultatul operației matematice A."
+
+#, fuzzy
+msgid "result_input_title_A"
+msgstr ""
+"Pentru a ne permite să verificăm adresa dvs. de e-mail și pentru a ne "
+"asigura că sunteți un om (nu un robot), vă rugăm să introduceți rezultatul "
+"operațiunii A pe care ați primit-o prin e-mail."
+
+#, fuzzy
+msgid "enter_result_label_B"
+msgstr "Vă rugăm să introduceți rezultatul operației matematice B:"
+
+#, fuzzy
+msgid "result_label_title_B"
+msgstr ""
+"Vă rugăm să introduceți codul pe care l-ați primit prin e-mail sau "
+"rezultatul operației matematice B."
+
+#, fuzzy
+msgid "result_input_title_B"
+msgstr ""
+"Pentru a ne permite să verificăm adresa dvs. de e-mail și să ne asigurăm că "
+"sunteți un om (nu un robot), vă rugăm să introduceți rezultatul operațiunii "
+"B pe care ați primit-o prin e-mail."
+
+#, fuzzy
+msgid "enter_result_label_C"
+msgstr "Vă rugăm să introduceți rezultatul operației matematice C:"
+
+#, fuzzy
+msgid "result_label_title_C"
+msgstr ""
+"Vă rugăm să introduceți codul pe care l-ați primit prin e-mail sau "
+"rezultatul operației matematice C."
+
+#, fuzzy
+msgid "result_input_title_C"
+msgstr ""
+"Pentru a ne permite să verificăm adresa dvs. de e-mail și să ne asigurăm că "
+"sunteți un om (nu un robot), vă rugăm să introduceți rezultatul operațiunii "
+"C pe care ați primit-o prin e-mail."
+
+#, fuzzy
+msgid "enter_result_label_D"
+msgstr "Vă rugăm să introduceți rezultatul operației matematice D:"
+
+#, fuzzy
+msgid "result_label_title_D"
+msgstr ""
+"Vă rugăm să introduceți codul pe care l-ați primit prin e-mail sau "
+"rezultatul operației matematice D."
+
+#, fuzzy
+msgid "result_input_title_D"
+msgstr ""
+"Pentru a ne permite să verificăm adresa dvs. de e-mail și să ne asigurăm că "
+"sunteți un om (nu un robot), vă rugăm să introduceți rezultatul operațiunii "
+"D pe care ați primit-o prin e-mail."
+
+msgid "verify_button"
+msgstr "Trimite"
+
+#, fuzzy
+msgid "submit_email_validation_title"
+msgstr "Faceți clic pentru a verifica codurile introduse."
+
+msgid "passwords_dont_match"
+msgstr "Parolele nu se potrivesc."
+
+#, fuzzy
+msgid "password_too_short"
+msgstr "Parola este prea scurtă."
+
+#, fuzzy
+msgid "password_minimum_length"
+msgstr "Parola trebuie să aibă cel puțin ${password_minimum_length} caractere."
+
+#, fuzzy
+msgid "password_too_long"
+msgstr "Parola este prea lungă."
+
+#, fuzzy
+msgid "password_maximum_length"
+msgstr "Parola nu trebuie să depășească ${password_maximum_length} caractere."
+
+#, fuzzy
+msgid "password_must_contain_digit"
+msgstr "Parola trebuie să conțină cel puțin o cifră."
+
+#, fuzzy
+msgid "password_must_contain_uppercase"
+msgstr "Parola trebuie să conțină cel puțin o literă majusculă."
+
+#, fuzzy
+msgid "password_must_contain_lowercase"
+msgstr "Parola trebuie să conțină cel puțin o literă minusculă."
+
+#, fuzzy
+msgid "password_must_contain_special_char"
+msgstr ""
+"Parola trebuie să conțină cel puțin unul dintre următoarele caractere: '@', "
+"'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#, fuzzy
+msgid "pseudonym_title_label"
+msgstr ""
+"Vă rugăm să introduceți aici pseudonimul care vă va identifica pe întreaga "
+"durată a activității dumneavoastră pe platforma noastră IT. Vă recomandăm "
+"ÎNGREJORĂTOR să selectați un pseudonim care să facă imposibilă (sau extrem "
+"de dificilă) urmărirea identității dvs. reale. Astfel, vă protejați "
+"confidențialitatea opiniilor dumneavoastră (adică datele cu caracter "
+"personal care fac obiectul unei protecții specifice în conformitate cu "
+"Regulamentul general privind protecția datelor - GDPR) împotriva oricărei "
+"forme de presiune externă în viața reală (de exemplu, din partea "
+"angajatorului sau a clienților dumneavoastră). Fiți foarte atenți! Odată ce "
+"l-ați ales, nu veți putea NICIODATĂ să schimbați ulterior acest pseudonim. "
+"Alegeți-l cu grijă!"
+
+#, fuzzy
+msgid "password_title_label"
+msgstr "Vă rugăm să introduceți parola aici."
+
+#, fuzzy
+msgid "password_confirm_title_label"
+msgstr "Vă rugăm să vă confirmați parola aici."
+
+#, fuzzy
+msgid "password_confirm"
+msgstr "Confirmați parola."
+
+#, fuzzy
+msgid "type_of_registration"
+msgstr "Tipul de înregistrare"
+
+#, fuzzy
+msgid "type_registration_label"
+msgstr "Selectați tipul de înregistrare care vi se potrivește."
+
+#, fuzzy
+msgid "type_registration_choice"
+msgstr ""
+"Fiecare tip de înregistrare este însoțit de un set specific de drepturi, "
+"beneficii și obligații."
+
+#, fuzzy
+msgid "approved_heading"
+msgstr "Felicitări pentru aprobarea dumneavoastră!"
+
+#, fuzzy
+msgid "approved_description"
+msgstr ""
+"Cererea dumneavoastră a fost aprobată. Acum vă puteți autentifica folosind "
+"pseudonimul și parola pe care le-ați furnizat în timpul procesului de "
+"depunere a cererii."
+
+#, fuzzy
+msgid "invalid_pseudonym"
+msgstr ""
+"Pseudonim invalid. Acesta trebuie să aibă între 5 și 20 de caractere și "
+"poate conține numai litere (A-Z, a-z), numere (0-9), caractere de subliniere "
+"(_), puncte (.), liniuțe (-) și spații."
+
+#, fuzzy
+msgid "Select_a_country"
+msgstr "Selectați un stat membru al Uniunii Europene"
+
+#, fuzzy
+msgid "Austria"
+msgstr "AT - Austria"
+
+#, fuzzy
+msgid "Belgium"
+msgstr "BE - Belgia"
+
+#, fuzzy
+msgid "Bulgaria"
+msgstr "BG - Bulgaria"
+
+#, fuzzy
+msgid "Cyprus"
+msgstr "CY - Cipru"
+
+#, fuzzy
+msgid "Czech_Republic"
+msgstr "CZ - Cehia"
+
+#, fuzzy
+msgid "Germany"
+msgstr "DE - Germania"
+
+#, fuzzy
+msgid "Denmark"
+msgstr "DK - Danemarca"
+
+#, fuzzy
+msgid "Estonia"
+msgstr "EE - Estonia"
+
+#, fuzzy
+msgid "Spain"
+msgstr "ES - Spania"
+
+#, fuzzy
+msgid "Finland"
+msgstr "FI - Finlanda"
+
+#, fuzzy
+msgid "France"
+msgstr "FR - Franța"
+
+#, fuzzy
+msgid "Greece"
+msgstr "GR - Grecia"
+
+#, fuzzy
+msgid "Croatia"
+msgstr "Resurse umane - Croația"
+
+#, fuzzy
+msgid "Hungary"
+msgstr "HU - Ungaria"
+
+#, fuzzy
+msgid "Ireland"
+msgstr "IE - Irlanda"
+
+#, fuzzy
+msgid "Italy"
+msgstr "IT - Italia"
+
+#, fuzzy
+msgid "Lithuania"
+msgstr "LT - Lituania"
+
+#, fuzzy
+msgid "Luxembourg"
+msgstr "LU - Luxemburg"
+
+#, fuzzy
+msgid "Latvia"
+msgstr "LV - Letonia"
+
+#, fuzzy
+msgid "Malta"
+msgstr "MT - Malta"
+
+#, fuzzy
+msgid "Netherlands"
+msgstr "NL - Țările de Jos"
+
+#, fuzzy
+msgid "Poland"
+msgstr "PL - Polonia"
+
+#, fuzzy
+msgid "Portugal"
+msgstr "PT - Portugalia"
+
+#, fuzzy
+msgid "Romania"
+msgstr "RO - România"
+
+#, fuzzy
+msgid "Sweden"
+msgstr "SE - Suedia"
+
+#, fuzzy
+msgid "Slovenia"
+msgstr "SI - Slovenia"
+
+#, fuzzy
+msgid "Slovakia"
+msgstr "SK - Slovacia"
+
+#, fuzzy
+msgid "full_name_as_in_id_required"
+msgstr "Numele și prenumele sunt obligatorii."
+
+#, fuzzy
+msgid "full_surname_as_in_id_required"
+msgstr "Este necesar numele de familie complet."
+
+#, fuzzy
+msgid "birthdate_required"
+msgstr "Data nașterii este obligatorie."
+
+#, fuzzy
+msgid "nationality_required"
+msgstr "Este necesară naționalitatea."
+
+#, fuzzy
+msgid "first_interaction_language_required"
+msgstr "Este necesară prima limbă de interacțiune."
+
+#, fuzzy
+msgid "pending_description"
+msgstr ""
+"Cererea dumneavoastră este în curs de examinare. Veți fi notificat prin e-"
+"mail după ce aceasta va fi aprobată."
+
+#, fuzzy
+msgid "candidature_not_found"
+msgstr "Aplicația nu a fost găsită."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"Cooperativa CosmoPolitica este o cooperativă pan-europeană pentru o "
+"transformare radicală către justiție socială, sustenabilitate și democrație. "
+"Aceasta sprijină indivizii și transformă sistemul economic, social și "
+"politic existent spre o societate echitabilă, durabilă și fericită, numită "
+"Societatea Acordului. Puteți participa în două moduri: (1) ca membru "
+"obișnuit al comunității noastre, cu un proces de înregistrare simplu, fără "
+"angajamente financiare, dar fără drept de vot; sau (2) ca cooperator, un "
+"membru cu drepturi depline al cooperativei noastre, cu un proces de "
+"înregistrare care asigură că o anumită persoană se poate înregistra o "
+"singură dată (pentru a asigura principiul democratic \"o persoană = un vot"
+"\") și că numai cetățenii Uniunii Europene sunt cooperatori, cu angajamentul "
+"de a achiziționa cel puțin o acțiune și de a plăti o contribuție anuală, "
+"precum și drepturi depline de vot."
+
+#, fuzzy
+msgid "human_verification_description"
+msgstr ""
+"Primul pas în procesul de înregistrare este să validați faptul că sunteți o "
+"ființă umană și nu un robot. Pentru aceasta, verificăm dacă puteți primi și "
+"înțelege un e-mail pe care vi-l vom trimite: ceea ce vă solicităm este "
+"simplu pentru o ființă umană, mult mai complex pentru un robot."
+
+msgid "identity_verification_label"
+msgstr "Verificarea identității"
+
+#, fuzzy
+msgid "Send_id_copy_by_email"
+msgstr ""
+"Trimiteți prin e-mail o scanare a unei părți din documentul oficial de "
+"identitate."
+
+#, fuzzy
+msgid "Send_video_conference_link"
+msgstr "Trimiteți propuneri pentru data și ora unei videoconferințe."
+
+msgid "Proceed"
+msgstr "Continuă"
+
+#, fuzzy
+msgid "confirm_sent_emails_to_validators"
+msgstr "Vă rugăm să confirmați că ați trimis e-mailurile către verificatori."
+
+#, fuzzy
+msgid "sent_confirmation_label"
+msgstr "Confirmarea faptului că e-mailurile au fost trimise către verificatori"
+
+#, fuzzy
+msgid "submit_email_confirmation_title"
+msgstr "Confirmați că ați trimis e-mailurile."
+
+msgid "confirm_email_send_button_label"
+msgstr "Confirmați"
