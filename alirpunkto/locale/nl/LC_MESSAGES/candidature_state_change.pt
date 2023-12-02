@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Wijziging in de status van uw aanvraag</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Evolutie van uw aanvraag naar <span tal:replace="site_name">Site Naam</span></h1>
+        <p tal:omit-tag="textual">Hallo<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Aanvragersnaam</span>,
+        </p>
+        <p tal:omit-tag="textual">Uw aanvraag op het platform
+            <span tal:replace="site_url">URL</span> als een 
+            <span tal:replace="python:candidature.type">Rol</span>
+            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">is geaccepteerd</span>.
+            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">is afgewezen</span>
+            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">is in behandeling en heeft zijn status gewijzigd</span> . 
+        </p>
+        <p tal:omit-tag="textual">Hier zijn de details van de evolutie:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Kandidaat-ID: <span tal:replace="python:candidature.oid">Aanvraag-ID</span></li>
+            <li tal:omit-tag="textual">Overgangsdatum: <span tal:replace="python:candidature.modifications[-1].datetime">Laatste overgang</span></li>
+            <li tal:omit-tag="textual">Nieuwe status: <span tal:replace="python:candidature.state">Nieuwe sollicitatiestatus</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Als u wilt, kunt u het registratieproces nu onderbreken. U kunt het later hervatten door op de onderstaande link te klikken.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Bedankt voor uw deelname.</p>
+        <p tal:omit-tag="textual">Gegroet,</p>
+        <p tal:omit-tag="textual">Het team van <span tal:replace="site_name">Site Name</span></p>
+    </body>
+</html>
