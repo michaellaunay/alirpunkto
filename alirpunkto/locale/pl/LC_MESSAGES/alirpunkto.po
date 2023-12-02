@@ -1,0 +1,651 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-12-02 13:04+0100\n"
+"Last-Translator: \n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+msgid "welcome"
+msgstr "Witaj"
+
+msgid "username_label"
+msgstr "Nazwa użytkownika"
+
+msgid "password_label"
+msgstr "Hasło"
+
+msgid "login_label"
+msgstr "Zaloguj się"
+
+msgid "welcome_msg"
+msgstr "Witaj"
+
+#, fuzzy
+msgid "all_applications_msg"
+msgstr ""
+"Wszystkie aplikacje potrzebne do uczestniczenia w działaniach ${site_name} w "
+"jednym miejscu."
+
+#, fuzzy
+msgid "register_or_login_msg"
+msgstr "Zarejestruj się lub zaloguj, aby rozpocząć."
+
+#, fuzzy
+msgid "logged_in_msg_title"
+msgstr ""
+"Alirpunkto, scentralizowana usługa dla aplikacji wykorzystywanych w "
+"infrastrukturze IT ${site_name}"
+
+#, fuzzy
+msgid "logged_in_msg"
+msgstr "Jesteś zalogowany jako ${user}."
+
+#, fuzzy
+msgid "log_out_invitation_msg"
+msgstr "Możesz się wylogować, klikając tutaj"
+
+msgid "logout_label"
+msgstr "Zaloguj się"
+
+#, fuzzy
+msgid "choose_application_msg"
+msgstr "Wybierz aplikację, do której chcesz dołączyć:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Nieprawidłowa nazwa użytkownika lub hasło. Spróbuj ponownie."
+
+msgid "register_link"
+msgstr "Utwórz konto"
+
+msgid "password_confirm_label"
+msgstr "Potwierdź hasło"
+
+msgid "password_confirm_title"
+msgstr "Potwierdź swoje hasło"
+
+msgid "forgot_password_label"
+msgstr "Zapomniałeś hasła?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Twoje imię (imiona) widniejące w oficjalnych dokumentach tożsamości"
+
+msgid "full_surname_as_in_id_label"
+msgstr ""
+"Twoje nazwisko lub nazwiska widniejące w oficjalnych dokumentach tożsamości"
+
+msgid "birthdate_label"
+msgstr "Data urodzenia"
+
+msgid "nationality_label"
+msgstr "Narodowość"
+
+msgid "cooperator_number_label"
+msgstr "Numer współpracownika"
+
+msgid "pseudonym_label"
+msgstr "Pseudonim"
+
+msgid "email_label"
+msgstr "Adres e-mail"
+
+msgid "first_interaction_language_label"
+msgstr "Preferowany język interakcji z użytkownikiem"
+
+msgid "second_interaction_language_label"
+msgstr "Język, który użytkownik akceptuje jako drugą opcję interakcji z nami"
+
+msgid "register_label"
+msgstr "Zarejestruj się"
+
+msgid "forgot_password_head"
+msgstr "Zapomniałeś hasła"
+
+msgid "forgot_your_password_title"
+msgstr "Zapomniałeś hasła?"
+
+msgid "enter_your_email_address_label"
+msgstr "Wprowadź swój adres e-mail:"
+
+msgid "submit_button"
+msgstr "Wyślij"
+
+#, fuzzy
+msgid "candidature_states_draft_value"
+msgstr "Wersja robocza: Aplikacja jest w trybie wersji roboczej."
+
+#, fuzzy
+msgid "candidature_states_email_validation_value"
+msgstr ""
+"Weryfikacja adresu e-mail: Stan, w którym adres e-mail wnioskodawcy oczekuje "
+"na walidację."
+
+#, fuzzy
+msgid "candidature_states_confirmed_human_value"
+msgstr ""
+"ConfirmedHuman: Adres e-mail wnioskodawcy został zweryfikowany i dostarczono "
+"dowód człowieczeństwa (sprawdziliśmy, że nie jesteś robotem)."
+
+#, fuzzy
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"UniqueData: Wnioskodawca wprowadził swoje osobiste dane identyfikacyjne, a "
+"my zweryfikowaliśmy, że żaden obecny lub niedawny Współpracownik lub Zwykły "
+"Członek Wspólnoty nie posiada takich samych danych."
+
+msgid "candidature_states_pending_value"
+msgstr ""
+"WToku: Wniosek został złożony. Osobiste dane identyfikacyjne zostały "
+"przesłane do weryfikatorów, ale nie przekazali oni jeszcze informacji "
+"zwrotnej."
+
+#, fuzzy
+msgid "candidature_states_approved_value"
+msgstr "Zatwierdzono: Wniosek został zaakceptowany."
+
+#, fuzzy
+msgid "candidature_states_refused_value"
+msgstr "Odrzucony: Wniosek został odrzucony."
+
+msgid "candidature_states_draft"
+msgstr "szkic"
+
+#, fuzzy
+msgid "candidature_states_email_validation"
+msgstr "email_validation"
+
+#, fuzzy
+msgid "candidature_states_confirmed_human"
+msgstr "confirmed_human"
+
+#, fuzzy
+msgid "candidature_states_unique_data"
+msgstr "unique_data"
+
+msgid "candidature_states_pending"
+msgstr "oczekujące"
+
+msgid "candidature_states_approved"
+msgstr "zatwierdzone"
+
+#, fuzzy
+msgid "candidature_states_refused"
+msgstr "odrzucony"
+
+msgid "candidature_types_ordinary_value"
+msgstr ""
+"Zwykły:  Wniosek o przyznanie statusu Zwykłego Członka Wspólnoty  = z "
+"uproszczonym procesem rejestracji, bez zobowiązań finansowych, ale bez praw "
+"do podejmowania decyzji."
+
+msgid "candidature_types_cooperator_value"
+msgstr ""
+"Spółdzielca: Wniosek o przyjęcie w poczet pełnoprawnych członków "
+"Spółdzielni, Spółdzielca = z kompletnym procesem rejestracji zapewniającym "
+"zasadę \"jedna osoba = jeden głos\" oraz, że Wnioskodawca jest obywatelem "
+"Unii Europejskiej, obowiązek zakupu co najmniej jednego udziału i wniesienia "
+"rocznego wkładu oraz pełne prawa decyzyjne."
+
+msgid "candidature_types_ordinary"
+msgstr "Zwykły Członek Wspólnoty"
+
+msgid "candidature_types_cooperator"
+msgstr "Spółdzielca = pełnoprawny członek Spółdzielni"
+
+msgid "vote_types_yes_value"
+msgstr "Tak:głosowanie jest pozytywne."
+
+msgid "vote_types_no_value"
+msgstr "Nie: głosowanie jest negatywne."
+
+msgid "vote_types_abstain_value"
+msgstr "Wstrzymał się od głosu: głosowanie jest neutralne."
+
+msgid "vote_types_yes"
+msgstr "tak"
+
+msgid "vote_types_no"
+msgstr "nie"
+
+#, fuzzy
+msgid "vote_types_abstain"
+msgstr "wstrzymać się od głosu"
+
+msgid "zero"
+msgstr "zero"
+
+msgid "one"
+msgstr "jeden"
+
+msgid "two"
+msgstr "dwa"
+
+msgid "three"
+msgstr "trzy"
+
+msgid "four"
+msgstr "cztery"
+
+msgid "five"
+msgstr "pięć"
+
+msgid "six"
+msgstr "sześć"
+
+msgid "seven"
+msgstr "siedem"
+
+msgid "eight"
+msgstr "osiem"
+
+msgid "nine"
+msgstr "dziewięć"
+
+msgid "times"
+msgstr "razy"
+
+#, fuzzy
+msgid "plus"
+msgstr "plus"
+
+#, fuzzy
+msgid "email_validation_subject"
+msgstr ""
+"Weryfikacja, czy jesteś człowiekiem. Obliczanie wyników prostych operacji "
+"matematycznych i wprowadzanie tych wyników na portalu"
+
+#, fuzzy
+msgid "email_candidature_state_changed"
+msgstr "Zmiana statusu zgłoszenia do portalu"
+
+#, fuzzy
+msgid "invalid_challenge"
+msgstr "Twoja odpowiedź jest nieprawidłowa. Wprowadź nową."
+
+#, fuzzy
+msgid "invalid_email"
+msgstr "Wystąpił problem z adresem e-mail, prosimy o jego weryfikację."
+
+#, fuzzy
+msgid "invalid_choice"
+msgstr "Twój wybór jest nieprawidłowy, wprowadź go ponownie."
+
+#, fuzzy
+msgid "challenge_instruction_text"
+msgstr ""
+"Oblicz wyniki poniższych czterech prostych działań matematycznych i wypełnij "
+"odpowiednie pola, aby potwierdzić swój adres e-mail."
+
+#, fuzzy
+msgid "enter_result_label_A"
+msgstr "Wprowadź wynik operacji matematycznej A:"
+
+#, fuzzy
+msgid "result_label_title_A"
+msgstr ""
+"Wprowadź kod otrzymany w wiadomości e-mail lub wynik działania "
+"matematycznego A."
+
+#, fuzzy
+msgid "result_input_title_A"
+msgstr ""
+"Abyśmy mogli zweryfikować Twój adres e-mail i to, że jesteś człowiekiem (a "
+"nie robotem), wprowadź wynik operacji A, którą otrzymałeś na e-mail."
+
+#, fuzzy
+msgid "enter_result_label_B"
+msgstr "Wprowadź wynik operacji matematycznej B:"
+
+#, fuzzy
+msgid "result_label_title_B"
+msgstr ""
+"Wprowadź kod otrzymany w wiadomości e-mail lub wynik działania "
+"matematycznego B."
+
+#, fuzzy
+msgid "result_input_title_B"
+msgstr ""
+"Abyśmy mogli zweryfikować Twój adres e-mail i to, że jesteś człowiekiem (a "
+"nie robotem), wprowadź wynik operacji B, którą otrzymałeś na e-mail."
+
+#, fuzzy
+msgid "enter_result_label_C"
+msgstr "Wprowadź wynik operacji matematycznej C:"
+
+#, fuzzy
+msgid "result_label_title_C"
+msgstr ""
+"Wprowadź kod otrzymany w wiadomości e-mail lub wynik działania "
+"matematycznego C."
+
+#, fuzzy
+msgid "result_input_title_C"
+msgstr ""
+"Abyśmy mogli zweryfikować Twój adres e-mail i to, że jesteś człowiekiem (a "
+"nie robotem), wprowadź wynik operacji C, którą otrzymałeś na e-mail."
+
+#, fuzzy
+msgid "enter_result_label_D"
+msgstr "Wprowadź wynik operacji matematycznej D:"
+
+#, fuzzy
+msgid "result_label_title_D"
+msgstr ""
+"Wprowadź kod otrzymany w wiadomości e-mail lub wynik działania "
+"matematycznego D."
+
+#, fuzzy
+msgid "result_input_title_D"
+msgstr ""
+"Abyśmy mogli zweryfikować Twój adres e-mail i to, że jesteś człowiekiem (a "
+"nie robotem), wprowadź wynik operacji D, którą otrzymałeś na e-mail."
+
+msgid "verify_button"
+msgstr "Wyślij"
+
+#, fuzzy
+msgid "submit_email_validation_title"
+msgstr "Kliknij, aby zweryfikować wprowadzone kody."
+
+msgid "passwords_dont_match"
+msgstr "Hasła nie pasują do siebie."
+
+#, fuzzy
+msgid "password_too_short"
+msgstr "Hasło jest zbyt krótkie."
+
+#, fuzzy
+msgid "password_minimum_length"
+msgstr "Hasło musi mieć co najmniej ${password_minimum_length} znaków."
+
+#, fuzzy
+msgid "password_too_long"
+msgstr "Hasło jest zbyt długie."
+
+#, fuzzy
+msgid "password_maximum_length"
+msgstr "Hasło nie powinno przekraczać ${password_maximum_length} znaków."
+
+#, fuzzy
+msgid "password_must_contain_digit"
+msgstr "Hasło musi zawierać co najmniej jedną cyfrę."
+
+#, fuzzy
+msgid "password_must_contain_uppercase"
+msgstr "Hasło musi zawierać co najmniej jedną wielką literę."
+
+#, fuzzy
+msgid "password_must_contain_lowercase"
+msgstr "Hasło musi zawierać co najmniej jedną małą literę."
+
+#, fuzzy
+msgid "password_must_contain_special_char"
+msgstr ""
+"Hasło musi zawierać co najmniej jeden z poniższych znaków: '@', '#', '%', "
+"'&', '*', '(', ')', '-', '_', '+', '='."
+
+#, fuzzy
+msgid "pseudonym_title_label"
+msgstr ""
+"Wpisz tutaj pseudonim, który będzie Cię identyfikował przez cały czas Twojej "
+"aktywności na naszej platformie IT. Zdecydowanie zalecamy wybranie "
+"pseudonimu, który uniemożliwi (lub bardzo utrudni) ustalenie prawdziwej "
+"tożsamości użytkownika. W ten sposób chronisz poufność swoich opinii (tj. "
+"danych osobowych, które podlegają szczególnej ochronie na mocy ogólnego "
+"rozporządzenia o ochronie danych - RODO) przed wszelkimi formami presji "
+"zewnętrznej w prawdziwym życiu (np. ze strony pracodawcy lub klientów). Bądź "
+"bardzo ostrożny! Raz wybranego pseudonimu NIGDY nie będzie można później "
+"zmienić. Wybierz go ostrożnie!"
+
+#, fuzzy
+msgid "password_title_label"
+msgstr "Wprowadź tutaj swoje hasło."
+
+#, fuzzy
+msgid "password_confirm_title_label"
+msgstr "Potwierdź swoje hasło tutaj."
+
+msgid "password_confirm"
+msgstr "Potwierdź swoje hasło"
+
+#, fuzzy
+msgid "type_of_registration"
+msgstr "Rodzaj rejestracji"
+
+#, fuzzy
+msgid "type_registration_label"
+msgstr "Wybierz typ rejestracji, który Ci odpowiada."
+
+#, fuzzy
+msgid "type_registration_choice"
+msgstr ""
+"Każdy rodzaj rejestracji wiąże się z określonym zestawem praw, korzyści i "
+"obowiązków."
+
+#, fuzzy
+msgid "approved_heading"
+msgstr "Gratulujemy zatwierdzenia!"
+
+#, fuzzy
+msgid "approved_description"
+msgstr ""
+"Twoja aplikacja została zatwierdzona. Możesz teraz zalogować się przy użyciu "
+"pseudonimu i hasła podanych podczas procesu składania wniosku."
+
+#, fuzzy
+msgid "invalid_pseudonym"
+msgstr ""
+"Nieprawidłowy pseudonim. Powinien mieć od 5 do 20 znaków i może zawierać "
+"tylko litery (A-Z, a-z), cyfry (0-9), podkreślenia (_), kropki (.), myślniki "
+"(-) i spacje."
+
+#, fuzzy
+msgid "Select_a_country"
+msgstr "Wybierz państwo członkowskie Unii Europejskiej"
+
+#, fuzzy
+msgid "Austria"
+msgstr "AT - Austria"
+
+#, fuzzy
+msgid "Belgium"
+msgstr "BE - Belgia"
+
+#, fuzzy
+msgid "Bulgaria"
+msgstr "BG - Bułgaria"
+
+#, fuzzy
+msgid "Cyprus"
+msgstr "CY - Cypr"
+
+#, fuzzy
+msgid "Czech_Republic"
+msgstr "CZ - Czechy"
+
+#, fuzzy
+msgid "Germany"
+msgstr "DE - Niemcy"
+
+#, fuzzy
+msgid "Denmark"
+msgstr "DK - Dania"
+
+#, fuzzy
+msgid "Estonia"
+msgstr "EE - Estonia"
+
+#, fuzzy
+msgid "Spain"
+msgstr "ES - Hiszpania"
+
+#, fuzzy
+msgid "Finland"
+msgstr "FI - Finlandia"
+
+#, fuzzy
+msgid "France"
+msgstr "FR - Francja"
+
+#, fuzzy
+msgid "Greece"
+msgstr "GR - Grecja"
+
+#, fuzzy
+msgid "Croatia"
+msgstr "HR - Chorwacja"
+
+#, fuzzy
+msgid "Hungary"
+msgstr "HU - Węgry"
+
+#, fuzzy
+msgid "Ireland"
+msgstr "IE - Irlandia"
+
+#, fuzzy
+msgid "Italy"
+msgstr "IT - Włochy"
+
+#, fuzzy
+msgid "Lithuania"
+msgstr "LT - Litwa"
+
+#, fuzzy
+msgid "Luxembourg"
+msgstr "LU - Luksemburg"
+
+#, fuzzy
+msgid "Latvia"
+msgstr "LV - Łotwa"
+
+#, fuzzy
+msgid "Malta"
+msgstr "MT - Malta"
+
+#, fuzzy
+msgid "Netherlands"
+msgstr "NL - Holandia"
+
+#, fuzzy
+msgid "Poland"
+msgstr "PL - Polska"
+
+#, fuzzy
+msgid "Portugal"
+msgstr "PT - Portugalia"
+
+#, fuzzy
+msgid "Romania"
+msgstr "RO - Rumunia"
+
+#, fuzzy
+msgid "Sweden"
+msgstr "SE - Szwecja"
+
+#, fuzzy
+msgid "Slovenia"
+msgstr "SI - Słowenia"
+
+#, fuzzy
+msgid "Slovakia"
+msgstr "SK - Słowacja"
+
+#, fuzzy
+msgid "full_name_as_in_id_required"
+msgstr "Wymagane jest pełne imię i nazwisko."
+
+#, fuzzy
+msgid "full_surname_as_in_id_required"
+msgstr "Wymagane jest pełne nazwisko(a)."
+
+#, fuzzy
+msgid "birthdate_required"
+msgstr "Wymagana jest data urodzenia."
+
+#, fuzzy
+msgid "nationality_required"
+msgstr "Wymagane obywatelstwo."
+
+#, fuzzy
+msgid "first_interaction_language_required"
+msgstr "Wymagany jest pierwszy język interakcji."
+
+#, fuzzy
+msgid "pending_description"
+msgstr ""
+"Twoja aplikacja jest w trakcie weryfikacji. Zostaniesz powiadomiony e-"
+"mailem, gdy wniosek zostanie zatwierdzony."
+
+#, fuzzy
+msgid "candidature_not_found"
+msgstr "Nie znaleziono aplikacji."
+
+#, fuzzy
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"CosmoPolitical Cooperative to ogólnoeuropejska spółdzielnia na rzecz "
+"radykalnej transformacji w kierunku sprawiedliwości społecznej, "
+"zrównoważonego rozwoju i demokracji. Wspiera jednostki i przekształca "
+"istniejący system gospodarczy, społeczny i polityczny w kierunku "
+"sprawiedliwego, zrównoważonego i szczęśliwego społeczeństwa, zwanego "
+"społeczeństwem porozumienia. Możesz uczestniczyć na dwa sposoby: (1) jako "
+"zwykły członek naszej społeczności, z prostym procesem rejestracji, bez "
+"zobowiązań finansowych, ale bez prawa głosu; lub (2) jako spółdzielca, "
+"pełnoprawny członek naszej spółdzielni, z procesem rejestracji "
+"zapewniającym, że dana osoba może zarejestrować się tylko raz (w celu "
+"zapewnienia demokratycznej zasady \"jedna osoba = jeden głos\") i że tylko "
+"obywatele Unii Europejskiej są spółdzielcami, z zobowiązaniem do zakupu co "
+"najmniej jednego udziału i opłacenia rocznej składki oraz pełnego prawa "
+"głosu."
+
+#, fuzzy
+msgid "human_verification_description"
+msgstr ""
+"Pierwszym krokiem w procesie rejestracji jest potwierdzenie, że jesteś "
+"człowiekiem, a nie robotem. W tym celu sprawdzamy, czy możesz otrzymać i "
+"zrozumieć wiadomość e-mail, którą do Ciebie wyślemy: to, o co prosimy, jest "
+"proste dla człowieka, znacznie bardziej skomplikowane dla robota."
+
+#, fuzzy
+msgid "identity_verification_label"
+msgstr "Weryfikacja tożsamości"
+
+#, fuzzy
+msgid "Send_id_copy_by_email"
+msgstr ""
+"Wyślij skan części oficjalnego dokumentu tożsamości pocztą elektroniczną."
+
+#, fuzzy
+msgid "Send_video_conference_link"
+msgstr "Przesłanie propozycji daty i godziny wideokonferencji."
+
+msgid "Proceed"
+msgstr "Kontynuuj"
+
+#, fuzzy
+msgid "confirm_sent_emails_to_validators"
+msgstr "Prosimy o potwierdzenie wysłania wiadomości e-mail do weryfikatorów."
+
+#, fuzzy
+msgid "sent_confirmation_label"
+msgstr "Potwierdzenie, że wiadomości e-mail zostały wysłane do weryfikatorów"
+
+#, fuzzy
+msgid "submit_email_confirmation_title"
+msgstr "Potwierdź wysłanie wiadomości e-mail."
+
+msgid "confirm_email_send_button_label"
+msgstr "Potwierdź"
