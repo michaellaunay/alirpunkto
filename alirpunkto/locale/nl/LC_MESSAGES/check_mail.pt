@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registratie bij <span tal:replace="site_name"></span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Bedankt voor het starten van uw registratie op het platform <span tal:replace="site_name"></span></h1>
+        <p tal:omit-tag="textual">Om uw e-mailadres te verifiëren en er zeker van te zijn dat u een mens bent (en geen robot), hebben we een reeks van 4 eenvoudige wiskundige bewerkingen bedacht. Voer de vier wiskundige operaties uit van A tot D hieronder en voer de resultaten in de corresponderende velden op de registratiepagina in waarnaar hieronder wordt verwezen.</p>
+        <div omit-tag="textual">
+            <p tal:omit-tag="textual" >Operatie A is <span tal:content="challenge_A"
+                    tal:omit-tag="textual">De eerste uitdaging</span></p>
+            <p tal:omit-tag="textual">Operatie B is <span tal:content="challenge_B"
+                    tal:omit-tag="textual">De tweede uitdaging</span></p>
+            <p tal:omit-tag="textual">Operatie C is <span tal:content="challenge_C"
+                    tal:omit-tag="textual">De derde uitdaging</span></p>
+            <p tal:omit-tag="textual">Operatie D is <span tal:content="challenge_D"
+                    tal:omit-tag="textual">De vierde uitdaging</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link naar de registratiepagina waarop u de resultaten van de bovenstaande bewerkingen A tot en met D opgeeft:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Dank u voor uw interesse in onze activiteiten. We hopen u binnenkort te mogen verwelkomen! </p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual"> Hoogachtend,</p>
+            <p tal:omit-tag="textual">Het team van <span tal:replace="site_name">Site</span></p>
+        </footer>
+
+    </body>
+</html>
