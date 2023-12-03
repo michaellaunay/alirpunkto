@@ -14,7 +14,7 @@
 
     <p tal:omit-tag="textual">Please note that certain sensitive information has been masked for security reasons. However, the document contain the information that you need to verify my identity according to the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> registration process.</p>
 
-    <p tal:omit-tag="textual">I kindly request that you review the attached document at your earliest convenience, to either confirm or refute the adequation between:</p>
+    <p tal:omit-tag="textual">I kindly request that you review the attached document at your earliest convenience, to vote on the adequation between:</p>
 <ul tal:omit-tag="textual">
    <li tal:omit-tag="textual">the identity information that you received directly by e-mail from the IT platform of the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> (and that will be reminded to you on the voting interface) and </li>
    <li tal:omit-tag="textual">the identity information that you can read on the attached partial copy of my official identity document.</li>
