@@ -22,7 +22,7 @@
      <p tal:omit-tag="textual">Il link per votare questa adeguatezza, e la scadenza per farlo, le saranno inviati direttamente in una e-mail indipendente dalla piattaforma di <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span>.</p>
     <p tal:omit-tag="textual">La ringrazio calorosamente in anticipo per aver supportato il processo della mia registrazione come Cooperatore  di <span tal:omit-tag="textual" tal:replace="site">Sito Nome</span>. In caso di ulteriori domande o di necessità di informazioni aggiuntive, non esiti a contattarmi direttamente.</p>
 
-   <p tal:omit-tag="textual">Buoni saluti,<p>
+   <p tal:omit-tag="textual">Buoni saluti,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="full_name">Il suo nome</span></strong></p>
 
     <p tal:omit-tag="textual">Allegato: [Nome del file del documento identificativo]</p>
