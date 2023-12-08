@@ -7,7 +7,7 @@
     <title tal:omit-tag="textual">Tu solicitud para la <span tal:replace="site_name">Nombre del sitio</span> ha sido aprobada</title>
 </head>
 <body tal:omit-tag="textual">
-    <h1 tal:omit-tag="textual">¡Felicidades por tu solicitud aprobada!</h1>
+    <h1 tal:omit-tag="textual">¡Felicidades por la aprobación de tu Solicitud!</h1>
     
     <p tal:omit-tag="textual">Hola <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nombre del Solicitante</span>,</p>
     
