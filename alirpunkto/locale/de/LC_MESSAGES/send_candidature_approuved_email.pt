@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual" >Deine Bewerbung für die <span tal:replace="site_name">Site Name</span> wurde genehmigt</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Glückwunsch zu deinem genehmigten Antrag!</h1>
+    
+    <p tal:omit-tag="textual">Hallo <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Name des Antragstellers</span>,</p>
+    
+    <p tal:omit-tag="textual">Wir freuen uns, dir mitzuteilen, dass deine Bewerbung an der <span tal:replace="site_name">Site name</span> für die Rolle der <span tal:replace="python:candidature.type">Rolle</span> genehmigt wurde.</p>
+    
+    <p tal:omit-tag="textual">Hier sind die Einzelheiten:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Bewerber-ID: <span tal:replace="python:candidature.oid">Bewerber-ID</span></li>
+        <li tal:omit-tag="textual">Bewilligungsdatum: <span tal:replace="python:candidature.modifications[-1]">Letzter Übergang</span></li>
+        <li tal:omit-tag="textual">Status: Genehmigt</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Nachdem deine Bewerbung genehmigt wurde, kannst du dich mit dem Pseudonym und dem Passwort, das du während des Bewerbungsprozesses angegeben hast, auf unserer Plattform einloggen.</p>
+    
+    <p tal:omit-tag="textual">Danke, dass du bei uns mitmachst! Wir freuen uns, dich in unserer Community begrüßen zu dürfen, und auf die Zusammenarbeit mit dir!</p>
+    
+    <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
+    <p tal:omit-tag="textual">Das Team von <span tal:replace="site_name">Site Name</span></p>
+</body>
+</html>
