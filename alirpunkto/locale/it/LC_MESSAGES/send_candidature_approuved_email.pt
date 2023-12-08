@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">La tua richiesta di iscrizione alla <span tal:replace="site_name">Site Name</span> è stata approvata</title>.
+</head>
+<body tal:omit-tag="textual">
+<h1 tal:omit-tag="textual">Congratulazioni per l'approvazione della tua Candidatura!</h1>
+    
+    <p tal:omit-tag="textual">Ciao <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nome del Richiedente</span>,</p>
+    
+    <p tal:omit-tag="textual">Siamo lieti di informarti che la tua candidatura alla <span tal:replace="site_name" >Nome del sito</span> per il ruolo di <span tal:replace="python:candidature.type">Role</span> è stata approvata.</p>
+    
+    <p tal:omit-tag="textual">Ecco i dettagli:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID di candidatura: <span tal:replace="python:candidature.oid">ID di candidatura</span></li>
+        <li tal:omit-tag="textual">Data di approvazione: <span tal:replace="python:candidature.modifications[-1]">Ultima transizione</span></li>
+        <li tal:omit-tag="textual">Status: Approvata</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Ora che la tua candidatura è stata approvata, puoi accedere alla nostra piattaforma utilizzando lo pseudonimo e la password che hai fornito durante il processo di candidatura.</p>
+    
+    <p tal:omit-tag="textual">Grazie per esserti unito a noi! Siamo felici di darti il benvenuto nella nostra Community e non vediamo l'ora di lavorare insieme a te!</p>
+    
+    <p tal:omit-tag="textual">Buoni saluti,</p>
+    <p tal:omit-tag="textual">Il team di <span tal:replace="site_name">Nome del sito</span></p>
+</body>
+</html>
