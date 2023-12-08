@@ -20,9 +20,9 @@
    <li tal:omit-tag="textual">de identiteitsgegevens die u kunt lezen op de bijgevoegde gedeeltelijke kopie van mijn officiële identiteitsbewijs.</li>
 </ul>
      <p tal:omit-tag="textual">De link waarmee u op deze toereikendheid kunt stemmen, en de uiterste datum waarop u dat kunt doen, worden u rechtstreeks per e-mail toegestuurd door het <span tal:omit-tag="textual" tal:replace="site">Site Name</span> platform.</p>
-    <p tal:omit-tag="textual">Ik dank u bij voorbaat hartelijk voor uw steun bij het proces van mijn registratie als Cooperator bij de <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Mocht u nog vragen hebben of aanvullende informatie nodig hebben, neem dan gerust rechtstreeks contact met mij op.</p>
+     <p tal:omit-tag="textual">Ik dank u bij voorbaat hartelijk voor uw steun bij het proces van mijn registratie als Cooperator bij de <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Mocht u nog vragen hebben of aanvullende informatie nodig hebben, neem dan gerust rechtstreeks contact met mij op.</p>
 
-   <p tal:omit-tag="textual">Gegroet,<p>
+     <p tal:omit-tag="textual">Gegroet,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="full_name">Uw naam</span></strong></p>
 
     <p tal:omit-tag="textual" >Attachement: [Naam van het ID-documentbestand]</p>
