@@ -14,14 +14,14 @@
 
     <p tal:omit-tag="textual">I am writing to you to complete the identity verification process for my application to become a Cooperator of the <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. I would like to propose a video conference meeting for this purpose.</p>
 
-    <p tal:omit-tag="textual">Here are some time slots that I am suggesting for the video conference. I live in Germany (Please adjust according to your country / region of residence. This is necessary for your correspondent to know your time zone.). This video conference should last no longer than 10 minutes: (plase provide at least 3 options, if possible at different times of the day and on different days including during the week-end, all of them no later than ###)</p>
+    <p tal:omit-tag="textual">Here are some time slots that I am suggesting for the video conference. Please note that I live in <strong>Germany</strong> (Please adjust according to your country / region of residence. This is necessary for your correspondent to know your time zone), so that the time of the day where I live may be different from the time of the day where you live. This video conference should last no longer than 10 minutes: (plase provide at least 3 options, if possible at different times of the day and on different days including during the week-end, all of them no later than ###)</p>
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">Monday, 04 September 2023, at 17:30 hours my time; (Adjust according to your availability)</li>
         <li tal:omit-tag="textual">Tuesday, 05 September 2023, at 20:30 hours my time; (Adjust according to your availability)</li>
         <li tal:omit-tag="textual">Saturday, 09 September 2023, at 10:00 hours my time. (Adjust according to your availability)</li>
     </ul>
 
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Please be aware that we may live in different time zones! Please transpose these time slots to your own time zone.</strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Please remember that we may live in different time zones! Please transpose these time slots to your own time zone.</strong></p>
 
     <p tal:omit-tag="textual">The video conference will take place using the following link:</p> 
 (please insert here the link that you have prepared for this videoconference. Here are our suggestions of platforms that you can use to create the videoconference and provide the corresponding link:
