@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Twoje zgłoszenie do witryny <span tal:replace="site_name">Nazwa witryny</span> zostało zatwierdzone</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Gratulujemy zatwierdzenia Twojego wniosku! </h1>
+    
+    <p tal:omit-tag="textual">Witaj <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Imię i nazwisko wnioskodawcy</span>,</p>
+    
+    <p tal:omit-tag="textual">Z przyjemnością informujemy, że Twoja aplikacja na stanowisko <span tal:replace="site_name">Nazwa witryny</span> dla roli <span tal:replace="python:candidature.type">Rola</span> została zatwierdzona.</p>
+    
+    <p tal:omit-tag="textual">Oto szczegóły:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Identyfikator kandydata: <span tal:replace="python:candidature.oid">Identyfikator wniosku</span></li>
+        <li tal:omit-tag="textual">Data zatwierdzenia: <span tal:replace="python:candidature.modifications[-1]">Ostatnie przejście</span></li>
+        <li tal:omit-tag="textual">Status: Zatwierdzony</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Teraz, gdy Twoja aplikacja została zatwierdzona, możesz zalogować się na naszej platformie przy użyciu pseudonimu i hasła podanego podczas procesu aplikacji.</p>
+    
+    <p tal:omit-tag="textual">Dziękujemy, że do nas dołączyłeś! Z radością witamy Cię w naszej społeczności i cieszymy się na współpracę z Tobą!</p>
+    
+    <p tal:omit-tag="textual">Z wyrazami szacunku,</p>
+    <p tal:omit-tag="textual">Zespół <span tal:replace="site_name">Nazwa strony</span></p>
+</body>
+</html>
