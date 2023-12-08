@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal">
+<tal:block tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">es - <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span> - Por favor, verifique por videoconferencia mi identidad como nuevo Cooperador potencial</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">es - Verificación de identidad para afiliación a <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span> mediante videoconferencia</h1>
+
+    <p tal:omit-tag="textual">Estimados verificadores,</p>
+
+    <p tal:omit-tag="textual">Me dirijo a ustedes para completar el proceso de verificación de identidad de mi solicitud para convertirme en Cooperador de <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span>. Me gustaría proponerle una reunión por videoconferencia para este fin.</p>
+
+    <p tal:omit-tag="textual">Aquí tiene algunas franjas horarias que le propongo para la videoconferencia. Tenga en cuenta que vivo en <strong>España</strong> (Por favor, ajústelo según su país / región de residencia. Esto es necesario para que su corresponsal conozca su zona horaria), por lo que la hora del día en la que yo vivo puede ser diferente de la hora del día en la que usted vive. Esta videoconferencia no debe durar más de 10 minutos: (por favor, proporcione al menos 3 opciones, si es posible a diferentes horas del día y en diferentes días, incluso durante el fin de semana, todas ellas no más tarde de ###)</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Lunes, 04 de septiembre de 2023, a las 17:30 horas mi hora; (Ajustar según su disponibilidad)</li>
+        <li tal:omit-tag="textual">Martes, 05 de septiembre de 2023, a las 20:30 horas mi hora; (Ajustar según su disponibilidad)</li>
+        <li tal:omit-tag="textual">Sábado, 09 de septiembre de 2023, a las 10:00 horas mi hora. (Ajustar según su disponibilidad)</li>
+    </ul>
+
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">¡Por favor, recuerde que podemos vivir en zonas horarias diferentes! Por favor, transponga estas franjas horarias a su propia zona horaria.</strong></p>
+
+    <p tal:omit-tag="textual">La videoconferencia tendrá lugar utilizando el siguiente enlace:</p> 
+(inserte aquí el enlace que ha preparado para esta videoconferencia. Aquí tiene nuestras sugerencias de plataformas que puede utilizar para crear la videoconferencia y proporcionar el enlace correspondiente:
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><a tal:omit-tag="textual" href="https://meet.jit.si/">Jitsi Meet</a> (software gratuito y de código abierto)</li>
+        <li tal:omit-tag="textual"><a tal:omit-tag="textual" href="https://framatalk.org/abc/es/">Framatalk</a> (software libre y de código abierto)</li>
+        <li tal:omit-tag="textual"><a tal:omit-tag="textual" href="https://zoom.us/">Zoom</a> (software propietario)</li>
+        <li tal:omit-tag="textual"><a tal:omit-tag="textual" href="https://www.microsoft.com/es-ES/microsoft-teams/log-in">Microsoft Teams</a> (software propietario, plataforma tras muro de pago)</li>
+        <li><a href="https://meet.google.com/?pli=1">Google Meet</a> (software propietario, acceso gratuito a la plataforma)</li>
+    </ul>)
+
+    <p tal:omit-tag="textual">Por favor, seleccione la franja horaria que más le convenga y envíeme un correo electrónico con su selección.</p>
+     <p tal:omit-tag="textual">Una vez celebrada esta reunión por videoconferencia, les ruego que voten para confirmar o refutar la adecuación entre:</p>
+<ul tal:omit-tag="textual">
+   <li tal:omit-tag="textual">la información de identidad que ha recibido directamente por correo electrónico de la plataforma informática del <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span> (y que le será recordada en la interfaz de votación) y </li>
+   <li tal:omit-tag="textual">la información de identidad que habrá visto durante la videoconferencia.</li>
+</ul>
+    <p tal:omit-tag="textual">El enlace para que pueda votar sobre esta adecuación después de esta videoconferencia, así como la fecha límite para hacerlo, le serán enviados directamente en un correo electrónico independiente por la plataforma <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span>.</p>
+   
+    <p tal:omit-tag="textual">Le agradezco muy cordialmente de antemano su apoyo en el proceso de mi inscripción como Cooperador en la <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span>. Si tiene alguna pregunta o necesita información adicional, no dude en ponerse en contacto conmigo directamente.</p>
+
+    <p tal:omit-tag="textual">Sinceramente,</p>
+     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">[Su nombre]</strong></p>
+
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Este correo electrónico ha sido generado con la ayuda de la función de verificación de identidad de <span tal:replace="site">Nombre del sitio</span>. Si usted no es el verificador asignado a la aplicación de <span tal:omit-tag="textual" tal:replace=" full_name">Su nombre</span> y ha recibido este correo electrónico por error, informe al administrador de <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span>.</small></p>
+
+</body>
+</tal:block>
+</html>
