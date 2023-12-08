@@ -22,13 +22,12 @@
      <p tal:omit-tag="textual">The link for you to vote on this adequation, and the deadline for doing so, will be sent directly to you in an independent e-mail by the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> platform.</p>
     <p tal:omit-tag="textual">I thank you very warmly in advance for supporting the process of my registration as a Cooperator to the <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Should you have any further questions or require additional information, please feel free to contact me directly.</p>
 
-    <p tal:omit-tag="textual">Best regards,<br />
-    <strong tal:omit-tag="textual"><span tal:replace="full_name">Your Name</span></strong></p>
+    <p tal:omit-tag="textual">Best regards,<p>
+     <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="full_name">Your Name</span></strong></p>
 
     <p tal:omit-tag="textual">Attachment: [Name of the ID document file]</p>
 
-    <hr tal:omit-tag="textual" />
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email has been generated with the assistance of <span tal:omit-tag="textual" tal:replace="site">Site Name</span>'s identity verification feature. If you are not the Verifier assigned to the application of <span tal:omit-tag="textual" tal:replace="full_name">Your Name</span> and have received this email in error, please inform the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> administrator.</small></p>
+      <p tal:omit-tag="textual"><small tal:omit-tag="textual">This email has been generated with the assistance of <span tal:omit-tag="textual" tal:replace="site">Site Name</span>'s identity verification feature. If you are not the Verifier assigned to the application of <span tal:omit-tag="textual" tal:replace="full_name">Your Name</span> and have received this email in error, please inform the <span tal:omit-tag="textual" tal:replace="site">Site Name</span> administrator.</small></p>
 
 </body>
 </html>
