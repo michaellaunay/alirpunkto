@@ -22,7 +22,7 @@
      <p tal:omit-tag="textual">El enlace para que pueda votar esta adecuación, así como el plazo para hacerlo, le serán enviados directamente en un correo electrónico independiente por la plataforma <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span>.</p>
     <p tal:omit-tag="textual">Le agradezco muy cordialmente de antemano su apoyo en el proceso de mi inscripción como Cooperador a la <span tal:omit-tag="textual" tal:replace="site">Nombre del sitio</span>. Si tiene alguna otra pregunta o necesita información adicional, no dude en ponerse en contacto conmigo directamente.</p>
 
-   <p tal:omit-tag="textual">Un cordial saludo,<p>
+   <p tal:omit-tag="textual">Un cordial saludo,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="full_name">Su Nombre</span></strong></p>
 
     <p tal:omit-tag="textual">Adjuntar: [Nombre del archivo del documento de identidad]</p>
