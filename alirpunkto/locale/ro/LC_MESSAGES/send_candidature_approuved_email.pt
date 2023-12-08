@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Aplicația dvs. pentru <span tal:replace="site_name">Numele site-ului</span> a fost aprobată</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Felicitări pentru aprobarea Aplicației dumneavoastră!</h1>
+    
+    <p tal:omit-tag="textual">Bună ziua <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Numele solicitantului</span>,</p>
+    
+    <p tal:omit-tag="textual">Am plăcerea să vă informăm că aplicația dumneavoastră la <span tal:replace=" site_name" >Numele site-ului</span> pentru rolul de <span tal:replace="python:candidature.type">Rol</span> a fost aprobată.</p>
+    
+    <p tal:omit-tag="textual">Iată detaliile:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Identificarea candidaturii: <span tal:replace="python:candidature.oid">Identificarea candidaturii</span></li>
+        <li tal:omit-tag="textual">Data aprobării: <span tal:replace="python:candidature.modifications[-1]">Ultima tranziție</span></li>
+        <li tal:omit-tag="textual">Statut: Aprobat</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Acum că aplicația dvs. a fost aprobată, vă puteți autentifica pe platforma noastră folosind pseudonimul și parola pe care le-ați furnizat în timpul procesului de candidatură.</p>
+    
+    <p tal:omit-tag="textual">Mulțumim că v-ați alăturat nouă! Suntem bucuroși să vă primim în comunitatea noastră și așteptăm cu nerăbdare să lucrăm împreună cu dumneavoastră!</p>
+    
+    <p tal:omit-tag="textual">Cele mai bune salutări,</p>
+    <p tal:omit-tag="textual">Echipa de la <span tal:replace="site_name">Numele site-ului</span></p>
+</body>
+</html>
