@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">fr - <span tal:omit-tag="textual" tal:replace="site">Nom du site</span> - Veuillez vérifier mon identité en tant que nouveau coopérateur potentiel</title>.
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Vérification d'identité pour l'adhésion <span tal:omit-tag="textual" tal:replace="site">Nom du site</span></h1>
+    <p tal:omit-tag="textual">Chers vérificateurs,</p> <p tal:omit-tag="textual"]
+
+    </p> <p tal:omit-tag="textual">Je vous écris pour compléter le processus de vérification de mon identité dans le cadre de ma demande d'adhésion en tant que coopérateur de <span tal:omit-tag="textual" tal:replace="site">Nom du site</span>. Vous trouverez en pièce jointe à ce courriel une copie partielle de ma pièce d'identité officielle.</p> 
+
+    <p tal:omit-tag="textual">Veuillez noter que certaines informations sensibles ont été masquées pour des raisons de sécurité. Cependant, le document contient les informations dont vous avez besoin pour vérifier mon identité conformément au processus d'enregistrement de <span tal:omit-tag="textual" tal:replace="site">Site Name</span>.</p>
+
+ <p tal:omit-tag="textual">Je vous prie de bien vouloir examiner le document ci-joint dans les meilleurs délais, afin de voter sur l'adéquation entre :</p> 
+<ul tal:omit-tag="textual">
+   <li tal:omit-tag="textual">les informations d'identité que vous avez reçues directement par courriel de la plateforme informatique de <span tal:omit-tag="textual" tal:replace="site">Nom du site</span> (et qui vous seront rappelées sur l'interface de vote) et </li>.
+   <li:omit-tag="textual">les informations d'identité que vous pouvez lire sur la copie partielle ci-jointe de mon document d'identité officiel.</li>
+</ul>
+    <p tal:omit-tag="textual">Le lien vous permettant de voter sur cette adéquation, ainsi que la date limite pour le faire, vous seront envoyés directement dans un courriel indépendant par la plateforme de <span tal:omit-tag="textual" tal:replace="site">Nom du site</span>.</p> 
+    <p tal:omit-tag="textual">Je vous remercie très chaleureusement par avance de soutenir le processus de mon inscription en tant que Coopérateur de <span tal:omit-tag="textual" tal:replace="site">Nom du site</span>. Si vous avez d'autres questions ou si vous avez besoin d'informations supplémentaires, n'hésitez pas à me contacter directement.</p> 
+
+    <p tal:omit-tag="textual"">Mes meilleures salutations,<br />
+    <strong tal:omit-tag="textual"><span tal:replace="full_name">Votre nom</span></strong></p><p>
+
+    <p tal:omit-tag="textual">Pièce jointe : [Nom du fichier du document d'identité]</p> 
+
+    <hr tal:omit-tag="textual" />
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Ce courriel a été généré avec l'aide de la fonction de vérification d'identité de <span tal:omit-tag="textual" tal:replace="site">Nom du site</span>. Si vous n'êtes pas le vérificateur assigné à l'application de <span tal:omit-tag="textual" tal:replace="full_name">votre nom</span> et que vous avez reçu cet e-mail par erreur, veuillez en informer l'administrateur de <span tal:omit-tag="textual" tal:replace="site">nom du site</span>.</small></p>
+
+</body>
+</html>
