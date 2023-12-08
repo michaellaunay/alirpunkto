@@ -22,7 +22,7 @@
      <p tal:omit-tag="textual">Der Link, über den Sie über diese Übereinstimmung entscheiden können, sowie die Frist, bis zu der Sie dies tun können, werden Ihnen direkt von der <span tal:omit-tag="textual" tal:replace="site">Site Name</span> Plattform in einer unabhängigen E-Mail zugesandt.</p>
     <p tal:omit-tag="textual">Ich danke Ihnen sehr herzlich im Voraus für die Unterstützung des Prozesses meiner Registrierung als Kooperator auf der <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Sollten Sie weitere Fragen haben oder zusätzliche Informationen benötigen, können Sie mich gerne direkt kontaktieren.</p>
 
-     <p tal:omit-tag="textual">Mit freundlichen Grüßen,<p>
+     <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="full_name">Ihr Name</span></strong></p>
 
     <p tal:omit-tag="textual">Attachment: [Name der Datei des ID-Dokuments]</p>
