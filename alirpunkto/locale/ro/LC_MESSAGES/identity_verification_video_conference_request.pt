@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal">
+<tal:block tal:omit-tag="textual">
+<head tal:omit-tag="textual"> <head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">ro - <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span> - Vă rog să verificați identitatea mea ca nou potențial cooperator prin videoconferință</title>.
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">ro - Verificarea identității pentru <span tal:omit-tag="textual" tal:replace="site">Numele sitului</span> calitatea de membru prin videoconferință</h1>
+
+    <p tal:tal:omit-tag="textual">Dragii verificatori,</p>
+
+    <p tal:omit-tag="textual">Vă scriu pentru a finaliza procesul de verificare a identității pentru cererea mea de a deveni cooperator al <span tal:omit-tag="textual" tal:replace="site">Numele sitului</span>. În acest scop, aș dori să vă propun o întâlnire prin videoconferință.</p> 
+
+    <p tal:omit-tag="textual">Iată câteva intervale orare pe care le propun pentru videoconferința. Vă rog să rețineți că locuiesc în <strong>România</strong> (Vă rugăm să adaptați în funcție de țara / regiunea de reședință. Acest lucru este necesar pentru ca corespondentul dvs. să cunoască fusul orar), astfel încât ora din ziua în care locuiesc eu poate fi diferită de ora din ziua în care locuiți dvs. Această videoconferință nu trebuie să dureze mai mult de 10 minute: (vă rugăm să furnizați cel puțin 3 opțiuni, dacă este posibil la ore diferite ale zilei și în zile diferite, inclusiv în timpul weekend-ului, toate acestea nu mai târziu de ###)</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Luni, 04 septembrie 2023, la ora 17:30, ora mea; (ajustați în funcție de disponibilitatea dumneavoastră)</li>.
+        <li tal:omit-tag="textual">Marți, 05 septembrie 2023, la ora 20:30, ora mea; (Se ajustează în funcție de disponibilitatea dumneavoastră)</li> <li>.
+        <li tal:omit-tag="textual">Sâmbătă, 09 septembrie 2023, la ora 10:00, ora mea. (Ajustați în funcție de disponibilitatea dumneavoastră)</li>
+    </ul>
+
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Vă rugăm să nu uitați că este posibil să locuim în fusuri orare diferite! Vă rugăm să transpuneți aceste intervale orare în propriul fus orar.</strong></p>
+
+    <p tal:omit-tag="textual">Conferința video va avea loc folosind următorul link:</p> <p>. 
+(vă rugăm să inserați aici linkul pe care l-ați pregătit pentru această videoconferință. Iată sugestiile noastre de platforme pe care le puteți utiliza pentru a crea videoconferința și a furniza link-ul corespunzător:
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><a tal:omit-tag="textual" href="https://meet.jit.si/">Jitsi Meet</a> (software gratuit și open-source)</li>
+        <li tal:omit-tag="textual"><a tal:omit-tag="textual" href="https://framatalk.org/abc/en/">Framatalk</a> (software gratuit și open-source)</li>
+        <li tal:omit-tag="textual"><a tal:omit-tag="textual" href="https://zoom.us/">Zoom</a> (software proprietar)</li>
+        <li tal:omit-tag="textual"><a tal:omit-tag="textual" href="https://www.microsoft.com/ro-RO/microsoft-teams/log-in">Microsoft Teams</a> (software proprietar, platformă în spatele unui paywall)</li>
+        <li><a href="https://meet.google.com/?pli=1">Google Meet</a> (software proprietar, acces gratuit la platformă)</li>
+    </ul>)
+
+    <p tal:omit-tag="textual">Vă rog să selectați un interval orar care vi se potrivește și să îmi trimiteți un e-mail cu selecția dumneavoastră.</p>
+     <p tal:omit-tag="textual">După ce ați desfășurat această întâlnire prin videoconferință, vă rog să votați pentru a confirma sau infirma adecvarea între:</p>
+<ul tal:omit-tag="textual">
+   <li tal:omit-tag="textual">informațiile de identitate pe care le-ați primit direct prin e-mail de la platforma informatică a <span tal:omit-tag="textual" tal:replace="site">Denumirea site-ului</span> (și care vă vor fi reamintite pe interfața de vot) și </li>
+   <li tal:omit-tag="textual">informațiile de identitate pe care le veți fi văzut în timpul videoconferinței.</li>
+</ul>
+    <p tal:omit-tag="textual">Linkul prin care puteți vota această adecvare după această videoconferință, precum și termenul limită pentru a face acest lucru, vă vor fi trimise direct într-un e-mail independent de către platforma <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span>.</p>
+   
+    <p tal:omit-tag="textual">Vă mulțumesc călduros în avans pentru susținerea procesului de înregistrare a mea în calitate de Cooperator la <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span>. În cazul în care aveți întrebări suplimentare sau aveți nevoie de informații suplimentare, vă rog să nu ezitați să mă contactați direct.</p>
+
+    <p tal:omit-tag="textual">Cu respect,</p>
+     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">[Numele dumneavoastră]</strong></p>
+
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Acest e-mail a fost generat cu ajutorul funcției de verificare a identității de la <span tal:replace="site">Numele site-ului</span>. Dacă nu sunteți verificatorul atribuit aplicației <span tal:omit-tag="textual" tal:replace="full_name">Numele tău</span> și ați primit acest e-mail din greșeală, vă rugăm să informați administratorul <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span>.</small></p>
+
+</body>
+</tal:block>
+</html>
