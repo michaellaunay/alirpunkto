@@ -3,8 +3,8 @@
 # Creation date: 2023-07-22
 # Author: Michaël Launay
 
-from typing import Type, Callable, Tuple, List, Any, Optional, Dict
-from dataclasses import dataclass
+from typing import Type, Callable, Tuple, List, Any, Optional, Dict, Iterator
+from dataclasses import dataclass, fields
 from persistent import Persistent
 from persistent.mapping import PersistentMapping
 from datetime import datetime
@@ -233,6 +233,15 @@ class CandidatureEmailEvent:
     function_name:str # the name of the function that triggered the event
     seed:str # the seed of the email send event
 
+    def iter_attributes(self)-> Iterator[Tuple[str, Any]]:
+        """Iterate over the attributes of the dataclass.
+        Returns:
+            Iterator[Tuple[str, Any]]: An iterator over the attributes of the
+                dataclass.
+        """
+        for field in fields(self):
+            yield field.name, getattr(self, field.name)
+
 class Candidatures(PersistentMapping):
     """A mapping to store candidatures in the ZODB.
     Coulb be used as a singleton if all calls are made through get_instance.
@@ -288,9 +297,22 @@ class Candidatures(PersistentMapping):
         For exemple, It could be necessary to send them a reminder email
           to the verifiers if the expiration date is approaching.
         Returns:
-            The monitored candidatures.
+            The monitored candidatures.DELETED
         """
         return self._monitored_candidatures
+
+    @property
+    def candidatures_emails(self)-> List[str]:
+        """Retrieve the emails of all candidatures.
+
+        This method returns a list of email addresses from all candidatures. 
+        In future versions, this functionality might be enhanced with caching 
+        and listeners to maintain updated and accurate values.
+
+        Returns:
+            List[str]: A list containing the emails of all candidatures.
+        """
+        return [candidature.email for candidature in self.values()]
 
 def random_string(
         length:int,
@@ -337,6 +359,15 @@ class CandidatureData:
     password_confirm: str
     lang1: str
     lang2: str
+
+    def iter_attributes(self)-> Iterator[Tuple[str, Any]]:
+        """Iterate over the attributes of the dataclass.
+        Returns:
+            Iterator[Tuple[str, Any]]: An iterator over the attributes of the
+                dataclass.
+        """
+        for field in fields(self):
+            yield field.name, getattr(self, field.name)
 
 @dataclass
 class Voter:
@@ -750,7 +781,3 @@ class Candidature(Persistent):
             seed=email_seed
         ))
         self._memorize_changes("add_email_send_status", old_status, status)
-
-        
-    
-

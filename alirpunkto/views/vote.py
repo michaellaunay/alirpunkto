@@ -29,29 +29,29 @@ def login_view(request):
     Args:
         request (pyramid.request.Request): the request
     """
-    logged_in = request.params.get('logged_in', False)
-    user = request.session.get('user', None)
+    logged_in = request.session['logged_in'] if 'logged_in' in request.session else False
+    user = request.session['user'] if 'user' in request.session else None
     if not logged_in or not user:
         # redirect to login page
         request.session['redirect_url'] = request.current_route_url()
         return HTTPFound(location=request.route_url('login'))
-    site_name = request.params.get('site_name', 'AlirPunkto')
-    username = request.params.get('username', "")
+    user = User.from_json(user)
+    site_name = request.session['site_name']
+    username = user.name
 
     if oid := request.params.get('oid', ""):
         request.session['oid'] = oid
-    canditures = get_candidatures()
+    canditures = get_candidatures(request)
     if oid not in canditures:
         return {'error': _('invalid_oid'), 'site_name': site_name}
     candidature = canditures[oid]
     voter = None
     for v in candidature.voters:
-        if v.mail == user['email']:
+        if v.email == user.email:
             voter = v
             break
     if not voter:
         return {'error': _('not_voter'), 'site_name': site_name}
-
 
     # Get the user's vote from the form
     if 'form.submitted' in request.params:
@@ -101,5 +101,6 @@ def login_view(request):
         'logged_in': True if user else False,
         'site_name': site_name,
         'user': username,
-        'voting_choices': VotingChoice.get_names()
+        'candidature': candidature,
+        'VotingChoice': VotingChoice
     }

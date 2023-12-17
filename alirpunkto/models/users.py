@@ -43,8 +43,13 @@ class User(Persistent):
         return json.dumps({'name': self.name, 'email': self.email, 'oid': self.oid})
  
     @classmethod
-    def from_json(cls, data:dict):
+    def from_json(cls, data:Union[dict, str]):
         """Create a User instance from json data
-
+        attr:
+            data (Union[dict, str]): the json data
+        return:
+            User: the user created
         """
+        if isinstance(data, str):
+            data = json.loads(data)
         return cls(data['name'], data['email'], data['oid'])

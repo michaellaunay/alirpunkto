@@ -225,6 +225,7 @@ def main(global_config, **settings):
         config.add_route('login', '/login')
         config.add_route('logout', '/logout')
         config.add_route('register', '/register')
+        config.add_route('elections', '/elections')
         config.add_route('vote', '/vote')
         config.add_route('forgot_password', '/forgot_password')
         config.scan()

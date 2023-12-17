@@ -9,15 +9,25 @@
             <div>
                 <p i18n:translate="welcome_voter">
                     You are about to vote on whether to accept or reject the application of
-                    <span tal:replace="candidate_name" i18n:name="name">Candidate Name</span>.
+                    <span tal:replace="python:candidature.data.fullname" i18n:name="name">Candidate Name</span>.
                     Their admission to the portal depends on your decision.
                     Whether through documents received via email or during a video conference,
                     we hope you were able to verify the applicant's identity.
                     We kindly ask you to proceed with this validation diligently, as the integrity of our site depends on it.
                 </p>
             </div>
+            <div>
+                <ul>
+                    <tal:block tal:repeat="field python:candidature.data.iter_attributes()">
+                        <li tal:condition="python:field[0] not in ['password', 'password_confirm']">
+                            <span tal:content="python:field[0]">Field Name</span>
+                            <span tal:content="python:field[1]">Field Value</span>
+                        </li>
+                    </tal:block>
+                </ul>
+            </div>
             <h3 i18n:translate="voting_header">Vote for the Candidature</h3>
-            <form method="POST" action="${request.route_url('login')}">
+            <form method="POST" action="${request.route_url('vote')}">
                 <div tal:define="votingChoices python:VotingChoice.get_names()">
                     <form method="post" action="path_to_voting_endpoint">
                         <fieldset>

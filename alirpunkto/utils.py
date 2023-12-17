@@ -81,8 +81,12 @@ def is_valid_email(email, request):
         error: the error if the email is not valid
         None: if the email is valid
     """
-    if not validate_email(email, check_mx=True):
-        return {'error': _('invalid_email')}
+    try:
+        if not validate_email(email, check_mx=True):
+            return {'error': _('invalid_email')}
+    except Exception as e:
+        log.error(f"Error while validating email {email}: {e}")
+        return {'error': _('connection_error')}
     try:
          # define an unsecure LDAP server, requesting info on DSE and schema
         server = Server(LDAP_SERVER, get_info=ALL)
@@ -96,8 +100,12 @@ def is_valid_email(email, request):
             LDAP_PASSWORD,
             auto_bind=True
         )
-
-        # Verify that the email is not already registered
+        # Verify that the email is not already registered in candidatures
+        candidatures = get_candidatures(request)
+        for candidature in candidatures.values():
+            if candidature.email == email and candidature.state != CandidatureStates.REFUSED:
+                return {'error': _('email_allready_exist')}
+        # Verify that the email is not already registered in LDAP
         conn.search(
             LDAP_BASE_DN,
             '(uid={})'.format(email),
@@ -108,6 +116,7 @@ def is_valid_email(email, request):
             return {'error': _('email_allready_exist')}
     # The email is valid and not already used
     except:
+        log.error(f"Error while checking email {email} in LDAP with {LDAP_SERVER=}, {LDAP_LOGIN=}, {LDAP_OU=}, {LDAP_BASE_DN=}")
         return {'error': _('ldap_error')}
     return None
 
@@ -365,10 +374,10 @@ def get_potential_voters(conn: Connection) -> List[Dict[str, str]]:
         conn (Connection): The LDAP connection object.
 
     Returns:
-        list: List of potential voters.
+        list: List of potential voters (uid, cn, mail, sn).
     """
     filter_str = '(&(employeeType=cooperator)(cn=*)(sn=*)(mail=*))'
-    conn.search(LDAP_BASE_DN, filter_str, attributes=['cn', 'mail', 'sn'])
+    conn.search(LDAP_BASE_DN, filter_str, attributes=['uid', 'cn', 'mail', 'sn'])
     return conn.entries
 
 
@@ -448,6 +457,7 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
 
         voters = [
             {
+                'uid': voter.uid.value,
                 'cn': voter.cn.value,
                 'sn': voter.sn.value,
                 'mail': voter.mail.value
@@ -461,6 +471,7 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
             if admin:
                 voters.append(
                     {
+                        'uid': 'admin',
                         'cn': admin.cn.value,
                         'sn': 'Admin',
                         'mail': admin.mail.value
@@ -547,7 +558,7 @@ def is_admin(username:str, password:str)-> bool:
     bool: Returns True if the provided username and password match the LDAP administrator's credentials, 
     otherwise returns False.
     """
-    return (username.strip(), password.strip())== (LDAP_LOGIN, LDAP_PASSWORD)
+    return (username.strip(), password.strip())== (LDAP_LOGIN.split("=")[-1], LDAP_PASSWORD)
 
 def get_local_template(request, pattern_path):
     """

@@ -326,6 +326,11 @@ def handle_email_validation_state(
                 CandidatureEmailSendStatus.ERROR, 
                 'send_confirm_validation_email'
             )
+            return {
+                'candidature': candidature,
+                'CandidatureTypes': CandidatureTypes,
+                'error': _('error_committing_candidature')
+            }
     return {
         'candidature': candidature,
         'CandidatureTypes': CandidatureTypes
