@@ -8,16 +8,16 @@
     </head>
     <body tal:omit-tag="textual">
         <h1 tal:omit-tag="textual">Évolution de votre candidature vers <span tal:replace="site_name">nom du site</span></h1>
-        <p tal:omit-tag="textual">Bonjour<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du candidat</span>,
+        <p tal:omit-tag="textual">Bonjour <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du candidat</span>,
         </p>
-        </p> <p tal:omit-tag="textual">Votre candidature sur la plateforme
-            <span tal:replace="site_url">URL</span> en tant que 
-            <span tal:replace="python:candidature.type">Rôle</span>
-            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">a été acceptée</span>
-            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">a été rejetée</span>
-            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">est en cours de traitement et a changé d'état</span> . 
+        <p tal:omit-tag="textual">Votre candidature sur la plateforme
+            <span tal:omit-tag="textual" tal:replace="site_url">URL</span> en tant que 
+            <span tal:omit-tag="textual" tal:replace="python:candidature.type">Rôle</span>
+            <span tal:omit-tag="textual" tal:condition="python:candidature.state == CandidatureStates.APPROVED">a été acceptée</span>
+            <span tal:omit-tag="textual" tal:condition="python:candidature.state == CandidatureStates.REFUSED">a été rejetée</span>
+            <span tal:omit-tag="textual" tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">est en cours de traitement et a changé d'état</span> . 
         </p>
-        </p> tal:omit-tag="textual">Voici les détails de son évolution:</p>
+        <p tal:omit-tag="textual">Voici les détails de son évolution:</p>
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Identification de la candidature : <span tal:replace="python:candidature.oid">Identification de la candidature</span></li>
             <li tal:omit-tag="textual">Date de transition : <span tal:replace="python:candidature.modifications[-1].datetime">Dernière transition</span></li>
@@ -25,15 +25,15 @@
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             Si vous le souhaitez, vous pouvez interrompre votre processus d'inscription maintenant. Vous pourrez la reprendre plus tard en cliquant sur le lien ci-dessous.
             </li>
-            <li:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
                 <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
-                    <span tal:replace="string:${page_register_with_oid}"></span>
+                    <span tal:replace="string:${page_register_with_oid}">page with oid</span>
                 </a>
             </li>
         </ul>
 
-        <p tal:omit-tag="textual">Merci de votre participation.</p> <p style="text-align : justify ;">Merci de votre participation.
+        <p tal:omit-tag="textual">Merci de votre participation.</p>
         <p tal:omit-tag="textual">Meilleures salutations,</p>
-        </p> <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Nom du site</span></p> <p>L'équipe de <span tal:replace="site_name">Nom du site</span><p>.
+        <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Nom du site</span></p>.
     </body>
 </html>
