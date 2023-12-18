@@ -17,6 +17,8 @@ from ..models.candidature import (
 )
 from ..utils import (
     get_candidatures,
+    send_confirm_validation_email,
+    send_candidature_state_change_email
 )
 from logging import getLogger
 
@@ -38,13 +40,14 @@ def login_view(request):
     user = User.from_json(user)
     site_name = request.session['site_name']
     username = user.name
-
-    if oid := request.params.get('oid', ""):
+    oid = request.session['oid'] if 'oid' in request.session else request.params.get('oid', "")
+    if oid and 'oid' not in request.session:
         request.session['oid'] = oid
     canditures = get_candidatures(request)
     if oid not in canditures:
         return {'error': _('invalid_oid'), 'site_name': site_name}
     candidature = canditures[oid]
+
     voter = None
     for v in candidature.voters:
         if v.email == user.email:
@@ -52,11 +55,11 @@ def login_view(request):
             break
     if not voter:
         return {'error': _('not_voter'), 'site_name': site_name}
-
+    #@TODO check if the user can vote (if time is not passed )
+    pass
     # Get the user's vote from the form
-    if 'form.submitted' in request.params:
+    if 'submit' in request.params:
         vote = request.POST.get('vote')
-        
         if vote not in VotingChoice.get_names():
             request.session.flash('Invalid voting choice!', 'error')
             return HTTPFound(location=request.route_url('voting_page'))  # Redirect back to voting page
@@ -69,7 +72,7 @@ def login_view(request):
         # check if all of the voter have voted
         if all([v.vote for v in candidature.voters]):
             # send email to the candidature owner
-            count = [v.vote for v in candidature.voters].count(VotingChoice.YES)
+            count = [v.vote for v in candidature.voters].count(VotingChoice.YES.name)
             if count > len(candidature.voters) / 2:
                 candidature.status = Candidature.Status.ACCEPTED
                 transaction.commit()
@@ -81,6 +84,11 @@ def login_view(request):
                 transaction.commit()
                 email_template = "send_candidature_rejected_email"
             # send email to the candidature owner
+            send_candidature_state_change_email(
+                request,
+                candidature,
+                email_template
+            )
             try:
                 candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, email_template)
                 transaction.commit()

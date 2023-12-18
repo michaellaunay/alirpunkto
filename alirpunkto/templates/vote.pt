@@ -45,7 +45,9 @@
                                     </label>
                                 </li>
                             </ul>
-                            <button type="submit" i18n:translate="submit_vote_btn_label">Submit Vote</button>
+                            <input type="submit" value="Submit" name="submit"
+                                title="Click to submit your vote."
+                                i18n:attributes="title submit_vote_title; value submit_button"/>
                         </fieldset>
                     </form>
                 </div>
