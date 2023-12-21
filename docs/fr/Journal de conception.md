@@ -686,7 +686,31 @@ Voici comment commencer avec l'internationalisation (i18n) dans Pyramid :
 
 python
 
-`import deform  from pkg_resources import resource_filename from pyramid.i18n import get_localizer from pyramid.threadlocal import get_current_request  def main(global_config, **settings):     config = Configurator(settings=settings)     config.add_translation_dirs(         'colander:locale',         'deform:locale',     )      def traducteur(term):         return get_localizer(get_current_request()).translate(term)      chemin_template_deform = resource_filename('deform', 'templates/')     zpt_renderer = deform.ZPTRendererFactory(         [chemin_template_deform],         translator=traducteur,     )     deform.Form.set_default_renderer(zpt_renderer)`
+```python
+import deform
+from pkg_resources
+import resource_filename
+from pyramid.i18n
+import get_localizer
+from pyramid.threadlocal
+import get_current_request
+
+def main(global_config, **settings):
+	config = Configurator(settings=settings)
+	config.add_translation_dirs(
+	    'colander:locale',
+	    'deform:locale',
+	)
+
+def traducteur(term):
+	return get_localizer(get_current_request()).translate(term)     
+	chemin_template_deform = resource_filename('deform', 'templates/')     
+	zpt_renderer = deform.ZPTRendererFactory(
+	    [chemin_template_deform],
+	    translator=traducteur,
+	)
+	deform.Form.set_default_renderer(zpt_renderer)
+```
 
 Consultez la démo d'internationalisation pour voir comment les messages d'erreur et de statut de Deform peuvent être localisés. Cette démonstration utilise les fonctionnalités d'internationalisation et de localisation de Pyramid pour afficher les messages d'erreur Deform dans les rendus de formulaire Chameleon.
 

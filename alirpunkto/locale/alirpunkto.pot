@@ -488,3 +488,6 @@ msgstr "Confirm you sent the emails."
 
 msgid "confirm_email_send_button_label"
 msgstr "Confirm"
+
+msgid "vote_success"
+msgstr "We thank you for participating in the voting process. Your vote ${vote} has been successfully recorded. You can change your vote until its deadline by returning to this page."

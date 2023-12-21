@@ -13,7 +13,8 @@ from ..models.users import User
 from ..models.candidature import (
     Candidature,
     VotingChoice,
-    CandidatureEmailSendStatus
+    CandidatureEmailSendStatus,
+    CandidatureStates
 )
 from ..utils import (
     get_candidatures,
@@ -32,6 +33,7 @@ def login_view(request):
         request (pyramid.request.Request): the request
     """
     logged_in = request.session['logged_in'] if 'logged_in' in request.session else False
+
     user = request.session['user'] if 'user' in request.session else None
     if not logged_in or not user:
         # redirect to login page
@@ -74,13 +76,13 @@ def login_view(request):
             # send email to the candidature owner
             count = [v.vote for v in candidature.voters].count(VotingChoice.YES.name)
             if count > len(candidature.voters) / 2:
-                candidature.status = Candidature.Status.ACCEPTED
+                candidature.state = CandidatureStates.APPROVED
                 transaction.commit()
                 # send email to the candidature owner
                 email_template = "send_candidature_approuved_email"
                 
             else:
-                candidature.status = Candidature.Status.REJECTED
+                candidature.state = CandidatureStates.REJECTED
                 transaction.commit()
                 email_template = "send_candidature_rejected_email"
             # send email to the candidature owner
@@ -100,6 +102,15 @@ def login_view(request):
                     candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
                 else:
                     transaction.commit()
+        return {
+            'logged_in': True if user else False,
+            'site_name': site_name,
+            'user': username,
+            'candidature': candidature,
+            'VotingChoice': VotingChoice,
+            'vote': voter.vote,
+            'registered_vote': True
+        }
 
         #@TODO if date is passed, compute the result with the votes
 
@@ -110,5 +121,7 @@ def login_view(request):
         'site_name': site_name,
         'user': username,
         'candidature': candidature,
-        'VotingChoice': VotingChoice
+        'VotingChoice': VotingChoice,
+        'vote': voter.vote if voter.vote else '',
+        'registered_vote': False
     }
