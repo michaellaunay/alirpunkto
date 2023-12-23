@@ -21,7 +21,7 @@
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
             <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1].datetime">Last transition</span></li>
-            <li tal:omit-tag="textual">New Status: <span tal:replace="python:candidature.state">New application status</span></li>
+            <li tal:omit-tag="textual">New Status: <span i18n:translate="python:candidature.state">New application status</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             If you need, you can interrupt your registration process now. You will be able to resume it later by clicking on the link below.
             </li>

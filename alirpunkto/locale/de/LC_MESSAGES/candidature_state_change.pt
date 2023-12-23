@@ -21,7 +21,7 @@
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Bewerber-ID: <span tal:replace="python:candidature.oid">Bewerber-ID</span></li>
             <li tal:omit-tag="textual">Übergangsdatum: <span tal:replace="python:candidature.modifications[-1].datetime">Letzter Übergang</span></li>
-            <li tal:omit-tag="textual">Neuer Status: <span tal:replace="python:candidature.state">Neuer Bewerbungsstatus</span></li>
+            <li tal:omit-tag="textual">Neuer Status: <span i18n:translate="python:candidature.state">Neuer Bewerbungsstatus</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             Wenn Sie möchten, können Sie Ihren Registrierungsprozess jetzt unterbrechen. Sie können ihn später fortsetzen, indem Sie auf den unten stehenden Link klicken.
             </li>

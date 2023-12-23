@@ -21,7 +21,7 @@
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Identificación de la candidatura: <span tal:replace="python:candidature.oid">Identificación de la candidatura</span></li>
             <li tal:omit-tag="textual">Fecha de transición: <span tal:replace="python:candidature.modifications[-1].datetime">Última transición</span></li>
-            <li tal:omit-tag="textual">Nuevo estado: <span tal:replace="python:candidature.state">Nuevo estado de la candidatura</span></li>
+            <li tal:omit-tag="textual">Nuevo estado: <span i18n:translate="python:candidature.state">Nuevo estado de la candidatura</span></li>
             <li tal:omit-tag="textual" tal:condition="exists: page_register_with_oid">
             Si lo necesita, puede interrumpir su proceso de registro ahora. Podrá reanudarlo más tarde haciendo clic en el siguiente enlace.
             </li>
