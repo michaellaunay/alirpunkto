@@ -189,6 +189,62 @@ class VotingChoice(Enum) :
         """
         return VotingChoice.__members__.keys()
 
+@unique
+class CandidatureRoles(Enum) :
+    """Roles of candidatures.
+    """
+    # None: No role.
+    NONE = "candidature_roles_none_value"
+    # Ordinary: A candidature for an ordinary member.
+    ORDINARY = "candidature_roles_ordinary_value"
+    # Cooperator: A candidature for a cooperator member.
+    COOPERATOR = "candidature_roles_cooperator_value"
+    # Board: A candidature for a board member.
+    BOARD = "candidature_roles_board_value"
+    # MediationArbitrationCouncil: A candidature for a mediation arbitration
+    #  council member.
+    MEDIATION_ARBITRATION_COUNCIL = "candidature_roles_mediation_arbitration_council_value"
+
+    @classmethod
+    def get_i18n_id(cls, name:str) -> str:
+        """Get the i18n id of the candidature role.
+        Args:
+            name: The name of the candidature role.
+        Returns:
+            The i18n id of the candidature role.
+        """
+        match name:
+            case cls.NONE.name :
+                return "candidature_roles_none"
+            case cls.ORDINARY.name :
+                return "candidature_roles_ordinary"
+            case cls.COOPERATOR.name :
+                return "candidature_roles_cooperator"
+            case cls.BOARD.name :
+                return "candidature_roles_board"
+            case cls.MEDIATION_ARBITRATION_COUNCIL.name :
+                return "candidature_roles_mediation_arbitration_council"
+            case cls.ORDINARY.value :
+                return "candidature_roles_ordinary_value"
+            case cls.COOPERATOR.value :
+                return "candidature_roles_cooperator_value"
+            case cls.BOARD.value :
+                return "candidature_roles_board_value"
+            case cls.MEDIATION_ARBITRATION_COUNCIL.value :
+                return "candidature_roles_mediation_arbitration_council_value"
+            case _ :
+                # should never happen
+                log.error(f"Unknown candidature role: {name}")
+                return(f"role_types_{name.lower()}")
+
+    @staticmethod
+    def get_names() -> List[str]:
+        """Get the names of the candidature roles.
+        Returns:
+            The names of the candidature roles.
+        """
+        return CandidatureRoles.__members__.keys()
+
 @dataclass
 class CandidatureEvent:
     """An event.
@@ -359,6 +415,11 @@ class CandidatureData:
     password_confirm: str
     lang1: str
     lang2: str
+    is_ordinary_member: bool = False
+    is_cooperator_member: bool = False
+    is_board_member: bool = False
+    is_member_of_mediation_arbitration_council: bool = False
+    role: CandidatureRoles = CandidatureRoles.NONE
 
     def iter_attributes(self)-> Iterator[Tuple[str, Any]]:
         """Iterate over the attributes of the dataclass.

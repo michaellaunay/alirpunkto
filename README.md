@@ -78,6 +78,7 @@ bin/pytest
 You should have no error !
 
 - Run your project.
-
-    bin/pserve development.ini
+```bash
+bin/pserve development.ini
+```
 

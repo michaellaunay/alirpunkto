@@ -3,8 +3,12 @@ from collections import defaultdict
 from dotenv import load_dotenv, get_key, find_dotenv
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
-from pyramid.i18n import get_localizer, TranslationStringFactory
-from pyramid.i18n import default_locale_negotiator
+from pyramid.i18n import (
+    get_localizer,
+    TranslationStringFactory,
+    default_locale_negotiator,
+    get_localizer
+)
 from pyramid.events import NewRequest, subscriber
 from pyramid.config import Configurator
 from pyramid_mailer.mailer import Mailer
@@ -15,7 +19,6 @@ from .models.candidature import Candidatures
 from pyramid.session import SignedCookieSessionFactory
 import deform
 from pkg_resources import resource_filename
-from pyramid.i18n import get_localizer
 from pyramid.threadlocal import get_current_request
 
 load_dotenv() # take environment variables from .env.

@@ -59,6 +59,7 @@ def login_view(request):
         return {'error': _('not_voter'), 'site_name': site_name}
     #@TODO check if the user can vote (if time is not passed )
     pass
+
     # Get the user's vote from the form
     if 'submit' in request.params:
         vote = request.POST.get('vote')
@@ -74,8 +75,9 @@ def login_view(request):
         # check if all of the voter have voted
         if all([v.vote for v in candidature.voters]):
             # send email to the candidature owner
-            count = [v.vote for v in candidature.voters].count(VotingChoice.YES.name)
-            if count > len(candidature.voters) / 2:
+            count_yes = [v.vote for v in candidature.voters].count(VotingChoice.YES.name)
+            count_no = [v.vote for v in candidature.voters].count(VotingChoice.NO.name)
+            if count_yes > count_no:
                 candidature.state = CandidatureStates.APPROVED
                 transaction.commit()
                 # send email to the candidature owner

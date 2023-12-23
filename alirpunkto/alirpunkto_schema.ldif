@@ -1,13 +1,28 @@
-attributeTypes: ( 1.3.6.1.4.1.77777.1
-  NAME 'candidatureNumber'
-  DESC 'Candidature Number for the user'
-  EQUALITY numericStringMatch
-  SYNTAX 1.3.6.1.4.1.1466.115.121.1.36
-  SINGLE-VALUE )
+dn: cn=schema,cn=config
+changetype: modify
+add: olcAttributeTypes
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.1.1 NAME 'isOrdinaryMember' 
+  DESC 'Indicates if the user is an ordinary member' 
+  EQUALITY booleanMatch 
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
 
-attributeTypes: ( 1.3.6.1.4.1.77777.2
-  NAME 'CandidatureType'
-  DESC 'Type of Candidature for the user'
-  EQUALITY caseIgnoreMatch
-  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
-  SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.1.2 NAME 'isCooperatorMember' 
+  DESC 'Indicates if the user is a cooperator member' 
+  EQUALITY booleanMatch 
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.1.3 NAME 'isBoardMember' 
+  DESC 'Indicates if the user is a board member' 
+  EQUALITY booleanMatch 
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.1.4 NAME 'isMemberOfMediationArbitrationCouncil' 
+  DESC 'Indicates if the user is a member of the Mediation Arbitration Council' 
+  EQUALITY booleanMatch 
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.1.5 NAME 'candidatureRole' 
+  DESC 'Role of the candidature' 
+  EQUALITY caseIgnoreMatch 
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{255} SINGLE-VALUE )
+
