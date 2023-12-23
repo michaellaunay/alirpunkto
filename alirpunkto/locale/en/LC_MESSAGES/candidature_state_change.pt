@@ -22,7 +22,7 @@
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
         <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1].datetime">Last transition</span></li>
-        <li tal:omit-tag="textual">New Status: <span i18n:translate="python:candidature.state.value">New application status</span></li>
+        <li tal:omit-tag="textual">New Status: <span i18n:translate="" tal:content="python:candidature.state.value">New application status</span></li>
         <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
             <span tal:replace="string:${page_register_with_oid}"></span>

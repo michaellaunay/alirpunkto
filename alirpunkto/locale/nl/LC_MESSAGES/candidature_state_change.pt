@@ -21,7 +21,7 @@
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Kandidaat-ID: <span tal:replace="python:candidature.oid">Aanvraag-ID</span></li>
             <li tal:omit-tag="textual">Overgangsdatum: <span tal:replace="python:candidature.modifications[-1].datetime">Laatste overgang</span></li>
-            <li tal:omit-tag="textual">Nieuwe status: <span i18n:translate="python:candidature.state.value">Nieuwe sollicitatiestatus</span></li>
+            <li tal:omit-tag="textual">Nieuwe status: <span i18n:translate="" tal:content="python:candidature.state.value">Nieuwe sollicitatiestatus</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             Als u wilt, kunt u het registratieproces nu onderbreken. U kunt het later hervatten door op de onderstaande link te klikken.
             </li>
