@@ -6,7 +6,7 @@
     <head tal:omit-tag="textual">
         <title tal:omit-tag="textual">Schimbare în statutul candidaturii dumneavoastră</title>
     </head>
-    <body tal:omit-tag="textual">
+    <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Evoluția candidaturii dumneavoastră la <span tal:replace="site_name">Numele site-ului</span></h1>
         <p tal:omit-tag="textual">Bună ziua<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Numele candidatului</span>,
         </p>
@@ -21,7 +21,7 @@
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Identificarea candidaturii: <span tal:replace="python:candidature.oid">Identificarea candidaturii</span></li>.
             <li tal:omit-tag="textual">Data de tranziție: <span tal:replace="python:candidature.modifications[-1].datetime">Ultima tranziție</span></li>.
-            <li tal:omit-tag="textual">Statut nou: <span i18n:translate="python:candidature.state">Statutul noii candidaturi</span></li>.
+            <li tal:omit-tag="textual">Statut nou: <span i18n:translate="python:candidature.state.value">Statutul noii candidaturi</span></li>.
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">: <li tal:omit-tag="textual" tal:condition="exist:page_register_with_oid">
             Dacă aveți nevoie, puteți întrerupe acum procesul de înregistrare. Îl veți putea relua mai târziu, făcând clic pe link-ul de mai jos.
             </li>

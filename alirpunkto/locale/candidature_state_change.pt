@@ -6,7 +6,7 @@
     <head tal:omit-tag="textual">
         <title tal:omit-tag="textual">Change in the Status of Your Application</title>
     </head>
-    <body tal:omit-tag="textual">
+    <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Evolution of Your Application to <span tal:replace="site_name">Site Name</span></h1>
         <p tal:omit-tag="textual">Hello<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,
         </p>
@@ -21,7 +21,7 @@
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
             <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1].datetime">Last transition</span></li>
-            <li tal:omit-tag="textual">New Status: <span i18n:translate="python:candidature.state">New application status</span></li>
+            <li tal:omit-tag="textual">New Status: <span i18n:translate="python:candidature.state.value">New application status</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             If you need, you can interrupt your registration process now. You will be able to resume it later by clicking on the link below.
             </li>

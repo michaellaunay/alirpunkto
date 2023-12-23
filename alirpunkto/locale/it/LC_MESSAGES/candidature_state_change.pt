@@ -6,7 +6,7 @@
     <head tal:omit-tag="textual">
         <title tal:omit-tag="textual">Cambiamento dello stato della sua candidatura</title>.
     </head>
-    <body tal:omit-tag="textual">
+    <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Evoluzione della sua candidatura a <span tal:replace="site_name">Nome del sito</span></h1>.
         <p tal:omit-tag="textual">Ciao<span tal:replace="utente" tal:condition="exists:user" tal:omit-tag="textual">Nome del richiedente</span>,
         </p>

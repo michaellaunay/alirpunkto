@@ -6,7 +6,7 @@
     <head tal:omit-tag="textual">
         <title tal:omit-tag="textual">Wijziging in de status van uw aanvraag</title>
     </head>
-    <body tal:omit-tag="textual">
+    <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Evolutie van uw aanvraag naar <span tal:replace="site_name">Site Naam</span></h1>
         <p tal:omit-tag="textual">Hallo<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Aanvragersnaam</span>,
         </p>
@@ -21,7 +21,7 @@
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Kandidaat-ID: <span tal:replace="python:candidature.oid">Aanvraag-ID</span></li>
             <li tal:omit-tag="textual">Overgangsdatum: <span tal:replace="python:candidature.modifications[-1].datetime">Laatste overgang</span></li>
-            <li tal:omit-tag="textual">Nieuwe status: <span i18n:translate="python:candidature.state">Nieuwe sollicitatiestatus</span></li>
+            <li tal:omit-tag="textual">Nieuwe status: <span i18n:translate="python:candidature.state.value">Nieuwe sollicitatiestatus</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             Als u wilt, kunt u het registratieproces nu onderbreken. U kunt het later hervatten door op de onderstaande link te klikken.
             </li>

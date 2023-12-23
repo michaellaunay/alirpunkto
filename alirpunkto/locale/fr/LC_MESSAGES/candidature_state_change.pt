@@ -6,7 +6,7 @@
     <head tal:omit-tag="textual">
         <title tal:omit-tag="textual">Changement de statut de votre candidature</title>
     </head>
-    <body tal:omit-tag="textual">
+    <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Évolution de votre candidature vers <span tal:replace="site_name">nom du site</span></h1>
         <p tal:omit-tag="textual">Bonjour <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du candidat</span>,
         </p>
