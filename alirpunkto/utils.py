@@ -272,11 +272,11 @@ def generate_math_challenges(request: Request)->Dict[str, str]:
     localizer = get_localizer(request)
     for label in ["A", "B", "C", "D"]:
         num1 = random.randint(1, 9)
-        str_num1 = localizer.translate(_(num1))
+        str_num1 = localizer.translate(_(numbers[num1]))
         num2 = random.randint(1, 9)
-        str_num2 = localizer.translate(_(num2))
+        str_num2 = localizer.translate(_(numbers[num2]))
         num3 = random.randint(1, 9)
-        str_num3 = localizer.translate(_(num3))
+        str_num3 = localizer.translate(_(numbers[num3]))
         str_times = localizer.translate(_("times"))
         str_plus = localizer.translate(_("plus"))
         challenge_str = f"{str_num1} {str_times} {str_num2} {str_plus} {str_num3}"
