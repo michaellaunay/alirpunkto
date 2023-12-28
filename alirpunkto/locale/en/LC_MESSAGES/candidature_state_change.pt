@@ -9,12 +9,12 @@
 <body tal:omit-tag="textual" i18n:domain="alirpunkto">
     <h1 tal:omit-tag="textual">Evolution of Your Application</h1>
     
-    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p >
+    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user">Applicant's Name</span>,</p >
     
     <p tal:omit-tag="textual">Your application on the platform <span tal:replace="site_url">URL</span> as a <span tal:replace="python:candidature.type">Role</span>
-        <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">has been accepted</span>
-        <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">has been rejected</span>
-        <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">is under processing and has changed its status</span>
+        <span tal:condition="python:candidature.state == CandidatureStates.APPROVED" tal:omit-tag="textual">has been accepted</span>
+        <span tal:condition="python:candidature.state == CandidatureStates.REFUSED" tal:omit-tag="textual">has been rejected</span>
+        <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]" tal:omit-tag="textual">is under processing and has changed its status</span>
         .
     </p>
     
@@ -22,7 +22,7 @@
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
         <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1].datetime">Last transition</span></li>
-        <li tal:omit-tag="textual">New Status: <span i18n:translate="" tal:content="python:candidature.state.value">New application status</span></li>
+        <li tal:omit-tag="textual">New Status: <span i18n:translate="" tal:content="python:candidature.state.value" tal:omit-tag="textual">New application status</span></li>
         <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
             <span tal:replace="string:${page_register_with_oid}"></span>

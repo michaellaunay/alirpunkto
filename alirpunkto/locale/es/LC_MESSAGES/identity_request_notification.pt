@@ -4,7 +4,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Su registro en <span tal:omit-tag="textual" tal:replace=" site_name"></span>. Próximos pasos</title>
+    <title tal:omit-tag="textual">Su registro en <span tal:replace=" site_name"></span>. Próximos pasos</title>
 </head>
 <body tal:omit-tag="textual">
 
@@ -19,7 +19,7 @@
         <li tal:omit-tag="textual">Se ha determinado su número de socio.</li>
         <li tal:omit-tag="textual">Se le ha enviado un correo electrónico de felicitación.</li>
         <li tal:omit-tag="textual">Su estado de solicitud es ahora " ApprovedOrdinaryCommunityMember".</li>
-        <li tal:omit-tag="textual">No es necesaria ninguna otra acción por su parte. Conéctese a nuestro <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">espacio de trabajo</a> y empiece a interactuar con sus compañeros Miembros de la Comunidad!</li> <li>
+        <li tal:omit-tag="textual">No es necesaria ninguna otra acción por su parte. Conéctese a nuestro <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">espacio de trabajo</a> y empiece a interactuar con sus compañeros Miembros de la Comunidad!</li>
     </ol>
 
     <h2 tal:omit-tag="textual">Si ha elegido la opción "Cooperador":</h2>
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Si tiene alguna pregunta o necesita más aclaraciones, no dude en ponerse en contacto con nosotros.</p>
 
     <p tal:omit-tag="textual">Un cordial saludo,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">El <span tal:omit-tag="textual" tal:replace="site_name"></span> Equipo</strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">El <span tal:replace="site_name"></span> Equipo</strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Esta notificación se ha generado automáticamente. Por favor, no responda directamente a este mensaje.</small></p>
 </body>

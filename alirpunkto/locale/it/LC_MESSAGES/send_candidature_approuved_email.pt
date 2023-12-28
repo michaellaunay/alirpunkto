@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
 <h1 tal:omit-tag="textual">Congratulazioni per l'approvazione della tua Candidatura!</h1>
     
-    <p tal:omit-tag="textual">Ciao <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nome del Richiedente</span>,</p>
+    <p tal:omit-tag="textual">Ciao <span tal:replace="user" tal:condition="exists:user">Nome del Richiedente</span>,</p>
     
     <p tal:omit-tag="textual">Siamo lieti di informarti che la tua candidatura alla <span tal:replace="site_name" >Nome del sito</span> per il ruolo di <span tal:replace="python:candidature.type">Role</span> è stata approvata.</p>
     

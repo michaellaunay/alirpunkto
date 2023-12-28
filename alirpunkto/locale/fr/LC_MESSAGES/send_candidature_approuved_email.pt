@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE html [<!ENTITY nbsp "&#160;">] >
 <html xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual"">Ta candidature auprès de la <span tal:replace="site_name">Nom du site</span> a été approuvée</title>
+    <title tal:omit-tag="textual">Ta candidature auprès de la <span tal:replace="site_name">Nom du site</span> a été approuvée</title>
 </head>
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Félicitations pour la validation de ta candidature!</h1>
     
-    <p tal:omit-tag="textual">Bonjour <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du demandeur</span>,</p>
+    <p tal:omit-tag="textual">Bonjour <span tal:replace="user" tal:condition="exists:user">Nom du demandeur</span>,</p>
     
     <p tal:omit-tag="textual">Nous avons le plaisir de t'informer que ta candidature au <span tal:replace="site_name">nom du site</span> pour le rôle de <span tal:replace="python:candidature.type">Rôle</span> a été approuvée.</p>
     
@@ -25,6 +25,6 @@
     <p tal:omit-tag="textual">Merci de nous avoir rejoints&nbsp;! Nous sommes heureux de t'accueillir au sein de notre communauté, et nous nous réjouissons de la perspective de travailler avec toi&nbsp;!</p>
     
     <p tal:omit-tag="textual">Meilleures salutations,</p>
-    </p> <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Nom du site</span></p>
+    <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Nom du site</span></p>
 </body>
 </html>

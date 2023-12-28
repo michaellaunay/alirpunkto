@@ -4,7 +4,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Înregistrarea dumneavoastră la <span tal:omit-tag="textual" tal:replace="site_name"></span>. Următorii pași</title>
+    <title tal:omit-tag="textual">Înregistrarea dumneavoastră la <span tal:replace="site_name"></span>. Următorii pași</title>
 </head>
 <body tal:omit-tag="textual">
 
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Dacă aveți întrebări sau aveți nevoie de clarificări suplimentare, nu ezitați să ne contactați.</p>
 
     <p tal:omit-tag="textual">Cele mai bune salutări,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Echipa <span tal:omit-tag="textual" tal:replace="site_name"></span></strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Echipa <span tal:replace="site_name"></span></strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Această notificare a fost generată automat. Vă rugăm să nu răspundeți direct la acest mesaj.</small></p>
 </body>

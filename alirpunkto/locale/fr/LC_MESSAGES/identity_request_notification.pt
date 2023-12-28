@@ -4,7 +4,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Votre inscription à <span tal:omit-tag="textual" tal:replace="site_name"></span>. Prochaines étapes</title>
+    <title tal:omit-tag="textual">Votre inscription à <span tal:replace="site_name"></span>. Prochaines étapes</title>
 </head>
 <body tal:omit-tag="textual">
 
@@ -19,7 +19,7 @@
         <li tal:omit-tag="textual">Votre numéro de membre a été déterminé.</li>
         <li tal:omit-tag="textual">Un courriel de félicitations vous a été envoyé.</li>
         <li tal:omit-tag="textual">Votre statut de candidature est maintenant "ApprovedOrdinaryCommunityMember".</li>
-        <li:omit-tag="textual">Aucune autre action n'est nécessaire de votre part. Connectez-vous à notre <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">espace de travail</a> et commencez à interagir avec vos homologues de la Communauté!</li>
+        <li tal:omit-tag="textual">Aucune autre action n'est nécessaire de votre part. Connectez-vous à notre <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">espace de travail</a> et commencez à interagir avec vos homologues de la Communauté!</li>
     </ol>
 
     <h2 tal:omit-tag="textual">Si vous avez choisi l'option "Coopérateur"</h2>
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Si vous avez des questions ou si vous avez besoin d'éclaircissements supplémentaires, n'hésitez pas à nous contacter.</p> 
 
     <p tal:omit-tag="textual">Sincères salutations,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">L'équipe de <span tal:omit-tag="textual" tal:replace="site_name"></span></strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">L'équipe de <span tal:replace="site_name"></span></strong></p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note : Cette notification a été générée automatiquement. Veuillez ne pas répondre directement à ce message.</small></p> 
 </body>
 </html>

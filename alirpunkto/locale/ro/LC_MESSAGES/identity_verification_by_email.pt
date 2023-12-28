@@ -3,30 +3,30 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">ro - <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span> - Vă rog să verificați identitatea mea ca nou potențial cooperator</title>.
+    <title tal:omit-tag="textual">ro - <span tal:replace="site">Numele site-ului</span> - Vă rog să verificați identitatea mea ca nou potențial cooperator</title>.
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Verificarea identității pentru <span tal:omit-tag="textual" tal:replace="site">Numele sitului</span> Membru</h1>
+    <h1 tal:omit-tag="textual">Verificarea identității pentru <span tal:replace="site">Numele sitului</span> Membru</h1>
     <p tal:omit-tag="textual">Dragii verificatori,</p>
 
-    <p tal:omit-tag="textual">Vă scriu pentru a finaliza procesul de verificare a identității pentru cererea mea de a deveni cooperator al <span tal:omit-tag="textual" tal:replace="site">Numele sitului</span>. Atașat la acest e-mail, veți găsi o copie parțială a documentului meu oficial de identitate.</p>
+    <p tal:omit-tag="textual">Vă scriu pentru a finaliza procesul de verificare a identității pentru cererea mea de a deveni cooperator al <span tal:replace="site">Numele sitului</span>. Atașat la acest e-mail, veți găsi o copie parțială a documentului meu oficial de identitate.</p>
 
-    <p tal:omit-tag="textual">Vă rugăm să rețineți că anumite informații sensibile au fost mascate din motive de securitate. Cu toate acestea, documentul conține informațiile de care aveți nevoie pentru a verifica identitatea mea conform procesului de înregistrare <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span>.</p>
+    <p tal:omit-tag="textual">Vă rugăm să rețineți că anumite informații sensibile au fost mascate din motive de securitate. Cu toate acestea, documentul conține informațiile de care aveți nevoie pentru a verifica identitatea mea conform procesului de înregistrare <span tal:replace="site">Numele site-ului</span>.</p>
 
-    <p tal:tal:omit-tag="textual">Vă rog să analizați documentul atașat în cel mai scurt timp, pentru a vota asupra adecvării între:</p>
+    <p tal:omit-tag="textual">Vă rog să analizați documentul atașat în cel mai scurt timp, pentru a vota asupra adecvării între:</p>
 <ul tal:omit-tag="textual">
-   <li tal:omit-tag="textual">informațiile de identitate pe care le-ați primit direct prin e-mail de la platforma informatică a <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span> (și care vă vor fi reamintite pe interfața de vot) și </li>
+   <li tal:omit-tag="textual">informațiile de identitate pe care le-ați primit direct prin e-mail de la platforma informatică a <span tal:replace="site">Numele site-ului</span> (și care vă vor fi reamintite pe interfața de vot) și </li>
    <li tal:omit-tag="textual">informațiile de identitate pe care le puteți citi pe copia parțială atașată a documentului meu oficial de identitate.</li>
 </ul>
-     <p tal:omit-tag="textual">Linkul prin care puteți vota cu privire la această adecvare, precum și termenul limită pentru a face acest lucru, vă vor fi trimise direct într-un e-mail independent de către platforma <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span>.</p>
-    <p tal:omit-tag="textual">Vă mulțumesc călduros în avans pentru susținerea procesului de înregistrare a mea în calitate de Cooperator la <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span>. În cazul în care aveți întrebări suplimentare sau aveți nevoie de informații suplimentare, vă rog să nu ezitați să mă contactați direct.</p>
+     <p tal:omit-tag="textual">Linkul prin care puteți vota cu privire la această adecvare, precum și termenul limită pentru a face acest lucru, vă vor fi trimise direct într-un e-mail independent de către platforma <span tal:replace="site">Numele site-ului</span>.</p>
+    <p tal:omit-tag="textual">Vă mulțumesc călduros în avans pentru susținerea procesului de înregistrare a mea în calitate de Cooperator la <span tal:replace="site">Numele site-ului</span>. În cazul în care aveți întrebări suplimentare sau aveți nevoie de informații suplimentare, vă rog să nu ezitați să mă contactați direct.</p>
 
-   <p tal:omit-tag="textual">Cele mai bune salutări,</p>
-     <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="nume_complet">Numele dumneavoastră</span></span></strong></p>
+    <p tal:omit-tag="textual">Cele mai bune salutări,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="nume_complet">Numele dumneavoastră</span></strong></p>
 
     <p tal:omit-tag="textual">Atașament: [Numele fișierului documentului de identitate]</p>
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Acest e-mail a fost generat cu ajutorul funcției de verificare a identității de la <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span>. Dacă nu sunteți verificatorul atribuit aplicației <span tal:omit-tag="textual" tal:replace="full_name">Numele tău</span> și ați primit acest e-mail din greșeală, vă rugăm să informați administratorul <span tal:omit-tag="textual" tal:replace="site">Numele site-ului</span>.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Acest e-mail a fost generat cu ajutorul funcției de verificare a identității de la <span tal:replace="site">Numele site-ului</span>. Dacă nu sunteți verificatorul atribuit aplicației <span tal:replace="full_name">Numele tău</span> și ați primit acest e-mail din greșeală, vă rugăm să informați administratorul <span tal:replace="site">Numele site-ului</span>.</small></p>
 
 </body>
 </html>

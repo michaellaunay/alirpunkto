@@ -8,20 +8,20 @@
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Evolución de su solicitud a <span tal:replace="site_name">Nombre del sitio</span></h1>
-        <p tal:omit-tag="textual">Hola<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nombre del solicitante</span>,
+        <p tal:omit-tag="textual">Hola<span tal:replace="user" tal:condition="exists:user">Nombre del solicitante</span>,
         </p>
         <p tal:omit-tag="textual">Su solicitud en la plataforma
             <span tal:replace="site_url">URL</span> como 
             <span tal:replace="python:candidature.type">Rol</span>
-            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">ha sido aceptada</span>
-            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">ha sido rechazada</span>
-            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">está en proceso de tramitación y ha cambiado de estado</span> . 
+            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED" tal:omit-tag="textual">ha sido aceptada</span>
+            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED" tal:omit-tag="textual">ha sido rechazada</span>
+            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]" tal:omit-tag="textual">está en proceso de tramitación y ha cambiado de estado</span> . 
         </p>
         <p tal:omit-tag="textual">Aquí tiene los detalles de su evolución:</p>
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Identificación de la candidatura: <span tal:replace="python:candidature.oid">Identificación de la candidatura</span></li>
             <li tal:omit-tag="textual">Fecha de transición: <span tal:replace="python:candidature.modifications[-1].datetime">Última transición</span></li>
-            <li tal:omit-tag="textual">Nuevo estado: <span i18n:translate="" tal:content="python:candidature.state.value">Nuevo estado de la candidatura</span></li>
+            <li tal:omit-tag="textual">Nuevo estado: <span i18n:translate="" tal:content="python:candidature.state.value" tal:omit-tag="textual">Nuevo estado de la candidatura</span></li>
             <li tal:omit-tag="textual" tal:condition="exists: page_register_with_oid">
             Si lo necesita, puede interrumpir su proceso de registro ahora. Podrá reanudarlo más tarde haciendo clic en el siguiente enlace.
             </li>
@@ -32,7 +32,7 @@
             </li>
         </ul>
 
-        <p tal:omit-tag="textual">Gracias por su participación.</p> <p
+        <p tal:omit-tag="textual">Gracias por su participación.</p>
         <p tal:omit-tag="textual">Un cordial saludo,</p>
         <p tal:omit-tag="textual">El equipo de <span tal:replace="site_name">Nombre del sitio</span></p>
     </body>

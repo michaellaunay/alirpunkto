@@ -8,20 +8,20 @@
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Ewolucja Państwa aplikacji do <span tal:replace="site_name">nazwy witryny</span></h1>.
-        <p tal:omit-tag="textual">Witam<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nazwa Wnioskodawcy</span>,
+        <p tal:omit-tag="textual">Witam<span tal:replace="user" tal:condition="exists:user">Nazwa Wnioskodawcy</span>,
         </p>
         <p tal:omit-tag="textual">Państwa aplikacja na platformie
             <span tal:replace="site_url">URL</span> jako 
             <span tal:replace="python:candidature.type">Rola</span>.
-            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">został zaakceptowany</span>.
-            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">został odrzucony</span>
-            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">jest w trakcie przetwarzania i zmienił swój status</span> . 
+            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED" tal:omit-tag="textual">został zaakceptowany</span>.
+            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED" tal:omit-tag="textual">został odrzucony</span>
+            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]" tal:omit-tag="textual">jest w trakcie przetwarzania i zmienił swój status</span> . 
         </p>
         <p tal:omit-tag="textual">Oto szczegóły jego ewolucji:</p>
         <ul tal:omit-tag="textual">.
             <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
             <li tal:omit-tag="textual">Data przejścia: <span tal:replace="python:candidature.modifications[-1].datetime">Ostatnie przejście</span></li>
-            <li tal:omit-tag="textual">Nowy status: <span i18n:translate="" tal:content="python:candidature.state.value">Nowy status aplikacji</span></li>
+            <li tal:omit-tag="textual">Nowy status: <span i18n:translate="" tal:content="python:candidature.state.value" tal:omit-tag="textual">Nowy status aplikacji</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">.
             W razie potrzeby mogą Państwo przerwać proces rejestracji. Będą Państwo mogli wznowić go później, klikając poniższy link.
             </li>

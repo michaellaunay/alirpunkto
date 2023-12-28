@@ -3,30 +3,30 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">pl - <span tal:omit-tag="textual" tal:replace="site">Nazwa strony</span> - Proszę zweryfikować moją tożsamość jako nowego potencjalnego współpracownika</title>
+    <title tal:omit-tag="textual">pl - <span tal:replace="site">Nazwa strony</span> - Proszę zweryfikować moją tożsamość jako nowego potencjalnego współpracownika</title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Proszę zweryfikować moją tożsamość dla <span tal:omit-tag="textual" tal:replace="site">Nazwa strony</span> członkostwa</h1>
+    <h1 tal:omit-tag="textual">Proszę zweryfikować moją tożsamość dla <span tal:replace="site">Nazwa strony</span> członkostwa</h1>
     <p tal:omit-tag="textual">Drodzy Weryfikatorzy,</p>
 
-    <p tal:omit-tag="textual">Piszę do Państwa, aby dokończyć proces weryfikacji tożsamości w związku z moim wnioskiem o członkostwo w organizacji <span tal:omit-tag="textual" tal:replace="site">Nazwa witryny</span>. W załączeniu do tego e-maila znajdą Państwo częściową kopię mojego oficjalnego dokumentu tożsamości.</p>
+    <p tal:omit-tag="textual">Piszę do Państwa, aby dokończyć proces weryfikacji tożsamości w związku z moim wnioskiem o członkostwo w organizacji <span tal:replace="site">Nazwa witryny</span>. W załączeniu do tego e-maila znajdą Państwo częściową kopię mojego oficjalnego dokumentu tożsamości.</p>
 
-    <p tal:omit-tag="textual">Proszę zauważyć, że niektóre poufne informacje zostały zamaskowane ze względów bezpieczeństwa. Dokument zawiera jednak informacje potrzebne do zweryfikowania mojej tożsamości zgodnie z procesem rejestracji <span tal:omit-tag="textual" tal:replace="site">nazwa strony</span>.</p>
+    <p tal:omit-tag="textual">Proszę zauważyć, że niektóre poufne informacje zostały zamaskowane ze względów bezpieczeństwa. Dokument zawiera jednak informacje potrzebne do zweryfikowania mojej tożsamości zgodnie z procesem rejestracji <span tal:replace="site">nazwa strony</span>.</p>
 
     <p tal:omit-tag="textual">Uprzejmie proszę o zapoznanie się z załączonym dokumentem w najbliższym dogodnym dla Państwa terminie, aby zagłosować nad adekwatnością pomiędzy:</p>
 <ul tal:omit-tag="textual">
-   <li tal:omit-tag="textual">informacjami dotyczącymi tożsamości, które otrzymali Państwo bezpośrednio pocztą elektroniczną z platformy informatycznej <span tal:omit-tag="textual" tal:replace="site">nazwy witryny</span> (i które zostaną Państwu przypomniane w interfejsie do głosowania) oraz </li>
+   <li tal:omit-tag="textual">informacjami dotyczącymi tożsamości, które otrzymali Państwo bezpośrednio pocztą elektroniczną z platformy informatycznej <span tal:replace="site">nazwy witryny</span> (i które zostaną Państwu przypomniane w interfejsie do głosowania) oraz </li>
    <li tal:omit-tag="textual">informacje o tożsamości, które mogą Państwo przeczytać na załączonej częściowej kopii mojego oficjalnego dokumentu tożsamości.</li>
 </ul>
-     <p tal:omit-tag="textual">Łącznik umożliwiający oddanie głosu na tę adekwatność oraz termin, w którym należy to zrobić, zostaną wysłane bezpośrednio do Państwa w niezależnej wiadomości e-mail przez platformę <span tal:omit-tag="textual" tal:replace="site">Nazwa strony</span>.</p>
-    <p tal:omit-tag="textual">Z góry bardzo serdecznie dziękuję Państwu za wsparcie procesu mojej rejestracji jako Współpracownika na platformie <span tal:omit-tag="textual" tal:replace="site">Nazwa strony</span>. Jeśli mają Państwo jakiekolwiek pytania lub potrzebują dodatkowych informacji, proszę skontaktować się ze mną bezpośrednio.</p>
+     <p tal:omit-tag="textual">Łącznik umożliwiający oddanie głosu na tę adekwatność oraz termin, w którym należy to zrobić, zostaną wysłane bezpośrednio do Państwa w niezależnej wiadomości e-mail przez platformę <span tal:replace="site">Nazwa strony</span>.</p>
+    <p tal:omit-tag="textual">Z góry bardzo serdecznie dziękuję Państwu za wsparcie procesu mojej rejestracji jako Współpracownika na platformie <span tal:replace="site">Nazwa strony</span>. Jeśli mają Państwo jakiekolwiek pytania lub potrzebują dodatkowych informacji, proszę skontaktować się ze mną bezpośrednio.</p>
 
    <p tal:omit-tag="textual">Z poważaniem,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="full_name">Państwa imię</span></strong></p>
 
     <p tal:omit-tag="textual">Załącznik: [Nazwa pliku dokumentu ID]</p>
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Ten e-mail został wygenerowany przy pomocy funkcji weryfikacji tożsamości <span tal:omit-tag="textual" tal:replace="site">Nazwa witryny</span>. Jeśli nie jesteś Weryfikatorem przypisanym do aplikacji <span tal:omit-tag="textual" tal:replace="full_name">Twoja nazwa</span> i otrzymałeś tę wiadomość omyłkowo, proszę poinformować o tym administratora <span tal:omit-tag="textual" tal:replace="site">Nazwa witryny</span>.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Ten e-mail został wygenerowany przy pomocy funkcji weryfikacji tożsamości <span tal:replace="site">Nazwa witryny</span>. Jeśli nie jesteś Weryfikatorem przypisanym do aplikacji <span tal:replace="full_name">Twoja nazwa</span> i otrzymałeś tę wiadomość omyłkowo, proszę poinformować o tym administratora <span tal:replace="site">Nazwa witryny</span>.</small></p>
 
 </body>
 </html>

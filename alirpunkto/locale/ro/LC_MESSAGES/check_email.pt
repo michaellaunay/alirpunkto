@@ -9,7 +9,7 @@
         <p tal:omit-tag="textual">Pentru a verifica adresa dvs. de e-mail și a ne asigura că sunteți un om (nu un robot), am conceput o serie de 4 operații matematice simple. Vă rugăm să efectuați cele patru operații matematice etichetate de la A la D de mai jos și să introduceți rezultatele lor în câmpurile corespunzătoare de pe pagina de înregistrare legată mai jos.</p>>.
         <div omit-tag="textual">
             <p tal:omit-tag="textual">Operația A este <span tal:content="challenge_A"
-                    tal:omit-tag="textual">Prima provocare</span></span></p>
+                    tal:omit-tag="textual">Prima provocare</span></p>
             <p tal:omit-tag="textual" >Operația B este <span tal:content="challenge_B"
                     tal:omit-tag="textual">A doua provocare</span></p>
             <p tal:omit-tag="textual" >Operația C este <span tal:content="challenge_C"
@@ -17,7 +17,7 @@
             <p tal:omit-tag="textual" >Operația D este <span tal:content="challenge_D"
                     tal:omit-tag="textual">Cea de-a patra provocare</span></p>
         </div>
-        <p tal:tal:omit-tag="textual">Link către pagina de înregistrare pe care să se furnizeze rezultatele operațiilor de la A la D de mai sus:</p>
+        <p tal:omit-tag="textual">Link către pagina de înregistrare pe care să se furnizeze rezultatele operațiilor de la A la D de mai sus:</p>
         <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
             <span tal:replace="string:${page_register_with_oid}"></span>.
         </a>

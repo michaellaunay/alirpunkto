@@ -4,15 +4,15 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal">
 <tal:block tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">it - <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span> - La prego di verificare la mia identità come nuovo potenziale Cooperatore tramite videoconferenza</title>.
+    <title tal:omit-tag="textual">it - <span tal:replace="site">Nome del sito</span> - La prego di verificare la mia identità come nuovo potenziale Cooperatore tramite videoconferenza</title>.
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">it - Verifica dell'identità per l'adesione a <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span> tramite videoconferenza</h1>
+    <h1 tal:omit-tag="textual">it - Verifica dell'identità per l'adesione a <span tal:replace="site">Nome del sito</span> tramite videoconferenza</h1>
 
     <p tal:omit-tag="textual">Cari Verificatori,</p>
 
-    <p tal:omit-tag="textual">Le scrivo per completare il processo di verifica dell'identità per la mia richiesta di diventare Cooperatore della <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Vorrei proporre un incontro in videoconferenza a tale scopo.</p>
+    <p tal:omit-tag="textual">Le scrivo per completare il processo di verifica dell'identità per la mia richiesta di diventare Cooperatore della <span tal:replace="site">Site Name</span>. Vorrei proporre un incontro in videoconferenza a tale scopo.</p>
 
     <p tal:omit-tag="textual">Ecco alcune fasce orarie che propongo per la videoconferenza. La prego di notare che vivo in <strong>Germania</strong> (La prego di adeguarsi al Suo Paese/regione di residenza. Questo è necessario affinché il suo corrispondente conosca il suo fuso orario), quindi l'ora del giorno in cui vivo io potrebbe essere diversa dall'ora del giorno in cui vive lei. Questa videoconferenza non dovrebbe durare più di 10 minuti: (la prego di fornire almeno 3 opzioni, se possibile in momenti diversi della giornata e in giorni diversi, compreso il fine settimana, tutte entro e non oltre ###)</p>
     <ul tal:omit-tag="textual">
@@ -36,17 +36,17 @@
     <p tal:omit-tag="textual">Per favore, selezioni una fascia oraria a lei congeniale e mi invii un'e-mail contenente la sua selezione.</p>
      <p tal:omit-tag="textual">Una volta tenuto questo incontro in videoconferenza, le chiedo gentilmente di votare per confermare o rifiutare l'adeguatezza tra:</p>
 <ul tal:omit-tag="textual">
-   <li tal:omit-tag="textual">le informazioni sull'identità che ha ricevuto direttamente via e-mail dalla piattaforma informatica della <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span> (e che le verranno ricordate sull'interfaccia di voto) e </li>
+   <li tal:omit-tag="textual">le informazioni sull'identità che ha ricevuto direttamente via e-mail dalla piattaforma informatica della <span tal:replace="site">Nome del sito</span> (e che le verranno ricordate sull'interfaccia di voto) e </li>
    <li tal:omit-tag="textual">le informazioni sull'identità che avrà visto durante la videoconferenza.</li>
 </ul>
-    <p tal:omit-tag="textual">Il link per votare questa adeguatezza dopo questa videoconferenza, e la scadenza per farlo, le saranno inviati direttamente in un'e-mail indipendente dalla piattaforma <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span>.</p>
+    <p tal:omit-tag="textual">Il link per votare questa adeguatezza dopo questa videoconferenza, e la scadenza per farlo, le saranno inviati direttamente in un'e-mail indipendente dalla piattaforma <span tal:replace="site">Nome del sito</span>.</p>
    
-    <p tal:omit-tag="textual">La ringrazio calorosamente in anticipo per aver supportato il processo della mia registrazione come Cooperatore della <span tal:omit-tag="textual" tal:replace="site">Sito Nome</span>. In caso di ulteriori domande o di necessità di informazioni aggiuntive, non esiti a contattarmi direttamente.</p>
+    <p tal:omit-tag="textual">La ringrazio calorosamente in anticipo per aver supportato il processo della mia registrazione come Cooperatore della <span tal:replace="site">Sito Nome</span>. In caso di ulteriori domande o di necessità di informazioni aggiuntive, non esiti a contattarmi direttamente.</p>
 
     <p tal:omit-tag="textual">Sinceramente,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual">[Suo Nome]</strong></p>
 
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Questa e-mail è stata generata con l'assistenza della funzione di verifica dell'identità di <span tal:replace="site">Nome sito</span>. Se non è il Verificatore assegnato all'applicazione di <span tal:omit-tag="textual" tal:replace="full_name">Tuo Nome</span> e ha ricevuto questa e-mail per errore, la preghiamo di informare l'amministratore di <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span>.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Questa e-mail è stata generata con l'assistenza della funzione di verifica dell'identità di <span tal:replace="site">Nome sito</span>. Se non è il Verificatore assegnato all'applicazione di <span tal:replace="full_name">Tuo Nome</span> e ha ricevuto questa e-mail per errore, la preghiamo di informare l'amministratore di <span tal:replace="site">Nome del sito</span>.</small></p>
 
 </body>
 </tal:block>

@@ -4,7 +4,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">La sua registrazione a <span tal:omit-tag="textual" tal:replace="site_name"></span>. I prossimi passi</title>
+    <title tal:omit-tag="textual">La sua registrazione a <span tal:replace="site_name"></span>. I prossimi passi</title>
 </head>
 <body tal:omit-tag="textual">
 
@@ -35,7 +35,7 @@
     <p tal:omit-tag="textual">Fornirà queste informazioni sulla nostra piattaforma di registrazione, e un gruppo di 3-7 Cooperatori selezionati in modo aleatorio, chiamati Verificatori, verificheranno che le informazioni da lei fornite sulla nostra piattaforma di registrazione corrispondano a quelle presenti sui suoi documenti d'identità ufficiali. A questo punto, trasmetterà le immagini parziali dei suoi documenti d'identità ufficiali direttamente a questi Verificatori, senza utilizzare (per motivi di sicurezza) la nostra piattaforma informatica.</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Ci sono due metodi per trasmettere queste immagini parziali dei suoi documenti d'identità ufficiali ai Verificatori:</strong></p>
     <ol tal:omit-tag="textual">.
-<li tal:omit-tag="textual"><strong tal:omit-tag="textual" <strong>Via videoconferenza</strong>: Un pulsante la guiderà nella redazione di un'e-mail precompilata, nella quale potrà proporre date e orari di appuntamento per una o più videoconferenze separate con i Verificatori a lei assegnati. Durante questa/e videoconferenza/e, mostrerà il suo documento d'identità ufficiale ai Verificatori tramite la sua fotocamera, facendo attenzione che, ad esempio, il numero del documento d'identità e il luogo di nascita rimangano nascosti, in modo da evitare (per motivi di sicurezza) che venga visualizzata una copia completa di questo documento.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via videoconferenza</strong>: Un pulsante la guiderà nella redazione di un'e-mail precompilata, nella quale potrà proporre date e orari di appuntamento per una o più videoconferenze separate con i Verificatori a lei assegnati. Durante questa/e videoconferenza/e, mostrerà il suo documento d'identità ufficiale ai Verificatori tramite la sua fotocamera, facendo attenzione che, ad esempio, il numero del documento d'identità e il luogo di nascita rimangano nascosti, in modo da evitare (per motivi di sicurezza) che venga visualizzata una copia completa di questo documento.</li>
         <li tal:omit-tag="textual"><strong tal:omit-tag="textual" >Via Allegato Email</strong>: Un pulsante la assisterà nella scrittura di un'e-mail precompilata, alla quale potrà allegare una copia parziale del suo documento d'identità ufficiale (ad esempio, mascherando il numero e il luogo di nascita).</li>
     </ol>
 
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Se ha domande o necessita di ulteriori chiarimenti, non esiti a contattarci.</p>
 
     <p tal:omit-tag="textual">Buoni saluti,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Il <span tal:omit-tag="textual" tal:replace=" site_name"></span> Team</strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Il <span tal:replace=" site_name"></span> Team</strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: questa notifica è stata generata automaticamente. La preghiamo di non rispondere direttamente a questo messaggio.</small></p>
 </body>

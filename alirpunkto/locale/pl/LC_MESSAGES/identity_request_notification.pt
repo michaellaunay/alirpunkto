@@ -4,7 +4,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Państwa rejestracja w <span tal:omit-tag="textual" tal:replace="site_name"></span>. Następne kroki</title>
+    <title tal:omit-tag="textual">Państwa rejestracja w <span tal:replace="site_name"></span>. Następne kroki</title>
 </head>
 <body tal:omit-tag="textual">
 
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Jeśli mają Państwo jakiekolwiek pytania lub potrzebują dalszych wyjaśnień, prosimy o kontakt.</p>
 
     <p tal:omit-tag="textual">Pozdrawiamy,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Zespół <span tal:omit-tag="textual" tal:replace="site_name"></span></strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Zespół <span tal:replace="site_name"></span></strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Uwaga: To powiadomienie zostało wygenerowane automatycznie. Proszę nie odpowiadać bezpośrednio na tę wiadomość.</small></p>
 </body>

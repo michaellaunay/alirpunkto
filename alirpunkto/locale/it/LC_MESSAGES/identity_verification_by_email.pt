@@ -3,30 +3,30 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">it - <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span> - La prego di verificare la mia identità come nuovo potenziale Cooperatore</title>.
+    <title tal:omit-tag="textual">it - <span tal:replace="site">Nome del sito</span> - La prego di verificare la mia identità come nuovo potenziale Cooperatore</title>.
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Verifica dell'identità per l'adesione a <span tal:omit-tag="textual" tal:replace="site">Nome sito</span></h1>
+    <h1 tal:omit-tag="textual">Verifica dell'identità per l'adesione a <span tal:replace="site">Nome sito</span></h1>
     <p tal:omit-tag="textual">Cari Verificatori,</p>
 
-    <p tal:omit-tag="textual">Le scrivo per completare il processo di verifica dell'identità per la mia richiesta di diventare Cooperatore di <span tal:omit-tag="textual" tal:replace="site">Nome Sito</span>. In allegato a questa e-mail, troverà una copia parziale del mio documento d'identità ufficiale.</p>
+    <p tal:omit-tag="textual">Le scrivo per completare il processo di verifica dell'identità per la mia richiesta di diventare Cooperatore di <span tal:replace="site">Nome Sito</span>. In allegato a questa e-mail, troverà una copia parziale del mio documento d'identità ufficiale.</p>
 
-    <p tal:omit-tag="textual">Si noti che alcune informazioni sensibili sono state mascherate per motivi di sicurezza. Tuttavia, il documento contiene le informazioni necessarie per verificare la mia identità secondo il processo di registrazione di <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span>.</p>
+    <p tal:omit-tag="textual">Si noti che alcune informazioni sensibili sono state mascherate per motivi di sicurezza. Tuttavia, il documento contiene le informazioni necessarie per verificare la mia identità secondo il processo di registrazione di <span tal:replace="site">Nome del sito</span>.</p>
 
     <p tal:omit-tag="textual">Le chiedo gentilmente di esaminare al più presto il documento allegato, per votare l'adeguatezza tra:</p>
 <ul tal:omit-tag="textual">
-   <li tal:omit-tag="textual">le informazioni sull'identità che ha ricevuto direttamente via e-mail dalla piattaforma informatica di <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span> (e che le verranno ricordate sull'interfaccia di voto) e </li>
+   <li tal:omit-tag="textual">le informazioni sull'identità che ha ricevuto direttamente via e-mail dalla piattaforma informatica di <span tal:replace="site">Nome del sito</span> (e che le verranno ricordate sull'interfaccia di voto) e </li>
    <li tal:omit-tag="textual">le informazioni sull'identità che può leggere sulla copia parziale allegata del mio documento d'identità ufficiale.</li>
 </ul>.
-     <p tal:omit-tag="textual">Il link per votare questa adeguatezza, e la scadenza per farlo, le saranno inviati direttamente in una e-mail indipendente dalla piattaforma di <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span>.</p>
-    <p tal:omit-tag="textual">La ringrazio calorosamente in anticipo per aver supportato il processo della mia registrazione come Cooperatore  di <span tal:omit-tag="textual" tal:replace="site">Sito Nome</span>. In caso di ulteriori domande o di necessità di informazioni aggiuntive, non esiti a contattarmi direttamente.</p>
+     <p tal:omit-tag="textual">Il link per votare questa adeguatezza, e la scadenza per farlo, le saranno inviati direttamente in una e-mail indipendente dalla piattaforma di <span tal:replace="site">Nome del sito</span>.</p>
+    <p tal:omit-tag="textual">La ringrazio calorosamente in anticipo per aver supportato il processo della mia registrazione come Cooperatore  di <span tal:replace="site">Sito Nome</span>. In caso di ulteriori domande o di necessità di informazioni aggiuntive, non esiti a contattarmi direttamente.</p>
 
    <p tal:omit-tag="textual">Buoni saluti,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="full_name">Il suo nome</span></strong></p>
 
     <p tal:omit-tag="textual">Allegato: [Nome del file del documento identificativo]</p>
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Questa e-mail è stata generata con l'assistenza della funzione di verifica dell'identità di <span tal:omit-tag="textual" tal:replace="site">Nome sito</span>. Se non è il Verificatore assegnato all'applicazione di <span tal:omit-tag="textual" tal:replace="full_name">Tuo Nome</span> e ha ricevuto questa e-mail per errore, la preghiamo di informare l'amministratore di <span tal:omit-tag="textual" tal:replace="site">Nome del sito</span>.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Questa e-mail è stata generata con l'assistenza della funzione di verifica dell'identità di <span tal:replace="site">Nome sito</span>. Se non è il Verificatore assegnato all'applicazione di <span tal:replace="full_name">Tuo Nome</span> e ha ricevuto questa e-mail per errore, la preghiamo di informare l'amministratore di <span tal:replace="site">Nome del sito</span>.</small></p>
 
 </body>
 </html>

@@ -4,15 +4,15 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal">
 <tal:block tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">de - <span tal:omit-tag="textual" tal:replace="site">Site Name</span> - Bitte bestätigen Sie per Videokonferenz meine Identität als neuer potentieller Genossenschafter</title>
+    <title tal:omit-tag="textual">de - <span tal:replace="site">Site Name</span> - Bitte bestätigen Sie per Videokonferenz meine Identität als neuer potentieller Genossenschafter</title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">de - Identitätsüberprüfung für <span tal:omit-tag="textual" tal:replace="site">Site Name</span> Mitgliedschaft per Videokonferenz</h1>
+    <h1 tal:omit-tag="textual">de - Identitätsüberprüfung für <span tal:replace="site">Site Name</span> Mitgliedschaft per Videokonferenz</h1>
 
     <p tal:omit-tag="textual">Liebe Überprüfer,</p>
 
-    <p tal:omit-tag="textual">Ich schreibe Ihnen, um den Prozess der Identitätsüberprüfung für meinen Antrag auf Mitgliedschaft in der <span tal:omit-tag="textual" tal:replace="site">Site Name</span> abzuschließen. Ich möchte zu diesem Zweck ein Treffen per Videokonferenz vorschlagen.</p>
+    <p tal:omit-tag="textual">Ich schreibe Ihnen, um den Prozess der Identitätsüberprüfung für meinen Antrag auf Mitgliedschaft in der <span tal:replace="site">Site Name</span> abzuschließen. Ich möchte zu diesem Zweck ein Treffen per Videokonferenz vorschlagen.</p>
 
     <p tal:omit-tag="textual">Hier sind einige Zeitfenster, die ich für die Videokonferenz vorschlage. Bitte beachten Sie, dass ich in <strong>Deutschland</strong> lebe (Bitte passen Sie diese Angaben an Ihr Land / Ihre Region an. Dies ist notwendig, damit Ihr Korrespondent Ihre Zeitzone kennt), so dass die Tageszeit, in der ich lebe, von der Tageszeit, in der Sie leben, abweichen kann. Diese Videokonferenz sollte nicht länger als 10 Minuten dauern: (bitte geben Sie mindestens 3 Optionen an, wenn möglich zu verschiedenen Tageszeiten und an verschiedenen Tagen, auch am Wochenende, alle nicht später als ###)</p>
     <ul tal:omit-tag="textual">
@@ -36,17 +36,17 @@
     <p tal:omit-tag="textual">Bitte wählen Sie ein Zeitfenster, das Ihnen zusagt, und senden Sie mir eine E-Mail mit Ihrer Auswahl.</p>
      <p tal:omit-tag="textual">Nachdem Sie dieses Treffen per Videokonferenz abgehalten haben, bitte ich Sie um eine Abstimmung zur Bestätigung oder Ablehnung der Übereinstimmung zwischen:</p>
 <ul tal:omit-tag="textual">
-   <li tal:omit-tag="textual">den Identitätsinformationen, die Sie direkt per E-Mail von der IT-Plattform der <span tal:omit-tag="textual" tal:replace="site">Site Name</span> erhalten haben (und die Ihnen auf der Abstimmungsseite in Erinnerung gerufen werden) und </li>
+   <li tal:omit-tag="textual">den Identitätsinformationen, die Sie direkt per E-Mail von der IT-Plattform der <span tal:replace="site">Site Name</span> erhalten haben (und die Ihnen auf der Abstimmungsseite in Erinnerung gerufen werden) und </li>
    <li tal:omit-tag="textual">die Identitätsinformationen, die Sie während der Videokonferenz gesehen haben.</li>
 </ul>
-    <p tal:omit-tag="textual">Der Link, über den Sie nach dieser Videokonferenz über diese Übereinstimmung abstimmen können, sowie die Frist dafür werden Ihnen direkt von der <span tal:omit-tag="textual" tal:replace="site">Site Name</span> Plattform in einer unabhängigen E-Mail zugesandt.</p>
+    <p tal:omit-tag="textual">Der Link, über den Sie nach dieser Videokonferenz über diese Übereinstimmung abstimmen können, sowie die Frist dafür werden Ihnen direkt von der <span tal:replace="site">Site Name</span> Plattform in einer unabhängigen E-Mail zugesandt.</p>
    
-    <p tal:omit-tag="textual">Ich danke Ihnen sehr herzlich im Voraus für die Unterstützung des Prozesses meiner Registrierung als Genossenschafter bei der <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Sollten Sie weitere Fragen haben oder zusätzliche Informationen benötigen, können Sie mich gerne direkt kontaktieren.</p>
+    <p tal:omit-tag="textual">Ich danke Ihnen sehr herzlich im Voraus für die Unterstützung des Prozesses meiner Registrierung als Genossenschafter bei der <span tal:replace="site">Site Name</span>. Sollten Sie weitere Fragen haben oder zusätzliche Informationen benötigen, können Sie mich gerne direkt kontaktieren.</p>
 
     <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual">[Ihr Name]</strong></p>
 
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Diese E-Mail wurde mit Hilfe der Identitätsüberprüfungsfunktion von <span tal:replace="site">Site Name</span> erstellt. Wenn Sie nicht der für die Anwendung von <span tal:omit-tag="textual" tal:replace="full_name">Ihr Name</span> zugewiesene Prüfer sind und diese E-Mail irrtümlich erhalten haben, informieren Sie bitte den <span tal:omit-tag="textual" tal:replace="site">Site Name</span>-Administrator.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Diese E-Mail wurde mit Hilfe der Identitätsüberprüfungsfunktion von <span tal:replace="site">Site Name</span> erstellt. Wenn Sie nicht der für die Anwendung von <span tal:replace="full_name">Ihr Name</span> zugewiesene Prüfer sind und diese E-Mail irrtümlich erhalten haben, informieren Sie bitte den <span tal:replace="site">Site Name</span>-Administrator.</small></p>
 
 </body>
 </tal:block>

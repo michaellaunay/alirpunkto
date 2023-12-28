@@ -3,30 +3,30 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">nl - <span tal:omit-tag="textual" tal:replace="site">Site Name</span> - Verifieer mijn identiteit als nieuwe potentiële Cooperator</title>
+    <title tal:omit-tag="textual">nl - <span tal:replace="site">Site Name</span> - Verifieer mijn identiteit als nieuwe potentiële Cooperator</title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Identiteitscontrole voor <span tal:omit-tag="textual" tal:replace="site">Site Naam</span> Lidmaatschap</h1>
+    <h1 tal:omit-tag="textual">Identiteitscontrole voor <span tal:replace="site">Site Naam</span> Lidmaatschap</h1>
     <p tal:omit-tag="textual" >Beste verificateurs,</p>
 
-    <p tal:omit-tag="textual">Ik schrijf u om de identiteitscontrole te voltooien voor mijn aanvraag om lid te worden van de <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Als bijlage bij deze e-mail vindt u een gedeeltelijke kopie van mijn officiële identiteitsbewijs.</p>
+    <p tal:omit-tag="textual">Ik schrijf u om de identiteitscontrole te voltooien voor mijn aanvraag om lid te worden van de <span tal:replace="site">Site Name</span>. Als bijlage bij deze e-mail vindt u een gedeeltelijke kopie van mijn officiële identiteitsbewijs.</p>
 
-    <p tal:omit-tag="textual">Let op: bepaalde gevoelige informatie is om veiligheidsredenen afgeschermd. Het document bevat echter de informatie die u nodig heeft om mijn identiteit te verifiëren volgens het <span tal:omit-tag="textual" tal:replace="site">Site Name</span> registratieproces.</p>
+    <p tal:omit-tag="textual">Let op: bepaalde gevoelige informatie is om veiligheidsredenen afgeschermd. Het document bevat echter de informatie die u nodig heeft om mijn identiteit te verifiëren volgens het <span tal:replace="site">Site Name</span> registratieproces.</p>
 
     <p tal:omit-tag="textual">Ik verzoek u vriendelijk het bijgevoegde document zo spoedig mogelijk te bekijken om te stemmen over de toereikendheid tussen:</p>
 <ul tal:omit-tag="textual">
-   <li tal:omit-tag="textual">de identiteitsgegevens die u rechtstreeks per e-mail hebt ontvangen van het IT-platform van de <span tal:omit-tag="textual" tal:replace="site">Site Name</span> (en die u zullen worden onthouden op de steminterface) en </li>.
+   <li tal:omit-tag="textual">de identiteitsgegevens die u rechtstreeks per e-mail hebt ontvangen van het IT-platform van de <span tal:replace="site">Site Name</span> (en die u zullen worden onthouden op de steminterface) en </li>.
    <li tal:omit-tag="textual">de identiteitsgegevens die u kunt lezen op de bijgevoegde gedeeltelijke kopie van mijn officiële identiteitsbewijs.</li>
 </ul>
-     <p tal:omit-tag="textual">De link waarmee u op deze toereikendheid kunt stemmen, en de uiterste datum waarop u dat kunt doen, worden u rechtstreeks per e-mail toegestuurd door het <span tal:omit-tag="textual" tal:replace="site">Site Name</span> platform.</p>
-     <p tal:omit-tag="textual">Ik dank u bij voorbaat hartelijk voor uw steun bij het proces van mijn registratie als Cooperator bij de <span tal:omit-tag="textual" tal:replace="site">Site Name</span>. Mocht u nog vragen hebben of aanvullende informatie nodig hebben, neem dan gerust rechtstreeks contact met mij op.</p>
+     <p tal:omit-tag="textual">De link waarmee u op deze toereikendheid kunt stemmen, en de uiterste datum waarop u dat kunt doen, worden u rechtstreeks per e-mail toegestuurd door het <span tal:replace="site">Site Name</span> platform.</p>
+     <p tal:omit-tag="textual">Ik dank u bij voorbaat hartelijk voor uw steun bij het proces van mijn registratie als Cooperator bij de <span tal:replace="site">Site Name</span>. Mocht u nog vragen hebben of aanvullende informatie nodig hebben, neem dan gerust rechtstreeks contact met mij op.</p>
 
      <p tal:omit-tag="textual">Gegroet,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual"><span tal:replace="full_name">Uw naam</span></strong></p>
 
     <p tal:omit-tag="textual" >Attachement: [Naam van het ID-documentbestand]</p>
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Deze e-mail is gegenereerd met behulp van <span tal:omit-tag="textual" tal:replace="site">Site Name</span>'s identiteitsverificatiefunctie. Als u niet de verificateur bent die is toegewezen aan de toepassing van <span tal:omit-tag="textual" tal:replace="full_name">Uw naam</span> en u deze e-mail per ongeluk hebt ontvangen, laat dit dan weten aan de <span tal:omit-tag="textual" tal:replace="site">Site Naam</span> beheerder.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Deze e-mail is gegenereerd met behulp van <span tal:replace="site">Site Name</span>'s identiteitsverificatiefunctie. Als u niet de verificateur bent die is toegewezen aan de toepassing van <span tal:replace="full_name">Uw naam</span> en u deze e-mail per ongeluk hebt ontvangen, laat dit dan weten aan de <span tal:replace="site">Site Naam</span> beheerder.</small></p>
 
 </body>
 </html>

@@ -4,15 +4,15 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal">
 <tal:block tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">pl - <span tal:omit-tag="textual" tal:replace="site">Nazwa strony</span> - Proszę zweryfikować moją tożsamość jako nowego potencjalnego współpracownika za pośrednictwem wideokonferencji</title>
+    <title tal:omit-tag="textual">pl - <span tal:replace="site">Nazwa strony</span> - Proszę zweryfikować moją tożsamość jako nowego potencjalnego współpracownika za pośrednictwem wideokonferencji</title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">pl - Weryfikacja tożsamości dla <span tal:omit-tag="textual" tal:replace="site">Nazwa witryny</span> Członkostwa poprzez Wideokonferencję</h1>
+    <h1 tal:omit-tag="textual">pl - Weryfikacja tożsamości dla <span tal:replace="site">Nazwa witryny</span> Członkostwa poprzez Wideokonferencję</h1>
 
     <p tal:omit-tag="textual">Drodzy Weryfikatorzy,</p>
 
-    <p tal:omit-tag="textual">Piszę do Państwa, aby dokończyć proces weryfikacji tożsamości w związku z moim wnioskiem o członkostwo w spółdzielni <span tal:omit-tag="textual" tal:replace="site">Nazwa witryny</span>. W tym celu chciałbym zaproponować Państwu spotkanie w formie wideokonferencji.</p>
+    <p tal:omit-tag="textual">Piszę do Państwa, aby dokończyć proces weryfikacji tożsamości w związku z moim wnioskiem o członkostwo w spółdzielni <span tal:replace="site">Nazwa witryny</span>. W tym celu chciałbym zaproponować Państwu spotkanie w formie wideokonferencji.</p>
 
     <p tal:omit-tag="textual">Proszę zwrócić uwagę na przedziały czasowe, które proponuję na wideokonferencję. Proszę pamiętać, że mieszkam w <strong>Polsce</strong> (proszę dostosować do swojego kraju / regionu zamieszkania. Jest to konieczne, aby korespondent znał Państwa strefę czasową), więc pora dnia, w której mieszkam, może różnić się od pory dnia, w której Państwo mieszkają. Wideokonferencja powinna trwać nie dłużej niż 10 minut: (proszę podać co najmniej 3 opcje, w miarę możliwości o różnych porach dnia i w różne dni, w tym w weekendy, wszystkie nie później niż ###)</p>
     <ul tal:omit-tag="textual">
@@ -36,17 +36,17 @@
     <p tal:omit-tag="textual">Proszę uprzejmie wybrać pasujący Państwu przedział czasowy i przesłać mi e-mail zawierający Państwa wybór.</p>
      <p tal:omit-tag="textual">Po odbyciu tego spotkania za pośrednictwem wideokonferencji, uprzejmie proszę o głosowanie w celu potwierdzenia lub odrzucenia adekwatności między:</p>
 <ul tal:omit-tag="textual">
-   <li tal:omit-tag="textual">informacjami o tożsamości, które otrzymali Państwo bezpośrednio pocztą elektroniczną z platformy informatycznej <span tal:omit-tag="textual" tal:replace="site">nazwy witryny</span> (i które zostaną Państwu przypomniane w interfejsie do głosowania) oraz </li>
+   <li tal:omit-tag="textual">informacjami o tożsamości, które otrzymali Państwo bezpośrednio pocztą elektroniczną z platformy informatycznej <span tal:replace="site">nazwy witryny</span> (i które zostaną Państwu przypomniane w interfejsie do głosowania) oraz </li>
    <li tal:omit-tag="textual">informacje o tożsamości, które zobaczą Państwo podczas wideokonferencji.</li>
 </ul>
-    <p tal:omit-tag="textual">Łącznik umożliwiający oddanie głosu na tę adekwatność po tej wideokonferencji, a także termin, w którym należy to zrobić, zostaną wysłane bezpośrednio do Państwa w niezależnej wiadomości e-mail przez platformę <span tal:omit-tag="textual" tal:replace="site">Nazwa witryny</span>.</p>
+    <p tal:omit-tag="textual">Łącznik umożliwiający oddanie głosu na tę adekwatność po tej wideokonferencji, a także termin, w którym należy to zrobić, zostaną wysłane bezpośrednio do Państwa w niezależnej wiadomości e-mail przez platformę <span tal:replace="site">Nazwa witryny</span>.</p>
    
-    <p tal:omit-tag="textual">Z góry bardzo serdecznie dziękuję Państwu za wsparcie procesu mojej rejestracji jako Współpracownika na platformie <span tal:omit-tag="textual" tal:replace="site">Nazwa strony</span>. Jeśli mają Państwo jakiekolwiek pytania lub potrzebują dodatkowych informacji, proszę skontaktować się ze mną bezpośrednio.</p>
+    <p tal:omit-tag="textual">Z góry bardzo serdecznie dziękuję Państwu za wsparcie procesu mojej rejestracji jako Współpracownika na platformie <span tal:replace="site">Nazwa strony</span>. Jeśli mają Państwo jakiekolwiek pytania lub potrzebują dodatkowych informacji, proszę skontaktować się ze mną bezpośrednio.</p>
 
     <p tal:omit-tag="textual">Z poważaniem,</p>
      <p tal:omit-tag="textual"><strong tal:omit-tag="textual">[Pana/Pani imię]</strong></p>
 
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Ten e-mail został wygenerowany przy pomocy funkcji weryfikacji tożsamości <span tal:replace="site">Nazwa witryny</span>. Jeśli nie jesteś Weryfikatorem przypisanym do aplikacji <span tal:omit-tag="textual" tal:replace="full_name">Twoje imię</span> i otrzymałeś tę wiadomość omyłkowo, proszę poinformować o tym administratora <span tal:omit-tag="textual" tal:replace="site">Nazwa witryny</span>.</small></p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Ten e-mail został wygenerowany przy pomocy funkcji weryfikacji tożsamości <span tal:replace="site">Nazwa witryny</span>. Jeśli nie jesteś Weryfikatorem przypisanym do aplikacji <span tal:replace="full_name">Twoje imię</span> i otrzymałeś tę wiadomość omyłkowo, proszę poinformować o tym administratora <span tal:replace="site">Nazwa witryny</span>.</small></p>
 
 </body>
 </tal:block>

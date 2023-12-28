@@ -8,21 +8,21 @@
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Evoluția candidaturii dumneavoastră la <span tal:replace="site_name">Numele site-ului</span></h1>
-        <p tal:omit-tag="textual">Bună ziua<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Numele candidatului</span>,
+        <p tal:omit-tag="textual">Bună ziua<span tal:replace="user" tal:condition="exists:user">Numele candidatului</span>,
         </p>
         <p tal:omit-tag="textual">Aplicația dvs. pe platformă
             <span tal:replace="site_url">URL</span> ca un 
             <span tal:replace="python:candidature.type">Rolul</span>.
-            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">a fost acceptată</span>
-            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">a fost respins</span>
-            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">este în curs de procesare și și-a schimbat statutul</span> . 
+            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED" tal:omit-tag="textual">a fost acceptată</span>
+            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED" tal:omit-tag="textual">a fost respins</span>
+            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]" tal:omit-tag="textual">este în curs de procesare și și-a schimbat statutul</span> . 
         </p>
-        <p tal:omit-tag="textual">Iată detalii despre evoluția sa:</p> <p>.
+        <p tal:omit-tag="textual">Iată detalii despre evoluția sa:</p>
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Identificarea candidaturii: <span tal:replace="python:candidature.oid">Identificarea candidaturii</span></li>.
             <li tal:omit-tag="textual">Data de tranziție: <span tal:replace="python:candidature.modifications[-1].datetime">Ultima tranziție</span></li>.
-            <li tal:omit-tag="textual">Statut nou: <span i18n:translate="" tal:content="python:candidature.state.value">Statutul noii candidaturi</span></li>.
-            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">: <li tal:omit-tag="textual" tal:condition="exist:page_register_with_oid">
+            <li tal:omit-tag="textual">Statut nou: <span i18n:translate="" tal:content="python:candidature.state.value" tal:omit-tag="textual">Statutul noii candidaturi</span></li>.
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">:
             Dacă aveți nevoie, puteți întrerupe acum procesul de înregistrare. Îl veți putea relua mai târziu, făcând clic pe link-ul de mai jos.
             </li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
@@ -32,7 +32,7 @@
             </li>
         </ul>
 
-        <p tal:omit-tag="textual">Mulțumim pentru participare.</p> <p>.
+        <p tal:omit-tag="textual">Mulțumim pentru participare.</p>
         <p tal:omit-tag="textual">Cele mai bune salutări,</p>
         <p tal:omit-tag="textual">Echipa de la <span tal:replace="site_name">Site Name</span></p>
     </body>
