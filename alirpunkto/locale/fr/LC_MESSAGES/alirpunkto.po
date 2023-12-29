@@ -247,7 +247,7 @@ msgid "nine"
 msgstr "neuf"
 
 msgid "times"
-msgstr "fois"
+msgstr "multiplié par"
 
 msgid "plus"
 msgstr "plus"
