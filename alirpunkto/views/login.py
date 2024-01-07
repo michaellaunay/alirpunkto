@@ -14,7 +14,7 @@ from .. import _
 from .. import LDAP_SERVER, LDAP_OU, LDAP_BASE_DN
 from ..models.users import User
 from logging import getLogger
-from ..utils import is_admin, get_admin_user
+from ..utils import is_admin, get_admin_user, get_oid_from_pseudonym
 
 log = getLogger('alirpunkto')
 
@@ -36,7 +36,15 @@ def login_view(request):
             # The user is the ldap admin
             user = get_admin_user()
         else:
-            user = check_password(username, password)
+            oid = get_oid_from_pseudonym(username, request)
+            if not oid:
+                # The user is not in the ldap directory
+                # return an error message
+                return {
+                    'error': _('invalid_username_or_password'),
+                    'site_name': site_name
+                }
+            user = check_password(username, oid, password)
         if user is not None:
             headers = remember(request, username)
             request.session['logged_in'] = True
@@ -65,11 +73,12 @@ def login_view(request):
         'user': username
     }
 
-def check_password(username:str, password:str) -> Union[None, User]:
+def check_password(username:str, oid:str, password:str) -> Union[None, User]:
     """Check in ldap if the password is correct for the given username.
 
     Args:
         username (str): the username
+        oid (str): the oid
         password (str): the password
 
     Returns:
@@ -78,8 +87,8 @@ def check_password(username:str, password:str) -> Union[None, User]:
     # define an unsecure LDAP server, requesting info on DSE and schema
     server = Server(LDAP_SERVER, get_info=ALL)
     ldap_login=(
-        f"uid={username},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU
-        else f"uid={username},{LDAP_BASE_DN}"
+        f"uid={oid},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU
+        else f"uid={oid},{LDAP_BASE_DN}"
     ) # define the user to authenticate
     log.debug(f"Trying to authenticate {ldap_login=} with {password=}")
     try:
@@ -87,8 +96,8 @@ def check_password(username:str, password:str) -> Union[None, User]:
         conn = Connection(server, ldap_login, password, auto_bind=True)
         conn.search(
             LDAP_BASE_DN,
-            '(uid={})'.format(username),
-            attributes=['cn','mail', 'employeeNumber']
+            '(uid={})'.format(oid),
+            attributes=['cn', 'uid','mail', 'employeeNumber']
         ) # search for the user in the LDAP directory
     except LDAPBindError as e:
         log.debug(f"Error while authenticating {username}: {e}")
@@ -97,15 +106,15 @@ def check_password(username:str, password:str) -> Union[None, User]:
         return None
     user_entry = conn.entries[0]
     name = user_entry.cn.value
-    employeeNumber = ""
-    if "mail" in user_entry:
-        email = user_entry.mail.value
-    else:
-        email = "undefined@example.com"
+    employeeNumber = (user_entry.employeeNumber.value
+        if "employeeNumber" in user_entry else user_entry.uid.value
+    )
+    email = (user_entry.mail.value
+        if "mail" in user_entry else "undefined@example.com"
+    )
+    if "mail" not in user_entry:
         log.warning(f"User {username} has no email address")
-    if "employeeNumber" in user_entry:
-        employeeNumber = user_entry.employeeNumber.value
-    else:
+    if "employeeNumber" not in user_entry:
         log.warning(f"User {username} has no employeeNumber")
     
     user = User.create_user(name, email, employeeNumber)

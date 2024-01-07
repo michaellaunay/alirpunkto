@@ -6,6 +6,7 @@ from typing import Dict, Union
 from pyramid.request import Request
 from .models.candidature import (
     Candidature,
+    CandidatureTypes,
     Candidatures,
     CandidatureEmailSendStatus,
     CandidatureStates,
@@ -40,8 +41,21 @@ from .models.users import User
 MIN_PSEUDONYM_LENGTH = 5 # Minimum pseudonym length
 MAX_PSEUDONYM_LENGTH = 20 # Maximum pseudonym length
 
+# Constructing the regular expression using f-strings
 pseudonym_pattern = re.compile(
-    f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$'
+# To remove accent use:
+    f'^[a-zA-Z0-9_.-]{{1}}(?:[a-zA-Z0-9_.-]| (?=[a-zA-Z0-9_.-])){{0,{MAX_PSEUDONYM_LENGTH - 2}}}[a-zA-Z0-9_.-]{{1}}$'
+# To remove space use:
+#     f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$'
+# To allow accent use:
+#     # Starting characters (letters, numbers, dashes, dots, underscores,
+#     # accented letters)
+#     fr'^[\u00C0-\u017F\w.-]' +
+#     # Middle characters (including conditional space)
+#     fr'(?:[\u00C0-\u017F\w.-]| (?=[\u00C0-\u017F\w.-]))' +
+#     # Repetition with adjusted maximum length
+#     fr'{{0,{MAX_PSEUDONYM_LENGTH - 2}}}' +
+#     fr'[\u00C0-\u017F\w.-]$'  # Ending character
 )
 
 MIN_PASSWORD_LENGTH = 12 # Minimum password length
@@ -108,7 +122,7 @@ def is_valid_email(email, request):
         # Verify that the email is not already registered in LDAP
         conn.search(
             LDAP_BASE_DN,
-            '(uid={})'.format(email),
+            '(cn={})'.format(email),
             attributes=['cn']) # search for the user in the LDAP directory
         # Verify that the email is not already registered
         if len(conn.entries) != 0:
@@ -157,7 +171,7 @@ def is_valid_unique_pseudonym(pseudonym):
     # Verify that the pseudonym is not already registered
     conn.search(
         LDAP_BASE_DN,
-        '(uid={})'.format(pseudonym, attributes=['cn'])
+        '(cn={})'.format(pseudonym, attributes=['cn'])
     ) # search for the user in the LDAP directory
     # Verify that the candidate is not already registered
     if len(conn.entries) != 0:
@@ -376,7 +390,7 @@ def get_potential_voters(conn: Connection) -> List[Dict[str, str]]:
     Returns:
         list: List of potential voters (uid, cn, mail, sn).
     """
-    filter_str = '(&(employeeType=cooperator)(cn=*)(sn=*)(mail=*))'
+    filter_str = '(&(employeeType=cooperator)(cn=*)(mail=*))'
     conn.search(LDAP_BASE_DN, filter_str, attributes=['uid', 'cn', 'mail', 'sn'])
     return conn.entries
 
@@ -459,7 +473,7 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
             {
                 'uid': voter.uid.value,
                 'cn': voter.cn.value,
-                'sn': voter.sn.value,
+                'sn': voter.sn.value if hasattr(voter, "sn") else voter.cn.value,
                 'mail': voter.mail.value
             }
             for voter in selected_voters
@@ -483,6 +497,38 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
                 return []
 
         return voters[:3]  # Ensure only top 3 are returned
+
+def get_oid_from_pseudonym(
+    pseudonym: str,
+    request: Request
+    ) -> Union[str, None]:
+    """Get the oid from the pseudonym and ldap.
+
+    Args:
+        pseudonym (str): the pseudonym
+        request (pyramid.request.Request): the request
+
+    Returns:
+        str: the oid, None if not found
+    """
+    #verify pseudonym is valid
+    pseudonym = pseudonym.strip()
+    if not pseudonym_pattern.match(pseudonym):
+        return None
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login = f"{LDAP_LOGIN},{LDAP_OU if LDAP_OU else ''},{LDAP_BASE_DN}"
+    while ',,' in ldap_login:
+        ldap_login = ldap_login.replace(',,', ',')
+    with Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) as conn:
+        conn.search(
+            LDAP_BASE_DN,
+            '(cn={})'.format(pseudonym),
+            attributes=['employeeNumber']
+        ) # search for the user in the LDAP directory
+        if len(conn.entries) == 0:
+            return None
+        user_entry = conn.entries[0]
+        return user_entry.employeeNumber.value
 
 def register_user_to_ldap(request, candidature, password):
     """
@@ -514,22 +560,43 @@ def register_user_to_ldap(request, candidature, password):
     conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
 
     # DN for the new entry
-    dn = (f"uid={pseudonym},{LDAP_OU},{LDAP_BASE_DN}"
-        if LDAP_OU else f"uid={pseudonym},{LDAP_BASE_DN}"
+    dn = (f"uid={candidature.oid},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"uid={candidature.oid},{LDAP_BASE_DN}"
     )
     # Attributes for the new user
     attributes = {
         # Adjust this based on your LDAP schema
-        'objectClass': ['top', 'inetOrgPerson'],
-        'uid': pseudonym,
+        'objectClass': ['top', 'inetOrgPerson', 'alirpunktoPerson'],
+        'uid': candidature.oid,
         'mail': candidature.email,
         'userPassword': password,
-        'cn': pseudonym,
+        'sn': (
+            candidature.data.fullsurname
+                if candidature.type == CandidatureTypes.COOPERATOR
+                else pseudonym
+        ), # sn is obligatory
+        'cn': pseudonym, # Use the pseudonym as commonName
         'employeeNumber': candidature.oid, # Use the oid as employeeNumber
         'employeeType': candidature.type.name, # Use the type as employeeType,
          # Use the fullsurname as sn
-        'sn': getattr(candidature, "fullsurname", pseudonym) or pseudonym,
+        "isActive": "True",
+        "isOrdinaryMember": "True",
+        "isCooperatorMember": "False",
+        "isBoardMember": "False",
+        "isMemberOfMediationArbitrationCouncil": "False"
     }
+    if candidature.type == CandidatureTypes.COOPERATOR:
+        # Add full name to inetOrgPerson attribute
+        #@TODO conforter
+        attributes['gn'] = candidature.data.fullname
+        #@TODO check country code is less of 3 chars
+        attributes["nationality"] = candidature.data.nationality
+        attributes["birthdate"] = candidature.data.birthdate.strftime("%Y%m%d%H%M%SZ")
+        #@TODO check language code
+        attributes["preferredLanguage"] = candidature.data.lang1
+        attributes["secondLanguage"] = candidature.data.lang2
+        attributes["isOrdinaryMember"] = "False"
+        attributes["isCooperatorMember"] = "True"
     log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
     # Add the new user to LDAP
     try:
@@ -540,6 +607,7 @@ def register_user_to_ldap(request, candidature, password):
     if success:
         return {'status': 'success', 'message': _('registration_successful')}
     else:
+        log.error(f"Error while adding user {pseudonym} to LDAP : {conn.result}")
         return {'status': 'failure', 'message': _('registration_failed')}
 
 def is_admin(username:str, password:str)-> bool:

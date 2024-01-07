@@ -69,6 +69,10 @@ python3 alirpunkto/generate_secret.py
 
 And change the SECRET_KEY inside the .env file.
 
+Here's the translated documentation in English for including in the `README.md` file of your AlirPunkto project, explaining how to add the `alirpunkto/alirpunkto_schema.ldif` schema to OpenLDAP on Ubuntu 22.04:
+
+Add alirpkunto_schema.ldif as describe bellow
+
 - Run your project's tests.
 
 ```bash
@@ -82,3 +86,54 @@ You should have no error !
 bin/pserve development.ini
 ```
 
+---
+
+## Adding AlirPunkto Schema to OpenLDAP on Linux
+
+This section guides you through the steps to integrate the custom `alirpunkto_schema.ldif` schema into an OpenLDAP server on Ubuntu 22.04.
+
+### Prerequisites
+
+- An OpenLDAP server installed on Ubuntu 22.04.
+- Administrative rights on the LDAP server.
+- The `alirpunkto_schema.ldif` file available in the `alirpunkto` directory of this project.
+
+### Installation Steps
+
+1. **Server Connection**  
+   Log into your Ubuntu server where OpenLDAP is installed.
+
+2. **Stopping LDAP Service**  
+   Before making any configuration changes, stop the LDAP service to prevent data corruption.
+   ```bash
+   sudo systemctl stop slapd
+   ```
+
+3. **Locating the Schema File**  
+   Ensure that the `alirpunkto_schema.ldif` file is present on the server. If not, transfer it to an appropriate directory (e.g., `/tmp`).
+
+4. **Adding the Schema to LDAP Server**  
+   Run the following command to add the schema to your LDAP directory:
+   ```bash
+   sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /path/to/alirpunkto_schema.ldif
+   ```
+   Replace `/path/to/alirpunkto_schema.ldif` with the actual path of the `alirpunkto_schema.ldif` file on your server.
+
+5. **Restarting LDAP Service**  
+   After successfully adding the schema, restart the LDAP service:
+   ```bash
+   sudo systemctl start slapd
+   ```
+
+6. **Verification**  
+   Verify that the schema has been added correctly. You can do this by checking the OpenLDAP logs or using an LDAP tool to explore the schema configuration.
+
+### Troubleshooting
+
+If you encounter any issues while adding the schema, check the OpenLDAP logs for detailed error information. The logs can often provide useful clues about what might have gone wrong.
+
+### Important Notes
+
+- Ensure you have a backup of the existing LDAP configuration before making changes.
+- Any modifications to the LDAP configuration should be carried out with caution, as errors can affect the stability and security of the service.
+- Test changes in a development environment before applying them on a production server.

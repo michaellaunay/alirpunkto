@@ -19,7 +19,8 @@ from ..models.candidature import (
 from ..utils import (
     get_candidatures,
     send_confirm_validation_email,
-    send_candidature_state_change_email
+    send_candidature_state_change_email,
+    register_user_to_ldap
 )
 from logging import getLogger
 
@@ -79,10 +80,10 @@ def login_view(request):
             count_no = [v.vote for v in candidature.voters].count(VotingChoice.NO.name)
             if count_yes > count_no:
                 candidature.state = CandidatureStates.APPROVED
+                register_user_to_ldap(request, candidature, candidature.data.password)
                 transaction.commit()
                 # send email to the candidature owner
                 email_template = "send_candidature_approuved_email"
-                
             else:
                 candidature.state = CandidatureStates.REJECTED
                 transaction.commit()

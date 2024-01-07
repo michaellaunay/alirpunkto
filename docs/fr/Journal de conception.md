@@ -813,3 +813,87 @@ C.f Issue #47
 C.f issue #48
 
 Le test d'unicité des mails ne fonctionne que partiellement, car elle n'est vérifiée que dans ldap et non pas aussi dans les candidatures en cours.
+
+# 2024-01-05
+Voici la notice d'ajout du schéma ldap alirpunkto_schema.ldif
+Voici un exemple de documentation à inclure dans le fichier `README.md` de votre projet AlirPunkto pour expliquer comment ajouter le schéma `alirpunkto/alirpunkto_schema.ldif` à un serveur OpenLDAP sur Ubuntu 22.04 :
+
+## Ajout du Schéma AlirPunkto à OpenLDAP sous Ubuntu 22.04
+
+Cette section vous guide à travers les étapes nécessaires pour intégrer le schéma personnalisé `alirpunkto_schema.ldif` dans un serveur OpenLDAP sur Ubuntu 22.04.
+
+### Prérequis
+
+- Un serveur OpenLDAP installé sur Ubuntu 22.04.
+- Des droits d'administrateur sur le serveur LDAP.
+- Le fichier `alirpunkto_schema.ldif` disponible dans le répertoire `alirpunkto` de ce projet.
+
+### Étapes d'Installation
+
+1. **Connexion au Serveur**  
+   Connectez-vous à votre serveur Ubuntu où OpenLDAP est installé.
+
+2. **Arrêt du Service LDAP**  
+   Avant de modifier la configuration, arrêtez le service LDAP pour éviter toute corruption de données.
+   ```bash
+   sudo systemctl stop slapd
+   ```
+
+3. **Localisation du Fichier Schema**  
+   Assurez-vous que le fichier `alirpunkto_schema.ldif` est présent sur le serveur. S'il ne l'est pas, transférez-le dans un répertoire approprié (par exemple, `/tmp`).
+
+4. **Ajout du Schéma au Serveur LDAP**  
+   Exécutez la commande suivante pour ajouter le schéma à votre annuaire LDAP :
+   ```bash
+   sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /chemin/vers/alirpunkto_schema.ldif
+   ```
+   Remplacez `/chemin/vers/alirpunkto_schema.ldif` par le chemin réel du fichier `alirpunkto_schema.ldif` sur votre serveur.
+
+5. **Redémarrage du Service LDAP**  
+   Après l'ajout réussi du schéma, redémarrez le service LDAP :
+   ```bash
+   sudo systemctl start slapd
+   ```
+
+6. **Vérification**  
+   Vérifiez que le schéma a été ajouté correctement. Vous pouvez le faire en consultant les journaux d'OpenLDAP ou en utilisant un outil LDAP pour explorer la configuration du schéma.
+
+### Dépannage
+
+Si vous rencontrez des problèmes lors de l'ajout du schéma, consultez les journaux d'OpenLDAP pour des informations détaillées sur les erreurs. Les journaux peuvent souvent fournir des indices utiles sur ce qui a pu mal tourner.
+
+### Notes Importantes
+
+- Assurez-vous de faire une sauvegarde de la configuration LDAP existante avant d'effectuer des modifications.
+- Toute modification de la configuration LDAP doit être effectuée avec prudence, car des erreurs peuvent affecter la stabilité et la sécurité du service.
+- Testez les modifications dans un environnement de développement avant de les appliquer sur un serveur de production.
+
+# 2024-01-06
+
+La description de olcObjectClasses pour ajouté un schéma à ldap nécessite des `$` comme séparateur des champs :
+```ldif
+olcObjectClasses: ( 1.3.6.1.4.1.61000.2.2.1
+  NAME 'alirpunktoPerson' 
+    DESC 'AlirPunkto specific person object class' 
+  SUP inetOrgPerson 
+  STRUCTURAL 
+    MUST (
+      uid $ cn $ mail $ employeeType $ isActive $ isOrdinaryMember $
+      isCooperatorMember $ isBoardMember $
+      isMemberOfMediationArbitrationCouncil )
+    MAY (
+      sn $ gn $ nationality $ birthdate $ preferredLanguage $
+      secondLanguage $ thirdLanguage $ cooperativeBehaviourMark $
+      lastUpdateBehaviour $ userProfileText $ userProfileImage $
+      thirdLanguage )
+  )
+```
+
+L'ajout se fait alors :
+```bash
+sudo -i
+apt install schema2ldif
+ldap-schema-manager -i /home/michaellaunay/workspace/alirpunkto/alirpunkto/alirpunkto_schema.ldif
+ldap-schema-manager -m /home/michaellaunay/workspace/alirpunkto/alirpunkto/alirpunkto_schema.ldif -n
+```
+Paradoxalement la premier appel ldap-schema-manager -i ne signale pas les erreurs et sort en 0, alors que la mise à jour faite par le second appel indiquait une erreur 80 qui correspondait à l'abscence de `$`
