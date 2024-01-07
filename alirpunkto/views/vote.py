@@ -48,7 +48,10 @@ def login_view(request):
         request.session['oid'] = oid
     canditures = get_candidatures(request)
     if oid not in canditures:
-        return {'error': _('invalid_oid'), 'site_name': site_name}
+        return {
+            'error': _('invalid_oid'),
+            'site_name': site_name
+            }
     candidature = canditures[oid]
 
     voter = None
@@ -57,7 +60,10 @@ def login_view(request):
             voter = v
             break
     if not voter:
-        return {'error': _('not_voter'), 'site_name': site_name}
+        return {
+            'error': _('not_voter'),
+            'site_name': site_name
+        }
     #@TODO check if the user can vote (if time is not passed )
     pass
 

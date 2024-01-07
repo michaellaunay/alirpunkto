@@ -97,6 +97,7 @@ This section guides you through the steps to integrate the custom `alirpunkto_sc
 - An OpenLDAP server installed on Ubuntu 22.04.
 - Administrative rights on the LDAP server.
 - The `alirpunkto_schema.ldif` file available in the `alirpunkto` directory of this project.
+- You can replace the PEN number with your own before proceeding with the installation.
 
 ### Installation Steps
 
@@ -115,7 +116,9 @@ This section guides you through the steps to integrate the custom `alirpunkto_sc
 4. **Adding the Schema to LDAP Server**  
    Run the following command to add the schema to your LDAP directory:
    ```bash
-   sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /path/to/alirpunkto_schema.ldif
+   sudo aptin install schema2ldif
+   ldap-schema-manager -i /path/to/alirpunkto_schema.ldif
+   ldap-schema-manager -m /path/to/alirpunkto_schema.ldif -n
    ```
    Replace `/path/to/alirpunkto_schema.ldif` with the actual path of the `alirpunkto_schema.ldif` file on your server.
 
@@ -137,3 +140,7 @@ If you encounter any issues while adding the schema, check the OpenLDAP logs for
 - Ensure you have a backup of the existing LDAP configuration before making changes.
 - Any modifications to the LDAP configuration should be carried out with caution, as errors can affect the stability and security of the service.
 - Test changes in a development environment before applying them on a production server.
+
+# 2024-01-08
+
+La façon dont est gérée l'admin d'openldap ne permet pas de gérer correctement l'administration d'Alirpunkto, car il n'a pas forcément d'entrée dans ldap. En conséquence, j'ai ajouté le compte ADMIN d'arlipunkto dont le login, le mail et le mot de passe sont définis dans le .env.

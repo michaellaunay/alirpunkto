@@ -17,6 +17,9 @@ from pyramid_zodbconn import get_connection
 from pyramid.path import AssetResolver
 from . import (
     _,
+    ADMIN_LOGIN,
+    ADMIN_PASSWORD,
+    ADMIN_EMAIL,
     LDAP_SERVER,
     LDAP_OU,
     LDAP_BASE_DN,
@@ -394,57 +397,15 @@ def get_potential_voters(conn: Connection) -> List[Dict[str, str]]:
     conn.search(LDAP_BASE_DN, filter_str, attributes=['uid', 'cn', 'mail', 'sn'])
     return conn.entries
 
-
-def get_admin(conn: Connection = None):
-    """Fetch the admin details from LDAP.
-
-    Args:
-        conn (Connection): The LDAP connection object, if None the connection
-                            will be open.
-
-    Returns:
-        dict: Admin details if found, otherwise None.
-    """
-    if not conn:
-        server = Server(LDAP_SERVER, get_info=ALL)
-        ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
-            if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-        )
-        conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
-
-    search_filter = "(&(objectclass=*)(cn=*)(mail=*)(sn=*))"
-    results = conn.search(
-        LDAP_BASE_DN,
-        search_filter,
-        search_scope=SUBTREE,
-        attributes=['cn', 'mail']
-    )
-    if not results:
-        return None
-    return conn.entries[0]
-
 def get_admin_user()->  User:
-        """return the admin User from LDAP Admin information or from settings.
-
+        """return the admin User from the sttings.
+        Args:
+            request (pyramid.request.Request): the request
         Returns:
-            User: The admin from the ldap admin information if exists, 
-                otherwise the admin from the settings
+            User: The admin from the settings
         """
-        admin_informations = None
-        try:
-            admin_informations = get_admin()
-        except Exception as e:
-            log.warning(
-                f"Error while fetching the admin informations from LDAP: {e}"
-            )
-            # If an error occurs, create user from settings
-        name = (
-            admin_informations.cn.value if hasattr(admin_informations, "cn")
-            else LDAP_LOGIN
-        )
-        mail = (admin_informations.mail.value
-                if hasattr(admin_informations, "mail") else MAIL_SENDER
-        )
+        name = ADMIN_LOGIN
+        mail = ADMIN_EMAIL
         oid = LDAP_ADMIN_OID
         admin_user = User(name, mail, oid)
         return admin_user
@@ -481,20 +442,14 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
 
         # If there are fewer than 3 voters, add the admin
         if len(voters) < 3:
-            admin = get_admin(conn)
-            if admin:
-                voters.append(
-                    {
-                        'uid': 'admin',
-                        'cn': admin.cn.value,
-                        'sn': 'Admin',
-                        'mail': admin.mail.value
-                    }
-                )
-            else:
-                # Handle the case where the admin is not found
-                log.error("No admin found in LDAP")
-                return []
+            voters.append(
+                {
+                    'uid': LDAP_ADMIN_OID,
+                    'cn': ADMIN_LOGIN,
+                    'sn': 'Administrator',
+                    'mail': ADMIN_EMAIL
+                }
+            )
 
         return voters[:3]  # Ensure only top 3 are returned
 
@@ -612,21 +567,20 @@ def register_user_to_ldap(request, candidature, password):
 
 def is_admin(username:str, password:str)-> bool:
     """
-    Determines if the provided username and password match the credentials of the LDAP administrator.
+    Determines if the provided username and password match the credentials of the administrator.
 
-    This function checks if the given username and password combination is the same as that of the LDAP 
-    administrator. It is intended for use in contexts where LDAP (Lightweight Directory Access Protocol) 
-    authentication is implemented, and there is a need to verify if a user has administrative privileges.
+    This function checks if the given username and password combination is the same as that of the
+    administrator.
 
     Args:
     username (str): The username to be checked.
     password (str): The password corresponding to the username.
 
     Returns:
-    bool: Returns True if the provided username and password match the LDAP administrator's credentials, 
+    bool: Returns True if the provided username and password match the administrator's credentials, 
     otherwise returns False.
     """
-    return (username.strip(), password.strip())== (LDAP_LOGIN.split("=")[-1], LDAP_PASSWORD)
+    return (username.strip(), password.strip())== (ADMIN_LOGIN.split("=")[-1], ADMIN_PASSWORD)
 
 def get_local_template(request, pattern_path):
     """
