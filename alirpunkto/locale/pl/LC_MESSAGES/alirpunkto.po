@@ -658,7 +658,7 @@ msgstr ""
 "głosowania, powracając na tę stronę."
 
 #, fuzzy
-msgid "human_cooperator_data_explenation"
+msgid "cooperator_data_explanation"
 msgstr ""
 "<div>\n"
 "    <p>Jako członek spółdzielni będziesz uczestniczyć we wszystkich naszych "
@@ -710,7 +710,7 @@ msgstr ""
 "</div>"
 
 #, fuzzy
-msgid "human_verification_explenation"
+msgid "human_verification_explanation"
 msgstr ""
 "<div>\n"
 "    <p>Wysłaliśmy ci e-mailem zestaw czterech prostych obliczeń "

@@ -116,7 +116,7 @@ This section guides you through the steps to integrate the custom `alirpunkto_sc
 4. **Adding the Schema to LDAP Server**  
    Run the following command to add the schema to your LDAP directory:
    ```bash
-   sudo aptin install schema2ldif
+   sudo apt install schema2ldif
    ldap-schema-manager -i /path/to/alirpunkto_schema.ldif
    ldap-schema-manager -m /path/to/alirpunkto_schema.ldif -n
    ```
