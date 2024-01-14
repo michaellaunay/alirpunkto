@@ -41,8 +41,6 @@ LDAP_PASSWORD = get_key(find_dotenv(), "LDAP_PASSWORD")
 ADMIN_LOGIN = get_key(find_dotenv(), "ADMIN_LOGIN")
 ADMIN_PASSWORD = get_key(find_dotenv(), "ADMIN_PASSWORD")
 ADMIN_EMAIL = get_key(find_dotenv(), "ADMIN_EMAIL")
-NUMBER_OF_VOTERS = int(os.getenv("NUMBER_OF_VOTERS", 3))
-LOGO_PATH = os.getenv("LOGO_PATH")
 MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_SENDER = os.getenv("MAIL_SENDER")
 MAIL_SERVER = os.getenv("MAIL_SERVER")
@@ -187,6 +185,9 @@ def main(global_config, **settings):
         settings['mail.port'] = MAIL_PORT if MAIL_PORT else os.environ.get('MAIL_PORT', '25')
         settings['mail.tls'] = MAIL_TLS if MAIL_TLS else os.environ.get('MAIL_TLS', 'false')
         settings['mail.ssl'] = MAIL_SSL if MAIL_SSL else os.environ.get('MAIL_SSL', 'false')
+        settings['site_logo'] = settings['site_logo'] if 'site_logo' in settings else os.environ.get('SITE_LOGO', 'static/alirpunkto.png')
+        settings['site_logo_small'] = settings['site_logo_small'] if 'site_logo_small' in settings else os.environ.get('SITE_LOGO_SMALL', 'static/alirpunkto-16x16.png')
+        settings['number_of_voters'] = settings['number_of_voters'] if 'number_of_voters' in settings else os.environ.get('NUMBER_OF_VOTERS', 3)
 
         # get secret key from environment variable
         config.registry.settings["mail.default_sender"] = settings['mail.default_sender'] # I didn't find a way to pass the default_sender to the views...
