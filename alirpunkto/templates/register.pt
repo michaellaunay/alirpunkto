@@ -9,7 +9,7 @@
                 tal:condition="python: (not hasattr(context,'url_obsolete') or not url_obsolete) and candidature">
                 <!-- DRAFT Status Section -->
                 <div tal:condition="python: not status or status == 'DRAFT'">
-                    <div i18n:translate="cosmopolitical_cooperative_description">The CosmoPolitical Cooperative is a pan-European cooperative for radical
+                    <div i18n:translate="cosmopolitical_cooperative_description" class="explanation">The CosmoPolitical Cooperative is a pan-European cooperative for radical
                         transformation towards social justice, sustainability and democracy. It
                         supports individuals and transforms the existing economic, social and
                         political system towards a just, sustainable, and happy society, called the
@@ -63,14 +63,19 @@
 
                 <!-- EMAIL_VALIDATION Status Section -->
                 <div tal:condition="python:status == 'EMAIL_VALIDATION'">
-                    <div i18n:translate="human_verification_description">The first step in your registration process is to validate that you are a
-                        human being, and not a robot. For this, we verify that you can receive and
-                        understand an e-mail that we will send to you: what we request from you is
-                        simple for a human being, much more complex for a robot.
+                    <div  class="explanation">
+                        <div i18n:translate="human_verification_description">The first step in your registration process is to validate that you are a
+                            human being, and not a robot. For this, we verify that you can receive and
+                            understand an e-mail that we will send to you: what we request from you is
+                            simple for a human being, much more complex for a robot.
+                        </div>
+                        <div tal:replace="structure _('human_verification_explanation')">
+                            <p>We sent you per e-mail a set of four simple arithmetic computations to perform, identified from A to D, all following the same pattern: (A FIRST NUMBER BETWEEN 1 AND 9) times (A SECOND NUMBER BETWEEN 1 AND 9), plus (A THIRD NUMBER BETWEEN 1 AND 9). In order to perform the computation, you should first multiply the FIRST NUMBER BETWEEN 1 AND 9 by the SECOND NUMBER BETWEEN 1 AND 9. Once you have the result of this multiplication, you should add to that result the THIRD NUMBER BETWEEN 1 AND 9. You should finally write down the result of this last addition in the box provided for the result of the arithmetic computation you are performing (among the four that we sent to you, identified from A to D). You should repeat the computation for all four computations sent to you by e-mail.</p> 
+                        </div>
                     </div>
                     <form method="POST">
                         <!-- Instructions -->
-                        <p i18n:translate="challenge_instruction_text">Please enter the results of
+                        <p i18n:translate="challenge_instruction_text" class="explanation">Please enter the results of
                             the challenges you received in your email to verify your address.</p>
 
                         <!-- Challenge A Field -->
@@ -126,15 +131,7 @@
 
                 <!-- CONFIRMED_HUMAN Status Section -->
                 <div tal:condition="python:status == 'CONFIRMED_HUMAN'">
-                    <div tal:replace="structure _('human_verification_explenation')">
-                        <p>We sent you per e-mail a set of four simple arithmetic computations to perform, identified from A to D, all following the same pattern: (A FIRST NUMBER BETWEEN 1 AND 9) times (A SECOND NUMBER BETWEEN 1 AND 9), plus (A THIRD NUMBER BETWEEN 1 AND 9). In order to perform the computation, you should first multiply the FIRST NUMBER BETWEEN 1 AND 9 by the SECOND NUMBER BETWEEN 1 AND 9. Once you have the result of this multiplication, you should add to that result the THIRD NUMBER BETWEEN 1 AND 9. You should finally write down the result of this last addition in the box provided for the result of the arithmetic computation you are performing (among the four that we sent to you, identified from A to D). You should repeat the computation for all four computations sent to you by e-mail.</p> 
-                    </div>
-                    <span tal:replace="structure form">Form Content</span>
-                </div>
-
-                <!-- UNIQUE_DATA Status Section -->
-                <div class="container" tal:condition="python:status == 'UNIQUE_DATA'">
-                    <div tal:replace="structure _('human_cooperator_data_explenation')">
+                    <div tal:replace="structure _('cooperator_data_explanation')" class="explanation">
                         <p>As a Cooperator, you will participate in all our decisions. These decisions are adopted along rigorous democratic procedures, and can have important consequences for the Cooperative and for the Cooperators. In addition, the Cooperative intends to represent the EU citizens, independently from their nationality - but EU citizens only. This is particularly important during public elections. We hence need to ensure three things: (1) that a given person can register no more than once, so as to ensure the democratic principle "one person = one vote"; (2) that all Cooperators are at least of legal age and (3) that only citizens of the European Union are Cooperators.</p>
                         <p>This is why we will verify from you some elements of your identity data, by comparing (1) the data that you will introduce on this form upon your registration with (2) the information present on your official identity documents. This verification will be performed by a set of ##variable = NUMBER OF VERIFIERS## randomly-selected members of the Cooperative, the Verifiers of your application, and will be based upon information regarding your official identity documents that you will transmit to them directly, by e-mail or during a videoconference, with no transit through this online platform (for the sake of security and confidentiality).</p>
                         <p>The data that we request from you and that the Verifiers will check for conformity with the data on your official identity documents is:
@@ -145,6 +142,21 @@
                         </ul></p>
                         <p>Only one person bears your name(s), your surname(s) and your date of birth: you. If you attempt to register again, you will need to provide the same data to our verification procedure, and we will reject your application, because you already are a Cooperator, and cannot have several accounts to vote more than once. We will be confident in doing so because we know that only one person has this combination of name(s), surname(s) and date of birth. Your date of birth enables us to verify that you are of legal age, and your citizenship enables us to ensure that you are indeed a citizen of the European Union.</p>
                         <p>This data will be used exclusively for us to verify your identity, your age and your citizenship, and to manage your account as a Cooperator. It will not be transmitted or sold to anyone, except to fulfill legal requirements by public authorities. The "data controller" as defined by the <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>
+                    </div>
+                    <span tal:replace="structure form">Form Content</span>
+                </div>
+
+                <!-- UNIQUE_DATA Status Section -->
+                <div class="container" tal:condition="python:status == 'UNIQUE_DATA'">
+                    <div class="explanation" tal:content="structure _('cooperator_data_choose_verification_explanation')" class="explanation">                
+                        <p>As part of the registration process as a Cooperator, it is essential for you to choose a method for verifying your identity. This is a crucial step to ensure the integrity of our Cooperative and to adhere to our democratic principles.</p>
+                        <p>You have two options for this verification process:</p>
+                        <ul>
+                            <li><strong>Send a copy of your identity documents by email:</strong> You can choose to securely send a copy of your identity documents to our verification team via email. This method ensures a quick and direct way of confirming your identity.</li>
+                            <li><strong>Arrange a video conference meeting:</strong> Alternatively, you may opt for a video conference session where you can present your identity documents live. This method provides a more personal interaction and allows for immediate clarification if needed.</li>
+                        </ul>
+                        <p>It is important to make your choice promptly to facilitate a smooth and timely registration process. Please ensure that the method you choose is the most convenient for you and aligns with your privacy preferences.</p>
+                        <p>Your cooperation in this matter is greatly appreciated and is key to maintaining the high standards of trust and security within our Cooperative. Thank you for your understanding and active participation in this crucial step.</p>
                     </div>
                     <label i18n:translate="identity_verification_label">Identity Verification</label>
                     <select id="identity_verification">

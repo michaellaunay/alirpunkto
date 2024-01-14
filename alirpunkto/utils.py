@@ -148,17 +148,22 @@ def is_valid_unique_pseudonym(pseudonym):
         None: if the email is valid and not already used
     """
     if not pseudonym_pattern.match(pseudonym):
-        return {'error': _('invalid_pseudonym')}
+        return {'error': _('invalid_pseudonym', {
+                "MIN_PSEUDONYM_LENGTH":MIN_PSEUDONYM_LENGTH,
+                "MAX_PSEUDONYM_LENGTH":MAX_PSEUDONYM_LENGTH
+            })}
 
     if len(pseudonym) < MIN_PSEUDONYM_LENGTH:
         return {
             'error': _('pseudonym_too_short'),
-            'error_details':_("pseudonym_minimum_length")
+            'error_details':_("pseudonym_minimum_length",
+                {"MIN_PSEUDONYM_LENGTH":MIN_PSEUDONYM_LENGTH})
         }
     if len(pseudonym) > MAX_PSEUDONYM_LENGTH:
         return {
             'error': _('pseudonym_too_long'),
-            'error_details':_("pseudonym_maximum_length")
+            'error_details':_("pseudonym_maximum_length",
+                {"MAX_PSEUDONYM_LENGTH":MAX_PSEUDONYM_LENGTH})
         }
     # define an unsecure LDAP server, requesting info on DSE and schema
     server = Server(LDAP_SERVER, get_info=ALL)
@@ -412,7 +417,8 @@ def get_admin_user()->  User:
 
 def random_voters(request: Request) -> List[Dict[str, str]]:
     """
-    Randomly select 3 voters to validate the candidate's personal data.
+    Randomly select the number of voters defined in settings to validate the
+    candidate's personal data.
     
     Args:
         request (pyramid.request.Request): The request.
@@ -425,10 +431,12 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
     ldap_login = f"{LDAP_LOGIN},{LDAP_OU if LDAP_OU else ''},{LDAP_BASE_DN}"
     while ',,' in ldap_login:
         ldap_login = ldap_login.replace(',,', ',')
+    # Get the number of voters from the settings
+    number_of_voters = request.registry.settings['number_of_voters']
     with Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) as conn:
         potential_voters = get_potential_voters(conn)
         random.shuffle(potential_voters)
-        selected_voters = potential_voters[:3]
+        selected_voters = potential_voters[:number_of_voters]
 
         voters = [
             {
@@ -440,8 +448,8 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
             for voter in selected_voters
         ]
 
-        # If there are fewer than 3 voters, add the admin
-        if len(voters) < 3:
+        # If there are fewer than number_of_voters voters, add the admin
+        if len(voters) < number_of_voters:
             voters.append(
                 {
                     'uid': LDAP_ADMIN_OID,
@@ -451,7 +459,7 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
                 }
             )
 
-        return voters[:3]  # Ensure only top 3 are returned
+        return voters[:number_of_voters]  # Ensure only top number_of_voters are returned
 
 def get_oid_from_pseudonym(
     pseudonym: str,

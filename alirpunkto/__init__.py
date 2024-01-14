@@ -51,6 +51,8 @@ MAIL_TLS = os.getenv("MAIL_TLS")
 MAIL_SSL = os.getenv("MAIL_SSL")
 MAIL_SIGNATURE = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name}")
 
+DEFAULT_NUMBER_OF_VOTERS = 3
+
 # logging configuration
 log = logging.getLogger('alirpunkto')
 
@@ -187,7 +189,7 @@ def main(global_config, **settings):
         settings['mail.ssl'] = MAIL_SSL if MAIL_SSL else os.environ.get('MAIL_SSL', 'false')
         settings['site_logo'] = settings['site_logo'] if 'site_logo' in settings else os.environ.get('SITE_LOGO', 'static/alirpunkto.png')
         settings['site_logo_small'] = settings['site_logo_small'] if 'site_logo_small' in settings else os.environ.get('SITE_LOGO_SMALL', 'static/alirpunkto-16x16.png')
-        settings['number_of_voters'] = settings['number_of_voters'] if 'number_of_voters' in settings else os.environ.get('NUMBER_OF_VOTERS', 3)
+        settings['number_of_voters'] = settings['number_of_voters'] if 'number_of_voters' in settings else os.environ.get('NUMBER_OF_VOTERS', DEFAULT_NUMBER_OF_VOTERS)
 
         # get secret key from environment variable
         config.registry.settings["mail.default_sender"] = settings['mail.default_sender'] # I didn't find a way to pass the default_sender to the views...
