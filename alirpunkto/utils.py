@@ -29,7 +29,7 @@ from . import (
     EUROPEAN_LOCALES,
 )
 from pyramid.i18n import get_localizer
-from ldap3 import Server, Connection, ALL
+from ldap3 import Server, Connection, ALL, MODIFY_ADD
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
 import random
@@ -567,17 +567,17 @@ def register_user_to_ldap(request, candidature, password):
         if success:
             match candidature.type:
                 case CandidatureTypes.COOPERATOR:
-                    group_dn = ("cn=CooperatorsGroup,"
-                                "ou=groups,"
-                                "{LDAP_BASE_DN}"
+                    group_dn = ("cn=cooperatorsGroup,"
+                                f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
+                                f"{LDAP_BASE_DN}"
                     )
-                    conn.modify(group_dn, {'member': [(MODIFY_ADD, [dn])]})
+                    conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
                 case CandidatureTypes.ORDINARY:
-                    group_dn = ("cn=OrdinaryMembersGroup,"
-                                "ou=groups,"
-                                "{LDAP_BASE_DN}"
+                    group_dn = ("cn=ordinaryMembersGroup,"
+                                f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
+                                f"{LDAP_BASE_DN}"
                     )
-                    conn.modify(group_dn, {'member': [(MODIFY_ADD, [dn])]})
+                    conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
                 case _:
                      log.error(f"Error while adding user {pseudonym} "
                                f"to a LDAP group : group for {candidature.type} is not coded")

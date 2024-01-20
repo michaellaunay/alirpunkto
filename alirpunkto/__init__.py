@@ -195,16 +195,15 @@ def create_ldap_groups_if_not_exists():
 
     # Checking for existence and creating groups
     for group in groups:
-        dn = f"cn={group['name']},{LDAP_OU},{LDAP_BASE_DN}"
+        dn = f"cn={group['name']},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"cn={group['name']},{LDAP_BASE_DN}"
         # Check if the group already exists
-        if conn.search(dn, '(objectClass=posixGroup)', search_scope='BASE'):
+        if conn.search(dn, '(objectClass=*)', search_scope='BASE'):
             logging.warning(f"Group {group['name']} already exists.")
             continue  # Skip to the next group if it already exists
 
         # Creating the group
         attributes = {
             'objectClass': ["top", "groupOfUniqueNames"],
-            'cn': group['name'],
             'description': group['description'],
             'uniqueMember': admin_dn
         }
