@@ -20,6 +20,7 @@ from pyramid.session import SignedCookieSessionFactory
 import deform
 from pkg_resources import resource_filename
 from pyramid.threadlocal import get_current_request
+from ldap3 import Server, Connection, ALL, MODIFY_ADD
 
 load_dotenv() # take environment variables from .env.
 # SECRET_KEY is used for cookie signing
@@ -52,6 +53,8 @@ MAIL_SSL = os.getenv("MAIL_SSL")
 MAIL_SIGNATURE = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name}")
 
 DEFAULT_NUMBER_OF_VOTERS = 3
+
+LDAP_ADMIN_OID = "00000000-0000-0000-0000-000000000000"
 
 # logging configuration
 log = logging.getLogger('alirpunkto')
@@ -158,6 +161,58 @@ def root_factory(request):
     Candidatures.get_instance(connection=conn)
     return root
 
+def create_ldap_groups_if_not_exists():
+    """
+    Connects to an LDAP server and creates specified groups if they do not
+    already exist.
+
+    This function establishes a connection to an LDAP server using predefined
+    LDAP settings. 
+    It then iteratively checks for the existence of a set of predefined groups. 
+    If a group does not exist, it creates the group with its specific
+    attributes in the LDAP directory.
+
+    Predefined groups include OrdinaryMembersGroup, CooperatorsGroup,
+    BoardMembersGroup, and MediationArbitrationCouncilGroup. Each group is
+    defined with a common name (cn) and a description. Initially, these groups
+    have no members.
+
+    Note: The function assumes that the specified LDAP_OU already exists in the LDAP directory.
+    """
+
+    # Connecting to the LDAP Server
+    server = Server(LDAP_SERVER, get_info=ALL)
+    conn = Connection(server, f"{LDAP_LOGIN},{LDAP_BASE_DN}", LDAP_PASSWORD, auto_bind=True)
+
+    admin_dn = f"uid={LDAP_ADMIN_OID},cn={ADMIN_LOGIN},{LDAP_BASE_DN}"
+    # Defining the groups to be created
+    groups = [
+        {"name": "ordinaryMembersGroup", "description": "Group for ordinary members of the cooperative"},
+        {"name": "cooperatorsGroup", "description": "Group for active cooperators of the cooperative"},
+        {"name": "boardMembersGroup", "description": "Group for board members of the cooperative"},
+        {"name": "mediationArbitrationCouncilGroup", "description": "Group for members of the Mediation Arbitration Council"},
+    ]
+
+    # Checking for existence and creating groups
+    for group in groups:
+        dn = f"cn={group['name']},{LDAP_OU},{LDAP_BASE_DN}"
+        # Check if the group already exists
+        if conn.search(dn, '(objectClass=posixGroup)', search_scope='BASE'):
+            logging.warning(f"Group {group['name']} already exists.")
+            continue  # Skip to the next group if it already exists
+
+        # Creating the group
+        attributes = {
+            'objectClass': ["top", "groupOfUniqueNames"],
+            'cn': group['name'],
+            'description': group['description'],
+            'uniqueMember': admin_dn
+        }
+        if not conn.add(dn, attributes=attributes):
+            logging.error(f"Error adding group {group['name']}: {conn.result}")
+    # Closing the connection
+    conn.unbind()
+
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -252,6 +307,7 @@ def main(global_config, **settings):
             translator=translator,
         )
 
+    create_ldap_groups_if_not_exists()
     deform.Form.set_default_renderer(zpt_renderer)
 
     return config.make_wsgi_app()
