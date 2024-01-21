@@ -241,7 +241,7 @@ msgid "times"
 msgstr "moltiplicato per"
 
 msgid "plus"
-msgstr "più"
+msgstr ", più"
 
 msgid "email_validation_subject"
 msgstr ""
