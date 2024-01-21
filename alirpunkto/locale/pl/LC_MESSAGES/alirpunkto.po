@@ -258,7 +258,7 @@ msgstr "pomnożone przez "
 
 #, fuzzy
 msgid "plus"
-msgstr "plus"
+msgstr ", plus"
 
 #, fuzzy
 msgid "email_validation_subject"
