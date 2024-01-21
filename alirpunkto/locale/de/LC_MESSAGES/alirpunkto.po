@@ -242,7 +242,7 @@ msgid "times"
 msgstr "mal"
 
 msgid "plus"
-msgstr "plus"
+msgstr ", plus"
 
 msgid "email_validation_subject"
 msgstr ""
