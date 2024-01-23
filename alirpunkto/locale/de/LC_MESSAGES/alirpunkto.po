@@ -32,7 +32,7 @@ msgstr ""
 
 msgid "all_applications_msg"
 msgstr ""
-"Alle Anwendungen, die Sie zur Teilnahme an den Aktivitäten von {site_name} "
+"Alle Anwendungen, die Sie zur Teilnahme an den Aktivitäten von ${site_name} "
 "benötigen, an einem Ort."
 
 msgid "register_or_login_msg"
@@ -41,10 +41,10 @@ msgstr "Registrieren Sie sich oder melden Sie sich jetzt an, um loszulegen."
 msgid "logged_in_msg_title"
 msgstr ""
 "Alirpunkto, der zentrale Dienst für die Anwendungen, die in der IT-"
-"Infrastruktur von {site_name} benutzt werden"
+"Infrastruktur von ${site_name} benutzt werden"
 
 msgid "logged_in_msg"
-msgstr "Sie sind als {user} eingeloggt."
+msgstr "Sie sind als ${user} eingeloggt."
 
 msgid "log_out_invitation_msg"
 msgstr "Sie können sich abmelden, indem Sie hier klicken"
