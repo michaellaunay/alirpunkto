@@ -140,7 +140,3 @@ If you encounter any issues while adding the schema, check the OpenLDAP logs for
 - Ensure you have a backup of the existing LDAP configuration before making changes.
 - Any modifications to the LDAP configuration should be carried out with caution, as errors can affect the stability and security of the service.
 - Test changes in a development environment before applying them on a production server.
-
-# 2024-01-08
-
-La façon dont est gérée l'admin d'openldap ne permet pas de gérer correctement l'administration d'Alirpunkto, car il n'a pas forcément d'entrée dans ldap. En conséquence, j'ai ajouté le compte ADMIN d'arlipunkto dont le login, le mail et le mot de passe sont définis dans le .env.
