@@ -27,6 +27,7 @@ from . import (
     LDAP_PASSWORD,
     MAIL_SENDER,
     EUROPEAN_LOCALES,
+    DEFAULT_NUMBER_OF_VOTERS
 )
 from pyramid.i18n import get_localizer
 from ldap3 import Server, Connection, ALL, MODIFY_ADD
@@ -428,11 +429,17 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
             [{'cn': 'name', 'sn': 'surname', 'mail': 'email'}, ...]
     """
     server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login = f"{LDAP_LOGIN},{LDAP_OU if LDAP_OU else ''},{LDAP_BASE_DN}"
-    while ',,' in ldap_login:
-        ldap_login = ldap_login.replace(',,', ',')
+    ldap_login = (f"{LDAP_LOGIN},"
+                  f"{(LDAP_OU + ',') if LDAP_OU else ''}"
+                  f"{LDAP_BASE_DN}"
+    )
     # Get the number of voters from the settings
-    number_of_voters = request.registry.settings['number_of_voters']
+    try:
+        number_of_voters = int(request.registry.settings['number_of_voters'])
+    except:
+        number_of_voters = DEFAULT_NUMBER_OF_VOTERS
+        log.warning(f"Use {DEFAULT_NUMBER_OF_VOTERS=} "
+            "as number of voters due to exception.")
     with Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) as conn:
         potential_voters = get_potential_voters(conn)
         random.shuffle(potential_voters)
