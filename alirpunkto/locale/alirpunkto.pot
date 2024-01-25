@@ -545,3 +545,5 @@ msgstr ""
 " <p>Your cooperation in this matter is greatly appreciated and is key to maintaining the high standards of trust and pan-European democracy within our Cooperative. Thank you for your understanding and active participation in this crucial step.</p>\n"
 "</div>"
 
+msgid "voters_not_selected"
+msgstr "The number of existing Cooperators is too low to select the adequate number of Verifiers of your identity. Please contact the system administrator to solve the issue."
