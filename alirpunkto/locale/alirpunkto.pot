@@ -546,4 +546,4 @@ msgstr ""
 "</div>"
 
 msgid "voters_not_selected"
-msgstr "The number of existing Cooperators is too low to select the adequate number of Verifiers of your identity. Please contact the system administrator to solve the issue."
+msgstr "The number of existing Cooperators is too low to select the adequate number of Verifiers of your identity. Please contact the system administrator, at the following address ${administrator}, to solve the issue."
