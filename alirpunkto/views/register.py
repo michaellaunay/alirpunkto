@@ -582,20 +582,33 @@ def get_template_parameters_for_cooperator(
     Returns:
         dict: the template parameters
     """
+    voting_url = request.route_url('vote', _query={'oid': candidature.oid}),
+    signature = MAIL_SIGNATURE.format(
+        site_name=request.registry.settings.get('site_name'),
+        fullname = candidature.data.fullname,
+        fullsurname = candidature.data.fullsurname if getattr(
+            candidature.data,
+            'fullsurname',
+            "Alirpunkto team"
+        ) else "",
+    )
+    email_copy_id_verification_body = _(
+        "email_copy_id_verification_body",
+        {"voting_url":voting_url, "signature":signature}
+    )
+    email_video_id_verification_body = _(
+        "email_video_id_verification_body",
+        {"voting_url":voting_url, "signature":signature}
+    )
+
     return {
         'candidature': candidature,
         'CandidatureTypes': CandidatureTypes,
         'voters': candidature.voters,
-        'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
-        'signature': MAIL_SIGNATURE.format(
-            site_name=request.registry.settings.get('site_name'),
-            fullname = candidature.data.fullname,
-            fullsurname = candidature.data.fullsurname if getattr(
-                candidature.data,
-                'fullsurname',
-                "Alirpunkto team"
-            ) else "",
-        )
+        'data_email_video_id_verification_subject':_("email_video_id_verification_subject"),
+        'data_email_video_id_verification_body': email_video_id_verification_body,
+        'data_email_copy_id_verification_subject':_("email_copy_id_verification_subject"),
+        'data_email_copy_id_verification_body':email_copy_id_verification_body,
     }
 
 

@@ -901,3 +901,11 @@ Paradoxalement la premier appel ldap-schema-manager -i ne signale pas les erreur
 # 2024-01-08
 
 La façon dont est gérée l'admin d'openldap ne permet pas de gérer correctement l'administration d'Alirpunkto, car il n'a pas forcément d'entrée dans ldap. En conséquence, j'ai ajouté le compte ADMIN d'arlipunkto dont le login, le mail et le mot de passe sont définis dans le .env.
+
+# 2024-01-27
+
+Ajout d'une vue permettant de rendre une zpt et de la traduire selon la locale de l'utilisateur, puis de la retourner sous forme de texte.
+
+# 2024-01-28
+
+Remplacement de la vue get_email par un passage de variable, attention nous sommes limité à la taille limite d'une url soit 4096 octets (2096 pour les vielles version de IE)

@@ -169,10 +169,12 @@
                     <button onclick="sendEmail()"
                         data-emails="${','.join([voter.email for voter in candidature.voters])}"
                         data-user-email="${candidature.email}"
-                        data-voting-url="${voting_url}"
-                        data-signature="${signature}"
-                    >
-                        ${_("Proceed")}</button>
+                        tal:attributes="email_video_id_verification_body data_email_video_id_verification_body;
+                            email_video_id_verification_subject data_email_video_id_verification_subject;
+                            email_copy_id_verification_body data_email_copy_id_verification_body;
+                            email_copy_id_verification_subject data_email_copy_id_verification_subject"
+                        i18n:translate=""
+                    >${_("Proceed")}</button>
                     <form method="POST">
                         <div i18n:translate="confirm_sent_emails_to_validators">Please confirm you
                             have sent the emails to the validators.</div>
