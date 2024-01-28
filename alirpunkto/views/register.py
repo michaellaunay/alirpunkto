@@ -7,14 +7,12 @@
 # author: Michaël Launay
 # date: 2023-06-15
 
-from dataclasses import dataclass
 import datetime
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional
 import deform
 from deform import ValidationFailure
 from pyramid.view import view_config
 from pyramid.request import Request
-from pyramid.httpexceptions import HTTPFound
 from ..schemas.register_form import RegisterForm
 from ..models.candidature import (
     Candidature, CandidatureStates, 
@@ -25,7 +23,7 @@ from ..models.candidature import (
     SEED_LENGTH
 )
 from .. import _, MAIL_SIGNATURE
-from pyramid.i18n import Translator, get_localizer
+from pyramid.i18n import Translator
 import logging
 log = logging.getLogger("alirpunkto")
 from ..utils import (

@@ -293,6 +293,7 @@ def main(global_config, **settings):
         config.add_route('elections', '/elections')
         config.add_route('vote', '/vote')
         config.add_route('forgot_password', '/forgot_password')
+        config.add_route('get_email', '/get_email')
         config.scan()
         config.add_translation_dirs('alirpunkto:locale/', 'colander:locale/', 'deform:locale/')
         config.set_locale_negotiator(locale_negotiator)       
