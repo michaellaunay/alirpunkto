@@ -909,3 +909,34 @@ Ajout d'une vue permettant de rendre une zpt et de la traduire selon la locale d
 # 2024-01-28
 
 Remplacement de la vue get_email par un passage de variable, attention nous sommes limité à la taille limite d'une url soit 4096 octets (2096 pour les vielles version de IE)
+
+# 2024-01-31
+
+Voici le scénario de réinitialisation du mot de passe :
+
+    - 1) AlirPunkto affiche la zpt forgot_password.pt de saisie du mail
+    - 2) L'utilisateur saisit son mail et valide
+    - 3) AlirPunkto vérifie que le mail existe dans ldap
+    - 3.1) Si le mail n'existe pas, AlirPunkto affiche un message indiquant que si l'utilisateur existe, il recevra un mail 
+    - 3.2) Fin de la procédure
+    - 4) AlirPunkto récupère les informations concernant l'utilisateur depuis le ldap
+    - 5) AlirPunkto regarde s'il existe une candidature pour l'utilisateur
+    - 5.1) Si non, AlirPunkto crée une candidature à partir des informations du ldap
+    - 5.2) Si oui, AlirPunkto récupère la candidature et la met à jour avec les informations du ldap (priorité au ldap)
+    - 6) AlirPunkto génère un token hashé de réinitialisation du mot de passe
+    - 7) AlirPunkto crée un événement de réinitialisation du mot de passe et lui ajoute le token
+    - 8) AlirPunkto crée un lien vers la candidature avec le token
+    - 9) AlirPunkto envoie un mail à l'utilisateur avec le lien
+    - 10) AlirPunkto affiche un message indiquant que le mail a été envoyé (même message que 3.1)
+    - 11) L'utilisateur reçoit le mail et clique sur le lien
+    - 11.1) Si le lien est invalide ou expiré, AlirPunkto affiche un message d'erreur
+    - 11.2) Retour en 1
+    - 12) AlirPunkto affiche la zpt forgot_password.pt de saisie du nouveau mot de passe
+    - 13) L'utilisateur saisit son nouveau mot de passe et valide
+    - 14) AlirPunkto vérifie que le mot de passe est valide et respecte les contraintes de sécurité
+    - 14.1) Si le mot de passe n'est pas valide, AlirPunkto affiche un message d'erreur
+    - 14.2) Retour en 12
+    - 15) AlirPunkto met à jour le mot de passe dans le ldap
+    - 16) AlirPunkto met à jour les événements de la candidature
+    - 17) AlirPunkto affiche la zpt forgot_password.pt de confirmation de changement de mot de passe
+    - 18) AlirPunkto envoie un mail à l'utilisateur pour le prévenir du changement de mot de passe
