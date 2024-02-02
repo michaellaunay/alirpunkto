@@ -560,7 +560,7 @@ msgid "voters_not_selected"
 msgstr "The number of existing Cooperators is too low to select the adequate number of Verifiers of your identity. Please contact the system administrator, at the following address ${administrator}, to solve the issue."
 
 msgid "email_copy_id_verification_subject"
-msgstr "en - Please verify my identity for me to become a Cooperator of ${site_name}"
+msgstr "en - ${site_name} - Please verify my identity as a new potential Cooperator"
 
 msgid "email_copy_id_verification_body"
 msgstr ""
@@ -586,7 +586,7 @@ msgstr ""
       " <p><small>This email has been generated with the assistance of ${site_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${site_name} administrator.</small></p>"
 
 msgid "email_video_id_verification_subject"
-msgstr "en - Please verify my identity for me to become a Cooperator of ${site_name}"
+msgstr "en - ${site_name} - Please verify my identity as a new potential Cooperator"
 
 msgid "email_video_id_verification_body"
 msgstr ""
