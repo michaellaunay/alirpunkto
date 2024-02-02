@@ -3,14 +3,19 @@
 # date: 2023-06-15
 
 from pyramid.view import view_config
-
+from pyramid_zodbconn import get_connection
 from alirpunkto.utils import (
     is_not_a_valid_email_address,
     get_member_by_mail,
 )
 
+from alirpunkto.models.users import (
+    User
+)
+
 from alirpunkto.constants_and_globals import (
     _,
+    LDAP_ADMIN_OID,
     log
 )
 
@@ -47,7 +52,20 @@ def forgot_password(request):
         member = members[0]
         pseudo = member['cn']
         uid = member['uid']
+        if uid == LDAP_ADMIN_OID:
+            log.warning('forgot_password: Admin user cannot reset password: {}'.format(mail[:512]))
+            request.session.flash(_('forget_admin_user'), 'error')
+            return {"error":_('forget_admin_user')}
         # 5) AlirPunkto checks if there is an application for the user
+        user = User.create_user(pseudo, mail, uid)
+        # get the ZODB connection
+        connection = get_connection(request)
+        root = connection.root()        
+        if 'users' not in root:
+            connection.root()['users'] = BTrees.OOBTree.BTree()
+            transaction.commit()
+        Candidatures._instance = connection.root()['candidatures']
+        return root['candidatures']
 
         # 5.1) If not, AlirPunkto creates an application from the ldap information
         # 5.2) If yes, AlirPunkto retrieves the application and updates it with the ldap information (ldap priority)

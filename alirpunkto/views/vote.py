@@ -4,7 +4,6 @@
 
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
-from constants_and_globals import _
 from alirpunkto.models.users import User
 from alirpunkto.models.candidature import (
     VotingChoice,
@@ -17,9 +16,11 @@ from alirpunkto.utils import (
     send_candidature_state_change_email,
     register_user_to_ldap
 )
-from logging import getLogger
 
-log = getLogger('alirpunkto')
+from alirpunkto.constants_and_globals import (
+    _,
+    log
+)
 
 @view_config(route_name='vote', renderer='alirpunkto:templates/vote.pt')
 def login_view(request):

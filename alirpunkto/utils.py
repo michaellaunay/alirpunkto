@@ -85,7 +85,7 @@ def get_unsecure_ldap_connection() -> Connection:
     )
     return conn
 
-def get_member_by_mail(email: str) -> Union[Dict[str, str, str, str], None]:
+def get_member_by_mail(email: str) -> Union[Dict[str, str], None]:
     """Get the member from LDAP by its mail.
     Args:
         email (str): the mail of the member
@@ -94,10 +94,12 @@ def get_member_by_mail(email: str) -> Union[Dict[str, str, str, str], None]:
         None: if the member is not found
     """
     conn = get_unsecure_ldap_connection()
+    # search for the user in the LDAP directory
     conn.search(
         LDAP_BASE_DN,
         f'(mail={email.strip()})',
-        attributes=['cn','uid', 'isActive', 'employeeType']) # search for the user in the LDAP directory
+        attributes=['cn', 'uid', 'isActive', 'employeeType']
+    )
     return conn.entries
 
 def is_not_a_valid_email_address(email:str, check_mx:bool=True)->Union[Dict[str, str], None]:
@@ -189,7 +191,8 @@ def is_valid_unique_pseudonym(pseudonym):
     # Verify that the pseudonym is not already registered
     conn.search(
         LDAP_BASE_DN,
-        '(cn={})'.format(pseudonym, attributes=['cn'])
+        f"(cn={pseudonym})",
+        attributes=['cn']
     ) # search for the user in the LDAP directory
     # Verify that the candidate is not already registered
     if len(conn.entries) != 0:

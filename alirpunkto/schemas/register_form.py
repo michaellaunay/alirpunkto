@@ -7,8 +7,11 @@ from pyramid.i18n import TranslationStringFactory
 from deform import ValidationFailure
 from deform import schema
 from deform.widget import SelectWidget, TextInputWidget, DateInputWidget
-from .. import _, EUROPEAN_LOCALES
-from ..utils import is_valid_password, is_valid_unique_pseudonym
+from alirpunkto.constants_and_globals import (
+    _,
+    EUROPEAN_LOCALES
+)
+from alirpunkto.utils import is_valid_password, is_valid_unique_pseudonym
 
 locales_as_choices = [(key, value) for key, value in EUROPEAN_LOCALES.items()]
 
