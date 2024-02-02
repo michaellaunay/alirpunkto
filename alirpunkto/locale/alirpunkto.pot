@@ -586,7 +586,7 @@ msgstr ""
       " <p><small>This email has been generated with the assistance of ${site_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${site_name} administrator.</small></p>"
 
 msgid "email_video_id_verification_subject"
-msgstr "en - ${site_name} - Please verify my identity as a new potential Cooperator"
+msgstr "en - ${site_name} - Please verify my identity per video conference as a new potential Cooperator"
 
 msgid "email_video_id_verification_body"
 msgstr ""
