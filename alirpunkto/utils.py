@@ -10,12 +10,11 @@ from .models.candidature import (
     Candidatures,
     CandidatureEmailSendStatus,
     CandidatureStates,
-    LDAP_ADMIN_OID
 )
 from pyramid_mailer.message import Message, Attachment
 from pyramid_zodbconn import get_connection
 from pyramid.path import AssetResolver
-from . import (
+from .constants_and_globals import (
     _,
     ADMIN_LOGIN,
     ADMIN_PASSWORD,
@@ -25,9 +24,14 @@ from . import (
     LDAP_BASE_DN,
     LDAP_LOGIN,
     LDAP_PASSWORD,
-    MAIL_SENDER,
+    LDAP_ADMIN_OID,
     EUROPEAN_LOCALES,
-    DEFAULT_NUMBER_OF_VOTERS
+    DEFAULT_NUMBER_OF_VOTERS,
+    MIN_PSEUDONYM_LENGTH,
+    MAX_PSEUDONYM_LENGTH,
+    MIN_PASSWORD_LENGTH,
+    MAX_PASSWORD_LENGTH,
+    log,
 )
 from pyramid.i18n import get_localizer
 from ldap3 import Server, Connection, ALL, MODIFY_ADD
@@ -36,34 +40,8 @@ from pyramid.renderers import render_to_response
 import random
 import hashlib
 from cryptography.fernet import Fernet
-import logging
-log = logging.getLogger("alirpunkto")
 import base64
-import re
 from .models.users import User
-
-MIN_PSEUDONYM_LENGTH = 5 # Minimum pseudonym length
-MAX_PSEUDONYM_LENGTH = 20 # Maximum pseudonym length
-
-# Constructing the regular expression using f-strings
-pseudonym_pattern = re.compile(
-# To remove accent use:
-    f'^[a-zA-Z0-9_.-]{{1}}(?:[a-zA-Z0-9_.-]| (?=[a-zA-Z0-9_.-])){{0,{MAX_PSEUDONYM_LENGTH - 2}}}[a-zA-Z0-9_.-]{{1}}$'
-# To remove space use:
-#     f'^[a-zA-Z0-9_.-]{{{MIN_PSEUDONYM_LENGTH},{MAX_PSEUDONYM_LENGTH}}}$'
-# To allow accent use:
-#     # Starting characters (letters, numbers, dashes, dots, underscores,
-#     # accented letters)
-#     fr'^[\u00C0-\u017F\w.-]' +
-#     # Middle characters (including conditional space)
-#     fr'(?:[\u00C0-\u017F\w.-]| (?=[\u00C0-\u017F\w.-]))' +
-#     # Repetition with adjusted maximum length
-#     fr'{{0,{MAX_PSEUDONYM_LENGTH - 2}}}' +
-#     fr'[\u00C0-\u017F\w.-]$'  # Ending character
-)
-
-MIN_PASSWORD_LENGTH = 12 # Minimum password length
-MAX_PASSWORD_LENGTH = 92 # Maximum password length
 
 def get_preferred_language(request: Request)->str:
     """Get the preferred language from the request.
@@ -88,6 +66,57 @@ def get_candidatures(request)->Candidatures:
     conn = get_connection(request)
     return Candidatures.get_instance(connection=conn)
 
+def get_unsecure_ldap_connection() -> Connection:
+    """Get an unsecure LDAP connection.
+    Returns:
+        Connection: the unsecure LDAP connexion
+    """
+    # define an unsecure LDAP server, requesting info on DSE and schema
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    )# define the user to authenticate
+    # define an unsecure LDAP connection, using the credentials above
+    conn = Connection(
+        server,
+        ldap_login,
+        LDAP_PASSWORD,
+        auto_bind=True
+    )
+    return conn
+
+def get_member_by_mail(email: str) -> Union[Dict[str, str, str, str], None]:
+    """Get the member from LDAP by its mail.
+    Args:
+        email (str): the mail of the member
+    Returns:    
+        dict: the member
+        None: if the member is not found
+    """
+    conn = get_unsecure_ldap_connection()
+    conn.search(
+        LDAP_BASE_DN,
+        f'(mail={email.strip()})',
+        attributes=['cn','uid', 'isActive', 'employeeType']) # search for the user in the LDAP directory
+    return conn.entries
+
+def is_not_a_valid_email_address(email:str, check_mx:bool=True)->Union[Dict[str, str], None]:
+    """Check if the email is not a valid email address.
+    Args:
+        email (str): the email to check
+        check_mx (bool): check the mx record
+    Returns:
+        error: the error if the email is not valid
+        None: if the email is valid
+    """
+    try:
+        if not validate_email(email, check_mx=check_mx):
+            return {'error': _('invalid_email')}
+    except Exception as e:
+        log.error(f"Error while validating email {email}: {e}")
+        return {'error': _('connection_error')}
+    return None
+
 def is_valid_email(email, request):
     """Check if the email is valid and not used in LDAP.
 
@@ -99,37 +128,17 @@ def is_valid_email(email, request):
         error: the error if the email is not valid
         None: if the email is valid
     """
+    if err := is_not_a_valid_email_address(email):
+        return err
     try:
-        if not validate_email(email, check_mx=True):
-            return {'error': _('invalid_email')}
-    except Exception as e:
-        log.error(f"Error while validating email {email}: {e}")
-        return {'error': _('connection_error')}
-    try:
-         # define an unsecure LDAP server, requesting info on DSE and schema
-        server = Server(LDAP_SERVER, get_info=ALL)
-        ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
-            if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-        )# define the user to authenticate
-         # define an unsecure LDAP connection, using the credentials above
-        conn = Connection(
-            server,
-            ldap_login,
-            LDAP_PASSWORD,
-            auto_bind=True
-        )
         # Verify that the email is not already registered in candidatures
         candidatures = get_candidatures(request)
         for candidature in candidatures.values():
             if candidature.email == email and candidature.state != CandidatureStates.REFUSED:
                 return {'error': _('email_allready_exist')}
         # Verify that the email is not already registered in LDAP
-        conn.search(
-            LDAP_BASE_DN,
-            '(cn={})'.format(email),
-            attributes=['cn']) # search for the user in the LDAP directory
-        # Verify that the email is not already registered
-        if len(conn.entries) != 0:
+        entries = get_member_by_mail(email)
+        if len(entries) != 0:
             # If already registered, display an error message
             return {'error': _('email_allready_exist')}
     # The email is valid and not already used
@@ -218,7 +227,7 @@ def is_valid_password(password):
     if not any(char.islower() for char in password):
         return {'error': _('password_must_contain_lowercase')}
     if not any(
-        char in ['$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '=']
+        char in SPECIAL_CHARACTERS
         for char in password
     ):
         return {'error': _('password_must_contain_special_char')}

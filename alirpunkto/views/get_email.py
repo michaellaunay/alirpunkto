@@ -4,21 +4,20 @@
 # date: 2024-01-26
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound, HTTPBadRequest
-from .. import _
-from ..models.users import User
-from ..utils import (
+from alirpunkto.constants_and_globals import (
+    _,
+    log
+)
+from alirpunkto.models.users import User
+from alirpunkto.utils import (
     get_local_template,
     render_to_response
 )
-from pyramid.i18n import get_localizer
-from logging import getLogger
 from functools import lru_cache
 from typing import Set
 import re
 # Compile the regular expression for reuse
 injection_pattern = re.compile(r'eval\(|exec\(|__import__')
-
-log = getLogger('alirpunkto')
 
 @lru_cache(maxsize=128)
 def extract_zpt_variables(file_path: str) -> Set[str]:

@@ -6,7 +6,7 @@ import logging
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import forget
-from alirpunkto.models.candidature import CANDIDATURE_OID
+from alirpunkto.constants_and_globals import CANDIDATURE_OID
 
 @view_config(route_name='logout')
 def logout_view(request):

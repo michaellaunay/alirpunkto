@@ -3,11 +3,7 @@
 # date: 2023-07-07
 
 from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPFound
-from pyramid.security import remember
-from ldap3 import Server, Connection, ALL, NTLM
-from .. import _
-from pyramid.settings import aslist
+from alirpunkto.constants_and_globals import _
 from json import loads
 
 def is_authenticated(request):

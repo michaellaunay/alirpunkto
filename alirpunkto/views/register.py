@@ -13,19 +13,21 @@ import deform
 from deform import ValidationFailure
 from pyramid.view import view_config
 from pyramid.request import Request
-from ..schemas.register_form import RegisterForm
-from ..models.candidature import (
+from alirpunkto.schemas.register_form import RegisterForm
+from alirpunkto.models.candidature import (
     Candidature, CandidatureStates, 
     CandidatureTypes,
     CandidatureEmailSendStatus, CandidatureData,
     Voter,
-    CANDIDATURE_OID,
-    SEED_LENGTH
 )
-from .. import _, MAIL_SIGNATURE
+from alirpunkto.constants_and_globals import (
+    _,
+    MAIL_SIGNATURE,
+    CANDIDATURE_OID,
+    SEED_LENGTH,
+    log,
+)
 from pyramid.i18n import Translator
-import logging
-log = logging.getLogger("alirpunkto")
 from ..utils import (
     get_candidatures, decrypt_oid,
     generate_math_challenges, is_valid_email, get_candidature_by_oid,

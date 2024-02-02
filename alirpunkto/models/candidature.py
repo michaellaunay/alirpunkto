@@ -19,11 +19,11 @@ import random
 import string
 
 # Constants
-CANDIDATURE_OID = 'candidature_oid'
-SEED_LENGTH = 10
-LDAP_ADMIN_OID = "00000000-0000-0000-0000-000000000000"
-
-log = getLogger('alirpunkto')
+from alirpunkto.constants_and_globals import (
+    _,
+    log,
+    SEED_LENGTH,
+)
 
 @unique
 class CandidatureStates(Enum) :

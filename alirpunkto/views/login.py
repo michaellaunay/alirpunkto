@@ -3,20 +3,21 @@
 # date: 2023-06-15
 
 import datetime
-import logging
 from typing import Union
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
 from ldap3 import Server, Connection, ALL
 from ldap3.core.exceptions import LDAPBindError
-from .. import _
-from .. import LDAP_SERVER, LDAP_OU, LDAP_BASE_DN
+from alirpunkto.constants_and_globals import (
+    _,
+    LDAP_SERVER,
+    LDAP_OU,
+    LDAP_BASE_DN,
+    log
+)
 from ..models.users import User
-from logging import getLogger
 from ..utils import is_admin, get_admin_user, get_oid_from_pseudonym
-
-log = getLogger('alirpunkto')
 
 @view_config(route_name='login', renderer='alirpunkto:templates/login.pt')
 def login_view(request):

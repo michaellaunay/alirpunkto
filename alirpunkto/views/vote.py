@@ -2,21 +2,16 @@
 # author: Michaël Launay
 # date: 2023-10-27
 
-import datetime
-import logging
-from typing import Union
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
-from pyramid.security import remember
-from .. import _
-from ..models.users import User
-from ..models.candidature import (
-    Candidature,
+from constants_and_globals import _
+from alirpunkto.models.users import User
+from alirpunkto.models.candidature import (
     VotingChoice,
     CandidatureEmailSendStatus,
     CandidatureStates
 )
-from ..utils import (
+from alirpunkto.utils import (
     get_candidatures,
     send_confirm_validation_email,
     send_candidature_state_change_email,

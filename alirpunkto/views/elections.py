@@ -8,9 +8,8 @@ and possibly managing user interactions related to these elections.
 """
 
 from pyramid.view import view_config
-from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
-from ..utils import get_candidatures
+from alirpunkto.utils import get_candidatures
 # Import any other necessary modules or packages
 
 @view_config(route_name='elections', renderer='alirpunkto:templates/elections.pt')

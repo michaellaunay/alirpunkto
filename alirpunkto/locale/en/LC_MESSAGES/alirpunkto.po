@@ -581,3 +581,6 @@ msgstr ""
 "\n"        
 "Best wishes,\n"
 "${signature}`"
+
+mdsgid "forget_email_in_member_list"
+msgstr "If the user exists, he will receive an email."

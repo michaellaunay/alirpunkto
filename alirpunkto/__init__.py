@@ -1,18 +1,15 @@
 import os, pytz, hashlib
 from collections import defaultdict
-from dotenv import load_dotenv, get_key, find_dotenv
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
 from pyramid.i18n import (
     get_localizer,
-    TranslationStringFactory,
     default_locale_negotiator,
     get_localizer
 )
 from pyramid.events import NewRequest, subscriber
 from pyramid.config import Configurator
 from pyramid_mailer.mailer import Mailer
-import logging
 
 from .models import appmaker
 from .models.candidature import Candidatures
@@ -20,96 +17,9 @@ from pyramid.session import SignedCookieSessionFactory
 import deform
 from pkg_resources import resource_filename
 from pyramid.threadlocal import get_current_request
-from ldap3 import Server, Connection, ALL, MODIFY_ADD
+from ldap3 import Server, Connection, ALL
 
-load_dotenv() # take environment variables from .env.
-# SECRET_KEY is used for cookie signing
-# This information is stored in environment variables
-# See https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/security.html
-# Using get_key() instead of os.getenv() as os.getenv() does not 
-# handle values containing `=` properly.
-SECRET_KEY = get_key(find_dotenv(), "SECRET_KEY")
-# check if secret is not empty an make it accessible from the views
-if not SECRET_KEY:
-    raise ValueError("You must provide a base64 value for SECRET_KEY")
-
-# LDAP informations are stored in environment variables
-LDAP_SERVER = os.getenv("LDAP_SERVER")
-LDAP_BASE_DN = get_key(find_dotenv(), "LDAP_BASE_DN")
-LDAP_OU = get_key(find_dotenv(), "LDAP_OU")
-LDAP_LOGIN = get_key(find_dotenv(), "LDAP_LOGIN")
-LDAP_PASSWORD = get_key(find_dotenv(), "LDAP_PASSWORD")
-ADMIN_LOGIN = get_key(find_dotenv(), "ADMIN_LOGIN")
-ADMIN_PASSWORD = get_key(find_dotenv(), "ADMIN_PASSWORD")
-ADMIN_EMAIL = get_key(find_dotenv(), "ADMIN_EMAIL")
-MAIL_USERNAME = os.getenv("MAIL_USERNAME")
-MAIL_SENDER = os.getenv("MAIL_SENDER")
-MAIL_SERVER = os.getenv("MAIL_SERVER")
-MAIL_PASSWORD = get_key(find_dotenv(), "MAIL_PASSWORD")
-MAIL_PORT = os.getenv("MAIL_PORT")
-MAIL_HOST = os.getenv("MAIL_HOST")
-MAIL_TLS = os.getenv("MAIL_TLS")
-MAIL_SSL = os.getenv("MAIL_SSL")
-MAIL_SIGNATURE = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name}")
-
-DEFAULT_NUMBER_OF_VOTERS = 3
-
-LDAP_ADMIN_OID = "00000000-0000-0000-0000-000000000000"
-
-# logging configuration
-log = logging.getLogger('alirpunkto')
-
-# TranslationStringFactory is used to translate strings
-_ = TranslationStringFactory('alirpunkto')
-
-# Default session timeout is getting from environment variable or set to 7 hours
-DEFAULT_SESSION_TIMEOUT = int(os.getenv("DEFAULT_SESSION_TIMEOUT", 7*60*60))
-
-EUROPEAN_LOCALES = {
-    'eo': _('Esperanto'),
-    'bg': _('български'),
-    'cs': _('čeština'),
-    'da': _('dansk'),
-    'de': _('Deutsch'),
-    'et': _('Eesti'),
-    'el': _('ελληνικά'),
-    'en': _('English'),
-    'es': _('Español'),
-    'fr': _('Français'),
-    'ga': _('Gaeilge'),
-    'hr': _('Hrvatski'),
-    'it': _('Italiano'),
-    'lv': _('Latviešu'),
-    'lt': _('Lietuvių'),
-    'hu': _('Magyar'),
-    'mt': _('Malti'),
-    'nl': _('Nederlands'),
-    'pl': _('Polski'),
-    'pt': _('Português'),
-    'ro': _('Română'),
-    'sk': _('Slovenčina'),
-    'sl': _('Slovenščina'),
-    'fi': _('Suomi'),
-    'sv': _('Svenska'),
-}
-
-EUROPEAN_ZONES = [tz for tz in pytz.all_timezones if tz.startswith('Europe')]
-
-def get_locales():
-    """Return the list of available locales.
-    Returns:
-        list: The list of available locales.
-    """
-    dir_ = os.listdir(os.path.join(os.path.dirname(__file__),
-                                   '.', 'locale'))
-    return list(filter(lambda x: not x.endswith('.pot'), dir_)) + ['en']
-
-AVAILABLE_LANGUAGES = get_locales()
-
-
-#LANGUAGES_TITLES = EUROPEAN_LOCALES
-LANGUAGES_TITLES = {'en': 'English',
-                    'fr': 'Français'}
+from .constants_and_globals import *
 
 @subscriber(NewRequest)
 def add_localizer(event):
@@ -212,11 +122,9 @@ def create_ldap_groups_if_not_exists():
     # Closing the connection
     conn.unbind()
 
-
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
-
     with Configurator(settings=settings) as config:
         # set session factory
         hash_object = hashlib.sha256()
