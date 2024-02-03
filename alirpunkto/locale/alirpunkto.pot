@@ -619,3 +619,6 @@ msgstr ""
 " <p>Best regards,</p>\n"
 " <p><strong>${signature}</strong></p>\n"
 " <p><small>This email has been generated with the assistance of ${site_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${site_name} administrator.</small></p>"
+
+mdsgid "forget_email_in_member_list"
+msgstr "If the user exists, s/he will receive an email."
