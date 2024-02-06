@@ -122,3 +122,5 @@ MIN_PASSWORD_LENGTH: Final = 12 # Minimum password length
 MAX_PASSWORD_LENGTH: Final = 92 # Maximum password length
 
 SPECIAL_CHARACTERS: Final = ('$', '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '=')
+
+MEMBERS_BEING_MODIFIED = "members_being_modified"

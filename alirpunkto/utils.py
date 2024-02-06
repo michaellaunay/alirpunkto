@@ -4,11 +4,20 @@
 
 from typing import Dict, Union
 from pyramid.request import Request
+from alirpunkto.models.user_datas import (
+    UserStates,
+    EmailSendStatus,
+    UserTypes,
+    UserRoles,
+    UserDatasEvent,
+    EmailEvent,
+    UserDatasFunctions,
+    PersistentUserDatas,
+    UserDatas,
+)
 from .models.candidature import (
     Candidature,
-    CandidatureTypes,
     Candidatures,
-    CandidatureEmailSendStatus,
     CandidatureStates,
 )
 from pyramid_mailer.message import Message, Attachment
@@ -31,6 +40,7 @@ from .constants_and_globals import (
     MAX_PSEUDONYM_LENGTH,
     MIN_PASSWORD_LENGTH,
     MAX_PASSWORD_LENGTH,
+    pseudonym_pattern,
     log,
 )
 from pyramid.i18n import get_localizer

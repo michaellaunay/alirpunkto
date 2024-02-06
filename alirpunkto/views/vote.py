@@ -7,8 +7,10 @@ from pyramid.httpexceptions import HTTPFound
 from alirpunkto.models.users import User
 from alirpunkto.models.candidature import (
     VotingChoice,
-    CandidatureEmailSendStatus,
     CandidatureStates
+)
+from alirpunkto.models.user_datas import (
+    EmailSendStatus,
 )
 from alirpunkto.utils import (
     get_candidatures,
@@ -97,14 +99,14 @@ def login_view(request):
                 email_template
             )
             try:
-                candidature.add_email_send_status(CandidatureEmailSendStatus.SENT, email_template)
+                candidature.add_email_send_status(EmailSendStatus.SENT, email_template)
                 transaction.commit()
             except Exception as e:
                 log.error(f"Error while sending email to the candidature owner: {e}")
-                candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, email_template)
+                candidature.add_email_send_status(EmailSendStatus.ERROR, email_template)
                 send_result = send_confirm_validation_email(request, candidature)
                 if 'error' in send_result:
-                    candidature.add_email_send_status(CandidatureEmailSendStatus.ERROR, "send_confirm_validation_email")
+                    candidature.add_email_send_status(EmailSendStatus.ERROR, "send_confirm_validation_email")
                 else:
                     transaction.commit()
         return {

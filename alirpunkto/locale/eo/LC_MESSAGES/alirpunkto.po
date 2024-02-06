@@ -123,16 +123,16 @@ msgstr "aprobita"
 msgid "candidature_states_refused"
 msgstr "rifuzita"
 
-msgid "candidature_types_ordinary_value"
+msgid "user_types_ordinary_value"
 msgstr "Ordinara: Aplikado por Ordinara Membro de la Komunumo = kun simpligita registra proceduro, nenia financa devo, sed sen decido-faraj rajtoj."
 
-msgid "candidature_types_cooperator_value"
+msgid "user_types_cooperator_value"
 msgstr "Koopera: Aplikado por plena membro de la Kooperativo, Koopero = kun kompletigita registra proceduro certigante la principon 'unu persono = unu voĉo', la devo aĉeti almenaŭ unu parton kaj pagi jaran kontribuon, kaj plenaj decido-faraj rajtoj."
 
-msgid "candidature_types_ordinary"
+msgid "user_types_ordinary"
 msgstr "ordinara membro"
 
-msgid "candidature_types_cooperator"
+msgid "user_types_cooperator"
 msgstr "koopera membro"
 
 msgid "vote_types_yes_value"

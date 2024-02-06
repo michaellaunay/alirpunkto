@@ -169,13 +169,13 @@ msgstr "approvato"
 msgid "candidature_states_refused"
 msgstr "rifiutato"
 
-msgid "candidature_types_ordinary_value"
+msgid "user_types_ordinary_value"
 msgstr ""
 "Ordinario: Una domanda per diventare Membro Ordinario della Comunità = con "
 "un processo di registrazione semplificato, nessun obbligo finanziario, ma "
 "nessun diritto decisionale."
 
-msgid "candidature_types_cooperator_value"
+msgid "user_types_cooperator_value"
 msgstr ""
 "Cooperatore: La richiesta di diventare socio a tutti gli effetti della "
 "Cooperativa, un Cooperatore = con un processo di registrazione completo che "
@@ -183,10 +183,10 @@ msgstr ""
 "cittadino dell'Unione Europea, l'obbligo di acquistare almeno un'azione e di "
 "pagare un contributo annuale, e pieni diritti decisionali."
 
-msgid "candidature_types_ordinary"
+msgid "user_types_ordinary"
 msgstr "Membro ordinario della Comunità"
 
-msgid "candidature_types_cooperator"
+msgid "user_types_cooperator"
 msgstr "Cooperatore = socio a pieno titolo della Cooperativa"
 
 msgid "vote_types_yes_value"

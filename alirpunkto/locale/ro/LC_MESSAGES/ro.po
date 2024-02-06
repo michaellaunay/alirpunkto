@@ -134,17 +134,17 @@ msgstr "aprobat"
 msgid "candidature_states_refused"
 msgstr "refuzat"
 
-msgid "candidature_types_ordinary_value"
+msgid "user_types_ordinary_value"
 msgstr "Ordinar: O cerere pentru un Membru Ordinar al Comunității = cu un proces de înregistrare simplificat, fără obligații financiare, dar fără drepturi de decizie."
 
-msgid "candidature_types_cooperator_value"
+msgid "user_types_cooperator_value"
 msgstr "Cooperator: O cerere de membru cu drepturi depline al Cooperativei, un Cooperator = cu un proces de înregistrare complet care asigură principiul \"o persoană = un vot\", obligația de a cumpăra cel puțin o cotă socială și de a plăti o contribuție anuală, precum și drepturi depline de decizie."
 
-msgid "candidature_types_ordinary"
+msgid "user_types_ordinary"
 msgstr "Membru Ordinar al Comunității"
 
 #, fuzzy
-msgid "candidature_types_cooperator"
+msgid "user_types_cooperator"
 msgstr "Cooperator = membru cu drepturi depline al Cooperativei"
 
 #, fuzzy

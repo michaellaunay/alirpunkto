@@ -169,13 +169,13 @@ msgstr "goedgekeurd"
 msgid "candidature_states_refused"
 msgstr "geweigerd"
 
-msgid "candidature_types_ordinary_value"
+msgid "user_types_ordinary_value"
 msgstr ""
 "Gewoon: Een aanvraag voor een Gewoon Lid van de Gemeenschap = met een "
 "vereenvoudigde registratieprocedure, geen financiële verplichting, maar geen "
 "besluitvormingsrechten."
 
-msgid "candidature_types_cooperator_value"
+msgid "user_types_cooperator_value"
 msgstr ""
 "Cooperator: Een aanvraag om volwaardig lid te worden van de coöperatie, een "
 "Cooperator = met een volledig registratieproces waarbij het 'één persoon = "
@@ -183,10 +183,10 @@ msgstr ""
 "Europese Unie is, de plicht om ten minste één aandeel te kopen en een "
 "jaarlijkse bijdrage te betalen, en volledige beslissingsrechten."
 
-msgid "candidature_types_ordinary"
+msgid "user_types_ordinary"
 msgstr "Gewoon Lid van de Gemeenschap"
 
-msgid "candidature_types_cooperator"
+msgid "user_types_cooperator"
 msgstr "Coöperator = volwaardig lid van de Coöperatie"
 
 msgid "vote_types_yes_value"

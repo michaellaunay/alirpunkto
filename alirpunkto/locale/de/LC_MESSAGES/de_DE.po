@@ -167,13 +167,13 @@ msgstr "genehmigt"
 msgid "candidature_states_refused"
 msgstr "abgelehnt"
 
-msgid "candidature_types_ordinary_value"
+msgid "user_types_ordinary_value"
 msgstr ""
 "Ordentlich: Ein Antrag auf eine ordentliche Mitgliedschaft in der "
 "Gemeinschaft = mit vereinfachtem Registrierungsverfahren, ohne finanzielle "
 "Verpflichtungen, aber ohne Entscheidungsrechte."
 
-msgid "candidature_types_cooperator_value"
+msgid "user_types_cooperator_value"
 msgstr ""
 "Genossenschaftler: Ein Antrag auf Vollmitgliedschaft in der Genossenschaft, "
 "ein Genossenschaftler = mit einem vollständigen Registrierungsprozess, der "
@@ -181,10 +181,10 @@ msgstr ""
 "Kauf von mindestens einem Anteil und zur Zahlung eines Jahresbeitrags sowie "
 "vollen Entscheidungsrechten."
 
-msgid "candidature_types_ordinary"
+msgid "user_types_ordinary"
 msgstr "Ordentliches Mitglied der Gemeinschaft"
 
-msgid "candidature_types_cooperator"
+msgid "user_types_cooperator"
 msgstr "Genossenschaftler = Vollmitglied der Genossenschaft"
 
 msgid "vote_types_yes_value"

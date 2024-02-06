@@ -2,10 +2,13 @@
 Define the user model which is used to store users in the zodb database.
 """
 # description: User model
-from typing import Union
+from typing import Union, List, Final
 from persistent import Persistent
+from persistent.mapping import PersistentMapping
 import json
-
+from enum import Enum, unique
+from alirpunkto.constants_and_globals import log
+from alirpunkto.models.user_datas import UserStates
 
 # User class
 class User(Persistent):
@@ -21,6 +24,7 @@ class User(Persistent):
         self.name = name
         self.email = email
         self.oid = oid
+        self.user_data_state = UserStates.CREATED
 
     @classmethod
     def create_user(cls, name:str, email:str, oid:str) -> 'User':

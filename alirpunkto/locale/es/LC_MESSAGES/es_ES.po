@@ -173,23 +173,23 @@ msgstr "aprobado"
 msgid "candidature_states_refused"
 msgstr "rechazado"
 
-msgid "candidature_types_ordinary_value"
+msgid "user_types_ordinary_value"
 msgstr ""
 "Ordinario: Una solicitud de Miembro Ordinario de la Comunidad = con proceso "
 "de registro simplificado, sin obligación financiera, pero sin derechos de "
 "decisión."
 
-msgid "candidature_types_cooperator_value"
+msgid "user_types_cooperator_value"
 msgstr ""
 "Cooperador: Una solicitud de socio de pleno derecho de la Cooperativa, un "
 "Cooperador = con un proceso de registro completo que garantiza el principio "
 "de \"una persona = un voto\", la obligación de adquirir al menos una acción "
 "y de pagar una aportación anual, y plenos derechos de toma de decisiones."
 
-msgid "candidature_types_ordinary"
+msgid "user_types_ordinary"
 msgstr "Miembro ordinario de la Comunidad"
 
-msgid "candidature_types_cooperator"
+msgid "user_types_cooperator"
 msgstr "Cooperador = socio de pleno derecho de la Cooperativa"
 
 msgid "vote_types_yes_value"

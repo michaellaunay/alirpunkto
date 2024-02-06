@@ -42,14 +42,14 @@
                             <select name="choice"
                                 title="Different types of memberships offer different benefits."
                                 i18n:attributes="title type_registration_choice">
-                                <option value="ORDINARY" i18n:translate="candidature_types_ordinary"
+                                <option value="ORDINARY" i18n:translate="user_types_ordinary"
                                     title="Choose this if you want to be an ordinary member."
-                                    i18n:attributes="title candidature_types_ordinary_value">Ordinary
+                                    i18n:attributes="title user_types_ordinary_value">Ordinary
                                     Member</option>
                                 <option value="COOPERATOR"
-                                    i18n:translate="candidature_types_cooperator"
+                                    i18n:translate="user_types_cooperator"
                                     title="Choose this if you want to actively cooperate and contribute."
-                                    i18n:attributes="title candidature_types_cooperator_value">
+                                    i18n:attributes="title user_types_cooperator_value">
                                     Cooperator</option>
                             </select>
                         </div>

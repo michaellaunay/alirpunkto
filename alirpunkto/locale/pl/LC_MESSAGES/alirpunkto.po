@@ -184,13 +184,13 @@ msgstr "zatwierdzone"
 msgid "candidature_states_refused"
 msgstr "odrzucony"
 
-msgid "candidature_types_ordinary_value"
+msgid "user_types_ordinary_value"
 msgstr ""
 "Zwykły:  Wniosek o przyznanie statusu Zwykłego Członka Wspólnoty  = z "
 "uproszczonym procesem rejestracji, bez zobowiązań finansowych, ale bez praw "
 "do podejmowania decyzji."
 
-msgid "candidature_types_cooperator_value"
+msgid "user_types_cooperator_value"
 msgstr ""
 "Spółdzielca: Wniosek o przyjęcie w poczet pełnoprawnych członków "
 "Spółdzielni, Spółdzielca = z kompletnym procesem rejestracji zapewniającym "
@@ -198,10 +198,10 @@ msgstr ""
 "Unii Europejskiej, obowiązek zakupu co najmniej jednego udziału i wniesienia "
 "rocznego wkładu oraz pełne prawa decyzyjne."
 
-msgid "candidature_types_ordinary"
+msgid "user_types_ordinary"
 msgstr "Zwykły Członek Wspólnoty"
 
-msgid "candidature_types_cooperator"
+msgid "user_types_cooperator"
 msgstr "Spółdzielca = pełnoprawny członek Spółdzielni"
 
 msgid "vote_types_yes_value"

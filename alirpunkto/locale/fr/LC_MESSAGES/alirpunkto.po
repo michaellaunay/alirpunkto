@@ -178,13 +178,13 @@ msgstr "approuvé"
 msgid "candidature_states_refused"
 msgstr "refusée"
 
-msgid "candidature_types_ordinary_value"
+msgid "user_types_ordinary_value"
 msgstr ""
 "Ordinaire : Une inscription pour un Membre Ordinaire de la Communauté = avec "
 "un processus d'inscription simplifié, pas d'obligation financière, mais pas "
 "de droits de décision."
 
-msgid "candidature_types_cooperator_value"
+msgid "user_types_cooperator_value"
 msgstr ""
 "Coopérateur : Une inscription pour devenir membre à part entière de la "
 "Coopérative, un Coopérateur = avec un processus d'inscription complet "
@@ -192,10 +192,10 @@ msgstr ""
 "un citoyen de l'Union européenne, l'obligation d'acheter au moins une part "
 "et de payer une contribution annuelle, et les pleins droits de décision."
 
-msgid "candidature_types_ordinary"
+msgid "user_types_ordinary"
 msgstr "Membre ordinaire de la Communauté"
 
-msgid "candidature_types_cooperator"
+msgid "user_types_cooperator"
 msgstr "Coopérateur = membre à part entière de la coopérative"
 
 msgid "vote_types_yes_value"

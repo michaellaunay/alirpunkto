@@ -16,8 +16,11 @@ from alirpunkto.models.users import (
 from alirpunkto.constants_and_globals import (
     _,
     LDAP_ADMIN_OID,
+    MEMBERS_BEING_MODIFIED,
     log
 )
+import BTrees
+import transaction
 
 @view_config(route_name='forgot_password', renderer='alirpunkto:templates/forgot_password.pt')
 def forgot_password(request):
@@ -61,11 +64,12 @@ def forgot_password(request):
         # get the ZODB connection
         connection = get_connection(request)
         root = connection.root()        
-        if 'users' not in root:
-            connection.root()['users'] = BTrees.OOBTree.BTree()
+        if MEMBERS_BEING_MODIFIED not in root:
+            connection.root()[MEMBERS_BEING_MODIFIED] = BTrees.OOBTree.BTree()
             transaction.commit()
-        Candidatures._instance = connection.root()['candidatures']
-        return root['candidatures']
+        reset_users = connection.root()[MEMBERS_BEING_MODIFIED]
+        reset_users[uid] = user
+        transaction.commit()
 
         # 5.1) If not, AlirPunkto creates an application from the ldap information
         # 5.2) If yes, AlirPunkto retrieves the application and updates it with the ldap information (ldap priority)
