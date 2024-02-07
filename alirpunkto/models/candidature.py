@@ -18,7 +18,7 @@ from alirpunkto.constants_and_globals import (
 )
 
 from alirpunkto.models.user_datas import (
-    UserDatas,
+    PersistentUserDatas,
 )
 
 @unique
@@ -216,7 +216,7 @@ class Voter:
     fullsurname:str
     vote:VotingChoice = None
 
-class Candidature(UserDatas):
+class Candidature(PersistentUserDatas):
     """A candidature in the ZODB.
     """
 

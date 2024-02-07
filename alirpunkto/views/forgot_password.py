@@ -65,9 +65,9 @@ def forgot_password(request):
         connection = get_connection(request)
         root = connection.root()        
         if MEMBERS_BEING_MODIFIED not in root:
-            connection.root()[MEMBERS_BEING_MODIFIED] = BTrees.OOBTree.BTree()
+            root[MEMBERS_BEING_MODIFIED] = BTrees.OOBTree.BTree()
             transaction.commit()
-        reset_users = connection.root()[MEMBERS_BEING_MODIFIED]
+        reset_users = root[MEMBERS_BEING_MODIFIED]
         reset_users[uid] = user
         transaction.commit()
 

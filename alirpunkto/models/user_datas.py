@@ -302,19 +302,19 @@ class PersistentUserDatas(Persistent):
     __acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]
 
     def __init__(self, data = None):
-        """    Initialize a new UserDatas object.
+        """    Initialize a new PersistentUserDatas object.
 
         Args:
-            data (Optional[Type]): Initial data for the user_datas.
+            data (Optional[Type]): Initial data for the user.
              Defaults to None.
 
         Attributes:
-            _data (UserDatas): The data for the UserDatas.
+            _data (PersistentUserDatas): The data for the user.
             _modifications (List[UserDatasEvent]): A list to record
                 modifications, each entry is a dataclass containing the
                 datetime, the function name, the previous value, the new value.
-            _state (UserStates): The current state of the UserDatas.
-            _type (UserTypes or None): The type of the UserDatas.
+            _state (UserStates): The current state of the user.
+            _type (UserTypes or None): The type of the user.
             _email (str or None): The email associated with the user_datas.
             _oid (str): A unique object identifier.
             _seed (str): A random string used to generate the OID.
@@ -322,7 +322,7 @@ class PersistentUserDatas(Persistent):
              record email send status history.
             _challenge (Tuple[str, int]): A tuple containing the string math
              challenge and the solution in integer.
-            _pseudonym (str): The pseudonym of the UserDatas.
+            _pseudonym (str): The pseudonym of the user.
         Raises:
             RuntimeError: Raised if an instance already exists with same oid.
 
@@ -338,7 +338,7 @@ class PersistentUserDatas(Persistent):
         self._challenge = None
         self._pseudonym = None
         # get a unique object id
-        self._oid = UserDatas.generate_unique_oid()
+        self._oid = PersistentUserDatas.generate_unique_oid()
         # get a random seed and record the creation
         self._modifications = []
         self._memorize_changes("__init__", None, self._state)
@@ -379,29 +379,29 @@ class PersistentUserDatas(Persistent):
 
     @property
     def seed(self)-> str:
-        """ Get the seed of the UserDatas.
+        """ Get the seed of the user.
         Returns:
-            The seed of the UserDatas.
+            The seed of the user.
         """
         return self._seed
 
     @property
     def state(self)-> UserStates:
-        """ Get the state of the UserDatas.
+        """ Get the state of the user.
         Returns:
-            The state of the UserDatas.
+            The state of the user.
         """
         return self._state
     
     @state.setter
     def state(self, value:UserStates):
-        """ Set the state of the UserDatas.
+        """ Set the state of the user.
 
         Args:
-            value (UserDatasStates): The new state of the UserDatas.
+            value (UserStates): The new state of the user.
 
         Raises:
-            TypeError: The state must be an instance of UserDatasStates.
+            TypeError: The state must be an instance of UserStates.
         """
         if not isinstance(value, UserStates):
             raise TypeError(
@@ -414,25 +414,25 @@ class PersistentUserDatas(Persistent):
     
     @property
     def type(self)-> UserTypes:
-        """ Get the type of the UserDatas.
+        """ Get the type of the user.
         Returns:
-            The type of the UserDatas.
+            The type of the user.
         """
         return self._type
     
     @type.setter
     def type(self, value:UserTypes):
-        """ Set the type of the UserDatas.
+        """ Set the type of the user.
 
         Args:
-            value (UserDatasTypes): The new type of the UserDatas.
+            value (UserTypes): The new type of the user.
 
         Raises:
-            TypeError: The type must be an instance of UserDatasTypes.
+            TypeError: The type must be an instance of UserTypes.
         """
-        if not isinstance(value, UserDatasTypes):
+        if not isinstance(value, UserTypes):
             raise TypeError(
-                "The type must be an instance of UserDatasTypes."
+                "The type must be an instance of UserTypes."
             )
         
         old_type = self._type.name if self._type else "None"
@@ -441,18 +441,18 @@ class PersistentUserDatas(Persistent):
 
     @property
     def email(self)-> str:
-        """ Get the email of the UserDatas.
+        """ Get the email of the user.
         Returns:
-            The email of the UserDatas.
+            The email of the user.
         """
         return self._email
     
     @email.setter
     def email(self, value:str):
-        """ Set the email of the UserDatas.
+        """ Set the email of the user.
 
         Args:
-            value (str): The new email of the UserDatas.
+            value (str): The new email of the user.
 
         Raises:
             TypeError: The email must be a string.
@@ -466,18 +466,18 @@ class PersistentUserDatas(Persistent):
 
     @property
     def pseudonym(self)-> str:
-        """ Get the pseudonym of the UserDatas.
+        """ Get the pseudonym of the user.
         Returns:
-            The pseudonym of the UserDatas.
+            The pseudonym of the user.
         """
         return self._pseudonym
     
     @pseudonym.setter
     def pseudonym(self, value:str):
-        """ Set the pseudonym of the UserDatas.
+        """ Set the pseudonym of the user.
 
         Args:
-            value (str): The new pseudonym of the UserDatas.
+            value (str): The new pseudonym of the user.
 
         Raises:
             TypeError: The pseudonym must be a string.
@@ -491,38 +491,38 @@ class PersistentUserDatas(Persistent):
 
     @property
     def modifications(self)-> List[UserDatasEvent]:
-        """ Get the modifications of the UserDatas.
+        """ Get the modifications of the user.
         Returns:
             A copy of modifications of the user_datas as a list of
-             UserDatasEvent.
+            user.
         """
         return self._modifications.copy()
     
     @property
     def oid(self)-> str:
-        """ Get the oid of the UserDatas.
+        """ Get the oid of the user.
         Returns:
-            The oid of the UserDatas.
+            The oid of the user.
         """
         return self._oid
 
     @property
     def data(self)-> UserDatas:
-        """ Get the data of the UserDatas.
+        """ Get the data of the user.
         Returns:
-            The data of the UserDatas.
+            The data of the user.
         """
         return self._data
     
     @data.setter
     def data(self, value:UserDatas):
-        """ Set the data of the UserDatas.
+        """ Set the data of the user.
 
         Args:
-            value (UserDatas): The new data of the UserDatas.
+            value (UserDatas): The new data of the user.
 
         Raises:
-            TypeError: The data must be a UserDatas.
+            TypeError: The data must be a user.
         """
         if not isinstance(value, UserDatas):
             raise TypeError("The data must be a UserDatas.")
@@ -533,7 +533,7 @@ class PersistentUserDatas(Persistent):
     
     @staticmethod
     def generate_unique_oid(
-        user_datass:UserDatas = None,
+        user_datas:UserDatas = None,
         max_retries:int = 10
         )-> str:
         """
@@ -541,12 +541,12 @@ class PersistentUserDatas(Persistent):
 
         This function tries to generate a unique OID by using the 
          UserDatasFunctions.uuid function.
-        It checks for uniqueness by looking into the existing `user_datass`
+        It checks for uniqueness by looking into the existing `user_datas`
          mapping.
 
         Args:
-            user_datass (UserDatas, optional): The mapping of existing
-             user_datass to check for OID uniqueness. 
+            user_datas (UserDatas, optional): The mapping of existing
+             user_datas to check for OID uniqueness. 
              Defaults to the singleton instance of the UserDatas class.
             max_retries (int, optional): Maximum number of attempts to generate
              a unique OID. Defaults to 10.
@@ -558,12 +558,12 @@ class PersistentUserDatas(Persistent):
             ValueError: If a unique OID cannot be generated after `max_retries`
              attempts.
         """
-        if user_datass is None:
+        if user_datas is None:
             # get the singleton instance
-            user_datass = UserDatas.get_instance()
+            user_datas = PersistentUserDatas.get_instance() # @TODO replace by abstract factory selected by type
         for _ in range(max_retries):
             oid = str(UserDatasFunctions.uuid())
-            if oid not in user_datass:
+            if oid not in user_datas:
                 return oid
         raise ValueError(
             f"Failed to generate a unique OID after {max_retries} attempts."
@@ -571,9 +571,9 @@ class PersistentUserDatas(Persistent):
 
     @property
     def email_send_status_history(self)-> List[EmailEvent]:
-        """ Get the email send status history of the UserDatas.
+        """ Get the email send status history of the user.
         Returns:
-            A copy of email send status history of the UserDatas.
+            A copy of email send status history of the user.
         """
         return self._email_send_status_history.copy()    
     
