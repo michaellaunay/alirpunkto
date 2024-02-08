@@ -575,7 +575,7 @@ msgstr ""
 "<ul>\n"
    "<li>the identity information that you received directly by e-mail from the IT platform of ${site_name} (and that will be reminded to you on the voting interface) and </li>\n"
    "<li>the identity information that you can read on the attached partial copy of my official identity document.</li>\n"
-</ul>\n"
+"</ul>\n"
      " <p>The link for you to vote on this adequation is the following: ${voting_url}.</p>\n"
     " <p>I thank you very warmly in advance for supporting the process of my registration as a Cooperator to ${site_name}. Should you have any further questions or require additional information, please feel free to contact me directly in your own language.</p>\n"
 
