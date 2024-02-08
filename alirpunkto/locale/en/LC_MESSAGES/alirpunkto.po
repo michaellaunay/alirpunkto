@@ -1,0 +1,629 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2023-06-23 12:40\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "welcome"
+msgstr "Welcome"
+
+msgid "username_label"
+msgstr "Username"
+
+msgid "password_label"
+msgstr "Password"
+
+msgid "login_label"
+msgstr "Login"
+
+msgid "welcome_msg"
+msgstr "Welcome to Alirpunkto, the centralized service for the applications used in the IT infrastructure of ${site_name}."
+
+msgid "all_applications_msg"
+msgstr "All the applications you need to participate in the activities of ${site_name} in one place."
+
+msgid "register_or_login_msg"
+msgstr "Register or login now to get started."
+
+msgid "logged_in_msg_title"
+msgstr "Alirpunkto, the centralized service for the applications used in the IT infrastructure of ${site_name}" 
+
+msgid "logged_in_msg"
+msgstr "You are logged in as ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "You can log out by clicking here"
+
+msgid "logout_label"
+msgstr "Log out"
+
+msgid "choose_application_msg"
+msgstr "Choose the application you want to join:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Invalid username or password"
+
+msgid "register_link"
+msgstr "Create account"
+
+msgid "password_confirm_label"
+msgstr "Confirm Password"
+
+msgid "password_confirm_title"
+msgstr "Confirm your password"
+
+msgid "forgot_password_label"
+msgstr "Forgot password?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Full name(s) as in your official identity documents"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Full surname(s) as in your official identity documents"
+
+msgid "birthdate_label"
+msgstr "Birthdate"
+
+msgid "nationality_label"
+msgstr "Nationality (among those of the European Union)"
+
+msgid "cooperator_number_label"
+msgstr "Cooperator number"
+
+msgid "pseudonym_label"
+msgstr "Pseudonym"
+
+msgid "email_label"
+msgstr "Email address"
+
+msgid "first_interaction_language_label"
+msgstr "The language you prefer for us to interact with you"
+
+msgid "second_interaction_language_label"
+msgstr "The language you accept as a second choice for us to interact with you"
+
+msgid "register_label"
+msgstr "Register"
+
+msgid "forgot_password_head"
+msgstr "Forgot Password"
+
+msgid "forgot_your_password_title"
+msgstr "Forgot your password?"
+
+msgid "enter_your_email_address_label"
+msgstr "Please enter your email address:"
+
+msgid "submit_button"
+msgstr "Submit"
+
+msgid "candidature_states_draft_value"
+msgstr "Draft: The application is in draft mode."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Email Validation: The state where the Applicant's email address is awaiting validation."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "ConfirmedHuman: The Applicant's email address is verified, and proof of humanity is provided (we have verified that you are not a robot)."
+
+msgid "candidature_states_unique_data_value" 
+msgstr "UniqueData: The Applicant has entered his/her personal identification data, and we have verified that no current or recent Cooperator or Ordinary Member of the Community has the same data."
+
+msgid "candidature_states_pending_value"
+msgstr "Pending: The application has been submitted. The personal identification data has been transmitted to the Verifiers, but they have not provided their feedback yet."
+
+msgid "candidature_states_approved_value"
+msgstr "Approved: The application has been accepted."
+
+msgid "candidature_states_refused_value"
+msgstr "Refused: The application has been denied."
+
+msgid "candidature_states_draft"
+msgstr "draft"
+
+msgid "candidature_states_email_validation"
+msgstr "email_validation"
+
+msgid "candidature_states_confirmed_human"
+msgstr "confirmed_human"
+
+msgid "candidature_states_unique_data"
+msgstr "unique_data"
+
+msgid "candidature_states_pending"
+msgstr "pending"
+
+msgid "candidature_states_approved"
+msgstr "approved"
+
+msgid "candidature_states_refused"
+msgstr "refused"
+
+msgid "user_types_ordinary_value"
+msgstr "Ordinary: An application to become an Ordinary Member of the Community = with simplified registration process, no financial duty, but no decision-making rights."
+
+msgid "user_types_cooperator_value"
+msgstr "Cooperator: An application to become a full member of the Cooperative, a Cooperator = with a complete registration process ensuring the 'one person = one vote' principle and that the Applicant is a citizen of the European Union, the duty to purchase at least one share and to pay a yearly contribution, and full decision-making rights."
+
+msgid "user_types_ordinary"
+msgstr "Ordinary Member of the Community"
+
+msgid "user_types_cooperator"
+msgstr "Cooperator = full member of the Cooperative"
+
+msgid "vote_types_yes_value"
+msgstr "Yes: The vote is positive."
+
+msgid "vote_types_no_value"
+msgstr "No: The vote is negative."
+
+msgid "vote_types_abstain_value"
+msgstr "Abstain: The vote is neutral."
+
+msgid "vote_types_yes"
+msgstr "yes"
+
+msgid "vote_types_no"
+msgstr "no"
+
+msgid "vote_types_abstain"
+msgstr "abstain"
+
+msgid "zero"
+msgstr "zero"
+
+msgid "one"
+msgstr "one"
+
+msgid "two"
+msgstr "two"
+
+msgid "three"
+msgstr "three"
+
+msgid "four"
+msgstr "four"
+
+msgid "five"
+msgstr "five"
+
+msgid "six"
+msgstr "six"
+
+msgid "seven"
+msgstr "seven"
+
+msgid "eight"
+msgstr "eight"
+
+msgid "nine"
+msgstr "nine"
+
+msgid "times"
+msgstr "multiplied by"
+
+msgid "plus"
+msgstr ", plus"
+
+msgid "email_validation_subject"
+msgstr "Verifying that you are an human. Compute the results of simple mathematical operations and enter these results on the portal"
+
+msgid "email_candidature_state_changed"
+msgstr "Change in the status of your application to the portal"
+
+msgid "invalid_challenge"
+msgstr "Your answer is incorrect. Please enter a new one."
+
+msgid "invalid_email"
+msgstr "There is an issue with your email address, please verify it."
+
+msgid "invalid_choice"
+msgstr "Your choice is not valid, please enter it again."
+
+msgid "invalid_username_or_password"
+msgstr "Invalid username or password. Please try again."
+
+msgid "challenge_instruction_text"
+msgstr "Please comppute the results of the following four simple mathematical operations and fill in the corresponding fields to confirm your email address."
+
+msgid "enter_result_label_A"
+msgstr "Please enter the result for mathematical operation A:"
+
+msgid "result_label_title_A"
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation A."
+
+msgid "result_input_title_A"
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation A that you received per e-mail."
+
+msgid "enter_result_label_B"
+msgstr "Please enter the result for mathematical operation B:"
+
+msgid "result_label_title_B"
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation B."
+
+msgid "result_input_title_B"
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation B that you received per e-mail."
+
+msgid "enter_result_label_C"
+msgstr "Please enter the result for mathematical operation C:"
+
+msgid "result_label_title_C"
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation C."
+
+msgid "result_input_title_C"
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation C that you received per e-mail."
+
+msgid "enter_result_label_D"
+msgstr "Please enter the result for mathematical operation D:"
+
+msgid "result_label_title_D"
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation D."
+
+msgid "result_input_title_D"
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation D that you received per e-mail."
+
+msgid "verify_button"
+msgstr "Submit"
+
+msgid "submit_email_validation_title"
+msgstr "Click to verify the entered codes."
+
+msgid "passwords_dont_match"
+msgstr "Passwords don't match."
+
+msgid "password_too_short"
+msgstr "Password is too short."
+
+msgid "password_minimum_length"
+msgstr "Password must be at least ${password_minimum_length} characters long."
+
+msgid "password_too_long"
+msgstr "Password is too long."
+
+msgid "password_maximum_length"
+msgstr "Password should not exceed ${password_maximum_length} characters."
+
+msgid "password_must_contain_digit"
+msgstr "Password must contain at least one digit."
+
+msgid "password_must_contain_uppercase"
+msgstr "Password must contain at least one uppercase letter."
+
+msgid "password_must_contain_lowercase"
+msgstr "Password must contain at least one lowercase letter."
+
+msgid "password_must_contain_special_char"
+msgstr "Password must contain at least one of the characters among the following: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "pseudonym_title_label"
+msgstr "Please enter here the pseudonym that will identify you for the whole duration of your activity on our IT platform. We STRONGLY recommend that you select a pseudonym that makes tracking back to your real identity impossible (or extremely difficult). Thereby, you protect the confidentiality of your opinions (i.e. personal data that are the purpose of a specific protection under the General Data Protection Regulation - GDPR) against any form of external pressure in real life (e.g. by your employer or your customers). Be very careful! Once you have chosen it, you will NEVER be able to change this pseudonym afterwards. Choose it with care! "
+
+msgid "password_title_label"
+msgstr "Please enter your password here."
+
+msgid "password_confirm_title_label"
+msgstr "Please confirm your password here."
+
+msgid "password_confirm"
+msgstr "Confirm your password."
+
+msgid "type_of_registration"
+msgstr "Type of Registration"
+
+msgid "type_registration_label"
+msgstr "Select the type of registration that suits you."
+
+msgid "type_registration_choice"
+msgstr "Each type of registration comes with a specific set of rights, benefits and obligations."
+
+msgid "approved_heading"
+msgstr "Congratulations on Your Approval!"
+
+msgid "approved_description"
+msgstr "Your application has been approved. You can now log in using the pseudonym and password you provided during the application process."
+
+msgid "invalid_pseudonym"
+msgstr "Invalid pseudonym. It should be between ${MIN_PSEUDONYM_LENGTH} and ${MAX_PSEUDONYM_LENGTH} characters long and can only contain letters (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-) and spaces ( )."
+
+msgid "invalid_date"
+msgstr "Invalid date format."
+
+msgid "pseudonym_too_short"
+msgstr "Pseudonym too short."
+
+msgid "pseudonym_minimum_length"
+msgstr "Pseudonym must be at least ${MIN_PSEUDONYM_LENGTH} characters long."
+
+msgid "pseudonym_too_long"
+msgstr "Pseudonym too long."
+
+msgid "pseudonym_maximum_length"
+msgstr "Pseudonym must not exceed ${MAX_PSEUDONYM_LENGTH} characters."
+
+msgid "pseudonym_allready_exists"
+msgstr "This pseudonym is already in use. Please choose a different one."
+
+msgid "Select_a_country"
+msgstr "Select a Member State of the European Union"
+
+msgid "Austria"
+msgstr "AT - Austria"
+
+msgid "Belgium"
+msgstr "BE - Belgium"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgaria"
+
+msgid "Cyprus"
+msgstr "CY - Cyprus"
+
+msgid "Czech_Republic"
+msgstr "CZ - Czechia"
+
+msgid "Germany"
+msgstr "DE - Germany"
+
+msgid "Denmark"
+msgstr "DK - Denmark"
+
+msgid "Estonia"
+msgstr "EE - Estonia"
+
+msgid "Spain"
+msgstr "ES - Spain"
+
+msgid "Finland"
+msgstr "FI - Finland"
+
+msgid "France"
+msgstr "FR - France"
+
+msgid "Greece"
+msgstr "GR - Greece"
+
+msgid "Croatia"
+msgstr "HR - Croatia"
+
+msgid "Hungary"
+msgstr "HU - Hungary"
+
+msgid "Ireland"
+msgstr "IE - Ireland"
+
+msgid "Italy"
+msgstr "IT - Italy"
+
+msgid "Lithuania"
+msgstr "LT - Lithuania"
+
+msgid "Luxembourg"
+msgstr "LU - Luxembourg"
+
+msgid "Latvia"
+msgstr "LV - Latvia"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Netherlands"
+
+msgid "Poland"
+msgstr "PL - Poland"
+
+msgid "Portugal"
+msgstr "PT - Portugal"
+
+msgid "Romania"
+msgstr "RO - Romania"
+
+msgid "Sweden"
+msgstr "SE - Sweden"
+
+msgid "Slovenia"
+msgstr "SI - Slovenia"
+
+msgid "Slovakia"
+msgstr "SK - Slovakia"
+
+msgid "full_name_as_in_id_required"
+msgstr "Full Name(s) is(are) required."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Full Surname(s) is(are) required."
+
+msgid "birthdate_required"
+msgstr "Birthdate is required."
+
+msgid "nationality_required"
+msgstr "Nationality is required."
+
+msgid "first_interaction_language_required"
+msgstr "The first interaction language is required."
+
+msgid "pending_description"
+msgstr "Your application is being reviewed. You will be notified by email once it has been approved."
+
+msgid "candidature_not_found"
+msgstr "Application not found."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><strong>Thank you for your interest in the activities of ${site_name}! Here is the right place for you to register </strong></h2>\n"
+"<p>The CosmoPolitical Cooperative supports individuals and transforms the existing economic, social and political system towards a radically just, sustainable, democratic and happy society, the <a href="https://www.cosmopolitical.coop/SocietyAgreement">Society of Agreement</a>.</p>\n"
+"<p>Below you will find the start of the registration process to join us. We propose two levels of participation, with increasing obligations and rights:</p>\n"
+"<ul>\n"
+"<li>as an <strong>Ordinary Member of our Community</strong>, with a simple registration process, no financial commitments, but no voting rights; or </li>\n"
+"<li>as a <strong>Cooperator</strong>, a full member of our Cooperative, with a registration process ensuring that a given person can register once only (to heed the democratic principle \"one person = one vote\") and that only citizens of the European Union having reached their majority age are Cooperators, with the commitment to purchase at least one share and to pay a yearly contribution, and full voting rights. The European Union is the geographic scope of our work (<a href="https://www.cosmopolitical.coop/FAQ_EUscale">see why</a>)</li>\n"
+"</ul>\n"
+"<p>The registration process includes the following steps:</p>\n"
+"<ol>\n"
+"<li>we verify that the e-mail address was provided by you, a human (and not by a robot);</li>\n"
+"<li>we ask you for your pseudonym, password and preferred language(s) for interaction with you;</li>\n"
+"<li>in the case when you registered as an Ordinary Member of the Community, you have finished and enter our Community. In the case when you registered as a Cooperator, the process continues so that we can verify that you comply with the conditions set above to be a Cooperator.</li>\n"
+"</ol>\n"
+"<p>This verification is done as follows:</p>\n"
+"<ol>\n"
+"<li>we ask you for your <strong>identity details</strong>: your given name(s) and family name(s), your date of birth;</li>\n"
+"<li>we ask a few existing members of the Cooperative (your Verifiers) to verify that the information on your official identiy document matches the one you provided in the previous step, on the basis of a direct exchange of e-mails or of a videoconference meeting with you;</li>\n"
+"<li>once they have confirmed this match, you will be welcomed as a Cooperator, with full rights - once you have purchased at least <a href="https://www.cosmopolitical.coop/share">one share</a> and paid your <a href="https://www.cosmopolitical.coop/yearcontrib">yearly contribution to our operations</a>.</li>\n"
+"</ol>\n"
+"<p>Please start your registration now! We look forward to welcoming you in our activities.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"The first step in your registration process is to validate that you are a \n"
+"human being, and not a robot. For this, we verify that you can receive and \n"
+"understand an e-mail that we will send to you: what we request from you is \n"
+"simple for a human being, much more complex for a robot."
+
+msgid "identity_verification_label"
+msgstr "Identity Verification"
+
+msgid "Send_id_copy_by_email"
+msgstr "Send a scan of a part of your official identity document by email."
+
+msgid "Send_video_conference_link"
+msgstr "Send proposals for the date and timeslot of a video conference."
+
+msgid "Proceed"
+msgstr "Proceed"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Please confirm you have sent the emails to the Verifiers."
+
+msgid "sent_confirmation_label"
+msgstr "Confirmation that the emails were sent to the Verifiers"
+
+msgid "submit_email_confirmation_title"
+msgstr "Confirm you sent the emails."
+
+msgid "confirm_email_send_button_label"
+msgstr "Confirm"
+
+msgid "vote_success"
+msgstr "We thank you for participating in the voting process. Your vote ${vote} has been successfully recorded. You can change your vote until its deadline by returning to this page."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>As a Cooperator, you will participate in all our decisions. These decisions are adopted along rigorous democratic procedures, and can have important consequences for the Cooperative and for the Cooperators. In addition, the Cooperative intends to represent the EU citizens, independently from their nationality - but EU citizens only. This is particularly important during public elections. We hence need to ensure three things: (1) that a given person can register no more than once, so as to ensure the democratic principle \"one person = one vote\"; (2) that all Cooperators are at least of legal age and (3) that only citizens of the European Union are Cooperators.</p>\n"
+"    <p>This is why we will verify from you some elements of your identity data, by comparing (1) the data that you will introduce on this form upon your registration with (2) the information present on your official identity documents. This verification will be performed by a set of randomly-selected members of the Cooperative, the Verifiers of your application, and will be based upon information regarding your official identity documents that you will transmit to them directly, by e-mail or during a videoconference, with no transit through this online platform (for the sake of security and confidentiality).</p>\n"
+"    <p>The data that we request from you and that the Verifiers will check for conformity with the data on your official identity documents is:\n"
+"    <ul>\n"
+"    <li>your name(s) and surname(s);</li>\n"
+"    <li>your date of birth;</li>\n"
+"    <li>your citizenship.</li>\n"
+"    </ul></p>\n"
+"    <p>Only one person bears your name(s), your surname(s) and your date of birth: you. If you attempt to register again, you will need to provide the same data to our verification procedure, and we will reject your application, because you already are a Cooperator, and cannot have several accounts to vote more than once. We will be confident in doing so because we know that only one person has this combination of name(s), surname(s) and date of birth. Your date of birth enables us to verify that you are of legal age, and your citizenship enables us to ensure that you are indeed a citizen of the European Union.</p>\n"
+"    <p>This data will be used exclusively for us to verify your identity, your age and your citizenship, and to manage your account as a Cooperator. It will not be transmitted or sold to anyone, except to fulfill legal requirements by public authorities. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>We sent you per e-mail a set of four simple arithmetic computations to perform, identified from A to D, all following the same pattern: (A FIRST NUMBER BETWEEN 1 AND 9) multiplied by (A SECOND NUMBER BETWEEN 1 AND 9), plus (A THIRD NUMBER BETWEEN 1 AND 9). In order to perform the computation, you should first multiply the FIRST NUMBER BETWEEN 1 AND 9 by the SECOND NUMBER BETWEEN 1 AND 9. Once you have the result of this multiplication, you should add to that result the THIRD NUMBER BETWEEN 1 AND 9. You should finally write down the result of this last addition in the box provided for the result of the arithmetic computation you are performing (among the four that we sent to you, identified from A to D). You should repeat the computation for all four computations sent to you by e-mail.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>As part of the registration process as a Cooperator, you must choose a method for the verification of your identity. This verification of your identity is needed to ensure: (1) that a given person does not register several times with different e-mail addresses (we hereby heed the democratic prinicple: \"one person - one vote\"); (2) that only citizen of the European Union having reached the age of majority are Cooperators (<a href="https://www.cosmopolitical.coop/FAQ_EUscale" >see why</a>).</p>\n"
+"    <p>You have two options for this verification process:</p>\n"
+" <ul>\n"
+"   <li><strong>Send a copy of your identity documents by email:</strong> You can choose to securely send via e-mail a copy of your identity documents directly to a small set of randomly-selected Cooperators, your Verifiers. This method ensures a quick and direct way of confirming your identity.</li>\n"
+"   <li><strong>Arrange a video conference meeting:</strong> Alternatively, you may opt for a video conference session where you can present your identity documents live to your Verifiers. This method provides a more personal interaction and allows for immediate clarification if needed, orally if you share a common language, via the chat and automated translation if not.</li>\n"
+" </ul>\n"
+" <p>In both cases, we advise you, for security reasons, that you hide, on your official identity document, your place of birth and the identity document number, before copying it or showing it to your Verifiers.</p>\n"
+" <p>It is important that you make your choice promptly so that your registration process be smooth and timely. Please ensure that the method you choose is the most convenient for you and aligns with your privacy preferences.</p>\n"
+" <p>Your cooperation in this matter is greatly appreciated and is key to maintaining the high standards of trust and pan-European democracy within our Cooperative. Thank you for your understanding and active participation in this crucial step.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr "The number of existing Cooperators is too low to select the adequate number of Verifiers of your identity. Please contact the system administrator, at the following address ${administrator}, to solve the issue."
+
+msgid "email_copy_id_verification_subject"
+msgstr "en - ${site_name} - Please verify my identity as a new potential Cooperator"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"<div>\n"
+" <p>Dear Verifiers,</p>\n"
+
+    " <p>I am writing to you to complete the identity verification process for my application to become a Cooperator of ${site_name}. Attached to this email, you will find a partial copy of my official identity document.</p>\n"
+
+    " <p>Please note that certain sensitive information has been masked for security reasons. However, the document contain the information that you need to verify my identity according to the registration process of ${site_name}.</p>\n"
+
+    " <p>I kindly request that you review the attached document if possible within the next 3 days, to vote on the adequation between:</p>\n"
+"<ul>\n"
+   "<li>the identity information that you received directly by e-mail from the IT platform of ${site_name} (and that will be reminded to you on the voting interface) and </li>\n"
+   "<li>the identity information that you can read on the attached partial copy of my official identity document.</li>\n"
+"</ul>\n"
+     " <p>The link for you to vote on this adequation is the following: ${voting_url}.</p>\n"
+    " <p>I thank you very warmly in advance for supporting the process of my registration as a Cooperator to ${site_name}. Should you have any further questions or require additional information, please feel free to contact me directly in your own language.</p>\n"
+
+    " <p>Best regards,</p>\n"
+     " <p><strong>${signature}</strong></p>\n"
+
+    " <p>Attachment: [Name of the ID document file]</p>\n"
+
+      " <p><small>This email has been generated with the assistance of ${site_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${site_name} administrator.</small></p>\n"
+"</div>"
+
+msgid "email_video_id_verification_subject"
+msgstr "en - ${site_name} - Please verify my identity per video conference as a new potential Cooperator"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"<div>\n"
+" <p>Dear Verifiers,</p>\n"
+"    <p>I am writing to you to complete the identity verification process for my application to become a Cooperator of ${site_name}. I would like to propose a video conference meeting for this purpose.</p>\n"
+"    <p>Here are some time slots that I am suggesting for the video conference. Please note that I live in <strong>Germany</strong> (Please adjust according to your country / region of residence. This is necessary for your correspondent to know your time zone), so that the time of the day where I live may be different from the time of the day where you live. This video conference should last no longer than 10 minutes: (plase provide at least 3 options, if possible at different times of the day and on different days including during the week-end, all of them within 10 days after you send the e-mail)</p>\n"
+"   <ul>\n"
+"        <li>Monday, 04 September 2023, at 17:30 hours my time; (Adjust according to your availability)</li>\n"
+"        <li>Tuesday, 05 September 2023, at 20:30 hours my time; (Adjust according to your availability)</li>\n"
+"        <li>Saturday, 09 September 2023, at 10:00 hours my time. (Adjust according to your availability)</li>\n"
+"    </ul>\n"
+"    <p><strong>Please remember that we may live in different time zones! Please transpose these time slots to your own time zone.</strong></p>\n"
+"    <p>The video conference will take place using the following link:</p>\n"
+"(please insert here the link that you have prepared for this videoconference. Here are our suggestions of platforms that you can use to create the videoconference and provide the corresponding link:\n"
+"   <ul>\n"
+"        <li><a href="https://meet.jit.si/">Jitsi Meet</a> (free and open-source software)</li>\n"
+"        <li><a href="https://framatalk.org/abc/en/">Framatalk</a> (free and open-source software)</li>\n"
+"        <li><a href="https://zoom.us/">Zoom</a> (proprietary software)</li>\n"
+"        <li><a href="https://www.microsoft.com/en-gb/microsoft-teams/log-in">Microsoft Teams</a> (proprietary software, platform behind paywall)</li>\n"
+"        <li><a href="https://meet.google.com/?pli=1">Google Meet</a> (proprietary software, cost-free access to the platform)</li>\n"
+"    </ul>)\n"
+"    <p>Please kindly select a time slot that suits you, and send me an e-mail containing your selection.</p>\n"
+"    <p>During the videoconference meeting, it can happen that we don't share any common language. If this is the case, I suggest that we adopt a kind and supportive attitude towards each other. I propose that we use the chat to express ourselves in our respective languages, and use machine translation to understand what our interlocutor is writing.</p>\n"
+"    <p>Once you have held this meeting per videoconference, I kindly request that you vote to either confirm or refute the adequation between:</p>\n"
+"<ul>\n"
+"    <li>the identity information that you received directly by e-mail from the IT platform of ${site_name} (and that will be reminded to you on the voting interface) and </li>\n"
+"   <li>the identity information that you will have seen during the videoconference.</li>\n"
+"</ul>\n"
+" <p>The link for you to vote on this adequation is the following: ${voting_url}.</p>\n"
+"  <p>I thank you very warmly in advance for supporting the process of my registration as a Cooperator to ${site_name}. Should you have any further questions or require additional information, please feel free to contact me directly.</p>\n"
+" <p>Best regards,</p>\n"
+" <p><strong>${signature}</strong></p>\n"
+" <p><small>This email has been generated with the assistance of ${site_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${site_name} administrator.</small></p>\n"
+"</div>"
+
+msgid "forget_email_in_member_list"
+msgstr "If the user exists, s/he will receive an email."
