@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
-<head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Registration to <span tal:replace="site_name"></span></title>
-</head>
-<body tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registration to <span tal:replace="site_name"></span></title>
+    </head>
+    <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Thank you for starting your registration to the platform <span tal:replace="site_name"></span></h1>
-    <p tal:omit-tag="textual">To verify your email address and ensure you're a human (not a robot), we've devised a series of simple calculations. Please solve the four calculations labeled from A to D and enter the respective results in the corresponding fields on the registration page linked below.</p>
-    <div omit-tag="textual">
+        <h1 tal:omit-tag="textual">Thank you for starting your registration to the platform <span
+                tal:replace="site_name"></span></h1>
+        <p tal:omit-tag="textual">To verify your email address and ensure you're a human (not a
+            robot), we've devised a series of 4 simple mathematical operations. Please perform the
+            four mathematical operations labeled from A to D below and enter their results in the
+            corresponding fields on the registration page linked below.</p>
+        <div omit-tag="textual">
 
-        <p tal:omit-tag="textual">Operation A is <span tal:content="challenge_A" tal:omit-tag="textual">The first challenge</span></p>
-        <p tal:omit-tag="textual">Operation B is <span tal:content="challenge_B" tal:omit-tag="textual">The second challenge</span></p>
-        <p tal:omit-tag="textual">Operation C is <span tal:content="challenge_C" tal:omit-tag="textual">The third challenge</span></p>
-        <p tal:omit-tag="textual">Operation D is <span tal:content="challenge_D" tal:omit-tag="textual">The fours challenge</span></p>
-    </div>
-    <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
-        <span tal:replace="string:${page_register_with_oid}"></span>
-    </a>
+            <p tal:omit-tag="textual">Operation A is <span tal:content="challenge_A"
+                    tal:omit-tag="textual">The first challenge</span></p>
+            <p tal:omit-tag="textual">Operation B is <span tal:content="challenge_B"
+                    tal:omit-tag="textual">The second challenge</span></p>
+            <p tal:omit-tag="textual">Operation C is <span tal:content="challenge_C"
+                    tal:omit-tag="textual">The third challenge</span></p>
+            <p tal:omit-tag="textual">Operation D is <span tal:content="challenge_D"
+                    tal:omit-tag="textual">The fourth challenge</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link to the registration page on which to provide the results of the operations A to D above:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
 
-    <p tal:omit-tag="textual">Thank you for your interest in our activities. We look forward to welcoming you soon!</p>
-    
-    <footer tal:omit-tag="textual">
-        <p tal:omit-tag="textual">Sincerely,</p>
-        <p tal:omit-tag="textual">The team at <span tal:replace="site_name">Site</span></p>
-    </footer>
+        <p tal:omit-tag="textual">Thank you for your interest in our activities. We look forward to
+            welcoming you soon!</p>
 
-</body>
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Sincerely,</p>
+            <p tal:omit-tag="textual">The team at <span tal:replace="site_name">Site</span></p>
+        </footer>
+
+    </body>
 </html>
