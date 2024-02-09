@@ -17,8 +17,10 @@ from alirpunkto.models.user_datas import (
 )
 from .models.candidature import (
     Candidature,
-    Candidatures,
     CandidatureStates,
+)
+from .models.user_datas import (
+    PersistentUsers
 )
 from pyramid_mailer.message import Message, Attachment
 from pyramid_zodbconn import get_connection
@@ -66,7 +68,7 @@ def get_preferred_language(request: Request)->str:
         preferred_language = "en"
     return preferred_language
 
-def get_candidatures(request)->Candidatures:
+def get_candidatures(request)->PersistentUsers:
     """Get the candidatures from the request.
     Args:
         request (pyramid.request.Request): the request
@@ -74,7 +76,12 @@ def get_candidatures(request)->Candidatures:
         Candidatures: the candidatures
     """
     conn = get_connection(request)
-    return Candidatures.get_instance(connection=conn)
+    persistent_users = PersistentUsers.get_instance(connection=conn)
+    #filter the candidatures
+    candidatures = {oid: user for oid, user in persistent_users.items()
+        if isinstance(user, Candidature)
+    }
+    return candidatures
 
 def get_unsecure_ldap_connection() -> Connection:
     """Get an unsecure LDAP connection.
@@ -564,7 +571,7 @@ def register_user_to_ldap(request, candidature, password):
         'userPassword': password,
         'sn': (
             candidature.data.fullsurname
-                if candidature.type == CandidatureTypes.COOPERATOR
+                if candidature.type == UserTypes.COOPERATOR
                 else pseudonym
         ), # sn is obligatory
         'cn': pseudonym, # Use the pseudonym as commonName
@@ -577,7 +584,7 @@ def register_user_to_ldap(request, candidature, password):
         "isBoardMember": "False",
         "isMemberOfMediationArbitrationCouncil": "False"
     }
-    if candidature.type == CandidatureTypes.COOPERATOR:
+    if candidature.type == UserTypes.COOPERATOR:
         # Add full name to inetOrgPerson attribute
         #@TODO conforter
         attributes['gn'] = candidature.data.fullname
@@ -595,13 +602,13 @@ def register_user_to_ldap(request, candidature, password):
         success = conn.add(dn, attributes=attributes)
         if success:
             match candidature.type:
-                case CandidatureTypes.COOPERATOR:
+                case UserTypes.COOPERATOR:
                     group_dn = ("cn=cooperatorsGroup,"
                                 f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
                                 f"{LDAP_BASE_DN}"
                     )
                     conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
-                case CandidatureTypes.ORDINARY:
+                case UserTypes.ORDINARY:
                     group_dn = ("cn=ordinaryMembersGroup,"
                                 f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
                                 f"{LDAP_BASE_DN}"

@@ -1,6 +1,6 @@
 # Description: UserDatas model
-#   A UserDatas is an object that represents the user datas manage by the application.
-# Creation date: 2023-07-22
+# A UserDatas is an object that represents the user datas manage by the application.
+# Creation date: 2024-02-06
 # Author: Michaël Launay
 
 from typing import Type, Tuple, List, Any, Optional, Dict, Iterator
@@ -295,6 +295,81 @@ class UserDatas:
         for field in fields(self):
             yield field.name, getattr(self, field.name)
 
+class PersistentUsers(PersistentMapping):
+    """A mapping to store PersistentUserDatas in the ZODB.
+    Coulb be used as a singleton if all calls are made through get_instance.
+    """
+    _instance = None
+
+    @staticmethod
+    def get_instance(connection:Connection = None) -> Type['PersistentUsers']:
+        """Get the singleton instance. Not thread safe !
+        Args:
+            connection: The ZODB connection, could be change for testing.
+        Returns:
+            The singleton instance.
+            This singleton instance is a mapping to store lists of PersistentUserDatas
+            subtypes associated with one unique oid.
+        Raises:
+            TypeError: The connection argument must be an instance of 
+                    ZODB.Connection.Connection
+        """
+        if PersistentUsers._instance is not None:
+            #check if the zodb connexion is still alive then return the instance
+            try:
+                'test' in PersistentUsers._instance
+            except Exception as e:
+                log.error(f"Error while getting users instance: {e}")
+                raise e
+            return PersistentUsers._instance
+
+        # Check if a ZODB is provided
+        if not isinstance(connection, Connection):
+            raise TypeError(
+                "The connection argument must be an instance of "
+                "ZODB.Connection.Connection"
+            )
+
+        # check if root exists
+        root = connection.root()
+        if 'users' not in root:
+            connection.root()['users'] = PersistentUsers()
+            transaction.commit()
+        PersistentUsers._instance = connection.root()['users']
+        return root['users']
+
+    def __init__(self):
+        """Constructor.
+        """
+        super().__init__()
+        self._monitored_users = PersistentMapping()
+
+    @property
+    def monitored_users(self)-> PersistentMapping:
+        """ Get the monitored users.
+        A monitored user is a user that is not in DRAFT or
+          APPROUVED or REFUSED state and needs to be monitored.
+        For exemple, It could be necessary to send them a reminder email
+          to the verifiers if the expiration date is approaching.
+        Returns:
+            The monitored users.DELETED
+        """
+        return self._monitored_users
+
+    @property
+    def users_emails(self)-> List[str]:
+        """Retrieve the emails of all users.
+
+        This method returns a list of email addresses from all users. 
+        In future versions, this functionality might be enhanced with caching 
+        and listeners to maintain updated and accurate values.
+
+        Returns:
+            List[str]: A list containing the emails of all users.
+        """
+        return [user.email for user in self.values()]
+
+
 class PersistentUserDatas(Persistent):
     """A user_datas in the ZODB.
     """
@@ -560,7 +635,7 @@ class PersistentUserDatas(Persistent):
         """
         if user_datas is None:
             # get the singleton instance
-            user_datas = PersistentUserDatas.get_instance() # @TODO replace by abstract factory selected by type
+            user_datas = PersistentUsers.get_instance()
         for _ in range(max_retries):
             oid = str(UserDatasFunctions.uuid())
             if oid not in user_datas:
