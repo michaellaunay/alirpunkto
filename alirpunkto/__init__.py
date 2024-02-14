@@ -19,7 +19,27 @@ from pkg_resources import resource_filename
 from pyramid.threadlocal import get_current_request
 from ldap3 import Server, Connection, ALL
 
-from .constants_and_globals import *
+from .constants_and_globals import (
+    _,
+    log,
+    LDAP_ADMIN_OID,
+    LDAP_SERVER,
+    LDAP_BASE_DN,
+    LDAP_OU,
+    LDAP_LOGIN,
+    LDAP_PASSWORD,
+    AVAILABLE_LANGUAGES,
+    ADMIN_LOGIN,
+    MAIL_USERNAME,
+    MAIL_PASSWORD,
+    MAIL_SENDER,
+    MAIL_HOST,
+    MAIL_PORT,
+    MAIL_TLS,
+    MAIL_SSL,
+    SECRET_KEY,
+    DEFAULT_SESSION_TIMEOUT,
+)
 
 @subscriber(NewRequest)
 def add_localizer(event):
@@ -105,10 +125,11 @@ def create_ldap_groups_if_not_exists():
 
     # Checking for existence and creating groups
     for group in groups:
-        dn = f"cn={group['name']},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU else f"cn={group['name']},{LDAP_BASE_DN}"
+        dn = (f"cn={group['name']},{LDAP_OU},{LDAP_BASE_DN}"
+                if LDAP_OU else f"cn={group['name']},{LDAP_BASE_DN}")
         # Check if the group already exists
         if conn.search(dn, '(objectClass=*)', search_scope='BASE'):
-            logging.warning(f"Group {group['name']} already exists.")
+            log.warning(f"Group {group['name']} already exists.")
             continue  # Skip to the next group if it already exists
 
         # Creating the group
@@ -118,7 +139,7 @@ def create_ldap_groups_if_not_exists():
             'uniqueMember': admin_dn
         }
         if not conn.add(dn, attributes=attributes):
-            logging.error(f"Error adding group {group['name']}: {conn.result}")
+            log.error(f"Error adding group {group['name']}: {conn.result}")
     # Closing the connection
     conn.unbind()
 

@@ -5,15 +5,8 @@
 from typing import Dict, Union
 from pyramid.request import Request
 from alirpunkto.models.user_datas import (
-    UserStates,
     EmailSendStatus,
-    UserTypes,
-    UserRoles,
-    UserDatasEvent,
-    EmailEvent,
-    UserDatasFunctions,
-    PersistentUserDatas,
-    UserDatas,
+    UserTypes
 )
 from .models.candidature import (
     Candidature,
@@ -44,6 +37,7 @@ from .constants_and_globals import (
     MAX_PASSWORD_LENGTH,
     pseudonym_pattern,
     log,
+    SPECIAL_CHARACTERS
 )
 from pyramid.i18n import get_localizer
 from ldap3 import Server, Connection, ALL, MODIFY_ADD
@@ -76,12 +70,7 @@ def get_candidatures(request)->PersistentUsers:
         Candidatures: the candidatures
     """
     conn = get_connection(request)
-    persistent_users = PersistentUsers.get_instance(connection=conn)
-    #filter the candidatures
-    candidatures = {oid: user for oid, user in persistent_users.items()
-        if isinstance(user, Candidature)
-    }
-    return candidatures
+    return PersistentUsers.get_instance(connection=conn)
 
 def get_unsecure_ldap_connection() -> Connection:
     """Get an unsecure LDAP connection.
@@ -378,7 +367,6 @@ def generate_key(secret:str)->bytes:
     sha256.update(secret.encode())
     return sha256.digest()
 
-
 def decrypt_oid(encrypted_oid: str, seed_size: int, secret: str) -> [str, str]:
     """Decrypt the OID using the SECRET and return the decrypted OID and seed.
 
@@ -414,8 +402,6 @@ def encrypt_oid(oid: str, seed: str, secret: str) -> str:
         encrypted_message).decode()
     
     return encoded_encrypted_message
-
-
 
 from typing import List, Dict
 
@@ -758,11 +744,11 @@ def send_candidature_state_change_email(request: Request,
     
     if success:
         candidature.add_email_send_status(
-            CandidatureEmailSendStatus.SENT, sending_function_name)
+            EmailSendStatus.SENT, sending_function_name)
         return {'success': True}
     else:
         candidature.add_email_send_status(
-            CandidatureEmailSendStatus.ERROR, sending_function_name)
+            EmailSendStatus.ERROR, sending_function_name)
         return {'error': _('email_not_sent')}
 
 def send_validation_email(

@@ -20,6 +20,7 @@ from alirpunkto.models.candidature import (
 )
 from alirpunkto.models.user_datas import (
     UserTypes,
+    UserDatas,
     EmailSendStatus,
     PersistentUserDatas,
 )
@@ -125,7 +126,7 @@ def _handle_candidature_state(
 
     Returns:
     - Dict: A dictionary with the rendered state view.
-    """   
+    """
     match candidature.state:
         case CandidatureStates.DRAFT:
             return handle_draft_state(request, candidature)
@@ -159,6 +160,8 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
     Returns:
         dict: Candidature data and error messages or HTTPFound on success.
     """
+    log.debug(f"Handling draft state for candidature {candidature.oid}")
+
     if 'submit' in request.POST:
         email = request.params['email']
         choice = request.params['choice']
@@ -263,7 +266,7 @@ def commit_candidature_changes(request: Request,
     """
     candidatures = get_candidatures(request)
     candidatures[candidature.oid] = candidature
-    candidatures.monitored_candidatures[candidature.oid] = candidature
+    candidatures.monitored_users[candidature.oid] = candidature
 
     try:
         request.tm.commit()
@@ -300,6 +303,7 @@ def handle_email_validation_state(
         dict: Response dictionary containing candidature data, form rendering,
               and error messages as needed.
     """
+    log.debug(f"Handling email validation state for candidature {candidature.oid}")
     if 'submit' in request.POST:
         # Validate the challenge
         challenge_error = validate_challenge(request, candidature)
@@ -395,6 +399,7 @@ def handle_confirmed_human_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
+    log.debug(f"Handling confirmed human state for candidature {candidature.oid}")
     schema = RegisterForm().bind(request=request)
     appstruct = {
         'cooperative_number': candidature.oid,
@@ -462,7 +467,7 @@ def handle_confirmed_human_state(request, candidature):
                     'candidature': candidature,
                     'UserTypes': UserTypes
                 }
-            candidatures.monitored_candidatures.pop(candidature.oid, None)
+            candidatures.monitored_users.pop(candidature.oid, None)
             candidature.state = CandidatureStates.APPROVED
             email_template = "send_candidature_approuved_email"
 
@@ -474,7 +479,7 @@ def handle_confirmed_human_state(request, candidature):
             appstruct['lang2'] = request.params['lang2']
             parameters = {
                 k: request.params[k]
-                for k in PersistentUserDatas.__dataclass_fields__.keys()
+                for k in UserDatas.__dataclass_fields__.keys()
                 if k in request.params
             }
             try:
@@ -488,7 +493,7 @@ def handle_confirmed_human_state(request, candidature):
                     'candidature': candidature,
                     'UserTypes': UserTypes
                 }
-            data = PersistentUserDatas(**parameters)
+            data = UserDatas(**parameters)
             candidature.data = data
 
             candidature.pseudonym = request.params['pseudonym']
@@ -627,6 +632,7 @@ def handle_unique_data_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
+    log.debug(f"Handling unique data state for candidature {candidature.oid}")
     if not candidature.voters:
         prepare_for_cooperator(request, candidature)
     if 'confirm' in request.POST:
@@ -669,6 +675,7 @@ def handle_pending_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
+    log.debug(f"Handling pending state for candidature {candidature.oid}")
     return {
         'candidature': candidature,
         'UserTypes': UserTypes,
@@ -684,6 +691,7 @@ def handle_default_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
+    log.error(f"Unhandled candidature state: {candidature.state}")
     return {
         'candidature': candidature,
         'UserTypes': UserTypes,
