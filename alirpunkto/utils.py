@@ -320,7 +320,7 @@ def generate_math_challenges(request: Request)->Dict[str, str]:
         str_num3 = localizer.translate(_(numbers[num3]))
         str_times = localizer.translate(_("times"))
         str_plus = localizer.translate(_("plus"))
-        challenge_str = f"{str_num1} {str_times} {str_num2} {str_plus} {str_num3}"
+        challenge_str = f"{str_num1} {str_times} {str_num2}, {str_plus} {str_num3}"
         challenge_solution = num1 * num2 + num3
         challenges[label] = (challenge_str, challenge_solution)
     return challenges
