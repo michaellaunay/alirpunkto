@@ -602,22 +602,27 @@ def get_template_parameters_for_cooperator(
             "Alirpunkto team"
         ) else "",
     )
+    local_datas = {
+        "voting_url":voting_url,
+        "signature":signature,
+        "site_name":request.registry.settings.get('site_name')
+    }
     email_copy_id_verification_body = _(
         "email_copy_id_verification_body",
-        {"voting_url":voting_url, "signature":signature}
+        local_datas
     )
     email_video_id_verification_body = _(
         "email_video_id_verification_body",
-        {"voting_url":voting_url, "signature":signature}
+        local_datas
     )
 
     return {
         'candidature': candidature,
         'UserTypes': UserTypes,
         'voters': candidature.voters,
-        'data_email_video_id_verification_subject':_("email_video_id_verification_subject"),
+        'data_email_video_id_verification_subject':_("email_video_id_verification_subject", local_datas),
         'data_email_video_id_verification_body': email_video_id_verification_body,
-        'data_email_copy_id_verification_subject':_("email_copy_id_verification_subject"),
+        'data_email_copy_id_verification_subject':_("email_copy_id_verification_subject", local_datas),
         'data_email_copy_id_verification_body':email_copy_id_verification_body,
     }
 
