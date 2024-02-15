@@ -565,10 +565,6 @@ def register_user_to_ldap(request, candidature, password):
         'employeeType': candidature.type.name, # Use the type as employeeType,
          # Use the fullsurname as sn
         "isActive": "True",
-        "isOrdinaryMember": "True",
-        "isCooperatorMember": "False",
-        "isBoardMember": "False",
-        "isMemberOfMediationArbitrationCouncil": "False"
     }
     if candidature.type == UserTypes.COOPERATOR:
         # Add full name to inetOrgPerson attribute
@@ -580,8 +576,6 @@ def register_user_to_ldap(request, candidature, password):
         #@TODO check language code
         attributes["preferredLanguage"] = candidature.data.lang1
         attributes["secondLanguage"] = candidature.data.lang2
-        attributes["isOrdinaryMember"] = "False"
-        attributes["isCooperatorMember"] = "True"
     log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
     # Add the new user to LDAP
     try:
