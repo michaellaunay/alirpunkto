@@ -940,3 +940,81 @@ Voici le scénario de réinitialisation du mot de passe :
     - 16) AlirPunkto met à jour les événements de la candidature
     - 17) AlirPunkto affiche la zpt forgot_password.pt de confirmation de changement de mot de passe
     - 18) AlirPunkto envoie un mail à l'utilisateur pour le prévenir du changement de mot de passe
+
+2024-02-05 à 2024-02-14
+
+   Refactorisation des Candidatures pour généraliser le mécanisme de lien chiffré à envoyer pour modification des données de membre ou du mot de passe.
+
+2024-02-16
+   Pour configurer notre serveur Ubuntu 22.04 afin qu'il lance automatiquement le script `/home/alirpunkto/alirpunkto/bin/pserve production.ini` à chaque démarrage sous le compte utilisateur `alirpunkto`, nous utilisons `systemd`, un système d'init et un gestionnaire de système pour Linux. Voici comment procéder :
+
+   1. **Créer un fichier de service systemd**
+
+   Nous devons créer un fichier de service systemd pour votre application. Ouvrons un terminal et utilisons vim :
+
+   ```bash
+   sudo vim /etc/systemd/system/alirpunkto.service
+   ```
+
+   2. **Ajouter le contenu au fichier de service**
+
+   Dans l'éditeur, ajoutons le contenu suivant, qui définit le service :
+
+   ```ini
+   [Unit]
+   Description=Alirpunkto Application
+   After=network.target
+
+   [Service]
+   User=alirpunkto
+   Group=alirpunkto
+   WorkingDirectory=/home/alirpunkto/alirpunkto
+   ExecStart=/home/alirpunkto/alirpunkto/bin/pserve production.ini
+   Restart=always
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+   Ce fichier de configuration fait plusieurs choses :
+   - **Description** : Donne une description de votre service.
+   - **After** : Indique que ce service doit être démarré après le réseau (ce qui est important pour une application web).
+   - **User** et **Group** : Spécifie sous quel utilisateur et groupe le service doit s'exécuter.
+   - **WorkingDirectory** : Définit le répertoire de travail pour l'exécution du script.
+   - **ExecStart** : Indique la commande à exécuter pour démarrer le service.
+   - **Restart** : Politique de redémarrage du service, ici configuré pour toujours redémarrer en cas d'échec.
+   - **WantedBy** : Définit à quel niveau de cibles le service doit être automatiquement démarré.
+
+   3. **Recharger les daemons systemd**
+
+   Après avoir enregistré et fermé l'éditeur, rechargeons les configurations systemd pour qu'il prenne en compte le nouveau fichier de service :
+
+   ```bash
+   sudo systemctl daemon-reload
+   ```
+
+   4. **Activer le service**
+
+   Pour que notre service démarre automatiquement à chaque démarrage du système, activons-le avec la commande suivante :
+
+   ```bash
+   sudo systemctl enable alirpunkto.service
+   ```
+
+   5. **Démarrer le service manuellement (optionnel)**
+
+   Si nous souhaitons démarrer le service tout de suite sans redémarrer notre serveur :
+
+   ```bash
+   sudo systemctl start alirpunkto.service
+   ```
+
+   6. **Vérifier l'état du service**
+
+   Pour vérifier que le service fonctionne correctement, nous pouvons vérifier son statut :
+
+   ```bash
+   sudo systemctl status alirpunkto.service
+   ```
+
+
