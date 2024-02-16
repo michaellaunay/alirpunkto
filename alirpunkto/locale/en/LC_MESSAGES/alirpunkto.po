@@ -217,7 +217,10 @@ msgid "times"
 msgstr "multiplied by"
 
 msgid "plus"
-msgstr ", plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
 
 msgid "email_validation_subject"
 msgstr "Verifying that you are an human. Compute the results of simple mathematical operations and enter these results on the portal"

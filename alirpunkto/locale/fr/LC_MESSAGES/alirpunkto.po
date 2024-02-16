@@ -250,7 +250,10 @@ msgid "times"
 msgstr "multiplié par"
 
 msgid "plus"
-msgstr ", plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
 
 msgid "email_validation_subject"
 msgstr ""
