@@ -179,7 +179,7 @@ msgid "user_types_cooperator_value"
 msgstr ""
 "Cooperatore: La richiesta di diventare socio a tutti gli effetti della "
 "Cooperativa, un Cooperatore = con un processo di registrazione completo che "
-"garantisca il principio \"una persona = un voto\" e che il Richiedente sia "
+"garantisca il principio 'una persona = un voto' e che il Richiedente sia "
 "cittadino dell'Unione Europea, l'obbligo di acquistare almeno un'azione e di "
 "pagare un contributo annuale, e pieni diritti decisionali."
 
