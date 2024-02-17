@@ -194,7 +194,7 @@ msgid "user_types_cooperator_value"
 msgstr ""
 "Spółdzielca: Wniosek o przyjęcie w poczet pełnoprawnych członków "
 "Spółdzielni, Spółdzielca = z kompletnym procesem rejestracji zapewniającym "
-"zasadę \"jedna osoba = jeden głos\" oraz, że Wnioskodawca jest obywatelem "
+"zasadę 'jedna osoba = jeden głos' oraz, że Wnioskodawca jest obywatelem "
 "Unii Europejskiej, obowiązek zakupu co najmniej jednego udziału i wniesienia "
 "rocznego wkładu oraz pełne prawa decyzyjne."
 
