@@ -188,7 +188,7 @@ msgid "user_types_cooperator_value"
 msgstr ""
 "Coopérateur : Une inscription pour devenir membre à part entière de la "
 "Coopérative, un Coopérateur = avec un processus d'inscription complet "
-"garantissant le principe \"une personne = une voix\" et que le demandeur est "
+"garantissant le principe 'une personne = une voix' et que le demandeur est "
 "un citoyen de l'Union européenne, l'obligation d'acheter au moins une part "
 "et de payer une contribution annuelle, et les pleins droits de décision."
 
