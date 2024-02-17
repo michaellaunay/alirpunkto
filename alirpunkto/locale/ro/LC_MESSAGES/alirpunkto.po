@@ -192,7 +192,7 @@ msgid "user_types_cooperator_value"
 msgstr ""
 "Cooperator: O cerere pentru a deveni membru cu drepturi depline al "
 "Cooperativei, un Cooperator = cu un proces de înregistrare complet care să "
-"asigure principiul \"o persoană = un vot\" și faptul că solicitantul este "
+"asigure principiul 'o persoană = un vot' și faptul că solicitantul este "
 "cetățean al Uniunii Europene, obligația de a achiziționa cel puțin o acțiune "
 "și de a plăti o contribuție anuală, precum și drepturi depline de decizie."
 
