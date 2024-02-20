@@ -280,10 +280,6 @@ class UserDatas:
     password_confirm: str
     lang1: str
     lang2: str
-    is_ordinary_member: bool = False
-    is_cooperator_member: bool = False
-    is_board_member: bool = False
-    is_member_of_mediation_arbitration_council: bool = False
     role: UserRoles = UserRoles.NONE
 
     def iter_attributes(self)-> Iterator[Tuple[str, Any]]:
