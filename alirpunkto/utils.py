@@ -610,7 +610,7 @@ def register_user_to_ldap(request, candidature, password):
         return {'status': 'success', 'message': _('registration_successful')}
     else:
         log.error(f"Error while adding user {pseudonym} to LDAP : {conn.result}")
-        return {'status': 'failure', 'message': _('registration_failed')}
+        return {'status': 'error', 'message': _('registration_failed')}
 
 def is_admin(username:str, password:str)-> bool:
     """
