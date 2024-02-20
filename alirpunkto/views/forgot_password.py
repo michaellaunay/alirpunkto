@@ -13,6 +13,10 @@ from alirpunkto.models.users import (
     User
 )
 
+from alirpunkto.models.user_datas import (
+    UserDatas
+)
+
 from alirpunkto.constants_and_globals import (
     _,
     LDAP_ADMIN_OID,
@@ -59,23 +63,24 @@ def forgot_password(request):
             log.warning('forgot_password: Admin user cannot reset password: {}'.format(mail[:512]))
             request.session.flash(_('forget_admin_user'), 'error')
             return {"error":_('forget_admin_user')}
-        # 5) AlirPunkto checks if there is an application for the user
+        # 5) AlirPunkto create user from LDAP information
         user = User.create_user(pseudo, mail, uid)
         # get the ZODB connection
         connection = get_connection(request)
-        root = connection.root()        
+        root = connection.root()
+        # 5.1) AlirPunkto checks if there is a user being modified
+        # get the list of users being modified
         if MEMBERS_BEING_MODIFIED not in root:
             root[MEMBERS_BEING_MODIFIED] = BTrees.OOBTree.BTree()
             transaction.commit()
         reset_users = root[MEMBERS_BEING_MODIFIED]
+        # Add the user to the list of users being modified
         reset_users[uid] = user
         transaction.commit()
 
-        # 5.1) If not, AlirPunkto creates an application from the ldap information
-        # 5.2) If yes, AlirPunkto retrieves the application and updates it with the ldap information (ldap priority)
         # 6) AlirPunkto generates a hashed password reset token
         # 7) AlirPunkto creates a password reset event and adds the token to it
-        # 8) AlirPunkto creates a link to the application with the token
+        # 8) AlirPunkto creates a link to the persistent user with the token
         # 9) AlirPunkto sends an email to the user with the link
         # 10) AlirPunkto displays a message indicating that the email has been sent (same message as 3.1)
         # 11) The user receives the email and clicks on the link
