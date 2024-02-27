@@ -82,10 +82,10 @@ def _retrieve_candidature(
     - tuple: A tuple containing the candidature object and an error dict if applicable.
     """
     # Check if the candidature is already in the request
-    candidatures = get_candidatures(request)
-    if CANDIDATURE_OID in request.session and \
-       request.session[CANDIDATURE_OID] in candidatures:
-        return candidatures[request.session[CANDIDATURE_OID]], None
+    if CANDIDATURE_OID in request.session :
+        candidature = get_candidature_by_oid(request.session[CANDIDATURE_OID], request)
+        if candidature :
+            return candidature, None
 
     # If the candidature is not in the request, try to retrieve it from the URL
     encrypted_oid = request.params.get("oid", None)

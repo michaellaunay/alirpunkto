@@ -365,53 +365,84 @@ class PersistentUsers(PersistentMapping):
         """
         return [user.email for user in self.values()]
 
-
+# @TODO Rename this class to User and model.user to model.member
 class PersistentUserDatas(Persistent):
-    """A user_datas in the ZODB.
+    """
+    Represents a persistent storage object for user data within the ZODB.
+
+    This class is designed to manage user data, track modifications, and
+    handle state transitions securely. It supports recording various user-related
+    data, including personal information, state, type, and modification history.
+    It's particularly suitable for applications that require detailed audit trails
+    and historical data tracking.
+
+    Properties:
+        data (UserDatas): Accesses the data for the user. Supports get and set operations.
+        oid (str): Retrieves the unique object identifier. Read-only.
+        voters (list): Manages the list of voters associated with the user. Supports get and set operations.
+        state (UserStates): Controls the current state of the user. Supports get and set operations.
+        type (UserTypes or None): Defines the type of the user. Supports get and set operations.
+        email (str or None): Manages the email address associated with the user. Supports get and set operations.
+        votes (dict): Accesses the dictionary of votes associated with the user. Supports get and set operations.
+        seed (str): Retrieves the random string used to generate the OID. Read-only.
+        email_send_status_history (list of EmailEvent): Accesses the list that records the email send status history. Supports get and set operations.
+        challenge (tuple[str, int]): Manages the math challenge and its solution. Supports get and set operations.
+        pseudonym (str): Accesses the pseudonym of the user. Supports get and set operations.
+        modifications (list of UserDatasEvent): Tracks modifications to the user data. Supports get and set operations.
     """
 
     __acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]
 
-    def __init__(self, data = None):
-        """    Initialize a new PersistentUserDatas object.
+    def __init__(self,
+        data: Optional[UserDatas] = None,
+        oid: Optional[str] = None,
+        voters: Optional[List[str]] = None,
+        state: UserStates = UserStates.DRAFT,
+        type: Optional[UserTypes] = None,
+        email: Optional[str] = None,
+        votes: Optional[Dict[str, int]] = None,
+        seed: Optional[str] = None,
+        email_send_status_history: Optional[List[EmailEvent]] = None,
+        challenge: Optional[Tuple[str, int]] = None,
+        pseudonym: Optional[str] = None,
+        modifications: Optional[List[UserDatasEvent]] = None
+        ):
+        """
+        Initialize a new PersistentUserDatas object.
 
         Args:
-            data (Optional[Type]): Initial data for the user.
-             Defaults to None.
+            data (UserDatas, optional): Initial data for the user. Defaults to None.
+            oid (str, optional): A unique object identifier. If not provided, a unique OID is generated. Defaults to None.
+            voters (list, optional): A list of voters associated with the user. Defaults to an empty list.
+            state (UserStates, optional): The current state of the user. Defaults to UserStates.DRAFT.
+            type (UserTypes or None, optional): The type of the user (e.g., administrator, regular user). Defaults to None.
+            email (str or None, optional): The email address associated with the user. Defaults to None.
+            votes (dict, optional): A dictionary of votes associated with the user. Defaults to an empty dict.
+            seed (str, optional): A random string used to generate the OID. Defaults to None.
+            email_send_status_history (list of EmailEvent, optional): A list to record the email send status history. Defaults to an empty list.
+            challenge (tuple[str, int], optional): A tuple containing a string math challenge and its solution as an integer. Defaults to None.
+            pseudonym (str, optional): The pseudonym of the user. Defaults to None.
+            modifications (list of UserDatasEvent, optional): A list to record modifications, where each entry is a dataclass containing the datetime, function name, previous value, new value, and seed. Defaults to an empty list.
 
-        Attributes:
-            _data (PersistentUserDatas): The data for the user.
-            _modifications (List[UserDatasEvent]): A list to record
-                modifications, each entry is a dataclass containing the
-                datetime, the function name, the previous value, the new value.
-            _state (UserStates): The current state of the user.
-            _type (UserTypes or None): The type of the user.
-            _email (str or None): The email associated with the user_datas.
-            _oid (str): A unique object identifier.
-            _seed (str): A random string used to generate the OID.
-            _email_send_status_history (List[EmailEvent]): A list to
-             record email send status history.
-            _challenge (Tuple[str, int]): A tuple containing the string math
-             challenge and the solution in integer.
-            _pseudonym (str): The pseudonym of the user.
         Raises:
-            RuntimeError: Raised if an instance already exists with same oid.
+            RuntimeError: Raised if an instance already exists with the same OID.
 
         """
         self._data = data
-        self._voters = []
-        self._state = UserStates.DRAFT
-        self._type = None
-        self._email = None
-        self._votes = {}
-        self._seed = None
-        self._email_send_status_history = []
-        self._challenge = None
-        self._pseudonym = None
-        # get a unique object id
-        self._oid = PersistentUserDatas.generate_unique_oid()
+        # get a unique object id if not provided
+        self._oid = oid if oid else PersistentUserDatas.generate_unique_oid()
+        self._voters = voters if voters else []
+        self._state = state
+        self._type = type
+        self._email = email
+        self._votes = votes if votes else {}
+        self._seed = seed
+        self._email_send_status_history = (email_send_status_history
+            if email_send_status_history else [])
+        self._challenge = challenge
+        self._pseudonym = pseudonym
         # get a random seed and record the creation
-        self._modifications = []
+        self._modifications = modifications if modifications else []
         self._memorize_changes("__init__", None, self._state)
 
     def _memorize_changes(

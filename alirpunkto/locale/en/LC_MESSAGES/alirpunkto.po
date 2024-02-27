@@ -617,3 +617,6 @@ msgstr ""
 
 msgid "forget_email_in_member_list"
 msgstr "If the user exists, s/he will receive an email."
+
+msgid "reset_password_email_subject"
+msgstr "Reset Your Password"

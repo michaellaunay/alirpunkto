@@ -3,17 +3,18 @@
 # date: 2023-09-30
 
 from typing import Dict, Union
+import datetime
 from pyramid.request import Request
 from alirpunkto.models.user_datas import (
+    PersistentUsers,
+    PersistentUserDatas,
     EmailSendStatus,
+    UserDatas,
     UserTypes
 )
 from .models.candidature import (
     Candidature,
     CandidatureStates,
-)
-from .models.user_datas import (
-    PersistentUsers
 )
 from pyramid_mailer.message import Message, Attachment
 from pyramid_zodbconn import get_connection
@@ -68,6 +69,16 @@ def get_candidatures(request)->PersistentUsers:
         request (pyramid.request.Request): the request
     Returns:
         Candidatures: the candidatures
+    """
+    conn = get_connection(request)
+    return PersistentUsers.get_instance(connection=conn)
+
+def get_persistent_users(request)->PersistentUsers:
+    """Get the persistent users from the request.
+    Args:
+        request (pyramid.request.Request): the request
+    Returns:
+        PersistentUsers: the persistent users
     """
     conn = get_connection(request)
     return PersistentUsers.get_instance(connection=conn)
@@ -326,16 +337,147 @@ def generate_math_challenges(request: Request)->Dict[str, str]:
         challenges[label] = (challenge_str, challenge_solution)
     return challenges
 
-def get_candidature_by_oid(oid, request):
+def get_candidature_by_oid(
+        oid:str,
+        request:Request
+    ) -> Candidature:
     """Get the candidature by its oid.
     Args:
         oid (str): the oid of the candidature
         request (pyramid.request.Request): the request
     Returns:
-        Candidature: the candidature
+        Candidature: the candidature or None if not found or not a Candidature
     """
     candidatures = get_candidatures(request)
-    return candidatures[oid] if oid in candidatures else None
+    candidature = candidatures[oid] if oid in candidatures else None
+    if not isinstance(candidature, Candidature):
+        candidature = None
+    return candidature
+
+def get_persistent_user_by_oid(
+        oid:str,
+        request:Request
+    ) -> PersistentUserDatas:
+    """Get the persistent user by its oid.
+    Args:
+        oid (str): the oid of the persistent user
+        request (pyramid.request.Request): the request
+    Returns:
+        PersistentUser: the persistent user or None if not found or not a PersistentUser
+    """
+    candidatures = get_candidatures(request)
+    user = candidatures[oid] if oid in candidatures else None
+    if not isinstance(user, PersistentUserDatas):
+        user = None
+    return user
+
+def append_persistent_user(
+        persistent_user: PersistentUserDatas,
+        request: Request):
+    """Append the persistent user to the list of persistent users.
+    Args:
+        persistent_user (PersistentUser): the persistent user
+        request (pyramid.request.Request): the request
+    """
+    persistent_users = get_persistent_users(request)
+    persistent_users[persistent_user.oid] = persistent_user
+
+def update_persistent_users_from_ldap(
+        oid: str,
+        request: Request
+    ) -> Union[PersistentUserDatas, None]:
+    """Update the persistent users from LDAP.
+    Args:
+        oid (str): the oid of the user
+        request (pyramid.request.Request): the request
+    Returns:
+        PersistentUser: the persistent user
+        None: if not found in ldap
+    """
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login = (f"{LDAP_LOGIN},"
+                  f"{(LDAP_OU + ',') if LDAP_OU else ''}"
+                  f"{LDAP_BASE_DN}"
+    )
+    try:
+        conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
+    except Exception as e:
+        log.error(f"Error while connecting to LDAP: {e}")
+        return None
+    # Extend the list of attributes retrieved to include all those added during registration
+    try:
+        conn.search(
+            LDAP_BASE_DN,
+            f'(uid={oid})',
+            attributes=['cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword', 'employeeNumber', 'isActive', 'gn', 'nationality', 'birthdate', 'preferredLanguage', 'secondLanguage']
+        )
+        if len(conn.entries) == 0:
+            log.warning(f"User {oid} not found in LDAP")
+            return None
+    except Exception as e:
+        log.error(f"Error while searching for user {oid} in LDAP: {e}")
+        return None
+    user_entry = conn.entries[0]
+    persistent_user_datas = get_persistent_user_by_oid(oid, request)
+
+    new_email = user_entry.mail.value.strip() if hasattr(user_entry, 'mail') else None
+    new_pseudonym = user_entry.cn.value.strip() if hasattr(user_entry, 'cn') else None
+    new_type = UserTypes[user_entry.employeeType.value.strip()] if hasattr(user_entry, 'employeeType') else None
+    new_fullname = user_entry.gn.value.strip() if hasattr(user_entry, 'gn') else None
+    new_nationality = user_entry.nationality.value.strip() if hasattr(user_entry, 'nationality') else None
+    new_birthdate = datetime.strptime(user_entry.birthdate.value, "%Y-%m-%d") if hasattr(user_entry, 'birthdate') else None
+    new_preferred_language = user_entry.preferredLanguage.value.strip() if hasattr(user_entry, 'preferredLanguage') else None
+    new_second_language = user_entry.secondLanguage.value.strip() if hasattr(user_entry, 'secondLanguage') else None
+
+    log.debug(f"Update PersistentUser {oid} with ldap informations")
+    if not persistent_user_datas:
+        log.debug(f"Create PersistentUser {oid} with informations found in LDAP with {new_email=}, {new_pseudonym=}, {new_type=}, {new_fullname=}, {new_nationality=}, {new_birthdate=}, {new_preferred_language=}, {new_second_language=}")
+        datas = UserDatas(
+            fullname=new_fullname,
+            fullsurname = new_fullname,
+            nationality = new_nationality,
+            birthdate = new_birthdate,
+            password = None,
+            password_confirmation = None,
+            lang1 = new_preferred_language,
+            lang2 = new_second_language,
+            role = new_type
+        )
+        persistent_user_datas = PersistentUserDatas(
+            email=new_email,
+            pseudonym=new_pseudonym,
+            oid=oid,
+            data=datas
+        )
+        append_persistent_user(persistent_user_datas, request)
+    else :
+        # Update the persistent_user_datas object with the data retrieved from LDAP
+        if new_email and persistent_user_datas.email != new_email:
+            log.debug(f"Update PersistentUser {oid} with new email {new_email}")
+            persistent_user_datas.email = new_email
+        if new_pseudonym and persistent_user_datas.pseudonym != new_pseudonym:
+            log.debug(f"Update PersistentUser {oid} with new pseudonym {new_pseudonym}")
+            persistent_user_datas.pseudonym = new_pseudonym
+        if new_type and persistent_user_datas.type != new_type:
+            log.debug(f"Update PersistentUser {oid} with new type {new_type}")
+            persistent_user_datas.type = new_type
+        # Add additional fields for cooperators
+        if new_fullname and persistent_user_datas.data.fullname != new_fullname:
+            log.debug(f"Update PersistentUser {oid} with new fullname {new_fullname}")
+            persistent_user_datas.data.fullname = new_fullname
+        if new_nationality and persistent_user_datas.data.national != new_nationality:
+            log.debug(f"Update PersistentUser {oid} with new nationality {new_nationality}")
+            persistent_user_datas.data.nationality = new_nationality
+        if new_birthdate and persistent_user_datas.data.birthdate != new_birthdate:
+            log.debug(f"Update PersistentUser {oid} with new birthdate {new_birthdate}")
+            persistent_user_datas.data.birthdate = new_birthdate
+        if new_preferred_language and persistent_user_datas.data.lang1 != new_preferred_language:
+            log.debug(f"Update PersistentUser {oid} with new preferred language {new_preferred_language}")
+            persistent_user_datas.data.lang1 = new_preferred_language
+        if new_second_language and persistent_user_datas.data.lang2 != new_second_language:
+            log.debug(f"Update PersistentUser {oid} with new second language {new_second_language}")
+            persistent_user_datas.data.lang2 = new_second_language
+    return persistent_user_datas
 
 def get_candidature_from_request(request: Request)->Candidature:
     """Get the candidature from the request.
@@ -672,15 +814,16 @@ def send_confirm_validation_email(request: Request,
         candidature,
         "send_confirm_validation_email")
 
+# @TODO generalize this function to PersistentUserDatas
 def send_candidature_state_change_email(request: Request,
-    candidature: Candidature,
-    sending_function_name,
-    template_name = None,
-    subject = None) -> Dict:
+    candidature: PersistentUserDatas,
+    sending_function_name : str,
+    template_name : str = None,
+    subject:str = None) -> Dict:
     """Send the candidature state change email to the candidate.
     Args:
         request (pyramid.request.Request): the request
-        candidature (Candidature): the candidature
+        candidature (PersistentUserDatas): the candidature
         sending_function_name (str): the name of the function that sends the email
         template_name (str): the name of the template to use or None to use the default template
         subject (str): the subject of the email or None to use the default subject
@@ -700,13 +843,13 @@ def send_candidature_state_change_email(request: Request,
     seed = candidature.email_send_status_history[-1].seed
 
     # Prepare the necessary information for the email
-    parametter = encrypt_oid(
+    parameter = encrypt_oid(
         candidature.oid,
         seed,
         request.registry.settings['session.secret']
     )
   
-    url = request.route_url('register', _query={'oid': parametter})
+    url = request.route_url('register', _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     #We don't have user yet so we use the email parts befor the @ or pseudonym if it exists
@@ -746,6 +889,71 @@ def send_candidature_state_change_email(request: Request,
             EmailSendStatus.ERROR, sending_function_name)
         return {'error': _('email_not_sent')}
 
+def send_email_to_member(request: Request,
+    member: PersistentUserDatas,
+    sending_function_name,
+    template_name,
+    subject_msgid,
+    view_name) -> Dict:
+    """Send an email to the member.
+    Args:
+        request (pyramid.request.Request): the request
+        member (PersistentUserDatas): the member
+        sending_function_name (str): the name of the function that sends the email
+        template_name (str): the name of the template to use
+        subject_msgid (str): the msgid of the email subject
+        view_name (str): the name of the view to use in the email
+    Returns:
+        dict: the result of the email sending
+    """
+
+    template_path = get_local_template(request, template_name).abspath()
+    localizer = get_localizer(request)
+    subject = localizer.translate(_(subject_msgid))
+    email = member.email
+    seed = member.email_send_status_history[-1].seed
+
+    # Prepare the necessary information for the email
+    parameter = encrypt_oid(
+        member.oid,
+        seed,
+        request.registry.settings['session.secret']
+    )
+  
+    url = request.route_url(view_name, _query={'oid': parameter})
+    site_url = request.route_url('home')
+    site_name = request.registry.settings.get('site_name')
+    
+    template_vars = {
+        'page_with_oid': url,
+        'site_url': site_url,
+        'site_name': site_name,
+        'member': member.data,
+    }
+    
+    # Use the send_email from utils.py
+    try:
+        # Stack email sending action to be executed at commit
+        success = send_email(
+            request,
+            subject,
+            [email],
+            template_path,
+            template_vars
+        )
+    except Exception as e:
+        log.error(f"Error while sending email to {email} : {e}")
+        success = False
+    
+    if success:
+        member.add_email_send_status(
+            EmailSendStatus.SENT, sending_function_name)
+        return {'success': True}
+    else:
+        member.add_email_send_status(
+            EmailSendStatus.ERROR, sending_function_name)
+        return {'error': _('email_not_sent')}
+
 def send_validation_email(
         request: Request,
         candidature: 'Candidature'
@@ -770,13 +978,13 @@ def send_validation_email(
     localizer = get_localizer(request)
     subject = localizer.translate(_('email_validation_subject'))
     seed = candidature.email_send_status_history[-1].seed
-    parametter = encrypt_oid(
+    parameter = encrypt_oid(
         candidature.oid,
         seed,
         request.registry.settings['session.secret']
     )
     
-    url = request.route_url('register', _query={'oid': parametter})
+    url = request.route_url('register', _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     
