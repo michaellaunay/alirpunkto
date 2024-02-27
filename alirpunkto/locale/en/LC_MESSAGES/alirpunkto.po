@@ -620,3 +620,6 @@ msgstr "If the user exists, s/he will receive an email."
 
 msgid "reset_password_email_subject"
 msgstr "Reset Your Password"
+
+msgid "forget_email_send_error"
+msgstr "An error occurred when sending reset email, please contact the administrator"

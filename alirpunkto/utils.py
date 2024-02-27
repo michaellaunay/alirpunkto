@@ -73,7 +73,7 @@ def get_candidatures(request)->PersistentUsers:
     conn = get_connection(request)
     return PersistentUsers.get_instance(connection=conn)
 
-def get_persistent_users(request)->PersistentUsers:
+def get_members(request)->PersistentUsers:
     """Get the persistent users from the request.
     Args:
         request (pyramid.request.Request): the request
@@ -354,7 +354,7 @@ def get_candidature_by_oid(
         candidature = None
     return candidature
 
-def get_persistent_user_by_oid(
+def get_member_by_oid(
         oid:str,
         request:Request
     ) -> PersistentUserDatas:
@@ -379,10 +379,10 @@ def append_persistent_user(
         persistent_user (PersistentUser): the persistent user
         request (pyramid.request.Request): the request
     """
-    persistent_users = get_persistent_users(request)
+    persistent_users = get_members(request)
     persistent_users[persistent_user.oid] = persistent_user
 
-def update_persistent_users_from_ldap(
+def update_member_from_ldap(
         oid: str,
         request: Request
     ) -> Union[PersistentUserDatas, None]:
@@ -418,7 +418,7 @@ def update_persistent_users_from_ldap(
         log.error(f"Error while searching for user {oid} in LDAP: {e}")
         return None
     user_entry = conn.entries[0]
-    persistent_user_datas = get_persistent_user_by_oid(oid, request)
+    persistent_user_datas = get_member_by_oid(oid, request)
 
     new_email = user_entry.mail.value.strip() if hasattr(user_entry, 'mail') else None
     new_pseudonym = user_entry.cn.value.strip() if hasattr(user_entry, 'cn') else None

@@ -884,3 +884,6 @@ msgstr ""
 
 msgid "forget_email_in_member_list"
 msgstr "Si l'utilisateur*trice existe, il/elle recevra un courriel."
+
+msgid "forget_email_send_error"
+msgstr "An error occured when sending reset email, please contact the administrator"

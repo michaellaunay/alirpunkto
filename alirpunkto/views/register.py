@@ -8,7 +8,7 @@
 # date: 2023-06-15
 
 import datetime
-from typing import Dict, Optional
+from typing import Dict, Optional,Union
 import deform
 from deform import ValidationFailure
 from pyramid.view import view_config
@@ -72,7 +72,7 @@ def register(request: Request) -> Dict:
 
 def _retrieve_candidature(
         request: Request
-    ) -> (Candidature, Dict):
+    ) -> Union[Candidature, Dict]:
     """Retrieve an existing candidature from the session or URL.
 
     Parameters:
