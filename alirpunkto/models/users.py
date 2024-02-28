@@ -2,13 +2,11 @@
 Define the user model which is used to store users in the zodb database.
 """
 # description: User model
-from typing import Union, List, Final
+from typing import Union, List
 from persistent import Persistent
-from persistent.mapping import PersistentMapping
 import json
-from enum import Enum, unique
 from alirpunkto.constants_and_globals import log
-from alirpunkto.models.user_datas import UserStates
+from alirpunkto.models.member import UserStates
 
 # User class
 class User(Persistent):

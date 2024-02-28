@@ -9,7 +9,7 @@ from alirpunkto.models.candidature import (
     VotingChoice,
     CandidatureStates
 )
-from alirpunkto.models.user_datas import (
+from alirpunkto.models.member import (
     EmailSendStatus,
 )
 from alirpunkto.utils import (

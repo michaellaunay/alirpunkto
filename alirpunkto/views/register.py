@@ -18,11 +18,10 @@ from alirpunkto.models.candidature import (
     Candidature, CandidatureStates, 
     Voter,
 )
-from alirpunkto.models.user_datas import (
-    UserTypes,
-    UserDatas,
+from alirpunkto.models.member import (
+    MemberTypes,
+    MemberDatas,
     EmailSendStatus,
-    PersistentUserDatas,
 )
 from alirpunkto.constants_and_globals import (
     _,
@@ -98,12 +97,12 @@ def _retrieve_candidature(
         if candidature is None:
             error = _('candidature_not_found')
             return None, {'candidature': candidature,
-                'UserTypes': UserTypes,
+                'MemberTypes': MemberTypes,
                 'error': error}
         if seed != candidature.email_send_status_history[-1].seed:
             error = _('url_is_obsolete')
             return None, {'candidature': candidature,
-                'UserTypes': UserTypes,
+                'MemberTypes': MemberTypes,
                 'error': error,
                 'url_obsolete': True}
         request.session[CANDIDATURE_OID] = candidature.oid
@@ -177,14 +176,14 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
         if not attempt_send_validation_email(request, candidature):
             return {
                 'candidature': candidature,
-                'UserTypes': UserTypes,
+                'MemberTypes': MemberTypes,
                 'error': _('email_not_sent')
             }
 
         candidature.state = CandidatureStates.EMAIL_VALIDATION
         return commit_candidature_changes(request, candidature)
 
-    return {'candidature': candidature, 'UserTypes': UserTypes}
+    return {'candidature': candidature, 'MemberTypes': MemberTypes}
 
 def validate_candidature_choice_and_email(
         email: str, choice: str, 
@@ -207,19 +206,19 @@ def validate_candidature_choice_and_email(
     if email_error is not None:
         return {
             'candidature': candidature, 
-            'UserTypes': UserTypes, 
+            'MemberTypes': MemberTypes, 
             'error': email_error['error']
         }
 
-    if choice not in UserTypes.get_names():
+    if choice not in MemberTypes.get_names():
         return {
             'candidature': candidature, 
-            'UserTypes': UserTypes,
+            'MemberTypes': MemberTypes,
             'error': _('invalid_choice')
         }
 
     candidature.email = email
-    candidature.type = getattr(UserTypes, choice, None)
+    candidature.type = getattr(MemberTypes, choice, None)
 
     return None
 
@@ -266,7 +265,7 @@ def commit_candidature_changes(request: Request,
     """
     candidatures = get_candidatures(request)
     candidatures[candidature.oid] = candidature
-    candidatures.monitored_users[candidature.oid] = candidature
+    candidatures.monitored_members[candidature.oid] = candidature
 
     try:
         request.tm.commit()
@@ -274,14 +273,14 @@ def commit_candidature_changes(request: Request,
             EmailSendStatus.SENT,
             "send_validation_email"
         )
-        return {'candidature': candidature, 'UserTypes': UserTypes}
+        return {'candidature': candidature, 'MemberTypes': MemberTypes}
     except Exception as e:
         log.error(
             f"Error committing candidature {candidature.oid}: {e}"
         )
         return {
             'candidature': candidature,
-            'UserTypes': UserTypes,
+            'MemberTypes': MemberTypes,
             'error': _('error_committing_candidature')
         }
 
@@ -325,7 +324,7 @@ def handle_email_validation_state(
                 return {
                     'form': render_candidature_form(request, candidature),
                     'candidature': candidature,
-                    'UserTypes': UserTypes
+                    'MemberTypes': MemberTypes
                 }
         except Exception as e:
             log.error(f"Error committing candidature {candidature.oid}: {e}")
@@ -335,12 +334,12 @@ def handle_email_validation_state(
             )
             return {
                 'candidature': candidature,
-                'UserTypes': UserTypes,
+                'MemberTypes': MemberTypes,
                 'error': _('error_committing_candidature')
             }
     return {
         'candidature': candidature,
-        'UserTypes': UserTypes
+        'MemberTypes': MemberTypes
     }
 
 def validate_challenge(
@@ -363,7 +362,7 @@ def validate_challenge(
             return {
                 'error': _('invalid_challenge'), 
                 'candidature': candidature, 
-                'UserTypes': UserTypes
+                'MemberTypes': MemberTypes
             }
     return None
 
@@ -384,7 +383,7 @@ def render_candidature_form(request: Request,
         'cooperative_number': candidature.oid,
         'email': candidature.email,
     }
-    if candidature.type == UserTypes.ORDINARY:
+    if candidature.type == MemberTypes.ORDINARY:
         schema.prepare_for_ordinary()
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
     return form.render(appstruct=appstruct)
@@ -405,7 +404,7 @@ def handle_confirmed_human_state(request, candidature):
         'cooperative_number': candidature.oid,
         'email': candidature.email,
     }
-    if candidature.type == UserTypes.ORDINARY:
+    if candidature.type == MemberTypes.ORDINARY:
         schema.prepare_for_ordinary()
 
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
@@ -419,7 +418,7 @@ def handle_confirmed_human_state(request, candidature):
             return {
                 'form': form.render(appstruct=appstruct),
                 'candidature': candidature,
-                'UserTypes': UserTypes
+                'MemberTypes': MemberTypes
             }
         candidatures = get_candidatures(request)
         password = request.params['password']
@@ -432,7 +431,7 @@ def handle_confirmed_human_state(request, candidature):
                 {
                     'form': form.render(appstruct=appstruct),
                     'candidature': candidature,
-                    'UserTypes': UserTypes
+                    'MemberTypes': MemberTypes
                 }
             )
             return is_valid_password_result
@@ -442,7 +441,7 @@ def handle_confirmed_human_state(request, candidature):
                 'form': form.render(appstruct=appstruct),
                 'error': _('passwords_dont_match'),
                 'candidature': candidature,
-                'UserTypes': UserTypes
+                'MemberTypes': MemberTypes
             }
 
         is_valid_pseudo_result = is_valid_unique_pseudonym(pseudonym)
@@ -451,27 +450,27 @@ def handle_confirmed_human_state(request, candidature):
                 {
                     'form': form.render(appstruct=appstruct),
                     'candidature': candidature,
-                    'UserTypes': UserTypes
+                    'MemberTypes': MemberTypes
                 }
             )
             return is_valid_pseudo_result
         
         candidature.pseudonym = pseudonym
 
-        if candidature.type == UserTypes.ORDINARY:
+        if candidature.type == MemberTypes.ORDINARY:
             result = register_user_to_ldap(request, candidature, password)
             if result['status'] == 'error':
                 return {
                     'form': form.render(appstruct=appstruct),
                     'error': result['message'],
                     'candidature': candidature,
-                    'UserTypes': UserTypes
+                    'MemberTypes': MemberTypes
                 }
-            candidatures.monitored_users.pop(candidature.oid, None)
+            candidatures.monitored_members.pop(candidature.oid, None)
             candidature.state = CandidatureStates.APPROVED
             email_template = "send_candidature_approuved_email"
 
-        elif candidature.type == UserTypes.COOPERATOR:
+        elif candidature.type == MemberTypes.COOPERATOR:
             appstruct['fullname'] = request.params['fullname']
             appstruct['fullsurname'] = request.params['fullsurname']
             appstruct['nationality'] = request.params['nationality']
@@ -479,7 +478,7 @@ def handle_confirmed_human_state(request, candidature):
             appstruct['lang2'] = request.params['lang2']
             parameters = {
                 k: request.params[k]
-                for k in UserDatas.__dataclass_fields__.keys()
+                for k in MemberDatas.__dataclass_fields__.keys()
                 if k in request.params
             }
             try:
@@ -491,9 +490,9 @@ def handle_confirmed_human_state(request, candidature):
                     'form': form.render(appstruct=appstruct),
                     'error': _('invalid_date'),
                     'candidature': candidature,
-                    'UserTypes': UserTypes
+                    'MemberTypes': MemberTypes
                 }
-            data = UserDatas(**parameters)
+            data = MemberDatas(**parameters)
             candidature.data = data
 
             candidature.pseudonym = request.params['pseudonym']
@@ -505,7 +504,7 @@ def handle_confirmed_human_state(request, candidature):
                 'form': form.render(appstruct=appstruct),
                 'error': _('invalid_choice'),
                 'candidature': candidature,
-                'UserTypes': UserTypes
+                'MemberTypes': MemberTypes
             }
 
         send_candidature_state_change_email(
@@ -528,7 +527,7 @@ def handle_confirmed_human_state(request, candidature):
                 EmailSendStatus.ERROR,
                 email_template
             )
-        if candidature.type == UserTypes.COOPERATOR:
+        if candidature.type == MemberTypes.COOPERATOR:
             if err := prepare_for_cooperator(request, candidature):
                 return err
             return get_template_parameters_for_cooperator(request, candidature)
@@ -536,7 +535,7 @@ def handle_confirmed_human_state(request, candidature):
     return {
         'form': form.render(appstruct=appstruct),
         'candidature': candidature,
-        'UserTypes': UserTypes
+        'MemberTypes': MemberTypes
     }
 
 def prepare_for_cooperator(
@@ -567,7 +566,7 @@ def prepare_for_cooperator(
             )
             return {
                 'candidature': candidature,
-                'UserTypes': UserTypes,
+                'MemberTypes': MemberTypes,
                 'error': _('voters_not_selected'),
                 'voting_url': request.route_url(
                     'vote',
@@ -618,7 +617,7 @@ def get_template_parameters_for_cooperator(
 
     return {
         'candidature': candidature,
-        'UserTypes': UserTypes,
+        'MemberTypes': MemberTypes,
         'voters': candidature.voters,
         'data_email_video_id_verification_subject':_("email_video_id_verification_subject", local_datas),
         'data_email_video_id_verification_body': email_video_id_verification_body,
@@ -655,7 +654,7 @@ def handle_unique_data_state(request, candidature):
             transaction.commit()
             return {
                 'candidature': candidature,
-                'UserTypes': UserTypes,
+                'MemberTypes': MemberTypes,
             }
 
         except Exception as e:
@@ -683,7 +682,7 @@ def handle_pending_state(request, candidature):
     log.debug(f"Handling pending state for candidature {candidature.oid}")
     return {
         'candidature': candidature,
-        'UserTypes': UserTypes,
+        'MemberTypes': MemberTypes,
     }
 
 def handle_default_state(request, candidature):
@@ -699,7 +698,7 @@ def handle_default_state(request, candidature):
     log.error(f"Unhandled candidature state: {candidature.state}")
     return {
         'candidature': candidature,
-        'UserTypes': UserTypes,
+        'MemberTypes': MemberTypes,
         'error':"handle_default_state Not yet implemented"
     }
 

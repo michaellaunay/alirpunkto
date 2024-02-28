@@ -5,12 +5,12 @@
 from typing import Dict, Union
 import datetime
 from pyramid.request import Request
-from alirpunkto.models.user_datas import (
-    PersistentUsers,
-    PersistentUserDatas,
+from alirpunkto.models.member import (
+    Members,
+    MemberDatas,
     EmailSendStatus,
-    UserDatas,
-    UserTypes
+    Member,
+    MemberTypes
 )
 from .models.candidature import (
     Candidature,
@@ -63,7 +63,7 @@ def get_preferred_language(request: Request)->str:
         preferred_language = "en"
     return preferred_language
 
-def get_candidatures(request)->PersistentUsers:
+def get_candidatures(request)->Members:
     """Get the candidatures from the request.
     Args:
         request (pyramid.request.Request): the request
@@ -71,17 +71,17 @@ def get_candidatures(request)->PersistentUsers:
         Candidatures: the candidatures
     """
     conn = get_connection(request)
-    return PersistentUsers.get_instance(connection=conn)
+    return Members.get_instance(connection=conn)
 
-def get_members(request)->PersistentUsers:
-    """Get the persistent users from the request.
+def get_members(request)->Members:
+    """Get the members from the request.
     Args:
         request (pyramid.request.Request): the request
     Returns:
-        PersistentUsers: the persistent users
+        Members: the members
     """
     conn = get_connection(request)
-    return PersistentUsers.get_instance(connection=conn)
+    return Members.get_instance(connection=conn)
 
 def get_unsecure_ldap_connection() -> Connection:
     """Get an unsecure LDAP connection.
@@ -102,13 +102,13 @@ def get_unsecure_ldap_connection() -> Connection:
     )
     return conn
 
-def get_member_by_mail(email: str) -> Union[Dict[str, str], None]:
-    """Get the member from LDAP by its mail.
+def get_member_by_email(email: str) -> Union[Dict[str, str], None]:
+    """Get the members from LDAP by their email.
     Args:
-        email (str): the mail of the member
+        email (str): the email of the member
     Returns:    
-        dict: the member
-        None: if the member is not found
+        dict: The members found for the given email
+        None: If no member is found
     """
     conn = get_unsecure_ldap_connection()
     # search for the user in the LDAP directory
@@ -119,7 +119,10 @@ def get_member_by_mail(email: str) -> Union[Dict[str, str], None]:
     )
     return conn.entries
 
-def is_not_a_valid_email_address(email:str, check_mx:bool=True)->Union[Dict[str, str], None]:
+def is_not_a_valid_email_address(
+        email:str,
+        check_mx:bool=True
+    )->Union[Dict[str, str], None]:
     """Check if the email is not a valid email address.
     Args:
         email (str): the email to check
@@ -156,7 +159,7 @@ def is_valid_email(email, request):
             if candidature.email == email and candidature.state != CandidatureStates.REFUSED:
                 return {'error': _('email_allready_exist')}
         # Verify that the email is not already registered in LDAP
-        entries = get_member_by_mail(email)
+        entries = get_member_by_email(email)
         if len(entries) != 0:
             # If already registered, display an error message
             return {'error': _('email_allready_exist')}
@@ -204,7 +207,7 @@ def is_valid_unique_pseudonym(pseudonym):
         ldap_login,
         LDAP_PASSWORD,
         auto_bind=True
-    ) # define an unsecure LDAP connection, using the credentials above
+    )
     # Verify that the pseudonym is not already registered
     conn.search(
         LDAP_BASE_DN,
@@ -357,41 +360,41 @@ def get_candidature_by_oid(
 def get_member_by_oid(
         oid:str,
         request:Request
-    ) -> PersistentUserDatas:
-    """Get the persistent user by its oid.
+    ) -> Member:
+    """Get the member by its oid.
     Args:
-        oid (str): the oid of the persistent user
+        oid (str): the oid of the member
         request (pyramid.request.Request): the request
     Returns:
-        PersistentUser: the persistent user or None if not found or not a PersistentUser
+        Member: the member or None if not found or not a Member
     """
-    candidatures = get_candidatures(request)
+    candidatures = get_members(request)
     user = candidatures[oid] if oid in candidatures else None
-    if not isinstance(user, PersistentUserDatas):
+    if not isinstance(user, MemberDatas):
         user = None
     return user
 
-def append_persistent_user(
-        persistent_user: PersistentUserDatas,
+def append_member(
+        member: Member,
         request: Request):
-    """Append the persistent user to the list of persistent users.
+    """Append the member to the list of members.
     Args:
-        persistent_user (PersistentUser): the persistent user
+        member (Member): the member
         request (pyramid.request.Request): the request
     """
-    persistent_users = get_members(request)
-    persistent_users[persistent_user.oid] = persistent_user
+    members = get_members(request)
+    members[member.oid] = member
 
 def update_member_from_ldap(
         oid: str,
         request: Request
-    ) -> Union[PersistentUserDatas, None]:
-    """Update the persistent users from LDAP.
+    ) -> Union[MemberDatas, None]:
+    """Update the members from LDAP.
     Args:
         oid (str): the oid of the user
         request (pyramid.request.Request): the request
     Returns:
-        PersistentUser: the persistent user
+        Member: the member
         None: if not found in ldap
     """
     server = Server(LDAP_SERVER, get_info=ALL)
@@ -418,21 +421,20 @@ def update_member_from_ldap(
         log.error(f"Error while searching for user {oid} in LDAP: {e}")
         return None
     user_entry = conn.entries[0]
-    persistent_user_datas = get_member_by_oid(oid, request)
-
     new_email = user_entry.mail.value.strip() if hasattr(user_entry, 'mail') else None
     new_pseudonym = user_entry.cn.value.strip() if hasattr(user_entry, 'cn') else None
-    new_type = UserTypes[user_entry.employeeType.value.strip()] if hasattr(user_entry, 'employeeType') else None
+    new_type = MemberTypes[user_entry.employeeType.value.strip()] if hasattr(user_entry, 'employeeType') else None
     new_fullname = user_entry.gn.value.strip() if hasattr(user_entry, 'gn') else None
     new_nationality = user_entry.nationality.value.strip() if hasattr(user_entry, 'nationality') else None
     new_birthdate = datetime.strptime(user_entry.birthdate.value, "%Y-%m-%d") if hasattr(user_entry, 'birthdate') else None
     new_preferred_language = user_entry.preferredLanguage.value.strip() if hasattr(user_entry, 'preferredLanguage') else None
     new_second_language = user_entry.secondLanguage.value.strip() if hasattr(user_entry, 'secondLanguage') else None
+    member = get_member_by_oid(oid, request)
 
-    log.debug(f"Update PersistentUser {oid} with ldap informations")
-    if not persistent_user_datas:
-        log.debug(f"Create PersistentUser {oid} with informations found in LDAP with {new_email=}, {new_pseudonym=}, {new_type=}, {new_fullname=}, {new_nationality=}, {new_birthdate=}, {new_preferred_language=}, {new_second_language=}")
-        datas = UserDatas(
+    log.debug(f"Update Member {oid} with ldap informations")
+    if not member:
+        log.debug(f"Create Member {oid} with informations found in LDAP with {new_email=}, {new_pseudonym=}, {new_type=}, {new_fullname=}, {new_nationality=}, {new_birthdate=}, {new_preferred_language=}, {new_second_language=}")
+        datas = MemberDatas(
             fullname=new_fullname,
             fullsurname = new_fullname,
             nationality = new_nationality,
@@ -443,41 +445,41 @@ def update_member_from_ldap(
             lang2 = new_second_language,
             role = new_type
         )
-        persistent_user_datas = PersistentUserDatas(
+        member = Member(
             email=new_email,
             pseudonym=new_pseudonym,
             oid=oid,
             data=datas
         )
-        append_persistent_user(persistent_user_datas, request)
+        append_member(member, request)
     else :
-        # Update the persistent_user_datas object with the data retrieved from LDAP
-        if new_email and persistent_user_datas.email != new_email:
-            log.debug(f"Update PersistentUser {oid} with new email {new_email}")
-            persistent_user_datas.email = new_email
-        if new_pseudonym and persistent_user_datas.pseudonym != new_pseudonym:
-            log.debug(f"Update PersistentUser {oid} with new pseudonym {new_pseudonym}")
-            persistent_user_datas.pseudonym = new_pseudonym
-        if new_type and persistent_user_datas.type != new_type:
-            log.debug(f"Update PersistentUser {oid} with new type {new_type}")
-            persistent_user_datas.type = new_type
+        # Update the member object with the data retrieved from LDAP
+        if new_email and member.email != new_email:
+            log.debug(f"Update Member {oid} with new email {new_email}")
+            member.email = new_email
+        if new_pseudonym and member.pseudonym != new_pseudonym:
+            log.debug(f"Update Member {oid} with new pseudonym {new_pseudonym}")
+            member.pseudonym = new_pseudonym
+        if new_type and member.type != new_type:
+            log.debug(f"Update Member {oid} with new type {new_type}")
+            member.type = new_type
         # Add additional fields for cooperators
-        if new_fullname and persistent_user_datas.data.fullname != new_fullname:
-            log.debug(f"Update PersistentUser {oid} with new fullname {new_fullname}")
-            persistent_user_datas.data.fullname = new_fullname
-        if new_nationality and persistent_user_datas.data.national != new_nationality:
-            log.debug(f"Update PersistentUser {oid} with new nationality {new_nationality}")
-            persistent_user_datas.data.nationality = new_nationality
-        if new_birthdate and persistent_user_datas.data.birthdate != new_birthdate:
-            log.debug(f"Update PersistentUser {oid} with new birthdate {new_birthdate}")
-            persistent_user_datas.data.birthdate = new_birthdate
-        if new_preferred_language and persistent_user_datas.data.lang1 != new_preferred_language:
-            log.debug(f"Update PersistentUser {oid} with new preferred language {new_preferred_language}")
-            persistent_user_datas.data.lang1 = new_preferred_language
-        if new_second_language and persistent_user_datas.data.lang2 != new_second_language:
-            log.debug(f"Update PersistentUser {oid} with new second language {new_second_language}")
-            persistent_user_datas.data.lang2 = new_second_language
-    return persistent_user_datas
+        if new_fullname and member.data.fullname != new_fullname:
+            log.debug(f"Update Member {oid} with new fullname {new_fullname}")
+            member.data.fullname = new_fullname
+        if new_nationality and member.data.national != new_nationality:
+            log.debug(f"Update Member {oid} with new nationality {new_nationality}")
+            member.data.nationality = new_nationality
+        if new_birthdate and member.data.birthdate != new_birthdate:
+            log.debug(f"Update Member {oid} with new birthdate {new_birthdate}")
+            member.data.birthdate = new_birthdate
+        if new_preferred_language and member.data.lang1 != new_preferred_language:
+            log.debug(f"Update Member {oid} with new preferred language {new_preferred_language}")
+            member.data.lang1 = new_preferred_language
+        if new_second_language and member.data.lang2 != new_second_language:
+            log.debug(f"Update Member {oid} with new second language {new_second_language}")
+            member.data.lang2 = new_second_language
+    return member
 
 def get_candidature_from_request(request: Request)->Candidature:
     """Get the candidature from the request.
@@ -700,7 +702,7 @@ def register_user_to_ldap(request, candidature, password):
         'userPassword': password,
         'sn': (
             candidature.data.fullsurname
-                if candidature.type == UserTypes.COOPERATOR
+                if candidature.type == MemberTypes.COOPERATOR
                 else pseudonym
         ), # sn is obligatory
         'cn': pseudonym, # Use the pseudonym as commonName
@@ -709,7 +711,7 @@ def register_user_to_ldap(request, candidature, password):
          # Use the fullsurname as sn
         "isActive": "True",
     }
-    if candidature.type == UserTypes.COOPERATOR:
+    if candidature.type == MemberTypes.COOPERATOR:
         # Add full name to inetOrgPerson attribute
         #@TODO conforter
         attributes['gn'] = candidature.data.fullname
@@ -725,13 +727,13 @@ def register_user_to_ldap(request, candidature, password):
         success = conn.add(dn, attributes=attributes)
         if success:
             match candidature.type:
-                case UserTypes.COOPERATOR:
+                case MemberTypes.COOPERATOR:
                     group_dn = ("cn=cooperatorsGroup,"
                                 f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
                                 f"{LDAP_BASE_DN}"
                     )
                     conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
-                case UserTypes.ORDINARY:
+                case MemberTypes.ORDINARY:
                     group_dn = ("cn=ordinaryMembersGroup,"
                                 f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
                                 f"{LDAP_BASE_DN}"
@@ -814,16 +816,16 @@ def send_confirm_validation_email(request: Request,
         candidature,
         "send_confirm_validation_email")
 
-# @TODO generalize this function to PersistentUserDatas
+# @TODO generalize this function to MemberDatas
 def send_candidature_state_change_email(request: Request,
-    candidature: PersistentUserDatas,
+    candidature: MemberDatas,
     sending_function_name : str,
     template_name : str = None,
     subject:str = None) -> Dict:
     """Send the candidature state change email to the candidate.
     Args:
         request (pyramid.request.Request): the request
-        candidature (PersistentUserDatas): the candidature
+        candidature (MemberDatas): the candidature
         sending_function_name (str): the name of the function that sends the email
         template_name (str): the name of the template to use or None to use the default template
         subject (str): the subject of the email or None to use the default subject
@@ -890,7 +892,7 @@ def send_candidature_state_change_email(request: Request,
         return {'error': _('email_not_sent')}
 
 def send_email_to_member(request: Request,
-    member: PersistentUserDatas,
+    member: MemberDatas,
     sending_function_name,
     template_name,
     subject_msgid,
@@ -898,7 +900,7 @@ def send_email_to_member(request: Request,
     """Send an email to the member.
     Args:
         request (pyramid.request.Request): the request
-        member (PersistentUserDatas): the member
+        member (MemberDatas): the member
         sending_function_name (str): the name of the function that sends the email
         template_name (str): the name of the template to use
         subject_msgid (str): the msgid of the email subject

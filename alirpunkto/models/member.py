@@ -1,5 +1,5 @@
-# Description: UserDatas model
-# A UserDatas is an object that represents the user datas manage by the application.
+# Description: MemberDatas model
+# A MemberDatas is an object that represents the member datas manage by the application.
 # Creation date: 2024-02-06
 # Author: Michaël Launay
 
@@ -25,59 +25,59 @@ from alirpunkto.constants_and_globals import (
 
 @unique
 class UserStates(Enum) :
-    """States of the user.
+    """States of the member.
     """
-    # Created: The user data set is in created mode.
-    CREATED = "user_created_value"
-    # Draft: The user data set is in draft mode.
-    DRAFT = "user_draft_value"
-    # Data modification requested: The user data set is in modification requested mode.
-    DATA_MODIFICATION_REQUESTED = "user_datas_modification_request_value"
-    # Data modified: The user data set is in modified mode.
-    DATA_MODIFIED = "user_datas_modified_value"
+    # Created: The member data set is in created mode.
+    CREATED = "member_created_value"
+    # Draft: The member data set is in draft mode.
+    DRAFT = "member_draft_value"
+    # Data modification requested: The member data set is in modification requested mode.
+    DATA_MODIFICATION_REQUESTED = "member_datas_modification_request_value"
+    # Data modified: The member data set is in modified mode.
+    DATA_MODIFIED = "member_datas_modified_value"
 
     @classmethod
     def get_i18n_id(cls, name:str) -> str:
-        """Get the i18n id of the user state.
+        """Get the i18n id of the member state.
         Args:
-            name: The name of the user state.
+            name: The name of the member state.
         Returns:
-            The i18n id of the user state.
+            The i18n id of the member state.
         """
         match name:
 
             case cls.CREATED.name :
-                return "user_datas_states_created_name"
+                return "member_datas_states_created_name"
             case cls.DRAFT.name :
-                return "user_datas_states_draft_name"
+                return "member_datas_states_draft_name"
             case cls.DATA_MODIFICATION_REQUESTED.name :
-                return "user_datas_modification_request_name"
+                return "member_datas_modification_request_name"
             case cls.DATA_MODIFIED.name :
-                return "user_datas_modified_name"
+                return "member_datas_modified_name"
             case cls.CREATED.value :
-                return "user_datas_states_created_value"
+                return "member_datas_states_created_value"
             case cls.DRAFT.name :
-                return "user_datas_states_draft_value"
+                return "member_datas_states_draft_value"
             case cls.DATA_MODIFICATION_REQUESTED.name :
-                return "user_datas_modification_request_value"
+                return "member_datas_modification_request_value"
             case cls.DATA_MODIFIED.name :
-                return "user_datas_modified_value"
+                return "member_datas_modified_value"
             case _ :
                 # should never happen
-                log.error(f"Unknown user state: {name}")
+                log.error(f"Unknown member state: {name}")
                 return(f"name.lower()")
 
     @staticmethod
     def get_names() -> List[str]:
-        """Get the names of the user_datas states.
+        """Get the names of the member_datas states.
         Returns:
-            The names of the user_datas states.
+            The names of the member_datas states.
         """
         return UserStates.__members__.keys()
 
 @unique
 class EmailSendStatus(Enum):
-    """Status of the email sent to the applicant or user.
+    """Status of the email sent to the applicant or member.
     """
     #  In Preparation: The email is being prepared.
     IN_PREPARATION = "email_send_status_in_preparation_value"
@@ -88,110 +88,110 @@ class EmailSendStatus(Enum):
 
 
 @unique
-class UserTypes(Enum) :
-    """Types of user.
+class MemberTypes(Enum) :
+    """Types of member.
     """
-    # Ordinary: The user is an ordinary member.
-    ORDINARY = "user_types_ordinary_value"
-    # Cooperator: The user is a cooperator member.
-    COOPERATOR = "user_types_cooperator_value"
+    # Ordinary: The member is an ordinary member.
+    ORDINARY = "member_types_ordinary_value"
+    # Cooperator: The member is a cooperator member.
+    COOPERATOR = "member_types_cooperator_value"
     @classmethod
     def get_i18n_id(cls, name:str) -> str:
-        """Get the i18n id of the user type.
+        """Get the i18n id of the member type.
         Args:
-            name: The name of the user type.
+            name: The name of the member type.
         Returns:
-            The i18n id of the user type.
+            The i18n id of the member type.
         """
         match name:
             case cls.ORDINARY.name :
-                return "user_types_ordinary"
+                return "member_types_ordinary"
             case cls.COOPERATOR.name :
-                return "user_types_cooperator"
+                return "member_types_cooperator"
             case cls.ORDINARY.value :
-                return "user_types_ordinary_value"
+                return "member_types_ordinary_value"
             case cls.COOPERATOR.value :
-                return "user_types_cooperator_value"
+                return "member_types_cooperator_value"
             case _ :
                 # should never happen
-                log.error(f"Unknown user type: {name}")
+                log.error(f"Unknown member type: {name}")
                 return(f"name.lower()")
 
     @staticmethod
     def get_names() -> List[str]:
-        """Get the names of the user types.
+        """Get the names of the member types.
         Returns:
-            The names of the user types.
+            The names of the member types.
         """
-        return UserTypes.__members__.keys()
+        return MemberTypes.__members__.keys()
 
 @unique
 class UserRoles(Enum) :
-    """Roles of users.
+    """Roles of members.
     """
     # None: No role.
-    NONE = "user_role_none_value"
-    # Ordinary: The user is an ordinary member.
-    ORDINARY = "user_role_ordinary_value"
-    # Cooperator: The user is a cooperator member.
-    COOPERATOR = "user_role_cooperator_value"
-    # Board:  The user is a board member.
-    BOARD = "user_role_board_value"
-    # MediationArbitrationCouncil: The user is a mediation arbitration
+    NONE = "member_role_none_value"
+    # Ordinary: The member is an ordinary member.
+    ORDINARY = "member_role_ordinary_value"
+    # Cooperator: The member is a cooperator member.
+    COOPERATOR = "member_role_cooperator_value"
+    # Board:  The member is a board member.
+    BOARD = "member_role_board_value"
+    # MediationArbitrationCouncil: The member is a mediation arbitration
     #  council member.
-    MEDIATION_ARBITRATION_COUNCIL = "user_role_mediation_arbitration_council_value"
+    MEDIATION_ARBITRATION_COUNCIL = "member_role_mediation_arbitration_council_value"
 
     @classmethod
     def get_i18n_id(cls, name:str) -> str:
-        """Get the i18n id of the user role.
+        """Get the i18n id of the member role.
         Args:
-            name: The name of the user role.
+            name: The name of the member role.
         Returns:
-            The i18n id of the user role.
+            The i18n id of the member role.
         """
         match name:
             case cls.NONE.name :
-                return "user_roles_none"
+                return "member_roles_none"
             case cls.ORDINARY.name :
-                return "user_roles_ordinary"
+                return "member_roles_ordinary"
             case cls.COOPERATOR.name :
-                return "user_roles_cooperator"
+                return "member_roles_cooperator"
             case cls.BOARD.name :
-                return "user_roles_board"
+                return "member_roles_board"
             case cls.MEDIATION_ARBITRATION_COUNCIL.name :
-                return "user_roles_mediation_arbitration_council"
+                return "member_roles_mediation_arbitration_council"
             case cls.ORDINARY.value :
-                return "user_roles_ordinary_value"
+                return "member_roles_ordinary_value"
             case cls.COOPERATOR.value :
-                return "user_roles_cooperator_value"
+                return "member_roles_cooperator_value"
             case cls.BOARD.value :
-                return "user_roles_board_value"
+                return "member_roles_board_value"
             case cls.MEDIATION_ARBITRATION_COUNCIL.value :
-                return "user_roles_mediation_arbitration_council_value"
+                return "member_roles_mediation_arbitration_council_value"
             case _ :
                 # should never happen
-                log.error(f"Unknown user role: {name}")
+                log.error(f"Unknown member role: {name}")
                 return(f"role_types_{name.lower()}")
 
     @staticmethod
     def get_names() -> List[str]:
-        """Get the names of the user roles.
+        """Get the names of the member roles.
         Returns:
-            The names of the user roles.
+            The names of the member roles.
         """
         return UserRoles.__members__.keys()
 
 @dataclass
-class UserDatasEvent:
+class MemberDatasEvent:
     """An event.
     """
     datetime:datetime # the datetime of the event
     function_name:str # the name of the function that triggered the event
-    value_before:Any # the value of the user_datas before the event
-    value_after:Any # the value of the user_datas after the event
-    seed:str # the seed of the user_datas at the moment of the event
+    value_before:Any # the value of the member_datas before the event
+    value_after:Any # the value of the member_datas after the event
+    seed:str # the seed of the member_datas at the moment of the event
     def __repr__(self):
-        return f"<UserDatasEvent({self.datetime}, "\
+        return f"<MemberDatasEvent({self.datetime}, "\
                 f"{self.function_name}, "\
                 f"{self.value_before}, "\
                 f"{self.value_after}, "\
@@ -249,8 +249,8 @@ def random_string(
     """
     return ''.join(random.choice(chars) for _ in range(length))
 
-class UserDatasFunctions:
-    """A class to store functions used by the UserDatas class.
+class MemberDatasFunctions:
+    """A class to store functions used by the MemberDatas class.
     Easy to mook for testing.
     """
     func_now = datetime.now
@@ -261,17 +261,17 @@ class UserDatasFunctions:
         Returns:
             The current datetime.
         """
-        return UserDatasFunctions.func_now()
+        return MemberDatasFunctions.func_now()
     @staticmethod
     def uuid() -> str:
         """Get a unique identifier (UUID).
         Returns:
             A unique identifier (UUID).
         """
-        return UserDatasFunctions.func_uuid()
+        return MemberDatasFunctions.func_uuid()
     
 @dataclass
-class UserDatas:
+class MemberDatas:
     fullname: str
     fullsurname: str
     nationality: str
@@ -291,33 +291,33 @@ class UserDatas:
         for field in fields(self):
             yield field.name, getattr(self, field.name)
 
-class PersistentUsers(PersistentMapping):
-    """A mapping to store PersistentUserDatas in the ZODB.
+class Members(PersistentMapping):
+    """A mapping to store MemberDatas in the ZODB.
     Coulb be used as a singleton if all calls are made through get_instance.
     """
     _instance = None
 
     @staticmethod
-    def get_instance(connection:Connection = None) -> Type['PersistentUsers']:
+    def get_instance(connection:Connection = None) -> Type['Members']:
         """Get the singleton instance. Not thread safe !
         Args:
             connection: The ZODB connection, could be change for testing.
         Returns:
             The singleton instance.
-            This singleton instance is a mapping to store lists of PersistentUserDatas
+            This singleton instance is a mapping to store lists of MemberDatas
             subtypes associated with one unique oid.
         Raises:
             TypeError: The connection argument must be an instance of 
                     ZODB.Connection.Connection
         """
-        if PersistentUsers._instance is not None:
+        if Members._instance is not None:
             #check if the zodb connexion is still alive then return the instance
             try:
-                'test' in PersistentUsers._instance
+                'test' in Members._instance
             except Exception as e:
-                log.error(f"Error while getting users instance: {e}")
+                log.error(f"Error while getting members instance: {e}")
                 raise e
-            return PersistentUsers._instance
+            return Members._instance
 
         # Check if a ZODB is provided
         if not isinstance(connection, Connection):
@@ -328,101 +328,101 @@ class PersistentUsers(PersistentMapping):
 
         # check if root exists
         root = connection.root()
-        if 'users' not in root:
-            connection.root()['users'] = PersistentUsers()
+        if 'members' not in root:
+            connection.root()['members'] = Members()
             transaction.commit()
-        PersistentUsers._instance = connection.root()['users']
-        return root['users']
+        Members._instance = connection.root()['members']
+        return root['members']
 
     def __init__(self):
         """Constructor.
         """
         super().__init__()
-        self._monitored_users = PersistentMapping()
+        self._monitored_members = PersistentMapping()
 
     @property
-    def monitored_users(self)-> PersistentMapping:
-        """ Get the monitored users.
-        A monitored user is a user that is not in DRAFT or
+    def monitored_members(self)-> PersistentMapping:
+        """ Get the monitored members.
+        A monitored member is a member that is not in DRAFT or
           APPROUVED or REFUSED state and needs to be monitored.
         For exemple, It could be necessary to send them a reminder email
           to the verifiers if the expiration date is approaching.
         Returns:
-            The monitored users.DELETED
+            The monitored members.DELETED
         """
-        return self._monitored_users
+        return self._monitored_members
 
     @property
-    def users_emails(self)-> List[str]:
-        """Retrieve the emails of all users.
+    def members_emails(self)-> List[str]:
+        """Retrieve the emails of all members.
 
-        This method returns a list of email addresses from all users. 
+        This method returns a list of email addresses from all members. 
         In future versions, this functionality might be enhanced with caching 
         and listeners to maintain updated and accurate values.
 
         Returns:
-            List[str]: A list containing the emails of all users.
+            List[str]: A list containing the emails of all members.
         """
-        return [user.email for user in self.values()]
+        return [member.email for member in self.values()]
 
-# @TODO Rename this class to User and model.user to model.member
-class PersistentUserDatas(Persistent):
+# @TODO Rename this class to User and model.member to model.member
+class Member(Persistent):
     """
-    Represents a persistent storage object for user data within the ZODB.
+    Represents a persistent storage object for member data within the ZODB.
 
-    This class is designed to manage user data, track modifications, and
-    handle state transitions securely. It supports recording various user-related
+    This class is designed to manage member data, track modifications, and
+    handle state transitions securely. It supports recording various member-related
     data, including personal information, state, type, and modification history.
     It's particularly suitable for applications that require detailed audit trails
     and historical data tracking.
 
     Properties:
-        data (UserDatas): Accesses the data for the user. Supports get and set operations.
+        data (MemberDatas): Accesses the data for the member. Supports get and set operations.
         oid (str): Retrieves the unique object identifier. Read-only.
-        voters (list): Manages the list of voters associated with the user. Supports get and set operations.
-        state (UserStates): Controls the current state of the user. Supports get and set operations.
-        type (UserTypes or None): Defines the type of the user. Supports get and set operations.
-        email (str or None): Manages the email address associated with the user. Supports get and set operations.
-        votes (dict): Accesses the dictionary of votes associated with the user. Supports get and set operations.
+        voters (list): Manages the list of voters associated with the member. Supports get and set operations.
+        state (UserStates): Controls the current state of the member. Supports get and set operations.
+        type (MemberTypes or None): Defines the type of the member. Supports get and set operations.
+        email (str or None): Manages the email address associated with the member. Supports get and set operations.
+        votes (dict): Accesses the dictionary of votes associated with the member. Supports get and set operations.
         seed (str): Retrieves the random string used to generate the OID. Read-only.
         email_send_status_history (list of EmailEvent): Accesses the list that records the email send status history. Supports get and set operations.
         challenge (tuple[str, int]): Manages the math challenge and its solution. Supports get and set operations.
-        pseudonym (str): Accesses the pseudonym of the user. Supports get and set operations.
-        modifications (list of UserDatasEvent): Tracks modifications to the user data. Supports get and set operations.
+        pseudonym (str): Accesses the pseudonym of the member. Supports get and set operations.
+        modifications (list of MemberDatasEvent): Tracks modifications to the member data. Supports get and set operations.
     """
 
     __acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]
 
     def __init__(self,
-        data: Optional[UserDatas] = None,
+        data: Optional[MemberDatas] = None,
         oid: Optional[str] = None,
         voters: Optional[List[str]] = None,
         state: UserStates = UserStates.DRAFT,
-        type: Optional[UserTypes] = None,
+        type: Optional[MemberTypes] = None,
         email: Optional[str] = None,
         votes: Optional[Dict[str, int]] = None,
         seed: Optional[str] = None,
         email_send_status_history: Optional[List[EmailEvent]] = None,
         challenge: Optional[Tuple[str, int]] = None,
         pseudonym: Optional[str] = None,
-        modifications: Optional[List[UserDatasEvent]] = None
+        modifications: Optional[List[MemberDatasEvent]] = None
         ):
         """
-        Initialize a new PersistentUserDatas object.
+        Initialize a new MemberDatas object.
 
         Args:
-            data (UserDatas, optional): Initial data for the user. Defaults to None.
+            data (MemberDatas, optional): Initial data for the member. Defaults to None.
             oid (str, optional): A unique object identifier. If not provided, a unique OID is generated. Defaults to None.
-            voters (list, optional): A list of voters associated with the user. Defaults to an empty list.
-            state (UserStates, optional): The current state of the user. Defaults to UserStates.DRAFT.
-            type (UserTypes or None, optional): The type of the user (e.g., administrator, regular user). Defaults to None.
-            email (str or None, optional): The email address associated with the user. Defaults to None.
-            votes (dict, optional): A dictionary of votes associated with the user. Defaults to an empty dict.
+            voters (list, optional): A list of voters associated with the member. Defaults to an empty list.
+            state (UserStates, optional): The current state of the member. Defaults to UserStates.DRAFT.
+            type (MemberTypes or None, optional): The type of the member (e.g., administrator, regular member). Defaults to None.
+            email (str or None, optional): The email address associated with the member. Defaults to None.
+            votes (dict, optional): A dictionary of votes associated with the member. Defaults to an empty dict.
             seed (str, optional): A random string used to generate the OID. Defaults to None.
             email_send_status_history (list of EmailEvent, optional): A list to record the email send status history. Defaults to an empty list.
             challenge (tuple[str, int], optional): A tuple containing a string math challenge and its solution as an integer. Defaults to None.
-            pseudonym (str, optional): The pseudonym of the user. Defaults to None.
-            modifications (list of UserDatasEvent, optional): A list to record modifications, where each entry is a dataclass containing the datetime, function name, previous value, new value, and seed. Defaults to an empty list.
+            pseudonym (str, optional): The pseudonym of the member. Defaults to None.
+            modifications (list of MemberDatasEvent, optional): A list to record modifications, where each entry is a dataclass containing the datetime, function name, previous value, new value, and seed. Defaults to an empty list.
 
         Raises:
             RuntimeError: Raised if an instance already exists with the same OID.
@@ -430,7 +430,7 @@ class PersistentUserDatas(Persistent):
         """
         self._data = data
         # get a unique object id if not provided
-        self._oid = oid if oid else PersistentUserDatas.generate_unique_oid()
+        self._oid = oid if oid else Member.generate_unique_oid()
         self._voters = voters if voters else []
         self._state = state
         self._type = type
@@ -451,14 +451,14 @@ class PersistentUserDatas(Persistent):
         previous_value: Optional[Any] = None, 
         new_value: Optional[Any] = None
         ) -> None:
-        """Memorize changes to the user_datas and generate a new seed.
+        """Memorize changes to the member_datas and generate a new seed.
         
         Args:
             function_name (Optional[str]): The name of the function that
              triggered the change. Defaults to "_change_seed".
             previous_value (Optional[Any]): The previous value of the
-             user_datas property. Defaults to None.
-            new_value (Optional[Any]): The new value of the user_datas
+             member_datas property. Defaults to None.
+            new_value (Optional[Any]): The new value of the member_datas
             property. Defaults to None.
         """
         # Fallback to "_change_seed" if function_name is None
@@ -468,8 +468,8 @@ class PersistentUserDatas(Persistent):
 
         self._seed = random_string(SEED_LENGTH) 
 
-        event = UserDatasEvent(
-            datetime=UserDatasFunctions.now(), 
+        event = MemberDatasEvent(
+            datetime=MemberDatasFunctions.now(), 
             function_name=function_name,
             value_before=previous_value,
             value_after=new_value,
@@ -481,26 +481,26 @@ class PersistentUserDatas(Persistent):
 
     @property
     def seed(self)-> str:
-        """ Get the seed of the user.
+        """ Get the seed of the member.
         Returns:
-            The seed of the user.
+            The seed of the member.
         """
         return self._seed
 
     @property
     def state(self)-> UserStates:
-        """ Get the state of the user.
+        """ Get the state of the member.
         Returns:
-            The state of the user.
+            The state of the member.
         """
         return self._state
     
     @state.setter
     def state(self, value:UserStates):
-        """ Set the state of the user.
+        """ Set the state of the member.
 
         Args:
-            value (UserStates): The new state of the user.
+            value (UserStates): The new state of the member.
 
         Raises:
             TypeError: The state must be an instance of UserStates.
@@ -515,26 +515,26 @@ class PersistentUserDatas(Persistent):
         self._memorize_changes("state", old_state, value.name)
     
     @property
-    def type(self)-> UserTypes:
-        """ Get the type of the user.
+    def type(self)-> MemberTypes:
+        """ Get the type of the member.
         Returns:
-            The type of the user.
+            The type of the member.
         """
         return self._type
     
     @type.setter
-    def type(self, value:UserTypes):
-        """ Set the type of the user.
+    def type(self, value:MemberTypes):
+        """ Set the type of the member.
 
         Args:
-            value (UserTypes): The new type of the user.
+            value (MemberTypes): The new type of the member.
 
         Raises:
-            TypeError: The type must be an instance of UserTypes.
+            TypeError: The type must be an instance of MemberTypes.
         """
-        if not isinstance(value, UserTypes):
+        if not isinstance(value, MemberTypes):
             raise TypeError(
-                "The type must be an instance of UserTypes."
+                "The type must be an instance of MemberTypes."
             )
         
         old_type = self._type.name if self._type else "None"
@@ -543,18 +543,18 @@ class PersistentUserDatas(Persistent):
 
     @property
     def email(self)-> str:
-        """ Get the email of the user.
+        """ Get the email of the member.
         Returns:
-            The email of the user.
+            The email of the member.
         """
         return self._email
     
     @email.setter
     def email(self, value:str):
-        """ Set the email of the user.
+        """ Set the email of the member.
 
         Args:
-            value (str): The new email of the user.
+            value (str): The new email of the member.
 
         Raises:
             TypeError: The email must be a string.
@@ -568,18 +568,18 @@ class PersistentUserDatas(Persistent):
 
     @property
     def pseudonym(self)-> str:
-        """ Get the pseudonym of the user.
+        """ Get the pseudonym of the member.
         Returns:
-            The pseudonym of the user.
+            The pseudonym of the member.
         """
         return self._pseudonym
     
     @pseudonym.setter
     def pseudonym(self, value:str):
-        """ Set the pseudonym of the user.
+        """ Set the pseudonym of the member.
 
         Args:
-            value (str): The new pseudonym of the user.
+            value (str): The new pseudonym of the member.
 
         Raises:
             TypeError: The pseudonym must be a string.
@@ -592,42 +592,42 @@ class PersistentUserDatas(Persistent):
         self._memorize_changes("pseudonym", old_pseudonym, value)
 
     @property
-    def modifications(self)-> List[UserDatasEvent]:
-        """ Get the modifications of the user.
+    def modifications(self)-> List[MemberDatasEvent]:
+        """ Get the modifications of the member.
         Returns:
-            A copy of modifications of the user_datas as a list of
-            user.
+            A copy of modifications of the member_datas as a list of
+            member.
         """
         return self._modifications.copy()
     
     @property
     def oid(self)-> str:
-        """ Get the oid of the user.
+        """ Get the oid of the member.
         Returns:
-            The oid of the user.
+            The oid of the member.
         """
         return self._oid
 
     @property
-    def data(self)-> UserDatas:
-        """ Get the data of the user.
+    def data(self)-> MemberDatas:
+        """ Get the data of the member.
         Returns:
-            The data of the user.
+            The data of the member.
         """
         return self._data
     
     @data.setter
-    def data(self, value:UserDatas):
-        """ Set the data of the user.
+    def data(self, value:MemberDatas):
+        """ Set the data of the member.
 
         Args:
-            value (UserDatas): The new data of the user.
+            value (MemberDatas): The new data of the member.
 
         Raises:
-            TypeError: The data must be a user.
+            TypeError: The data must be a member.
         """
-        if not isinstance(value, UserDatas):
-            raise TypeError("The data must be a UserDatas.")
+        if not isinstance(value, MemberDatas):
+            raise TypeError("The data must be a MemberDatas.")
         
         old_data = self._data if self._data else "None"
         self._data = value
@@ -635,21 +635,21 @@ class PersistentUserDatas(Persistent):
     
     @staticmethod
     def generate_unique_oid(
-        user_datas:UserDatas = None,
+        member_datas:MemberDatas = None,
         max_retries:int = 10
         )-> str:
         """
-        Generate a unique Object Identifier (OID) for a new UserDatas object.
+        Generate a unique Object Identifier (OID) for a new MemberDatas object.
 
         This function tries to generate a unique OID by using the 
-         UserDatasFunctions.uuid function.
-        It checks for uniqueness by looking into the existing `user_datas`
+         MemberDatasFunctions.uuid function.
+        It checks for uniqueness by looking into the existing `member_datas`
          mapping.
 
         Args:
-            user_datas (UserDatas, optional): The mapping of existing
-             user_datas to check for OID uniqueness. 
-             Defaults to the singleton instance of the UserDatas class.
+            member_datas (MemberDatas, optional): The mapping of existing
+             member_datas to check for OID uniqueness. 
+             Defaults to the singleton instance of the MemberDatas class.
             max_retries (int, optional): Maximum number of attempts to generate
              a unique OID. Defaults to 10.
 
@@ -660,12 +660,12 @@ class PersistentUserDatas(Persistent):
             ValueError: If a unique OID cannot be generated after `max_retries`
              attempts.
         """
-        if user_datas is None:
+        if member_datas is None:
             # get the singleton instance
-            user_datas = PersistentUsers.get_instance()
+            member_datas = Members.get_instance()
         for _ in range(max_retries):
-            oid = str(UserDatasFunctions.uuid())
-            if oid not in user_datas:
+            oid = str(MemberDatasFunctions.uuid())
+            if oid not in member_datas:
                 return oid
         raise ValueError(
             f"Failed to generate a unique OID after {max_retries} attempts."
@@ -673,9 +673,9 @@ class PersistentUserDatas(Persistent):
 
     @property
     def email_send_status_history(self)-> List[EmailEvent]:
-        """ Get the email send status history of the user.
+        """ Get the email send status history of the member.
         Returns:
-            A copy of email send status history of the user.
+            A copy of email send status history of the member.
         """
         return self._email_send_status_history.copy()    
     
@@ -684,7 +684,7 @@ class PersistentUserDatas(Persistent):
             status:EmailSendStatus,
             procedure_name:str
         ):
-        """ Add an email send status to the user_datas.
+        """ Add an email send status to the member_datas.
         Args:
             status (EmailSendStatus): The new status of the email
              sent to the applicant.
@@ -715,7 +715,7 @@ class PersistentUserDatas(Persistent):
                 else "None"
             )
         self._email_send_status_history.append(EmailEvent(
-            datetime=UserDatasFunctions.now(), 
+            datetime=MemberDatasFunctions.now(), 
             state=status,
             function_name=procedure_name,
             seed=email_seed

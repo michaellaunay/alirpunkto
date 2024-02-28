@@ -12,7 +12,7 @@ from pyramid.config import Configurator
 from pyramid_mailer.mailer import Mailer
 
 from .models import appmaker
-from .models.user_datas import PersistentUsers
+from .models.member import Members
 from pyramid.session import SignedCookieSessionFactory
 import deform
 from pkg_resources import resource_filename
@@ -88,7 +88,7 @@ def root_factory(request):
     """
     conn = get_connection(request)
     root = appmaker(conn.root())
-    PersistentUsers.get_instance(connection=conn)
+    Members.get_instance(connection=conn)
     return root
 
 def create_ldap_groups_if_not_exists():
