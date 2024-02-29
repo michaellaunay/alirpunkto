@@ -24,7 +24,7 @@ from alirpunkto.constants_and_globals import (
 )
 
 @unique
-class UserStates(Enum) :
+class MemberStates(Enum) :
     """States of the member.
     """
     # Created: The member data set is in created mode.
@@ -73,7 +73,7 @@ class UserStates(Enum) :
         Returns:
             The names of the member_datas states.
         """
-        return UserStates.__members__.keys()
+        return MemberStates.__members__.keys()
 
 @unique
 class EmailSendStatus(Enum):
@@ -126,7 +126,7 @@ class MemberTypes(Enum) :
         return MemberTypes.__members__.keys()
 
 @unique
-class UserRoles(Enum) :
+class MemberRoles(Enum) :
     """Roles of members.
     """
     # None: No role.
@@ -179,7 +179,7 @@ class UserRoles(Enum) :
         Returns:
             The names of the member roles.
         """
-        return UserRoles.__members__.keys()
+        return MemberRoles.__members__.keys()
 
 @dataclass
 class MemberDatasEvent:
@@ -280,7 +280,7 @@ class MemberDatas:
     password_confirm: str
     lang1: str
     lang2: str
-    role: UserRoles = UserRoles.NONE
+    role: MemberRoles = MemberRoles.NONE
 
     def iter_attributes(self)-> Iterator[Tuple[str, Any]]:
         """Iterate over the attributes of the dataclass.
@@ -365,7 +365,6 @@ class Members(PersistentMapping):
         """
         return [member.email for member in self.values()]
 
-# @TODO Rename this class to User and model.member to model.member
 class Member(Persistent):
     """
     Represents a persistent storage object for member data within the ZODB.
@@ -380,7 +379,7 @@ class Member(Persistent):
         data (MemberDatas): Accesses the data for the member. Supports get and set operations.
         oid (str): Retrieves the unique object identifier. Read-only.
         voters (list): Manages the list of voters associated with the member. Supports get and set operations.
-        state (UserStates): Controls the current state of the member. Supports get and set operations.
+        state (MemberStates): Controls the current state of the member. Supports get and set operations.
         type (MemberTypes or None): Defines the type of the member. Supports get and set operations.
         email (str or None): Manages the email address associated with the member. Supports get and set operations.
         votes (dict): Accesses the dictionary of votes associated with the member. Supports get and set operations.
@@ -397,7 +396,7 @@ class Member(Persistent):
         data: Optional[MemberDatas] = None,
         oid: Optional[str] = None,
         voters: Optional[List[str]] = None,
-        state: UserStates = UserStates.DRAFT,
+        state: MemberStates = MemberStates.DRAFT,
         type: Optional[MemberTypes] = None,
         email: Optional[str] = None,
         votes: Optional[Dict[str, int]] = None,
@@ -414,7 +413,7 @@ class Member(Persistent):
             data (MemberDatas, optional): Initial data for the member. Defaults to None.
             oid (str, optional): A unique object identifier. If not provided, a unique OID is generated. Defaults to None.
             voters (list, optional): A list of voters associated with the member. Defaults to an empty list.
-            state (UserStates, optional): The current state of the member. Defaults to UserStates.DRAFT.
+            state (MemberStates, optional): The current state of the member. Defaults to MemberStates.DRAFT.
             type (MemberTypes or None, optional): The type of the member (e.g., administrator, regular member). Defaults to None.
             email (str or None, optional): The email address associated with the member. Defaults to None.
             votes (dict, optional): A dictionary of votes associated with the member. Defaults to an empty dict.
@@ -488,7 +487,7 @@ class Member(Persistent):
         return self._seed
 
     @property
-    def state(self)-> UserStates:
+    def state(self)-> MemberStates:
         """ Get the state of the member.
         Returns:
             The state of the member.
@@ -496,18 +495,18 @@ class Member(Persistent):
         return self._state
     
     @state.setter
-    def state(self, value:UserStates):
+    def state(self, value:MemberStates):
         """ Set the state of the member.
 
         Args:
-            value (UserStates): The new state of the member.
+            value (MemberStates): The new state of the member.
 
         Raises:
-            TypeError: The state must be an instance of UserStates.
+            TypeError: The state must be an instance of MemberStates.
         """
-        if not isinstance(value, UserStates):
+        if not isinstance(value, MemberStates):
             raise TypeError(
-                "The state must be an instance of UserStates."
+                "The state must be an instance of MemberStates."
             )
         
         old_state = self._state.name if self._state else "None"

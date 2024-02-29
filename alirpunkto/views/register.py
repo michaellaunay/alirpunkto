@@ -96,7 +96,7 @@ def _retrieve_candidature(
         candidature = get_candidature_by_oid(decrypted_oid, request)
         if candidature is None:
             error = _('candidature_not_found')
-            return None, {'candidature': candidature,
+            return None, {'candidature': None,
                 'MemberTypes': MemberTypes,
                 'error': error}
         if seed != candidature.email_send_status_history[-1].seed:

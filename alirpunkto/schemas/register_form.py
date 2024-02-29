@@ -29,6 +29,12 @@ class RegisterForm(schema.CSRFSchema):
         messages={'required': _('full_surname_as_in_id_required')},
         missing=""
     )
+    avatar = colander.SchemaNode(
+        colander.String(),
+        title=_('avatar_label'),
+        widget=TextInputWidget(readonly=True),  # The field is visible but not editable
+        missing=""
+    )
     birthdate = colander.SchemaNode(
         colander.Date(),
         title=_('birthdate_label'),
@@ -130,4 +136,60 @@ class RegisterForm(schema.CSRFSchema):
         self.children.remove(self.get('nationality'))
         self.children.remove(self.get('lang1'))
         self.children.remove(self.get('lang2'))
+
+    def prepare_for_modification(self, read_only_fields: dict, writable_field_values: dict):
+        """Prepare the form for an ordinary user."""
+        if 'pseudonyme' in read_only_fields:
+            self.get('pseudonyme').widget = TextInputWidget(readonly=True)
+            self.get('pseudonyme').widget.value = read_only_fields['pseudonyme']
+        elif 'pseudonyme' in writable_field_values:
+            self.get('pseudonyme').widget.value = writable_field_values['pseudonyme']
+        else:
+            self.children.remove(self.get('pseudonyme'))
+        if 'fullname' in read_only_fields:
+            self.get('fullname').widget = TextInputWidget(readonly=True)
+            self.get('fullname').widget.value = read_only_fields['fullname']
+        elif 'fullname' in writable_field_values:
+            self.get('fullname').widget.value = writable_field_values['fullname']
+        else:
+            self.children.remove(self.get('fullname'))
+        if 'fullsurname' in read_only_fields:
+            self.get('fullsurname').widget = TextInputWidget(readonly=True)
+            self.get('fullsurname').widget.value = read_only_fields['fullsurname']
+        elif 'fullsurname' in writable_field_values:
+            self.get('fullsurname').widget.value = writable_field_values['fullsurname']
+        else:
+            self.children.remove(self.get('fullsurname'))
+        if 'birthdate' in read_only_fields:
+            self.get('birthdate').widget = DateInputWidget(readonly=True)
+            self.get('birthdate').widget.value = read_only_fields['birthdate']
+        elif 'birthdate' in writable_field_values:
+            self.get('birthdate').widget.value = writable_field_values['birthdate']
+        else:
+            self.children.remove(self.get('birthdate'))
+        if 'nationality' in read_only_fields:
+            self.get('nationality').widget = SelectWidget(readonly=True)
+            self.get('nationality').widget.value = read_only_fields['nationality']
+        elif 'nationality' in writable_field_values:
+            self.get('nationality').widget.value = writable_field_values['nationality']
+        else:
+            self.children.remove(self.get('nationality'))
+        if 'lang1' in read_only_fields:
+            self.get('lang1').widget = SelectWidget(readonly=True)
+            self.get('lang1').widget.value = read_only_fields['lang1']
+        elif 'lang1' in writable_field_values:
+            self.get('lang1').widget.value = writable_field_values['lang1']
+        else:
+            self.children.remove(self.get('lang1'))
+        if 'lang2' in read_only_fields:
+            self.get('lang2').widget = SelectWidget(readonly=True)
+            self.get('lang2').widget.value = read_only_fields['lang2']
+        elif 'lang2' in writable_field_values:
+            self.get('lang2').widget.value = writable_field_values['lang2']
+        else:
+            self.children.remove(self.get('lang2'))
+
+        self.get('cooperative_number').widget = TextInputWidget(readonly=True)
+        self.get('cooperative_number').widget.value = read_only_fields['cooperative_number']
+
 

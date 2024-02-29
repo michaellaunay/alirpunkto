@@ -6,7 +6,7 @@ from typing import Union, List
 from persistent import Persistent
 import json
 from alirpunkto.constants_and_globals import log
-from alirpunkto.models.member import UserStates
+from alirpunkto.models.member import MemberStates
 
 # User class
 class User(Persistent):
@@ -22,7 +22,7 @@ class User(Persistent):
         self.name = name
         self.email = email
         self.oid = oid
-        self.user_data_state = UserStates.CREATED
+        self.user_data_state = MemberStates.CREATED
 
     @classmethod
     def create_user(cls, name:str, email:str, oid:str) -> 'User':

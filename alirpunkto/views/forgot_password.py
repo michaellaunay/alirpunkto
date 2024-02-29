@@ -9,29 +9,29 @@ from alirpunkto.utils import (
     get_member_by_email,
     update_member_from_ldap,
     get_member_by_oid,
-    send_email_to_member
+    send_email_to_member,
+    decrypt_oid
 )
 from pyramid.request import Request
-from typing import Dict, Optional, Union
+from typing import Dict, Union
 
 from alirpunkto.models.member import (
-    Member,
+    MemberStates,
     EmailSendStatus,
-    MemberDatas
+    MemberDatas,
+    MemberTypes
 )
 from alirpunkto.constants_and_globals import (
     _,
     LDAP_ADMIN_OID,
     MEMBERS_BEING_MODIFIED,
-    log
-)
-from alirpunkto.constants_and_globals import (
+    log,
     CANDIDATURE_OID,
     SEED_LENGTH
 )
-
-import BTrees
-import transaction
+from alirpunkto.schemas.register_form import RegisterForm
+from pyramid.i18n import Translator
+import deform
 
 @view_config(route_name='forgot_password', renderer='alirpunkto:templates/forgot_password.pt')
 def forgot_password(request):
@@ -43,6 +43,24 @@ def forgot_password(request):
     """
     log.debug(f"forgot_password: {request.method} {request.url}")
     transaction = request.tm
+    member, error = _retrieve_member(request)
+    if error:
+        return error
+    if member:
+        if member.state == MemberDatas.STATE_RESET_PASSWORD: 
+            schema = RegisterForm().bind(request=request)
+            appstruct = {
+                'cooperative_number': member.oid,
+                'email': member.email,
+            }
+            if member.type == MemberTypes.ORDINARY:
+                schema.prepare_for_ordinary()
+            form = deform.Form(schema, buttons=('submit',), translator=Translator)
+            read_only_fields = {member.data[field]: field for field in member.data}
+            writable_field_values = {}
+            form.prepare_for_modification(read_only_fields, writable_field_values)
+            return {"form": form.render(appstruct=appstruct), "member": member}
+                    
     # 1) AlirPunkto displays the forgot_password.pt zpt to enter the mail 
     if 'submit' in request.POST:
         # 2) The user has entered his mail and validated
@@ -98,7 +116,7 @@ def forgot_password(request):
         # 7) AlirPunkto creates a password reset event and adds the token to it
         # 8) AlirPunkto creates a link to the persistent user with the token
         # 9) AlirPunkto sends an email to the user with the link
-        persitent_user_datas.state = UserDatas.STATE_RESET_PASSWORD
+        persitent_user_datas.state = MemberStates.DATA_MODIFICATION_REQUESTED
         email_template = "reset_password_email"
         send_email_to_member(
             request,
@@ -166,7 +184,7 @@ def forgot_password(request):
 def _retrieve_member(
         request: Request
     ) -> Union[MemberDatas, Dict]:
-    """Retrieve an existing member from the session or URL.
+    """Retrieve an existing member from the URL.
 
     Parameters:
     - request (Request): The pyramid request object.
@@ -174,11 +192,6 @@ def _retrieve_member(
     Returns:
     - tuple: A tuple containing the member object and an error dict if applicable.
     """
-    # Check if the member is already in the request
-    if CANDIDATURE_OID in request.session :
-        member = get_member_by_oid(request.session[CANDIDATURE_OID], request)
-        if member :
-            return member, None
 
     # If the member is not in the request, try to retrieve it from the URL
     encrypted_oid = request.params.get("oid", None)
@@ -190,13 +203,11 @@ def _retrieve_member(
         member = get_member_by_oid(decrypted_oid, request)
         if member is None:
             error = _('member_not_found')
-            return None, {'member': member,
-                'MemberTypes': MemberTypes,
+            return None, {'member': None,
                 'error': error}
         if seed != member.email_send_status_history[-1].seed:
             error = _('url_is_obsolete')
             return None, {'member': member,
-                'MemberTypes': MemberTypes,
                 'error': error,
                 'url_obsolete': True}
         request.session[CANDIDATURE_OID] = member.oid
