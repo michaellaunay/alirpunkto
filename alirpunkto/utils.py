@@ -41,7 +41,7 @@ from .constants_and_globals import (
     SPECIAL_CHARACTERS
 )
 from pyramid.i18n import get_localizer
-from ldap3 import Server, Connection, ALL, MODIFY_ADD
+from ldap3 import Server, Connection, ALL, MODIFY_ADD, MODIFY_REPLACE
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
 import random
@@ -368,11 +368,11 @@ def get_member_by_oid(
     Returns:
         Member: the member or None if not found or not a Member
     """
-    candidatures = get_members(request)
-    user = candidatures[oid] if oid in candidatures else None
-    if not isinstance(user, MemberDatas):
-        user = None
-    return user
+    members = get_members(request)
+    member = members[oid] if oid in members else None
+    if not isinstance(member, MemberDatas):
+        member = None
+    return member
 
 def append_member(
         member: Member,
@@ -755,6 +755,44 @@ def register_user_to_ldap(request, candidature, password):
     else:
         log.error(f"Error while adding user {pseudonym} to LDAP : {conn.result}")
         return {'status': 'error', 'message': _('registration_failed')}
+
+def update_member_password(request, member_oid, new_password):
+    """
+    Update a member's password in the LDAP directory.
+
+    Args:
+        request (pyramid.request.Request): the request.
+        member_oid (str): the oid of the member to update.
+        new_password (str): the new password.
+
+    Returns:
+        dict: a dictionary containing the result of the update.
+    """
+
+    # Connect to the LDAP server
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    )
+    conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
+
+    # DN for the member
+    dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"uid={member_oid},{LDAP_BASE_DN}"
+    )
+
+    # Update the member's password
+    try:
+        success = conn.modify(dn, {'userPassword': [(MODIFY_REPLACE, [new_password])]})
+    except Exception as e:
+        log.error(f"Error while updating password for user {member_oid} in LDAP: {e}")
+        success = False
+
+    if success:
+        return {'status': 'success', 'message': _('password_update_successful')}
+    else:
+        log.error(f"Error while updating password for user {member_oid} in LDAP : {conn.result}")
+        return {'status': 'error', 'message': _('password_update_failed')}
 
 def is_admin(username:str, password:str)-> bool:
     """

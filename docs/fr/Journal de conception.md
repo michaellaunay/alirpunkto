@@ -1017,4 +1017,11 @@ Voici le scénario de réinitialisation du mot de passe :
    sudo systemctl status alirpunkto.service
    ```
 
-
+```
+# 2024-02-16 à 2024-02-29
+Refactorisation du code pour créer la classe Member mère de Candidature, cela pour réutiliser le code de génération des liens chiffrés dans la vue forget_password.
+# 2024-03-01
+Modification de la configuration des logs en ajoutant le fichier à l'origine
+```ini
+format = %(asctime)s %(levelname)-5.5s [%(name)s:%(filename)s:%(lineno)s][%(threadName)s] %(message)s
+```

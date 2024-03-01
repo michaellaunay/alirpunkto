@@ -10,10 +10,13 @@ from alirpunkto.utils import (
     update_member_from_ldap,
     get_member_by_oid,
     send_email_to_member,
-    decrypt_oid
+    decrypt_oid,
+    is_valid_password,
+    update_member_password
 )
 from pyramid.request import Request
 from typing import Dict, Union
+from BTrees import OOBTree
 
 from alirpunkto.models.member import (
     MemberStates,
@@ -26,14 +29,18 @@ from alirpunkto.constants_and_globals import (
     LDAP_ADMIN_OID,
     MEMBERS_BEING_MODIFIED,
     log,
-    CANDIDATURE_OID,
+    MEMBER_OID,
     SEED_LENGTH
 )
 from alirpunkto.schemas.register_form import RegisterForm
 from pyramid.i18n import Translator
 import deform
+import colander
 
-@view_config(route_name='forgot_password', renderer='alirpunkto:templates/forgot_password.pt')
+@view_config(
+    route_name='forgot_password',
+    renderer='alirpunkto:templates/forgot_password.pt'
+)
 def forgot_password(request):
     """Forgot password view.
     Send an email to the user with a link to reset his password
@@ -47,31 +54,44 @@ def forgot_password(request):
     if error:
         return error
     if member:
+        # If we get here it's because the user used the link received in his 
+        # email and it's valid @TODO check the validity period
+        # 11) The user receives the email and clicks on the link
+        # 12) AlirPunkto displays the forgot_password.pt zpt to enter the new
+        # password
         if member.state == MemberDatas.STATE_RESET_PASSWORD: 
             schema = RegisterForm().bind(request=request)
-            appstruct = {
-                'cooperative_number': member.oid,
-                'email': member.email,
-            }
+            appstruct = colander.null
             if member.type == MemberTypes.ORDINARY:
                 schema.prepare_for_ordinary()
-            form = deform.Form(schema, buttons=('submit',), translator=Translator)
-            read_only_fields = {member.data[field]: field for field in member.data}
-            writable_field_values = {}
-            form.prepare_for_modification(read_only_fields, writable_field_values)
+            form = deform.Form(schema,
+                buttons=('modify',),
+                translator=Translator
+            )
+            read_only_fields = {
+                member.data[field]: field for field in member.data
+                if field not in ["password", "password_confirm"]
+            }
+            writable_field_values = {"password": "", "password_confirm": ""}
+            form.prepare_for_modification(read_only_fields,
+                writable_field_values)
+            request.session[MEMBER_OID] = member.oid
             return {"form": form.render(appstruct=appstruct), "member": member}
-                    
+    oid = request.session.get(MEMBER_OID, None)
+    if oid:
+        member = get_member_by_oid(oid, request)       
     # 1) AlirPunkto displays the forgot_password.pt zpt to enter the mail 
     if 'submit' in request.POST:
         # 2) The user has entered his mail and validated
         mail = request.POST['mail'] if 'mail' in request.POST else None
         if not mail:
-            log.warning('forgot_password: No mail provided')
+            log.warning('No mail provided')
             request.session.flash(_('forget_no_mail'), 'error')
             return {"error":_('forget_no_mail')}
         # 2.1) AlirPunkto checks that the mail is valid
         if err:= is_not_a_valid_email_address(mail, check_mx=False):
-            log.warning('forgot_password: Invalid email address: {}'.format(mail[:512]))
+            log.warning(
+                f'Invalid email address: {mail[:512]}')
             # 2.1.1) If not, AlirPunkto displays an error message
             request.session.flash(err["error"], 'error')
             # 2.1.2) Return to 1
@@ -80,17 +100,18 @@ def forgot_password(request):
         # 3) AlirPunkto checks that the email exists in ldap
         members = get_member_by_email(mail)
         if not members:
-            # 3.1) If the mail does not exist, AlirPunkto displays a message indicating that if the user exists, he will receive an email
+            # 3.1) If the mail does not exist, AlirPunkto displays a message
+            # indicating that if the user exists, he will receive an email
             request.session.flash(_('forget_email_in_member_list'), 'warning')
             # 3.2) End of the procedure
             return {"error":_('forget_email_in_member_list')}
         # 4) AlirPunkto retrieves information about the user from the ldap
         if len(members) > 1:
-            log.warning(f'forgot_password: Multiple members found for mail: {mail[:512]}')
-        member = members[0]
-        uid = member['uid']
+            log.warning(f'Multiple members found for mail: {mail[:512]}')
+        ldap_member = members[0]
+        uid = ldap_member['uid']
         if uid == LDAP_ADMIN_OID:
-            log.warning(f'forgot_password: Admin user cannot reset password: {mail[:512]}')
+            log.warning(f'Admin user cannot reset password: {mail[:512]}')
             request.session.flash(_('forget_admin_user'), 'error')
             return {"error":_('forget_admin_user')}
         # 5) If an instance of Member (an application, or any other
@@ -98,29 +119,29 @@ def forgot_password(request):
         # instance is created with LDAP informations, and stored in the MemberDatas list.
         # The details of the email sent to the member, such as the link, will
         # be generated by the instance's methods.
-        persitent_user_datas = update_member_from_ldap(uid, request)
-        if not persitent_user_datas:
+        member = update_member_from_ldap(uid, request)
+        if not member:
             return {"error":_('forget_email_in_member_list')}       
         # 5.1) AlirPunkto checks if there is a user being modified
         # get the list of users being modified
         root = get_connection(request).root()
         if MEMBERS_BEING_MODIFIED not in root:
-            root[MEMBERS_BEING_MODIFIED] = BTrees.OOBTree.BTree()
+            root[MEMBERS_BEING_MODIFIED] = OOBTree.BTree()
             transaction.commit()
         reset_members = root[MEMBERS_BEING_MODIFIED]
         # Add the user to the list of users being modified
-        reset_members[uid] = persitent_user_datas
+        reset_members[uid] = member
         transaction.commit()
         # Change state to reset password
         # 6) AlirPunkto generates a hashed password reset token
         # 7) AlirPunkto creates a password reset event and adds the token to it
         # 8) AlirPunkto creates a link to the persistent user with the token
         # 9) AlirPunkto sends an email to the user with the link
-        persitent_user_datas.state = MemberStates.DATA_MODIFICATION_REQUESTED
+        member.state = MemberStates.DATA_MODIFICATION_REQUESTED
         email_template = "reset_password_email"
         send_email_to_member(
             request,
-            persitent_user_datas, 
+            member, 
             'forgot_password',
             email_template,
             'reset_password_email_subject',
@@ -128,58 +149,66 @@ def forgot_password(request):
         )       
         try:
             transaction.commit()
-            persitent_user_datas.add_email_send_status(
+            member.add_email_send_status(
                 EmailSendStatus.SENT,
                 email_template
             )
-            return {"message":_('forget_email_sent')}
+            return {"message":_('forget_email_sent'), "member": member}
         except Exception as e:
             log.error(
-                f"Error while reset password {persitent_user_datas.oid} : {e}"
+                f"Error while reset password {member.oid} : {e}"
             )
-            persitent_user_datas.add_email_send_status(
+            member.add_email_send_status(
                 EmailSendStatus.ERROR,
                 email_template
             )
-            return {"error":_('forget_email_send_error')}
-    elif 'modify' in request.POST:
-        # 11) The user receives the email and clicks on the link
-        # 11.1) If the link is invalid or expired, AlirPunkto displays an error message
-        # 11.2) Return to 1
+            # 11) The user receives the email and musts clicks on the link to continue
+            # 11.1) If the link is invalid or expired, AlirPunkto displays an error message
+            # 11.2) Return to 1
+            return {"member":None, "error":_('forget_email_send_error')}
+    elif 'modify' in request.POST and oid and member:
+            # 11.1) If the link is invalid or expired, AlirPunkto displays an error message
         # 12) AlirPunkto displays the forgot_password.pt zpt to enter the new password
         # 13) The user enters his new password and validates
-        # 14) AlirPunkto checks that the password is valid and meets the security constraints
+        # 14) AlirPunkto checks that the password is valid and meets security constraints
         # 14.1) If the password is not valid, AlirPunkto displays an error message
-        ...
+        # 14.2) Return to 12
+        password = request.params['password']
+        password_confirm = request.params['password_confirm']
+        if password != password_confirm:
+            request.session.flash(_('password_not_match'), 'error')
+            return {"error":_('password_not_match'),
+                "member": member,
+                "form": form.render()}
+        if password == "":
+            request.session.flash(_('password_required'), 'error')
+            return {"error":_('password_required'),
+                "member": member,
+                "form": form.render()}
+        err = is_valid_password(password)
+        if err:
+            request.session.flash(err, 'error')
+            return {"error":_('password_required'),
+                "member": member,
+                "form": form.render()}
+        #@TODO
+        # __fr
+        # 15) AlirPunkto met à jour le mot de passe dans le ldap
+        # 16) AlirPunkto met à jour les événements de la candidature
+        # 17) AlirPunkto affiche la zpt forgot_password.pt de confirmation de changement de mot de passe
+        # 18) AlirPunkto envoie un mail à l'utilisateur pour le prévenir du changement de mot de passe        ...
+        # __en
+        # 15) AlirPunkto updates the password in the ldap
+        result = update_member_password(member, password, request)
+        if result['status'] == "success":
+            return {"message":_('password_changed'), "member": member}
+        else:
+            return {"error":_('password_not_changed'), "member": member}
+        # 16) AlirPunkto updates the events of the candidature
+        # 17) AlirPunkto displays the forgot_password.pt zpt to confirm the password change
+        # 18) AlirPunkto sends an email to the user to notify him of the password change
     else :
-        return {}
-
-    # 2) L'utilisateur saisit son mail et valide
-    # 3) AlirPunkto vérifie que le mail existe dans ldap
-    # 3.1) Si le mail n'existe pas, AlirPunkto affiche un message indiquant que si l'utilisateur existe, il recevra un mail 
-    # 3.2) Fin de la procédure
-    # 4) AlirPunkto récupère les informations concernant l'utilisateur depuis le ldap
-    # 5) AlirPunkto regarde s'il existe une candidature pour l'utilisateur
-    # 5.1) Si non, AlirPunkto crée une candidature à partir des informations du ldap
-    # 5.2) Si oui, AlirPunkto récupère la candidature et la met à jour avec les informations du ldap (priorité au ldap)
-    # 6) AlirPunkto génère un token hashé de réinitialisation du mot de passe
-    # 7) AlirPunkto crée un événement de réinitialisation du mot de passe et lui ajoute le token
-    # 8) AlirPunkto crée un lien vers la candidature avec le token
-    # 9) AlirPunkto envoie un mail à l'utilisateur avec le lien
-    # 10) AlirPunkto affiche un message indiquant que le mail a été envoyé (même message que 3.1)
-    # 11) L'utilisateur reçoit le mail et clique sur le lien
-    # 11.1) Si le lien est invalide ou expiré, AlirPunkto affiche un message d'erreur
-    # 11.2) Retour en 1
-    # 12) AlirPunkto affiche la zpt forgot_password.pt de saisie du nouveau mot de passe
-    # 13) L'utilisateur saisit son nouveau mot de passe et valide
-    # 14) AlirPunkto vérifie que le mot de passe est valide et respecte les contraintes de sécurité
-    # 14.1) Si le mot de passe n'est pas valide, AlirPunkto affiche un message d'erreur
-    # 14.2) Retour en 12
-    # 15) AlirPunkto met à jour le mot de passe dans le ldap
-    # 16) AlirPunkto met à jour les événements de la candidature
-    # 17) AlirPunkto affiche la zpt forgot_password.pt de confirmation de changement de mot de passe
-    # 18) AlirPunkto envoie un mail à l'utilisateur pour le prévenir du changement de mot de passe
-    return {}
+        return {"member": None, "form": None, "error": None}
 
 def _retrieve_member(
         request: Request
@@ -210,7 +239,6 @@ def _retrieve_member(
             return None, {'member': member,
                 'error': error,
                 'url_obsolete': True}
-        request.session[CANDIDATURE_OID] = member.oid
         return member, None
     else:
         return None, None

@@ -95,6 +95,7 @@ EUROPEAN_LOCALES: Final = {
 }
 
 CANDIDATURE_OID: Final = 'candidature_oid'
+MEMBER_OID: Final = 'member_oid'
 SEED_LENGTH: Final = 10
 LDAP_ADMIN_OID: Final = "00000000-0000-0000-0000-000000000000"
 

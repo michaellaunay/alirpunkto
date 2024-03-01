@@ -41,6 +41,8 @@ from .constants_and_globals import (
     DEFAULT_SESSION_TIMEOUT,
 )
 
+
+
 @subscriber(NewRequest)
 def add_localizer(event):
     """add_localizer is used to add the localizer to the request

@@ -188,6 +188,22 @@ class RegisterForm(schema.CSRFSchema):
             self.get('lang2').widget.value = writable_field_values['lang2']
         else:
             self.children.remove(self.get('lang2'))
+        if 'password' in read_only_fields:
+            self.get('password').widget = TextInputWidget(readonly=True)
+            password = read_only_fields['password']
+            self.get('password').widget.value = password if password else ""
+        elif 'password' in writable_field_values:
+            self.get('password').widget.value = writable_field_values['password']
+        else:
+            self.children.remove(self.get('password'))
+        if 'password_confirm' in read_only_fields:
+            self.get('password_confirm').widget = TextInputWidget(readonly=True)
+            password_confirm = read_only_fields['password_confirm']
+            self.get('password_confirm').widget.value = password_confirm if password_confirm else ""
+        elif 'password_confirm' in writable_field_values:
+            self.get('password_confirm').widget.value = writable_field_values['password_confirm']
+        else:
+            self.children.remove(self.get('password_confirm'))
 
         self.get('cooperative_number').widget = TextInputWidget(readonly=True)
         self.get('cooperative_number').widget.value = read_only_fields['cooperative_number']
