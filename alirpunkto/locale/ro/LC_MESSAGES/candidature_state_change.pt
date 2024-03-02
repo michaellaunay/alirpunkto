@@ -13,15 +13,15 @@
         <p tal:omit-tag="textual">Aplicația dvs. pe platformă
             <span tal:replace="site_url">URL</span> ca un 
             <span tal:replace="python:candidature.type">Rolul</span>.
-            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED" tal:omit-tag="textual">a fost acceptată</span>
-            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED" tal:omit-tag="textual">a fost respins</span>
-            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]" tal:omit-tag="textual">este în curs de procesare și și-a schimbat statutul</span> . 
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED" tal:omit-tag="textual">a fost acceptată</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED" tal:omit-tag="textual">a fost respins</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]" tal:omit-tag="textual">este în curs de procesare și și-a schimbat statutul</span> . 
         </p>
         <p tal:omit-tag="textual">Iată detalii despre evoluția sa:</p>
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Identificarea candidaturii: <span tal:replace="python:candidature.oid">Identificarea candidaturii</span></li>.
             <li tal:omit-tag="textual">Data de tranziție: <span tal:replace="python:candidature.modifications[-1].datetime">Ultima tranziție</span></li>.
-            <li tal:omit-tag="textual">Statut nou: <span i18n:translate="" tal:content="python:candidature.state.value" tal:omit-tag="textual">Statutul noii candidaturi</span></li>.
+            <li tal:omit-tag="textual">Statut nou: <span i18n:translate="" tal:content="python:candidature.candidature_state.value" tal:omit-tag="textual">Statutul noii candidaturi</span></li>.
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">:
             Dacă aveți nevoie, puteți întrerupe acum procesul de înregistrare. Îl veți putea relua mai târziu, făcând clic pe link-ul de mai jos.
             </li>

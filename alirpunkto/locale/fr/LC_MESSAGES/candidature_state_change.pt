@@ -13,15 +13,15 @@
         <p tal:omit-tag="textual">Votre candidature sur la plateforme
             <span tal:replace="site_url">URL</span> en tant que 
             <span tal:replace="python:candidature.type">Rôle</span>
-            <span tal:omit-tag="textual" tal:condition="python:candidature.state == CandidatureStates.APPROVED">a été acceptée</span>
-            <span tal:omit-tag="textual" tal:condition="python:candidature.state == CandidatureStates.REFUSED">a été rejetée</span>
-            <span tal:omit-tag="textual" tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">est en cours de traitement et a changé d'état</span> . 
+            <span tal:omit-tag="textual" tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">a été acceptée</span>
+            <span tal:omit-tag="textual" tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">a été rejetée</span>
+            <span tal:omit-tag="textual" tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">est en cours de traitement et a changé d'état</span> . 
         </p>
         <p tal:omit-tag="textual">Voici les détails de son évolution:</p>
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Identification de la candidature : <span tal:replace="python:candidature.oid">Identification de la candidature</span></li>
             <li tal:omit-tag="textual">Date de transition : <span tal:replace="python:candidature.modifications[-1].datetime">Dernière transition</span></li>
-            <li tal:omit-tag="textual">Nouveau statut : <span i18n:translate="" tal:content="python:candidature.state.value" tal:omit-tag="textual">Etat</span></li>
+            <li tal:omit-tag="textual">Nouveau statut : <span i18n:translate="" tal:content="python:candidature.candidature_state.value" tal:omit-tag="textual">Etat</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             Si vous le souhaitez, vous pouvez interrompre votre processus d'inscription maintenant. Vous pourrez la reprendre plus tard en cliquant sur le lien ci-dessous.
             </li>

@@ -10,6 +10,7 @@ from alirpunkto.models.member import (
     MemberDatas,
     EmailSendStatus,
     Member,
+    MemberStates,
     MemberTypes
 )
 from .models.candidature import (
@@ -38,7 +39,9 @@ from .constants_and_globals import (
     MAX_PASSWORD_LENGTH,
     pseudonym_pattern,
     log,
-    SPECIAL_CHARACTERS
+    SPECIAL_CHARACTERS,
+    LOCALE_LANG_MESSAGES,
+    ZPT_EXTENSION
 )
 from pyramid.i18n import get_localizer
 from ldap3 import Server, Connection, ALL, MODIFY_ADD, MODIFY_REPLACE
@@ -156,7 +159,7 @@ def is_valid_email(email, request):
         # Verify that the email is not already registered in candidatures
         candidatures = get_candidatures(request)
         for candidature in candidatures.values():
-            if candidature.email == email and candidature.state != CandidatureStates.REFUSED:
+            if candidature.email == email and candidature.candidature_state != CandidatureStates.REFUSED:
                 return {'error': _('email_allready_exist')}
         # Verify that the email is not already registered in LDAP
         entries = get_member_by_email(email)
@@ -370,7 +373,7 @@ def get_member_by_oid(
     """
     members = get_members(request)
     member = members[oid] if oid in members else None
-    if not isinstance(member, MemberDatas):
+    if not isinstance(member, Member):
         member = None
     return member
 
@@ -388,7 +391,7 @@ def append_member(
 def update_member_from_ldap(
         oid: str,
         request: Request
-    ) -> Union[MemberDatas, None]:
+    ) -> Union[Member, None]:
     """Update the members from LDAP.
     Args:
         oid (str): the oid of the user
@@ -420,15 +423,17 @@ def update_member_from_ldap(
     except Exception as e:
         log.error(f"Error while searching for user {oid} in LDAP: {e}")
         return None
-    user_entry = conn.entries[0]
-    new_email = user_entry.mail.value.strip() if hasattr(user_entry, 'mail') else None
-    new_pseudonym = user_entry.cn.value.strip() if hasattr(user_entry, 'cn') else None
-    new_type = MemberTypes[user_entry.employeeType.value.strip()] if hasattr(user_entry, 'employeeType') else None
-    new_fullname = user_entry.gn.value.strip() if hasattr(user_entry, 'gn') else None
-    new_nationality = user_entry.nationality.value.strip() if hasattr(user_entry, 'nationality') else None
-    new_birthdate = datetime.strptime(user_entry.birthdate.value, "%Y-%m-%d") if hasattr(user_entry, 'birthdate') else None
-    new_preferred_language = user_entry.preferredLanguage.value.strip() if hasattr(user_entry, 'preferredLanguage') else None
-    new_second_language = user_entry.secondLanguage.value.strip() if hasattr(user_entry, 'secondLanguage') else None
+    member_entry = conn.entries[0]
+    new_email = member_entry.mail.value if hasattr(member_entry, 'mail') else None
+    new_pseudonym = member_entry.cn.value if hasattr(member_entry, 'cn') else None
+    new_type = MemberTypes[member_entry.employeeType.value] if hasattr(member_entry, 'employeeType') else None
+    new_fullname = member_entry.gn.value if hasattr(member_entry, 'gn') else None
+    new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
+    new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
+    if new_birthdate:
+        new_birthdate = datetime.datetime.strptime(new_birthdate, "%Y%m%d")
+    new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
+    new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
     member = get_member_by_oid(oid, request)
 
     log.debug(f"Update Member {oid} with ldap informations")
@@ -657,8 +662,8 @@ def get_oid_from_pseudonym(
         ) # search for the user in the LDAP directory
         if len(conn.entries) == 0:
             return None
-        user_entry = conn.entries[0]
-        return user_entry.employeeNumber.value
+        member_entry = conn.entries[0]
+        return member_entry.employeeNumber.value
 
 def register_user_to_ldap(request, candidature, password):
     """
@@ -713,7 +718,6 @@ def register_user_to_ldap(request, candidature, password):
     }
     if candidature.type == MemberTypes.COOPERATOR:
         # Add full name to inetOrgPerson attribute
-        #@TODO conforter
         attributes['gn'] = candidature.data.fullname
         #@TODO check country code is less of 3 chars
         attributes["nationality"] = candidature.data.nationality
@@ -854,37 +858,42 @@ def send_confirm_validation_email(request: Request,
         candidature,
         "send_confirm_validation_email")
 
-# @TODO generalize this function to MemberDatas
-def send_candidature_state_change_email(request: Request,
-    candidature: MemberDatas,
+def send_member_state_change_email(request: Request,
+    member: Member,
     sending_function_name : str,
     template_name : str = None,
-    subject:str = None) -> Dict:
-    """Send the candidature state change email to the candidate.
+    subject:str = None,
+    extra_template_parameter:dict = None) -> Dict:
+    """Send the member state change email to the candidate.
     Args:
         request (pyramid.request.Request): the request
-        candidature (MemberDatas): the candidature
+        member (Member): the member
         sending_function_name (str): the name of the function that sends the email
         template_name (str): the name of the template to use or None to use the default template
         subject (str): the subject of the email or None to use the default subject
+        extra_template_parameter (dict): extra parameters to add to the template
     Returns:
         dict: the result of the email sending
     """
     template_name = (template_name
         if template_name
-        else 'locale/{lang}/LC_MESSAGES/candidature_state_change.pt'
+        else "member_state_change"
     )
-    template_path = get_local_template(request, template_name).abspath()
+    assert(template_name.find("{lang}") == -1)
+    # The string for the template path is concatenated because the 'lang' variable 
+    # will be replaced during formatting by the resource resolution
+    template_path = LOCALE_LANG_MESSAGES+template_name+ZPT_EXTENSION
+    template_resolver = get_local_template(request, template_path).abspath()
     localizer = get_localizer(request)
     subject = (subject if subject
-        else localizer.translate(_('email_candidature_state_changed'))
+        else localizer.translate(_('email_member_state_changed'))
     )
-    email = candidature.email
-    seed = candidature.email_send_status_history[-1].seed
+    email = member.email
+    seed = member.email_send_status_history[-1].seed
 
     # Prepare the necessary information for the email
     parameter = encrypt_oid(
-        candidature.oid,
+        member.oid,
         seed,
         request.registry.settings['session.secret']
     )
@@ -893,7 +902,7 @@ def send_candidature_state_change_email(request: Request,
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     #We don't have user yet so we use the email parts befor the @ or pseudonym if it exists
-    user = (candidature.pseudonym if hasattr(candidature, "pseudonym")
+    user = (member.pseudonym if hasattr(member, "pseudonym")
             else email.split('@')[0]
     )
     
@@ -901,10 +910,12 @@ def send_candidature_state_change_email(request: Request,
         'page_register_with_oid': url,
         'site_url': site_url,
         'site_name': site_name,
-        'candidature': candidature,
-        'CandidatureStates': CandidatureStates,
+        'member': member,
+        'MemberStates': MemberStates,
         'user': user
     }
+    if extra_template_parameter:
+        template_vars.update(extra_template_parameter)
     
     # Use the send_email from utils.py
     try:
@@ -913,7 +924,7 @@ def send_candidature_state_change_email(request: Request,
             request,
             subject,
             [email],
-            template_path,
+            template_resolver,
             template_vars
         )
     except Exception as e:
@@ -921,24 +932,63 @@ def send_candidature_state_change_email(request: Request,
         success = False
     
     if success:
-        candidature.add_email_send_status(
+        member.add_email_send_status(
             EmailSendStatus.SENT, sending_function_name)
         return {'success': True}
     else:
-        candidature.add_email_send_status(
+        member.add_email_send_status(
             EmailSendStatus.ERROR, sending_function_name)
         return {'error': _('email_not_sent')}
 
+def send_candidature_state_change_email(request: Request,
+    candidature: Member,
+    sending_function_name : str,
+    template_name : str = None,
+    subject:str = None) -> Dict:
+    """Send the candidature state change email to the candidate.
+    Args:
+        request (pyramid.request.Request): the request
+        candidature (Member): the candidature
+        sending_function_name (str): the name of the function that sends the email
+        template_name (str): the name of the template to use or None to use the default template
+        subject (str): the subject of the email or None to use the default subject
+    Returns:
+        dict: the result of the email sending
+    """
+    template_name = (template_name
+        if template_name
+        else "candidature_state_change"
+    )
+
+    log.debug(f"template_name={template_name}")
+    localizer = get_localizer(request)
+    subject = (subject if subject
+        else localizer.translate(_('email_candidature_state_changed'))
+    )
+    
+    template_vars = {
+        'candidature': candidature,
+        'CandidatureStates': CandidatureStates,
+    }
+    return send_member_state_change_email(
+        request,
+        candidature,
+        sending_function_name,
+        template_name,
+        subject,
+        template_vars)
+
 def send_email_to_member(request: Request,
-    member: MemberDatas,
-    sending_function_name,
-    template_name,
-    subject_msgid,
-    view_name) -> Dict:
+    member: Member,
+    sending_function_name: str,
+    template_name: str,
+    subject_msgid: str,
+    view_name: str,
+    extra_template_parameters:dict = None) -> Dict:
     """Send an email to the member.
     Args:
         request (pyramid.request.Request): the request
-        member (MemberDatas): the member
+        member (Member): the member
         sending_function_name (str): the name of the function that sends the email
         template_name (str): the name of the template to use
         subject_msgid (str): the msgid of the email subject
@@ -946,8 +996,8 @@ def send_email_to_member(request: Request,
     Returns:
         dict: the result of the email sending
     """
-
-    template_path = get_local_template(request, template_name).abspath()
+    template_path = LOCALE_LANG_MESSAGES+template_name+ZPT_EXTENSION
+    template_resolver = get_local_template(request, template_path).abspath()
     localizer = get_localizer(request)
     subject = localizer.translate(_(subject_msgid))
     email = member.email
@@ -970,6 +1020,8 @@ def send_email_to_member(request: Request,
         'site_name': site_name,
         'member': member.data,
     }
+    if extra_template_parameters:
+        template_vars.update(extra_template_parameters)
     
     # Use the send_email from utils.py
     try:
@@ -978,7 +1030,7 @@ def send_email_to_member(request: Request,
             request,
             subject,
             [email],
-            template_path,
+            template_resolver,
             template_vars
         )
     except Exception as e:
@@ -1010,7 +1062,7 @@ def send_validation_email(
     """
     template_path = get_local_template(
         request,
-        'locale/{lang}/LC_MESSAGES/check_email.pt'
+        LOCALE_LANG_MESSAGES + "check_email" + ZPT_EXTENSION
     ).abspath()
 
     email = candidature.email # The email to send to.

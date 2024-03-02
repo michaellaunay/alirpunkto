@@ -13,15 +13,15 @@
         <p tal:omit-tag="textual">Your application on the platform
             <span tal:replace="site_url">URL</span> as a 
             <span tal:replace="python:candidature.type">Role</span>
-            <span tal:condition="python:candidature.state == CandidatureStates.APPROVED">has been accepted</span>
-            <span tal:condition="python:candidature.state == CandidatureStates.REFUSED">has been rejected</span>
-            <span tal:condition="python:candidature.state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">is under processing and has changed its status</span> . 
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">has been accepted</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">has been rejected</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">is under processing and has changed its status</span> . 
         </p>
         <p tal:omit-tag="textual">Here are the details of its evolution:</p>
         <ul tal:omit-tag="textual">
             <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
             <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1].datetime">Last transition</span></li>
-            <li tal:omit-tag="textual">New Status: <span tal:replace="python:candidature.state">New application status</span></li>
+            <li tal:omit-tag="textual">New Status: <span tal:replace="python:candidature.candidature_state">New application status</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
             If you need, you can interrupt your registration process now. You will be able to resume it later by clicking on the link below.
             </li>

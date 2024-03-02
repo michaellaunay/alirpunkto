@@ -623,3 +623,36 @@ msgstr "Reset Your Password"
 
 msgid "forget_email_send_error"
 msgstr "An error occurred when sending reset email, please contact the administrator"
+
+msgid "member_states_created_name"
+msgstr "created"
+
+msgid "member_states_created_value"
+msgstr "The member has been created"
+
+msgid "member_states_draft_name"
+msgstr "draft"
+
+msgid "member_states_draft_value"
+msgstr "The member's data is being edited"
+
+msgid "member_states_registred_name"
+msgstr "registered"
+
+msgid "member_states_registred_value"
+msgstr "The member's data has been saved"
+
+msgid "member_data_modification_request_name"
+msgstr "being modified"
+
+msgid "member_data_modification_request_value"
+msgstr "A data modification request has been submitted"
+
+msgid "member_datas_modified_name"
+msgstr "modified"
+
+msgid "member_datas_modified_value"
+msgstr "The member's data has been modified"
+
+msgid "email_member_state_changed"
+msgstr "Change in your member profile"

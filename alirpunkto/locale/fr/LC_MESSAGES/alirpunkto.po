@@ -164,10 +164,10 @@ msgid "candidature_states_email_validation"
 msgstr "validation_adresse_courriel"
 
 msgid "candidature_states_confirmed_human"
-msgstr "confirmé_humain"
+msgstr "humain"
 
 msgid "candidature_states_unique_data"
-msgstr "données_uniques"
+msgstr "données uniques"
 
 msgid "candidature_states_pending"
 msgstr "en attente"
@@ -886,4 +886,37 @@ msgid "forget_email_in_member_list"
 msgstr "Si l'utilisateur*trice existe, il/elle recevra un courriel."
 
 msgid "forget_email_send_error"
-msgstr "An error occured when sending reset email, please contact the administrator"
+msgstr "Une erreur s'est produite lors de l'envoi de l'email de réinitialisation, veuillez contacter l'administrateur"
+
+msgid "member_states_created_name"
+msgstr "créé"
+
+msgid "member_states_created_value"
+msgstr "Le membre a été créé"
+
+msgid "member_states_draft_name"
+msgstr "brouillon"
+
+msgid "member_states_draft_value"
+msgstr "Les données du membre sont en cours d'édition"
+
+msgid "member_states_registred_name"
+msgstr "enregistré"
+
+msgid "member_states_registred_value"
+msgstr "Les données du membre ont été enregistrées"
+
+msgid "member_data_modification_request_name"
+msgstr "en cours de modification"
+
+msgid "member_data_modification_request_value"
+msgstr "Une demande de modification des données a été soumise"
+
+msgid "member_datas_modified_name"
+msgstr "modifié"
+
+msgid "member_datas_modified_value"
+msgstr "Les données du membre ont été modifiées"
+
+msgid "email_member_state_changed"
+msgstr "Changement dans votre profil de membre"

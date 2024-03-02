@@ -31,8 +31,10 @@ class MemberStates(Enum) :
     CREATED = "member_created_value"
     # Draft: The member data set is in draft mode.
     DRAFT = "member_draft_value"
+    # Registred: The member data set is in registred mode.
+    REGISTRED = "member_registred_value"
     # Data modification requested: The member data set is in modification requested mode.
-    DATA_MODIFICATION_REQUESTED = "member_datas_modification_request_value"
+    DATA_MODIFICATION_REQUESTED = "member_data_modification_request_value"
     # Data modified: The member data set is in modified mode.
     DATA_MODIFIED = "member_datas_modified_value"
 
@@ -47,19 +49,23 @@ class MemberStates(Enum) :
         match name:
 
             case cls.CREATED.name :
-                return "member_datas_states_created_name"
+                return "member_states_created_name"
             case cls.DRAFT.name :
-                return "member_datas_states_draft_name"
+                return "member_states_draft_name"
+            case cls.REGISTRED.name :
+                return "member_states_registred_name"
+            case cls.REGISTRED.value :
+                return "member_states_registred_value"
             case cls.DATA_MODIFICATION_REQUESTED.name :
-                return "member_datas_modification_request_name"
+                return "member_data_modification_request_name"
             case cls.DATA_MODIFIED.name :
                 return "member_datas_modified_name"
             case cls.CREATED.value :
-                return "member_datas_states_created_value"
+                return "member_states_created_value"
             case cls.DRAFT.name :
-                return "member_datas_states_draft_value"
+                return "member_states_draft_value"
             case cls.DATA_MODIFICATION_REQUESTED.name :
-                return "member_datas_modification_request_value"
+                return "member_data_modification_request_value"
             case cls.DATA_MODIFIED.name :
                 return "member_datas_modified_value"
             case _ :
@@ -379,7 +385,7 @@ class Member(Persistent):
         data (MemberDatas): Accesses the data for the member. Supports get and set operations.
         oid (str): Retrieves the unique object identifier. Read-only.
         voters (list): Manages the list of voters associated with the member. Supports get and set operations.
-        state (MemberStates): Controls the current state of the member. Supports get and set operations.
+        member_state (MemberStates): Controls the current state of the member. Supports get and set operations.
         type (MemberTypes or None): Defines the type of the member. Supports get and set operations.
         email (str or None): Manages the email address associated with the member. Supports get and set operations.
         votes (dict): Accesses the dictionary of votes associated with the member. Supports get and set operations.
@@ -396,7 +402,7 @@ class Member(Persistent):
         data: Optional[MemberDatas] = None,
         oid: Optional[str] = None,
         voters: Optional[List[str]] = None,
-        state: MemberStates = MemberStates.DRAFT,
+        member_state: MemberStates = MemberStates.DRAFT,
         type: Optional[MemberTypes] = None,
         email: Optional[str] = None,
         votes: Optional[Dict[str, int]] = None,
@@ -413,7 +419,7 @@ class Member(Persistent):
             data (MemberDatas, optional): Initial data for the member. Defaults to None.
             oid (str, optional): A unique object identifier. If not provided, a unique OID is generated. Defaults to None.
             voters (list, optional): A list of voters associated with the member. Defaults to an empty list.
-            state (MemberStates, optional): The current state of the member. Defaults to MemberStates.DRAFT.
+            member_state (MemberStates, optional): The current state of the member. Defaults to MemberStates.DRAFT.
             type (MemberTypes or None, optional): The type of the member (e.g., administrator, regular member). Defaults to None.
             email (str or None, optional): The email address associated with the member. Defaults to None.
             votes (dict, optional): A dictionary of votes associated with the member. Defaults to an empty dict.
@@ -431,7 +437,7 @@ class Member(Persistent):
         # get a unique object id if not provided
         self._oid = oid if oid else Member.generate_unique_oid()
         self._voters = voters if voters else []
-        self._state = state
+        self._member_state = member_state
         self._type = type
         self._email = email
         self._votes = votes if votes else {}
@@ -442,7 +448,7 @@ class Member(Persistent):
         self._pseudonym = pseudonym
         # get a random seed and record the creation
         self._modifications = modifications if modifications else []
-        self._memorize_changes("__init__", None, self._state)
+        self._memorize_changes("__init__", None, self._member_state)
 
     def _memorize_changes(
         self, 
@@ -487,15 +493,15 @@ class Member(Persistent):
         return self._seed
 
     @property
-    def state(self)-> MemberStates:
+    def member_state(self)-> MemberStates:
         """ Get the state of the member.
         Returns:
             The state of the member.
         """
-        return self._state
+        return self._member_state
     
-    @state.setter
-    def state(self, value:MemberStates):
+    @member_state.setter
+    def member_state(self, value:MemberStates):
         """ Set the state of the member.
 
         Args:
@@ -509,9 +515,9 @@ class Member(Persistent):
                 "The state must be an instance of MemberStates."
             )
         
-        old_state = self._state.name if self._state else "None"
-        self._state = value
-        self._memorize_changes("state", old_state, value.name)
+        old_state = self._member_state.name if self._member_state else "None"
+        self._member_state = value
+        self._memorize_changes("member_state", old_state, value.name)
     
     @property
     def type(self)-> MemberTypes:

@@ -19,6 +19,7 @@ from alirpunkto.constants_and_globals import (
 
 from alirpunkto.models.member import (
     Member,
+    MemberStates
 )
 
 @unique
@@ -169,22 +170,22 @@ class Candidature(Member):
         """
         super().__init__(data)
         self._voters = []
-        self._state = CandidatureStates.DRAFT
+        self._candidature_state = CandidatureStates.DRAFT
         self._votes = {}
         self._challenge = None
         # get a random seed and record the creation
-        self._memorize_changes("Candidature.__init__", None, self._state)
+        self._memorize_changes("Candidature.__init__", None, self._candidature_state)
 
     @property
-    def state(self)-> CandidatureStates:
+    def candidature_state(self)-> CandidatureStates:
         """ Get the state of the candidature.
         Returns:
             The state of the candidature.
         """
-        return self._state
+        return self._candidature_state
     
-    @state.setter
-    def state(self, value:CandidatureStates):
+    @candidature_state.setter
+    def candidature_state(self, value:CandidatureStates):
         """ Set the state of the candidature.
 
         Args:
@@ -197,10 +198,11 @@ class Candidature(Member):
             raise TypeError(
                 "The state must be an instance of CandidatureStates."
             )
-        
-        old_state = self._state.name if self._state else "None"
-        self._state = value
-        self._memorize_changes("state", old_state, value.name)
+        if value == CandidatureStates.APPROVED:
+            self.member_state = MemberStates.REGISTRED
+        old_candidature_state = self._candidature_state.name if self._candidature_state else "None"
+        self._candidature_state = value
+        self._memorize_changes("state", old_candidature_state, value.name)
     
     @property
     def challenge(self)-> Tuple[str, int]:

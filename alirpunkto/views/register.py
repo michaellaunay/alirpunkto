@@ -126,7 +126,7 @@ def _handle_candidature_state(
     Returns:
     - Dict: A dictionary with the rendered state view.
     """
-    match candidature.state:
+    match candidature.candidature_state:
         case CandidatureStates.DRAFT:
             return handle_draft_state(request, candidature)
         case CandidatureStates.EMAIL_VALIDATION:
@@ -142,7 +142,7 @@ def _handle_candidature_state(
         case CandidatureStates.REFUSED:
             return handle_pending_state(request, candidature)
         case _:
-            log.error("Candidature state not handled: %s", candidature.state)
+            log.error("Candidature state not handled: %s", candidature.candidature_state)
             return handle_default_state(request, candidature)
 
 def handle_draft_state(request: Request, candidature: Candidature) -> dict:
@@ -180,7 +180,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
                 'error': _('email_not_sent')
             }
 
-        candidature.state = CandidatureStates.EMAIL_VALIDATION
+        candidature.candidature_state = CandidatureStates.EMAIL_VALIDATION
         return commit_candidature_changes(request, candidature)
 
     return {'candidature': candidature, 'MemberTypes': MemberTypes}
@@ -310,7 +310,7 @@ def handle_email_validation_state(
             return challenge_error
         
         # User is a human, we update state and commit changes
-        candidature.state = CandidatureStates.CONFIRMED_HUMAN
+        candidature.candidature_state = CandidatureStates.CONFIRMED_HUMAN
         try:
             request.tm.commit()
             # Send confirmation email and handle status
@@ -467,7 +467,7 @@ def handle_confirmed_human_state(request, candidature):
                     'MemberTypes': MemberTypes
                 }
             candidatures.monitored_members.pop(candidature.oid, None)
-            candidature.state = CandidatureStates.APPROVED
+            candidature.candidature_state = CandidatureStates.APPROVED
             email_template = "send_candidature_approuved_email"
 
         elif candidature.type == MemberTypes.COOPERATOR:
@@ -496,7 +496,7 @@ def handle_confirmed_human_state(request, candidature):
             candidature.data = data
 
             candidature.pseudonym = request.params['pseudonym']
-            candidature.state = CandidatureStates.UNIQUE_DATA
+            candidature.candidature_state = CandidatureStates.UNIQUE_DATA
             email_template = "send_candidature_pending_email"
 
         else:
@@ -625,7 +625,6 @@ def get_template_parameters_for_cooperator(
         'data_email_copy_id_verification_body':email_copy_id_verification_body,
     }
 
-
 def handle_unique_data_state(request, candidature):
     """Handle the unique data state.
 
@@ -643,7 +642,7 @@ def handle_unique_data_state(request, candidature):
         #Get identity Verification method
 
         candidatures = get_candidatures(request)
-        candidature.state = CandidatureStates.PENDING
+        candidature.candidature_state = CandidatureStates.PENDING
         transaction = request.tm
         try:
             transaction.commit()
@@ -695,7 +694,7 @@ def handle_default_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    log.error(f"Unhandled candidature state: {candidature.state}")
+    log.error(f"Unhandled candidature state: {candidature.candidature_state}")
     return {
         'candidature': candidature,
         'MemberTypes': MemberTypes,

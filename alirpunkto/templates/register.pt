@@ -3,7 +3,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal">
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
-        <tal:block define="status python:candidature.state.name if candidature else None"
+        <tal:block define="status python:candidature.candidature_state.name if candidature else None"
             i18n:domain="alirpunkto">
             <div class="container"
                 tal:condition="python: (not hasattr(context,'url_obsolete') or not url_obsolete) and candidature">
