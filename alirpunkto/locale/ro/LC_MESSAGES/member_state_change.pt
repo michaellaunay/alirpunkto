@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Schimbarea stării datelor dumneavoastră</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Modificarea datelor dvs. personale în <span tal:replace="site_name">Numele site-ului</span></h1>
+        <p tal:omit-tag="textual">Bună ziua<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Numele membrului</span>,
+        </p>
+        <p tal:omit-tag="textual">Iată detaliile modificării sale:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Identificarea membrului: <span tal:replace="python:candidature.oid">Identificare membru</span></li>
+            <li tal:omit-tag="textual">Data tranziției: <span tal:replace="python:candidature.modifications[-1].datetime">Ultima tranziție</span></li>.
+            <li tal:omit-tag="textual">Statut nou: <span tal:replace="python:candidature.member_state">Statutul noului membru</span></li>
+            <li tal:omit-tag="textual" tal:condition="exist:page_register_with_oid"> <li tal:omit-tag="textual" tal:condition="exist:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Mulțumim pentru participare.</p> <p>.
+        <p tal:omit-tag="textual">Cele mai bune salutări,</p>
+        <p tal:omit-tag="textual">Echipa de la <span tal:replace="site_name">Site Name</span></p>
+    </body>
+</html>
