@@ -431,7 +431,7 @@ def update_member_from_ldap(
     new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
     new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
     if new_birthdate:
-        new_birthdate = datetime.datetime.strptime(new_birthdate, "%Y%m%d")
+        new_birthdate = datetime.datetime.strptime(new_birthdate, "%Y%m%d%H%M%SZ")
     new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
     new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
     member = get_member_by_oid(oid, request)
@@ -445,7 +445,7 @@ def update_member_from_ldap(
             nationality = new_nationality,
             birthdate = new_birthdate,
             password = None,
-            password_confirmation = None,
+            password_confirm = None,
             lang1 = new_preferred_language,
             lang2 = new_second_language,
             role = new_type
@@ -472,7 +472,7 @@ def update_member_from_ldap(
         if new_fullname and member.data.fullname != new_fullname:
             log.debug(f"Update Member {oid} with new fullname {new_fullname}")
             member.data.fullname = new_fullname
-        if new_nationality and member.data.national != new_nationality:
+        if new_nationality and member.data.nationality != new_nationality:
             log.debug(f"Update Member {oid} with new nationality {new_nationality}")
             member.data.nationality = new_nationality
         if new_birthdate and member.data.birthdate != new_birthdate:
@@ -709,7 +709,7 @@ def register_user_to_ldap(request, candidature, password):
             candidature.data.fullsurname
                 if candidature.type == MemberTypes.COOPERATOR
                 else pseudonym
-        ), # sn is obligatory
+        ), # sn 434,is obligatory
         'cn': pseudonym, # Use the pseudonym as commonName
         'employeeNumber': candidature.oid, # Use the oid as employeeNumber
         'employeeType': candidature.type.name, # Use the type as employeeType,
@@ -1001,7 +1001,9 @@ def send_email_to_member(request: Request,
     localizer = get_localizer(request)
     subject = localizer.translate(_(subject_msgid))
     email = member.email
-    seed = member.email_send_status_history[-1].seed
+    # Retrieve the seed from the last email event which must be
+    # EmailSendStatus.IN_PREPARATION
+    seed = member.email_send_status_history[-1].seed 
 
     # Prepare the necessary information for the email
     parameter = encrypt_oid(

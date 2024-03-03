@@ -682,8 +682,15 @@ class Member(Persistent):
         Returns:
             A copy of email send status history of the member.
         """
-        return self._email_send_status_history.copy()    
-    
+        return self._email_send_status_history.copy()
+
+    def generate_seed(self)-> str:
+        """ Generate a seed for the member.
+        Returns:
+            A seed for the member.
+        """
+        return random_string(SEED_LENGTH)
+
     def add_email_send_status(
             self,
             status:EmailSendStatus,
@@ -712,7 +719,7 @@ class Member(Persistent):
 
         # if the status is IN_PREPARATION, generate a new seed
         if status == EmailSendStatus.IN_PREPARATION:
-            email_seed = random_string(SEED_LENGTH)
+            email_seed = self.generate_seed()
         else:
             email_seed = (
                 self._email_send_status_history[-1].seed

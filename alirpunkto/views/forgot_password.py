@@ -63,10 +63,10 @@ def forgot_password(request):
         # password
         if member.member_state == MemberStates.DATA_MODIFICATION_REQUESTED: 
             schema = RegisterForm().bind(request=request)
-            read_only_fields = {
-                member.data[field]: field for field in member.data
-                if field not in ["password", "password_confirm"]
-            } if member.data else {}
+            read_only_fields = dict(
+                (name,value) for name,value in member.data.iter_attributes()
+                if name not in ["password", "password_confirm"]
+            ) if member.data else {}
             read_only_fields["email"] = member.email
             read_only_fields["pseudonym"] = member.pseudonym
             read_only_fields["cooperative_number"] = member.oid
@@ -153,6 +153,10 @@ def forgot_password(request):
         # 9) AlirPunkto sends an email to the user with the link
         member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
         email_template = "reset_password_email"
+        member.add_email_send_status(
+            EmailSendStatus.IN_PREPARATION, 
+            "forgot_password"
+        )
         send_email_to_member(
             request,
             member, 
@@ -221,10 +225,12 @@ def forgot_password(request):
             transaction.commit()
             return {"message":_('password_changed'), "member": member, "form": None}
         else:
+            log.error(
+                f"Error while reset password {member.oid} : {result['message']}"
+            )
             return {"error":_('password_not_changed'), "member": member, "form": None}
     else :
-        log.warning('No submit or modify in request')
-        return {"member": None, "form": None, "error": None, "error": _('forget_password_error')}
+        return {"member": None, "form": None}
 
 def _retrieve_member(
         request: Request
