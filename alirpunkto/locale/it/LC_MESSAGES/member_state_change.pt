@@ -1,0 +1,29 @@
+<DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Cambiamento dello stato dei suoi dati</title>.
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Cambiamento dei Suoi dati personali in <span tal:replace="site_name">Nome del sito</span></h1>.
+        <p tal:omit-tag="textual">Ciao<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nome utente</span>,
+        </p>
+        <p tal:omit-tag="textual">Ecco i dettagli della sua modifica:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Identità del membro: <span tal:replace="python:candidature.oid">ID del membro</span></li>.
+            <li tal:omit-tag="textual">Data di transizione: <span tal:replace="python:candidature.modifications[-1].datetime">ultima transizione</span></li>.
+            <li tal:omit-tag="textual">Nuovo stato: <span tal:replace="python:candidature.member_state">Nuovo stato di membro</span></li>.
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">.
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">.
+                    <span tal:replace="string:${page_register_with_oid}"></span>.
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Grazie per la sua partecipazione.</p>
+        <p tal:omit-tag="textual">Cordialmente,</p>
+        <p tal:omit-tag="textual">Il team di <span tal:replace="nome_sito">nome_sito</span></p>
+    </body>
+</html>
