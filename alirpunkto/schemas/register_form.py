@@ -139,13 +139,13 @@ class RegisterForm(schema.CSRFSchema):
 
     def prepare_for_modification(self, read_only_fields: dict, writable_field_values: dict):
         """Prepare the form for an ordinary user."""
-        if 'pseudonyme' in read_only_fields:
-            self.get('pseudonyme').widget = TextInputWidget(readonly=True)
-            self.get('pseudonyme').widget.value = read_only_fields['pseudonyme']
-        elif 'pseudonyme' in writable_field_values:
-            self.get('pseudonyme').widget.value = writable_field_values['pseudonyme']
+        if 'pseudonym' in read_only_fields:
+            self.get('pseudonym').widget = TextInputWidget(readonly=True)
+            self.get('pseudonym').widget.value = read_only_fields['pseudonym']
+        elif 'pseudonym' in writable_field_values:
+            self.get('pseudonym').widget.value = writable_field_values['pseudonym']
         else:
-            self.children.remove(self.get('pseudonyme'))
+            self.children.remove(self.get('pseudonym'))
         if 'fullname' in read_only_fields:
             self.get('fullname').widget = TextInputWidget(readonly=True)
             self.get('fullname').widget.value = read_only_fields['fullname']

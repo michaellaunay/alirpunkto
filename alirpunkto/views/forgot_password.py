@@ -51,10 +51,11 @@ def forgot_password(request):
     """
     log.debug(f"forgot_password: {request.method} {request.url}")
     transaction = request.tm
+
     member, error = _retrieve_member(request)
     if error:
         return error
-    if member:
+    if member and not "modify" in request.POST:
         # If we get here it's because the user used the link received in his 
         # email and it's valid @TODO check the validity period
         # 11) The user receives the email and clicks on the link
@@ -62,30 +63,35 @@ def forgot_password(request):
         # password
         if member.member_state == MemberStates.DATA_MODIFICATION_REQUESTED: 
             schema = RegisterForm().bind(request=request)
-            appstruct = colander.null
-            if member.type == MemberTypes.ORDINARY:
-                schema.prepare_for_ordinary()
-            form = deform.Form(schema,
-                buttons=('modify',),
-                translator=Translator
-            )
             read_only_fields = {
                 member.data[field]: field for field in member.data
                 if field not in ["password", "password_confirm"]
             } if member.data else {}
+            read_only_fields["email"] = member.email
+            read_only_fields["pseudonym"] = member.pseudonym
+            read_only_fields["cooperative_number"] = member.oid
+
             writable_field_values = {"password": "", "password_confirm": ""}
-            form.prepare_for_modification(read_only_fields,
+            schema.prepare_for_modification(read_only_fields,
                 writable_field_values)
+            appstruct = {
+                'cooperative_number': member.oid,
+                'email': member.email,
+                'pseudonym': member.pseudonym,
+            }
+            form = deform.Form(schema,
+                buttons=('modify',),
+                translator=Translator
+            )
             request.session[MEMBER_OID] = member.oid
             transaction.commit()
             return {"form": form.render(appstruct=appstruct),
-                "member": member,
-                "message": _('forget_email_sent'),
-                "error": None}
+                "member": member
+            }
     oid = request.session.get(MEMBER_OID, None)
     if oid:
         member = get_member_by_oid(oid, request)       
-    # 1) AlirPunkto displays the forgot_password.pt zpt to enter the mail 
+    # 1) AlirPunkto displays the forgot_password.pt zpt to enter the mail
     if 'submit' in request.POST:
         # 2) The user has entered his mail and validated
         mail = request.POST['email'] if 'email' in request.POST else None
@@ -200,7 +206,7 @@ def forgot_password(request):
                 "member": member,
                 "form": form.render()}
         # 15) AlirPunkto updates the password in the ldap
-        result = update_member_password(member, password, request)
+        result = update_member_password(request, member.oid, password)
         if result['status'] == "success":
             # 16) AlirPunkto updates the events of the member
             # 17) AlirPunkto displays the forgot_password.pt zpt to confirm the password change
@@ -209,14 +215,16 @@ def forgot_password(request):
             transaction.commit()
             send_member_state_change_email(
                 request,
-                member
+                member,
+                "forgot_password",
             )
             transaction.commit()
             return {"message":_('password_changed'), "member": member, "form": None}
         else:
             return {"error":_('password_not_changed'), "member": member, "form": None}
     else :
-        return {"member": None, "form": None, "error": None}
+        log.warning('No submit or modify in request')
+        return {"member": None, "form": None, "error": None, "error": _('forget_password_error')}
 
 def _retrieve_member(
         request: Request
