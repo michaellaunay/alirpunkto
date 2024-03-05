@@ -444,7 +444,10 @@ def home_view(request):
 	...
     return {'logged_in': logged_in, 'site_name': site_name, 'user': user, 'applications': applications }
 ```
-
+## Solution```
+```html
+<h1 i18n:translate="welcome_msg">Welcome to ${site_name}, the centralized service for applications of <tal:var i18n:name="site_name">${site_name}</tal:var>.</h1>
+```
 # 2023-09-24
 
 Pour enrichir le schéma ldap, il faut obtenir un numéro d'entreprise unique dont le numéro s'obtient au prés de l'IANA.
