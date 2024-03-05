@@ -123,6 +123,11 @@ def create_ldap_groups_if_not_exists():
         {"name": "cooperatorsGroup", "description": "Group for active cooperators of the cooperative"},
         {"name": "boardMembersGroup", "description": "Group for board members of the cooperative"},
         {"name": "mediationArbitrationCouncilGroup", "description": "Group for members of the Mediation Arbitration Council"},
+        {"name": "candidatesMissingShareYearContribGroup", "description": "Group for members who have not contributed their share for the current year"},
+        {"name": "candidatesMissingShareGroup", "description": "Group for members who have not contributed their share"},
+        {"name": "candidatesMissingYearContribGroup", "description": "Group for members who have not contributed for the current year"},
+        {"name": "sanctionedGroup", "description": "Group for sanctioned members"},
+        {"name": "sanctionedMissingYearContribGroup", "description": "Group for sanctioned members who have not contributed for the current year"}
     ]
 
     # Checking for existence and creating groups
