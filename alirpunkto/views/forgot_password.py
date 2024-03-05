@@ -217,18 +217,26 @@ def forgot_password(request):
             # 18) AlirPunkto sends an email to the user to notify him of the password change
             member.member_state = MemberStates.DATA_MODIFIED
             transaction.commit()
-            send_member_state_change_email(
+            result = send_member_state_change_email(
                 request,
                 member,
                 "forgot_password",
             )
             transaction.commit()
-            return {"message":_('password_changed'), "member": member, "form": None}
+            log.debug(f"Password changed for {member.oid} to {password}")
+            log.info(f"Password changed for {member.oid}")
+            if 'sucess' in result and result['sucess']:
+                return {"message":_('password_changed'), "member": member, "form": None}
+            else:
+                log.error(
+                    f"Error while reset password {member.oid} : {result['error']}"
+                )
+                return {"error":_('forget_confirmation_email_send_error'), "member": member, "form": None}
         else:
             log.error(
                 f"Error while reset password {member.oid} : {result['message']}"
             )
-            return {"error":_('password_not_changed'), "member": member, "form": None}
+            return {"error":_('15dd'), "member": member, "form": None}
     else :
         return {"member": None, "form": None}
 
