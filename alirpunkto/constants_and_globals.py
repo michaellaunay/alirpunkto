@@ -37,7 +37,7 @@ MAIL_PORT = os.getenv("MAIL_PORT")
 MAIL_HOST = os.getenv("MAIL_HOST")
 MAIL_TLS = os.getenv("MAIL_TLS")
 MAIL_SSL = os.getenv("MAIL_SSL")
-MAIL_SIGNATURE = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name}")
+MAIL_SIGNATURE = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name} for {domain_name}")
 
 # logging configuration
 log: Final = logging.getLogger('alirpunkto')

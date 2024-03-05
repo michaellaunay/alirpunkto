@@ -901,6 +901,7 @@ def send_member_state_change_email(request: Request,
     url = request.route_url('register', _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
+    domain_name = request.registry.settings.get('domain_name')
     #We don't have user yet so we use the email parts befor the @ or pseudonym if it exists
     user = (member.pseudonym if hasattr(member, "pseudonym")
             else email.split('@')[0]
@@ -910,6 +911,7 @@ def send_member_state_change_email(request: Request,
         'page_register_with_oid': url,
         'site_url': site_url,
         'site_name': site_name,
+        'domain_name': domain_name,
         'member': member,
         'MemberStates': MemberStates,
         'user': user
@@ -1015,11 +1017,13 @@ def send_email_to_member(request: Request,
     url = request.route_url(view_name, _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
+    domain_name = request.registry.settings.get('domain_name')
     
     template_vars = {
         'page_with_oid': url,
         'site_url': site_url,
         'site_name': site_name,
+        'domain_name': domain_name,
         'member': member.data,
     }
     if extra_template_parameters:
@@ -1081,6 +1085,7 @@ def send_validation_email(
     url = request.route_url('register', _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
+    domain_name = request.registry.settings.get('domain_name')
     
     template_vars = {
         'challenge_A': challenge["A"][0],
@@ -1089,7 +1094,8 @@ def send_validation_email(
         'challenge_D': challenge["D"][0],
         'page_register_with_oid': url,
         'site_url': site_url,
-        'site_name': site_name
+        'site_name': site_name,
+        'domain_name': domain_name
     }
 
     # Use the send_email from utils.py

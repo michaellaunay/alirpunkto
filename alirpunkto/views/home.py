@@ -26,6 +26,13 @@ def home_view(request):
     else:
         logged_in = request.session['logged_in'] = False
     site_name = request.registry.settings.get('site_name', 'AlirPunkto')
+    domain_name = request.registry.settings.get('domain_name', 'alirpunkto.org')
     user = request.session.get('user', None)
     user = loads(user) if user else {'name':'unknown'}
-    return {'logged_in': logged_in, 'site_name': site_name, 'user': user, 'applications': applications }
+    return {
+        'logged_in': logged_in,
+        'site_name': site_name,
+        'domain_name': domain_name,
+        'user': user,
+        'applications': applications
+    }

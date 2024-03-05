@@ -146,6 +146,7 @@ def _handle_candidature_state(
             log.error("Candidature state not handled: %s", candidature.candidature_state)
             result = handle_default_state(request, candidature)
     result["site_name"] = request.registry.settings.get('site_name')
+    result["domain_name"] = request.registry.settings.get('domain_name')
     return result
 
 def handle_draft_state(request: Request, candidature: Candidature) -> dict:
@@ -576,6 +577,7 @@ def prepare_for_cooperator(
                 ),
                 'signature': MAIL_SIGNATURE.format(
                     site_name=request.registry.settings.get('site_name'),
+                    domain_name=request.registry.settings.get('domain_name'),
                     fullname = candidature.data.fullname,
                     fullsurname = candidature.data.fullsurname,
                 )
@@ -596,6 +598,7 @@ def get_template_parameters_for_cooperator(
     voting_url = request.route_url('vote', _query={'oid': candidature.oid}),
     signature = MAIL_SIGNATURE.format(
         site_name=request.registry.settings.get('site_name'),
+        domain_name=request.registry.settings.get('domain_name'),
         fullname = candidature.data.fullname,
         fullsurname = candidature.data.fullsurname if getattr(
             candidature.data,
@@ -606,7 +609,8 @@ def get_template_parameters_for_cooperator(
     local_datas = {
         "voting_url":voting_url,
         "signature":signature,
-        "site_name":request.registry.settings.get('site_name')
+        "site_name":request.registry.settings.get('site_name'),
+        "domain_name":request.registry.settings.get('domain_name')
     }
     email_copy_id_verification_body = _(
         "email_copy_id_verification_body",

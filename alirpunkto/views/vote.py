@@ -40,6 +40,7 @@ def login_view(request):
         return HTTPFound(location=request.route_url('login'))
     user = User.from_json(user)
     site_name = request.session['site_name']
+    domain_name = request.session['domain_name']
     username = user.name
     oid = request.session['oid'] if 'oid' in request.session else request.params.get('oid', "")
     if oid and 'oid' not in request.session:
@@ -48,7 +49,8 @@ def login_view(request):
     if oid not in canditures:
         return {
             'error': _('invalid_oid'),
-            'site_name': site_name
+            'site_name': site_name,
+            'domain_name': domain_name
             }
     candidature = canditures[oid]
 
@@ -60,7 +62,8 @@ def login_view(request):
     if not voter:
         return {
             'error': _('not_voter'),
-            'site_name': site_name
+            'site_name': site_name,
+            'domain_name': domain_name
         }
     #@TODO check if the user can vote (if time is not passed )
     pass
@@ -112,6 +115,7 @@ def login_view(request):
         return {
             'logged_in': True if user else False,
             'site_name': site_name,
+            'domain_name': domain_name,
             'user': username,
             'candidature': candidature,
             'VotingChoice': VotingChoice,
@@ -126,6 +130,7 @@ def login_view(request):
     return {
         'logged_in': True if user else False,
         'site_name': site_name,
+        'domain_name': domain_name,
         'user': username,
         'candidature': candidature,
         'VotingChoice': VotingChoice,

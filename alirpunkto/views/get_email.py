@@ -80,6 +80,7 @@ def get_email(request):
 
     user = User.from_json(user_json)
     site_name = request.registry.settings.get('site_name')
+    domain_name = request.registry.settings.get('domain_name')
     email_id = request.params.get('email_id', None)
     link = request.session.get('link', None)
 
@@ -101,7 +102,12 @@ def get_email(request):
     # Construct template variables from URL parameters
     template_vars = {var: request.params.get(var, None) 
         for var in expected_variables if var in request.params}
-    template_vars.update({'site_name': site_name, 'user': user, 'link': link})
+    template_vars.update({
+        'site_name': site_name,
+        'domain_name': domain_name,
+        'user': user,
+        'link': link
+    })
 
     try:
         text_body = render_to_response(

@@ -16,6 +16,7 @@ from alirpunkto.utils import get_candidatures
 def elections_view(request):
     logged_in = request.params.get('logged_in', False)
     site_name = request.params.get('site_name', 'AlirPunkto')
+    domain_name = request.params.get('domain_name', 'alirpunkto.org')
     username = request.params.get('username', "")
     elections = []
     user = request.session.get('user', None)

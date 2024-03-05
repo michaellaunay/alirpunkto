@@ -28,6 +28,7 @@ def login_view(request):
     """
     logged_in = request.params.get('logged_in', False)
     site_name = request.params.get('site_name', 'AlirPunkto')
+    domain_name = request.params.get('domain_name', 'alirpunkto.org')
     username = request.params.get('username', "")
     user = request.session.get('user', None)
     if 'form.submitted' in request.params:
@@ -43,7 +44,8 @@ def login_view(request):
                 # return an error message
                 return {
                     'error': _('invalid_username_or_password'),
-                    'site_name': site_name
+                    'site_name': site_name,
+                    'domain_name': domain_name
                 }
             user = check_password(username, oid, password)
         if user is not None:
@@ -53,6 +55,7 @@ def login_view(request):
             current_time = datetime.datetime.now().isoformat()
             request.session['created_at'] = current_time
             request.session['site_name'] = site_name
+            request.session['domain_name'] = domain_name
             # redirect to the page the user wanted to access before login
             if 'redirect_url' in request.session:
                 redirect_url = request.session['redirect_url']
@@ -66,11 +69,13 @@ def login_view(request):
             request.session['logged_in'] = False
             return {
                 'error': _('invalid_username_or_password'),
-                'site_name': site_name
+                'site_name': site_name,
+                'domain_name': domain_name
             }
     return {
         'logged_in': True if user else False,
         'site_name': site_name,
+        'domain_name': domain_name,
         'user': username
     }
 
