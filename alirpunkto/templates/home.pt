@@ -26,7 +26,8 @@
                         <img tal:attributes="src applications[app_id]['logo_file']" alt="" />
                         
                         <!-- Display the application name and link -->
-                        <a tal:attributes="href applications[app_id]['url']; title applications[app_id].get('description', '')" tal:content="applications[app_id]['name']">Application Link</a>
+                        <a tal:attributes="href applications[app_id]['url']; title _(applications[app_id].get('explanation', ''))" tal:content="applications[app_id]['name']">Application Link</a> : 
+                        <span tal:condition="applications[app_id].get('description', '')" tal:content="applications[app_id]['description']" i18n:translate="">Application Description</span>
                     </li>
                 </ul>
             </div>
