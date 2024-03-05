@@ -30,7 +30,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2">
-            <img class="logo img-responsive" src="${request.static_url('alirpunkto:' + request.registry.settings['site_logo'])}" alt="Alirpunkto application" />
+            <a href="/"><img class="logo img-responsive" src="${request.static_url('alirpunkto:' + request.registry.settings['site_logo'])}" alt="Alirpunkto application" /></a>
           </div>
           <div class="col-md-10">
             <div metal:define-slot="content">No content</div>
