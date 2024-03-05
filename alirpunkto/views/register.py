@@ -126,24 +126,27 @@ def _handle_candidature_state(
     Returns:
     - Dict: A dictionary with the rendered state view.
     """
+    result = None
     match candidature.candidature_state:
         case CandidatureStates.DRAFT:
-            return handle_draft_state(request, candidature)
+            result = handle_draft_state(request, candidature)
         case CandidatureStates.EMAIL_VALIDATION:
-            return handle_email_validation_state(request, candidature)
+            result = handle_email_validation_state(request, candidature)
         case CandidatureStates.CONFIRMED_HUMAN:
-            return handle_confirmed_human_state(request, candidature)
+            result = handle_confirmed_human_state(request, candidature)
         case CandidatureStates.UNIQUE_DATA:
-            return handle_unique_data_state(request, candidature)
+            result = handle_unique_data_state(request, candidature)
         case CandidatureStates.PENDING:
-            return handle_pending_state(request, candidature)
+            result = handle_pending_state(request, candidature)
         case CandidatureStates.APPROVED:
-            return handle_pending_state(request, candidature)
+            result = handle_pending_state(request, candidature)
         case CandidatureStates.REFUSED:
-            return handle_pending_state(request, candidature)
+            result = handle_pending_state(request, candidature)
         case _:
             log.error("Candidature state not handled: %s", candidature.candidature_state)
-            return handle_default_state(request, candidature)
+            result = handle_default_state(request, candidature)
+    result["site_name"] = request.registry.settings.get('site_name')
+    return result
 
 def handle_draft_state(request: Request, candidature: Candidature) -> dict:
     """
@@ -160,7 +163,6 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
         dict: Candidature data and error messages or HTTPFound on success.
     """
     log.debug(f"Handling draft state for candidature {candidature.oid}")
-
     if 'submit' in request.POST:
         email = request.params['email']
         choice = request.params['choice']

@@ -21,6 +21,7 @@
                         vote") and that only citizens of the European Union are Cooperators, with
                         the commitment to purchase at least one share and to pay a yearly
                         contribution, and full voting rights.
+                        <tal:var i18n:name="site_name">${site_name}</tal:var>
                     </div>
                     <form method="POST">
                         <!-- Email Field -->
