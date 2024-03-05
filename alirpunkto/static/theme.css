@@ -1,175 +1,121 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
-body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  color: #ffffff;
-  background: #083870;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Réinitialisation et bases */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #333;
+  background: #f5f5f5; /* Fond plus clair pour améliorer la lisibilité */
+}
+
+/* Conteneur principal et mise en page */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* En-tête */
+header {
+  background: #fff; /* Fond clair pour l'en-tête */
+  color: #333; /* Texte foncé pour contraster avec le fond clair */
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ajout d'une légère ombre pour la profondeur */
+}
+header img.logo {
+  max-height: 60px;
+  margin-bottom: 20px;
+}
+
+/* Typographie et liens */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.5em 0;
+  color: #444; /* Couleur plus foncée pour un meilleur contraste */
 }
 p {
-  font-weight: 300;
+  line-height: 1.6;
 }
-button, input, optgroup, select, textarea {
-  color: black;
+a {
+  color: #007bff; /* Couleur bleue pour les liens, pour la cohérence et la lisibilité */
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
-.font-normal {
-  font-weight: 400;
+a:hover {
+  color: #0056b3;
 }
-.font-semi-bold {
-  font-weight: 600;
-}
-.font-bold {
-  font-weight: 700;
-}
-.starter-template {
-  margin-top: 250px;
-}
-.starter-template .content {
-  margin-left: 10px;
-}
-.starter-template .content h1 {
-  margin-top: 10px;
-  font-size: 60px;
-}
-.starter-template .content h1 .smaller {
-  font-size: 40px;
-  color: #f2b7bd;
-}
-.starter-template .content .lead {
-  font-size: 25px;
-  color: #f2b7bd;
-}
-.starter-template .content .lead .font-normal {
+
+/* Boutons et formulaires */
+button, input[type="submit"] {
+  background-color: #007bff; /* Couleur bleue pour les boutons, pour l'accessibilité */
   color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
-.starter-template .links {
-  float: right;
-  right: 0;
-  margin-top: 125px;
+button:hover, input[type="submit"]:hover {
+  background-color: #0056b3;
 }
-.starter-template .links ul {
-  display: block;
-  padding: 0;
-  margin: 0;
+input[type="email"], select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
-.starter-template .links ul li {
-  list-style: none;
-  display: inline;
-  margin: 0 10px;
+
+/* Sections et marges */
+.section {
+  margin: 20px 0;
+  background: #fff; /* Fond clair pour les sections */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombre pour la profondeur */
 }
-.starter-template .links ul li:first-child {
-  margin-left: 0;
+.form-group {
+  margin-bottom: 15px;
 }
-.starter-template .links ul li:last-child {
-  margin-right: 0;
+
+/* Erreurs et validations */
+.error, .help-block {
+  color: #d9534f;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
 }
-.starter-template .links ul li.current-version {
-  color: #f2b7bd;
-  font-weight: 400;
-}
-.starter-template .links ul li a, a {
-  color: #f2b7bd;
-  text-decoration: underline;
-}
-.starter-template .links ul li a:hover, a:hover {
-  color: #ffffff;
-  text-decoration: underline;
-}
-.starter-template .links ul li .icon-muted {
-  color: #eb8b95;
-  margin-right: 5px;
-}
-.starter-template .links ul li:hover .icon-muted {
-  color: #ffffff;
-}
-.starter-template .copyright {
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #f2b7bd;
-  text-transform: lowercase;
-  float: right;
-  right: 0;
-}
-.error {
-  color: #000000;
-  font-size: 1.5em;
-  background-color: #f2b7bd;
-  margin-block: 0.5em;
-  padding: 0.5em;
-  text-transform: lowercase;
-}
-@media (max-width: 1199px) {
-  .starter-template .content h1 {
-    font-size: 45px;
+
+/* Média queries pour responsive design */
+@media (max-width: 768px) {
+  header, .container {
+    padding: 10px;
   }
-  .starter-template .content h1 .smaller {
-    font-size: 30px;
-  }
-  .starter-template .content .lead {
-    font-size: 20px;
-  }
-}
-@media (max-width: 991px) {
-  .starter-template {
-    margin-top: 0;
-  }
-  .starter-template .logo {
-    margin: 40px auto;
-  }
-  .starter-template .content {
-    margin-left: 0;
-    text-align: center;
-  }
-  .starter-template .content h1 {
-    margin-bottom: 20px;
-  }
-  .starter-template .links {
-    float: none;
-    text-align: center;
-    margin-top: 60px;
-  }
-  .starter-template .copyright {
-    float: none;
-    text-align: center;
-  }
-}
-@media (max-width: 767px) {
-  .starter-template .content h1 .smaller {
-    font-size: 25px;
-    display: block;
-  }
-  .starter-template .content .lead {
-    font-size: 16px;
-  }
-  .starter-template .links {
-    margin-top: 40px;
-  }
-  .starter-template .links ul li {
-    display: block;
-    margin: 0;
-  }
-  .starter-template .links ul li .icon-muted {
-    display: none;
-  }
-  .starter-template .copyright {
-    margin-top: 20px;
+  header img.logo {
+    margin: 10px 0;
   }
 }
 
-.email-input {
-  width: 100%; 
-  padding: 5px;
+/* Pied de page */
+footer {
+  background: #007bff; /* Fond bleu pour le pied de page, avec texte blanc pour le contraste */
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 20px;
 }
-
-.help-block {
-  color: #000000;
-  background-color: #f2b7bd;
+footer a {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+footer a:hover {
+  color: #a8d8ea;
 }
