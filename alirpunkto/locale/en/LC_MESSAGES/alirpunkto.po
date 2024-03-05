@@ -656,3 +656,58 @@ msgstr "The member's data has been modified"
 
 msgid "email_member_state_changed"
 msgstr "Change in your member profile"
+
+#: alirpunkto/views/forgot_password.py:100
+#: alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:128
+#: alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:197
+#: alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:202
+#: alirpunkto/views/forgot_password.py:203
+#: alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr ""
+
+#: alirpunkto/views/forgot_password.py:268
+#: alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr ""
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr ""
+
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr ""
