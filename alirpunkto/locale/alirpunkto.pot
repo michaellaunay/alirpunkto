@@ -30,16 +30,16 @@ msgid "login_label"
 msgstr "Login"
 
 msgid "welcome_msg"
-msgstr "Welcome to Alirpunkto, the centralized service for the applications used in the IT infrastructure of ${site_name}."
+msgstr "Welcome to ${site_name}, the centralized service for the applications used in the IT infrastructure of ${domain_name}."
 
 msgid "all_applications_msg"
-msgstr "All the applications you need to participate in the activities of ${site_name} in one place."
+msgstr "All the applications you need to participate in the activities of ${domain_name} in one place."
 
 msgid "register_or_login_msg"
 msgstr "Register or login now to get started."
 
 msgid "logged_in_msg_title"
-msgstr "Alirpunkto, the centralized service for the applications used in the IT infrastructure of ${site_name}" 
+msgstr "${site_name}, the centralized service for the applications used in the IT infrastructure of ${domain_name}" 
 
 msgid "logged_in_msg"
 msgstr "You are logged in as ${user}."
@@ -560,32 +560,32 @@ msgid "voters_not_selected"
 msgstr "The number of existing Cooperators is too low to select the adequate number of Verifiers of your identity. Please contact the system administrator, at the following address ${administrator}, to solve the issue."
 
 msgid "email_copy_id_verification_subject"
-msgstr "en - ${site_name} - Please verify my identity as a new potential Cooperator"
+msgstr "en - ${site_name}.${domain_name} - Please verify my identity as a new potential Cooperator"
 
 msgid "email_copy_id_verification_body"
 msgstr ""
 " Dear Verifiers,\n"
-" I am writing to you to complete the identity verification process for my application to become a Cooperator of ${site_name}. Attached to this email, you will find a partial copy of my official identity document.\n"
-" Please note that certain sensitive information has been masked for security reasons. However, the document contain the information that you need to verify my identity according to the registration process of ${site_name}.\n"
+" I am writing to you to complete the identity verification process for my application to become a Cooperator of ${domain_name}. Attached to this email, you will find a partial copy of my official identity document.\n"
+" Please note that certain sensitive information has been masked for security reasons. However, the document contain the information that you need to verify my identity according to the registration process of ${site_name}.${domain_name}.\n"
 " I kindly request that you review the attached document if possible within the next 3 days, to vote on the adequation between:\n"
 "\n"
-" - the identity information that you received directly by e-mail from the IT platform of ${site_name} (and that will be reminded to you on the voting interface) and \n"
+" - the identity information that you received directly by e-mail from the IT platform of ${site_name}.${domain_name} (and that will be reminded to you on the voting interface) and \n"
 " - the identity information that you can read on the attached partial copy of my official identity document.\n"
 "\n"
 " The link for you to vote on this adequation is the following: ${voting_url}.\n"
-" I thank you very warmly in advance for supporting the process of my registration as a Cooperator to ${site_name}. Should you have any further questions or require additional information, please feel free to contact me directly in your own language.\n"
+" I thank you very warmly in advance for supporting the process of my registration as a Cooperator to ${domain_name}. Should you have any further questions or require additional information, please feel free to contact me directly in your own language.\n"
 " Best regards,\n"
 " ${signature}\n"
 " Attachment: [Name of the ID document file]\n"
-" This email has been generated with the assistance of ${site_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${site_name} administrator."
+" This email has been generated with the assistance of ${site_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${domain_name} administrator."
 
 msgid "email_video_id_verification_subject"
-msgstr "en - ${site_name} - Please verify my identity per video conference as a new potential Cooperator"
+msgstr "en - ${site_name}.${domain_name} - Please verify my identity per video conference as a new potential Cooperator"
 
 msgid "email_video_id_verification_body"
 msgstr ""
 " Dear Verifiers,\n"
-"    I am writing to you to complete the identity verification process for my application to become a Cooperator of ${site_name}. I would like to propose a video conference meeting for this purpose.\n"
+"    I am writing to you to complete the identity verification process for my application to become a Cooperator of ${domain_name}. I would like to propose a video conference meeting for this purpose.\n"
 "    Here are some time slots that I am suggesting for the video conference. Please note that I live in Germany (Please adjust according to your country / region of residence. This is necessary for your correspondent to know your time zone), so that the time of the day where I live may be different from the time of the day where you live. This video conference should last no longer than 10 minutes: (plase provide at least 3 options, if possible at different times of the day and on different days including during the week-end, all of them within 10 days after you send the e-mail)\n"
 "   \n"
 "         - Monday, 04 September 2023, at 17:30 hours my time; (Adjust according to your availability)\n"
@@ -606,14 +606,14 @@ msgstr ""
 "    During the videoconference meeting, it can happen that we don't share any common language. If this is the case, I suggest that we adopt a kind and supportive attitude towards each other. I propose that we use the chat to express ourselves in our respective languages, and use machine translation to understand what our interlocutor is writing.\n"
 "    Once you have held this meeting per videoconference, I kindly request that you vote to either confirm or refute the adequation between:\n"
 "\n"
-"     - the identity information that you received directly by e-mail from the IT platform of ${site_name} (and that will be reminded to you on the voting interface) and \n"
+"     - the identity information that you received directly by e-mail from the IT platform of ${domain_name} (and that will be reminded to you on the voting interface) and \n"
 "    - the identity information that you will have seen during the videoconference.\n"
 "\n"
 " The link for you to vote on this adequation is the following: ${voting_url}.\n"
-"  I thank you very warmly in advance for supporting the process of my registration as a Cooperator to ${site_name}. Should you have any further questions or require additional information, please feel free to contact me directly.\n"
+"  I thank you very warmly in advance for supporting the process of my registration as a Cooperator to ${domain_name}. Should you have any further questions or require additional information, please feel free to contact me directly.\n"
 " Best regards,\n"
 " ${signature}\n"
-" This email has been generated with the assistance of ${site_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${site_name} administrator."
+" This email has been generated with the assistance of ${domain_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have received this email in error, please inform the ${domain_name} administrator."
 
 msgid "forget_email_in_member_list"
 msgstr "If the user exists, s/he will receive an email."
@@ -656,3 +656,73 @@ msgstr "The member's data has been modified"
 
 msgid "email_member_state_changed"
 msgstr "Change in your member profile"
+
+#: alirpunkto/views/forgot_password.py:100
+#: alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Please provide a valid e-mail address"
+
+#: alirpunkto/views/forgot_password.py:128
+#: alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "The administrator is not allowed to reset his/her own password"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "If the user exists, an e-mail has been sent to his/her e-mail address with a link to reset his/her password"
+
+#: alirpunkto/views/forgot_password.py:197
+#: alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "The two versions of the password do not match. Please ensure that they do, and submit again"
+
+#: alirpunkto/views/forgot_password.py:202
+#: alirpunkto/views/forgot_password.py:203
+#: alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Please provide a new password"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "You have successfully changed your password"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "An error has occurred in the process of resetting your password"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "An error has occurred in the process of resetting your password. Your password was not changed"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "The member was not found in the list of current members"
+
+#: alirpunkto/views/forgot_password.py:268
+#: alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "The hyperlink that you used to reset your password is obsolete. Please use the latest one you received"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "The e-mail containing the mathematical challenge verifying that the candidate is human (and not a robot) was not sent."
+
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Error when committing the candidature"
+
+msgid "modification_to_profile_button_title"
+msgstr "Edit Your Profile"
+
+msgid "modification_to_profile_button_label"
+msgstr "Edit Profile"
+
+msgid "modification_to_profile_button_description"
+msgstr "Click here to receive by email a secure link to modify your profile."
+
+msgid "modification_to_profile_explanation_content"
+msgstr "To ensure the security of your data, a unique link to modify your profile will be sent to you via email. This process guarantees that only the person with access to your email address can make changes to your profile."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Link to modify your profile on the IT infrastructure of ${domain_name}"
