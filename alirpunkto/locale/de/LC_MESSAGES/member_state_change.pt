@@ -7,7 +7,7 @@
         <title tal:omit-tag="textual">Änderung des Status Ihrer Daten</title>.
     </head>.
     <body tal:omit-tag="textual">.
-        <h1 tal:omit-tag="textual">Änderung Ihrer Persönlichen Daten in <span tal:replace="site_name">Name der Website</span></h1>.
+        <h1 tal:omit-tag="textual">Änderung Ihrer Persönlichen Daten in <span tal:replace="domain_name">Name der Website</span></h1>.
         <p tal:omit-tag="textual">Hallo<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Mitgliedsname</span>,
         </p>
         <p tal:omit-tag="textual">Hier sind die Details ihrer Änderung:</p>.
@@ -24,6 +24,6 @@
 
         <p tal:omit-tag="textual">Danke für Ihre Teilnahme.</p>.
         <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>.
-        <p tal:omit-tag="textual">Das Team von <span tal:replace="site_name">Name der Website</span></p>.
+        <p tal:omit-tag="textual">Das Team von <span tal:replace="domain_name">Name der Website</span></p>.
     </body>.
 </html>.

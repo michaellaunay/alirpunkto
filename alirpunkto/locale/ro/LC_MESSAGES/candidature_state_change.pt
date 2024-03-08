@@ -7,7 +7,7 @@
         <title tal:omit-tag="textual">Schimbare în statutul candidaturii dumneavoastră</title>
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
-        <h1 tal:omit-tag="textual">Evoluția candidaturii dumneavoastră la <span tal:replace="site_name">Numele site-ului</span></h1>
+        <h1 tal:omit-tag="textual">Evoluția candidaturii dumneavoastră la <span tal:replace="domain_name">Numele site-ului</span></h1>
         <p tal:omit-tag="textual">Bună ziua<span tal:replace="user" tal:condition="exists:user">Numele candidatului</span>,
         </p>
         <p tal:omit-tag="textual">Aplicația dvs. pe platformă
@@ -34,6 +34,6 @@
 
         <p tal:omit-tag="textual">Mulțumim pentru participare.</p>
         <p tal:omit-tag="textual">Cele mai bune salutări,</p>
-        <p tal:omit-tag="textual">Echipa de la <span tal:replace="site_name">Site Name</span></p>
+        <p tal:omit-tag="textual">Echipa de la <span tal:replace="domain_name">Site Name</span></p>
     </body>
 </html>

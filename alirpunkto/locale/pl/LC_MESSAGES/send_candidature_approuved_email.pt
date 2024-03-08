@@ -4,14 +4,14 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Twoje zgłoszenie do witryny <span tal:replace="site_name">Nazwa witryny</span> zostało zatwierdzone</title>
+    <title tal:omit-tag="textual">Twoje zgłoszenie do witryny <span tal:replace="domain_name">Nazwa witryny</span> zostało zatwierdzone</title>
 </head>
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Gratulujemy zatwierdzenia Twojego wniosku! </h1>
     
     <p tal:omit-tag="textual">Witaj <span tal:replace="user" tal:condition="exists:user">Imię i nazwisko wnioskodawcy</span>,</p>
     
-    <p tal:omit-tag="textual">Z przyjemnością informujemy, że Twoja aplikacja na stanowisko <span tal:replace="site_name">Nazwa witryny</span> dla roli <span tal:replace="python:candidature.type">Rola</span> została zatwierdzona.</p>
+    <p tal:omit-tag="textual">Z przyjemnością informujemy, że Twoja aplikacja na stanowisko <span tal:replace="domain_name">Nazwa witryny</span> dla roli <span tal:replace="python:candidature.type">Rola</span> została zatwierdzona.</p>
     
     <p tal:omit-tag="textual">Oto szczegóły:</p>
     <ul tal:omit-tag="textual">
@@ -25,6 +25,6 @@
     <p tal:omit-tag="textual">Dziękujemy, że do nas dołączyłeś! Z radością witamy Cię w naszej społeczności i cieszymy się na współpracę z Tobą!</p>
     
     <p tal:omit-tag="textual">Z wyrazami szacunku,</p>
-    <p tal:omit-tag="textual">Zespół <span tal:replace="site_name">Nazwa strony</span></p>
+    <p tal:omit-tag="textual">Zespół <span tal:replace="domain_name">Nazwa strony</span></p>
 </body>
 </html>

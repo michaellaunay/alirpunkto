@@ -4,12 +4,12 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag=" textual">
-    <title tal:omit-tag="textual">Ihre Anmeldung zu <span tal:replace="site_name"></span>. Nächste Schritte</title>
+    <title tal:omit-tag="textual">Ihre Anmeldung zu <span tal:replace="domain_name"></span>. Nächste Schritte</title>
 </head>
 <body tal:omit-tag=" textual">
 
     <h1 tal:omit-tag="textual">Hallo <span tal:replace="full_name">Name des Antragstellers</span>,</h1>
-    <p tal:omit-tag="textual">Danke, dass Sie Ihre Bewerbung bei <span tal:replace="site_name"></span> eingereicht haben! </p>
+    <p tal:omit-tag="textual">Danke, dass Sie Ihre Bewerbung bei <span tal:replace="domain_name"></span> eingereicht haben! </p>
 
     <p tal:omit-tag="textual">Abhängig von der Option, die Sie bei der Anmeldung gewählt haben, sind hier die nächsten Schritte:</p>
 
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Wenn Sie Fragen haben oder weitere Informationen benötigen, zögern Sie bitte nicht, uns zu kontaktieren.</p>
 
     <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Das <span tal:replace="site_name"></span> Team</strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Das <span tal:replace="domain_name"></span> Team</strong></p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Hinweis: Diese Mitteilung wurde automatisch generiert. Bitte antworten Sie nicht direkt auf diese Nachricht.</small></p>
 </body>
 </html>

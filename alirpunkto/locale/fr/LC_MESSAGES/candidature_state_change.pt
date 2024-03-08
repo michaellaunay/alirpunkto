@@ -7,7 +7,7 @@
         <title tal:omit-tag="textual">Changement de statut de votre candidature</title>
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
-        <h1 tal:omit-tag="textual">Évolution de votre candidature vers <span tal:replace="site_name">nom du site</span></h1>
+        <h1 tal:omit-tag="textual">Évolution de votre candidature vers <span tal:replace="domain_name">nom du site</span></h1>
         <p tal:omit-tag="textual">Bonjour <span tal:replace="user" tal:condition="exists:user">Nom du candidat</span>,
         </p>
         <p tal:omit-tag="textual">Votre candidature sur la plateforme
@@ -34,6 +34,6 @@
 
         <p tal:omit-tag="textual">Merci de votre participation.</p>
         <p tal:omit-tag="textual">Meilleures salutations,</p>
-        <p tal:omit-tag="textual">L'équipe de <span tal:replace="site_name">Nom du site</span></p>.
+        <p tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Nom du site</span></p>.
     </body>
 </html>

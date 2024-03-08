@@ -7,7 +7,7 @@
         <title tal:omit-tag="textual">Änderung des Status Ihrer Bewerbung</title>
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
-        <h1 tal:omit-tag="textual">Entwicklung Ihrer Bewerbung auf <span tal:replace="site_name">Site Name</span></h1>
+        <h1 tal:omit-tag="textual">Entwicklung Ihrer Bewerbung auf <span tal:replace="domain_name">Site Name</span></h1>
         <p tal:omit-tag="textual">Hallo<span tal:replace="user" tal:condition="exists:user">Name des Antragstellers</span>,
         </p>
         <p tal:omit-tag="textual">Ihre Bewerbung auf der Plattform
@@ -34,6 +34,6 @@
 
         <p tal:omit-tag="textual">Wir danken Ihnen für Ihre Teilnahme.</p>
         <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
-        <p tal:omit-tag="textual">Das Team von <span tal:replace="site_name">Site Name</span></p>
+        <p tal:omit-tag="textual">Das Team von <span tal:replace="domain_name">Site Name</span></p>
     </body>
 </html>

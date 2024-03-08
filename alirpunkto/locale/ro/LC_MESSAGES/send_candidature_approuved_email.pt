@@ -4,14 +4,14 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Aplicația dvs. pentru <span tal:replace="site_name">Numele site-ului</span> a fost aprobată</title>
+    <title tal:omit-tag="textual">Aplicația dvs. pentru <span tal:replace="domain_name">Numele site-ului</span> a fost aprobată</title>
 </head>
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Felicitări pentru aprobarea Aplicației dumneavoastră!</h1>
     
     <p tal:omit-tag="textual">Bună ziua <span tal:replace="user" tal:condition="exists:user">Numele solicitantului</span>,</p>
     
-    <p tal:omit-tag="textual">Am plăcerea să vă informăm că aplicația dumneavoastră la <span tal:replace=" site_name" >Numele site-ului</span> pentru rolul de <span tal:replace="python:candidature.type">Rol</span> a fost aprobată.</p>
+    <p tal:omit-tag="textual">Am plăcerea să vă informăm că aplicația dumneavoastră la <span tal:replace=" domain_name" >Numele site-ului</span> pentru rolul de <span tal:replace="python:candidature.type">Rol</span> a fost aprobată.</p>
     
     <p tal:omit-tag="textual">Iată detaliile:</p>
     <ul tal:omit-tag="textual">
@@ -25,6 +25,6 @@
     <p tal:omit-tag="textual">Mulțumim că v-ați alăturat nouă! Suntem bucuroși să vă primim în comunitatea noastră și așteptăm cu nerăbdare să lucrăm împreună cu dumneavoastră!</p>
     
     <p tal:omit-tag="textual">Cele mai bune salutări,</p>
-    <p tal:omit-tag="textual">Echipa de la <span tal:replace="site_name">Numele site-ului</span></p>
+    <p tal:omit-tag="textual">Echipa de la <span tal:replace="domain_name">Numele site-ului</span></p>
 </body>
 </html>

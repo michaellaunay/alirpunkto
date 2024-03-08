@@ -4,14 +4,14 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">La tua richiesta di iscrizione alla <span tal:replace="site_name">Site Name</span> è stata approvata</title>.
+    <title tal:omit-tag="textual">La tua richiesta di iscrizione alla <span tal:replace="domain_name">Site Name</span> è stata approvata</title>.
 </head>
 <body tal:omit-tag="textual">
 <h1 tal:omit-tag="textual">Congratulazioni per l'approvazione della tua Candidatura!</h1>
     
     <p tal:omit-tag="textual">Ciao <span tal:replace="user" tal:condition="exists:user">Nome del Richiedente</span>,</p>
     
-    <p tal:omit-tag="textual">Siamo lieti di informarti che la tua candidatura alla <span tal:replace="site_name" >Nome del sito</span> per il ruolo di <span tal:replace="python:candidature.type">Role</span> è stata approvata.</p>
+    <p tal:omit-tag="textual">Siamo lieti di informarti che la tua candidatura alla <span tal:replace="domain_name" >Nome del sito</span> per il ruolo di <span tal:replace="python:candidature.type">Role</span> è stata approvata.</p>
     
     <p tal:omit-tag="textual">Ecco i dettagli:</p>
     <ul tal:omit-tag="textual">
@@ -25,6 +25,6 @@
     <p tal:omit-tag="textual">Grazie per esserti unito a noi! Siamo felici di darti il benvenuto nella nostra Community e non vediamo l'ora di lavorare insieme a te!</p>
     
     <p tal:omit-tag="textual">Buoni saluti,</p>
-    <p tal:omit-tag="textual">Il team di <span tal:replace="site_name">Nome del sito</span></p>
+    <p tal:omit-tag="textual">Il team di <span tal:replace="domain_name">Nome del sito</span></p>
 </body>
 </html>

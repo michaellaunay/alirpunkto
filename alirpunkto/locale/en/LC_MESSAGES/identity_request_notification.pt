@@ -4,12 +4,12 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Your registation to <span tal:omit-tag="textual" tal:replace="site_name"></span>. Next steps</title>
+    <title tal:omit-tag="textual">Your registation to <span tal:omit-tag="textual" tal:replace="domain_name"></span>. Next steps</title>
 </head>
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Hello <span tal:replace="full_name">Applicant's Name</span>,</h1>
-    <p tal:omit-tag="textual">Thank you for submitting your application to <span tal:replace="site_name"></span>! </p>
+    <p tal:omit-tag="textual">Thank you for submitting your application to <span tal:replace="domain_name"></span>! </p>
 
     <p tal:omit-tag="textual">Depending on the option you chose during registration, here are the next steps:</p>
 
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">If you have any questions or need further clarification, please do not hesitate to contact us.</p>
 
     <p tal:omit-tag="textual">Best regards,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">The <span tal:omit-tag="textual" tal:replace="site_name"></span> Team</strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">The <span tal:replace="site_name">Site Name</span>.<span tal:replace="domain_name">Domain Name</span> Team</strong></p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note: This notification has been generated automatically. Please do not reply directly to this message.</small></p>
 </body>
 </html>

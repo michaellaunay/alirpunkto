@@ -7,7 +7,7 @@
         <title tal:omit-tag="textual">Zmiana statusu Państwa danych</title>
     </head>
     <body tal:omit-tag="textual">
-        <h1 tal:omit-tag="textual">Modyfikacja Państwa danych osobowych w <span tal:replace="site_name">nazwie witryny</span></h1>.
+        <h1 tal:omit-tag="textual">Modyfikacja Państwa danych osobowych w <span tal:replace="domain_name">nazwie witryny</span></h1>.
         <p tal:omit-tag="textual">Witam<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nazwa członka</span>,
         </p>
         <p tal:omit-tag="textual">Oto szczegóły jego modyfikacji:</p>
@@ -24,6 +24,6 @@
 
         <p tal:omit-tag="textual">Dziękujemy za Państwa udział.</p>
         <p tal:omit-tag="textual">Pozdrawiamy,</p>
-        <p tal:omit-tag="textual">Zespół <span tal:replace="site_name">Nazwa strony</span></p>
+        <p tal:omit-tag="textual">Zespół <span tal:replace="domain_name">Nazwa strony</span></p>
     </body>
 </html>

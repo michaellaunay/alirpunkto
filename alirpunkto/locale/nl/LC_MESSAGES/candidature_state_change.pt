@@ -7,7 +7,7 @@
         <title tal:omit-tag="textual">Wijziging in de status van uw aanvraag</title>
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
-        <h1 tal:omit-tag="textual">Evolutie van uw aanvraag naar <span tal:replace="site_name">Site Naam</span></h1>
+        <h1 tal:omit-tag="textual">Evolutie van uw aanvraag naar <span tal:replace="domain_name">Site Naam</span></h1>
         <p tal:omit-tag="textual">Hallo<span tal:replace="user" tal:condition="exists:user">Aanvragersnaam</span>,
         </p>
         <p tal:omit-tag="textual">Uw aanvraag op het platform
@@ -34,6 +34,6 @@
 
         <p tal:omit-tag="textual">Bedankt voor uw deelname.</p>
         <p tal:omit-tag="textual">Gegroet,</p>
-        <p tal:omit-tag="textual">Het team van <span tal:replace="site_name">Site Name</span></p>
+        <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name">Site Name</span></p>
     </body>
 </html>

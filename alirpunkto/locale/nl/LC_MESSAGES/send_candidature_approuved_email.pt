@@ -4,14 +4,14 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Uw aanvraag voor de <span tal:replace="site_name" >Sitienaam</span> is goedgekeurd</title>.
+    <title tal:omit-tag="textual">Uw aanvraag voor de <span tal:replace="domain_name" >Sitienaam</span> is goedgekeurd</title>.
 </head>
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Gefeliciteerd met de goedkeuring van jouw aanvraag! </h1>
     
     <p tal:omit-tag="textual">Hallo <span tal:replace="user" tal:condition="exists:user">Aanvragersnaam</span>,</p>
     
-    <p tal:omit-tag="textual">Wij zijn verheugd je te informeren dat jouw aanvraag voor de <span tal:replace="site_name">Site naam</span> voor de rol van <span tal:replace="python:candidature.type">Rol</span> is goedgekeurd.</p>
+    <p tal:omit-tag="textual">Wij zijn verheugd je te informeren dat jouw aanvraag voor de <span tal:replace="domain_name">Site naam</span> voor de rol van <span tal:replace="python:candidature.type">Rol</span> is goedgekeurd.</p>
     
     <p tal:omit-tag="textual">Hier zijn de details:</p>
     <ul tal:omit-tag="textual">
@@ -25,6 +25,6 @@
     <p tal:omit-tag="textual">Bedankt dat je je bij ons hebt aangesloten! We heten je van harte welkom in onze Gemeenschap en kijken ernaar uit om met je samen te werken!</p>
     
     <p tal:omit-tag="textual">Gegroet, </p>
-    <p tal:omit-tag="textual">Het team van <span tal:replace="site_name" >Sitenaam</span></p>
+    <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name" >Sitenaam</span></p>
 </body>
 </html>

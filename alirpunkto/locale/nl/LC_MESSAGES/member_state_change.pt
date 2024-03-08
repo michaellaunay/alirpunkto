@@ -7,7 +7,7 @@
         <title tal:omit-tag="textual">Wijziging in de status van je gegevens</title>
     </head>
     <body tal:omit-tag="textual">
-        <h1 tal:omit-tag="textual">Wijziging in uw persoonlijke gegevens in <span tal:replace="site_name">Site Naam</span></h1>
+        <h1 tal:omit-tag="textual">Wijziging in uw persoonlijke gegevens in <span tal:replace="domain_name">Site Naam</span></h1>
         <p tal:omit-tag="textual">Hallo<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Ledennaam</span>,
         </p>
         <p tal:omit-tag="textual">Hier zijn de details van de wijziging:</p>
@@ -24,6 +24,6 @@
 
         <p tal:omit-tag="textual">Bedankt voor uw deelname.</p>
         <p tal:omit-tag="textual">Gegroet,</p>
-        <p tal:omit-tag="textual">Het team van <span tal:replace="site_name">Site naam</span></p>
+        <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name">Site naam</span></p>
     </body>
 </html>

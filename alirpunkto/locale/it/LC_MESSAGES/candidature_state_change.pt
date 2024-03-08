@@ -7,7 +7,7 @@
         <title tal:omit-tag="textual">Cambiamento dello stato della sua candidatura</title>.
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
-        <h1 tal:omit-tag="textual">Evoluzione della sua candidatura a <span tal:replace="site_name">Nome del sito</span></h1>.
+        <h1 tal:omit-tag="textual">Evoluzione della sua candidatura a <span tal:replace="domain_name">Nome del sito</span></h1>.
         <p tal:omit-tag="textual">Ciao<span tal:replace="utente" tal:condition="exists:user">Nome del richiedente</span>,
         </p>
         <p tal:omit-tag="textual">La sua candidatura sulla piattaforma
@@ -34,6 +34,6 @@
 
         <p tal:omit-tag="textual">Grazie per la sua partecipazione.</p>
         <p tal:omit-tag="textual">Auguri,</p>
-        <p tal:omit-tag="textual">Il team di <span tal:replace="site_name">NomeSito</span></p>
+        <p tal:omit-tag="textual">Il team di <span tal:replace="domain_name">NomeSito</span></p>
     </body>
 </html>

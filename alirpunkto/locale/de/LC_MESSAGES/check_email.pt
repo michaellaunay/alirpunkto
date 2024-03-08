@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
     <head tal:omit-tag="textual">
-        <title tal:omit-tag="textual">Registrierung auf <span tal:replace="site_name"></span></title>
+        <title tal:omit-tag="textual">Registrierung auf <span tal:replace="domain_name"></span></title>
     </head>
     <body tal:omit-tag=" textual">
 
-        <h1 tal:omit-tag="textual">Danke, dass Sie Ihre Registrierung auf der Plattform <span tal:replace="site_name"></span></h1>
+        <h1 tal:omit-tag="textual">Danke, dass Sie Ihre Registrierung auf der Plattform <span tal:replace="domain_name"></span></h1>
         <p tal:omit-tag="textual">Um Ihre E-Mail-Adresse zu verifizieren und sicherzustellen, dass Sie ein Mensch (und kein Roboter) sind, haben wir uns eine Reihe von 4 einfachen mathematischen Operationen ausgedacht. Bitte führen Sie die vier mathematischen Operationen von A bis D aus und tragen Sie die Ergebnisse in die entsprechenden Felder auf der unten verlinkten Registrierungsseite ein.</p>
         <div omit-tag=" textual">
             <p tal:omit-tag="textual">Operation A ist <span tal:content="Herausforderung_A"
@@ -26,7 +26,7 @@
 
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
-            <p tal:omit-tag="textual">Das Team von <span tal:replace="site_name">Site</span></p>
+            <p tal:omit-tag="textual">Das Team von <span tal:replace="domain_name">Site</span></p>
         </footer>
 
     </body>
