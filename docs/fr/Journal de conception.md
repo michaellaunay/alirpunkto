@@ -1028,3 +1028,179 @@ Modification de la configuration des logs en ajoutant le fichier à l'origine
 ```ini
 format = %(asctime)s %(levelname)-5.5s [%(name)s:%(filename)s:%(lineno)s][%(threadName)s] %(message)s
 ```
+# 2024-03-07
+Réflexion sur la sécurisation du champ Avatar (jpegPhoto dans inetOrgPerson LDAP).
+Les outils classiques limitent la taille du côté client par un js et côté serveur par des directives Apache ou Nginx (Il est entendu que le côté client n'est pas de confiance quoi que l'on fasse).
+
+Dans un projet Pyramid, pour limiter la taille de l'image uploadée (par exemple, à 5 Mo), nous devons implémenter une logique de validation côté serveur lors de la réception du fichier.
+Pyramid ne fournit pas directement une fonctionnalité pour limiter la taille des fichiers uploadés dans le framework lui-même, mais nous pouvons ajouter cette vérification dans notre vue qui gère l'upload des fichiers.
+
+Voici un exemple de base de comment nous pourrions implémenter cette logique dans la vue Pyramid qui gère l'upload d'images :
+
+```python
+from pyramid.response import Response
+from pyramid.view import view_config
+
+@view_config(route_name='upload_image', request_method='POST')
+def upload_image_view(request):
+    # Obtenir le fichier depuis la requête
+    input_file = request.POST['image'].file
+    input_file.seek(0, 2)  # Déplacer le curseur à la fin du fichier
+    file_size = input_file.tell()  # Obtenir la taille du fichier en octets
+    input_file.seek(0)  # Réinitialiser le curseur au début du fichier
+
+    max_size = 5 * 1024 * 1024  # 5 Mo
+
+    if file_size > max_size:
+        return Response(json_body={'error': 'File size exceeds the 5 MB limit.'}, status=400)
+
+    # Logique pour sauvegarder le fichier ici
+    # ...
+
+    return Response(json_body={'message': 'File uploaded successfully.'})
+```
+
+Cette vue fait les opérations suivantes :
+
+1. Elle récupère l'objet fichier uploadé depuis la requête.
+2. Elle utilise `seek()` et `tell()` pour déterminer la taille du fichier.
+3. Elle compare cette taille à la limite maximale définie (5 Mo dans cet exemple).
+4. Si le fichier dépasse la taille limite, elle renvoie une réponse d'erreur.
+5. Sinon, elle continue avec la logique pour sauvegarder le fichier.
+
+## Côté client
+Pour bloquer l'upload de fichiers trop volumineux côté client avant même que le téléchargement vers le serveur commence, nous pouvons utiliser JavaScript pour effectuer une vérification de la taille du fichier avant de soumettre le formulaire. Cela permet d'éviter l'envoi de fichiers volumineux inutilement, économisant ainsi de la bande passante et améliorant l'expérience utilisateur en fournissant une réponse immédiate si le fichier est trop gros.
+
+Voici un exemple simple de comment nous pourrions faire cette vérification avec JavaScript :
+
+```html
+<form id="uploadForm" action="/upload_image" method="post" enctype="multipart/form-data">
+    <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/tiff">
+    <input type="submit" value="Upload Image">
+</form>
+<div id="message"></div>
+
+<script>
+document.getElementById('uploadForm').onsubmit = function(e) {
+    var fileInput = document.getElementById('image');
+    var maxSize = 5 * 1024 * 1024; // 5 Mo en octets
+    if (fileInput.files[0].size > maxSize) {
+        // Empêcher l'envoi du formulaire
+        e.preventDefault();
+        // Afficher un message d'erreur
+        document.getElementById('message').innerHTML = 'File size exceeds the 5 MB limit.';
+        return false;
+    }
+    // Continuer avec l'envoi du formulaire si la taille est acceptable
+};
+</script>
+```
+
+Dans cet exemple, le formulaire HTML inclut un champ d'entrée de type fichier et un bouton de soumission. Le script JavaScript intercepte l'événement de soumission du formulaire (`onsubmit`). Avant de soumettre le formulaire, il vérifie la taille du fichier sélectionné. Si le fichier dépasse la taille maximale autorisée (5 Mo dans cet exemple), l'envoi du formulaire est annulé avec `e.preventDefault()`, et un message d'erreur est affiché à l'utilisateur. Si la taille du fichier est acceptable, le formulaire est soumis normalement.
+
+Cette approche garantit que l'utilisateur reçoit une réponse immédiate si le fichier sélectionné est trop grand, sans avoir besoin d'attendre que le fichier soit complètement téléchargé sur le serveur pour découvrir qu'il est inacceptable.
+**Les vérifications côté client peuvent être contournées, il est donc essentiel de maintenir également la validation de la taille du fichier côté serveur !**
+
+## Côté serveur
+Si l'utilisateur contourne les vérifications côté client, comme la validation de la taille du fichier en JavaScript, en utilisant des outils de développement ou en désactivant JavaScript, rien ne garantit ces vérifications pour assurer la sécurité et les contraintes de notre application. C'est pourquoi nous devons avoir une couche de validation robuste côté serveur.
+
+Côté serveur, nous pouvons limiter la taille des requêtes acceptées par notre application Pyramid en configurant notre serveur WSGI ou le serveur Web frontal (comme Nginx ou Apache) pour rejeter les requêtes qui dépassent une certaine taille. Exemples :
+
+### Nginx
+
+Nous utilisons Nginx comme serveur Web frontal, nous utiliserons la directive `client_max_body_size` dans notre configuration Nginx pour limiter la taille des corps de requête :
+
+```nginx
+server {
+    ...
+    client_max_body_size 5M;  # Limite la taille des requêtes à 5 Mo
+    ...
+}
+```
+
+### Apache
+
+Pour Apache, utilisons la directive `LimitRequestBody` dans notre configuration :
+
+```apache
+<Directory "/var/www/html">
+    ...
+    LimitRequestBody 5242880  # 5 Mo en octets
+    ...
+</Directory>
+```
+
+### Pyramid / Waitress
+
+Nous utilisons Waitress (le serveur WSGI souvent utilisé avec Pyramid), et  pouvons définir la taille maximale de la requête lors du lancement de l'application. Cependant, Waitress ne fournit pas directement d'option de configuration pour limiter la taille du corps de la requête. Nous devons donc nous appuyer sur la configuration de notre serveur Web frontal.
+
+### Vérification supplémentaire dans Pyramid
+
+En plus de configurer notre serveur, nous devons implémenter une vérification de la taille du fichier dans votre vue Pyramid. Cela garantit qu'une demande qui contourne les limites imposées par le serveur Web frontal est encore validée par notre application elle-même :
+
+```python
+from pyramid.httpexceptions import HTTPBadRequest
+
+@view_config(route_name='upload_image', request_method='POST')
+def upload_image_view(request):
+    input_file = request.POST['image'].file
+    input_file
+
+
+```
+### Explications du champs template du widget FileUploadWidget
+Le champ `template` dans le widget `FileUploadWidget` de Deform, une bibliothèque Python utilisée avec Colander pour la validation des données et la génération de formulaires HTML, spécifie le modèle (template) utilisé pour rendre le widget de téléchargement de fichier dans le formulaire HTML. Ce mécanisme permet de personnaliser l'apparence et le comportement du champ de téléchargement de fichier dans le formulaire généré.
+
+### Fonctionnement du champ `template`
+
+- **Définition et Personnalisation** : Le `template` est une chaîne de caractères qui fait référence au nom d'un fichier de modèle (généralement un fichier HTML ou un système de template spécifique à Python comme Chameleon). Ce modèle contient du HTML et potentiellement du code de template qui définit comment le widget de téléchargement de fichier sera rendu dans le formulaire HTML.
+
+- **Rôle du Template** : Le fichier de template décrit l'interface utilisateur du widget de téléchargement de fichier, incluant les éléments HTML comme le bouton de parcours (`<input type="file">`), des messages d'erreur, des indications visuelles sur la progression du téléchargement, etc.
+
+- **Personnalisation Avancée** : En utilisant un template personnalisé, vous pouvez modifier l'apparence du widget d'upload de fichier pour qu'il corresponde au style de votre application web, intégrer des validations côté client supplémentaires (par exemple, pour vérifier la taille ou le type de fichier avant l'envoi), ou ajouter des fonctionnalités interactives (comme une barre de progression pour l'upload).
+
+### Exemple d'utilisation
+
+Dans l'exemple que vous avez fourni :
+
+```python
+avatar = colander.SchemaNode(
+    colander.FileData(),
+    title=_('avatar_label'),
+    widget=FileUploadWidget(max_file_size=4096*1024, template='file_upload'),
+    missing=""
+)
+```
+
+- **`colander.FileData()`** : Définit le type de données du champ comme étant un fichier. Cela informe Colander que le champ doit être traité comme un upload de fichier.
+
+- **`title=_('avatar_label')`** : Définit le titre (ou l'étiquette) du champ de formulaire, ce qui est utile pour l'accessibilité et l'interface utilisateur.
+
+- **`widget=FileUploadWidget(...)`** : Indique que le champ doit utiliser un `FileUploadWidget` pour l'interface de téléchargement de fichier, avec des options de configuration spécifiques.
+
+- **`max_file_size=4096*1024`** : Spécifie la taille maximale de fichier acceptée par le widget, ici définie à environ 4 Mo (4096 kilo-octets).
+
+- **`template='file_upload'`** : Indique le nom du template utilisé pour rendre le widget. Dans ce contexte, `file_upload` fait référence à un fichier de template (supposé être trouvé quelque part dans votre configuration de rendu) qui définit comment le champ de téléchargement de fichier doit être affiché. Ce nom de template est un identifiant que votre système de templates doit reconnaître pour charger le bon fichier et l'utiliser lors du rendu du formulaire.
+
+Si vous ne fournissez pas le champ `template` lors de la création d'un `FileUploadWidget` dans Deform, le widget utilisera le template par défaut fourni par Deform pour les widgets d'upload de fichier. Ce template par défaut est conçu pour couvrir les besoins généraux d'upload de fichiers, fournissant une interface utilisateur basique qui permet aux utilisateurs de sélectionner et de soumettre un fichier.
+
+### Conséquences de l'absence du champ `template` :
+
+- **Interface Utilisateur Standard** : Sans un template personnalisé, le widget s'affichera avec le design standard de Deform. Cela signifie que le style et la disposition du champ d'upload de fichier seront ceux définis par les styles CSS par défaut de Deform et le markup HTML générique.
+
+- **Fonctionnalités Basiques** : Le widget d'upload de fichier fonctionnera avec les fonctionnalités de base, permettant aux utilisateurs de sélectionner un fichier depuis leur système et de l'envoyer avec le formulaire. Il n'inclura pas de fonctionnalités avancées ou de validations côté client spécifiques que vous auriez pu ajouter via un template personnalisé.
+
+- **Cohérence avec le reste du formulaire** : L'apparence et le comportement du widget d'upload de fichier resteront cohérents avec les autres éléments de formulaire générés par Deform, assurant une expérience utilisateur uniforme à travers votre formulaire.
+
+### Exemple sans le champ `template` :
+
+```python
+avatar = colander.SchemaNode(
+    colander.FileData(),
+    title=_('avatar_label'),
+    widget=FileUploadWidget(max_file_size=4096*1024),
+    missing=""
+)
+```
+
+Dans cet exemple, le widget `FileUploadWidget` est configuré avec une limite de taille de fichier (`max_file_size`), mais sans spécifier de `template`. Le widget utilisera donc le template par défaut pour l'upload de fichier.
