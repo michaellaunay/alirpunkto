@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual" >Jouw profielwijzigingsverzoek</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual" >Jouw profielwijzigingsverzoek</h1>
+    
+    <p tal:omit-tag="textual">Hallo <span tal:replace="member.firstname" tal:condition="exists:member">Gebruikersnaam</span>,</p>
+    
+    <p tal:omit-tag="textual">Wij hebben op het <span tal:replace="site_name">Site Name</span> platform van <span tal:replace="domain_name">Domain Name</span> een verzoek ontvangen om jouw profiel aan te passen. Voor je veiligheid vragen we je een beveiligde link te volgen om verder te gaan met de wijzigingen. Klik op de volgende URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modify Profile Link</a> om je profielgegevens bij te werken.</p>
+    
+    <p tal:omit-tag="textual">Als je deze profielwijziging niet hebt aangevraagd, negeer dan deze e-mail of neem contact op met support als je je zorgen maakt.</p>
+    
+    <p tal:omit-tag="textual">Met vriendelijke groet,</p>
+    <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name">Domeinnaam</span>.</p>
+</body>
+</html>
