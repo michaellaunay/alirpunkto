@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Votre demande de modification de profil</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Votre demande de modification de profil</h1>
+    
+    <p tal:omit-tag="textual">Bonjour <span tal:replace="member.firstname" tal:condition="exists:member">Nom de l'utilisateur</span>,</p>
+    
+    </p> <p tal:omit-tag="textual">Nous avons reçu, sur la plateforme <span tal:replace="site_name">Site Name</span> de <span tal:replace="domain_name">Domain Name</span>, une demande de modification de votre profil. Pour votre sécurité, nous vous demandons de suivre un lien sécurisé pour procéder aux modifications. Veuillez cliquer sur l'URL suivante <a href="${page_with_oid}" tal:attributes="href page_with_oid">Lien de modification du profil</a> pour mettre à jour les informations de votre profil.</p>
+    
+  <p tal:omit-tag="textual">Si vous n'avez pas demandé cette modification de profil, veuillez ignorer cet email ou contacter le support si vous avez des questions.</p>
+    
+    <p tal:omit-tag="textual">Très cordialement,</p>
+    </p> <p tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Nom de domaine</span>.</p>
+</body>
+</html>
