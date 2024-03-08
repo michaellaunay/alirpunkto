@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
     <head tal:omit-tag="textual">
-        <title tal:omit-tag="textual">Registration to <span tal:replace="site_name"></span></title>
+        <title tal:omit-tag="textual">Registration to <span tal:replace="domain_name">Domain name</span></title>
     </head>
     <body tal:omit-tag="textual">
 
         <h1 tal:omit-tag="textual">Thank you for starting your registration to the platform <span
-                tal:replace="site_name"></span></h1>
+                tal:replace="domain_name">Domain name</span></h1>
         <p tal:omit-tag="textual">To verify your email address and ensure you're a human (not a
             robot), we've devised a series of 4 simple mathematical operations. Please perform the
             four mathematical operations labeled from A to D below and enter their results in the
@@ -32,7 +32,7 @@
 
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Sincerely,</p>
-            <p tal:omit-tag="textual">The team at <span tal:replace="site_name">Site</span></p>
+            <p tal:omit-tag="textual">The team of <span tal:replace="domain_name">Domain name</span></p>
         </footer>
 
     </body>
