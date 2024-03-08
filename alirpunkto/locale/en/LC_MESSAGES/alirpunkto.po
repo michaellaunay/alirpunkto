@@ -660,27 +660,27 @@ msgstr "Change in your member profile"
 #: alirpunkto/views/forgot_password.py:100
 #: alirpunkto/views/forgot_password.py:101
 msgid "forget_no_mail"
-msgstr ""
+msgstr "Please provide a valid e-mail address"
 
 #: alirpunkto/views/forgot_password.py:128
 #: alirpunkto/views/forgot_password.py:129
 msgid "forget_admin_user"
-msgstr ""
+msgstr "The administrator is not allowed to reset his/her password"
 
 #: alirpunkto/views/forgot_password.py:174
 msgid "forget_email_sent"
-msgstr ""
+msgstr "If the user exists, an e-mail has been sent to his/her e-mail address with a link to reset his/her password"
 
 #: alirpunkto/views/forgot_password.py:197
 #: alirpunkto/views/forgot_password.py:198
 msgid "password_not_match"
-msgstr ""
+msgstr "The two versions of the password do not match. Please ensure that they do, and submit again"
 
 #: alirpunkto/views/forgot_password.py:202
 #: alirpunkto/views/forgot_password.py:203
 #: alirpunkto/views/forgot_password.py:209
 msgid "password_required"
-msgstr ""
+msgstr "Please provide a new password"
 
 #: alirpunkto/views/forgot_password.py:229
 msgid "password_changed"
