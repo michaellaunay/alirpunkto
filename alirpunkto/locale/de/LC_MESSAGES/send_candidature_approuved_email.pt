@@ -25,6 +25,6 @@
     <p tal:omit-tag="textual">Danke, dass du bei uns mitmachst! Wir freuen uns, dich in unserer Community begrüßen zu dürfen, und auf die Zusammenarbeit mit dir!</p>
     
     <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
-    <p tal:omit-tag="textual">Das Team von <span tal:replace="domain_name">Site Name</span></p>
+    <p tal:omit-tag="textual">Das Team von <span tal:replace="domain_name">Domain Name</span></p>
 </body>
 </html>
