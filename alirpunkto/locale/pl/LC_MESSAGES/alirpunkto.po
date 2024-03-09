@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-03 11:41+0100\n"
+"PO-Revision-Date: 2024-03-09 23:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: pl\n"
@@ -35,7 +35,7 @@ msgstr "Witaj"
 #, fuzzy
 msgid "all_applications_msg"
 msgstr ""
-"Wszystkie aplikacje potrzebne do uczestniczenia w działaniach ${domain_name} w "
+"Wszystkie aplikacje potrzebne do uczestniczenia w działaniach ${site_name} w "
 "jednym miejscu."
 
 #, fuzzy
@@ -46,7 +46,7 @@ msgstr "Zarejestruj się lub zaloguj, aby rozpocząć."
 msgid "logged_in_msg_title"
 msgstr ""
 "Alirpunkto, scentralizowana usługa dla aplikacji wykorzystywanych w "
-"infrastrukturze IT ${domain_name}"
+"infrastrukturze IT ${site_name}"
 
 #, fuzzy
 msgid "logged_in_msg"
@@ -623,7 +623,7 @@ msgstr "Nie znaleziono aplikacji."
 msgid "cosmopolitical_cooperative_description"
 msgstr ""
 "<div>\n"
-"<h2><strong>Dziękujemy za zainteresowanie działalnością ${domain_name}! Oto "
+"<h2><strong>Dziękujemy za zainteresowanie działalnością ${site_name}! Oto "
 "właściwe miejsce do rejestracji </strong></h2>\n"
 "<p>Kosmopolityczna Spółdzielnia wspiera jednostki i przekształca istniejący "
 "system gospodarczy, społeczny i polityczny w kierunku radykalnie "
@@ -837,7 +837,7 @@ msgstr ""
 #, fuzzy
 msgid "email_copy_id_verification_subject"
 msgstr ""
-"pl - ${domain_name} - Proszę zweryfikować moją tożsamość jako nowego "
+"pl - ${site_name} - Proszę zweryfikować moją tożsamość jako nowego "
 "potencjalnego Współpracownika"
 
 #, fuzzy
@@ -845,39 +845,39 @@ msgid "email_copy_id_verification_body"
 msgstr ""
 "    Drodzy Weryfikatorzy,\n"
 "    Piszę do Państwa, aby dokończyć proces weryfikacji tożsamości w związku "
-"z moim wnioskiem o członkostwo w organizacji ${domain_name}. W załączeniu do "
+"z moim wnioskiem o członkostwo w organizacji ${site_name}. W załączeniu do "
 "tego e-maila znajdą Państwo częściową kopię mojego oficjalnego dokumentu "
 "tożsamości.\n"
 "    Proszę zauważyć, że niektóre poufne informacje zostały zamaskowane ze "
 "względów bezpieczeństwa. Dokument zawiera jednak informacje potrzebne do "
 "zweryfikowania mojej tożsamości zgodnie z procesem rejestracji "
-"${domain_name}.\n"
+"${site_name}.\n"
 "    Uprzejmie proszę o zapoznanie się z załączonym dokumentem jeśli to "
 "możliwe w ciągu najbliższych 3 dni, aby zagłosować nad adekwatnością "
 "pomiędzy:\n"
 "   * informacjami dotyczącymi tożsamości, które otrzymali Państwo "
-"bezpośrednio pocztą elektroniczną z platformy informatycznej ${domain_name} (i "
+"bezpośrednio pocztą elektroniczną z platformy informatycznej ${site_name} (i "
 "które zostaną Państwu przypomniane w interfejsie do głosowania) oraz \n"
 "   * informacje o tożsamości, które mogą Państwo przeczytać na załączonej "
 "częściowej kopii mojego oficjalnego dokumentu tożsamości.\n"
 "    Łącznik umożliwiający oddanie głosu na tę adekwatność oraz termin jest "
 "następująca: ${voting_url}.\n"
 "    Z góry bardzo serdecznie dziękuję Państwu za wsparcie procesu mojej "
-"rejestracji jako Współpracownika na platformie ${domain_name}. Jeśli mają "
+"rejestracji jako Współpracownika na platformie ${site_name}. Jeśli mają "
 "Państwo jakiekolwiek pytania lub potrzebują dodatkowych informacji, proszę "
 "skontaktować się ze mną bezpośrednio.\n"
 "  Z poważaniem,\n"
 "    ${signature}\n"
 "    Załącznik: [Nazwa pliku dokumentu ID]\n"
 "    Ten e-mail został wygenerowany przy pomocy funkcji weryfikacji "
-"tożsamości ${domain_name}. Jeśli nie jesteś Weryfikatorem przypisanym do "
+"tożsamości ${site_name}. Jeśli nie jesteś Weryfikatorem przypisanym do "
 "aplikacji ${signature} i otrzymałeś tę wiadomość omyłkowo, proszę "
-"poinformować o tym administratora ${domain_name} pod adresem ${administrator}."
+"poinformować o tym administratora ${site_name} pod adresem ${administrator}."
 
 #, fuzzy
 msgid "email_video_id_verification_subject"
 msgstr ""
-"pl - ${domain_name} - Proszę zweryfikować moją tożsamość za pośrednictwem "
+"pl - ${site_name} - Proszę zweryfikować moją tożsamość za pośrednictwem "
 "wideokonferencji jako nowego potencjalnego Współpracownika"
 
 #, fuzzy
@@ -885,7 +885,7 @@ msgid "email_video_id_verification_body"
 msgstr ""
 "    Drodzy Weryfikatorzy,\n"
 "    Piszę do Państwa, aby dokończyć proces weryfikacji tożsamości w związku "
-"z moim wnioskiem o członkostwo w spółdzielni ${domain_name}. W tym celu "
+"z moim wnioskiem o członkostwo w spółdzielni ${site_name}. W tym celu "
 "chciałbym zaproponować Państwu spotkanie w formie wideokonferencji.</p>\n"
 "    Proszę zwrócić uwagę na przedziały czasowe, które proponuję na "
 "wideokonferencję. Proszę pamiętać, że mieszkam w Polsce (proszę dostosować "
@@ -927,22 +927,22 @@ msgstr ""
 "proszę o głosowanie w celu potwierdzenia lub odrzucenia adekwatności "
 "między:\n"
 "   * informacjami o tożsamości, które otrzymali Państwo bezpośrednio pocztą "
-"elektroniczną z platformy informatycznej ${domain_name} (i które zostaną "
+"elektroniczną z platformy informatycznej ${site_name} (i które zostaną "
 "Państwu przypomniane w interfejsie do głosowania) oraz \n"
 "   * informacje o tożsamości, które zobaczą Państwo podczas "
 "wideokonferencji.\n"
 "    Łącznik umożliwiający oddanie głosu na tę adekwatność po tej "
 "wideokonferencji jest następująca: ${voting_url}.\n"
 "    Z góry bardzo serdecznie dziękuję Państwu za wsparcie procesu mojej "
-"rejestracji jako Współpracownika na platformie ${domain_name}. Jeśli mają "
+"rejestracji jako Współpracownika na platformie ${site_name}. Jeśli mają "
 "Państwo jakiekolwiek pytania lub potrzebują dodatkowych informacji, proszę "
 "skontaktować się ze mną bezpośrednio.\n"
 "    Z poważaniem,\n"
 "    ${signature}\n"
 "    Ten e-mail został wygenerowany przy pomocy funkcji weryfikacji "
-"tożsamości ${domain_name}. Jeśli nie jesteś Weryfikatorem przypisanym do "
+"tożsamości ${site_name}. Jeśli nie jesteś Weryfikatorem przypisanym do "
 "aplikacji ${signature} i otrzymałeś tę wiadomość omyłkowo, proszę "
-"poinformować o tym administratora ${domain_name} pod adresem ${administrator}."
+"poinformować o tym administratora ${site_name} pod adresem ${administrator}."
 
 #, fuzzy
 msgid "forget_email_in_member_list"
@@ -996,3 +996,98 @@ msgstr "Dane użytkownika zostały zmodyfikowane"
 #, fuzzy
 msgid "email_member_state_changed"
 msgstr "Zmiana w profilu użytkownika"
+
+#: alirpunkto/views/forgot_password.py:100
+#: alirpunkto/views/forgot_password.py:101
+#, fuzzy
+msgid "forget_no_mail"
+msgstr "Podaj prawidłowy adres e-mail"
+
+#: alirpunkto/views/forgot_password.py:128
+#: alirpunkto/views/forgot_password.py:129
+#, fuzzy
+msgid "forget_admin_user"
+msgstr "Administrator nie może zresetować własnego hasła"
+
+#: alirpunkto/views/forgot_password.py:174
+#, fuzzy
+msgid "forget_email_sent"
+msgstr ""
+"Jeśli użytkownik istnieje, na jego adres e-mail została wysłana wiadomość z "
+"linkiem umożliwiającym zresetowanie hasła"
+
+#: alirpunkto/views/forgot_password.py:197
+#: alirpunkto/views/forgot_password.py:198
+#, fuzzy
+msgid "password_not_match"
+msgstr ""
+"Obie wersje hasła nie są zgodne. Upewnij się, że tak jest i prześlij ponownie"
+
+#: alirpunkto/views/forgot_password.py:202
+#: alirpunkto/views/forgot_password.py:203
+#: alirpunkto/views/forgot_password.py:209
+#, fuzzy
+msgid "password_required"
+msgstr "Podaj nowe hasło"
+
+#: alirpunkto/views/forgot_password.py:229
+#, fuzzy
+msgid "password_changed"
+msgstr "Hasło zostało pomyślnie zmienione"
+
+#: alirpunkto/views/forgot_password.py:234
+#, fuzzy
+msgid "forget_confirmation_email_send_error"
+msgstr "Podczas resetowania hasła wystąpił błąd"
+
+#: alirpunkto/views/forgot_password.py:239
+#, fuzzy
+msgid "password_not_changed"
+msgstr "Podczas resetowania hasła wystąpił błąd. Hasło nie zostało zmienione"
+
+#: alirpunkto/views/forgot_password.py:264
+#, fuzzy
+msgid "member_not_found"
+msgstr "Członek nie został znaleziony na liście aktualnych członków"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+#, fuzzy
+msgid "url_is_obsolete"
+msgstr ""
+"Hiperłącze użyte do zresetowania hasła jest nieaktualne. Użyj najnowszego, "
+"które otrzymałeś"
+
+#: alirpunkto/views/register.py:182
+#, fuzzy
+msgid "email_not_sent"
+msgstr ""
+"Wiadomość e-mail zawierająca wyzwanie matematyczne weryfikujące, czy "
+"kandydat jest człowiekiem (a nie robotem), nie została wysłana."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+#, fuzzy
+msgid "error_committing_candidature"
+msgstr "Błąd podczas zatwierdzania kandydatury"
+
+msgid "modification_to_profile_button_title"
+msgstr "Edycja Twojego profilu"
+
+msgid "modification_to_profile_button_label"
+msgstr "Edytuj profil"
+
+#, fuzzy
+msgid "modification_to_profile_button_description"
+msgstr ""
+"Kliknij tutaj, aby otrzymać e-mailem bezpieczny link do modyfikacji profilu."
+
+#, fuzzy
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Aby zapewnić bezpieczeństwo Twoich danych, unikalny link do modyfikacji "
+"Twojego profilu zostanie wysłany do Ciebie pocztą elektroniczną. Proces ten "
+"gwarantuje, że tylko osoba mająca dostęp do Twojego adresu e-mail może "
+"wprowadzać zmiany w Twoim profilu."
+
+#, fuzzy
+msgid "modification_to_profile_email_subject"
+msgstr "Link do modyfikacji profilu w infrastrukturze IT ${domain_name}"
