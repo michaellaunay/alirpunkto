@@ -11,11 +11,11 @@
     
     <p tal:omit-tag="textual">Bună ziua <span tal:replace="member.firstname" tal:condition="exists:member">Numele utilizatorului</span>,</p>
     
-    <p tal:omit-tag="textual">Am primit, pe platforma <span tal:replace=" site_name">Numele site-ului</span> a <span tal:replace="domain_name">Numele domeniului</span>, o cerere de modificare a profilului dumneavoastră. Pentru siguranța dvs., vă solicităm să urmați un link securizat pentru a continua cu modificările. Vă rugăm să faceți clic pe următorul URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modify Profile Link</a> pentru a vă actualiza informațiile de profil.</p>
+    <p tal:omit-tag="textual">Am primit, pe platforma <span tal:replace="site_name">Numele site-ului</span> a <span tal:replace="domain_name">Numele domeniului</span>, o cerere de modificare a profilului dumneavoastră. Pentru siguranța dvs., vă solicităm să urmați un link securizat pentru a continua cu modificările. Vă rugăm să faceți clic pe următorul URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modify Profile Link</a> pentru a vă actualiza informațiile de profil.</p>
     
     <p tal:omit-tag="textual">Dacă nu ați solicitat această modificare de profil, vă rugăm să ignorați acest e-mail sau să contactați serviciul de asistență dacă aveți nelămuriri.</p>
     
     <p tal:omit-tag="textual">Cele mai bune salutări,</p>
-    <p tal:omit-tag="textual">Echipa de la <span tal:replace=" domain_name">Nume domeniu</span>.</p>
+    <p tal:omit-tag="textual">Echipa de la <span tal:replace="domain_name">Nume domeniu</span>.</p>
 </body>
 </html>
