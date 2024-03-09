@@ -11,7 +11,7 @@
     
     <p tal:omit-tag="textual">Hallo <span tal:replace="member.firstname" tal:condition="exists:member">Name des Benutzers</span>,</p>
     
-    <p tal:omit-tag="textual">Wir haben auf der <span tal:replace="site_name">Site Name</span> Plattform von <span tal:replace="domain_name">Domain Name</span> eine Anfrage zur Änderung deines Profils erhalten. Zu deiner Sicherheit müssen wir dich bitten, einem sicheren Link zu folgen, um mit den Änderungen fortzufahren. Bitte klicke auf die folgende URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Profil ändern Link</a>, um deine Profilinformationen zu aktualisieren.</p>
+    <p tal:omit-tag="textual">Wir haben auf der <span tal:replace="site_name">Site Name</span> Plattform von <span tal:replace="domain_name">Domain Name</span> eine Anfrage zur Änderung deines Profils erhalten. Zu deiner Sicherheit müssen wir dich bitten, einem sicheren Link zu folgen, um mit den Änderungen voranzukommen. Bitte klicke auf die folgende URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Profil ändern Link</a>, um deine Profilinformationen zu aktualisieren.</p>
     
     <p tal:omit-tag="textual">Wenn du diese Profiländerung nicht angefordert hast, ignoriere bitte diese E-Mail oder wende dich an den Support, wenn du irgendwelche Bedenken hast.</p>
     
