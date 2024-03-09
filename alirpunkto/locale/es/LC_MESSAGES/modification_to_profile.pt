@@ -11,11 +11,11 @@
     
     <p tal:omit-tag="textual">Hola <span tal:replace="member.firstname" tal:condition="exists:member">Nombre del usuario</span>,</p>
     
-    <p tal:omit-tag="textual">Hemos recibido, en la plataforma <span tal:replace="site_name">Nombre_sitio</span> de <span tal:replace="domain_name">Nombre de dominio</span>, una solicitud para modificar tu perfil. Por tu seguridad, requerimos que sigas un enlace seguro para proceder a las modificaciones. Por favor, haz clic en la siguiente URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Enlace Modificar Perfil</a> para actualizar la información de tu perfil.</p> <p
+    <p tal:omit-tag="textual">Hemos recibido, en la plataforma <span tal:replace="site_name">Nombre_sitio</span> de <span tal:replace="domain_name">Nombre de dominio</span>, una solicitud para modificar tu perfil. Por tu seguridad, requerimos que sigas un enlace seguro para proceder a las modificaciones. Por favor, haz clic en la siguiente URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Enlace Modificar Perfil</a> para actualizar la información de tu perfil.</p>
     
     <p tal:omit-tag="textual">Si no has solicitado esta modificación de perfil, ignora este correo electrónico o ponte en contacto con el servicio de asistencia si tienes alguna duda.</p>
     
-    <p tal:omit-tag="textual">Un saludo,</p> <p
+    <p tal:omit-tag="textual">Un saludo,</p>
     <p tal:omit-tag="textual">El equipo de <span tal:replace="domain_name">Nombre_dominio</span>.</p>
 </body>
 </html>
