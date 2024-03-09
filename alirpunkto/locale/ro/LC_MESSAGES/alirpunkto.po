@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-03 11:42+0100\n"
+"PO-Revision-Date: 2024-03-09 23:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: ro\n"
@@ -36,7 +36,7 @@ msgstr "Bine ați venit"
 msgid "all_applications_msg"
 msgstr ""
 "Toate aplicațiile de care aveți nevoie pentru a participa la activitățile "
-"din ${domain_name} într-un singur loc."
+"din ${site_name} într-un singur loc."
 
 #, fuzzy
 msgid "register_or_login_msg"
@@ -46,7 +46,7 @@ msgstr "Înregistrați-vă sau conectați-vă acum pentru a începe."
 msgid "logged_in_msg_title"
 msgstr ""
 "Alirpunkto, serviciul centralizat pentru aplicațiile utilizate în "
-"infrastructura IT a ${domain_name}"
+"infrastructura IT a ${site_name}"
 
 #, fuzzy
 msgid "logged_in_msg"
@@ -640,7 +640,7 @@ msgid "cosmopolitical_cooperative_description"
 msgstr ""
 "<div>\n"
 "<h2><strong>Vă mulțumim pentru interesul dumneavoastră pentru activitățile "
-"de ${domain_name}! Aici este locul potrivit pentru a vă înregistra </strong></"
+"de ${site_name}! Aici este locul potrivit pentru a vă înregistra </strong></"
 "h2>\n"
 "<p>Cooperativa CosmoPolitica  sprijină indivizii și transformă sistemul "
 "economic, social și politic existent spre o societate radical echitabilă, "
@@ -862,7 +862,7 @@ msgstr ""
 #, fuzzy
 msgid "email_copy_id_verification_subject"
 msgstr ""
-"ro - ${domain_name} - Vă rog să verificați identitatea mea ca nou potențial "
+"ro - ${site_name} - Vă rog să verificați identitatea mea ca nou potențial "
 "Cooperator"
 
 #, fuzzy
@@ -870,38 +870,38 @@ msgid "email_copy_id_verification_body"
 msgstr ""
 "    Dragii Verificatori,\n"
 "    Vă scriu pentru a finaliza procesul de verificare a identității pentru "
-"cererea mea de a deveni cooperator al ${domain_name}. Atașat la acest e-mail, "
+"cererea mea de a deveni cooperator al ${site_name}. Atașat la acest e-mail, "
 "veți găsi o copie parțială a documentului meu oficial de identitate.\n"
 "    Vă rugăm să rețineți că anumite informații sensibile au fost mascate din "
 "motive de securitate. Cu toate acestea, documentul conține informațiile de "
 "care aveți nevoie pentru a verifica identitatea mea conform procesului de "
-"înregistrare ${domain_name}.\n"
+"înregistrare ${site_name}.\n"
 "    Vă rog să analizați documentul atașat dacă este posibil în următoarele 3 "
 "zile, pentru a vota asupra adecvării între:\n"
 "     * informațiile de identitate pe care le-ați primit direct prin e-mail "
-"de la platforma informatică a ${domain_name} (și care vă vor fi reamintite pe "
+"de la platforma informatică a ${site_name} (și care vă vor fi reamintite pe "
 "interfața de vot) și \n"
 "     * informațiile de identitate pe care le puteți citi pe copia parțială "
 "atașată a documentului meu oficial de identitate.\n"
 "    Linkul prin care puteți vota cu privire la această adecvare este "
 "următoarea: ${voting_url}.\n"
 "    Vă mulțumesc călduros în avans pentru susținerea procesului de "
-"înregistrare a mea în calitate de Cooperator la ${domain_name}. În cazul în "
+"înregistrare a mea în calitate de Cooperator la ${site_name}. În cazul în "
 "care aveți întrebări suplimentare sau aveți nevoie de informații "
 "suplimentare, vă rog să nu ezitați să mă contactați direct.\n"
 "    Cele mai bune salutări,\n"
 "    ${signature}\n"
 "    Atașament: [Numele fișierului documentului de identitate]\n"
 "    Acest e-mail a fost generat cu ajutorul funcției de verificare a "
-"identității de ${domain_name}. Dacă nu sunteți Verificatorul atribuit "
+"identității de ${site_name}. Dacă nu sunteți Verificatorul atribuit "
 "aplicației ${signature} și ați primit acest e-mail din greșeală, vă rugăm să "
-"informați administratorul ${domain_name}, la următoarea adresă "
+"informați administratorul ${site_name}, la următoarea adresă "
 "${administrator}."
 
 #, fuzzy
 msgid "email_video_id_verification_subject"
 msgstr ""
-"ro - ${domain_name} - Vă rog să verificați identitatea mea prin "
+"ro - ${site_name} - Vă rog să verificați identitatea mea prin "
 "videoconferință ca nou potențial Cooperator"
 
 #, fuzzy
@@ -909,7 +909,7 @@ msgid "email_video_id_verification_body"
 msgstr ""
 "    Dragii verificatori,\n"
 "    Vă scriu pentru a finaliza procesul de verificare a identității pentru "
-"cererea mea de a deveni cooperator al ${domain_name}. În acest scop, aș dori "
+"cererea mea de a deveni cooperator al ${site_name}. În acest scop, aș dori "
 "să vă propun o întâlnire prin videoconferință. \n"
 "    Iată câteva intervale orare pe care le propun pentru videoconferința. Vă "
 "rog să rețineți că locuiesc în România (Vă rugăm să adaptați în funcție de "
@@ -951,22 +951,22 @@ msgstr ""
 "    După ce ați desfășurat această întâlnire prin videoconferință, vă rog să "
 "votați pentru a confirma sau infirma adecvarea între:\n"
 "     * informațiile de identitate pe care le-ați primit direct prin e-mail "
-"de la platforma informatică a ${domain_name} (și care vă vor fi reamintite pe "
+"de la platforma informatică a ${site_name} (și care vă vor fi reamintite pe "
 "interfața de vot) și \n"
 "     * informațiile de identitate pe care le veți fi văzut în timpul "
 "videoconferinței.\n"
 "    Linkul prin care puteți vota această adecvare după această "
 "videoconferință este următoarea: ${voting_url}.\n"
 "    Vă mulțumesc călduros în avans pentru susținerea procesului de "
-"înregistrare a mea în calitate de Cooperator la ${domain_name}. În cazul în "
+"înregistrare a mea în calitate de Cooperator la ${site_name}. În cazul în "
 "care aveți întrebări suplimentare sau aveți nevoie de informații "
 "suplimentare, vă rog să nu ezitați să mă contactați direct.\n"
 "    Cu respect,\n"
 "    ${signature}\n"
 "    Acest e-mail a fost generat cu ajutorul funcției de verificare a "
-"identității de la ${domain_name}. Dacă nu sunteți verificatorul atribuit "
+"identității de la ${site_name}. Dacă nu sunteți verificatorul atribuit "
 "aplicației ${signature} și ați primit acest e-mail din greșeală, vă rugăm să "
-"informați administratorul ${domain_name}, la următoarea adresă "
+"informați administratorul ${site_name}, la următoarea adresă "
 "${administrator}."
 
 #, fuzzy
@@ -1021,3 +1021,103 @@ msgstr "Datele membrului au fost modificate"
 #, fuzzy
 msgid "email_member_state_changed"
 msgstr "Schimbare în profilul dvs. de membru"
+
+#: alirpunkto/views/forgot_password.py:100
+#: alirpunkto/views/forgot_password.py:101
+#, fuzzy
+msgid "forget_no_mail"
+msgstr "Vă rugăm să furnizați o adresă de e-mail validă"
+
+#: alirpunkto/views/forgot_password.py:128
+#: alirpunkto/views/forgot_password.py:129
+#, fuzzy
+msgid "forget_admin_user"
+msgstr "Administratorul nu are voie să își reseteze propria parolă"
+
+#: alirpunkto/views/forgot_password.py:174
+#, fuzzy
+msgid "forget_email_sent"
+msgstr ""
+"Dacă utilizatorul există, a fost trimis un e-mail la adresa sa de e-mail cu "
+"un link pentru resetarea parolei"
+
+#: alirpunkto/views/forgot_password.py:197
+#: alirpunkto/views/forgot_password.py:198
+#, fuzzy
+msgid "password_not_match"
+msgstr ""
+"Cele două versiuni ale parolei nu se potrivesc. Vă rugăm să vă asigurați că "
+"acestea corespund și să trimiteți din nou"
+
+#: alirpunkto/views/forgot_password.py:202
+#: alirpunkto/views/forgot_password.py:203
+#: alirpunkto/views/forgot_password.py:209
+#, fuzzy
+msgid "password_required"
+msgstr "Vă rugăm să furnizați o nouă parolă"
+
+#: alirpunkto/views/forgot_password.py:229
+#, fuzzy
+msgid "password_changed"
+msgstr "V-ați schimbat cu succes parola"
+
+#: alirpunkto/views/forgot_password.py:234
+#, fuzzy
+msgid "forget_confirmation_email_send_error"
+msgstr "A apărut o eroare în procesul de resetare a parolei dvs"
+
+#: alirpunkto/views/forgot_password.py:239
+#, fuzzy
+msgid "password_not_changed"
+msgstr ""
+"A apărut o eroare în procesul de resetare a parolei dvs. Parola dvs. nu a "
+"fost schimbată"
+
+#: alirpunkto/views/forgot_password.py:264
+#, fuzzy
+msgid "member_not_found"
+msgstr "Membrul nu a fost găsit în lista membrilor actuali"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+#, fuzzy
+msgid "url_is_obsolete"
+msgstr ""
+"Hyperlink-ul pe care l-ați folosit pentru a vă reseta parola este depășit. "
+"Vă rugăm să îl utilizați pe cel mai recent pe care l-ați primit"
+
+#: alirpunkto/views/register.py:182
+#, fuzzy
+msgid "email_not_sent"
+msgstr ""
+"E-mailul care conține provocarea matematică prin care se verifică dacă "
+"candidatul este un om (și nu un robot) nu a fost trimis."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+#, fuzzy
+msgid "error_committing_candidature"
+msgstr "Eroare la angajarea candidaturii"
+
+msgid "modification_to_profile_button_title"
+msgstr "Editează-ți profil"
+
+msgid "modification_to_profile_button_label"
+msgstr "Editare profil"
+
+#, fuzzy
+msgid "modification_to_profile_button_description"
+msgstr ""
+"Faceți clic aici pentru a primi prin e-mail un link securizat pentru a vă "
+"modifica profilul."
+
+#, fuzzy
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Pentru a asigura securitatea datelor dvs., vi se va trimite prin e-mail un "
+"link unic pentru a vă modifica profilul. Acest proces garantează că numai "
+"persoana care are acces la adresa dvs. de e-mail poate face modificări la "
+"profilul dvs."
+
+#, fuzzy
+msgid "modification_to_profile_email_subject"
+msgstr ""
+"Link pentru a vă modifica profilul pe infrastructura IT a ${domain_name}"
