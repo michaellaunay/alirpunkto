@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-03 11:39+0100\n"
+"PO-Revision-Date: 2024-03-09 23:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: nl\n"
@@ -35,7 +35,7 @@ msgstr "Welkom"
 msgid "all_applications_msg"
 msgstr ""
 "Alle applicaties die je nodig hebt om deel te nemen aan de activiteiten van "
-"${domain_name} op één plek."
+"${site_name} op één plek."
 
 msgid "register_or_login_msg"
 msgstr "Registreer of log nu in om te beginnen."
@@ -43,7 +43,7 @@ msgstr "Registreer of log nu in om te beginnen."
 msgid "logged_in_msg_title"
 msgstr ""
 "Alirpunkto, de gecentraliseerde dienst voor de applicaties die worden "
-"gebruikt in de IT-infrastructuur van ${domain_name}"
+"gebruikt in de IT-infrastructuur van ${site_name}"
 
 msgid "logged_in_msg"
 msgstr "U bent ingelogd als ${user}."
@@ -538,7 +538,7 @@ msgstr "Aanvrag niet gevonden."
 msgid "cosmopolitical_cooperative_description"
 msgstr ""
 "<div>\n"
-"<h2><strong>Bedankt voor je interesse in de activiteiten van ${domain_name}! "
+"<h2><strong>Bedankt voor je interesse in de activiteiten van ${site_name}! "
 "Hier is de juiste plaats om je te registreren </strong></h2>\n"
 "<p>De CosmoPolitiekel Coöperatie ondersteunt individuen en transformeert het "
 "bestaande economische, sociale en politieke systeem naar een radicaal "
@@ -748,52 +748,52 @@ msgstr ""
 
 msgid "email_copy_id_verification_subject"
 msgstr ""
-"nl - ${domain_name} - Verifieer mijn identiteit als nieuwe potentiële "
+"nl - ${site_name} - Verifieer mijn identiteit als nieuwe potentiële "
 "Coöperator"
 
 msgid "email_copy_id_verification_body"
 msgstr ""
 "    Beste verificateurs,\n"
 "    Ik schrijf u om de identiteitscontrole te voltooien voor mijn aanvraag "
-"om Coöperator te worden van ${domain_name}. Als bijlage bij deze e-mail vindt "
+"om Coöperator te worden van ${site_name}. Als bijlage bij deze e-mail vindt "
 "u een gedeeltelijke kopie van mijn officiële identiteitsbewijs.\n"
 "    Let op: bepaalde gevoelige informatie is om veiligheidsredenen "
 "afgeschermd. Het document bevat echter de informatie die u nodig heeft om "
 "mijn identiteit te verifiëren volgens het registratieproces van "
-"${domain_name}.\n"
+"${site_name}.\n"
 "    Ik verzoek u vriendelijk het bijgevoegde document te bekijken om indien "
 "mogelijk binnen de komende 3 dagen te stemmen over de toereikendheid "
 "tussen:\n"
 "   * de identiteitsgegevens die u rechtstreeks per e-mail hebt ontvangen van "
-"het IT-platform van ${domain_name} (en die u zullen worden onthouden op de "
+"het IT-platform van ${site_name} (en die u zullen worden onthouden op de "
 "steminterface) en \n"
 "   * de identiteitsgegevens die u kunt lezen op de bijgevoegde gedeeltelijke "
 "kopie van mijn officiële identiteitsbewijs.\n"
 "    De link waarmee u op deze toereikendheid kunt stemmen is het volgende: "
 "${voting_url}.\n"
 "    Ik dank u bij voorbaat hartelijk voor uw steun bij het proces van mijn "
-"registratie als Coöperator bij ${domain_name}. Mocht u nog vragen hebben of "
+"registratie als Coöperator bij ${site_name}. Mocht u nog vragen hebben of "
 "aanvullende informatie nodig hebben, neem dan gerust rechtstreeks contact "
 "met mij op.\n"
 "    Gegroet,\n"
 "    ${signature}\n"
 "    Attachement: [Naam van het ID-documentbestand]\n"
-"    >Deze e-mail is gegenereerd met behulp van ${domain_name}'s "
+"    >Deze e-mail is gegenereerd met behulp van ${site_name}'s "
 "identiteitsverificatiefunctie. Als u niet de Verificateur bent die is "
 "toegewezen aan de toepassing van ${signature} en u deze e-mail per ongeluk "
-"hebt ontvangen, laat dit dan weten aan de ${domain_name} beheerder op het "
+"hebt ontvangen, laat dit dan weten aan de ${site_name} beheerder op het "
 "volgende adres ${administrator}."
 
 msgid "email_video_id_verification_subject"
 msgstr ""
-"nl - ${domain_name} - Verifieer mijn identiteit via videoconferentie als "
+"nl - ${site_name} - Verifieer mijn identiteit via videoconferentie als "
 "nieuwe potentiële Coöperator"
 
 msgid "email_video_id_verification_body"
 msgstr ""
 "   Beste verificateurs,\n"
 "    Ik schrijf u om de verificatie van mijn identiteit af te ronden voor "
-"mijn aanvraag om Coöperator te worden van ${domain_name}. Ik wil hiervoor een "
+"mijn aanvraag om Coöperator te worden van ${site_name}. Ik wil hiervoor een "
 "videoconferentievergadering voorstellen.\n"
 "    Hier zijn enkele tijdsvensters die ik voorstel voor de videoconferentie. "
 "Houd er rekening mee dat ik in Nederland / België woon (Gelieve aan te "
@@ -834,21 +834,21 @@ msgstr ""
 "verzoek ik u vriendelijk te stemmen voor bevestiging of verwerping van de "
 "adequatie tussen:\n"
 "   * de identiteitsgegevens die u rechtstreeks per e-mail hebt ontvangen van "
-"het IT-platform van de ${domain_name} (en die u worden onthouden op de "
+"het IT-platform van de ${site_name} (en die u worden onthouden op de "
 "steminterface) en \n"
 "   * de identiteitsgegevens die u tijdens de videoconferentie hebt gezien.\n"
 "    De link waarmee u na deze videoconferentie over deze adequatie kunt "
 "stemmen is het volgende: ${voting_url}.\n"
 "    Ik dank u bij voorbaat hartelijk voor uw steun bij het proces van mijn "
-"registratie als Coöperator bij de ${domain_name}. Mocht u nog vragen hebben of "
+"registratie als Coöperator bij de ${site_name}. Mocht u nog vragen hebben of "
 "aanvullende informatie nodig hebben, neem dan gerust rechtstreeks contact "
 "met mij op.\n"
 "    Met vriendelijke groet,\n"
 "    ${signature}\n"
 "    Deze e-mail is gegenereerd met de hulp van de identiteit verificatie "
-"functie van  ${domain_name}. Als u niet de Verificateur bent die is toegewezen "
+"functie van  ${site_name}. Als u niet de Verificateur bent die is toegewezen "
 "aan de toepassing van ${signature} en u deze e-mail per ongeluk hebt "
-"ontvangen, laat dit dan weten aan de beheerder van ${domain_name} op het "
+"ontvangen, laat dit dan weten aan de beheerder van ${site_name} op het "
 "volgende adres ${administrator}."
 
 msgid "forget_email_in_member_list"
@@ -894,3 +894,89 @@ msgstr "De gegevens van het lid zijn gewijzigd"
 
 msgid "email_member_state_changed"
 msgstr "Wijzig je profiel"
+
+#: alirpunkto/views/forgot_password.py:100
+#: alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Geef een geldig e-mailadres op"
+
+#: alirpunkto/views/forgot_password.py:128
+#: alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "De beheerder mag zijn/haar eigen wachtwoord niet resetten"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr ""
+"Als de gebruiker bestaat, is er een e-mail naar zijn/haar e-mailadres "
+"gestuurd met een link om zijn/haar wachtwoord opnieuw in te stellen"
+
+#: alirpunkto/views/forgot_password.py:197
+#: alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr ""
+"De twee versies van het wachtwoord komen niet overeen. Zorg ervoor dat dit "
+"wel het geval is en verzend opnieuw"
+
+#: alirpunkto/views/forgot_password.py:202
+#: alirpunkto/views/forgot_password.py:203
+#: alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Geef een nieuw wachtwoord op"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "U heeft succesvol uw wachtwoord gewijzigd"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Er is een fout opgetreden tijdens het resetten van je wachtwoord"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr ""
+"Er is een fout opgetreden tijdens het resetten van je wachtwoord. Uw "
+"wachtwoord is niet gewijzigd"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Het lid is niet gevonden in de lijst met huidige leden"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr ""
+"De hyperlink die je hebt gebruikt om je wachtwoord opnieuw in te stellen is "
+"verouderd. Gebruik de laatste die u hebt ontvangen"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr ""
+"De e-mail met de wiskundige uitdaging die verifieert dat de kandidaat een "
+"mens is (en geen robot) werd niet verzonden."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+#, fuzzy
+msgid "error_committing_candidature"
+msgstr "Fout bij het vastleggen van de kandidatuur"
+
+msgid "modification_to_profile_button_title"
+msgstr "Bewerk uw profiel"
+
+msgid "modification_to_profile_button_label"
+msgstr "Bewerk profiel"
+
+msgid "modification_to_profile_button_description"
+msgstr ""
+"Klik hier om per e-mail een beveiligde link te ontvangen om je profiel aan "
+"te passen."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Om de veiligheid van je gegevens te garanderen, wordt er een unieke link om "
+"je profiel te wijzigen naar je verzonden via e-mail. Dit proces garandeert "
+"dat alleen de persoon met toegang tot je e-mailadres wijzigingen in je "
+"profiel kan aanbrengen."
+
+msgid "modification_to_profile_email_subject"
+msgstr ""
+"Link om je profiel op de IT-infrastructuur van ${domain_name} aan te passen"
