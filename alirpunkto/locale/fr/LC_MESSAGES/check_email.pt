@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Inscription à <span tal:replace="domain_name"></span></title>
+    <title tal:omit-tag="textual">Inscription à <span tal:replace="domain_name">Nom domaine</span></title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Merci de commencer votre inscription sur la plateforme <span tal:replace="domain_name"></span></h1>
+    <h1 tal:omit-tag="textual">Merci de commencer votre inscription sur la plateforme <span tal:replace="domain_name">Nom domaine</span></h1>
     <p tal:omit-tag="textual">Pour vérifier votre adresse e-mail et vous assurer que vous êtes un humain (et non un robot), nous avons conçu une série de 4 opérations mathématiques simples. Veuillez effectuer les quatre opérations mathématiques étiquetées de A à D ci-dessous et entrez leurs résultats dans les champs correspondants sur la page d'inscription liée ci-dessous.</p>
     <div omit-tag="textual">
 
