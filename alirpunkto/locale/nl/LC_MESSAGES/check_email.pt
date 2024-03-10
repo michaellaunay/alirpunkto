@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
     <head tal:omit-tag="textual">
-        <title tal:omit-tag="textual">Registratie bij <span tal:replace="domain_name"></span></title>
+        <title tal:omit-tag="textual">Registratie bij <span tal:replace="domain_name">Domein naam</span></title>
     </head>
     <body tal:omit-tag="textual">
 
-        <h1 tal:omit-tag="textual">Bedankt voor het starten van uw registratie op het platform <span tal:replace="domain_name"></span></h1>
+        <h1 tal:omit-tag="textual">Bedankt voor het starten van uw registratie op het platform <span tal:replace="domain_name">Domein naam</span></h1>
         <p tal:omit-tag="textual">Om uw e-mailadres te verifiëren en er zeker van te zijn dat u een mens bent (en geen robot), hebben we een reeks van 4 eenvoudige wiskundige bewerkingen bedacht. Voer de vier wiskundige operaties uit van A tot D hieronder en voer de resultaten in de corresponderende velden op de registratiepagina in waarnaar hieronder wordt verwezen.</p>
         <div omit-tag="textual">
             <p tal:omit-tag="textual" >Operatie A is <span tal:content="challenge_A"
