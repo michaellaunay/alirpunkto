@@ -4,12 +4,12 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Uw registratie bij <span tal:replace="domain_name"></span>. Volgende stappen</title>
+    <title tal:omit-tag="textual">Uw registratie bij <span tal:replace="domain_name">Domein naam</span>. Volgende stappen</title>
 </head>
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Hallo <span tal:replace="full_name">Aanvragersnaam</span>,</h1>
-    <p tal:omit-tag="textual">Dank u voor het indienen van uw sollicitatie bij <span tal:replace="domain_name"></span>! </p>
+    <p tal:omit-tag="textual">Dank u voor het indienen van uw sollicitatie bij <span tal:replace="domain_name">Domein naam</span>! </p>
 
     <p tal:omit-tag="textual">Afhankelijk van de optie die u tijdens de registratie hebt gekozen, zijn dit de volgende stappen:</p>
 
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Als u vragen hebt of meer uitleg wilt, aarzel dan niet om contact met ons op te nemen.</p>
 
     <p tal:omit-tag="textual">Gegroet,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Het <span tal:replace="domain_name"></span> Team</strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Het <span tal:replace="domain_name">Domein naam</span> Team</strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note: Deze melding is automatisch gegenereerd. Gelieve niet rechtstreeks op dit bericht te antwoorden.</small></p>
 </body>
