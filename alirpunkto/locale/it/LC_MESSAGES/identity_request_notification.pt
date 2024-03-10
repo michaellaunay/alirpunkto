@@ -4,12 +4,12 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">La sua registrazione a <span tal:replace="domain_name"></span>. I prossimi passi</title>
+    <title tal:omit-tag="textual">La sua registrazione a <span tal:replace="domain_name">Nome sito</span>. I prossimi passi</title>
 </head>
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Ciao <span tal:replace="full_name">Nome del Richiedente</span>,</h1>
-    <p tal:omit-tag="textual">Grazie per aver inviato la sua candidatura a <span tal:replace=" domain_name"></span>! </p>
+    <p tal:omit-tag="textual">Grazie per aver inviato la sua candidatura a <span tal:replace=" domain_name">Nome sito</span>! </p>
 
     <p tal:omit-tag="textual">In base all'opzione che ha scelto durante la registrazione, ecco i passi successivi:</p>
 
@@ -48,7 +48,7 @@
     <p tal:omit-tag="textual">Se ha domande o necessita di ulteriori chiarimenti, non esiti a contattarci.</p>
 
     <p tal:omit-tag="textual">Buoni saluti,</p>
-    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Il <span tal:replace=" domain_name"></span> Team</strong></p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Il <span tal:replace=" domain_name">Nome sito</span> Team</strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: questa notifica è stata generata automaticamente. La preghiamo di non rispondere direttamente a questo messaggio.</small></p>
 </body>
