@@ -2,16 +2,15 @@
 # Creation date: 2023-07-22
 # Author: Michaël Launay
 import datetime
+import os
 import colander
-from pyramid.i18n import TranslationStringFactory
-from deform import ValidationFailure
 from deform import schema
-from deform.widget import SelectWidget, TextInputWidget, DateInputWidget
+from deform.widget import SelectWidget, TextInputWidget, DateInputWidget, FileUploadWidget
 from alirpunkto.constants_and_globals import (
     _,
     EUROPEAN_LOCALES
 )
-from alirpunkto.utils import is_valid_password, is_valid_unique_pseudonym
+from alirpunkto.utils import is_valid_password
 
 locales_as_choices = [(key, value) for key, value in EUROPEAN_LOCALES.items()]
 
@@ -29,10 +28,22 @@ class RegisterForm(schema.CSRFSchema):
         messages={'required': _('full_surname_as_in_id_required')},
         missing=""
     )
+    """ WIP
+    @TODO define tempstore
     avatar = colander.SchemaNode(
+        tmpstore=tmpstore, #@TODO create an IOCharSteam in temporary directory
+        colander.String(),  # Use colander.String as the base field type.
+        widget=FileUploadWidget(size=40,  # Define the input field size.
+                                max_file_size=4096*1024,  # Limit the file size.
+                                template='custom_file_upload_template'),  # Use a custom template if needed.
+        missing=colander.drop,  # Use colander.drop to ignore the field if missing.
+        title=_('Avatar')  # The field title for display.
+    )
+    """
+    description = colander.SchemaNode(
         colander.String(),
-        title=_('avatar_label'),
-        widget=TextInputWidget(readonly=True),  # The field is visible but not editable
+        title=_('description_label'),
+        widget=TextInputWidget(maxlength=5000),
         missing=""
     )
     birthdate = colander.SchemaNode(
@@ -128,14 +139,69 @@ class RegisterForm(schema.CSRFSchema):
         title=_('second_interaction_language_label'),
         widget=SelectWidget(values=locales_as_choices),
     )
+    lang3 = colander.SchemaNode(
+        colander.String(),
+        title=_('third_interaction_language_label'),
+        widget=SelectWidget(values=locales_as_choices),
+    )
+    cooperative_behaviour_mark = colander.SchemaNode(
+        colander.Integer(),
+        title=_('cooperative_behaviour_mark_label'),
+        widget=SelectWidget(values=[
+            ('', _('Select a mark')),
+            (0, _('0')),
+            (1, _('1')),
+            (2, _('2')),
+            (3, _('3')),
+            (4, _('4')),
+            (5, _('5')),
+            (6, _('6')),
+            (7, _('7')),
+            (8, _('8')),
+            (9, _('9')),
+            (10, _('10')),
+        ]),
+    )
+    cooperative_behaviour_mark_update = colander.SchemaNode(
+        colander.Date(),
+        title=_('cooperative_behaviour_mark_update_label'),
+        messages={'required': _('cooperative_behaviour_mark_update_required')},
+        widget=DateInputWidget(),
+        validator=colander.Range(
+            min=datetime.date(2020, 1, 1)
+        ),
+        missing=""
+    )
+    number_shares_owned = colander.SchemaNode(
+        colander.Integer(),
+        title=_('number_shares_owned_label'),
+        widget=TextInputWidget(),  # The field is visible but not editable
+        messages={'required': _('number_shares_owned_required')},
+        missing=0
+    )
+    date_end_validity_yearly_contribution = colander.SchemaNode(
+        colander.Date(),
+        title=_('date_end_validity_yearly_contribution_label'),
+        messages={'required': _('date_end_validity_yearly_contribution_required')},
+        widget=DateInputWidget(),
+        validator=colander.Range(
+            min=datetime.date(2020, 1, 1)
+        ),
+        missing=""
+    )
+    iban = colander.SchemaNode(
+        colander.String(),
+        title=_('iban_label'),
+        widget=TextInputWidget(),  # The field is visible but not editable
+        messages={'required': _('iban_required')},
+        missing=""
+    )
     def prepare_for_ordinary(self):
         """Prepare the form for an ordinary user."""
         self.children.remove(self.get('fullname'))
         self.children.remove(self.get('fullsurname'))
         self.children.remove(self.get('birthdate'))
         self.children.remove(self.get('nationality'))
-        self.children.remove(self.get('lang1'))
-        self.children.remove(self.get('lang2'))
 
     def prepare_for_modification(self, read_only_fields: dict, writable_field_values: dict):
         """Prepare the form for an ordinary user."""
@@ -188,6 +254,55 @@ class RegisterForm(schema.CSRFSchema):
             self.get('lang2').widget.value = writable_field_values['lang2']
         else:
             self.children.remove(self.get('lang2'))
+        if 'lang3' in read_only_fields:
+            self.get('lang3').widget = SelectWidget(readonly=True)
+            self.get('lang3').widget.value = read_only_fields['lang3']
+        elif 'lang3' in writable_field_values:
+            self.get('lang3').widget.value = writable_field_values['lang3']
+        else:
+            self.children.remove(self.get('lang3'))
+        if 'description' in read_only_fields:
+            self.get('description').widget = TextInputWidget(readonly=True)
+            self.get('description').widget.value = read_only_fields['description']
+        elif 'description' in writable_field_values:
+            self.get('description').widget.value = writable_field_values['description']
+        else:
+            self.children.remove(self.get('description'))
+        if 'cooperative_behaviour_mark' in read_only_fields:
+            self.get('cooperative_behaviour_mark').widget = SelectWidget(readonly=True)
+            self.get('cooperative_behaviour_mark').widget.value = read_only_fields['cooperative_behaviour_mark']
+        elif 'cooperative_behaviour_mark' in writable_field_values:
+            self.get('cooperative_behaviour_mark').widget.value = writable_field_values['cooperative_behaviour_mark']
+        else:
+            self.children.remove(self.get('cooperative_behaviour_mark'))
+        if 'cooperative_behaviour_mark_update' in read_only_fields:
+            self.get('cooperative_behaviour_mark_update').widget = DateInputWidget(readonly=True)
+            self.get('cooperative_behaviour_mark_update').widget.value = read_only_fields['cooperative_behaviour_mark_update']
+        elif 'cooperative_behaviour_mark_update' in writable_field_values:
+            self.get('cooperative_behaviour_mark_update').widget.value = writable_field_values['cooperative_behaviour_mark_update']
+        else:
+            self.children.remove(self.get('cooperative_behaviour_mark_update'))
+        if 'number_shares_owned' in read_only_fields:
+            self.get('number_shares_owned').widget = TextInputWidget(readonly=True)
+            self.get('number_shares_owned').widget.value = read_only_fields['number_shares_owned']
+        elif 'number_shares_owned' in writable_field_values:
+            self.get('number_shares_owned').widget.value = writable_field_values['number_shares_owned']
+        else:
+            self.children.remove(self.get('number_shares_owned'))
+        if 'date_end_validity_yearly_contribution' in read_only_fields:
+            self.get('date_end_validity_yearly_contribution').widget = DateInputWidget(readonly=True)
+            self.get('date_end_validity_yearly_contribution').widget.value = read_only_fields['date_end_validity_yearly_contribution']
+        elif 'date_end_validity_yearly_contribution' in writable_field_values:
+            self.get('date_end_validity_yearly_contribution').widget.value = writable_field_values['date_end_validity_yearly_contribution']
+        else:
+            self.children.remove(self.get('date_end_validity_yearly_contribution'))
+        if 'iban' in read_only_fields:
+            self.get('iban').widget = TextInputWidget(readonly=True)
+            self.get('iban').widget.value = read_only_fields['iban']
+        elif 'iban' in writable_field_values:
+            self.get('iban').widget.value = writable_field_values['iban']
+        else:
+            self.children.remove(self.get('iban'))
         if 'password' in read_only_fields:
             self.get('password').widget = TextInputWidget(readonly=True)
             password = read_only_fields['password']

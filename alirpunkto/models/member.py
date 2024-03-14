@@ -280,12 +280,19 @@ class MemberDatasFunctions:
 class MemberDatas:
     fullname: str
     fullsurname: str
+    description: str
     nationality: str
     birthdate: str
     password: str
     password_confirm: str
     lang1: str
     lang2: str
+    lang3: str
+    cooperative_behaviour_mark: int
+    cooperative_behaviour_mark_updated: str
+    number_shares_owned: int
+    date_end_validity_yearly_contribution: str
+    iban: str
     role: MemberRoles = MemberRoles.NONE
 
     def iter_attributes(self)-> Iterator[Tuple[str, Any]]:
@@ -446,8 +453,8 @@ class Member(Persistent):
             if email_send_status_history else [])
         self._challenge = challenge
         self._pseudonym = pseudonym
-        # get a random seed and record the creation
         self._modifications = modifications if modifications else []
+        # get a random seed and record the creation
         self._memorize_changes("__init__", None, self._member_state)
 
     def _memorize_changes(
@@ -459,7 +466,8 @@ class Member(Persistent):
         """Memorize changes to the member_datas and generate a new seed.
         
         Args:
-            function_name (Optional[str]): The name of the function that
+            function_name (Optional[str]        # get a random seed and record the creation
+): The name of the function that
              triggered the change. Defaults to "_change_seed".
             previous_value (Optional[Any]): The previous value of the
              member_datas property. Defaults to None.
