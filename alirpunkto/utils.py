@@ -2,7 +2,7 @@
 # author: Michaël Launay
 # date: 2023-09-30
 
-from typing import Dict, Union
+from typing import Union, Tuple, Dict
 import datetime
 from pyramid.request import Request
 from alirpunkto.models.member import (
@@ -517,7 +517,7 @@ def generate_key(secret:str)->bytes:
     sha256.update(secret.encode())
     return sha256.digest()
 
-def decrypt_oid(encrypted_oid: str, seed_size: int, secret: str) -> [str, str]:
+def decrypt_oid(encrypted_oid: str, seed_size: int, secret: str) -> Tuple[str, str]:
     """Decrypt the OID using the SECRET and return the decrypted OID and seed.
 
     Args:

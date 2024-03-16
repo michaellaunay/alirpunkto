@@ -278,21 +278,21 @@ class MemberDatasFunctions:
     
 @dataclass
 class MemberDatas:
-    fullname: str
-    fullsurname: str
-    description: str
-    nationality: str
-    birthdate: str
-    password: str
-    password_confirm: str
-    lang1: str
-    lang2: str
-    lang3: str
-    cooperative_behaviour_mark: int
-    cooperative_behaviour_mark_updated: str
-    number_shares_owned: int
-    date_end_validity_yearly_contribution: str
-    iban: str
+    fullname: str = None
+    fullsurname: str = None
+    description: str = None
+    nationality: str = None
+    birthdate: str = None
+    password: str = None
+    password_confirm: str = None
+    lang1: str = None
+    lang2: str = None
+    lang3: str = None
+    cooperative_behaviour_mark: int = 0
+    cooperative_behaviour_mark_updated: str = None
+    number_shares_owned: int = 0
+    date_end_validity_yearly_contribution: str = None
+    iban: str = None
     role: MemberRoles = MemberRoles.NONE
 
     def iter_attributes(self)-> Iterator[Tuple[str, Any]]:

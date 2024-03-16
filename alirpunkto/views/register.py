@@ -412,7 +412,6 @@ def handle_confirmed_human_state(request, candidature):
 
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
     if 'submit' in request.POST:
-
         try:
             items = request.POST.items()
             appstruct.update(dict(items))
@@ -459,31 +458,26 @@ def handle_confirmed_human_state(request, candidature):
             return is_valid_pseudo_result
         
         candidature.pseudonym = pseudonym
-
-        if candidature.type == MemberTypes.ORDINARY:
-            result = register_user_to_ldap(request, candidature, password)
-            if result['status'] == 'error':
-                return {
-                    'form': form.render(appstruct=appstruct),
-                    'error': result['message'],
-                    'candidature': candidature,
-                    'MemberTypes': MemberTypes
-                }
-            candidatures.monitored_members.pop(candidature.oid, None)
-            candidature.candidature_state = CandidatureStates.APPROVED
-            email_template = "send_candidature_approuved_email"
-
-        elif candidature.type == MemberTypes.COOPERATOR:
+        if 'fullname' in request.params:
             appstruct['fullname'] = request.params['fullname']
+        if 'fullsurname' in request.params:
             appstruct['fullsurname'] = request.params['fullsurname']
+        if 'nationality' in request.params:
             appstruct['nationality'] = request.params['nationality']
+        if 'lang1' in request.params:
             appstruct['lang1'] = request.params['lang1']
+        if 'lang2' in request.params:
             appstruct['lang2'] = request.params['lang2']
-            parameters = {
-                k: request.params[k]
-                for k in MemberDatas.__dataclass_fields__.keys()
-                if k in request.params
-            }
+        if 'lang3' in request.params:
+            appstruct['lang3'] = request.params['lang3']
+        if 'description' in request.params:
+            appstruct['description'] = request.params['description']
+        parameters = {
+            k: request.params[k]
+            for k in MemberDatas.__dataclass_fields__.keys()
+            if k in request.params
+        }
+        if 'birthdate' in request.params:
             try:
                 parameters['birthdate'] = datetime.datetime.strptime(
                     request.params['date'], '%Y-%m-%d'
@@ -495,20 +489,34 @@ def handle_confirmed_human_state(request, candidature):
                     'candidature': candidature,
                     'MemberTypes': MemberTypes
                 }
-            data = MemberDatas(**parameters)
-            candidature.data = data
+        data = MemberDatas(**parameters)
+        candidature.data = data
 
-            candidature.pseudonym = request.params['pseudonym']
-            candidature.candidature_state = CandidatureStates.UNIQUE_DATA
-            email_template = "send_candidature_pending_email"
+        candidature.pseudonym = request.params['pseudonym']
+        match candidature.type:
+            case MemberTypes.ORDINARY:
+                result = register_user_to_ldap(request, candidature, password)
+                if result['status'] == 'error':
+                    return {
+                        'form': form.render(appstruct=appstruct),
+                        'error': result['message'],
+                        'candidature': candidature,
+                        'MemberTypes': MemberTypes
+                    }
+                candidatures.monitored_members.pop(candidature.oid, None)
+                candidature.candidature_state = CandidatureStates.APPROVED
+                email_template = "send_candidature_approuved_email"
+            case MemberTypes.COOPERATOR:
+                candidature.candidature_state = CandidatureStates.UNIQUE_DATA
+                email_template = "send_candidature_pending_email"
 
-        else:
-            return {
-                'form': form.render(appstruct=appstruct),
-                'error': _('invalid_choice'),
-                'candidature': candidature,
-                'MemberTypes': MemberTypes
-            }
+            case _: # should never happen
+                return {
+                    'form': form.render(appstruct=appstruct),
+                    'error': _('invalid_choice'),
+                    'candidature': candidature,
+                    'MemberTypes': MemberTypes
+                }
 
         send_candidature_state_change_email(
             request,

@@ -233,7 +233,7 @@ class Candidature(Member):
         self._memorize_changes("challenge", old_challenge, value)
 
     @property
-    def voters(self)-> [Voter]:
+    def voters(self)-> List[Voter]:
         """ Get the voters of the candidature.
         Returns:
             A copy of voters of the candidature.
@@ -258,7 +258,7 @@ class Candidature(Member):
         self._memorize_changes("voters", old_voters, value)
     
     @property
-    def votes(self)-> {str: VotingChoice}:
+    def votes(self)-> Dict[str, VotingChoice]:
         """ Get the votes of the candidature.
         Returns:
             A copy of votes of the candidature.
@@ -266,7 +266,7 @@ class Candidature(Member):
         return self._votes.copy()
     
     @votes.setter
-    def votes(self, value:{VotingChoice: int}):
+    def votes(self, value:Dict[VotingChoice, int]):
         """ Set the votes of the candidature.
 
         Args:

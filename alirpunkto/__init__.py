@@ -39,6 +39,7 @@ from .constants_and_globals import (
     MAIL_SSL,
     SECRET_KEY,
     DEFAULT_SESSION_TIMEOUT,
+    DEFAULT_NUMBER_OF_VOTERS
 )
 
 

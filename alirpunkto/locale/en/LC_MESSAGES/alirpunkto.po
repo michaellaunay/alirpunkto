@@ -726,3 +726,135 @@ msgstr "To ensure the security of your data, a unique link to modify your profil
 
 msgid "modification_to_profile_email_subject"
 msgstr "Link to modify your profile on the IT infrastructure of ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "Select a country"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
