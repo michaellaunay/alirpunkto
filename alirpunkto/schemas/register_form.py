@@ -67,7 +67,7 @@ class RegisterForm(schema.CSRFSchema):
         description = _('nationality_description'),
         messages = {'required': _('nationality_required')},
         widget = SelectWidget(values=[
-            ('', _('Select a country')),
+            ('', _('select_a_country')),
             ('AT', _('Austria')),
             ('BE', _('Belgium')),
             ('BG', _('Bulgaria')),
@@ -179,7 +179,7 @@ class RegisterForm(schema.CSRFSchema):
         colander.Integer(),
         title = _('number_shares_owned_label'),
         description = _('number_shares_owned_description'),
-        widget = TextInputWidget(),  # The field is visible but not editable
+        widget = TextInputWidget(readonly = True),  # The field is visible but not editable
         messages = {'required': _('number_shares_owned_required')},
         missing=0
     )
@@ -188,7 +188,7 @@ class RegisterForm(schema.CSRFSchema):
         title = _('date_end_validity_yearly_contribution_label'),
         description = _('date_end_validity_yearly_contribution_description'),
         messages = {'required': _('date_end_validity_yearly_contribution_required')},
-        widget = DateInputWidget(),
+        widget = DateInputWidget(readonly = True),
         validator = colander.Range(
             min = datetime.date(2020, 1, 1)
         ),

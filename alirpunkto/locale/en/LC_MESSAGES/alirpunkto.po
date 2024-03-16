@@ -752,7 +752,7 @@ msgid "nationality_description"
 msgstr ""
 
 #: alirpunkto/schemas/register_form.py:70
-msgid "Select a country"
+msgid "select_a_country"
 msgstr ""
 
 #: alirpunkto/schemas/register_form.py:104
