@@ -729,35 +729,35 @@ msgstr "Link to modify your profile on the IT infrastructure of ${domain_name}"
 
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
-msgstr ""
+msgstr "Please provide here all your family names at birth (i.e. NOT your family name as a married person), as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet different from the Latin)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
-msgstr ""
+msgstr "Please provide here all your given names, as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet different from the Latin"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
-msgstr ""
+msgstr "Text describing you (your profile text)"
 
 #: alirpunkto/schemas/register_form.py:48
 msgid "description_description"
-msgstr ""
+msgstr "Please write here a text describing you to all other members of the Community. Please focus on: (1) what you want to do as a member of the Community, and (2) the resources (experience, knowledge, time) that you have available"
 
 #: alirpunkto/schemas/register_form.py:55
 msgid "birthdate_description"
-msgstr ""
+msgstr "Please provide your birthdate in the following format: DD/MM/YYYY, i.e. (1) the day in the month, on 2 digits; (2) the number of the month, on 2 digits; (3) the year, on 4 digits. Only persons having reached their 18th birthday can be Cooperators"
 
 #: alirpunkto/schemas/register_form.py:67
 msgid "nationality_description"
-msgstr ""
+msgstr "Please provide one Member State of the European Union of which you are a citizen. Only citizens of the European Union can be Cooperators"
 
 #: alirpunkto/schemas/register_form.py:70
 msgid "select_a_country"
-msgstr ""
+msgstr "Please select a Member State of the European Union"
 
 #: alirpunkto/schemas/register_form.py:104
 msgid "cooperator_number_description"
-msgstr ""
+msgstr "This is the unique number that identifies you in all processes taking place in the Community"
 
 #: alirpunkto/schemas/register_form.py:106
 msgid "cooperator_number_required"
@@ -765,51 +765,58 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:112
 msgid "pseudonym_description"
-msgstr ""
+msgstr "Please enter here the pseudonym that will identify you for the whole duration of your activity on our IT platform. We STRONGLY recommend that you select a pseudonym that makes tracking back to your real identity impossible (or extremely difficult). Thereby, you protect the confidentiality of your opinions (i.e. personal data that are the purpose of a specific protection under the General Data Protection Regulation - GDPR) against any form of external pressure in real life (e.g. by your employer or your customers). Be very careful! Once you have chosen it, you will NEVER be able to change this pseudonym afterwards. Choose it with care! /n Your pseudonym must be between ${MIN_PSEUDONYM_LENGTH} and ${MAX_PSEUDONYM_LENGTH} characters long and can only contain letters of the Latin alphabet (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-) and spaces ( ). It cannot contain letters with accents, umlauts, and other diacritical signs specific to some languages. "
 
 #: alirpunkto/schemas/register_form.py:115
 msgid "pseudonym_required"
-msgstr ""
+msgstr "Providing your pseudonym is required"
 
 #: alirpunkto/schemas/register_form.py:121
 msgid "password_description"
-msgstr ""
+msgstr "Please provide your password. Your password must be between ${password_minimum_length} and ${password_maximum_length}characters long, contain at least one digit, at least one lowercase letter, at least one uppercase letter and at least one of the characters among the following: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
 #: alirpunkto/schemas/register_form.py:130
 msgid "password_confirm_description"
-msgstr ""
+msgstr "Please confirm your passowrd"
 
 #: alirpunkto/schemas/register_form.py:132
 msgid "confirm_password_required"
-msgstr ""
+msgstr "Confirming your password is required"
 
 #: alirpunkto/schemas/register_form.py:138
 msgid "email_description"
-msgstr ""
+msgstr "Please provide the e-mail address that the IT infrastructure of ${domain_name} will use to interact with you. This e-mail address will never be displayed to other users of this IT infrastructure"
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
-msgstr ""
+msgstr "Please provide the language with which you would prefer that the IT infrastructure of ${domain_name} interact with you. If it is available among those for which we have developed a user interface, we will use it to interact with you"
 
 #: alirpunkto/schemas/register_form.py:151
 msgid "second_interaction_language_description"
-msgstr ""
+msgstr "Please provide the language with which you would accept, as a second choice, that the IT infrastructure of ${domain_name} interact with you. If it is available among those for which we have developed a user interface, we will use it to interact with you"
 
 #: alirpunkto/schemas/register_form.py:156
 msgid "third_interaction_language_label"
-msgstr ""
+msgstr "The language you accept as a third choice for us to interact with you"
+
+msgid "third_interaction_language_description"
+msgstr "Please provide the language with which you would accept, as a third choice, that the IT infrastructure of ${domain_name} interact with you. If it is available among those for which we have developed a user interface, we will use it to interact with you"
+
 
 #: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Your Cooperative Behaviour Mark"
+
 msgid "cooperative_behaviour_mark_description"
-msgstr ""
+msgstr "As a Cooperator, your Cooperative Behaviour Mark results from the marks allocated to you by the other Active Participants in the Working Groups in which you have participated to define and adopt Action Proposals. Each Active Pariticpant can provide a mark equal to +1, 0 or -1, according to how cooperative your behaviour was during your active participation in that Working Group. This mark is then automatically 'forgotten' and decays over time: it is halved after ${forgetting_time_constant} days. The initial value of your Cooperative Behaviour Mark is zero."
 
 #: alirpunkto/schemas/register_form.py:169
 msgid "cooperative_behaviour_mark_update_label"
-msgstr ""
+msgstr "Date at which your Cooperative Behaviour Mark was last updated"
 
 #: alirpunkto/schemas/register_form.py:170
 msgid "cooperative_behaviour_mark_update_description"
-msgstr ""
+msgstr "This is the latest date at which another Cooperator allocated to you a mark following the end of your active participation in a Working Group that was defining and adopting an Action Proposal. The initial value of that date is that of your registration as a Cooperator"
 
 #: alirpunkto/schemas/register_form.py:171
 msgid "cooperative_behaviour_mark_update_required"
@@ -817,11 +824,11 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:180
 msgid "number_shares_owned_label"
-msgstr ""
+msgstr "Number of shares of the Cooperative that you own"
 
 #: alirpunkto/schemas/register_form.py:181
 msgid "number_shares_owned_description"
-msgstr ""
+msgstr "This is the total number of shares of the Cooperative that you own, after having purchased them on our web portal. Upon your registration, this number is equal to zero. We invite you to proceed as soon as possible to this URL: ${url_purchase_shares} to purchase your first share(s). You will enjoy your full decision-making rights as a Cooperator only after having purchased at least one share (and paid your yearly contribution). You are welcome to purchase more than one share, upon registration, but also anytime afterwards. It strengthens our Cooperative, and we all are grateful to you for this!"
 
 #: alirpunkto/schemas/register_form.py:183
 msgid "number_shares_owned_required"
@@ -829,11 +836,11 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:188
 msgid "date_end_validity_yearly_contribution_label"
-msgstr ""
+msgstr "Date at which your current yearly contribution expires"
 
 #: alirpunkto/schemas/register_form.py:189
 msgid "date_end_validity_yearly_contribution_description"
-msgstr ""
+msgstr "Date at which your current yearly contribution expires, and before which you must pay it again to keep your full decision-making rights as a Cooperator. Upon your registration, this date is set at a time in the past, which means that you should pay it now. We invite you to proceed as soon as possible to this URL: ${url_pay_yearly_contrib} to pay your first yearly contribution, and participate thereby to the operations of our Cooperative. You will enjoy your full decision-making rights as a Cooperator only after having paid your yearly contribution (and purchased at least one share)."
 
 #: alirpunkto/schemas/register_form.py:190
 msgid "date_end_validity_yearly_contribution_required"
@@ -841,11 +848,11 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:199
 msgid "iban_label"
-msgstr ""
+msgstr "International Bank Account Number (IBAN) of your bank account"
 
 #: alirpunkto/schemas/register_form.py:200
 msgid "iban_description"
-msgstr ""
+msgstr "If and when you decide to leave the Cooperative (which we would all regret), we need your IBAN to be able to transfer to you the proceeds of our back purchase of your shares of the Cooperative. For security reasons, we advise you to provide this information only if and when you anticipate to leave the Cooperative"
 
 #: alirpunkto/schemas/register_form.py:202
 msgid "iban_required"
@@ -853,8 +860,8 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:207
 msgid "date_erasure_all_data_title"
-msgstr ""
+msgstr "Date at which all your data will be erased from our IT infrastructure"
 
 #: alirpunkto/schemas/register_form.py:208
 msgid "date_erasure_all_data_description"
-msgstr ""
+msgstr "If and when you leave the Cooperative, your identity data will be kept for a duration of ${Quarantine} days, before being fully and irrevocably erased from our records. This is to ensure that a Cooperator quitting the Cooperative because his/her Cooperative Behaviour Mark is too bad cannot re-register again immediately with a virgin pseudonym and Cooperative Behaviour Mark. Upon your registration, this date is set in a very distant future"
