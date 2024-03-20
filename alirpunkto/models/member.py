@@ -9,7 +9,7 @@ from persistent import Persistent
 from persistent.mapping import PersistentMapping
 from datetime import datetime
 from pyramid.authorization import Allow, ALL_PERMISSIONS
-from enum import Enum, unique
+from enum import Enum, unique, IntFlag
 from uuid import uuid4
 from ZODB.Connection import Connection
 import transaction
@@ -80,6 +80,86 @@ class MemberStates(Enum) :
             The names of the member_datas states.
         """
         return MemberStates.__members__.keys()
+
+@unique
+class DataMemberAccessPermissions(IntFlag):
+    """Access permissions to member datas for any member.
+    """
+    # None: No access
+    NONE =         0b00000000
+    # Read: Read access
+    READ =         0b00000001
+    # Write: Write access
+    WRITE =        0b00000010
+    # Execute: Execute access
+    EXECUTE =      0b00000100
+    # Delete: Delete access
+    DELETE =       0b00001000
+    # Traverse: Traverse access
+    TRAVERSE =     0b00010000
+    # Rename: Rename access
+    RENAME =       0b00100000
+    # Delete_child: Delete child access
+    DELETE_CHILD = 0b01000000
+    # Admin: Admin access
+    ADMIN =        0b10000000
+
+    @classmethod
+    def get_i18n_id(cls, name:Type['DataMemberAccessPermissions'], get_value = False) -> str:
+        """Get the i18n id of the access permission.
+        Args:
+            name: The name of the access permission.
+            get_value: If True, return the name of the permission, else return the name.
+        Returns:
+            The i18n id of the access permission.
+        """
+        match name:
+            case cls.NONE :
+                return ("access_permissions_none" if get_value 
+                    else "access_permissions_none_value")
+            case cls.READ :
+                return ("access_permissions_read" if get_value
+                    else "access_permissions_read_value")
+            case cls.WRITE :
+                return ("access_permissions_write" if get_value
+                    else "access_permissions_write_value")
+            case cls.EXECUTE :
+                return ("access_permissions_execute" if get_value
+                    else "access_permissions_execute_value")
+            case cls.DELETE :
+                return ("access_permissions_delete" if get_value
+                    else "access_permissions_delete_value")
+            case cls.TRAVERSE :
+                return ("access_permissions_traverse" if get_value
+                    else "access_permissions_traverse_value")
+            case cls.DELETE_CHILD :
+                return ("access_permissions_delete_child"
+                    if get_value else "access_permissions_delete_child_value")
+            case cls.ADMIN :
+                return ("access_permissions_admin" if get_value
+                    else "access_permissions_admin_value")
+            case _ :
+                # should never happen
+                log.error(f"Unknown access permission: {name}")
+                return(f"name.lower()")
+    @staticmethod
+    def get_names() -> List[str]:
+        """Get the names of the access permissions.
+        Returns:
+            The names of the access permissions.
+        """
+        return DataMemberAccessPermissions.__members__.keys()
+    @staticmethod
+    def get_permissions(permission:int) \
+        -> Iterator[Type['DataMemberAccessPermissions']]:
+        """Get the permissions from int.
+        Returns:
+            The access permissions as a list.
+        """
+        return (perm
+            for perm in DataMemberAccessPermissions.__members__.values()
+            if permission & perm.value
+        )
 
 @unique
 class EmailSendStatus(Enum):
