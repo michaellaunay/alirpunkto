@@ -31,7 +31,7 @@ Pour régler cela nous avons plusieurs solutions :
 
 Il existe déjà des bibliothèques pour faire cela qui permettent de chiffrer des documents côté navigateur avant de les déposer sur un serveur web. Ces solutions utilisent généralement des bibliothèques de chiffrement en JavaScript pour effectuer le chiffrement localement, garantissant ainsi que les données restent sécurisées avant d'être envoyées au serveur. Plusieurs bibliothèques populaires permettent de chiffrer des documents côté navigateur :
 
-1. CryptoJS : CryptoJS est une bibliothèque JavaScript de chiffrement qui prend en charge différents algorithmes de chiffrement, tels que AES, DES, Triple DES, etc. Vous pouvez l'utiliser pour chiffrer vos données avant de les envoyer au serveur.
+1. CryptoJS : CryptoJS est une bibliothèque JavaScript de chiffrement qui prend en charge différents algorithmes de chiffrement, tels que AES, DES, Triple DES, etc. Nous pouvons l'utiliser pour chiffrer nos données avant de les envoyer au serveur.
 
 Site web : [https://cryptojs.gitbook.io/docs/](https://cryptojs.gitbook.io/docs/)
 
@@ -85,7 +85,7 @@ Salut Vincent, que peux tu me dire de ce que j'ai écris à Laurent à propos de
 
 Michaël Launay [17 h 19]
 
-Voici ce qu'en dit gpt 4: mais je suis sur ma faim : Votre réflexion sur la manière de traiter l'authentification et le stockage de données sensibles comme la pièce d'identité est intéressante et montre une réelle préoccupation pour la sécurité des données utilisateur. Cependant, il y a quelques points qui méritent une discussion plus approfondie.  
+Voici ce qu'en dit gpt 4: mais je suis sur ma faim : notre réflexion sur la manière de traiter l'authentification et le stockage de données sensibles comme la pièce d'identité est intéressante et montre une réelle préoccupation pour la sécurité des données utilisateur. Cependant, il y a quelques points qui méritent une discussion plus approfondie.  
 
 1. **Hachage du mot de passe côté client** : Bien que l'idée de hacher le mot de passe côté client puisse sembler attrayante, elle présente en réalité quelques problèmes potentiels. Le hachage côté client peut offrir une protection supplémentaire contre l'interception du mot de passe sur le réseau, mais si le hash lui-même est compromis, il peut être utilisé pour s'authentifier auprès du serveur. En pratique, si le serveur attend le hash du mot de passe plutôt que le mot de passe lui-même, le hash devient effectivement le mot de passe. De plus, si un attaquant compromet le site Web et modifie le code JavaScript, il peut simplement désactiver le hachage et collecter les mots de passe en clair.
 2. **Génération de clés de chiffrement basée sur le mot de passe** : Utiliser le mot de passe pour générer une paire de clés publique/privée est une idée intéressante, et c'est un concept connu dans la cryptographie appelé dérivation de clé. Toutefois, cette méthode a ses propres défis. Les mots de passe des utilisateurs ne sont généralement pas suffisamment aléatoires ou longs pour constituer des clés cryptographiques sûres sans traitement supplémentaire. Il existe des fonctions de dérivation de clé spécialement conçues pour ce but, comme PBKDF2, qui peuvent être utilisées pour convertir un mot de passe en une clé sûre.
@@ -161,7 +161,7 @@ La date de création d'un enregistrement de document est la date de début de pr
 
 ## Avis de ChatGPT4
 
-L'approche que vous avez décrite est ingénieuse et a le potentiel d'offrir un haut degré de sécurité. Le fait d'utiliser une clé symétrique pour chiffrer le document et ensuite chiffrer cette clé avec les clés publiques de chaque utilisateur permet un contrôle fin de l'accès au document. La régénération de la paire de clés à partir d'une graine unique et du mot de passe de l'utilisateur ajoute une autre couche de sécurité.
+L'approche que nous avons décrite est ingénieuse et a le potentiel d'offrir un haut degré de sécurité. Le fait d'utiliser une clé symétrique pour chiffrer le document et ensuite chiffrer cette clé avec les clés publiques de chaque utilisateur permet un contrôle fin de l'accès au document. La régénération de la paire de clés à partir d'une graine unique et du mot de passe de l'utilisateur ajoute une autre couche de sécurité.
 
 Cependant, il y a des considérations importantes :
 
@@ -304,7 +304,7 @@ Le passage du seed dans les URL des e-mails pose problème, car nous ne changeon
 
 # 2023-09-06  
 Retour en arrière : on conserve le seed, mais on utilise celui de l'état que l'on a quitté.  
-Modifiez le code pour enregistrer dans les modifications de la candidature le tuple (date, état, seed) sous forme d'objets et non plus sous forme de texte. Ajoutez les fonctions permettant de parcourir l'historique et de décrire les transitions.
+Modifions le code pour enregistrer dans les modifications de la candidature le tuple (date, état, seed) sous forme d'objets et non plus sous forme de texte. Ajoutons les fonctions permettant de parcourir l'historique et de décrire les transitions.
 
 # 2023-09-07  
 Il y a un problème profond avec l'état des candidatures.  
@@ -486,19 +486,19 @@ Explication du fichier LDIF :
 
 6. **SINGLE-VALUE**: Cela signifie que l'attribut ne peut avoir qu'une seule valeur. Si nous voulons que l'attribut puisse avoir plusieurs valeurs, il faudra omettre cette option.
 
-N'oublions pas de remplacer `OUR_OID_NUMBER` par le nombre OID que nous avons obtenu pour notre organisation ou application. L'OID doit être unique à votre organisation pour éviter les conflits avec d'autres extensions de schéma.
+N'oublions pas de remplacer `OUR_OID_NUMBER` par le nombre OID que nous avons obtenu pour notre organisation ou application. L'OID doit être unique à notre organisation pour éviter les conflits avec d'autres extensions de schéma.
 
 ## Comment avoir un OID unique
 L'OID (Object Identifier) est une chaîne de nombres qui identifie de manière unique un type d'objet ou un attribut dans divers standards, dont LDAP. 
 
 Pour une entreprise nous devons faire une demande 
-2. **IANA Private Enterprise Numbers**: Si nous ne disposons pas d'un préfixe OID, une solution courante est d'utiliser notre Private Enterprise Number (PEN) attribué par l'Internet Assigned Numbers Authority (IANA). Vous pouvez demander un PEN gratuitement auprès de l'IANA. Une fois que vous avez un PEN, vous pouvez utiliser ce nombre comme base pour vos OIDs en ajoutant vos propres sous-identifiants. Par exemple, si votre PEN est `12345`, vous pourriez avoir des OIDs comme `1.3.6.1.4.1.77777.1`, `1.3.6.1.4.1.77777.2`, etc.
+2. **IANA Private Enterprise Numbers**: Si nous ne disposons pas d'un préfixe OID, une solution courante est d'utiliser notre Private Enterprise Number (PEN) attribué par l'Internet Assigned Numbers Authority (IANA). Nous pouvons demander un PEN gratuitement auprès de l'IANA. Une fois que nous avons un PEN, nous pouvons utiliser ce nombre comme base pour nos OIDs en ajoutant nos propres sous-identifiants. Par exemple, si notre PEN est `12345`, nous pourrions avoir des OIDs comme `1.3.6.1.4.1.77777.1`, `1.3.6.1.4.1.77777.2`, etc.
 
    - Pour demander un PEN, allons sur le [site de l'IANA](https://www.iana.org/assignments/enterprise-numbers/).
 
 3. **Générer un OID temporaire**: Si nous développons uniquement pour des tests internes et n'avons pas l'intention de publier ou de partager notre schéma, nous pourrions utiliser un OID généré de manière arbitraire. Cependant, c'est risqué pour la production ou pour des environnements où le schéma pourrait être partagé, car il pourrait y avoir des collisions.
 
-4. **Registres nationaux**: Certains pays ont des registres nationaux où vous pouvez demander un OID. Cependant, les processus et la disponibilité peuvent varier.
+4. **Registres nationaux**: Certains pays ont des registres nationaux où nous pouvons demander un OID. Cependant, les processus et la disponibilité peuvent varier.
 
 Il est recommandé d'obtenir un OID officiel si nous prévoyons de déployer notre schéma dans un environnement de production ou de le partager avec d'autres.
 
@@ -616,7 +616,7 @@ Traceback (most recent call last):
 TypeError: attribut en lecture seule
 ```
 
-Si vous devez changer leurs informations, vous devrez créer un nouvel id de message :
+Si nous devons changer leurs informations, nous devrions créer un nouvel id de message :
 
 ```python
 >>> new_robot = Message(robot, mapping={u'name': u'Bender'})
@@ -715,13 +715,13 @@ def traducteur(term):
 	deform.Form.set_default_renderer(zpt_renderer)
 ```
 
-Consultez la démo d'internationalisation pour voir comment les messages d'erreur et de statut de Deform peuvent être localisés. Cette démonstration utilise les fonctionnalités d'internationalisation et de localisation de Pyramid pour afficher les messages d'erreur Deform dans les rendus de formulaire Chameleon.
+Consultons la démo d'internationalisation pour voir comment les messages d'erreur et de statut de Deform peuvent être localisés. Cette démonstration utilise les fonctionnalités d'internationalisation et de localisation de Pyramid pour afficher les messages d'erreur Deform dans les rendus de formulaire Chameleon.
 
 **Explication** :
 
 Deform est un outil qui peut être utilisé avec l'internationalisation, ce qui signifie qu'il peut s'adapter à différentes langues et régions. En particulier, il a des fichiers `.mo` qui permettent de traduire des messages d'erreur dans différentes langues, bien que ces traductions ne soient pas encore complètes.
 
-Le code donné est un exemple de la manière dont vous pourriez configurer l'internationalisation dans une application Pyramid qui utilise Deform.
+Le code donné est un exemple de la manière dont nous pourrions configurer l'internationalisation dans une application Pyramid qui utilise Deform.
 
 1. On importe les modules nécessaires.
 2. Dans la fonction `main`, on configure Pyramid pour utiliser les répertoires de traduction fournis par `deform` et `colander`.
@@ -760,19 +760,19 @@ Les attributs que j'ai fournis à ldap semblent corrects pour une entrée utilis
 
 En examinant les attributs que vous avez fournis, quelques points à vérifier :
 
-1. **Attribut `sn` manquant** : La classe d'objet `inetOrgPerson` nécessite généralement que vous fournissiez un attribut `sn` (pour "surname" ou "nom de famille"). C'est souvent un attribut obligatoire. Vous devez ajouter cet attribut à votre dictionnaire d'attributs.
+1. **Attribut `sn` manquant** : La classe d'objet `inetOrgPerson` nécessite généralement que vous fournissiez un attribut `sn` (pour "surname" ou "nom de famille"). C'est souvent un attribut obligatoire. Vous devez ajouter cet attribut à notre dictionnaire d'attributs.
 
 2. **Vérifier les autres attributs** :
-    - Assurez-vous que l'attribut `uid` est unique dans votre LDAP pour la branche ou la base DN que vous ciblez.
+    - Assurez-vous que l'attribut `uid` est unique dans notre LDAP pour la branche ou la base DN que vous ciblez.
     - Assurez-vous que l'attribut `userPassword` est bien encodé. Dans certaines configurations LDAP, vous devez utiliser une méthode spécifique pour encoder le mot de passe. Par exemple, vous pourriez avoir besoin de le hacher en utilisant SHA ou SSHA.
 
-3. **Chemin complet de DN** : Assurez-vous que le DN que vous créez est correct et que la base DN (`LDAP_BASE_DN`) et l'unité organisationnelle (`LDAP_OU`) existent bien dans l'annuaire LDAP. Vous semblez avoir ajouté une logique pour gérer le cas où `LDAP_OU` pourrait être nul, mais assurez-vous que la valeur de `dn` est correcte et valide pour votre LDAP.
+3. **Chemin complet de DN** : Assurez-vous que le DN que vous créez est correct et que la base DN (`LDAP_BASE_DN`) et l'unité organisationnelle (`LDAP_OU`) existent bien dans l'annuaire LDAP. Vous semblez avoir ajouté une logique pour gérer le cas où `LDAP_OU` pourrait être nul, mais assurez-vous que la valeur de `dn` est correcte et valide pour notre LDAP.
 
-4. **Autres classes d'objet ou attributs** : Assurez-vous qu'il n'y a pas d'autres exigences pour votre configuration spécifique d'OpenLDAP qui nécessiteraient une autre classe d'objet ou un autre attribut à être fourni.
+4. **Autres classes d'objet ou attributs** : Assurez-vous qu'il n'y a pas d'autres exigences pour notre configuration spécifique d'OpenLDAP qui nécessiteraient une autre classe d'objet ou un autre attribut à être fourni.
 
 5. **Logs OpenLDAP** : Vous pouvez également consulter les logs du serveur OpenLDAP lui-même. Si le serveur est configuré pour enregistrer des informations détaillées, il pourrait y avoir plus d'informations sur pourquoi l'ajout a échoué.
 
-Je vous suggère de commencer par ajouter l'attribut `sn` à votre dictionnaire d'attributs et de réessayer. Si cela ne résout pas le problème, passez aux autres étapes de dépannage.
+Je vous suggère de commencer par ajouter l'attribut `sn` à notre dictionnaire d'attributs et de réessayer. Si cela ne résout pas le problème, passez aux autres étapes de dépannage.
 ```
 
 # 2023-12-02
@@ -819,11 +819,11 @@ Le test d'unicité des mails ne fonctionne que partiellement, car elle n'est vé
 
 # 2024-01-05
 Voici la notice d'ajout du schéma ldap alirpunkto_schema.ldif
-Voici un exemple de documentation à inclure dans le fichier `README.md` de votre projet AlirPunkto pour expliquer comment ajouter le schéma `alirpunkto/alirpunkto_schema.ldif` à un serveur OpenLDAP sur Ubuntu 22.04 :
+Voici un exemple de documentation à inclure dans le fichier `README.md` de notre projet AlirPunkto pour expliquer comment ajouter le schéma `alirpunkto/alirpunkto_schema.ldif` à un serveur OpenLDAP sur Ubuntu 22.04 :
 
 ## Ajout du Schéma AlirPunkto à OpenLDAP sous Ubuntu 22.04
 
-Cette section vous guide à travers les étapes nécessaires pour intégrer le schéma personnalisé `alirpunkto_schema.ldif` dans un serveur OpenLDAP sur Ubuntu 22.04.
+Cette section nous guide à travers les étapes nécessaires pour intégrer le schéma personnalisé `alirpunkto_schema.ldif` dans un serveur OpenLDAP sur Ubuntu 22.04.
 
 ### Prérequis
 
@@ -834,42 +834,42 @@ Cette section vous guide à travers les étapes nécessaires pour intégrer le s
 ### Étapes d'Installation
 
 1. **Connexion au Serveur**  
-   Connectez-vous à votre serveur Ubuntu où OpenLDAP est installé.
+   Connectons-nous à notre serveur Ubuntu où OpenLDAP est installé.
 
 2. **Arrêt du Service LDAP**  
-   Avant de modifier la configuration, arrêtez le service LDAP pour éviter toute corruption de données.
+   Avant de modifier la configuration, arrêtons le service LDAP pour éviter toute corruption de données.
    ```bash
    sudo systemctl stop slapd
    ```
 
 3. **Localisation du Fichier Schema**  
-   Assurez-vous que le fichier `alirpunkto_schema.ldif` est présent sur le serveur. S'il ne l'est pas, transférez-le dans un répertoire approprié (par exemple, `/tmp`).
+   Assurons-nous que le fichier `alirpunkto_schema.ldif` est présent sur le serveur. S'il ne l'est pas, transférons-le dans un répertoire approprié (par exemple, `/tmp`).
 
 4. **Ajout du Schéma au Serveur LDAP**  
-   Exécutez la commande suivante pour ajouter le schéma à votre annuaire LDAP :
+   Exécutons la commande suivante pour ajouter le schéma à notre annuaire LDAP :
    ```bash
    sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /chemin/vers/alirpunkto_schema.ldif
    ```
-   Remplacez `/chemin/vers/alirpunkto_schema.ldif` par le chemin réel du fichier `alirpunkto_schema.ldif` sur votre serveur.
+   Remplacons `/chemin/vers/alirpunkto_schema.ldif` par le chemin réel du fichier `alirpunkto_schema.ldif` sur notre serveur.
 
 5. **Redémarrage du Service LDAP**  
-   Après l'ajout réussi du schéma, redémarrez le service LDAP :
+   Après l'ajout réussi du schéma, redémarrons le service LDAP :
    ```bash
    sudo systemctl start slapd
    ```
 
 6. **Vérification**  
-   Vérifiez que le schéma a été ajouté correctement. Vous pouvez le faire en consultant les journaux d'OpenLDAP ou en utilisant un outil LDAP pour explorer la configuration du schéma.
+   Vérifions que le schéma a été ajouté correctement. Nous pouvons le faire en consultant les journaux d'OpenLDAP ou en utilisant un outil LDAP pour explorer la configuration du schéma.
 
 ### Dépannage
 
-Si vous rencontrez des problèmes lors de l'ajout du schéma, consultez les journaux d'OpenLDAP pour des informations détaillées sur les erreurs. Les journaux peuvent souvent fournir des indices utiles sur ce qui a pu mal tourner.
+Si nous rencontrons des problèmes lors de l'ajout du schéma, consultons les journaux d'OpenLDAP pour des informations détaillées sur les erreurs. Les journaux peuvent souvent fournir des indices utiles sur ce qui a pu mal tourner.
 
 ### Notes Importantes
 
-- Assurez-vous de faire une sauvegarde de la configuration LDAP existante avant d'effectuer des modifications.
+- Assurons-nous de faire une sauvegarde de la configuration LDAP existante avant d'effectuer des modifications.
 - Toute modification de la configuration LDAP doit être effectuée avec prudence, car des erreurs peuvent affecter la stabilité et la sécurité du service.
-- Testez les modifications dans un environnement de développement avant de les appliquer sur un serveur de production.
+- Testons les modifications dans un environnement de développement avant de les appliquer sur un serveur de production.
 
 # 2024-01-06
 
@@ -953,7 +953,7 @@ Voici le scénario de réinitialisation du mot de passe :
 
    1. **Créer un fichier de service systemd**
 
-   Nous devons créer un fichier de service systemd pour votre application. Ouvrons un terminal et utilisons vim :
+   Nous devons créer un fichier de service systemd pour notre application. Ouvrons un terminal et utilisons vim :
 
    ```bash
    sudo vim /etc/systemd/system/alirpunkto.service
@@ -980,7 +980,7 @@ Voici le scénario de réinitialisation du mot de passe :
    ```
 
    Ce fichier de configuration fait plusieurs choses :
-   - **Description** : Donne une description de votre service.
+   - **Description** : Donne une description de notre service.
    - **After** : Indique que ce service doit être démarré après le réseau (ce qui est important pour une application web).
    - **User** et **Group** : Spécifie sous quel utilisateur et groupe le service doit s'exécuter.
    - **WorkingDirectory** : Définit le répertoire de travail pour l'exécution du script.
@@ -1136,7 +1136,7 @@ Nous utilisons Waitress (le serveur WSGI souvent utilisé avec Pyramid), et  pou
 
 ### Vérification supplémentaire dans Pyramid
 
-En plus de configurer notre serveur, nous devons implémenter une vérification de la taille du fichier dans votre vue Pyramid. Cela garantit qu'une demande qui contourne les limites imposées par le serveur Web frontal est encore validée par notre application elle-même :
+En plus de configurer notre serveur, nous devons implémenter une vérification de la taille du fichier dans notre vue Pyramid. Cela garantit qu'une demande qui contourne les limites imposées par le serveur Web frontal est encore validée par notre application elle-même :
 
 ```python
 from pyramid.httpexceptions import HTTPBadRequest
@@ -1157,11 +1157,11 @@ Le champ `template` dans le widget `FileUploadWidget` de Deform, une bibliothèq
 
 - **Rôle du Template** : Le fichier de template décrit l'interface utilisateur du widget de téléchargement de fichier, incluant les éléments HTML comme le bouton de parcours (`<input type="file">`), des messages d'erreur, des indications visuelles sur la progression du téléchargement, etc.
 
-- **Personnalisation Avancée** : En utilisant un template personnalisé, vous pouvez modifier l'apparence du widget d'upload de fichier pour qu'il corresponde au style de votre application web, intégrer des validations côté client supplémentaires (par exemple, pour vérifier la taille ou le type de fichier avant l'envoi), ou ajouter des fonctionnalités interactives (comme une barre de progression pour l'upload).
+- **Personnalisation Avancée** : En utilisant un template personnalisé, nous pouvons modifier l'apparence du widget d'upload de fichier pour qu'il corresponde au style de notre application web, intégrer des validations côté client supplémentaires (par exemple, pour vérifier la taille ou le type de fichier avant l'envoi), ou ajouter des fonctionnalités interactives (comme une barre de progression pour l'upload).
 
 ### Exemple d'utilisation
 
-Dans l'exemple que vous avez fourni :
+Dans l'exemple que nous avons fourni :
 
 ```python
 avatar = colander.SchemaNode(
@@ -1180,17 +1180,17 @@ avatar = colander.SchemaNode(
 
 - **`max_file_size=4096*1024`** : Spécifie la taille maximale de fichier acceptée par le widget, ici définie à environ 4 Mo (4096 kilo-octets).
 
-- **`template='file_upload'`** : Indique le nom du template utilisé pour rendre le widget. Dans ce contexte, `file_upload` fait référence à un fichier de template (supposé être trouvé quelque part dans votre configuration de rendu) qui définit comment le champ de téléchargement de fichier doit être affiché. Ce nom de template est un identifiant que votre système de templates doit reconnaître pour charger le bon fichier et l'utiliser lors du rendu du formulaire.
+- **`template='file_upload'`** : Indique le nom du template utilisé pour rendre le widget. Dans ce contexte, `file_upload` fait référence à un fichier de template (supposé être trouvé quelque part dans notre configuration de rendu) qui définit comment le champ de téléchargement de fichier doit être affiché. Ce nom de template est un identifiant que notre système de templates doit reconnaître pour charger le bon fichier et l'utiliser lors du rendu du formulaire.
 
-Si vous ne fournissez pas le champ `template` lors de la création d'un `FileUploadWidget` dans Deform, le widget utilisera le template par défaut fourni par Deform pour les widgets d'upload de fichier. Ce template par défaut est conçu pour couvrir les besoins généraux d'upload de fichiers, fournissant une interface utilisateur basique qui permet aux utilisateurs de sélectionner et de soumettre un fichier.
+Si nous ne fournissons pas le champ `template` lors de la création d'un `FileUploadWidget` dans Deform, le widget utilisera le template par défaut fourni par Deform pour les widgets d'upload de fichier. Ce template par défaut est conçu pour couvrir les besoins généraux d'upload de fichiers, fournissant une interface utilisateur basique qui permet aux utilisateurs de sélectionner et de soumettre un fichier.
 
 ### Conséquences de l'absence du champ `template` :
 
 - **Interface Utilisateur Standard** : Sans un template personnalisé, le widget s'affichera avec le design standard de Deform. Cela signifie que le style et la disposition du champ d'upload de fichier seront ceux définis par les styles CSS par défaut de Deform et le markup HTML générique.
 
-- **Fonctionnalités Basiques** : Le widget d'upload de fichier fonctionnera avec les fonctionnalités de base, permettant aux utilisateurs de sélectionner un fichier depuis leur système et de l'envoyer avec le formulaire. Il n'inclura pas de fonctionnalités avancées ou de validations côté client spécifiques que vous auriez pu ajouter via un template personnalisé.
+- **Fonctionnalités Basiques** : Le widget d'upload de fichier fonctionnera avec les fonctionnalités de base, permettant aux utilisateurs de sélectionner un fichier depuis leur système et de l'envoyer avec le formulaire. Il n'inclura pas de fonctionnalités avancées ou de validations côté client spécifiques que nous aurions pu ajouter via un template personnalisé.
 
-- **Cohérence avec le reste du formulaire** : L'apparence et le comportement du widget d'upload de fichier resteront cohérents avec les autres éléments de formulaire générés par Deform, assurant une expérience utilisateur uniforme à travers votre formulaire.
+- **Cohérence avec le reste du formulaire** : L'apparence et le comportement du widget d'upload de fichier resteront cohérents avec les autres éléments de formulaire générés par Deform, assurant une expérience utilisateur uniforme à travers notre formulaire.
 
 ### Exemple sans le champ `template` :
 
@@ -1204,3 +1204,109 @@ avatar = colander.SchemaNode(
 ```
 
 Dans cet exemple, le widget `FileUploadWidget` est configuré avec une limite de taille de fichier (`max_file_size`), mais sans spécifier de `template`. Le widget utilisera donc le template par défaut pour l'upload de fichier.
+
+# 2024-03-21
+Le mécanisme des ACL de Pyramid est naturellement statique, cependant, nous devons instaurer un workflow pour gérer les données des membres en fonction de l'état d'approbation de leur candidature. Cela implique la nécessité de modifier dynamiquement les ACL des ressources (telles que les vues et les données des modèles). Pour y parvenir, je propose l'utilisation d'un système de workflow basé sur des flags et des dictionnaires qui permettrait une transposition dynamique des règles vers les ACL de Pyramid.
+Mais voici un rappel concernant les ACL de Pyramid.
+## Fonctionnement des ACL dans Pyramid
+
+Dans le framework Pyramid, les listes de contrôle d'accès (ACL, Access Control Lists) sont utilisées pour gérer les autorisations au niveau des ressources. Une ACL est une liste de tuples, où chaque tuple représente une règle d'autorisation. Chaque tuple est composé de trois éléments : 
+
+1. L'action : C'est généralement `Allow` ou `Deny`, indiquant si l'autorisation est accordée ou refusée.
+2. Le principal : C'est l'entité à laquelle l'autorisation est accordée ou refusée. Il peut s'agir d'un utilisateur spécifique, d'un groupe d'utilisateurs, ou d'un identifiant spécial comme `Everyone` ou `Authenticated`.
+3. La permission : C'est l'opération spécifique qui est autorisée ou refusée. Il peut s'agir d'une chaîne de caractères comme `'view'` ou `'edit'`, ou d'une constante spéciale comme `ALL_PERMISSIONS`.
+
+Dans notre sélection active, `__acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]`, nous définissons une ACL avec une seule règle qui accorde toutes les permissions (`ALL_PERMISSIONS`) au groupe d'administrateurs (`'group:admins'`).
+
+Pyramid vérifie ces autorisations lors de l'accès à une ressource. Il commence par le haut de la liste et s'arrête dès qu'il trouve une règle qui correspond à la situation actuelle (c'est-à-dire le principal actuel et l'opération demandée). Si aucune règle ne correspond, l'accès est refusé.
+
+Il est important de noter que les ACL sont généralement définies dans les ressources elles-mêmes, mais elles peuvent aussi être définies globalement pour toute l'application. De plus, Pyramid supporte également un système de sécurité basé sur des rôles, qui peut être utilisé en complément ou à la place des ACL.
+
+## Qui vérifie les ACL
+Les listes de contrôle d'accès (ACL) dans Pyramid sont vérifiées par le système de sécurité de Pyramid lui-même. 
+
+Lorsqu'une requête est faite à une ressource protégée par une ACL, Pyramid effectue une vérification d'autorisation. Il examine l'ACL de la ressource et compare chaque règle à l'utilisateur actuel (ou "principal") et à l'opération demandée (ou "permission"). 
+
+Pyramid commence par le haut de l'ACL et s'arrête dès qu'il trouve une règle qui correspond à la situation actuelle. Si la règle est une règle `Allow`, l'accès est accordé. Si la règle est une règle `Deny`, l'accès est refusé. Si aucune règle ne correspond, l'accès est également refusé.
+
+C'est donc le système de sécurité de Pyramid qui vérifie les ACL. Cela se fait automatiquement pour chaque requête à une ressource protégée, donc en tant que développeur, nous n'avons pas besoin de vérifier manuellement les ACL. Nous devons simplement nous assurer que nos ressources ont les ACL appropriées.
+
+## Où positionner les ACL ?
+
+Dans le framework Pyramid, les listes de contrôle d'accès (ACL) sont généralement positionnées sur les objets de ressources. Une ressource est un objet qui représente une chose sur laquelle nous voulons contrôler l'accès, comme une page web, une entrée de base de données, un fichier, etc.
+
+Dans notre code, `__acl__` est défini directement dans la classe, ce qui suggère que cette classe est utilisée comme une ressource dans notre application Pyramid.
+
+Chaque fois qu'une ressource est accédée, Pyramid vérifie l'ACL pour déterminer si l'utilisateur actuel a la permission d'effectuer l'opération demandée sur la ressource. C'est pourquoi les ACL sont généralement définies sur les objets de ressources : pour contrôler l'accès à ces ressources.
+
+## Comment faire des workflows documentaires
+
+Les ACL (Access Control Lists) dans Pyramid sont généralement statiques et ne prennent pas en compte l'état de l'objet. Cependant, nous pouvons implémenter une logique de workflow où les permissions dépendent de l'état de l'objet en définissant dynamiquement l'ACL en fonction de l'état de l'objet.
+
+Voici un exemple de comment nous pourrions le faire :
+
+```python
+from pyramid.security import Allow, ALL_PERMISSIONS
+
+class Document:
+    def __init__(self, state):
+        self.state = state
+        self.__acl__ = self.generate_acl()
+
+    def generate_acl(self):
+        if self.state == 'draft':
+            return [(Allow, 'group:editors', ALL_PERMISSIONS)]
+        elif self.state == 'published':
+            return [(Allow, 'group:viewers', 'view')]
+        else:  # archived
+            return [(Allow, 'group:admins', ALL_PERMISSIONS)]
+```
+
+Dans cet exemple, la classe `Document` génère dynamiquement son ACL dans la méthode `generate_acl` en fonction de son état actuel. Si le document est à l'état de brouillon (`draft`), tous les droits sont accordés au groupe des éditeurs (`editors`). Si le document est publié (`published`), seul le droit de vue est accordé au groupe des spectateurs (`viewers`). Si le document est archivé, tous les droits sont accordés au groupe des administrateurs (`admins`).
+
+Cela permet de mettre en place un workflow où les permissions dépendent de l'état de l'objet. Cependant, cela nécessite que l'état de l'objet soit correctement géré et mis à jour dans notre application.
+## Exemple d'application
+Pour exprimer que le propriétaire (owner) peut remplir les champs `data` uniquement lorsque sa Candidature est dans l'état Draft, nous pouvons ajouter une condition à notre liste de contrôle d'accès (ACL). Cependant, les ACLs sont généralement statiques et ne prennent pas en compte l'état de l'objet. Nous devrons donc gérer cette logique ailleurs dans notre code, probablement dans la méthode qui gère la création de data.
+
+Voici un exemple de comment nous pourrions le faire :
+
+```python
+def create_data(self, user, data):
+    if self.state != 'draft':
+        raise PermissionError("Cannot create data when not in draft state")
+    if 'group:owners' not in user.groups:
+        raise PermissionError("Only owners can create data")
+    # Proceed with data creation
+```
+Dans cet exemple, la méthode create_data vérifie d'abord si l'objet est dans l'état draft. Si ce n'est pas le cas, elle lève une exception PermissionError. Ensuite, elle vérifie si l'utilisateur appartient au groupe owners. Si ce n'est pas le cas, elle lève également une exception PermissionError. Si ces deux conditions sont remplies, la méthode continue avec la création de data.
+
+La gestion des listes de contrôle d'accès (ACL) pour un membre (`Member`) pourrait ressembler à ceci :
+
+```python
+from pyramid.security import Allow, Deny, ALL_PERMISSIONS
+
+class Member:
+    def __init__(self, name, role):
+        self.name = name
+        self.role = role
+
+        # Define ACL based on role
+        if self.role == 'admin':
+            self.__acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]
+        elif self.role == 'owner':
+            self.__acl__ = [(Allow, 'group:owners', ('view', 'edit'))]
+        else:  # ordinary member
+            self.__acl__ = [(Allow, 'group:members', 'view')]
+
+    def get_acl(self):
+        return self.__acl__
+```
+
+Dans cet exemple, la classe `Member` définit une ACL en fonction du rôle du membre lors de son initialisation. Si le membre est un administrateur (`admin`), il reçoit toutes les permissions. Si le membre est un propriétaire (`owner`), il reçoit les permissions de `view` et `edit`. Si le membre est un membre ordinaire, il reçoit uniquement la permission de `view`.
+
+La méthode `get_acl` est utilisée pour récupérer l'ACL du membre.
+
+Notons que ceci est un exemple simplifié. Dans l'application la gestion des ACL sera plus complexe et impliquer des vérifications supplémentaires, des rôles et des permissions plus détaillés, et d'autres facteurs.
+
+## Implémentation
+J'ai décidé de définir nos workflows en utilisant un dictionnaire d'états. Chaque état contient un dictionnaire de rôles, associé à une liste de permissions. Cette structure nous permet d'obtenir une description précise du workflow. Ensuite, nous élaborerons le code nécessaire pour établir une correspondance entre les ACL de Pyramid et notre description du workflow. Nous procéderons également à des tests pour vérifier la validité des opérations en fonction de cette configuration.

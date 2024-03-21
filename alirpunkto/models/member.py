@@ -86,26 +86,28 @@ class DataMemberAccessPermissions(IntFlag):
     """Access permissions to member datas for any member.
     """
     # None: No access
-    NONE =         0b00000000
+    NONE =         0b0000000000000000
     # Read: Read access
-    READ =         0b00000001
+    READ =         0B0000000000000001
     # Write: Write access
-    WRITE =        0b00000010
+    WRITE =        0B0000000000000010
     # Execute: Execute access
-    EXECUTE =      0b00000100
+    EXECUTE =      0B0000000000000100
+    # Create: Create access
+    CREATE =       0B0000000000001000
     # Delete: Delete access
-    DELETE =       0b00001000
+    DELETE =       0B0000000000010000
     # Traverse: Traverse access
-    TRAVERSE =     0b00010000
+    TRAVERSE =     0B0000000000100000
     # Rename: Rename access
-    RENAME =       0b00100000
+    RENAME =       0B0000000001000000
     # Delete_child: Delete child access
-    DELETE_CHILD = 0b01000000
+    DELETE_CHILD = 0B0000000010000000
     # Admin: Admin access
-    ADMIN =        0b10000000
+    ADMIN =        0B0000000100000000
 
     @classmethod
-    def get_i18n_id(cls, name:Type['DataMemberAccessPermissions'], get_value = False) -> str:
+    def get_i18n_id(cls, name:Type['DataMemberAccessPermissions']) -> str:
         """Get the i18n id of the access permission.
         Args:
             name: The name of the access permission.
@@ -114,30 +116,46 @@ class DataMemberAccessPermissions(IntFlag):
             The i18n id of the access permission.
         """
         match name:
-            case cls.NONE :
-                return ("access_permissions_none" if get_value 
-                    else "access_permissions_none_value")
-            case cls.READ :
-                return ("access_permissions_read" if get_value
-                    else "access_permissions_read_value")
-            case cls.WRITE :
-                return ("access_permissions_write" if get_value
-                    else "access_permissions_write_value")
-            case cls.EXECUTE :
-                return ("access_permissions_execute" if get_value
-                    else "access_permissions_execute_value")
-            case cls.DELETE :
-                return ("access_permissions_delete" if get_value
-                    else "access_permissions_delete_value")
-            case cls.TRAVERSE :
-                return ("access_permissions_traverse" if get_value
-                    else "access_permissions_traverse_value")
-            case cls.DELETE_CHILD :
-                return ("access_permissions_delete_child"
-                    if get_value else "access_permissions_delete_child_value")
-            case cls.ADMIN :
-                return ("access_permissions_admin" if get_value
-                    else "access_permissions_admin_value")
+            case cls.NONE.name :
+                return "access_permissions_none"
+            case cls.NONE.value :
+                return "access_permissions_none_value"
+            case cls.READ.name :
+                return "access_permissions_read"
+            case cls.READ.value :
+                return "access_permissions_read_value"
+            case cls.WRITE.name :
+                return "access_permissions_write"
+            case cls.WRITE.value :
+                return "access_permissions_write_value"
+            case cls.EXECUTE.name :
+                return "access_permissions_execute"
+            case cls.EXECUTE.value :
+                return "access_permissions_execute_value"
+            case cls.CREATE.name :
+                return "access_permissions_create"
+            case cls.CREATE.value :
+                return "access_permissions_create_value"
+            case cls.DELETE.name :
+                return "access_permissions_delete"
+            case cls.DELETE.value :
+                return "access_permissions_delete_value"
+            case cls.TRAVERSE.name :
+                return "access_permissions_traverse"
+            case cls.TRAVERSE.value :
+                return "access_permissions_traverse_value"
+            case cls.RENAME.name :
+                return "access_permissions_rename"
+            case cls.RENAME.value :
+                return "access_permissions_rename_value"
+            case cls.DELETE_CHILD.name :
+                return "access_permissions_delete_child"
+            case cls.DELETE_CHILD.value :
+                return "access_permissions_delete_child_value"
+            case cls.ADMIN.name :
+                return "access_permissions_admin"
+            case cls.ADMIN.value :
+                return "access_permissions_admin_value"
             case _ :
                 # should never happen
                 log.error(f"Unknown access permission: {name}")
@@ -182,7 +200,7 @@ class MemberTypes(Enum) :
     # Cooperator: The member is a cooperator member.
     COOPERATOR = "member_types_cooperator_value"
     @classmethod
-    def get_i18n_id(cls, name:str) -> str:
+    def get_i18n_id(cls, name:Type['MemberTypes']) -> str:
         """Get the i18n id of the member type.
         Args:
             name: The name of the member type.
@@ -228,7 +246,7 @@ class MemberRoles(Enum) :
     MEDIATION_ARBITRATION_COUNCIL = "member_role_mediation_arbitration_council_value"
 
     @classmethod
-    def get_i18n_id(cls, name:str) -> str:
+    def get_i18n_id(cls, name:Type['MemberRoles']) -> str:
         """Get the i18n id of the member role.
         Args:
             name: The name of the member role.
@@ -482,7 +500,6 @@ class Member(Persistent):
         pseudonym (str): Accesses the pseudonym of the member. Supports get and set operations.
         modifications (list of MemberDatasEvent): Tracks modifications to the member data. Supports get and set operations.
     """
-
     __acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]
 
     def __init__(self,
