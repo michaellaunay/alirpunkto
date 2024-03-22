@@ -55,7 +55,7 @@ msgstr "Choose the application you want to join:"
 
 #: views/login.py:23
 msgid "invalid_username_or_password"
-msgstr "Invalid username or password"
+msgstr "Invalid username or password. Please try again"
 
 msgid "register_link"
 msgstr "Create account"
