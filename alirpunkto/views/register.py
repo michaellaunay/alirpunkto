@@ -604,14 +604,17 @@ def get_template_parameters_for_cooperator(
         dict: the template parameters
     """
     voting_url = request.route_url('vote', _query={'oid': candidature.oid}),
+    if(isinstance(voting_url, tuple)):
+        voting_url = voting_url[0]
+    site_name=request.registry.settings.get('site_name')
     signature = MAIL_SIGNATURE.format(
-        site_name=request.registry.settings.get('site_name'),
+        site_name=site_name,
         domain_name=request.registry.settings.get('domain_name'),
         fullname = candidature.data.fullname,
         fullsurname = candidature.data.fullsurname if getattr(
             candidature.data,
             'fullsurname',
-            "Alirpunkto team"
+            f"{site_name} team"
         ) else "",
     )
     local_datas = {
