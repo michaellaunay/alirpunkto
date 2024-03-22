@@ -733,7 +733,7 @@ msgstr "Please provide here all your family names at birth (i.e. NOT your family
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
-msgstr "Please provide here all your given names, as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet different from the Latin"
+msgstr "Please provide here all your given names, as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet different from the Latin)"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
@@ -745,7 +745,7 @@ msgstr "Please write here a text describing you to all other members of the Comm
 
 #: alirpunkto/schemas/register_form.py:55
 msgid "birthdate_description"
-msgstr "Please provide your birthdate in the following format: DD/MM/YYYY, i.e. (1) the day in the month, on 2 digits; (2) the number of the month, on 2 digits; (3) the year, on 4 digits. Only persons having reached their 18th birthday can be Cooperators"
+msgstr "Please provide your birthdate in the following format: DD/MM/YYYY, i.e. (1) the day in the month, on 2 digits; (2) the number of the month, on 2 digits; (3) the year, on 4 digits. Only persons having reached their 18th birthday can be Cooperators. If you have not reached yet your 18th birthday, we invite you to register as an Ordinary Member of the Community - and to upgrade to Cooperator status as soon as you reach the age of majority."
 
 #: alirpunkto/schemas/register_form.py:67
 msgid "nationality_description"
@@ -773,7 +773,7 @@ msgstr "Providing your pseudonym is required"
 
 #: alirpunkto/schemas/register_form.py:121
 msgid "password_description"
-msgstr "Please provide your password. Your password must be between ${password_minimum_length} and ${password_maximum_length}characters long, contain at least one digit, at least one lowercase letter, at least one uppercase letter and at least one of the characters among the following: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+msgstr "Please provide your password. Your password must be between ${password_minimum_length} and ${password_maximum_length} characters long, contain at least one digit, at least one lowercase letter, at least one uppercase letter and at least one of the characters among the following: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
 #: alirpunkto/schemas/register_form.py:130
 msgid "password_confirm_description"
