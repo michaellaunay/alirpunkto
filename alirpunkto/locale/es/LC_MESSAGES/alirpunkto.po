@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-09 22:51+0100\n"
+"PO-Revision-Date: 2024-03-22 09:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: es_ES\n"
@@ -988,3 +988,257 @@ msgid "modification_to_profile_email_subject"
 msgstr ""
 "Enlace para modificar su perfil en la infraestructura informática de "
 "${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Indique aquí todos sus apellidos de nacimiento (es decir, NO sus apellidos "
+"como persona casada), tal como figuran en sus documentos oficiales de "
+"identidad, en su transcripción oficial en caracteres latinos (si el idioma "
+"original utiliza un alfabeto distinto del latino)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Indique aquí todos sus nombres, tal como figuran en sus documentos oficiales "
+"de identidad, en su transcripción oficial en caracteres latinos (si el "
+"idioma original utiliza un alfabeto distinto del latino)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Texto que le describe (texto de su perfil)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Escriba aquí un texto que le describa ante los demás miembros de la "
+"Comunidad. Por favor, concéntrese en: (1) lo que desea hacer como miembro de "
+"la Comunidad, y (2) los recursos (experiencia, conocimientos, tiempo) de que "
+"dispone"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Indique su fecha de nacimiento en el formato siguiente: DD/MM/AAAA, es decir "
+"(1) el día del mes, en 2 cifras; (2) el número del mes, en 2 cifras; (3) el "
+"año, en 4 cifras. Sólo pueden ser Cooperadores las personas que hayan "
+"cumplido 18 años. Si aún no ha cumplido los 18 años, le invitamos a "
+"inscribirse como miembro ordinario de la Comunidad y a pasar a la categoría "
+"de Cooperador en cuanto alcance la mayoría de edad."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr ""
+"Indique un Estado miembro de la Unión Europea del que sea ciudadano. Sólo "
+"pueden ser Cooperadores los ciudadanos de la Unión Europea"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Seleccione un Estado miembro de la Unión Europea"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr ""
+"Este es el número único que le identifica en todos los procesos que tienen "
+"lugar en la Comunidad"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Introduzca aquí el seudónimo que le identificará durante toda su actividad "
+"en nuestra plataforma informática. Le recomendamos ENCARECIDAMENTE que "
+"seleccione un seudónimo que haga imposible (o extremadamente difícil) el "
+"rastreo hasta su identidad real. De este modo, protegerá la confidencialidad "
+"de sus opiniones (es decir, los datos personales que son objeto de una "
+"protección específica en virtud del Reglamento General de Protección de "
+"Datos - RGPD) frente a cualquier forma de presión externa en la vida real "
+"(por ejemplo, por parte de su empleador o sus clientes). ¡Tenga mucho "
+"cuidado! Una vez que lo haya elegido, NUNCA podrá cambiar este seudónimo "
+"después. ¡Elígelo con cuidado! /n Tu seudónimo debe tener entre "
+"${MIN_PSEUDONYM_LENGTH} y ${MAX_PSEUDONYM_LENGTH} caracteres y sólo puede "
+"contener letras del alfabeto latino (A-Z, a-z), números (0-9), guiones bajos "
+"(_), puntos (.), guiones (-) y espacios ( ). No puede contener letras con "
+"acentos, diéresis ni otros signos diacríticos específicos de algunas lenguas."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Es obligatorio indicar su seudónimo"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Introduzca su contraseña. Su contraseña debe tener entre "
+"${password_minimum_length} y ${password_maximum_length} caracteres, contener "
+"al menos un dígito, al menos una letra minúscula, al menos una letra "
+"mayúscula y al menos uno de los caracteres siguientes: '@', '#', '%', '&', "
+"'*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Confirma tu contraseña"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Es necesario confirmar la contraseña"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Indique la dirección de correo electrónico que la infraestructura "
+"informática de ${domain_name} utilizará para interactuar con usted. Esta "
+"dirección de correo electrónico nunca se mostrará a otros usuarios de esta "
+"infraestructura informática"
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Indique la lengua con la que prefiere que la infraestructura informática de "
+"${domain_name} interactúe con usted. Si está disponible entre aquellas para "
+"las que hemos desarrollado una interfaz de usuario, la utilizaremos para "
+"interactuar con usted"
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Indique la lengua con la que aceptaría, como segunda opción, que la "
+"infraestructura informática de ${domain_name} interactuase con usted. Si "
+"está disponible entre aquellas para las que hemos desarrollado una interfaz "
+"de usuario, la utilizaremos para interactuar con usted"
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr ""
+"El idioma que acepta como tercera opción para que interactuemos con usted"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Indique el idioma con el que aceptaría, como tercera opción, que la "
+"infraestructura informática de ${domain_name} interactuase con usted. Si "
+"está disponible entre aquellas para las que hemos desarrollado una interfaz "
+"de usuario, la utilizaremos para interactuar con usted"
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Su Marca de Comportamiento Cooperativo"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Como Cooperador, su Marca de Comportamiento Cooperativo resulta de las "
+"marcas que le asignan los demás Participantes Activos en los Grupos de "
+"Trabajo en los que ha participado para definir y adoptar Propuestas de "
+"Acción. Cada Participante Activo puede proporcionar una marca igual a +1, 0 "
+"o -1, según lo cooperativo que haya sido su comportamiento durante su "
+"participación activa en ese Grupo de Trabajo. Esta marca se \"olvida\" "
+"automáticamente y decae con el tiempo: se reduce a la mitad después de "
+"${forgetting_time_constant} días. El valor inicial de su Marca de "
+"Comportamiento Cooperativo es cero."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr ""
+"Fecha de la última actualización de su Marca de Comportamiento Cooperativo"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Es la última fecha en la que otro Cooperador le asignó una marca tras el fin "
+"de su participación activa en un Grupo de Trabajo que estaba definiendo y "
+"adoptando una Propuesta de Acción. El valor inicial de esa fecha es el de su "
+"inscripción como Cooperador"
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Número de acciones de la Cooperativa que posee"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Es el número total de acciones de la Cooperativa que posee, tras haberlas "
+"adquirido en nuestro portal web. En el momento de su registro, este número "
+"es igual a cero. Le invitamos a dirigirse lo antes posible a esta URL: "
+"${url_purchase_shares} para adquirir su(s) primera(s) acción(es). Disfrutará "
+"de todos sus derechos de decisión como Cooperador sólo después de haber "
+"comprado al menos una acción (y pagado su contribución anual). Puede "
+"adquirir más de una acción en el momento de registrarse, pero también en "
+"cualquier momento posterior. ¡Esto fortalece nuestra Cooperativa y todos se "
+"lo agradecemos!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Fecha de expiración de su cotización anual actual"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Fecha en la que vence su contribución anual actual, y antes de la cual debe "
+"pagarla de nuevo para conservar todos sus derechos de decisión como "
+"Cooperador. En el momento de su inscripción, esta fecha se fija en un "
+"momento en el pasado, lo que significa que debe pagarla ahora. Le invitamos "
+"a dirigirse lo antes posible a esta URL: ${url_pay_yearly_contrib} para "
+"pagar su primera aportación anual y participar así en el funcionamiento de "
+"nuestra Cooperativa. Disfrutará de todos sus derechos de decisión como "
+"Cooperador sólo después de haber pagado su aportación anual (y comprado al "
+"menos una acción)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Número internacional de cuenta bancaria (IBAN) de su cuenta bancaria"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Si decide abandonar la Cooperativa (cosa que todos lamentaríamos), "
+"necesitamos su IBAN para poder transferirle el producto de nuestra recompra "
+"de sus acciones de la Cooperativa. Por razones de seguridad, le aconsejamos "
+"que nos facilite esta información sólo en el caso de que decida abandonar la "
+"Cooperativa"
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr ""
+"Fecha en la que se borrarán todos sus datos de nuestra infraestructura "
+"informática"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"En caso de que abandone la Cooperativa, sus datos de identidad se "
+"conservarán durante ${Quarantine} días, antes de ser borrados completa e "
+"irrevocablemente de nuestros registros. Esto es para asegurar que un "
+"Cooperador que abandona la Cooperativa porque su Marca de Comportamiento "
+"Cooperativo es demasiado mala no pueda volver a registrarse inmediatamente "
+"con un pseudónimo y una Marca de Comportamiento Cooperativo vírgenes. En el "
+"momento de su inscripción, esta fecha se fija en un futuro muy lejano"
+
+msgid "avatar_label"
+msgstr "Una imagen que le represente (su avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Proporcione una fotografía que le represente en su interacción con la "
+"Comunidad. Para evitar represalias por parte de su empresa o sus clientes, "
+"le recomendamos que esta foto no permita rastrear su identidad en la vida "
+"real. Por lo tanto, en general no debería ser una fotografía suya (recuerde "
+"que los robots de búsqueda utilizan mucho el software de reconocimiento "
+"facial). La imagen debe estar en formato JPEG (extensión .JPG o .JPEG) y no "
+"debe superar los 5 MB"
