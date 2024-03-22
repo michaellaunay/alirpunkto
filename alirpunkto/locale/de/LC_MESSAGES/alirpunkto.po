@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-09 22:45+0100\n"
+"PO-Revision-Date: 2024-03-22 09:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -995,3 +995,266 @@ msgstr ""
 msgid "modification_to_profile_email_subject"
 msgstr ""
 "Link zur Änderung Ihres Profils in der IT-Infrastruktur von ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Bitte geben Sie hier alle Ihre Familiennamen bei der Geburt an (d. h. NICHT "
+"Ihren Familiennamen als verheiratete Person), wie sie in Ihren amtlichen "
+"Ausweispapieren stehen, und zwar in ihrer offiziellen Transkription in "
+"lateinischen Buchstaben (falls die Originalsprache ein anderes Alphabet als "
+"das lateinische verwendet)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Bitte geben Sie hier alle Ihre Vornamen an, wie sie in Ihren amtlichen "
+"Ausweispapieren stehen, und zwar in ihrer offiziellen Transkription in "
+"lateinischen Buchstaben (wenn die Originalsprache ein anderes Alphabet als "
+"das lateinische verwendet)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Text, der Sie beschreibt (Ihr Profiltext)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Bitte schreiben Sie hier einen Text, der Sie für alle anderen Mitglieder der "
+"Gemeinschaft beschreibt. Bitte konzentrieren Sie sich auf: (1) was Sie als "
+"Mitglied der Gemeinschaft tun möchten, und (2) welche Ressourcen (Erfahrung, "
+"Wissen, Zeit) Sie zur Verfügung haben"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Bitte geben Sie Ihr Geburtsdatum in folgendem Format an: TT/MM/JJJJ, d.h. "
+"(1) der Tag im Monat, zweistellig; (2) die Zahl des Monats, zweistellig; (3) "
+"das Jahr, vierstellig. Nur Personen, die das 18. Lebensjahr vollendet haben, "
+"können Genossenschaftler sein. Wenn Sie das 18. Lebensjahr noch nicht "
+"vollendet haben, laden wir Sie ein, sich als ordentliches Mitglied der "
+"Gemeinschaft zu registrieren - und den Status eines Genossenschaftlers zu "
+"erhalten, sobald Sie die Volljährigkeit erreicht haben."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr ""
+"Bitte geben Sie einen Mitgliedstaat der Europäischen Union an, dessen "
+"Staatsangehörigkeit Sie besitzen. Nur Bürger der Europäischen Union können "
+"Genossenchaftler sein"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Bitte wählen Sie einen Mitgliedstaat der Europäischen Union"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr ""
+"Dies ist die eindeutige Nummer, die Sie bei allen Vorgängen in der "
+"Gemeinschaft identifiziert"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Bitte geben Sie hier das Pseudonym ein, das Sie für die gesamte Dauer Ihrer "
+"Tätigkeit auf unserer IT-Plattform identifizieren wird. Wir empfehlen Ihnen "
+"DRINGEND, ein Pseudonym zu wählen, das die Rückverfolgung zu Ihrer "
+"wirklichen Identität unmöglich (oder äußerst schwierig) macht. Auf diese "
+"Weise schützen Sie die Vertraulichkeit Ihrer Meinungen (d.h. "
+"personenbezogene Daten, die einem besonderen Schutz gemäß der Allgemeinen "
+"Datenschutzverordnung - ADSV - unterliegen) vor jeder Form von Druck von "
+"außen im wirklichen Leben (z.B. durch Ihren Arbeitgeber oder Ihre Kunden). "
+"Seien Sie sehr vorsichtig! Wenn Sie sich einmal für ein Pseudonym "
+"entschieden haben, können Sie dieses Pseudonym NIE wieder ändern. Wählen Sie "
+"es mit Bedacht! /n Ihr Pseudonym muss zwischen ${MIN_PSEUDONYM_LENGTH} und "
+"${MAX_PSEUDONYM_LENGTH} Zeichen lang sein und darf nur Buchstaben des "
+"lateinischen Alphabets (A-Z, a-z), Zahlen (0-9), Unterstriche (_), Punkte "
+"(.), Bindestriche (-) und Leerzeichen ( ) enthalten. Es kann keine "
+"Buchstaben mit Akzenten, Umlauten und anderen diakritischen Zeichen "
+"enthalten, die für einige Sprachen spezifisch sind."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Die Angabe eines Pseudonyms ist erforderlich"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Bitte geben Sie Ihr Passwort ein. Ihr Passwort muss zwischen "
+"${password_minimum_length} und ${password_maximum_length}Zeichen lang sein, "
+"mindestens eine Ziffer, mindestens einen Kleinbuchstaben, mindestens einen "
+"Großbuchstaben und mindestens eines der folgenden Zeichen enthalten: '@', "
+"'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Bitte bestätigen Sie Ihr Passwort"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Die Bestätigung des Passworts ist erforderlich"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Bitte geben Sie die E-Mail-Adresse an, die die IT-Infrastruktur von "
+"${domain_name} verwenden wird, um mit Ihnen zu kommunizieren. Diese E-Mail-"
+"Adresse wird anderen Nutzern dieser IT-Infrastruktur niemals angezeigt"
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Bitte geben Sie die Sprache an, in der die IT-Infrastruktur von "
+"${domain_name} Ihrer Meinung nach mit Ihnen kommunizieren soll. Wenn sie "
+"unter den Sprachen verfügbar ist, für die wir eine Benutzeroberfläche "
+"entwickelt haben, werden wir sie für die Interaktion mit Ihnen verwenden"
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Bitte geben Sie die Sprache an, mit der Sie als zweite Wahl akzeptieren "
+"würden, dass die IT-Infrastruktur von ${domain_name} mit Ihnen interagiert. "
+"Wenn sie unter den Sprachen verfügbar ist, für die wir eine "
+"Benutzeroberfläche entwickelt haben, werden wir sie für die Interaktion mit "
+"Ihnen verwenden"
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr ""
+"Die Sprache, die Sie als dritte Wahl für die Kommunikation mit uns "
+"akzeptieren"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Bitte geben Sie die Sprache an, mit der Sie als dritte Wahl akzeptieren "
+"würden, dass die IT-Infrastruktur von ${domain_name} mit Ihnen interagiert. "
+"Wenn sie unter den Sprachen verfügbar ist, für die wir eine "
+"Benutzeroberfläche entwickelt haben, werden wir sie für die Interaktion mit "
+"Ihnen verwenden"
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Ihre Note für kooperatives Verhalten"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Als Genossenschaftler ergibt sich Ihre Note für kooperatives Verhalten aus "
+"den Noten, die Ihnen die anderen aktiven Teilnehmer der Arbeitsgruppen, in "
+"denen Sie an der Ausarbeitung und Annahme von Aktionsvorschlägen mitgewirkt "
+"haben, gegeben haben. Jeder aktive Teilnehmer kann eine Note von +1, 0 oder "
+"-1 vergeben, je nachdem, wie kooperativ Sie sich während Ihrer aktiven "
+"Teilnahme an dieser Arbeitsgruppe verhalten haben. Diese Note wird dann "
+"automatisch \"vergessen\" und verfällt mit der Zeit: Sie wird nach "
+"${forgetting_time_constant} Tagen halbiert. Der anfängliche Wert Ihrer Note "
+"für kooperatives Verhalten ist Null."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Datum der letzten Aktualisierung Ihrer Note für kooperatives Verhalten"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Dies ist das späteste Datum, an dem ein anderer Genossenschaftler Ihnen nach "
+"dem Ende Ihrer aktiven Teilnahme an einer Arbeitsgruppe, die einen "
+"Aktionsvorschlag ausarbeitete und verabschiedete, eine Note zugewiesen hat. "
+"Der Anfangswert dieses Datums ist der Ihrer Registrierung als "
+"Genossenschaftler"
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Anzahl der Anteile der Genossenschaft, die Sie besitzen"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Dies ist die Gesamtzahl der Genossenschaftsanteile, die Sie besitzen, "
+"nachdem Sie sie über unser Webportal erworben haben. Bei Ihrer Registrierung "
+"ist diese Zahl gleich Null. Wir laden Sie ein, so schnell wie möglich zu "
+"dieser URL zu gehen: ${url_purchase_shares} , um Ihre ersten Anteile zu "
+"erwerben. Erst wenn Sie mindestens einen Anteil erworben (und Ihren "
+"Jahresbeitrag gezahlt) haben, verfügen Sie über die vollen "
+"Entscheidungsrechte als Genossenschafter. Sie können bei der Registrierung, "
+"aber auch jederzeit danach, mehr als einen Anteil erwerben. Das stärkt "
+"unsere Genossenschaft, und wir alle sind Ihnen dafür dankbar!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Datum, an dem Ihr aktueller jährlicher Beitrag abläuft"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Datum, an dem Ihr aktueller Jahresbeitrag abläuft und vor dem Sie ihn erneut "
+"zahlen müssen, um Ihre vollen Entscheidungsrechte als Genossenschafter zu "
+"behalten. Bei Ihrer Anmeldung wird dieses Datum auf einen Zeitpunkt in der "
+"Vergangenheit festgelegt, was bedeutet, dass Sie den Beitrag jetzt zahlen "
+"sollten. Wir bitten Sie, so bald wie möglich zu dieser URL zu gehen: "
+"${url_pay_yearly_contrib} , um Ihren ersten Jahresbeitrag zu entrichten und "
+"sich damit an den Aktivitäten unserer Genossenschaft zu beteiligen. Erst "
+"wenn Sie Ihren Jahresbeitrag gezahlt (und mindestens einen Anteil "
+"gezeichnet) haben, können Sie als Genossenschafter voll mitbestimmen."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Internationale Bankkontonummer (IBAN) Ihres Bankkontos"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Wenn Sie sich entscheiden, die Genossenschaft zu verlassen (was wir alle "
+"bedauern würden), benötigen wir Ihre IBAN, um Ihnen den Erlös aus dem "
+"Rückkauf Ihrer Genossenschaftsanteile zu überweisen. Aus Sicherheitsgründen "
+"raten wir Ihnen, diese Informationen nur anzugeben, wenn Sie die "
+"Genossenschaft verlassen wollen"
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr ""
+"Datum, an dem alle Ihre Daten aus unserer IT-Infrastruktur gelöscht werden"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Wenn Sie die Genossenschaft verlassen, werden Ihre Identitätsdaten für eine "
+"Dauer von ${Quarantine} Tagen gespeichert, bevor sie vollständig und "
+"unwiderruflich aus unseren Unterlagen gelöscht werden. Damit soll "
+"sichergestellt werden, dass ein Genossenschafter, der die Genossenschaft "
+"verlässt, weil seine Note für kooperatives Verhalten zu schlecht ist, sich "
+"nicht sofort wieder mit einem neuen Pseudonym und einer neuen Note für "
+"kooperatives Verhalten anmelden kann. Bei Ihrer Anmeldung wird dieses Datum "
+"in eine sehr ferne Zukunft gelegt"
+
+msgid "avatar_label"
+msgstr "Ein Bild, das Sie repräsentiert (Ihr Avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Bitte stellen Sie ein Bild zur Verfügung, das Sie bei Ihrer Interaktion mit "
+"der Gemeinschaft zeigt. Um Sie vor eventuellen Repressalien seitens Ihres "
+"Arbeitgebers oder Ihrer Kunden zu schützen, empfehlen wir, dass dieses Bild "
+"keine Rückschlüsse auf Ihre Identität im wirklichen Leben zulässt. Es sollte "
+"also generell kein Foto von Ihnen sein (denken Sie daran, dass "
+"Gesichtserkennungssoftware massiv von Suchrobotern eingesetzt wird). Das "
+"Bild sollte nur im JPEG-Format (Erweiterung .JPG oder .JPEG) vorliegen und "
+"nicht größer als 5 MB sein"
