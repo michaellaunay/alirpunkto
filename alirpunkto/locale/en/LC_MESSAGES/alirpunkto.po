@@ -867,7 +867,7 @@ msgid "date_erasure_all_data_description"
 msgstr "If and when you leave the Cooperative, your identity data will be kept for a duration of ${Quarantine} days, before being fully and irrevocably erased from our records. This is to ensure that a Cooperator quitting the Cooperative because his/her Cooperative Behaviour Mark is too bad cannot re-register again immediately with a virgin pseudonym and Cooperative Behaviour Mark. Upon your registration, this date is set in a very distant future"
 
 msgid "avatar_label"
-msgstr "A picture to represent yuo (your avatar)"
+msgstr "A picture to represent you (your avatar)"
 
 msgid "avatar_description"
 msgstr "Please provide a picture representing you as a member of the Community. For the sake of preserving you from any reprisals from your employer or clients, we recommend that this picture does not enable to track back to your identity in real life. It should hence in general not be a photograph of yourself (remember that face recognition software is massively used by search robots). The picture should be in JPEG format only (extension .JPG or .JPEG), and not larger than 5 MB. \n <strong> We believe that this information is useful because</strong> a picture make it easier for the other members of the Community to recognise you. Sometimes a picture speaks much louder than a long speech. With this image, you're expressing a lot about yourself, in a universal language. Make the most of it!"
