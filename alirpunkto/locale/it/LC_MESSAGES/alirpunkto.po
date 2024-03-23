@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-23 10:56+0100\n"
+"PO-Revision-Date: 2024-03-23 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: it_IT\n"
@@ -31,21 +31,21 @@ msgstr "Accedi"
 
 msgid "welcome_msg"
 msgstr ""
-"Benvenuti in Alirpunkto, il servizio centralizzato per le applicazioni "
-"utilizzate nell'infrastruttura IT di ${site_name}."
+"Benvenuti in ${site_name}, il servizio centralizzato per le applicazioni "
+"utilizzate nell'infrastruttura IT di ${domain_name}."
 
 msgid "all_applications_msg"
 msgstr ""
 "Tutte le applicazioni necessarie per partecipare alle attività di "
-"${site_name} in un unico posto."
+"${domain_name} in un unico posto."
 
 msgid "register_or_login_msg"
 msgstr "Registratevi o effettuate il login per iniziare."
 
 msgid "logged_in_msg_title"
 msgstr ""
-"Alirpunkto, il servizio centralizzato per le applicazioni utilizzate "
-"nell'infrastruttura IT di ${site_name}"
+"${site_name}, il servizio centralizzato per le applicazioni utilizzate "
+"nell'infrastruttura IT di ${domain_name}"
 
 msgid "logged_in_msg"
 msgstr "Hai effettuato il login come ${user}."
@@ -538,7 +538,7 @@ msgstr "Domanda non trovata."
 msgid "cosmopolitical_cooperative_description"
 msgstr ""
 "<div>\n"
-"<h2><strong>Grazie per il vostro interesse nelle attività di ${site_name}! "
+"<h2><strong>Grazie per il vostro interesse nelle attività di ${domain_name}! "
 "Ecco il posto giusto per iscriversi </strong></h2>\n"
 "<p>La Cooperativa CosmoPolitica sostiene gli individui e trasforma il "
 "sistema economico, sociale e politico esistente verso una società "
@@ -743,50 +743,51 @@ msgstr ""
 
 msgid "email_copy_id_verification_subject"
 msgstr ""
-"it - ${site_name} - La prego di verificare la mia identità come nuovo "
+"it - ${domain_name} - La prego di verificare la mia identità come nuovo "
 "potenziale Cooperatore"
 
 msgid "email_copy_id_verification_body"
 msgstr ""
 "    Cari Verificatori,\n"
 "    Le scrivo per completare il processo di verifica dell'identità per la "
-"mia richiesta di diventare Cooperatore di ${site_name}. In allegato a questa "
-"e-mail, troverà una copia parziale del mio documento d'identità ufficiale.\n"
+"mia richiesta di diventare Cooperatore di ${domain_name}. In allegato a "
+"questa e-mail, troverà una copia parziale del mio documento d'identità "
+"ufficiale.\n"
 "    Si noti che alcune informazioni sensibili sono state mascherate per "
 "motivi di sicurezza. Tuttavia, il documento contiene le informazioni "
 "necessarie per verificare la mia identità secondo il processo di "
-"registrazione di ${site_name}.\n"
+"registrazione di ${domain_name}.\n"
 "    Le chiedo gentilmente di esaminare se possibile entro i prossimi 3 "
 "giorni il documento allegato, per votare l'adeguatezza tra:\n"
 "        * le informazioni sull'identità che ha ricevuto direttamente via e-"
-"mail dalla piattaforma informatica di ${site_name} (e che le verranno "
+"mail dalla piattaforma informatica di ${domain_name} (e che le verranno "
 "ricordate sull'interfaccia di voto) e \n"
 "        * le informazioni sull'identità che può leggere sulla copia parziale "
 "allegata del mio documento d'identità ufficiale.\n"
 "    Il link per votare questa adeguatezza è il seguente: ${voting_url}.</p>\n"
 "    La ringrazio calorosamente in anticipo per aver supportato il processo "
-"della mia registrazione come Cooperatore di ${site_name}. In caso di "
+"della mia registrazione come Cooperatore di ${domain_name}. In caso di "
 "ulteriori domande o di necessità di informazioni aggiuntive, non esiti a "
 "contattarmi direttamente.\n"
 "   Buoni saluti,\n"
 "    ${signature}\n"
 "    Allegato: [Nome del file del documento identificativo]\n"
 "    Questa e-mail è stata generata con l'assistenza della funzione di "
-"verifica dell'identità di ${site_name}. Se non è il Verificatore assegnato "
+"verifica dell'identità di ${domain_name}. Se non è il Verificatore assegnato "
 "all'applicazione di ${signature} e ha ricevuto questa e-mail per errore, la "
-"preghiamo di informare l'amministratore di ${site_name}, al seguente "
+"preghiamo di informare l'amministratore di ${domain_name}, al seguente "
 "indirizzo ${administrator}."
 
 msgid "email_video_id_verification_subject"
 msgstr ""
-"it - ${site_name} - La prego di verificare tramite videoconferenza la mia "
+"it - ${domain_name} - La prego di verificare tramite videoconferenza la mia "
 "identità come nuovo potenziale Cooperatore"
 
 msgid "email_video_id_verification_body"
 msgstr ""
 " Cari Verificatori,\n"
 "    Le scrivo per completare il processo di verifica dell'identità per la "
-"mia richiesta di diventare Cooperatore de ${site_name}. Vorrei proporre un "
+"mia richiesta di diventare Cooperatore de ${domain_name}. Vorrei proporre un "
 "incontro in videoconferenza a tale scopo.\n"
 "    Ecco alcune fasce orarie che propongo per la videoconferenza. La prego "
 "di notare che vivo in Italia (La prego di adeguarsi al Suo Paese/regione di "
@@ -828,22 +829,22 @@ msgstr ""
 "    Una volta tenuto questo incontro in videoconferenza, le chiedo "
 "gentilmente di votare per confermare o rifiutare l'adeguatezza tra:\n"
 "        * le informazioni sull'identità che ha ricevuto direttamente via e-"
-"mail dalla piattaforma informatica di ${site_name} (e che le verranno "
+"mail dalla piattaforma informatica di ${domain_name} (e che le verranno "
 "ricordate sull'interfaccia di voto) e \n"
 "        * le informazioni sull'identità che avrà visto durante la "
 "videoconferenza.\n"
 "    Il link per votare questa adeguatezza dopo questa videoconferenza è il "
 "seguente: ${voting_url}.\n"
 "    La ringrazio calorosamente in anticipo per aver supportato il processo "
-"della mia registrazione come Cooperatore di ${site_name}. In caso di "
+"della mia registrazione come Cooperatore di ${domain_name}. In caso di "
 "ulteriori domande o di necessità di informazioni aggiuntive, non esiti a "
 "contattarmi direttamente.\n"
 "    Sinceramente,\n"
 "    ${signature]\n"
 "    Questa e-mail è stata generata con l'assistenza della funzione di "
-"verifica dell'identità di ${site_name}. Se non è il Verificatore assegnato "
+"verifica dell'identità di ${domain_name}. Se non è il Verificatore assegnato "
 "all'applicazione di ${signature} e ha ricevuto questa e-mail per errore, la "
-"preghiamo di informare l'amministratore di ${site_name}, al seguente "
+"preghiamo di informare l'amministratore di ${domain_name}, al seguente "
 "indirizzo ${administrator}."
 
 msgid "forget_email_in_member_list"
@@ -855,7 +856,7 @@ msgstr "Reimposta la tua password"
 msgid "forget_email_send_error"
 msgstr ""
 "Si è verificato un errore durante l'invio dell'e-mail di reset, si prega di "
-"contattare l'amministratore"
+"contattare l'amministratore, all'indrizzo ${administrator}"
 
 msgid "member_states_created_name"
 msgstr "creato"
@@ -997,7 +998,6 @@ msgid "description_label"
 msgstr "Testo che vi descrive (il testo del vostro profilo)"
 
 #: alirpunkto/schemas/register_form.py:48
-#, fuzzy
 msgid "description_description"
 msgstr ""
 "Scrivete qui un testo che vi descriva, <strong>nella lingua che preferite</"
@@ -1012,7 +1012,6 @@ msgstr ""
 "l'interazione molto più facile!"
 
 #: alirpunkto/schemas/register_form.py:55
-#, fuzzy
 msgid "birthdate_description"
 msgstr ""
 "Indicare la data di nascita nel seguente formato: GG/MM/AAAA, ossia (1) il "
@@ -1023,19 +1022,16 @@ msgstr ""
 "Cooperatore non appena avrai raggiunto la maggiore età."
 
 #: alirpunkto/schemas/register_form.py:67
-#, fuzzy
 msgid "nationality_description"
 msgstr ""
 "Indicare uno Stato membro dell'Unione europea di cui si è cittadino/a. Solo "
 "i cittadini dell'Unione europea possono essere cooperatori"
 
 #: alirpunkto/schemas/register_form.py:70
-#, fuzzy
 msgid "select_a_country"
 msgstr "Selezionare uno Stato membro dell'Unione europea"
 
 #: alirpunkto/schemas/register_form.py:104
-#, fuzzy
 msgid "cooperator_number_description"
 msgstr ""
 "È il numero unico che vi identifica in tutti i processi che si svolgono "
@@ -1046,7 +1042,6 @@ msgid "cooperator_number_required"
 msgstr ""
 
 #: alirpunkto/schemas/register_form.py:112
-#, fuzzy
 msgid "pseudonym_description"
 msgstr ""
 "Inserite qui lo pseudonimo che vi identificherà per tutta la durata della "
@@ -1066,12 +1061,10 @@ msgstr ""
 "altri segni diacritici specifici di alcune lingue."
 
 #: alirpunkto/schemas/register_form.py:115
-#, fuzzy
 msgid "pseudonym_required"
 msgstr "È necessario fornire il proprio pseudonimo"
 
 #: alirpunkto/schemas/register_form.py:121
-#, fuzzy
 msgid "password_description"
 msgstr ""
 "Si prega di fornire la propria password. La password deve avere una "
@@ -1081,17 +1074,14 @@ msgstr ""
 "caratteri: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
 #: alirpunkto/schemas/register_form.py:130
-#, fuzzy
 msgid "password_confirm_description"
 msgstr "Si prega di confermare il passowrd"
 
 #: alirpunkto/schemas/register_form.py:132
-#, fuzzy
 msgid "confirm_password_required"
-msgstr "È necessario confermare la password"
+msgstr "È necessario confermare il password"
 
 #: alirpunkto/schemas/register_form.py:138
-#, fuzzy
 msgid "email_description"
 msgstr ""
 "Indicare l'indirizzo e-mail che l'infrastruttura informatica di "
@@ -1107,7 +1097,6 @@ msgstr ""
 "proprietari dei giganti digitali (noti anche come \"GAFAM\")."
 
 #: alirpunkto/schemas/register_form.py:144
-#, fuzzy
 msgid "first_interaction_language_description"
 msgstr ""
 "Indicate la lingua con cui preferite che l'infrastruttura informatica di "
@@ -1121,7 +1110,6 @@ msgstr ""
 "con voi in una lingua che comprendiate al meglio."
 
 #: alirpunkto/schemas/register_form.py:151
-#, fuzzy
 msgid "second_interaction_language_description"
 msgstr ""
 "Indicate la lingua con cui accettereste, come seconda scelta, che "
@@ -1137,11 +1125,9 @@ msgstr ""
 "vi chiediamo se potete utilizzare un'altra lingua."
 
 #: alirpunkto/schemas/register_form.py:156
-#, fuzzy
 msgid "third_interaction_language_label"
 msgstr "La lingua che accettate come terza scelta per interagire con noi"
 
-#, fuzzy
 msgid "third_interaction_language_description"
 msgstr ""
 "Indicate la lingua con cui accettereste, come terza scelta, che "
@@ -1194,7 +1180,6 @@ msgid "cooperative_behaviour_mark_update_required"
 msgstr ""
 
 #: alirpunkto/schemas/register_form.py:180
-#, fuzzy
 msgid "number_shares_owned_label"
 msgstr "Numero di azioni della Cooperativa che possedete"
 
@@ -1220,7 +1205,6 @@ msgid "date_end_validity_yearly_contribution_label"
 msgstr "Data di scadenza del suo contributo annuale attuale"
 
 #: alirpunkto/schemas/register_form.py:189
-#, fuzzy
 msgid "date_end_validity_yearly_contribution_description"
 msgstr ""
 "Data in cui scade il suo attuale contributo annuale e prima della quale "
@@ -1238,13 +1222,11 @@ msgid "date_end_validity_yearly_contribution_required"
 msgstr ""
 
 #: alirpunkto/schemas/register_form.py:199
-#, fuzzy
 msgid "iban_label"
 msgstr ""
-"Numero di conto bancario internazionale (IBAN) del vostro conto bancario"
+"Numero internazionale di conto bancario (IBAN) del vostro conto bancario"
 
 #: alirpunkto/schemas/register_form.py:200
-#, fuzzy
 msgid "iban_description"
 msgstr ""
 "Se e quando deciderete di lasciare la Cooperativa (cosa che dispiacerebbe a "
@@ -1258,7 +1240,6 @@ msgid "iban_required"
 msgstr ""
 
 #: alirpunkto/schemas/register_form.py:207
-#, fuzzy
 msgid "date_erasure_all_data_title"
 msgstr ""
 "Data in cui tutti i vostri dati saranno cancellati dalla nostra "
