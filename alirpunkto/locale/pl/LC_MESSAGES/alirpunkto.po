@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-23 14:50+0100\n"
+"PO-Revision-Date: 2024-03-23 14:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: pl\n"
@@ -29,8 +29,11 @@ msgstr "Hasło"
 msgid "login_label"
 msgstr "Zaloguj się"
 
+#, fuzzy
 msgid "welcome_msg"
 msgstr ""
+"Witamy w ${site_name}, scentralizowanej usłudze dla aplikacji używanych w "
+"infrastrukturze IT ${domain_name}."
 
 #, fuzzy
 msgid "all_applications_msg"
@@ -835,13 +838,11 @@ msgstr ""
 "liczbę Weryfikatorów tożsamości. Skontaktuj się z administratorem systemu "
 "pod adresem ${administrator}, aby rozwiązać ten problem."
 
-#, fuzzy
 msgid "email_copy_id_verification_subject"
 msgstr ""
 "pl - ${domain_name} - Proszę zweryfikować moją tożsamość jako nowego "
 "potencjalnego Współpracownika"
 
-#, fuzzy
 msgid "email_copy_id_verification_body"
 msgstr ""
 "    Drodzy Weryfikatorzy,\n"
@@ -876,7 +877,6 @@ msgstr ""
 "poinformować o tym administratora ${domain_name} pod adresem "
 "${administrator}."
 
-#, fuzzy
 msgid "email_video_id_verification_subject"
 msgstr ""
 "pl - ${domain_name} - Proszę zweryfikować moją tożsamość za pośrednictwem "
@@ -1228,7 +1228,6 @@ msgstr ""
 "gigantów (znanych również jako \"GAFAM\")."
 
 #: alirpunkto/schemas/register_form.py:144
-#, fuzzy
 msgid "first_interaction_language_description"
 msgstr ""
 "Prosimy o podanie języka, w którym użytkownik chciałby, aby infrastruktura "
@@ -1242,7 +1241,6 @@ msgstr ""
 "użytkownikiem w języku, który jest dla niego jak najbardziej zrozumiały."
 
 #: alirpunkto/schemas/register_form.py:151
-#, fuzzy
 msgid "second_interaction_language_description"
 msgstr ""
 "Podaj język, w którym zaakceptowałbyś, jako drugi wybór, interakcję z Tobą "
