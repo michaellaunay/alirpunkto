@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-09 22:59+0100\n"
+"PO-Revision-Date: 2024-03-23 10:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: it_IT\n"
@@ -976,3 +976,321 @@ msgid "modification_to_profile_email_subject"
 msgstr ""
 "Link per modificare il vostro profilo sull'infrastruttura IT di "
 "${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Indicare qui tutti i nomi di famiglia alla nascita (cioè NON il nome di "
+"famiglia come persona sposata), come scritto nei documenti di identità "
+"ufficiali, nella loro trascrizione ufficiale in caratteri latini (se la "
+"lingua originale usa un alfabeto diverso dal latino)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Indicare qui tutti i nomi, così come sono scritti nei documenti d'identità "
+"ufficiali, nella loro trascrizione ufficiale in caratteri latini (se la "
+"lingua d'origine usa un alfabeto diverso da quello latino)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Testo che vi descrive (il testo del vostro profilo)"
+
+#: alirpunkto/schemas/register_form.py:48
+#, fuzzy
+msgid "description_description"
+msgstr ""
+"Scrivete qui un testo che vi descriva, <strong>nella lingua che preferite</"
+"strong>, in modo che tutti gli altri membri della Comunità possano "
+"conoscervi un po' meglio. Vi suggeriamo di concentrarvi su: (1) da dove "
+"venite, (2) cosa fate, (3) cosa volete fare come membri della Comunità e (4) "
+"le risorse (esperienza, conoscenze, tempo) che avete a disposizione.\n"
+" <strong> Riteniamo che queste informazioni siano utili perché</strong> "
+"presentarsi agli altri con parole proprie dà un volto umano alla propria "
+"identità digitale sulla nostra infrastruttura informatica. Con questo testo, "
+"ogni membro della Comunità vi conosce un po' meglio e questo rende "
+"l'interazione molto più facile!"
+
+#: alirpunkto/schemas/register_form.py:55
+#, fuzzy
+msgid "birthdate_description"
+msgstr ""
+"Indicare la data di nascita nel seguente formato: GG/MM/AAAA, ossia (1) il "
+"giorno del mese, a 2 cifre; (2) il numero del mese, a 2 cifre; (3) l'anno, a "
+"4 cifre. Solo le persone che hanno compiuto il 18° anno di età possono "
+"essere Cooperatori. Se non hai ancora compiuto 18 anni, ti invitiamo a "
+"registrarti come Socio Ordinario della Comunità e a passare allo status di "
+"Cooperatore non appena avrai raggiunto la maggiore età."
+
+#: alirpunkto/schemas/register_form.py:67
+#, fuzzy
+msgid "nationality_description"
+msgstr ""
+"Indicare uno Stato membro dell'Unione europea di cui si è cittadino/a. Solo "
+"i cittadini dell'Unione europea possono essere cooperatori"
+
+#: alirpunkto/schemas/register_form.py:70
+#, fuzzy
+msgid "select_a_country"
+msgstr "Selezionare uno Stato membro dell'Unione europea"
+
+#: alirpunkto/schemas/register_form.py:104
+#, fuzzy
+msgid "cooperator_number_description"
+msgstr ""
+"È il numero unico che vi identifica in tutti i processi che si svolgono "
+"nella Comunità"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+#, fuzzy
+msgid "pseudonym_description"
+msgstr ""
+"Inserite qui lo pseudonimo che vi identificherà per tutta la durata della "
+"vostra attività sulla nostra piattaforma informatica. Le consigliamo "
+"vivamente di scegliere uno pseudonimo che renda impossibile (o estremamente "
+"difficile) risalire alla sua vera identità. In questo modo, proteggerete la "
+"riservatezza delle vostre opinioni (cioè i dati personali che sono oggetto "
+"di una protezione specifica ai sensi del Regolamento generale sulla "
+"protezione dei dati - RGPD) contro qualsiasi forma di pressione esterna "
+"nella vita reale (ad esempio da parte del vostro datore di lavoro o dei "
+"vostri clienti). Fate molta attenzione! Una volta scelto, non potrete MAI "
+"più cambiare questo pseudonimo. Sceglietelo con cura!\n"
+" Lo pseudonimo deve avere una lunghezza compresa tra ${MIN_PSEUDONYM_LENGTH} "
+"e ${MAX_PSEUDONYM_LENGTH} caratteri e può contenere solo lettere "
+"dell'alfabeto latino (A-Z, a-z), numeri (0-9), trattini (_), punti (.), "
+"trattini (-) e spazi ( ). Non può contenere lettere con accenti, umlaut e "
+"altri segni diacritici specifici di alcune lingue."
+
+#: alirpunkto/schemas/register_form.py:115
+#, fuzzy
+msgid "pseudonym_required"
+msgstr "È necessario fornire il proprio pseudonimo"
+
+#: alirpunkto/schemas/register_form.py:121
+#, fuzzy
+msgid "password_description"
+msgstr ""
+"Si prega di fornire la propria password. La password deve avere una "
+"lunghezza compresa tra ${password_minimum_length} e "
+"${password_maximum_length} caratteri, contenere almeno una cifra, almeno una "
+"lettera minuscola, almeno una lettera maiuscola e almeno uno dei seguenti "
+"caratteri: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+#, fuzzy
+msgid "password_confirm_description"
+msgstr "Si prega di confermare il passowrd"
+
+#: alirpunkto/schemas/register_form.py:132
+#, fuzzy
+msgid "confirm_password_required"
+msgstr "È necessario confermare la password"
+
+#: alirpunkto/schemas/register_form.py:138
+#, fuzzy
+msgid "email_description"
+msgstr ""
+"Indicare l'indirizzo e-mail che l'infrastruttura informatica di "
+"${domain_name} utilizzerà per interagire con voi. \n"
+" Si consiglia di scegliere un indirizzo e-mail che si controlla spesso. "
+"Questo indirizzo e-mail non verrà mai mostrato ad altri utenti di questa "
+"infrastruttura informatica. \n"
+" <strong>Abbiamo bisogno di queste informazioni per</strong> interagire "
+"spesso con voi, per tenervi informati sugli sviluppi della Cooperativa, per "
+"offrirvi la possibilità di agire o contribuire alle decisioni. L'e-mail è il "
+"mezzo di comunicazione più utilizzato in Europa, è universale e si basa su "
+"standard aperti e liberi, a differenza dei sistemi di messaggistica "
+"proprietari dei giganti digitali (noti anche come \"GAFAM\")."
+
+#: alirpunkto/schemas/register_form.py:144
+#, fuzzy
+msgid "first_interaction_language_description"
+msgstr ""
+"Indicate la lingua con cui preferite che l'infrastruttura informatica di "
+"${domain_name} interagisca con voi. \n"
+" Vi consigliamo di scegliere la lingua che conoscete meglio, tra le lingue "
+"ufficiali dell'Unione Europea o l'esperanto. Se è disponibile tra quelle per "
+"le quali abbiamo sviluppato un'interfaccia utente, la utilizzeremo per "
+"interagire con voi. \n"
+" <strong>Abbiamo bisogno di questa informazione perché</strong>, per ragioni "
+"di correttezza e di rispetto dei principi democratici, vogliamo interagire "
+"con voi in una lingua che comprendiate al meglio."
+
+#: alirpunkto/schemas/register_form.py:151
+#, fuzzy
+msgid "second_interaction_language_description"
+msgstr ""
+"Indicate la lingua con cui accettereste, come seconda scelta, che "
+"l'infrastruttura informatica di ${domain_name} interagisca con voi. \n"
+" Vi consigliamo di scegliere un'altra lingua ufficiale dell'Unione Europea o "
+"l'esperanto, che comprendete ragionevolmente bene. Se è disponibile tra "
+"quelle per le quali abbiamo sviluppato un'interfaccia utente, e se la vostra "
+"lingua preferita non è disponibile, la utilizzeremo per interagire con "
+"voi. \n"
+" <strong>Abbiamo bisogno di queste informazioni perché</strong>, nonostante "
+"i nostri sforzi, potrebbe accadere che la vostra lingua preferita non sia "
+"disponibile sull'interfaccia utente del nostro software. Per questo motivo "
+"vi chiediamo se potete utilizzare un'altra lingua."
+
+#: alirpunkto/schemas/register_form.py:156
+#, fuzzy
+msgid "third_interaction_language_label"
+msgstr "La lingua che accettate come terza scelta per interagire con noi"
+
+#, fuzzy
+msgid "third_interaction_language_description"
+msgstr ""
+"Indicate la lingua con cui accettereste, come terza scelta, che "
+"l'infrastruttura informatica di ${domain_name} interagisca con voi. \n"
+" Vi consigliamo di scegliere un'altra lingua ufficiale dell'Unione Europea o "
+"l'esperanto, che siete comunque in grado di comprendere. Se è disponibile "
+"tra quelle per le quali abbiamo sviluppato un'interfaccia utente, e se non è "
+"disponibile né la vostra lingua preferita né la vostra seconda lingua, la "
+"utilizzeremo per interagire con voi. \n"
+" <strong>Abbiamo bisogno di queste informazioni perché</strong>, nonostante "
+"i nostri sforzi, potrebbe accadere che la vostra lingua preferita e la "
+"vostra seconda lingua non siano disponibili sull'interfaccia utente del "
+"nostro software. Per questo motivo vi chiediamo se potete utilizzare una "
+"terza lingua. Siamo consapevoli del fatto che per voi interagire con noi "
+"utilizzando tale lingua è una situazione insoddisfacente, come lo è per noi. "
+"Ci scusiamo per questo."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Il vostro Punteggio di Comportamento Cooperativo"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"In qualità di Cooperatore, il vostro Punteggio di Comportamento Cooperativo "
+"risulta dai punteggi assegnati dagli altri Partecipanti Attivi ai Gruppi di "
+"Lavoro a cui avete partecipato per definire e adottare Proposte di Azione. "
+"Ogni Partecipante Attivo può assegnare un punteggio pari a +1, 0 o -1, a "
+"seconda di quanto sia stato collaborativo il vostro comportamento durante la "
+"vostra partecipazione attiva a quel Gruppo di Lavoro. Questo voto viene "
+"automaticamente \"dimenticato\" e decade nel tempo: si dimezza dopo "
+"${forgetting_time_constant} giorni. Il valore iniziale del voto di "
+"comportamento cooperativo è zero."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr ""
+"Data dell'ultimo aggiornamento del vostro Punteggio di Comportamento "
+"Cooperativo"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Si tratta dell'ultima data in cui un altro cooperatore vi ha assegnato un "
+"punteggio dopo la fine della vostra partecipazione attiva a un Gruppo di "
+"Lavoro che stava definendo e adottando una Proposta d'Azione. Il valore "
+"iniziale di tale data è quello della vostra registrazione come Cooperatore"
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+#, fuzzy
+msgid "number_shares_owned_label"
+msgstr "Numero di azioni della Cooperativa che possedete"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"È il numero totale di azioni della Cooperativa che possedete, dopo averle "
+"acquistate sul nostro portale web. Al momento della registrazione, questo "
+"numero è pari a zero. Vi invitiamo a recarvi al più presto a questo URL: "
+"${url_purchase_shares} per acquistare le vostre prime azioni. Potrete godere "
+"di tutti i diritti decisionali come Cooperatori solo dopo aver acquistato "
+"almeno un'azione (e aver pagato il vostro contributo annuale). Siete "
+"invitati ad acquistare più di un'azione, al momento dell'iscrizione, ma "
+"anche in seguito, in qualsiasi momento. Questo rafforza la nostra "
+"Cooperativa e noi tutti vi siamo grati per questo!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Data di scadenza del suo contributo annuale attuale"
+
+#: alirpunkto/schemas/register_form.py:189
+#, fuzzy
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Data in cui scade il suo attuale contributo annuale e prima della quale "
+"dovrà pagarlo nuovamente per mantenere i suoi pieni diritti decisionali come "
+"Cooperatore. Al momento dell'iscrizione, questa data viene fissata in un "
+"momento passato, il che significa che deve pagarla ora. La invitiamo a "
+"recarsi il prima possibile a questo URL: ${url_pay_yearly_contrib} per "
+"versare il suo primo contributo annuale e partecipare così alle operazioni "
+"della nostra Cooperativa. Potrà godere di tutti i diritti decisionali come "
+"Cooperatore solo dopo aver versato il suo contributo annuale (e aver "
+"acquistato almeno un'azione)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+#, fuzzy
+msgid "iban_label"
+msgstr ""
+"Numero di conto bancario internazionale (IBAN) del vostro conto bancario"
+
+#: alirpunkto/schemas/register_form.py:200
+#, fuzzy
+msgid "iban_description"
+msgstr ""
+"Se e quando deciderete di lasciare la Cooperativa (cosa che dispiacerebbe a "
+"tutti noi), abbiamo bisogno del vostro IBAN per potervi trasferire il "
+"ricavato del nostro riacquisto delle vostre azioni della Cooperativa. Per "
+"motivi di sicurezza, vi consigliamo di fornire questa informazione solo se e "
+"quando prevedete di lasciare la Cooperativa"
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+#, fuzzy
+msgid "date_erasure_all_data_title"
+msgstr ""
+"Data in cui tutti i vostri dati saranno cancellati dalla nostra "
+"infrastruttura IT"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Se e quando lascerete la Cooperativa, i vostri dati di identità saranno "
+"conservati per un periodo di ${Quarantine} giorni, prima di essere "
+"completamente e irrevocabilmente cancellati dai nostri archivi. Questo per "
+"garantire che un Cooperatore che abbandona la Cooperativa perché il suo "
+"Punteggio di Comportamento Cooperativo è troppo negativo non possa "
+"iscriversi di nuovo immediatamente con uno pseudonimo e un marchio di "
+"comportamento cooperativo vergini. Al momento dell'iscrizione, questa data è "
+"fissata in un futuro molto lontano"
+
+msgid "avatar_label"
+msgstr "Un'immagine che la rappresenta (il suo avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Si prega di fornire un'immagine che vi rappresenti come membri della "
+"Comunità. Per tutelarvi da eventuali ritorsioni da parte del vostro datore "
+"di lavoro o dei vostri clienti, vi raccomandiamo che questa immagine non "
+"permetta di risalire alla vostra identità nella vita reale. In generale, "
+"quindi, non dovrebbe essere una fotografia di voi stessi (ricordate che i "
+"software di riconoscimento facciale sono molto utilizzati dai robot di "
+"ricerca). L'immagine deve essere esclusivamente in formato JPEG (estensione ."
+"JPG o .JPEG) e non deve superare i 5 MB. \n"
+" <strong> Riteniamo che questa informazione sia utile perché</strong> una "
+"immagine rende più facile il riconoscimento da parte degli altri membri "
+"della Comunità. A volte un'immagine parla molto più forte di un lungo "
+"discorso. Con questa immagine esprimete molto di voi stessi, in un "
+"linguaggio universale. Sfruttatela al meglio!"
