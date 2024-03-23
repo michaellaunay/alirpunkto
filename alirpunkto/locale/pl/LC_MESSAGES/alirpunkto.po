@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-09 23:09+0100\n"
+"PO-Revision-Date: 2024-03-23 14:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: pl\n"
@@ -623,7 +623,7 @@ msgstr "Nie znaleziono aplikacji."
 msgid "cosmopolitical_cooperative_description"
 msgstr ""
 "<div>\n"
-"<h2><strong>Dziękujemy za zainteresowanie działalnością ${site_name}! Oto "
+"<h2><strong>Dziękujemy za zainteresowanie działalnością ${domain_name}! Oto "
 "właściwe miejsce do rejestracji </strong></h2>\n"
 "<p>Kosmopolityczna Spółdzielnia wspiera jednostki i przekształca istniejący "
 "system gospodarczy, społeczny i polityczny w kierunku radykalnie "
@@ -643,7 +643,7 @@ msgstr ""
 "jeden głos\") i że tylko obywatele Unii Europejskiej, którzy osiągnęli "
 "pełnoletność, są Spółdzielcami, z zobowiązaniem do zakupu co najmniej "
 "jednego udziału i opłacenia rocznego wkładu oraz pełnego prawa głosu. Unia "
-"Europejska jest geograficznym zasięgiem naszej pracy (<a href=\"https://www."
+"Europejska jest geograficznym zasięgiem naszej pracy  (<a href=\"https://www."
 "cosmopolitical.coop/FAQ_EUscale\">zobacz dlaczego</a>)</li>\n"
 "</ul>\n"
 "<p>Proces rejestracji obejmuje następujące kroki:</p>\n"
@@ -790,6 +790,7 @@ msgstr ""
 "mailem.</p>\n"
 "</div>"
 
+#, fuzzy
 msgid "cooperator_data_choose_verification_explanation"
 msgstr ""
 "<div>\n"
@@ -834,50 +835,48 @@ msgstr ""
 "liczbę Weryfikatorów tożsamości. Skontaktuj się z administratorem systemu "
 "pod adresem ${administrator}, aby rozwiązać ten problem."
 
-#, fuzzy
 msgid "email_copy_id_verification_subject"
 msgstr ""
-"pl - ${site_name} - Proszę zweryfikować moją tożsamość jako nowego "
+"pl - ${domain_name} - Proszę zweryfikować moją tożsamość jako nowego "
 "potencjalnego Współpracownika"
 
-#, fuzzy
 msgid "email_copy_id_verification_body"
 msgstr ""
 "    Drodzy Weryfikatorzy,\n"
 "    Piszę do Państwa, aby dokończyć proces weryfikacji tożsamości w związku "
-"z moim wnioskiem o członkostwo w organizacji ${site_name}. W załączeniu do "
+"z moim wnioskiem o członkostwo w organizacji ${domain_name}. W załączeniu do "
 "tego e-maila znajdą Państwo częściową kopię mojego oficjalnego dokumentu "
 "tożsamości.\n"
 "    Proszę zauważyć, że niektóre poufne informacje zostały zamaskowane ze "
 "względów bezpieczeństwa. Dokument zawiera jednak informacje potrzebne do "
 "zweryfikowania mojej tożsamości zgodnie z procesem rejestracji "
-"${site_name}.\n"
+"${domain_name}.\n"
 "    Uprzejmie proszę o zapoznanie się z załączonym dokumentem jeśli to "
 "możliwe w ciągu najbliższych 3 dni, aby zagłosować nad adekwatnością "
 "pomiędzy:\n"
 "   * informacjami dotyczącymi tożsamości, które otrzymali Państwo "
-"bezpośrednio pocztą elektroniczną z platformy informatycznej ${site_name} (i "
-"które zostaną Państwu przypomniane w interfejsie do głosowania) oraz \n"
+"bezpośrednio pocztą elektroniczną z platformy informatycznej ${domain_name} "
+"(i które zostaną Państwu przypomniane w interfejsie do głosowania) oraz \n"
 "   * informacje o tożsamości, które mogą Państwo przeczytać na załączonej "
 "częściowej kopii mojego oficjalnego dokumentu tożsamości.\n"
 "    Łącznik umożliwiający oddanie głosu na tę adekwatność oraz termin jest "
 "następująca: ${voting_url}.\n"
 "    Z góry bardzo serdecznie dziękuję Państwu za wsparcie procesu mojej "
-"rejestracji jako Współpracownika na platformie ${site_name}. Jeśli mają "
+"rejestracji jako Współpracownika na platformie ${domain_name}. Jeśli mają "
 "Państwo jakiekolwiek pytania lub potrzebują dodatkowych informacji, proszę "
 "skontaktować się ze mną bezpośrednio.\n"
 "  Z poważaniem,\n"
 "    ${signature}\n"
 "    Załącznik: [Nazwa pliku dokumentu ID]\n"
 "    Ten e-mail został wygenerowany przy pomocy funkcji weryfikacji "
-"tożsamości ${site_name}. Jeśli nie jesteś Weryfikatorem przypisanym do "
+"tożsamości ${domain_name}. Jeśli nie jesteś Weryfikatorem przypisanym do "
 "aplikacji ${signature} i otrzymałeś tę wiadomość omyłkowo, proszę "
-"poinformować o tym administratora ${site_name} pod adresem ${administrator}."
+"poinformować o tym administratora ${domain_name} pod adresem "
+"${administrator}."
 
-#, fuzzy
 msgid "email_video_id_verification_subject"
 msgstr ""
-"pl - ${site_name} - Proszę zweryfikować moją tożsamość za pośrednictwem "
+"pl - ${domain_name} - Proszę zweryfikować moją tożsamość za pośrednictwem "
 "wideokonferencji jako nowego potencjalnego Współpracownika"
 
 #, fuzzy
@@ -885,7 +884,7 @@ msgid "email_video_id_verification_body"
 msgstr ""
 "    Drodzy Weryfikatorzy,\n"
 "    Piszę do Państwa, aby dokończyć proces weryfikacji tożsamości w związku "
-"z moim wnioskiem o członkostwo w spółdzielni ${site_name}. W tym celu "
+"z moim wnioskiem o członkostwo w spółdzielni ${domain_name}. W tym celu "
 "chciałbym zaproponować Państwu spotkanie w formie wideokonferencji.</p>\n"
 "    Proszę zwrócić uwagę na przedziały czasowe, które proponuję na "
 "wideokonferencję. Proszę pamiętać, że mieszkam w Polsce (proszę dostosować "
@@ -940,9 +939,10 @@ msgstr ""
 "    Z poważaniem,\n"
 "    ${signature}\n"
 "    Ten e-mail został wygenerowany przy pomocy funkcji weryfikacji "
-"tożsamości ${site_name}. Jeśli nie jesteś Weryfikatorem przypisanym do "
+"tożsamości ${domain_name}. Jeśli nie jesteś Weryfikatorem przypisanym do "
 "aplikacji ${signature} i otrzymałeś tę wiadomość omyłkowo, proszę "
-"poinformować o tym administratora ${site_name} pod adresem ${administrator}."
+"poinformować o tym administratora ${domain_name} pod adresem "
+"${administrator}."
 
 #, fuzzy
 msgid "forget_email_in_member_list"
@@ -955,7 +955,7 @@ msgstr "Zresetuj hasło"
 msgid "forget_email_send_error"
 msgstr ""
 "Wystąpił błąd podczas wysyłania wiadomości resetowania, skontaktuj się z "
-"administratorem"
+"administratorem: ${administrator}"
 
 msgid "member_states_created_name"
 msgstr "utworzono"
@@ -1091,3 +1091,327 @@ msgstr ""
 #, fuzzy
 msgid "modification_to_profile_email_subject"
 msgstr "Link do modyfikacji profilu w infrastrukturze IT ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+#, fuzzy
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Prosimy o podanie tutaj wszystkich nazwisk rodowych w chwili urodzenia (tj. "
+"NIE nazwiska rodowego jako osoby zamężnej), zapisanych w oficjalnych "
+"dokumentach tożsamości, w ich oficjalnej transkrypcji alfabetem łacińskim "
+"(jeśli oryginalny język używa alfabetu innego niż łaciński)"
+
+#: alirpunkto/schemas/register_form.py:29
+#, fuzzy
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Prosimy o podanie w tym miejscu wszystkich imion i nazwisk zapisanych w "
+"oficjalnych dokumentach tożsamości w oficjalnej transkrypcji alfabetem "
+"łacińskim (jeśli w języku oryginalnym używany jest alfabet inny niż łaciński)"
+
+#: alirpunkto/schemas/register_form.py:47
+#, fuzzy
+msgid "description_label"
+msgstr "Tekst opisujący użytkownika (tekst profilowy)"
+
+#: alirpunkto/schemas/register_form.py:48
+#, fuzzy
+msgid "description_description"
+msgstr ""
+"Napisz tutaj tekst opisujący siebie, <strong>w preferowanym języku</strong>, "
+"aby inni członkowie społeczności mogli Cię lepiej poznać. Sugerujemy, abyś "
+"skupił się na: (1) skąd pochodzisz, (2) czym się zajmujesz, (3) co chcesz "
+"robić jako członek społeczności oraz (4) zasobach (doświadczenie, wiedza, "
+"czas), którymi dysponujesz.\n"
+" <strong> Uważamy, że te informacje są przydatne, ponieważ</strong> "
+"przedstawienie się innym własnymi słowami nadaje ludzką twarz twojej "
+"cyfrowej tożsamości w naszej infrastrukturze IT. Dzięki temu tekstowi każdy "
+"członek społeczności poznaje cię nieco lepiej, co znacznie ułatwia "
+"interakcję!"
+
+#: alirpunkto/schemas/register_form.py:55
+#, fuzzy
+msgid "birthdate_description"
+msgstr ""
+"Prosimy o podanie daty urodzenia w następującym formacie: DD/MM/RRRR, tj. "
+"(1) dzień miesiąca, na 2 cyfrach; (2) numer miesiąca, na 2 cyfrach; (3) rok, "
+"na 4 cyfrach. Współpracownikami mogą być wyłącznie osoby, które ukończyły 18 "
+"lat. Osoby, które nie ukończyły jeszcze 18. roku życia, zachęcamy do "
+"zarejestrowania się jako Członek Zwykły Wspólnoty i uzyskania statusu "
+"Współpracownika po osiągnięciu pełnoletności."
+
+#: alirpunkto/schemas/register_form.py:67
+#, fuzzy
+msgid "nationality_description"
+msgstr ""
+"Podaj jedno państwo członkowskie Unii Europejskiej, którego jesteś "
+"obywatelem. Współpracownikami mogą być wyłącznie obywatele Unii Europejskiej"
+
+#: alirpunkto/schemas/register_form.py:70
+#, fuzzy
+msgid "select_a_country"
+msgstr "Wybierz państwo członkowskie Unii Europejskiej"
+
+#: alirpunkto/schemas/register_form.py:104
+#, fuzzy
+msgid "cooperator_number_description"
+msgstr ""
+"Jest to unikalny numer, który identyfikuje użytkownika we wszystkich "
+"procesach zachodzących we Wspólnocie"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+#, fuzzy
+msgid "pseudonym_description"
+msgstr ""
+"Wpisz tutaj pseudonim, który będzie Cię identyfikował przez cały czas Twojej "
+"aktywności na naszej platformie IT. Zdecydowanie zalecamy wybranie "
+"pseudonimu, który uniemożliwi (lub bardzo utrudni) ustalenie prawdziwej "
+"tożsamości użytkownika. W ten sposób chronisz poufność swoich opinii (tj. "
+"danych osobowych, które podlegają szczególnej ochronie na mocy ogólnego "
+"rozporządzenia o ochronie danych - RODO) przed wszelkimi formami presji "
+"zewnętrznej w prawdziwym życiu (np. ze strony pracodawcy lub klientów). Bądź "
+"bardzo ostrożny! Raz wybranego pseudonimu NIGDY nie będzie można później "
+"zmienić. Wybierz go ostrożnie!\n"
+" Twój pseudonim musi mieć długość od ${MIN_PSEUDONYM_LENGTH} do "
+"${MAX_PSEUDONYM_LENGTH} znaków i może zawierać tylko litery alfabetu "
+"łacińskiego (A-Z, a-z), cyfry (0-9), podkreślniki (_), kropki (.), myślniki "
+"(-) i spacje ( ). Nie może zawierać liter z akcentami, umlautów i innych "
+"znaków diakrytycznych charakterystycznych dla niektórych języków."
+
+#: alirpunkto/schemas/register_form.py:115
+#, fuzzy
+msgid "pseudonym_required"
+msgstr "Podanie pseudonimu jest wymagane"
+
+#: alirpunkto/schemas/register_form.py:121
+#, fuzzy
+msgid "password_description"
+msgstr ""
+"Podaj swoje hasło. Hasło musi mieć długość od ${password_minimum_length} do "
+"${password_maximum_length} znaków, zawierać co najmniej jedną cyfrę, co "
+"najmniej jedną małą literę, co najmniej jedną wielką literę i co najmniej "
+"jeden znak spośród następujących: '@', '#', '%', '&', '*', '(', ')', '-', "
+"'_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+#, fuzzy
+msgid "password_confirm_description"
+msgstr "Prosimy o potwierdzenie przepustki"
+
+#: alirpunkto/schemas/register_form.py:132
+#, fuzzy
+msgid "confirm_password_required"
+msgstr "Wymagane jest potwierdzenie hasła"
+
+#: alirpunkto/schemas/register_form.py:138
+#, fuzzy
+msgid "email_description"
+msgstr ""
+"Prosimy o podanie adresu e-mail, którego infrastruktura IT ${domain_name} "
+"będzie używać do interakcji z użytkownikiem. \n"
+" Zalecamy wybranie adresu e-mail, który będzie często sprawdzany. Ten adres "
+"e-mail nigdy nie będzie wyświetlany innym użytkownikom tej infrastruktury "
+"IT. \n"
+" <strong>Potrzebujemy tych informacji, ponieważ</strong> musimy często "
+"kontaktować się z użytkownikiem, informować go o rozwoju sytuacji w "
+"Spółdzielni, oferować możliwość podjęcia działań lub udziału w podejmowaniu "
+"decyzji. Poczta elektroniczna jest najczęściej używanym medium w Europie, "
+"jest uniwersalna i oparta na otwartych i bezpłatnych standardach, w "
+"przeciwieństwie do zastrzeżonych systemów przesyłania wiadomości cyfrowych "
+"gigantów (znanych również jako \"GAFAM\")."
+
+#: alirpunkto/schemas/register_form.py:144
+#, fuzzy
+msgid "first_interaction_language_description"
+msgstr ""
+"Prosimy o podanie języka, w którym użytkownik chciałby, aby infrastruktura "
+"IT strony{domain_name} kontaktowała się z nim. \n"
+" Zalecamy wybranie języka, który użytkownik zna najlepiej, spośród "
+"oficjalnych języków Unii Europejskiej lub esperanto. Jeśli jest on dostępny "
+"wśród tych, dla których opracowaliśmy interfejs użytkownika, użyjemy go do "
+"interakcji z użytkownikiem. \n"
+"<strong>Potrzebujemy tych informacji</strong>, ponieważ ze względu na "
+"uczciwość i poszanowanie zasad demokracji chcemy komunikować się z "
+"użytkownikiem w języku, który jest dla niego jak najbardziej zrozumiały."
+
+#: alirpunkto/schemas/register_form.py:151
+#, fuzzy
+msgid "second_interaction_language_description"
+msgstr ""
+"Podaj język, w którym zaakceptowałbyś, jako drugi wybór, interakcję z Tobą "
+"przez infrastrukturę IT{domain_name}. \n"
+" Zalecamy wybranie innego języka urzędowego Unii Europejskiej lub esperanto, "
+"który użytkownik rozumie dość dobrze. Jeśli jest on dostępny wśród tych, dla "
+"których opracowaliśmy interfejs użytkownika, a preferowany język użytkownika "
+"jest niedostępny, użyjemy go do interakcji z użytkownikiem. \n"
+"<strong>Potrzebujemy tych informacji, ponieważ</strong> pomimo naszych "
+"starań może się zdarzyć, że preferowany język użytkownika będzie niedostępny "
+"w interfejsie użytkownika naszego oprogramowania. Dlatego pytamy "
+"użytkownika, czy może używać innego języka."
+
+#: alirpunkto/schemas/register_form.py:156
+#, fuzzy
+msgid "third_interaction_language_label"
+msgstr "Język, który użytkownik akceptuje jako trzecią opcję interakcji z nami"
+
+#, fuzzy
+msgid "third_interaction_language_description"
+msgstr ""
+"Prosimy o podanie języka, w którym użytkownik zaakceptowałby, jako trzeci "
+"wybór, interakcję z infrastrukturą IT strony{domain_name}. \n"
+" Zalecamy wybranie innego oficjalnego języka Unii Europejskiej lub "
+"esperanto, który jest nadal zrozumiały. Jeśli jest on dostępny wśród tych, "
+"dla których opracowaliśmy interfejs użytkownika, i jeśli ani preferowany "
+"język, ani drugi język nie są dostępne, użyjemy go do interakcji z "
+"użytkownikiem. \n"
+"<strong>Potrzebujemy tych informacji, ponieważ</strong> pomimo naszych "
+"starań może się zdarzyć, że preferowany język użytkownika i jego drugi język "
+"będą niedostępne w interfejsie użytkownika naszego oprogramowania. Dlatego "
+"pytamy użytkownika, czy może używać trzeciego języka. Zdajemy sobie sprawę z "
+"tego, że interakcja z nami przy użyciu tego języka jest niezadowalająca "
+"zarówno dla użytkownika, jak i dla nas. Przepraszamy za to."
+
+#: alirpunkto/schemas/register_form.py:163
+#, fuzzy
+msgid "cooperative_behaviour_mark_label"
+msgstr "Państwa wynik zachowań kooperacyjnych"
+
+#, fuzzy
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Jako osoba współpracująca, twój Państwa wynik zachowań kooperacyjnych wynika "
+"z ocen przyznanych ci przez innych aktywnych uczestników w grupach "
+"roboczych, w których uczestniczyłeś w celu zdefiniowania i przyjęcia "
+"propozycji działań. Każdy aktywny uczestnik może przyznać ocenę równą +1, 0 "
+"lub -1, w zależności od tego, jak bardzo kooperatywne było twoje zachowanie "
+"podczas aktywnego uczestnictwa w danej grupie roboczej. Ocena ta jest "
+"następnie automatycznie \"zapominana\" i maleje z czasem: zmniejsza się o "
+"połowę po ${forgetting_time_constant} dniach. Początkowa wartość znacznika "
+"zachowania kooperatywnego wynosi zero."
+
+#: alirpunkto/schemas/register_form.py:169
+#, fuzzy
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Data ostatniej aktualizacji Pana/Pani oceny zachowań kooperacyjnych"
+
+#: alirpunkto/schemas/register_form.py:170
+#, fuzzy
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Jest to najpóźniejsza data, w której inny podmiot współpracujący przydzielił "
+"użytkownikowi oceny po zakończeniu jego aktywnego udziału w grupie roboczej, "
+"która definiowała i przyjmowała propozycję działania. Początkową wartością "
+"tej daty jest data rejestracji użytkownika jako podmiotu współpracującego"
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+#, fuzzy
+msgid "number_shares_owned_label"
+msgstr "Liczba posiadanych udziałów w spółdzielni"
+
+#: alirpunkto/schemas/register_form.py:181
+#, fuzzy
+msgid "number_shares_owned_description"
+msgstr ""
+"Jest to łączna liczba udziałów Spółdzielni, które posiadasz po ich zakupie "
+"na naszym portalu internetowym. W momencie rejestracji liczba ta jest równa "
+"zero. Zachęcamy do jak najszybszego przejścia pod ten adres URL: "
+"${url_purchase_shares}, aby zakupić swój pierwszy udział(y). Pełne prawo do "
+"podejmowania decyzji jako spółdzielca będzie przysługiwać dopiero po zakupie "
+"co najmniej jednego udziału (i opłaceniu rocznej składki). Zapraszamy do "
+"zakupu więcej niż jednego udziału, po rejestracji, ale także w dowolnym "
+"momencie później. Wzmacnia to naszą Spółdzielnię i wszyscy jesteśmy za to "
+"wdzięczni!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+#, fuzzy
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Data wygaśnięcia bieżącej składki rocznej"
+
+#: alirpunkto/schemas/register_form.py:189
+#, fuzzy
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Data, w której wygasa aktualna roczna składka i przed którą należy ją "
+"ponownie wpłacić, aby zachować pełne prawa do podejmowania decyzji jako "
+"członek spółdzielni. Podczas rejestracji data ta jest ustalana w "
+"przeszłości, co oznacza, że należy ją opłacić teraz. Zachęcamy do jak "
+"najszybszego przejścia pod ten adres URL: ${url_pay_yearly_contrib}, aby "
+"wpłacić swój pierwszy roczny wkład i tym samym uczestniczyć w działalności "
+"naszej Spółdzielni. Pełne prawo do podejmowania decyzji jako członek "
+"Spółdzielni będzie przysługiwać dopiero po opłaceniu rocznej składki (i "
+"nabyciu co najmniej jednego udziału)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+#, fuzzy
+msgid "iban_label"
+msgstr "Międzynarodowy numer rachunku bankowego (IBAN) Twojego konta bankowego"
+
+#: alirpunkto/schemas/register_form.py:200
+#, fuzzy
+msgid "iban_description"
+msgstr ""
+"Jeśli i kiedy zdecydujesz się opuścić Spółdzielnię (czego wszyscy byśmy "
+"żałowali), potrzebujemy Twojego numeru IBAN, aby móc przekazać Ci wpływy z "
+"naszego wykupu Twoich udziałów w Spółdzielni. Ze względów bezpieczeństwa "
+"zalecamy podanie tych informacji tylko w przypadku przewidywanego "
+"opuszczenia Spółdzielni"
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+#, fuzzy
+msgid "date_erasure_all_data_title"
+msgstr ""
+"Data usunięcia wszystkich danych użytkownika z naszej infrastruktury "
+"informatycznej"
+
+#: alirpunkto/schemas/register_form.py:208
+#, fuzzy
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Jeśli użytkownik opuści Spółdzielnię, jego dane tożsamości będą "
+"przechowywane przez okres ${Quarantine} dni, a następnie zostaną całkowicie "
+"i nieodwołalnie usunięte z naszych rejestrów. Ma to na celu zagwarantowanie, "
+"że osoba opuszczająca Spółdzielnię z powodu zbyt słabej oceny zachowania w "
+"Spółdzielni nie będzie mogła natychmiast zarejestrować się ponownie z nowym "
+"pseudonimem i oceną zachowania w Spółdzielni. Po rejestracji data ta jest "
+"ustalana w bardzo odległej przyszłości"
+
+#, fuzzy
+msgid "avatar_label"
+msgstr "Obrazek reprezentujący użytkownika (awatar)"
+
+#, fuzzy
+msgid "avatar_description"
+msgstr ""
+"Prosimy o dostarczenie zdjęcia przedstawiającego Ciebie jako członka "
+"społeczności. Aby uchronić Cię przed ewentualnymi represjami ze strony "
+"pracodawcy lub klientów, zalecamy, aby to zdjęcie nie umożliwiało "
+"prześledzenia Twojej tożsamości w prawdziwym życiu. Nie powinno to być zatem "
+"zdjęcie przedstawiające ciebie samego (pamiętaj, że oprogramowanie do "
+"rozpoznawania twarzy jest masowo wykorzystywane przez roboty wyszukiwarek). "
+"Zdjęcie powinno być wyłącznie w formacie JPEG (rozszerzenie .JPG lub .JPEG) "
+"i nie większe niż 5 MB. \n"
+" <strong> Uważamy, że ta informacja jest przydatna, ponieważ</strong> "
+"zdjęcie ułatwia innym członkom społeczności rozpoznanie użytkownika. Czasami "
+"obraz przemawia znacznie głośniej niż długie przemówienie. Dzięki temu "
+"obrazowi wyrażasz wiele o sobie w uniwersalnym języku. Wykorzystaj to jak "
+"najlepiej!"
