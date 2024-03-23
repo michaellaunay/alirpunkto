@@ -470,7 +470,7 @@ msgstr ""
 "<p>Below you will find the start of the registration process to join us. We propose two levels of participation, with increasing obligations and rights:</p>\n"
 "<ul>\n"
 "<li>as an <strong>Ordinary Member of our Community</strong>, with a simple registration process, no financial commitments, but no voting rights; or </li>\n"
-"<li>as a <strong>Cooperator</strong>, a full member of our Cooperative, with a registration process ensuring that a given person can register once only (to heed the democratic principle \"one person = one vote\") and that only citizens of the European Union having reached their majority age are Cooperators, with the commitment to purchase at least one share and to pay a yearly contribution, and full voting rights. The European Union is the geographic scope of our work (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">see why</a>)</li>\n"
+"<li>as a <strong>Cooperator</strong>, a full member of our Cooperative, with a registration process ensuring that a given person can register once only (to heed the democratic principle \"one person = one vote\") and that only citizens of the European Union having reached their majority age are Cooperators, with the commitment to purchase at least one share and to pay a yearly contribution, and full voting rights. The European Union is the geographic scope of our work  (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">see why</a>)</li>\n"
 "</ul>\n"
 "<p>The registration process includes the following steps:</p>\n"
 "<ol>\n"
@@ -741,7 +741,7 @@ msgstr "Text describing you (your profile text)"
 
 #: alirpunkto/schemas/register_form.py:48
 msgid "description_description"
-msgstr "Please write here a text describing you to all other members of the Community. Please focus on: (1) what you want to do as a member of the Community, and (2) the resources (experience, knowledge, time) that you have available"
+msgstr "Please write here a text describing yourself, <strong>in your preferred langage</strong>, so that all other members of the Community can get to know you a little better. We suggest that you focus on: (1) Where you come from, (2) what you do, (3) what you want to do as a member of the Community, and (4) the resources (experience, knowledge, time) that you have available.\n <strong> We believe that this information is useful because</strong> introducing yourself to others with your own words gives a human face to your digital identity on our IT infrastructure. With this text, every member of the Community gets to know you a little better, and that makes interaction so much easier!"
 
 #: alirpunkto/schemas/register_form.py:55
 msgid "birthdate_description"
@@ -785,22 +785,22 @@ msgstr "Confirming your password is required"
 
 #: alirpunkto/schemas/register_form.py:138
 msgid "email_description"
-msgstr "Please provide the e-mail address that the IT infrastructure of ${domain_name} will use to interact with you. This e-mail address will never be displayed to other users of this IT infrastructure"
+msgstr "Please provide the e-mail address that the IT infrastructure of ${domain_name} will use to interact with you. \n We recommend that you choose an email address that you check often. This e-mail address will never be displayed to other users of this IT infrastructure. \n <strong>We need this information because</strong> we need to interact with you often, to keep you informed of developments at the Cooperative, to offer you the chance to take action or contribute to decisions. Email is the most widely used medium in Europe, it is universal and is based on open and free standards, unlike the proprietary messaging systems of the digital giants (also known as 'GAFAM')."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
-msgstr "Please provide the language with which you would prefer that the IT infrastructure of ${domain_name} interact with you. If it is available among those for which we have developed a user interface, we will use it to interact with you"
+msgstr "Please provide the language with which you would prefer that the IT infrastructure of ${domain_name} interact with you. \n We recommend that you choose the language you know best, from among the official languages of the European Union or Esperanto. If it is available among those for which we have developed a user interface, we will use it to interact with you. \n <strong>We need this information because</strong>, for reasons of fairness and respect for democratic principles, we want to interact with you in a language that you understand as well as possible."
 
 #: alirpunkto/schemas/register_form.py:151
 msgid "second_interaction_language_description"
-msgstr "Please provide the language with which you would accept, as a second choice, that the IT infrastructure of ${domain_name} interact with you. If it is available among those for which we have developed a user interface, we will use it to interact with you"
+msgstr "Please provide the language with which you would accept, as a second choice, that the IT infrastructure of ${domain_name} interact with you. \n We recommend that you choose another official language of the European Union or Esperanto, which you understand reasonably well. If it is available among those for which we have developed a user interface, and if your preferred language is unavailable, we will use it to interact with you. \n <strong>We need this information because</strong>, despite our efforts, it may happen that your preferred language be unavailable on the user interface of our software. This is why we are asking you if you can use another language."
 
 #: alirpunkto/schemas/register_form.py:156
 msgid "third_interaction_language_label"
 msgstr "The language you accept as a third choice for us to interact with you"
 
 msgid "third_interaction_language_description"
-msgstr "Please provide the language with which you would accept, as a third choice, that the IT infrastructure of ${domain_name} interact with you. If it is available among those for which we have developed a user interface, we will use it to interact with you"
+msgstr "Please provide the language with which you would accept, as a third choice, that the IT infrastructure of ${domain_name} interact with you. \n We recommend that you choose another official language of the European Union or Esperanto, which you still can understand. If it is available among those for which we have developed a user interface, and if neither your preferred language nor your second language is available, we will use it to interact with you. \n <strong>We need this information because</strong>, despite our efforts, it may happen that your preferred language and your second language be unavailable on the user interface of our software. This is why we are asking you if you can use a third language. We are aware that for you to interact with us using it is an unsatisfactory situation for you - as it is for us. We apologise for this."
 
 
 #: alirpunkto/schemas/register_form.py:163
@@ -870,4 +870,4 @@ msgid "avatar_label"
 msgstr "A picture to represent yuo (your avatar)"
 
 msgid "avatar_description"
-msgstr "Please provide a picture representing you in your interaction with the Community. For the sake of preserving you from any reprisals from your employer or clients, we recommend that this picture does not enable to track back to your identity in real life. It should hence in general not be a photograph of yourself (remember that face recognition software is massively used by search robots). The picture should be in JPEG format only (extension .JPG or .JPEG), and not larger than 5  MB"
+msgstr "Please provide a picture representing you as a member of the Community. For the sake of preserving you from any reprisals from your employer or clients, we recommend that this picture does not enable to track back to your identity in real life. It should hence in general not be a photograph of yourself (remember that face recognition software is massively used by search robots). The picture should be in JPEG format only (extension .JPG or .JPEG), and not larger than 5 MB. \n <strong> We believe that this information is useful because</strong> a picture make it easier for the other members of the Community to recognise you. Sometimes a picture speaks much louder than a long speech. With this image, you're expressing a lot about yourself, in a universal language. Make the most of it!"
