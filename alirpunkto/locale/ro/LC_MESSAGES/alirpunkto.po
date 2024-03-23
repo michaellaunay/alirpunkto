@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-09 23:11+0100\n"
+"PO-Revision-Date: 2024-03-23 14:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: ro\n"
@@ -32,11 +32,10 @@ msgstr "Autentificare"
 msgid "welcome_msg"
 msgstr "Bine ați venit"
 
-#, fuzzy
 msgid "all_applications_msg"
 msgstr ""
 "Toate aplicațiile de care aveți nevoie pentru a participa la activitățile "
-"din ${site_name} într-un singur loc."
+"din ${domain_name} într-un singur loc."
 
 #, fuzzy
 msgid "register_or_login_msg"
@@ -45,8 +44,8 @@ msgstr "Înregistrați-vă sau conectați-vă acum pentru a începe."
 #, fuzzy
 msgid "logged_in_msg_title"
 msgstr ""
-"Alirpunkto, serviciul centralizat pentru aplicațiile utilizate în "
-"infrastructura IT a ${site_name}"
+"${site_name}, serviciul centralizat pentru aplicațiile utilizate în "
+"infrastructura IT a ${domain_name}"
 
 #, fuzzy
 msgid "logged_in_msg"
@@ -547,7 +546,7 @@ msgstr "GR - Grecia"
 
 #, fuzzy
 msgid "Croatia"
-msgstr "Resurse umane - Croația"
+msgstr "HR - Croația"
 
 #, fuzzy
 msgid "Hungary"
@@ -640,8 +639,8 @@ msgid "cosmopolitical_cooperative_description"
 msgstr ""
 "<div>\n"
 "<h2><strong>Vă mulțumim pentru interesul dumneavoastră pentru activitățile "
-"de ${site_name}! Aici este locul potrivit pentru a vă înregistra </strong></"
-"h2>\n"
+"de ${domain_name}! Aici este locul potrivit pentru a vă înregistra </"
+"strong></h2>\n"
 "<p>Cooperativa CosmoPolitica  sprijină indivizii și transformă sistemul "
 "economic, social și politic existent spre o societate radical echitabilă, "
 "durabilă, democratică și fericită, <a href=\"https://www.cosmopolitical.coop/"
@@ -740,6 +739,7 @@ msgstr ""
 "fost înregistrat cu succes. Puteți să vă modificați votul până la data "
 "limită, revenind la această pagină."
 
+#, fuzzy
 msgid "cooperator_data_explanation"
 msgstr ""
 "<div>\n"
@@ -810,6 +810,7 @@ msgstr ""
 "toate cele patru calcule care v-au fost trimise prin e-mail.</p>\n"
 "</div>"
 
+#, fuzzy
 msgid "cooperator_data_choose_verification_explanation"
 msgstr ""
 "<div>\n"
@@ -862,7 +863,7 @@ msgstr ""
 #, fuzzy
 msgid "email_copy_id_verification_subject"
 msgstr ""
-"ro - ${site_name} - Vă rog să verificați identitatea mea ca nou potențial "
+"ro - ${domain_name} - Vă rog să verificați identitatea mea ca nou potențial "
 "Cooperator"
 
 #, fuzzy
@@ -870,38 +871,38 @@ msgid "email_copy_id_verification_body"
 msgstr ""
 "    Dragii Verificatori,\n"
 "    Vă scriu pentru a finaliza procesul de verificare a identității pentru "
-"cererea mea de a deveni cooperator al ${site_name}. Atașat la acest e-mail, "
-"veți găsi o copie parțială a documentului meu oficial de identitate.\n"
+"cererea mea de a deveni cooperator al ${domain_name}. Atașat la acest e-"
+"mail, veți găsi o copie parțială a documentului meu oficial de identitate.\n"
 "    Vă rugăm să rețineți că anumite informații sensibile au fost mascate din "
 "motive de securitate. Cu toate acestea, documentul conține informațiile de "
 "care aveți nevoie pentru a verifica identitatea mea conform procesului de "
-"înregistrare ${site_name}.\n"
+"înregistrare ${domain_name}.\n"
 "    Vă rog să analizați documentul atașat dacă este posibil în următoarele 3 "
 "zile, pentru a vota asupra adecvării între:\n"
 "     * informațiile de identitate pe care le-ați primit direct prin e-mail "
-"de la platforma informatică a ${site_name} (și care vă vor fi reamintite pe "
-"interfața de vot) și \n"
+"de la platforma informatică a ${domain_name} (și care vă vor fi reamintite "
+"pe interfața de vot) și \n"
 "     * informațiile de identitate pe care le puteți citi pe copia parțială "
 "atașată a documentului meu oficial de identitate.\n"
 "    Linkul prin care puteți vota cu privire la această adecvare este "
 "următoarea: ${voting_url}.\n"
 "    Vă mulțumesc călduros în avans pentru susținerea procesului de "
-"înregistrare a mea în calitate de Cooperator la ${site_name}. În cazul în "
+"înregistrare a mea în calitate de Cooperator la ${domain_name}. În cazul în "
 "care aveți întrebări suplimentare sau aveți nevoie de informații "
 "suplimentare, vă rog să nu ezitați să mă contactați direct.\n"
 "    Cele mai bune salutări,\n"
 "    ${signature}\n"
 "    Atașament: [Numele fișierului documentului de identitate]\n"
 "    Acest e-mail a fost generat cu ajutorul funcției de verificare a "
-"identității de ${site_name}. Dacă nu sunteți Verificatorul atribuit "
+"identității de ${domain_name}. Dacă nu sunteți Verificatorul atribuit "
 "aplicației ${signature} și ați primit acest e-mail din greșeală, vă rugăm să "
-"informați administratorul ${site_name}, la următoarea adresă "
+"informați administratorul ${domain_name}, la următoarea adresă "
 "${administrator}."
 
 #, fuzzy
 msgid "email_video_id_verification_subject"
 msgstr ""
-"ro - ${site_name} - Vă rog să verificați identitatea mea prin "
+"ro - ${domain_name} - Vă rog să verificați identitatea mea prin "
 "videoconferință ca nou potențial Cooperator"
 
 #, fuzzy
@@ -909,7 +910,7 @@ msgid "email_video_id_verification_body"
 msgstr ""
 "    Dragii verificatori,\n"
 "    Vă scriu pentru a finaliza procesul de verificare a identității pentru "
-"cererea mea de a deveni cooperator al ${site_name}. În acest scop, aș dori "
+"cererea mea de a deveni cooperator al ${domain_name}. În acest scop, aș dori "
 "să vă propun o întâlnire prin videoconferință. \n"
 "    Iată câteva intervale orare pe care le propun pentru videoconferința. Vă "
 "rog să rețineți că locuiesc în România (Vă rugăm să adaptați în funcție de "
@@ -951,22 +952,22 @@ msgstr ""
 "    După ce ați desfășurat această întâlnire prin videoconferință, vă rog să "
 "votați pentru a confirma sau infirma adecvarea între:\n"
 "     * informațiile de identitate pe care le-ați primit direct prin e-mail "
-"de la platforma informatică a ${site_name} (și care vă vor fi reamintite pe "
-"interfața de vot) și \n"
+"de la platforma informatică a ${domain_name} (și care vă vor fi reamintite "
+"pe interfața de vot) și \n"
 "     * informațiile de identitate pe care le veți fi văzut în timpul "
 "videoconferinței.\n"
 "    Linkul prin care puteți vota această adecvare după această "
 "videoconferință este următoarea: ${voting_url}.\n"
 "    Vă mulțumesc călduros în avans pentru susținerea procesului de "
-"înregistrare a mea în calitate de Cooperator la ${site_name}. În cazul în "
+"înregistrare a mea în calitate de Cooperator la ${domain_name}. În cazul în "
 "care aveți întrebări suplimentare sau aveți nevoie de informații "
 "suplimentare, vă rog să nu ezitați să mă contactați direct.\n"
 "    Cu respect,\n"
 "    ${signature}\n"
 "    Acest e-mail a fost generat cu ajutorul funcției de verificare a "
-"identității de la ${site_name}. Dacă nu sunteți verificatorul atribuit "
+"identității de la ${domain_name}. Dacă nu sunteți verificatorul atribuit "
 "aplicației ${signature} și ați primit acest e-mail din greșeală, vă rugăm să "
-"informați administratorul ${site_name}, la următoarea adresă "
+"informați administratorul ${domain_name}, la următoarea adresă "
 "${administrator}."
 
 #, fuzzy
@@ -980,7 +981,7 @@ msgstr "Resetea-za parola"
 msgid "forget_email_send_error"
 msgstr ""
 "A apărut o eroare la trimiterea e-mailului de resetare, vă rugăm să "
-"contactați administratorul"
+"contactați administratorul: ${administrator}"
 
 msgid "member_states_created_name"
 msgstr "creeat"
@@ -1121,3 +1122,340 @@ msgstr ""
 msgid "modification_to_profile_email_subject"
 msgstr ""
 "Link pentru a vă modifica profilul pe infrastructura IT a ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+#, fuzzy
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Vă rugăm să furnizați aici toate numele de familie la naștere (adică NU "
+"numele de familie ca persoană căsătorită), așa cum sunt scrise în "
+"documentele de identitate oficiale, în transcrierea lor oficială în "
+"caractere latine (dacă limba originală folosește un alfabet diferit de cel "
+"latin)"
+
+#: alirpunkto/schemas/register_form.py:29
+#, fuzzy
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Vă rugăm să furnizați aici toate prenumele dumneavoastră, așa cum sunt "
+"scrise în documentele de identitate oficiale, în transcrierea lor oficială "
+"în caractere latine (dacă limba originală folosește un alfabet diferit de "
+"cel latin)"
+
+#: alirpunkto/schemas/register_form.py:47
+#, fuzzy
+msgid "description_label"
+msgstr "Textul care vă descrie (textul profilului dvs.)"
+
+#: alirpunkto/schemas/register_form.py:48
+#, fuzzy
+msgid "description_description"
+msgstr ""
+"Vă rugăm să scrieți aici un text în care să vă descrieți,<strong> în limba "
+"preferată</strong>, pentru ca toți ceilalți membri ai Comunității să vă "
+"cunoască mai bine. Vă sugerăm să vă concentrați asupra: (1) de unde veniți, "
+"(2) cu ce vă ocupați, (3) ce doriți să faceți în calitate de membru al "
+"Comunității și (4) resursele (experiență, cunoștințe, timp) de care "
+"dispuneți.\n"
+" <strong> Considerăm că aceste informații sunt utile</strong>, deoarece "
+"faptul că vă prezentați celorlalți cu propriile cuvinte oferă o față umană "
+"identității dvs. digitale pe infrastructura noastră IT. Cu ajutorul acestui "
+"text, fiecare membru al Comunității ajunge să vă cunoască puțin mai bine, "
+"iar acest lucru face interacțiunea mult mai ușoară!"
+
+#: alirpunkto/schemas/register_form.py:55
+#, fuzzy
+msgid "birthdate_description"
+msgstr ""
+"Vă rugăm să indicați data nașterii în următorul format: DD/LL/AAAA, adică "
+"(1) ziua din lună, pe 2 cifre; (2) numărul lunii, pe 2 cifre; (3) anul, pe 4 "
+"cifre. Numai persoanele care au împlinit 18 ani pot fi cooperatori. În cazul "
+"în care nu ați împlinit încă 18 ani, vă invităm să vă înregistrați ca membru "
+"obișnuit al Comunității - și să treceți la statutul de cooperator de îndată "
+"ce atingeți vârsta majoratului."
+
+#: alirpunkto/schemas/register_form.py:67
+#, fuzzy
+msgid "nationality_description"
+msgstr ""
+"Vă rugăm să indicați un stat membru al Uniunii Europene al cărui cetățean "
+"sunteți. Numai cetățenii Uniunii Europene pot fi cooperatori"
+
+#: alirpunkto/schemas/register_form.py:70
+#, fuzzy
+msgid "select_a_country"
+msgstr "Vă rugăm să selectați un stat membru al Uniunii Europene"
+
+#: alirpunkto/schemas/register_form.py:104
+#, fuzzy
+msgid "cooperator_number_description"
+msgstr ""
+"Acesta este numărul unic care vă identifică în toate procesele care au loc "
+"în Comunitate"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+#, fuzzy
+msgid "pseudonym_description"
+msgstr ""
+"Vă rugăm să introduceți aici pseudonimul care vă va identifica pe întreaga "
+"durată a activității dumneavoastră pe platforma noastră IT. Vă recomandăm "
+"ÎNGREJORĂTOR să selectați un pseudonim care să facă imposibilă (sau extrem "
+"de dificilă) urmărirea identității dvs. reale. Astfel, vă protejați "
+"confidențialitatea opiniilor dumneavoastră (adică datele cu caracter "
+"personal care fac obiectul unei protecții specifice în conformitate cu "
+"Regulamentul general privind protecția datelor - GDPR) împotriva oricărei "
+"forme de presiune externă în viața reală (de exemplu, din partea "
+"angajatorului sau a clienților dumneavoastră). Fiți foarte atenți! Odată ce "
+"l-ați ales, nu veți putea NICIODATĂ să schimbați ulterior acest pseudonim. "
+"Alegeți-l cu grijă!\n"
+" Pseudonimul dvs. trebuie să aibă o lungime cuprinsă între "
+"${MIN_PSEUDONYM_LENGTH} și ${MAX_PSEUDONYM_LENGTH} caractere și poate "
+"conține numai litere din alfabetul latin (A-Z, a-z), numere (0-9), caractere "
+"de subliniere (_), puncte (.), cratimă (-) și spații ( ). Nu poate conține "
+"litere cu accente, umlauts și alte semne diacritice specifice anumitor limbi."
+
+#: alirpunkto/schemas/register_form.py:115
+#, fuzzy
+msgid "pseudonym_required"
+msgstr "Este necesară furnizarea pseudonimului dvs"
+
+#: alirpunkto/schemas/register_form.py:121
+#, fuzzy
+msgid "password_description"
+msgstr ""
+"Vă rugăm să vă furnizați parola. Parola dvs. trebuie să aibă o lungime "
+"cuprinsă între ${password_minimum_length} și ${password_maximum_length} "
+"caractere, să conțină cel puțin o cifră, cel puțin o literă minusculă, cel "
+"puțin o literă majusculă și cel puțin unul dintre caracterele de mai jos: "
+"'@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+#, fuzzy
+msgid "password_confirm_description"
+msgstr "Vă rugăm să confirmați parola dvs"
+
+#: alirpunkto/schemas/register_form.py:132
+#, fuzzy
+msgid "confirm_password_required"
+msgstr "Este necesară confirmarea parolei dvs"
+
+#: alirpunkto/schemas/register_form.py:138
+#, fuzzy
+msgid "email_description"
+msgstr ""
+"Vă rugăm să furnizați adresa de e-mail pe care infrastructura IT a "
+"${domain_name} o va folosi pentru a interacționa cu dumneavoastră. \n"
+" Vă recomandăm să alegeți o adresă de e-mail pe care o verificați des. "
+"Această adresă de e-mail nu va fi niciodată afișată altor utilizatori ai "
+"acestei infrastructuri IT. \n"
+" <strong>Avem nevoie de aceste informații deoarece</strong> trebuie să "
+"interacționăm des cu dumneavoastră, pentru a vă ține la curent cu evoluțiile "
+"din cadrul Cooperativei, pentru a vă oferi posibilitatea de a acționa sau de "
+"a contribui la luarea deciziilor. E-mailul este mijlocul de comunicare cel "
+"mai utilizat în Europa, este universal și se bazează pe standarde deschise "
+"și libere, spre deosebire de sistemele de mesagerie proprietare ale "
+"giganților digitali (cunoscute și sub numele de \"GAFAM\")."
+
+#: alirpunkto/schemas/register_form.py:144
+#, fuzzy
+msgid "first_interaction_language_description"
+msgstr ""
+"Vă rugăm să indicați limba în care ați prefera ca infrastructura IT "
+"a{domain_name} să interacționeze cu dumneavoastră. \n"
+" Vă recomandăm să alegeți limba pe care o cunoașteți cel mai bine, dintre "
+"limbile oficiale ale Uniunii Europene sau esperanto. Dacă aceasta este "
+"disponibilă printre cele pentru care am dezvoltat o interfață de utilizator, "
+"o vom folosi pentru a interacționa cu dvs. \n"
+"<strong>Avem nevoie de aceste informații deoarece</strong>, din motive de "
+"corectitudine și de respect pentru principiile democratice, dorim să "
+"interacționăm cu dvs. într-o limbă pe care o înțelegeți cât mai bine."
+
+#: alirpunkto/schemas/register_form.py:151
+#, fuzzy
+msgid "second_interaction_language_description"
+msgstr ""
+"Vă rugăm să indicați limba în care ați accepta, ca a doua opțiune, ca "
+"infrastructura IT a{domain_name} să interacționeze cu dumneavoastră. \n"
+" Vă recomandăm să alegeți o altă limbă oficială a Uniunii Europene sau "
+"Esperanto, pe care o înțelegeți destul de bine. Dacă aceasta este "
+"disponibilă printre cele pentru care am dezvoltat o interfață de utilizator "
+"și dacă limba preferată de dvs. nu este disponibilă, o vom folosi pentru a "
+"interacționa cu dvs. \n"
+" <strong>Avem nevoie de aceste informații deoarece</strong>, în ciuda "
+"eforturilor noastre, se poate întâmpla ca limba dvs. preferată să nu fie "
+"disponibilă pe interfața de utilizator a software-ului nostru. Acesta este "
+"motivul pentru care vă întrebăm dacă puteți utiliza o altă limbă."
+
+#: alirpunkto/schemas/register_form.py:156
+#, fuzzy
+msgid "third_interaction_language_label"
+msgstr ""
+"Limba pe care o acceptați ca o a treia opțiune pentru a interacționa cu "
+"dumneavoastră"
+
+#, fuzzy
+msgid "third_interaction_language_description"
+msgstr ""
+"Vă rugăm să indicați limba în care ați accepta, ca a treia opțiune, ca "
+"infrastructura IT a{domain_name} să interacționeze cu dumneavoastră. \n"
+" Vă recomandăm să alegeți o altă limbă oficială a Uniunii Europene sau "
+"Esperanto, pe care încă o puteți înțelege. Dacă aceasta este disponibilă "
+"printre cele pentru care am dezvoltat o interfață de utilizator și dacă nici "
+"limba preferată, nici cea de-a doua limbă nu sunt disponibile, o vom folosi "
+"pentru a interacționa cu dumneavoastră. \n"
+" <strong>Avem nevoie de aceste informații deoarece</strong>, în ciuda "
+"eforturilor noastre, se poate întâmpla ca limba dvs. preferată și cea de-a "
+"doua limbă să nu fie disponibile pe interfața de utilizator a software-ului "
+"nostru. Acesta este motivul pentru care vă întrebăm dacă puteți utiliza o a "
+"treia limbă. Suntem conștienți de faptul că, pentru dumneavoastră, a "
+"interacționa cu noi folosind această limbă este o situație nesatisfăcătoare "
+"pentru dumneavoastră - ca și pentru noi. Ne cerem scuze pentru acest lucru."
+
+#: alirpunkto/schemas/register_form.py:163
+#, fuzzy
+msgid "cooperative_behaviour_mark_label"
+msgstr "Scorul de comportament cooperant"
+
+#, fuzzy
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"În calitate de cooperator, nota dumneavoastră pentru comportament cooperant "
+"rezultă din scorul care v-au fost atribuite de ceilalți participanți activi "
+"din grupurile de lucru la care ați participat pentru a defini și adopta "
+"propuneri de acțiune. Fiecare Pariticpant activ poate acorda un scorul egal "
+"cu +1, 0 sau -1, în funcție de cât de cooperant a fost comportamentul "
+"dumneavoastră în timpul participării active la acel Grup de lucru. Aceast "
+"scorul este apoi \"uitat\" în mod automat și se diminuează în timp: se "
+"înjumătățește după ${forgetting_time_constant} zile. Valoarea inițială a "
+"scorul de comportament cooperant este zero."
+
+#: alirpunkto/schemas/register_form.py:169
+#, fuzzy
+msgid "cooperative_behaviour_mark_update_label"
+msgstr ""
+"Data la care a fost actualizat ultima dată scorul tău de comportament "
+"cooperant"
+
+#: alirpunkto/schemas/register_form.py:170
+#, fuzzy
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Aceasta este ultima dată la care un alt cooperator v-a atribuit un scorul "
+"după încheierea participării dumneavoastră active la un grup de lucru care a "
+"definit și adoptat o propunere de acțiune. Valoarea inițială a acestei date "
+"este cea a înregistrării dumneavoastră ca cooperator"
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+#, fuzzy
+msgid "number_shares_owned_label"
+msgstr "Numărul de acțiuni ale cooperativei pe care le dețineți"
+
+#: alirpunkto/schemas/register_form.py:181
+#, fuzzy
+msgid "number_shares_owned_description"
+msgstr ""
+"Acesta este numărul total de acțiuni ale Cooperativei pe care le dețineți, "
+"după ce le-ați cumpărat de pe portalul nostru web. În momentul înregistrării "
+"dumneavoastră, acest număr este egal cu zero. Vă invităm să treceți cât mai "
+"curând posibil la acest URL: ${url_purchase_shares} pentru a vă achiziționa "
+"prima (primele) acțiune (acțiuni). Vă veți bucura de drepturi decizionale "
+"depline în calitate de cooperator numai după ce ați cumpărat cel puțin o "
+"acțiune (și v-ați plătit contribuția anuală). Sunteți binevenit să "
+"achiziționați mai mult de o cotă, la înregistrare, dar și oricând după "
+"aceea. Aceasta consolidează cooperativa noastră și vă suntem cu toții "
+"recunoscători pentru acest lucru!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+#, fuzzy
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Data la care expiră contribuția anuală curentă"
+
+#: alirpunkto/schemas/register_form.py:189
+#, fuzzy
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Data la care expiră contribuția anuală curentă și înainte de care trebuie să "
+"o plătiți din nou pentru a vă păstra toate drepturile de decizie în calitate "
+"de cooperator. În momentul înregistrării dumneavoastră, această dată este "
+"fixată la un moment din trecut, ceea ce înseamnă că trebuie să o plătiți "
+"acum. Vă invităm să vă îndreptați cât mai curând posibil către acest URL: "
+"${url_pay_yearly_contrib} pentru a vă plăti prima contribuție anuală și a "
+"participa astfel la operațiunile cooperativei noastre. Vă veți bucura de "
+"drepturi decizionale depline în calitate de cooperator numai după ce v-ați "
+"plătit contribuția anuală (și ați cumpărat cel puțin o cotă)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+#, fuzzy
+msgid "iban_label"
+msgstr "Numărul internațional de cont bancar (IBAN) al contului dvs. bancar"
+
+#: alirpunkto/schemas/register_form.py:200
+#, fuzzy
+msgid "iban_description"
+msgstr ""
+"Dacă și când veți decide să părăsiți Cooperativa (lucru pe care l-am regreta "
+"cu toții), avem nevoie de IBAN-ul dumneavoastră pentru a vă putea transfera "
+"veniturile obținute din răscumpărarea acțiunilor dumneavoastră în cadrul "
+"Cooperativei. Din motive de securitate, vă sfătuim să ne furnizați aceste "
+"informații numai dacă și atunci când anticipați să părăsiți Cooperativa"
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+#, fuzzy
+msgid "date_erasure_all_data_title"
+msgstr ""
+"Data la care toate datele dumneavoastră vor fi șterse din infrastructura "
+"noastră IT"
+
+#: alirpunkto/schemas/register_form.py:208
+#, fuzzy
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Dacă și când părăsiți Cooperativa, datele dumneavoastră de identitate vor fi "
+"păstrate pentru o perioadă de ${Quarantine} zile, înainte de a fi șterse "
+"complet și irevocabil din evidențele noastre. Acest lucru este menit să "
+"asigure că un cooperator care părăsește Cooperativa pentru că scorul sa de "
+"comportament cooperatist este prea slabă nu se poate reînregistra imediat cu "
+"un pseudonim și o scorul de comportament cooperatist noi. În momentul "
+"înregistrării dumneavoastră, această dată este stabilită într-un viitor "
+"foarte îndepărtat"
+
+#, fuzzy
+msgid "avatar_label"
+msgstr "O imagine care să te reprezinte (avatarul tău)"
+
+#, fuzzy
+msgid "avatar_description"
+msgstr ""
+"Vă rugăm să furnizați o imagine care să vă reprezinte în calitate de membru "
+"al Comunității. Pentru a vă proteja de orice represalii din partea "
+"angajatorului sau a clienților, vă recomandăm ca această imagine să nu "
+"permită urmărirea identității dumneavoastră în viața reală. Prin urmare, în "
+"general, nu ar trebui să fie o fotografie a dvs. (nu uitați că programele de "
+"recunoaștere a fețelor sunt utilizate masiv de roboții de căutare). Imagine "
+"trebuie să fie în format JPEG (extensia .JPG sau .JPEG) și să nu depășească "
+"5 MB. \n"
+" <strong> Considerăm că această informație este utilă</strong>, deoarece o "
+"imagine permite celorlalți membri ai comunității să vă recunoască mai ușor. "
+"Uneori, o imagine vorbește mult mai tare decât un discurs lung. Cu această "
+"imagine, exprimați multe despre dumneavoastră, într-un limbaj universal. "
+"Profitați din plin de ea!"
