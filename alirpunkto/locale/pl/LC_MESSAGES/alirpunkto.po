@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-23 14:05+0100\n"
+"PO-Revision-Date: 2024-03-23 14:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: pl\n"
@@ -30,13 +30,13 @@ msgid "login_label"
 msgstr "Zaloguj się"
 
 msgid "welcome_msg"
-msgstr "Witaj"
+msgstr ""
 
 #, fuzzy
 msgid "all_applications_msg"
 msgstr ""
-"Wszystkie aplikacje potrzebne do uczestniczenia w działaniach ${site_name} w "
-"jednym miejscu."
+"Wszystkie aplikacje potrzebne do uczestniczenia w działaniach ${domain_name} "
+"w jednym miejscu."
 
 #, fuzzy
 msgid "register_or_login_msg"
@@ -45,8 +45,8 @@ msgstr "Zarejestruj się lub zaloguj, aby rozpocząć."
 #, fuzzy
 msgid "logged_in_msg_title"
 msgstr ""
-"Alirpunkto, scentralizowana usługa dla aplikacji wykorzystywanych w "
-"infrastrukturze IT ${site_name}"
+"${site_name}, scentralizowana usługa dla aplikacji wykorzystywanych w "
+"infrastrukturze IT ${domain_name}"
 
 #, fuzzy
 msgid "logged_in_msg"
@@ -835,11 +835,13 @@ msgstr ""
 "liczbę Weryfikatorów tożsamości. Skontaktuj się z administratorem systemu "
 "pod adresem ${administrator}, aby rozwiązać ten problem."
 
+#, fuzzy
 msgid "email_copy_id_verification_subject"
 msgstr ""
 "pl - ${domain_name} - Proszę zweryfikować moją tożsamość jako nowego "
 "potencjalnego Współpracownika"
 
+#, fuzzy
 msgid "email_copy_id_verification_body"
 msgstr ""
 "    Drodzy Weryfikatorzy,\n"
@@ -874,6 +876,7 @@ msgstr ""
 "poinformować o tym administratora ${domain_name} pod adresem "
 "${administrator}."
 
+#, fuzzy
 msgid "email_video_id_verification_subject"
 msgstr ""
 "pl - ${domain_name} - Proszę zweryfikować moją tożsamość za pośrednictwem "
