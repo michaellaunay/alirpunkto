@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-09 23:06+0100\n"
+"PO-Revision-Date: 2024-03-23 13:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: nl\n"
@@ -955,7 +955,6 @@ msgstr ""
 "mens is (en geen robot) werd niet verzonden."
 
 #: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
-#, fuzzy
 msgid "error_committing_candidature"
 msgstr "Fout bij het vastleggen van de kandidatuur"
 
@@ -980,3 +979,299 @@ msgstr ""
 msgid "modification_to_profile_email_subject"
 msgstr ""
 "Link om je profiel op de IT-infrastructuur van ${domain_name} aan te passen"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Vermeld hier al uw familienamen bij geboorte (dus NIET uw familienaam als "
+"gehuwde), zoals die in uw officiële identiteitsdocumenten staan, in hun "
+"officiële transcriptie in Latijns schrift (als de oorspronkelijke taal een "
+"ander alfabet gebruikt dan het Latijnse)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Vermeld hier al uw voornamen, zoals ze in uw officiële identiteitsdocumenten "
+"staan, in hun officiële transcriptie in Latijnse karakters (als de "
+"oorspronkelijke taal een ander alfabet gebruikt dan het Latijnse)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Tekst die jou beschrijft (je profieltekst)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Schrijf hier een tekst waarin je jezelf beschrijft, <strong>in de taal van "
+"je voorkeur</strong>, zodat alle andere leden van de Gemeenschap je een "
+"beetje beter kunnen leren kennen. We stellen voor dat je je concentreert op: "
+"(1) waar je vandaan komt, (2) wat je doet, (3) wat je wilt doen als lid van "
+"de Gemeenschap, en (4) de middelen (ervaring, kennis, tijd) die je "
+"beschikbaar hebt.\n"
+" <strong> Wij geloven dat deze informatie nuttig is omdat</strong> jezelf "
+"voorstellen aan anderen met je eigen woorden een menselijk gezicht geeft aan "
+"je digitale identiteit op onze IT-infrastructuur. Met deze tekst leert elk "
+"lid van de Gemeenschap je een beetje beter kennen, en dat maakt interactie "
+"zoveel makkelijker!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Geef je geboortedatum op in het volgende formaat: DD/MM/JJJJ, d.w.z. (1) de "
+"dag in de maand, op 2 cijfers; (2) het nummer van de maand, op 2 cijfers; "
+"(3) het jaar, op 4 cijfers. Alleen personen die de 18e verjaardag hebben "
+"bereikt, kunnen Coöperator worden. Als je de 18e verjaardag nog niet hebt "
+"bereikt, nodigen we je uit om je te registreren als gewoon lid van de "
+"Gemeenschap - en op te waarderen naar de status van Coöperator zodra je "
+"meerderjarig wordt."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr ""
+"Geef een lidstaat van de Europese Unie op waarvan u staatsburger bent. "
+"Alleen burgers van de Europese Unie kunnen Coöperator zijn"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Selecteer een lidstaat van de Europese Unie"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr ""
+"Dit is het unieke nummer dat u identificeert in alle processen die "
+"plaatsvinden in de Gemeenschap"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Voer hier het pseudoniem in dat u zal identificeren voor de volledige duur "
+"van uw activiteit op ons IT-platform. We raden u TEN STERKSTE aan een "
+"pseudoniem te kiezen dat herleiding tot uw echte identiteit onmogelijk (of "
+"uiterst moeilijk) maakt. Op die manier bescherm je de vertrouwelijkheid van "
+"je meningen (d.w.z. persoonlijke gegevens die het doel zijn van een "
+"specifieke bescherming onder de Algemene Verordening Gegevensbescherming - "
+"GDPR) tegen elke vorm van externe druk in het echte leven (bijv. door je "
+"werkgever of je klanten). Wees heel voorzichtig! Als je het eenmaal hebt "
+"gekozen, kun je dit pseudoniem daarna NOOIT meer veranderen. Kies het met "
+"zorg!\n"
+" Je pseudoniem moet tussen ${MIN_PSEUDONYM_LENGTH} en "
+"${MAX_PSEUDONYM_LENGTH} tekens lang zijn en mag alleen letters van het "
+"Latijnse alfabet (A-Z, a-z), cijfers (0-9), underscores (_), punten (.), "
+"koppeltekens (-) en spaties ( ) bevatten. Het kan geen letters met accenten, "
+"umlauts en andere diakritische tekens bevatten die specifiek zijn voor "
+"sommige talen."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Het opgeven van je pseudoniem is verplicht"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Geef uw wachtwoord op. Uw wachtwoord moet tussen ${password_minimum_length} "
+"en ${password_maximum_length} tekens lang zijn, minstens één cijfer "
+"bevatten, minstens één kleine letter, minstens één hoofdletter en minstens "
+"één van de volgende tekens: '@', '#', '%', '&', '*', '(', ')', '-', '_', "
+"'+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Bevestig uw wachtwoord"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Bevestiging van je wachtwoord is vereist"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Geef het e-mailadres op dat de IT-infrastructuur van ${domain_name} zal "
+"gebruiken om met u te communiceren. \n"
+" We raden u aan een e-mailadres te kiezen dat u vaak controleert. Dit e-"
+"mailadres zal nooit aan andere gebruikers van deze IT-infrastructuur worden "
+"getoond. \n"
+" <strong>We hebben deze informatie nodig omdat</strong> we vaak met u willen "
+"communiceren, om u op de hoogte te houden van ontwikkelingen bij de "
+"coöperatie, om u de kans te bieden actie te ondernemen of bij te dragen aan "
+"beslissingen. E-mail is het meest gebruikte medium in Europa, het is "
+"universeel en is gebaseerd op open en vrije standaarden, in tegenstelling "
+"tot de merkgebonden berichtensystemen van de digitale reuzen (ook bekend als "
+"'GAFAM')."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Geef de taal op waarmee je wilt dat de IT-infrastructuur van ${domain_name} "
+"met je communiceert. \n"
+" We raden u aan de taal te kiezen die u het beste kent, uit de officiële "
+"talen van de Europese Unie of Esperanto. Als deze taal beschikbaar is onder "
+"de talen waarvoor we een gebruikersinterface hebben ontwikkeld, zullen we "
+"deze gebruiken om met je te communiceren. \n"
+" <strong>We hebben deze informatie nodig omdat</strong> we om redenen van "
+"eerlijkheid en respect voor democratische principes zo goed mogelijk met je "
+"willen communiceren in een taal die je begrijpt."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Geef de taal op waarmee je, als tweede keuze, zou accepteren dat de IT-"
+"infrastructuur van ${domain_name} met je communiceert. \n"
+" We raden u aan een andere officiële taal van de Europese Unie of Esperanto "
+"te kiezen, die u redelijk goed begrijpt. Als deze taal beschikbaar is onder "
+"de talen waarvoor we een gebruikersinterface hebben ontwikkeld en als de "
+"taal van uw voorkeur niet beschikbaar is, zullen we deze taal gebruiken om "
+"met u te communiceren. \n"
+" <strong>We hebben deze informatie nodig omdat</strong>, ondanks onze "
+"inspanningen, het kan gebeuren dat jouw voorkeurstaal niet beschikbaar is op "
+"de gebruikersinterface van onze software. Daarom vragen we je of je een "
+"andere taal kunt gebruiken."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr ""
+"De taal die u accepteert als derde keuze voor ons om met u te communiceren"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Geef als derde keuze de taal op waarmee u zou accepteren dat de IT-"
+"infrastructuur van ${domain_name} met u communiceert. \n"
+" We raden u aan een andere officiële taal van de Europese Unie of Esperanto "
+"te kiezen, die u nog steeds kunt begrijpen. Als deze taal beschikbaar is "
+"onder de talen waarvoor we een gebruikersinterface hebben ontwikkeld, en als "
+"noch uw voorkeurstaal noch uw tweede taal beschikbaar is, zullen we deze "
+"taal gebruiken om met u te communiceren. \n"
+" <strong>We hebben deze informatie nodig omdat</strong> het, ondanks onze "
+"inspanningen, kan voorkomen dat uw voorkeurstaal en uw tweede taal niet "
+"beschikbaar zijn op de gebruikersinterface van onze software. Daarom vragen "
+"we je of je een derde taal kunt gebruiken. We zijn ons ervan bewust dat het "
+"voor u - net als voor ons - een onbevredigende situatie is om via deze taal "
+"met ons te communiceren. We verontschuldigen ons hiervoor."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Je Score voor Coöperatief Gedrag"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Als een Coöperator is jouw Score voor Coöperatief Gedrag het resultaat van "
+"de scores die aan jou zijn toegekend door de andere Actieve Deelnemers in de "
+"Werkgroepen waaraan je hebt deelgenomen om Actievoorstellen te definiëren en "
+"aan te nemen. Elke Actieve Deelnemer kan een score geven dat gelijk is aan "
+"+1, 0 of -1, afhankelijk van hoe coöperatief je was tijdens je actieve "
+"deelname aan die Werkgroep. Dit score wordt dan automatisch 'vergeten' en "
+"vermindert in de loop van de tijd: het wordt gehalveerd na "
+"${forgetting_time_constant} dagen. De beginwaarde van je Score voor "
+"Coöperatief Gedrag is nul."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr ""
+"Datum waarop uw Score voor Coöperatief Gedrag voor het laatst is bijgewerkt"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Dit is de laatste datum waarop een andere Coöperator u een score heeft "
+"toegekend na het einde van uw actieve deelname aan een Werkgroep die een "
+"Actievoorstel aan het definiëren en goedkeuren was. De beginwaarde van die "
+"datum is die van uw registratie als een Coöperator"
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Aantal aandelen van de coöperatie dat u bezit"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Dit is het totale aantal aandelen van de Coöperatie dat je bezit, nadat je "
+"ze hebt gekocht op ons webportaal. Bij uw registratie is dit aantal gelijk "
+"aan nul. We nodigen u uit om zo snel mogelijk naar deze URL te gaan: "
+"${url_purchase_shares} om uw eerste aandeel(en) te kopen. Pas nadat u ten "
+"minste één aandeel hebt gekocht (en uw jaarlijkse bijdrage hebt betaald), "
+"hebt u volledige beslissingsbevoegdheid als Coöperator. Je bent welkom om "
+"meer dan één aandeel te kopen, bij registratie, maar ook op elk moment "
+"daarna. Het versterkt onze Coöperatie en we zijn je er allemaal dankbaar "
+"voor!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Datum waarop je huidige jaarlijkse bijdrage vervalt"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Datum waarop je huidige jaarlijkse bijdrage vervalt en waarop je deze "
+"opnieuw moet betalen om je volledige beslissingsrecht als Coöperator te "
+"behouden. Bij uw registratie is deze datum vastgesteld op een tijdstip in "
+"het verleden, wat betekent dat u deze nu moet betalen. We nodigen u uit om "
+"zo snel mogelijk naar deze URL te gaan: ${url_pay_yearly_contrib} om uw "
+"eerste jaarlijkse contributie te betalen en daarmee deel te nemen aan de "
+"activiteiten van onze Coöperatie. Pas na betaling van je jaarlijkse bijdrage "
+"(en aankoop van ten minste één aandeel) geniet je van je volledige "
+"beslissingsrecht als Coöperator."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Internationaal bankrekeningnummer (IBAN) van je bankrekening"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Als en wanneer u besluit de Coöperatie te verlaten (wat we allemaal zouden "
+"betreuren), hebben we uw IBAN nodig om de opbrengst van onze terugkoop van "
+"uw aandelen van de Coöperatie aan u te kunnen overmaken. Om "
+"veiligheidsredenen adviseren wij u deze informatie alleen te verstrekken als "
+"en wanneer u verwacht de coöperatie te verlaten"
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Datum waarop al uw gegevens uit onze IT-infrastructuur worden gewist"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Indien en wanneer u de Coöperatie verlaat, worden uw identiteitsgegevens "
+"bewaard voor een periode van ${Quarantine} dagen, voordat ze volledig en "
+"onherroepelijk uit onze administratie worden gewist. Dit is om ervoor te "
+"zorgen dat een Coöperator die de Coöperatie verlaat omdat zijn/haar Score "
+"voor Coöperatief Gedrag te slecht is, zich niet onmiddellijk opnieuw kan "
+"registreren met een nieuw pseudoniem en Score voor Coöperatief Gedrag. Bij "
+"je registratie wordt deze datum in een zeer verre toekomst vastgelegd"
+
+msgid "avatar_label"
+msgstr "Een beeld die je voorstelt (je avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Geef een beeld op die jou voorstelt als lid van de Gemeenschap. Om je te "
+"beschermen tegen eventuele represailles van je werkgever of klanten, raden "
+"we aan dat deze beeld het niet mogelijk maakt om je identiteit in het echte "
+"leven te achterhalen. Het moet dus in het algemeen geen foto van jezelf zijn "
+"(onthoud dat gezichtsherkenningssoftware massaal wordt gebruikt door "
+"zoekrobots). Het beeld mag alleen in JPEG-formaat zijn (extensie .JPG of ."
+"JPEG) en mag niet groter zijn dan 5 MB. \n"
+" <strong> Wij geloven dat deze informatie nuttig is omdat</strong> een beeld "
+"het voor de andere leden van de Gemeenschap makkelijker maakt om je te "
+"herkennen. Soms zegt een beeld meer dan een lange speech. Met deze "
+"afbeelding geef je veel over jezelf weer, in een universele taal. Haal er "
+"het beste uit!"
