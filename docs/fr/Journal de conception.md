@@ -1310,3 +1310,75 @@ Notons que ceci est un exemple simplifié. Dans l'application la gestion des ACL
 
 ## Implémentation
 J'ai décidé de définir nos workflows en utilisant un dictionnaire d'états. Chaque état contient un dictionnaire de rôles, associé à une liste de permissions. Cette structure nous permet d'obtenir une description précise du workflow. Ensuite, nous élaborerons le code nécessaire pour établir une correspondance entre les ACL de Pyramid et notre description du workflow. Nous procéderons également à des tests pour vérifier la validité des opérations en fonction de cette configuration.
+
+# 2024-03-24
+Voici l'extrait de code python de la gestion des workflows sous forme de  matrice :
+```python
+from typing import Dict, List
+from enum import Enum, unique
+from typing import Dict, List
+from enum import Enum, unique
+
+@unique
+class MemberStates(Enum):
+    CREATED = "created"
+    DRAFT = "draft"
+    REGISTRED = "registred"
+    DATA_MODIFICATION_REQUESTED = "data_modification_requested"
+    DATA_MODIFIED = "data_modified"
+
+@unique
+class MemberRoles(Enum):
+    NONE = "none"
+    ORDINARY = "ordinary"
+    COOPERATOR = "cooperator"
+    BOARD = "board"
+    MEDIATION_ARBITRATION_COUNCIL = "mediation_arbitration_council"
+
+@unique
+class DataMemberAccessPermissions(Enum):
+    NONE = 0
+    READ = 1
+    WRITE = 2
+    EXECUTE = 3
+    CREATE = 4
+    DELETE = 5
+    TRAVERSE = 6
+    RENAME = 7
+    DELETE_CHILD = 8
+    ADMIN = 9
+
+# Créer la matrice MemberStates / MemberRoles
+matrix: Dict[MemberStates, Dict[MemberRoles, List[DataMemberAccessPermissions]]] = {}
+
+# Initialiser la matrice avec des listes vides
+for state in MemberStates:
+    matrix[state] = {}
+    for role in MemberRoles:
+        matrix[state][role] = []
+
+# Ajouter les permissions aux cellules de la matrice
+matrix[MemberStates.CREATED][MemberRoles.NONE] = [DataMemberAccessPermissions.READ]
+matrix[MemberStates.CREATED][MemberRoles.ORDINARY] = [DataMemberAccessPermissions.READ, DataMemberAccessPermissions.WRITE]
+matrix[MemberStates.DRAFT][MemberRoles.NONE] = [DataMemberAccessPermissions.READ, DataMemberAccessPermissions.WRITE]
+# ... Ajouter les autres permissions pour chaque combinaison de state et role
+
+# Exemple d'accès à une cellule de la matrice
+permissions = matrix[MemberStates.CREATED][MemberRoles.NONE]
+print(permissions)  # Output: [DataMemberAccessPermissions.READ]
+
+# Créer une classe MembreData pour représenter les champs de données du membre
+class MembreData:
+    # Définir les champs de données du membre
+    # ...
+
+# Ajouter les permissions des champs de MembreData à la matrice
+matrix[MemberStates.CREATED][MemberRoles.NONE] = [DataMemberAccessPermissions.READ, DataMemberAccessPermissions.WRITE, DataMemberAccessPermissions.EXECUTE]
+matrix[MemberStates.CREATED][MemberRoles.ORDINARY] = [DataMemberAccessPermissions.READ, DataMemberAccessPermissions.WRITE, DataMemberAccessPermissions.EXECUTE]
+matrix[MemberStates.DRAFT][MemberRoles.NONE] = [DataMemberAccessPermissions.READ, DataMemberAccessPermissions.WRITE, DataMemberAccessPermissions.EXECUTE]
+# ... Ajouter les autres permissions pour chaque combinaison de state, role et champ de MembreData
+
+# Exemple d'accès à une cellule de la matrice pour les champs de MembreData
+permissions = matrix[MemberStates.CREATED][MemberRoles.NONE]
+print(permissions)  # Output: [DataMemberAccessPermissions.READ, DataMemberAccessPermissions.WRITE, DataMemberAccessPermissions.EXECUTE]
+```
