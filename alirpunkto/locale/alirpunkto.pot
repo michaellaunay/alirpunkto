@@ -533,7 +533,7 @@ msgstr ""
 "    <li>your citizenship.</li>\n"
 "    </ul></p>\n"
 "    <p>Only one person bears your name(s), your surname(s) and your date of birth: you. If you attempt to register again, you will need to provide the same data to our verification procedure, and we will reject your application, because you already are a Cooperator, and cannot have several accounts to vote more than once. We will be confident in doing so because we know that only one person has this combination of name(s), surname(s) and date of birth. Your date of birth enables us to verify that you are of legal age, and your citizenship enables us to ensure that you are indeed a citizen of the European Union.</p>\n"
-"    <p>This data will be used exclusively for us to verify your identity, your age and your citizenship, and to manage your account as a Cooperator. It will not be transmitted or sold to anyone, except to fulfill legal requirements by public authorities. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>\n"
+"    <p>This data will be used exclusively for us to verify your identity, your age and your citizenship, and to manage your account as a Cooperator. It will never be displayed to the other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the request of a judge. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>\n"
 "</div>"
 
 msgid "human_verification_explanation"
@@ -785,7 +785,13 @@ msgstr "Confirming your password is required"
 
 #: alirpunkto/schemas/register_form.py:138
 msgid "email_description"
-msgstr "Please provide the e-mail address that the IT infrastructure of ${domain_name} will use to interact with you. \n We recommend that you choose an email address that you check often. This e-mail address will never be displayed to other users of this IT infrastructure. \n <strong>We need this information because</strong> we need to interact with you often, to keep you informed of developments at the Cooperative, to offer you the chance to take action or contribute to decisions. Email is the most widely used medium in Europe, it is universal and is based on open and free standards, unlike the proprietary messaging systems of the digital giants (also known as 'GAFAM')."
+msgstr ""
+"<div>\n"
+"<p>Please provide the e-mail address that the IT infrastructure of ${domain_name} will use to interact with you.</p>\n"
+"<p>We recommend that you choose an email address that you check often.</p>\n"
+"<p><strong>We need this information because</strong> we need to interact with you, to keep you informed of developments at the Cooperative, to offer you the chance to take action or contribute to decisions. Email is the most widely used medium in Europe, it is universal and is based on open and free standards, unlike the proprietary messaging systems of the digital giants (also known as 'GAFAM').</p>\n"
+"<p>This e-mail address will used exclusively to ensure the communication between the IT infrastructure of ${domain_name} with you. It will never be displayed to the other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the request of a judge. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>\n"
+"</div>"
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
