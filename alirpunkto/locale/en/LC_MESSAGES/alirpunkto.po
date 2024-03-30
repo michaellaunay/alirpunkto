@@ -9,13 +9,14 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2023-06-23 12:40\n"
+"PO-Revision-Date: 2024-03-30 13:45+0100\n"
 "Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
 
 msgid "welcome"
 msgstr "Welcome"
@@ -39,7 +40,7 @@ msgid "register_or_login_msg"
 msgstr "Register or login now to get started."
 
 msgid "logged_in_msg_title"
-msgstr "${site_name}, the centralized service for the applications used in the IT infrastructure of ${domain_name}" 
+msgstr "${site_name}, the centralized service for the applications used in the IT infrastructure of ${domain_name}"
 
 msgid "logged_in_msg"
 msgstr "You are logged in as ${user}."
@@ -120,7 +121,7 @@ msgstr "Email Validation: The state where the Applicant's email address is await
 msgid "candidature_states_confirmed_human_value"
 msgstr "ConfirmedHuman: The Applicant's email address is verified, and proof of humanity is provided (we have verified that you are not a robot)."
 
-msgid "candidature_states_unique_data_value" 
+msgid "candidature_states_unique_data_value"
 msgstr "UniqueData: The Applicant has entered his/her personal identification data, and we have verified that no current or recent Cooperator or Ordinary Member of the Community has the same data."
 
 msgid "candidature_states_pending_value"
@@ -533,7 +534,7 @@ msgstr ""
 "    <li>your citizenship.</li>\n"
 "    </ul></p>\n"
 "    <p>Only one person bears your name(s), your surname(s) and your date of birth: you. If you attempt to register again, you will need to provide the same data to our verification procedure, and we will reject your application, because you already are a Cooperator, and cannot have several accounts to vote more than once. We will be confident in doing so because we know that only one person has this combination of name(s), surname(s) and date of birth. Your date of birth enables us to verify that you are of legal age, and your citizenship enables us to ensure that you are indeed a citizen of the European Union.</p>\n"
-"    <p>This data will be used exclusively for us to verify your identity, your age and your citizenship, and to manage your account as a Cooperator. It will not be transmitted or sold to anyone, except to fulfill legal requirements by public authorities. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>\n"
+"    <p>This data will be used exclusively for us to verify your identity, your age and your citizenship, and to manage your account as a Cooperator. It will never be displayed to the other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the request of a judge. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>\n"
 "</div>"
 
 msgid "human_verification_explanation"
@@ -698,15 +699,13 @@ msgstr "An error has occurred in the process of resetting your password. Your pa
 msgid "member_not_found"
 msgstr "The member was not found in the list of current members"
 
-#: alirpunkto/views/forgot_password.py:268
-#: alirpunkto/views/register.py:103
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
 msgid "url_is_obsolete"
 msgstr "The hyperlink that you used to reset your password is obsolete. Please use the latest one you received"
 
 #: alirpunkto/views/register.py:182
 msgid "email_not_sent"
 msgstr "The e-mail containing the mathematical challenge verifying that the candidate is human (and not a robot) was not sent."
-
 
 #: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
 msgid "error_committing_candidature"
@@ -741,7 +740,9 @@ msgstr "Text describing you (your profile text)"
 
 #: alirpunkto/schemas/register_form.py:48
 msgid "description_description"
-msgstr "Please write here a text describing yourself, <strong>in your preferred langage</strong>, so that all other members of the Community can get to know you a little better. We suggest that you focus on: (1) Where you come from, (2) what you do, (3) what you want to do as a member of the Community, and (4) the resources (experience, knowledge, time) that you have available.\n <strong> We believe that this information is useful because</strong> introducing yourself to others with your own words gives a human face to your digital identity on our IT infrastructure. With this text, every member of the Community gets to know you a little better, and that makes interaction so much easier!"
+msgstr ""
+"Please write here a text describing yourself, <strong>in your preferred langage</strong>, so that all other members of the Community can get to know you a little better. We suggest that you focus on: (1) Where you come from, (2) what you do, (3) what you want to do as a member of the Community, and (4) the resources (experience, knowledge, time) that you have available.\n"
+" <strong> We believe that this information is useful because</strong> introducing yourself to others with your own words gives a human face to your digital identity on our IT infrastructure. With this text, every member of the Community gets to know you a little better, and that makes interaction so much easier!"
 
 #: alirpunkto/schemas/register_form.py:55
 msgid "birthdate_description"
@@ -765,7 +766,9 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:112
 msgid "pseudonym_description"
-msgstr "Please enter here the pseudonym that will identify you for the whole duration of your activity on our IT platform. We STRONGLY recommend that you select a pseudonym that makes tracking back to your real identity impossible (or extremely difficult). Thereby, you protect the confidentiality of your opinions (i.e. personal data that are the purpose of a specific protection under the General Data Protection Regulation - GDPR) against any form of external pressure in real life (e.g. by your employer or your customers). Be very careful! Once you have chosen it, you will NEVER be able to change this pseudonym afterwards. Choose it with care! \n Your pseudonym must be between ${MIN_PSEUDONYM_LENGTH} and ${MAX_PSEUDONYM_LENGTH} characters long and can only contain letters of the Latin alphabet (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-) and spaces ( ). It cannot contain letters with accents, umlauts, and other diacritical signs specific to some languages."
+msgstr ""
+"Please enter here the pseudonym that will identify you for the whole duration of your activity on our IT platform. We STRONGLY recommend that you select a pseudonym that makes tracking back to your real identity impossible (or extremely difficult). Thereby, you protect the confidentiality of your opinions (i.e. personal data that are the purpose of a specific protection under the General Data Protection Regulation - GDPR) against any form of external pressure in real life (e.g. by your employer or your customers). Be very careful! Once you have chosen it, you will NEVER be able to change this pseudonym afterwards. Choose it with care! \n"
+" Your pseudonym must be between ${MIN_PSEUDONYM_LENGTH} and ${MAX_PSEUDONYM_LENGTH} characters long and can only contain letters of the Latin alphabet (A-Z, a-z), numbers (0-9), underscores (_), dots (.), hyphens (-) and spaces ( ). It cannot contain letters with accents, umlauts, and other diacritical signs specific to some languages."
 
 #: alirpunkto/schemas/register_form.py:115
 msgid "pseudonym_required"
@@ -785,23 +788,37 @@ msgstr "Confirming your password is required"
 
 #: alirpunkto/schemas/register_form.py:138
 msgid "email_description"
-msgstr "Please provide the e-mail address that the IT infrastructure of ${domain_name} will use to interact with you. \n We recommend that you choose an email address that you check often. This e-mail address will never be displayed to other users of this IT infrastructure. \n <strong>We need this information because</strong> we need to interact with you often, to keep you informed of developments at the Cooperative, to offer you the chance to take action or contribute to decisions. Email is the most widely used medium in Europe, it is universal and is based on open and free standards, unlike the proprietary messaging systems of the digital giants (also known as 'GAFAM')."
+msgstr ""
+"<div>\n"
+"<p>Please provide the e-mail address that the IT infrastructure of ${domain_name} will use to interact with you.</p>\n"
+"<p>We recommend that you choose an email address that you check often.</p>\n"
+"<p><strong>We need this information because</strong> we need to interact with you, to keep you informed of developments at the Cooperative, to offer you the chance to take action or contribute to decisions. Email is the most widely used medium in Europe, it is universal and is based on open and free standards, unlike the proprietary messaging systems of the digital giants (also known as 'GAFAM').</p>\n"
+"<p>This e-mail address will used exclusively to ensure the communication between the IT infrastructure of ${domain_name} and you. It will never be displayed to the other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the request of a judge. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>\n"
+"</div>"
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
-msgstr "Please provide the language with which you would prefer that the IT infrastructure of ${domain_name} interact with you. \n We recommend that you choose the language you know best, from among the official languages of the European Union or Esperanto. If it is available among those for which we have developed a user interface, we will use it to interact with you. \n <strong>We need this information because</strong>, for reasons of fairness and respect for democratic principles, we want to interact with you in a language that you understand as well as possible."
+msgstr ""
+"Please provide the language with which you would prefer that the IT infrastructure of ${domain_name} interact with you. \n"
+" We recommend that you choose the language you know best, from among the official languages of the European Union or Esperanto. If it is available among those for which we have developed a user interface, we will use it to interact with you. \n"
+" <strong>We need this information because</strong>, for reasons of fairness and respect for democratic principles, we want to interact with you in a language that you understand as well as possible."
 
 #: alirpunkto/schemas/register_form.py:151
 msgid "second_interaction_language_description"
-msgstr "Please provide the language with which you would accept, as a second choice, that the IT infrastructure of ${domain_name} interact with you. \n We recommend that you choose another official language of the European Union or Esperanto, which you understand reasonably well. If it is available among those for which we have developed a user interface, and if your preferred language is unavailable, we will use it to interact with you. \n <strong>We need this information because</strong>, despite our efforts, it may happen that your preferred language be unavailable on the user interface of our software. This is why we are asking you if you can use another language."
+msgstr ""
+"Please provide the language with which you would accept, as a second choice, that the IT infrastructure of ${domain_name} interact with you. \n"
+" We recommend that you choose another official language of the European Union or Esperanto, which you understand reasonably well. If it is available among those for which we have developed a user interface, and if your preferred language is unavailable, we will use it to interact with you. \n"
+" <strong>We need this information because</strong>, despite our efforts, it may happen that your preferred language be unavailable on the user interface of our software. This is why we are asking you if you can use another language."
 
 #: alirpunkto/schemas/register_form.py:156
 msgid "third_interaction_language_label"
 msgstr "The language you accept as a third choice for us to interact with you"
 
 msgid "third_interaction_language_description"
-msgstr "Please provide the language with which you would accept, as a third choice, that the IT infrastructure of ${domain_name} interact with you. \n We recommend that you choose another official language of the European Union or Esperanto, which you still can understand. If it is available among those for which we have developed a user interface, and if neither your preferred language nor your second language is available, we will use it to interact with you. \n <strong>We need this information because</strong>, despite our efforts, it may happen that your preferred language and your second language be unavailable on the user interface of our software. This is why we are asking you if you can use a third language. We are aware that for you to interact with us using it is an unsatisfactory situation for you - as it is for us. We apologise for this."
-
+msgstr ""
+"Please provide the language with which you would accept, as a third choice, that the IT infrastructure of ${domain_name} interact with you. \n"
+" We recommend that you choose another official language of the European Union or Esperanto, which you still can understand. If it is available among those for which we have developed a user interface, and if neither your preferred language nor your second language is available, we will use it to interact with you. \n"
+" <strong>We need this information because</strong>, despite our efforts, it may happen that your preferred language and your second language be unavailable on the user interface of our software. This is why we are asking you if you can use a third language. We are aware that for you to interact with us using it is an unsatisfactory situation for you - as it is for us. We apologise for this."
 
 #: alirpunkto/schemas/register_form.py:163
 msgid "cooperative_behaviour_mark_label"
@@ -870,4 +887,6 @@ msgid "avatar_label"
 msgstr "A picture to represent you (your avatar)"
 
 msgid "avatar_description"
-msgstr "Please provide a picture representing you as a member of the Community. For the sake of preserving you from any reprisals from your employer or clients, we recommend that this picture does not enable to track back to your identity in real life. It should hence in general not be a photograph of yourself (remember that face recognition software is massively used by search robots). The picture should be in JPEG format only (extension .JPG or .JPEG), and not larger than 5 MB. \n <strong> We believe that this information is useful because</strong> a picture make it easier for the other members of the Community to recognise you. Sometimes a picture speaks much louder than a long speech. With this image, you're expressing a lot about yourself, in a universal language. Make the most of it!"
+msgstr ""
+"Please provide a picture representing you as a member of the Community. For the sake of preserving you from any reprisals from your employer or clients, we recommend that this picture does not enable to track back to your identity in real life. It should hence in general not be a photograph of yourself (remember that face recognition software is massively used by search robots). The picture should be in JPEG format only (extension .JPG or .JPEG), and not larger than 5 MB. \n"
+" <strong> We believe that this information is useful because</strong> a picture make it easier for the other members of the Community to recognise you. Sometimes a picture speaks much louder than a long speech. With this image, you're expressing a lot about yourself, in a universal language. Make the most of it!"
