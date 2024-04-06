@@ -900,22 +900,22 @@ msgstr ""
 "Une erreur s'est produite lors de l'envoi de l'email de réinitialisation, "
 "veuillez contacter l'administrateur, à l'adresse ${administrator}"
 
-msgid "member_states_created_name"
+msgid "member_state_created_name"
 msgstr "créé"
 
-msgid "member_states_created_value"
+msgid "member_state_created_value"
 msgstr "Le membre a été créé"
 
-msgid "member_states_draft_name"
+msgid "member_state_draft_name"
 msgstr "brouillon"
 
-msgid "member_states_draft_value"
+msgid "member_state_draft_value"
 msgstr "Les données du membre sont en cours d'édition"
 
-msgid "member_states_registred_name"
+msgid "member_state_registred_name"
 msgstr "enregistré"
 
-msgid "member_states_registred_value"
+msgid "member_state_registred_value"
 msgstr "Les données du membre ont été enregistrées"
 
 msgid "member_data_modification_request_name"

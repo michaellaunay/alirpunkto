@@ -962,25 +962,25 @@ msgstr ""
 "Wystąpił błąd podczas wysyłania wiadomości resetowania, skontaktuj się z "
 "administratorem: ${administrator}"
 
-msgid "member_states_created_name"
+msgid "member_state_created_name"
 msgstr "utworzono"
 
 #, fuzzy
-msgid "member_states_created_value"
+msgid "member_state_created_value"
 msgstr "Członek został utworzony"
 
-msgid "member_states_draft_name"
+msgid "member_state_draft_name"
 msgstr "szkic"
 
 #, fuzzy
-msgid "member_states_draft_value"
+msgid "member_state_draft_value"
 msgstr "Dane użytkownika są edytowane"
 
-msgid "member_states_registred_name"
+msgid "member_state_registred_name"
 msgstr "zarejestrowany"
 
 #, fuzzy
-msgid "member_states_registred_value"
+msgid "member_state_registred_value"
 msgstr "Dane użytkownika zostały zapisane"
 
 #, fuzzy

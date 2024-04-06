@@ -863,22 +863,22 @@ msgstr ""
 "Er is een fout opgetreden bij het verzenden van de reset e-mail, neem "
 "contact op met de beheerder, bij ${administrator}"
 
-msgid "member_states_created_name"
+msgid "member_state_created_name"
 msgstr "toegevoegd"
 
-msgid "member_states_created_value"
+msgid "member_state_created_value"
 msgstr "Het lid is aangemaakt"
 
-msgid "member_states_draft_name"
+msgid "member_state_draft_name"
 msgstr "draft"
 
-msgid "member_states_draft_value"
+msgid "member_state_draft_value"
 msgstr "De gegevens van het lid worden bewerkt"
 
-msgid "member_states_registred_name"
+msgid "member_state_registred_name"
 msgstr "geregistreerde"
 
-msgid "member_states_registred_value"
+msgid "member_state_registred_value"
 msgstr "De gegevens van het lid zijn opgeslagen"
 
 msgid "member_data_modification_request_name"

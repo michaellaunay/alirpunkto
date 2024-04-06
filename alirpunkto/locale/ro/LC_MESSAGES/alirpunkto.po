@@ -983,25 +983,25 @@ msgstr ""
 "A apărut o eroare la trimiterea e-mailului de resetare, vă rugăm să "
 "contactați administratorul: ${administrator}"
 
-msgid "member_states_created_name"
+msgid "member_state_created_name"
 msgstr "creeat"
 
 #, fuzzy
-msgid "member_states_created_value"
+msgid "member_state_created_value"
 msgstr "Membrul a fost creat"
 
-msgid "member_states_draft_name"
+msgid "member_state_draft_name"
 msgstr "schiță"
 
 #, fuzzy
-msgid "member_states_draft_value"
+msgid "member_state_draft_value"
 msgstr "Datele membrului sunt în curs de editare"
 
-msgid "member_states_registred_name"
+msgid "member_state_registred_name"
 msgstr "înregistrat"
 
 #, fuzzy
-msgid "member_states_registred_value"
+msgid "member_state_registred_value"
 msgstr "Datele membrului au fost salvate"
 
 #, fuzzy

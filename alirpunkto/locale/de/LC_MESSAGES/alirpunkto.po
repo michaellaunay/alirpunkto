@@ -880,22 +880,22 @@ msgstr ""
 "Beim Senden der Reset-E-Mail ist ein Fehler aufgetreten, bitte wenden Sie "
 "sich an den Administrator, bei ${administrator}"
 
-msgid "member_states_created_name"
+msgid "member_state_created_name"
 msgstr "erstellt"
 
-msgid "member_states_created_value"
+msgid "member_state_created_value"
 msgstr "Das Mitglied ist erstellt worden"
 
-msgid "member_states_draft_name"
+msgid "member_state_draft_name"
 msgstr "Entwurf"
 
-msgid "member_states_draft_value"
+msgid "member_state_draft_value"
 msgstr "Die Daten des Mitglieds werden gerade bearbeitet"
 
-msgid "member_states_registred_name"
+msgid "member_state_registred_name"
 msgstr "Registriert"
 
-msgid "member_states_registred_value"
+msgid "member_state_registred_value"
 msgstr "Die Daten des Mitglieds wurden gespeichert"
 
 msgid "member_data_modification_request_name"

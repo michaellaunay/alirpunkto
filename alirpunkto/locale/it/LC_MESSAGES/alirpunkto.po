@@ -861,22 +861,22 @@ msgstr ""
 "Si è verificato un errore durante l'invio dell'e-mail di reset, si prega di "
 "contattare l'amministratore, all'indrizzo ${administrator}"
 
-msgid "member_states_created_name"
+msgid "member_state_created_name"
 msgstr "creato"
 
-msgid "member_states_created_value"
+msgid "member_state_created_value"
 msgstr "Il membro è stato creato"
 
-msgid "member_states_draft_name"
+msgid "member_state_draft_name"
 msgstr "bozza"
 
-msgid "member_states_draft_value"
+msgid "member_state_draft_value"
 msgstr "I dati del membro sono in fase di modifica"
 
-msgid "member_states_registred_name"
+msgid "member_state_registred_name"
 msgstr "registrato"
 
-msgid "member_states_registred_value"
+msgid "member_state_registred_value"
 msgstr "I dati del membro sono stati salvati"
 
 msgid "member_data_modification_request_name"
