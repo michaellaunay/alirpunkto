@@ -1,5 +1,6 @@
 import unittest
-from alirpunkto.models.member import MemberStates, Permissions, EmailSendStatus, MemberTypes
+from alirpunkto.models.member import MemberStates, EmailSendStatus, MemberTypes
+from alirpunkto.models.permissions import Permissions
 
 class TestMemberStates(unittest.TestCase):
     def test_get_i18n_id(self):
@@ -10,7 +11,6 @@ class TestMemberStates(unittest.TestCase):
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFICATION_REQUESTED.name), "member_data_modification_request_name")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFIED.name), "member_datas_modified_name")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.CREATED.value), "member_state_created_value")
-        self.assertEqual(MemberStates.get_i18n_id(MemberStates.DRAFT.name), "member_state_draft_value")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFICATION_REQUESTED.name), "member_data_modification_request_value")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFIED.name), "member_datas_modified_value")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.EXCLUDED.name), "member_datas_excluded_name")

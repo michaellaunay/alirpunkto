@@ -201,7 +201,7 @@ class MemberRoles(Enum) :
         return MemberRoles.__members__.keys()
 
 @dataclass
-class MemberDatasEvent:
+class MemberDataEvent:
     """An event.
     """
     datetime:datetime # the datetime of the event
@@ -210,7 +210,7 @@ class MemberDatasEvent:
     value_after:Any # the value of the member_datas after the event
     seed:str # the seed of the member_datas at the moment of the event
     def __repr__(self):
-        return f"<MemberDatasEvent({self.datetime}, "\
+        return f"<MemberDataEvent({self.datetime}, "\
                 f"{self.function_name}, "\
                 f"{self.value_before}, "\
                 f"{self.value_after}, "\
@@ -240,7 +240,7 @@ class MemberDatasEvent:
         Returns:
             An iterator over the field names of the dataclass.
         """
-        return (field.name for field in fields(MemberDatasEvent))
+        return (field.name for field in fields(MemberDataEvent))
 
 @dataclass
 class EmailEvent:
@@ -281,7 +281,7 @@ def random_string(
     """
     return ''.join(random.choice(chars) for _ in range(length))
 
-class MemberDatasFunctions:
+class MemberDataFunctions:
     """A class to store functions used by the MemberDatas class.
     Easy to mook for testing.
     """
@@ -293,14 +293,14 @@ class MemberDatasFunctions:
         Returns:
             The current datetime.
         """
-        return MemberDatasFunctions.func_now()
+        return MemberDataFunctions.func_now()
     @staticmethod
     def uuid() -> str:
         """Get a unique identifier (UUID).
         Returns:
             A unique identifier (UUID).
         """
-        return MemberDatasFunctions.func_uuid()
+        return MemberDataFunctions.func_uuid()
     
 @dataclass
 class MemberDatas:
@@ -434,7 +434,7 @@ class Member(Persistent):
         email_send_status_history (list of EmailEvent): Accesses the list that records the email send status history. Supports get and set operations.
         challenge (tuple[str, int]): Manages the math challenge and its solution. Supports get and set operations.
         pseudonym (str): Accesses the pseudonym of the member. Supports get and set operations.
-        modifications (list of MemberDatasEvent): Tracks modifications to the member data. Supports get and set operations.
+        modifications (list of MemberDataEvent): Tracks modifications to the member data. Supports get and set operations.
     """
     __acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]
 
@@ -450,7 +450,7 @@ class Member(Persistent):
         email_send_status_history: Optional[List[EmailEvent]] = None,
         challenge: Optional[Tuple[str, int]] = None,
         pseudonym: Optional[str] = None,
-        modifications: Optional[List[MemberDatasEvent]] = None
+        modifications: Optional[List[MemberDataEvent]] = None
         ):
         """
         Initialize a new MemberDatas object.
@@ -467,7 +467,7 @@ class Member(Persistent):
             email_send_status_history (list of EmailEvent, optional): A list to record the email send status history. Defaults to an empty list.
             challenge (tuple[str, int], optional): A tuple containing a string math challenge and its solution as an integer. Defaults to None.
             pseudonym (str, optional): The pseudonym of the member. Defaults to None.
-            modifications (list of MemberDatasEvent, optional): A list to record modifications, where each entry is a dataclass containing the datetime, function name, previous value, new value, and seed. Defaults to an empty list.
+            modifications (list of MemberDataEvent, optional): A list to record modifications, where each entry is a dataclass containing the datetime, function name, previous value, new value, and seed. Defaults to an empty list.
 
         Raises:
             RuntimeError: Raised if an instance already exists with the same OID.
@@ -514,8 +514,8 @@ class Member(Persistent):
 
         self._seed = random_string(SEED_LENGTH) 
 
-        event = MemberDatasEvent(
-            datetime=MemberDatasFunctions.now(), 
+        event = MemberDataEvent(
+            datetime=MemberDataFunctions.now(), 
             function_name=function_name,
             value_before=previous_value,
             value_after=new_value,
@@ -619,7 +619,27 @@ class Member(Persistent):
             The pseudonym of the member.
         """
         return self._pseudonym
-    
+    @property
+    def votes(self)-> Dict[str, int]:
+        """ Get the votes of the member.
+        Returns:
+            The votes of the member.
+        """
+        return self._votes.copy()
+    @property
+    def voters(self)-> List[str]:
+        """ Get the voters of the member.
+        Returns:
+            The voters of the member.
+        """
+        return self._voters.copy()
+    @property
+    def challenge(self)-> Tuple[str, int]:
+        """ Get the challenge of the member.
+        Returns:
+            The challenge of the member.
+        """
+        return self._challenge    
     @pseudonym.setter
     def pseudonym(self, value:str):
         """ Set the pseudonym of the member.
@@ -638,7 +658,7 @@ class Member(Persistent):
         self._memorize_changes("pseudonym", old_pseudonym, value)
 
     @property
-    def modifications(self)-> List[MemberDatasEvent]:
+    def modifications(self)-> List[MemberDataEvent]:
         """ Get the modifications of the member.
         Returns:
             A copy of modifications of the member_datas as a list of
@@ -688,7 +708,7 @@ class Member(Persistent):
         Generate a unique Object Identifier (OID) for a new MemberDatas object.
 
         This function tries to generate a unique OID by using the 
-         MemberDatasFunctions.uuid function.
+         MemberDataFunctions.uuid function.
         It checks for uniqueness by looking into the existing `member_datas`
          mapping.
 
@@ -710,7 +730,7 @@ class Member(Persistent):
             # get the singleton instance
             member_datas = Members.get_instance()
         for _ in range(max_retries):
-            oid = str(MemberDatasFunctions.uuid())
+            oid = str(MemberDataFunctions.uuid())
             if oid not in member_datas:
                 return oid
         raise ValueError(
@@ -768,7 +788,7 @@ class Member(Persistent):
                 else "None"
             )
         self._email_send_status_history.append(EmailEvent(
-            datetime=MemberDatasFunctions.now(), 
+            datetime=MemberDataFunctions.now(), 
             state=status,
             function_name=procedure_name,
             seed=email_seed

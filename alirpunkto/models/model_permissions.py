@@ -1,9 +1,10 @@
 # 
 
-from permissions import Permissions
 from dataclasses import make_dataclass
 from typing import Type, Final
-from member import MemberStates, MemberDatas, Member
+from .permissions import Permissions
+from .member import MemberStates, MemberDatas, Member, MemberTypes
+from .candidature import CandidatureStates, Candidature
 
 # MemberDataPermissions is a frozen dataclass that stores the permissions for
 # each attribute of the MemberDatas dataclass.
@@ -55,7 +56,7 @@ def define_member_data_permissions(
             fullname=fullname,
             fullsurname=fullsurname,
             description=description,
-            nationality=nationality
+            nationality=nationality,
             birthdate=birthdate,
             password=password,
             password_confirm=password_confirm,
@@ -220,6 +221,125 @@ access = {
                 pseudonym=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
+        },
+        (CandidatureStates.EMAIL_VALIDATION, None):{
+            MemberPermissions(
+                data=NO_MEMBER_DATA_PERMISSIONS,
+                oid=Permissions.ACCESS | Permissions.READ,
+                member_state=Permissions.ACCESS | Permissions.READ,
+                type=Permissions.ACCESS | Permissions.READ,
+                email=Permissions.ACCESS | Permissions.READ,
+                votes=Permissions.NONE,
+                seed=Permissions.ACCESS,
+                email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                challenge=Permissions.ACCESS,
+                pseudonym=Permissions.ACCESS | Permissions.READ,
+                modifications=Permissions
+            )
+        },
+        (CandidatureStates.CONFIRMED_HUMAN, MemberTypes.ORDINARY):{
+            MemberPermissions(
+                data=NO_MEMBER_DATA_PERMISSIONS,
+                oid=Permissions.ACCESS | Permissions.READ,
+                member_state=Permissions.ACCESS | Permissions.READ,
+                type=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                email=Permissions.ACCESS | Permissions.READ,
+                votes=Permissions.NONE,
+                seed=Permissions.ACCESS,
+                email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                challenge=Permissions.NONE,
+                pseudonym=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                modifications=Permissions.NONE
+            )
+        },
+        (CandidatureStates.CONFIRMED_HUMAN, MemberTypes.COOPERATOR):{
+            MemberPermissions(
+                data=MemberDataPermissions(
+                    fullname=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    fullsurname=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    description=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    nationality=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    birthdate=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    password=Permissions.ACCESS | Permissions.WRITE,
+                    password_confirm=Permissions.ACCESS | Permissions.WRITE,
+                    lang1=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    lang2=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    lang3=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    cooperative_behaviour_mark=Permissions.NONE,
+                    cooperative_behaviour_mark_updated=Permissions.NONE,
+                    number_shares_owned=Permissions.NONE,
+                    date_end_validity_yearly_contribution=Permissions.NONE,
+                    iban=Permissions.NONE,
+                    role=Permissions.NONE,
+                ),
+                oid=Permissions.ACCESS | Permissions.READ,
+                member_state=Permissions.ACCESS | Permissions.READ,
+                type=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                email=Permissions.ACCESS | Permissions.READ,
+                votes=Permissions.NONE,
+                seed=Permissions.ACCESS,
+                email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                challenge=Permissions.NONE,
+                pseudonym=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                modifications=Permissions.NONE
+            )
+        },
+        (CandidatureStates.UNIQUE_DATA, MemberTypes.COOPERATOR):{
+            MemberPermissions(
+                data=MemberDataPermissions(
+                    fullname=Permissions.ACCESS | Permissions.READ,
+                    fullsurname=Permissions.ACCESS | Permissions.READ,
+                    description=Permissions.ACCESS | Permissions.READ,
+                    nationality=Permissions.ACCESS | Permissions.READ,
+                    birthdate=Permissions.ACCESS | Permissions.READ,
+                    password=Permissions.ACCESS,
+                    password_confirm=Permissions.ACCESS,
+                    lang1=Permissions.ACCESS | Permissions.READ,
+                    lang2=Permissions.ACCESS | Permissions.READ,
+                    lang3=Permissions.ACCESS | Permissions.READ,
+                    cooperative_behaviour_mark=Permissions.NONE,
+                    cooperative_behaviour_mark_updated=Permissions.NONE,
+                    number_shares_owned=Permissions.NONE,
+                    date_end_validity_yearly_contribution=Permissions.NONE,
+                    iban=Permissions.NONE,
+                    role=Permissions.NONE,
+                ),
+                oid=Permissions.ACCESS | Permissions.READ,
+                member_state=Permissions.ACCESS | Permissions.READ,
+                type=Permissions.ACCESS | Permissions.READ,
+                email=Permissions.ACCESS | Permissions.READ,
+                votes=Permissions.NONE,
+                voters=Permissions.ACCESS | Permissions.READ,
+                seed=Permissions.ACCESS,
+                email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                challenge=Permissions.NONE,
+                pseudonym=Permissions.ACCESS | Permissions.READ,
+                modifications=Permissions.NONE
+            )
+        },
+        (CandidatureStates.PENDING, MemberTypes.COOPERATOR):{
+            BASIC_PERMISSIONS
+        },
+        (CandidatureStates.APPROVED, MemberTypes.ORDINARY):{
+            MemberPermissions(
+                data=NO_MEMBER_DATA_PERMISSIONS,
+                oid=Permissions.ACCESS | Permissions.READ,
+                member_state=Permissions.ACCESS | Permissions.READ,
+                type=Permissions.ACCESS | Permissions.READ,
+                email=Permissions.ACCESS | Permissions.READ,
+                votes=Permissions.NONE,
+                seed=Permissions.ACCESS,
+                email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                challenge=Permissions.NONE,
+                pseudonym=Permissions.ACCESS | Permissions.READ,
+                modifications=Permissions.NONE
+            )
+        },
+        (CandidatureStates.APPROVED, MemberTypes.COOPERATOR):{
+            BASIC_PERMISSIONS
+        },
+        (CandidatureStates.REFUSED, MemberTypes.COOPERATOR):{
+            BASIC_PERMISSIONS
         },
         MemberStates.REGISTRED:{
             MemberPermissions(
@@ -433,25 +553,25 @@ access = {
         }
     },
     'Ordinary' : {
-        MemberStates.CREATED:{NO_MEMBER_DATA_PERMISSIONS},
-        MemberStates.DRAFT:{NO_MEMBER_DATA_PERMISSIONS},
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DRAFT:{NO_MEMBER_PERMISSIONS},
         MemberStates.REGISTRED:{BASIC_PERMISSIONS},
         MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
         MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
-        MemberStates.EXCLUDED:{NO_MEMBER_DATA_PERMISSIONS},
-        MemberStates.DELETED:{NO_MEMBER_DATA_PERMISSIONS}
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'Cooperator' : {
-        MemberStates.CREATED:{NO_MEMBER_DATA_PERMISSIONS},
-        MemberStates.DRAFT:{NO_MEMBER_DATA_PERMISSIONS},
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DRAFT:{NO_MEMBER_PERMISSIONS},
         MemberStates.REGISTRED:{BASIC_PERMISSIONS},
         MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
         MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
-        MemberStates.EXCLUDED:{NO_MEMBER_DATA_PERMISSIONS},
-        MemberStates.DELETED:{NO_MEMBER_DATA_PERMISSIONS}
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'voter' : {
-        MemberStates.CREATED:{NO_MEMBER_DATA_PERMISSIONS},
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DRAFT:{
             MemberPermissions(
                 data=MemberDataPermissions(
@@ -487,249 +607,66 @@ access = {
         MemberStates.REGISTRED:{BASIC_PERMISSIONS},
         MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
         MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
-        MemberStates.EXCLUDED:{NO_MEMBER_DATA_PERMISSIONS},
-        MemberStates.DELETED:{NO_MEMBER_DATA_PERMISSIONS}
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'Board' : {
-        MemberStates.CREATED:{
-             MemberPermissions(
-                data=MemberDataPermissions(
-                    fullname=Permissions.NONE,
-                    fullsurname=Permissions.NONE,
-                    description=Permissions.NONE,
-                    nationality=Permissions.NONE,
-                    birthdate=Permissions.NONE,
-                    password=Permissions.NONE,
-                    password_confirm=Permissions.NONE,
-                    lang1=Permissions.NONE,
-                    lang2=Permissions.NONE,
-                    lang3=Permissions.NONE,
-                    cooperative_behaviour_mark=Permissions.NONE,
-                    cooperative_behaviour_mark_updated=Permissions.NONE,
-                    number_shares_owned=Permissions.NONE,
-                    date_end_validity_yearly_contribution=Permissions.NONE,
-                    iban=Permissions.NONE,
-                    role=Permissions.NONE
-                ),
-                oid=Permissions.ACCESS | Permissions.READ,
-                member_state=Permissions.ACCESS | Permissions.READ,
-                type=Permissions.NONE,
-                email=Permissions.NONE,
-                votes=Permissions.NONE,
-                seed=Permissions.NONE,
-                email_send_status_history=Permissions.NONE,
-                challenge=Permissions.NONE,
-                pseudonym=Permissions.ACCESS | Permissions.READ,
-                modifications=Permissions.NONE
-            )    
-        }
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'MediationArbitrationCouncil' : {
-        MemberStates.CREATED:{
-             MemberPermissions(
-                data=MemberDataPermissions(
-                    fullname=Permissions.NONE,
-                    fullsurname=Permissions.NONE,
-                    description=Permissions.NONE,
-                    nationality=Permissions.NONE,
-                    birthdate=Permissions.NONE,
-                    password=Permissions.NONE,
-                    password_confirm=Permissions.NONE,
-                    lang1=Permissions.NONE,
-                    lang2=Permissions.NONE,
-                    lang3=Permissions.NONE,
-                    cooperative_behaviour_mark=Permissions.NONE,
-                    cooperative_behaviour_mark_updated=Permissions.NONE,
-                    number_shares_owned=Permissions.NONE,
-                    date_end_validity_yearly_contribution=Permissions.NONE,
-                    iban=Permissions.NONE,
-                    role=Permissions.NONE
-                ),
-                oid=Permissions.ACCESS | Permissions.READ,
-                member_state=Permissions.ACCESS | Permissions.READ,
-                type=Permissions.NONE,
-                email=Permissions.NONE,
-                votes=Permissions.NONE,
-                seed=Permissions.NONE,
-                email_send_status_history=Permissions.NONE,
-                challenge=Permissions.NONE,
-                pseudonym=Permissions.ACCESS | Permissions.READ,
-                modifications=Permissions.NONE
-            )    
-        }
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'CandidatesMissingShareYearContrib' : {
-        MemberStates.CREATED:{
-             MemberPermissions(
-                data=MemberDataPermissions(
-                    fullname=Permissions.NONE,
-                    fullsurname=Permissions.NONE,
-                    description=Permissions.NONE,
-                    nationality=Permissions.NONE,
-                    birthdate=Permissions.NONE,
-                    password=Permissions.NONE,
-                    password_confirm=Permissions.NONE,
-                    lang1=Permissions.NONE,
-                    lang2=Permissions.NONE,
-                    lang3=Permissions.NONE,
-                    cooperative_behaviour_mark=Permissions.NONE,
-                    cooperative_behaviour_mark_updated=Permissions.NONE,
-                    number_shares_owned=Permissions.NONE,
-                    date_end_validity_yearly_contribution=Permissions.NONE,
-                    iban=Permissions.NONE,
-                    role=Permissions.NONE
-                ),
-                oid=Permissions.ACCESS | Permissions.READ,
-                member_state=Permissions.ACCESS | Permissions.READ,
-                type=Permissions.NONE,
-                email=Permissions.NONE,
-                votes=Permissions.NONE,
-                seed=Permissions.NONE,
-                email_send_status_history=Permissions.NONE,
-                challenge=Permissions.NONE,
-                pseudonym=Permissions.ACCESS | Permissions.READ,
-                modifications=Permissions.NONE
-            )    
-        }
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'CandidatesMissingShare' : {
-        MemberStates.CREATED:{
-             MemberPermissions(
-                data=MemberDataPermissions(
-                    fullname=Permissions.NONE,
-                    fullsurname=Permissions.NONE,
-                    description=Permissions.NONE,
-                    nationality=Permissions.NONE,
-                    birthdate=Permissions.NONE,
-                    password=Permissions.NONE,
-                    password_confirm=Permissions.NONE,
-                    lang1=Permissions.NONE,
-                    lang2=Permissions.NONE,
-                    lang3=Permissions.NONE,
-                    cooperative_behaviour_mark=Permissions.NONE,
-                    cooperative_behaviour_mark_updated=Permissions.NONE,
-                    number_shares_owned=Permissions.NONE,
-                    date_end_validity_yearly_contribution=Permissions.NONE,
-                    iban=Permissions.NONE,
-                    role=Permissions.NONE
-                ),
-                oid=Permissions.ACCESS | Permissions.READ,
-                member_state=Permissions.ACCESS | Permissions.READ,
-                type=Permissions.NONE,
-                email=Permissions.NONE,
-                votes=Permissions.NONE,
-                seed=Permissions.NONE,
-                email_send_status_history=Permissions.NONE,
-                challenge=Permissions.NONE,
-                pseudonym=Permissions.ACCESS | Permissions.READ,
-                modifications=Permissions.NONE
-            )    
-        }
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'CandidatesMissingYearContrib' : {
-        MemberStates.CREATED:{
-             MemberPermissions(
-                data=MemberDataPermissions(
-                    fullname=Permissions.NONE,
-                    fullsurname=Permissions.NONE,
-                    description=Permissions.NONE,
-                    nationality=Permissions.NONE,
-                    birthdate=Permissions.NONE,
-                    password=Permissions.NONE,
-                    password_confirm=Permissions.NONE,
-                    lang1=Permissions.NONE,
-                    lang2=Permissions.NONE,
-                    lang3=Permissions.NONE,
-                    cooperative_behaviour_mark=Permissions.NONE,
-                    cooperative_behaviour_mark_updated=Permissions.NONE,
-                    number_shares_owned=Permissions.NONE,
-                    date_end_validity_yearly_contribution=Permissions.NONE,
-                    iban=Permissions.NONE,
-                    role=Permissions.NONE
-                ),
-                oid=Permissions.ACCESS | Permissions.READ,
-                member_state=Permissions.ACCESS | Permissions.READ,
-                type=Permissions.NONE,
-                email=Permissions.NONE,
-                votes=Permissions.NONE,
-                seed=Permissions.NONE,
-                email_send_status_history=Permissions.NONE,
-                challenge=Permissions.NONE,
-                pseudonym=Permissions.ACCESS | Permissions.READ,
-                modifications=Permissions.NONE
-            )    
-        }
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'Sanctioned' : {
-        MemberStates.CREATED:{
-             MemberPermissions(
-                data=MemberDataPermissions(
-                    fullname=Permissions.NONE,
-                    fullsurname=Permissions.NONE,
-                    description=Permissions.NONE,
-                    nationality=Permissions.NONE,
-                    birthdate=Permissions.NONE,
-                    password=Permissions.NONE,
-                    password_confirm=Permissions.NONE,
-                    lang1=Permissions.NONE,
-                    lang2=Permissions.NONE,
-                    lang3=Permissions.NONE,
-                    cooperative_behaviour_mark=Permissions.NONE,
-                    cooperative_behaviour_mark_updated=Permissions.NONE,
-                    number_shares_owned=Permissions.NONE,
-                    date_end_validity_yearly_contribution=Permissions.NONE,
-                    iban=Permissions.NONE,
-                    role=Permissions.NONE
-                ),
-                oid=Permissions.ACCESS | Permissions.READ,
-                member_state=Permissions.ACCESS | Permissions.READ,
-                type=Permissions.NONE,
-                email=Permissions.NONE,
-                votes=Permissions.NONE,
-                seed=Permissions.NONE,
-                email_send_status_history=Permissions.NONE,
-                challenge=Permissions.NONE,
-                pseudonym=Permissions.ACCESS | Permissions.READ,
-                modifications=Permissions.NONE
-            )    
-        }
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'SanctionedMissingYearContrib' : {
-        MemberStates.CREATED:{
-             MemberPermissions(
-                data=MemberDataPermissions(
-                    fullname=Permissions.NONE,
-                    fullsurname=Permissions.NONE,
-                    description=Permissions.NONE,
-                    nationality=Permissions.NONE,
-                    birthdate=Permissions.NONE,
-                    password=Permissions.NONE,
-                    password_confirm=Permissions.NONE,
-                    lang1=Permissions.NONE,
-                    lang2=Permissions.NONE,
-                    lang3=Permissions.NONE,
-                    cooperative_behaviour_mark=Permissions.NONE,
-                    cooperative_behaviour_mark_updated=Permissions.NONE,
-                    number_shares_owned=Permissions.NONE,
-                    date_end_validity_yearly_contribution=Permissions.NONE,
-                    iban=Permissions.NONE,
-                    role=Permissions.NONE
-                ),
-                oid=Permissions.ACCESS | Permissions.READ,
-                member_state=Permissions.ACCESS | Permissions.READ,
-                type=Permissions.NONE,
-                email=Permissions.NONE,
-                votes=Permissions.NONE,
-                seed=Permissions.NONE,
-                email_send_status_history=Permissions.NONE,
-                challenge=Permissions.NONE,
-                pseudonym=Permissions.ACCESS | Permissions.READ,
-                modifications=Permissions.NONE
-            )    
-        }
+        MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
+        MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     }
 }
-
 
 def get_member_data_access_permissions(acceded: Member, accessor : Member) -> MemberPermissionsType:
     """Get the data access permissions for a member accessing another member's data.
@@ -743,9 +680,16 @@ def get_member_data_access_permissions(acceded: Member, accessor : Member) -> Me
     is_owner = acceded == accessor
     # Check if the accessor is the same as the acceded member
     if is_owner:
-        return access['Owner'][acceded.member_state]        
+        permissions.append(access['Owner'][acceded.member_state])
+        if isinstance(acceded, Candidature):
+            permissions.append(access['Owner'][(acceded.candidature_state, acceded.type)])
     else:
-        return access[accessor.type.name][acceded.member_state]
+        permissions.append(access[accessor.role][acceded.member_state])
+        if isinstance(acceded, Candidature):
+            permissions.append(access[accessor.role][(acceded.candidature_state, acceded.type)])
+        else:
+            permissions.append(access[accessor.role][acceded.member_state])
+    return permissions
 
 """_summary_
 Explanation of permissions by roles and states of Members and Applications
