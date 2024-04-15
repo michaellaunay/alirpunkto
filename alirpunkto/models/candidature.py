@@ -3,13 +3,11 @@
 # Creation date: 2023-07-22
 # Author: Michaël Launay
 
-from typing import Type, Tuple, List, Dict
+from typing import Type, Tuple, List, Dict, Iterator
 from dataclasses import dataclass
 from persistent.mapping import PersistentMapping
 from pyramid.authorization import Allow, ALL_PERMISSIONS
 from enum import Enum, unique
-from ZODB.Connection import Connection
-import transaction
 
 # Constants
 from alirpunkto.constants_and_globals import (
@@ -148,6 +146,14 @@ class Voter:
 
 class Candidature(Member):
     """A candidature in the ZODB.
+
+    Represents a persistent storage object for candidature data within the ZODB.
+
+    Properties:
+        challenge (tuple[str, int]): Manages the math challenge and its solution. Supports get and set operations.
+        candidature_state (CandidatureStates): Manages the state of the candidature. Supports get and set operations.
+        voters (List[Voter]): Manages the voters of the candidature. Supports get and set operations.
+        votes (Dict[str, VotingChoice]): Manages the votes of the candidature. Supports get and set operations.
     """
 
     __acl__ = [(Allow, 'group:admins', ALL_PERMISSIONS)]
@@ -281,4 +287,17 @@ class Candidature(Member):
         old_votes = self._votes if self._votes else "None"
         self._votes = value
         self._memorize_changes("votes", old_votes, value)
+    
+    @staticmethod
+    def get_field_names()-> Iterator[str]:
+        """Get the field names of the dataclass.
+        Returns:
+            An iterator over the field names of the dataclass.
+        >>> list(Candidature.get_field_names())
+        ['data', 'email', 'email_send_status_history', 'member_state', 'modifications', 'oid', 'pseudonym', 'seed', 'type', 'votes', 'voters', 'challenge', 'candidature_state']
+        """
+        field_names = [name for name in dir(Candidature)
+            if isinstance(getattr(Candidature, name), property)
+        ]
+        return iter(field_names)   
 

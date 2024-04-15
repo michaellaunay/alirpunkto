@@ -2,9 +2,10 @@
 
 from dataclasses import make_dataclass
 from typing import Type, Final
-from .permissions import Permissions
-from .member import MemberStates, MemberDatas, Member, MemberTypes
-from .candidature import CandidatureStates, Candidature
+from alirpunkto.models.permissions import Permissions
+from alirpunkto.models.member import MemberStates, MemberDatas, Member, MemberTypes
+from alirpunkto.models.candidature import CandidatureStates, Candidature
+from alirpunkto.constants_and_globals import log
 
 # MemberDataPermissions is a frozen dataclass that stores the permissions for
 # each attribute of the MemberDatas dataclass.
@@ -22,54 +23,13 @@ MemberDataPermissionsType = Type[MemberDataPermissions]
 # permissions.
 NO_MEMBER_DATA_PERMISSIONS : Final = MemberDataPermissions()
 
-def define_member_data_permissions(
-    fullname=Permissions.NONE,
-    fullsurname=Permissions.NONE,
-    description=Permissions.NONE,
-    nationality=Permissions.NONE,
-    birthdate=Permissions.NONE,
-    password=Permissions.NONE,
-    password_confirm=Permissions.NONE,
-    lang1=Permissions.NONE,
-    lang2=Permissions.NONE,
-    lang3=Permissions.NONE,
-    cooperative_behaviour_mark=Permissions.NONE,
-    cooperative_behaviour_mark_updated=Permissions.NONE,
-    number_shares_owned=Permissions.NONE,
-    date_end_validity_yearly_contribution=Permissions.NONE,
-    iban=Permissions.NONE,
-    role=Permissions.NONE        
-    ) -> MemberDataPermissionsType:
-    """Define the permissions for a member data.
-    """
-    if all(value == Permissions.NONE for value in [
-        fullname, fullsurname, description, nationality, birthdate,
-        password, password_confirm, lang1, lang2, lang3,
-        cooperative_behaviour_mark, cooperative_behaviour_mark_updated,
-        number_shares_owned, date_end_validity_yearly_contribution,
-        iban, role]):
-        # If all permissions are NONE return NO_DATA_PERMISSIONS
-        # for allowing instance comparison (faster than comparing all values)
-        return NO_MEMBER_DATA_PERMISSIONS
-    else :
-        return MemberDataPermissions(
-            fullname=fullname,
-            fullsurname=fullsurname,
-            description=description,
-            nationality=nationality,
-            birthdate=birthdate,
-            password=password,
-            password_confirm=password_confirm,
-            lang1=lang1,
-            lang2=lang2,
-            lang3=lang3,
-            cooperative_behaviour_mark=cooperative_behaviour_mark,
-            cooperative_behaviour_mark_updated=cooperative_behaviour_mark_updated,
-            number_shares_owned=number_shares_owned,
-            date_end_validity_yearly_contribution=date_end_validity_yearly_contribution,
-            iban=iban,
-            role=role
-        )
+BASIC_MEMBER_DATA_PERMISSIONS : Final = MemberDataPermissions(
+    role=Permissions.ACCESS | Permissions.READ,
+    cooperative_behaviour_mark=Permissions.ACCESS | Permissions.READ,
+    cooperative_behaviour_mark_updated=Permissions.ACCESS | Permissions.READ,
+    number_shares_owned=Permissions.ACCESS,
+    date_end_validity_yearly_contribution=Permissions.ACCESS,
+),
 
 # MemberPermissions is a frozen dataclass that stores the permissions for each
 # attribute of the Member dataclass.
@@ -88,48 +48,10 @@ MemberPermissionsType = Type[MemberPermissions]
 # permissions directly by instance comparison.
 NO_MEMBER_PERMISSIONS : Final = MemberPermissions()
 
-def define_member_permissions(
-    data=NO_MEMBER_DATA_PERMISSIONS,
-    oid=Permissions.NONE,
-    member_state=Permissions.NONE,
-    type=Permissions.NONE,
-    email=Permissions.NONE,
-    votes=Permissions.NONE,
-    seed=Permissions.NONE,
-    email_send_status_history=Permissions.NONE,
-    challenge=Permissions.NONE,
-    pseudonym=Permissions.NONE,
-    modifications=Permissions.NONE
-    ) -> MemberPermissionsType:
-    """Define the permissions for a member.
-    """
-    if data == NO_MEMBER_DATA_PERMISSIONS and all(
-        value == Permissions.NONE for value in [
-            oid, member_state, type, email, votes, seed,
-            email_send_status_history, challenge, pseudonym, modifications]):
-        # If all permissions are NONE return NO_MEMBER_PERMISSIONS
-        # for allowing instance comparison (faster than comparing all values)
-        return NO_MEMBER_PERMISSIONS
-    return MemberPermissions(
-        data=data,
-        oid=oid,
-        member_state=member_state,
-        type=type,
-        email=email,
-        votes=votes,
-        seed=seed,
-        email_send_status_history=email_send_status_history,
-        challenge=challenge,
-        pseudonym=pseudonym,
-        modifications=modifications
-    )
-
 # The permissions for reading only oid, pseudonym, type, role and state.
 # Access to basic member data.
-BASIC_PERMISSIONS : Final = define_member_permissions(
-    data=define_member_data_permissions(
-        role=Permissions.ACCESS | Permissions.READ
-    ),
+BASIC_MEMBER_PERMISSIONS : Final = MemberPermissions(
+    data=BASIC_MEMBER_DATA_PERMISSIONS,
     oid=Permissions.ACCESS | Permissions.READ,
     member_state=Permissions.ACCESS | Permissions.READ,
     type=Permissions.ACCESS | Permissions.READ,
@@ -137,7 +59,7 @@ BASIC_PERMISSIONS : Final = define_member_permissions(
 )
 
 # Permissions for admin members to access member properties.
-ADMIN_PERMISSIONS : Final = define_member_permissions(
+ADMIN_MEMBER_PERMISSIONS : Final = MemberPermissions(
     data=MemberDataPermissions(
         fullname=Permissions.ACCESS | Permissions.READ,
         fullsurname=Permissions.ACCESS | Permissions.READ,
@@ -160,12 +82,39 @@ ADMIN_PERMISSIONS : Final = define_member_permissions(
     member_state=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
     type=Permissions.ACCESS | Permissions.READ,
     email=Permissions.ACCESS | Permissions.READ,
-    votes=Permissions.ACCESS | Permissions.READ,
     seed=Permissions.ACCESS,
     email_send_status_history=Permissions.ACCESS | Permissions.READ,
-    challenge=Permissions.ACCESS | Permissions.READ,
     pseudonym=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
     modifications=Permissions.ACCESS | Permissions.READ
+)
+
+# CandidaturePermissions is a frozen dataclass that stores the permissions for each
+# attribute of the Candidature dataclass.
+CandidaturePermissions = make_dataclass(
+    "CandidaturePermissions", [
+        ((name, Permissions, Permissions.NONE) if name != 'data'
+            else (name, MemberDataPermissions, NO_MEMBER_DATA_PERMISSIONS)
+        ) for name in Candidature.get_field_names()],
+    bases=(MemberPermissions,),
+    frozen=True
+)
+CandidaturePermissionsType = Type[CandidaturePermissions]
+
+# NO_CANDIDATURE_PERMISSIONS is a CandidaturePermissions instance with all permissions
+# set to NONE.
+# It can be used for testing if a CandidaturePermissions instance has no
+# permissions directly by instance comparison.
+NO_CANDIDATURE_PERMISSIONS : Final = CandidaturePermissions()
+
+# The permissions for reading only oid, pseudonym, type, role and state.
+# Access to basic member data.
+BASIC_CANDIDATURE_PERMISSIONS : Final = CandidaturePermissions(
+    data=BASIC_MEMBER_DATA_PERMISSIONS,
+    oid=Permissions.ACCESS | Permissions.READ,
+    member_state=Permissions.ACCESS | Permissions.READ,
+    type=Permissions.ACCESS | Permissions.READ,
+    pseudonym=Permissions.ACCESS | Permissions.READ,
+    candidature_state=Permissions.ACCESS | Permissions.READ
 )
 
 # Create a mapping to store the permissions for each member state.
@@ -176,16 +125,14 @@ ADMIN_PERMISSIONS : Final = define_member_permissions(
 access = {
     'Owner' : {
         MemberStates.CREATED:{
-            define_member_permissions(
+            MemberPermissions(
                 data=NO_MEMBER_DATA_PERMISSIONS,
                 oid=Permissions.ACCESS | Permissions.READ,
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.NONE,
                 email=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
-                challenge=Permissions.NONE,
                 pseudonym=Permissions.NONE,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
@@ -214,46 +161,79 @@ access = {
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 email=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                pseudonym=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                modifications=Permissions.ACCESS | Permissions.READ
+            )
+        },
+        (CandidatureStates.DRAFT, None):{
+            CandidaturePermissions(
+                data=MemberDataPermissions(
+                    fullname=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    fullsurname=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    description=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    nationality=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    birthdate=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    password=Permissions.ACCESS | Permissions.WRITE,
+                    password_confirm=Permissions.ACCESS | Permissions.WRITE,
+                    lang1=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    lang2=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    lang3=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                    cooperative_behaviour_mark=Permissions.NONE,
+                    cooperative_behaviour_mark_updated=Permissions.NONE,
+                    number_shares_owned=Permissions.NONE,
+                    date_end_validity_yearly_contribution=Permissions.NONE,
+                    iban=Permissions.NONE,
+                    role=Permissions.ACCESS | Permissions.READ,
+                ),
+                oid=Permissions.ACCESS | Permissions.READ,
+                member_state=Permissions.ACCESS | Permissions.READ,
+                type=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                email=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                seed=Permissions.ACCESS,
+                email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                votes=Permissions.NONE,
+                voters=Permissions.NONE,
                 challenge=Permissions.NONE,
                 pseudonym=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
         },
         (CandidatureStates.EMAIL_VALIDATION, None):{
-            MemberPermissions(
+            CandidaturePermissions(
                 data=NO_MEMBER_DATA_PERMISSIONS,
                 oid=Permissions.ACCESS | Permissions.READ,
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.ACCESS | Permissions.READ,
                 email=Permissions.ACCESS | Permissions.READ,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                votes=Permissions.NONE,
+                voters=Permissions.NONE,
                 challenge=Permissions.ACCESS,
                 pseudonym=Permissions.ACCESS | Permissions.READ,
                 modifications=Permissions
             )
         },
         (CandidatureStates.CONFIRMED_HUMAN, MemberTypes.ORDINARY):{
-            MemberPermissions(
+            CandidaturePermissions(
                 data=NO_MEMBER_DATA_PERMISSIONS,
                 oid=Permissions.ACCESS | Permissions.READ,
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 email=Permissions.ACCESS | Permissions.READ,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
+                votes=Permissions.NONE,
+                voters=Permissions.NONE,
                 challenge=Permissions.NONE,
                 pseudonym=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 modifications=Permissions.NONE
             )
         },
         (CandidatureStates.CONFIRMED_HUMAN, MemberTypes.COOPERATOR):{
-            MemberPermissions(
+            CandidaturePermissions(
                 data=MemberDataPermissions(
                     fullname=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                     fullsurname=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
@@ -277,6 +257,7 @@ access = {
                 type=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 email=Permissions.ACCESS | Permissions.READ,
                 votes=Permissions.NONE,
+                voters=Permissions.ACCESS | Permissions.READ,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
                 challenge=Permissions.NONE,
@@ -285,7 +266,7 @@ access = {
             )
         },
         (CandidatureStates.UNIQUE_DATA, MemberTypes.COOPERATOR):{
-            MemberPermissions(
+            CandidaturePermissions(
                 data=MemberDataPermissions(
                     fullname=Permissions.ACCESS | Permissions.READ,
                     fullsurname=Permissions.ACCESS | Permissions.READ,
@@ -318,10 +299,10 @@ access = {
             )
         },
         (CandidatureStates.PENDING, MemberTypes.COOPERATOR):{
-            BASIC_PERMISSIONS
+            BASIC_CANDIDATURE_PERMISSIONS
         },
         (CandidatureStates.APPROVED, MemberTypes.ORDINARY):{
-            MemberPermissions(
+            CandidaturePermissions(
                 data=NO_MEMBER_DATA_PERMISSIONS,
                 oid=Permissions.ACCESS | Permissions.READ,
                 member_state=Permissions.ACCESS | Permissions.READ,
@@ -336,10 +317,10 @@ access = {
             )
         },
         (CandidatureStates.APPROVED, MemberTypes.COOPERATOR):{
-            BASIC_PERMISSIONS
+            BASIC_CANDIDATURE_PERMISSIONS
         },
         (CandidatureStates.REFUSED, MemberTypes.COOPERATOR):{
-            BASIC_PERMISSIONS
+            BASIC_CANDIDATURE_PERMISSIONS
         },
         MemberStates.REGISTRED:{
             MemberPermissions(
@@ -365,10 +346,8 @@ access = {
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.ACCESS | Permissions.READ,
                 email=Permissions.ACCESS | Permissions.READ,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
-                challenge=Permissions.NONE,
                 pseudonym=Permissions.ACCESS | Permissions.READ,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
@@ -397,10 +376,8 @@ access = {
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.ACCESS | Permissions.READ,
                 email=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
-                challenge=Permissions.NONE,
                 pseudonym=Permissions.ACCESS | Permissions.READ,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
@@ -429,10 +406,8 @@ access = {
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.ACCESS | Permissions.READ,
                 email=Permissions.ACCESS | Permissions.READ,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
-                challenge=Permissions.NONE,
                 pseudonym=Permissions.ACCESS | Permissions.READ,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
@@ -461,10 +436,8 @@ access = {
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.ACCESS | Permissions.READ,
                 email=Permissions.ACCESS | Permissions.READ,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
-                challenge=Permissions.NONE,
                 pseudonym=Permissions.ACCESS | Permissions.READ,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
@@ -493,17 +466,15 @@ access = {
                 member_state=Permissions.ACCESS | Permissions.READ,
                 type=Permissions.ACCESS | Permissions.READ,
                 email=Permissions.ACCESS | Permissions.READ,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
-                challenge=Permissions.NONE,
                 pseudonym=Permissions.ACCESS | Permissions.READ,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
         }        
     },
     'Admin' : {
-        MemberStates.CREATED:{BASIC_PERMISSIONS},
+        MemberStates.CREATED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.DRAFT:{
             MemberPermissions(
                 data=MemberDataPermissions(
@@ -528,52 +499,55 @@ access = {
                 member_state=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 type=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 email=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
-                votes=Permissions.NONE,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.ACCESS | Permissions.READ,
-                challenge=Permissions.ACCESS | Permissions.READ,
                 pseudonym=Permissions.ACCESS | Permissions.READ,
                 modifications=Permissions.ACCESS | Permissions.READ
             )
         },
         MemberStates.REGISTRED:{
-            ADMIN_PERMISSIONS
+            ADMIN_MEMBER_PERMISSIONS
         },
         MemberStates.DATA_MODIFICATION_REQUESTED:{
-            ADMIN_PERMISSIONS
+            ADMIN_MEMBER_PERMISSIONS
         },
         MemberStates.DATA_MODIFIED:{
-            ADMIN_PERMISSIONS
+            ADMIN_MEMBER_PERMISSIONS
         },
         MemberStates.EXCLUDED:{
-            ADMIN_PERMISSIONS
+            ADMIN_MEMBER_PERMISSIONS
         },
         MemberStates.DELETED:{
-            ADMIN_PERMISSIONS
+            ADMIN_MEMBER_PERMISSIONS
         }
     },
     'Ordinary' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DRAFT:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'Cooperator' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DRAFT:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'voter' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
-        MemberStates.DRAFT:{
-            MemberPermissions(
+        MemberStates.DRAFT:{NO_MEMBER_PERMISSIONS},
+        CandidatureStates.DRAFT:{NO_MEMBER_PERMISSIONS},
+        CandidatureStates.EMAIL_VALIDATION:{NO_MEMBER_PERMISSIONS},
+        CandidatureStates.CONFIRMED_HUMAN:{NO_MEMBER_PERMISSIONS},
+        CandidatureStates.UNIQUE_DATA:{NO_MEMBER_PERMISSIONS},
+        CandidatureStates.PENDING:{
+            CandidaturePermissions(
                 data=MemberDataPermissions(
                     fullname=Permissions.ACCESS | Permissions.READ,
                     fullsurname=Permissions.ACCESS | Permissions.READ,
@@ -597,6 +571,7 @@ access = {
                 type=Permissions.ACCESS | Permissions.READ,
                 email=Permissions.ACCESS | Permissions.READ,
                 votes=Permissions.ACCESS | Permissions.WRITE,
+                voters=Permissions.ACCESS,
                 seed=Permissions.ACCESS,
                 email_send_status_history=Permissions.NONE,
                 challenge=Permissions.NONE,
@@ -604,65 +579,67 @@ access = {
                 modifications=Permissions.NONE
             )
         },
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        CandidatureStates.APPROVED:{BASIC_MEMBER_PERMISSIONS},
+        CandidatureStates.REFUSED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'Board' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'MediationArbitrationCouncil' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'CandidatesMissingShareYearContrib' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'CandidatesMissingShare' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'CandidatesMissingYearContrib' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'Sanctioned' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     },
     'SanctionedMissingYearContrib' : {
         MemberStates.CREATED:{NO_MEMBER_PERMISSIONS},
-        MemberStates.REGISTRED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_PERMISSIONS},
-        MemberStates.DATA_MODIFIED:{BASIC_PERMISSIONS},
+        MemberStates.REGISTRED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFICATION_REQUESTED:{BASIC_MEMBER_PERMISSIONS},
+        MemberStates.DATA_MODIFIED:{BASIC_MEMBER_PERMISSIONS},
         MemberStates.EXCLUDED:{NO_MEMBER_PERMISSIONS},
         MemberStates.DELETED:{NO_MEMBER_PERMISSIONS}
     }
@@ -686,11 +663,42 @@ def get_member_data_access_permissions(acceded: Member, accessor : Member) -> Me
     else:
         permissions.append(access[accessor.role][acceded.member_state])
         if isinstance(acceded, Candidature):
+            if acceded.voters and accessor.oid in acceded.voters:
+                permissions.append(access['voter'][acceded.member_state])
             permissions.append(access[accessor.role][(acceded.candidature_state, acceded.type)])
         else:
             permissions.append(access[accessor.role][acceded.member_state])
     return permissions
 
+if __name__ == "__main__":
+    roles = ['Owner', 'Admin', 'Ordinary', 'Cooperator', 'voter', 'Board', 'MediationArbitrationCouncil', 'CandidatesMissingShareYearContrib', 'CandidatesMissingShare', 'CandidatesMissingYearContrib', 'Sanctioned', 'SanctionedMissingYearContrib']  
+    role=None
+    while role not in roles:    
+        role = input(f"Enter a role from {roles}: ")
+    member_states = MemberStates.__members__.keys()
+    member_states = [f"Member.{x}" for x in member_states]
+    candidature_states = CandidatureStates.__members__.keys()
+    candidature_states = [f"Candidature.{x}" for x in candidature_states]
+    states = [*member_states,*candidature_states]
+    state = None
+    while not state:
+        state_str = input(f"Enter a state from {states}: ")
+        if state_str in member_states:
+            state = MemberStates[state_str.split(".")[1]]
+        elif state_str in candidature_states:
+            state = CandidatureStates[state_str.split(".")[1]]
+    if isinstance(state, CandidatureStates):
+        member_type = None
+        if state in [CandidatureStates.CONFIRMED_HUMAN, CandidatureStates.UNIQUE_DATA, CandidatureStates.PENDING, CandidatureStates.APPROVED, CandidatureStates.REFUSED]:
+            while not member_type:
+                member_type = input(f"Enter a type for the acceded member from {MemberTypes.__members__.keys()}: ")
+                if member_type in MemberTypes.__members__.keys():
+                    member_type = MemberTypes[member_type]
+                else:
+                    member_type = None
+        print(str(access[role][(state, member_type)]).replace(", ", "\n"))
+    else:
+        print(str(access[role][state]).replace(", ", "\n"))
 """_summary_
 Explanation of permissions by roles and states of Members and Applications
 

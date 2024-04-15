@@ -425,14 +425,11 @@ class Member(Persistent):
     Properties:
         data (MemberDatas): Accesses the data for the member. Supports get and set operations.
         oid (str): Retrieves the unique object identifier. Read-only.
-        voters (list): Manages the list of voters associated with the member. Supports get and set operations.
         member_state (MemberStates): Controls the current state of the member. Supports get and set operations.
         type (MemberTypes or None): Defines the type of the member. Supports get and set operations.
         email (str or None): Manages the email address associated with the member. Supports get and set operations.
-        votes (dict): Accesses the dictionary of votes associated with the member. Supports get and set operations.
         seed (str): Retrieves the random string used to generate the OID. Read-only.
         email_send_status_history (list of EmailEvent): Accesses the list that records the email send status history. Supports get and set operations.
-        challenge (tuple[str, int]): Manages the math challenge and its solution. Supports get and set operations.
         pseudonym (str): Accesses the pseudonym of the member. Supports get and set operations.
         modifications (list of MemberDataEvent): Tracks modifications to the member data. Supports get and set operations.
     """
@@ -441,14 +438,11 @@ class Member(Persistent):
     def __init__(self,
         data: Optional[MemberDatas] = None,
         oid: Optional[str] = None,
-        voters: Optional[List[str]] = None,
         member_state: MemberStates = MemberStates.DRAFT,
         type: Optional[MemberTypes] = None,
         email: Optional[str] = None,
-        votes: Optional[Dict[str, int]] = None,
         seed: Optional[str] = None,
         email_send_status_history: Optional[List[EmailEvent]] = None,
-        challenge: Optional[Tuple[str, int]] = None,
         pseudonym: Optional[str] = None,
         modifications: Optional[List[MemberDataEvent]] = None
         ):
@@ -458,14 +452,11 @@ class Member(Persistent):
         Args:
             data (MemberDatas, optional): Initial data for the member. Defaults to None.
             oid (str, optional): A unique object identifier. If not provided, a unique OID is generated. Defaults to None.
-            voters (list, optional): A list of voters associated with the member. Defaults to an empty list.
             member_state (MemberStates, optional): The current state of the member. Defaults to MemberStates.DRAFT.
             type (MemberTypes or None, optional): The type of the member (e.g., administrator, regular member). Defaults to None.
             email (str or None, optional): The email address associated with the member. Defaults to None.
-            votes (dict, optional): A dictionary of votes associated with the member. Defaults to an empty dict.
             seed (str, optional): A random string used to generate the OID. Defaults to None.
             email_send_status_history (list of EmailEvent, optional): A list to record the email send status history. Defaults to an empty list.
-            challenge (tuple[str, int], optional): A tuple containing a string math challenge and its solution as an integer. Defaults to None.
             pseudonym (str, optional): The pseudonym of the member. Defaults to None.
             modifications (list of MemberDataEvent, optional): A list to record modifications, where each entry is a dataclass containing the datetime, function name, previous value, new value, and seed. Defaults to an empty list.
 
@@ -476,15 +467,12 @@ class Member(Persistent):
         self._data = data
         # get a unique object id if not provided
         self._oid = oid if oid else Member.generate_unique_oid()
-        self._voters = voters if voters else []
         self._member_state = member_state
         self._type = type
         self._email = email
-        self._votes = votes if votes else {}
         self._seed = seed
         self._email_send_status_history = (email_send_status_history
             if email_send_status_history else [])
-        self._challenge = challenge
         self._pseudonym = pseudonym
         self._modifications = modifications if modifications else []
         # get a random seed and record the creation
@@ -619,27 +607,7 @@ class Member(Persistent):
             The pseudonym of the member.
         """
         return self._pseudonym
-    @property
-    def votes(self)-> Dict[str, int]:
-        """ Get the votes of the member.
-        Returns:
-            The votes of the member.
-        """
-        return self._votes.copy()
-    @property
-    def voters(self)-> List[str]:
-        """ Get the voters of the member.
-        Returns:
-            The voters of the member.
-        """
-        return self._voters.copy()
-    @property
-    def challenge(self)-> Tuple[str, int]:
-        """ Get the challenge of the member.
-        Returns:
-            The challenge of the member.
-        """
-        return self._challenge    
+   
     @pseudonym.setter
     def pseudonym(self, value:str):
         """ Set the pseudonym of the member.
