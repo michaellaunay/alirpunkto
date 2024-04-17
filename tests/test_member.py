@@ -11,17 +11,17 @@ class TestMemberStates(unittest.TestCase):
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFICATION_REQUESTED.name), "member_data_modification_request_name")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFIED.name), "member_datas_modified_name")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.CREATED.value), "member_state_created_value")
-        self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFICATION_REQUESTED.name), "member_data_modification_request_value")
-        self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFIED.name), "member_datas_modified_value")
+        self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFICATION_REQUESTED.name), "member_data_modification_request_name")
+        self.assertEqual(MemberStates.get_i18n_id(MemberStates.DATA_MODIFIED.name), "member_datas_modified_name")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.EXCLUDED.name), "member_datas_excluded_name")
-        self.assertEqual(MemberStates.get_i18n_id(MemberStates.DELETED.name), "member_datas_deleted_name")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.EXCLUDED.value), "member_datas_excluded_value")
+        self.assertEqual(MemberStates.get_i18n_id(MemberStates.DELETED.name), "member_datas_deleted_name")
         self.assertEqual(MemberStates.get_i18n_id(MemberStates.DELETED.value), "member_datas_deleted_value")
         self.assertEqual(MemberStates.get_i18n_id("unknown_state"), "name.lower()")
 
     def test_get_names(self):
         names = MemberStates.get_names()
-        self.assertEqual(len(names), 8)
+        self.assertEqual(len(names), 7)
         self.assertIn(MemberStates.CREATED.name, names)
         self.assertIn(MemberStates.DRAFT.name, names)
         self.assertIn(MemberStates.REGISTRED.name, names)
@@ -58,7 +58,7 @@ class TestMemberPermissions(unittest.TestCase):
 
     def test_get_names(self):
         names = Permissions.get_names()
-        self.assertEqual(len(names), 12)
+        self.assertEqual(len(names), 11)
         self.assertIn(Permissions.NONE.name, names)
         self.assertIn(Permissions.ACCESS.name, names)
         self.assertIn(Permissions.READ.name, names)

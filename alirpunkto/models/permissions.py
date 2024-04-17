@@ -6,6 +6,7 @@
 from typing import Type, Tuple, List, Any, Optional, Dict, Iterator, Final
 from dataclasses import dataclass, fields, make_dataclass
 from enum import IntFlag, unique
+from alirpunkto.constants_and_globals import log
 
 @unique
 class Permissions(IntFlag):

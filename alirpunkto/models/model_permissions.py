@@ -645,29 +645,28 @@ access = {
     }
 }
 
-def get_member_data_access_permissions(acceded: Member, accessor : Member) -> MemberPermissionsType:
+def get_access_permissions(accessed: Member, accessor : Member) -> MemberPermissionsType:
     """Get the data access permissions for a member accessing another member's data.
+    Selects the access rights based on the type and role of the members passed as parameters.
     Args:
-        acceded (Member): The member whose data is being accessed.
+        accessed (Member): The member whose data is being accessed.
         accessor (Member): The member accessing the data.
     Returns:
-        MemberPermissions: The data access permissions for the accessor.
+        MemberPermissions: The access permissions for the accessor.
     """
-    permissions = []
-    is_owner = acceded == accessor
-    # Check if the accessor is the same as the acceded member
-    if is_owner:
-        permissions.append(access['Owner'][acceded.member_state])
-        if isinstance(acceded, Candidature):
-            permissions.append(access['Owner'][(acceded.candidature_state, acceded.type)])
-    else:
-        permissions.append(access[accessor.role][acceded.member_state])
-        if isinstance(acceded, Candidature):
-            if acceded.voters and accessor.oid in acceded.voters:
-                permissions.append(access['voter'][acceded.member_state])
-            permissions.append(access[accessor.role][(acceded.candidature_state, acceded.type)])
-        else:
-            permissions.append(access[accessor.role][acceded.member_state])
+    permissions = None
+    is_owner = accessed == accessor
+    match (is_owner, accessed, accessor):
+        # If the accessor is the owner of the accessed member
+        case (True, _, _):
+            permissions = access['Owner'][accessed.member_state] if isinstance(accessed, Candidature) else access['Owner'][(accessed.candidature_state, accessed.type)]
+        # else if accessed is a Candidature and the accessor is a voter
+        case (False, Candidature, _) if accessed.voters and accessor.oid in accessed.voters:
+            permissions = access['voter'][accessed.member_state]
+        case (False, Candidature, _):
+            permissions = access[accessor.role][(accessed.candidature_state, accessed.type)]
+        case (False, _, _):
+            permissions = access[accessor.role][accessed.member_state]
     return permissions
 
 if __name__ == "__main__":
