@@ -670,7 +670,17 @@ def get_access_permissions(accessed: Member, accessor : Member) -> MemberPermiss
     return permissions
 
 if __name__ == "__main__":
-    def get_member_type():
+    def get_member_type()->MemberTypes:
+        """
+        Get the member type from the user interaction.
+
+        This function prompts the user to enter a member type from a list of available member types.
+        The available member types are obtained from the `MemberTypes` enum.
+
+        Returns:
+            MemberTypes: The selected member type.
+
+        """
         member_types = MemberTypes.__members__.keys()
         member_types = [f"Member.{x}" for x in member_types]
         member_type = None
@@ -679,7 +689,16 @@ if __name__ == "__main__":
             if member_type_str in member_types:
                 member_type = MemberTypes[member_type_str.split(".")[1]]
         return member_type
-    def get_state():
+
+    def get_state()->MemberStates:
+        """Get the state from the user interaction.
+        
+        This function prompts the user to enter a state from a list of available states.
+        It validates the user input and returns the selected state.
+
+        Returns:
+            Union[MemberStates, CandidatureStates]: The selected state.
+        """
         member_states = MemberStates.__members__.keys()
         member_states = [f"Member.{x}" for x in member_states]
         candidature_states = CandidatureStates.__members__.keys()

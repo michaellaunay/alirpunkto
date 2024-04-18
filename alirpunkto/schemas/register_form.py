@@ -5,7 +5,7 @@ import datetime
 import os
 import colander
 from deform import schema
-from deform.widget import SelectWidget, TextInputWidget, DateInputWidget, FileUploadWidget
+from deform.widget import SelectWidget, TextInputWidget, DateInputWidget, FileUploadWidget, PasswordWidget
 from alirpunkto.constants_and_globals import (
     _,
     EUROPEAN_LOCALES
@@ -122,16 +122,17 @@ class RegisterForm(schema.CSRFSchema):
         colander.String(),
         title = _('password_label'),
         description = _('password_description'),
-        widget = TextInputWidget(type='password'),
+        widget = PasswordWidget(),
         validator = colander.Function(is_valid_password),
         messages = {'required': _('password_required')},
         missing = ""
     )
+    # @TODO replace by the use of CheckedPasswordWidget
     password_confirm = colander.SchemaNode(
         colander.String(),
         title = _('password_confirm_label'),
         description = _('password_confirm_description'),
-        widget = TextInputWidget(type='password'),
+        widget = PasswordWidget(),
         messages = {'required': _('confirm_password_required')},
         missing = ""
     )
@@ -214,13 +215,30 @@ class RegisterForm(schema.CSRFSchema):
     )
     def apply_permissions(self, permissions: MemberDataPermissionsType):
         """Apply permissions to the form."""
-        for permission in fields(permissions):
-            if permission == Permissions.NONE
-        if not permissions.can_write:
-            self.children.remove(self.get('fullname'))
-            self.children.remove(self.get('fullsurname'))
-            self.children.remove(self.get('birthdate'))
-            self.children.remove
+        for field in fields(permissions):
+            name = field.name
+            attribute = getattr(self, name, None)
+            if attribute:
+                permission = getattr(permissions, name)
+                if permission == Permissions.NONE:
+                    self.children.remove(attribute)
+                    return
+                
+                if ((attribute == self.password) and 
+                    (permission & Permissions.ACCESS) and
+                    (permission & Permissions.WRITE)
+                    ):
+                    attribute.widget.readonly = False
+                    attribute.widget.hidden = False
+                elif ((permission & Permissions.ACCESS) and
+                      (permission & Permissions.READ)):
+                    attribute.widget.hidden = False
+                else:
+                    attribute.widget.hidden = True
+
+                if permission & Permissions.WRITE:
+                    attribute.widget.readonly = False
+
     def prepare_for_ordinary(self):
         """Prepare the form for an ordinary user."""
         self.children.remove(self.get('fullname'))
@@ -236,112 +254,112 @@ class RegisterForm(schema.CSRFSchema):
     def prepare_for_modification(self, read_only_fields: dict, writable_field_values: dict):
         """Prepare the form for an ordinary user."""
         if 'pseudonym' in read_only_fields:
-            self.get('pseudonym').widget = TextInputWidget(readonly = True)
+            self.get('pseudonym').widget.readonly = True
             self.get('pseudonym').widget.value = read_only_fields['pseudonym']
         elif 'pseudonym' in writable_field_values:
             self.get('pseudonym').widget.value = writable_field_values['pseudonym']
         else:
             self.children.remove(self.get('pseudonym'))
         if 'fullname' in read_only_fields:
-            self.get('fullname').widget = TextInputWidget(readonly = True)
+            self.get('fullname').widget.readonly = True
             self.get('fullname').widget.value = read_only_fields['fullname']
         elif 'fullname' in writable_field_values:
             self.get('fullname').widget.value = writable_field_values['fullname']
         else:
             self.children.remove(self.get('fullname'))
         if 'fullsurname' in read_only_fields:
-            self.get('fullsurname').widget = TextInputWidget(readonly = True)
+            self.get('fullsurname').readonly = True
             self.get('fullsurname').widget.value = read_only_fields['fullsurname']
         elif 'fullsurname' in writable_field_values:
             self.get('fullsurname').widget.value = writable_field_values['fullsurname']
         else:
             self.children.remove(self.get('fullsurname'))
         if 'birthdate' in read_only_fields:
-            self.get('birthdate').widget = DateInputWidget(readonly = True)
+            self.get('birthdate').widget.readonly = True
             self.get('birthdate').widget.value = read_only_fields['birthdate']
         elif 'birthdate' in writable_field_values:
             self.get('birthdate').widget.value = writable_field_values['birthdate']
         else:
             self.children.remove(self.get('birthdate'))
         if 'nationality' in read_only_fields:
-            self.get('nationality').widget = SelectWidget(readonly = True)
+            self.get('nationality').widget.readonly = True
             self.get('nationality').widget.value = read_only_fields['nationality']
         elif 'nationality' in writable_field_values:
             self.get('nationality').widget.value = writable_field_values['nationality']
         else:
             self.children.remove(self.get('nationality'))
         if 'lang1' in read_only_fields:
-            self.get('lang1').widget = SelectWidget(readonly = True)
+            self.get('lang1').widget.readonly = True
             self.get('lang1').widget.value = read_only_fields['lang1']
         elif 'lang1' in writable_field_values:
             self.get('lang1').widget.value = writable_field_values['lang1']
         else:
             self.children.remove(self.get('lang1'))
         if 'lang2' in read_only_fields:
-            self.get('lang2').widget = SelectWidget(readonly = True)
+            self.get('lang2').widget.readonly = True
             self.get('lang2').widget.value = read_only_fields['lang2']
         elif 'lang2' in writable_field_values:
             self.get('lang2').widget.value = writable_field_values['lang2']
         else:
             self.children.remove(self.get('lang2'))
         if 'lang3' in read_only_fields:
-            self.get('lang3').widget = SelectWidget(readonly = True)
+            self.get('lang3').widget.readonly = True
             self.get('lang3').widget.value = read_only_fields['lang3']
         elif 'lang3' in writable_field_values:
             self.get('lang3').widget.value = writable_field_values['lang3']
         else:
             self.children.remove(self.get('lang3'))
         if 'description' in read_only_fields:
-            self.get('description').widget = TextInputWidget(readonly = True)
+            self.get('description').widget.readonly = True
             self.get('description').widget.value = read_only_fields['description']
         elif 'description' in writable_field_values:
             self.get('description').widget.value = writable_field_values['description']
         else:
             self.children.remove(self.get('description'))
         if 'cooperative_behaviour_mark' in read_only_fields:
-            self.get('cooperative_behaviour_mark').widget = SelectWidget(readonly = True)
+            self.get('cooperative_behaviour_mark').widget.readonly = True
             self.get('cooperative_behaviour_mark').widget.value = read_only_fields['cooperative_behaviour_mark']
         elif 'cooperative_behaviour_mark' in writable_field_values:
             self.get('cooperative_behaviour_mark').widget.value = writable_field_values['cooperative_behaviour_mark']
         else:
             self.children.remove(self.get('cooperative_behaviour_mark'))
         if 'cooperative_behaviour_mark_update' in read_only_fields:
-            self.get('cooperative_behaviour_mark_update').widget = DateInputWidget(readonly = True)
+            self.get('cooperative_behaviour_mark_update').widget.readonly = True
             self.get('cooperative_behaviour_mark_update').widget.value = read_only_fields['cooperative_behaviour_mark_update']
         elif 'cooperative_behaviour_mark_update' in writable_field_values:
             self.get('cooperative_behaviour_mark_update').widget.value = writable_field_values['cooperative_behaviour_mark_update']
         else:
             self.children.remove(self.get('cooperative_behaviour_mark_update'))
         if 'number_shares_owned' in read_only_fields:
-            self.get('number_shares_owned').widget = TextInputWidget(readonly = True)
+            self.get('number_shares_owned').widget.readonly = True
             self.get('number_shares_owned').widget.value = read_only_fields['number_shares_owned']
         elif 'number_shares_owned' in writable_field_values:
             self.get('number_shares_owned').widget.value = writable_field_values['number_shares_owned']
         else:
             self.children.remove(self.get('number_shares_owned'))
         if 'date_end_validity_yearly_contribution' in read_only_fields:
-            self.get('date_end_validity_yearly_contribution').widget = DateInputWidget(readonly = True)
+            self.get('date_end_validity_yearly_contribution').widget.readonly = True
             self.get('date_end_validity_yearly_contribution').widget.value = read_only_fields['date_end_validity_yearly_contribution']
         elif 'date_end_validity_yearly_contribution' in writable_field_values:
             self.get('date_end_validity_yearly_contribution').widget.value = writable_field_values['date_end_validity_yearly_contribution']
         else:
             self.children.remove(self.get('date_end_validity_yearly_contribution'))
         if 'iban' in read_only_fields:
-            self.get('iban').widget = TextInputWidget(readonly = True)
+            self.get('iban').widget.readonly = True
             self.get('iban').widget.value = read_only_fields['iban']
         elif 'iban' in writable_field_values:
             self.get('iban').widget.value = writable_field_values['iban']
         else:
             self.children.remove(self.get('iban'))
         if 'date_erasure_all_data' in read_only_fields:
-            self.get('date_erasure_all_data').widget = DateInputWidget(readonly = True)
+            self.get('date_erasure_all_data').widget.readonly = True
             self.get('date_erasure_all_data').widget.value = read_only_fields['date_erasure_all_data']
         elif 'date_erasure_all_data' in writable_field_values:
             self.get('date_erasure_all_data').widget.value = writable_field_values['date_erasure_all_data']
         else:
             self.children.remove(self.get('date_erasure_all_data'))
         if 'password' in read_only_fields:
-            self.get('password').widget = TextInputWidget(readonly = True)
+            self.get('password').widget.readonly = True
             password = read_only_fields['password']
             self.get('password').widget.value = password if password else ""
         elif 'password' in writable_field_values:
@@ -349,7 +367,7 @@ class RegisterForm(schema.CSRFSchema):
         else:
             self.children.remove(self.get('password'))
         if 'password_confirm' in read_only_fields:
-            self.get('password_confirm').widget = TextInputWidget(readonly = True)
+            self.get('password_confirm').widget.readonly = True
             password_confirm = read_only_fields['password_confirm']
             self.get('password_confirm').widget.value = password_confirm if password_confirm else ""
         elif 'password_confirm' in writable_field_values:
@@ -357,7 +375,7 @@ class RegisterForm(schema.CSRFSchema):
         else:
             self.children.remove(self.get('password_confirm'))
 
-        self.get('cooperative_number').widget = TextInputWidget(readonly = True)
+        self.get('cooperative_number').widget.readonly = True
         self.get('cooperative_number').widget.value = read_only_fields['cooperative_number']
 
 
