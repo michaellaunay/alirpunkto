@@ -29,7 +29,7 @@ BASIC_MEMBER_DATA_PERMISSIONS : Final = MemberDataPermissions(
     cooperative_behaviour_mark_updated=Permissions.ACCESS | Permissions.READ,
     number_shares_owned=Permissions.ACCESS,
     date_end_validity_yearly_contribution=Permissions.ACCESS,
-),
+)
 
 # MemberPermissions is a frozen dataclass that stores the permissions for each
 # attribute of the Member dataclass.
