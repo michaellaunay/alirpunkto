@@ -670,32 +670,40 @@ def get_access_permissions(accessed: Member, accessor : Member) -> MemberPermiss
     return permissions
 
 if __name__ == "__main__":
+    def get_member_type():
+        member_types = MemberTypes.__members__.keys()
+        member_types = [f"Member.{x}" for x in member_types]
+        member_type = None
+        while not member_type:
+            member_type_str = input(f"Enter a member type from {member_types}: ")
+            if member_type_str in member_types:
+                member_type = MemberTypes[member_type_str.split(".")[1]]
+        return member_type
+    def get_state():
+        member_states = MemberStates.__members__.keys()
+        member_states = [f"Member.{x}" for x in member_states]
+        candidature_states = CandidatureStates.__members__.keys()
+        candidature_states = [f"Candidature.{x}" for x in candidature_states]
+        states = [*member_states,*candidature_states]
+        state = None
+        while not state:
+            state_str = input(f"Enter a state from {states}: ")
+            if state_str in member_states:
+                state = MemberStates[state_str.split(".")[1]]
+            elif state_str in candidature_states:
+                state = CandidatureStates[state_str.split(".")[1]]
+        return state
     roles = ['Owner', 'Admin', 'Ordinary', 'Cooperator', 'voter', 'Board', 'MediationArbitrationCouncil', 'CandidatesMissingShareYearContrib', 'CandidatesMissingShare', 'CandidatesMissingYearContrib', 'Sanctioned', 'SanctionedMissingYearContrib']  
     role=None
     while role not in roles:    
         role = input(f"Enter a role from {roles}: ")
-    member_states = MemberStates.__members__.keys()
-    member_states = [f"Member.{x}" for x in member_states]
-    candidature_states = CandidatureStates.__members__.keys()
-    candidature_states = [f"Candidature.{x}" for x in candidature_states]
-    states = [*member_states,*candidature_states]
-    state = None
-    while not state:
-        state_str = input(f"Enter a state from {states}: ")
-        if state_str in member_states:
-            state = MemberStates[state_str.split(".")[1]]
-        elif state_str in candidature_states:
-            state = CandidatureStates[state_str.split(".")[1]]
+    state = get_state()
     if isinstance(state, CandidatureStates):
-        member_type = None
-        if state in [CandidatureStates.CONFIRMED_HUMAN, CandidatureStates.UNIQUE_DATA, CandidatureStates.PENDING, CandidatureStates.APPROVED, CandidatureStates.REFUSED]:
-            while not member_type:
-                member_type = input(f"Enter a type for the acceded member from {MemberTypes.__members__.keys()}: ")
-                if member_type in MemberTypes.__members__.keys():
-                    member_type = MemberTypes[member_type]
-                else:
-                    member_type = None
-        print(str(access[role][(state, member_type)]).replace(", ", "\n"))
+        member_type = get_member_type()
+        if role == 'Owner':
+            print(str(access[role][(state, member_type)]).replace(", ", "\n"))
+        else:
+            print(str(access[role][(state, member_type)]).replace(", ", "\n"))
     else:
         print(str(access[role][state]).replace(", ", "\n"))
 """_summary_

@@ -11,6 +11,9 @@ from alirpunkto.constants_and_globals import (
     EUROPEAN_LOCALES
 )
 from alirpunkto.utils import is_valid_password
+from alirpunkto.models.permissions import Permissions
+from alirpunkto.models.model_permissions import MemberDataPermissionsType
+from dataclasses import fields
 
 locales_as_choices = [(key, value) for key, value in EUROPEAN_LOCALES.items()]
 
@@ -209,6 +212,15 @@ class RegisterForm(schema.CSRFSchema):
         widget = DateInputWidget(readonly = True),
         missing = ""
     )
+    def apply_permissions(self, permissions: MemberDataPermissionsType):
+        """Apply permissions to the form."""
+        for permission in fields(permissions):
+            if permission == Permissions.NONE
+        if not permissions.can_write:
+            self.children.remove(self.get('fullname'))
+            self.children.remove(self.get('fullsurname'))
+            self.children.remove(self.get('birthdate'))
+            self.children.remove
     def prepare_for_ordinary(self):
         """Prepare the form for an ordinary user."""
         self.children.remove(self.get('fullname'))
