@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-30 14:07+0100\n"
+"PO-Revision-Date: 2024-04-19 22:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: es_ES\n"
@@ -873,22 +873,22 @@ msgstr ""
 "restablecimiento, póngase en contacto con el administrador, en la dirección: "
 "${administrator}"
 
-msgid "member_state_created_name"
+msgid "member_states_created_name"
 msgstr "creado"
 
-msgid "member_state_created_value"
+msgid "member_states_created_value"
 msgstr "Se ha creado el miembro"
 
-msgid "member_state_draft_name"
+msgid "member_states_draft_name"
 msgstr "borrador"
 
-msgid "member_state_draft_value"
+msgid "member_states_draft_value"
 msgstr "Se están editando los datos del afiliado"
 
-msgid "member_state_registred_name"
+msgid "member_states_registred_name"
 msgstr "registrado"
 
-msgid "member_state_registred_value"
+msgid "member_states_registred_value"
 msgstr "Se han guardado los datos del afiliado"
 
 msgid "member_data_modification_request_name"
@@ -996,17 +996,17 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Indique aquí todos sus apellidos de nacimiento (es decir, NO sus apellidos "
-"como persona casada), tal como figuran en sus documentos oficiales de "
-"identidad, en su transcripción oficial en caracteres latinos (si el idioma "
-"original utiliza un alfabeto distinto del latino)"
+"Indique aquí todos sus nombres, tal como figuran en sus documentos oficiales "
+"de identidad, en su transcripción oficial en caracteres latinos (si el "
+"idioma original utiliza un alfabeto distinto del latino)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Indique aquí todos sus nombres, tal como figuran en sus documentos oficiales "
-"de identidad, en su transcripción oficial en caracteres latinos (si el "
-"idioma original utiliza un alfabeto distinto del latino)"
+"Indique aquí todos sus apellidos de nacimiento (es decir, NO sus apellidos "
+"como persona casada), tal como figuran en sus documentos oficiales de "
+"identidad, en su transcripción oficial en caracteres latinos (si el idioma "
+"original utiliza un alfabeto distinto del latino)"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
