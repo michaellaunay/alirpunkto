@@ -9,7 +9,7 @@
                 tal:condition="python: (not hasattr(context,'url_obsolete') or not url_obsolete) and candidature">
                 <!-- DRAFT Status Section -->
                 <div tal:condition="python: not status or status == 'DRAFT'">
-                    <div i18n:translate="cosmopolitical_cooperative_description" class="explanation">The CosmoPolitical Cooperative is a pan-European cooperative for radical
+                    <div i18n:translate="cosmopolitical_cooperative_description" class="explanation">The <tal:var i18n:name="domain_name">${domain_name}</tal:var> is a pan-European cooperative for radical
                         transformation towards social justice, sustainability and democracy. It
                         supports individuals and transforms the existing economic, social and
                         political system towards a just, sustainable, and happy society, called the
