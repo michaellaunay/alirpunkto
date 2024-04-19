@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-30 21:39+0100\n"
+"PO-Revision-Date: 2024-04-19 22:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: nl\n"
@@ -863,22 +863,22 @@ msgstr ""
 "Er is een fout opgetreden bij het verzenden van de reset e-mail, neem "
 "contact op met de beheerder, bij ${administrator}"
 
-msgid "member_state_created_name"
+msgid "member_states_created_name"
 msgstr "toegevoegd"
 
-msgid "member_state_created_value"
+msgid "member_states_created_value"
 msgstr "Het lid is aangemaakt"
 
-msgid "member_state_draft_name"
+msgid "member_states_draft_name"
 msgstr "draft"
 
-msgid "member_state_draft_value"
+msgid "member_states_draft_value"
 msgstr "De gegevens van het lid worden bewerkt"
 
-msgid "member_state_registred_name"
+msgid "member_states_registred_name"
 msgstr "geregistreerde"
 
-msgid "member_state_registred_value"
+msgid "member_states_registred_value"
 msgstr "De gegevens van het lid zijn opgeslagen"
 
 msgid "member_data_modification_request_name"
@@ -984,17 +984,17 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Vermeld hier al uw familienamen bij geboorte (dus NIET uw familienaam als "
-"gehuwde), zoals die in uw officiële identiteitsdocumenten staan, in hun "
-"officiële transcriptie in Latijns schrift (als de oorspronkelijke taal een "
-"ander alfabet gebruikt dan het Latijnse)"
+"Vermeld hier al uw voornamen, zoals ze in uw officiële identiteitsdocumenten "
+"staan, in hun officiële transcriptie in Latijnse karakters (als de "
+"oorspronkelijke taal een ander alfabet gebruikt dan het Latijnse)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Vermeld hier al uw voornamen, zoals ze in uw officiële identiteitsdocumenten "
-"staan, in hun officiële transcriptie in Latijnse karakters (als de "
-"oorspronkelijke taal een ander alfabet gebruikt dan het Latijnse)"
+"Vermeld hier al uw familienamen bij geboorte (dus NIET uw familienaam als "
+"gehuwde), zoals die in uw officiële identiteitsdocumenten staan, in hun "
+"officiële transcriptie in Latijns schrift (als de oorspronkelijke taal een "
+"ander alfabet gebruikt dan het Latijnse)"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
