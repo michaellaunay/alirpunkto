@@ -165,7 +165,7 @@ class RegisterForm(schema.CSRFSchema):
         colander.Float(),
         title = _('cooperative_behaviour_mark_label'),
         description = _('cooperative_behaviour_mark_description'),
-        widget = TextInputWidget(type='number', readonly = True),  # The field is visible but not editable
+        widget = TextInputWidget(hidden=True, type='number', readonly = True),  # The field is visible but not editable
         missing=0.0
     )
     cooperative_behaviour_mark_update = colander.SchemaNode(
@@ -173,7 +173,7 @@ class RegisterForm(schema.CSRFSchema):
         title = _('cooperative_behaviour_mark_update_label'),
         description = _('cooperative_behaviour_mark_update_description'),
         messages = {'required': _('cooperative_behaviour_mark_update_required')},
-        widget = DateInputWidget(readonly = True),
+        widget = DateInputWidget(hidden=True, readonly = True),
         validator = colander.Range(
             min = datetime.date(2020, 1, 1)
         ),
@@ -183,7 +183,7 @@ class RegisterForm(schema.CSRFSchema):
         colander.Integer(),
         title = _('number_shares_owned_label'),
         description = _('number_shares_owned_description'),
-        widget = TextInputWidget(readonly = True),  # The field is visible but not editable
+        widget = TextInputWidget(hidden=True, readonly = True),  # The field is visible but not editable
         messages = {'required': _('number_shares_owned_required')},
         missing=0
     )
@@ -192,7 +192,7 @@ class RegisterForm(schema.CSRFSchema):
         title = _('date_end_validity_yearly_contribution_label'),
         description = _('date_end_validity_yearly_contribution_description'),
         messages = {'required': _('date_end_validity_yearly_contribution_required')},
-        widget = DateInputWidget(readonly = True),
+        widget = DateInputWidget(hidden=True, readonly = True),
         validator = colander.Range(
             min = datetime.date(2020, 1, 1)
         ),
@@ -202,7 +202,7 @@ class RegisterForm(schema.CSRFSchema):
         colander.String(),
         title = _('iban_label'),
         description = _('iban_description'),
-        widget = TextInputWidget(),  # The field is visible but not editable
+        widget = TextInputWidget(hidden=True),  # The field is visible but not editable
         messages = {'required': _('iban_required')},
         missing = ""
     )
@@ -210,7 +210,7 @@ class RegisterForm(schema.CSRFSchema):
         colander.Date(),
         title = _('date_erasure_all_data_title'),
         description = _('date_erasure_all_data_description'),
-        widget = DateInputWidget(readonly = True),
+        widget = DateInputWidget(hidden=True,readonly = True),
         missing = ""
     )
     def apply_permissions(self, permissions: MemberDataPermissionsType):
