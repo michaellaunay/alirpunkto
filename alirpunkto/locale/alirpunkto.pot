@@ -729,11 +729,11 @@ msgstr "Link to modify your profile on the IT infrastructure of ${domain_name}"
 
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
-msgstr "Please provide here all your family names at birth (i.e. NOT your family name as a married person), as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet different from the Latin)"
+msgstr "Please provide here all your given name(s), as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet different from the Latin)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
-msgstr "Please provide here all your given names, as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet different from the Latin)"
+msgstr "Please provide here all your family name(s) at birth (i.e. NOT your family name as a married person), as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet different from the Latin)"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
