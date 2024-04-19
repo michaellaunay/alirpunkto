@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-30 21:48+0100\n"
+"PO-Revision-Date: 2024-04-19 22:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: pl\n"
@@ -962,25 +962,25 @@ msgstr ""
 "Wystąpił błąd podczas wysyłania wiadomości resetowania, skontaktuj się z "
 "administratorem: ${administrator}"
 
-msgid "member_state_created_name"
+msgid "member_states_created_name"
 msgstr "utworzono"
 
 #, fuzzy
-msgid "member_state_created_value"
+msgid "member_states_created_value"
 msgstr "Członek został utworzony"
 
-msgid "member_state_draft_name"
+msgid "member_states_draft_name"
 msgstr "szkic"
 
 #, fuzzy
-msgid "member_state_draft_value"
+msgid "member_states_draft_value"
 msgstr "Dane użytkownika są edytowane"
 
-msgid "member_state_registred_name"
+msgid "member_states_registred_name"
 msgstr "zarejestrowany"
 
 #, fuzzy
-msgid "member_state_registred_value"
+msgid "member_states_registred_value"
 msgstr "Dane użytkownika zostały zapisane"
 
 #, fuzzy
@@ -1101,18 +1101,18 @@ msgstr "Link do modyfikacji profilu w infrastrukturze IT ${domain_name}"
 #, fuzzy
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Prosimy o podanie tutaj wszystkich nazwisk rodowych w chwili urodzenia (tj. "
-"NIE nazwiska rodowego jako osoby zamężnej), zapisanych w oficjalnych "
-"dokumentach tożsamości, w ich oficjalnej transkrypcji alfabetem łacińskim "
-"(jeśli oryginalny język używa alfabetu innego niż łaciński)"
+"Prosimy o podanie w tym miejscu wszystkich imion i nazwisk zapisanych w "
+"oficjalnych dokumentach tożsamości w oficjalnej transkrypcji alfabetem "
+"łacińskim (jeśli w języku oryginalnym używany jest alfabet inny niż łaciński)"
 
 #: alirpunkto/schemas/register_form.py:29
 #, fuzzy
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Prosimy o podanie w tym miejscu wszystkich imion i nazwisk zapisanych w "
-"oficjalnych dokumentach tożsamości w oficjalnej transkrypcji alfabetem "
-"łacińskim (jeśli w języku oryginalnym używany jest alfabet inny niż łaciński)"
+"Prosimy o podanie tutaj wszystkich nazwisk rodowych w chwili urodzenia (tj. "
+"NIE nazwiska rodowego jako osoby zamężnej), zapisanych w oficjalnych "
+"dokumentach tożsamości, w ich oficjalnej transkrypcji alfabetem łacińskim "
+"(jeśli oryginalny język używa alfabetu innego niż łaciński)"
 
 #: alirpunkto/schemas/register_form.py:47
 #, fuzzy
