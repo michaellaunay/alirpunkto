@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-30 13:53+0100\n"
+"PO-Revision-Date: 2024-04-19 21:57+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -880,22 +880,22 @@ msgstr ""
 "Beim Senden der Reset-E-Mail ist ein Fehler aufgetreten, bitte wenden Sie "
 "sich an den Administrator, bei ${administrator}"
 
-msgid "member_state_created_name"
+msgid "member_states_created_name"
 msgstr "erstellt"
 
-msgid "member_state_created_value"
+msgid "member_states_created_value"
 msgstr "Das Mitglied ist erstellt worden"
 
-msgid "member_state_draft_name"
+msgid "member_states_draft_name"
 msgstr "Entwurf"
 
-msgid "member_state_draft_value"
+msgid "member_states_draft_value"
 msgstr "Die Daten des Mitglieds werden gerade bearbeitet"
 
-msgid "member_state_registred_name"
+msgid "member_states_registred_name"
 msgstr "Registriert"
 
-msgid "member_state_registred_value"
+msgid "member_states_registred_value"
 msgstr "Die Daten des Mitglieds wurden gespeichert"
 
 msgid "member_data_modification_request_name"
@@ -1002,18 +1002,18 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Bitte geben Sie hier alle Ihre Familiennamen bei der Geburt an (d. h. NICHT "
-"Ihren Familiennamen als verheiratete Person), wie sie in Ihren amtlichen "
+"Bitte geben Sie hier alle Ihre Vornamen an, wie sie in Ihren amtlichen "
 "Ausweispapieren stehen, und zwar in ihrer offiziellen Transkription in "
-"lateinischen Buchstaben (falls die Originalsprache ein anderes Alphabet als "
+"lateinischen Buchstaben (wenn die Originalsprache ein anderes Alphabet als "
 "das lateinische verwendet)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Bitte geben Sie hier alle Ihre Vornamen an, wie sie in Ihren amtlichen "
+"Bitte geben Sie hier alle Ihre Familiennamen bei der Geburt an (d. h. NICHT "
+"Ihren Familiennamen als verheiratete Person), wie sie in Ihren amtlichen "
 "Ausweispapieren stehen, und zwar in ihrer offiziellen Transkription in "
-"lateinischen Buchstaben (wenn die Originalsprache ein anderes Alphabet als "
+"lateinischen Buchstaben (falls die Originalsprache ein anderes Alphabet als "
 "das lateinische verwendet)"
 
 #: alirpunkto/schemas/register_form.py:47
