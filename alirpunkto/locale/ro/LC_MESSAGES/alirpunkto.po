@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-30 21:54+0100\n"
+"PO-Revision-Date: 2024-04-19 22:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: ro\n"
@@ -983,25 +983,25 @@ msgstr ""
 "A apărut o eroare la trimiterea e-mailului de resetare, vă rugăm să "
 "contactați administratorul: ${administrator}"
 
-msgid "member_state_created_name"
+msgid "member_states_created_name"
 msgstr "creeat"
 
 #, fuzzy
-msgid "member_state_created_value"
+msgid "member_states_created_value"
 msgstr "Membrul a fost creat"
 
-msgid "member_state_draft_name"
+msgid "member_states_draft_name"
 msgstr "schiță"
 
 #, fuzzy
-msgid "member_state_draft_value"
+msgid "member_states_draft_value"
 msgstr "Datele membrului sunt în curs de editare"
 
-msgid "member_state_registred_name"
+msgid "member_states_registred_name"
 msgstr "înregistrat"
 
 #, fuzzy
-msgid "member_state_registred_value"
+msgid "member_states_registred_value"
 msgstr "Datele membrului au fost salvate"
 
 #, fuzzy
@@ -1127,20 +1127,20 @@ msgstr ""
 #, fuzzy
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Vă rugăm să furnizați aici toate numele de familie la naștere (adică NU "
-"numele de familie ca persoană căsătorită), așa cum sunt scrise în "
-"documentele de identitate oficiale, în transcrierea lor oficială în "
-"caractere latine (dacă limba originală folosește un alfabet diferit de cel "
-"latin)"
+"Vă rugăm să furnizați aici toate prenumele dumneavoastră, așa cum sunt "
+"scrise în documentele de identitate oficiale, în transcrierea lor oficială "
+"în caractere latine (dacă limba originală folosește un alfabet diferit de "
+"cel latin)"
 
 #: alirpunkto/schemas/register_form.py:29
 #, fuzzy
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Vă rugăm să furnizați aici toate prenumele dumneavoastră, așa cum sunt "
-"scrise în documentele de identitate oficiale, în transcrierea lor oficială "
-"în caractere latine (dacă limba originală folosește un alfabet diferit de "
-"cel latin)"
+"Vă rugăm să furnizați aici toate numele de familie la naștere (adică NU "
+"numele de familie ca persoană căsătorită), așa cum sunt scrise în "
+"documentele de identitate oficiale, în transcrierea lor oficială în "
+"caractere latine (dacă limba originală folosește un alfabet diferit de cel "
+"latin)"
 
 #: alirpunkto/schemas/register_form.py:47
 #, fuzzy
