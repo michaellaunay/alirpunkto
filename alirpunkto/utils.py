@@ -301,7 +301,7 @@ def send_email(
         subject=subject,
         sender=sender,
         recipients=recipients,
-        body=Attachment(content_type='text/plain; charset=utf-8', data=text_body),
+        body=text_body,
         html=Attachment(content_type='text/html; charset=utf-8', data=html_body)
     )
     log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {text_body}")
