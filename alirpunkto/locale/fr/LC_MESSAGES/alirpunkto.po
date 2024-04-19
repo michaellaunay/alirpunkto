@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-30 14:15+0100\n"
+"PO-Revision-Date: 2024-04-19 22:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: fr_FR\n"
@@ -900,22 +900,22 @@ msgstr ""
 "Une erreur s'est produite lors de l'envoi de l'email de réinitialisation, "
 "veuillez contacter l'administrateur, à l'adresse ${administrator}"
 
-msgid "member_state_created_name"
+msgid "member_states_created_name"
 msgstr "créé"
 
-msgid "member_state_created_value"
+msgid "member_states_created_value"
 msgstr "Le membre a été créé"
 
-msgid "member_state_draft_name"
+msgid "member_states_draft_name"
 msgstr "brouillon"
 
-msgid "member_state_draft_value"
+msgid "member_states_draft_value"
 msgstr "Les données du membre sont en cours d'édition"
 
-msgid "member_state_registred_name"
+msgid "member_states_registred_name"
 msgstr "enregistré"
 
-msgid "member_state_registred_value"
+msgid "member_states_registred_value"
 msgstr "Les données du membre ont été enregistrées"
 
 msgid "member_data_modification_request_name"
@@ -1024,19 +1024,19 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
 msgstr ""
+"Veuillez indiquer ici tous vos prénoms, tels qu'ils figurent sur vos "
+"documents d'identité officiels, dans leur transcription officielle en "
+"caractères latins (si la langue d'origine utilise un alphabet différent du "
+"latin)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
 "Veuillez indiquer ici tous vos noms de famille à la naissance (c'est-à-dire "
 "PAS votre nom de famille en tant que personne mariée), tels qu'ils figurent "
 "sur vos documents d'identité officiels, dans leur transcription officielle "
 "en caractères latins (si la langue d'origine utilise un alphabet différent "
 "du latin)"
-
-#: alirpunkto/schemas/register_form.py:29
-msgid "full_surname_as_in_id_description"
-msgstr ""
-"Veuillez indiquer ici tous vos prénoms, tels qu'ils figurent sur vos "
-"documents d'identité officiels, dans leur transcription officielle en "
-"caractères latins (si la langue d'origine utilise un alphabet différent du "
-"latin)"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
