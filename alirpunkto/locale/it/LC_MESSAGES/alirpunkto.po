@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-03-30 14:37+0100\n"
+"PO-Revision-Date: 2024-04-19 22:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: it_IT\n"
@@ -861,22 +861,22 @@ msgstr ""
 "Si è verificato un errore durante l'invio dell'e-mail di reset, si prega di "
 "contattare l'amministratore, all'indrizzo ${administrator}"
 
-msgid "member_state_created_name"
+msgid "member_states_created_name"
 msgstr "creato"
 
-msgid "member_state_created_value"
+msgid "member_states_created_value"
 msgstr "Il membro è stato creato"
 
-msgid "member_state_draft_name"
+msgid "member_states_draft_name"
 msgstr "bozza"
 
-msgid "member_state_draft_value"
+msgid "member_states_draft_value"
 msgstr "I dati del membro sono in fase di modifica"
 
-msgid "member_state_registred_name"
+msgid "member_states_registred_name"
 msgstr "registrato"
 
-msgid "member_state_registred_value"
+msgid "member_states_registred_value"
 msgstr "I dati del membro sono stati salvati"
 
 msgid "member_data_modification_request_name"
@@ -984,17 +984,17 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Indicare qui tutti i nomi di famiglia alla nascita (cioè NON il nome di "
-"famiglia come persona sposata), come scritto nei documenti di identità "
+"Indicare qui tutti i nomi, così come sono scritti nei documenti d'identità "
 "ufficiali, nella loro trascrizione ufficiale in caratteri latini (se la "
-"lingua originale usa un alfabeto diverso dal latino)"
+"lingua d'origine usa un alfabeto diverso da quello latino)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Indicare qui tutti i nomi, così come sono scritti nei documenti d'identità "
+"Indicare qui tutti i nomi di famiglia alla nascita (cioè NON il nome di "
+"famiglia come persona sposata), come scritto nei documenti di identità "
 "ufficiali, nella loro trascrizione ufficiale in caratteri latini (se la "
-"lingua d'origine usa un alfabeto diverso da quello latino)"
+"lingua originale usa un alfabeto diverso dal latino)"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
