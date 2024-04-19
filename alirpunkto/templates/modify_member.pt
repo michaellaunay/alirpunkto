@@ -1,0 +1,34 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+        <h1 i18n:translate="modify_member_title">Consult or modify the member datas ?</h1>
+        <div class="container" i18n:domain="alirpunkto" tal:condition="not member">
+            <form method="POST">
+                <label for="accessed_member_oid" i18n:translate="select_member_oid_label">Select the member</label>
+                <select id="accessed_member_oid" name="accessed_member_oid" required>
+                    <option value="" disabled selected i18n:translate="select_member_placeholder">Select a member</option>
+                    <option tal:repeat="acessed_member accessed_members" tal:attributes="value accessed_member['oid']" tal:content="accessed_member['pseudonyme']"></option>
+                </select>
+                <input type="submit" name="submit" value="Submit" i18n:attributes="value submit_button">
+            </form>
+        </div>
+        <div tal:condition="form">
+            <p i18n:translate="modify_member_fill_form">Please fill the fields</p>
+            <span tal:replace="structure form">Form Content</span>
+        </div>
+        <div tal:condition="exists:message" tal:omit-tag="">
+
+            <div class="message">
+                <p tal:content="message">The message here</p>
+            </div>
+        </div>
+        <div tal:condition="exists:error" tal:omit-tag="">
+            <div class="error">
+                <p tal:content="error">Error message here</p>
+            </div>
+            <div class="error" tal:condition="exists:error_details">
+                <p tal:content="error_details">Error details message here</p>
+            </div>
+        </div>
+    </div>
+</div>
+

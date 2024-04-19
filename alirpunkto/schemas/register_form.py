@@ -1,5 +1,5 @@
 # Description: Schema for the register form.
-# Creation date: 2023-07-22
+# Creation date: 2024-04-19
 # Author: Michaël Launay
 import datetime
 import os
