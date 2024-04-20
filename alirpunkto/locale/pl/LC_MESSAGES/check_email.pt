@@ -7,7 +7,7 @@
 
         <h1 tal:omit-tag="textual">Dziękujemy za rozpoczęcie rejestracji na platformie <span tal:replace="domain_name">Domain name</span></h1>.
         <p tal:omit-tag="textual">Aby zweryfikować Twój adres e-mail i upewnić się, że jesteś człowiekiem (a nie robotem), opracowaliśmy serię 4 prostych operacji matematycznych. Proszę wykonać cztery operacje matematyczne oznaczone od A do D poniżej i wprowadzić ich wyniki w odpowiednich polach na stronie rejestracji połączonej poniżej.</p>
-        <div omit-tag="textual">
+        <div tal:omit-tag="textual">
             <p tal:omit-tag="textual">Operacja A to <span tal:content="challenge_A"
                     tal:omit-tag="textual">Pierwsze wyzwanie</span></p>
             <p tal:omit-tag="textual">Operacja B to <span tal:content="challenge_B"

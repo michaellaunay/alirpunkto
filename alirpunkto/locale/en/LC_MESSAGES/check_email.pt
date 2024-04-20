@@ -11,7 +11,7 @@
             robot), we've devised a series of 4 simple mathematical operations. Please perform the
             four mathematical operations labeled from A to D below and enter their results in the
             corresponding fields on the registration page linked below.</p>
-        <div omit-tag="textual">
+        <div tal:omit-tag="textual">
 
             <p tal:omit-tag="textual">Operation A is <span tal:content="challenge_A"
                     tal:omit-tag="textual">The first challenge</span></p>

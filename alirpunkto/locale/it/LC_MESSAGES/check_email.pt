@@ -7,7 +7,7 @@
 
         <h1 tal:omit-tag="textual">Grazie per aver avviato la sua registrazione alla piattaforma <span tal:replace="domain_name">Nome sito</span></h1>.
         <p tal:omit-tag="textual">Per verificare il suo indirizzo e-mail e assicurarci che lei sia un essere umano (non un robot), abbiamo ideato una serie di 4 semplici operazioni matematiche. La preghiamo di eseguire le quattro operazioni matematiche etichettate da A a D qui sotto e di inserire i risultati nei campi corrispondenti della pagina di registrazione collegata qui sotto.</p>
-        <div omit-tag="textual">
+        <div tal:omit-tag="textual">
             <p tal:omit-tag="textual">L'operazione A è <span tal:content="challenge_A"
                     tal:omit-tag="textual">La prima sfida</span></p>
             <p tal:omit-tag="textual">L'operazione B è <span tal:content="challenge_B"
