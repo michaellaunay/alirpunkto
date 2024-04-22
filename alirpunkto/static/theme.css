@@ -102,6 +102,20 @@ input[type="email"], select {
   margin: 10px 0;
 }
 
+.help-block {
+  display: none;
+}
+
+.help-block:hover::after {
+  content: attr(title);
+  display: block;
+  position: absolute;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+  width: 200px;
+}
 /* Média queries pour responsive design */
 @media (max-width: 768px) {
   header, .container {

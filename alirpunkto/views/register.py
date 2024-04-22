@@ -423,9 +423,16 @@ def handle_confirmed_human_state(request, candidature):
                 'MemberTypes': MemberTypes
             }
         candidatures = get_candidatures(request)
-        password = request.params['password']
-        password_confirm = request.params['password_confirm']
-        pseudonym = request.params['pseudonym']
+        password = request.params['password'] if 'password' in request.params else None
+        password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None
+        pseudonym = request.params['pseudonym'] if 'pseudonym' in request.params else None
+        if not password or not password_confirm or not pseudonym:
+            return {
+                'form': form.render(appstruct=appstruct),
+                'error': _('missing_data'),
+                'candidature': candidature,
+                'MemberTypes': MemberTypes
+            }
         appstruct['pseudonym'] = pseudonym
         is_valid_password_result = is_valid_password(password)
         if is_valid_password_result:

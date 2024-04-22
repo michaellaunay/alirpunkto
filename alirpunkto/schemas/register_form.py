@@ -8,7 +8,13 @@ from deform import schema
 from deform.widget import SelectWidget, TextInputWidget, DateInputWidget, FileUploadWidget, PasswordWidget
 from alirpunkto.constants_and_globals import (
     _,
-    EUROPEAN_LOCALES
+    EUROPEAN_LOCALES,
+    DOMAIN_NAME,
+    SITE_NAME,
+    MIN_PSEUDONYM_LENGTH,
+    MAX_PSEUDONYM_LENGTH,
+    MIN_PASSWORD_LENGTH,
+    MAX_PASSWORD_LENGTH
 )
 from alirpunkto.utils import is_valid_password
 from alirpunkto.models.permissions import Permissions
@@ -22,15 +28,19 @@ class RegisterForm(schema.CSRFSchema):
     fullname = colander.SchemaNode(
         colander.String(),
         title = _('full_name_as_in_id_label'),
-        description = _('full_name_as_in_id_description'),
-        messages = {'required': _('full_name_as_in_id_required')},
+        description = _('full_name_as_in_id_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
+        messages = {'required': _('full_name_as_in_id_required',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})},
         missing = ""
     )
     fullsurname = colander.SchemaNode(
         colander.String(),
         title = _('full_surname_as_in_id_label'),
-        description = _('full_surname_as_in_id_description'),
-        messages = {'required': _('full_surname_as_in_id_required')},
+        description = _('full_surname_as_in_id_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
+        messages = {'required': _('full_surname_as_in_id_required',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})},
         missing = ""
     )
     """ WIP
@@ -48,15 +58,18 @@ class RegisterForm(schema.CSRFSchema):
     description = colander.SchemaNode(
         colander.String(),
         title = _('description_label'),
-        description = _('description_description'),
+        description = _('description_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(maxlength=5000),
         missing = ""
     )
     birthdate = colander.SchemaNode(
         colander.Date(),
         title = _('birthdate_label'),
-        description = _('birthdate_description'),
-        messages = {'required': _('birthdate_required')},
+        description = _('birthdate_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
+        messages = {'required': _('birthdate_required',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})},
         widget = DateInputWidget(),
         validator = colander.Range(
             min = datetime.date(1900, 1, 1),
@@ -67,8 +80,14 @@ class RegisterForm(schema.CSRFSchema):
     nationality = colander.SchemaNode(
         colander.String(),
         title = _('nationality_label'),
-        description = _('nationality_description'),
-        messages = {'required': _('nationality_required')},
+        description = _('nationality_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME,
+                'MIN_PSEUDONYM_LENGTH': MIN_PSEUDONYM_LENGTH,
+                'MAX_PSEUDONYM_LENGTH': MAX_PSEUDONYM_LENGTH}),
+        messages = {'required': _('nationality_required',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME,
+                'MIN_PSEUDONYM_LENGTH': MIN_PSEUDONYM_LENGTH,
+                'MAX_PSEUDONYM_LENGTH': MAX_PSEUDONYM_LENGTH})},
         widget = SelectWidget(values=[
             ('', _('select_a_country')),
             ('AT', _('Austria')),
@@ -104,7 +123,8 @@ class RegisterForm(schema.CSRFSchema):
     cooperative_number = colander.SchemaNode(
         colander.String(),
         title = _('cooperator_number_label'),
-        description = _('cooperator_number_description'),
+        description = _('cooperator_number_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(readonly = True),  # The field is visible but not editable
         messages = {'required': _('cooperator_number_required')},
         missing = ""
@@ -112,7 +132,8 @@ class RegisterForm(schema.CSRFSchema):
     pseudonym = colander.SchemaNode(
         colander.String(),
         title = _('pseudonym_label'),
-        description = _('pseudonym_description'),
+        description = _('pseudonym_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME, }),
         widget = TextInputWidget(),
         #validator = colander.Function(is_valid_unique_pseudonym),
         messages = {'required': _('pseudonym_required')},
@@ -121,7 +142,8 @@ class RegisterForm(schema.CSRFSchema):
     password = colander.SchemaNode(
         colander.String(),
         title = _('password_label'),
-        description = _('password_description'),
+        description = _('password_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = PasswordWidget(),
         validator = colander.Function(is_valid_password),
         messages = {'required': _('password_required')},
@@ -131,7 +153,8 @@ class RegisterForm(schema.CSRFSchema):
     password_confirm = colander.SchemaNode(
         colander.String(),
         title = _('password_confirm_label'),
-        description = _('password_confirm_description'),
+        description = _('password_confirm_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = PasswordWidget(),
         messages = {'required': _('confirm_password_required')},
         missing = ""
@@ -139,39 +162,45 @@ class RegisterForm(schema.CSRFSchema):
     email = colander.SchemaNode(
         colander.String(),
         title = _('email_label'),
-        description = _('email_description'),
+        description = _('email_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(readonly = True),  # The field is visible but not editable
     )
     lang1 = colander.SchemaNode(
         colander.String(),
         title = _('first_interaction_language_label'),
-        description = _('first_interaction_language_description'),
+        description = _('first_interaction_language_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = SelectWidget(values=locales_as_choices),
         messages = {'required': _('first_interaction_language_required')},
     )
     lang2 = colander.SchemaNode(
         colander.String(),
         title = _('second_interaction_language_label'),
-        description = _('second_interaction_language_description'),
+        description = _('second_interaction_language_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = SelectWidget(values=locales_as_choices),
     )
     lang3 = colander.SchemaNode(
         colander.String(),
         title = _('third_interaction_language_label'),
-        description = _('third_interaction_language_description'),
+        description = _('third_interaction_language_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = SelectWidget(values=locales_as_choices),
     )
     cooperative_behaviour_mark = colander.SchemaNode(
         colander.Float(),
         title = _('cooperative_behaviour_mark_label'),
-        description = _('cooperative_behaviour_mark_description'),
+        description = _('cooperative_behaviour_mark_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(hidden=True, type='number', readonly = True),  # The field is visible but not editable
         missing=0.0
     )
     cooperative_behaviour_mark_update = colander.SchemaNode(
         colander.Date(),
         title = _('cooperative_behaviour_mark_update_label'),
-        description = _('cooperative_behaviour_mark_update_description'),
+        description = _('cooperative_behaviour_mark_update_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('cooperative_behaviour_mark_update_required')},
         widget = DateInputWidget(hidden=True, readonly = True),
         validator = colander.Range(
@@ -182,7 +211,8 @@ class RegisterForm(schema.CSRFSchema):
     number_shares_owned = colander.SchemaNode(
         colander.Integer(),
         title = _('number_shares_owned_label'),
-        description = _('number_shares_owned_description'),
+        description = _('number_shares_owned_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(hidden=True, readonly = True),  # The field is visible but not editable
         messages = {'required': _('number_shares_owned_required')},
         missing=0
@@ -190,7 +220,8 @@ class RegisterForm(schema.CSRFSchema):
     date_end_validity_yearly_contribution = colander.SchemaNode(
         colander.Date(),
         title = _('date_end_validity_yearly_contribution_label'),
-        description = _('date_end_validity_yearly_contribution_description'),
+        description = _('date_end_validity_yearly_contribution_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('date_end_validity_yearly_contribution_required')},
         widget = DateInputWidget(hidden=True, readonly = True),
         validator = colander.Range(
@@ -201,7 +232,8 @@ class RegisterForm(schema.CSRFSchema):
     iban = colander.SchemaNode(
         colander.String(),
         title = _('iban_label'),
-        description = _('iban_description'),
+        description = _('iban_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(hidden=True),  # The field is visible but not editable
         messages = {'required': _('iban_required')},
         missing = ""
@@ -209,7 +241,8 @@ class RegisterForm(schema.CSRFSchema):
     date_erasure_all_data = colander.SchemaNode(
         colander.Date(),
         title = _('date_erasure_all_data_title'),
-        description = _('date_erasure_all_data_description'),
+        description = _('date_erasure_all_data_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = DateInputWidget(hidden=True,readonly = True),
         missing = ""
     )
@@ -257,6 +290,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('pseudonym').widget.readonly = True
             self.get('pseudonym').widget.value = read_only_fields['pseudonym']
         elif 'pseudonym' in writable_field_values:
+            self.get('pseudonym').widget.readonly = False
             self.get('pseudonym').widget.value = writable_field_values['pseudonym']
         else:
             self.children.remove(self.get('pseudonym'))
@@ -264,6 +298,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('fullname').widget.readonly = True
             self.get('fullname').widget.value = read_only_fields['fullname']
         elif 'fullname' in writable_field_values:
+            self.get('fullname').widget.readonly = False
             self.get('fullname').widget.value = writable_field_values['fullname']
         else:
             self.children.remove(self.get('fullname'))
@@ -271,6 +306,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('fullsurname').readonly = True
             self.get('fullsurname').widget.value = read_only_fields['fullsurname']
         elif 'fullsurname' in writable_field_values:
+            self.get('fullsurname').readonly = False
             self.get('fullsurname').widget.value = writable_field_values['fullsurname']
         else:
             self.children.remove(self.get('fullsurname'))
@@ -278,6 +314,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('birthdate').widget.readonly = True
             self.get('birthdate').widget.value = read_only_fields['birthdate']
         elif 'birthdate' in writable_field_values:
+            self.get('birthdate').widget.readonly = False
             self.get('birthdate').widget.value = writable_field_values['birthdate']
         else:
             self.children.remove(self.get('birthdate'))
@@ -285,6 +322,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('nationality').widget.readonly = True
             self.get('nationality').widget.value = read_only_fields['nationality']
         elif 'nationality' in writable_field_values:
+            self.get('nationality').widget.readonly = False
             self.get('nationality').widget.value = writable_field_values['nationality']
         else:
             self.children.remove(self.get('nationality'))
@@ -292,6 +330,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('lang1').widget.readonly = True
             self.get('lang1').widget.value = read_only_fields['lang1']
         elif 'lang1' in writable_field_values:
+            self.get('lang1').widget.readonly = False
             self.get('lang1').widget.value = writable_field_values['lang1']
         else:
             self.children.remove(self.get('lang1'))
@@ -299,6 +338,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('lang2').widget.readonly = True
             self.get('lang2').widget.value = read_only_fields['lang2']
         elif 'lang2' in writable_field_values:
+            self.get('lang2').widget.readonly = False
             self.get('lang2').widget.value = writable_field_values['lang2']
         else:
             self.children.remove(self.get('lang2'))
@@ -306,6 +346,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('lang3').widget.readonly = True
             self.get('lang3').widget.value = read_only_fields['lang3']
         elif 'lang3' in writable_field_values:
+            self.get('lang3').widget.readonly = False
             self.get('lang3').widget.value = writable_field_values['lang3']
         else:
             self.children.remove(self.get('lang3'))
@@ -313,6 +354,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('description').widget.readonly = True
             self.get('description').widget.value = read_only_fields['description']
         elif 'description' in writable_field_values:
+            self.get('description').widget.readonly = False
             self.get('description').widget.value = writable_field_values['description']
         else:
             self.children.remove(self.get('description'))
@@ -320,6 +362,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('cooperative_behaviour_mark').widget.readonly = True
             self.get('cooperative_behaviour_mark').widget.value = read_only_fields['cooperative_behaviour_mark']
         elif 'cooperative_behaviour_mark' in writable_field_values:
+            self.get('cooperative_behaviour_mark').widget.readonly = False
             self.get('cooperative_behaviour_mark').widget.value = writable_field_values['cooperative_behaviour_mark']
         else:
             self.children.remove(self.get('cooperative_behaviour_mark'))
@@ -327,6 +370,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('cooperative_behaviour_mark_update').widget.readonly = True
             self.get('cooperative_behaviour_mark_update').widget.value = read_only_fields['cooperative_behaviour_mark_update']
         elif 'cooperative_behaviour_mark_update' in writable_field_values:
+            self.get('cooperative_behaviour_mark_update').widget.readonly = False
             self.get('cooperative_behaviour_mark_update').widget.value = writable_field_values['cooperative_behaviour_mark_update']
         else:
             self.children.remove(self.get('cooperative_behaviour_mark_update'))
@@ -334,6 +378,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('number_shares_owned').widget.readonly = True
             self.get('number_shares_owned').widget.value = read_only_fields['number_shares_owned']
         elif 'number_shares_owned' in writable_field_values:
+            self.get('number_shares_owned').widget.readonly = False
             self.get('number_shares_owned').widget.value = writable_field_values['number_shares_owned']
         else:
             self.children.remove(self.get('number_shares_owned'))
@@ -341,6 +386,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('date_end_validity_yearly_contribution').widget.readonly = True
             self.get('date_end_validity_yearly_contribution').widget.value = read_only_fields['date_end_validity_yearly_contribution']
         elif 'date_end_validity_yearly_contribution' in writable_field_values:
+            self.get('date_end_validity_yearly_contribution').widget.readonly = False
             self.get('date_end_validity_yearly_contribution').widget.value = writable_field_values['date_end_validity_yearly_contribution']
         else:
             self.children.remove(self.get('date_end_validity_yearly_contribution'))
@@ -348,6 +394,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('iban').widget.readonly = True
             self.get('iban').widget.value = read_only_fields['iban']
         elif 'iban' in writable_field_values:
+            self.get('iban').widget.readonly = False
             self.get('iban').widget.value = writable_field_values['iban']
         else:
             self.children.remove(self.get('iban'))
@@ -355,6 +402,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('date_erasure_all_data').widget.readonly = True
             self.get('date_erasure_all_data').widget.value = read_only_fields['date_erasure_all_data']
         elif 'date_erasure_all_data' in writable_field_values:
+            self.get('date_erasure_all_data').widget.readonly = False
             self.get('date_erasure_all_data').widget.value = writable_field_values['date_erasure_all_data']
         else:
             self.children.remove(self.get('date_erasure_all_data'))
@@ -363,6 +411,7 @@ class RegisterForm(schema.CSRFSchema):
             password = read_only_fields['password']
             self.get('password').widget.value = password if password else ""
         elif 'password' in writable_field_values:
+            self.get('password').widget.readonly = False
             self.get('password').widget.value = writable_field_values['password']
         else:
             self.children.remove(self.get('password'))
@@ -371,6 +420,7 @@ class RegisterForm(schema.CSRFSchema):
             password_confirm = read_only_fields['password_confirm']
             self.get('password_confirm').widget.value = password_confirm if password_confirm else ""
         elif 'password_confirm' in writable_field_values:
+            self.get('password_confirm').widget.readonly = False
             self.get('password_confirm').widget.value = writable_field_values['password_confirm']
         else:
             self.children.remove(self.get('password_confirm'))
