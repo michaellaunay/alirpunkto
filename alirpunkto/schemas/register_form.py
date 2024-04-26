@@ -20,7 +20,6 @@ from alirpunkto.utils import is_valid_password
 from alirpunkto.models.permissions import Permissions
 from alirpunkto.models.model_permissions import MemberDataPermissionsType
 from dataclasses import fields
-from markupsafe import Markup
 
 locales_as_choices = [(key, value) for key, value in EUROPEAN_LOCALES.items()]
 
@@ -29,8 +28,8 @@ class RegisterForm(schema.CSRFSchema):
     fullname = colander.SchemaNode(
         colander.String(),
         title = _('full_name_as_in_id_label'),
-        description = Markup(_('full_name_as_in_id_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('full_name_as_in_id_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('full_name_as_in_id_required',
             {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})},
         missing = ""
@@ -38,8 +37,8 @@ class RegisterForm(schema.CSRFSchema):
     fullsurname = colander.SchemaNode(
         colander.String(),
         title = _('full_surname_as_in_id_label'),
-        description = Markup(_('full_surname_as_in_id_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('full_surname_as_in_id_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('full_surname_as_in_id_required',
             {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})},
         missing = ""
@@ -59,16 +58,16 @@ class RegisterForm(schema.CSRFSchema):
     description = colander.SchemaNode(
         colander.String(),
         title = _('description_label'),
-        description = Markup(_('description_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('description_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(maxlength=5000),
         missing = ""
     )
     birthdate = colander.SchemaNode(
         colander.Date(),
         title = _('birthdate_label'),
-        description = Markup(_('birthdate_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('birthdate_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('birthdate_required',
             {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})},
         widget = DateInputWidget(),
@@ -81,10 +80,10 @@ class RegisterForm(schema.CSRFSchema):
     nationality = colander.SchemaNode(
         colander.String(),
         title = _('nationality_label'),
-        description = Markup(_('nationality_description',
+        description = _('nationality_description',
             {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME,
                 'MIN_PSEUDONYM_LENGTH': MIN_PSEUDONYM_LENGTH,
-                'MAX_PSEUDONYM_LENGTH': MAX_PSEUDONYM_LENGTH})),
+                'MAX_PSEUDONYM_LENGTH': MAX_PSEUDONYM_LENGTH}),
         messages = {'required': _('nationality_required',
             {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME,
                 'MIN_PSEUDONYM_LENGTH': MIN_PSEUDONYM_LENGTH,
@@ -124,8 +123,8 @@ class RegisterForm(schema.CSRFSchema):
     cooperative_number = colander.SchemaNode(
         colander.String(),
         title = _('cooperator_number_label'),
-        description = Markup(_('cooperator_number_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('cooperator_number_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(readonly = True),  # The field is visible but not editable
         messages = {'required': _('cooperator_number_required')},
         missing = ""
@@ -133,8 +132,8 @@ class RegisterForm(schema.CSRFSchema):
     pseudonym = colander.SchemaNode(
         colander.String(),
         title = _('pseudonym_label'),
-        description = Markup(_('pseudonym_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME, })),
+        description = _('pseudonym_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME, }),
         widget = TextInputWidget(),
         #validator = colander.Function(is_valid_unique_pseudonym),
         messages = {'required': _('pseudonym_required')},
@@ -143,8 +142,8 @@ class RegisterForm(schema.CSRFSchema):
     password = colander.SchemaNode(
         colander.String(),
         title = _('password_label'),
-        description = Markup(_('password_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('password_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = PasswordWidget(),
         validator = colander.Function(is_valid_password),
         messages = {'required': _('password_required')},
@@ -154,8 +153,8 @@ class RegisterForm(schema.CSRFSchema):
     password_confirm = colander.SchemaNode(
         colander.String(),
         title = _('password_confirm_label'),
-        description = Markup(_('password_confirm_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('password_confirm_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = PasswordWidget(),
         messages = {'required': _('confirm_password_required')},
         missing = ""
@@ -163,45 +162,45 @@ class RegisterForm(schema.CSRFSchema):
     email = colander.SchemaNode(
         colander.String(),
         title = _('email_label'),
-        description = Markup(_('email_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('email_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(readonly = True),  # The field is visible but not editable
     )
     lang1 = colander.SchemaNode(
         colander.String(),
         title = _('first_interaction_language_label'),
-        description = Markup(_('first_interaction_language_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('first_interaction_language_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = SelectWidget(values=locales_as_choices),
         messages = {'required': _('first_interaction_language_required')},
     )
     lang2 = colander.SchemaNode(
         colander.String(),
         title = _('second_interaction_language_label'),
-        description = Markup(_('second_interaction_language_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('second_interaction_language_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = SelectWidget(values=locales_as_choices),
     )
     lang3 = colander.SchemaNode(
         colander.String(),
         title = _('third_interaction_language_label'),
-        description = Markup(_('third_interaction_language_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('third_interaction_language_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = SelectWidget(values=locales_as_choices),
     )
     cooperative_behaviour_mark = colander.SchemaNode(
         colander.Float(),
         title = _('cooperative_behaviour_mark_label'),
-        description = Markup(_('cooperative_behaviour_mark_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('cooperative_behaviour_mark_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(hidden=True, type='number', readonly = True),  # The field is visible but not editable
         missing=0.0
     )
     cooperative_behaviour_mark_update = colander.SchemaNode(
         colander.Date(),
         title = _('cooperative_behaviour_mark_update_label'),
-        description = Markup(_('cooperative_behaviour_mark_update_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('cooperative_behaviour_mark_update_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('cooperative_behaviour_mark_update_required')},
         widget = DateInputWidget(hidden=True, readonly = True),
         validator = colander.Range(
@@ -212,8 +211,8 @@ class RegisterForm(schema.CSRFSchema):
     number_shares_owned = colander.SchemaNode(
         colander.Integer(),
         title = _('number_shares_owned_label'),
-        description = Markup(_('number_shares_owned_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('number_shares_owned_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(hidden=True, readonly = True),  # The field is visible but not editable
         messages = {'required': _('number_shares_owned_required')},
         missing=0
@@ -221,8 +220,8 @@ class RegisterForm(schema.CSRFSchema):
     date_end_validity_yearly_contribution = colander.SchemaNode(
         colander.Date(),
         title = _('date_end_validity_yearly_contribution_label'),
-        description = Markup(_('date_end_validity_yearly_contribution_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('date_end_validity_yearly_contribution_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('date_end_validity_yearly_contribution_required')},
         widget = DateInputWidget(hidden=True, readonly = True),
         validator = colander.Range(
@@ -233,8 +232,8 @@ class RegisterForm(schema.CSRFSchema):
     iban = colander.SchemaNode(
         colander.String(),
         title = _('iban_label'),
-        description = Markup(_('iban_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('iban_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(hidden=True),  # The field is visible but not editable
         messages = {'required': _('iban_required')},
         missing = ""
@@ -242,8 +241,8 @@ class RegisterForm(schema.CSRFSchema):
     date_erasure_all_data = colander.SchemaNode(
         colander.Date(),
         title = _('date_erasure_all_data_title'),
-        description = Markup(_('date_erasure_all_data_description',
-            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})),
+        description = _('date_erasure_all_data_description',
+            {'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = DateInputWidget(hidden=True,readonly = True),
         missing = ""
     )

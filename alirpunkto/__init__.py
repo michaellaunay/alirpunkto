@@ -247,5 +247,6 @@ def main(global_config, **settings):
 
     create_ldap_groups_if_not_exists()
     deform.Form.set_default_renderer(zpt_renderer)
+    deform.renderer.configure_zpt_renderer(["alirpunkto:templates/deform"])
 
     return config.make_wsgi_app()
