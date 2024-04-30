@@ -50,7 +50,7 @@ from alirpunkto.models.model_permissions import (
 )
 def modify_member(request):
     """Modify member view.
-    get the accessed member oid and show form to modify acessed member datas.
+    get the accessed member oid and show form to modify accessed member datas.
     
     Args:
         request (pyramid.request.Request): the request
@@ -64,13 +64,12 @@ def modify_member(request):
     else:
         return {"member": None, "form": None, "message": _('unknown_member')}
     accessor_member = member
-    accessed_member = request.POST.get('ACCESSED_MEMBER_OID', None)
+    accessed_member = request.POST.get(ACCESSED_MEMBER_OID, None)
     if not accessed_member:
         accessed_member = request.session.get(ACCESSED_MEMBER_OID, None)
     form = None
     schema = None
     if "submit" in request.POST or 'modify' in request.POST:
-        schema = RegisterForm().bind(request=request)
         if not accessed_member:
             return {"accessed_member": None, "form": None, "message": _('unknown_accessed_member')}        
         permissions = get_access_permissions(
@@ -82,6 +81,7 @@ def modify_member(request):
             request.session.flash(_('no_permission'), 'error')
             return {"error":_('no_permission'), "member": None, "form": None}
         member_data_permissions = permissions.datas
+        schema = RegisterForm().bind(request=request)
         schema.apply_permissions(member_data_permissions)
     if "submit" in request.POST:
         appstruct = {

@@ -245,7 +245,7 @@ def main(global_config, **settings):
         [deform_template_dir],
         translator=translator,
     )
-    create_ldap_groups_if_not_exists()
     deform.Form.set_default_renderer(zpt_renderer)
+    create_ldap_groups_if_not_exists()
 
     return config.make_wsgi_app()
