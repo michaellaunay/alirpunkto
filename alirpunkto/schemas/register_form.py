@@ -234,7 +234,7 @@ class RegisterForm(schema.CSRFSchema):
         title = _('iban_label'),
         description = _('iban_description',
             mapping={'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
-        widget = TextInputWidget(hidden=True),  # The field is visible but not editable
+        widget = TextInputWidget(hidden=True, readonly=True),
         messages = {'required': _('iban_required')},
         missing = ""
     )
