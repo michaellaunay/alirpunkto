@@ -41,7 +41,9 @@ from .constants_and_globals import (
     log,
     SPECIAL_CHARACTERS,
     LOCALE_LANG_MESSAGES,
-    ZPT_EXTENSION
+    ZPT_EXTENSION,
+    CANDIDATURE_OID,
+    MEMBER_OID
 )
 from pyramid.i18n import get_localizer
 from ldap3 import Server, Connection, ALL, MODIFY_ADD, MODIFY_REPLACE
@@ -1131,3 +1133,28 @@ def send_validation_email(
         log.error(f"Error while sending email to {email} : {e}")
         success = False
     return success
+
+
+def logout(request: Request):
+    """
+    Log out the user by removing the user's OID from the session.
+    
+    Args:
+        request (Request): The request object.
+    """
+    username = request.params.get('username', "")
+    if username:
+        del request.session['username']
+    user = request.session.get('user', None)
+    if user is not None:
+        # log the user is logging out
+        log.info(f"User {user} is logging out")
+        del request.session['user']
+        request.session['logged_in'] = False
+        request.session['created_at'] = None
+    else:
+        request.session['logged_in'] = False
+    if CANDIDATURE_OID in request.session:
+        del request.session[CANDIDATURE_OID] #
+    if MEMBER_OID in request.session:
+        del request.session[MEMBER_OID] 

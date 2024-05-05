@@ -1264,3 +1264,6 @@ msgstr ""
 "you. Sometimes a picture speaks much louder than a long speech. With this "
 "image, you're expressing a lot about yourself, in a universal language. Make "
 "the most of it!"
+
+msgid 'candidature_mixed'
+msgstr 'The candidacy identification number in the session and in the URL do not match. Please only use the URL from the most recent email you received.'

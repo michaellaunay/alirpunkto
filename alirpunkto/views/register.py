@@ -27,8 +27,11 @@ from alirpunkto.constants_and_globals import (
     _,
     MAIL_SIGNATURE,
     CANDIDATURE_OID,
+    MEMBER_OID,
     SEED_LENGTH,
     log,
+    SITE_NAME,
+    DOMAIN_NAME,
 )
 from pyramid.i18n import Translator
 from ..utils import (
@@ -39,9 +42,9 @@ from ..utils import (
     send_validation_email,
     send_confirm_validation_email,
     send_candidature_state_change_email,
+    logout,
 )
-
-
+import json
 
 @view_config(route_name='register',
              renderer='alirpunkto:templates/register.pt')
@@ -72,46 +75,79 @@ def register(request: Request) -> Dict:
 def _retrieve_candidature(
         request: Request
     ) -> Union[Candidature, Dict]:
-    """Retrieve an existing candidature from the session or URL.
+    """Retrieve an existing candidature from the session or URL and check if
+    the OID in the URL is coherent with the OID in the session if it exists.
 
     Parameters:
-    - request (Request): The pyramid request object.
+    - request (Request): The Pyramid request object.
 
     Returns:
     - tuple: A tuple containing the candidature object and an error dict if applicable.
     """
-    # Check if the candidature is already in the request
-    if CANDIDATURE_OID in request.session :
-        candidature = get_candidature_by_oid(request.session[CANDIDATURE_OID], request)
-        if candidature :
-            return candidature, None
+    session_oid = None
+    decrypted_oid = None
+    decrypted_candidature = None
+    user_oid = None
 
-    # If the candidature is not in the request, try to retrieve it from the URL
-    encrypted_oid = request.params.get("oid", None)
-    if encrypted_oid:
+    if CANDIDATURE_OID in request.session:
+        session_oid = request.session[CANDIDATURE_OID]
+
+    if "oid" in request.params:
+        encrypted_oid = request.params.get("oid", None)
         decrypted_oid, seed = decrypt_oid(
             encrypted_oid,
             SEED_LENGTH,
             request.registry.settings['session.secret'])
-        candidature = get_candidature_by_oid(decrypted_oid, request)
-        if candidature is None:
+        decrypted_candidature = get_candidature_by_oid(decrypted_oid, request)
+        if decrypted_candidature is None:
             error = _('candidature_not_found')
             return None, {'candidature': None,
                 'MemberTypes': MemberTypes,
                 'error': error}
-        if seed != candidature.email_send_status_history[-1].seed:
+        if seed != decrypted_candidature.email_send_status_history[-1].seed:
             error = _('url_is_obsolete')
-            return None, {'candidature': candidature,
+            return None, {'candidature': decrypted_candidature,
                 'MemberTypes': MemberTypes,
                 'error': error,
                 'url_obsolete': True}
-        request.session[CANDIDATURE_OID] = candidature.oid
-        return candidature, None
+
+    if "user" in request.session:
+        json_user = request.session["user"]
+        user = json.loads(json_user)
+        if "oid" in user:
+            user_oid = user["oid"]
+        else:
+            log.error(f"User oid not in user json session parameter: {user_oid}")
+            raise ValueError("User oid not in user json session parameter")
+
+    if ((session_oid and decrypted_oid
+        and session_oid != decrypted_oid)
+        or (session_oid and user_oid
+            and session_oid != user_oid)
+        or (decrypted_oid and user_oid and decrypted_oid != user_oid)):
+        # The candidature OID in the session and URL do not match.
+        # This is likely due to a URL call with a different OID.
+        # We reset the session and send a message inviting the user to log in again.
+        logout(request)
+        return None, {
+            'candidature': None,
+            'MemberTypes': None,
+            'error': _('candidature_mixed',
+                default='The candidature ID in the session and URL do not match.',
+                mapping={"site_name":SITE_NAME, "domain_name":DOMAIN_NAME}),
+        }
+
+    decrypted_oid = session_oid or decrypted_candidature.oid
+    if decrypted_candidature:
+        candidature = decrypted_candidature
+    elif session_oid:
+        candidature = get_candidature_by_oid(decrypted_candidature, request)
+    elif user_oid:
+        candidature = get_candidature_by_oid(user_oid, request)
     else:
-        # Create a new candidature and store its OID in the session
         candidature = Candidature()
-        request.session[CANDIDATURE_OID] = candidature.oid
-        return candidature, None
+    request.session[CANDIDATURE_OID] = candidature.oid
+    return candidature, None
 
 def _handle_candidature_state(
         request:Request,
@@ -127,6 +163,7 @@ def _handle_candidature_state(
     - Dict: A dictionary with the rendered state view.
     """
     result = None
+
     match candidature.candidature_state:
         case CandidatureStates.DRAFT:
             result = handle_draft_state(request, candidature)
