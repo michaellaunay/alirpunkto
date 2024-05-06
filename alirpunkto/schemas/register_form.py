@@ -260,9 +260,7 @@ class RegisterForm(schema.CSRFSchema):
                 permission = getattr(permissions, name)
                 if permission == Permissions.NONE:
                     self.children.remove(attribute)
-                    return
-                
-                if ((attribute == self.password) and 
+                elif ((attribute == children['password']) and 
                     (permission & Permissions.ACCESS) and
                     (permission & Permissions.WRITE)
                     ):
@@ -271,11 +269,13 @@ class RegisterForm(schema.CSRFSchema):
                 elif ((permission & Permissions.ACCESS) and
                       (permission & Permissions.READ)):
                     attribute.widget.hidden = False
+                    attribute.widget.readonly = True
+                elif permission & Permissions.WRITE:
+                    attribute.widget.readonly = False
+                    attribute.widget.hidden = True
                 else:
                     attribute.widget.hidden = True
-
-                if permission & Permissions.WRITE:
-                    attribute.widget.readonly = False
+                    attribute.widget.readonly = True
 
     def prepare_for_ordinary(self):
         """Prepare the form for an ordinary user."""

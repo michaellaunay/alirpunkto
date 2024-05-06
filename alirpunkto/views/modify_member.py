@@ -3,14 +3,8 @@
 # date: 2024-04-19
 
 from pyramid.view import view_config
-from pyramid_zodbconn import get_connection
 from alirpunkto.utils import (
-    is_not_a_valid_email_address,
-    get_member_by_email,
-    update_member_from_ldap,
     get_member_by_oid,
-    send_email_to_member,
-    decrypt_oid,
     is_valid_password,
     update_member_password,
     send_member_state_change_email,
@@ -18,7 +12,6 @@ from alirpunkto.utils import (
 )
 from pyramid.request import Request
 from typing import Dict, Union
-from BTrees import OOBTree
 
 from alirpunkto.models.member import (
     MemberStates,
@@ -28,13 +21,10 @@ from alirpunkto.models.member import (
 )
 from alirpunkto.constants_and_globals import (
     _,
-    LDAP_ADMIN_OID,
-    MEMBERS_BEING_MODIFIED,
     log,
     CANDIDATURE_OID,
     MEMBER_OID,
     ACCESSED_MEMBER_OID,
-    SEED_LENGTH
 )
 from alirpunkto.schemas.register_form import RegisterForm
 from pyramid.i18n import Translator
@@ -42,10 +32,9 @@ import deform
 from alirpunkto.models.permissions import Permissions
 from alirpunkto.models.model_permissions import (
     MemberDataPermissions,
-    MemberPermissions,
-    CandidaturePermissions,
     get_access_permissions
 )
+from dataclasses import fields
 
 @view_config(
     route_name='modify_member',
@@ -59,45 +48,58 @@ def modify_member(request):
         request (pyramid.request.Request): the request
     """
     log.debug(f"modify_member: {request.method} {request.url}")
+    member = None
+    accessed_member_oid = None
+    form = None
+    schema = None
+    members = {k:m.pseudonym
+        for (k,m) in get_members(request).items()
+            if m.member_state in (
+                MemberStates.DATA_MODIFIED,
+                MemberStates.DATA_MODIFICATION_REQUESTED,
+                MemberStates.REGISTRED
+            )
+    }
     transaction = request.tm
     oid = (request.session.get(CANDIDATURE_OID, None)
         or request.session.get(MEMBER_OID, None))
-    member = None
-    members = {k:m.pseudonym
-        for (k,m) in get_members(request).items()
-        if m.member_state in (
-            MemberStates.DATA_MODIFIED,
-            MemberStates.DATA_MODIFICATION_REQUESTED,
-            MemberStates.REGISTRED
-        )
-    }
     if oid:
         member = get_member_by_oid(oid, request)
     else:
-        return {"member": None,
+        return {
             "form": None,
             "message": _('unknown_member'),
+            "member": None,
+            "accessed_member": None,
             "accessed_members": members,
         }
     accessor_member = member
-    accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)
-    if not accessed_member_oid:
-        if accessed_member_oid in Members.get_instance():
-            accessed_member = Members.get_instance()[accessed_member_oid]
-        else:
-            return {"accessed_member": None,
-                "form": None,
-                "message": _('unknown_accessed_member'),
-                "accessed_members": members,
-            }
-    form = None
-    schema = None
+ 
     if "submit" in request.POST or 'modify' in request.POST:
+        if "submit" in request.POST:
+            accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)
+            if accessed_member_oid and accessed_member_oid in members:
+                accessed_member = Members.get_instance()[accessed_member_oid]
+                if not accessed_member:
+                    return {
+                        "form": None,
+                        "member": member,
+                        "accessed_member": None,
+                        "accessed_members": members,
+                        "message": _('unknown_accessed_member'),
+                    }
+        elif 'modify' in request.POST:
+            accessed_member_oid = (request.session[ACCESSED_MEMBER_OID]
+                if ACCESSED_MEMBER_OID in request.session else None
+                )
+
         if not accessed_member_oid:
-            return {"accessed_member": None,
+            return {
                 "form": None,
-                "message": _('unknown_accessed_member'),
+                "member": member,
+                "accessed_member": None,
                 "accessed_members": members,
+                "message": _('unknown_accessed_member'),
             }
         accessed_member = Members.get_instance()[accessed_member_oid]
         permissions = get_access_permissions(accessed_member, accessor_member)
@@ -112,7 +114,7 @@ def modify_member(request):
                 "accessed_members": members,
             }
         schema = RegisterForm().bind(request=request)
-        schema.apply_permissions(permissions)
+        schema.apply_permissions(permissions.data)
     if "submit" in request.POST:
         appstruct = {
             'accessed_member': accessed_member,
@@ -138,35 +140,57 @@ def modify_member(request):
             buttons=('modify',),
             translator=Translator
         )
-        request.session[MEMBER_OID] = member.oid
+        request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
+        accessed_member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
         transaction.commit()
         return {"form": form.render(appstruct=appstruct),
-            "member": member
+            "member": member,
+            "accessed_members": {},
+            "accessed_member": accessed_member.oid,
         }
     elif 'modify' in request.POST and oid and member:
-        password = request.params['password'] if 'password' in request.params else None
-        password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None
-        if password != password_confirm:
-            request.session.flash(_('password_not_match'), 'error')
-            return {"error":_('password_not_match'),
-                "member": member,
-                "accessed_member": accessed_member_oid.oid,
-                "form": form.render()}
-        if password == "":
-            request.session.flash(_('password_required'), 'error')
-            return {"error":_('password_required'),
-                "member": member,
-                "form": form.render()}
-        err = is_valid_password(password)
-        if err:
-            request.session.flash(err, 'error')
-            return {"error":_('password_required'),
-                "member": member,
-                "form": form.render()}
-        #@TODO gérer tous les champs du formulaire
-        #@TODO mettre accessed_member à jour
-        #@TODO Mette à jour son état DATA_MODIFIED et le modifier
-        # 15) AlirPunkto updates the password in the ldap
+        # check if the member data field is writable before assignement
+        writable_fields = [permission.name for permission in fields(permissions.data)
+            if permission.value & (MemberDataPermissions.WRITE|MemberDataPermissions.ACCESS)]
+        err = None
+        for field in writable_fields:
+            if field in request.POST and request.POST[field] and request.POST[field] != getattr(accessed_member.data, field):
+                if "password" in request.POST and "password" in writable_fields:
+                    password = request.params['password'] if 'password' in request.params else None
+                    password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None
+                    if password != password_confirm:
+                        request.session.flash(_('password_not_match'), 'error')
+                        return {"error":_('password_not_match'),
+                            "member": member,
+                            "accessed_members": {},
+                            "accessed_member": accessed_member.oid,
+                            "form": form.render()}
+                    if password == "":
+                        request.session.flash(_('password_required'), 'error')
+                        return {"error":_('password_required'),
+                            "member": member,
+                            "accessed_members": {},
+                            "accessed_member": accessed_member.oid,
+                            "form": form.render()}
+                    err = is_valid_password(password)
+                else:
+                    #@TODO cast the value to the right type
+                    try:
+                        setattr(accessed_member.data, field, request.POST[field])
+                    except Exception as e:
+                        log.error(f"Error while setting {field} to {request.POST[field]} : {e}")
+                        error = _('error_while_setting_field', mapping={'field': field})
+                        request.session.flash(_('error_while_setting_field'), error)
+                        return {"error":_('password_required'),
+                            "member": member,
+                            "accessed_members": members,
+                            "accessed_member": accessed_member.oid,
+                            "form": form.render(),
+                            "error": error}
+        accessed_member.member_state = MemberStates.DATA_MODIFIED
+        transaction.commit()
+        #@TODO envoyer un email de confirmation de mofiication
+        # 15) AlirPunkto updates the member in the ldap
         result = update_member_password(request, member.oid, password)
         if result['status'] == "success":
             # 16) AlirPunkto updates the events of the member
@@ -180,19 +204,23 @@ def modify_member(request):
                 "modify_member",
             )
             transaction.commit()
-            log.debug(f"Password changed for {member.oid} to {password}")
-            log.info(f"Password changed for {member.oid}")
+            log.debug(f"Fields changed for {member.oid} to {password}")
+            log.info(f"Fields changed for {member.oid}")
             if 'sucess' in result and result['sucess']:
-                return {"message":_('password_changed'), "member": member, "form": None}
+                return {"message":_('fields_changed'),
+                    "member": member, "accessed_member": accessed_member,
+                    "accessed_members": {}, "form": None}
             else:
                 log.error(
                     f"Error while reset password {member.oid} : {result['error']}"
                 )
-                return {"error":_('forget_confirmation_email_send_error'), "member": member, "form": None}
+                return {"error":_('forget_confirmation_email_send_error'),
+                    "member": {}, "accessed_members": {}, "form": None}
         else:
             log.error(
-                f"Error while reset password {member.oid} : {result['message']}"
+                f"Error while modify {accessed_member.oid} by {member.oid} : {result['message']}"
             )
-            return {"error":_('15dd'), "member": member, "form": None}
+            return {"error":_('15dd'),
+                "member": member, "accessed_members": {}, "form": None}
     else :
-        return {"member": None, "form": None, "accessed_members": members}
+        return {"member": member, "form": None, "accessed_member":None,"accessed_members": members}

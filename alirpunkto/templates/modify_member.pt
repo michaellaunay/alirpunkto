@@ -1,7 +1,7 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <h1 i18n:translate="modify_member_title">Consult or modify the member datas ?</h1>
-        <div class="container" i18n:domain="alirpunkto" tal:condition="not member">
+        <div class="container" i18n:domain="alirpunkto" tal:condition="not accessed_member">
             <form method="POST">
                 <label for="accessed_member_oid" i18n:translate="select_member_oid_label">Select the member</label>
                 <select id="accessed_member_oid" name="accessed_member_oid" required>
