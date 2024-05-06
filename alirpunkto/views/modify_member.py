@@ -74,7 +74,7 @@ def modify_member(request):
             "accessed_members": members,
         }
     accessor_member = member
- 
+
     if "submit" in request.POST or 'modify' in request.POST:
         if "submit" in request.POST:
             accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)

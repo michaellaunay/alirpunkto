@@ -256,7 +256,7 @@ class RegisterForm(schema.CSRFSchema):
         for field in fields(permissions):
             name = field.name
             attribute = children.get(name, None)
-            if attribute:
+            if attribute and attribute.widget:
                 permission = getattr(permissions, name)
                 if permission == Permissions.NONE:
                     self.children.remove(attribute)
