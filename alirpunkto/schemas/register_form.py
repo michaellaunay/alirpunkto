@@ -252,9 +252,10 @@ class RegisterForm(schema.CSRFSchema):
     )
     def apply_permissions(self, permissions: MemberDataPermissionsType):
         """Apply permissions to the form."""
+        children = {child.name: child for child in self.children}
         for field in fields(permissions):
             name = field.name
-            attribute = getattr(self, name, None)
+            attribute = children.get(name, None)
             if attribute:
                 permission = getattr(permissions, name)
                 if permission == Permissions.NONE:

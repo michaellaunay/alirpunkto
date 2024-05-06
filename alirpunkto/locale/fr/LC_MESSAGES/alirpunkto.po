@@ -1343,5 +1343,5 @@ msgstr ""
 "cette image, vous exprimez beaucoup de choses sur vous, dans un langage "
 "universel. Profitez-en !"
 
-msgid 'candidature_mixed'
+msgid "candidature_mixed"
 msgstr "Le numéro de la candidature dans la session et celui de l'URL ne correspondent pas. Veuillez uniquement utiliser l'URL du dernier email que vous avez reçu."

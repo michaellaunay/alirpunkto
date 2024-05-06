@@ -13,7 +13,8 @@ from alirpunkto.utils import (
     decrypt_oid,
     is_valid_password,
     update_member_password,
-    send_member_state_change_email
+    send_member_state_change_email,
+    get_members,
 )
 from pyramid.request import Request
 from typing import Dict, Union
@@ -23,12 +24,14 @@ from alirpunkto.models.member import (
     MemberStates,
     EmailSendStatus,
     MemberDatas,
+    Members,
 )
 from alirpunkto.constants_and_globals import (
     _,
     LDAP_ADMIN_OID,
     MEMBERS_BEING_MODIFIED,
     log,
+    CANDIDATURE_OID,
     MEMBER_OID,
     ACCESSED_MEMBER_OID,
     SEED_LENGTH
@@ -57,32 +60,59 @@ def modify_member(request):
     """
     log.debug(f"modify_member: {request.method} {request.url}")
     transaction = request.tm
-    oid = request.session.get(MEMBER_OID, None)
+    oid = (request.session.get(CANDIDATURE_OID, None)
+        or request.session.get(MEMBER_OID, None))
     member = None
+    members = {k:m.pseudonym
+        for (k,m) in get_members(request).items()
+        if m.member_state in (
+            MemberStates.DATA_MODIFIED,
+            MemberStates.DATA_MODIFICATION_REQUESTED,
+            MemberStates.REGISTRED
+        )
+    }
     if oid:
         member = get_member_by_oid(oid, request)
     else:
-        return {"member": None, "form": None, "message": _('unknown_member')}
+        return {"member": None,
+            "form": None,
+            "message": _('unknown_member'),
+            "accessed_members": members,
+        }
     accessor_member = member
-    accessed_member = request.POST.get(ACCESSED_MEMBER_OID, None)
-    if not accessed_member:
-        accessed_member = request.session.get(ACCESSED_MEMBER_OID, None)
+    accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)
+    if not accessed_member_oid:
+        if accessed_member_oid in Members.get_instance():
+            accessed_member = Members.get_instance()[accessed_member_oid]
+        else:
+            return {"accessed_member": None,
+                "form": None,
+                "message": _('unknown_accessed_member'),
+                "accessed_members": members,
+            }
     form = None
     schema = None
     if "submit" in request.POST or 'modify' in request.POST:
-        if not accessed_member:
-            return {"accessed_member": None, "form": None, "message": _('unknown_accessed_member')}        
-        permissions = get_access_permissions(
-            accessed_member, accessor_member)
+        if not accessed_member_oid:
+            return {"accessed_member": None,
+                "form": None,
+                "message": _('unknown_accessed_member'),
+                "accessed_members": members,
+            }
+        accessed_member = Members.get_instance()[accessed_member_oid]
+        permissions = get_access_permissions(accessed_member, accessor_member)
         if not permissions or permissions == Permissions.NONE:
             log.warning(
-                f'No permission to access member datas: {accessed_member.oid}'
+                f'No permission to access member datas: {accessed_member_oid.oid}'
             )
             request.session.flash(_('no_permission'), 'error')
-            return {"error":_('no_permission'), "member": None, "form": None}
-        member_data_permissions = permissions.datas
+            return {"error":_('no_permission'),
+                "member": None,
+                "form": None,
+                "accessed_members": members,
+            }
         schema = RegisterForm().bind(request=request)
-        schema.apply_permissions(member_data_permissions)
+        schema.apply_permissions(permissions)
     if "submit" in request.POST:
         appstruct = {
             'accessed_member': accessed_member,
@@ -98,11 +128,11 @@ def modify_member(request):
             'lang2': accessed_member.data.lang2,
             'lang3': accessed_member.data.lang3,
             'cooperative_behaviour_mark': accessed_member.data.cooperative_behaviour_mark,
-            'cooperative_behaviour_mark_update': accessed_member.data.cooperative_behaviour_mark_update,
+            'cooperative_behaviour_mark_update': accessed_member.data.cooperative_behaviour_mark_updated,
             'number_shares_owned': accessed_member.data.number_shares_owned,
             'date_end_validity_yearly_contribution': accessed_member.data.date_end_validity_yearly_contribution,
             'iban': accessed_member.data.iban,
-            'date_erasure_all_data': accessed_member.data.date_erasure_all_data
+            #'date_erasure_all_data': accessed_member.data.date_erasure_all_data #TODO
         }
         form = deform.Form(schema,
             buttons=('modify',),
@@ -120,7 +150,7 @@ def modify_member(request):
             request.session.flash(_('password_not_match'), 'error')
             return {"error":_('password_not_match'),
                 "member": member,
-                "accessed_member": accessed_member.oid,
+                "accessed_member": accessed_member_oid.oid,
                 "form": form.render()}
         if password == "":
             request.session.flash(_('password_required'), 'error')
@@ -165,4 +195,4 @@ def modify_member(request):
             )
             return {"error":_('15dd'), "member": member, "form": None}
     else :
-        return {"member": None, "form": None}
+        return {"member": None, "form": None, "accessed_members": members}
