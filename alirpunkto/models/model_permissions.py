@@ -616,9 +616,9 @@ def get_access_permissions(accessed: Member, accessor : Member) -> MemberPermiss
         # If the accessor is the owner of the accessed member
         case (True, _, _):
             if isinstance(accessed, Candidature):
-                permissions = access['Owner'][accessed.member_state]
-            else:
                 permissions = access['Owner'][(accessed.candidature_state, accessed.type)]
+            else:
+                permissions = access['Owner'][accessed.member_state]
         # else if accessed is a Candidature and the accessor is a voter
         case (False, Candidature, _) if accessed.voters and accessor.oid in accessed.voters:
             permissions = access['voter'][accessed.member_state]

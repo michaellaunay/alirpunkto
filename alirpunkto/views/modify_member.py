@@ -35,6 +35,7 @@ from alirpunkto.models.model_permissions import (
     get_access_permissions
 )
 from dataclasses import fields
+import json
 
 @view_config(
     route_name='modify_member',
@@ -63,6 +64,10 @@ def modify_member(request):
     transaction = request.tm
     oid = (request.session.get(CANDIDATURE_OID, None)
         or request.session.get(MEMBER_OID, None))
+    if not oid:
+        user = request.session.get("user", None)
+        if user:
+            oid = json.loads(user).get("oid", None)
     if oid:
         member = get_member_by_oid(oid, request)
     else:
@@ -114,7 +119,10 @@ def modify_member(request):
                 "accessed_members": members,
             }
         schema = RegisterForm().bind(request=request)
+        # The permissions don't have the same structure as the schema,
+        # so we need to apply permissions.data and permissions to the schema.
         schema.apply_permissions(permissions.data)
+        schema.apply_permissions(permissions)
     if "submit" in request.POST:
         appstruct = {
             'accessed_member': accessed_member,
@@ -150,8 +158,12 @@ def modify_member(request):
         }
     elif 'modify' in request.POST and oid and member:
         # check if the member data field is writable before assignement
-        writable_fields = [permission.name for permission in fields(permissions.data)
-            if permission.value & (MemberDataPermissions.WRITE|MemberDataPermissions.ACCESS)]
+        writable_fields = [
+            permission.name
+                for permission in fields(permissions.data)
+                if (getattr(permissions.data, permission.name)
+                    & (Permissions.WRITE|Permissions.ACCESS))
+        ]
         err = None
         for field in writable_fields:
             if field in request.POST and request.POST[field] and request.POST[field] != getattr(accessed_member.data, field):
@@ -187,10 +199,12 @@ def modify_member(request):
                             "accessed_member": accessed_member.oid,
                             "form": form.render(),
                             "error": error}
+        # @TODO write in ldap
         accessed_member.member_state = MemberStates.DATA_MODIFIED
         transaction.commit()
-        #@TODO envoyer un email de confirmation de mofiication
+        #@TODO send a modification confirmation email
         # 15) AlirPunkto updates the member in the ldap
+        raise NotImplementedError
         result = update_member_password(request, member.oid, password)
         if result['status'] == "success":
             # 16) AlirPunkto updates the events of the member

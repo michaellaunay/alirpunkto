@@ -256,26 +256,30 @@ class RegisterForm(schema.CSRFSchema):
         for field in fields(permissions):
             name = field.name
             attribute = children.get(name, None)
-            if attribute and attribute.widget:
-                permission = getattr(permissions, name)
+            if attribute:
+                permission = getattr(permissions, name, None)
+                # Permissions may not contain all the children
+                if permission == None:
+                    continue
                 if permission == Permissions.NONE:
                     self.children.remove(attribute)
-                elif ((attribute == children['password']) and 
-                    (permission & Permissions.ACCESS) and
-                    (permission & Permissions.WRITE)
-                    ):
-                    attribute.widget.readonly = False
-                    attribute.widget.hidden = False
-                elif ((permission & Permissions.ACCESS) and
-                      (permission & Permissions.READ)):
-                    attribute.widget.hidden = False
-                    attribute.widget.readonly = True
-                elif permission & Permissions.WRITE:
-                    attribute.widget.readonly = False
-                    attribute.widget.hidden = True
-                else:
-                    attribute.widget.hidden = True
-                    attribute.widget.readonly = True
+                elif attribute.widget:
+                    if (('password' in children and attribute == children['password']) and 
+                        (permission & Permissions.ACCESS) and
+                        (permission & Permissions.WRITE)
+                        ):
+                        attribute.widget.readonly = False
+                        attribute.widget.hidden = False
+                    elif ((permission & Permissions.ACCESS) and
+                        (permission & Permissions.READ)):
+                        attribute.widget.hidden = False
+                        attribute.widget.readonly = True
+                    elif permission & Permissions.WRITE:
+                        attribute.widget.readonly = False
+                        attribute.widget.hidden = True
+                    else:
+                        attribute.widget.hidden = True
+                        attribute.widget.readonly = True
 
     def prepare_for_ordinary(self):
         """Prepare the form for an ordinary user."""
