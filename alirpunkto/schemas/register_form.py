@@ -271,12 +271,14 @@ class RegisterForm(schema.CSRFSchema):
                         attribute.widget.readonly = False
                         attribute.widget.hidden = False
                     elif ((permission & Permissions.ACCESS) and
+                        (permission & Permissions.READ) and
+                        (permission & Permissions.WRITE)):
+                        attribute.widget.readonly = False
+                        attribute.widget.hidden = True
+                    elif ((permission & Permissions.ACCESS) and
                         (permission & Permissions.READ)):
                         attribute.widget.hidden = False
                         attribute.widget.readonly = True
-                    elif permission & Permissions.WRITE:
-                        attribute.widget.readonly = False
-                        attribute.widget.hidden = True
                     else:
                         attribute.widget.hidden = True
                         attribute.widget.readonly = True
