@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">E-mailadres bijwerken op <span tal:replace="domain_name">Domeinnaam</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Bedankt voor het bevestigen van de update van uw e-mailadres op het platform <span tal:replace="domain_name">Domeinnaam</span></h1>
+    <p tal:omit-tag="textual">U hebt ons gevraagd het e-mailadres te wijzigen dat de <span tal:replace="domain_name">domeinnaam</span> IT-infrastructuur zal gebruiken om met u te communiceren. Klik op de bevestigingslink hieronder om je nieuwe e-mailadres te bevestigen.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Bedankt voor uw interesse in onze activiteiten.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Gegroet,</p>
+        <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name">Site</span></p>
+    </footer>
+
+</body>
+</html>
