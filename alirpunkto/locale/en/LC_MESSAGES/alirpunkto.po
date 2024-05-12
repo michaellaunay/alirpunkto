@@ -1266,4 +1266,14 @@ msgstr ""
 "the most of it!"
 
 msgid "candidature_mixed"
-msgstr "The candidacy identification number in the session and in the URL do not match. Please only use the URL from the most recent email you received."
+msgstr ""
+"The candidacy identification number in the session and in the URL do not match."
+" Please only use the URL from the most recent email you received."
+
+msgid "check_new_email"
+msgstr ""
+"You have requested to change your email address to ${new_email},"
+" as a result you will receive an email containing a validation link for your new address"
+
+msgid "check_new_email_subject"
+msgstr "Verification of your new email address"

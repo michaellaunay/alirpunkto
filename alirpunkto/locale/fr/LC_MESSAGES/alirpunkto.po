@@ -1344,4 +1344,14 @@ msgstr ""
 "universel. Profitez-en !"
 
 msgid "candidature_mixed"
-msgstr "Le numéro de la candidature dans la session et celui de l'URL ne correspondent pas. Veuillez uniquement utiliser l'URL du dernier email que vous avez reçu."
+msgstr ""
+"Le numéro de la candidature dans la session et celui de l'URL ne correspondent pas."
+"Veuillez uniquement utiliser l'URL du dernier email que vous avez reçu."
+
+msgid "check_new_email"
+msgstr ""
+"Vous avez demandé à changer votre adresse de courriel pour ${new_email},"
+" en conséquence vous allez recevoir un courriel contenant un lien de validation de votre nouvelle adresse"
+
+msgid "check_new_email_subject"
+msgstr "Vérfification de votre nouvelle adresse de courriel"
