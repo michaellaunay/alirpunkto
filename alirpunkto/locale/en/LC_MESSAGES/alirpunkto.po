@@ -1267,13 +1267,14 @@ msgstr ""
 
 msgid "candidature_mixed"
 msgstr ""
-"The candidacy identification number in the session and in the URL do not match."
-" Please only use the URL from the most recent email you received."
+"The address (URL) you used to retrieve your application process from where you interrupted it does not match the one we registered for you."
+"(The application identification number in the session and in the URL number do not match)\n"
+"Please use only the URL from the last email you received."
 
 msgid "check_new_email"
 msgstr ""
-"You have requested to change your email address to ${new_email},"
-" as a result you will receive an email containing a validation link for your new address"
+"You have asked to change your email address. In future, you would like to use: ${new_email}."
+"As a result you will receive an email containing a link to validate this new address."
 
 msgid "check_new_email_subject"
 msgstr "Verification of your new email address"
