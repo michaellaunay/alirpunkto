@@ -6,7 +6,7 @@
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Merci de confirmer la mise à jour de votre adresse email sur la plateforme <span tal:replace="domain_name">Nom domaine</span></h1>
-    <p tal:omit-tag="textual">Pour confirmer votre nouvelle adresse email veuillez cliquer sur la page de confirmation ci-dessous.</p>
+    <p tal:omit-tag="textual">Vous nous avez demandé de modifier l'adresse de courriel qu'utilisera l'infrastructure informatique de <span tal:replace="domain_name">Nom domaine</span> pour interagir avec vous. Pour confirmer votre nouvelle adresse email veuillez cliquer sur le lien de confirmation ci-dessous.</p>
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
     </a>
