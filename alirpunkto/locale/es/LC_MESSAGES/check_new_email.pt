@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Aktualisierung der E-Mail-Adresse auf <span tal:replace="domain_name">Domainname</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Danke, dass Sie die Aktualisierung Ihrer E-Mail-Adresse auf der Plattform <span tal:replace="domain_name">Domainname</span> bestätigt haben</h1>
+    <p tal:omit-tag="textual">Sie haben uns gebeten, die E-Mail-Adresse zu ändern, die die IT-Infrastruktur von <span tal:replace="domain_name">Domainname</span> für die Kommunikation mit Ihnen verwendet. Um Ihre neue E-Mail-Adresse zu bestätigen, klicke Sie bitte auf den Bestätigungslink unten.</p>
+    <a tal:attributes=n"href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Danke für Ihr Interesse an unseren Aktivitäten.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
+        <p tal:omit-tag="textual">Das Team von <span tal:replace="domain_name">Site</span></p>
+    </footer>
+
+</body>
+</html>
