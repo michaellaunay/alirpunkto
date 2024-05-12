@@ -1345,13 +1345,14 @@ msgstr ""
 
 msgid "candidature_mixed"
 msgstr ""
-"Le numéro de la candidature dans la session et celui de l'URL ne correspondent pas."
-"Veuillez uniquement utiliser l'URL du dernier email que vous avez reçu."
+"L'adresse (URL) que vous avez utilisée pour retrouver votre procédure de candidature où vous l'aviez interrompue ne correspond pas à celle que que nous avons enregistrée pour vous."
+"(Le numéro de la candidature dans la session et celui de l'URL ne correspondent pas)\n"
+"Veuillez utiliser uniquement l'URL du dernier courriel que vous avez reçu."
 
 msgid "check_new_email"
 msgstr ""
-"Vous avez demandé à changer votre adresse de courriel pour ${new_email},"
-" en conséquence vous allez recevoir un courriel contenant un lien de validation de votre nouvelle adresse"
+"Vous avez demandé à changer votre adresse de courriel. Vous souhaitez utiliser à l'avenir : ${new_email}."
+" En conséquence vous allez recevoir un courriel contenant un lien de validation de cette nouvelle adresse."
 
 msgid "check_new_email_subject"
 msgstr "Vérfification de votre nouvelle adresse de courriel"
