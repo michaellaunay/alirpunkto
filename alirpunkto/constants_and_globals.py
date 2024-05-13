@@ -1,3 +1,6 @@
+# This file is part of the alirpunkto package.
+# author: Michael Launay
+
 # Description: Constants for the alirpunkto app
 from typing import Final
 import os, pytz
@@ -8,38 +11,44 @@ from pyramid.i18n import (
 import logging
 import re
 
-load_dotenv() # take environment variables from .env.
+# Load environment variables from .env.
+dotenv_path: Final = find_dotenv()
+load_dotenv(dotenv_path)
 # SECRET_KEY is used for cookie signing
 # This information is stored in environment variables
 # See https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/security.html
 # Using get_key() instead of os.getenv() as os.getenv() does not 
 # handle values containing `=` properly.
-SECRET_KEY: Final = get_key(find_dotenv(), "SECRET_KEY")
+SECRET_KEY: Final = get_key(dotenv_path, "SECRET_KEY")
 # check if secret is not empty an make it accessible from the views
 if not SECRET_KEY:
     raise ValueError("You must provide a base64 value for SECRET_KEY")
 
 # LDAP informations are stored in environment variables
 # Not Final due to __init__ initialization
-LDAP_SERVER = os.getenv("LDAP_SERVER")
-LDAP_BASE_DN = get_key(find_dotenv(), "LDAP_BASE_DN")
-LDAP_OU = get_key(find_dotenv(), "LDAP_OU")
-LDAP_LOGIN = get_key(find_dotenv(), "LDAP_LOGIN")
-LDAP_PASSWORD = get_key(find_dotenv(), "LDAP_PASSWORD")
-ADMIN_LOGIN = get_key(find_dotenv(), "ADMIN_LOGIN")
-ADMIN_PASSWORD = get_key(find_dotenv(), "ADMIN_PASSWORD")
-ADMIN_EMAIL = get_key(find_dotenv(), "ADMIN_EMAIL")
-MAIL_USERNAME = os.getenv("MAIL_USERNAME")
-MAIL_SENDER = os.getenv("MAIL_SENDER")
-MAIL_SERVER = os.getenv("MAIL_SERVER")
-MAIL_PASSWORD = get_key(find_dotenv(), "MAIL_PASSWORD")
-MAIL_PORT = os.getenv("MAIL_PORT")
-MAIL_HOST = os.getenv("MAIL_HOST")
-MAIL_TLS = os.getenv("MAIL_TLS")
-MAIL_SSL = os.getenv("MAIL_SSL")
-MAIL_SIGNATURE = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name} for {domain_name}")
-DOMAIN_NAME = os.getenv("DOMAIN_NAME")
-SITE_NAME = os.getenv("SITE_NAME")
+LDAP_SERVER: Final = os.getenv("LDAP_SERVER")
+LDAP_BASE_DN: Final = get_key(dotenv_path, "LDAP_BASE_DN")
+LDAP_OU: Final = get_key(dotenv_path, "LDAP_OU")
+LDAP_USE_SSL: Final = (
+    (get_key(dotenv_path, "LDAP_USE_SSL") or "False").lower()
+    in ['true', '1', "yes", "y"]
+)
+LDAP_LOGIN: Final = get_key(dotenv_path, "LDAP_LOGIN")
+LDAP_PASSWORD: Final = get_key(dotenv_path, "LDAP_PASSWORD")
+ADMIN_LOGIN: Final = get_key(dotenv_path, "ADMIN_LOGIN")
+ADMIN_PASSWORD: Final = get_key(dotenv_path, "ADMIN_PASSWORD")
+ADMIN_EMAIL: Final = get_key(dotenv_path, "ADMIN_EMAIL")
+MAIL_USERNAME: Final = os.getenv("MAIL_USERNAME")
+MAIL_SENDER: Final = os.getenv("MAIL_SENDER")
+MAIL_SERVER: Final = os.getenv("MAIL_SERVER")
+MAIL_PASSWORD: Final = get_key(dotenv_path, "MAIL_PASSWORD")
+MAIL_PORT: Final = os.getenv("MAIL_PORT")
+MAIL_HOST: Final = os.getenv("MAIL_HOST")
+MAIL_TLS: Final = os.getenv("MAIL_TLS")
+MAIL_SSL: Final = os.getenv("MAIL_SSL")
+MAIL_SIGNATURE: Final = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name} for {domain_name}")
+DOMAIN_NAME: Final = os.getenv("DOMAIN_NAME")
+SITE_NAME: Final = os.getenv("SITE_NAME")
 # logging configuration
 log: Final = logging.getLogger('alirpunkto')
 
