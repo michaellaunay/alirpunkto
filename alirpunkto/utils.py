@@ -2,7 +2,7 @@
 # author: Michaël Launay
 # date: 2023-09-30
 
-from typing import Union, Tuple, Dict
+from typing import Union, Tuple, Dict, List, Final
 import datetime
 from pyramid.request import Request
 from alirpunkto.models.member import (
@@ -27,6 +27,7 @@ from .constants_and_globals import (
     ADMIN_EMAIL,
     LDAP_SERVER,
     LDAP_OU,
+    LDAP_USE_SSL,
     LDAP_BASE_DN,
     LDAP_LOGIN,
     LDAP_PASSWORD,
@@ -46,7 +47,15 @@ from .constants_and_globals import (
     MEMBER_OID
 )
 from pyramid.i18n import get_localizer
-from ldap3 import Server, Connection, ALL, MODIFY_ADD, MODIFY_REPLACE
+from ldap3 import (
+    Server,
+    Connection,
+    ALL,
+    MODIFY_ADD,
+    MODIFY_REPLACE,
+    SAFE_SYNC,
+    SUBTREE
+)
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
 import random
@@ -88,13 +97,16 @@ def get_members(request)->Members:
     conn = get_connection(request)
     return Members.get_instance(connection=conn)
 
-def get_unsecure_ldap_connection() -> Connection:
-    """Get an unsecure LDAP connection.
+def get_ldap_connection(use_ssl=LDAP_USE_SSL) -> Connection:
+    """Get an LDAP connection secure or not depending of LDAP_USE_SSL global.
     Returns:
         Connection: the unsecure LDAP connexion
     """
     # define an unsecure LDAP server, requesting info on DSE and schema
-    server = Server(LDAP_SERVER, get_info=ALL)
+    server = Server(LDAP_SERVER,
+        #use_ssl=use_ssl,
+        get_info=ALL
+    )
     ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
         if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
     )# define the user to authenticate
@@ -103,7 +115,8 @@ def get_unsecure_ldap_connection() -> Connection:
         server,
         ldap_login,
         LDAP_PASSWORD,
-        auto_bind=True
+        auto_bind=True,
+        # client_strategy=SAFE_SYNC # Normaly prevent injection attacks but in this case clear conn.entries and conn.response!
     )
     return conn
 
@@ -111,18 +124,48 @@ def get_member_by_email(email: str) -> Union[Dict[str, str], None]:
     """Get the members from LDAP by their email.
     Args:
         email (str): the email of the member
-    Returns:    
+    Returns:
         dict: The members found for the given email
         None: If no member is found
     """
-    conn = get_unsecure_ldap_connection()
-    # search for the user in the LDAP directory
-    conn.search(
-        LDAP_BASE_DN,
-        f'(mail={email.strip()})',
-        attributes=['cn', 'uid', 'isActive', 'employeeType']
-    )
-    return conn.entries
+    with get_ldap_connection() as conn:
+        conn.search(
+            LDAP_BASE_DN,
+            f'(mail={email.strip()})',
+            search_scope=SUBTREE,
+            attributes=['cn', 'uid', 'isActive', 'employeeType']
+        )
+        if conn.entries:
+            return conn.entries[0]
+        else:
+            return []
+
+def get_ldap_member_list(
+        types_of_members: List[str] = [member.name for member in MemberTypes]
+    )->List[Tuple[str, str, bool, str]]:
+    """Get the list of members from the LDAP.
+    Returns:
+        list: list of tuples ('cn', 'uid', 'isActive', 'employeeType')
+        representing the ldap members.
+    """
+    with get_ldap_connection() as conn:
+        conn.search(
+            LDAP_BASE_DN,
+            '(objectClass=*)',
+            search_scope=SUBTREE,
+            attributes=['cn', 'uid', 'mail', 'isActive', 'employeeType']
+        )
+        return [
+            User(
+                name = entry['cn'].value,
+                email = entry['mail'].value,
+                oid= entry['uid'].value,
+                isActive = entry['isActive'].value in ["True", "true", "TRUE", "Y", "y", "YES", "yes", "1"],
+                type = getattr(MemberTypes, entry['employeeType'].value, MemberTypes.ORDINARY)
+            )
+            for entry in conn.entries
+            if entry and entry['uid'] and entry['employeeType'] in types_of_members
+        ]
 
 def is_not_a_valid_email_address(
         email:str,
@@ -1134,6 +1177,63 @@ def send_validation_email(
         success = False
     return success
 
+def send_check_new_email(
+        request: Request,
+        member: 'Member',
+        new_email: str
+    ) -> bool:
+    """
+    Send the validation of new email adress to the member.
+    
+    Args:
+        request: The request object.
+        candidature: The candidature object.
+        
+    Returns:
+        bool: True if the email is successfully sent, False otherwise.
+    """
+    template_path = get_local_template(
+        request,
+        LOCALE_LANG_MESSAGES + "check_new_email" + ZPT_EXTENSION
+    ).abspath()
+
+    email = member.email # The email to send to.
+    challenge = member.challenge # The math challenge for email validation.
+    localizer = get_localizer(request)
+    subject = localizer.translate(_('email_validation_subject'))
+    seed = member.email_send_status_history[-1].seed
+    parameter = encrypt_oid(
+        member.oid,
+        seed,
+        request.registry.settings['session.secret']
+    )
+    
+    url = request.route_url('check_new_email', _query={'oid': parameter})
+    site_url = request.route_url('home')
+    site_name = request.registry.settings.get('site_name')
+    domain_name = request.registry.settings.get('domain_name')
+    
+    template_vars = {
+        'check_new_email_view':url,
+        'site_url': site_url,
+        'site_name': site_name,
+        'domain_name': domain_name
+    }
+
+    # Use the send_email from utils.py
+    # Put on the stack the action of sending the email wich is done during the commit
+    try:
+        success = send_email(
+            request,
+            subject,
+            [email],
+            template_path,
+            template_vars
+        )
+    except Exception as e:
+        log.error(f"Error while sending email to {email} : {e}")
+        success = False
+    return success
 
 def logout(request: Request):
     """
