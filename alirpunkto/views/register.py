@@ -137,15 +137,16 @@ def _retrieve_candidature(
                 mapping={"site_name":SITE_NAME, "domain_name":DOMAIN_NAME}),
         }
 
-    decrypted_oid = session_oid or decrypted_candidature.oid
+    decrypted_oid = session_oid or (decrypted_candidature and decrypted_candidature.oid) or None
     if decrypted_candidature:
-        candidature = decrypted_candidature
-    elif session_oid:
         candidature = get_candidature_by_oid(decrypted_candidature, request)
+    elif session_oid:
+        candidature = get_candidature_by_oid(session_oid, request)
     elif user_oid:
         candidature = get_candidature_by_oid(user_oid, request)
     else:
         candidature = Candidature()
+        get_candidatures(request)[candidature.oid] = candidature
     request.session[CANDIDATURE_OID] = candidature.oid
     return candidature, None
 
@@ -163,7 +164,6 @@ def _handle_candidature_state(
     - Dict: A dictionary with the rendered state view.
     """
     result = None
-
     match candidature.candidature_state:
         case CandidatureStates.DRAFT:
             result = handle_draft_state(request, candidature)

@@ -123,5 +123,5 @@ def check_password(username:str, oid:str, password:str) -> Union[None, User]:
     if "employeeNumber" not in user_entry:
         log.warning(f"User {username} has no employeeNumber")
     
-    user = User.create_user(name, email, employeeNumber)
+    user = User(name=name, email=email, oid=employeeNumber)
     return user
