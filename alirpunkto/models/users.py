@@ -1,57 +1,38 @@
 """_summary_
 Define the user model which is used to store users in the zodb database.
 """
-# description: User model
-from typing import Union, List
-from persistent import Persistent
+from dataclasses import dataclass, asdict, field
+from typing import Union
 import json
-from alirpunkto.constants_and_globals import log
-from alirpunkto.models.member import MemberStates
+from persistent import Persistent
 
-# User class
+@dataclass
 class User(Persistent):
-    """A user in the LDAP directory."""
-    _admin_user = None
-    def __init__(self, name:str, email:str, oid:str) -> None:
-        """Create a user from the LDAP directory.
-        attr:
-            name (str): the name of the user
-            email (str): the email of the user
-            oid (str): the oid of the user, same as his candidature oid
-        """
-        self.name = name
-        self.email = email
-        self.oid = oid
-        self.user_data_state = MemberStates.CREATED
+    """A user in the LDAP directory, stored in the ZODB database."""
+    name: str
+    email: str
+    oid: str
+    isActive: bool = True
+    type: str = "ORDINARY"
+
+    def __post_init__(self):
+        super().__init__()  # Needed to initialize Persistent base class properties
+
+    def to_json(self) -> str:
+        """Return a json representation of the user."""
+        return json.dumps(asdict(self))
 
     @classmethod
-    def create_user(cls, name:str, email:str, oid:str) -> 'User':
-        """Create a user from the LDAP directory.
-        attr:
-            name (str): the name of the user
-            email (str): the email of the user
-            oid (str): the oid of the user, same as his candidature oid
+    def from_json(cls, data: Union[dict, str]) -> 'User':
+        """Create a User instance from json data.
+        args:
+            data (Union[dict, str]): the json data in string or dict format.
         return:
-            User: the user created
-        """
-        return cls(name, email, oid)
-
-    def __repr__(self):
-        return f"<User {self.name=!r} {self.email=!r} {self.oid=!r}>"
-    
-    def to_json(self):
-        """Return a json representation of the user
-        """
-        return json.dumps({'name': self.name, 'email': self.email, 'oid': self.oid})
- 
-    @classmethod
-    def from_json(cls, data:Union[dict, str]):
-        """Create a User instance from json data
-        attr:
-            data (Union[dict, str]): the json data
-        return:
-            User: the user created
+            User: the user created.
         """
         if isinstance(data, str):
             data = json.loads(data)
-        return cls(data['name'], data['email'], data['oid'])
+        return cls(**data)
+
+    def __repr__(self):
+        return f"<User name={self.name!r} email={self.email!r} oid={self.oid!r}>"

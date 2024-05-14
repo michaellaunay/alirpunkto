@@ -6,17 +6,17 @@ from pyramid.view import view_config
 from alirpunkto.utils import (
     get_member_by_oid,
     is_valid_password,
+    is_valid_email,
     update_member_password,
+    update_member_from_ldap,
     send_member_state_change_email,
+    send_check_new_email,
     get_members,
+    get_ldap_member_list,
 )
-from pyramid.request import Request
-from typing import Dict, Union
 
 from alirpunkto.models.member import (
     MemberStates,
-    EmailSendStatus,
-    MemberDatas,
     Members,
 )
 from alirpunkto.constants_and_globals import (
@@ -53,6 +53,9 @@ def modify_member(request):
     accessed_member_oid = None
     form = None
     schema = None
+    ldap_members= get_ldap_member_list()
+    members = {user.oid:user.name for user in ldap_members}
+    """
     members = {k:m.pseudonym
         for (k,m) in get_members(request).items()
             if m.member_state in (
@@ -61,6 +64,7 @@ def modify_member(request):
                 MemberStates.REGISTRED
             )
     }
+    """
     transaction = request.tm
     oid = (request.session.get(CANDIDATURE_OID, None)
         or request.session.get(MEMBER_OID, None))
@@ -97,7 +101,12 @@ def modify_member(request):
             accessed_member_oid = (request.session[ACCESSED_MEMBER_OID]
                 if ACCESSED_MEMBER_OID in request.session else None
                 )
-
+            if accessed_member_oid:
+                # Force the update of the member from the ldap
+                accessed_member = update_member_from_ldap(
+                    accessed_member_oid,
+                    request
+                )
         if not accessed_member_oid:
             return {
                 "form": None,
@@ -167,6 +176,26 @@ def modify_member(request):
         err = None
         for field in writable_fields:
             if field in request.POST and request.POST[field] and request.POST[field] != getattr(accessed_member.data, field):
+                if accessed_member_oid == member.oid and "email" in request.POST and "email" in writable_fields:
+                    email = request.POST['email']
+                    if email != accessed_member.email:
+                        err = is_valid_email(email)
+                        if err:
+                            request.session.flash(err, 'error')
+                            return {"error":err,
+                                "member": member,
+                                "accessed_members": {},
+                                "accessed_member": accessed_member.oid,
+                                "form": form.render()}
+                        accessed_member.new_email = email
+                        transaction.commit()
+                        result = send_check_new_email(request, accessed_member)
+                        if not result:
+                            return {"message":_('check_new_email_send_error'),
+                                "member": member,
+                                "accessed_member": accessed_member,
+                                "accessed_members": {},
+                                "form": form.render()}
                 if "password" in request.POST and "password" in writable_fields:
                     password = request.params['password'] if 'password' in request.params else None
                     password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None

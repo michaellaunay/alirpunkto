@@ -1066,3 +1066,6 @@ msgstr ""
 
 msgid "check_new_email_subject"
 msgstr "Verification of your new email address"
+
+msgid "check_new_email_send_error"
+msgstr "The sending of the verification email for your new address has failed"
