@@ -620,7 +620,7 @@ def get_access_permissions(accessed: Member, accessor : Member) -> MemberPermiss
             else:
                 permissions = access['Owner'][accessed.member_state]
         # else if accessed is a Candidature and the accessor is a voter
-        case (False, Candidature, _) if accessed.voters and accessor.oid in accessed.voters:
+        case (False, Candidature, _) if getattr(accessed, "voters", None) and accessed.voters and accessor.oid in accessed.voters:
             permissions = access['voter'][accessed.member_state]
         case (False, Candidature, _):
             permissions = access[accessor.type.name.capitalize()][accessed.member_state]

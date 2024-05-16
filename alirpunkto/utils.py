@@ -842,25 +842,86 @@ def update_member_password(request, member_oid, new_password):
     ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
         if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
     )
-    conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
+    with get_ldap_connection() as conn:
+        # DN for the member
+        dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
+            if LDAP_OU else f"uid={member_oid},{LDAP_BASE_DN}"
+        )
 
-    # DN for the member
-    dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
-        if LDAP_OU else f"uid={member_oid},{LDAP_BASE_DN}"
+        # Update the member's password
+        try:
+            success = conn.modify(dn, {'userPassword': [(MODIFY_REPLACE, [new_password])]})
+        except Exception as e:
+            log.error(f"Error while updating password for user {member_oid} in LDAP: {e}")
+            success = False
+
+        if success:
+            return {'status': 'success', 'message': _('password_update_successful')}
+        else:
+            log.error(f"Error while updating password for user {member_oid} in LDAP : {conn.result}")
+            return {'status': 'error', 'message': _('password_update_failed')}
+
+def update_ldap_member(
+    request:Request,
+    member:Member,
+    fields_to_update:List[str]=['email', 'data.fullsurname', 'data.description', 'data.type', 'data.fullname', 'data.nationality', 'data.birthdate', 'data.lang1', 'data.lang2', 'data.lang3']
+    ):
+    """
+    Update a member in the LDAP directory.
+
+    Args:
+        request (pyramid.request.Request): the request.
+        member (Member): the member to update.
+
+    Returns:
+        dict: a dictionary containing the result of the update.
+    """
+
+    # Connect to the LDAP server
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
     )
+    with get_ldap_connection() as conn:
 
-    # Update the member's password
-    try:
-        success = conn.modify(dn, {'userPassword': [(MODIFY_REPLACE, [new_password])]})
-    except Exception as e:
-        log.error(f"Error while updating password for user {member_oid} in LDAP: {e}")
-        success = False
+        # DN for the member
+        dn = (f"uid={member.oid},{LDAP_OU},{LDAP_BASE_DN}"
+            if LDAP_OU else f"uid={member.oid},{LDAP_BASE_DN}"
+        )
 
-    if success:
-        return {'status': 'success', 'message': _('password_update_successful')}
-    else:
-        log.error(f"Error while updating password for user {member_oid} in LDAP : {conn.result}")
-        return {'status': 'error', 'message': _('password_update_failed')}
+        # Attributes for the member
+        attributes = {}
+        if 'email' in fields_to_update:
+            attributes['mail'] = [(MODIFY_REPLACE,[member.email])]
+        if 'sn' in fields_to_update:
+            attributes['data.fullsurname'] = [(MODIFY_REPLACE,[member.data.fullsurname])]
+        if 'description' in fields_to_update:
+            attributes['data.description'] = [(MODIFY_REPLACE,[member.data.description])]
+        if 'employeeType' in fields_to_update:
+            attributes['data.type'] = [(MODIFY_REPLACE,[member.type.name])]
+        if 'gn' in fields_to_update:
+            attributes['data.fullname'] = [(MODIFY_REPLACE,[member.data.fullname])]
+        if 'nationality' in fields_to_update:
+            attributes['data.nationality'] = [(MODIFY_REPLACE,[member.data.nationality])]
+        if 'birthdate' in fields_to_update:
+            attributes['data.birthdate'] = [(MODIFY_REPLACE,[member.data.birthdate.strftime("%Y%m%d%H%M%SZ")])]
+        if 'preferredLanguage' in fields_to_update:
+            attributes['data.lang1'] = [(MODIFY_REPLACE,[member.data.lang1])]
+        if 'secondLanguage' in fields_to_update:
+            attributes['data.lang2'] = [(MODIFY_REPLACE,[member.data.lang2])]
+        if 'thirdLanguage' in fields_to_update:
+            attributes['data.lang3'] = [(MODIFY_REPLACE,[member.data.lang3])]
+        try:
+            success = conn.modify(dn, attributes)
+        except Exception as e:
+            log.error(f"Error while updating user {member.oid} in LDAP: {e}")
+            success = False
+        
+        if success:
+            return {'status': 'success', 'message': _('member_update_successful')}
+        else:
+            log.error(f"Error while updating user {member.oid} in LDAP : {conn.result}")
+            return {'status': 'error', 'message': _('member_update_failed')}
 
 def is_admin(username:str, password:str)-> bool:
     """
@@ -1198,7 +1259,6 @@ def send_check_new_email(
     ).abspath()
 
     email = member.email # The email to send to.
-    challenge = member.challenge # The math challenge for email validation.
     localizer = get_localizer(request)
     subject = localizer.translate(_('email_validation_subject'))
     seed = member.email_send_status_history[-1].seed

@@ -9,6 +9,7 @@ from alirpunkto.utils import (
     is_valid_email,
     update_member_password,
     update_member_from_ldap,
+    update_ldap_member,
     send_member_state_change_email,
     send_check_new_email,
     get_members,
@@ -66,6 +67,7 @@ def modify_member(request):
     }
     """
     transaction = request.tm
+    message = None
     oid = (request.session.get(CANDIDATURE_OID, None)
         or request.session.get(MEMBER_OID, None))
     if not oid:
@@ -83,11 +85,11 @@ def modify_member(request):
             "accessed_members": members,
         }
     accessor_member = member
-
     if "submit" in request.POST or 'modify' in request.POST:
         if "submit" in request.POST:
             accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)
             if accessed_member_oid and accessed_member_oid in members:
+                update_member_from_ldap(accessed_member_oid, request)
                 accessed_member = Members.get_instance()[accessed_member_oid]
                 if not accessed_member:
                     return {
@@ -115,7 +117,17 @@ def modify_member(request):
                 "accessed_members": members,
                 "message": _('unknown_accessed_member'),
             }
-        accessed_member = Members.get_instance()[accessed_member_oid]
+        accessed_member = update_member_from_ldap(accessed_member_oid, request)
+        if not accessed_member:
+            return {
+                "form": None,
+                "member": member,
+                "accessed_member": None,
+                "accessed_members": members,
+                "message": _('unknown_accessed_member'),
+                "error": sending_success
+            }
+
         permissions = get_access_permissions(accessed_member, accessor_member)
         if not permissions or permissions == Permissions.NONE:
             log.warning(
@@ -169,17 +181,34 @@ def modify_member(request):
         # check if the member data field is writable before assignement
         writable_fields = [
             permission.name
-                for permission in fields(permissions.data)
-                if (getattr(permissions.data, permission.name)
-                    & (Permissions.WRITE|Permissions.ACCESS))
+            for permission in fields(permissions.data)
+            if (
+                    getattr(permissions.data, permission.name)
+                    & (Permissions.WRITE | Permissions.ACCESS)
+                ) == (Permissions.WRITE | Permissions.ACCESS)
         ]
+        writable_fields.extend([
+            permission.name
+            for permission in fields(permissions)
+            if (
+                    permission.name != 'data'
+                    and (getattr(permissions, permission.name)
+                    & (Permissions.WRITE | Permissions.ACCESS))
+                ) == (Permissions.WRITE | Permissions.ACCESS)
+        ])
         err = None
         for field in writable_fields:
-            if field in request.POST and request.POST[field] and request.POST[field] != getattr(accessed_member.data, field):
+            if (
+                field in request.POST 
+                and request.POST[field]
+                and (
+                    request.POST[field] != getattr(accessed_member.data, field, NotImplemented)
+                    or request.POST[field] != getattr(accessed_member, field, NotImplemented)
+                )):
                 if accessed_member_oid == member.oid and "email" in request.POST and "email" in writable_fields:
                     email = request.POST['email']
                     if email != accessed_member.email:
-                        err = is_valid_email(email)
+                        err = is_valid_email(email, request)
                         if err:
                             request.session.flash(err, 'error')
                             return {"error":err,
@@ -189,14 +218,15 @@ def modify_member(request):
                                 "form": form.render()}
                         accessed_member.new_email = email
                         transaction.commit()
-                        result = send_check_new_email(request, accessed_member)
-                        if not result:
+                        sending_success = send_check_new_email(request, accessed_member, email)
+                        if not sending_success:
                             return {"message":_('check_new_email_send_error'),
                                 "member": member,
                                 "accessed_member": accessed_member,
                                 "accessed_members": {},
                                 "form": form.render()}
-                if "password" in request.POST and "password" in writable_fields:
+                        message = _('check_new_email_send')
+                elif "password" in request.POST and "password" in writable_fields:
                     password = request.params['password'] if 'password' in request.params else None
                     password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None
                     if password != password_confirm:
@@ -216,10 +246,14 @@ def modify_member(request):
                     err = is_valid_password(password)
                 else:
                     #@TODO cast the value to the right type
-                    try:
-                        setattr(accessed_member.data, field, request.POST[field])
-                    except Exception as e:
-                        log.error(f"Error while setting {field} to {request.POST[field]} : {e}")
+                    if field in fields(accessed_member.data):
+                        if getattr(accessed_member.data, field) != request.POST[field]:
+                            setattr(accessed_member.data, field, request.POST[field])
+                    elif field in fields(accessed_member):
+                        if getattr(accessed_member, field) != request.POST[field]:
+                            setattr(accessed_member, field, request.POST[field])
+                    else:
+                        log.error(f"Unknown field {field} to {request.POST[field]}")
                         error = _('error_while_setting_field', mapping={'field': field})
                         request.session.flash(_('error_while_setting_field'), error)
                         return {"error":_('password_required'),
@@ -228,42 +262,31 @@ def modify_member(request):
                             "accessed_member": accessed_member.oid,
                             "form": form.render(),
                             "error": error}
-        # @TODO write in ldap
+        # write modifications in ldap
+        fields_to_update = []
+        sending_success = None
+        for field in writable_fields:
+            if field in request.POST and request.POST[field] and request.POST[field] != getattr(accessed_member.data, field):
+                if field == "email" and accessed_member_oid == member.oid:
+                    continue # The email is updated by the check_new_email view
+                fields_to_update.append(field)
+        if fields_to_update:
+            sending_success = update_ldap_member(accessed_member, request, fields_to_update=fields_to_update)
+        if not sending_success and fields_to_update:
+            return {"error":_('error_while_updating_member'),
+                "member": member,
+                "accessed_members": members,
+                "accessed_member": accessed_member.oid,
+                "form": form.render()}
         accessed_member.member_state = MemberStates.DATA_MODIFIED
         transaction.commit()
         #@TODO send a modification confirmation email
-        # 15) AlirPunkto updates the member in the ldap
-        raise NotImplementedError
-        result = update_member_password(request, member.oid, password)
-        if result['status'] == "success":
-            # 16) AlirPunkto updates the events of the member
-            # 17) AlirPunkto displays the modify_member.pt zpt to confirm the password change
-            # 18) AlirPunkto sends an email to the user to notify him of the password change
-            member.member_state = MemberStates.DATA_MODIFIED
-            transaction.commit()
-            result = send_member_state_change_email(
-                request,
-                member,
-                "modify_member",
-            )
-            transaction.commit()
-            log.debug(f"Fields changed for {member.oid} to {password}")
-            log.info(f"Fields changed for {member.oid}")
-            if 'sucess' in result and result['sucess']:
-                return {"message":_('fields_changed'),
-                    "member": member, "accessed_member": accessed_member,
-                    "accessed_members": {}, "form": None}
-            else:
-                log.error(
-                    f"Error while reset password {member.oid} : {result['error']}"
-                )
-                return {"error":_('forget_confirmation_email_send_error'),
-                    "member": {}, "accessed_members": {}, "form": None}
-        else:
-            log.error(
-                f"Error while modify {accessed_member.oid} by {member.oid} : {result['message']}"
-            )
-            return {"error":_('15dd'),
-                "member": member, "accessed_members": {}, "form": None}
+        return {"member": member,
+            "form": None,
+            "accessed_member":accessed_member,
+            "accessed_members": [],
+            "message": message if message else _('member_data_updated')
+        }
+        
     else :
         return {"member": member, "form": None, "accessed_member":None,"accessed_members": members}
