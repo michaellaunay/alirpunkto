@@ -737,92 +737,100 @@ def register_user_to_ldap(request, candidature, password):
         f"LDAP Connection{LDAP_LOGIN=},{LDAP_OU=},{LDAP_BASE_DN=},"
         f"{LDAP_PASSWORD=},{LDAP_SERVER=}"
     )
-    conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
+    with Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) as conn:
 
-    # DN for the new entry
-    dn = (f"uid={candidature.oid},{LDAP_OU},{LDAP_BASE_DN}"
-        if LDAP_OU else f"uid={candidature.oid},{LDAP_BASE_DN}"
-    )
-    # Attributes for the new user
-    attributes = {
-        # Adjust this based on your LDAP schema
-        'objectClass': ['top', 'inetOrgPerson', 'alirpunktoPerson'],
-        'uid': candidature.oid,
-        'mail': candidature.email,
-        'userPassword': password,
-        'sn': (
-            candidature.data.fullsurname
-                if candidature.type == MemberTypes.COOPERATOR
-                else pseudonym
-        ), # sn 434,is obligatory
-        'cn': pseudonym, # Use the pseudonym as commonName
-        'description': candidature.data.description,
-        'employeeNumber': candidature.oid, # Use the oid as employeeNumber
-        'employeeType': candidature.type.name, # Use the type as employeeType,
-         # Use the fullsurname as sn
-        "isActive": "True",
-        "preferredLanguage" : candidature.data.lang1,
-        "secondLanguage" : candidature.data.lang2,
-        "thirdLanguage" : candidature.data.lang3
-    }
-    # Determine the groups the user belongs to and add them to uniqueMemberOf
-    groups=[]
-    match candidature.type:
-        case MemberTypes.COOPERATOR:
-            # Add full name to inetOrgPerson attribute
-            attributes['gn'] = candidature.data.fullname
-            #@TODO check country code is less of 3 chars
-            attributes["nationality"] = candidature.data.nationality
-            attributes["birthdate"] = candidature.data.birthdate.strftime("%Y%m%d%H%M%SZ")
-            attributes["beha"]
-            attributes["numberSharesOwned"] = candidature.data.number_shares_owned,
-            attributes["dateEndValidityYearlyContribution"] = candidature.data.date_end_validity_yearly_contribution.strftime("%Y%m%d%H%M%SZ")
-            #@TODO check language code
-            groups.append(
-                f"cn=cooperatorsGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
-        case MemberTypes.ORDINARY:
-            groups.append(
-                f"cn=ordinaryMembersGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
-        case _:
-            log.error(f"Unsupported member type {candidature.type}")
-    # If there are groups the user belongs to, add them to the uniqueMemberOf attribute
-    if groups:
-        attributes['uniqueMemberOf'] = groups
-    
-    log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
-    # Add the new user to LDAP
-    try:
-        success = conn.add(dn, attributes=attributes)
+        # DN for the new entry
+        dn = (f"uid={candidature.oid},{LDAP_OU},{LDAP_BASE_DN}"
+            if LDAP_OU else f"uid={candidature.oid},{LDAP_BASE_DN}"
+        )
+        # Attributes for the new user
+        try:
+            attributes = {
+                # Adjust this based on your LDAP schema
+                'objectClass': ['top', 'inetOrgPerson', 'alirpunktoPerson'],
+                'uid': candidature.oid,
+                'mail': candidature.email,
+                'userPassword': password,
+                'sn': (
+                    candidature.data.fullsurname
+                        if candidature.type == MemberTypes.COOPERATOR
+                        else pseudonym
+                ), # sn 434,is obligatory
+                'cn': pseudonym, # Use the pseudonym as commonName
+                'description': candidature.data.description,
+                'employeeNumber': candidature.oid, # Use the oid as employeeNumber
+                'employeeType': candidature.type.name, # Use the type as employeeType,
+                # Use the fullsurname as sn
+                "isActive": "True",
+                "preferredLanguage" : candidature.data.lang1,
+                "secondLanguage" : candidature.data.lang2,
+                "thirdLanguage" : candidature.data.lang3
+            }
+        except Exception as e:
+            log.error(f"Error while preparing attributes for user {pseudonym}: {e}")
+            return {'status': 'error', 'message': _('registration_failed')}
+        # Determine the groups the user belongs to and add them to uniqueMemberOf
+        groups=[]
+        match candidature.type:
+            case MemberTypes.COOPERATOR:
+                try:
+                    # Add full name to inetOrgPerson attribute
+                    attributes['gn'] = candidature.data.fullname
+                    #@TODO check country code is less of 3 chars
+                    attributes["nationality"] = candidature.data.nationality
+                    attributes["birthdate"] = candidature.data.birthdate.strftime("%Y%m%d%H%M%SZ")
+                    attributes["beha"]
+                    attributes["numberSharesOwned"] = candidature.data.number_shares_owned,
+                    attributes["dateEndValidityYearlyContribution"] = candidature.data.date_end_validity_yearly_contribution.strftime("%Y%m%d%H%M%SZ")
+                    #@TODO check language code
+                    groups.append(
+                        f"cn=cooperatorsGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
+                except Exception as e:
+                    log.error(f"Error while preparing attributes for user {pseudonym}: {e}")
+                    return {'status': 'error', 'message': _('registration_failed')}
+            case MemberTypes.ORDINARY:
+                groups.append(
+                    f"cn=ordinaryMembersGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
+            case _:
+                log.error(f"Unsupported member type {candidature.type}")
+        # If there are groups the user belongs to, add them to the uniqueMemberOf attribute
+        if groups:
+            attributes['uniqueMemberOf'] = groups
+        
+        log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
+        # Add the new user to LDAP
+        try:
+            success = conn.add(dn, attributes=attributes)
+            if success:
+                match candidature.type:
+                    case MemberTypes.COOPERATOR:
+                        group_dn = ("cn=cooperatorsGroup,"
+                                    f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
+                                    f"{LDAP_BASE_DN}"
+                        )
+                        conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
+                    case MemberTypes.ORDINARY:
+                        group_dn = ("cn=ordinaryMembersGroup,"
+                                    f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
+                                    f"{LDAP_BASE_DN}"
+                        )
+                        conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
+                    case _:
+                        log.error(f"Error while adding user {pseudonym} "
+                                f"to a LDAP group : group for {candidature.type} is not coded")
+
+                # Check if group addition was successful
+                if not conn.result['description'] == 'success':
+                    log.error(f"Error while adding user {pseudonym} to group {group_dn}: {conn.result}")
+            
+        except Exception as e:
+            log.error(f"Error while adding user {pseudonym} to LDAP: {e}")
+            success = False
         if success:
-            match candidature.type:
-                case MemberTypes.COOPERATOR:
-                    group_dn = ("cn=cooperatorsGroup,"
-                                f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
-                                f"{LDAP_BASE_DN}"
-                    )
-                    conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
-                case MemberTypes.ORDINARY:
-                    group_dn = ("cn=ordinaryMembersGroup,"
-                                f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
-                                f"{LDAP_BASE_DN}"
-                    )
-                    conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
-                case _:
-                     log.error(f"Error while adding user {pseudonym} "
-                               f"to a LDAP group : group for {candidature.type} is not coded")
-
-            # Check if group addition was successful
-            if not conn.result['description'] == 'success':
-                log.error(f"Error while adding user {pseudonym} to group {group_dn}: {conn.result}")
-           
-    except Exception as e:
-        log.error(f"Error while adding user {pseudonym} to LDAP: {e}")
-        success = False
-    if success:
-        return {'status': 'success', 'message': _('registration_successful')}
-    else:
-        log.error(f"Error while adding user {pseudonym} to LDAP : {conn.result}")
-        return {'status': 'error', 'message': _('registration_failed')}
+            return {'status': 'success', 'message': _('registration_successful')}
+        else:
+            log.error(f"Error while adding user {pseudonym} to LDAP : {conn.result}")
+            return {'status': 'error', 'message': _('registration_failed')}
 
 def update_member_password(request, member_oid, new_password):
     """

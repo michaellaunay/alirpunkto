@@ -15,6 +15,7 @@ from ZODB.Connection import Connection
 import transaction
 import random
 import string
+from datetime import date
 
 # Constants
 from alirpunkto.constants_and_globals import (
@@ -308,7 +309,7 @@ class MemberDatas:
     fullsurname: str = None
     description: str = None
     nationality: str = None
-    birthdate: str = None
+    birthdate: date = None
     password: str = None
     password_confirm: str = None
     lang1: str = None

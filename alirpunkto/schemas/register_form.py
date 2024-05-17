@@ -23,6 +23,10 @@ from dataclasses import fields
 
 locales_as_choices = [(key, value) for key, value in EUROPEAN_LOCALES.items()]
 
+def get_majority_date():
+    """Return the date of majority."""
+    return datetime.date.today() - datetime.timedelta(days=365*18)
+
 class RegisterForm(schema.CSRFSchema):
     """Register form schema."""
     fullname = colander.SchemaNode(
@@ -73,7 +77,7 @@ class RegisterForm(schema.CSRFSchema):
         widget = DateInputWidget(),
         validator = colander.Range(
             min = datetime.date(1900, 1, 1),
-            max = datetime.date(2020, 12, 31)
+            max = get_majority_date()
         ),
         missing = ""
     )

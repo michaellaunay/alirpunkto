@@ -500,7 +500,6 @@ def handle_confirmed_human_state(request, candidature):
                 }
             )
             return is_valid_pseudo_result
-        
         candidature.pseudonym = pseudonym
         if 'fullname' in request.params:
             appstruct['fullname'] = request.params['fullname']
@@ -521,10 +520,22 @@ def handle_confirmed_human_state(request, candidature):
             for k in MemberDatas.__dataclass_fields__.keys()
             if k in request.params
         }
-        if 'birthdate' in request.params:
+        # Extract birthdate from request
+        # This is a bit convoluted because of the way deform handles nested forms
+        start_birthdate = False
+        birthdate = None
+        for k,v in request.params.items():
+            if k == '__start__' and v == 'birthdate:mapping':
+                start_birthdate = True
+            elif start_birthdate and k == 'date':
+                birthdate = v
+                break
+            elif start_birthdate and k == '__end__' and v == 'birthdate:mapping':
+                break
+        if birthdate:
             try:
                 parameters['birthdate'] = datetime.datetime.strptime(
-                    request.params['date'], '%Y-%m-%d'
+                   birthdate, '%Y-%m-%d'
                 ).date()
             except ValueError:
                 return {
@@ -533,6 +544,14 @@ def handle_confirmed_human_state(request, candidature):
                     'candidature': candidature,
                     'MemberTypes': MemberTypes
                 }
+        else:
+            log.error("Birthdate not found in request")
+            return {
+                'form': form.render(appstruct=appstruct),
+                'error': _('missing_data'),
+                'candidature': candidature,
+                'MemberTypes': MemberTypes
+            }
         data = MemberDatas(**parameters)
         candidature.data = data
 
