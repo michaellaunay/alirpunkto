@@ -779,8 +779,8 @@ def register_user_to_ldap(request, candidature, password):
                     #@TODO check country code is less of 3 chars
                     attributes["nationality"] = candidature.data.nationality
                     attributes["birthdate"] = candidature.data.birthdate.strftime("%Y%m%d%H%M%SZ")
-                    attributes["beha"]
-                    attributes["numberSharesOwned"] = candidature.data.number_shares_owned,
+                    attributes["cooperativeBehaviourMark"] = candidature.data.behaviour_mark
+                    attributes["numberSharesOwned"] = candidature.data.number_shares_owned
                     attributes["dateEndValidityYearlyContribution"] = candidature.data.date_end_validity_yearly_contribution.strftime("%Y%m%d%H%M%SZ")
                     #@TODO check language code
                     groups.append(
