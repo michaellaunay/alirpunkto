@@ -781,7 +781,7 @@ def register_user_to_ldap(request, candidature, password):
                     attributes["birthdate"] = candidature.data.birthdate.strftime("%Y%m%d%H%M%SZ")
                     attributes["cooperativeBehaviourMark"] = candidature.data.cooperative_behaviour_mark
                     attributes["numberSharesOwned"] = candidature.data.number_shares_owned
-                    attributes["dateEndValidityYearlyContribution"] = candidature.data.date_end_validity_yearly_contribution.strftime("%Y%m%d%H%M%SZ")
+                    attributes["dateEndValidityYearlyContribution"] = candidature.data.date_end_validity_yearly_contribution.strftime("%Y%m%d%H%M%SZ") if candidature.data.date_end_validity_yearly_contribution else "20230425000020Z"
                     #@TODO check language code
                     groups.append(
                         f"cn=cooperatorsGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
