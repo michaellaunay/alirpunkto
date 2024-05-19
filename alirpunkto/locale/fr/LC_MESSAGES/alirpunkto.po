@@ -1359,3 +1359,96 @@ msgstr "Vérfification de votre nouvelle adresse de courriel"
 
 msgid "check_new_email_send_error"
 msgstr "L'envoi du courriel de vérification de votre nouvelle adresse a échoué"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Nouvel email envoyé"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Erreur de connexion"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "L'email existe déjà"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Email mis à jour"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Erreur lors de la mise à jour de l'email"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Erreur lors de la définition du champ"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Erreur lors de la mise à jour du membre"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "OID invalide"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Requête invalide"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "Erreur LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Données du membre mises à jour"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Échec de la mise à jour du membre"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Mise à jour du membre réussie"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Données manquantes"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Pas de nouvel email"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Pas de permission"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Non votant"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Échec de la mise à jour du mot de passe"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Mise à jour du mot de passe réussie"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Échec de l'inscription"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Inscription réussie"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Membre accédé inconnu"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Membre inconnu"
