@@ -86,40 +86,46 @@ def _retrieve_candidature(
     """
     session_oid = None
     decrypted_oid = None
-    decrypted_candidature = None
     user_oid = None
+    candidature = None
 
+    # Check if the candidature OID is in the session
     if CANDIDATURE_OID in request.session:
         session_oid = request.session[CANDIDATURE_OID]
+        candidature = get_candidature_by_oid(session_oid, request)
 
+    # Check if the candidature OID is in the URL
     if "oid" in request.params:
         encrypted_oid = request.params.get("oid", None)
         decrypted_oid, seed = decrypt_oid(
             encrypted_oid,
             SEED_LENGTH,
             request.registry.settings['session.secret'])
-        decrypted_candidature = get_candidature_by_oid(decrypted_oid, request)
-        if decrypted_candidature is None:
+        candidature = get_candidature_by_oid(decrypted_oid, request)
+        if candidature is None:
             error = _('candidature_not_found')
             return None, {'candidature': None,
                 'MemberTypes': MemberTypes,
                 'error': error}
-        if seed != decrypted_candidature.email_send_status_history[-1].seed:
+        if seed != candidature.email_send_status_history[-1].seed:
             error = _('url_is_obsolete')
-            return None, {'candidature': decrypted_candidature,
+            return None, {'candidature': candidature,
                 'MemberTypes': MemberTypes,
                 'error': error,
                 'url_obsolete': True}
 
+    # Check if the user is in the session
     if "user" in request.session:
         json_user = request.session["user"]
         user = json.loads(json_user)
         if "oid" in user:
             user_oid = user["oid"]
+            candidature = get_candidature_by_oid(user_oid, request)
         else:
             log.error(f"User oid not in user json session parameter: {user_oid}")
             raise ValueError("User oid not in user json session parameter")
 
+    # Check if the candidature OID in the session and user and URL match
     if ((session_oid and decrypted_oid
         and session_oid != decrypted_oid)
         or (session_oid and user_oid
@@ -137,17 +143,21 @@ def _retrieve_candidature(
                 mapping={"site_name":SITE_NAME, "domain_name":DOMAIN_NAME}),
         }
 
-    decrypted_oid = session_oid or (decrypted_candidature and decrypted_candidature.oid) or None
-    if decrypted_candidature:
-        candidature = get_candidature_by_oid(decrypted_candidature, request)
-    elif session_oid:
-        candidature = get_candidature_by_oid(session_oid, request)
-    elif user_oid:
-        candidature = get_candidature_by_oid(user_oid, request)
-    else:
+    if not (decrypted_oid or session_oid or user_oid):
+        # New candidature
         candidature = Candidature()
+        # Add the candidature to the candidature list
         get_candidatures(request)[candidature.oid] = candidature
-    request.session[CANDIDATURE_OID] = candidature.oid
+   
+    if candidature:
+        request.session[CANDIDATURE_OID] = candidature.oid
+    else:
+        log.error(f"No candidature found for oid {decrypted_oid | session_oid | user_oid}")
+        return None, {
+            'candidature': None,
+            'MemberTypes': None,
+            'error': _('candidature_not_found'),
+        }
     return candidature, None
 
 def _handle_candidature_state(
