@@ -1382,3 +1382,6 @@ matrix[MemberStates.DRAFT][MemberRoles.NONE] = [DataMemberAccessPermissions.READ
 permissions = matrix[MemberStates.CREATED][MemberRoles.NONE]
 print(permissions)  # Output: [DataMemberAccessPermissions.READ, DataMemberAccessPermissions.WRITE, DataMemberAccessPermissions.EXECUTE]
 ```
+
+# 2024-05-14
+Refactoration des Users pour en faire une dataclass et pouvoir l'utiliser pour avoir la liste des membres dans le LDAP.
