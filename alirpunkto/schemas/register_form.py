@@ -143,7 +143,6 @@ class RegisterForm(schema.CSRFSchema):
         widget = TextInputWidget(),
         #validator = colander.Function(is_valid_unique_pseudonym),
         messages = {'required': _('pseudonym_required')},
-        missing = ""
     )
     password = colander.SchemaNode(
         colander.String(),
