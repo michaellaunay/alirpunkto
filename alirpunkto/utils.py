@@ -757,7 +757,6 @@ def register_user_to_ldap(request, candidature, password):
                         else pseudonym
                 ), # sn 434,is obligatory
                 'cn': pseudonym, # Use the pseudonym as commonName
-                'description': candidature.data.description,
                 'employeeNumber': candidature.oid, # Use the oid as employeeNumber
                 'employeeType': candidature.type.name, # Use the type as employeeType,
                 # Use the fullsurname as sn
@@ -766,6 +765,8 @@ def register_user_to_ldap(request, candidature, password):
                 "secondLanguage" : candidature.data.lang2,
                 "thirdLanguage" : candidature.data.lang3
             }
+            if candidature.data.description:
+                attributes['description'] = candidature.data.description,
         except Exception as e:
             log.error(f"Error while preparing attributes for user {pseudonym}: {e}")
             return {'status': 'error', 'message': _('registration_failed')}
