@@ -1385,3 +1385,8 @@ print(permissions)  # Output: [DataMemberAccessPermissions.READ, DataMemberAcces
 
 # 2024-05-14
 Refactoration des Users pour en faire une dataclass et pouvoir l'utiliser pour avoir la liste des membres dans le LDAP.
+
+# 2024-05-20
+Dans Colander, l'attribut `missing` dans `colander.SchemaNode` définit le comportement à adopter lorsque aucune valeur n'est fournie pour un champ lors de la désérialisation. Si `missing` est défini comme une chaîne vide (`""`), cela signifie que le champ est facultatif et qu'une valeur vide sera utilisée si aucune valeur n'est fournie.
+
+Cependant, pour le champ "Pseudonyme", nous voulons qu'il soit obligatoire. Par conséquent, nous devons supprimer ou modifier l'attribut `missing` pour ce champ. Si nous le supprimons, Colander considérera par défaut que le champ est requis et générera une erreur si aucune valeur n'est fournie. Si nous voulons un comportement différent lorsque le champ est manquant, nous pouvons définir `missing` sur une autre valeur ou fonction.
