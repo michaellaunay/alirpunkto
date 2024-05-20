@@ -140,8 +140,9 @@ class VotingChoice(Enum) :
 class Voter:
     """A voter.
     """
+    oid:str
     email:str
-    fullsurname:str
+    pseudonym:str
     vote:VotingChoice = None
 
 class Candidature(Member):

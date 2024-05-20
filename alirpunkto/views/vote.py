@@ -56,7 +56,7 @@ def login_view(request):
 
     voter = None
     for v in candidature.voters:
-        if v.email == user.email:
+        if v.oid == user.oid:
             voter = v
             break
     if not voter:

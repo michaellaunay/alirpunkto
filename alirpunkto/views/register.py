@@ -642,7 +642,7 @@ def prepare_for_cooperator(
         try:
             voters = random_voters(request)
             candidature.voters = [
-                Voter(voter["mail"], voter["sn"])
+                Voter(voter["uid"], voter["mail"], voter["cn"])
                 for voter in voters
             ]
             transaction.commit()
