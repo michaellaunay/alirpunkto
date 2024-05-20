@@ -266,7 +266,9 @@ def modify_member(request):
         fields_to_update = []
         sending_success = None
         for field in writable_fields:
-            if field in request.POST and request.POST[field] and request.POST[field] != getattr(accessed_member.data, field):
+            if (field in request.POST and request.POST[field] 
+                and getattr(accessed_member.data, field, getattr(accessed_member, field,None))
+            ):
                 if field == "email" and accessed_member_oid == member.oid:
                     continue # The email is updated by the check_new_email view
                 fields_to_update.append(field)

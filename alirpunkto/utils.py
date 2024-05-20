@@ -136,7 +136,7 @@ def get_member_by_email(email: str) -> Union[Dict[str, str], None]:
             attributes=['cn', 'uid', 'isActive', 'employeeType']
         )
         if conn.entries:
-            return conn.entries[0]
+            return conn.entries
         else:
             return []
 
