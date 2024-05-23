@@ -1452,3 +1452,18 @@ msgstr "Membre accédé inconnu"
 #: alirpunkto/views/modify_member.py:82
 msgid "unknown_member"
 msgstr "Membre inconnu"
+
+msgid "modify_member_title"
+msgstr "Modification du profil d'un membre."
+
+msgid "select_member_oid_label"
+msgstr "Veuillez sélectionner un membre pour modifier son profil :"
+
+msgid "select_member_placeholder"
+msgstr "Pseudonyme du membre"
+
+msgid "modify_profile"
+msgstr "Vous pouvez changer vos données personnelles en cliquant"
+
+msgid "profile"
+msgstr "profil"

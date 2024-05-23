@@ -76,6 +76,16 @@ def modify_member(request):
             oid = json.loads(user).get("oid", None)
     if oid:
         member = get_member_by_oid(oid, request)
+        if not member:
+            member = update_member_from_ldap(oid, request)
+            if not member:
+                return {
+                    "form": None,
+                    "message": _('unknown_member'),
+                    "member": None,
+                    "accessed_member": None,
+                    "accessed_members": members,
+                }
     else:
         return {
             "form": None,

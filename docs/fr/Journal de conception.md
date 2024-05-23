@@ -1390,3 +1390,10 @@ Refactoration des Users pour en faire une dataclass et pouvoir l'utiliser pour a
 Dans Colander, l'attribut `missing` dans `colander.SchemaNode` définit le comportement à adopter lorsque aucune valeur n'est fournie pour un champ lors de la désérialisation. Si `missing` est défini comme une chaîne vide (`""`), cela signifie que le champ est facultatif et qu'une valeur vide sera utilisée si aucune valeur n'est fournie.
 
 Cependant, pour le champ "Pseudonyme", nous voulons qu'il soit obligatoire. Par conséquent, nous devons supprimer ou modifier l'attribut `missing` pour ce champ. Si nous le supprimons, Colander considérera par défaut que le champ est requis et générera une erreur si aucune valeur n'est fournie. Si nous voulons un comportement différent lorsque le champ est manquant, nous pouvons définir `missing` sur une autre valeur ou fonction.
+
+# 2024-05-22
+
+## Explication du mécanisme de récupération de l'utilisateur
+
+Un candidat en cours de création ne peut pas être logué puisqu'il n'existe pas encore dans LDAP, pour compenser on stocke l'OID (object identifier) dans la session en attendant d'avoir l'email et le pseudonyme du candidat. Une fois le challenge réalisé et l'identité remplie, on crée un User que l'on stocke en session en plus de l'OID. De même, lorsqu'un lien contenant un OID chiffré est accédé, l'OID déchiffré est alors utilisé pour récupérer la candidature. Chaque fois qu'un accès est fait, les OID sont comparés entre eux, celui de la session avec celui de l'utilisateur et celui de l'URL s'il y en a un. Si les OID ne sont pas cohérents entre eux, alors la session est fermée et un message d'erreur est affiché.
+

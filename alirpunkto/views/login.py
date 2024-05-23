@@ -17,7 +17,12 @@ from alirpunkto.constants_and_globals import (
     log
 )
 from ..models.users import User
-from ..utils import is_admin, get_admin_user, get_oid_from_pseudonym
+from ..utils import (
+    is_admin,
+    get_admin_user,
+    get_oid_from_pseudonym,
+    update_member_from_ldap,
+)
 
 @view_config(route_name='login', renderer='alirpunkto:templates/login.pt')
 def login_view(request):
@@ -49,6 +54,8 @@ def login_view(request):
                 }
             user = check_password(username, oid, password)
         if user is not None:
+            # The user is in the ldap directory
+            update_member_from_ldap(oid, request) # force update of the user
             headers = remember(request, username)
             request.session['logged_in'] = True
             request.session['user'] = user.to_json()

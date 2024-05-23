@@ -1163,3 +1163,18 @@ msgstr "Unknown accessed member"
 msgid "unknown_member"
 msgstr "Unknown member"
 
+msgid "modify_member_title"
+msgstr "Edit Member Profile"
+
+msgid "select_member_oid_label"
+msgstr "Please select a member to edit their profile:"
+
+msgid "select_member_placeholder"
+msgstr "Member's pseudonym"
+
+
+msgid "modify_profile"
+msgstr "You can change your profile by clicking"
+
+msgid "profile"
+msgstr "profile"

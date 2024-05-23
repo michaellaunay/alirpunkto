@@ -15,7 +15,12 @@
                 <h1 i18n:translate="logged_in_msg_title">${site_name}, the centralized service for applications of <tal:var i18n:name="site_name">${site_name}</tal:var><tal:var i18n:name="domain_name">${domain_name}</tal:var></h1>
                 <p i18n:translate="logged_in_msg">You are logged in as <tal:var i18n:name="user" tal:replace="user['name']">user</tal:var>.</p>
                 <p>
-                    <span i18n:translate="log_out_invitation_msg">You can log out by clicking</span> <a class="button" href="${request.route_url('logout')}" i18n:translate="logout_label">Log out</a>
+                    <span i18n:translate="log_out_invitation_msg">You can log out by clicking</span> <a class="button" href="${request.route_url('logout')}" i18n:translate="logout_label">Log out</a><br />
+                    <span i18n:translate="modify_profile">You can change your profile by clicking</span>
+                    <form method="POST" action="modify_member">
+                        <input type="hidden" id="accessed_member_oid" name="accessed_member_oid" tal:attributes="value user['oid']" value="None">
+                        <input class="button" type="submit" name="submit" value="modify_profile" i18n:attributes="value profile">
+                    </form>
                 </p>
                 <p i18n:translate="all_applications_msg">All the applications you need to participate in the activities of <tal:var i18n:name="site_name">${site_name}</tal:var> in one place.</p>
                 <p i18n:translate="choose_application_msg">Choose the application you want to join:</p>
