@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Aktualizacja adresu e-mail na <span tal:replace="domain_name">nazwie domeny</span></title>.
+     <title tal:omit-tag="textual">Potwierdź aktualizację swojego adresu e-mail na <span tal:replace="domain_name">nazwie domeny</span></title>.
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Dziękujemy za potwierdzenie aktualizacji adresu e-mail na platformie <span tal:replace="domain_name">domain_name</span></h1>.
-    <p tal:omit-tag="textual">Poprosiłeś nas o zmianę adresu e-mail, którego infrastruktura IT <span tal:replace="domain_name">nazwa domeny</span> będzie używać do interakcji z Tobą. Aby potwierdzić nowy adres e-mail, kliknij poniższy link potwierdzający.</p>
+    <h1 tal:omit-tag="textual">Prosimy o potwierdzenie aktualizacji adresu e-mail na platformie informatycznej <span tal:replace="domain_name">nazwa domeny</span></h1>
+    <p tal:omit-tag="textual">Ty lub osoba mająca dostęp do Twojego konta na platformie <span tal:replace="site_name">Nazwa witryny</span> <span tal:replace="domain_name">Nazwa domeny</span>, poprosiliście nas o zmianę adresu e-mail, który infrastruktura IT <span tal:replace="domain_name">Nazwa domeny</span> wykorzystuje do interakcji z Tobą. Nowy adres e-mail, który ma być używany w przyszłości, to: <span tal:replace="new_email_address">Nowy adres e-mail</span>.</p>
+<p tal:omit-tag="textual">Jeśli potwierdzisz, że <span tal:replace="new_email_address">nowy adres e-mail</span> powinien być adresem e-mail, którego <span tal:replace="domain_name">nazwa domeny</span> infrastruktura IT powinna w przyszłości używać do interakcji z Tobą, kliknij poniższy link potwierdzający.</p>
+
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
     </a>
 
+    <p tal:omit-tag="textual">Jeśli popełniłeś błąd lub nie złożyłeś tej prośby, po prostu zignoruj ten e-mail.</p>
+    
     <p tal:omit-tag="textual">Dziękujemy za zainteresowanie naszymi działaniami.</p>
     
     <footer tal:omit-tag="textual">
