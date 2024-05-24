@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Actualizarea adresei de e-mail pe <span tal:replace="domain_name">Numele domeniului</span></title>.
+    <title tal:omit-tag="textual">Vă rugăm să confirmați actualizarea adresei dvs. de e-mail pe <span tal:replace="domain_name">Nume domeniu</span></title>.
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Mulțumim pentru confirmarea actualizării adresei dumneavoastră de e-mail pe platforma <span tal:replace="domain_name">Nume domeniu</span></h1>.
-    <p tal:omit-tag="textual">Ne-ați solicitat să modificăm adresa de e-mail pe care infrastructura IT a platformei <span tal:replace="domain_name">denumire domeniu</span> o va utiliza pentru a interacționa cu dumneavoastră. Pentru a confirma noua dvs. adresă de e-mail, vă rugăm să faceți clic pe linkul de confirmare de mai jos.</p>
+    <h1 tal:omit-tag="textual">Vă rugăm să confirmați actualizarea adresei dumneavoastră de e-mail pe platforma IT <span tal:replace="domain_name">Nume domeniu</span></h1>
+    <p tal:omit-tag="textual"> Dumneavoastră sau o persoană care are acces la contul dumneavoastră pe platforma <span tal:replace="site_name">Numele site-ului</span> a <span tal:replace="domain_name">Numele domeniului</span>, ne-ați solicitat să modificăm adresa de e-mail pe care infrastructura IT <span tal:replace="domain_name">Numele domeniului</span> o folosește pentru a interacționa cu dumneavoastră. Noua adresă de e-mail care a fost solicitată pentru a fi utilizată în viitor este: <span tal:replace="new_email_address">Noua adresă de e-mail</span>.</p>
+<p tal:omit-tag="textual">Dacă confirmați că <span tal:replace="new_email_address">Noua adresă de e-mail</span> ar trebui să fie adresa de e-mail pe care infrastructura IT <span tal:replace="domain_name">denumirea domeniului</span> ar trebui să o folosească în viitor pentru a interacționa cu dumneavoastră, vă rugăm să faceți clic pe link-ul de confirmare de mai jos.</p>
+
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
     </a>
-
+    
+    <p tal:omit-tag="textual">Dacă ați făcut o eroare, sau dacă nu ați făcut această cerere, ignorați pur și simplu acest e-mail.</p>
+    
     <p tal:omit-tag="textual">Vă mulțumim pentru interesul acordat activităților noastre.</p>
     
     <footer tal:omit-tag="textual">
