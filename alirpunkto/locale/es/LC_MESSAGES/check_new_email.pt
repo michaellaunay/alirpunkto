@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Actualización de la dirección de correo electrónico en <span tal:replace="domain_name">Nombre_dominio</span></title>
+    <title tal:omit-tag="textual">Por favor, confirma la actualización de tu dirección de correo electrónico en <span tal:replace="domain_name">Nombre dominio</span></title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Gracias por confirmar la actualización de tu dirección de correo electrónico en la plataforma <span tal:replace="domain_name">Nombre_dominio</span></h1>
-    <p tal:omit-tag="textual">Nos has pedido que cambiemos la dirección de correo electrónico que la infraestructura informática de <span tal:replace="domain_name">nombre_dominio</span> utilizará para interactuar contigo. Para confirmar tu nueva dirección de correo electrónico, haz clic en el siguiente enlace de confirmación.</p>
+    <h1 tal:omit-tag="textual">Por favor, confirma la actualización de tu dirección de correo electrónico en la plataforma informática <span tal:replace="domain_name">Nombre dominio</span></h1>
+    <p tal:omit-tag="textual">Tú, o una persona con acceso a tu cuenta en la plataforma <span tal:replace="site_name">Nombre sitio</span> de <span tal:replace="domain_name">Nombre dominio</span>, nos has solicitado que cambiemos la dirección de correo electrónico que la infraestructura informática de <span tal:replace="domain_name">nombre dominio</span> utiliza para interactuar contigo. La nueva dirección de correo electrónico que se ha solicitado utilizar en el futuro es: <span tal:replace="new_email_address">Nueva dirección de correo electrónico</span>.</p>
+<p tal:omit-tag="textual">Si confirmas que <span tal:replace="new_email_address">Nueva dirección de correo electrónico</span> debe ser la dirección de correo electrónico que la infraestructura informática de <span tal:replace="domain_name">nombre de dominio</span> debe utilizar en el futuro para interactuar contigo, haz clic en el enlace de confirmación que aparece a continuación.</p>
+
     <a tal:attributes="string href:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
     </a>
 
+    <p tal:omit-tag="textual">Si has cometido un error, o si no has realizado esta solicitud, simplemente ignora este correo electrónico.</p>
+    
     <p tal:omit-tag="textual">Gracias por tu interés en nuestras actividades.</p>
     
     <footer tal:omit-tag="textual">
