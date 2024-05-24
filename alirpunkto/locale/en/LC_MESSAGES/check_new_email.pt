@@ -5,9 +5,9 @@
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Please confirm the update of your email address on the platform <span tal:replace="domain_name">Domain name</span></h1>
+    <h1 tal:omit-tag="textual">Please confirm the update of your email address on the IT platform <span tal:replace="domain_name">Domain name</span></h1>
     <p tal:omit-tag="textual">You, or a person having access to your account on the <span tal:replace="site_name">Site name</span> platform of <span tal:replace="domain_name">Domain name</span>, have requested us to change the email address that the <span tal:replace="domain_name">domain name</span> IT infrastructure uses to interact with you. The new email address that was requested to be used in the future is: <span tal:replace="new_email_address">New email address</span>.</p>
-<p tal:omit-tag="textual">If you confirm that <span tal:replace="new_email_address">New email address</span> should be the address that the <span tal:replace="domain_name">domain name</span> IT infrastructure should in the future use to interact with you, please click on the confirmation link below.</p>
+<p tal:omit-tag="textual">If you confirm that <span tal:replace="new_email_address">New email address</span> should be the email address that the <span tal:replace="domain_name">domain name</span> IT infrastructure should in the future use to interact with you, please click on the confirmation link below.</p>
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
     </a>
