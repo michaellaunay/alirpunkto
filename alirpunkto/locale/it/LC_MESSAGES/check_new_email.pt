@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Aggiornamento dell'indirizzo e-mail su <span tal:replace="domain_name">domain_name</span></title>
+    <title tal:omit-tag="textual">Conferma l'aggiornamento del tuo indirizzo email su <span tal:replace="domain_name">nome dominio</span></title>
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Grazie per aver confermato l'aggiornamento del tuo indirizzo email sulla piattaforma <span tal:replace="domain_name">domain_name</span></h1>
-    <p tal:omit-tag="textual">Ci hai chiesto di modificare l'indirizzo e-mail che l'infrastruttura IT di <span tal:replace="domain_name">domain_name</span> utilizzerà per interagire con te. Per confermare il tuo nuovo indirizzo e-mail, clicca sul link di conferma qui sotto.</p>
+    <h1 tal:omit-tag="textual">Conferma l'aggiornamento del tuo indirizzo email sulla piattaforma informatica di <span tal:replace="domain_name">nome dominio</span></h1>
+    <p tal:omit-tag="textual">Tu, o una persona che ha accesso al tuo account sulla piattaforma <span tal:replace="site_name">nome_sito</span> di <span tal:replace="domain_name">nome dominio</span>, ci hai chiesto di modificare l'indirizzo e-mail che l'infrastruttura informatica di <span tal:replace="domain_name">nome dominio</span> utilizza per interagire con te. Il nuovo indirizzo e-mail che è stato richiesto di utilizzare in futuro è: <span tal:replace="new_email_address">Nuovo indirizzo e-mail</span>.</p>
+<p tal:omit-tag="textual">Se confermi che <span tal:replace="new_email_address">nuovo indirizzo email</span> deve essere l'indirizzo email che l'infrastruttura informatica di <span tal:replace="domain_name">nome dominio</span> dovrà utilizzare in futuro per interagire con te, clicca sul link di conferma sottostante.</p>
+
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
     </a>
 
+    <p tal:omit-tag="textual">Se hai commesso un errore o se non hai fatto questa richiesta, ignora questa e-mail.</p>
+    
     <p tal:omit-tag="textual">Grazie per il tuo interesse nelle nostre attività.</p>
     
     <footer tal:omit-tag="textual">
