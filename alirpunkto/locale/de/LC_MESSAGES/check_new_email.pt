@@ -6,8 +6,8 @@
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Bitte bestätige deine Anfrage zur Aktualisierung deiner E-Mail-Adresse auf der IT-Plattform <span tal:replace="domain_name">Domainname</span></h1>
-    <p tal:omit-tag="textual">Du oder eine Person, die Zugriff auf dein Konto auf der <span tal:replace="site_name">Site name</span> Plattform von <span tal:replace="domain_name">Domain name</span> hat, hast uns gebeten, die E-Mail-Adresse zu ändern, die die <span tal:replace="domain_name">Domain name</span> IT-Infrastruktur für die Interaktion mit dir verwendet. Die neue E-Mail-Adresse, die in Zukunft verwendet werden soll, lautet: <span tal:replace="new_email_address">Neue E-Mail-Adresse</span>.</p>
-<p tal:omit-tag="textual">Wenn du bestätigst, dass <span tal:replace="new_email_address">Neue E-Mail-Adresse</span> die E-Mail-Adresse sein soll, die die <span tal:replace="domain_name">Domainname</span> IT-Infrastruktur in Zukunft für die Interaktion mit dir verwenden soll, klicke bitte auf den Bestätigungslink unten.</p>
+    <p tal:omit-tag="textual">Du oder eine Person, die Zugriff auf dein Konto auf der <span tal:replace="site_name">Site name</span> Plattform von <span tal:replace="domain_name">Domain name</span> hat, hast uns gebeten, die E-Mail-Adresse zu ändern, die die <span tal:replace="domain_name">Domain name</span> IT-Infrastruktur für die Interaktion mit dir verwendet. Die neue E-Mail-Adresse, die in Zukunft verwendet werden soll, lautet: <span tal:replace="new_email">Neue E-Mail-Adresse</span>.</p>
+<p tal:omit-tag="textual">Wenn du bestätigst, dass <span tal:replace="new_email">Neue E-Mail-Adresse</span> die E-Mail-Adresse sein soll, die die <span tal:replace="domain_name">Domainname</span> IT-Infrastruktur in Zukunft für die Interaktion mit dir verwenden soll, klicke bitte auf den Bestätigungslink unten.</p>
 
     <a tal:attributes=n"href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
