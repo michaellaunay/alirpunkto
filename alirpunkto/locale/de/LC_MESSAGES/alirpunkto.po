@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-12 10:23+0200\n"
+"PO-Revision-Date: 2024-05-25 09:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1064,8 +1064,9 @@ msgstr ""
 "Gemeinschaft identifiziert"
 
 #: alirpunkto/schemas/register_form.py:106
+#, fuzzy
 msgid "cooperator_number_required"
-msgstr ""
+msgstr "kooperator_Anzahl_erforderlich"
 
 #: alirpunkto/schemas/register_form.py:112
 msgid "pseudonym_description"
@@ -1224,8 +1225,9 @@ msgstr ""
 "Genossenschaftler"
 
 #: alirpunkto/schemas/register_form.py:171
+#, fuzzy
 msgid "cooperative_behaviour_mark_update_required"
-msgstr ""
+msgstr "kooperatives_Verhalten_markieren_aktualisieren_erforderlich"
 
 #: alirpunkto/schemas/register_form.py:180
 msgid "number_shares_owned_label"
@@ -1245,8 +1247,9 @@ msgstr ""
 "unsere Genossenschaft, und wir alle sind Ihnen dafür dankbar!"
 
 #: alirpunkto/schemas/register_form.py:183
+#, fuzzy
 msgid "number_shares_owned_required"
-msgstr ""
+msgstr "anzahl_der_eigenen_Anteile_erforderlich"
 
 #: alirpunkto/schemas/register_form.py:188
 msgid "date_end_validity_yearly_contribution_label"
@@ -1266,8 +1269,9 @@ msgstr ""
 "gezeichnet) haben, können Sie als Genossenschafter voll mitbestimmen."
 
 #: alirpunkto/schemas/register_form.py:190
+#, fuzzy
 msgid "date_end_validity_yearly_contribution_required"
-msgstr ""
+msgstr "datum_Ende_der_Gültigkeit_jährlicher_Beitrag_erforderlich"
 
 #: alirpunkto/schemas/register_form.py:199
 msgid "iban_label"
@@ -1283,8 +1287,9 @@ msgstr ""
 "Genossenschaft verlassen wollen"
 
 #: alirpunkto/schemas/register_form.py:202
+#, fuzzy
 msgid "iban_required"
-msgstr ""
+msgstr "iban_erforderlich"
 
 #: alirpunkto/schemas/register_form.py:207
 msgid "date_erasure_all_data_title"
@@ -1339,3 +1344,115 @@ msgstr ""
 
 msgid "check_new_email_subject"
 msgstr "Verifizierung Ihrer neuen E-Mail Adresse"
+
+msgid "check_new_email_send_error"
+msgstr ""
+"Der Versand der Bestätigungs-E-Mail für Ihre neue Adresse ist fehlgeschlagen"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Die Bestätigungs-E-Mail für Ihre neue Adresse wurde versandt"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Verbindungsfehler"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "E-Mail Adresse existiert bereits"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "E-Mail Adresse aktualisiert"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Fehler beim Aktualisieren der E-Mail Adresse"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Fehler beim Setzen des Feldes"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Fehler beim Aktualisieren des Mitglieds"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Ungültige OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Ungültige Anfrage"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP-Fehler"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Mitgliederdaten aktualisiert"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Aktualisierung der Mitgliederdaten ist fehlgeschlagen"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Aktualisierung der Mitgliederdaten ist erfolgreich"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Fehlende Daten"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Neue E-Mail Adresse fehlt"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Keine Berechtigung"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Nichtwähler*in"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Passwortaktualisierung ist fehlgeschlagen"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Passwortaktualisierung ist erfolgreich"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Die Registrierung ist fehlgeschlagen"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Die Registrierung ist erfolgreich"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Unbekanntes zugegriffenes Mitglied"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Unbekanntes Mitglied"
+
+msgid "modify_member_title"
+msgstr "Mitgliedsprofil bearbeiten"
+
+msgid "select_member_oid_label"
+msgstr "Bitte wähle ein Mitglied aus, um sein/ihr Profil zu bearbeiten:"
+
+msgid "select_member_placeholder"
+msgstr "Pseudonym des Mitglieds"
+
+msgid "modify_profile"
+msgstr "Du kannst dein Profil ändern, indem du auf folgendes klickst"
+
+msgid "profile"
+msgstr "Profil"
