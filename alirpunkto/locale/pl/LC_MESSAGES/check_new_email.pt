@@ -6,8 +6,8 @@
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Potwierdź swoją prośbę o aktualizację adresu e-mail na platformie informatycznej <span tal:replace="domain_name">nazwa domeny</span></h1>
-    <p tal:omit-tag="textual">Ty lub osoba mająca dostęp do Twojego konta na platformie <span tal:replace="site_name">Nazwa witryny</span> <span tal:replace="domain_name">Nazwa domeny</span>, poprosiliście nas o zmianę adresu e-mail, który infrastruktura IT <span tal:replace="domain_name">Nazwa domeny</span> wykorzystuje do interakcji z Tobą. Nowy adres e-mail, który ma być używany w przyszłości, to: <span tal:replace="new_email_address">Nowy adres e-mail</span>.</p>
-<p tal:omit-tag="textual">Jeśli potwierdzisz, że <span tal:replace="new_email_address">nowy adres e-mail</span> powinien być adresem e-mail, którego <span tal:replace="domain_name">nazwa domeny</span> infrastruktura IT powinna w przyszłości używać do interakcji z Tobą, kliknij poniższy link potwierdzający.</p>
+    <p tal:omit-tag="textual">Ty lub osoba mająca dostęp do Twojego konta na platformie <span tal:replace="site_name">Nazwa witryny</span> <span tal:replace="domain_name">Nazwa domeny</span>, poprosiliście nas o zmianę adresu e-mail, który infrastruktura IT <span tal:replace="domain_name">Nazwa domeny</span> wykorzystuje do interakcji z Tobą. Nowy adres e-mail, który ma być używany w przyszłości, to: <span tal:replace="new_email">Nowy adres e-mail</span>.</p>
+<p tal:omit-tag="textual">Jeśli potwierdzisz, że <span tal:replace="new_email">nowy adres e-mail</span> powinien być adresem e-mail, którego <span tal:replace="domain_name">nazwa domeny</span> infrastruktura IT powinna w przyszłości używać do interakcji z Tobą, kliknij poniższy link potwierdzający.</p>
 
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
