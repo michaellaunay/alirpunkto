@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-12 11:02+0200\n"
+"PO-Revision-Date: 2024-05-25 09:36+0200\n"
 "Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: en\n"
@@ -1072,7 +1072,7 @@ msgstr "The sending of the verification email for your new address has failed"
 
 #: alirpunkto/views/modify_member.py:228
 msgid "check_new_email_send"
-msgstr "New email sent"
+msgstr "The verification email for your new address has been sent"
 
 #: alirpunkto/utils.py:187
 msgid "connection_error"
@@ -1084,11 +1084,11 @@ msgstr "Email already exists"
 
 #: alirpunkto/views/check_new_email.py:95
 msgid "email_updated"
-msgstr "Email updated"
+msgstr "Email address updated"
 
 #: alirpunkto/views/check_new_email.py:89
 msgid "email_update_error"
-msgstr "Error updating email"
+msgstr "Error while updating email address"
 
 #: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
 msgid "error_while_setting_field"
@@ -1116,11 +1116,11 @@ msgstr "Member data updated"
 
 #: alirpunkto/utils.py:932
 msgid "member_update_failed"
-msgstr "Member update failed"
+msgstr "Update of member data has failed"
 
 #: alirpunkto/utils.py:929
 msgid "member_update_successful"
-msgstr "Member update successful"
+msgstr "Update of member data is successful"
 
 #: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
 msgid "missing_data"
@@ -1140,22 +1140,21 @@ msgstr "Not a voter"
 
 #: alirpunkto/utils.py:870
 msgid "password_update_failed"
-msgstr "Password update failed"
+msgstr "Password update has failed"
 
 #: alirpunkto/utils.py:867
 msgid "password_update_successful"
-msgstr "Password update successful"
+msgstr "Password update is successful"
 
 #: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
 msgid "registration_failed"
-msgstr "Registration failed"
+msgstr "Registration has failed"
 
 #: alirpunkto/utils.py:830
 msgid "registration_successful"
-msgstr "Registration successful"
+msgstr "Registration is successful"
 
-#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
-#: alirpunkto/views/modify_member.py:127
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
 msgid "unknown_accessed_member"
 msgstr "Unknown accessed member"
 
@@ -1164,14 +1163,13 @@ msgid "unknown_member"
 msgstr "Unknown member"
 
 msgid "modify_member_title"
-msgstr "Edit Member Profile"
+msgstr "Edit member profile"
 
 msgid "select_member_oid_label"
-msgstr "Please select a member to edit their profile:"
+msgstr "Please select a member to edit his/her profile:"
 
 msgid "select_member_placeholder"
-msgstr "Member's pseudonym"
-
+msgstr "Pseudonym of the member"
 
 msgid "modify_profile"
 msgstr "You can change your profile by clicking"
