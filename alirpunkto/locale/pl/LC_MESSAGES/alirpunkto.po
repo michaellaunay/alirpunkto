@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-12 11:14+0200\n"
+"PO-Revision-Date: 2024-05-25 12:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: pl\n"
@@ -1446,3 +1446,134 @@ msgstr ""
 #, fuzzy
 msgid "check_new_email_subject"
 msgstr "Weryfikacja nowego adresu e-mail"
+
+#, fuzzy
+msgid "check_new_email_send_error"
+msgstr ""
+"Wysłanie weryfikacyjnej wiadomości e-mail dla nowego adresu nie powiodło się"
+
+#: alirpunkto/views/modify_member.py:228
+#, fuzzy
+msgid "check_new_email_send"
+msgstr "E-mail weryfikacyjny dla nowego adresu został wysłany"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Błąd połączenia"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Email już istnieje"
+
+#: alirpunkto/views/check_new_email.py:95
+#, fuzzy
+msgid "email_updated"
+msgstr "Zaktualizowano adres e-mail"
+
+#: alirpunkto/views/check_new_email.py:89
+#, fuzzy
+msgid "email_update_error"
+msgstr "Błąd podczas aktualizacji adresu e-mail"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+#, fuzzy
+msgid "error_while_setting_field"
+msgstr "Błąd podczas ustawiania pola"
+
+#: alirpunkto/views/modify_member.py:276
+#, fuzzy
+msgid "error_while_updating_member"
+msgstr "Błąd podczas aktualizacji członka"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+#, fuzzy
+msgid "invalid_oid"
+msgstr "Nieprawidłowy identyfikator OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Nieprawidłowe zapytanie"
+
+#: alirpunkto/utils.py:217
+#, fuzzy
+msgid "ldap_error"
+msgstr "Błąd LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Dane członka zostały zaktualizowane"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Dane członka nie zostały pomyślnie zaktualizowane"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Dane użytkownika zostały pomyślnie zaktualizowane"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Brakujące dane"
+
+#: alirpunkto/views/check_new_email.py:78
+#, fuzzy
+msgid "no_new_email"
+msgstr "Brakuje nowego adresu e-mail"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Brak dostępu"
+
+#: alirpunkto/views/vote.py:64
+#, fuzzy
+msgid "not_voter"
+msgstr "Nie jestem wyborcą"
+
+#: alirpunkto/utils.py:870
+#, fuzzy
+msgid "password_update_failed"
+msgstr "Aktualizacja hasła nie powiodła się"
+
+#: alirpunkto/utils.py:867
+#, fuzzy
+msgid "password_update_successful"
+msgstr "Aktualizacja hasła powiodła się"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+#, fuzzy
+msgid "registration_failed"
+msgstr "Rejestracja nie powiodła się"
+
+#: alirpunkto/utils.py:830
+#, fuzzy
+msgid "registration_successful"
+msgstr "Rejestracja powiodła się"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Członek, do którego próbujesz uzyskać dostęp, jest nieznany"
+
+#: alirpunkto/views/modify_member.py:82
+#, fuzzy
+msgid "unknown_member"
+msgstr "Nieznany członek"
+
+#, fuzzy
+msgid "modify_member_title"
+msgstr "Edytuj profil członka"
+
+#, fuzzy
+msgid "select_member_oid_label"
+msgstr "Wybierz członka, aby edytować jego profil:"
+
+#, fuzzy
+msgid "select_member_placeholder"
+msgstr "Pseudonim członka"
+
+#, fuzzy
+msgid "modify_profile"
+msgstr "Możesz zmienić swój profil, klikając"
+
+msgid "profile"
+msgstr "profil"
