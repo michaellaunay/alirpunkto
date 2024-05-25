@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-12 11:00+0200\n"
+"PO-Revision-Date: 2024-05-25 12:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: it_IT\n"
@@ -1294,7 +1294,7 @@ msgstr ""
 msgid "candidature_mixed"
 msgstr ""
 "L'indirizzo (URL) utilizzato per recuperare il processo di candidatura da "
-"dove è stato interrotto non corrisponde a quello registrato per voi (il "
+"dove è stato interrotto non corrisponde a quello registrato per voi. (il "
 "numero di identificazione della candidatura nella sessione e il numero "
 "dell'URL non corrispondono)\n"
 "Si prega di utilizzare solo l'URL dell'ultima e-mail ricevuta."
@@ -1307,3 +1307,115 @@ msgstr ""
 
 msgid "check_new_email_subject"
 msgstr "Verifica del nuovo indirizzo e-mail"
+
+msgid "check_new_email_send_error"
+msgstr ""
+"L'invio dell'e-mail di verifica del nuovo indirizzo non è andato a buon fine"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "L'e-mail di verifica del nuovo indirizzo è stata inviata"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Errore di connessione"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Email già esistente"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Indirizzo e-mail aggiornato"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Errore durante l'aggiornamento dell'indirizzo e-mail"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Errore durante l'impostazione del campo"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Errore durante l'aggiornamento del membro"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "OID non valido"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Richiesta non valida"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "Errore LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Aggiornamento dei dati del membro"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "L'aggiornamento dei dati del membro è fallito"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "L'aggiornamento dei dati del membro è riuscito"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Dati mancanti"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Manca un nuovo indirizzo e-mail"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Permessi non sufficienti"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Non è un elettore"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "L'aggiornamento della password non è riuscito"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "L'aggiornamento della password è riuscito"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "La registrazione non è riuscita"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "La registrazione è riuscita"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Il membro a cui stai cercando di accedere è sconosciuto"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Membro sconosciuto"
+
+msgid "modify_member_title"
+msgstr "Modifica il profilo del membro"
+
+msgid "select_member_oid_label"
+msgstr "Seleziona un membro per modificare il suo profilo:"
+
+msgid "select_member_placeholder"
+msgstr "Pseudonimo del membro"
+
+msgid "modify_profile"
+msgstr "Puoi modificare il tuo profilo cliccando su"
+
+msgid "profile"
+msgstr "profilo"
