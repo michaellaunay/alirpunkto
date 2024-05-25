@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-12 11:10+0200\n"
+"PO-Revision-Date: 2024-05-25 12:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: nl\n"
@@ -1305,3 +1305,114 @@ msgstr ""
 
 msgid "check_new_email_subject"
 msgstr "Verificatie van je nieuwe e-mailadres"
+
+msgid "check_new_email_send_error"
+msgstr "Het verzenden van de verificatiemail voor je nieuwe adres is mislukt"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "De verificatiemail voor je nieuwe adres is verzonden"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Verbindingsfout"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "E-mailadres bestaat al"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "E-mailadres bijgewerkt"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Fout bij het bijwerken van e-mailadres"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Fout bij instellen veld"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Fout bij het bijwerken van lid"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Ongeldig OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Ongeldig verzoek"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP-fout"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "De gegevens van het lid bijgewerkt"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Update van de gegevens van het lid is mislukt"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Update van de gegevens van het lid is succesvol"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Ontbrekende gegevens"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Nieuw e-mailadres ontbreekt"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Geen toegang"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Geen kiezer"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Wachtwoordupdate is mislukt"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Wachtwoord bijwerken is gelukt"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Registratie is mislukt"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "De registratie is gelukt"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Het lid dat je probeert te bereiken is onbekend"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Onbekend lid"
+
+msgid "modify_member_title"
+msgstr "Profiel bewerken"
+
+msgid "select_member_oid_label"
+msgstr "Selecteer een lid om zijn/haar profiel te bewerken:"
+
+msgid "select_member_placeholder"
+msgstr "Pseudoniem van het lid"
+
+msgid "modify_profile"
+msgstr "Je kunt je profiel wijzigen door te klikken op"
+
+msgid "profile"
+msgstr "profiel"
