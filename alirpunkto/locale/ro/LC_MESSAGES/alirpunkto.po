@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-12 11:17+0200\n"
+"PO-Revision-Date: 2024-05-25 12:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: ro\n"
@@ -1489,3 +1489,134 @@ msgstr ""
 #, fuzzy
 msgid "check_new_email_subject"
 msgstr "Verificarea noii dvs. adrese de e-mail"
+
+#, fuzzy
+msgid "check_new_email_send_error"
+msgstr "Trimiterea e-mailului de verificare pentru noua dvs. adresă a eșuat"
+
+#: alirpunkto/views/modify_member.py:228
+#, fuzzy
+msgid "check_new_email_send"
+msgstr "E-mailul de verificare pentru noua ta adresă a fost trimis"
+
+#: alirpunkto/utils.py:187
+#, fuzzy
+msgid "connection_error"
+msgstr "Eroare de conexiune"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Acest email deja există"
+
+#: alirpunkto/views/check_new_email.py:95
+#, fuzzy
+msgid "email_updated"
+msgstr "Adresa de e-mail actualizată"
+
+#: alirpunkto/views/check_new_email.py:89
+#, fuzzy
+msgid "email_update_error"
+msgstr "Eroare la actualizarea adresei de e-mail"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+#, fuzzy
+msgid "error_while_setting_field"
+msgstr "Eroare la setarea câmpului"
+
+#: alirpunkto/views/modify_member.py:276
+#, fuzzy
+msgid "error_while_updating_member"
+msgstr "Eroare la actualizarea membrului"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+#, fuzzy
+msgid "invalid_oid"
+msgstr "OID nevalabil"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Solicitare incorectă"
+
+#: alirpunkto/utils.py:217
+#, fuzzy
+msgid "ldap_error"
+msgstr "Eroare LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Datele membrului au fost actualizate"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Datele membrului nu au fost actualizate cu succes"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Datele membrului au fost actualizate cu succes"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Date lipsă"
+
+#: alirpunkto/views/check_new_email.py:78
+#, fuzzy
+msgid "no_new_email"
+msgstr "Noua adresă de e-mail lipsește"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Ne pare rău, nu aveți permisiunea de a vizualiza interdicțiile."
+
+#: alirpunkto/views/vote.py:64
+#, fuzzy
+msgid "not_voter"
+msgstr "Nu sunt alegător"
+
+#: alirpunkto/utils.py:870
+#, fuzzy
+msgid "password_update_failed"
+msgstr "Actualizarea parolei a eșuat"
+
+#: alirpunkto/utils.py:867
+#, fuzzy
+msgid "password_update_successful"
+msgstr "Actualizarea parolei a fost efectuată cu succes"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+#, fuzzy
+msgid "registration_failed"
+msgstr "Înregistrarea a eșuat"
+
+#: alirpunkto/utils.py:830
+#, fuzzy
+msgid "registration_successful"
+msgstr "Înregistrarea a avut succes"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Membrul pe care încercați să îl accesați este necunoscut"
+
+#: alirpunkto/views/modify_member.py:82
+#, fuzzy
+msgid "unknown_member"
+msgstr "Membru necunoscut"
+
+#, fuzzy
+msgid "modify_member_title"
+msgstr "Editarea profilului de membru"
+
+#, fuzzy
+msgid "select_member_oid_label"
+msgstr "Vă rugăm să selectați un membru pentru a edita profilul acestuia:"
+
+#, fuzzy
+msgid "select_member_placeholder"
+msgstr "Pseudonimul membrului"
+
+#, fuzzy
+msgid "modify_profile"
+msgstr "Vă puteți modifica profilul făcând clic pe"
+
+msgid "profile"
+msgstr "profilul"
