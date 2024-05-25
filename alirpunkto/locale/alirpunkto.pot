@@ -1128,7 +1128,7 @@ msgstr "Missing data"
 
 #: alirpunkto/views/check_new_email.py:78
 msgid "no_new_email"
-msgstr "No new email"
+msgstr "New email address is missing"
 
 #: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
 msgid "no_permission"
