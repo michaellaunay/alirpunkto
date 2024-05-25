@@ -6,8 +6,8 @@
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Bevestig je verzoek om je e-mailadres bij te werken op het IT-platform van <span tal:replace="domain_name">Domeinnaam</span></h1>
-    <p tal:omit-tag="textual">U, of een persoon die toegang heeft tot uw account op het <span tal:replace="site_name">Site naam</span> platform van <span tal:replace="domain_name">Domeinnaam</span>, heeft ons verzocht het e-mailadres te wijzigen dat de <span tal:replace="domain_name">domeinnaam</span> IT-infrastructuur gebruikt om met u te communiceren. Het nieuwe e-mailadres dat in de toekomst moet worden gebruikt is: <span tal:replace="new_email_address">Nieuw e-mailadres</span>.</p>
-<p tal:omit-tag="textual">Als u bevestigt dat <span tal:replace="new_email_address">Nieuw e-mailadres</span> het e-mailadres moet zijn dat de <span tal:replace="domain_name">domeinnaam</span> IT-infrastructuur in de toekomst moet gebruiken om met u te communiceren, klik dan op de bevestigingslink hieronder.</p>
+    <p tal:omit-tag="textual">U, of een persoon die toegang heeft tot uw account op het <span tal:replace="site_name">Site naam</span> platform van <span tal:replace="domain_name">Domeinnaam</span>, heeft ons verzocht het e-mailadres te wijzigen dat de <span tal:replace="domain_name">domeinnaam</span> IT-infrastructuur gebruikt om met u te communiceren. Het nieuwe e-mailadres dat in de toekomst moet worden gebruikt is: <span tal:replace="new_email">Nieuw e-mailadres</span>.</p>
+<p tal:omit-tag="textual">Als u bevestigt dat <span tal:replace="new_email">Nieuw e-mailadres</span> het e-mailadres moet zijn dat de <span tal:replace="domain_name">domeinnaam</span> IT-infrastructuur in de toekomst moet gebruiken om met u te communiceren, klik dan op de bevestigingslink hieronder.</p>
 
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
