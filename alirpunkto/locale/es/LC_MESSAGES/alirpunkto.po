@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-12 10:30+0200\n"
+"PO-Revision-Date: 2024-05-25 12:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: es_ES\n"
@@ -1317,3 +1317,118 @@ msgstr ""
 
 msgid "check_new_email_subject"
 msgstr "Verificación de su nueva dirección de correo electrónico"
+
+msgid "check_new_email_send_error"
+msgstr ""
+"El envío del correo electrónico de verificación para su nueva dirección ha "
+"fallado"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr ""
+"Se ha enviado el correo electrónico de verificación de su nueva dirección"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Error de conexión"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Este correo electrónico ya existe"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Dirección de correo electrónico actualizada"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Error al actualizar la dirección de correo electrónico"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Error al configurar el campo"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Error al actualizar el miembro"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "OID no válido"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Solicitud inválida"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "Error de LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Actualización de los datos del miembro"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "La actualización de los datos del miembro ha fallado"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr ""
+"La actualización de los datos del miembro se ha realizado correctamente"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Faltan dados"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Falta la nueva dirección de correo electrónico"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "No hay permiso"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "No es votante"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "La actualización de la contraseña ha fallado"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "La actualización de la contraseña se ha realizado correctamente"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "El registro ha fallado"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "El registro se ha realizado correctamente"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "El miembro al que intentas acceder es desconocido"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Miembro desconocido"
+
+msgid "modify_member_title"
+msgstr "Editar perfil de miembro"
+
+msgid "select_member_oid_label"
+msgstr "Por favor, seleccione un miembro para editar su perfil:"
+
+msgid "select_member_placeholder"
+msgstr "Seudónimo del miembro"
+
+msgid "modify_profile"
+msgstr "Puede cambiar su perfil haciendo clic en"
+
+msgid "profile"
+msgstr "perfil"
