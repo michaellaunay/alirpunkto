@@ -240,6 +240,9 @@ def commit_candidature_changes(request: Request,
         log.error(
             f"Error committing candidature {candidature.oid}: {e}"
         )
+        # Explicitly abort the transaction to ensure consistency
+        request.tm.abort()
+        # Return error message
         return {
             'candidature': candidature,
             'MemberTypes': MemberTypes,
@@ -294,6 +297,8 @@ def handle_email_validation_state(
                 EmailSendStatus.ERROR, 
                 'send_confirm_validation_email'
             )
+            # Explicitly abort the transaction to ensure consistency
+            request.tm.abort()
             return {
                 'candidature': candidature,
                 'MemberTypes': MemberTypes,

@@ -1397,3 +1397,43 @@ Cependant, pour le champ "Pseudonyme", nous voulons qu'il soit obligatoire. Par 
 
 Un candidat en cours de création ne peut pas être logué puisqu'il n'existe pas encore dans LDAP, pour compenser on stocke l'OID (object identifier) dans la session en attendant d'avoir l'email et le pseudonyme du candidat. Une fois le challenge réalisé et l'identité remplie, on crée un User que l'on stocke en session en plus de l'OID. De même, lorsqu'un lien contenant un OID chiffré est accédé, l'OID déchiffré est alors utilisé pour récupérer la candidature. Chaque fois qu'un accès est fait, les OID sont comparés entre eux, celui de la session avec celui de l'utilisateur et celui de l'URL s'il y en a un. Si les OID ne sont pas cohérents entre eux, alors la session est fermée et un message d'erreur est affiché.
 
+# 2024-05-28
+Lorsqu'une exception est levée par `request.tm.commit()`, il faut dans le bloc `except` faire un "abort" :
+```python
+def commit_candidature_changes(request: Request,
+                               candidature: Candidature) -> dict:
+    """
+    Commit changes to the candidature in the database.
+
+    Args:
+        request (Request): The request object.
+        candidature (Candidature): The candidature.
+
+    Returns:
+        dict: The updated candidature data.
+    """
+    candidatures = get_candidatures(request)
+    candidatures[candidature.oid] = candidature
+    candidatures.monitored_members[candidature.oid] = candidature
+
+    try:
+        request.tm.commit()
+        candidature.add_email_send_status(
+            EmailSendStatus.SENT,
+            "send_validation_email"
+        )
+    except Exception as e:
+        log.error(
+            f"Error committing candidature {candidature.oid}: {e}"
+        )
+        # Explicitly abort the transaction to ensure consistency
+        request.tm.abort()
+        return {
+            'candidature': candidature,
+            'MemberTypes': MemberTypes,
+            'error': _('error_committing_candidature')
+        }
+
+    return {'candidature': candidature, 'MemberTypes': MemberTypes}
+
+```
