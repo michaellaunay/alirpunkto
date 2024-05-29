@@ -88,11 +88,19 @@ def login_view(request):
             if count_yes > count_no:
                 candidature.candidature_state = CandidatureStates.APPROVED
                 register_user_to_ldap(request, candidature, candidature.data.password)
+                candidature.add_email_send_status(
+                    EmailSendStatus.IN_PREPARATION, 
+                    "send_candidature_approuved_email"
+                )
                 transaction.commit()
                 # send email to the candidature owner
                 email_template = "send_candidature_approuved_email"
             else:
                 candidature.candidature_state = CandidatureStates.REJECTED
+                candidature.add_email_send_status(
+                    EmailSendStatus.IN_PREPARATION, 
+                    "send_candidature_rejected_email"
+                )
                 transaction.commit()
                 email_template = "send_candidature_rejected_email"
             # send email to the candidature owner
@@ -106,12 +114,22 @@ def login_view(request):
                 transaction.commit()
             except Exception as e:
                 log.error(f"Error while sending email to the candidature owner: {e}")
+                # Explicitly abort the transaction to ensure consistency
+                request.tm.abort()
                 candidature.add_email_send_status(EmailSendStatus.ERROR, email_template)
-                send_result = send_confirm_validation_email(request, candidature)
-                if 'error' in send_result:
-                    candidature.add_email_send_status(EmailSendStatus.ERROR, "send_confirm_validation_email")
-                else:
-                    transaction.commit()
+                # Return error message
+                return {
+                    'error': _('error_sending_voting_result_email'),
+                    'logged_in': True if user else False,
+                    'site_name': site_name,
+                    'domain_name': domain_name,
+                    'user': username,
+                    'candidature': candidature,
+                    'VotingChoice': VotingChoice,
+                    'vote': voter.vote,
+                    'registered_vote': True
+                }
+
         return {
             'logged_in': True if user else False,
             'site_name': site_name,

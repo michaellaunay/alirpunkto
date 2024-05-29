@@ -293,12 +293,13 @@ def handle_email_validation_state(
                 }
         except Exception as e:
             log.error(f"Error committing candidature {candidature.oid}: {e}")
+            # Explicitly abort the transaction to ensure consistency
+            request.tm.abort()
             candidature.add_email_send_status(
                 EmailSendStatus.ERROR, 
                 'send_confirm_validation_email'
             )
-            # Explicitly abort the transaction to ensure consistency
-            request.tm.abort()
+
             return {
                 'candidature': candidature,
                 'MemberTypes': MemberTypes,
