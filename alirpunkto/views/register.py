@@ -44,6 +44,8 @@ from ..utils import (
     send_candidature_state_change_email,
     retrieve_candidature,
 )
+from alirpunkto.models.model_permissions import get_access_permissions
+from alirpunkto.models.permissions import Permissions
 import json
 
 @view_config(route_name='register',
@@ -368,6 +370,21 @@ def handle_confirmed_human_state(request, candidature):
     """
     log.debug(f"Handling confirmed human state for candidature {candidature.oid}")
     schema = RegisterForm().bind(request=request)
+    permissions = get_access_permissions(candidature, candidature)
+    if not permissions or permissions == Permissions.NONE:
+        log.warning(
+            f'No permission to access member datas: {candidature.oid}'
+        )
+        request.session.flash(_('no_permission'), 'error')
+        return {
+            "error":_('no_permission'),
+            "member": None,
+            "form": None,
+            "candidature": candidature,
+            'MemberTypes': candidature.type
+        }
+    schema.apply_permissions(permissions.data, {'password_confirm':Permissions.ACCESS|Permissions.READ|Permissions.WRITE, 'password':Permissions.ACCESS|Permissions.READ|Permissions.WRITE})
+    schema.apply_permissions(permissions)
     appstruct = {
         'cooperative_number': candidature.oid,
         'email': candidature.email,

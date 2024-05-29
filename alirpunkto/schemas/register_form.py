@@ -1,6 +1,7 @@
 # Description: Schema for the register form.
 # Creation date: 2024-04-19
 # Author: Michaël Launay
+from typing import Union
 import datetime
 import os
 import colander
@@ -18,7 +19,7 @@ from alirpunkto.constants_and_globals import (
 )
 from alirpunkto.utils import is_valid_password
 from alirpunkto.models.permissions import Permissions
-from alirpunkto.models.model_permissions import MemberDataPermissionsType
+from alirpunkto.models.model_permissions import MemberDataPermissionsType, MemberPermissionsType
 from dataclasses import fields
 
 locales_as_choices = [(key, value) for key, value in EUROPEAN_LOCALES.items()]
@@ -131,7 +132,6 @@ class RegisterForm(schema.CSRFSchema):
             mapping={'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         widget = TextInputWidget(readonly = True),  # The field is visible but not editable
         messages = {'required': _('cooperator_number_required')},
-        missing = ""
     )
     pseudonym = colander.SchemaNode(
         colander.String(),
@@ -253,31 +253,68 @@ class RegisterForm(schema.CSRFSchema):
         widget = DateInputWidget(hidden=True,readonly = True),
         missing = ""
     )
-    def apply_permissions(self, permissions: MemberDataPermissionsType):
-        """Apply permissions to the form."""
+    def apply_permissions(
+            self,
+            permissions: Union[MemberPermissionsType, MemberDataPermissionsType],
+            force_permissions: dict[str, Permissions] = {'password_confirm': Permissions.ACCESS, 'password': Permissions.ACCESS}
+        ):
+        """
+        Apply permissions to the form fields based on the provided permissions and force permissions.
+
+        This method iterates over the form fields and applies the specified permissions to each field. It also considers
+        any force permissions that need to be applied regardless of the provided permissions.
+
+        Args:
+            permissions (Union[MemberPermission, MemberDataPermissionsType]): An object or dictionary containing the permissions for each form field.
+            force_permissions (dict[str, Permissions], optional): A dictionary of force permissions that override the
+                provided permissions for specific fields. The default is to grant ACCESS permission to the 'password_confirm'
+                and 'password' fields.
+
+        Example:
+            Given a permissions object with read and write permissions for specific fields, and an optional dictionary of 
+            force permissions, this method will set the appropriate access and visibility settings for each form field.
+
+        Note:
+            - If a field's permission is set to `Permissions.NONE`, the field will be removed from the form.
+            - If a field's permission includes `Permissions.WRITE`, the field will be editable.
+            - If a field's permission includes `Permissions.READ`, the field will be visible but not editable.
+            - Force permissions take precedence over the provided permissions and ensure that specific fields have the desired 
+            access level.
+
+        Raises:
+            KeyError: If a specified field in the permissions or force_permissions is not present in the form.
+            TypeError: If the permissions argument is not of the expected type.
+
+        Implementation Details:
+            - The method first creates a dictionary of form children keyed by their names.
+            - It then iterates over the fields in the permissions object.
+            - For each field, it retrieves the corresponding form attribute.
+            - If a force permission exists for the field, it overrides the provided permission.
+            - Based on the determined permission, the form attribute's visibility and editability are set accordingly:
+                - If the permission is `Permissions.NONE`, the field is removed from the form.
+                - If the permission includes `Permissions.WRITE`, the field is set to editable and visible.
+                - If the permission includes `Permissions.READ` but not `Permissions.WRITE`, the field is set to read-only and visible.
+                - If the permission includes neither `Permissions.READ` nor `Permissions.WRITE`, the field is hidden and read-only.
+        """
         children = {child.name: child for child in self.children}
         for field in fields(permissions):
             name = field.name
             attribute = children.get(name, None)
             if attribute:
                 permission = getattr(permissions, name, None)
+                if name in force_permissions:
+                    permission = force_permissions[name]
                 # Permissions may not contain all the children
                 if permission == None:
                     continue
                 if permission == Permissions.NONE:
                     self.children.remove(attribute)
                 elif attribute.widget:
-                    if (('password' in children and attribute == children['password']) and 
-                        (permission & Permissions.ACCESS) and
-                        (permission & Permissions.WRITE)
-                        ):
-                        attribute.widget.readonly = False
-                        attribute.widget.hidden = False
-                    elif ((permission & Permissions.ACCESS) and
+                    if ((permission & Permissions.ACCESS) and
                         (permission & Permissions.READ) and
                         (permission & Permissions.WRITE)):
                         attribute.widget.readonly = False
-                        attribute.widget.hidden = True
+                        attribute.widget.hidden = False
                     elif ((permission & Permissions.ACCESS) and
                         (permission & Permissions.READ)):
                         attribute.widget.hidden = False
