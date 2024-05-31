@@ -498,18 +498,20 @@ def get_candidature_by_oid(
 
 def get_member_by_oid(
         oid:str,
-        request:Request
+        request:Request,
+        update:bool=False
     ) -> Member:
     """Get the member by its oid.
     Args:
         oid (str): the oid of the member
         request (pyramid.request.Request): the request
+        update (bool): update the member from ldap if not found
     Returns:
         Member: the member or None if not found or not a Member
     """
     members = get_members(request)
     member = members[oid] if oid in members else None
-    if not isinstance(member, Member):
+    if update and not isinstance(member, Member):
         update_member_from_ldap(oid, request)
         member = None
     return member
@@ -571,7 +573,7 @@ def update_member_from_ldap(
         new_birthdate = datetime.datetime.strptime(new_birthdate, "%Y%m%d%H%M%SZ")
     new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
     new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
-    member = get_member_by_oid(oid, request)
+    member = get_member_by_oid(oid, request, False)
 
     log.debug(f"Update Member {oid} with ldap informations")
     if not member:

@@ -90,7 +90,7 @@ def forgot_password(request):
             }
     oid = request.session.get(MEMBER_OID, None)
     if oid:
-        member = get_member_by_oid(oid, request)       
+        member = get_member_by_oid(oid, request, True)
     # 1) AlirPunkto displays the forgot_password.pt zpt to enter the mail
     if 'submit' in request.POST:
         # 2) The user has entered his mail and validated
@@ -259,7 +259,7 @@ def _retrieve_member(
             encrypted_oid,
             SEED_LENGTH,
             request.registry.settings['session.secret'])
-        member = get_member_by_oid(decrypted_oid, request)
+        member = get_member_by_oid(decrypted_oid, request, True)
         if member is None:
             error = _('member_not_found')
             return None, {'member': None,
