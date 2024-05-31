@@ -63,13 +63,11 @@ def forgot_password(request):
         # password
         if member.member_state == MemberStates.DATA_MODIFICATION_REQUESTED: 
             schema = RegisterForm().bind(request=request)
-            read_only_fields = dict(
-                (name,value) for name,value in member.data.iter_attributes()
-                if name not in ["password", "password_confirm"]
-            ) if member.data else {}
-            read_only_fields["email"] = member.email
-            read_only_fields["pseudonym"] = member.pseudonym
-            read_only_fields["cooperative_number"] = member.oid
+            read_only_fields = {
+                "email": member.email,
+                "pseudonym": member.pseudonym,
+                "cooperative_number": member.oid
+            }
 
             writable_field_values = {"password": "", "password_confirm": ""}
             schema.prepare_for_modification(read_only_fields,
