@@ -20,7 +20,7 @@ msgid "username_label"
 msgstr "Benutzername"
 
 msgid "password_label"
-msgstr "Passwort zurücksetzen"
+msgstr "Passwort"
 
 msgid "login_label"
 msgstr "Anmelden"
