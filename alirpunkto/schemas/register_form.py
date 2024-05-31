@@ -37,6 +37,7 @@ class RegisterForm(schema.CSRFSchema):
             mapping={'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('full_name_as_in_id_required',
             mapping={'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})},
+        widget = TextInputWidget(maxlength=125),
         missing = ""
     )
     fullsurname = colander.SchemaNode(
@@ -46,6 +47,7 @@ class RegisterForm(schema.CSRFSchema):
             mapping={'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME}),
         messages = {'required': _('full_surname_as_in_id_required',
             mapping={'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME})},
+        widget = TextInputWidget(maxlength=125),
         missing = ""
     )
     """ WIP
@@ -345,6 +347,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('pseudonym').widget.value = writable_field_values['pseudonym']
         else:
             self.children.remove(self.get('pseudonym'))
+
         if 'fullname' in read_only_fields:
             self.get('fullname').widget.readonly = True
             self.get('fullname').widget.value = read_only_fields['fullname']
@@ -353,14 +356,16 @@ class RegisterForm(schema.CSRFSchema):
             self.get('fullname').widget.value = writable_field_values['fullname']
         else:
             self.children.remove(self.get('fullname'))
+
         if 'fullsurname' in read_only_fields:
-            self.get('fullsurname').readonly = True
+            self.get('fullsurname').widget.readonly = True
             self.get('fullsurname').widget.value = read_only_fields['fullsurname']
         elif 'fullsurname' in writable_field_values:
-            self.get('fullsurname').readonly = False
+            self.get('fullsurname').widget.readonly = False
             self.get('fullsurname').widget.value = writable_field_values['fullsurname']
         else:
             self.children.remove(self.get('fullsurname'))
+
         if 'birthdate' in read_only_fields:
             self.get('birthdate').widget.readonly = True
             self.get('birthdate').widget.value = read_only_fields['birthdate']
@@ -369,6 +374,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('birthdate').widget.value = writable_field_values['birthdate']
         else:
             self.children.remove(self.get('birthdate'))
+
         if 'nationality' in read_only_fields:
             self.get('nationality').widget.readonly = True
             self.get('nationality').widget.value = read_only_fields['nationality']
@@ -377,6 +383,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('nationality').widget.value = writable_field_values['nationality']
         else:
             self.children.remove(self.get('nationality'))
+
         if 'lang1' in read_only_fields:
             self.get('lang1').widget.readonly = True
             self.get('lang1').widget.value = read_only_fields['lang1']
@@ -385,6 +392,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('lang1').widget.value = writable_field_values['lang1']
         else:
             self.children.remove(self.get('lang1'))
+
         if 'lang2' in read_only_fields:
             self.get('lang2').widget.readonly = True
             self.get('lang2').widget.value = read_only_fields['lang2']
@@ -393,6 +401,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('lang2').widget.value = writable_field_values['lang2']
         else:
             self.children.remove(self.get('lang2'))
+
         if 'lang3' in read_only_fields:
             self.get('lang3').widget.readonly = True
             self.get('lang3').widget.value = read_only_fields['lang3']
@@ -401,6 +410,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('lang3').widget.value = writable_field_values['lang3']
         else:
             self.children.remove(self.get('lang3'))
+
         if 'description' in read_only_fields:
             self.get('description').widget.readonly = True
             self.get('description').widget.value = read_only_fields['description']
@@ -409,6 +419,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('description').widget.value = writable_field_values['description']
         else:
             self.children.remove(self.get('description'))
+
         if 'cooperative_behaviour_mark' in read_only_fields:
             self.get('cooperative_behaviour_mark').widget.readonly = True
             self.get('cooperative_behaviour_mark').widget.value = read_only_fields['cooperative_behaviour_mark']
@@ -417,6 +428,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('cooperative_behaviour_mark').widget.value = writable_field_values['cooperative_behaviour_mark']
         else:
             self.children.remove(self.get('cooperative_behaviour_mark'))
+
         if 'cooperative_behaviour_mark_update' in read_only_fields:
             self.get('cooperative_behaviour_mark_update').widget.readonly = True
             self.get('cooperative_behaviour_mark_update').widget.value = read_only_fields['cooperative_behaviour_mark_update']
@@ -425,6 +437,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('cooperative_behaviour_mark_update').widget.value = writable_field_values['cooperative_behaviour_mark_update']
         else:
             self.children.remove(self.get('cooperative_behaviour_mark_update'))
+
         if 'number_shares_owned' in read_only_fields:
             self.get('number_shares_owned').widget.readonly = True
             self.get('number_shares_owned').widget.value = read_only_fields['number_shares_owned']
@@ -433,6 +446,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('number_shares_owned').widget.value = writable_field_values['number_shares_owned']
         else:
             self.children.remove(self.get('number_shares_owned'))
+
         if 'date_end_validity_yearly_contribution' in read_only_fields:
             self.get('date_end_validity_yearly_contribution').widget.readonly = True
             self.get('date_end_validity_yearly_contribution').widget.value = read_only_fields['date_end_validity_yearly_contribution']
@@ -441,6 +455,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('date_end_validity_yearly_contribution').widget.value = writable_field_values['date_end_validity_yearly_contribution']
         else:
             self.children.remove(self.get('date_end_validity_yearly_contribution'))
+
         if 'iban' in read_only_fields:
             self.get('iban').widget.readonly = True
             self.get('iban').widget.value = read_only_fields['iban']
@@ -449,6 +464,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('iban').widget.value = writable_field_values['iban']
         else:
             self.children.remove(self.get('iban'))
+
         if 'date_erasure_all_data' in read_only_fields:
             self.get('date_erasure_all_data').widget.readonly = True
             self.get('date_erasure_all_data').widget.value = read_only_fields['date_erasure_all_data']
@@ -457,6 +473,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('date_erasure_all_data').widget.value = writable_field_values['date_erasure_all_data']
         else:
             self.children.remove(self.get('date_erasure_all_data'))
+
         if 'password' in read_only_fields:
             self.get('password').widget.readonly = True
             password = read_only_fields['password']
@@ -466,6 +483,7 @@ class RegisterForm(schema.CSRFSchema):
             self.get('password').widget.value = writable_field_values['password']
         else:
             self.children.remove(self.get('password'))
+
         if 'password_confirm' in read_only_fields:
             self.get('password_confirm').widget.readonly = True
             password_confirm = read_only_fields['password_confirm']
