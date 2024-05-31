@@ -283,7 +283,7 @@ def modify_member(request):
                     continue # The email is updated by the check_new_email view
                 fields_to_update.append(field)
         if fields_to_update:
-            sending_success = update_ldap_member(accessed_member, request, fields_to_update=fields_to_update)
+            sending_success = update_ldap_member(request, accessed_member, fields_to_update=fields_to_update)
         if not sending_success and fields_to_update:
             return {"error":_('error_while_updating_member'),
                 "member": member,
