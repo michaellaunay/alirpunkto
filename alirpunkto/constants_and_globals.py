@@ -14,18 +14,10 @@ import re
 # Load environment variables from .env.
 dotenv_path: Final = find_dotenv()
 load_dotenv(dotenv_path)
-# SECRET_KEY is used for cookie signing
-# This information is stored in environment variables
-# See https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/security.html
-# Using get_key() instead of os.getenv() as os.getenv() does not 
-# handle values containing `=` properly.
-SECRET_KEY: Final = get_key(dotenv_path, "SECRET_KEY")
-# check if secret is not empty an make it accessible from the views
-if not SECRET_KEY:
-    raise ValueError("You must provide a base64 value for SECRET_KEY")
 
 # LDAP informations are stored in environment variables
 # Not Final due to __init__ initialization
+SECRET_KEY: Final = "SECRET_KEY"
 LDAP_SERVER: Final = os.getenv("LDAP_SERVER")
 LDAP_BASE_DN: Final = get_key(dotenv_path, "LDAP_BASE_DN")
 LDAP_OU: Final = get_key(dotenv_path, "LDAP_OU")
@@ -33,15 +25,15 @@ LDAP_USE_SSL: Final = (
     (get_key(dotenv_path, "LDAP_USE_SSL") or "False").lower()
     in ['true', '1', "yes", "y"]
 )
+LDAP_PASSWORD: Final = "LDAP_PASSWORD" # use get_secret to get the password
 LDAP_LOGIN: Final = get_key(dotenv_path, "LDAP_LOGIN")
-LDAP_PASSWORD: Final = get_key(dotenv_path, "LDAP_PASSWORD")
 ADMIN_LOGIN: Final = get_key(dotenv_path, "ADMIN_LOGIN")
-ADMIN_PASSWORD: Final = get_key(dotenv_path, "ADMIN_PASSWORD")
+ADMIN_PASSWORD: Final = "ADMIN_PASSWORD" # use get_secret to get the password
 ADMIN_EMAIL: Final = get_key(dotenv_path, "ADMIN_EMAIL")
 MAIL_USERNAME: Final = os.getenv("MAIL_USERNAME")
 MAIL_SENDER: Final = os.getenv("MAIL_SENDER")
 MAIL_SERVER: Final = os.getenv("MAIL_SERVER")
-MAIL_PASSWORD: Final = get_key(dotenv_path, "MAIL_PASSWORD")
+MAIL_PASSWORD: Final = "MAIL_PASSWORD" # use get_secret to get the password
 MAIL_PORT: Final = os.getenv("MAIL_PORT")
 MAIL_HOST: Final = os.getenv("MAIL_HOST")
 MAIL_TLS: Final = os.getenv("MAIL_TLS")
@@ -49,6 +41,12 @@ MAIL_SSL: Final = os.getenv("MAIL_SSL")
 MAIL_SIGNATURE: Final = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name} for {domain_name}")
 DOMAIN_NAME: Final = os.getenv("DOMAIN_NAME")
 SITE_NAME: Final = os.getenv("SITE_NAME")
+KEYCLOAK_SERVER_URL:Final = get_key(dotenv_path, "KEYCLOAK_SERVER_URL",None) # The keycloak server
+KEYCLOAK_REALM:Final = get_key(dotenv_path, "KEYCLOAK_REALM",None) # The realm
+# The client id of this application for keycloak
+KEYCLOAK_CLIENT_ID:Final = "KEYCLOAK_CLIENT_ID" # use get_secret to get the password
+# The client secret of this application
+KEYCLOAK_CLIENT_SECRET:Final = "KEYCLOAK_CLIENT_SECRET" # use get_secret to get the password
 # logging configuration
 log: Final = logging.getLogger('alirpunkto')
 

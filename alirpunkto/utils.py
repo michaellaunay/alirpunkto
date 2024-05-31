@@ -65,6 +65,7 @@ from cryptography.fernet import Fernet
 import base64
 from .models.users import User
 import json
+from .secret_manager import get_secret
 
 def get_preferred_language(request: Request)->str:
     """Get the preferred language from the request.
@@ -116,7 +117,7 @@ def get_ldap_connection(use_ssl=LDAP_USE_SSL) -> Connection:
     conn = Connection(
         server,
         ldap_login,
-        LDAP_PASSWORD,
+        get_secret(LDAP_PASSWORD),
         auto_bind=True,
         # client_strategy=SAFE_SYNC # Normaly prevent injection attacks but in this case clear conn.entries and conn.response!
     )
@@ -343,7 +344,7 @@ def is_valid_unique_pseudonym(pseudonym):
     conn = Connection(
         server,
         ldap_login,
-        LDAP_PASSWORD,
+        get_secret(LDAP_PASSWORD),
         auto_bind=True
     )
     # Verify that the pseudonym is not already registered
@@ -542,7 +543,7 @@ def update_member_from_ldap(
                   f"{LDAP_BASE_DN}"
     )
     try:
-        conn = Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True)
+        conn = Connection(server, ldap_login, get_secret(LDAP_PASSWORD), auto_bind=True)
     except Exception as e:
         log.error(f"Error while connecting to LDAP: {e}")
         return None
@@ -741,7 +742,12 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
         number_of_voters = DEFAULT_NUMBER_OF_VOTERS
         log.warning(f"Use {DEFAULT_NUMBER_OF_VOTERS=} "
             "as number of voters due to exception.")
-    with Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) as conn:
+    with Connection(
+            server,
+            ldap_login,
+            get_secret(LDAP_PASSWORD),
+            auto_bind=True
+        ) as conn:
         potential_voters = get_potential_voters(conn)
         random.shuffle(potential_voters)
         selected_voters = potential_voters[:number_of_voters]
@@ -790,7 +796,11 @@ def get_oid_from_pseudonym(
     ldap_login = f"{LDAP_LOGIN},{LDAP_OU if LDAP_OU else ''},{LDAP_BASE_DN}"
     while ',,' in ldap_login:
         ldap_login = ldap_login.replace(',,', ',')
-    with Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) as conn:
+    with Connection(
+            server, ldap_login,
+            get_secret(LDAP_PASSWORD),
+            auto_bind=True
+        ) as conn:
         conn.search(
             LDAP_BASE_DN,
             '(cn={})'.format(pseudonym),
@@ -826,9 +836,14 @@ def register_user_to_ldap(request, candidature, password):
     )
     log.debug(
         f"LDAP Connection{LDAP_LOGIN=},{LDAP_OU=},{LDAP_BASE_DN=},"
-        f"{LDAP_PASSWORD=},{LDAP_SERVER=}"
+        f"{get_secret(LDAP_PASSWORD)=},{LDAP_SERVER=}"
     )
-    with Connection(server, ldap_login, LDAP_PASSWORD, auto_bind=True) as conn:
+    with Connection(
+            server,
+            ldap_login,
+            get_secret(LDAP_PASSWORD),
+            auto_bind=True
+        ) as conn:
 
         # DN for the new entry
         dn = (f"uid={candidature.oid},{LDAP_OU},{LDAP_BASE_DN}"
@@ -1038,7 +1053,8 @@ def is_admin(username:str, password:str)-> bool:
     bool: Returns True if the provided username and password match the administrator's credentials, 
     otherwise returns False.
     """
-    return (username.strip(), password.strip())== (ADMIN_LOGIN.split("=")[-1], ADMIN_PASSWORD)
+    return (username.strip(), password.strip()) == \
+        (ADMIN_LOGIN.split("=")[-1], get_secret(ADMIN_PASSWORD))
 
 def get_local_template(request, pattern_path):
     """

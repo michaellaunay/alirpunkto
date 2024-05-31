@@ -1,4 +1,5 @@
 import os, pytz, hashlib
+from typing import Final
 from collections import defaultdict
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
@@ -22,6 +23,7 @@ from ldap3 import Server, Connection, ALL
 from .constants_and_globals import (
     _,
     log,
+    SECRET_KEY,
     LDAP_ADMIN_OID,
     LDAP_SERVER,
     LDAP_BASE_DN,
@@ -37,12 +39,13 @@ from .constants_and_globals import (
     MAIL_PORT,
     MAIL_TLS,
     MAIL_SSL,
-    SECRET_KEY,
     DEFAULT_SESSION_TIMEOUT,
     DEFAULT_NUMBER_OF_VOTERS
 )
+from .secret_manager import get_secret
+from dotenv import get_key
 
-
+get_secret(None) # force the initialization of the secrets
 
 @subscriber(NewRequest)
 def add_localizer(event):
@@ -115,7 +118,12 @@ def create_ldap_groups_if_not_exists():
 
     # Connecting to the LDAP Server
     server = Server(LDAP_SERVER, get_info=ALL)
-    conn = Connection(server, f"{LDAP_LOGIN},{LDAP_BASE_DN}", LDAP_PASSWORD, auto_bind=True)
+    conn = Connection(
+        server,
+        f"{LDAP_LOGIN},{LDAP_BASE_DN}",
+        get_secret(LDAP_PASSWORD),
+        auto_bind=True
+    )
 
     admin_dn = f"uid={LDAP_ADMIN_OID},cn={ADMIN_LOGIN},{LDAP_BASE_DN}"
     # Defining the groups to be created
@@ -154,6 +162,7 @@ def create_ldap_groups_if_not_exists():
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
+
     with Configurator(settings=settings) as config:
         # set session factory
         hash_object = hashlib.sha256()
@@ -170,7 +179,7 @@ def main(global_config, **settings):
         settings['mail.username'] = MAIL_USERNAME if MAIL_USERNAME else os.environ.get('MAIL_USERNAME', None)
         if settings['mail.username'] == "None":
             settings['mail.username'] = None
-        settings['mail.password'] = MAIL_PASSWORD if MAIL_PASSWORD else os.environ.get('MAIL_PASSWORD', None)
+        settings['mail.password'] = get_secret(MAIL_PASSWORD)
         if settings['mail.password'] == "None":
             settings['mail.password'] = None
         settings['mail.default_sender'] = MAIL_SENDER if MAIL_SENDER else os.environ.get('MAIL_SENDER', 'default_sender')
@@ -187,7 +196,7 @@ def main(global_config, **settings):
         # Create a mailer object
         mailer = Mailer.from_settings(settings)
         config.registry['mailer'] = mailer
-        config.add_settings({'session.secret': SECRET_KEY})
+        config.add_settings({'session.secret': get_secret(SECRET_KEY)})
 
         # Prefix for application-related settings
         PARAM = "applications."

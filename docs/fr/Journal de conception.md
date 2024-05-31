@@ -1437,3 +1437,323 @@ def commit_candidature_changes(request: Request,
     return {'candidature': candidature, 'MemberTypes': MemberTypes}
 
 ```
+# 2024-05-31
+
+Nous allons sécuriser l'accès aux variables contenant les secrets et mots de passe.
+
+## Comment créer une variable de type singleton
+
+Pour créer une variable dans une fonction Python qui est initialisée lors du premier appel et réutilisée lors des appels suivants, tout en étant inaccessible en dehors de la fonction, nous pouvons utiliser une technique basée sur les attributs de fonction:
+
+### Utilisation des Attributs de Fonction
+
+Les fonctions en Python peuvent avoir des attributs personnalisés attachés à elles. Nous pouvons utiliser cet attribut pour stocker la variable.
+
+Voici un exemple :
+
+```python
+def my_function():
+    # Initialiser la variable au premier appel
+    if not hasattr(my_function, 'my_variable'):
+        my_function.my_variable = 'Initial Value'
+    
+    # Utiliser la variable
+    print(f"Variable value: {my_function.my_variable}")
+
+    # Modifier la variable pour les appels suivants
+    my_function.my_variable = 'Updated Value'
+```
+
+### Exemple Complet
+
+```python
+def my_function():
+    # Initialiser la variable au premier appel
+    if not hasattr(my_function, 'my_variable'):
+        my_function.my_variable = 'Initial Value'
+    
+    # Utiliser la variable
+    print(f"Variable value: {my_function.my_variable}")
+
+    # Modifier la variable pour les appels suivants
+    my_function.my_variable = 'Updated Value'
+
+# Premier appel - initialisation
+my_function()  # Output: Variable value: Initial Value
+
+# Appel suivant - utilisation de la valeur modifiée
+my_function()  # Output: Variable value: Updated Value
+```
+
+### Points à Considérer
+
+1. **Isolation de la Variable :**
+   - La variable `my_variable` est attachée à la fonction `my_function` et ne peut être accédée directement en dehors de la fonction.
+
+2. **Réutilisation :**
+   - Lors des appels suivants, la valeur modifiée de `my_variable` est utilisée, montrant ainsi qu'elle persiste entre les appels.
+
+3. **Bonne Pratique :**
+   - Utiliser des attributs de fonction est une manière propre et idiomatique en Python pour gérer des variables persistantes à l'intérieur d'une fonction.
+
+### Avantages
+
+- **Encapsulation :** La variable est encapsulée à l'intérieur de la fonction et ne pollue pas l'espace de noms global ou local.
+- **Persistance :** La valeur de la variable persiste entre les appels de la fonction, offrant un comportement de type "statique".
+
+Cette technique est particulièrement utile pour des cas où nous avons besoin de maintenir un état au sein d'une fonction sans exposer ce état à d'autres parties de votre code.
+
+Lorsqu'on utilise `dotenv` pour lire des variables d'environnement depuis un fichier `.env`, ces variables sont chargées dans l'environnement du processus Python et peuvent être accessibles via `os.getenv` ou `os.environ`. Cependant, il n'est pas directement possible d'empêcher totalement l'accès à `os.getenv` pour le reste du programme après avoir lu les variables, car cela ferait partie de la gestion d'environnement de Python.
+
+Cependant, nous pouvons utiliser quelques astuces pour restreindre l'accès ou minimiser les risques après le chargement des variables :
+
+1. **Supprimer les variables sensibles de `os.environ` après les avoir utilisées.**
+2. **Créer une fonction wrapper pour accéder aux variables d'environnement de manière contrôlée.**
+3. **Utiliser des objets ou des classes pour encapsuler et gérer l'accès aux variables.**
+
+### Exemple de Suppression des Variables Sensibles
+
+En Python, il n'y a pas de mécanisme natif pour créer des variables dans un module qui soient totalement inaccessibles en dehors du module. Cependant, nous pouvons utiliser certaines conventions et techniques pour simuler ce comportement et indiquer aux autres développeurs que certaines variables sont destinées à un usage interne uniquement.
+
+### Conventions et Techniques
+
+1. **Conventions de Nommage :**
+   - Utilisez une seule barre de soulignement `_` en préfixe pour indiquer qu'une variable est destinée à être privée.
+   - Exemple : `_private_variable`
+
+2. **Utilisation de Fonctions ou de Classes Internes :**
+   - Encapsulez les variables dans des fonctions ou des classes qui ne sont pas exposées en dehors du module.
+
+3. **Modules de Type Singleton :**
+   - Créez un module singleton avec une classe pour encapsuler les variables privées.
+
+Voici des exemples pour chaque technique :
+
+## Comment créer des variables inaccessibles en dehors de leur module
+### 1. Conventions de Nommage
+
+```python
+# mymodule.py
+
+# Variable avec une convention de nommage indiquant qu'elle est privée
+_private_variable = "This is a private variable"
+
+def public_function():
+    return _private_variable
+
+def _private_function():
+    return "This is a private function"
+```
+
+En utilisant cette convention, les développeurs savent que `_private_variable` et `_private_function` ne sont pas destinés à être utilisés en dehors du module.
+
+### 2. Utilisation de Fonctions ou de Classes Internes
+
+```python
+# mymodule.py
+
+class _PrivateClass:
+    def __init__(self):
+        self._private_variable = "This is a private variable"
+
+    def get_private_variable(self):
+        return self._private_variable
+
+# Instance unique de la classe privée
+_private_instance = _PrivateClass()
+
+def public_function():
+    return _private_instance.get_private_variable()
+```
+
+Ici, `_PrivateClass` et `_private_instance` ne sont pas destinés à être utilisés directement en dehors du module.
+
+### 3. Modules de Type Singleton
+
+```python
+# mymodule.py
+
+class _SingletonModule:
+    def __init__(self):
+        self._private_variable = "This is a private variable"
+
+    def get_private_variable(self):
+        return self._private_variable
+
+# Instance unique du singleton
+_singleton_instance = _SingletonModule()
+
+def public_function():
+    return _singleton_instance.get_private_variable()
+```
+
+### Limitation
+
+Même en utilisant ces techniques, il est important de comprendre que ces variables ne sont pas réellement privées au sens strict du langage (comme `private` en Java ou C++). Les utilisateurs peuvent toujours accéder à ces variables s'ils le souhaitent vraiment. Cependant, ces conventions servent de forte indication pour décourager l'utilisation non intentionnelle de ces variables en dehors de leur contexte prévu.
+
+### Exemple d'Utilisation
+
+```python
+# main.py
+import mymodule
+
+# Accéder à la fonction publique
+print(mymodule.public_function())
+
+# Tentative d'accès direct à la variable privée (à éviter)
+# print(mymodule._private_variable)  # Non recommandé
+
+# Tentative d'accès direct à la classe privée (à éviter)
+# private_instance = mymodule._PrivateClass()  # Non recommandé
+```
+
+En suivant ces conventions et techniques, vous pouvez indiquer clairement quelles parties de votre module sont destinées à un usage interne uniquement, tout en reconnaissant que Python n'applique pas strictement l'encapsulation.
+
+
+Voici un exemple où nous supprimons les variables sensibles de `os.environ` après les avoir lues :
+
+```python
+import os
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+
+# Lire les variables sensibles
+sensitive_vars = {
+    'LDAP_SERVER': os.getenv('LDAP_SERVER'),
+    'LDAP_BASE_DN': os.getenv('LDAP_BASE_DN'),
+    'LDAP_OU': os.getenv('LDAP_OU'),
+    'KEYCLOAK_SERVER_URL': os.getenv('KEYCLOAK_SERVER_URL'),
+    'KEYCLOAK_REALM': os.getenv('KEYCLOAK_REALM'),
+    'KEYCLOAK_CLIENT_ID': os.getenv('KEYCLOAK_CLIENT_ID'),
+    'KEYCLOAK_CLIENT_SECRET': os.getenv('KEYCLOAK_CLIENT_SECRET'),
+}
+
+# Supprimer les variables sensibles de os.environ
+for key in sensitive_vars.keys():
+    if key in os.environ:
+        del os.environ[key]
+
+# Fonction pour accéder aux variables sensibles de manière sécurisée
+def get_sensitive_var(key):
+    if key in sensitive_vars:
+        return sensitive_vars[key]
+    else:
+        raise KeyError(f"Key {key} not found in sensitive variables")
+
+# Exemple d'utilisation
+print(get_sensitive_var('LDAP_SERVER'))
+```
+
+### Exemple avec une Classe pour Encapsuler les Variables Sensibles
+
+Nous pouvons encapsuler les variables dans une classe pour restreindre l'accès :
+
+```python
+import os
+from dotenv import load_dotenv
+
+class SensitiveConfig:
+    def __init__(self):
+        load_dotenv()
+        self._sensitive_vars = {
+            'LDAP_SERVER': os.getenv('LDAP_SERVER'),
+            'LDAP_BASE_DN': os.getenv('LDAP_BASE_DN'),
+            'LDAP_OU': os.getenv('LDAP_OU'),
+            'KEYCLOAK_SERVER_URL': os.getenv('KEYCLOAK_SERVER_URL'),
+            'KEYCLOAK_REALM': os.getenv('KEYCLOAK_REALM'),
+            'KEYCLOAK_CLIENT_ID': os.getenv('KEYCLOAK_CLIENT_ID'),
+            'KEYCLOAK_CLIENT_SECRET': os.getenv('KEYCLOAK_CLIENT_SECRET'),
+        }
+
+        # Supprimer les variables sensibles de os.environ
+        for key in self._sensitive_vars.keys():
+            if key in os.environ:
+                del os.environ[key]
+
+    def get(self, key):
+        if key in self._sensitive_vars:
+            return self._sensitive_vars[key]
+        else:
+            raise KeyError(f"Key {key} not found in sensitive variables")
+
+# Instance de la configuration sensible
+config = SensitiveConfig()
+
+# Exemple d'utilisation
+print(config.get('LDAP_SERVER'))
+```
+
+### Conclusion
+
+Bien qu'il ne soit pas possible de bloquer complètement l'accès à `os.getenv` dans tout le programme après avoir lu les variables, ces approches permettent de limiter les risques d'accès non autorisé aux informations sensibles. En supprimant les variables d'environnement après les avoir lues et en encapsulant les variables dans des structures contrôlées, nous pouvons mieux sécuriser les informations sensibles dans votre application.
+
+Lorsque l'on supprime une variable d'environnement avec `del os.environ["SECRET_KEY"]`, cette variable est retirée de l'environnement du processus et ne peut pas être récupérée à nouveau avec `get_key(dotenv_path, "SECRET_KEY")` sans recharger explicitement le fichier `.env`.
+
+La fonction `load_dotenv` lit les variables du fichier `.env` et les charge dans `os.environ` au moment de son exécution. Si nous supprimons une variable d'environnement après l'avoir chargée, elle n'existe plus dans `os.environ` et n'est pas automatiquement rechargée à partir du fichier `.env`.
+
+### Exemple Illustratif
+
+Supposons que nous ayons un fichier `.env` avec le contenu suivant :
+
+```
+SECRET_KEY=supersecretkey
+```
+
+### Code
+
+Voici un exemple de ce qui se passe lorsque nous chargeons, supprimons et tentons de récupérer à nouveau une variable d'environnement :
+
+```python
+import os
+from dotenv import load_dotenv, dotenv_values
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+
+# Lire la variable d'environnement
+secret_key = os.getenv('SECRET_KEY')
+print(f"Initial SECRET_KEY: {secret_key}")
+
+# Supprimer la variable d'environnement
+del os.environ['SECRET_KEY']
+
+# Essayer de récupérer la variable supprimée avec os.getenv
+secret_key_after_delete = os.getenv('SECRET_KEY')
+print(f"SECRET_KEY after deletion: {secret_key_after_delete}")
+
+# Recharger la variable à partir du fichier .env
+dotenv_path = '.env'
+config = dotenv_values(dotenv_path)
+secret_key_reloaded = config.get('SECRET_KEY')
+print(f"Reloaded SECRET_KEY: {secret_key_reloaded}")
+```
+
+### Sortie
+
+L'exécution de ce code produira la sortie suivante :
+
+```
+Initial SECRET_KEY: supersecretkey
+SECRET_KEY after deletion: None
+Reloaded SECRET_KEY: supersecretkey
+```
+
+### Explications
+
+1. **Chargement Initial :**
+   - La variable `SECRET_KEY` est chargée depuis le fichier `.env` et disponible via `os.getenv`.
+
+2. **Suppression de la Variable :**
+   - `del os.environ['SECRET_KEY']` supprime la variable de l'environnement.
+
+3. **Accès Après Suppression :**
+   - `os.getenv('SECRET_KEY')` retourne `None` car la variable a été supprimée de `os.environ`.
+
+4. **Rechargement de la Variable :**
+   - Pour récupérer la variable après suppression, utilisez `dotenv_values(dotenv_path)` pour lire les valeurs directement à partir du fichier `.env` sans les charger dans `os.environ`.
+
+### Conclusion
+
+Après avoir supprimé une variable d'environnement avec `del os.environ["SECRET_KEY"]`, elle n'est plus accessible via `os.getenv`. Pour récupérer la valeur de cette variable, nous devons la recharger explicitement à partir du fichier `.env` en utilisant des fonctions comme `dotenv_values` ou en appelant `load_dotenv` à nouveau.
