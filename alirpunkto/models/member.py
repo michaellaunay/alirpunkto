@@ -302,7 +302,7 @@ class MemberDataFunctions:
             A unique identifier (UUID).
         """
         return MemberDataFunctions.func_uuid()
-    
+
 @dataclass
 class MemberDatas:
     fullname: str = None
@@ -315,10 +315,11 @@ class MemberDatas:
     lang1: str = None
     lang2: str = None
     lang3: str = None
-    cooperative_behaviour_mark: int = 0
-    cooperative_behaviour_mark_updated: str = None
+    is_active: bool = True
+    cooperative_behaviour_mark: float = 0
+    cooperative_behaviour_mark_updated: date = None
     number_shares_owned: int = 0
-    date_end_validity_yearly_contribution: str = None
+    date_end_validity_yearly_contribution: date = None
     iban: str = None
     role: MemberRoles = MemberRoles.NONE
 
@@ -355,7 +356,7 @@ class Members(PersistentMapping):
             This singleton instance is a mapping to store lists of MemberDatas
             subtypes associated with one unique oid.
         Raises:
-            TypeError: The connection argument must be an instance of 
+            TypeError: The connection argument must be an instance of
                     ZODB.Connection.Connection
         """
         if Members._instance is not None:
@@ -404,8 +405,8 @@ class Members(PersistentMapping):
     def members_emails(self)-> List[str]:
         """Retrieve the emails of all members.
 
-        This method returns a list of email addresses from all members. 
-        In future versions, this functionality might be enhanced with caching 
+        This method returns a list of email addresses from all members.
+        In future versions, this functionality might be enhanced with caching
         and listeners to maintain updated and accurate values.
 
         Returns:
@@ -480,13 +481,13 @@ class Member(Persistent):
         self._memorize_changes("__init__", None, self._member_state)
 
     def _memorize_changes(
-        self, 
-        function_name: Optional[str] = None, 
-        previous_value: Optional[Any] = None, 
+        self,
+        function_name: Optional[str] = None,
+        previous_value: Optional[Any] = None,
         new_value: Optional[Any] = None
         ) -> None:
         """Memorize changes to the member_datas and generate a new seed.
-        
+  
         Args:
             function_name (Optional[str]        # get a random seed and record the creation
 ): The name of the function that
@@ -501,10 +502,10 @@ class Member(Persistent):
         # Fallback to "None" if self._seed is None
         old_seed = self._seed or "None"
 
-        self._seed = random_string(SEED_LENGTH) 
+        self._seed = random_string(SEED_LENGTH)
 
         event = MemberDataEvent(
-            datetime=MemberDataFunctions.now(), 
+            datetime=MemberDataFunctions.now(),
             function_name=function_name,
             value_before=previous_value,
             value_after=new_value,
@@ -529,7 +530,7 @@ class Member(Persistent):
             The state of the member.
         """
         return self._member_state
-    
+
     @member_state.setter
     def member_state(self, value:MemberStates):
         """ Set the state of the member.
@@ -544,11 +545,11 @@ class Member(Persistent):
             raise TypeError(
                 "The state must be an instance of MemberStates."
             )
-        
+  
         old_state = self._member_state.name if self._member_state else "None"
         self._member_state = value
         self._memorize_changes("member_state", old_state, value.name)
-    
+
     @property
     def type(self)-> MemberTypes:
         """ Get the type of the member.
@@ -556,7 +557,7 @@ class Member(Persistent):
             The type of the member.
         """
         return self._type
-    
+
     @type.setter
     def type(self, value:MemberTypes):
         """ Set the type of the member.
@@ -571,7 +572,7 @@ class Member(Persistent):
             raise TypeError(
                 "The type must be an instance of MemberTypes."
             )
-        
+  
         old_type = self._type.name if self._type else "None"
         self._type = value
         self._memorize_changes("type", old_type, value.name)
@@ -583,7 +584,7 @@ class Member(Persistent):
             The email of the member.
         """
         return self._email
-    
+
     @email.setter
     def email(self, value:str):
         """ Set the email of the member.
@@ -596,7 +597,7 @@ class Member(Persistent):
         """
         if not isinstance(value, str):
             raise TypeError("The email must be a string.")
-        
+  
         old_email = self._email if self._email else "None"
         self._email = value
         self._memorize_changes("email", old_email, value)
@@ -608,7 +609,7 @@ class Member(Persistent):
             The pseudonym of the member.
         """
         return self._pseudonym
-   
+
     @pseudonym.setter
     def pseudonym(self, value:str):
         """ Set the pseudonym of the member.
@@ -621,7 +622,7 @@ class Member(Persistent):
         """
         if not isinstance(value, str):
             raise TypeError("The pseudonym must be a string.")
-        
+  
         old_pseudonym = self._pseudonym if self._pseudonym else "None"
         self._pseudonym = value
         self._memorize_changes("pseudonym", old_pseudonym, value)
@@ -634,7 +635,7 @@ class Member(Persistent):
             member.
         """
         return self._modifications.copy()
-    
+
     @property
     def oid(self)-> str:
         """ Get the oid of the member.
@@ -650,7 +651,7 @@ class Member(Persistent):
             The data of the member.
         """
         return self._data
-    
+
     @data.setter
     def data(self, value:MemberDatas):
         """ Set the data of the member.
@@ -663,11 +664,11 @@ class Member(Persistent):
         """
         if not isinstance(value, MemberDatas):
             raise TypeError("The data must be a MemberDatas.")
-        
+  
         old_data = self._data if self._data else "None"
         self._data = value
         self._memorize_changes("data", old_data, value)
-    
+
     @staticmethod
     def generate_unique_oid(
         member_datas:MemberDatas = None,
@@ -676,14 +677,14 @@ class Member(Persistent):
         """
         Generate a unique Object Identifier (OID) for a new MemberDatas object.
 
-        This function tries to generate a unique OID by using the 
+        This function tries to generate a unique OID by using the
          MemberDataFunctions.uuid function.
         It checks for uniqueness by looking into the existing `member_datas`
          mapping.
 
         Args:
             member_datas (MemberDatas, optional): The mapping of existing
-             member_datas to check for OID uniqueness. 
+             member_datas to check for OID uniqueness.
              Defaults to the singleton instance of the MemberDatas class.
             max_retries (int, optional): Maximum number of attempts to generate
              a unique OID. Defaults to 10.
@@ -742,7 +743,7 @@ class Member(Persistent):
                 "The status must be an instance of EmailSendStatus."
             )
         old_status = (
-            self._email_send_status_history[-1].state 
+            self._email_send_status_history[-1].state
             if self._email_send_status_history
             else "None"
         )
@@ -757,7 +758,7 @@ class Member(Persistent):
                 else "None"
             )
         self._email_send_status_history.append(EmailEvent(
-            datetime=MemberDataFunctions.now(), 
+            datetime=MemberDataFunctions.now(),
             state=status,
             function_name=procedure_name,
             seed=email_seed

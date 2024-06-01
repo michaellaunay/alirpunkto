@@ -46,6 +46,7 @@ from .constants_and_globals import (
     CANDIDATURE_OID,
     MEMBER_OID,
     SEED_LENGTH,
+    DEFAULT_COOPERATIVE_BEHAVIOUR_MARK,
 )
 from pyramid.i18n import get_localizer
 from ldap3 import (
@@ -246,7 +247,7 @@ def retrieve_candidature(
         candidature = Candidature()
         # Add the candidature to the candidature list
         get_candidatures(request)[candidature.oid] = candidature
-   
+
     if candidature:
         request.session[CANDIDATURE_OID] = candidature.oid
     else:
@@ -405,14 +406,14 @@ def send_email(
     ) -> bool:
     """
     Generic function to send emails.
-    
+
     Args:
         request: The incoming Pyramid request object.
         subject: Subject of the email.
         recipients: List of email addresses to send the email to.
         template_path: Path to the email body template.
         template_vars: Variables to be used in the template.
-        
+
     Returns:
         bool: True if email is sent successfully, otherwise False.
     """
@@ -444,7 +445,7 @@ def send_email(
 
     mailer = request.registry['mailer']
     status = mailer.send(message) # Remember the message is not sent until the transaction is committed
-    
+
     if status is None:
         log.error(f"Error while preparing sending email {subject} to {recipients}")
         return False
@@ -554,7 +555,14 @@ def update_member_from_ldap(
         conn.search(
             LDAP_BASE_DN,
             f'(uid={oid})',
-            attributes=['cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword', 'employeeNumber', 'isActive', 'gn', 'nationality', 'birthdate', 'preferredLanguage', 'secondLanguage']
+            attributes=[
+                'cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword',
+                'employeeNumber', 'isActive', 'gn', 'nationality', 'birthdate',
+                'preferredLanguage', 'secondLanguage',
+                'cooperativeBehaviourMark', 'cooperativeBehaviorMarkUpdate',
+                'numberSharesOwned', 'dateEndValidityYearlyContribution',
+                'uniqueMemberOf', 'iban', 'dateErasureAllData'
+            ]
         )
         if len(conn.entries) == 0:
             log.warning(f"User {oid} not found in LDAP")
@@ -574,6 +582,22 @@ def update_member_from_ldap(
     new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
     new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
     member = get_member_by_oid(oid, request, False)
+    cooperative_behaviour_mark = (
+        float(member_entry.cooperativeBehaviourMark.value
+            or DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
+        if hasattr(member_entry, 'cooperativeBehaviourMark')
+        else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
+    cooperative_behaviour_mark_update = member_entry.cooperativeBehaviorMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviorMarkUpdate') else None
+    if cooperative_behaviour_mark_update:
+        cooperative_behaviour_mark_update = datetime.datetime.strptime(cooperative_behaviour_mark_update, "%Y%m%d%H%M%SZ")
+    number_shares_owned = member_entry.numberSharesOwned.value if hasattr(member_entry, 'numberSharesOwned') else None
+    date_end_validity_yearly_contribution = member_entry.dateEndValidityYearlyContribution.value if hasattr(member_entry, 'dateEndValidityYearlyContribution') else None
+    if date_end_validity_yearly_contribution:
+        date_end_validity_yearly_contribution = datetime.datetime.strptime(date_end_validity_yearly_contribution, "%Y%m%d%H%M%SZ")
+    unique_member_of = member_entry.uniqueMemberOf.value if hasattr(member_entry, 'uniqueMemberOf') else None
+    iban = member_entry.iban.value if hasattr(member_entry, 'iban') else None
+    date_erasure_all_data = member_entry.dateErasureAllData.value if hasattr(member_entry, 'dateErasureAllData') else None
+
 
     log.debug(f"Update Member {oid} with ldap informations")
     if not member:
@@ -587,7 +611,14 @@ def update_member_from_ldap(
             password_confirm = None,
             lang1 = new_preferred_language,
             lang2 = new_second_language,
-            role = new_type
+            role = new_type,
+            cooperative_behaviour_mark = cooperative_behaviour_mark,
+            cooperative_behaviour_mark_update = cooperative_behaviour_mark_update,
+            number_shares_owned = number_shares_owned,
+            date_end_validity_yearly_contribution = date_end_validity_yearly_contribution,
+            unique_member_of = unique_member_of,
+            iban = iban,
+            date_erasure_all_data = date_erasure_all_data
         )
         member = Member(
             email=new_email,
@@ -651,7 +682,7 @@ def generate_key(secret:str)->bytes:
         secret (str): The secret to use to generate the key
     Returns:
         bytes: The key
-    """    
+    """
     sha256 = hashlib.sha256()
     sha256.update(secret.encode())
     return sha256.digest()
@@ -689,7 +720,7 @@ def encrypt_oid(oid: str, seed: str, secret: str) -> str:
     encrypted_message = fernet.encrypt(concatenated_string.encode())
     encoded_encrypted_message = base64.urlsafe_b64encode(
         encrypted_message).decode()
-    
+
     return encoded_encrypted_message
 
 from typing import List, Dict
@@ -724,12 +755,12 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
     """
     Randomly select the number of voters defined in settings to validate the
     candidate's personal data.
-    
+
     Args:
         request (pyramid.request.Request): The request.
 
     Returns:
-        list: A list of voters in the format: 
+        list: A list of voters in the format:
             [{'cn': 'name', 'sn': 'surname', 'mail': 'email'}, ...]
     """
     server = Server(LDAP_SERVER, get_info=ALL)
@@ -816,15 +847,15 @@ def get_oid_from_pseudonym(
 def register_user_to_ldap(request, candidature, password):
     """
     Register a user to the LDAP directory.
-    
+
     Args:
         request (pyramid.request.Request): the request.
         candidature (Candidature): the candidature of the user to register.
-    
+
     Returns:
         dict: a dictionary containing the result of the registration.
     """
-    
+
     # First, check if the pseudonym is unique
     pseudonym = candidature.pseudonym
     error = is_valid_unique_pseudonym(pseudonym)
@@ -905,7 +936,7 @@ def register_user_to_ldap(request, candidature, password):
         # If there are groups the user belongs to, add them to the uniqueMemberOf attribute
         if groups:
             attributes['uniqueMemberOf'] = groups
-        
+
         log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
         # Add the new user to LDAP
         try:
@@ -931,7 +962,7 @@ def register_user_to_ldap(request, candidature, password):
                 # Check if group addition was successful
                 if not conn.result['description'] == 'success':
                     log.error(f"Error while adding user {pseudonym} to group {group_dn}: {conn.result}")
-            
+
         except Exception as e:
             log.error(f"Error while adding user {pseudonym} to LDAP: {e}")
             success = False
@@ -981,7 +1012,13 @@ def update_member_password(request, member_oid, new_password):
 def update_ldap_member(
     request:Request,
     member:Member,
-    fields_to_update:List[str]=['email', 'data.fullsurname', 'data.description', 'data.type', 'data.fullname', 'data.nationality', 'data.birthdate', 'data.lang1', 'data.lang2', 'data.lang3']
+    fields_to_update:List[str]=[
+        'email', 'sn', 'description', 'employeeType', 'gn', 'nationality',
+        'birthdate', 'preferredLanguage', 'secondLanguage', 'thirdLanguage',
+        'cooperativeBehaviourMark', 'cooperativeBehaviorMarkUpdate',
+        'numberSharesOwned', 'dateEndValidityYearlyContribution', 'IBAN',
+        'uniqueMemberOf', 'dateErasureAllData'
+    ]
     ):
     """
     Update a member in the LDAP directory.
@@ -995,10 +1032,6 @@ def update_ldap_member(
     """
 
     # Connect to the LDAP server
-    server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
-        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-    )
     with get_ldap_connection() as conn:
 
         # DN for the member
@@ -1010,30 +1043,46 @@ def update_ldap_member(
         attributes = {}
         if 'email' in fields_to_update:
             attributes['mail'] = [(MODIFY_REPLACE,[member.email])]
-        if 'sn' in fields_to_update:
-            attributes['data.fullsurname'] = [(MODIFY_REPLACE,[member.data.fullsurname])]
+        if 'data.fullsurname' in fields_to_update:
+            attributes['sn'] = [(MODIFY_REPLACE,[member.data.fullsurname])]
         if 'description' in fields_to_update:
-            attributes['data.description'] = [(MODIFY_REPLACE,[member.data.description])]
-        if 'employeeType' in fields_to_update:
-            attributes['data.type'] = [(MODIFY_REPLACE,[member.type.name])]
-        if 'gn' in fields_to_update:
-            attributes['data.fullname'] = [(MODIFY_REPLACE,[member.data.fullname])]
+            attributes['description'] = [(MODIFY_REPLACE,[member.data.description])]
+        if 'type' in fields_to_update:
+            attributes['employeeType'] = [(MODIFY_REPLACE,[member.type.name])]
+        if 'fullname' in fields_to_update:
+            attributes['gn'] = [(MODIFY_REPLACE,[member.data.fullname])]
         if 'nationality' in fields_to_update:
-            attributes['data.nationality'] = [(MODIFY_REPLACE,[member.data.nationality])]
+            attributes['nationality'] = [(MODIFY_REPLACE,[member.data.nationality])]
         if 'birthdate' in fields_to_update:
-            attributes['data.birthdate'] = [(MODIFY_REPLACE,[member.data.birthdate.strftime("%Y%m%d%H%M%SZ")])]
-        if 'preferredLanguage' in fields_to_update:
-            attributes['data.lang1'] = [(MODIFY_REPLACE,[member.data.lang1])]
-        if 'secondLanguage' in fields_to_update:
-            attributes['data.lang2'] = [(MODIFY_REPLACE,[member.data.lang2])]
-        if 'thirdLanguage' in fields_to_update:
-            attributes['data.lang3'] = [(MODIFY_REPLACE,[member.data.lang3])]
+            attributes['birthdate'] = [(MODIFY_REPLACE,[member.data.birthdate.strftime("%Y%m%d%H%M%SZ")])]
+        if 'lang1' in fields_to_update:
+            attributes['preferredLanguage'] = [(MODIFY_REPLACE,[member.data.lang1])]
+        if 'lang2' in fields_to_update:
+            attributes['secondLanguage'] = [(MODIFY_REPLACE,[member.data.lang2])]
+        if 'lang3' in fields_to_update:
+            attributes['thirdLanguage'] = [(MODIFY_REPLACE,[member.data.lang3])]
+        if 'is_active' in fields_to_update:
+            attributes['isActive'] = [(MODIFY_REPLACE, [member.data.is_active])]
+        if 'cooperative_behaviour_mark' in fields_to_update:
+            attributes['cooperativeBehaviourMark'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark])]
+        if 'cooperative_behaviour_mark_update' in fields_to_update:
+            attributes['cooperativeBehaviorMarkUpdate'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark_updated.strftime("%Y%m%d%H%M%SZ")])]
+        if 'number_shares_owned' in fields_to_update:
+            attributes['numberSharesOwned'] = [(MODIFY_REPLACE, [str(member.data.number_shares_owned)])]
+        if 'date_end_validity_yearly_contribution' in fields_to_update:
+            attributes['dateEndValidityYearlyContribution'] = [(MODIFY_REPLACE, [member.data.date_end_validity_yearly_contribution.strftime("%Y%m%d%H%M%SZ")])]
+        if 'iban' in fields_to_update:
+            attributes['IBAN'] = [(MODIFY_REPLACE, [member.data.iban])]
+        if 'uniqueMemberOf' in fields_to_update:
+            attributes['uniqueMemberOf'] = [(MODIFY_REPLACE, [member.data.uniqueMemberOf])]
+        if 'date_erasure_all_data' in fields_to_update:
+            attributes['dateErasureAllData'] = [(MODIFY_REPLACE, [member.data.dateErasureAllData.strftime("%Y%m%d%H%M%SZ")])]
         try:
             success = conn.modify(dn, attributes)
         except Exception as e:
             log.error(f"Error while updating user {member.oid} in LDAP: {e}")
             success = False
-        
+
         if success:
             return {'status': 'success', 'message': _('member_update_successful')}
         else:
@@ -1052,7 +1101,7 @@ def is_admin(username:str, password:str)-> bool:
     password (str): The password corresponding to the username.
 
     Returns:
-    bool: Returns True if the provided username and password match the administrator's credentials, 
+    bool: Returns True if the provided username and password match the administrator's credentials,
     otherwise returns False.
     """
     return (username.strip(), password.strip()) == \
@@ -1123,7 +1172,7 @@ def send_member_state_change_email(request: Request,
         else "member_state_change"
     )
     assert(template_name.find("{lang}") == -1)
-    # The string for the template path is concatenated because the 'lang' variable 
+    # The string for the template path is concatenated because the 'lang' variable
     # will be replaced during formatting by the resource resolution
     template_path = LOCALE_LANG_MESSAGES+template_name+ZPT_EXTENSION
     template_resolver = get_local_template(request, template_path).abspath()
@@ -1140,7 +1189,7 @@ def send_member_state_change_email(request: Request,
         seed,
         request.registry.settings['session.secret']
     )
-  
+
     url = request.route_url('register', _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
@@ -1149,7 +1198,7 @@ def send_member_state_change_email(request: Request,
     user = (member.pseudonym if hasattr(member, "pseudonym")
             else email.split('@')[0]
     )
-    
+
     template_vars = {
         'page_register_with_oid': url,
         'site_url': site_url,
@@ -1161,7 +1210,7 @@ def send_member_state_change_email(request: Request,
     }
     if extra_template_parameter:
         template_vars.update(extra_template_parameter)
-    
+
     # Use the send_email from utils.py
     try:
         # Stack email sending action to be executed at commit
@@ -1175,7 +1224,7 @@ def send_member_state_change_email(request: Request,
     except Exception as e:
         log.error(f"Error while sending email to {email} : {e}")
         success = False
-    
+
     if success:
         member.add_email_send_status(
             EmailSendStatus.SENT, sending_function_name)
@@ -1210,7 +1259,7 @@ def send_candidature_state_change_email(request: Request,
     subject = (subject if subject
         else localizer.translate(_('email_candidature_state_changed'))
     )
-    
+
     template_vars = {
         'candidature': candidature,
         'CandidatureStates': CandidatureStates,
@@ -1248,7 +1297,7 @@ def send_email_to_member(request: Request,
     email = member.email
     # Retrieve the seed from the last email event which must be
     # EmailSendStatus.IN_PREPARATION
-    seed = member.email_send_status_history[-1].seed 
+    seed = member.email_send_status_history[-1].seed
 
     # Prepare the necessary information for the email
     parameter = encrypt_oid(
@@ -1256,12 +1305,12 @@ def send_email_to_member(request: Request,
         seed,
         request.registry.settings['session.secret']
     )
-  
+
     url = request.route_url(view_name, _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
-    
+
     template_vars = {
         'page_with_oid': url,
         'site_url': site_url,
@@ -1271,7 +1320,7 @@ def send_email_to_member(request: Request,
     }
     if extra_template_parameters:
         template_vars.update(extra_template_parameters)
-    
+
     # Use the send_email from utils.py
     try:
         # Stack email sending action to be executed at commit
@@ -1285,7 +1334,7 @@ def send_email_to_member(request: Request,
     except Exception as e:
         log.error(f"Error while sending email to {email} : {e}")
         success = False
-    
+
     if success:
         member.add_email_send_status(
             EmailSendStatus.SENT, sending_function_name)
@@ -1301,11 +1350,11 @@ def send_validation_email(
     ) -> bool:
     """
     Send the validation email to the candidate.
-    
+
     Args:
         request: The request object.
         candidature: The candidature object.
-        
+
     Returns:
         bool: True if the email is successfully sent, False otherwise.
     """
@@ -1324,12 +1373,12 @@ def send_validation_email(
         seed,
         request.registry.settings['session.secret']
     )
-    
+
     url = request.route_url('register', _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
-    
+
     template_vars = {
         'challenge_A': challenge["A"][0],
         'challenge_B': challenge["B"][0],
@@ -1363,11 +1412,11 @@ def send_check_new_email(
     ) -> bool:
     """
     Send the validation of new email adress to the member.
-    
+
     Args:
         request: The request object.
         candidature: The candidature object.
-        
+
     Returns:
         bool: True if the email is successfully sent, False otherwise.
     """
@@ -1385,12 +1434,12 @@ def send_check_new_email(
         seed,
         request.registry.settings['session.secret']
     )
-    
+
     url = request.route_url('check_new_email', _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
-    
+
     template_vars = {
         'check_new_email_view':url,
         'site_url': site_url,
@@ -1416,7 +1465,7 @@ def send_check_new_email(
 def logout(request: Request):
     """
     Log out the user by removing the user's OID from the session.
-    
+
     Args:
         request (Request): The request object.
     """
@@ -1435,4 +1484,4 @@ def logout(request: Request):
     if CANDIDATURE_OID in request.session:
         del request.session[CANDIDATURE_OID] #
     if MEMBER_OID in request.session:
-        del request.session[MEMBER_OID] 
+        del request.session[MEMBER_OID]

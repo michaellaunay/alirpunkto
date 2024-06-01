@@ -273,14 +273,14 @@ class RegisterForm(schema.CSRFSchema):
                 and 'password' fields.
 
         Example:
-            Given a permissions object with read and write permissions for specific fields, and an optional dictionary of 
+            Given a permissions object with read and write permissions for specific fields, and an optional dictionary of
             force permissions, this method will set the appropriate access and visibility settings for each form field.
 
         Note:
             - If a field's permission is set to `Permissions.NONE`, the field will be removed from the form.
             - If a field's permission includes `Permissions.WRITE`, the field will be editable.
             - If a field's permission includes `Permissions.READ`, the field will be visible but not editable.
-            - Force permissions take precedence over the provided permissions and ensure that specific fields have the desired 
+            - Force permissions take precedence over the provided permissions and ensure that specific fields have the desired
             access level.
 
         Raises:

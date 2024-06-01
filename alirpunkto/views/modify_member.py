@@ -137,7 +137,6 @@ def modify_member(request):
                 "message": _('unknown_accessed_member'),
                 "error": sending_success
             }
-
         permissions = get_access_permissions(accessed_member, accessor_member)
         if not permissions or permissions == Permissions.NONE:
             log.warning(
@@ -207,16 +206,23 @@ def modify_member(request):
                 ) == (Permissions.WRITE | Permissions.ACCESS)
         ])
         err = None
+        fields_to_update = []
         for field in writable_fields:
             if (
                 field in request.POST 
                 and request.POST[field]
                 and (
-                    request.POST[field] != getattr(accessed_member.data, field, NotImplemented)
-                    or request.POST[field] != getattr(accessed_member, field, NotImplemented)
+                    request.POST[field] != getattr(
+                        accessed_member.data, field, NotImplemented)
+                    or request.POST[field] != getattr(
+                        accessed_member, field, NotImplemented)
                 )):
-                if accessed_member_oid == member.oid and "email" in request.POST and "email" in writable_fields:
+                if (
+                    field == "email" and accessed_member_oid == member.oid and
+                    "email" in request.POST and "email" in writable_fields
+                ):
                     email = request.POST['email']
+                    #@TODO change to manage other changed fields
                     if email != accessed_member.email:
                         err = is_valid_email(email, request)
                         if err:
@@ -256,12 +262,14 @@ def modify_member(request):
                     err = is_valid_password(password)
                 else:
                     #@TODO cast the value to the right type
-                    if field in fields(accessed_member.data):
+                    if field in accessed_member.data.get_field_names():
                         if getattr(accessed_member.data, field) != request.POST[field]:
                             setattr(accessed_member.data, field, request.POST[field])
-                    elif field in fields(accessed_member):
+                            fields_to_update.append(field)
+                    elif field in dir(accessed_member):
                         if getattr(accessed_member, field) != request.POST[field]:
                             setattr(accessed_member, field, request.POST[field])
+                            fields_to_update.append(field)
                     else:
                         log.error(f"Unknown field {field} to {request.POST[field]}")
                         error = _('error_while_setting_field', mapping={'field': field})
@@ -273,15 +281,8 @@ def modify_member(request):
                             "form": form.render(),
                             "error": error}
         # write modifications in ldap
-        fields_to_update = []
+
         sending_success = None
-        for field in writable_fields:
-            if (field in request.POST and request.POST[field] 
-                and getattr(accessed_member.data, field, getattr(accessed_member, field,None))
-            ):
-                if field == "email" and accessed_member_oid == member.oid:
-                    continue # The email is updated by the check_new_email view
-                fields_to_update.append(field)
         if fields_to_update:
             sending_success = update_ldap_member(request, accessed_member, fields_to_update=fields_to_update)
         if not sending_success and fields_to_update:
