@@ -81,43 +81,26 @@ def modify_member(request):
             if not member:
                 return {
                     "form": None,
-                    "message": _('unknown_member'),
                     "member": None,
                     "accessed_member": None,
                     "accessed_members": members,
+                    "error": _('unknown_member'),
                 }
     else:
         return {
             "form": None,
-            "message": _('unknown_member'),
             "member": None,
             "accessed_member": None,
             "accessed_members": members,
+            "error": _('unknown_member'),
         }
     accessor_member = member
     if "submit" in request.POST or 'modify' in request.POST:
         if "submit" in request.POST:
             accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)
-            if accessed_member_oid and accessed_member_oid in members:
-                update_member_from_ldap(accessed_member_oid, request)
-                accessed_member = Members.get_instance()[accessed_member_oid]
-                if not accessed_member:
-                    return {
-                        "form": None,
-                        "member": member,
-                        "accessed_member": None,
-                        "accessed_members": members,
-                        "message": _('unknown_accessed_member'),
-                    }
         elif 'modify' in request.POST:
             accessed_member_oid = (request.session[ACCESSED_MEMBER_OID]
                 if ACCESSED_MEMBER_OID in request.session else None
-                )
-            if accessed_member_oid:
-                # Force the update of the member from the ldap
-                accessed_member = update_member_from_ldap(
-                    accessed_member_oid,
-                    request
                 )
         if not accessed_member_oid:
             return {
@@ -125,17 +108,22 @@ def modify_member(request):
                 "member": member,
                 "accessed_member": None,
                 "accessed_members": members,
-                "message": _('unknown_accessed_member'),
+                "error": _('unknown_accessed_member'),
             }
+        # Update the accessed member from the ldap
         accessed_member = update_member_from_ldap(accessed_member_oid, request)
+        # Memorize the moddification request
+        if accessed_member.member_state != MemberStates.DATA_MODIFICATION_REQUESTED:
+            request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
+            accessed_member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
+            transaction.commit()
         if not accessed_member:
             return {
                 "form": None,
                 "member": member,
                 "accessed_member": None,
                 "accessed_members": members,
-                "message": _('unknown_accessed_member'),
-                "error": sending_success
+                "error": _('unknown_accessed_member')
             }
         permissions = get_access_permissions(accessed_member, accessor_member)
         if not permissions or permissions == Permissions.NONE:
@@ -143,10 +131,11 @@ def modify_member(request):
                 f'No permission to access member datas: {accessed_member_oid.oid}'
             )
             request.session.flash(_('no_permission'), 'error')
-            return {"error":_('no_permission'),
+            return {
                 "member": None,
                 "form": None,
                 "accessed_members": members,
+                "error":_('no_permission'),
             }
         schema = RegisterForm().bind(request=request)
         # The permissions don't have the same structure as the schema,
@@ -178,10 +167,8 @@ def modify_member(request):
             buttons=('modify',),
             translator=Translator
         )
-        request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
-        accessed_member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
-        transaction.commit()
-        return {"form": form.render(appstruct=appstruct),
+        return {
+            "form": form.render(appstruct=appstruct),
             "member": member,
             "accessed_members": {},
             "accessed_member": accessed_member.oid,
@@ -227,38 +214,46 @@ def modify_member(request):
                         err = is_valid_email(email, request)
                         if err:
                             request.session.flash(err, 'error')
-                            return {"error":err,
+                            return {
                                 "member": member,
                                 "accessed_members": {},
                                 "accessed_member": accessed_member.oid,
-                                "form": form.render()}
+                                "form": form.render(),
+                                "error":err,
+                                }
                         accessed_member.new_email = email
                         transaction.commit()
                         sending_success = send_check_new_email(request, accessed_member, email)
                         if not sending_success:
-                            return {"message":_('check_new_email_send_error'),
+                            return {
+                                "message":_('check_new_email_send_error'),
                                 "member": member,
                                 "accessed_member": accessed_member,
                                 "accessed_members": {},
-                                "form": form.render()}
+                                "form": form.render(),
+                            }
                         message = _('check_new_email_send')
                 elif "password" in request.POST and "password" in writable_fields:
                     password = request.params['password'] if 'password' in request.params else None
                     password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None
                     if password != password_confirm:
                         request.session.flash(_('password_not_match'), 'error')
-                        return {"error":_('password_not_match'),
+                        return {
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render()}
+                            "form": form.render(),
+                            "error":_('password_not_match'),
+                        }
                     if password == "":
                         request.session.flash(_('password_required'), 'error')
-                        return {"error":_('password_required'),
+                        return {
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render()}
+                            "form": form.render(),
+                            "error":_('password_required'),
+                        }
                     err = is_valid_password(password)
                 else:
                     #@TODO cast the value to the right type
@@ -274,31 +269,35 @@ def modify_member(request):
                         log.error(f"Unknown field {field} to {request.POST[field]}")
                         error = _('error_while_setting_field', mapping={'field': field})
                         request.session.flash(_('error_while_setting_field'), error)
-                        return {"error":_('password_required'),
+                        return {
                             "member": member,
                             "accessed_members": members,
                             "accessed_member": accessed_member.oid,
                             "form": form.render(),
-                            "error": error}
+                            "error": error,
+                        }
         # write modifications in ldap
 
         sending_success = None
         if fields_to_update:
             sending_success = update_ldap_member(request, accessed_member, fields_to_update=fields_to_update)
         if not sending_success and fields_to_update:
-            return {"error":_('error_while_updating_member'),
+            return {
                 "member": member,
                 "accessed_members": members,
                 "accessed_member": accessed_member.oid,
-                "form": form.render()}
+                "form": form.render(),
+                "error":_('error_while_updating_member'),
+                }
         accessed_member.member_state = MemberStates.DATA_MODIFIED
         transaction.commit()
         #@TODO send a modification confirmation email
-        return {"member": member,
+        return {
+            "member": member,
             "form": None,
             "accessed_member":accessed_member,
             "accessed_members": [],
-            "message": message if message else _('member_data_updated')
+            "message": message if message else _('member_data_updated'),
         }
         
     else :
