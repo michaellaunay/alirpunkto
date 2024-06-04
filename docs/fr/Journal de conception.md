@@ -1757,3 +1757,200 @@ Reloaded SECRET_KEY: supersecretkey
 ### Conclusion
 
 Après avoir supprimé une variable d'environnement avec `del os.environ["SECRET_KEY"]`, elle n'est plus accessible via `os.getenv`. Pour récupérer la valeur de cette variable, nous devons la recharger explicitement à partir du fichier `.env` en utilisant des fonctions comme `dotenv_values` ou en appelant `load_dotenv` à nouveau.
+
+# 2024-05-04
+
+Il est possible d'utiliser l'authentification réussie à AlirPunkto via OpenLDAP pour générer un jeton d'accès Keycloak sans exiger une nouvelle authentification de l'utilisateur. Voici comment cela peut être mis en œuvre :
+
+### Scénario de Connexion et Gestion du SSO avec AlirPunkto et Keycloak
+
+1. **Connexion Initiale à AlirPunkto :**
+   - L'utilisateur accède à AlirPunkto et saisit son login et mot de passe.
+   - AlirPunkto vérifie les informations d'identification en interrogeant OpenLDAP.
+   - Si l'authentification LDAP réussit, l'utilisateur est autorisé à modifier ses informations personnelles dans OpenLDAP.
+
+2. **Demande de Jeton d'Accès Keycloak :**
+   - Après l'authentification réussie via LDAP, AlirPunkto utilise les identifiants de l'utilisateur pour obtenir un jeton d'accès auprès de Keycloak sans nécessiter une nouvelle saisie des identifiants.
+   - Cela peut être fait en utilisant les API de Keycloak pour une "authentification par proxy" ou en configurant Keycloak pour accepter les informations d'identification vérifiées par AlirPunkto.
+
+3. **Gestion de la Session SSO :**
+   - Keycloak génère un jeton d'accès et un jeton d'actualisation pour l'utilisateur.
+   - AlirPunkto stocke ces jetons et les utilise pour permettre à l'utilisateur d'accéder à d'autres applications sans se réauthentifier.
+
+4. **Accès aux Autres Applications :**
+   - L'utilisateur peut naviguer vers d'autres applications protégées par Keycloak. Ces applications utiliseront le jeton d'accès pour vérifier l'identité de l'utilisateur et accorder l'accès sans exiger de nouvelle authentification.
+
+### Diagramme de Séquences Mermaid
+
+```mermaid
+sequenceDiagram
+    participant Utilisateur
+    participant AlirPunkto
+    participant Keycloak
+    participant OpenLDAP
+    participant Application
+
+    Note over Utilisateur, AlirPunkto: Connexion à AlirPunkto
+    Utilisateur->>AlirPunkto: Saisit login et mot de passe
+    AlirPunkto->>OpenLDAP: Vérification des identifiants
+    OpenLDAP-->>AlirPunkto: Confirmation de l'authentification réussie
+
+    Note over AlirPunkto, Keycloak: Demande de Jeton d'Accès Keycloak
+    AlirPunkto->>Keycloak: Demande de jeton avec identifiants utilisateur
+    Keycloak->>Keycloak: Génère jeton d'accès et jeton d'actualisation
+    Keycloak-->>AlirPunkto: Retourne les jetons
+
+    Note over Utilisateur, AlirPunkto: Modification des informations personnelles
+    Utilisateur->>AlirPunkto: Modifie les informations personnelles
+    AlirPunkto->>OpenLDAP: Mise à jour des informations personnelles
+    OpenLDAP-->>AlirPunkto: Confirmation de la mise à jour
+
+    Note over Utilisateur, Application: Accès aux autres applications
+    Utilisateur->>AlirPunkto: Sélectionne une application
+    AlirPunkto->>Application: Redirige avec jeton d'accès
+    Application->>Keycloak: Vérifie le jeton d'accès
+    Keycloak-->>Application: Confirmation de validité du jeton
+    Application->>Utilisateur: Accès autorisé
+```
+
+### Détails Techniques
+
+1. **Configuration d'AlirPunkto pour la Demande de Jeton :**
+   - AlirPunkto doit être configuré pour communiquer avec Keycloak et utiliser les API appropriées pour obtenir un jeton d'accès.
+   - Un compte de service Keycloak avec les permissions appropriées pourrait être utilisé pour ce processus.
+
+2. **Utilisation des API Keycloak :**
+   - AlirPunkto envoie une requête à Keycloak avec les identifiants de l'utilisateur vérifiés.
+   - Keycloak émet un jeton d'accès basé sur la vérification d'AlirPunkto.
+
+3. **Stockage et Gestion des Jetons :**
+   - Les jetons générés doivent être sécurisés et gérés de manière appropriée pour éviter tout risque de sécurité.
+   - Les jetons peuvent être stockés dans des sessions utilisateur côté serveur ou dans des cookies sécurisés.
+
+## Ajout du code de Keycloak
+
+Pour demander un jeton à Keycloak après avoir vérifié les informations d'identification de l'utilisateur via LDAP, nous pouvons utiliser la bibliothèque `requests` en Python pour interagir avec les API de Keycloak. Voici comment :
+
+1. **Ajouter une fonction pour demander un jeton à Keycloak dans un fichier utilitaire :**
+   - Créez un fichier `alirpunkto/utils/keycloak.py` (ou ajoutons-le dans le fichier alirpunkto/utils.py).
+
+```python
+import requests
+from typing import Optional
+from .models.users import User
+
+KEYCLOAK_SERVER_URL = "https://your-keycloak-server/auth"
+KEYCLOAK_REALM = "your-realm"
+KEYCLOAK_CLIENT_ID = "your-client-id"
+KEYCLOAK_CLIENT_SECRET = "your-client-secret"
+
+def get_keycloak_token(user: User, password: str) -> Optional[str]:
+    token_url = f"{KEYCLOAK_SERVER_URL}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/token"
+    payload = {
+        'client_id': KEYCLOAK_CLIENT_ID,
+        'client_secret': KEYCLOAK_CLIENT_SECRET,
+        'grant_type': 'password',
+        'username': user.oid,  # assuming the oid is used as the username in Keycloak
+        'password': password,
+    }
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    response = requests.post(token_url, data=payload, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json().get('access_token')
+    else:
+        print(f"Failed to get token: {response.status_code} - {response.text}")
+        return None
+```
+
+2. **Utiliser cette fonction dans votre processus de connexion :**
+   - Modifions la fonction de vérification de mot de passe `check_password` pour inclure l'appel à `get_keycloak_token` après avoir vérifié l'utilisateur via LDAP.
+
+```python
+# Modification du fichier alirpunkto/utils.py
+from .models.users import User
+from typing import Union, Optional
+from ldap3 import Server, Connection, ALL, LDAPBindError
+import logging
+
+log = logging.getLogger(__name__)
+
+LDAP_SERVER = "your-ldap-server"
+LDAP_BASE_DN = "your-base-dn"
+LDAP_OU = "your-organizational-unit"
+
+from .keycloak import get_keycloak_token
+
+def check_password(username: str, oid: str, password: str) -> Union[None, User]:
+    """Check in ldap if the password is correct for the given username.
+
+    Args:
+        username (str): the username
+        oid (str): the oid
+        password (str): the password
+
+    Returns:
+        User: a User instance if the password is correct, None otherwise
+    """
+    # define an unsecure LDAP server, requesting info on DSE and schema
+    server = Server(LDAP_SERVER, get_info=ALL)
+    ldap_login = (
+        f"uid={oid},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU
+        else f"uid={oid},{LDAP_BASE_DN}"
+    )  # define the user to authenticate
+    log.debug(f"Trying to authenticate {ldap_login=} with {password=}")
+    try:
+        # define an unsecure LDAP connection, using the credentials above
+        conn = Connection(server, ldap_login, password, auto_bind=True)
+        conn.search(
+            LDAP_BASE_DN,
+            '(uid={})'.format(oid),
+            attributes=['cn', 'uid', 'mail', 'employeeNumber']
+        )  # search for the user in the LDAP directory
+    except LDAPBindError as e:
+        log.debug(f"Error while authenticating {username}: {e}")
+        return None
+    if len(conn.entries) == 0:
+        return None
+    user_entry = conn.entries[0]
+    name = user_entry.cn.value
+    employeeNumber = (
+        user_entry.employeeNumber.value
+        if "employeeNumber" in user_entry else user_entry.uid.value
+    )
+    email = (
+        user_entry.mail.value
+        if "mail" in user_entry else "undefined@example.com"
+    )
+    if "mail" not in user_entry:
+        log.warning(f"User {username} has no email address")
+    if "employeeNumber" not in user_entry:
+        log.warning(f"User {username} has no employeeNumber")
+
+    user = User(name=name, email=email, oid=employeeNumber)
+    
+    # Request Keycloak token
+    token = get_keycloak_token(user, password)
+    if token:
+        log.debug(f"Successfully obtained Keycloak token for {username}")
+    else:
+        log.warning(f"Failed to obtain Keycloak token for {username}")
+    
+    return user
+```
+
+### Explication du Code
+
+1. **Demande de Jeton à Keycloak :**
+   - La fonction `get_keycloak_token` envoie une requête POST à l'endpoint de token de Keycloak avec les identifiants de l'utilisateur.
+   - Elle utilise le `grant_type` "password" pour obtenir un jeton d'accès OAuth 2.0.
+   - Si la requête réussit, elle retourne le jeton d'accès ; sinon, elle retourne `None`.
+
+2. **Intégration dans `check_password` :**
+   - Après avoir vérifié l'authentification LDAP, la fonction `check_password` appelle `get_keycloak_token` pour obtenir un jeton d'accès pour l'utilisateur.
+   - Le résultat (succès ou échec) de cette requête est logué.
+
+Avec ce scénario, nous profiterons de l'authentification réussie via LDAP pour générer un jeton d'accès Keycloak sans exiger une nouvelle authentification de l'utilisateur, facilitant ainsi l'intégration du SSO.
