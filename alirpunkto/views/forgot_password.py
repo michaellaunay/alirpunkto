@@ -234,7 +234,7 @@ def forgot_password(request):
             log.error(
                 f"Error while reset password {member.oid} : {result['message']}"
             )
-            return {"error":_('15dd'), "member": member, "form": None}
+            return {"error":_('password_not_changed'), "member": member, "form": None}
     else :
         return {"member": None, "form": None}
 
