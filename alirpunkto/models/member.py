@@ -317,10 +317,12 @@ class MemberDatas:
     lang3: str = None
     is_active: bool = True
     cooperative_behaviour_mark: float = 0
-    cooperative_behaviour_mark_updated: date = None
+    cooperative_behaviour_mark_update: date = None
     number_shares_owned: int = 0
     date_end_validity_yearly_contribution: date = None
+    unique_member_of: str = ""
     iban: str = None
+    date_erasure_all_data: date = None
     role: MemberRoles = MemberRoles.NONE
 
     def iter_attributes(self)-> Iterator[Tuple[str, Any]]:

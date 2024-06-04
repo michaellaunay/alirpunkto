@@ -157,7 +157,7 @@ def modify_member(request):
             'lang2': accessed_member.data.lang2,
             'lang3': accessed_member.data.lang3,
             'cooperative_behaviour_mark': accessed_member.data.cooperative_behaviour_mark,
-            'cooperative_behaviour_mark_update': accessed_member.data.cooperative_behaviour_mark_updated,
+            'cooperative_behaviour_mark_update': accessed_member.data.cooperative_behaviour_mark_update,
             'number_shares_owned': accessed_member.data.number_shares_owned,
             'date_end_validity_yearly_contribution': accessed_member.data.date_end_validity_yearly_contribution,
             'iban': accessed_member.data.iban,
