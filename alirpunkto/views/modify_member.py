@@ -218,7 +218,7 @@ def modify_member(request):
                                 "member": member,
                                 "accessed_members": {},
                                 "accessed_member": accessed_member.oid,
-                                "form": form.render(),
+                                "form": form.render() if form else None,
                                 "error":err,
                                 }
                         accessed_member.new_email = email
@@ -230,7 +230,7 @@ def modify_member(request):
                                 "member": member,
                                 "accessed_member": accessed_member,
                                 "accessed_members": {},
-                                "form": form.render(),
+                                "form": form.render() if form else None,
                             }
                         message = _('check_new_email_send')
                 elif "password" in request.POST and "password" in writable_fields:
@@ -242,7 +242,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render(),
+                            "form": form.render() if form else None,
                             "error":_('password_not_match'),
                         }
                     if password == "":
@@ -251,7 +251,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render(),
+                            "form": form.render() if form else None,
                             "error":_('password_required'),
                         }
                     err = is_valid_password(password)
@@ -273,7 +273,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": members,
                             "accessed_member": accessed_member.oid,
-                            "form": form.render(),
+                            "form": form.render() if form else None,
                             "error": error,
                         }
         # write modifications in ldap

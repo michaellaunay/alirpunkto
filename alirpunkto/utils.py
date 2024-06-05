@@ -337,27 +337,19 @@ def is_valid_unique_pseudonym(pseudonym):
             'error_details':_("pseudonym_maximum_length",
                 {"MAX_PSEUDONYM_LENGTH":MAX_PSEUDONYM_LENGTH})
         }
+
     # define an unsecure LDAP server, requesting info on DSE and schema
-    server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login= (f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
-        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-        ) # define the user to authenticate
-    conn = Connection(
-        server,
-        ldap_login,
-        get_secret(LDAP_PASSWORD),
-        auto_bind=True
-    )
-    # Verify that the pseudonym is not already registered
-    conn.search(
-        LDAP_BASE_DN,
-        f"(cn={pseudonym})",
-        attributes=['cn']
-    ) # search for the user in the LDAP directory
-    # Verify that the candidate is not already registered
-    if len(conn.entries) != 0:
-        # If already registered, display an error message
-        return {'error': _('pseudonym_allready_exists')}
+    with get_ldap_connection() as conn:
+        # Verify that the pseudonym is not already registered
+        conn.search(
+            LDAP_BASE_DN,
+            f"(cn={pseudonym})",
+            attributes=['cn']
+        ) # search for the user in the LDAP directory
+        # Verify that the candidate is not already registered
+        if len(conn.entries) != 0:
+            # If already registered, display an error message
+            return {'error': _('pseudonym_allready_exists')}
     # The pseudonym is valid and not already used
     return None
 
@@ -863,20 +855,7 @@ def register_user_to_ldap(request, candidature, password):
         return error
 
     # Continue to register the user to LDAP
-    server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
-        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-    )
-    log.debug(
-        f"LDAP Connection{LDAP_LOGIN=},{LDAP_OU=},{LDAP_BASE_DN=},"
-        f"{get_secret(LDAP_PASSWORD)=},{LDAP_SERVER=}"
-    )
-    with Connection(
-            server,
-            ldap_login,
-            get_secret(LDAP_PASSWORD),
-            auto_bind=True
-        ) as conn:
+    with get_ldap_connection() as conn:
 
         # DN for the new entry
         dn = (f"uid={candidature.oid},{LDAP_OU},{LDAP_BASE_DN}"
@@ -986,10 +965,6 @@ def update_member_password(request, member_oid, new_password):
     """
 
     # Connect to the LDAP server
-    server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
-        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-    )
     with get_ldap_connection() as conn:
         # DN for the member
         dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
