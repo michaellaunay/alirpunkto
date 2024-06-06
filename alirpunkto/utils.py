@@ -47,6 +47,7 @@ from .constants_and_globals import (
     MEMBER_OID,
     SEED_LENGTH,
     DEFAULT_COOPERATIVE_BEHAVIOUR_MARK,
+    ACCESSED_MEMBER_OID,
 )
 from pyramid.i18n import get_localizer
 from ldap3 import (
@@ -532,121 +533,113 @@ def update_member_from_ldap(
         Member: the member
         None: if not found in ldap
     """
-    server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login = (f"{LDAP_LOGIN},"
-                  f"{(LDAP_OU + ',') if LDAP_OU else ''}"
-                  f"{LDAP_BASE_DN}"
-    )
     try:
-        conn = Connection(server, ldap_login, get_secret(LDAP_PASSWORD), auto_bind=True)
-    except Exception as e:
-        log.error(f"Error while connecting to LDAP: {e}")
-        return None
-    # Extend the list of attributes retrieved to include all those added during registration
-    try:
-        conn.search(
-            LDAP_BASE_DN,
-            f'(uid={oid})',
-            attributes=[
-                'cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword',
-                'employeeNumber', 'isActive', 'gn', 'nationality', 'birthdate',
-                'preferredLanguage', 'secondLanguage',
-                'cooperativeBehaviourMark', 'cooperativeBehaviorMarkUpdate',
-                'numberSharesOwned', 'dateEndValidityYearlyContribution',
-                'uniqueMemberOf', 'iban', 'dateErasureAllData'
-            ]
-        )
-        if len(conn.entries) == 0:
-            log.warning(f"User {oid} not found in LDAP")
-            return None
+        with get_ldap_connection() as conn:
+            # Extend the list of attributes retrieved to include all those
+            # added during registration
+            conn.search(
+                LDAP_BASE_DN,
+                f'(uid={oid})',
+                attributes=[
+                    'cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword',
+                    'employeeNumber', 'isActive', 'gn', 'nationality',
+                    'birthdate', 'preferredLanguage', 'secondLanguage',
+                    'cooperativeBehaviourMark',
+                    'cooperativeBehaviorMarkUpdate', 'numberSharesOwned',
+                    'dateEndValidityYearlyContribution', 'uniqueMemberOf',
+                    'iban', 'dateErasureAllData'
+                ]
+            )
+            if len(conn.entries) == 0:
+                log.warning(f"User {oid} not found in LDAP")
+                return None
+            member_entry = conn.entries[0]
+            new_email = member_entry.mail.value if hasattr(member_entry, 'mail') else None
+            new_pseudonym = member_entry.cn.value if hasattr(member_entry, 'cn') else None
+            new_type = MemberTypes[member_entry.employeeType.value] if hasattr(member_entry, 'employeeType') else None
+            new_fullname = member_entry.gn.value if hasattr(member_entry, 'gn') else None
+            new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
+            new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
+            if new_birthdate:
+                new_birthdate = datetime.datetime.strptime(new_birthdate, "%Y%m%d%H%M%SZ")
+            new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
+            new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
+            member = get_member_by_oid(oid, request, False)
+            cooperative_behaviour_mark = (
+                float(member_entry.cooperativeBehaviourMark.value
+                    or DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
+                if hasattr(member_entry, 'cooperativeBehaviourMark')
+                else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
+            cooperative_behaviour_mark_update = member_entry.cooperativeBehaviorMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviorMarkUpdate') else None
+            if cooperative_behaviour_mark_update:
+                cooperative_behaviour_mark_update = datetime.datetime.strptime(cooperative_behaviour_mark_update, "%Y%m%d%H%M%SZ")
+            number_shares_owned = member_entry.numberSharesOwned.value if hasattr(member_entry, 'numberSharesOwned') else None
+            date_end_validity_yearly_contribution = member_entry.dateEndValidityYearlyContribution.value if hasattr(member_entry, 'dateEndValidityYearlyContribution') else None
+            if date_end_validity_yearly_contribution:
+                date_end_validity_yearly_contribution = datetime.datetime.strptime(date_end_validity_yearly_contribution, "%Y%m%d%H%M%SZ")
+            unique_member_of = member_entry.uniqueMemberOf.value if hasattr(member_entry, 'uniqueMemberOf') else None
+            iban = member_entry.iban.value if hasattr(member_entry, 'iban') else None
+            date_erasure_all_data = member_entry.dateErasureAllData.value if hasattr(member_entry, 'dateErasureAllData') else None
+
+        log.debug(f"Update Member {oid} with ldap informations")
+        if not member:
+            log.debug(f"Create Member {oid} with informations found in LDAP with {new_email=}, {new_pseudonym=}, {new_type=}, {new_fullname=}, {new_nationality=}, {new_birthdate=}, {new_preferred_language=}, {new_second_language=}")
+            datas = MemberDatas(
+                fullname=new_fullname,
+                fullsurname = new_fullname,
+                nationality = new_nationality,
+                birthdate = new_birthdate,
+                password = None,
+                password_confirm = None,
+                lang1 = new_preferred_language,
+                lang2 = new_second_language,
+                role = new_type,
+                cooperative_behaviour_mark = cooperative_behaviour_mark,
+                cooperative_behaviour_mark_update = cooperative_behaviour_mark_update,
+                number_shares_owned = number_shares_owned,
+                date_end_validity_yearly_contribution = date_end_validity_yearly_contribution,
+                unique_member_of = unique_member_of,
+                iban = iban,
+                date_erasure_all_data = date_erasure_all_data
+            )
+            member = Member(
+                email=new_email,
+                pseudonym=new_pseudonym,
+                oid=oid,
+                data=datas
+            )
+            append_member(member, request)
+        else :
+            # Update the member object with the data retrieved from LDAP
+            if new_email and member.email != new_email:
+                log.debug(f"Update Member {oid} with new email {new_email}")
+                member.email = new_email
+            if new_pseudonym and member.pseudonym != new_pseudonym:
+                log.debug(f"Update Member {oid} with new pseudonym {new_pseudonym}")
+                member.pseudonym = new_pseudonym
+            if new_type and member.type != new_type:
+                log.debug(f"Update Member {oid} with new type {new_type}")
+                member.type = new_type
+            # Add additional fields for cooperators
+            if new_fullname and member.data.fullname != new_fullname:
+                log.debug(f"Update Member {oid} with new fullname {new_fullname}")
+                member.data.fullname = new_fullname
+            if new_nationality and member.data.nationality != new_nationality:
+                log.debug(f"Update Member {oid} with new nationality {new_nationality}")
+                member.data.nationality = new_nationality
+            if new_birthdate and member.data.birthdate != new_birthdate:
+                log.debug(f"Update Member {oid} with new birthdate {new_birthdate}")
+                member.data.birthdate = new_birthdate
+            if new_preferred_language and member.data.lang1 != new_preferred_language:
+                log.debug(f"Update Member {oid} with new preferred language {new_preferred_language}")
+                member.data.lang1 = new_preferred_language
+            if new_second_language and member.data.lang2 != new_second_language:
+                log.debug(f"Update Member {oid} with new second language {new_second_language}")
+                member.data.lang2 = new_second_language
+        return member
     except Exception as e:
         log.error(f"Error while searching for user {oid} in LDAP: {e}")
         return None
-    member_entry = conn.entries[0]
-    new_email = member_entry.mail.value if hasattr(member_entry, 'mail') else None
-    new_pseudonym = member_entry.cn.value if hasattr(member_entry, 'cn') else None
-    new_type = MemberTypes[member_entry.employeeType.value] if hasattr(member_entry, 'employeeType') else None
-    new_fullname = member_entry.gn.value if hasattr(member_entry, 'gn') else None
-    new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
-    new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
-    if new_birthdate:
-        new_birthdate = datetime.datetime.strptime(new_birthdate, "%Y%m%d%H%M%SZ")
-    new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
-    new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
-    member = get_member_by_oid(oid, request, False)
-    cooperative_behaviour_mark = (
-        float(member_entry.cooperativeBehaviourMark.value
-            or DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
-        if hasattr(member_entry, 'cooperativeBehaviourMark')
-        else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
-    cooperative_behaviour_mark_update = member_entry.cooperativeBehaviorMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviorMarkUpdate') else None
-    if cooperative_behaviour_mark_update:
-        cooperative_behaviour_mark_update = datetime.datetime.strptime(cooperative_behaviour_mark_update, "%Y%m%d%H%M%SZ")
-    number_shares_owned = member_entry.numberSharesOwned.value if hasattr(member_entry, 'numberSharesOwned') else None
-    date_end_validity_yearly_contribution = member_entry.dateEndValidityYearlyContribution.value if hasattr(member_entry, 'dateEndValidityYearlyContribution') else None
-    if date_end_validity_yearly_contribution:
-        date_end_validity_yearly_contribution = datetime.datetime.strptime(date_end_validity_yearly_contribution, "%Y%m%d%H%M%SZ")
-    unique_member_of = member_entry.uniqueMemberOf.value if hasattr(member_entry, 'uniqueMemberOf') else None
-    iban = member_entry.iban.value if hasattr(member_entry, 'iban') else None
-    date_erasure_all_data = member_entry.dateErasureAllData.value if hasattr(member_entry, 'dateErasureAllData') else None
-
-
-    log.debug(f"Update Member {oid} with ldap informations")
-    if not member:
-        log.debug(f"Create Member {oid} with informations found in LDAP with {new_email=}, {new_pseudonym=}, {new_type=}, {new_fullname=}, {new_nationality=}, {new_birthdate=}, {new_preferred_language=}, {new_second_language=}")
-        datas = MemberDatas(
-            fullname=new_fullname,
-            fullsurname = new_fullname,
-            nationality = new_nationality,
-            birthdate = new_birthdate,
-            password = None,
-            password_confirm = None,
-            lang1 = new_preferred_language,
-            lang2 = new_second_language,
-            role = new_type,
-            cooperative_behaviour_mark = cooperative_behaviour_mark,
-            cooperative_behaviour_mark_update = cooperative_behaviour_mark_update,
-            number_shares_owned = number_shares_owned,
-            date_end_validity_yearly_contribution = date_end_validity_yearly_contribution,
-            unique_member_of = unique_member_of,
-            iban = iban,
-            date_erasure_all_data = date_erasure_all_data
-        )
-        member = Member(
-            email=new_email,
-            pseudonym=new_pseudonym,
-            oid=oid,
-            data=datas
-        )
-        append_member(member, request)
-    else :
-        # Update the member object with the data retrieved from LDAP
-        if new_email and member.email != new_email:
-            log.debug(f"Update Member {oid} with new email {new_email}")
-            member.email = new_email
-        if new_pseudonym and member.pseudonym != new_pseudonym:
-            log.debug(f"Update Member {oid} with new pseudonym {new_pseudonym}")
-            member.pseudonym = new_pseudonym
-        if new_type and member.type != new_type:
-            log.debug(f"Update Member {oid} with new type {new_type}")
-            member.type = new_type
-        # Add additional fields for cooperators
-        if new_fullname and member.data.fullname != new_fullname:
-            log.debug(f"Update Member {oid} with new fullname {new_fullname}")
-            member.data.fullname = new_fullname
-        if new_nationality and member.data.nationality != new_nationality:
-            log.debug(f"Update Member {oid} with new nationality {new_nationality}")
-            member.data.nationality = new_nationality
-        if new_birthdate and member.data.birthdate != new_birthdate:
-            log.debug(f"Update Member {oid} with new birthdate {new_birthdate}")
-            member.data.birthdate = new_birthdate
-        if new_preferred_language and member.data.lang1 != new_preferred_language:
-            log.debug(f"Update Member {oid} with new preferred language {new_preferred_language}")
-            member.data.lang1 = new_preferred_language
-        if new_second_language and member.data.lang2 != new_second_language:
-            log.debug(f"Update Member {oid} with new second language {new_second_language}")
-            member.data.lang2 = new_second_language
-    return member
 
 def get_candidature_from_request(request: Request)->Candidature:
     """Get the candidature from the request.
@@ -1460,3 +1453,5 @@ def logout(request: Request):
         del request.session[CANDIDATURE_OID] #
     if MEMBER_OID in request.session:
         del request.session[MEMBER_OID]
+    if ACCESSED_MEMBER_OID in request.session:
+        del request.session[ACCESSED_MEMBER_OID]
