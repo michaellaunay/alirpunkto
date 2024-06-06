@@ -9,7 +9,7 @@
             <div i18n:translate="check_new_email_confirmed_msg">
 Your email address has been successfully updated. You will now use this new address for all future communications with ${site_name}.
 
-If you did not request this change or if you have any questions, please do not hesitate to contact our support immediately at ${}.
+If you did not request this change or if you have any questions, please do not hesitate to contact our support immediately at ${admin_email}.
 
 Thank you for being a part of the ${domain_name} community!
             </div>

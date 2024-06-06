@@ -1482,3 +1482,9 @@ msgstr "Vous pouvez changer votre profil en cliquant"
 
 msgid "profile"
 msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Votre adresse e-mail a été mise à jour avec succès. Vous utiliserez désormais cette nouvelle adresse pour toutes les communications futures avec ${site_name}."
+"Si vous n'avez pas demandé ce changement ou si vous avez des questions, n'hésitez pas à contacter notre support immédiatement à ${admin_email}."
+"Merci de faire partie de la communauté ${domain_name} !"

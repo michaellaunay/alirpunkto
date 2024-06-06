@@ -3,37 +3,21 @@
 # date: 2024-05-12
 
 from pyramid.view import view_config
-from pyramid_zodbconn import get_connection
 from alirpunkto.utils import (
-
-    update_member_from_ldap,
-    get_member_by_oid,
-    send_email_to_member,
     decrypt_oid,
-    send_member_state_change_email,
     get_candidature_by_oid,
     update_ldap_member,
 )
-from pyramid.request import Request
-from typing import Dict, Union
-from BTrees import OOBTree
 
 from alirpunkto.models.member import (
     MemberStates,
-    EmailSendStatus,
-    MemberDatas,
 )
 from alirpunkto.constants_and_globals import (
     _,
-    LDAP_ADMIN_OID,
-    MEMBERS_BEING_MODIFIED,
     log,
-    MEMBER_OID,
-    SEED_LENGTH
+    SEED_LENGTH,
+    ADMIN_EMAIL,
 )
-from alirpunkto.schemas.register_form import RegisterForm
-from pyramid.i18n import Translator
-import deform
 
 @view_config(
     route_name='check_new_email',
@@ -61,7 +45,8 @@ def check_new_email(request):
             return {
                 'error': _('invalid_oid'),
                 'site_name': request.session.get('site_name', 'AlirPunkto'),
-                'domain_name': request.session.get('domain_name', 'alirpunkto.org')
+                'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+                'admin_email': ADMIN_EMAIL,  
             }
         decrypted_member = get_candidature_by_oid(decrypted_oid, request)
         if decrypted_member is None:
@@ -69,7 +54,8 @@ def check_new_email(request):
             return {
                 'error': _('candidature_not_found'),
                 'site_name': request.session.get('site_name', 'AlirPunkto'),
-                'domain_name': request.session.get('domain_name', 'alirpunkto.org')
+                'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+                'admin_email': ADMIN_EMAIL,  
             }
         new_email = decrypted_member.new_email
         if new_email is None:
@@ -77,7 +63,8 @@ def check_new_email(request):
             return {
                 'error': _('no_new_email'),
                 'site_name': request.session.get('site_name', 'AlirPunkto'),
-                'domain_name': request.session.get('domain_name', 'alirpunkto.org')
+                'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+                'admin_email': ADMIN_EMAIL,  
             }
         decrypted_member.new_email = None
         decrypted_member.email = new_email
@@ -94,10 +81,12 @@ def check_new_email(request):
         return {
             'success': _('email_updated'),
             'site_name': request.session.get('site_name', 'AlirPunkto'),
-            'domain_name': request.session.get('domain_name', 'alirpunkto.org')
+            'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+            'admin_email': ADMIN_EMAIL,  
         }
     return {
         'error': _('invalid_request'),
         'site_name': request.session.get('site_name', 'AlirPunkto'),
-        'domain_name': request.session.get('domain_name', 'alirpunkto.org')
+        'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+        'admin_email': ADMIN_EMAIL,  
     }
