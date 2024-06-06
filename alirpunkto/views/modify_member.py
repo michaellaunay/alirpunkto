@@ -18,7 +18,7 @@ from alirpunkto.utils import (
 
 from alirpunkto.models.member import (
     MemberStates,
-    Members,
+    EmailSendStatus,
 )
 from alirpunkto.constants_and_globals import (
     _,
@@ -117,6 +117,8 @@ def modify_member(request):
             request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
             accessed_member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
             transaction.commit()
+        elif ACCESSED_MEMBER_OID not in request.session:
+            request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
         if not accessed_member:
             return {
                 "form": None,
@@ -223,8 +225,21 @@ def modify_member(request):
                                 }
                         accessed_member.new_email = email
                         transaction.commit()
-                        sending_success = send_check_new_email(request, accessed_member, email)
+                        email_template = "reset_password_email"
+                        member.add_email_send_status(
+                            EmailSendStatus.IN_PREPARATION, 
+                            email_template
+                        )
+                        sending_success = send_check_new_email(
+                            request,
+                            accessed_member,
+                            email
+                        )
                         if not sending_success:
+                            accessed_member.add_email_send_status(
+                                EmailSendStatus.ERROR,
+                                email_template
+                            )                           
                             return {
                                 "message":_('check_new_email_send_error'),
                                 "member": member,
@@ -232,7 +247,24 @@ def modify_member(request):
                                 "accessed_members": {},
                                 "form": form.render() if form else None,
                             }
-                        message = _('check_new_email_send')
+                        try:
+                            transaction.commit()
+                            member.add_email_send_status(
+                                EmailSendStatus.SENT,
+                                email_template
+                            )
+                            message = _('check_new_email_send')
+                        except Exception as e:
+                            log.error(
+                                f"Error while reset password {member.oid} : {e}"
+                            )
+                            member.add_email_send_status(
+                                EmailSendStatus.ERROR,
+                                email_template
+                            )
+                            # message is left with error because we can't
+                            # use the error message as it could be overridden
+                            message = _('forget_email_send_error')
                 elif "password" in request.POST and "password" in writable_fields:
                     password = request.params['password'] if 'password' in request.params else None
                     password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None

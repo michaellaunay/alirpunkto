@@ -138,4 +138,4 @@ MEMBERS_BEING_MODIFIED = "members_being_modified"
 LOCALE_LANG_MESSAGES: Final = os.path.join('locale', '{lang}', 'LC_MESSAGES', "")
 ZPT_EXTENSION: Final = '.pt'
 
-DEFAULT_COOPERATIVE_BEHAVIOUR_MARK: Final = 0.5
+DEFAULT_COOPERATIVE_BEHAVIOUR_MARK: Final = 0

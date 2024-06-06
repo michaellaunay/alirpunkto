@@ -22,6 +22,7 @@ from alirpunkto.constants_and_globals import (
     _,
     log,
     SEED_LENGTH,
+    DEFAULT_COOPERATIVE_BEHAVIOUR_MARK,
 )
 
 @unique
@@ -316,7 +317,7 @@ class MemberDatas:
     lang2: str = None
     lang3: str = None
     is_active: bool = True
-    cooperative_behaviour_mark: float = 0
+    cooperative_behaviour_mark: float = DEFAULT_COOPERATIVE_BEHAVIOUR_MARK
     cooperative_behaviour_mark_update: date = None
     number_shares_owned: int = 0
     date_end_validity_yearly_contribution: date = None

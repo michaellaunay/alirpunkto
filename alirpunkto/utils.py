@@ -1412,7 +1412,8 @@ def send_check_new_email(
         'check_new_email_view':url,
         'site_url': site_url,
         'site_name': site_name,
-        'domain_name': domain_name
+        'domain_name': domain_name,
+        'new_email': new_email
     }
 
     # Use the send_email from utils.py
