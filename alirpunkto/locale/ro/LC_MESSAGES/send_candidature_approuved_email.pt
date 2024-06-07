@@ -13,17 +13,35 @@
     
     <p tal:omit-tag="textual">Am plăcerea să vă informăm că aplicația dumneavoastră la <span tal:replace=" domain_name" >Numele site-ului</span> pentru rolul de <span tal:replace="python:candidature.type">Rol</span> a fost aprobată.</p>
     
-    <p tal:omit-tag="textual">Iată detaliile:</p>
-    <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Identificarea candidaturii: <span tal:replace="python:candidature.oid">Identificarea candidaturii</span></li>
-        <li tal:omit-tag="textual">Data aprobării: <span tal:replace="python:candidature.modifications[-1]">Ultima tranziție</span></li>
-        <li tal:omit-tag="textual">Statut: Aprobat</li>
+    <p tal:omit-tag="textual”>Mulțumim că sunteți alături de noi! Suntem bucuroși să vă întâmpinăm în comunitatea noastră.</p>
+    
+    <p tal:omit-tag="textual”>Acum că aplicația dvs. a fost aprobată, vă puteți conecta la platforma noastră folosind pseudonimul și parola pe care le-ați furnizat în timpul procesului de aplicare. După ce v-ați logat, veți găsi:</p>
+    <ul tal:omit-tag="textual”>
+        <li tal:omit-tag="textual”>linkurile către toate aplicațiile software la care aveți acces direct. Nu este nevoie să vă conectați din nou!</li>
+        <li tal:omit-tag="textual”>un link către formularul prin care vă puteți vizualiza și edita propriul profil. În acest formular, vă încurajăm să vă prezentați celorlalți membri ai Comunității noastre printr-un scurt „text de profil” și să afișați o mică imagine care să vă reprezinte („avatarul” dvs.);</li>
+        <li tal:omit-tag="textual”>un link pentru a vă deconecta.</li>
     </ul>
 
-    <p tal:omit-tag="textual">Acum că aplicația dvs. a fost aprobată, vă puteți autentifica pe platforma noastră folosind pseudonimul și parola pe care le-ați furnizat în timpul procesului de candidatură.</p>
+    <p tal:omit-tag="textual”>Iată principalele elemente ale profilului dvs. pe care le-am înregistrat:</p>
+    <ul tal:omit-tag="textual”>
+        <li tal:omit-tag="textual”> pseudonimul tău: ##PSEUDONYM. Vă rugăm să păstrați o ÎNREGISTRARE ATENTĂ ȘI SIGURĂ a acestui pseudonim: este singurul identificator cu care vă puteți conecta la platforma noastră IT;</li>
+        <li tal:omit-tag="textual”>parola dvs.: (parola pe care ați furnizat-o la înregistrare);</li>
+        <li tal:omit-tag="textual”>adresa dvs. de e-mail: (adresa de e-mail la care trimitem prezentul e-mail);</li>
+        <li tal:omit-tag="textual” tal:condition="##IS_COOPERATOR”>datele dvs. de identitate: (toate numele și prenumele dvs. de familie, data nașterii, așa cum au fost furnizate și verificate în timpul procesului de înregistrare);</li>
+        <li tal:omit-tag="textual”>limba dvs. preferată pentru ca noi să interacționăm cu dvs: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual”>cea de-a doua limbă pe care acceptați să o folosim pentru a interacționa cu dvs: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual”>limbajul pe care acceptați că îl folosim, ca o a treia alegere, pentru a interacționa cu dumneavoastră: ###LINGVISTIC>: ##LANGUAGE_3.</li>
+        </ul>
+
+    <p tal:omit-tag="textual”>Pentru evidența dvs., iată detaliile privind finalizarea procesului de înregistrare:</p>
+    <ul tal:omit-tag="textual”>
+        <li tal:omit-tag="textual”>Identificarea candidaturii: <span tal:replace="python:candidature.oid”>Identificarea candidaturii</span></li>
+        <li tal:omit-tag="textual”>Data aprobării: <span tal:replace="python:candidature.modifications[-1]”>Ultima tranziție</span></li>
+        <li tal:omit-tag="textual”>Statut: Aprobat</li>
+    </ul>
+
     
-    <p tal:omit-tag="textual">Mulțumim că v-ați alăturat nouă! Suntem bucuroși să vă primim în comunitatea noastră și așteptăm cu nerăbdare să lucrăm împreună cu dumneavoastră!</p>
-    
+    <p tal:omit-tag="textual”>Așteptăm cu nerăbdare plăcerea de a lucra împreună cu dumneavoastră!</p>
     <p tal:omit-tag="textual">Cele mai bune salutări,</p>
     <p tal:omit-tag="textual">Echipa de la <span tal:replace="domain_name">Numele site-ului</span></p>
 </body>
