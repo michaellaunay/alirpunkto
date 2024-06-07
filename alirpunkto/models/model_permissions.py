@@ -306,7 +306,27 @@ access = {
             pseudonym=Permissions.ACCESS | Permissions.READ,
             modifications=Permissions.NONE,
         ),
-        (CandidatureStates.APPROVED, MemberTypes.COOPERATOR): BASIC_CANDIDATURE_PERMISSIONS,
+        (CandidatureStates.APPROVED, MemberTypes.COOPERATOR): CandidaturePermissions(
+            data=MemberDataPermissions(
+                description=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                password=Permissions.ACCESS | Permissions.WRITE,
+                password_confirm=Permissions.ACCESS | Permissions.WRITE,
+                lang1=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                lang2=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                lang3=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                role=Permissions.ACCESS | Permissions.READ,
+            ),
+            oid=Permissions.ACCESS | Permissions.READ,
+            member_state=Permissions.ACCESS | Permissions.READ,
+            type=Permissions.ACCESS | Permissions.READ,
+            email=Permissions.ACCESS | Permissions.READ| Permissions.WRITE,
+            votes=Permissions.NONE,
+            seed=Permissions.ACCESS,
+            email_send_status_history=Permissions.ACCESS | Permissions.READ,
+            challenge=Permissions.NONE,
+            pseudonym=Permissions.ACCESS | Permissions.READ,
+            modifications=Permissions.NONE,
+        ),
         (CandidatureStates.REFUSED, MemberTypes.COOPERATOR): BASIC_CANDIDATURE_PERMISSIONS,
         MemberStates.REGISTRED: MemberPermissions(
             data=MemberDataPermissions(
