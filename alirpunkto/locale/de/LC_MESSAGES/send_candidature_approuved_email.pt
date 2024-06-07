@@ -13,17 +13,36 @@
     
     <p tal:omit-tag="textual">Wir freuen uns, dir mitzuteilen, dass deine Bewerbung an der <span tal:replace="domain_name">Site name</span> für die Rolle der <span tal:replace="python:candidature.type">Rolle</span> genehmigt wurde.</p>
     
-    <p tal:omit-tag="textual">Hier sind die Einzelheiten:</p>
-    <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Bewerber-ID: <span tal:replace="python:candidature.oid">Bewerber-ID</span></li>
-        <li tal:omit-tag="textual">Bewilligungsdatum: <span tal:replace="python:candidature.modifications[-1]">Letzter Übergang</span></li>
-        <li tal:omit-tag="textual">Status: Genehmigt</li>
+    <p tal:omit-tag="textual“>Vielen Dank für deine Teilnahme! Wir freuen uns, dich in unserer Gemeinschaft begrüßen zu dürfen.</p>
+    
+    <p tal:omit-tag="textual“>Nachdem dein Antrag genehmigt wurde, kannst du dich mit dem Pseudonym und dem Passwort, das du während des Antragsverfahrens angegeben hast, auf unserer Plattform anmelden. Nach der Anmeldung findest du:</p>
+    <ul tal:omit-tag="textual“>
+        <li tal:omit-tag="textual“>die Links zu allen Softwareanwendungen, auf die du direkt zugreifen kannst. Du musst dich nicht erneut anmelden!</li>
+        <li tal:omit-tag="textual“>ein Link zu dem Formular, in dem du dein eigenes Profil anzeigen und bearbeiten kannst. In diesem Formular kannst du dich den anderen Mitgliedern unserer Gemeinschaft in einem kurzen „Profiltext“ vorstellen und ein kleines Bild anzeigen, das dich repräsentiert (dein „Avatar“);</li>
+        <li tal:omit-tag="textual“>einen Link zum Abmelden.</li>
     </ul>
 
-    <p tal:omit-tag="textual">Nachdem deine Bewerbung genehmigt wurde, kannst du dich mit dem Pseudonym und dem Passwort, das du während des Bewerbungsprozesses angegeben hast, auf unserer Plattform einloggen.</p>
+    <p tal:omit-tag="textual“>Hier sind die wichtigsten Elemente deines Profils, die wir erfasst haben:</p>
+    <ul tal:omit-tag="textual“>
+        <li tal:omit-tag="textual“>dein Pseudonym: ##PSEUDONYM. Bitte bewahre dieses Pseudonym SORGFÄLTIG UND SICHER auf: Es ist die einzige Kennung, mit der du dich auf unserer IT-Plattform anmelden kannst;</li>
+        <li tal:omit-tag="textual“>dein Passwort: (das Passwort, das du bei deiner Registrierung angegeben hast);</li>
+        <li tal:omit-tag="textual“>deine E-Mail-Adresse: (die E-Mail-Adresse, an die wir diese E-Mail senden);</li>
+        <li tal:omit-tag="textual“ tal:condition="##IS_COOPERATOR“>Deine Identitätsdaten: (alle von Dir angegebenen Vor- und Nachnamen, Dein Geburtsdatum, wie bei der Registrierung angegeben und überprüft);</li>
+        <li tal:omit-tag="textual“>Deine bevorzugte Sprache für die Kommunikation mit uns: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual“>die zweite Sprache, die du akzeptierst, damit wir mit dir kommunizieren können: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual“>die Sprache, die du als dritte Wahl akzeptierst, um mit uns zu kommunizieren: ##LANGUAGE_3.</li>
+        </ul>
+
+    <p tal:omit-tag="textual“>Zu deiner Information findest du hier die Details zum Abschluss deines Registrierungsprozesses:</p>
+    <ul tal:omit-tag="textual“>
+        <li tal:omit-tag="textual“>Bewerbungs-ID: <span tal:replace="python:candidature.oid“>Bewerbungs-ID</span></li>
+        <li tal:omit-tag="textual“>Genehmigungsdatum: <span tal:replace="python:candidature.modifications[-1]“>Letzte Änderung</span></li>
+        <li tal:omit-tag="textual“>Status: Genehmigt</li>
+    </ul>
+
     
-    <p tal:omit-tag="textual">Danke, dass du bei uns mitmachst! Wir freuen uns, dich in unserer Community begrüßen zu dürfen, und auf die Zusammenarbeit mit dir!</p>
-    
+    <p tal:omit-tag="textual“>Wir freuen uns auf die Zusammenarbeit mit dir!</p>
+
     <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
     <p tal:omit-tag="textual">Das Team von <span tal:replace="domain_name">Domain Name</span></p>
 </body>
