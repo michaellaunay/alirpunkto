@@ -13,16 +13,34 @@
     
     <p tal:omit-tag="textual">Wij zijn verheugd je te informeren dat jouw aanvraag voor de <span tal:replace="domain_name">Site naam</span> voor de rol van <span tal:replace="python:candidature.type">Rol</span> is goedgekeurd.</p>
     
-    <p tal:omit-tag="textual">Hier zijn de details:</p>
-    <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Aanvraag-ID: <span tal:replace="python:candidature.oid">Aanvraag-ID</span></li>
-        <li tal:omit-tag="textual">Goedkeuringsdatum: <span tal:replace="python:candidature.modifications[-1]">Laatste overgang</span></li>
-        <li tal:omit-tag="textual">Status: Goedgekeurd</li>
+    <p tal:omit-tag=“textual”>Bedankt dat je je bij ons hebt aangesloten! We zijn blij je te mogen verwelkomen in onze Gemeenschap.</p>
+    
+    <p tal:omit-tag=“textual”>Nu je aanmelding is goedgekeurd, kun je inloggen op ons platform met het pseudoniem en wachtwoord dat je tijdens de aanmeldprocedure hebt opgegeven. Nadat je bent ingelogd, vind je:</p>
+    <ul tal:omit-tag=“textual”>
+        <li tal:omit-tag=“textual”>de links naar alle softwaretoepassingen waartoe je direct toegang hebt. Je hoeft niet opnieuw in te loggen!</li>
+        <li tal:omit-tag=“textual”>een link naar het formulier waar je je eigen profiel kunt bekijken en bewerken. Op dit formulier moedigen we je aan om jezelf te presenteren aan de andere leden van onze Gemeenschap in een korte “profieltekst” en om een kleine afbeelding weer te geven die jou voorstelt (je “avatar”);</li>
+        <li tal:omit-tag=“textual”>een link om uit te loggen.</li>
     </ul>
 
-    <p tal:omit-tag="textual">Nu jouw aanvraag is goedgekeurd, kun je inloggen op ons platform met het pseudoniem en wachtwoord dat je tijdens de aanvraagprocedure hebt opgegeven.</p>
+    <p tal:omit-tag=“textual”>hier zijn de belangrijkste elementen van je profiel die we hebben vastgelegd:</p>
+    <ul tal:omit-tag=“textual”>
+        <li tal:omit-tag=“textual”>uw pseudoniem: ##PSEUDONYM. Bewaar dit pseudoniem zorgvuldig en veilig: het is de enige identificatie waarmee je kunt inloggen op ons IT-platform;</li>
+        <li tal:omit-tag=“textual”>uw wachtwoord: (het wachtwoord dat je bij je registratie hebt opgegeven);</li>
+        <li tal:omit-tag=“textual”>uw e-mailadres: (het e-mailadres waarnaar we deze e-mail sturen);</li>
+        <li tal:omit-tag=“textual” tal:condition=“##IS_COOPERATOR”>uw identiteitsgegevens: (al je voor- en achternamen, je geboortedatum, zoals opgegeven en geverifieerd tijdens je registratieproces);</li>
+        <li tal:omit-tag=“textual”>uw voorkeurstaal om met u te communiceren: ##LANGUAGE_1;</li>
+        <li tal:omit-tag=“textual”>de tweede taal die je accepteert dat we gebruiken om met je te communiceren: ##LANGUAGE_2;</li>
+        <li tal:omit-tag=“textual”>de taal die je accepteert dat we, als derde keuze, gebruiken om met je te communiceren: ##LANGUAGE_3.</li>
+        </ul>
+
+    <p tal:omit-tag=“textual”>Voor je administratie, hier zijn de details van de afronding van je registratieproces:</p>
+    <ul tal:omit-tag=“textual”>
+        <li tal:omit-tag=“textual”>Kandidatuur-ID: <span tal:replace=“python:candidature.oid”>Aanvraag-ID</span></li>
+        <li tal:omit-tag=“textual”>Goedkeuringsdatum: <span tal:replace=“python:candidature.modifications[-1]”>Laatste overgang</span></li>
+        <li tal:omit-tag=“textual”>Status: Goedgekeurd</li>
+    </ul>
     
-    <p tal:omit-tag="textual">Bedankt dat je je bij ons hebt aangesloten! We heten je van harte welkom in onze Gemeenschap en kijken ernaar uit om met je samen te werken!</p>
+    <p tal:omit-tag=“textual”>Wij verheugen ons op de prettige samenwerking met jou! </p>
     
     <p tal:omit-tag="textual">Gegroet, </p>
     <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name" >Sitenaam</span></p>
