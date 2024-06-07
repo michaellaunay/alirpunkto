@@ -12,17 +12,37 @@
     <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p>
     
     <p tal:omit-tag="textual">We are pleased to inform you that your application to the <span tal:replace="domain_name">Domain name</span> for the role of <span tal:replace="python:candidature.type">Role</span> has been approved.</p>
+
+    <p tal:omit-tag="textual">Thank you for joining us! We are happy to welcome you in our Community./p>
     
-    <p tal:omit-tag="textual">Here are the details:</p>
+    <p tal:omit-tag="textual">Now that your application has been approved, you can log in to our platform using the pseudonym and password you provided during the application process. After having logged in, you will find:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">the links to all the software applications that you have directly access to. You don't need to log in again!</li>
+        <li tal:omit-tag="textual">a link to the form where you can view and edit your own profile. On this form, we encourage you to present yourself to the other members of our Community in a short "profile text" and to display a small picture that represents you (your "avatar");</li>
+        <li tal:omit-tag="textual">a link to log out.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Here are main elements of your profile that we recorded:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">your pseudonym: ##PSEUDONYM. Please keep a CAREFUL AND SECURE RECORD of this pseudonym: it is the only identifier with which you can log in to our IT platform;</li>
+        <li tal:omit-tag="textual">your password: (the password that you provided upon your registration);</li>
+        <li tal:omit-tag="textual">your e-mail address: (the e-mail address to which we send the present e-mail);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">your identity data: (all your given and family names, your date of birth, as provided and verified during your registration process);</li>
+        <li tal:omit-tag="textual">your preferred language for us to interact with you: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">the second language that you accept that we use to interact with you: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">the language that you accept that we use, as a third choice, to interact with you: ##LANGUAGE_3.</li>
+        </ul>
+
+    <p tal:omit-tag="textual">For your records, here are the details of the finalisation of your registration process:</p>
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
         <li tal:omit-tag="textual">Approval Date: <span tal:replace="python:candidature.modifications[-1]">Last transition</span></li>
         <li tal:omit-tag="textual">Status: Approved</li>
     </ul>
 
-    <p tal:omit-tag="textual">Now that your application has been approved, you can log in to our platform using the pseudonym and password you provided during the application process.</p>
     
-    <p tal:omit-tag="textual">Thank you for joining us! We are happy to welcome you in our Community, and look forward to working together with you!</p>
+    <p tal:omit-tag="textual">We look forward to the pleasure of working together with you!</p>
+
     
     <p tal:omit-tag="textual">Best regards,</p>
     <p tal:omit-tag="textual">The team of <span tal:replace="domain_name">Domain Name</span>.</p>
