@@ -13,16 +13,35 @@
     
     <p tal:omit-tag="textual">Siamo lieti di informarti che la tua candidatura alla <span tal:replace="domain_name" >Nome del sito</span> per il ruolo di <span tal:replace="python:candidature.type">Role</span> è stata approvata.</p>
     
-    <p tal:omit-tag="textual">Ecco i dettagli:</p>
-    <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">ID di candidatura: <span tal:replace="python:candidature.oid">ID di candidatura</span></li>
-        <li tal:omit-tag="textual">Data di approvazione: <span tal:replace="python:candidature.modifications[-1]">Ultima transizione</span></li>
-        <li tal:omit-tag="textual">Status: Approvata</li>
+    <p tal:omit-tag=“textual”>Grazie per esserti unito a noi! Siamo felici di darti il benvenuto nella nostra Comunità.</p>
+    
+    <p tal:omit-tag=“textual”>Ora che la tua candidatura è stata approvata, puoi accedere alla nostra piattaforma utilizzando lo pseudonimo e la password che ci hai fornito durante il processo di candidatura. Dopo aver effettuato il login, troverai:</p>
+    <ul tal:omit-tag=“textual”>
+        <li tal:omit-tag=“textual”>i link a tutte le applicazioni software a cui hai accesso diretto. Non è necessario effettuare di nuovo il login!
+        <li tal:omit-tag=“textual”>un link al modulo in cui puoi visualizzare e modificare il tuo profilo. In questo modulo, ti invitiamo a presentarti agli altri membri della nostra Comunità con un breve “testo del profilo” e a mostrare una piccola immagine che ti rappresenti (il tuo “avatar”);</li>
+        <li tal:omit-tag=“textual”>un link per effettuare il logout.</li>
     </ul>
 
-    <p tal:omit-tag="textual">Ora che la tua candidatura è stata approvata, puoi accedere alla nostra piattaforma utilizzando lo pseudonimo e la password che hai fornito durante il processo di candidatura.</p>
+    <p tal:omit-tag=“textual”>Ecco gli elementi principali del tuo profilo che abbiamo registrato:</p>
+    <ul tal:omit-tag=“textual”>
+        <li tal:omit-tag=“textual”>il tuo pseudonimo: ##PSEUDONYM. Ti preghiamo di tenere un'attenta e sicura registrazione di questo pseudonimo: è l'unico identificativo con cui potrai accedere alla nostra piattaforma informatica;</li>
+        <li tal:omit-tag=“textual”>la tua password: (la password che hai fornito al momento della registrazione);</li>
+        <li tal:omit-tag=“textual”>il tuo indirizzo e-mail: (l'indirizzo e-mail a cui inviamo la presente e-mail);</li>
+        <li tal:omit-tag=“textual” tal:condition=“##IS_COOPERATOR”>i tuoi dati di identità: (tutti i tuoi nomi e cognomi, la tua data di nascita, come forniti e verificati durante il processo di registrazione);</li>
+        <li tal:omit-tag=“textual”>la tua lingua preferita per interagire con noi: ##LANGUAGE_1;</li>
+        <li tal:omit-tag=“textual”>la seconda lingua che accetti che noi utilizziamo per interagire con te: ##LANGUAGE_2;</li>
+        <li tal:omit-tag=“textual”>la lingua che accetti che noi utilizziamo, come terza scelta, per interagire con te: ##LANGUAGE_3.</li>
+        </ul>
+
+    <p tal:omit-tag=“textual”>Per tua informazione, ecco i dettagli relativi al completamento del processo di registrazione:</p>
+    <ul tal:omit-tag=“textual”>
+        <li tal:omit-tag=“textual”>ID di candidatura: <span tal:replace=“python:candidature.oid”>ID di candidatura</span></li>
+        <li tal:omit-tag=“textual”>Data di approvazione: <span tal:replace=“python:candidature.modifiche[-1]”>Ultima transizione</span></li>
+        <li tal:omit-tag=“textual”>Statuto: Approvato</li>
+    </ul>
+
     
-    <p tal:omit-tag="textual">Grazie per esserti unito a noi! Siamo felici di darti il benvenuto nella nostra Community e non vediamo l'ora di lavorare insieme a te!</p>
+    <p tal:omit-tag=“textual”>Non vediamo l'ora di avere il piacere di lavorare insieme a te!</p>
     
     <p tal:omit-tag="textual">Buoni saluti,</p>
     <p tal:omit-tag="textual">Il team di <span tal:replace="domain_name">Nome del sito</span></p>
