@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-25 12:40+0200\n"
+"PO-Revision-Date: 2024-06-07 10:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: nl\n"
@@ -361,19 +361,6 @@ msgstr ""
 "Het wachtwoord moet ten minste één van de volgende tekens bevatten: '@', "
 "'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
-msgid "pseudonym_title_label"
-msgstr ""
-"Voer hier het pseudoniem in dat u zal identificeren voor de volledige duur "
-"van uw activiteiten op ons IT-platform. We raden u TEN STERKSTE aan een "
-"pseudoniem te kiezen dat herleiding tot uw echte identiteit onmogelijk (of "
-"uiterst moeilijk) maakt. Op die manier bescherm je de vertrouwelijkheid van "
-"je meningen (d.w.z. persoonlijke gegevens die het doel zijn van een "
-"specifieke bescherming onder de Algemene Verordening Gegevensbescherming - "
-"AVGB) tegen elke vorm van externe druk in het echte leven (bijv. door je "
-"werkgever of je klanten). Wees heel voorzichtig! Als je het eenmaal hebt "
-"gekozen, kun je dit pseudoniem daarna NOOIT meer veranderen. Kies het met "
-"zorg!"
-
 msgid "password_title_label"
 msgstr "Voer hier je wachtwoord in."
 
@@ -407,7 +394,8 @@ msgstr ""
 "Ongeldig pseudoniem. Het moet tussen ${MIN_PSEUDONYM_LENGTH} en "
 "${MAX_PSEUDONYM_LENGTH} tekens lang zijn en mag alleen letters (A-Z, a-z), "
 "cijfers (0-9), underscores (_), punten (.), koppeltekens (-) en spaties ( ) "
-"bevatten."
+"bevatten. Het kan geen letters met accenten, umlauts en andere diakritische "
+"tekens bevatten die specifiek zijn voor sommige talen."
 
 msgid "invalid_date"
 msgstr "Ongeldig datumformaat."
@@ -1043,8 +1031,9 @@ msgstr ""
 "plaatsvinden in de Gemeenschap"
 
 #: alirpunkto/schemas/register_form.py:106
+#, fuzzy
 msgid "cooperator_number_required"
-msgstr ""
+msgstr "meewerkend_aantal_vereist"
 
 #: alirpunkto/schemas/register_form.py:112
 msgid "pseudonym_description"
@@ -1194,8 +1183,9 @@ msgstr ""
 "datum is die van uw registratie als een Coöperator"
 
 #: alirpunkto/schemas/register_form.py:171
+#, fuzzy
 msgid "cooperative_behaviour_mark_update_required"
-msgstr ""
+msgstr "coöperatief_gedrag_merk_bijwerken_vereist"
 
 #: alirpunkto/schemas/register_form.py:180
 msgid "number_shares_owned_label"
@@ -1215,8 +1205,9 @@ msgstr ""
 "voor!"
 
 #: alirpunkto/schemas/register_form.py:183
+#, fuzzy
 msgid "number_shares_owned_required"
-msgstr ""
+msgstr "aantal_aandelen_bezit_vereist"
 
 #: alirpunkto/schemas/register_form.py:188
 msgid "date_end_validity_yearly_contribution_label"
@@ -1236,8 +1227,9 @@ msgstr ""
 "beslissingsrecht als Coöperator."
 
 #: alirpunkto/schemas/register_form.py:190
+#, fuzzy
 msgid "date_end_validity_yearly_contribution_required"
-msgstr ""
+msgstr "date_end_validity_yearly_contribution_required"
 
 #: alirpunkto/schemas/register_form.py:199
 msgid "iban_label"
@@ -1253,8 +1245,9 @@ msgstr ""
 "en wanneer u verwacht de coöperatie te verlaten"
 
 #: alirpunkto/schemas/register_form.py:202
+#, fuzzy
 msgid "iban_required"
-msgstr ""
+msgstr "iban_vereist"
 
 #: alirpunkto/schemas/register_form.py:207
 msgid "date_erasure_all_data_title"
@@ -1416,3 +1409,24 @@ msgstr "Je kunt je profiel wijzigen door te klikken op"
 
 msgid "profile"
 msgstr "profiel"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Uw e-mailadres is succesvol bijgewerkt. U zult dit nieuwe adres nu gebruiken "
+"voor alle toekomstige communicatie met ${domain_name}. Als u deze wijziging "
+"niet heeft aangevraagd of als u vragen heeft, aarzel dan niet om "
+"onmiddellijk contact op te nemen met onze supportafdeling op ${admin_email}. "
+"Bedankt dat u deel uitmaakt van de ${domain_name} gemeenschap!"
+
+#~ msgid "pseudonym_title_label"
+#~ msgstr ""
+#~ "Voer hier het pseudoniem in dat u zal identificeren voor de volledige "
+#~ "duur van uw activiteiten op ons IT-platform. We raden u TEN STERKSTE aan "
+#~ "een pseudoniem te kiezen dat herleiding tot uw echte identiteit "
+#~ "onmogelijk (of uiterst moeilijk) maakt. Op die manier bescherm je de "
+#~ "vertrouwelijkheid van je meningen (d.w.z. persoonlijke gegevens die het "
+#~ "doel zijn van een specifieke bescherming onder de Algemene Verordening "
+#~ "Gegevensbescherming - AVGB) tegen elke vorm van externe druk in het echte "
+#~ "leven (bijv. door je werkgever of je klanten). Wees heel voorzichtig! Als "
+#~ "je het eenmaal hebt gekozen, kun je dit pseudoniem daarna NOOIT meer "
+#~ "veranderen. Kies het met zorg!"
