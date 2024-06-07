@@ -13,16 +13,35 @@
     
     <p tal:omit-tag="textual">Z przyjemnością informujemy, że Twoja aplikacja na stanowisko <span tal:replace="domain_name">Nazwa witryny</span> dla roli <span tal:replace="python:candidature.type">Rola</span> została zatwierdzona.</p>
     
-    <p tal:omit-tag="textual">Oto szczegóły:</p>
-    <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Identyfikator kandydata: <span tal:replace="python:candidature.oid">Identyfikator wniosku</span></li>
-        <li tal:omit-tag="textual">Data zatwierdzenia: <span tal:replace="python:candidature.modifications[-1]">Ostatnie przejście</span></li>
-        <li tal:omit-tag="textual">Status: Zatwierdzony</li>
+    <p tal:omit-tag="textual”>Dziękujemy, że do nas dołączyłeś! Cieszymy się, że możemy powitać Cię w naszej społeczności.</p>
+    
+    <p tal:omit-tag="textual”>Teraz, gdy Twoja aplikacja została zatwierdzona, możesz zalogować się na naszej platformie przy użyciu pseudonimu i hasła podanych podczas procesu aplikacji. Po zalogowaniu znajdziesz:</p>
+    <ul tal:omit-tag="textual”>
+        <li tal:omit-tag="textual”>linki do wszystkich aplikacji, do których masz bezpośredni dostęp. Nie musisz logować się ponownie! </li>.
+        <li tal:omit-tag="textual”>link do formularza, w którym możesz przeglądać i edytować swój profil. W tym formularzu zachęcamy do zaprezentowania się innym członkom naszej społeczności w krótkim „tekście profilowym” i wyświetlenia małego zdjęcia, które Cię reprezentuje („awatar”);</li>
+        <li tal:omit-tag="textual”> link do wylogowania się.</li>
     </ul>
 
-    <p tal:omit-tag="textual">Teraz, gdy Twoja aplikacja została zatwierdzona, możesz zalogować się na naszej platformie przy użyciu pseudonimu i hasła podanego podczas procesu aplikacji.</p>
+    <p tal:omit-tag="textual”>Oto główne elementy Twojego profilu, które zarejestrowaliśmy:</p>
+    <ul tal:omit-tag="textual”>
+        <li tal:omit-tag="textual”>Twój pseudonim: ##PSEUDONYM. Prosimy o UWAŻNE I BEZPIECZNE ZAPISANIE tego pseudonimu: jest to jedyny identyfikator, za pomocą którego możesz zalogować się do naszej platformy informatycznej;</li>
+        <li tal:omit-tag="textual”>Twoje hasło: (hasło, które podałeś podczas rejestracji);</li>
+        <li tal:omit-tag="textual”>Twój adres e-mail: (adres e-mail, na który wysyłamy niniejszą wiadomość e-mail);</li>
+        <li tal:omit-tag="textual” tal:condition="##IS_COOPERATOR”>Twoje dane identyfikacyjne: (wszystkie imiona i nazwiska, data urodzenia, podane i zweryfikowane podczas procesu rejestracji);</li>
+        <li tal:omit-tag="textual”>Twój preferowany język, w którym chcemy się z Tobą komunikować: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual”>drugi język, który akceptujesz, abyśmy używali go do interakcji z Tobą: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual”>język, który akceptujesz, a którego używamy jako trzeciego do interakcji z Tobą: ##LANGUAGE_3.</li>
+        </ul>
+
+    <p tal:omit-tag="textual”>Dla Twojej wiadomości, oto szczegóły finalizacji procesu rejestracji:</p>
+    <ul tal:omit-tag="textual”>
+        <li tal:omit-tag="textual”>Identyfikator kandydata: <span tal:replace="python:candidature.oid”>Identyfikator aplikacji</span></li>
+        <li tal:omit-tag="textual”>Data zatwierdzenia: <span tal:replace="python:candidature.modifications[-1]”>Ostatnie przejście</span></li>
+        <li tal:omit-tag="textual”>Status: Zatwierdzony</li>
+    </ul>
     
-    <p tal:omit-tag="textual">Dziękujemy, że do nas dołączyłeś! Z radością witamy Cię w naszej społeczności i cieszymy się na współpracę z Tobą!</p>
+    <p tal:omit-tag="textual”>Z niecierpliwością czekamy na przyjemność współpracy z Tobą! </p>
+"textual">Dziękujemy, że do nas dołączyłeś! Z radością witamy Cię w naszej społeczności i cieszymy się na współpracę z Tobą!</p>
     
     <p tal:omit-tag="textual">Z wyrazami szacunku,</p>
     <p tal:omit-tag="textual">Zespół <span tal:replace="domain_name">Nazwa strony</span></p>
