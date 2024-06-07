@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-25 12:55+0200\n"
+"PO-Revision-Date: 2024-06-07 10:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: ro\n"
@@ -405,21 +405,6 @@ msgstr ""
 "'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
 #, fuzzy
-msgid "pseudonym_title_label"
-msgstr ""
-"Vă rugăm să introduceți aici pseudonimul care vă va identifica pe întreaga "
-"durată a activității dumneavoastră pe platforma noastră IT. Vă recomandăm "
-"ÎNGREJORĂTOR să selectați un pseudonim care să facă imposibilă (sau extrem "
-"de dificilă) urmărirea identității dvs. reale. Astfel, vă protejați "
-"confidențialitatea opiniilor dumneavoastră (adică datele cu caracter "
-"personal care fac obiectul unei protecții specifice în conformitate cu "
-"Regulamentul general privind protecția datelor - GDPR) împotriva oricărei "
-"forme de presiune externă în viața reală (de exemplu, din partea "
-"angajatorului sau a clienților dumneavoastră). Fiți foarte atenți! Odată ce "
-"l-ați ales, nu veți putea NICIODATĂ să schimbați ulterior acest pseudonim. "
-"Alegeți-l cu grijă!"
-
-#, fuzzy
 msgid "password_title_label"
 msgstr "Vă rugăm să introduceți parola aici."
 
@@ -456,13 +441,13 @@ msgstr ""
 "pseudonimul și parola pe care le-ați furnizat în timpul procesului de "
 "depunere a cererii."
 
-#, fuzzy
 msgid "invalid_pseudonym"
 msgstr ""
 "Pseudonim invalid. Acesta trebuie să aibă o lungime cuprinsă între "
 "${MIN_PSEUDONYM_LENGTH} și ${MAX_PSEUDONYM_LENGTH} caractere și poate "
 "conține numai litere (A-Z, a-z), numere (0-9), caractere de subliniere (_), "
-"puncte (.), liniuțe (-) și spații ( )."
+"puncte (.), liniuțe (-) și spații ( ). Nu poate conține litere cu accente, "
+"umlauts și alte semne diacritice specifice anumitor limbi."
 
 #, fuzzy
 msgid "invalid_date"
@@ -1194,8 +1179,9 @@ msgstr ""
 "în Comunitate"
 
 #: alirpunkto/schemas/register_form.py:106
+#, fuzzy
 msgid "cooperator_number_required"
-msgstr ""
+msgstr "număr_cooperator_număr_necesar"
 
 #: alirpunkto/schemas/register_form.py:112
 #, fuzzy
@@ -1361,8 +1347,9 @@ msgstr ""
 "este cea a înregistrării dumneavoastră ca cooperator"
 
 #: alirpunkto/schemas/register_form.py:171
+#, fuzzy
 msgid "cooperative_behaviour_mark_update_required"
-msgstr ""
+msgstr "cooperative_behaviour_mark_update_required"
 
 #: alirpunkto/schemas/register_form.py:180
 #, fuzzy
@@ -1385,8 +1372,9 @@ msgstr ""
 "recunoscători pentru acest lucru!"
 
 #: alirpunkto/schemas/register_form.py:183
+#, fuzzy
 msgid "number_shares_owned_required"
-msgstr ""
+msgstr "număr_acțiuni_deținute_necesare"
 
 #: alirpunkto/schemas/register_form.py:188
 #, fuzzy
@@ -1408,8 +1396,9 @@ msgstr ""
 "plătit contribuția anuală (și ați cumpărat cel puțin o cotă)."
 
 #: alirpunkto/schemas/register_form.py:190
+#, fuzzy
 msgid "date_end_validity_yearly_contribution_required"
-msgstr ""
+msgstr "data_fin_validitate_fin_validitate_contribuție_anuală_necesară"
 
 #: alirpunkto/schemas/register_form.py:199
 #, fuzzy
@@ -1427,8 +1416,9 @@ msgstr ""
 "informații numai dacă și atunci când anticipați să părăsiți Cooperativa"
 
 #: alirpunkto/schemas/register_form.py:202
+#, fuzzy
 msgid "iban_required"
-msgstr ""
+msgstr "iban_required"
 
 #: alirpunkto/schemas/register_form.py:207
 #, fuzzy
@@ -1506,7 +1496,7 @@ msgstr "Eroare de conexiune"
 
 #: alirpunkto/utils.py:208 alirpunkto/utils.py:213
 msgid "email_allready_exist"
-msgstr "Acest email deja există"
+msgstr "Această adresă de email deja există"
 
 #: alirpunkto/views/check_new_email.py:95
 #, fuzzy
@@ -1616,7 +1606,31 @@ msgstr "Pseudonimul membrului"
 
 #, fuzzy
 msgid "modify_profile"
-msgstr "Vă puteți modifica profilul făcând clic pe"
+msgstr "Vă puteți modifica profilul dând click aici"
 
 msgid "profile"
 msgstr "profilul"
+
+#, fuzzy
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Adresa dvs. de e-mail a fost actualizată cu succes. De acum înainte veți "
+"folosi această nouă adresă pentru toate comunicările viitoare cu "
+"${domain_name}.Dacă nu ați solicitat această modificare sau dacă aveți "
+"întrebări, nu ezitați să ne contactați imediat serviciul de asistență la "
+"${admin_email}. Vă mulțumim că faceți parte din comunitatea ${domain_name}!"
+
+#, fuzzy
+#~ msgid "pseudonym_title_label"
+#~ msgstr ""
+#~ "Vă rugăm să introduceți aici pseudonimul care vă va identifica pe "
+#~ "întreaga durată a activității dumneavoastră pe platforma noastră IT. Vă "
+#~ "recomandăm ÎNGREJORĂTOR să selectați un pseudonim care să facă imposibilă "
+#~ "(sau extrem de dificilă) urmărirea identității dvs. reale. Astfel, vă "
+#~ "protejați confidențialitatea opiniilor dumneavoastră (adică datele cu "
+#~ "caracter personal care fac obiectul unei protecții specifice în "
+#~ "conformitate cu Regulamentul general privind protecția datelor - GDPR) "
+#~ "împotriva oricărei forme de presiune externă în viața reală (de exemplu, "
+#~ "din partea angajatorului sau a clienților dumneavoastră). Fiți foarte "
+#~ "atenți! Odată ce l-ați ales, nu veți putea NICIODATĂ să schimbați "
+#~ "ulterior acest pseudonim. Alegeți-l cu grijă!"
