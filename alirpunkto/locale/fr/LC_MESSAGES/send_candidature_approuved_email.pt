@@ -13,16 +13,34 @@
     
     <p tal:omit-tag="textual">Nous avons le plaisir de t'informer que ta candidature au <span tal:replace="domain_name">nom du site</span> pour le rôle de <span tal:replace="python:candidature.type">Rôle</span> a été approuvée.</p>
     
-    <p tal:omit-tag="textual">Voici les détails&nbsp;:</p>
-    <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Identification de la candidature&nbsp;: <span tal:replace="python:candidature.oid">Identification de la candidature</span></li>
-        <li tal:omit-tag="textual">Date d'approbation&nbsp;: <span tal:replace="python:candidature.modifications[-1]">Dernière transition</span></li>
-        <li tal:omit-tag="textual">Statut&nbsp;: Approuvé</li>
+    <p tal:omit-tag=« textual »>Merci de nous rejoindre ! Nous sommes heureux de t'accueillir au sein de notre Communauté.</p>
+    
+    <p tal:omit-tag=« textual »>Maintenant que ta candidature a été approuvée, tu peux te connecter à notre plateforme en utilisant le pseudonyme et le mot de passe que tu as fournis pendant le processus de candidature. Après t'être connecté.e, tu trouveras :</p>
+    <ul tal:omit-tag=« textual »>
+        <li tal:omit-tag=« textual »>les liens vers toutes les applications logicielles auxquelles tu as directement accès. Tu n'as pas besoin de te reconnecter !</li>
+        <li:omit-tag=« textual »>un lien vers le formulaire où tu peux consulter et modifier ton propre profil. Sur ce formulaire, nous t'encourageons à te présenter aux autres membres de notre Communauté dans un court « texte de profil » et à afficher une petite image qui te représente (ton « avatar »);</li>.
+        <li tal:omit-tag=« textual »>un lien permettant de te déconnecter.</li>
     </ul>
 
-    <p tal:omit-tag="textual">Maintenant que ta candidature a été approuvée, tu peux te connecter à notre plateforme en utilisant le pseudonyme et le mot de passe que tu as fournis pendant le processus de candidature.</p>
-    
-    <p tal:omit-tag="textual">Merci de nous avoir rejoints&nbsp;! Nous sommes heureux de t'accueillir au sein de notre communauté, et nous nous réjouissons de la perspective de travailler avec toi&nbsp;!</p>
+    <p tal:omit-tag=« textual »>Voici les principaux éléments de ton profil que nous avons enregistrés :</p>
+    <ul tal:omit-tag=« textual »>
+        <li tal:omit-tag= » textual »>ton pseudonyme : ##PSEUDONYM. Conserve soigneusement et en toute sécurité ce pseudonyme : c'est le seul identifiant avec lequel tu peux te connecter à notre plateforme informatique ;</li>.
+        <li tal:omit-tag= » textual »>ton mot de passe : (le mot de passe que tu as fourni lors de ton inscription);</li>.
+        <li:omit-tag= » textual »>ton adresse électronique : (l'adresse électronique à laquelle nous envoyons le présent courriel);</li>
+        <li:omit-tag= » textual “ tal:condition=” ##IS_COOPERATOR »>tes données d'identité : (tous tes noms et prénoms, ta date de naissance, tels qu'ils ont été fournis et vérifiés au cours de ton processus d'inscription);</li>
+        <li tal:omit-tag= « textual »>la langue que tu préfères pour que nous interagissions avec toi : ##LANGUAGE_1;</li>
+        <li:omit-tag=« textual »>la deuxième langue que tu acceptes que nous utilisions pour interagir avec toi : ##LANGUAGE_2;</li>
+        <li tal:omit-tag= » textual »>la langue que tu acceptes que nous utilisions, en troisième choix, pour interagir avec toi : ##LANGUAGE_3;</li> 
+</ul>
+
+    <p tal:omit-tag= » textual »>Pour ton information, voici les détails de la finalisation de ton processus d'inscription :</p> <p>.
+    <ul tal:omit-tag=« textual »>
+        <li tal:omit-tag=« textual »>Identification de la candidature : <span tal:replace=« python:candidature.oid »>Identification de la candidature</span></li>.
+        <li tal:omit-tag=« textual »>Date d'approbation : <span tal:replace=« python:candidature.modifications[-1] »>Dernière transition</span></li>.
+        <li tal:omit-tag= » textual »>Statut : Approuvé</li>
+    </ul>
+
+    <p tal:omit-tag= » textual »>Nous nous réjouissons de la perspective d'avoir le plaisir de travailler avec toi !</p>
     
     <p tal:omit-tag="textual">Meilleures salutations,</p>
     <p tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Nom du site</span></p>
