@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-25 12:33+0200\n"
+"PO-Revision-Date: 2024-06-07 10:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: it_IT\n"
@@ -362,19 +362,6 @@ msgstr ""
 "La password deve contenere almeno uno dei seguenti caratteri: '@', '#', '%', "
 "'&', '*', '(', ')', '-', '_', '+', '='."
 
-msgid "pseudonym_title_label"
-msgstr ""
-"Inserite qui lo pseudonimo che vi identificherà per tutta la durata della "
-"vostra attività sulla nostra piattaforma informatica. Le consigliamo "
-"vivamente di scegliere uno pseudonimo che renda impossibile (o estremamente "
-"difficile) risalire alla sua vera identità. In questo modo, proteggerete la "
-"riservatezza delle vostre opinioni (cioè i dati personali che sono oggetto "
-"di una protezione specifica ai sensi del Regolamento generale sulla "
-"protezione dei dati - RGPD) contro qualsiasi forma di pressione esterna "
-"nella vita reale (ad esempio da parte del vostro datore di lavoro o dei "
-"vostri clienti). Fate molta attenzione! Una volta scelto, non potrete MAI "
-"più cambiare questo pseudonimo. Sceglietelo con cura! "
-
 msgid "password_title_label"
 msgstr "Inserire la password qui."
 
@@ -407,7 +394,9 @@ msgid "invalid_pseudonym"
 msgstr ""
 "Pseudonimo non valido. Deve essere lungo tra ${MIN_PSEUDONYM_LENGTH} e "
 "${MAX_PSEUDONYM_LENGTH} caratteri e può contenere solo lettere (A-Z, a-z), "
-"numeri (0-9), trattini (_), punti (.), trattini (-) e spazi ( )."
+"numeri (0-9), trattini (_), punti (.), trattini (-) e spazi ( ). Non può "
+"contenere lettere con accenti, umlaut e altri segni diacritici specifici di "
+"alcune lingue."
 
 msgid "invalid_date"
 msgstr "Formato di data non valido."
@@ -1041,8 +1030,9 @@ msgstr ""
 "nella Comunità"
 
 #: alirpunkto/schemas/register_form.py:106
+#, fuzzy
 msgid "cooperator_number_required"
-msgstr ""
+msgstr "numero_cooperatore_richiesto"
 
 #: alirpunkto/schemas/register_form.py:112
 msgid "pseudonym_description"
@@ -1191,8 +1181,9 @@ msgstr ""
 "iniziale di tale data è quello della vostra registrazione come Cooperatore"
 
 #: alirpunkto/schemas/register_form.py:171
+#, fuzzy
 msgid "cooperative_behaviour_mark_update_required"
-msgstr ""
+msgstr "comportamento_cooperativo_marcatura_aggiornamento_richiesto"
 
 #: alirpunkto/schemas/register_form.py:180
 msgid "number_shares_owned_label"
@@ -1212,8 +1203,9 @@ msgstr ""
 "Cooperativa e noi tutti vi siamo grati per questo!"
 
 #: alirpunkto/schemas/register_form.py:183
+#, fuzzy
 msgid "number_shares_owned_required"
-msgstr ""
+msgstr "numero_azioni_di_proprietà_richieste"
 
 #: alirpunkto/schemas/register_form.py:188
 msgid "date_end_validity_yearly_contribution_label"
@@ -1233,8 +1225,9 @@ msgstr ""
 "acquistato almeno un'azione)."
 
 #: alirpunkto/schemas/register_form.py:190
+#, fuzzy
 msgid "date_end_validity_yearly_contribution_required"
-msgstr ""
+msgstr "data_fine_validità_annuale_contributo_richiesto"
 
 #: alirpunkto/schemas/register_form.py:199
 msgid "iban_label"
@@ -1251,8 +1244,9 @@ msgstr ""
 "quando prevedete di lasciare la Cooperativa"
 
 #: alirpunkto/schemas/register_form.py:202
+#, fuzzy
 msgid "iban_required"
-msgstr ""
+msgstr "iban_richiesto"
 
 #: alirpunkto/schemas/register_form.py:207
 msgid "date_erasure_all_data_title"
@@ -1322,7 +1316,7 @@ msgstr "Errore di connessione"
 
 #: alirpunkto/utils.py:208 alirpunkto/utils.py:213
 msgid "email_allready_exist"
-msgstr "Email già esistente"
+msgstr "Il indrizzo di email già esistente"
 
 #: alirpunkto/views/check_new_email.py:95
 msgid "email_updated"
@@ -1419,3 +1413,23 @@ msgstr "Puoi modificare il tuo profilo cliccando su"
 
 msgid "profile"
 msgstr "profilo"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Il tuo indirizzo e-mail è stato aggiornato con successo. Se non hai "
+"richiesto questa modifica o se hai delle domande, non esitare a contattare "
+"immediatamente il nostro supporto al numero ${admin_email}. Grazie per far "
+"parte della comunità ${domain_name}!"
+
+#~ msgid "pseudonym_title_label"
+#~ msgstr ""
+#~ "Inserite qui lo pseudonimo che vi identificherà per tutta la durata della "
+#~ "vostra attività sulla nostra piattaforma informatica. Le consigliamo "
+#~ "vivamente di scegliere uno pseudonimo che renda impossibile (o "
+#~ "estremamente difficile) risalire alla sua vera identità. In questo modo, "
+#~ "proteggerete la riservatezza delle vostre opinioni (cioè i dati personali "
+#~ "che sono oggetto di una protezione specifica ai sensi del Regolamento "
+#~ "generale sulla protezione dei dati - RGPD) contro qualsiasi forma di "
+#~ "pressione esterna nella vita reale (ad esempio da parte del vostro datore "
+#~ "di lavoro o dei vostri clienti). Fate molta attenzione! Una volta scelto, "
+#~ "non potrete MAI più cambiare questo pseudonimo. Sceglietelo con cura! "
