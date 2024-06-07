@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-05-25 12:49+0200\n"
+"PO-Revision-Date: 2024-06-07 10:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: pl\n"
@@ -403,19 +403,6 @@ msgstr ""
 "'&', '*', '(', ')', '-', '_', '+', '='."
 
 #, fuzzy
-msgid "pseudonym_title_label"
-msgstr ""
-"Wpisz tutaj pseudonim, który będzie Cię identyfikował przez cały czas Twojej "
-"aktywności na naszej platformie IT. Zdecydowanie zalecamy wybranie "
-"pseudonimu, który uniemożliwi (lub bardzo utrudni) ustalenie prawdziwej "
-"tożsamości użytkownika. W ten sposób chronisz poufność swoich opinii (tj. "
-"danych osobowych, które podlegają szczególnej ochronie na mocy ogólnego "
-"rozporządzenia o ochronie danych - RODO) przed wszelkimi formami presji "
-"zewnętrznej w prawdziwym życiu (np. ze strony pracodawcy lub klientów). Bądź "
-"bardzo ostrożny! Raz wybranego pseudonimu NIGDY nie będzie można później "
-"zmienić. Wybierz go ostrożnie! "
-
-#, fuzzy
 msgid "password_title_label"
 msgstr "Wprowadź tutaj swoje hasło."
 
@@ -450,12 +437,13 @@ msgstr ""
 "Twoja aplikacja została zatwierdzona. Możesz teraz zalogować się przy użyciu "
 "pseudonimu i hasła podanych podczas procesu składania wniosku."
 
-#, fuzzy
 msgid "invalid_pseudonym"
 msgstr ""
 "Nieprawidłowy pseudonim. Powinien zawierać od ${MIN_PSEUDONYM_LENGTH} do "
 "${MAX_PSEUDONYM_LENGTH} znaków i może zawierać tylko litery (A-Z, a-z), "
-"cyfry (0-9), podkreślenia (_), kropki (.), myślniki (-) i spacje ( )."
+"cyfry (0-9), podkreślenia (_), kropki (.), myślniki (-) i spacje ( ). Nie "
+"może zawierać liter z akcentami, umlautów i innych znaków diakrytycznych "
+"charakterystycznych dla niektórych języków."
 
 msgid "invalid_date"
 msgstr "Niedozwolony format pliku."
@@ -1164,8 +1152,9 @@ msgstr ""
 "procesach zachodzących we Wspólnocie"
 
 #: alirpunkto/schemas/register_form.py:106
+#, fuzzy
 msgid "cooperator_number_required"
-msgstr ""
+msgstr "cooperator_number_required"
 
 #: alirpunkto/schemas/register_form.py:112
 #, fuzzy
@@ -1320,8 +1309,9 @@ msgstr ""
 "tej daty jest data rejestracji użytkownika jako podmiotu współpracującego"
 
 #: alirpunkto/schemas/register_form.py:171
+#, fuzzy
 msgid "cooperative_behaviour_mark_update_required"
-msgstr ""
+msgstr "cooperative_behaviour_mark_update_required"
 
 #: alirpunkto/schemas/register_form.py:180
 #, fuzzy
@@ -1343,8 +1333,9 @@ msgstr ""
 "wdzięczni!"
 
 #: alirpunkto/schemas/register_form.py:183
+#, fuzzy
 msgid "number_shares_owned_required"
-msgstr ""
+msgstr "wymagana liczba_udziałów_własnych"
 
 #: alirpunkto/schemas/register_form.py:188
 #, fuzzy
@@ -1366,8 +1357,9 @@ msgstr ""
 "nabyciu co najmniej jednego udziału)."
 
 #: alirpunkto/schemas/register_form.py:190
+#, fuzzy
 msgid "date_end_validity_yearly_contribution_required"
-msgstr ""
+msgstr "date_end_validity_yearly_contribution_required"
 
 #: alirpunkto/schemas/register_form.py:199
 #, fuzzy
@@ -1385,8 +1377,9 @@ msgstr ""
 "opuszczenia Spółdzielni"
 
 #: alirpunkto/schemas/register_form.py:202
+#, fuzzy
 msgid "iban_required"
-msgstr ""
+msgstr "iban_required"
 
 #: alirpunkto/schemas/register_form.py:207
 #, fuzzy
@@ -1463,7 +1456,7 @@ msgstr "Błąd połączenia"
 
 #: alirpunkto/utils.py:208 alirpunkto/utils.py:213
 msgid "email_allready_exist"
-msgstr "Email już istnieje"
+msgstr "Adres email już istnieje"
 
 #: alirpunkto/views/check_new_email.py:95
 #, fuzzy
@@ -1573,7 +1566,28 @@ msgstr "Pseudonim członka"
 
 #, fuzzy
 msgid "modify_profile"
-msgstr "Możesz zmienić swój profil, klikając"
+msgstr "Możesz zmienić swój profil klikając tutaj"
 
 msgid "profile"
 msgstr "profil"
+
+#, fuzzy
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Twój adres e-mail został pomyślnie zaktualizowany. Jeśli nie poprosiłeś o tę "
+"zmianę lub masz jakiekolwiek pytania, nie wahaj się skontaktować z naszym "
+"działem pomocy technicznej pod adresem ${admin_email}. Dziękujemy za bycie "
+"częścią społeczności ${domain_name}!"
+
+#, fuzzy
+#~ msgid "pseudonym_title_label"
+#~ msgstr ""
+#~ "Wpisz tutaj pseudonim, który będzie Cię identyfikował przez cały czas "
+#~ "Twojej aktywności na naszej platformie IT. Zdecydowanie zalecamy wybranie "
+#~ "pseudonimu, który uniemożliwi (lub bardzo utrudni) ustalenie prawdziwej "
+#~ "tożsamości użytkownika. W ten sposób chronisz poufność swoich opinii (tj. "
+#~ "danych osobowych, które podlegają szczególnej ochronie na mocy ogólnego "
+#~ "rozporządzenia o ochronie danych - RODO) przed wszelkimi formami presji "
+#~ "zewnętrznej w prawdziwym życiu (np. ze strony pracodawcy lub klientów). "
+#~ "Bądź bardzo ostrożny! Raz wybranego pseudonimu NIGDY nie będzie można "
+#~ "później zmienić. Wybierz go ostrożnie! "
