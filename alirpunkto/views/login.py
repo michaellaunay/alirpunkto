@@ -22,6 +22,7 @@ from ..utils import (
     get_admin_user,
     get_oid_from_pseudonym,
     update_member_from_ldap,
+    logout,
 )
 
 @view_config(route_name='login', renderer='alirpunkto:templates/login.pt')
@@ -80,6 +81,8 @@ def login_view(request):
                 'site_name': site_name,
                 'domain_name': domain_name
             }
+    else:
+        logout(request)
     return {
         'logged_in': True if user else False,
         'site_name': site_name,
