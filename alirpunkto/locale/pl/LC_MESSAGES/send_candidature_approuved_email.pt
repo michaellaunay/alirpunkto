@@ -41,7 +41,6 @@
     </ul>
     
     <p tal:omit-tag="textual”>Z niecierpliwością czekamy na przyjemność współpracy z Tobą! </p>
-"textual">Dziękujemy, że do nas dołączyłeś! Z radością witamy Cię w naszej społeczności i cieszymy się na współpracę z Tobą!</p>
     
     <p tal:omit-tag="textual">Z wyrazami szacunku,</p>
     <p tal:omit-tag="textual">Zespół <span tal:replace="domain_name">Nazwa strony</span></p>
