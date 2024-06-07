@@ -53,6 +53,7 @@ from .constants_and_globals import (
     KEYCLOAK_CLIENT_ID,
     KEYCLOAK_CLIENT_SECRET,
     SSO_TOKEN,
+    SSO_REFRESH,
     SSO_EXPIRES_AT,
 )
 from pyramid.i18n import get_localizer
@@ -1465,6 +1466,10 @@ def logout(request: Request):
         del request.session[ACCESSED_MEMBER_OID]
     if SSO_TOKEN in request.session:
         del request.session[SSO_TOKEN]
+    if SSO_REFRESH in request.session:
+        del request.session[SSO_REFRESH]
+    if SSO_EXPIRES_AT in request.session:
+        del request.session[SSO_EXPIRES_AT]
 
 def get_keycloak_token(user: User, password: str) -> Optional[str]:
     """Get the Keycloak token for the given user.
@@ -1536,3 +1541,4 @@ def refresh_keycloak_token(refresh_token: str) -> Optional[dict]:
     else:
         log.error(f"Failed to refresh SSO token: {response.status_code} - {response.text}")
         return None
+
