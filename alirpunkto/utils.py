@@ -2,8 +2,8 @@
 # author: Michaël Launay
 # date: 2023-09-30
 
-from typing import Union, Tuple, Dict, List, Final
-import datetime
+from typing import Union, Tuple, Dict, List, Optional
+from datetime import datetime, timedelta
 from pyramid.request import Request
 from alirpunkto.models.member import (
     Members,
@@ -48,6 +48,12 @@ from .constants_and_globals import (
     SEED_LENGTH,
     DEFAULT_COOPERATIVE_BEHAVIOUR_MARK,
     ACCESSED_MEMBER_OID,
+    KEYCLOAK_SERVER_URL,
+    KEYCLOAK_REALM,
+    KEYCLOAK_CLIENT_ID,
+    KEYCLOAK_CLIENT_SECRET,
+    SSO_TOKEN,
+    SSO_EXPIRES_AT,
 )
 from pyramid.i18n import get_localizer
 from ldap3 import (
@@ -68,6 +74,7 @@ import base64
 from .models.users import User
 import json
 from .secret_manager import get_secret
+import requests
 
 def get_preferred_language(request: Request)->str:
     """Get the preferred language from the request.
@@ -561,7 +568,7 @@ def update_member_from_ldap(
             new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
             new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
             if new_birthdate:
-                new_birthdate = datetime.datetime.strptime(new_birthdate, "%Y%m%d%H%M%SZ")
+                new_birthdate = datetime.strptime(new_birthdate, "%Y%m%d%H%M%SZ")
             new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
             new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
             member = get_member_by_oid(oid, request, False)
@@ -572,11 +579,11 @@ def update_member_from_ldap(
                 else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
             cooperative_behaviour_mark_update = member_entry.cooperativeBehaviorMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviorMarkUpdate') else None
             if cooperative_behaviour_mark_update:
-                cooperative_behaviour_mark_update = datetime.datetime.strptime(cooperative_behaviour_mark_update, "%Y%m%d%H%M%SZ")
+                cooperative_behaviour_mark_update = datetime.strptime(cooperative_behaviour_mark_update, "%Y%m%d%H%M%SZ")
             number_shares_owned = member_entry.numberSharesOwned.value if hasattr(member_entry, 'numberSharesOwned') else None
             date_end_validity_yearly_contribution = member_entry.dateEndValidityYearlyContribution.value if hasattr(member_entry, 'dateEndValidityYearlyContribution') else None
             if date_end_validity_yearly_contribution:
-                date_end_validity_yearly_contribution = datetime.datetime.strptime(date_end_validity_yearly_contribution, "%Y%m%d%H%M%SZ")
+                date_end_validity_yearly_contribution = datetime.strptime(date_end_validity_yearly_contribution, "%Y%m%d%H%M%SZ")
             unique_member_of = member_entry.uniqueMemberOf.value if hasattr(member_entry, 'uniqueMemberOf') else None
             iban = member_entry.iban.value if hasattr(member_entry, 'iban') else None
             date_erasure_all_data = member_entry.dateErasureAllData.value if hasattr(member_entry, 'dateErasureAllData') else None
@@ -1456,3 +1463,76 @@ def logout(request: Request):
         del request.session[MEMBER_OID]
     if ACCESSED_MEMBER_OID in request.session:
         del request.session[ACCESSED_MEMBER_OID]
+    if SSO_TOKEN in request.session:
+        del request.session[SSO_TOKEN]
+
+def get_keycloak_token(user: User, password: str) -> Optional[str]:
+    """Get the Keycloak token for the given user.
+
+    This function sends a request to the Keycloak server to obtain an access token
+    for the specified user using their username and password.
+
+    Args:
+        user (User): The user object representing the user for whom the token is requested.
+        password (str): The password of the user.
+
+    Returns:
+        Optional[str]: The full json if the request is successful, None otherwise.
+    """
+    token_url = f"{KEYCLOAK_SERVER_URL}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/token"
+    if "https" not in token_url:
+        log.warning(f"Token from {token_url} is not secure.")
+    payload = {
+        'client_id': get_secret(KEYCLOAK_CLIENT_ID),
+        'client_secret': get_secret(KEYCLOAK_CLIENT_SECRET),
+        'grant_type': 'password',
+        'username': user.oid, # assuming the oid is used as the username in Keycloak
+        'password': password,
+    }
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    now = datetime.now()
+    response = requests.post(token_url, data=payload, headers=headers)
+
+    if response.status_code == 200:
+        json_response = response.json()
+        if 'expires_in' in json_response:
+            expires_at = (now + timedelta(seconds=json_response['expires_in'])).isoformat()
+            json_response[SSO_EXPIRES_AT] = expires_at
+        return json_response
+    else:
+        log.error(f"Failed to get SSO token: {response.status_code} - {response.text}")
+        return None
+
+def refresh_keycloak_token(refresh_token: str) -> Optional[dict]:
+    """Refresh the Keycloak access token using the refresh token.
+
+    Args:
+        refresh_token (str): The refresh token obtained from a previous authentication.
+
+    Returns:
+        Optional[dict]: The JSON response containing the new access token if the request is successful,
+        None otherwise.
+    """
+    token_url = f"{KEYCLOAK_SERVER_URL}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/token"
+    if "https" not in token_url:
+        log.warning(f"Token from {token_url} is not secure.")
+    payload = {
+        'client_id': get_secret(KEYCLOAK_CLIENT_ID),
+        'client_secret': get_secret(KEYCLOAK_CLIENT_SECRET),
+        'grant_type': 'refresh_token',
+        'refresh_token': refresh_token,
+    }
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    response = requests.post(token_url, data=payload, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        log.error(f"Failed to refresh SSO token: {response.status_code} - {response.text}")
+        return None

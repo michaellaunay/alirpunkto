@@ -1,4 +1,4 @@
-# 
+#
 
 from dataclasses import make_dataclass
 from typing import Type, Final
@@ -659,7 +659,7 @@ if __name__ == "__main__":
 
     def get_state()->MemberStates:
         """Get the state from the user interaction.
-        
+
         This function prompts the user to enter a state from a list of available states.
         It validates the user input and returns the selected state.
 
@@ -679,9 +679,9 @@ if __name__ == "__main__":
             elif state_str in candidature_states:
                 state = CandidatureStates[state_str.split(".")[1]]
         return state
-    roles = ['Owner', 'Admin', 'Ordinary', 'Cooperator', 'voter', 'Board', 'MediationArbitrationCouncil', 'CandidatesMissingShareYearContrib', 'CandidatesMissingShare', 'CandidatesMissingYearContrib', 'Sanctioned', 'SanctionedMissingYearContrib']  
+    roles = ['Owner', 'Admin', 'Ordinary', 'Cooperator', 'voter', 'Board', 'MediationArbitrationCouncil', 'CandidatesMissingShareYearContrib', 'CandidatesMissingShare', 'CandidatesMissingYearContrib', 'Sanctioned', 'SanctionedMissingYearContrib']
     role=None
-    while role not in roles:    
+    while role not in roles:
         role = input(f"Enter a role from {roles}: ")
     state = get_state()
     if isinstance(state, CandidatureStates):

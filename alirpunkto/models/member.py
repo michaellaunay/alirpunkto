@@ -490,7 +490,7 @@ class Member(Persistent):
         new_value: Optional[Any] = None
         ) -> None:
         """Memorize changes to the member_datas and generate a new seed.
-  
+
         Args:
             function_name (Optional[str]        # get a random seed and record the creation
 ): The name of the function that
@@ -548,7 +548,7 @@ class Member(Persistent):
             raise TypeError(
                 "The state must be an instance of MemberStates."
             )
-  
+
         old_state = self._member_state.name if self._member_state else "None"
         self._member_state = value
         self._memorize_changes("member_state", old_state, value.name)
@@ -575,7 +575,7 @@ class Member(Persistent):
             raise TypeError(
                 "The type must be an instance of MemberTypes."
             )
-  
+
         old_type = self._type.name if self._type else "None"
         self._type = value
         self._memorize_changes("type", old_type, value.name)
@@ -600,7 +600,7 @@ class Member(Persistent):
         """
         if not isinstance(value, str):
             raise TypeError("The email must be a string.")
-  
+
         old_email = self._email if self._email else "None"
         self._email = value
         self._memorize_changes("email", old_email, value)
@@ -625,7 +625,7 @@ class Member(Persistent):
         """
         if not isinstance(value, str):
             raise TypeError("The pseudonym must be a string.")
-  
+
         old_pseudonym = self._pseudonym if self._pseudonym else "None"
         self._pseudonym = value
         self._memorize_changes("pseudonym", old_pseudonym, value)
@@ -667,7 +667,7 @@ class Member(Persistent):
         """
         if not isinstance(value, MemberDatas):
             raise TypeError("The data must be a MemberDatas.")
-  
+
         old_data = self._data if self._data else "None"
         self._data = value
         self._memorize_changes("data", old_data, value)

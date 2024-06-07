@@ -1004,6 +1004,9 @@ msgstr "The sending of the verification email for your new address has failed"
 msgid "check_new_email_send"
 msgstr "The verification email for your new address has been sent"
 
+msgid "modify_member"
+msgstr "Consult or modify member"
+
 #: alirpunkto/utils.py:187
 msgid "connection_error"
 msgstr "Connection error"

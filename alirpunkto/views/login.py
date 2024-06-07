@@ -2,7 +2,7 @@
 # author: Michaël Launay
 # date: 2023-06-15
 
-import datetime
+from datetime import datetime
 from typing import Union
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
@@ -14,15 +14,18 @@ from alirpunkto.constants_and_globals import (
     LDAP_SERVER,
     LDAP_OU,
     LDAP_BASE_DN,
-    log
+    log,
+    SSO_REFRESH,
+    SSO_EXPIRES_AT,
 )
-from ..models.users import User
-from ..utils import (
+from alirpunkto.models.users import User
+from alirpunkto.utils import (
     is_admin,
     get_admin_user,
     get_oid_from_pseudonym,
     update_member_from_ldap,
     logout,
+    get_keycloak_token,
 )
 
 @view_config(route_name='login', renderer='alirpunkto:templates/login.pt')
@@ -61,10 +64,19 @@ def login_view(request):
             headers = remember(request, username)
             request.session['logged_in'] = True
             request.session['user'] = user.to_json()
-            current_time = datetime.datetime.now().isoformat()
+            current_time = datetime.now().isoformat()
             request.session['created_at'] = current_time
             request.session['site_name'] = site_name
             request.session['domain_name'] = domain_name
+                        # Request Keycloak token
+            sso_token = get_keycloak_token(user, password)
+            if sso_token:
+                log.debug(f"Successfully obtained Keycloak token for {username}")
+                request.session[SSO_REFRESH] = sso_token['refresh_token']
+                request.session[SSO_EXPIRES_AT] = sso_token[SSO_EXPIRES_AT]
+                request.headers['Authorization'] = f'Bearer {sso_token}'
+            else:
+                log.warning(f"Failed to obtain Keycloak token for {username}")
             # redirect to the page the user wanted to access before login
             if 'redirect_url' in request.session:
                 redirect_url = request.session['redirect_url']
@@ -82,7 +94,7 @@ def login_view(request):
                 'domain_name': domain_name
             }
     else:
-        logout(request)
+        logout(request) # Enforce logout before processing login
     return {
         'logged_in': True if user else False,
         'site_name': site_name,
@@ -110,29 +122,29 @@ def check_password(username:str, oid:str, password:str) -> Union[None, User]:
     log.debug(f"Trying to authenticate {ldap_login=} with {password=}")
     try:
         # define an unsecure LDAP connection, using the credentials above
-        conn = Connection(server, ldap_login, password, auto_bind=True)
-        conn.search(
-            LDAP_BASE_DN,
-            '(uid={})'.format(oid),
-            attributes=['cn', 'uid','mail', 'employeeNumber']
-        ) # search for the user in the LDAP directory
+        with Connection(server, ldap_login, password, auto_bind=True) as conn:
+            conn.search(
+                LDAP_BASE_DN,
+                '(uid={})'.format(oid),
+                attributes=['cn', 'uid','mail', 'employeeNumber']
+            ) # search for the user in the LDAP directory
+            if len(conn.entries) == 0:
+                return None
+            user_entry = conn.entries[0]
+            name = user_entry.cn.value
+            employeeNumber = (user_entry.employeeNumber.value
+                if "employeeNumber" in user_entry else user_entry.uid.value
+            )
+            email = (user_entry.mail.value
+                if "mail" in user_entry else "undefined@example.com"
+            )
+            if "mail" not in user_entry:
+                log.warning(f"User {username} has no email address")
+            if "employeeNumber" not in user_entry:
+                log.warning(f"User {username} has no employeeNumber")
+
+            user = User(name=name, email=email, oid=employeeNumber)
+            return user
     except LDAPBindError as e:
         log.debug(f"Error while authenticating {username}: {e}")
         return None
-    if len(conn.entries) == 0:
-        return None
-    user_entry = conn.entries[0]
-    name = user_entry.cn.value
-    employeeNumber = (user_entry.employeeNumber.value
-        if "employeeNumber" in user_entry else user_entry.uid.value
-    )
-    email = (user_entry.mail.value
-        if "mail" in user_entry else "undefined@example.com"
-    )
-    if "mail" not in user_entry:
-        log.warning(f"User {username} has no email address")
-    if "employeeNumber" not in user_entry:
-        log.warning(f"User {username} has no employeeNumber")
-    
-    user = User(name=name, email=email, oid=employeeNumber)
-    return user

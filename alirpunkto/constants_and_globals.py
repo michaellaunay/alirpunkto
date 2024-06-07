@@ -47,6 +47,12 @@ KEYCLOAK_REALM:Final = get_key(dotenv_path, "KEYCLOAK_REALM",None) # The realm
 KEYCLOAK_CLIENT_ID:Final = "KEYCLOAK_CLIENT_ID" # use get_secret to get the password
 # The client secret of this application
 KEYCLOAK_CLIENT_SECRET:Final = "KEYCLOAK_CLIENT_SECRET" # use get_secret to get the password
+# SSO Token in session
+SSO_TOKEN:Final = "SSO_TOKEN"
+# SSO Refresh Token in session
+SSO_REFRESH:Final = "SSO_REFRESH"
+# SSO Token expiration date
+SSO_EXPIRES_AT:Final = 'expires_at'
 # logging configuration
 log: Final = logging.getLogger('alirpunkto')
 
