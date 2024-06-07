@@ -13,12 +13,12 @@
     
     <p tal:omit-tag="textual">Tenemos el placer de informarte de que tu solicitud a la <span tal:replace="domain_name">Site name</span> para el rol de <span tal:replace="python:candidature.type">Role</span> ha sido aprobada.</p>
     
-    <p tal:omit-tag="textual">¡Gracias por unirte a nosotros! Nos complace darte la bienvenida a nuestra Comunidad.</p> <p
+    <p tal:omit-tag="textual">¡Gracias por unirte a nosotros! Nos complace darte la bienvenida a nuestra Comunidad.</p>
     
     <p tal:omit-tag="textual">Ahora que tu solicitud ha sido aprobada, puedes iniciar sesión en nuestra plataforma utilizando el seudónimo y la contraseña que proporcionaste durante el proceso de solicitud. Después de haber iniciado sesión, encontrarás:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">los enlaces a todas las aplicaciones informáticas a las que tienes acceso directo. ¡No necesitas volver a conectarte!</li> <li
-        <li tal:omit-tag="textual">un enlace al formulario donde puedes ver y editar tu propio perfil. En este formulario, te animamos a presentarte a los demás miembros de nuestra Comunidad con un breve «texto de perfil» y a mostrar una pequeña foto que te represente (tu «avatar»);</li> <li
+        <li tal:omit-tag="textual">los enlaces a todas las aplicaciones informáticas a las que tienes acceso directo. ¡No necesitas volver a conectarte!</li>
+        <li tal:omit-tag="textual">un enlace al formulario donde puedes ver y editar tu propio perfil. En este formulario, te animamos a presentarte a los demás miembros de nuestra Comunidad con un breve «texto de perfil» y a mostrar una pequeña foto que te represente (tu «avatar»);</li>
         <li tal:omit-tag="textual">un enlace para cerrar la sesión.</li>
     </ul>
 
