@@ -209,7 +209,14 @@ access = {
             modifications=Permissions
         ),
         (CandidatureStates.CONFIRMED_HUMAN, MemberTypes.ORDINARY): CandidaturePermissions(
-            data=NO_MEMBER_DATA_PERMISSIONS,
+            data=MemberDataPermissions(
+                description=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                password=Permissions.ACCESS | Permissions.WRITE,
+                password_confirm=Permissions.ACCESS | Permissions.WRITE,
+                lang1=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                lang2=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                lang3=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+            ),
             oid=Permissions.ACCESS | Permissions.READ,
             member_state=Permissions.ACCESS | Permissions.READ,
             type=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
