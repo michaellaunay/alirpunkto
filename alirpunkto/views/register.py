@@ -32,6 +32,7 @@ from alirpunkto.constants_and_globals import (
     log,
     SITE_NAME,
     DOMAIN_NAME,
+    ADMIN_EMAIL,
 )
 from pyramid.i18n import Translator
 from ..utils import (
@@ -166,7 +167,8 @@ def validate_candidature_choice_and_email(
     Returns:
         dict: Error message if validation fails, None otherwise.
     """
-    email_error = is_valid_email(email, request)
+    check_mx = not (ADMIN_EMAIL.split("@")[-1] in email.split("@")[-1])
+    email_error = is_valid_email(email, request, check_mx)
     if email_error is not None:
         return {
             'candidature': candidature, 
@@ -617,9 +619,10 @@ def get_template_parameters_for_cooperator(
     if(isinstance(voting_url, tuple)):
         voting_url = voting_url[0]
     site_name=request.registry.settings.get('site_name')
+    domain_name = request.registry.settings.get('domain_name')
     signature = MAIL_SIGNATURE.format(
         site_name=site_name,
-        domain_name=request.registry.settings.get('domain_name'),
+        domain_name=domain_name,
         fullname = candidature.data.fullname,
         fullsurname = candidature.data.fullsurname if getattr(
             candidature.data,
@@ -630,8 +633,8 @@ def get_template_parameters_for_cooperator(
     local_datas = {
         "voting_url":voting_url,
         "signature":signature,
-        "site_name":request.registry.settings.get('site_name'),
-        "domain_name":request.registry.settings.get('domain_name')
+        "site_name":site_name,
+        "domain_name":domain_name,
     }
     email_copy_id_verification_body = _(
         "email_copy_id_verification_body",

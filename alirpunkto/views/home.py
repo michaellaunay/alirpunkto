@@ -7,15 +7,43 @@ from alirpunkto.constants_and_globals import (
     _,
     SSO_REFRESH,
     SSO_EXPIRES_AT,
+    KEYCLOAK_CLIENT_ID,
+    KEYCLOAK_REALM,
+    KEYCLOAK_SERVER_URL,
+    KEYCLOAK_CLIENT_SECRET,
 )
 from json import loads
 from alirpunkto.utils import refresh_keycloak_token
 from datetime import datetime, timedelta
-import copy
+import urllib.parse
+from alirpunkto.secret_manager import get_secret
 
 def is_authenticated(request):
     # Check if the user is authenticated
     return 'user' in request.session
+
+def generate_keycloak_redirect_url(keycloak_base_url, client_id, redirect_uri, token):
+    """
+    Generates a redirect URL to Keycloak for authentication.
+
+    Args:
+        keycloak_base_url (str): The base URL of your Keycloak server.
+        client_id (str): The Keycloak client ID.
+        redirect_uri (str): The redirect URL of the target application after authentication.
+        token (str): The JWT token for authentication.
+
+    Returns:
+        str: The redirect URL to Keycloak.
+    """
+    query_params = {
+        'client_id': client_id,
+        'redirect_uri': redirect_uri,
+        'response_type': 'token',
+        'scope': 'openid',
+        'state': token  # Utiliser l'état pour passer le token
+    }
+    query_string = urllib.parse.urlencode(query_params)
+    return f"{keycloak_base_url}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/auth?{query_string}"
 
 
 @view_config(route_name='home', renderer='alirpunkto:templates/home.pt')
@@ -48,9 +76,11 @@ def home_view(request):
             request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
             request.headers['Authorization'] = f'Bearer {sso_token}'
             access_token = sso_token['access_token']
+            client_id = get_secret(KEYCLOAK_CLIENT_ID)
             # Add the token to the applications url without changing the original settings
             applications = {
-                app_name: {**app_info, 'url': app_info['url'] + f"?token={access_token}"}
+                app_name: {**app_info, 'url': generate_keycloak_redirect_url(
+                            KEYCLOAK_SERVER_URL, client_id, app_info['url'], access_token)}
                 for app_name, app_info in applications.items()
             }
 

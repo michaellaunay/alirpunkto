@@ -1954,3 +1954,75 @@ def check_password(username: str, oid: str, password: str) -> Union[None, User]:
    - Le résultat (succès ou échec) de cette requête est logué.
 
 Avec ce scénario, nous profiterons de l'authentification réussie via LDAP pour générer un jeton d'accès Keycloak sans exiger une nouvelle authentification de l'utilisateur, facilitant ainsi l'intégration du SSO.
+
+# 2024-06-07
+
+Pour rediriger vers le serveur Keycloak avec le token et l'URL de l'application tierce, vous pouvez utiliser l'endpoint d'autorisation de Keycloak pour demander un token d'accès pour l'application tierce. Voici comment vous pouvez procéder :
+
+1. **Générer une URL de redirection vers Keycloak** : Cette URL contiendra le token JWT et l'URL de l'application tierce comme paramètres.
+2. **Keycloak authentifie l'utilisateur** : Si l'utilisateur est authentifié avec succès, Keycloak redirige l'utilisateur vers l'URL de l'application tierce avec le token d'accès.
+
+Voici un exemple de code pour préparer l'URL de redirection vers Keycloak :
+
+```python
+import urllib.parse
+
+def generate_keycloak_redirect_url(keycloak_base_url, client_id, redirect_uri, token):
+    # Construire les paramètres de la requête
+    params = {
+        'client_id': client_id,
+        'redirect_uri': redirect_uri,
+        'response_type': 'code',
+        'scope': 'openid',
+        'state': token
+    }
+
+    # Encoder les paramètres dans l'URL
+    query_string = urllib.parse.urlencode(params)
+    return f"{keycloak_base_url}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/auth?{query_string}"
+
+# Utilisation
+keycloak_base_url = 'https://keycloak.example.com/auth'
+client_id = 'your-client-id'
+redirect_uri = 'https://example.com/application'
+token = 'your-jwt-token'
+redirect_url = generate_keycloak_redirect_url(keycloak_base_url, client_id, redirect_uri, token)
+print(redirect_url)
+```
+
+Dans cet exemple, la fonction `generate_keycloak_redirect_url` construit une URL de redirection vers Keycloak en utilisant les paramètres nécessaires pour l'authentification OpenID Connect.
+
+### Étapes détaillées :
+
+1. **Générer une URL de redirection** :
+   - Cette URL inclut les paramètres `client_id`, `redirect_uri`, `response_type`, `scope`, et un état unique (`state`) qui peut être votre token JWT.
+
+2. **Redirection vers Keycloak** :
+   - Lorsque l'utilisateur accède à cette URL, Keycloak authentifie l'utilisateur. Si l'authentification est réussie, Keycloak redirige l'utilisateur vers l'URL spécifiée dans `redirect_uri` avec un code d'autorisation.
+
+3. **Échange du code d'autorisation pour un token d'accès** :
+   - L'application tierce utilise le code d'autorisation pour obtenir un token d'accès en appelant l'endpoint de token de Keycloak.
+
+### Exemple de flux complet :
+
+1. **Votre application redirige l'utilisateur vers Keycloak** :
+
+   ```python
+   redirect_url = generate_keycloak_redirect_url(
+       keycloak_base_url='https://keycloak.example.com/auth',
+       client_id='your-client-id',
+       redirect_uri='https://example.com/application',
+       token='your-jwt-token'
+   )
+   print(redirect_url)
+   ```
+
+2. **Keycloak authentifie l'utilisateur et redirige vers l'application tierce** :
+
+   - L'utilisateur est redirigé vers `https://example.com/application` avec un code d'autorisation.
+
+3. **L'application tierce échange le code d'autorisation pour un token d'accès** :
+
+   - L'application tierce utilise le code d'autorisation pour obtenir un token d'accès en appelant l'endpoint de token de Keycloak.
+
+En suivant ce flux, vous pouvez rediriger l'utilisateur vers Keycloak avec le token JWT et l'URL de l'application tierce, puis Keycloak authentifie l'utilisateur et redirige vers l'application tierce avec un token d'accès.
