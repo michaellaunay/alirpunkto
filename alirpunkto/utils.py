@@ -445,10 +445,10 @@ def send_email(
         subject=subject,
         sender=sender,
         recipients=recipients,
-        body=Attachment(content_type='text/plain; charset=utf-8',
-            transfer_encoding='quoted-printable', data=text_body),
-        html=Attachment(content_type='text/html; charset=utf-8',
-            transfer_encoding='quoted-printable', data=html_body)
+        body=text_body,
+        html=html_body.decode('utf-8'),
+        extra_headers={'Content-Transfer-Encoding': 'quoted-printable',
+            'Content-Type': "text/plain; charset='utf-8'"},
     )
     log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {text_body}")
 
@@ -1492,6 +1492,9 @@ def get_keycloak_token(user: User, password: str) -> Optional[str]:
     Returns:
         Optional[str]: The full json if the request is successful, None otherwise.
     """
+    if not KEYCLOAK_SERVER_URL or not KEYCLOAK_REALM:
+        log.warning("Keycloak server URL or realm not set.")
+        return None
     token_url = f"{KEYCLOAK_SERVER_URL}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/token"
     if "https" not in token_url:
         log.warning(f"Token from {token_url} is not secure.")
