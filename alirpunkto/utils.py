@@ -76,6 +76,7 @@ from .models.users import User
 import json
 from .secret_manager import get_secret
 import requests
+import re
 
 def get_preferred_language(request: Request)->str:
     """Get the preferred language from the request.
@@ -288,18 +289,19 @@ def is_not_a_valid_email_address(
         return {'error': _('connection_error')}
     return None
 
-def is_valid_email(email, request):
+def is_valid_email(email, request, check_mx=True):
     """Check if the email is valid and not used in LDAP.
 
     Args:
         email (str): the email to check
         request (pyramid.request.Request): the request
+        check_mx (bool): check the mx record
 
     Returns:
         error: the error if the email is not valid
         None: if the email is valid
     """
-    if err := is_not_a_valid_email_address(email):
+    if err := is_not_a_valid_email_address(email, check_mx):
         return err
     try:
         # Verify that the email is not already registered in candidatures
@@ -418,29 +420,35 @@ def send_email(
     Returns:
         bool: True if email is sent successfully, otherwise False.
     """
+    def clean_text(text):
+        # Remove redundant newlines and HTML DOCTYPE
+        text = re.sub(r'\n{2,}', '\n', text)
+        text = re.sub(r'<!DOCTYPE html>\n?', '', text)
+        return text.strip()
+
     text_body = render_to_response(
         template_path,
         request=request,
         value={**template_vars, "textual":True}
     ).text
-    for i in range(5, 1, -1):
-        text_body = text_body.replace("\n"*i, "\n")
-    text_body = text_body.replace("<!DOCTYPE html>\n", "") \
-                     .replace("\n\n\n\n", "\n") \
-                     .replace("\n\n\n", "\n") \
-                     .replace("\n\n", "\n")
+    text_body = clean_text(text_body)
+
     html_body = render_to_response(
         template_path,
         request=request,
         value={**template_vars, "textual":False}
     ).body
+
     sender = request.registry.settings['mail.default_sender']
+
     message = Message(
         subject=subject,
         sender=sender,
         recipients=recipients,
-        body=text_body,
-        html=Attachment(content_type='text/html; charset=utf-8', data=html_body)
+        body=Attachment(content_type='text/plain; charset=utf-8',
+            transfer_encoding='quoted-printable', data=text_body),
+        html=Attachment(content_type='text/html; charset=utf-8',
+            transfer_encoding='quoted-printable', data=html_body)
     )
     log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {text_body}")
 
