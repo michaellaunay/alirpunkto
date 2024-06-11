@@ -1222,7 +1222,7 @@ msgstr ""
 "Rozporządzenia o Ochronie Danych (RODO) Unii Europejskiej jest "
 "CosmoPolitical Cooperative SCE, spółdzielnia europejska z siedzibą 229 rue "
 "Solférino, 59000 Lille, Francja, zarejestrowana 25 kwietnia 2023 r. pod "
-"numerem SIREN 951 007 897.\n"
+"numerem SIREN 951 007 897."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
