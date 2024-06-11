@@ -1099,7 +1099,7 @@ msgstr ""
 "(GDPR) van de Europese Unie is de CosmoPolitical Cooperative SCE, een "
 "Europese coöperatieve vereniging gevestigd 229 rue Solférino, 59000 Lille, "
 "Frankrijk en geregistreerd op 25 april 2023 onder het nummer SIREN 951 007 "
-"897.\n"
+"897."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
