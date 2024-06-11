@@ -1095,7 +1095,7 @@ msgstr ""
 "definito dal Regolamento generale sulla protezione dei "
 "dati (RGPD) dell'Unione europea, è CosmoPolitical Cooperative SCE, "
 "società cooperativa europea con sede in rue Solférino 229, 59000 Lille, "
-"Francia, registrata il 25 aprile 2023 con il numero SIREN 951 007 897.\n"
+"Francia, registrata il 25 aprile 2023 con il numero SIREN 951 007 897."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
