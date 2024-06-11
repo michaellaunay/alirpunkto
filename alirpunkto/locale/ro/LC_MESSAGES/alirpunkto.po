@@ -1252,7 +1252,7 @@ msgstr ""
 "datelor (RGPD) al Uniunii Europene, este CosmoPolitical Cooperative SCE, "
 "o societate cooperativă europeană cu sediul în 229 rue Solférino, 59000 "
 "Lille, Franța și înregistrată la 25 aprilie 2023 sub numărul SIREN 951 007 "
-"897.\n"
+"897."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
