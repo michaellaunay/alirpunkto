@@ -1121,7 +1121,7 @@ msgstr ""
 "Verarbeitung Verantwortliche\" im Sinne der Datenschutz-Grundverordnung (DSGGVO) der Europäischen Union ist die "
 "CosmoPolitical Cooperative SCE, eine europäische Genossenschaft mit Sitz in "
 "229 rue Solférino, 59000 Lille, Frankreich, eingetragen am 25. April 2023 "
-"unter der Nummer SIREN 951 007 897.\n"
+"unter der Nummer SIREN 951 007 897."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
