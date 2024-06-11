@@ -1155,7 +1155,7 @@ msgstr ""
 "protection des données (RGPD) de l'Union européenne est CosmoPolitical "
 "Cooperative SCE, société coopérative européenne établie 229 rue Solférino, "
 "59000 Lille, France et immatriculée le 25 avril 2023 sous le numéro SIREN "
-"951 007 897.\n"
+"951 007 897."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
