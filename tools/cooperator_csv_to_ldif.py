@@ -1,5 +1,5 @@
 #!/bin/python3
-# Description: Convert a CSV file to LDIF format for importing into an LDAP server.
+# Description: Convert a CSV file to LDIF format for importing members into an LDAP server.
 # Author: Michael Launay
 # Date: 2024-06-11
 
@@ -8,9 +8,15 @@ from datetime import datetime
 import argparse
 import os, sys, re, random
 import string
+from uuid import uuid4
+
+from alirpunkto.utils import get_ldap_member_list
 
 default_csv_file_path = '/home/michaellaunay/tmp/FoundingMembers_2022_LDAP-data.csv'
 default_ldif_dir = '/home/michaellaunay/tmp/ldif'
+# reserved uids that should not be used
+reserved_uids = ["00000000-0000-0000-0000-000000000000"]
+reserved_uids.extend([member['uid'] for member in get_ldap_member_list()])
 
 # Dictionary to map French months to their numerical equivalents
 french_months = {
@@ -24,7 +30,7 @@ def convert_french_date_to_iso(date_francaise):
     match = re.search(r'(\d{1,2}) (\w+)\. (\d{4})', date_francaise)
     if match:
         day, month, year = match.groups()
-        month = french_months[month] if month in french_months else french_months[month+"."]
+        month = french_months[month.lower()] if month in french_months else french_months[month.lower()+"."]
         date_iso = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
         return date_iso
     return date_francaise
@@ -56,8 +62,8 @@ def convert_csv_to_ldif(csv_file_path, print_dest=sys.stdout):
     with open(csv_file_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            uid = row['Pseudonyme'].lower().replace(' ', '_')
-            if not uid:
+            pseudonym = row['Pseudonyme']
+            if not pseudonym:
                 continue
             given_name = row['Prénoms']
             family_name = row['Noms']
@@ -65,11 +71,13 @@ def convert_csv_to_ldif(csv_file_path, print_dest=sys.stdout):
             birthdate = convert_date(convert_french_date_to_iso(row['Date de naissance']))
             nationality = row['Nationalité'].split('–')[0].strip()
             email = row['Adresse de courriel']
-            pseudonym = row['Pseudonyme']
             lang1 = row['Langue 1']
             lang2 = row['Langue 2']
             lang3 = row['Langue 3']
             num_shares = remove_inner_spaces(row['Nombre de parts'])
+            uid = uuid4()
+            while uid in reserved_uids:
+                uid = uuid4()
 
             # Generate a random password with 20 characters
             password = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
