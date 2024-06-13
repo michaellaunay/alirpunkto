@@ -16,7 +16,7 @@ default_csv_file_path = '/home/michaellaunay/tmp/FoundingMembers_2022_LDAP-data.
 default_ldif_dir = '/home/michaellaunay/tmp/ldif'
 # reserved uids that should not be used
 reserved_uids = ["00000000-0000-0000-0000-000000000000"]
-reserved_uids.extend([member['uid'] for member in get_ldap_member_list()])
+reserved_uids.extend([member.oid for member in get_ldap_member_list()])
 
 # Dictionary to map French months to their numerical equivalents
 french_months = {
@@ -95,7 +95,7 @@ def convert_csv_to_ldif(csv_file_path, print_dest=sys.stdout):
             description: {function}
             employeeNumber: {uid}
             employeeType: COOPERATOR
-            isActive: 'False'
+            isActive: FALSE
             preferredLanguage: {lang1}
             secondLanguage: {lang2}
             thirdLanguage: {lang3}
