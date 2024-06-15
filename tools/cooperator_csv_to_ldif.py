@@ -14,7 +14,15 @@ from uuid import uuid4
 import base64
 
 from alirpunkto.utils import get_ldap_member_list
+from alirpunkto.constants_and_globals import (
+    LDAP_BASE_DN,
+    LDAP_SERVER,
+    LDAP_OU,
+)
 
+ldap_superior=(f"{LDAP_OU},{LDAP_BASE_DN}"
+    if LDAP_OU else f"{LDAP_BASE_DN}"
+)
 default_csv_file_path = '/home/michaellaunay/tmp/FoundingMembers_2022_LDAP-data.csv'
 default_ldif_dir = '/home/michaellaunay/tmp/ldif'
 # reserved uids that should not be used
@@ -102,7 +110,7 @@ def convert_csv_to_ldif(csv_file_path, ldif_dir):
             password = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
 
             ldif_entry = f"""
-dn: uid={uid},dc=ecreall,dc=com
+dn: uid={uid},{ldap_superior}
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: alirpunktoPerson
