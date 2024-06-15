@@ -893,7 +893,7 @@ def register_user_to_ldap(request, candidature, password):
                 "thirdLanguage" : candidature.data.lang3
             }
             if candidature.data.description:
-                attributes['description'] = candidature.data.description,
+                attributes['description'] = candidature.data.description
         except Exception as e:
             log.error(f"Error while preparing attributes for user {pseudonym}: {e}")
             return {'status': 'error', 'message': _('registration_failed')}

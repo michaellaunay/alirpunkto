@@ -115,15 +115,15 @@ description: {function}
 employeeNumber: {uid}
 employeeType: COOPERATOR
 isActive: FALSE
-preferredLanguage: {lang1}
-secondLanguage: {lang2}
-thirdLanguage: {lang3}
+preferredLanguage: {lang1}"""+(f"""
+secondLanguage: {lang2}""" if lang2 else '') + (f"""
+thirdLanguage: {lang3}""" if lang3 else '') + f"""
 givenName: {given_name}
 nationality: {nationality}
 birthdate: {birthdate}
 cooperativeBehaviourMark: 0
 numberSharesOwned: {num_shares.replace(',', '')}
-dateEndValidityYearlyContribution: {convert_date('2024-04-23')}
+dateEndValidityYearlyContribution: {convert_date('20240423000001Z')}
 uniqueMemberOf: cn=cooperatorsGroup,dc=cosmopolitical,dc=coop
             """
 
