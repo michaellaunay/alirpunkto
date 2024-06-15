@@ -20,8 +20,12 @@ reserved_uids.extend([member.oid for member in get_ldap_member_list()])
 
 # Dictionary to map French months to their numerical equivalents
 french_months = {
-    "janv.": "01", "févr.": "02", "mars": "03", "avr.": "04", "mai": "05", "juin": "06",
-    "juil.": "07", "août": "08", "sept.": "09", "oct.": "10", "nov.": "11", "déc.": "12"
+    "janv.": "01", "févr.": "02", "mars": "03", "avr.": "04", "mai": "05",
+    "janv": "01", "févr": "02", "avr": "04", "juil": "07", "sept": "09",
+    "oct": "10", "nov":"11", "déc": "12",
+    "juin": "06", "juil.": "07", "août": "08", "sept.": "09", "oct.": "10",
+    "nov.": "11", "déc.": "12", "janvier":"01", "février":"02","avril":"04",
+    "juillet":"07","septembre":"09","octobre":"10", "novembre":"11", "décembre":"12",
 }
 
 def convert_french_date_to_iso(date_francaise):
@@ -30,8 +34,8 @@ def convert_french_date_to_iso(date_francaise):
     match = re.search(r'(\d{1,2}) (\w+)\. (\d{4})', date_francaise)
     if match:
         day, month, year = match.groups()
-        month = french_months[month.lower()] if month in french_months else french_months[month.lower()+"."]
-        date_iso = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+        month = french_months[month.lower()] if month in french_months else french_months[month.lower()]
+        date_iso = f"{year}{month.zfill(2)}{day.zfill(2)}000001Z"
         return date_iso
     return date_francaise
 
@@ -83,29 +87,29 @@ def convert_csv_to_ldif(csv_file_path, print_dest=sys.stdout):
             password = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
 
             ldif_entry = f"""
-            dn: uid={uid},dc=ecreall,dc=com
-            objectClass: top
-            objectClass: inetOrgPerson
-            objectClass: alirpunktoPerson
-            uid: {uid}
-            mail: {email}
-            userPassword: {password}
-            sn: {family_name}
-            cn: {pseudonym}
-            description: {function}
-            employeeNumber: {uid}
-            employeeType: COOPERATOR
-            isActive: FALSE
-            preferredLanguage: {lang1}
-            secondLanguage: {lang2}
-            thirdLanguage: {lang3}
-            givenName: {given_name}
-            nationality: {nationality}
-            birthdate: {birthdate}
-            cooperativeBehaviourMark: 0
-            numberSharesOwned: {num_shares.replace(',', '')}
-            dateEndValidityYearlyContribution: {convert_date('2024-04-23')}
-            uniqueMemberOf: cn=cooperatorsGroup,dc=cosmopolitical,dc=coop
+dn: uid={uid},dc=ecreall,dc=com
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: alirpunktoPerson
+uid: {uid}
+mail: {email}
+userPassword: {password}
+sn: {family_name}
+cn: {pseudonym}
+description: {function}
+employeeNumber: {uid}
+employeeType: COOPERATOR
+isActive: FALSE
+preferredLanguage: {lang1}
+secondLanguage: {lang2}
+thirdLanguage: {lang3}
+givenName: {given_name}
+nationality: {nationality}
+birthdate: {birthdate}
+cooperativeBehaviourMark: 0
+numberSharesOwned: {num_shares.replace(',', '')}
+dateEndValidityYearlyContribution: {convert_date('2024-04-23')}
+uniqueMemberOf: cn=cooperatorsGroup,dc=cosmopolitical,dc=coop
             """
             print(ldif_entry.strip(), file=print_dest)
             print('\n', file=print_dest)
