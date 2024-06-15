@@ -6,9 +6,12 @@
 import csv
 from datetime import datetime
 import argparse
-import os, sys, re, random
+import os
+import re
+import random
 import string
 from uuid import uuid4
+import base64
 
 from alirpunkto.utils import get_ldap_member_list
 
@@ -30,7 +33,6 @@ french_months = {
 
 def convert_french_date_to_iso(date_francaise):
     """Converts a French date to ISO format (YYYY-MM-DD)"""
-    # Example of a French date: 21 févr. 1963
     match = re.search(r'(\d{1,2}) (\w+)\. (\d{4})', date_francaise)
     if match:
         day, month, year = match.groups()
@@ -62,7 +64,20 @@ def convert_date(date_str):
     except ValueError:
         return date_str
 
-def convert_csv_to_ldif(csv_file_path, print_dest=sys.stdout):
+def is_ascii(s):
+    try:
+        s.encode('ascii')
+    except UnicodeEncodeError:
+        return False
+    return True
+
+def encode_to_base64(value):
+    return base64.b64encode(value.encode('utf-8')).decode('utf-8')
+
+def sanitize_filename(filename):
+    return re.sub(r'[^\w\s-]', '_', filename).strip().lower()
+
+def convert_csv_to_ldif(csv_file_path, ldif_dir):
     with open(csv_file_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
@@ -111,8 +126,22 @@ numberSharesOwned: {num_shares.replace(',', '')}
 dateEndValidityYearlyContribution: {convert_date('2024-04-23')}
 uniqueMemberOf: cn=cooperatorsGroup,dc=cosmopolitical,dc=coop
             """
-            print(ldif_entry.strip(), file=print_dest)
-            print('\n', file=print_dest)
+
+            ldif_entry_lines = ldif_entry.strip().split('\n')
+            for i, line in enumerate(ldif_entry_lines):
+                if ': ' in line:
+                    attr, val = line.split(': ', 1)
+                    if not is_ascii(val):
+                        val = encode_to_base64(val)
+                        ldif_entry_lines[i] = f"{attr}:: {val}"
+
+            ldif_entry = '\n'.join(ldif_entry_lines)
+
+            sanitized_pseudonym = sanitize_filename(pseudonym)
+            ldif_file_path = os.path.join(ldif_dir, f"{sanitized_pseudonym}.ldif")
+
+            with open(ldif_file_path, 'w', encoding='utf-8') as ldif_file:
+                ldif_file.write(ldif_entry + '\n\n')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert a CSV file to LDIF format for importing into an LDAP server.')
@@ -134,4 +163,4 @@ if __name__ == '__main__':
         os.makedirs(ldif_dir)
 
     # Call the convert_csv_to_ldif function with the provided arguments
-    convert_csv_to_ldif(csv_file_path)
+    convert_csv_to_ldif(csv_file_path, ldif_dir)
