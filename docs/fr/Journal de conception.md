@@ -2026,3 +2026,164 @@ Dans cet exemple, la fonction `generate_keycloak_redirect_url` construit une URL
    - L'application tierce utilise le code d'autorisation pour obtenir un token d'accès en appelant l'endpoint de token de Keycloak.
 
 En suivant ce flux, vous pouvez rediriger l'utilisateur vers Keycloak avec le token JWT et l'URL de l'application tierce, puis Keycloak authentifie l'utilisateur et redirige vers l'application tierce avec un token d'accès.
+
+# 2024-06-19
+Voici un exemple d'intégration de KeyCloak à Pyramid
+## Exemple d'intégration de KeyCloak à Pyramid
+Pour intégrer une application Pyramid appelée Alirpunkto avec KeyCloak en utilisant la version 4 de la bibliothèque `python-keycloak`, suivons ces étapes. Nous allons installer les dépendances nécessaires, configurer KeyCloak, configurer Pyramid et ajouter les routes et vues nécessaires. Un diagramme Mermaid illustre le flux d'authentification en fin d'exemple.
+
+### Étape 1 : Installer les dépendances nécessaires
+
+Assurons-nous d'installer les bibliothèques nécessaires pour Pyramid et pour interagir avec KeyCloak.
+
+```bash
+pip install pyramid python-keycloak==4.*
+```
+
+### Étape 2 : Configurer KeyCloak
+
+1. **Créer un client dans KeyCloak** :
+   - Connectez-nous à l'interface d'administration de KeyCloak.
+   - Créons un nouveau client et configurons les URI de redirection pour notre application Pyramid.
+   - Notons les informations du client (client ID, client secret).
+
+2. **Configurer les rôles et les utilisateurs** :
+   - Ajoutons les rôles nécessaires pour notre application.
+   - Créons des utilisateurs et assignons-leur des rôles.
+
+### Étape 3 : Configurer Pyramid
+
+Modifions notre fichier de configuration Pyramid pour inclure les paramètres KeyCloak.
+
+#### `development.ini`
+
+```ini
+[app:main]
+use = egg:Alirpunkto
+
+keycloak.client_id = your_client_id
+keycloak.client_secret = your_client_secret
+keycloak.server_url = https://your-keycloak-server/auth/
+keycloak.realm_name = your_realm
+keycloak.redirect_uri = http://localhost:6543/keycloak/callback
+```
+
+### Étape 4 : Ajouter les routes pour l'authentification
+
+#### `__init__.py`
+
+```python
+from pyramid.config import Configurator
+from .views import home_view, login_view, callback_view
+
+def main(global_config, **settings):
+    config = Configurator(settings=settings)
+    config.include('pyramid_chameleon')
+    config.add_route('home', '/')
+    config.add_route('login', '/login')
+    config.add_route('callback', '/keycloak/callback')
+    config.scan()
+    return config.make_wsgi_app()
+```
+
+### Étape 5 : Implémenter les vues d'authentification
+
+#### `views.py`
+
+```python
+from pyramid.view import view_config
+from pyramid.response import Response
+from keycloak import KeycloakOpenID
+from pyramid.httpexceptions import HTTPFound
+
+@view_config(route_name='home', renderer='templates/home.pt')
+def home_view(request):
+    if not request.authenticated_userid:
+        return HTTPFound(location='/login')
+    return {'project': 'Alirpunkto'}
+
+@view_config(route_name='login')
+def login_view(request):
+    keycloak_openid = KeycloakOpenID(server_url=request.registry.settings['keycloak.server_url'],
+                                     client_id=request.registry.settings['keycloak.client_id'],
+                                     realm_name=request.registry.settings['keycloak.realm_name'],
+                                     client_secret_key=request.registry.settings['keycloak.client_secret'])
+    auth_url = keycloak_openid.auth_url(redirect_uri=request.registry.settings['keycloak.redirect_uri'])
+    return HTTPFound(location=auth_url)
+
+@view_config(route_name='callback')
+def callback_view(request):
+    keycloak_openid = KeycloakOpenID(server_url=request.registry.settings['keycloak.server_url'],
+                                     client_id=request.registry.settings['keycloak.client_id'],
+                                     realm_name=request.registry.settings['keycloak.realm_name'],
+                                     client_secret_key=request.registry.settings['keycloak.client_secret'])
+
+    code = request.params.get('code')
+    token = keycloak_openid.token(grant_type='authorization_code', code=code, redirect_uri=request.registry.settings['keycloak.redirect_uri'])
+    userinfo = keycloak_openid.userinfo(token['access_token'])
+    
+    request.session['token'] = token
+    request.session['user'] = userinfo
+    
+    return HTTPFound(location='/')
+```
+
+### Étape 6 : Protéger les routes et gérer les sessions
+
+Ajoutons des vérifications pour sécuriser nos vues et gérer les sessions utilisateur.
+
+#### `security.py`
+
+```python
+from pyramid.authentication import SessionAuthenticationPolicy
+from pyramid.authorization import ACLAuthorizationPolicy
+from pyramid.security import Allow, Authenticated, Everyone
+
+class RootFactory(object):
+    __acl__ = [
+        (Allow, Authenticated, 'view'),
+        (Allow, 'group:admins', 'admin'),
+        (Deny, Everyone, ALL_PERMISSIONS),
+    ]
+
+    def __init__(self, request):
+        pass
+
+def groupfinder(userid, request):
+    if 'user' in request.session:
+        return ['group:admins'] if request.session['user'].get('is_admin') else []
+    return []
+
+authn_policy = SessionAuthenticationPolicy(callback=groupfinder)
+authz_policy = ACLAuthorizationPolicy()
+
+config.set_authentication_policy(authn_policy)
+config.set_authorization_policy(authz_policy)
+config.set_root_factory(RootFactory)
+```
+
+### Diagramme Mermaid
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Alirpunkto
+    participant KeyCloak
+
+    User->>Browser: Open Alirpunkto
+    Browser->>Alirpunkto: Request Home Page
+    Alirpunkto->>Browser: Redirect to /login
+    Browser->>Alirpunkto: Request /login
+    Alirpunkto->>KeyCloak: Redirect to KeyCloak Auth URL
+    Browser->>KeyCloak: Authenticate User
+    KeyCloak->>Browser: Redirect to /keycloak/callback with Auth Code
+    Browser->>Alirpunkto: Request /keycloak/callback with Auth Code
+    Alirpunkto->>KeyCloak: Exchange Auth Code for Token
+    KeyCloak->>Alirpunkto: Return Token and User Info
+    Alirpunkto->>Browser: Redirect to Home Page
+    Browser->>Alirpunkto: Request Home Page with Token
+    Alirpunkto->>User: Serve Home Page
+```
+
+En suivant ces étapes, nous pouvons configurer notre application Pyramid pour qu'elle utilise KeyCloak comme fournisseur SSO en utilisant la version 4 de la bibliothèque `python-keycloak`.
