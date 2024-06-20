@@ -47,6 +47,8 @@ KEYCLOAK_REALM:Final = get_key(dotenv_path, "KEYCLOAK_REALM",None) # The realm
 KEYCLOAK_CLIENT_ID:Final = "KEYCLOAK_CLIENT_ID" # use get_secret to get the password
 # The client secret of this application
 KEYCLOAK_CLIENT_SECRET:Final = "KEYCLOAK_CLIENT_SECRET" # use get_secret to get the password
+# The keycloak redirect path
+KEYCLOAK_REDIRECT_PATH:Final = "keycloak_redirect"
 # SSO Token in session
 SSO_TOKEN:Final = "SSO_TOKEN"
 # SSO Refresh Token in session
