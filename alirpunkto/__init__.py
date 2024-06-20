@@ -40,7 +40,8 @@ from .constants_and_globals import (
     MAIL_TLS,
     MAIL_SSL,
     DEFAULT_SESSION_TIMEOUT,
-    DEFAULT_NUMBER_OF_VOTERS
+    DEFAULT_NUMBER_OF_VOTERS,
+    KEYCLOAK_REDIRECT_PATH,
 )
 from .secret_manager import get_secret
 from dotenv import get_key
@@ -242,6 +243,8 @@ def main(global_config, **settings):
         config.add_route('modify_member', '/modify_member')
         config.add_route('get_email', '/get_email')
         config.add_route('check_new_email', '/check_new_email')
+        config.add_route('sso_login', '/sso_login')
+        config.add_route(KEYCLOAK_REDIRECT_PATH, f'/{KEYCLOAK_REDIRECT_PATH}')
         config.scan()
         config.add_translation_dirs('alirpunkto:locale/', 'colander:locale/', 'deform:locale/')
         config.set_locale_negotiator(locale_negotiator)       

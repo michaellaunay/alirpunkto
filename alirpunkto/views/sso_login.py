@@ -10,7 +10,7 @@ from alirpunkto.constants_and_globals import (
     KEYCLOAK_CLIENT_SECRET,
     KEYCLOAK_REDIRECT_PATH,
 )
-from secret_manager import get_secret
+from alirpunkto.secret_manager import get_secret
 
 @view_config(route_name='sso_login')
 def sso_login_view(request):
