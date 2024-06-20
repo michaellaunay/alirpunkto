@@ -12,6 +12,7 @@ dist/
 .tox/
 nosetests.xml
 env*/
+share/
 tmp/
 var/
 bin/
