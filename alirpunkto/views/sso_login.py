@@ -10,9 +10,21 @@ from alirpunkto.constants_and_globals import (
     KEYCLOAK_SERVER_URL,
     KEYCLOAK_CLIENT_SECRET,
     KEYCLOAK_REDIRECT_PATH,
+    SSO_REFRESH,
+    SSO_EXPIRES_AT,
+)
+from alirpunkto.utils import (
+    update_member_from_ldap,
+    get_keycloak_token,
+    logout,
 )
 from alirpunkto.secret_manager import get_secret
 import jwt
+from alirpunkto.models.users import User
+from alirpunkto.models.member import Member
+import datetime
+from pyramid.security import remember
+
 
 @view_config(route_name='sso_login')
 def sso_login_view(request):
@@ -39,12 +51,12 @@ def callback_view(request):
 
     code = request.params.get('code')
     redirect_uri = request.route_url(KEYCLOAK_REDIRECT_PATH)
-    token = keycloak_openid.token(
+    sso_token = keycloak_openid.token(
         grant_type='authorization_code',
         code=code,
         redirect_uri=redirect_uri
     )
-    access_token = token["access_token"]
+    access_token = sso_token["access_token"]
     at_head = jwt.get_unverified_header(access_token)
     algo = at_head['alg']
     # Get the sso server public key
@@ -60,6 +72,34 @@ def callback_view(request):
             audience=[get_secret(KEYCLOAK_CLIENT_ID), 'account']
         )
         log.debug("Verified sso token payload: ", decoded_payload)
+
+        logout(request) # Enforce logout before processing login
+        site_name = request.params.get('site_name', 'AlirPunkto')
+        domain_name = request.params.get('domain_name', 'alirpunkto.org')
+        oid = decoded_payload['sub']
+        # The user is in the ldap directory
+        member = update_member_from_ldap(oid, request) # force update of the user
+        if not member:
+            # The user is not in the ldap directory
+            # return an error message
+            return {
+                'error': _('invalid username or password'),
+                'site_name': site_name,
+                'domain_name': domain_name
+            }
+        user = User(member.pseudonym, member.oid, member.email, member.is_admin)
+        request.session['logged_in'] = True
+        request.session['user'] = user.to_json()
+        current_time = datetime.now().isoformat()
+        request.session['created_at'] = current_time
+        request.session[SSO_REFRESH] = sso_token['refresh_token']
+        request.session[SSO_EXPIRES_AT] = sso_token[SSO_EXPIRES_AT]
+        #request.headers['Authorization'] = f'Bearer {sso_token}'
+        headers = remember(request, member.pseudonym)
+        return HTTPFound(
+            location=request.route_url('home'),
+            headers=headers
+        )
     except jwt.ExpiredSignatureErrori as err:
         log.debug("The sso token has expired")
     except jwt.InvalidAudienceError as err:

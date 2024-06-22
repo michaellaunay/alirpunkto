@@ -29,7 +29,7 @@ bin/pip install --upgrade pip setuptools
 
 Install pyramid
 ```bash
-pip install pyramid pyramid_chameleon python-dotenv ldap3 pyramid_beaker pyramid_mailer py3dns validate_email cryptography bcrypt
+pip install pyramid pyramid_chameleon python-dotenv ldap3 pyramid_beaker pyramid_mailer py3dns validate_email cryptography bcrypt python-keycloak pyjwt
 ```
 
 We need ZODB to store vote and session informations.
@@ -140,3 +140,4 @@ If you encounter any issues while adding the schema, check the OpenLDAP logs for
 - Ensure you have a backup of the existing LDAP configuration before making changes.
 - Any modifications to the LDAP configuration should be carried out with caution, as errors can affect the stability and security of the service.
 - Test changes in a development environment before applying them on a production server.
+
