@@ -29,7 +29,7 @@
                         <span i18n:translate="modify_member">You can consult other member profile by clicking</span> <a class="btn btn-link" href="${request.route_url('modify_member')}" i18n:translate="modify_member">Modify member</a><br />
                     </p>
                     <p tal:condition="user['type'] == 'COOPERATOR'">
-                        <span i18n:translate="votes">You can access the votes pannel menu by clicking</span> <a class="btn btn-link" href="${request.route_url('votes')}" i18n:translate="votes_view">Votes</a>
+                        <span i18n:translate="votes">You can access the votes pannel menu by clicking</span> <a class="btn btn-link" href="${request.route_url('vote')}" i18n:translate="votes_view">Votes</a>
                     </p>
                 </div>
                 <p i18n:translate="all_applications_msg">All the applications you need to participate in the activities of <tal:var i18n:name="site_name">${site_name}</tal:var><tal:var i18n:name="domain_name">${domain_name}</tal:var> in one place.</p>

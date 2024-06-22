@@ -51,20 +51,20 @@ def callback_view(request):
 
     code = request.params.get('code')
     redirect_uri = request.route_url(KEYCLOAK_REDIRECT_PATH)
-    sso_token = keycloak_openid.token(
-        grant_type='authorization_code',
-        code=code,
-        redirect_uri=redirect_uri
-    )
-    access_token = sso_token["access_token"]
-    at_head = jwt.get_unverified_header(access_token)
-    algo = at_head['alg']
-    # Get the sso server public key
-    public_key = f"""-----BEGIN PUBLIC KEY-----
+    try:
+        sso_token = keycloak_openid.token(
+            grant_type='authorization_code',
+            code=code,
+            redirect_uri=redirect_uri
+        )
+        access_token = sso_token["access_token"]
+        at_head = jwt.get_unverified_header(access_token)
+        algo = at_head['alg']
+        # Get the sso server public key
+        public_key = f"""-----BEGIN PUBLIC KEY-----
 {keycloak_openid.public_key()}
 -----END PUBLIC KEY-----"""
-    try:
-    # Decode and verify the JWT
+        # Decode and verify the JWT
         decoded_payload = jwt.decode(
             access_token,
             public_key,
@@ -76,7 +76,7 @@ def callback_view(request):
         logout(request) # Enforce logout before processing login
         site_name = request.params.get('site_name', 'AlirPunkto')
         domain_name = request.params.get('domain_name', 'alirpunkto.org')
-        oid = decoded_payload['sub']
+        oid = decoded_payload['employeeNumber']
         # The user is in the ldap directory
         member = update_member_from_ldap(oid, request) # force update of the user
         if not member:
@@ -87,10 +87,18 @@ def callback_view(request):
                 'site_name': site_name,
                 'domain_name': domain_name
             }
-        user = User(member.pseudonym, member.oid, member.email, member.is_admin)
+        user = User(
+            member.pseudonym,
+            member.email,
+            member.oid,
+            member.data.is_active,
+            member.type.name
+        )
+        request.session['site_name'] = site_name
+        request.session['domain_name'] = domain_name
         request.session['logged_in'] = True
         request.session['user'] = user.to_json()
-        current_time = datetime.now().isoformat()
+        current_time = datetime.datetime.now().isoformat()
         request.session['created_at'] = current_time
         request.session[SSO_REFRESH] = sso_token['refresh_token']
         request.session[SSO_EXPIRES_AT] = sso_token[SSO_EXPIRES_AT]
@@ -100,12 +108,14 @@ def callback_view(request):
             location=request.route_url('home'),
             headers=headers
         )
-    except jwt.ExpiredSignatureErrori as err:
+    except jwt.ExpiredSignatureError as err:
         log.debug("The sso token has expired")
     except jwt.InvalidAudienceError as err:
         log.warning(f"Inavalide audience in sso token: {err}")
     except jwt.InvalidTokenError as err:
         log.warning(f"Invalid sso token: {err}")
+    except Exception as e:
+        log.error(f"Error during sso authentication {e}")
     #@TODO from uid retrieve the ldap user and log him in
     
     return HTTPFound(location='/')
