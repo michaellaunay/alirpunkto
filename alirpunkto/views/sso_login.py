@@ -22,9 +22,8 @@ from alirpunkto.secret_manager import get_secret
 import jwt
 from alirpunkto.models.users import User
 from alirpunkto.models.member import Member
-import datetime
+from datetime import datetime, timedelta
 from pyramid.security import remember
-
 
 @view_config(route_name='sso_login')
 def sso_login_view(request):
@@ -98,11 +97,13 @@ def callback_view(request):
         request.session['domain_name'] = domain_name
         request.session['logged_in'] = True
         request.session['user'] = user.to_json()
-        current_time = datetime.datetime.now().isoformat()
+        now = datetime.now()
+        current_time = now.isoformat()
         request.session['created_at'] = current_time
         request.session[SSO_REFRESH] = sso_token['refresh_token']
-        request.session[SSO_EXPIRES_AT] = sso_token[SSO_EXPIRES_AT]
-        #request.headers['Authorization'] = f'Bearer {sso_token}'
+        refresh_at = now + timedelta(seconds=int(sso_token['refresh_expires_in']))
+        request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
+        request.headers['Authorization'] = f'Bearer {sso_token}'
         headers = remember(request, member.pseudonym)
         return HTTPFound(
             location=request.route_url('home'),
@@ -110,12 +111,16 @@ def callback_view(request):
         )
     except jwt.ExpiredSignatureError as err:
         log.debug("The sso token has expired")
+        logout(request)
     except jwt.InvalidAudienceError as err:
         log.warning(f"Inavalide audience in sso token: {err}")
+        logout(request)
     except jwt.InvalidTokenError as err:
         log.warning(f"Invalid sso token: {err}")
+        logout(request)
     except Exception as e:
         log.error(f"Error during sso authentication {e}")
+        logout(request)
     #@TODO from uid retrieve the ldap user and log him in
     
     return HTTPFound(location='/')

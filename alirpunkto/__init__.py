@@ -217,6 +217,8 @@ def main(global_config, **settings):
             for app_name, app in applications.items():
                 if not 'name' in app:
                     raise Exception(f"Application {app_name} has no name")
+                if not 'id' in app:
+                    raise Exception(f"Application {app_name} has no id")
                 if not 'logo_file' in app:
                     raise Exception(f"Application {app_name} has no logo")
                 if not 'url' in app:

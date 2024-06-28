@@ -13,7 +13,7 @@ from alirpunkto.constants_and_globals import (
     KEYCLOAK_CLIENT_SECRET,
 )
 from json import loads
-from alirpunkto.utils import refresh_keycloak_token
+from alirpunkto.utils import refresh_keycloak_token, logout
 from datetime import datetime, timedelta
 import urllib.parse
 from alirpunkto.secret_manager import get_secret
@@ -22,7 +22,7 @@ def is_authenticated(request):
     # Check if the user is authenticated
     return 'user' in request.session
 
-def generate_keycloak_redirect_url(keycloak_base_url, client_id, redirect_uri, token):
+def generate_keycloak_redirect_url(keycloak_base_url, client_id, redirect_uri):
     """
     Generates a redirect URL to Keycloak for authentication.
 
@@ -38,9 +38,7 @@ def generate_keycloak_redirect_url(keycloak_base_url, client_id, redirect_uri, t
     query_params = {
         'client_id': client_id,
         'redirect_uri': redirect_uri,
-        'response_type': 'token',
         'scope': 'openid',
-        'state': token  # Utiliser l'état pour passer le token
     }
     query_string = urllib.parse.urlencode(query_params)
     return f"{keycloak_base_url}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/auth?{query_string}"
@@ -58,6 +56,11 @@ def home_view(request):
     if is_authenticated(request):
         logged_in = request.session['logged_in'] = True
         applications = request.registry.settings["applications"]
+        applications = {
+            app_name: {**app_info, 'url': generate_keycloak_redirect_url(
+                        KEYCLOAK_SERVER_URL, app_info['id'], app_info['url'])}
+            for app_name, app_info in applications.items()
+        }
     else:
         logged_in = request.session['logged_in'] = False
     site_name = request.registry.settings.get('site_name', 'AlirPunkto')
@@ -71,18 +74,17 @@ def home_view(request):
         if expire > datetime.now():
             # Refresh the token
             sso_token = refresh_keycloak_token(sso_refresh_token)
+            access_token = sso_token['access_token']
             refresh_at = datetime.now() + timedelta(seconds=int(sso_token['refresh_expires_in']))
             request.session[SSO_REFRESH] = sso_token['refresh_token']
             request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
             request.headers['Authorization'] = f'Bearer {sso_token}'
-            access_token = sso_token['access_token']
-            client_id = get_secret(KEYCLOAK_CLIENT_ID)
-            # Add the token to the applications url without changing the original settings
-            applications = {
-                app_name: {**app_info, 'url': generate_keycloak_redirect_url(
-                            KEYCLOAK_SERVER_URL, client_id, app_info['url'], access_token)}
-                for app_name, app_info in applications.items()
-            }
+        else:
+            # Session expired, causing the user to be logged out
+            logout(request)
+            logged_in = False
+            user = None
+            applications = []
 
     return {
         'logged_in': logged_in,
