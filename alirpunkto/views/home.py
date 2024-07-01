@@ -22,28 +22,6 @@ def is_authenticated(request):
     # Check if the user is authenticated
     return 'user' in request.session
 
-def generate_keycloak_redirect_url(keycloak_base_url, client_id, redirect_uri):
-    """
-    Generates a redirect URL to Keycloak for authentication.
-
-    Args:
-        keycloak_base_url (str): The base URL of your Keycloak server.
-        client_id (str): The Keycloak client ID.
-        redirect_uri (str): The redirect URL of the target application after authentication.
-        token (str): The JWT token for authentication.
-
-    Returns:
-        str: The redirect URL to Keycloak.
-    """
-    query_params = {
-        'client_id': client_id,
-        'redirect_uri': redirect_uri,
-        'scope': 'openid',
-    }
-    query_string = urllib.parse.urlencode(query_params)
-    return f"{keycloak_base_url}/realms/{KEYCLOAK_REALM}/protocol/openid-connect/auth?{query_string}"
-
-
 @view_config(route_name='home', renderer='alirpunkto:templates/home.pt')
 def home_view(request):
     """Home view.
@@ -56,11 +34,6 @@ def home_view(request):
     if is_authenticated(request):
         logged_in = request.session['logged_in'] = True
         applications = request.registry.settings["applications"]
-        applications = {
-            app_name: {**app_info, 'url': generate_keycloak_redirect_url(
-                        KEYCLOAK_SERVER_URL, app_info['id'], app_info['url'])}
-            for app_name, app_info in applications.items()
-        }
     else:
         logged_in = request.session['logged_in'] = False
     site_name = request.registry.settings.get('site_name', 'AlirPunkto')
