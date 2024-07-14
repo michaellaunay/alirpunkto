@@ -12,9 +12,9 @@
         </p>
         <p tal:omit-tag="textual">Here are the details of its modification:</p>
         <ul tal:omit-tag="textual">
-            <li tal:omit-tag="textual">Member ID: <span tal:replace="python:candidature.oid">Member ID</span></li>
-            <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:candidature.modifications[-1].datetime">Last transition</span></li>
-            <li tal:omit-tag="textual">New Status: <span tal:replace="python:candidature.member_state">New member status</span></li>
+            <li tal:omit-tag="textual">Member ID: <span tal:replace="python:member.oid">Member ID</span></li>
+            <li tal:omit-tag="textual">Transition Date: <span tal:replace="python:member.modifications[-1].datetime">Last transition</span></li>
+            <li tal:omit-tag="textual">New Status: <span tal:replace="python:member.member_state">New member status</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
                 <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
                     <span tal:replace="string:${page_register_with_oid}"></span>
