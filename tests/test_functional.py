@@ -16,8 +16,9 @@ def test_login(testapp):
     # Mock ldap
 
     post = {'username': 'admin', 'password': 'admin', 'form.submitted': 'True'}
-    res = testapp.post('/login', post, status=302)
-    assert res.status_code == 302
+    res = testapp.post('/login', post, status=200)
+    assert res.status_code == 200
+    assert b'Invalid username or password. Please try again' in res.body
 
 
 def test_register(testapp):
