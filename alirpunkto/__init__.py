@@ -1,5 +1,4 @@
 import os, pytz, hashlib
-from typing import Final
 from collections import defaultdict
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
@@ -163,7 +162,6 @@ def create_ldap_groups_if_not_exists():
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
-
     with Configurator(settings=settings) as config:
         # set session factory
         hash_object = hashlib.sha256()
@@ -192,6 +190,10 @@ def main(global_config, **settings):
         settings['site_logo_small'] = settings['site_logo_small'] if 'site_logo_small' in settings else os.environ.get('SITE_LOGO_SMALL', 'static/alirpunkto-16x16.png')
         settings['number_of_voters'] = settings['number_of_voters'] if 'number_of_voters' in settings else os.environ.get('NUMBER_OF_VOTERS', DEFAULT_NUMBER_OF_VOTERS)
 
+        # set site_logo and site_logo_small in the registry
+        config.registry.settings['site_logo'] = settings['site_logo']
+        config.registry.settings['site_logo_small'] = settings['site_logo_small']
+        
         # get secret key from environment variable
         config.registry.settings["mail.default_sender"] = settings['mail.default_sender'] # I didn't find a way to pass the default_sender to the views...
         # Create a mailer object
