@@ -72,9 +72,12 @@ def login_view(request):
     if 'submit' in request.params:
         vote = request.POST.get('vote')
         if vote not in VotingChoice.get_names():
-            request.session.flash('Invalid voting choice!', 'error')
-            return HTTPFound(location=request.route_url('voting_page'))  # Redirect back to voting page
-        
+            return {
+                'error': _('Invalid voting choice!'),
+                'message': _('not_voter'),
+                'site_name': site_name,
+                'domain_name': domain_name
+            }       
         voter.vote = vote
 
         transaction = request.tm

@@ -98,14 +98,12 @@ def forgot_password(request):
         mail = request.POST['email'] if 'email' in request.POST else None
         if not mail:
             log.warning('No mail provided')
-            request.session.flash(_('forget_no_mail'), 'error')
             return {"error":_('forget_no_mail'), "member": None, "form": None}
         # 2.1) AlirPunkto checks that the mail is valid
         if err:= is_not_a_valid_email_address(mail, check_mx=False):
             log.warning(
                 f'Invalid email address: {mail[:512]}')
             # 2.1.1) If not, AlirPunkto displays an error message
-            request.session.flash(err["error"], 'error')
             # 2.1.2) Return to 1
             err["member"] = None
             err["form"] = None
@@ -116,7 +114,6 @@ def forgot_password(request):
         if not members:
             # 3.1) If the mail does not exist, AlirPunkto displays a message
             # indicating that if the user exists, he will receive an email
-            request.session.flash(_('forget_email_in_member_list'), 'warning')
             # 3.2) End of the procedure
             return {"error":_('forget_email_in_member_list'), "member": None, "form": None}
         # 4) AlirPunkto retrieves information about the user from the ldap
@@ -126,7 +123,6 @@ def forgot_password(request):
         uid = str(ldap_member['uid']) # cast ldap3's type to str
         if uid == LDAP_ADMIN_OID:
             log.warning(f'Admin user cannot reset password: {mail[:512]}')
-            request.session.flash(_('forget_admin_user'), 'error')
             return {"error":_('forget_admin_user'), "member": None, "form": None}
         # 5) If an instance of Member (an application, or any other
         # derived object) exists for this OID it's updated from LDAP, if not, a MemberDatas
@@ -195,19 +191,16 @@ def forgot_password(request):
         password = request.params['password']
         password_confirm = request.params['password_confirm']
         if password != password_confirm:
-            request.session.flash(_('password_not_match'), 'error')
             return {"error":_('password_not_match'),
                 "member": member,
                 "form": form.render(appstruct=appstruct)}
         if password == "":
-            request.session.flash(_('password_required'), 'error')
             return {"error":_('password_required'),
                 "member": member,
                 "form": form.render(appstruct=appstruct)}
         err = is_valid_password(password)
         if err:
-            request.session.flash(err, 'error')
-            return {"error":_('password_required'),
+            return {"error":_(err["error"]),
                 "member": member,
                 "form": form.render(appstruct=appstruct)}
         # 15) AlirPunkto updates the password in the ldap
