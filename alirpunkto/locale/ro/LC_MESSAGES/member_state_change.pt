@@ -15,7 +15,7 @@
             <li tal:omit-tag="textual">Identificarea membrului: <span tal:replace="python:member.oid">Identificare membru</span></li>
             <li tal:omit-tag="textual">Data tranziției: <span tal:replace="python:member.modifications[-1].datetime">Ultima tranziție</span></li>.
             <li tal:omit-tag="textual">Statut nou: <span tal:replace="python:member.member_state">Statutul noului membru</span></li>
-            <li tal:omit-tag="textual" tal:condition="exist:page_register_with_oid"> <li tal:omit-tag="textual" tal:condition="exist:page_register_with_oid">
+            <li tal:omit-tag="textual" tal:condition="exist:page_register_with_oid"> 
                 <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
                     <span tal:replace="string:${page_register_with_oid}"></span>
                 </a>
