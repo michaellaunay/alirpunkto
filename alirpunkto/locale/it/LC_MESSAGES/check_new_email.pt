@@ -6,7 +6,7 @@
 <body tal:omit-tag="textual">
 
     <h1 tal:omit-tag="textual">Conferma la tua richiesta di aggiornamento dell'indirizzo e-mail sulla piattaforma informatica di <span tal:replace="domain_name">nome dominio</span></h1>
-    <p tal:omit-tag="textual">Tu, o una persona che ha accesso al tuo account sulla piattaforma <span tal:replace="site_name">nome_sito</span> di <span tal:replace="domain_name">nome dominio</span>, ci hai chiesto di modificare l'indirizzo e-mail che l'infrastruttura informatica di <span tal:replace="domain_name">nome dominio</span> utilizza per interagire con te. Il nuovo indirizzo e-mail che è stato richiesto di utilizzare in futuro è: <span tal:replace="new_email">Nuovo indirizzo e-mail</span>.</p>
+    <p tal:omit-tag="textual">Tu, o una persona che ha accesso al tuo account sulla piattaforma <span tal:replace="site_name">site_name</span> di <span tal:replace="domain_name">nome dominio</span>, ci hai chiesto di modificare l'indirizzo e-mail che l'infrastruttura informatica di <span tal:replace="domain_name">nome dominio</span> utilizza per interagire con te. Il nuovo indirizzo e-mail che è stato richiesto di utilizzare in futuro è: <span tal:replace="new_email">Nuovo indirizzo e-mail</span>.</p>
 <p tal:omit-tag="textual">Se confermi che <span tal:replace="new_email">nuovo indirizzo email</span> deve essere l'indirizzo email che l'infrastruttura informatica di <span tal:replace="domain_name">nome dominio</span> dovrà utilizzare in futuro per interagire con te, clicca sul link di conferma sottostante.</p>
 
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
