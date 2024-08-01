@@ -8,7 +8,7 @@
     </head>
     <body tal:omit-tag="textual" i18n:domain="alirpunkto">
         <h1 tal:omit-tag="textual">Evoluzione della sua candidatura a <span tal:replace="domain_name">Nome del sito</span></h1>.
-        <p tal:omit-tag="textual">Ciao<span tal:replace="utente" tal:condition="exists:user">Nome del richiedente</span>,
+        <p tal:omit-tag="textual">Ciao<span tal:replace="user" tal:condition="exists:user">Nome del richiedente</span>,
         </p>
         <p tal:omit-tag="textual">La sua candidatura sulla piattaforma
             <span tal:replace="site_url">URL</span> come un 
@@ -27,7 +27,7 @@
             </li>
             <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">.
                 <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
-                    <span tal:replace="stringa:${page_register_with_oid}"></span>.
+                    <span tal:replace="string:${page_register_with_oid}"></span>.
                 </a>
             </li>
         </ul>
