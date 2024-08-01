@@ -36,7 +36,7 @@
     <p tal:omit-tag="textual">Para tu información, aquí tienes los detalles de la finalización de tu proceso de registro:</p>
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">Identificación de la candidatura: <span tal:replace="python:candidature.oid">Identificación de la candidatura</span></li>
-        <li tal:omit-tag="textual">Fecha de aprobación: <span tal:replace="python:candidatura.modificaciones[-1]">Última transición</span></li>
+        <li tal:omit-tag="textual">Fecha de aprobación: <span tal:replace="python:candidature.modifications[-1]">Última transición</span></li>
         <li tal:omit-tag="textual">Estado: Aprobado</li>
     </ul>
 
