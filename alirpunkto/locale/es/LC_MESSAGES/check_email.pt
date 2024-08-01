@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
     <head tal:omit-tag="textual">
-        <title tal:omit-tag="textual">Registro a <span tal:replace="nombre_sitio"></span></title>
+        <title tal:omit-tag="textual">Registro a <span tal:replace="site_name">nombre_sitio</span></title>
     </head>
     <body tal:omit-tag="textual">
 
