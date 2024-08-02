@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Εγγραφή στο <span tal:replace="domain_name">Όνομα Τομέα</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Σας ευχαριστούμε που ξεκινήσατε την εγγραφή σας στην πλατφόρμα <span
+                tal:replace="domain_name">Όνομα Τομέα</span></h1>
+        <p tal:omit-tag="textual">Για να επαληθεύσουμε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας και να διασφαλίσουμε ότι είστε άνθρωπος (όχι
+            ρομπότ), έχουμε δημιουργήσει μια σειρά από 4 απλές μαθηματικές πράξεις. Παρακαλούμε εκτελέστε τις
+            τέσσερις μαθηματικές πράξεις με ετικέτα από Α έως Δ παρακάτω και εισαγάγετε τα αποτελέσματά τους στα
+            αντίστοιχα πεδία στη σελίδα εγγραφής που συνδέεται παρακάτω.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Η πράξη Α είναι <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Η πρώτη πρόκληση</span></p>
+            <p tal:omit-tag="textual">Η πράξη Β είναι <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Η δεύτερη πρόκληση</span></p>
+            <p tal:omit-tag="textual">Η πράξη Γ είναι <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Η τρίτη πρόκληση</span></p>
+            <p tal:omit-tag="textual">Η πράξη Δ είναι <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Η τέταρτη πρόκληση</span></p>
+        </div>
+        <p tal:omit-tag="textual">Σύνδεσμος προς τη σελίδα εγγραφής στην οποία θα παρέχετε τα αποτελέσματα των πράξεων Α έως Δ παραπάνω:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Σας ευχαριστούμε για το ενδιαφέρον σας στις δραστηριότητές μας. Ανυπομονούμε να σας καλωσορίσουμε σύντομα!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Με εκτίμηση,</p>
+            <p tal:omit-tag="textual">Η ομάδα του <span tal:replace="domain_name">Όνομα Τομέα</span></p>
+        </footer>
+
+    </body>
+</html>

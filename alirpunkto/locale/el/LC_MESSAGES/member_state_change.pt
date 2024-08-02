@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Αλλαγή στην Κατάσταση των Δεδομένων σας</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Τροποποίηση των Προσωπικών σας Δεδομένων στην υποδομή πληροφορικής του <span tal:replace="domain_name">Όνομα Τομέα</span></h1>
+        <p tal:omit-tag="textual">Γειά σας<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Όνομα Μέλους</span>,
+        </p>
+        <p tal:omit-tag="textual">Εδώ είναι οι λεπτομέρειες της τροποποίησής τους:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID Μέλους: <span tal:replace="python:member.oid">ID Μέλους</span></li>
+            <li tal:omit-tag="textual">Ημερομηνία Μετάβασης: <span tal:replace="python:member.modifications[-1].datetime">Τελευταία μετάβαση</span></li>
+            <li tal:omit-tag="textual">Νέα Κατάσταση: <span tal:replace="python:member.member_state">Νέα κατάσταση μέλους</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Σας ευχαριστούμε για τη συμμετοχή σας.</p>
+        <p tal:omit-tag="textual">Με εκτίμηση,</p>
+        <p tal:omit-tag="textual">Η ομάδα του <span tal:replace="domain_name">Όνομα Τομέα</span></p>
+    </body>
+</html>

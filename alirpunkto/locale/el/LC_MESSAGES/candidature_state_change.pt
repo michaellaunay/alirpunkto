@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Αλλαγή στην Κατάσταση της Αίτησής σας</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Εξέλιξη της Αίτησής σας στο <span tal:replace="domain_name">Όνομα Τομέα</span></h1>
+        <p tal:omit-tag="textual">Γειά σας<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Όνομα Αιτούντος</span>,
+        </p>
+        <p tal:omit-tag="textual">Η αίτησή σας στην πλατφόρμα
+            <span tal:replace="site_url">URL</span> ως 
+            <span tal:replace="python:candidature.type">Ρόλος</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">έχει γίνει δεκτή</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">έχει απορριφθεί</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">είναι υπό επεξεργασία και έχει αλλάξει κατάσταση</span>.
+        </p>
+        <p tal:omit-tag="textual">Εδώ είναι οι λεπτομέρειες της εξέλιξής της:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID Αίτησης: <span tal:replace="python:candidature.oid">ID Αίτησης</span></li>
+            <li tal:omit-tag="textual">Ημερομηνία Μετάβασης: <span tal:replace="python:candidature.modifications[-1].datetime">Τελευταία μετάβαση</span></li>
+            <li tal:omit-tag="textual">Νέα Κατάσταση: <span tal:replace="python:candidature.candidature_state">Νέα κατάσταση αίτησης</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Εάν χρειάζεστε, μπορείτε να διακόψετε τώρα τη διαδικασία εγγραφής σας. Θα μπορείτε να την συνεχίσετε αργότερα κάνοντας κλικ στον παρακάτω σύνδεσμο.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Σας ευχαριστούμε για τη συμμετοχή σας.</p>
+        <p tal:omit-tag="textual">Με εκτίμηση,</p>
+        <p tal:omit-tag="textual">Η ομάδα του <span tal:replace="domain_name">Όνομα Τομέα</span></p>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Η αίτησή σας στο <span tal:replace="domain_name">Όνομα Τομέα</span> έχει εγκριθεί</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Συγχαρητήρια για την έγκριση της αίτησής σας!</h1>
+    
+    <p tal:omit-tag="textual">Γειά σας <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Όνομα Αιτούντος</span>,</p>
+    
+    <p tal:omit-tag="textual">Είμαστε στην ευχάριστη θέση να σας ενημερώσουμε ότι η αίτησή σας στο <span tal:replace="domain_name">Όνομα Τομέα</span> για τον ρόλο του <span tal:replace="python:candidature.type">Ρόλος</span> έχει εγκριθεί.</p>
+
+    <p tal:omit-tag="textual">Σας ευχαριστούμε που ενταχθήκατε σε εμάς! Είμαστε χαρούμενοι που σας καλωσορίζουμε στην Κοινότητά μας.</p>
+    
+    <p tal:omit-tag="textual">Τώρα που η αίτησή σας έχει εγκριθεί, μπορείτε να συνδεθείτε στην πλατφόρμα μας χρησιμοποιώντας το ψευδώνυμο και τον κωδικό πρόσβασης που δώσατε κατά τη διάρκεια της διαδικασίας αίτησης. Αφού συνδεθείτε, θα βρείτε:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">τους συνδέσμους προς όλες τις εφαρμογές λογισμικού στις οποίες έχετε άμεση πρόσβαση. Δεν χρειάζεται να συνδεθείτε ξανά!</li>
+        <li tal:omit-tag="textual">έναν σύνδεσμο προς τη φόρμα όπου μπορείτε να δείτε και να επεξεργαστείτε το προφίλ σας. Στη φόρμα αυτή, σας ενθαρρύνουμε να παρουσιάσετε τον εαυτό σας στα άλλα μέλη της Κοινότητάς μας με ένα σύντομο "κείμενο προφίλ" και να εμφανίσετε μια μικρή εικόνα που σας αντιπροσωπεύει (το "avatar" σας).</li>
+        <li tal:omit-tag="textual">έναν σύνδεσμο για αποσύνδεση.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Εδώ είναι τα κύρια στοιχεία του προφίλ σας που καταγράψαμε:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">το ψευδώνυμό σας: ##PSEUDONYM. Παρακαλώ κρατήστε μια ΠΡΟΣΕΚΤΙΚΗ ΚΑΙ ΑΣΦΑΛΗ ΑΡΧΕΙΑΚΗ ΚΑΤΑΓΡΑΦΗ αυτού του ψευδώνυμου: είναι το μοναδικό αναγνωριστικό με το οποίο μπορείτε να συνδεθείτε στην πλατφόρμα πληροφορικής μας.</li>
+        <li tal:omit-tag="textual">ο κωδικός πρόσβασής σας: (ο κωδικός πρόσβασης που δώσατε κατά την εγγραφή σας).</li>
+        <li tal:omit-tag="textual">η διεύθυνση ηλεκτρονικού ταχυδρομείου σας: (η διεύθυνση ηλεκτρονικού ταχυδρομείου στην οποία στέλνουμε το παρόν email).</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">τα δεδομένα ταυτότητάς σας: (όλα τα δεδομένα και οικογενειακά σας ονόματα, η ημερομηνία γέννησής σας, όπως δόθηκαν και επαληθεύτηκαν κατά τη διάρκεια της διαδικασίας εγγραφής σας).</li>
+        <li tal:omit-tag="textual">η προτιμώμενη γλώσσα για να αλληλεπιδράσουμε μαζί σας: ##LANGUAGE_1.</li>
+        <li tal:omit-tag="textual">η δεύτερη γλώσσα που αποδέχεστε να χρησιμοποιούμε για να αλληλεπιδράσουμε μαζί σας: ##LANGUAGE_2.</li>
+        <li tal:omit-tag="textual">η γλώσσα που αποδέχεστε να χρησιμοποιούμε, ως τρίτη επιλογή, για να αλληλεπιδράσουμε μαζί σας: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Για τα αρχεία σας, εδώ είναι οι λεπτομέρειες της ολοκλήρωσης της διαδικασίας εγγραφής σας:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID Αίτησης: <span tal:replace="python:candidature.oid">ID Αίτησης</span></li>
+        <li tal:omit-tag="textual">Ημερομηνία Έγκρισης: <span tal:replace="python:candidature.modifications[-1]">Τελευταία μετάβαση</span></li>
+        <li tal:omit-tag="textual">Κατάσταση: Εγκεκριμένη</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Ανυπομονούμε να συνεργαστούμε μαζί σας!</p>
+
+    
+    <p tal:omit-tag="textual">Με εκτίμηση,</p>
+    <p tal:omit-tag="textual">Η ομάδα του <span tal:replace="domain_name">Όνομα Τομέα</span>.</p>
+</body>
+</html>

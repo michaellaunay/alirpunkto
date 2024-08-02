@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Παρακαλώ επιβεβαιώστε το αίτημά σας για ενημέρωση της διεύθυνσης ηλεκτρονικού ταχυδρομείου σας στο <span tal:replace="domain_name">Όνομα Τομέα</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Παρακαλώ επιβεβαιώστε το αίτημά σας για ενημέρωση της διεύθυνσης ηλεκτρονικού ταχυδρομείου σας στην πλατφόρμα πληροφορικής <span tal:replace="domain_name">Όνομα Τομέα</span></h1>
+    <p tal:omit-tag="textual">Εσείς ή ένα άτομο που έχει πρόσβαση στον λογαριασμό σας στην πλατφόρμα <span tal:replace="site_name">Όνομα Ιστοτόπου</span> του <span tal:replace="domain_name">Όνομα Τομέα</span>, έχετε ζητήσει να αλλάξουμε τη διεύθυνση ηλεκτρονικού ταχυδρομείου που χρησιμοποιεί η υποδομή πληροφορικής του <span tal:replace="domain_name">Όνομα Τομέα</span> για να αλληλεπιδρά μαζί σας. Η νέα διεύθυνση ηλεκτρονικού ταχυδρομείου που ζητήθηκε να χρησιμοποιηθεί στο μέλλον είναι: <span tal:replace="new_email">Νέα διεύθυνση ηλεκτρονικού ταχυδρομείου</span>.</p>
+<p tal:omit-tag="textual">Εάν επιβεβαιώνετε ότι η <span tal:replace="new_email">Νέα διεύθυνση ηλεκτρονικού ταχυδρομείου</span> πρέπει να είναι η διεύθυνση που θα χρησιμοποιεί η υποδομή πληροφορικής του <span tal:replace="domain_name">Όνομα Τομέα</span> στο μέλλον για να αλληλεπιδρά μαζί σας, παρακαλώ κάντε κλικ στον σύνδεσμο επιβεβαίωσης παρακάτω.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Αν κάνατε λάθος ή αν δεν κάνατε αυτό το αίτημα, απλά αγνοήστε αυτό το email.</p>
+
+    <p tal:omit-tag="textual">Σας ευχαριστούμε για το ενδιαφέρον σας στις δραστηριότητές μας.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Με εκτίμηση,</p>
+        <p tal:omit-tag="textual">Η ομάδα του <span tal:replace="domain_name">Όνομα Τομέα</span></p>
+    </footer>
+
+</body>
+</html>
