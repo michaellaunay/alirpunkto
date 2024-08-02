@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"PO-Revision-Date: 2024-08-03 01:13+0200\n"
 "Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
 "Language-Team: French <dev@logikascium.com>\n"
 "Language: pt\n"
@@ -1018,7 +1018,3 @@ msgstr "perfil"
 msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Seu endereço de e-mail foi atualizado com sucesso. Você usará este novo endereço para todas as comunicações futuras com ${domain_name}. Se você não solicitou esta alteração ou se tiver dúvidas, entre em contato com nosso suporte imediatamente no ${admin_email}. Obrigado por fazer parte da comunidade ${domain_name}!"
-
-
-
-
