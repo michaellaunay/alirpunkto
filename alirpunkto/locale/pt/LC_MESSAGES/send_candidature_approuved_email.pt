@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Sua Inscrição em <span tal:replace="domain_name">Nome do Domínio</span> foi aprovada</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Parabéns pela aprovação da sua Inscrição!</h1>
+    
+    <p tal:omit-tag="textual">Olá <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nome do Candidato</span>,</p>
+    
+    <p tal:omit-tag="textual">Temos o prazer de informar que sua inscrição em <span tal:replace="domain_name">Nome do Domínio</span> para o cargo de <span tal:replace="python:candidature.type">Função</span> foi aprovada.</p>
+
+    <p tal:omit-tag="textual">Obrigado por se juntar a nós! Estamos felizes em recebê-lo em nossa Comunidade.</p>
+    
+    <p tal:omit-tag="textual">Agora que sua inscrição foi aprovada, você pode fazer login na nossa plataforma usando o pseudônimo e a senha que você forneceu durante o processo de inscrição. Depois de fazer login, você encontrará:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">os links para todos os aplicativos de software aos quais você tem acesso direto. Você não precisa fazer login novamente!</li>
+        <li tal:omit-tag="textual">um link para o formulário onde você pode visualizar e editar seu próprio perfil. Neste formulário, incentivamos você a se apresentar aos outros membros de nossa Comunidade em um curto "texto de perfil" e a exibir uma pequena foto que o represente (seu "avatar");</li>
+        <li tal:omit-tag="textual">um link para sair.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Aqui estão os principais elementos do seu perfil que registramos:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">seu pseudônimo: ##PSEUDONYM. Por favor, mantenha um REGISTRO CUIDADOSO E SEGURO deste pseudônimo: é o único identificador com o qual você pode fazer login na nossa plataforma de TI;</li>
+        <li tal:omit-tag="textual">sua senha: (a senha que você forneceu durante o seu registro);</li>
+        <li tal:omit-tag="textual">seu endereço de e-mail: (o endereço de e-mail para o qual enviamos o presente e-mail);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">seus dados de identidade: (todos os seus nomes e sobrenomes, sua data de nascimento, conforme fornecido e verificado durante o seu processo de registro);</li>
+        <li tal:omit-tag="textual">sua língua preferida para que possamos interagir com você: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">a segunda língua que você aceita que usemos para interagir com você: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">a língua que você aceita que usemos, como terceira escolha, para interagir com você: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Para seus registros, aqui estão os detalhes da finalização do seu processo de registro:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID da Inscrição: <span tal:replace="python:candidature.oid">ID da Inscrição</span></li>
+        <li tal:omit-tag="textual">Data de Aprovação: <span tal:replace="python:candidature.modifications[-1]">Última transição</span></li>
+        <li tal:omit-tag="textual">Status: Aprovado</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Estamos ansiosos para ter o prazer de trabalhar com você!</p>
+
+    <p tal:omit-tag="textual">Atenciosamente,</p>
+    <p tal:omit-tag="textual">A equipe de <span tal:replace="domain_name">Nome do Domínio</span>.</p>
+</body>
+</html>

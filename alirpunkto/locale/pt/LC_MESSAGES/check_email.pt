@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registro em <span tal:replace="domain_name">Nome do Domínio</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Obrigado por iniciar seu registro na plataforma <span
+                tal:replace="domain_name">Nome do Domínio</span></h1>
+        <p tal:omit-tag="textual">Para verificar seu endereço de e-mail e garantir que você é humano (não um
+            robô), criamos uma série de 4 operações matemáticas simples. Por favor, realize as
+            quatro operações matemáticas rotuladas de A a D abaixo e insira os resultados nos
+            campos correspondentes na página de registro vinculada abaixo.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">A operação A é <span tal:content="challenge_A"
+                    tal:omit-tag="textual">O primeiro desafio</span></p>
+            <p tal:omit-tag="textual">A operação B é <span tal:content="challenge_B"
+                    tal:omit-tag="textual">O segundo desafio</span></p>
+            <p tal:omit-tag="textual">A operação C é <span tal:content="challenge_C"
+                    tal:omit-tag="textual">O terceiro desafio</span></p>
+            <p tal:omit-tag="textual">A operação D é <span tal:content="challenge_D"
+                    tal:omit-tag="textual">O quarto desafio</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link para a página de registro na qual fornecer os resultados das operações de A a D acima:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Obrigado pelo seu interesse em nossas atividades. Estamos ansiosos para
+            recebê-lo em breve!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Atenciosamente,</p>
+            <p tal:omit-tag="textual">A equipe de <span tal:replace="domain_name">Nome do Domínio</span></p>
+        </footer>
+
+    </body>
+</html>

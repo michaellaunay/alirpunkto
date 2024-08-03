@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Alteração no Status da Sua Inscrição</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Evolução da Sua Inscrição em <span tal:replace="domain_name">Nome do Domínio</span></h1>
+        <p tal:omit-tag="textual">Olá<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nome do Candidato</span>,
+        </p>
+        <p tal:omit-tag="textual">Sua inscrição na plataforma
+            <span tal:replace="site_url">URL</span> como 
+            <span tal:replace="python:candidature.type">Função</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">foi aceita</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">foi rejeitada</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">está em processamento e teve seu status alterado</span>.
+        </p>
+        <p tal:omit-tag="textual">Aqui estão os detalhes da sua evolução:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID da Inscrição: <span tal:replace="python:candidature.oid">ID da Inscrição</span></li>
+            <li tal:omit-tag="textual">Data da Transição: <span tal:replace="python:candidature.modifications[-1].datetime">Última transição</span></li>
+            <li tal:omit-tag="textual">Novo Status: <span tal:replace="python:candidature.candidature_state">Novo status da inscrição</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Se precisar, você pode interromper seu processo de inscrição agora. Você poderá retomá-lo mais tarde clicando no link abaixo.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Obrigado por sua participação.</p>
+        <p tal:omit-tag="textual">Atenciosamente,</p>
+        <p tal:omit-tag="textual">A equipe de <span tal:replace="domain_name">Nome do Domínio</span></p>
+    </body>
+</html>
