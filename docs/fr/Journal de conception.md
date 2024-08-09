@@ -2187,3 +2187,44 @@ sequenceDiagram
 ```
 
 En suivant ces étapes, nous pouvons configurer notre application Pyramid pour qu'elle utilise KeyCloak comme fournisseur SSO en utilisant la version 4 de la bibliothèque `python-keycloak`.
+
+# 2024-08-08
+Génération des traductions automatiques des fichiers PO et PT d'AlirPunkto pour de nouvelles langues:
+#### Script Bash `Translate.sh` de traduction des fichiers de localisation
+
+**Description :**
+Le script bash `Translate.sh` automatise la traduction des fichiers de localisation du projet AlirPunkto à partir de l'anglais vers plusieurs autres langues dont la liste est dans le script. Il utilise à son tour un script Python `translate.py`, qui s'appuie sur l'API OpenAI pour effectuer les traductions.
+
+**Fonctionnement :**
+1. Le script initialise un tableau associatif de langues, où chaque clé est le code de langue (ex: "bg" pour le bulgare) et chaque valeur est le nom complet de la langue de destination écrite en anglais car le prompt chatgpt de génération sera fourni en anglais.
+2. Il identifie tous les fichiers `.pt` ("page templates") et `.po` présents dans le répertoire de localisation anglais.
+3. Pour chaque fichier et chaque langue cible, le script vérifie si le fichier traduit existe déjà. Si ce n'est pas le cas, il lance le script Python `translate.py` pour générer la traduction et sauvegarder le résultat dans le répertoire approprié.
+4. Ce script ne réalise pas la mise à jour pour l'instant si la traduction existe déjà.
+
+**Points Importants :**
+- Pour mettre à jour une langue déjà existante il faut soit supprimer le fichier actuel, soit faire la génération vers un fichier de destination et faire soit même les mises à jour.
+
+#### Script Python pour la Traduction via l'API OpenAI
+
+**Description :**
+Le script Python `translate.py` permet de traduire le contenu textuel des fichiers entre deux langues en utilisant l'API d'OpenAI pour "gpt4o-mini". Ce script prend en entrée un fichier source, un fichier de sortie, la langue source, et la langue cible.
+
+**Fonctionnement :**
+1. **Pré-requis :** 
+   - Le script nécessite une clé API d'OpenAI, qui doit être spécifiée dans un fichier `.env` dans le répertoire racine du projet.
+   - La bibliothèque Python `openai` doit être installée (`pip install openai`).
+
+2. **Troncature du Texte :**
+   - Le texte du fichier source est tronqué au dernier saut de ligne vide avant une taille maximale définie pour respecter les limites de l'API.
+   - Le texte est segmenté en plusieurs morceaux si nécessaire, pour garantir que chaque requête respecte les limites imposées par l'API.
+
+3. **Processus de Traduction :**
+   - Pour chaque segment de texte, une requête est envoyée à l'API OpenAI pour obtenir la traduction. Le modèle utilisé est `gpt-4o-mini`.
+   - Le script veille à préserver les caractères échappés, ce qui est crucial pour les fichiers de localisation, où des caractères spéciaux peuvent avoir une signification syntaxique.
+
+4. **Sortie :**
+   - Le texte traduit est ensuite sauvegardé dans le fichier de sortie spécifié, prêt à être utilisé par le système.
+
+**Avantages :**
+- Ce script permet de traduire l'application vers toutes les langues supportée par le LLM.
+- Il est spécialement conçu pour manipuler et traduire des fichiers de localisation tout en préservant la structure syntaxique, ce qui le rend particulièrement adapté à la gestion des fichiers `.po` et `.pt`.
