@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Bekræft venligst din anmodning om at opdatere din e-mailadresse på <span tal:replace="domain_name">Domænenavn</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Bekræft venligst din anmodning om at opdatere din e-mailadresse på IT-platformen <span tal:replace="domain_name">Domænenavn</span></h1>
+    <p tal:omit-tag="textual">Du, eller en person med adgang til din konto på <span tal:replace="site_name">Sidenavn</span> platformen af <span tal:replace="domain_name">Domænenavn</span>, har bedt os om at ændre den e-mailadresse, som <span tal:replace="domain_name">domænenavnet</span> IT-infrastruktur bruger til at interagere med dig. Den nye e-mailadresse, der er anmodet om at blive brugt fremover, er: <span tal:replace="new_email">Ny e-mailadresse</span>.</p>
+<p tal:omit-tag="textual">Hvis du bekræfter, at <span tal:replace="new_email">Ny e-mailadresse</span> skal være den e-mailadresse, som <span tal:replace="domain_name">domænenavnet</span> IT-infrastruktur i fremtiden skal bruge til at interagere med dig, bedes du klikke på bekræftelseslinket nedenfor.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Hvis du har lavet en fejl, eller hvis du ikke har foretaget denne anmodning, skal du blot ignorere denne e-mail.</p>
+
+    <p tal:omit-tag="textual">Tak for din interesse i vores aktiviteter.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Med venlig hilsen,</p>
+        <p tal:omit-tag="textual">Teamet hos <span tal:replace="domain_name">Siden</span></p>
+    </footer>
+
+</body>
+</html>

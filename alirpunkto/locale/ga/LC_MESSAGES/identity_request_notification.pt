@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Do do chlárú do <span tal:omit-tag="textual" tal:replace="domain_name">Ainm don Domhain</span>. Céimeanna atá romhainn</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Hello <span tal:replace="full_name">Ainm an Iarrthóra</span>,</h1>
+    <p tal:omit-tag="textual">Go raibh maith agat as do iarratas a chur isteach do <span tal:omit-tag="replace" tal:replace="domain_name">Ainm an Domhain</span>! </p>
+
+    <p tal:omit-tag="textual">De réir an rogha a roghnaigh tú le linn do chlárú, tá na céimeanna atá romhainn:</p>
+
+    <h2 tal:omit-tag="textual">Má roghnaigh tú an rogha "Ball Gnáthphobail":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Comhghairdeas, tá tú anois i do "Bhall Gnáthphobail"!</li>
+        <li tal:omit-tag="textual">D’íocamar le do líon ballraíochta.</li>
+        <li tal:omit-tag="textual">Seoladh ríomhphost comhoibrithe chuig tú.</li>
+        <li tal:omit-tag="textual">Tá stádas do iarratais anois "ApprovedOrdinaryCommunityMember".</li>
+        <li tal:omit-tag="textual">Ní mór aon gníomh breise ó do thaobh. Ond coinnigh ceangal lenár <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">spás oibre</a> agus tús a chur le hidirghníomhaíocht lenár gComhoibrithe poblachta!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Má roghnaigh tú an rogha "Comhoibriúchán":</h2>
+    <p tal:omit-tag="textual">Beidh de cheart agat páirt iomlán a ghlacadh inár bpróisis gníomh chleachtais, agus inár dtoghcháin. I na próisis agus na toghcháin seo, ba mhaith linn an prionsabal daonlathach 'duine amháin = vótáil amháin' a chothú. Bheadh sé mícheart dá nglacfadh duine ar leith vótáil arís agus arís eile trí shuíomhanna éagsúla ar ár n-ardán TF. Mar sin, tá gá dúinn do chuntas a bhaineann leatsa go pearsanta, agus a chinntiú go raibh tú aitheanta ar ár n-ardán TF ar bhealach nach dtuigfar go míchruinn le haitheantas duine eile, i.e. le leagan uathúil d’aitheantóirí.</p>
+    <p tal:omit-tag="textual">Ar deireadh, ba mhaith linn a chinntiú nach bhfuil ach saoránaigh an Aontais Eorpaigh ina dComhoibrithe. Is é an chúis atá leis seo ná go mbeidh muid ag éileamh an ceart páirt a ghlacadh in toghcháin phoiblí san Aontas Eorpach mar eagraíocht aonair ar scála an AE, agus tá gá againn a thaispeáint go n-aithníonn muid saoránaigh an AE amháin (nó "leasa iasachta").</p>
+    <p tal:omit-tag="textual">Chun na spriocanna seo a bhaint amach, iarrfar ort an t-eolas a leanas a sholáthar, mar a léirítear i do dhoiciméid aitheantachta oifigiúla:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Do na hainmneacha go léir a tugadh duit (i n-iomlán oifigiúil i gcarachtair Laidine do Ghréig agus an Bhulgáir),</li>
+        <li tal:omit-tag="textual">Do na hainmneacha clainne go léir a tugadh duit ag breith (i n-iomlán oifigiúil i gcarachtair Laidine do Ghréig agus an Bhulgáir),</li>
+        <li tal:omit-tag="textual">Do dháta breithe,</li>
+        <li tal:omit-tag="textual">Do náisiún (i measc náisiún stát AE amháin).</li>
+    </ul>
+    <p tal:omit-tag="textual">Soláthróidh tú an t-eolas seo ar ár hardán cláraithe, agus déanfar grúpa 3 go 7 Comhoibrithe a roghnófar go randamach, ar a dtugtar na dearbhóirí, chun a chinntiú go gcomhlíonann an t-eolas a chuir tú ar ár hardán cláraithe é sin i do doiciméid aitheantachta oifigiúla. Mar sin, seolfaidh tú pictiúir páirteach de do doiciméid aitheantachta oifigiúla go díreach chuig na dearbhóirí seo, gan (ar son na slándála) ár hardán TF a úsáid.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Tá bealaí beirt agat chun na pictiúir páirteacha de do doiciméid aitheantachta oifigiúla a sheoladh chuig na dearbhóirí:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Trí Chomhoiriúnacht Físe</strong>: Tabharfaidh cnaipe treoir duit i scríobhadh ríomhphost réamh-líonadh, agus is féidir leat freastal ar dhátaí agus amanna comhoiriúnachta le dearbhóirí duit. I rith an chomhoiriúnachta (na gcomhoiriúnachtaí), taispeánfaidh tú do doiciméad aitheantachta oifigiúla do na dearbhóirí trí do cheamara, ag cinntiú go bhfanfaidh, e.g., uimhir an doiciméid aitheantachta agus an áit breithe do bhláth, ionas nach gcuirfidh tú (ar son na slándála) leagan iomlán den doiciméad sin léite.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Trí D'Lilí Ghaolmhaireacht Ríomhphoist</strong>: Tabharfaidh cnaipe cabhair duit i scríbhinn scríobh réamh-líonadh, a mbeidh tú in ann leagan páirteach de do doiciméad aitheantachta oifigiúla a cheangal (e.g., ag clúdach an uimhir agus an áit breithe).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Déanfaidh gach dearbhóir ansin a CNC de na sonraí a chuir tú ar fhoirm chlárúcháin ár hardán TF a chomhoiriúnacht leis an doiciméad aitheantachta oifigiúil. Gach dearbhóir a dhéanfaidh vótáil go neamhspleách ar ár hardán TF maidir le comhoiriúnacht seo. Má ghlacann tromlach na dearbhóirí go dtagann an t-eolas a chuir tú ar ár hardán cláraithe isteach i do doiciméid aitheantachta oifigiúla, beidh áthas orainn fáilte a chur romhat mar Chomhoibriúchán!</p>
+
+    <p tal:omit-tag="textual">Má níl aon chúis le seoladh ríomhphoist a theipeann, déanfear comhoiriúnacht agus déanfar iarracht chun ríomhphost a sheoladh chuig an riarthóir.</p>
+
+    <p tal:omit-tag="textual">Cuimhneamh ort go bhfuil an t-am atá leagtha amach duit chun an próiseas fíorghníomh a dhéanamh teoranta, mar sin gníomh go tapa.</p>
+
+    <p tal:omit-tag="textual">Má tá aon cheisteanna agat nó más gá duit breis eolais, ná bíodh aon leisce ort teagmháil a dhéanamh linn.</p>
+
+    <p tal:omit-tag="textual">Le dea-ghuí,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Foireann <span tal:replace="domain_name">Ainm an Domhain</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nóta: Tá an foláireamh seo ginte go huathoibríoch. Ná freagair díreach an teachtaireacht seo.</small></p>
+</body>
+</html>

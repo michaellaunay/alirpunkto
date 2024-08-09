@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Hakemuksesi <span tal:replace="domain_name">Verkkotunnus</span> on hyväksytty</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Onnittelut hakemuksesi hyväksymisestä!</h1>
+    
+    <p tal:omit-tag="textual">Hei <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Hakijan Nimi</span>,</p>
+    
+    <p tal:omit-tag="textual">Meillä on ilo ilmoittaa, että hakemuksesi <span tal:replace="domain_name">Verkkotunnukselle</span> rooliin <span tal:replace="python:candidature.type">Rooli</span> on hyväksytty.</p>
+
+    <p tal:omit-tag="textual">Kiitos, että liityit joukkoomme! Meillä on ilo toivottaa sinut tervetulleeksi yhteisöömme.</p>
+    
+    <p tal:omit-tag="textual">Nyt, kun hakemuksesi on hyväksytty, voit kirjautua alustallemme käyttäen nimimerkkisi ja salasanaasi, jotka annoit hakemusprosessin aikana. Kirjautumisen jälkeen löydät:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">linkit kaikkiin ohjelmistosovelluksiin, joihin sinulla on suora pääsy. Sinun ei tarvitse kirjautua uudelleen!</li>
+        <li tal:omit-tag="textual">linkin lomakkeeseen, jossa voit tarkastella ja muokata omaa profiiliasi. Tällä lomakkeella kannustamme sinua esittelemään itsesi muille yhteisömme jäsenille lyhyessä "profiilitekstissä" ja näyttämään pienen kuvan, joka edustaa sinua (oma "avatar");</li>
+        <li tal:omit-tag="textual">linkin, jonka avulla voit kirjautua ulos.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Tässä ovat pääelementit profiilistasi, jotka olemme tallentaneet:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">nimimerkkisi: ##PSEUDONYM. Ole hyvä ja pidä tämä nimimerkki huolellisesti ja turvallisesti tallessa: se on ainoa tunniste, jolla voit kirjautua IT-alustallemme;</li>
+        <li tal:omit-tag="textual">salasanasi: (salasana, jonka annoit rekisteröinnin yhteydessä);</li>
+        <li tal:omit-tag="textual">sähköpostiosoitteesi: (sähköpostiosoite, johon lähetämme tämän sähköpostin);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">henkilöllisyystietosi: (kaikki antamasi etu- ja sukunimet, syntymäaikasi, kuten rekisteröintiprosessissa on annettu ja varmennettu);</li>
+        <li tal:omit-tag="textual">haluamasi kieli, jolla kanssamme käytetään kommunikointia: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">toinen kieli, jonka hyväksyt käytettäväksi kanssasi kommunikoinnissa: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">kieli, jonka hyväksyt kolmantena vaihtoehtona käytettäväksi kanssasi kommunikoinnissa: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Muistoesi vuoksi tässä ovat rekisteröintiprosessin loppuunsaattamisen tiedot:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Hakemuksen ID: <span tal:replace="python:candidature.oid">Hakemus ID</span></li>
+        <li tal:omit-tag="textual">Hyväksymispäivä: <span tal:replace="python:candidature.modifications[-1]">Viimeinen siirto</span></li>
+        <li tal:omit-tag="textual">Tila: Hyväksytty</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Odotamme innolla yhteistyötä kanssasi!</p>
+
+    
+    <p tal:omit-tag="textual">Parhain terveisin,</p>
+    <p tal:omit-tag="textual">Tiimi <span tal:replace="domain_name">Verkkotunnus</span>.</p>
+</body>
+</html>

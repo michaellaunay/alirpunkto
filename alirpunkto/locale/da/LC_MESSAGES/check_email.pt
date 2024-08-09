@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registrering til <span tal:replace="domain_name">Domænenavn</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Tak for at starte din registrering til platformen <span
+                tal:replace="domain_name">Domænenavn</span></h1>
+        <p tal:omit-tag="textual">For at bekræfte din e-mailadresse og sikre, at du er et menneske (ikke en
+            robot), har vi udarbejdet en række på 4 enkle matematiske operationer. Udfør venligst de 
+            fire matematiske operationer mærket fra A til D nedenfor, og indtast deres resultater i de 
+            tilsvarende felter på registreringssiden linket nedenfor.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operation A er <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Den første udfordring</span></p>
+            <p tal:omit-tag="textual">Operation B er <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Den anden udfordring</span></p>
+            <p tal:omit-tag="textual">Operation C er <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Den tredje udfordring</span></p>
+            <p tal:omit-tag="textual">Operation D er <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Den fjerde udfordring</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link til registreringssiden, hvor du skal angive resultaterne af operationerne A til D ovenfor:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Tak for din interesse i vores aktiviteter. Vi ser frem til at 
+            byde dig velkommen snart!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Med venlig hilsen,</p>
+            <p tal:omit-tag="textual">Teamet fra <span tal:replace="domain_name">Domænenavn</span></p>
+        </footer>
+
+    </body>
+</html>

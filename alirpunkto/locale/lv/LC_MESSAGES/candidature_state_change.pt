@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Jūsu pieteikuma statusa maiņa</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Jūsu pieteikuma attīstība uz <span tal:replace="domain_name">Domēna nosaukums</span></h1>
+        <p tal:omit-tag="textual">Sveiki<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Pieteicēja vārds</span>,
+        </p>
+        <p tal:omit-tag="textual">Jūsu pieteikums platformā
+            <span tal:replace="site_url">URL</span> kā 
+            <span tal:replace="python:candidature.type">Loma</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">ir pieņemts</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">ir noraidīts</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">ir apstrādē un ir mainījis savu statusu</span> . 
+        </p>
+        <p tal:omit-tag="textual">Šeit ir tās attīstības detaļas:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Pieteikuma ID: <span tal:replace="python:candidature.oid">Pieteikuma ID</span></li>
+            <li tal:omit-tag="textual">Pārejas datums: <span tal:replace="python:candidature.modifications[-1].datetime">Pēdējā pāreja</span></li>
+            <li tal:omit-tag="textual">Jaunais statuss: <span tal:replace="python:candidature.candidature_state">Jaunais pieteikuma statuss</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Ja nepieciešams, jūs varat pārtraukt savu reģistrācijas procesu tagad. Jūs varēsiet to atsākt vēlāk, noklikšķinot uz zemāk esošās saites.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Paldies par jūsu līdzdalību.</p>
+        <p tal:omit-tag="textual">Ar cieņu,</p>
+        <p tal:omit-tag="textual">Komanda no <span tal:replace="domain_name">Domēna nosaukums</span></p>
+    </body>
+</html>

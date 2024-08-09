@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registriĝo al <span tal:replace="domain_name">Domananomo</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Dankon pro komenci vian registriĝon al la platformo <span
+                tal:replace="domain_name">Domananomo</span></h1>
+        <p tal:omit-tag="textual">Por kontroli vian retpoŝtan adreson kaj certigi, ke vi estas homo (ne roboto), ni ellaboris serion de 4 simplaj matematikaj operacioj. Bonvolu plenumi la kvar matematikajn operaciojn etikeditajn de A ĝis D sube kaj enigi iliajn rezultojn en la korespondantajn kampojn en la registriĝa paĝo ligita sube.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operacio A estas <span tal:content="challenge_A"
+                    tal:omit-tag="textual">La unua defio</span></p>
+            <p tal:omit-tag="textual">Operacio B estas <span tal:content="challenge_B"
+                    tal:omit-tag="textual">La dua defio</span></p>
+            <p tal:omit-tag="textual">Operacio C estas <span tal:content="challenge_C"
+                    tal:omit-tag="textual">La tria defio</span></p>
+            <p tal:omit-tag="textual">Operacio D estas <span tal:content="challenge_D"
+                    tal:omit-tag="textual">La kvara defio</span></p>
+        </div>
+        <p tal:omit-tag="textual">Ligo al la registriĝa paĝo kie vi povas provizi la rezultojn de la operacioj A ĝis D supre:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Dankon pro via intereso en niaj aktivaĵoj. Ni antaŭĝojas bonvenigi vin baldaŭ!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Sincere,</p>
+            <p tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Domananomo</span></p>
+        </footer>
+
+    </body>
+</html>

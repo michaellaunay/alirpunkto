@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">A jelentkezése állapotának változása</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Jelentkezése fejlődése: <span tal:replace="domain_name">Domain Név</span></h1>
+        <p tal:omit-tag="textual">Helló<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Jelentkező Neve</span>,
+        </p>
+        <p tal:omit-tag="textual">A platformon a jelentkezése 
+            <span tal:replace="site_url">URL</span> mint 
+            <span tal:replace="python:candidature.type">Szerepkör</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">elfogadásra került</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">elutasításra került</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">folyamatban van, és megváltozott az állapota</span> . 
+        </p>
+        <p tal:omit-tag="textual">Itt vannak a fejlődésének részletei:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Jelentkezési azonosító: <span tal:replace="python:candidature.oid">Jelentkezés azonosító</span></li>
+            <li tal:omit-tag="textual">Átmenet dátuma: <span tal:replace="python:candidature.modifications[-1].datetime">Utolsó átmenet</span></li>
+            <li tal:omit-tag="textual">Új állapot: <span tal:replace="python:candidature.candidature_state">Új jelentkezési állapot</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Ha szüksége van rá, most megszakíthatja a regisztrációs folyamatot. Később folytathatja az alábbi hivatkozásra kattintva.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Köszönjük a részvételét.</p>
+        <p tal:omit-tag="textual">Üdvözlettel,</p>
+        <p tal:omit-tag="textual">A <span tal:replace="domain_name">Domain Név</span> csapata</p>
+    </body>
+</html>

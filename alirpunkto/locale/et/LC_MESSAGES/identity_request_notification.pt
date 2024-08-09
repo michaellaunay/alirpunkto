@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Teie registreerimine <span tal:omit-tag="textual" tal:replace="domain_name">Domeeninimi</span>. Järgmised sammud</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Tere <span tal:replace="full_name">Kandidaadi Nimi</span>,</h1>
+    <p tal:omit-tag="textual">Aitäh, et esitasite oma taotluse <span tal:replace="domain_name">Domeeninimi</span> jaoks! </p>
+
+    <p tal:omit-tag="textual">Sõltuvalt valikust, mille tegite registreerimise ajal, on järgmised sammud:</p>
+
+    <h2 tal:omit-tag="textual">Kui valisite "Tavaline Kogukonna Liige" võimaluse:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Palju õnne, olete nüüd "Tavaline Kogukonna Liige"!</li>
+        <li tal:omit-tag="textual">Teie liikmelisuse number on määratud.</li>
+        <li tal:omit-tag="textual">Teie jaoks on saadetud õnnitlusmeil.</li>
+        <li tal:omit-tag="textual">Teie taotluse staatus on nüüd "KinnitatudTavalineKogukonnaLiige".</li>
+        <li tal:omit-tag="textual">Teie poolt ei ole enam midagi vajalik teha. Logige sisse meie <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">tööruumi</a> ja hakake suhtlema teiste Kogukonna liikmetega!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Kui valisite "Koostööline" võimaluse:</h2>
+    <p tal:omit-tag="textual">Teil on õigus osaleda täielikult meie otsustusprotsessides ja hääletustes. Nendes protsessides ja hääletustes soovime säilitada demokraatlikku põhimõtet "üks inimene = üks hääl". Oleks ebaaus, kui teatud isik saaks palju kordi hääletada, kasutades meie IT platvormil mitmeid kontosid. Me peame teie konto isiklikult teiega seostama ja veenduma, et teid tunnustatakse meie IT platvormil viisil, mis ei saa segi minna teise isiku identiteediga, st ainulaadsete identifikaatorite kogumiga.</p>
+    <p tal:omit-tag="textual">Lisaks tahame tagada, et ainult Euroopa Liidu kodanikud on koostööline. Põhjus on selles, et me kavatseme nõuda õigust osaleda avalikes valimistes Euroopa Liidus kui ühisorganisatsioon, ja peame tõestama, et me esindame ainult ELi kodanikke (mitte "välismaiseid huve").</p>
+    <p tal:omit-tag="textual">Selleks, et neid eesmärke saavutada, palume teil esitada järgmised andmed, nagu need on teie ametlikes isikut tõendavates dokumentides:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Kõik teie eesnimed (nende ametlikus transkriptsioonis ladina tähtedes kreeka ja bulgaaria keeles),</li>
+        <li tal:omit-tag="textual">Kõik teie perekonnanimed sünnil (nende ametlikus transkriptsioonis ladina tähtedes kreeka ja bulgaaria keeles),</li>
+        <li tal:omit-tag="textual">Teie sünnikuupäev,</li>
+        <li tal:omit-tag="textual">Teie rahvus (ainult ELi liikmesriikide rahvuste seas).</li>
+    </ul>
+    <p tal:omit-tag="textual">Esitate need andmed meie registreerimisplatvormil ning 3 kuni 7 juhuslikult valitud Koostöölise, keda nimetatakse Kontrollijateks, kontrollib, et teieg antud teave meie registreerimisplatvormil ühtib teie ametlike ID dokumentidega. Seega edastate te osalised pildid oma ametlikest ID dokumentidest otse neile Kontrollijatele, ilma et (turvalisuse huvides) kasutaksite meie IT platvormi.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">On kaks meetodit, kuidas edastada neid osalisi pilte oma ametlikest ID dokumentidest Kontrollijatele:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Video konverentsi kaudu</strong>: Nuputav nupp aitab teil koostada eelnevalt täidetud e-kirja, milles saate pakkuda kohtumise kuupäevi ja kelli ÜHE või eraldi video konverentside jaoks teile määratud Kontrollijatega. Sel (neil) video konverentsil (idel) näitate oma ametlikku ID dokumenti Kontrollijatele oma kaamera kaudu, veendudes, et ID dokumendi number ja sünnikoht oleksid varjatud, et vältida (turvalisuse huvides) selle dokumendi täis koopiat.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">E-kirja manuse kaudu</strong>: Nuputav nupp aitab teil koostada eelnevalt täidetud e-kirja, millele saate lisada osalise koopia oma ametlikust ID dokumentist (nt varjatakse number ja sünnikoht).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Iga Kontrollija kontrollib seejärel, kas teave, mille te meie IT platvormi registreerimisvormil esitasite, vastab teie ametliku isikut tõendava dokumendi andmetele. Iga Kontrollija hääletab seejärel iseseisvalt meie IT platvormil selle vastavuse kontrollimise osas. Kui enamus Kontrollijaid nõustub, et teave, mille te meie registreerimisplatvormil esitasite, vastab teie ametlike ID dokumentide andmetele, on meil hea meel teid tervitada Koostööliisena!</p>
+
+    <p tal:omit-tag="textual">Kui e-kirja saatmine mingil põhjusel ebaõnnestub, logitakse veateade ja püütakse saata e-kiri administraatorile.</p>
+
+    <p tal:omit-tag="textual">Tuletame meelde, et verifitseerimisprotsessiks ettenähtud aeg on piiratud, seega palun tegutsege kiiresti.</p>
+
+    <p tal:omit-tag="textual">Kui teil on küsimusi või vajate täiendavat selgitust, ärge kartke meiega ühendust võtta.</p>
+
+    <p tal:omit-tag="textual">Parimate soovidega,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Team <span tal:replace="domain_name">Domeeninimi</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Märkus: See teade on genereeritud automaatselt. Palun ärge vastake sellele sõnumile otse.</small></p>
+</body>
+</html>

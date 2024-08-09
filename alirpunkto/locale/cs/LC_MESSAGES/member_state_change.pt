@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Změna stavu vašich údajů</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Úprava vašich osobních údajů v IT infrastruktuře <span tal:replace="domain_name">Název Domény</span></h1>
+        <p tal:omit-tag="textual">Dobrý den<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Jméno člena</span>,
+        </p>
+        <p tal:omit-tag="textual">Zde jsou podrobnosti o její úpravě:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID člena: <span tal:replace="python:member.oid">ID člena</span></li>
+            <li tal:omit-tag="textual">Datum přechodu: <span tal:replace="python:member.modifications[-1].datetime">Poslední přechod</span></li>
+            <li tal:omit-tag="textual">Nový stav: <span tal:replace="python:member.member_state">Nový stav člena</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Děkujeme za vaši účast.</p>
+        <p tal:omit-tag="textual">S pozdravem,</p>
+        <p tal:omit-tag="textual">Tým <span tal:replace="domain_name">Název Domény</span></p>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Regisztrációja a <span tal:omit-tag="textual" tal:replace="domain_name">Domain név</span> alatt. Következő lépések</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Helló <span tal:replace="full_name">Pályázó neve</span>,</h1>
+    <p tal:omit-tag="textual">Köszönjük, hogy benyújtotta pályázatát a <span tal:replace="domain_name">Domain név</span> számára!</p>
+
+    <p tal:omit-tag="textual">A regisztráció során választott lehetőségtől függően itt vannak a következő lépések:</p>
+
+    <h2 tal:omit-tag="textual">Ha az "Átlagos Közösségi Tag" lehetőséget választotta:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Gratulálunk, most már "Átlagos Közösségi Tag" vagy!</li>
+        <li tal:omit-tag="textual">A tagsági számát meghatározták.</li>
+        <li tal:omit-tag="textual">Gratuláló e-mailt küldtek Önnek.</li>
+        <li tal:omit-tag="textual">A pályázati státusza most "JóváhagyottÁtlagosKözösségiTag".</li>
+        <li tal:omit-tag="textual">Öntől további teendő nem szükséges. Csatlakozzon a <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">munkaterületünkhöz</a>, és kezdje el kölcsönhatásba lépni a közösség többi tagjával!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Ha a "Szövetkező" lehetőséget választotta:</h2>
+    <p tal:omit-tag="textual">Teljes körű jogot kap a döntéshozatali folyamatainkban való részvételre, valamint a szavazásainkra. Ezekben a folyamatokban és szavazásokban szeretnénk fenntartani a demokratikus elvet: 'egy ember = egy szavazat'. Igazságtalan lenne, ha egy adott személy több szavazatot adhatna le különböző fiókok használatával az IT platformunkon. Ezért szükséges, hogy a fiókját személyesen hozzánk kapcsoljuk, és biztosítsuk, hogy az IT platformunkon olyan módon legyen azonosítva, amely nem összetéveszthető egy másik személy identitásával, vagyis egyedi azonosítókészlettel.</p>
+    <p tal:omit-tag="textual">Továbbá biztosítanunk kell, hogy csak az Európai Unió állampolgárai legyenek Szövetkezők. Ennek oka, hogy jogot kívánunk érvényesíteni a nyilvános választásokon való részvételre az Európai Unió keretein belül, és meg kell mutatnunk, hogy csak az EU állampolgárait képviseljük (és nem "külföldi érdekeket").</p>
+    <p tal:omit-tag="textual">E célok elérése érdekében kérjük, hogy a következő információkat adja meg, ahogyan az hivatalos személyazonosító okmányain szerepel:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Minden vezetéknév (az hivatalos latin karakterekre történő átiratban, görög és bolgár esetében),</li>
+        <li tal:omit-tag="textual">Minden születési családnév (az hivatalos latin karakterekre történő átiratban, görög és bolgár esetében),</li>
+        <li tal:omit-tag="textual">Születési dátuma,</li>
+        <li tal:omit-tag="textual">Állampolgárság (csak az EU tagállamok állampolgárságai közül).</li>
+    </ul>
+    <p tal:omit-tag="textual">Ezeket az információkat a regisztrációs platformunkon fogja megadni, és egy 3-7 véletlenszerűen kiválasztott Szövetkezőből álló csoport, úgynevezett Ellenőrök, ellenőrzik, hogy a regisztrációs platformunkon megadott információk megfelelnek-e a hivatalos személyazonosító okmányain szereplő adatoknak. Így Ön részleges másolatokat fog közvetíteni hivatalos személyazonosító okmányairól közvetlenül ezeknek az Ellenőröknek, anélkül, hogy (a biztonság érdekében) az IT platformunkat használná.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Két módszer létezik, hogy Ön ezeket a részleges másolatokat az Ellenőröknek továbbítsa:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Videokonferencia révén</strong>: Egy gomb segít Önnek egy előre kitöltött e-mail megfogalmazásában, amelyben javaslatot tehet időpontokra és időpontokra Önnek kijelölt Ellenőrökkel folytatott egyéni vagy különálló videokonferenciára. Ez alatt a (ezek alatt a) videokonferenciák alatt meg fogja mutatni a hivatalos személyazonosító okmányát az Ellenőröknek a kameráján keresztül, ügyelve arra, hogy pl. az okmány száma és a születési hely fedve maradjon, hogy elkerüljük (biztonsági okokból), hogy a teljes másolat megjelenjen.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">E-mail melléklet révén</strong>: Egy gomb segít Önnek egy előre kitöltött e-mail megírásában, amelyhez csatolhatja a hivatalos személyazonosító okmánya részleges másolatát (pl. eltakarva a számot és a születési helyet).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Minden Ellenőr akkor ellenőrzi az Ön által a regisztrációs űrlapon megadott információk megfelelőségét hivatalos személyazonosító okmánya adataival. Minden Ellenőr függetlenül szavaz a megfelelőség ellenőrzéséről az IT platformunkon. Ha az Ellenőrök többsége elfogadja, hogy az Ön által a regisztrációs platformunkon megadott információk megfelelnek a hivatalos személyazonosító okmányokon szereplő adatoknak, örömmel üdvözöljük Önt mint Szövetkezőt!</p>
+
+    <p tal:omit-tag="textual">Ha bármilyen okból az e-mail küldése nem sikerül, egy hibaüzenetet rögzítünk, és megpróbálunk e-mailt küldeni az adminisztrátornak.</p>
+
+    <p tal:omit-tag="textual">Emlékeztetjük, hogy a folyamat elvégzésére rendelkezésre álló idő korlátozott, ezért kérjük, cselekedjen gyorsan.</p>
+
+    <p tal:omit-tag="textual">Ha kérdései vannak, vagy további tisztázásra van szüksége, ne habozzon kapcsolatba lépni velünk.</p>
+
+    <p tal:omit-tag="textual">Üdvözlettel,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">A <span tal:replace="domain_name">Domain Név</span> csapata</strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Megjegyzés: Ez a értesítés automatikusan generálódott. Kérjük, ne válaszoljon közvetlenül erre az üzenetre.</small></p>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Via Apliko al la <span tal:replace="domain_name">Domajno Nomo</span> estis aprobita</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Gratulojn pro la aprobo de via Apliko!</h1>
+    
+    <p tal:omit-tag="textual">Saluton <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nomo de Petanto</span>,</p>
+    
+    <p tal:omit-tag="textual">Ni ĝojas informi vin ke via apliko al la <span tal:replace="domain_name">Domajno Nomo</span> por la rolo de <span tal:replace="python:candidature.type">Rolo</span> estis aprobita.</p>
+
+    <p tal:omit-tag="textual">Dankon pro aliĝado al ni! Ni ĝojas bonvenigi vin en nia Komunumo.</p>
+    
+    <p tal:omit-tag="textual">Nun, kiam via apliko estis aprobita, vi povas ensaluti en nian platformon uzante la pseŭdonimon kaj pasvorton, kiujn vi provizis dum la aplika proceso. Post ensaluto, vi trovos:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">la ligojn al ĉiuj softvaraj aplikaĵoj, al kiuj vi havas rektaĵon. Vi ne bezonas denove ensaluti!</li>
+        <li tal:omit-tag="textual">ligon al la formularo kie vi povas vidi kaj redakti vian propran profilon. En ĉi tiu formularo, ni instigas vin prezenti vin al la aliaj membroj de nia Komunumo per mallonga "profilteksto" kaj montri malgrandan bildon kiu reprezentas vin (via "avataro");</li>
+        <li tal:omit-tag="textual">ligon por elsaluti.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Jen la ĉefaj elementoj de via profilo, kiujn ni registris:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">via pseŭdonimo: ##PSEUDONYM. Bonvolu zorgi pri aŭskultado kaj sekure konservi ĉi tiun pseŭdonimon: ĝi estas la sola identigilo per kiu vi povas ensaluti al nia IT-platformo;</li>
+        <li tal:omit-tag="textual">via pasvorto: (la pasvorto, kiun vi provizis dum via registrado);</li>
+        <li tal:omit-tag="textual">via retpoŝta adreso: (la retpoŝta adreso al kiu ni sendas ĉi tiun retpoŝton);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">via identeco datumoj: (ĉiuj viaj donitaj kaj familinomo, via naskiĝdato, kiel provizita kaj kontrolita dum via registrado);</li>
+        <li tal:omit-tag="textual">la preferata lingvo por ni interagi kun vi: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">la dua lingvo, kiun vi akceptas, ke ni uzas por interagi kun vi: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">la lingvo, kiun vi akceptas, ke ni uzas, kiel tria elekto, por interagi kun vi: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Por viaj rekordoj, jen la detaloj de la finaligo de via registrado:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID de Apliko: <span tal:replace="python:candidature.oid">ID de Apliko</span></li>
+        <li tal:omit-tag="textual">Dato de Aprobado: <span tal:replace="python:candidature.modifications[-1]">Lasta transiro</span></li>
+        <li tal:omit-tag="textual">Statuso: Aprobita</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Ni antaŭĝojas pri la plezuro kunlabori kun vi!</p>
+
+    <p tal:omit-tag="textual">Kun plej bonaj salutoj,</p>
+    <p tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Domajno Nomo</span>.</p>
+</body>
+</html>

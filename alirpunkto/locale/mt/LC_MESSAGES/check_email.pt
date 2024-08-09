@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Ir-reġistrazzjoni għal <span tal:replace="domain_name">Isem id-domenju</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Grazzi talli bdejtilka r-reġistrazzjoni tiegħek għall-pjattaforma <span
+                tal:replace="domain_name">Isem id-domenju</span></h1>
+        <p tal:omit-tag="textual">Biex tiġġustifika l-indirizz elettroniku tiegħek u tiżgura li inti bniedem (mhuwiex
+            robot), aħna ħloqna serje ta’ 4 operazzjonijiet matematiċi sempliċi. Jekk jogħġbok, għamel il
+            erba’ operazzjonijiet matematiċi mfassla minn A sa D hawn taħt u daħħal ir-riżultati tagħhom fil
+            kampijiet korrespondenti fil-paġna tar-reġistrazzjoni marbuta hawn taħt.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">L-operazzjoni A hi <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Il-prijorità l-ewwel</span></p>
+            <p tal:omit-tag="textual">L-operazzjoni B hi <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Il-prijorità it-tieni</span></p>
+            <p tal:omit-tag="textual">L-operazzjoni C hi <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Il-prijorità it-tielet</span></p>
+            <p tal:omit-tag="textual">L-operazzjoni D hi <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Il-prijorità l-erbgħa</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link għall-paġna tar-reġistrazzjoni fejn għandek tipprovdi r-riżultati tal-operazzjonijiet A sa D hawn fuq:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Grazzi tal-interess tiegħek fil-attivitajiet tagħna. Nistennew bil-ħerqa li
+            nilqgħu lilek dalwaqt!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Sincerament,</p>
+            <p tal:omit-tag="textual">It-tim ta’ <span tal:replace="domain_name">Isem id-domenju</span></p>
+        </footer>
+
+    </body>
+</html>

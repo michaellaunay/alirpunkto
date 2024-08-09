@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Jūsu reģistrācija <span tal:omit-tag="textual" tal:replace="domain_name">Domēna nosaukumā</span>. Nākamie soļi</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Sveiki <span tal:replace="full_name">Pieteicēja Vārds</span>,</h1>
+    <p tal:omit-tag="textual">Paldies, ka iesniedzāt savu pieteikumu <span tal:replace="domain_name">Domēna nosaukumā</span>! </p>
+
+    <p tal:omit-tag="textual">Atkarībā no iespējas, kuru izvēlējāties reģistrācijas laikā, lūk, nākamie soļi:</p>
+
+    <h2 tal:omit-tag="textual">Ja izvēlējāties "Parasto Kopienas Locekļa" opciju:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Apsveicam, jūs tagad esat "Parastais Kopienas Loceklis"!</li>
+        <li tal:omit-tag="textual">Jūsu dalības numurs ir noteikts.</li>
+        <li tal:omit-tag="textual">Apsveikuma e-pasts jums ir nosūtīts.</li>
+        <li tal:omit-tag="textual">Jūsu pieteikuma statuss tagad ir "ApstiprinātsParastaisKopienasLoceklis".</li>
+        <li tal:omit-tag="textual">No jums nav nepieciešamas nekādas papildu darbības. Savienojieties ar mūsu <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">darba vietu</a> un sāciet sadarboties ar citiem Kopienas locekļiem!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Ja izvēlējāties "Kooperatora" opciju:</h2>
+    <p tal:omit-tag="textual">Jums būs tiesības pilnībā piedalīties mūsu lēmumu pieņemšanas procesos un balsojumos. Šajos procesos un balsojumos mēs vēlamies saglabāt demokrātisko principu 'viena persona = viena balss'. Būtu netaisnīgi, ja kāda persona varētu balsot vairākkārt, izmantojot vairākas kontus mūsu IT platformā. Tāpēc mums ir nepieciešams attiecināt jūsu kontu uz jums personīgi un nodrošināt, ka jūs esat identificēts mūsu IT platformā tā, lai netiktu sajaukts ar citas personas identitāti, t.i., ar unikālu identifikatoru kopumu.</p>
+    <p tal:omit-tag="textual">Papildus tam mēs vēlamies nodrošināt, ka tikai Eiropas Savienības pilsoņi ir Kooperators. Šī iemesla dēļ mēs pieprasīsim tiesības piedalīties publiskajās vēlēšanās Eiropas Savienībā kā vienai organizācijai, kas pārstāv tikai ES pilsoņus (nevis "ārvalstu intereses").</p>
+    <p tal:omit-tag="textual">Lai sasniegtu šos mērķus, mēs lūgsim jūs sniegt šādu informāciju, kā tā parādās jūsu oficiālajos identitātes dokumentos:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Visas jūsu personas vārdi (oficiālā transliterācijā latīņu burtiem grieķu un bulgāru valodā),</li>
+        <li tal:omit-tag="textual">Visas jūsu uzvārdi, uz kuriem esat piedzimis (oficiālā transliterācijā latīņu burtiem grieķu un bulgāru valodā),</li>
+        <li tal:omit-tag="textual">Jūsu dzimšanas datums,</li>
+        <li tal:omit-tag="textual">Jūsu nacionalitāte (tikai no ES dalībvalstu nacionalitātēm).</li>
+    </ul>
+    <p tal:omit-tag="textual">Jūs sniegsiet šo informāciju mūsu reģistrācijas platformā, un komplekts no 3 līdz 7 nejauši izvēlētiem Kooperatoriem, kas saukti par Verifikatoriem, pārbaudīs, vai informācija, kuru sniedzāt mūsu reģistrācijas platformā, atbilst jūsu oficiālajos identitātes dokumentos esošajai informācijai. Tādējādi jūs tieši šiem Verifikatoriem nosūtīsiet daļējas jūsu oficiālo identitātes dokumentu bildes, neizmantojot (drošības apsvērumu dēļ) mūsu IT platformu.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Ir divi veidi, kā jūs varat nosūtīt šīs daļējās jūsu oficiālo identitātes dokumentu bildes Verifikatoriem:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Caur videokonferenci</strong>: Poga jūs vadīs, izstrādājot iepriekš aizpildītu e-pastu, kurā varat ierosināt tikšanās datumus un laikus vienai vai atsevišķām videokonferencēm ar jums piešķirto Verifikatoru. Šajā (šajās) videokonferencēs jūs rādīsiet savu oficiālo identitātes dokumentu Verifikatoriem caur savu kameru, pārliecinoties, ka, piemēram, dokumenta numurs un dzimšanas vieta paliek noslēptas, lai izvairītos (drošības apsvērumu dēļ) no pilna šā dokumenta eksemplāra rādīšanas.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Caur e-pasta pielikumu</strong>: Poga jums palīdzēs uzrakstīt iepriekš aizpildītu e-pastu, kuram varat pievienot daļēju jūsu oficiālā identitātes dokumenta kopiju (piemēram, aizsedzot numuru un dzimšanas vietu).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Katrs Verifikators tad pārbaudīs informācijas atbilstību, ko jūs sniedzāt reģistrācijas veidlapā mūsu IT platformā, ar to, kas atrodama jūsu oficiālajā identitātes dokumentā. Katrs Verifikators tad neatkarīgi balsos mūsu IT platformā par šo atbilstības pārbaudi. Ja vairums Verifikatoru apstiprina, ka informācija, ko jūs sniedzāt mūsu reģistrācijas platformā, atbilst jūsu oficiālajos identitātes dokumentos esošajai informācijai, mēs ar prieku jūs uzņemam kā Kooperatoru!</p>
+
+    <p tal:omit-tag="textual">Ja kāda iemesla dēļ e-pasta sūtīšana neizdosies, tiks ierakstīts kļūdas ziņojums un tiks veikts mēģinājums nosūtīt e-pastu administratoram.</p>
+
+    <p tal:omit-tag="textual">Atgādinām, ka laiks, kas jums paredzēts šī verifikācijas procesa veikšanai, ir ierobežots, tāpēc lūdzu rīkojieties ātri.</p>
+
+    <p tal:omit-tag="textual">Ja jums ir kādi jautājumi vai nepieciešama papildu skaidrošana, lūdzu, nekautrējieties sazināties ar mums.</p>
+
+    <p tal:omit-tag="textual">Ar cieņu,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Komanda no <span tal:replace="domain_name">Domēna nosaukuma</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Ņemiet vērā: Šis paziņojums tika ģenerēts automātiski. Lūdzu, neatbildiet tieši uz šo ziņojumu.</small></p>
+</body>
+</html>

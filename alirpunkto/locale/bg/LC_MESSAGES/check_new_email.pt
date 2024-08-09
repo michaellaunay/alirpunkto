@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Моля, потвърдете вашата заявка за актуализиране на имейл адреса на <span tal:replace="domain_name">Име на домейн</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Моля, потвърдете вашата заявка за актуализиране на имейл адреса на ИТ платформата <span tal:replace="domain_name">Име на домейн</span></h1>
+    <p tal:omit-tag="textual">Вие, или лице, което има достъп до вашия акаунт на платформата <span tal:replace="site_name">Име на сайт</span> на <span tal:replace="domain_name">Име на домейн</span>, сте поискали да променим имейл адреса, който ИТ инфраструктурата на <span tal:replace="domain_name">име на домейн</span> използва, за да взаимодейства с вас. Новият имейл адрес, който е поискан да бъде използван в бъдеще, е: <span tal:replace="new_email">Нов имейл адрес</span>.</p>
+<p tal:omit-tag="textual">Ако потвърдите, че <span tal:replace="new_email">Нов имейл адрес</span> трябва да бъде имейл адреса, който ИТ инфраструктурата на <span tal:replace="domain_name">име на домейн</span> трябва в бъдеще да използва, за да взаимодейства с вас, моля, кликнете на потвърдителния линк по-долу.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Ако сте направили грешка или ако не сте направили тази заявка, просто игнорирайте този имейл.</p>
+
+    <p tal:omit-tag="textual">Благодарим ви за интереса към нашата дейност.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">С уважение,</p>
+        <p tal:omit-tag="textual">Екипът на <span tal:replace="domain_name">Сайт</span></p>
+    </footer>
+
+</body>
+</html>

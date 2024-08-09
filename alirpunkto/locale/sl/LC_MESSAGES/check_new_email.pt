@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Potrdite svoj zahtevek za posodobitev vašega e-poštnega naslova na <span tal:replace="domain_name">Ime domene</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Potrdite svoj zahtevek za posodobitev vašega e-poštnega naslova na IT platformi <span tal:replace="domain_name">Ime domene</span></h1>
+    <p tal:omit-tag="textual">Vi ali oseba, ki ima dostop do vašega računa na platformi <span tal:replace="site_name">Ime strani</span> za <span tal:replace="domain_name">Ime domene</span>, ste nas zaprosili, da spremenimo e-poštni naslov, ki ga IT infrastruktura <span tal:replace="domain_name">ime domene</span> uporablja za komunikacijo z vami. Novi e-poštni naslov, ki se je zahtevalo, da se uporablja v prihodnje, je: <span tal:replace="new_email">Nov e-poštni naslov</span>.</p>
+<p tal:omit-tag="textual">Če potrjujete, da naj bo <span tal:replace="new_email">Nov e-poštni naslov</span> e-poštni naslov, ki ga IT infrastruktura <span tal:replace="domain_name">ime domene</span> v prihodnje uporablja za komunikacijo z vami, prosimo, kliknite na potrditveno povezavo spodaj.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Če ste storili napako ali če niste vložili te zahteve, preprosto ignorirajte to e-pošto.</p>
+
+    <p tal:omit-tag="textual">Hvala za vaše zanimanje za naše dejavnosti.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Lep pozdrav,</p>
+        <p tal:omit-tag="textual">Ekipa na <span tal:replace="domain_name">Stran</span></p>
+    </footer>
+
+</body>
+</html>

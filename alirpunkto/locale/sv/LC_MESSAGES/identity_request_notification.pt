@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Din registrering till <span tal:omit-tag="textual" tal:replace="domain_name">Domännamn</span>. Nästa steg</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Hej <span tal:replace="full_name">Sökandens namn</span>,</h1>
+    <p tal:omit-tag="textual">Tack för att du skickade in din ansökan till <span tal:replace="domain_name">Domännamn</span>! </p>
+
+    <p tal:omit-tag="textual">Beroende på det alternativ du valde under registreringen, här är de nästa stegen:</p>
+
+    <h2 tal:omit-tag="textual">Om du valde alternativet "Ordinarie medlemmar":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Grattis, du är nu en "Ordinarie medlem"!</li>
+        <li tal:omit-tag="textual">Ditt medlemsnummer har fastställts.</li>
+        <li tal:omit-tag="textual">Ett gratulationsmejl har skickats till dig.</li>
+        <li tal:omit-tag="textual">Din ansökningsstatus är nu "GodkändOrdinarieMedlem".</li>
+        <li tal:omit-tag="textual">Ingen ytterligare åtgärd krävs från din sida. Logga in på vårt <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">arbetsutrymme</a> och börja interagera med dina medlemmar i gemenskapen!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Om du valde alternativet "Samarbetspartner":</h2>
+    <p tal:omit-tag="textual">Du kommer att ha rätt att delta fullt ut i våra beslutsprocesser och i våra omröstningar. I dessa processer och omröstningar vill vi bevara den demokratiska principen 'en person = en röst'. Det skulle vara orättvist om en viss person kunde rösta flera gånger genom att använda flera konton på vår IT-plattform. Vi behöver därför koppla ditt konto till dig personligen och säkerställa att du identifieras på vår IT-plattform på ett sätt som inte kan förväxlas med en annan persons identitet, d.v.s. med en unik uppsättning identifierare.</p>
+    <p tal:omit-tag="textual">Dessutom vill vi säkerställa att endast medborgare i Europeiska unionen är samarbetspartners. Anledningen till detta är att vi kommer att hävda rätten att delta i offentliga val i Europeiska unionen som en enskild organisation på EU:s nivå, och behöver visa att vi endast representerar EU-medborgare (och inte "utländska intressen").</p>
+    <p tal:omit-tag="textual">För att uppnå dessa mål kommer vi att be dig att tillhandahålla följande information, som de framgår av dina officiella identitetsdokument:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Alla dina förnamn (i deras officiella transkription i latinska tecken för grekiska och bulgariska),</li>
+        <li tal:omit-tag="textual">Alla dina efternamn vid födseln (i deras officiella transkription i latinska tecken för grekiska och bulgariska),</li>
+        <li tal:omit-tag="textual">Ditt födelsedatum,</li>
+        <li tal:omit-tag="textual">Din nationalitet (bland nationaliteterna från EU:s medlemsländer endast).</li>
+    </ul>
+    <p tal:omit-tag="textual">Du kommer att tillhandahålla denna information på vår registreringsplattform, och en grupp av 3 till 7 slumpmässigt utvalda samarbetspartners, kallade verifierare, kommer att kontrollera att den information du tillhandahållit på vår registreringsplattform överensstämmer med den på dina officiella ID-dokument. Du kommer därmed att överföra delvisa bilder av dina officiella ID-dokument direkt till dessa verifierare, utan (för säkerhets skull) att använda vår IT-plattform.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Det finns två metoder för dig att överföra dessa delvisa bilder av dina officiella ID-dokument till verifierarna:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via videokonferens</strong>: En knapp kommer att vägleda dig i att förbereda ett förifyllt mejl, där du kan föreslå mötesdatum och tider för en eller flera videokonferenser med de verifierare som är tilldelade dig. Under denna (dessa) videokonferens(er) kommer du att visa ditt officiella ID-dokument för verifierarna via din kamera, och se till att t.ex. numret på ID-dokumentet och födelseorten förblir dolda, för att undvika (av säkerhetsskäl) att en fullständig kopia av detta dokument visas.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via e-postbilaga</strong>: En knapp kommer att hjälpa dig att skriva ett förifyllt mejl, dit du kan bifoga en delvis kopia av ditt officiella ID-dokument (t.ex. maskera numret och födelseorten).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Varje verifierare kommer sedan att kontrollera överensstämmelsen av den information du tillhandahållit på registreringsformuläret på vår IT-plattform med den på ditt officiella identitetsdokument. Varje verifierare kommer sedan oberoende att rösta på vår IT-plattform om denna överensstämmelse. Om en majoritet av verifierarna accepterar att den information du tillhandahållit på vår registreringsplattform överensstämmer med den på dina officiella ID-dokument, kommer vi att få nöjet att välkomna dig som samarbetspartner!</p>
+
+    <p tal:omit-tag="textual">Skulle mejlutskick misslyckas av någon anledning, kommer ett felmeddelande att loggas och ett försök att skicka ett mejl till administratören kommer att göras.</p>
+
+    <p tal:omit-tag="textual">Vi påminner dig om att den tid som är avsatt för dig att genomföra denna verifieringsprocess är begränsad, så vänligen agera snabbt.</p>
+
+    <p tal:omit-tag="textual">Om du har några frågor eller behöver ytterligare förtydliganden, tveka inte att kontakta oss.</p>
+
+    <p tal:omit-tag="textual">Med vänliga hälsningar,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Domännamn</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Notera: Denna avisering har genererats automatiskt. Vänligen svara inte direkt på detta meddelande.</small></p>
+</body>
+</html>

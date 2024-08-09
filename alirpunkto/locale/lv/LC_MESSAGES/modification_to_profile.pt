@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Jūsu profila modifikācijas pieprasījums</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Jūsu profila modifikācijas pieprasījums</h1>
+    
+    <p tal:omit-tag="textual">Sveiki <span tal:replace="member.firstname" tal:condition="exists:member">Lietotāja vārds</span>,</p>
+    
+    <p tal:omit-tag="textual">Mēs esam saņēmuši, uz <span tal:replace="site_name">Vietnes nosaukums</span> platformas no <span tal:replace="domain_name">Domēna nosaukums</span>, pieprasījumu modificēt jūsu profilu. Jūsu drošības labad mēs pieprasām, lai jūs sekojat drošam saitei, lai turpinātu modifikācijas. Lūdzu, noklikšķiniet uz šīs URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Uzlabot profila saiti</a>, lai atjauninātu savu profila informāciju.</p>
+    
+    <p tal:omit-tag="textual">Ja jūs neesat pieprasījis šo profila modifikāciju, lūdzu, ignorējiet šo e-pastu vai sazinieties ar atbalstu, ja jums ir kādi jautājumi.</p>
+    
+    <p tal:omit-tag="textual">Ar cieņu,</p>
+    <p tal:omit-tag="textual">Domēna nosaukums <span tal:replace="domain_name">Domēna nosaukums</span> komanda.</p>
+</body>
+</html>

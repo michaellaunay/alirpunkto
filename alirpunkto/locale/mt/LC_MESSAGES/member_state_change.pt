@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Bidla fil-Status tad-Dati Tiegħek</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Modifikazzjoni tad-Dati Perswali Tiegħek fuq l-infrastruttura IT ta' <span tal:replace="domain_name">Isem tal-Domenju</span></h1>
+        <p tal:omit-tag="textual">Hello<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Isem il-Membru</span>,
+        </p>
+        <p tal:omit-tag="textual">Hawn taħt huma d-dettalji tal-modifikazzjoni tiegħu:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID tal-Membru: <span tal:replace="python:member.oid">ID tal-Membru</span></li>
+            <li tal:omit-tag="textual">Data tat-Trasizzjoni: <span tal:replace="python:member.modifications[-1].datetime">L-aħħar trasizzjoni</span></li>
+            <li tal:omit-tag="textual">Status Ġdid: <span tal:replace="python:member.member_state">Status ġdid tal-membru</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Grazzi tal-parteċipazzjoni tiegħek.</p>
+        <p tal:omit-tag="textual">Is-sliem it-tajjeb,</p>
+        <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem tal-Domenju</span></p>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Teie avalduse staatuse muutumine</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Teie avalduse areng <span tal:replace="domain_name">Domeeninimi</span> juurde</h1>
+        <p tal:omit-tag="textual">Tere<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Kandidaadi nimi</span>,
+        </p>
+        <p tal:omit-tag="textual">Teie avaldus platvormil
+            <span tal:replace="site_url">URL</span> kui 
+            <span tal:replace="python:candidature.type">Roll</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">on aktsepteeritud</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">on tagasilükatud</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">on töötlemisel ja on oma staatust muutnud</span> . 
+        </p>
+        <p tal:omit-tag="textual">Siin on selle arengu üksikasjad:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Kandidaadi ID: <span tal:replace="python:candidature.oid">Avalduse ID</span></li>
+            <li tal:omit-tag="textual">Üleminek kuupäev: <span tal:replace="python:candidature.modifications[-1].datetime">Viimane üleminek</span></li>
+            <li tal:omit-tag="textual">Uus staatus: <span tal:replace="python:candidature.candidature_state">Uus avalduse staatus</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Kui vajate, saate oma registreerimisprotsessi nüüd katkestada. Saate seda hiljem jätkata, klõpsates alloleval lingil.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Aitäh osalemise eest.</p>
+        <p tal:omit-tag="textual">Parimate soovidega,</p>
+        <p tal:omit-tag="textual">Meeskond <span tal:replace="domain_name">Domeeninimi</span></p>
+    </body>
+</html>

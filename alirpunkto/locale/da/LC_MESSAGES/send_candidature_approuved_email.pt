@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Din ansøgning til <span tal:replace="domain_name">Domænenavn</span> er blevet godkendt</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Tillykke med godkendelsen af din ansøgning!</h1>
+    
+    <p tal:omit-tag="textual">Hej <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Ansøgerens navn</span>,</p>
+    
+    <p tal:omit-tag="textual">Vi er glade for at informere dig om, at din ansøgning til <span tal:replace="domain_name">Domænenavnet</span> til rollen som <span tal:replace="python:candidature.type">Rolle</span> er blevet godkendt.</p>
+
+    <p tal:omit-tag="textual">Tak fordi du tilsluttede dig os! Vi er glade for at byde dig velkommen i vores fællesskab.</p>
+    
+    <p tal:omit-tag="textual">Nu hvor din ansøgning er blevet godkendt, kan du logge ind på vores platform ved hjælp af det pseudonym og den adgangskode, du angav under ansøgningsprocessen. Efter indlogning vil du finde:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">links til alle de softwareapplikationer, som du har direkte adgang til. Du skal ikke logge ind igen!</li>
+        <li tal:omit-tag="textual">et link til formularen, hvor du kan se og redigere din egen profil. På denne formular opfordrer vi dig til at præsentere dig selv for de andre medlemmer af vores fællesskab med en kort "profiltekst" og vise et lille billede, der repræsenterer dig (dit "avatar");</li>
+        <li tal:omit-tag="textual">et link til at logge ud.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Her er de vigtigste elementer af din profil, som vi har registreret:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">dit pseudonym: ##PSEUDONYM. Vær venlig at opbevare en NØJE OG SIKKER REGISTER over dette pseudonym: det er den eneste identifikator, du kan logge ind med på vores IT-platform;</li>
+        <li tal:omit-tag="textual">din adgangskode: (den adgangskode, som du angav ved din registrering);</li>
+        <li tal:omit-tag="textual">din e-mailadresse: (den e-mailadresse, som vi sender denne e-mail til);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">dine identitetsdata: (alle dine for- og efternavne, din fødselsdato, som angivet og verificeret under din registreringsproces);</li>
+        <li tal:omit-tag="textual">dit foretrukne sprog til, at vi kan interagere med dig: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">det andet sprog, som du accepterer, at vi bruger til at interagere med dig: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">det sprog, som du accepterer, at vi bruger som tredjevalg til at interagere med dig: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Til din optegnelse er her detaljerne vedrørende afslutningen af din registreringsproces:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Ansøgning ID: <span tal:replace="python:candidature.oid">Ansøgning ID</span></li>
+        <li tal:omit-tag="textual">Godkendelsesdato: <span tal:replace="python:candidature.modifications[-1]">Sidste overgang</span></li>
+        <li tal:omit-tag="textual">Status: Godkendt</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Vi ser frem til glæden ved at arbejde sammen med dig!</p>
+
+    
+    <p tal:omit-tag="textual">Med venlig hilsen,</p>
+    <p tal:omit-tag="textual">Teamet fra <span tal:replace="domain_name">Domænenavn</span>.</p>
+</body>
+</html>

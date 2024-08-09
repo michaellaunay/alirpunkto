@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Bidla fl-Istatus tal-Applikazzjoni Tiegħek</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Evoluzzjoni tal-Applikazzjoni Tiegħek għal <span tal:replace="domain_name">Isem tal-Dominu</span></h1>
+        <p tal:omit-tag="textual">Hello<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Isem tal-Applikant</span>,
+        </p>
+        <p tal:omit-tag="textual">L-applikazzjoni tiegħek fuq il-pjattaforma
+            <span tal:replace="site_url">URL</span> bħala 
+            <span tal:replace="python:candidature.type">Rwol</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">għandha tkun aċċettata</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">għandha tkun miġġura</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">hija taħt il-proċess u biddlet l-istatus tagħha</span> . 
+        </p>
+        <p tal:omit-tag="textual">Hawn huma d-dettalji tal-evoluzzjoni tagħha:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID tal-Applikazzjoni: <span tal:replace="python:candidature.oid">ID tal-Applikazzjoni</span></li>
+            <li tal:omit-tag="textual">Data tat-Tranzizzjoni: <span tal:replace="python:candidature.modifications[-1].datetime">L-aħħar tranzizzjoni</span></li>
+            <li tal:omit-tag="textual">Status Ġdid: <span tal:replace="python:candidature.candidature_state">Status ġdid tal-applikazzjoni</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Jekk għandek bżonn, tista' interrupt il-proċess ta' reġistrazzjoni tiegħek issa. Tista' terġa' tkompliha aktar tard billi tikklika l-link li ġej.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Grazzi talli parteċipat.</p>
+        <p tal:omit-tag="textual">B'rispett,</p>
+        <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem tal-Dominu</span></p>
+    </body>
+</html>

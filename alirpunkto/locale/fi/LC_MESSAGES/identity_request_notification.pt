@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Rekisteröitymisesi <span tal:omit-tag="textual" tal:replace="domain_name">Verkkotunnus</span> . Seuraavat vaiheet</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Hei <span tal:replace="full_name">Hakijan Nimi</span>,</h1>
+    <p tal:omit-tag="textual">Kiitos, että lähetit hakemuksesi <span tal:replace="domain_name">Verkkotunnus</span>! </p>
+
+    <p tal:omit-tag="textual">Valintasi mukaan rekisteröinnin aikana, tässä ovat seuraavat vaiheet:</p>
+
+    <h2 tal:omit-tag="textual">Jos valitsit "Tavallinen Yhteisön Jäsen" vaihtoehdon:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Onnittelut, nyt olet "Tavallinen Yhteisön Jäsen"!</li>
+        <li tal:omit-tag="textual">Jäsenyydenumerosi on määrätty.</li>
+        <li tal:omit-tag="textual">Sinulle on lähetetty onnittelu-sähköposti.</li>
+        <li tal:omit-tag="textual">Hakemustilasi on nyt "Hyväksytty Tavallinen Yhteisön Jäsen".</li>
+        <li tal:omit-tag="textual">Sinun ei tarvitse tehdä mitään muuta. Liity meidän <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">työtilaan</a> ja ala vuorovaikuttaa muiden Yhteisön Jäsenten kanssa!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Jos valitsit "Yhteistyökumppani" vaihtoehdon:</h2>
+    <p tal:omit-tag="textual">Sinulla on oikeus osallistua täysipainoisesti päätöksentekoprosesseihimme ja äänestyksiin. Näissä prosesseissa ja äänestyksissä haluamme säilyttää demokraattisen periaatteen 'yksi henkilö = yksi ääni'. Olisi epäoikeudenmukaista, jos tietty henkilö voisi äänestää useita kertoja useilla tileillä IT-alustallamme. Meidän on siis suhteutettava tiliisi henkilökohtaisesti ja varmistettava, että sinut tunnistetaan IT-alustallamme tavalla, jota ei voida sekoittaa toisen henkilön henkilöllisyyteen, eli ainutlaatuisen tunnistetiedon avulla.</p>
+    <p tal:omit-tag="textual">Lisäksi haluamme varmistaa, että vain Euroopan unionin kansalaiset ovat Yhteistyökumppaneita. Syynä tähän on, että vaadimme oikeutta osallistua julkisiin vaaleihin Euroopan unionissa yhtenä organisaationa EU:n laajuudella ja meidän on osoitettava, että edustamme vain EU:n kansalaisia (eikä "ulkopuolisia etuja").</p>
+    <p tal:omit-tag="textual">Näiden tavoitteiden saavuttamiseksi pyydämme sinua antamaan seuraavat tiedot, kuten ne näkyvät virallisissa henkilöllisyysasiakirjoissasi:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Kaikki etunimesi (virallisessa transkriptiossa latinalaisilla merkeillä kreikaksi ja bulgariaksi),</li>
+        <li tal:omit-tag="textual">Kaikki sukunimesi syntymässä (virallisessa transkriptiossa latinalaisilla merkeillä kreikaksi ja bulgariaksi),</li>
+        <li tal:omit-tag="textual">Syntymäpäiväsi,</li>
+        <li tal:omit-tag="textual">Kansallisuutesi (vain EU:n jäsenvaltioiden kansallisuudet).</li>
+    </ul>
+    <p tal:omit-tag="textual">Annamme nämä tiedot rekisteröintialustallamme, ja joukko 3-7 satunnaisesti valittua Yhteistyökumppania, joita kutsutaan Vahvistajiksi, tarkistaa, että antamasi tiedot rekisteröintialustallamme vastaavat virallisissa henkilöllisyysasiakirjoissasi olevia tietoja. Siispä lähetät osittaisia kuvia virallisista henkilöllisyysasiakirjoistasi suoraan näille Vahvistajille, ilman (turvallisuuden vuoksi) IT-alustamme käyttöä.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Sinulla on kaksi tapaa lähettää nämä osittaiset kuvat virallisista henkilöllisyysasiakirjoistasi Vahvistajille:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Videokonferenssin kautta</strong>: Nappi ohjaa sinua laatimaan ennakkoon täytettyä sähköpostia, jossa voit ehdottaa tapaamispäiviä ja -aikoja yksittäiselle tai erilliselle videokonferenssille Vahvistajien kanssa, joita on määrätty sinulle. Tänä (näinä) videokonferensseina esittelet virallista henkilöllisyysasiakirjaasi Vahvistajille kamerasi kautta, varmistamalla, että esim. henkilöllisyysasiakirjan numero ja syntymäpaikka pysyvät piilossa, jotta vältetään (turvallisuussyistä) asiakirjan täydellinen kopio.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Sähköposti-liitteen kautta</strong>: Nappi auttaa sinua kirjoittamaan ennakkoon täytettyä sähköpostia, johon voit liittää osittaisen kopion virallisesta henkilöllisyysasiakirjastasi (esim. peittämällä numeron ja syntymäpaikan).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Jokainen Vahvistaja tarkistaa sitten antamasi tiedot rekisteröintilomakkeesta IT-alustallamme ja virallisesta henkilöllisyysasiakirjastasi. Jokainen Vahvistaja äänestää sitten itsenäisesti IT-alustallamme tämän vaatimustenmukaisuuden vahvistamisesta. Jos useimmat Vahvistajat hyväksyvät, että antamasi tiedot rekisteröintialustallamme vastaavat virallisissa henkilöllisyysasiakirjoissasi olevia tietoja, meillä on ilo toivottaa sinut tervetulleeksi Yhteistyökumppaniksi!</p>
+
+    <p tal:omit-tag="textual">Mikäli sähköpostin lähettäminen epäonnistuu mistä tahansa syystä, virheilmoitus kirjataan ja yritetään lähettää sähköposti ylläpitäjälle.</p>
+
+    <p tal:omit-tag="textual">Muistutamme, että sinulle annettu aika tämän varmennusprosessin suorittamiseen on rajallinen, joten toimi nopeasti.</p>
+
+    <p tal:omit-tag="textual">Jos sinulla on kysymyksiä tai tarvitset lisäselvityksiä, älä epäröi ottaa meihin yhteyttä.</p>
+
+    <p tal:omit-tag="textual">Parhain terveisin,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Tiimi <span tal:replace="domain_name">Verkkotunnus</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Huomaa: Tämä ilmoitus on luotu automaattisesti. Älä vastaa suoraan tähän viestiin.</small></p>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Athrú ar Stádas do Chlárú</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Eabhlóid do Chlárú chuig <span tal:replace="domain_name">Ainm Domhain</span></h1>
+        <p tal:omit-tag="textual">Dia dhuit<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Ainm an Iarrthóra</span>,
+        </p>
+        <p tal:omit-tag="textual">Tá do chlárú ar an ardán
+            <span tal:replace="site_url">URL</span> mar
+            <span tal:replace="python:candidature.type">Ról</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">glactha</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">diúltaithe</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">ar próiseáil agus tá a stádas athraithe</span> . 
+        </p>
+        <p tal:omit-tag="textual">Seo a leanas na sonraí a bhaineann lena heabhlóid:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID Chlárú: <span tal:replace="python:candidature.oid">ID an Iarratais</span></li>
+            <li tal:omit-tag="textual">Dáta aistrithe: <span tal:replace="python:candidature.modifications[-1].datetime">An aistriú deireanach</span></li>
+            <li tal:omit-tag="textual">Stádas Nua: <span tal:replace="python:candidature.candidature_state">Stádas nua an iarratais</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Más gá, is féidir leat do phróiseas cláraithe a chur ar athló anois. Beidh tú in ann é a atosaigh níos moille tríd an nasc thíos a chliceáil.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Go raibh maith agat as do chuid rannpháirtíochta.</p>
+        <p tal:omit-tag="textual">Le gach dea-ghuí,</p>
+        <p tal:omit-tag="textual">Foireann <span tal:replace="domain_name">Ainm Domhain</span></p>
+    </body>
+</html>

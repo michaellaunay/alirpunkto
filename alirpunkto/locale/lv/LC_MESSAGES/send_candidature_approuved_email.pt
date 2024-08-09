@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Jūsu pieteikums pie <span tal:replace="domain_name">Domēna nosaukuma</span> ir apstiprināts</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Apsveicam ar jūsu pieteikuma apstiprināšanu!</h1>
+    
+    <p tal:omit-tag="textual">Sveiki <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Pieteicēja vārds</span>,</p>
+    
+    <p tal:omit-tag="textual">Mēs priecājamies jūs informēt, ka jūsu pieteikums pie <span tal:replace="domain_name">Domēna nosaukuma</span> par lomu <span tal:replace="python:candidature.type">Loma</span> ir apstiprināts.</p>
+
+    <p tal:omit-tag="textual">Paldies, ka pievienojāties mūsu! Mēs ar prieku jūs sveicam mūsu kopienā.</p>
+    
+    <p tal:omit-tag="textual">Tagad, kad jūsu pieteikums ir apstiprināts, jūs varat pieteikties mūsu platformā, izmantojot pseidonīmu un paroli, ko sniedzāt pieteikuma procesa laikā. Pēc pieteikšanās jūs atradīsiet:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">saites uz visām programmatūras lietojumprogrammām, kurām jūs varat piekļūt tieši. Jums nav jāiepiesakās vēlreiz!</li>
+        <li tal:omit-tag="textual">saite uz formu, kurā jūs varat skatīt un rediģēt savu profilu. Šajā formā mēs aicinām jūs iepazīstināt citus mūsu kopienas dalībniekus ar sevi īsā "profilā tekstā" un parādīt nelielu attēlu, kas jūs pārstāv (jūsu "avatare");</li>
+        <li tal:omit-tag="textual">saite, lai izietu.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Šeit ir galvenie jūsu profila elementi, kurus mēs esam reģistrējuši:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">jūsu pseidonīms: ##PSEUDONYM. Lūdzu, saglabājiet ŠO PSEUDONĪMU DROŠI UN AR PAREIZĀM PLĀNOSIEM: tas ir vienīgais identifikators, ar kuru jūs varat pieteikties mūsu IT platformā;</li>
+        <li tal:omit-tag="textual">jūsu parole: (parole, ko jūs sniedzāt reģistrācijas laikā);</li>
+        <li tal:omit-tag="textual">jūsu e-pasta adrese: (e-pasta adrese, uz kuru mēs nosūtām šo e-pastu);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">jūsu identitātes dati: (visi jūsu vārdi un uzvārdi, jūsu dzimšanas datums, kā norādīts un pārbaudīts reģistrācijas procesā);</li>
+        <li tal:omit-tag="textual">jūsu vēlamā valoda saziņai ar jums: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">otrā valoda, ko jūs pieņemat, lai mēs ar jums sazinātos: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">valoda, ko jūs pieņemat kā trešo izvēli saziņai ar jums: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Jūsu ierakstiem, šeit ir jūsu reģistrācijas procesa pabeigšanas detaļas:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Pieteikuma ID: <span tal:replace="python:candidature.oid">Pieteikuma ID</span></li>
+        <li tal:omit-tag="textual">Apstiprināšanas datums: <span tal:replace="python:candidature.modifications[-1]">Pēdējā pāreja</span></li>
+        <li tal:omit-tag="textual">Statuss: Apstiprināts</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Mēs ar prieku gaidām iespēju strādāt kopā ar jums!</p>
+
+    
+    <p tal:omit-tag="textual">Ar labākajiem novēlējumiem,</p>
+    <p tal:omit-tag="textual">Komanda no <span tal:replace="domain_name">Domēna nosaukuma</span>.</p>
+</body>
+</html>

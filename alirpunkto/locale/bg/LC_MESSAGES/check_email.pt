@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Регистрация за <span tal:replace="domain_name">Име на домейн</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Благодарим Ви, че започнахте регистрацията си в платформата <span
+                tal:replace="domain_name">Име на домейн</span></h1>
+        <p tal:omit-tag="textual">За да потвърдим вашия имейл адрес и да Ви уверим, че сте човек (а не
+            робот), разработихме серия от 4 прости математически операции. Моля, извършете
+            четирите математически операции, означени от A до D по-долу и въведете резултатите им в
+            съответните полета на страницата за регистрация, свързана по-долу.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Операция A е <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Първото предизвикателство</span></p>
+            <p tal:omit-tag="textual">Операция B е <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Второто предизвикателство</span></p>
+            <p tal:omit-tag="textual">Операция C е <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Третото предизвикателство</span></p>
+            <p tal:omit-tag="textual">Операция D е <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Четвъртото предизвикателство</span></p>
+        </div>
+        <p tal:omit-tag="textual">Връзка към страницата за регистрация, на която да предоставите резултатите от операциите A до D по-горе:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Благодарим Ви за интереса към нашите дейности. Очакваме с нетърпение
+            да Ви приветстваме скоро!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">С уважение,</p>
+            <p tal:omit-tag="textual">Екипът на <span tal:replace="domain_name">Име на домейн</span></p>
+        </footer>
+
+    </body>
+</html>

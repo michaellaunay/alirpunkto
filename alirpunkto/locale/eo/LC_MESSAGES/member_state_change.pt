@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Ŝanĝo en la Statuso de Via Datumoj</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Modifo de Viaj Personaj Datumoj sur la IT-infrastrukturo de <span tal:replace="domain_name">Doman Nomo</span></h1>
+        <p tal:omit-tag="textual">Saluton<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nomo de la Membro</span>,
+        </p>
+        <p tal:omit-tag="textual">Jen la detaloj pri ĝia modifo:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID de la Membro: <span tal:replace="python:member.oid">ID de la Membro</span></li>
+            <li tal:omit-tag="textual">Transira Dato: <span tal:replace="python:member.modifications[-1].datetime">Lasta transiro</span></li>
+            <li tal:omit-tag="textual">Nova Statuso: <span tal:replace="python:member.member_state">Nova statuto de la membro</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Dankon pro via partopreno.</p>
+        <p tal:omit-tag="textual">Kun plej bonaj salutoj,</p>
+        <p tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Doman Nomo</span></p>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Prosím potvrďte svou žádost o aktualizaci e-mailové adresy na <span tal:replace="domain_name">Název domény</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Prosím potvrďte svou žádost o aktualizaci e-mailové adresy na platformě IT <span tal:replace="domain_name">Název domény</span></h1>
+    <p tal:omit-tag="textual">Vy, nebo osoba, která má přístup k vašemu účtu na platformě <span tal:replace="site_name">Název webu</span> domény <span tal:replace="domain_name">Název domény</span>, jste nás požádali o změnu e-mailové adresy, kterou využívá IT infrastruktura <span tal:replace="domain_name">název domény</span> pro komunikaci s vámi. Nová e-mailová adresa, kterou bylo požadováno používat v budoucnu, je: <span tal:replace="new_email">Nová e-mailová adresa</span>.</p>
+<p tal:omit-tag="textual">Pokud potvrzujete, že <span tal:replace="new_email">Nová e-mailová adresa</span> by měla být e-mailová adresa, kterou by IT infrastruktura <span tal:replace="domain_name">název domény</span> měla v budoucnu používat pro komunikaci s vámi, klikněte prosím na potvrzovací odkaz níže.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Pokud jste udělali chybu, nebo pokud jste tuto žádost nepodali, jednoduše ignorujte tento e-mail.</p>
+
+    <p tal:omit-tag="textual">Děkujeme za váš zájem o naše aktivity.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">S pozdravem,</p>
+        <p tal:omit-tag="textual">Tým na <span tal:replace="domain_name">webu</span></p>
+    </footer>
+
+</body>
+</html>

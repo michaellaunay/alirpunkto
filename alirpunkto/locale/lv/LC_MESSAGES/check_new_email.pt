@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Lūdzu, apstipriniet savu pieprasījumu atjaunot savu e-pasta adresi uz <span tal:replace="domain_name">Domēna nosaukums</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Lūdzu, apstipriniet savu pieprasījumu atjaunot savu e-pasta adresi IT platformā <span tal:replace="domain_name">Domēna nosaukums</span></h1>
+    <p tal:omit-tag="textual">Jūs vai persona, kurai ir pieeja jūsu kontam <span tal:replace="site_name">Vietnes nosaukums</span> platformā <span tal:replace="domain_name">Domēna nosaukums</span>, esat pieprasījusi izmainīt e-pasta adresi, kuru <span tal:replace="domain_name">domēna nosaukums</span> IT infrastruktūra izmanto saziņai ar jums. Jaunā e-pasta adrese, kuru ir pieprasīts izmantot nākotnē, ir: <span tal:replace="new_email">Jaunā e-pasta adrese</span>.</p>
+<p tal:omit-tag="textual">Ja jūs apstiprināt, ka <span tal:replace="new_email">Jaunā e-pasta adrese</span> būtu e-pasta adrese, kuru <span tal:replace="domain_name">domēna nosaukums</span> IT infrastruktūrai nākotnē vajadzētu izmantot saziņai ar jums, lūdzu, noklikšķiniet uz apstiprinājuma saites zemāk.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Ja jūs izdarījāt kļūdu vai ja jūs neesat veikuši šo pieprasījumu, vienkārši ignorējiet šo e-pastu.</p>
+
+    <p tal:omit-tag="textual">Paldies par jūsu interesi par mūsu darbībām.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Ar cieņu,</p>
+        <p tal:omit-tag="textual">Komanda pie <span tal:replace="domain_name">Vietnes</span></p>
+    </footer>
+
+</body>
+</html>

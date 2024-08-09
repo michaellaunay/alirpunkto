@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registrácia na <span tal:replace="domain_name">názov domény</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Ďakujeme, že ste začali svoju registráciu na platforme <span
+                tal:replace="domain_name">názov domény</span></h1>
+        <p tal:omit-tag="textual">Na overenie vašej e-mailovej adresy a zabezpečenie, že ste človek (nie
+            robot), sme vymysleli sériu 4 jednoduchých matematických operácií. Prosím, vykonajte
+            štyri matematické operácie označené od A po D nižšie a zadajte ich výsledky do
+            príslušných polí na registračnej stránke, na ktorú sa odkazuje nižšie.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operácia A je <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Prvá výzva</span></p>
+            <p tal:omit-tag="textual">Operácia B je <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Druhá výzva</span></p>
+            <p tal:omit-tag="textual">Operácia C je <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Tretia výzva</span></p>
+            <p tal:omit-tag="textual">Operácia D je <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Štvrtá výzva</span></p>
+        </div>
+        <p tal:omit-tag="textual">Odkaz na registračnú stránku, na ktorej máte poskytnúť výsledky operácií A až D vyššie:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Ďakujeme za váš záujem o naše aktivity. Tešíme sa na
+            vašu návštevu čoskoro!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">S úctou,</p>
+            <p tal:omit-tag="textual">Tím <span tal:replace="domain_name">názov domény</span></p>
+        </footer>
+
+    </body>
+</html>

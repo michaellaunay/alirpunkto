@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">A profilod módosítási kérelme</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">A profilod módosítási kérelme</h1>
+    
+    <p tal:omit-tag="textual">Szia <span tal:replace="member.firstname" tal:condition="exists:member">Felhasználó neve</span>,</p>
+    
+    <p tal:omit-tag="textual">Megkaptuk a <span tal:replace="site_name">Webhely neve</span> platformon a <span tal:replace="domain_name">Domain név</span> kérését a profilod módosítására. A biztonságod érdekében arra kérünk, hogy kövesd a biztonságos linket a módosítások folytatásához. Kérlek, kattints az alábbi URL-re <a href="${page_with_oid}" tal:attributes="href page_with_oid">Profil módosítási link</a>, hogy frissíthesd a profilod adatait.</p>
+    
+    <p tal:omit-tag="textual">Ha nem kérted ezt a profilmódosítást, kérlek, hagyd figyelmen kívül ezt az e-mailt, vagy lépj kapcsolatba a támogatással, ha bármilyen kérdésed van.</p>
+    
+    <p tal:omit-tag="textual">Üdvözlettel,</p>
+    <p tal:omit-tag="textual">A <span tal:replace="domain_name">Domain név</span> csapata.</p>
+</body>
+</html>

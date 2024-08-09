@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Via Profilo-Modifaĝa Peto</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Via Profilo-Modifaĝa Peto</h1>
+    
+    <p tal:omit-tag="textual">Saluton <span tal:replace="member.firstname" tal:condition="exists:member">Nomo de Uzanto</span>,</p>
+    
+    <p tal:omit-tag="textual">Ni ricevis, sur la <span tal:replace="site_name">Nome de Loko</span> platformo de <span tal:replace="domain_name">Nomo de Domajno</span>, peton por modifi vian profilon. Por via sekureco, ni postulas, ke vi sekvu sekuran ligon por daŭrigi kun la modifoj. Bonvolu klaki sur la sekva URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modifi Profilan Ligon</a> por ĝisdatigi viajn profilajn informojn.</p>
+    
+    <p tal:omit-tag="textual">Se vi ne petis ĉi tiun profilon modifon, bonvolu ignori ĉi tiun retpoŝton aŭ kontakti subtenon se vi havas iujn zorgojn.</p>
+    
+    <p tal:omit-tag="textual">Plej bondezirojn,</p>
+    <p tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Nomo de Domajno</span>.</p>
+</body>
+</html>

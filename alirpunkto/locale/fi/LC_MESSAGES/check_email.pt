@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Rekisteröinti <span tal:replace="domain_name">Verkkotunnukseen</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Kiitos, että aloitit rekisteröitymisen alustoille <span
+                tal:replace="domain_name">Verkkotunnus</span></h1>
+        <p tal:omit-tag="textual">Vahvistaaksesi sähköpostiosoitteesi ja varmistaaksesi, että olet ihminen (et robotti), olemme kehittäneet sarjan 4 yksinkertaista matemaattista operaatioita. Suorita alla olevat A:sta D:hen merkittyjen matemaattisten operaatioiden laskentatehtävät ja syötä niiden tulokset rekisteröitymissivun vastaaviin kenttiin, jotka löydät alta.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operaatio A on <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Ensimmäinen haaste</span></p>
+            <p tal:omit-tag="textual">Operaatio B on <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Toinen haaste</span></p>
+            <p tal:omit-tag="textual">Operaatio C on <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Kolmas haaste</span></p>
+            <p tal:omit-tag="textual">Operaatio D on <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Neljäs haaste</span></p>
+        </div>
+        <p tal:omit-tag="textual">Linkki rekisteröitymissivulle, johon voit antaa operaatioiden A:sta D:hen tulokset yllä:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Kiitos kiinnostuksestasi toimintaamme kohtaan. Odotamme innolla
+            tervetuloa pian!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Ystävällisin terveisin,</p>
+            <p tal:omit-tag="textual">Tiimi <span tal:replace="domain_name">Verkkotunnus</span></p>
+        </footer>
+
+    </body>
+</html>

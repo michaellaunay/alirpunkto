@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Jūsų registracija <span tal:omit-tag="textual" tal:replace="domain_name">Domeno pavadinimas</span>. Kiti žingsniai</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Sveiki <span tal:replace="full_name">Pareiškėjo vardas</span>,</h1>
+    <p tal:omit-tag="textual">Dėkojame, kad pateikėte savo paraišką <span tal:replace="domain_name">Domeno pavadinimas</span>!</p>
+
+    <p tal:omit-tag="textual">Priklausomai nuo pasirinkto registracijos varianto, štai kiti žingsniai:</p>
+
+    <h2 tal:omit-tag="textual">Jei pasirinkote „Įprasto bendruomenės nario“ variantą:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Sveikinu, dabar esate „Įprastas bendruomenės narys“!</li>
+        <li tal:omit-tag="textual">Jūsų narystės numeris buvo nustatytas.</li>
+        <li tal:omit-tag="textual">Jums buvo išsiųstas sveikinimo el. laiškas.</li>
+        <li tal:omit-tag="textual">Jūsų paraiškos būsena dabar yra „PatvirtintasĮprastoBendruomenėsNarys“.</li>
+        <li tal:omit-tag="textual">Iš Jūsų pusės nereikia jokių papildomų veiksmų. Prisijunkite prie mūsų <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">darbo erdvės</a> ir pradėkite bendrauti su kitais bendruomenės nariais!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Jei pasirinkote „Kooperatoriaus“ variantą:</h2>
+    <p tal:omit-tag="textual">Turėsite teisę visiškai dalyvauti mūsų sprendimų priėmimo procesuose ir balsavimuose. Šiuose procesuose ir balsavimuose norime išlaikyti demokratinį principą „vienas žmogus = vienas balsas“. Būtų neteisinga, jei tam tikras asmuo galėtų balsuoti kelis kartus naudodamas kelis paskyras mūsų IT platformoje. Todėl turime susieti Jūsų paskyrą su Jumis asmeniškai ir užtikrinti, kad būtumėte identifikuotas mūsų IT platformoje taip, kad tai nepasiklystų su kitos asmenybės tapatybe, t.y., su unikaliu identifikatorių rinkiniu.</p>
+    <p tal:omit-tag="textual">Be to, norime užtikrinti, kad tik Europos Sąjungos piliečiai būtų kooperatoriai. To priežastis yra ta, kad mes reikalaujame teisės dalyvauti viešuosiuose rinkimuose Europos Sąjungoje kaip viena organizacija Europos Sąjungos mastu ir turime parodyti, kad atstovaujame tik ES piliečiams (o ne „užsienio interesams“).</p>
+    <p tal:omit-tag="textual">Kad pasiektume šiuos tikslus, paprašysime Jūsų pateikti šią informaciją, kaip ji pateikiama jūsų oficialiuose tapatybės dokumentuose:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Visus Jūsų vardus (jų oficialioje transkripcijoje lotynų rašmenimis graikų ir bulgarų kalba),</li>
+        <li tal:omit-tag="textual">Visus Jūsų šeimos vardus, gautus gimimo metu (jų oficialioje transkripcijoje lotynų rašmenimis graikų ir bulgarų kalba),</li>
+        <li tal:omit-tag="textual">Jūsų gimimo datą,</li>
+        <li tal:omit-tag="textual">Jūsų pilietybę (tarp ES valstybių narių tik).</li>
+    </ul>
+    <p tal:omit-tag="textual">Jūs pateiksite šią informaciją mūsų registracijos platformoje, o grupė 3–7 atsitiktinai pasirinkti kooperatoriai, vadinami Tikrintojais, patikrins, ar informacija, kurią pateikėte mūsų registracijos platformoje, atitinka informaciją Jūsų oficialiuose ID dokumentuose. Todėl perduosite dalines savo oficialių ID dokumentų nuotraukas tiesiogiai šiems Tikrintojams, nesinaudodami (dėl saugumo) mūsų IT platforma.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Yra du metodai, kaip galite perduoti šias dalines savo oficialių ID dokumentų nuotraukas Tikrintojams:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Per vaizdo konferenciją</strong>: Mygtukas padės Jums parengti iš anksto užpildytą el. laišką, kuriame galite siūlyti susitikimo datos ir laikus dėl vienos ar atskirų vaizdo konferencijų su Jums priskirtais Tikrintojais. Šios vaizdo konferencijos metu (šių vaizdo konferencijų metu) parodysite savo oficialų ID dokumentą Tikrintojams per savo kamerą, užtikrindami, kad, pavyzdžiui, ID dokumento numeris ir gimimo vieta liktų paslėpti, kad būtų išvengta (dėl saugumo priežasčių) šio dokumento pilnos kopijos rodymo.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Per el. laiško priedą</strong>: Mygtukas padės Jums parašyti iš anksto užpildytą el. laišką, kuriam galite pridėti dalinę oficialaus ID dokumento kopiją (pavyzdžiui, užmaskuodami numerį ir gimimo vietą).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Kiekvienas Tikrintojas tada patikrins Jūsų pateiktos informacijos, esančios mūsų IT platformos registracijos formoje, atitiktį Jūsų oficialiam tapatybės dokumentui. Kiekvienas Tikrintojas tada nepriklausomai balsuos mūsų IT platformoje dėl šios atitikties patvirtinimo. Jei dauguma Tikrintojų sutiks, kad informacija, kurią pateikėte mūsų registracijos platformoje, atitinka tą, kuri yra Jūsų oficialiuose ID dokumentuose, mes su malonumu pasveikinsime Jus kaip Kooperatorių!</p>
+
+    <p tal:omit-tag="textual">Jei el. laiško siuntimas nepavyks dėl bet kokios priežasties, bus užregistruota klaidos žinutė ir bus bandoma išsiųsti el. laišką administratorui.</p>
+
+    <p tal:omit-tag="textual">Primename, kad laikas, skirtas Jums atlikti šį patvirtinimo procesą, yra ribotas, todėl veikite greitai.</p>
+
+    <p tal:omit-tag="textual">Jei turite kokių nors klausimų ar reikia papildomo paaiškinimo, nedvejodami susisiekite su mumis.</p>
+
+    <p tal:omit-tag="textual">Pagarbiai,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Komanda <span tal:replace="domain_name">Domeno pavadinimas</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Pastaba: Ši pranešimas buvo automatiškai sugeneruotas. Prašome neatsakyti tiesiogiai į šį pranešimą.</small></p>
+</body>
+</html>

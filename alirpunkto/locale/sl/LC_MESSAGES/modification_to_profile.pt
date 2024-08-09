@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vaša zahteva za spremembo profila</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Vaša zahteva za spremembo profila</h1>
+    
+    <p tal:omit-tag="textual">Pozdravljen(a) <span tal:replace="member.firstname" tal:condition="exists:member">Ime uporabnika</span>,</p>
+    
+    <p tal:omit-tag="textual">Prejeli smo zahtevo za spremembo vašega profila na platformi <span tal:replace="site_name">Ime strani</span> na <span tal:replace="domain_name">Ime domene</span>. Za vašo varnost zahtevamo, da sledite varni povezavi, da nadaljujete s spremembami. Prosim, kliknite na naslednjo URL povezavo <a href="${page_with_oid}" tal:attributes="href page_with_oid">Povezava za spremembo profila</a>, da posodobite informacije o svojem profilu.</p>
+    
+    <p tal:omit-tag="textual">Če niste zahtevali te spremembe profila, prosimo, ignorirajte ta e-poštni naslov ali kontaktirajte podporo, če imate kakršnakoli vprašanja.</p>
+    
+    <p tal:omit-tag="textual">Lep pozdrav,</p>
+    <p tal:omit-tag="textual">Ekipa <span tal:replace="domain_name">Ime domene</span>.</p>
+</body>
+</html>

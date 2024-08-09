@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vaša registracija na <span tal:omit-tag="textual" tal:replace="domain_name">Ime domene</span>. Naslednji koraki</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Pozdravljen/a <span tal:replace="full_name">Ime prijavitelja</span>,</h1>
+    <p tal:omit-tag="textual">Hvala, da ste poslali svojo prijavo za <span tal:replace="domain_name">Ime domene</span>! </p>
+
+    <p tal:omit-tag="textual">Glede na možnost, ki ste jo izbrali med registracijo, so tukaj naslednji koraki:</p>
+
+    <h2 tal:omit-tag="textual">Če ste izbrali možnost "Običajni član skupnosti":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Čestitamo, zdaj ste "Običajni član skupnosti"!</li>
+        <li tal:omit-tag="textual">Vaša številka članstva je bila določena.</li>
+        <li tal:omit-tag="textual">Poslan vam je bil čestitkni e-poštni naslov.</li>
+        <li tal:omit-tag="textual">Status vaše prijave je zdaj "OdobrenObičajniČlanSkupnosti".</li>
+        <li tal:omit-tag="textual">Nobena dodatna dejanja z vaše strani niso potrebna. Povežite se z našim <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">delovnim prostorom</a> in začnite komunicirati z vašimi sopotniki članov skupnosti!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Če ste izbrali možnost "Sodelavec":</h2>
+    <p tal:omit-tag="textual">Imeli boste pravico do polnega sodelovanja v naših procesih odločanja in v naših glasovanjih. V teh procesih in glasovanjih želimo ohraniti demokratično načelo "ena oseba = en glas". Bilo bi nepravično, če bi lahko določena oseba glasovala večkrat z uporabo več računov na naši IT platformi. Zato moramo vaščo račun povezati z vami osebno in poskrbeti, da ste na naši IT platformi identificirani na način, ki ga ni mogoče zamenjati z identiteto druge osebe, tj. z edinstvenim sklopom identifikatorjev.</p>
+    <p tal:omit-tag="textual">Poleg tega želimo zagotoviti, da so le državljani Evropske unije Sodelavci. Razlog za to je, da bomo uveljavili pravico do sodelovanja na javnih volitvah v Evropski uniji kot ena sama organizacija na ravni EU in moramo dokazati, da predstavljamo le državljane EU (in ne "tujih interesov").</p>
+    <p tal:omit-tag="textual">Za dosego teh ciljev vas bomo prosili, da posredujete naslednje informacije, kot se pojavijo v vaših uradnih identifikacijskih dokumentih:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Vsa vaša imena (v uradni transkripciji v latinici za grščino in bolgarščino),</li>
+        <li tal:omit-tag="textual">Vsa vaša priimka ob rojstvu (v uradni transkripciji v latinici za grščino in bolgarščino),</li>
+        <li tal:omit-tag="textual">Vaš datum rojstva,</li>
+        <li tal:omit-tag="textual">Vaša narodnost (med narodnostmi držav članic EU). </li>
+    </ul>
+    <p tal:omit-tag="textual">Te informacije boste posredovali na naši platformi za registracijo, in sklop 3 do 7 naključno izbranih Sodelavcev, imenovanih preveritelji, bo preveril, ali se informacije, ki ste jih posredovali na naši platformi za registracijo, ujemajo tistim v vaših uradnih identifikacijskih dokumentih. Zato boste direktno prenesli delne slike vaših uradnih identifikacijskih dokumentov tem preveriteljem, brez (zaradi varnosti) uporabe naše IT platforme.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Obstajata dva načina, kako lahko te delne slike vaših uradnih identifikacijskih dokumentov prenesete preveriteljem:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Preko videokonference</strong>: Gumb vas bo usmeril k izpolnjenemu e-poštnemu sporočilu, v katerem lahko predlagate datume in čase sestankov za enotno ali ločeno videokonferenco z preveritelji, dodeljenimi vam. Med tem (temi) videokonferencami boste preveriteljem pokazali svoj uradni identifikacijski dokument preko vaše kamere, tako da boste skrili, npr., številko identifikacijskega dokumenta in kraj rojstva, da se izognete (zaradi varnosti) prikazu celotne kopije tega dokumenta.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Preko e-poštne priloge</strong>: Gumb vam bo pomagal napisati izpolnjeno e-poštno sporočilo, ki mu lahko pripnete delno kopijo svojega uradnega identifikacijskega dokumenta (npr., skrite številko in kraj rojstva).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Vsak preveritelj bo nato preveril skladnost informacij, ki ste jih posredovali na registracijskem obrazcu naše IT platforme, s tistimi v vašem uradnem identifikacijskem dokumentu. Vsak preveritelj bo nato neodvisno glasoval na naši IT platformi o tej verifikaciji skladnosti. Če bo večina preveriteljev sprejela, da se informacije, ki ste jih posredovali na naši platformi za registracijo, ujemajo tistimi v vaših uradnih identifikacijskih dokumentih, bomo imeli veselje, da vas sprejmemo kot Sodelavca!</p>
+
+    <p tal:omit-tag="textual">Če se pošiljanje e-pošte iz kakršnegakoli razloga ne uspe, bo sporočilo o napaki zabeleženo in poizkusilo se bo poslati e-pošto administratorju.</p>
+
+    <p tal:omit-tag="textual">Opominjamo vas, da je čas, dodeljen za izvedbo tega postopka preverjanja, omejen, zato prosimo, da hitro ukrepate.</p>
+
+    <p tal:omit-tag="textual">Če imate kakršnakoli vprašanja ali potrebujete dodatna pojasnila, ne oklevajte, da nas kontaktirate.</p>
+
+    <p tal:omit-tag="textual">Lep pozdrav,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Ekipa <span tal:replace="domain_name">Ime domene</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Opomba: Ta obvestilo je bilo samodejno ustvarjeno. Prosimo, ne odgovarjajte neposredno na to sporočilo.</small></p>
+</body>
+</html>

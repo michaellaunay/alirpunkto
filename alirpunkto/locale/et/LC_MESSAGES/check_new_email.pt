@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Palun kinnitage oma taotlus värskendada oma e-posti aadressi saidil <span tal:replace="domain_name">Domeeninimi</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Palun kinnitage oma taotlus värskendada oma e-posti aadressi IT platvormil <span tal:replace="domain_name">Domeeninimi</span></h1>
+    <p tal:omit-tag="textual">Teie või isik, kellel on juurdepääs teie kontole <span tal:replace="site_name">Saidinimi</span> platvormil <span tal:replace="domain_name">Domeeninimi</span>, on palunud meil muuta e-posti aadress, mida <span tal:replace="domain_name">domeeninimi</span> IT infrastruktuur kasutab teie poolt kommunikeerimiseks. Uus e-posti aadress, mida paluti kasutada tulevikus, on: <span tal:replace="new_email">Uus e-posti aadress</span>.</p>
+<p tal:omit-tag="textual">Kui kinnitate, et <span tal:replace="new_email">Uus e-posti aadress</span> peaks olema see e-posti aadress, mida <span tal:replace="domain_name">domeeninimi</span> IT infrastruktuur tulevikus kasutama peaks, palun klõpsake alloleval kinnituse lingil.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Kui tegite vea või kui te ei teinud seda taotlust, siis lihtsalt ignoreerige seda e-kirja.</p>
+
+    <p tal:omit-tag="textual">Aitäh, et olete meie tegevuste vastu huvitatud.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Parimate soovidega,</p>
+        <p tal:omit-tag="textual">Meeskond <span tal:replace="domain_name">Saidil</span></p>
+    </footer>
+
+</body>
+</html>

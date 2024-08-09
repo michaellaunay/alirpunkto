@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Žádost o úpravu vašeho profilu</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Žádost o úpravu vašeho profilu</h1>
+    
+    <p tal:omit-tag="textual">Dobrý den <span tal:replace="member.firstname" tal:condition="exists:member">Jméno uživatele</span>,</p>
+    
+    <p tal:omit-tag="textual">Obdrželi jsme na platformě <span tal:replace="site_name">Název webu</span> domény <span tal:replace="domain_name">Název domény</span> žádost o úpravu vašeho profilu. Pro vaši bezpečnost požadujeme, abyste následovali bezpečný odkaz pro pokračování v úpravách. Prosím, klikněte na následující URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Odkaz na úpravu profilu</a>, abyste aktualizovali informace o svém profilu.</p>
+    
+    <p tal:omit-tag="textual">Pokud jste tuto žádost o úpravu profilu nevyžadovali, prosím, ignorujte tento e-mail nebo kontaktujte podporu, pokud máte nějaké obavy.</p>
+    
+    <p tal:omit-tag="textual">S pozdravem,</p>
+    <p tal:omit-tag="textual">Tým <span tal:replace="domain_name">Název domény</span>.</p>
+</body>
+</html>

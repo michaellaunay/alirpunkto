@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Jūsų profilio modifikacijos prašymas</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Jūsų profilio modifikacijos prašymas</h1>
+    
+    <p tal:omit-tag="textual">Sveiki <span tal:replace="member.firstname" tal:condition="exists:member">Vartotojo Vardas</span>,</p>
+    
+    <p tal:omit-tag="textual">Gavome prašymą modifikuoti jūsų profilį <span tal:replace="site_name">Vietos Pavadinimas</span> platformoje <span tal:replace="domain_name">Domeno Pavadinimas</span>. Jūsų saugumui reikia, kad paspaustumėte saugų nuorodą, kad galėtumėte tęsti modifikacijas. Prašome paspausti šią nuorodą <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modifikuoti profilio nuorodą</a>, kad atnaujintumėte savo profilio informaciją.</p>
+    
+    <p tal:omit-tag="textual">Jei jūs neprašėte šios profilio modifikacijos, prašome ignoruoti šį el. laišką arba kreiptis į palaikymo tarnybą, jei turite kokių nors klausimų.</p>
+    
+    <p tal:omit-tag="textual">Pagarbiai,</p>
+    <p tal:omit-tag="textual">Komanda iš <span tal:replace="domain_name">Domeno Pavadinimas</span>.</p>
+</body>
+</html>

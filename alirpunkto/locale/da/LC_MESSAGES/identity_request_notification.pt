@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Din tilmelding til <span tal:omit-tag="textual" tal:replace="domain_name">Domænenavn</span>. Næste skridt</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Hej <span tal:replace="full_name">Ansøgers Navn</span>,</h1>
+    <p tal:omit-tag="textual">Tak for at have indsendt din ansøgning til <span tal:replace="domain_name">Domænenavn</span>! </p>
+
+    <p tal:omit-tag="textual">Afhængigt af den mulighed du valgte under registreringen, her er de næste skridt:</p>
+
+    <h2 tal:omit-tag="textual">Hvis du valgte "Ordinary Community Member" muligheden:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Tillykke, du er nu en "Ordinary Community Member"!</li>
+        <li tal:omit-tag="textual">Dit medlemsnummer er blevet bestemt.</li>
+        <li tal:omit-tag="textual">En gratulationsmail er blevet sendt til dig.</li>
+        <li tal:omit-tag="textual">Din ansøgningsstatus er nu "ApprovedOrdinaryCommunityMember".</li>
+        <li tal:omit-tag="textual">Der kræves ikke yderligere handling fra din side. Log ind på vores <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">arbejdsområde</a> og begynd at interagere med dine medlemmers fællesskab!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Hvis du valgte "Cooperator" muligheden:</h2>
+    <p tal:omit-tag="textual">Du vil have ret til fuldt at deltage i vores beslutningsprocesser og i vores afstemninger. I disse processer og afstemninger ønsker vi at bevare det demokratiske princip om 'én person = én stemme'. Det ville være uretfærdigt, hvis en given person kunne stemme flere gange ved at bruge flere konti på vores IT-platform. Vi skal derfor relatere din konto til dig personligt og sørge for, at du identificeres på vores IT-platform på en måde, der ikke kan forveksles med identiteten af en anden person, dvs. med et unikt sæt af identifikatorer.</p>
+    <p tal:omit-tag="textual">Derudover ønsker vi at sikre, at kun borgere i Den Europæiske Union er Cooperators. Årsagen til dette er, at vi vil gøre krav på retten til at deltage i offentlige valg i Den Europæiske Union som en enkelt organisation på EU-niveau, og vi skal demonstrere, at vi kun repræsenterer EU-borgere (og ikke "udenlandske interesser").</p>
+    <p tal:omit-tag="textual">For at opnå disse mål vil vi anmode dig om at give følgende oplysninger, som de fremgår af dine officielle identitetsdokumenter:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Alle dine fornavne (i deres officielle transkription i latinske tegn for græsk og bulgarsk),</li>
+        <li tal:omit-tag="textual">Alle dine efternavne ved fødslen (i deres officielle transkription i latinske tegn for græsk og bulgarsk),</li>
+        <li tal:omit-tag="textual">Din fødselsdato,</li>
+        <li tal:omit-tag="textual">Din nationalitet (blandt nationaliteterne i EU-medlemsstaterne kun).</li>
+    </ul>
+    <p tal:omit-tag="textual">Du vil give disse oplysninger på vores registreringsplatform, og et sæt af 3 til 7 tilfældigt udvalgte Cooperators, kaldet Verificatorerne, vil tjekke, at de oplysninger, du har givet på vores registreringsplatform, svarer til dem på dine officielle ID-dokumenter. Du vil således overføre delvise billeder af dine officielle ID-dokumenter direkte til disse Verificatorer, uden (af sikkerhedsmæssige årsager) at bruge vores IT-platform.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Der er to metoder til at overføre disse delvise billeder af dine officielle ID-dokumenter til Verificatorerne:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via videokonference</strong>: En knap vil guide dig til at udarbejde en forudfyldt e-mail, hvor du kan foreslå aftaledatoer og -tidspunkter for en enkelt eller separate videokonference(r) med de Verificatorer, der er tildelt dig. Under denne (disse) videokonference(r) vil du vise dit officielle ID-dokument til Verificatorerne via dit kamera, samtidig med at f.eks. ID-dokumentets nummer og fødested forbliver skjult, for at undgå (af sikkerhedsmæssige årsager), at der vises en fuld kopi af dette dokument.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via e-mailvedhæftning</strong>: En knap vil hjælpe dig med at skrive en forudfyldt e-mail, til hvilken du kan vedhæfte en delvis kopi af dit officielle ID-dokument (f.eks. ved at maskere nummeret og fødestedet).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Hver Verificator vil derefter kontrollere overensstemmelsen af de oplysninger, du har givet i registreringsformularen på vores IT-platform, med dem på dit officielle identitetsdokument. Hver Verificator vil derefter uafhængigt stemme på vores IT-platform om denne bekræftelse af overensstemmelse. Hvis et flertal af Verificatorerne accepterer, at de oplysninger, du har givet på vores registreringsplatform, stemmer overens med dem på dine officielle ID-dokumenter, vil vi have fornøjelsen af at byde dig velkommen som Cooperator!</p>
+
+    <p tal:omit-tag="textual">Hvis e-mail-forsendelsen mislykkes af en eller anden grund, vil en fejlmeddelelse blive logget, og der vil blive gjort et forsøg på at sende en e-mail til administratoren.</p>
+
+    <p tal:omit-tag="textual">Vi minder dig om, at den tid, der er afsat til dig for at udføre denne verificeringsproces, er begrænset, så venligst handle hurtigt.</p>
+
+    <p tal:omit-tag="textual">Hvis du har nogen spørgsmål eller har brug for yderligere afklaring, så tøv ikke med at kontakte os.</p>
+
+    <p tal:omit-tag="textual">Med venlig hilsen,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Teamet fra <span tal:replace="domain_name">Domænenavn</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Bemærk: Denne meddelelse er blevet genereret automatisk. Venligst svar ikke direkte på denne besked.</small></p>
+</body>
+</html>

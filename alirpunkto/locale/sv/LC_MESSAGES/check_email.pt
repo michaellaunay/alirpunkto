@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registrering till <span tal:replace="domain_name">Domännamn</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Tack för att du påbörjar din registrering till plattformen <span
+                tal:replace="domain_name">Domännamn</span></h1>
+        <p tal:omit-tag="textual">För att verifiera din e-postadress och säkerställa att du är en människa (inte en
+            robot), har vi utformat en serie av 4 enkla matematiska operationer. Vänligen genomför de
+            fyra matematiska operationerna märkta från A till D nedan och ange deras resultat i de
+            motsvarande fälten på registreringssidan som länkas nedan.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operation A är <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Den första utmaningen</span></p>
+            <p tal:omit-tag="textual">Operation B är <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Den andra utmaningen</span></p>
+            <p tal:omit-tag="textual">Operation C är <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Den tredje utmaningen</span></p>
+            <p tal:omit-tag="textual">Operation D är <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Den fjärde utmaningen</span></p>
+        </div>
+        <p tal:omit-tag="textual">Länk till registreringssidan där du ska ange resultaten av operationerna A till D ovan:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Tack för ditt intresse för våra aktiviteter. Vi ser fram emot att
+            välkomna dig snart!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Med vänlig hälsning,</p>
+            <p tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Domännamn</span></p>
+        </footer>
+
+    </body>
+</html>

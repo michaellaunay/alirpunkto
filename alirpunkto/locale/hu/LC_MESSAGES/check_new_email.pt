@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Kérjük, erősítse meg a kérését e-mail címe frissítésére a <span tal:replace="domain_name">Domain név</span> oldalán</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Kérjük, erősítse meg a kérését e-mail címe frissítésére az IT platformon a <span tal:replace="domain_name">Domain név</span> oldalán</h1>
+    <p tal:omit-tag="textual">Ön, vagy egy személy, aki hozzáféréssel bír az <span tal:replace="site_name">Webhely neve</span> platformon a <span tal:replace="domain_name">Domain név</span> alatt található fiókjához, kérte, hogy változtassuk meg azt az e-mail címet, amelyet a <span tal:replace="domain_name">domain név</span> IT infrastruktúrája használ, hogy kapcsolatba lépjen Önnel. Az új e-mail cím, amelyet a jövőben használni kértek, a következő: <span tal:replace="new_email">Új e-mail cím</span>.</p>
+<p tal:omit-tag="textual">Ha megerősíti, hogy a <span tal:replace="new_email">Új e-mail cím</span> legyen az e-mail cím, amelyet a <span tal:replace="domain_name">domain név</span> IT infrastruktúrája a jövőben használni fog, kérjük, kattintson az alábbi megerősítő linkre.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Ha hibát követett el, vagy ha nem kérte ezt, egyszerűen ignorálja ezt az e-mailt.</p>
+
+    <p tal:omit-tag="textual">Köszönjük érdeklődését tevékenységeink iránt.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Üdvözlettel,</p>
+        <p tal:omit-tag="textual">A <span tal:replace="domain_name">Webhely</span> csapata</p>
+    </footer>
+
+</body>
+</html>

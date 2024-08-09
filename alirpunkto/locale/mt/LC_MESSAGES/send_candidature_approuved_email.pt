@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">L-Applikazzjoni Tiegħek għal <span tal:replace="domain_name">Isem il-Domejn</span> ġiet approvata</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Prosit għall-approvazzjoni tal-Applikazzjoni Tiegħek!</h1>
+    
+    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Isem tal-Applikant</span>,</p>
+    
+    <p tal:omit-tag="textual">Ninsabu ċerti li nistgħu ninfurmawk li l-applikazzjoni tiegħek għall <span tal:replace="domain_name">Isem tad-Domejn</span> għall-pożizzjoni <span tal:replace="python:candidature.type">Pożizzjoni</span> ġiet approvata.</p>
+
+    <p tal:omit-tag="textual">Grazzi talli ġejt magħna! Aħna ferħana li nilqgħu lilek fil-Komunità tagħna.</p>
+    
+    <p tal:omit-tag="textual">Issa li l-applikazzjoni tiegħek ġiet approvata, tista' tidħol fil-pjattaforma tagħna bl-użu tal-pseudonimu u tal-password li tawna waqt il-proċess tal-applikazzjoni. Wara li tidħol, issib:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">il-links għal kull applikazzjoni tas-software li għandek aċċess dirett. Ma għandekx bżonn tidħol mill-ġdid!</li>
+        <li tal:omit-tag="textual">link għall-formola fejn tista' tarah u teditja l-profil tiegħek. F’dan il-format, ninkoraġġuk li tgħarraf lilna lilek innifsek lill-bqija tal-membri tal-Komunità tagħna f’"test tal-profil" qasir u li turi ritratt żgħir li jirrappreżenta lilek (il-"avatar" tiegħek);</li>
+        <li tal:omit-tag="textual">link biex toħroġ.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Hawn taħt huma l-elementi prinċipali tal-profil tiegħek li rrackupajna:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">il-pseudonimu tiegħek: ##PSEUDONYM. Jekk jogħġbok żomm nota ATTENTA U SIGURI ta’ dan il-pseudonimu: huwa l-unika identifikatur bil-li tista’ tidħol fil-pjattaforma IT tagħna;</li>
+        <li tal:omit-tag="textual">il-password tiegħek: (il-password li ngħatajt waqt ir-reġistrazzjoni tiegħek);</li>
+        <li tal:omit-tag="textual">l-indirizz elettroniku tiegħek: (l-indirizz elettroniku li biha nibagħtulek din l-email);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">id-dettalji tal-istorja tiegħek: (il-kull isimijiet u ismijiet tal-familja tiegħek, id-data tat-twelid tiegħek, kif dħalt u verifikat waqt il-proċess tar-reġistrazzjoni tiegħek);</li>
+        <li tal:omit-tag="textual">il-lingwa preferuta tiegħek biex ninteraġixxu miegħek: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">il-lingwa sekonda li taċċetta li nużaw biex ninteraġixxu miegħek: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">il-lingwa li taċċetta li nużaw, bħala t-tielet għażla, biex ninteraġixxu miegħek: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Għal tiegħek ir-rekords, hawn il-fajl tal-finalizzazzjoni tal-proċess ta’ reġistrazzjoni tiegħek:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID tal-Applikazzjoni: <span tal:replace="python:candidature.oid">ID tal-Applikazzjoni</span></li>
+        <li tal:omit-tag="textual">Data ta' Approvazzjoni: <span tal:replace="python:candidature.modifications[-1]">L-aħħar transizzjoni</span></li>
+        <li tal:omit-tag="textual">Status: Approvata</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Nistennew bil-ħeġġa l-pjaċir li naħdmu flimkien miegħek!</p>
+
+    
+    <p tal:omit-tag="textual">Tislijiet,</p>
+    <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem il-Domejn</span>.</p>
+</body>
+</html>

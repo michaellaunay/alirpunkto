@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Sprememba stanja vaše prijave</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Evolucija vaše prijave na <span tal:replace="domain_name">ime domene</span></h1>
+        <p tal:omit-tag="textual">Pozdravljen<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Ime prijavitelja</span>,
+        </p>
+        <p tal:omit-tag="textual">Vaša prijava na platformi
+            <span tal:replace="site_url">URL</span> kot 
+            <span tal:replace="python:candidature.type">vloga</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">je bila sprejeta</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">je bila zavrnjena</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">je v obdelavi in je spremenila svoje stanje</span> . 
+        </p>
+        <p tal:omit-tag="textual">Tukaj so podrobnosti njene evolucije:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID prijave: <span tal:replace="python:candidature.oid">ID prijave</span></li>
+            <li tal:omit-tag="textual">Datum prehoda: <span tal:replace="python:candidature.modifications[-1].datetime">Zadnji prehod</span></li>
+            <li tal:omit-tag="textual">Novo stanje: <span tal:replace="python:candidature.candidature_state">Novo stanje prijave</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Če potrebujete, lahko zdaj prekinete proces registracije. Kasneje ga boste lahko nadaljevali s klikom na spodnjo povezavo.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Hvala za vašo udeležbo.</p>
+        <p tal:omit-tag="textual">Lep pozdrav,</p>
+        <p tal:omit-tag="textual">Ekipa <span tal:replace="domain_name">ime domene</span></p>
+    </body>
+</html>

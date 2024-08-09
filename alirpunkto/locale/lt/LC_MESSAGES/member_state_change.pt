@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Jūsų duomenų statuso pakeitimas</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Jūsų asmeninių duomenų pakeitimas IT infrastruktūroje <span tal:replace="domain_name">Domeno pavadinimas</span></h1>
+        <p tal:omit-tag="textual">Sveiki<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Narėjo vardas</span>,
+        </p>
+        <p tal:omit-tag="textual">Čia pateikiami pakeitimo duomenys:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Narė ID: <span tal:replace="python:member.oid">Narė ID</span></li>
+            <li tal:omit-tag="textual">Pereinamasis datas: <span tal:replace="python:member.modifications[-1].datetime">Paskutinė pertrauka</span></li>
+            <li tal:omit-tag="textual">Naujas statusas: <span tal:replace="python:member.member_state">Naujas nario statusas</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Ačiū už jūsų dalyvavimą.</p>
+        <p tal:omit-tag="textual">Pagarbiai,</p>
+        <p tal:omit-tag="textual">Komanda iš <span tal:replace="domain_name">Domeno pavadinimas</span></p>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Do iarrtas chun do phróifíl a athrú</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Do iarrtas chun do phróifíl a athrú</h1>
+    
+    <p tal:omit-tag="textual">Dia duit <span tal:replace="member.firstname" tal:condition="exists:member">Ainm an Úsáideora</span>,</p>
+    
+    <p tal:omit-tag="textual">Fuair muid, ar ardán <span tal:replace="site_name">Ainm an Suímh</span> de <span tal:replace="domain_name">Ainm an Dhomain</span>, iarratas chun do phróifíl a athrú. Chun do shlándáil, teastaíonn uainn go leanfaidh tú nasc slán chun na hathruithe a dhéanamh. Lean an nasc seo le do thoil <a href="${page_with_oid}" tal:attributes="href page_with_oid">Nasc chun an Próifíl a Athrú</a> chun do chuid faisnéise próifíle a nuashonrú.</p>
+    
+    <p tal:omit-tag="textual">Mura bhfuair tú an t-iarratas seo ar athrú do phróifíl, déan neamhaird ar an ríomhphost seo nó déan teagmháil lenár tacaíocht má tá aon imní ort.</p>
+    
+    <p tal:omit-tag="textual">Le dea-mhéin,</p>
+    <p tal:omit-tag="textual">Foireann <span tal:replace="domain_name">Ainm an Dhomain</span>.</p>
+</body>
+</html>

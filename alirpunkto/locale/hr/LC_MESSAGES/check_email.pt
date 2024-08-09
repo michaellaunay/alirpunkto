@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registracija na <span tal:replace="domain_name">Ime domene</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Hvala vam što ste započeli svoju registraciju na platformi <span
+                tal:replace="domain_name">Ime domene</span></h1>
+        <p tal:omit-tag="textual">Kako bismo potvrdili vašu adresu e-pošte i osigurali da ste ljudsko biće (a ne
+            robot), osmislili smo niz od 4 jednostavne matematičke operacije. Molimo vas da izvršite
+            četiri matematičke operacije označene od A do D u nastavku i unesete njihove rezultate u
+            odgovarajuća polja na stranici za registraciju povezanoj u nastavku.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operacija A je <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Prvi izazov</span></p>
+            <p tal:omit-tag="textual">Operacija B je <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Drugi izazov</span></p>
+            <p tal:omit-tag="textual">Operacija C je <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Treći izazov</span></p>
+            <p tal:omit-tag="textual">Operacija D je <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Četvrti izazov</span></p>
+        </div>
+        <p tal:omit-tag="textual">Veza na stranicu za registraciju na kojoj trebate unijeti rezultate operacija A do D iznad:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Hvala vam na interesu za naše aktivnosti. Radujemo se
+            vašem uskoro dobrodošlici!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">S poštovanjem,</p>
+            <p tal:omit-tag="textual">Tim <span tal:replace="domain_name">Ime domene</span></p>
+        </footer>
+
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Ir-reġistrazzjoni tiegħek għal <span tal:omit-tag="textual" tal:replace="domain_name">Isem tad-Domain</span>. Passi li ġejjin</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Hello <span tal:replace="full_name">Isem tal-Applikant</span>,</h1>
+    <p tal:omit-tag="textual">Grazzi talli ssubmittejt l-applikazzjoni tiegħek għal <span tal:replace="domain_name">Isem tad-Domain</span>!</p>
+
+    <p tal:omit-tag="textual">Skont l-għażla li għażilt waqt ir-reġistrazzjoni, hawn huma l-passi li ġejjin:</p>
+
+    <h2 tal:omit-tag="textual">Jekk għażilt l-għażla "Membru Komunitarju Ordinarju":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Prosit, issa int "Membru Komunitarju Ordinarju"!</li>
+        <li tal:omit-tag="textual">In-numru tal-membri tiegħek ġie ddefinit.</li>
+        <li tal:omit-tag="textual">Email ta' prosit ġie mibgħut lilek.</li>
+        <li tal:omit-tag="textual">L-istatus tal-applikazzjoni tiegħek issa huwa "AċċettatMembruKomunitarjuOrdinarju".</li>
+        <li tal:omit-tag="textual">M'hemmx bżonn ta' aktar azzjoni min-naħa tiegħek. Ikonnettja ma' <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">l-ispazju tax-xogħol</a> tagħna u bdj in-interazzjoni ma' sħabek membri tal-komunità!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Jekk għażilt l-għażla "Kooperatur":</h2>
+    <p tal:omit-tag="textual">Int se jkollok id-dritt li tipparteċipa kompletament fil-proċessi ta' deċiżjoni tagħna, u fil-voti tagħna. F'dawn il-proċessi u voti, irridu nżommu l-prinċipju demokratiku ta' 'persuna waħda = vot wieħed'. Mhux se tkun ġusta jekk persuna waħda tkun tista' tivvota b'seħħ u b'ħafna kontijiet fuq il-pjattaforma IT tagħna. Għalhekk, għandna nibnu relazzjoni bejn il-kont tiegħek u inti personalment, u nikkonfermaw li inti identifikata fuq il-pjattaforma IT tagħna b'mod li ma tistax tiġi mmistifikata ma' identità ta' persuna oħra, jiġifieri b'għażla uniċi ta' identifikaturi.</p>
+    <p tal:omit-tag="textual">Barra minn hekk, irridu niżguraw li biss ċittadini tal-Unjoni Ewropea huma Kooperaturi. Ir-raġuni għal dan hija li se talbu d-dritt li jipparteċipaw fil-elezzjonijiet pubbliċi fl-Unjoni Ewropea bħala organizzazzjoni waħda fuq il-livell tal-UE, u għandna bżonn inuru li aħna r-preżentata ċittadini tal-UE biss (u mhux "interessi barranin").</p>
+    <p tal:omit-tag="textual">Biex naslu għal dawn l-għanijiet, se nitolbuk biex tipprovdi l-informazzjoni li ġejja, kif tidher fid-dokumenti ta' identità ufficiali tiegħek:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">L-isem tiegħek kollu (fil-traskrizzjoni uffiċjali tagħhom f'karattri Latin għall-Griċi u Bulgaru),</li>
+        <li tal:omit-tag="textual">Il-kunjom tiegħek kollha tal-btala (fil-traskrizzjoni uffiċjali tagħhom f'karattri Latin għall-Griċi u Bulgaru),</li>
+        <li tal:omit-tag="textual">Id-data tat-twelid tiegħek,</li>
+        <li tal:omit-tag="textual">Il-nazzjonalità tiegħek (fost in-nazzjonalitajiet ta' Stat Membri tal-UE biss).</li>
+    </ul>
+    <p tal:omit-tag="textual">Int se tipprovdi din l-informazzjoni fuq il-pjattaforma tagħna ta' reġistrazzjoni, u sett ta' 3 sa 7 Kooperaturi li ġew magħżula bil-fortuna, imsejħa l-Veriferi, se jivverifikaw li l-informazzjoni li provdejt fuq il-pjattaforma tagħna ta' reġistrazzjoni tikkonforma ma' dawk fid-dokumenti ta' identità uffiċjali tiegħek. Int se tgħaddi ritratti parzjali tad-dokumenti ta' identità uffiċjali tiegħek direttament lil dawn il-Veriferi, mingħajr (għal raġunijiet ta' sigurtà) li tuża l-pjattaforma IT tagħna.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Hemm żewġ metodi biex tgħaddi dawn ir-ritratti parzjali tad-dokumenti ta' identità uffiċjali tiegħek lill-Veriferi:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Permezz ta' Konferenzi Video</strong>: Buttun se jiggwidak fil-ħolqien ta' email pre-ibli, fejn tista' tippjana d-dati u l-ħinijiet għall-konferenza jew konferenzi video magħżula mal-Veriferi assenjati lilek. Matul din (dawn) il-konferenza(i) video, inti se turi d-dokument ta' identità uffiċjali tiegħek lill-Veriferi permezz tal-kamera tiegħek, filwaqt li tiżgura li eż. in-numru tad-dokumenti ta' identità u l-post tat-twelid jibqgħu moħba, sabiex tevita (għar-raġunijiet ta' sigurtà) li tidher kopja sħiħa ta' dan id-dokument.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Permezz ta' Email Attachment</strong>: Buttun se jgħinek fil-kitba ta' email pre-fatturata, li tista' tgħaqqad kopja parzjali tad-dokument ta' identità uffiċjali tiegħek (eż., moħbija b'informazzjoni dwar in-numru u l-post tat-twelid).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Kull Verifier imbagħad se jiċċekkjaw il-konformità tal-informazzjoni li provdejt fuq il-formola tar-reġistrazzjoni tal-pjattaforma IT tagħna ma' dik fuq id-dokument ta' identità uffiċjali tiegħek. Kull Verifier imbagħad se jivvota indipendentement fuq il-pjattaforma IT tagħna dwar din il-verifika tal-konformità. Jekk maġġoranza tal-Veriferi taċċetta li l-informazzjoni li provdejt fuq il-pjattaforma tagħna ta' reġistrazzjoni tikkonforma ma' dik fid-dokumenti ta' identità uffiċjali tiegħek, ikollna l-pjaċir nilqgħu lilek bħala Kooperatur!</p>
+
+    <p tal:omit-tag="textual">Jekk il-bidla tal-email ta' send tiġdid bħala r-raġuni, messaġġ ta' żball se jiġi rreġistrat u tiġi ppruvata sending email lill-amministratur.</p>
+
+    <p tal:omit-tag="textual">Niftakru li l-ħin allokat għalik biex twettaq dan il-proċess ta' verifika huwa limitat, għalhekk jekk jogħġbok jaħsbu malajr.</p>
+
+    <p tal:omit-tag="textual">Jekk għandek xi mistoqsijiet jew għandek bżonn iktar spjegazzjoni, jekk jogħġbok ma tħossokx ħieles li tikkuntattjana.</p>
+
+    <p tal:omit-tag="textual">Tislijiet,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem tad-Domain</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Din in-notifika ġiet imġedda awtomatikament. Jekk jogħġbok ma rridux irrispettivament din il-messaġġ.</small></p>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Az Ön pályázata a <span tal:replace="domain_name">Domain Név</span> szerepre jóváhagyva</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Gratulálunk a pályázata jóváhagyásához!</h1>
+    
+    <p tal:omit-tag="textual">Helló <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">A pályázó neve</span>,</p>
+    
+    <p tal:omit-tag="textual">Örömmel értesítjük, hogy a <span tal:replace="domain_name">Domain név</span> pozícióra benyújtott pályázatát <span tal:replace="python:candidature.type">Szerep</span> jóváhagyták.</p>
+
+    <p tal:omit-tag="textual">Köszönjük, hogy csatlakozott hozzánk! Örömmel üdvözöljük a közösségünkben.</p>
+    
+    <p tal:omit-tag="textual">Most, hogy a pályázatát jóváhagyták, bejelentkezhet a platformunkra az Ön által a pályázati folyamat során megadott álnevével és jelszavával. A bejelentkezés után a következőt találja:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">az összes szoftveralkalmazás linkje, amelyekhez közvetlenül hozzáférése van. Nincs szüksége újabb bejelentkezésre!</li>
+        <li tal:omit-tag="textual">egy link a formanyomtatványhoz, ahol megtekintheti és szerkesztheti saját profilját. Ezen a formanyomtatványon arra biztatjuk, hogy mutatkozzon be a közösségünk többi tagjának egy rövid "profil szövegben", és tegyen közzé egy kis képet, amely Önt képviseli (az Ön "avatarja");</li>
+        <li tal:omit-tag="textual">egy link a kijelentkezéshez.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Itt vannak a profiljának fő elemei, amelyeket rögzítettünk:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">az Ön álneve: ##PSEUDONYM. Kérjük, őrizze meg ELOLVASOTT ÉS BIZTONSÁGOS KÉRÉSSEL ezt az álnevet: ez az egyetlen azonosító, amellyel be tud jelentkezni az IT platformunkra;</li>
+        <li tal:omit-tag="textual">az Ön jelszava: (a jelszó, amelyet a regisztráció során adott meg);</li>
+        <li tal:omit-tag="textual">az Ön e-mail címe: (az e-mail cím, amelyre a jelen e-mailt küldtük);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">az Ön személyazonosító adatai: (az összes megadott és családi név, születési dátuma, ahogyan azt a regisztráció során megadták és ellenőrizték);</li>
+        <li tal:omit-tag="textual">az a nyelv, amelyet preferál, hogy kapcsolatba lépjünk Önnel: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">a második nyelv, amelyet elfogad, hogy kapcsolatba lépjünk Önnel: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">a harmadik választásként elfogadott nyelv, amelyet kapcsolatba lépjünk Önnel: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">A dokumentálás céljából itt vannak a regisztrációs folyamat véglegesítésének részletei:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Pályázati azonosító: <span tal:replace="python:candidature.oid">Pályázati azonosító</span></li>
+        <li tal:omit-tag="textual">Jóváhagyás dátuma: <span tal:replace="python:candidature.modifications[-1]">Utolsó átmenet</span></li>
+        <li tal:omit-tag="textual">Állapot: Jóváhagyva</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Várjuk, hogy együtt dolgozhassunk Önnel!</p>
+
+    
+    <p tal:omit-tag="textual">Üdvözlettel,</p>
+    <p tal:omit-tag="textual">A <span tal:replace="domain_name">Domain Név</span> csapata.</p>
+</body>
+</html>

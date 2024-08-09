@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vahvista pyyntösi päivittää sähköpostiosoitteesi osoitteessa <span tal:replace="domain_name">Domain name</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Vahvista pyyntösi päivittää sähköpostiosoitteesi IT-alustalla <span tal:replace="domain_name">Domain name</span></h1>
+    <p tal:omit-tag="textual">Sinä tai joku, jolla on pääsy tiliisi <span tal:replace="site_name">Site name</span> -alustalla <span tal:replace="domain_name">Domain name</span>, on pyytänyt meitä muuttamaan sähköpostiosoitteen, jota <span tal:replace="domain_name">domain name</span> IT-infrastruktuuri käyttää kommunikoidakseen kanssasi. Uusi sähköpostiosoite, jota pyydettiin käytettäväksi tulevaisuudessa, on: <span tal:replace="new_email">New email address</span>.</p>
+<p tal:omit-tag="textual">Jos vahvistat, että <span tal:replace="new_email">New email address</span> tulisi olla sähköpostiosoite, jota <span tal:replace="domain_name">domain name</span> IT-infrastruktuurin tulisi tulevaisuudessa käyttää kommunikoidakseen kanssasi, klikkaa alla olevaa vahvistuslinkkiä.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Jos teit virheen tai et tehnyt tätä pyyntöä, voit yksinkertaisesti jättää tämän sähköpostin huomioimatta.</p>
+
+    <p tal:omit-tag="textual">Kiitos kiinnostuksestasi toimintaamme kohtaan.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Ystävällisin terveisin,</p>
+        <p tal:omit-tag="textual">Tiimi osoitteessa <span tal:replace="domain_name">Site</span></p>
+    </footer>
+
+</body>
+</html>

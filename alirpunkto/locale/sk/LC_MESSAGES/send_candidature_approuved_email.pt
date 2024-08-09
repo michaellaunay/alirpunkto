@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vaša žiadosť o <span tal:replace="domain_name">doménové meno</span> bola schválená</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Blahoželáme k schváleniu vašej žiadosti!</h1>
+    
+    <p tal:omit-tag="textual">Ahoj <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Meno uchádzača</span>,</p>
+    
+    <p tal:omit-tag="textual">S potešením vás informujeme, že vaša žiadosť o <span tal:replace="domain_name">doménové meno</span> na pozíciu <span tal:replace="python:candidature.type">Pozícia</span> bola schválená.</p>
+
+    <p tal:omit-tag="textual">Ďakujeme, že ste sa k nám pripojili! S radosťou vás vítame v našej komunite.</p>
+    
+    <p tal:omit-tag="textual">Teraz, keď bola vaša žiadosť schválená, môžete sa prihlásiť na našu platformu pomocou pseudonymu a hesla, ktoré ste uviedli počas procesu podávania žiadosti. Po prihlásení nájdete:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">linky na všetky softvérové aplikácie, ku ktorým máte priamy prístup. Nemusíte sa prihlasovať znova!</li>
+        <li tal:omit-tag="textual">odkaz na formulár, kde si môžete pozrieť a upraviť svoj profil. V tomto formulári vás povzbudzujeme, aby ste sa predstavili ostatným členom našej komunity krátkym "profilovým textom" a aby ste zobrazili malý obrázok, ktorý vás reprezentuje (váš "avatar");</li>
+        <li tal:omit-tag="textual">odkaz na odhlásenie.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Tu sú hlavné prvky vášho profilu, ktoré sme zaznamenali:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">váš pseudonym: ##PSEUDONYM. Prosím, uchovávajte si STAROSTLIVÝ A BEZPEČNÝ ZÁZNAM tohto pseudonymu: je to jediný identifikátor, s ktorým sa môžete prihlásiť na našu IT platformu;</li>
+        <li tal:omit-tag="textual">vaše heslo: (heslo, ktoré ste uviedli pri registrácii);</li>
+        <li tal:omit-tag="textual">vaša e-mailová adresa: (e-mailová adresa, na ktorú posielame tento e-mail);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">vaše identifikačné údaje: (všetky vaše krstné a priezviská, dátum narodenia, ako ste uviedli a overili počas registračného procesu);</li>
+        <li tal:omit-tag="textual">vaša preferovaná jazyková verzia pre našu interakciu: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">druhý jazyk, ktorý akceptujete, že použijeme na interakciu s vami: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">jazyk, ktorý akceptujete, že použijeme ako tretiu voľbu na interakciu s vami: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Pre vaše záznamy, tu sú podrobnosti o dokončení vášho registračného procesu:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID žiadosti: <span tal:replace="python:candidature.oid">ID žiadosti</span></li>
+        <li tal:omit-tag="textual">Dátum schválenia: <span tal:replace="python:candidature.modifications[-1]">Posledná zmena</span></li>
+        <li tal:omit-tag="textual">Stav: Schválené</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Tešíme sa na spoluprácu s vami!</p>
+
+    
+    <p tal:omit-tag="textual">S pozdravom,</p>
+    <p tal:omit-tag="textual">Tím <span tal:replace="domain_name">doménového mena</span>.</p>
+</body>
+</html>

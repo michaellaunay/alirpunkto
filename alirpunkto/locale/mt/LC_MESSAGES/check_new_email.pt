@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Jekk jogħġbok ikkonferma t-talba tiegħek biex taġġorna l-indirizz elettroniku tiegħek fuq <span tal:replace="domain_name">Isem il-dominju</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Jekk jogħġbok ikkonferma t-talba tiegħek biex taġġorna l-indirizz elettroniku tiegħek fuq il-pjattaforma IT <span tal:replace="domain_name">Isem il-dominju</span></h1>
+    <p tal:omit-tag="textual">Int, jew persuna li għandha aċċess għall-kont tiegħek fuq il-pjattaforma <span tal:replace="site_name">Isem is-sit</span> ta' <span tal:replace="domain_name">Isem il-dominju</span>, talbetna biex nibdlu l-indirizz elettroniku li l-infrastruttura IT ta' <span tal:replace="domain_name">isem il-dominju</span> tuża biex tiġi interaċċjonata miegħek. L-indirizz elettroniku ġdid li kien mitlub li jintuża fil-futur huwa: <span tal:replace="new_email">Indirizz elettroniku ġdid</span>.</p>
+<p tal:omit-tag="textual">Jekk inti tikkonferma li <span tal:replace="new_email">Indirizz elettroniku ġdid</span> għandu jkun l-indirizz elettroniku li l-infrastruttura IT ta' <span tal:replace="domain_name">isem il-dominju</span> għandha fil-futur tuża biex tiġi interaċċjonata miegħek, jekk jogħġbok ikklikkja fuq il-wegħda ta' konferma hawn taħt.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Jekk għamilt żball, jew jekk int ma għamiltx din it-talba, sempliċement injorah dan l-e-mail.</p>
+
+    <p tal:omit-tag="textual">Grazzi talli inti interessat fl-attivitajiet tagħna.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">L-aħjar saluti,</p>
+        <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Is-sit</span></p>
+    </footer>
+
+</body>
+</html>

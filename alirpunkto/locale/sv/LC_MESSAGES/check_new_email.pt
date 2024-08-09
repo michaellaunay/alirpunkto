@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vänligen bekräfta din begäran om att uppdatera din e-postadress på <span tal:replace="domain_name">Domännamn</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Vänligen bekräfta din begäran om att uppdatera din e-postadress på IT-plattformen <span tal:replace="domain_name">Domännamn</span></h1>
+    <p tal:omit-tag="textual">Du, eller en person som har tillgång till ditt konto på <span tal:replace="site_name">Webbplatsens namn</span>-plattformen av <span tal:replace="domain_name">Domännamn</span>, har begärt att vi ska ändra den e-postadress som <span tal:replace="domain_name">domännamnet</span> IT-infrastruktur använder för att interagera med dig. Den nya e-postadress som begärts att användas i framtiden är: <span tal:replace="new_email">Ny e-postadress</span>.</p>
+<p tal:omit-tag="textual">Om du bekräftar att <span tal:replace="new_email">Ny e-postadress</span> bör vara den e-postadress som <span tal:replace="domain_name">domännamnet</span> IT-infrastruktur i framtiden ska använda för att interagera med dig, vänligen klicka på bekräftelselänken nedan.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Om du gjorde ett fel, eller om du inte gjorde denna begäran, ignorera helt enkelt detta e-postmeddelande.</p>
+
+    <p tal:omit-tag="textual">Tack för ditt intresse för våra aktiviteter.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Med vänliga hälsningar,</p>
+        <p tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Webbplats</span></p>
+    </footer>
+
+</body>
+</html>

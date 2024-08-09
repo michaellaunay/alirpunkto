@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Regisztráció a <span tal:replace="domain_name">Domain név</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Köszönjük, hogy elkezdte a regisztrációt a <span
+                tal:replace="domain_name">Domain név</span> platformra</h1>
+        <p tal:omit-tag="textual">Az email címe ellenőrzésére és az emberi mivolta (nem robot) biztosítására négy egyszerű matematikai műveletet dolgoztunk ki. Kérjük, végezze el az A-tól D-ig terjedő négy matematikai műveletet, és adja meg az eredményeiket a lenti regisztrációs oldalon található megfelelő mezőkben.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Az A művelet <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Az első kihívás</span></p>
+            <p tal:omit-tag="textual">A B művelet <span tal:content="challenge_B"
+                    tal:omit-tag="textual">A második kihívás</span></p>
+            <p tal:omit-tag="textual">A C művelet <span tal:content="challenge_C"
+                    tal:omit-tag="textual">A harmadik kihívás</span></p>
+            <p tal:omit-tag="textual">A D művelet <span tal:content="challenge_D"
+                    tal:omit-tag="textual">A negyedik kihívás</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link a regisztrációs oldalra, ahol megadja az A-tól D-ig terjedő műveletek eredményeit:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Köszönjük érdeklődését tevékenységeink iránt. Várjuk, hogy hamarosan köszöntsük Önt!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Tisztelettel,</p>
+            <p tal:omit-tag="textual">A <span tal:replace="domain_name">Domain név</span> csapata</p>
+        </footer>
+
+    </body>
+</html>

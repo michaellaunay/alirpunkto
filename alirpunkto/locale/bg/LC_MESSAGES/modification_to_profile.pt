@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Вашето искане за модификация на профила</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Вашето искане за модификация на профила</h1>
+    
+    <p tal:omit-tag="textual">Здравейте <span tal:replace="member.firstname" tal:condition="exists:member">Името на потребителя</span>,</p>
+    
+    <p tal:omit-tag="textual">Получили сме искане за модификация на профила ви на платформата <span tal:replace="site_name">Име на сайта</span> на <span tal:replace="domain_name">Име на домейна</span>. За ваша сигурност, изискваме да следвате сигурен линк, за да продължите с модификациите. Моля, кликнете на следния URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Линк за модификация на профила</a>, за да актуализирате информацията за профила си.</p>
+    
+    <p tal:omit-tag="textual">Ако не сте искали тази модификация на профила, игнорирайте този имейл или се свържете с поддръжката, ако имате въпроси.</p>
+    
+    <p tal:omit-tag="textual">С най-добри пожелания,</p>
+    <p tal:omit-tag="textual">Екипът на <span tal:replace="domain_name">Име на домейна</span>.</p>
+</body>
+</html>

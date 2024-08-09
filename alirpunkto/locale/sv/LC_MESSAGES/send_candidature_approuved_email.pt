@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Din ansökan till <span tal:replace="domain_name">Domännamn</span> har blivit godkänd</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Grattis till godkännandet av din ansökan!</h1>
+    
+    <p tal:omit-tag="textual">Hej <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Sökandes namn</span>,</p>
+    
+    <p tal:omit-tag="textual">Vi är glada att informera dig om att din ansökan till <span tal:replace="domain_name">Domännamn</span> för rollen som <span tal:replace="python:candidature.type">Roll</span> har blivit godkänd.</p>
+
+    <p tal:omit-tag="textual">Tack för att du har gått med i vår gemenskap!</p>
+    
+    <p tal:omit-tag="textual">Nu när din ansökan har blivit godkänd kan du logga in på vår plattform med det pseudonym och lösenord du angav under ansökningsprocessen. Efter att du loggat in kommer du hitta:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">länkar till alla programvaruapplikationer som du har direkt åtkomst till. Du behöver inte logga in igen!</li>
+        <li tal:omit-tag="textual">en länk till formuläret där du kan se och redigera din egen profil. På detta formulär uppmuntrar vi dig att presentera dig för de andra medlemmarna i vår gemenskap med en kort "profiltext" och att visa en liten bild som representerar dig (din "avatar");</li>
+        <li tal:omit-tag="textual">en länk för att logga ut.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Här är huvuduppgifterna i din profil som vi har registrerat:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ditt pseudonym: ##PSEUDONYM. Vänligen håll en NOGGRANN OCH SÄKER REGISTER över detta pseudonym: det är den enda identifieraren med vilken du kan logga in på vår IT-plattform;</li>
+        <li tal:omit-tag="textual">ditt lösenord: (det lösenord som du angav vid registreringen);</li>
+        <li tal:omit-tag="textual">din e-postadress: (den e-postadress till vilken vi skickar denna e-post);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">dina identitetsuppgifter: (alla dina förnamn och efternamn, ditt födelsedatum, som angavs och verifierades under din registreringsprocess);</li>
+        <li tal:omit-tag="textual">ditt föredragna språk för vår kommunikation med dig: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">det andra språket som du accepterar att vi använder för att kommunicera med dig: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">språket som du accepterar att vi använder, som ett tredje val, för att kommunicera med dig: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">För din kännedom, här är detaljerna för slutförandet av din registreringsprocess:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Ansöknings-ID: <span tal:replace="python:candidature.oid">Ansöknings-ID</span></li>
+        <li tal:omit-tag="textual">Godkännandedatum: <span tal:replace="python:candidature.modifications[-1]">Senaste övergång</span></li>
+        <li tal:omit-tag="textual">Status: Godkänd</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Vi ser fram emot att få möjligheten att arbeta tillsammans med dig!</p>
+
+    <p tal:omit-tag="textual">Med vänliga hälsningar,</p>
+    <p tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Domännamn</span>.</p>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Teie profiili muutmise taotlus</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Teie profiili muutmise taotlus</h1>
+    
+    <p tal:omit-tag="textual">Tere <span tal:replace="member.firstname" tal:condition="exists:member">Kasutaja Nimi</span>,</p>
+    
+    <p tal:omit-tag="textual">Oleme saanud, platvormil <span tal:replace="site_name">Sait Nimi</span> ja domeeniga <span tal:replace="domain_name">Domeen Nimi</span>, taotlus teie profiili muutmiseks. Teie turvalisuse huvides nõuame, et järgiksite turvalist linki muudatuste tegemiseks. Palun klõpsake järgmisel URL-il <a href="${page_with_oid}" tal:attributes="href page_with_oid">Profiili muutmise link</a>, et uuendada oma profiili teavet.</p>
+    
+    <p tal:omit-tag="textual">Kui te ei taotlud sellele profiili muutmist, ignoreerige seda e-kirja või võtke toetusega ühendust, kui teil on mingid mured.</p>
+    
+    <p tal:omit-tag="textual">Parimate soovidega,</p>
+    <p tal:omit-tag="textual">Domeeni <span tal:replace="domain_name">Domeen Nimi</span> meeskond.</p>
+</body>
+</html>

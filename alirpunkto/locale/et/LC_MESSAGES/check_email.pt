@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registreerimine <span tal:replace="domain_name">Domeeninimi</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Aitäh, et alustasite oma registreerimist platvormile <span
+                tal:replace="domain_name">Domeeninimi</span></h1>
+        <p tal:omit-tag="textual">Teie e-posti aadressi kinnitamiseks ja veendumiseks, et olete inimene (mitte robot), oleme välja mõelnud neli lihtsat matemaatilist tehet. Palun sooritage allpool märgitud neli matemaatilist tehet A-st D-ni ja sisestage nende tulemused registreerimisleheküljel, mille link on allpool.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Tehe A on <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Esimene väljakutse</span></p>
+            <p tal:omit-tag="textual">Tehe B on <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Teine väljakutse</span></p>
+            <p tal:omit-tag="textual">Tehe C on <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Kolmas väljakutse</span></p>
+            <p tal:omit-tag="textual">Tehe D on <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Neljas väljakutse</span></p>
+        </div>
+        <p tal:omit-tag="textual">Link registreerimislehele, kuhu tuleb sisestada ülaltoodud tehete A kuni D tulemused:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Aitäh, et olete huvitatud meie tegevusest. Ootame teid peagi!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Lugupidamisega,</p>
+            <p tal:omit-tag="textual">Meeskond <span tal:replace="domain_name">Domeeninimi</span></p>
+        </footer>
+
+    </body>
+</html>

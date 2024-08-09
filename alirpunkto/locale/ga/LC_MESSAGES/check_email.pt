@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Cláraigh isteach le <span tal:replace="domain_name">Ainm an dómain</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Go raibh maith agat as do chlárúchán leis an ardán <span
+                tal:replace="domain_name">Ainm an dómain</span></h1>
+        <p tal:omit-tag="textual">Chun do sheoladh ríomhphoist a fhíorú agus a chinntiú gurb é do
+            dhuine (ní robot), tá sraith 4 oibríochtaí matamaitice simplí cruthaithe againn. Déan na
+            ceithre hoibríocht matamaitice atá lipéadaithe ó A go D thíos agus cuir isteach a gcuid
+            torthaí sna comhoibrithe cuí ar an leathanach clárúcháin atá nasctha thíos.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Is é an Hoibríocht A <span tal:content="challenge_A"
+                    tal:omit-tag="textual">An chéad dúshlán</span></p>
+            <p tal:omit-tag="textual">Is é an Hoibríocht B <span tal:content="challenge_B"
+                    tal:omit-tag="textual">An dara dúshlán</span></p>
+            <p tal:omit-tag="textual">Is é an Hoibríocht C <span tal:content="challenge_C"
+                    tal:omit-tag="textual">An tríú dúshlán</span></p>
+            <p tal:omit-tag="textual">Is é an Hoibríocht D <span tal:content="challenge_D"
+                    tal:omit-tag="textual">An ceathrú dúshlán</span></p>
+        </div>
+        <p tal:omit-tag="textual">Nasc chuig an leathanach clárúcháin ar ar chóir duit na torthaí
+            de na hoibríochtaí A go D a sholáthar:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Go raibh maith agat as do spéis inár ngníomhachtaí. Táimid ag
+            tnúth le do fháilte a chur romhainn go luath!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Le meas,</p>
+            <p tal:omit-tag="textual">Foireann <span tal:replace="domain_name">Ainm an dómain</span></p>
+        </footer>
+
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Tá do Tháidl chuig an <span tal:replace="domain_name">Ainm Domaain</span> ceadaithe</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Comhghairdeas ar cheadú do Tháidl!</h1>
+    
+    <p tal:omit-tag="textual">Dia dhuit <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Ainm an Iarrthóra</span>,</p>
+    
+    <p tal:omit-tag="textual">Tá áthas orainn a chur in iúl duit go bhfuil do tháidl chuig an <span tal:replace="domain_name">Ainm Domaain</span> don ról <span tal:replace="python:candidature.type">Ról</span> ceadaithe.</p>
+
+    <p tal:omit-tag="textual">Go raibh maith agat as do bheith linn! Tá áthas orainn fáilte a chur romhat isteach in ár gComhluadar.</p>
+    
+    <p tal:omit-tag="textual">Anois go bhfuil do tháidl ceadaithe, is féidir leat logáil isteach lenár n-ardán ag úsáid an ainm bréige agus pasfhocal a sholáthair tú le linn an phróisis iarratais. Tar éis duit logáil isteach, gheobhaidh tú:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">na naisc do gach iarratas bogearra atá agat ar rochtain dhíreach. Ní gá duit logáil isteach arís!</li>
+        <li tal:omit-tag="textual">nasc chuig an fhoirm áit ar féidir leat do phróifíl féin a fheiceáil agus a réitigh. Ar an fhoirm seo, spreagaimid tú le do mholadh a chur in iúl do na baill eile de ár gComhluadar le téacs 'proifíle' beag agus le híomhá bheag a léiríonn tú (do 'avatar');</li>
+        <li tal:omit-tag="textual">nasc chun logáil amach.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Seo a leanas na príomhtháirgí de do phróifíl a taifeadadh againn:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">do ainm bréige: ##PSEUDONYM. Coinnigh taifead cúramach agus sábháilte den ainm bréige seo: is é an t-aon aithint atá agat le logáil isteach lenár n-ardán TF;</li>
+        <li tal:omit-tag="textual">do phasfhocal: (an pasfhocal a sholáthar tú le haghaidh do chlárúcháin);</li>
+        <li tal:omit-tag="textual">do sheoladh ríomhphoist: (an seoladh ríomhphoist a chuirimid an ríomhphost seo chugat);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">do chuid sonraí aitheantais: (do na hainmneacha uile agus do ainm teaghlaigh, do dáta breithe, mar a sholáthraíodh agus a dheimhníodh le linn do phróisis cláraithe);</li>
+        <li tal:omit-tag="textual">do theanga is fearr leat dúinn chun comhoibriú leat: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">an dara teanga a cheadaíonn tú dúinn a úsáid chun comhoibriú leat: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">an teanga a cheadaíonn tú dúinn a úsáid, mar tríú rogha, chun comhoibriú leat: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Chun do thaifid, seo na sonraí maidir le críochnú do phróisis cláraithe:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID Iarrthóra: <span tal:replace="python:candidature.oid">ID na hIarratais</span></li>
+        <li tal:omit-tag="textual">Dáta Ceadaithe: <span tal:replace="python:candidature.modifications[-1]">An t-iompa don dáta deireanach</span></li>
+        <li tal:omit-tag="textual">Stádas: Ceadaithe</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Tugaimid cuireadh duit ár rudaí a dhéanamh le chéile!</p>
+
+    <p tal:omit-tag="textual">Le gach dea-ghuí,</p>
+    <p tal:omit-tag="textual">Foireann an <span tal:replace="domain_name">Ainm Domaain</span>.</p>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Ändring av statusen för din ansökan</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Utveckling av din ansökan till <span tal:replace="domain_name">Domännamn</span></h1>
+        <p tal:omit-tag="textual">Hej<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Ansökarens namn</span>,
+        </p>
+        <p tal:omit-tag="textual">Din ansökan på plattformen
+            <span tal:replace="site_url">URL</span> som en 
+            <span tal:replace="python:candidature.type">Roll</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">har accepterats</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">har avvisats</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">är under behandling och har ändrat status</span> . 
+        </p>
+        <p tal:omit-tag="textual">Här är detaljerna för dess utveckling:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Ansöknings-ID: <span tal:replace="python:candidature.oid">Ansöknings-ID</span></li>
+            <li tal:omit-tag="textual">Övergångsdatum: <span tal:replace="python:candidature.modifications[-1].datetime">Senaste övergång</span></li>
+            <li tal:omit-tag="textual">Ny status: <span tal:replace="python:candidature.candidature_state">Ny ansökningsstatus</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Om du behöver kan du avbryta din registreringsprocess nu. Du kommer att kunna återuppta den senare genom att klicka på länken nedan.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Tack för din medverkan.</p>
+        <p tal:omit-tag="textual">Vänliga hälsningar,</p>
+        <p tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Domännamn</span></p>
+    </body>
+</html>

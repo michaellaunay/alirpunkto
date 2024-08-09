@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Le do thoil deimhnigh d'iarratas chun do seoladh ríomhphoist a nuashonrú ar <span tal:replace="domain_name">Ainm an domain</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Le do thoil deimhnigh d'iarratas chun do seoladh ríomhphoist a nuashonrú ar an ardán IT <span tal:replace="domain_name">Ainm an domain</span></h1>
+    <p tal:omit-tag="textual">Tú, nó duine a bhfuil rochtain aige ar do chuntas ar an ardán <span tal:replace="site_name">Ainm an shuíomh</span> de <span tal:replace="domain_name">Ainm an domain</span>, a d'iarr orainn an seoladh ríomhphoist a athrú a úsáideann an t-infreastucture IT <span tal:replace="domain_name">ainm an domain</span> chun idirghníomhú leat. Is é an seoladh ríomhphoist nua a d'iarradh a úsáid sa todhchaí: <span tal:replace="new_email">Seoladh ríomhphoist nua</span>.</p>
+<p tal:omit-tag="textual">Má deimhnigh tú go bhfuil <span tal:replace="new_email">Seoladh ríomhphoist nua</span> le bheith mar an seoladh ríomhphoist a ba cheart don t-infreastucture IT <span tal:replace="domain_name">ainm an domain</span> a úsáid chun idirghníomhú leat sa todhchaí, déan cliceáil ar an nasc deimhnithe thíos.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Má rinne tú earráid, nó más rud é nár rinne tú an t-iarratas seo, ní gá ach an ríomhphost seo a neamhaird a dhéanamh.</p>
+
+    <p tal:omit-tag="textual">Go raibh maith agat as do shuim inár ngníomhaíochtaí.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Le gach dea-ghuí,</p>
+        <p tal:omit-tag="textual">Foireann <span tal:replace="domain_name">Ainm an shuíomh</span></p>
+    </footer>
+
+</body>
+</html>

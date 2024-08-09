@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registracija į <span tal:replace="domain_name">Domeno pavadinimą</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Ačiū, kad pradėjote registraciją į platformą <span
+                tal:replace="domain_name">Domeno pavadinimą</span></h1>
+        <p tal:omit-tag="textual">Norėdami patvirtinti savo el. pašto adresą ir užtikrinti, kad esate žmogus (o ne
+            robotas), mes sugalvojome 4 paprastus matematikos uždavinius. Prašome atlikti
+            keturias matematikos operacijas, pažymėtas nuo A iki D žemiau, ir įrašyti jų rezultatus į
+            atitinkamas sritis registracijos puslapyje, esančiame žemiau.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operacija A yra <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Pirmasis iššūkis</span></p>
+            <p tal:omit-tag="textual">Operacija B yra <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Antrasis iššūkis</span></p>
+            <p tal:omit-tag="textual">Operacija C yra <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Trečiasis iššūkis</span></p>
+            <p tal:omit-tag="textual">Operacija D yra <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Ketvirtasis iššūkis</span></p>
+        </div>
+        <p tal:omit-tag="textual">Nuoroda į registracijos puslapį, kuriame reikia pateikti operacijų A iki D rezultatus:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Ačiū už jūsų susidomėjimą mūsų veikla. Nekantriai laukiame
+            galimybės jus pasveikinti!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Pagarbiai,</p>
+            <p tal:omit-tag="textual">Komanda iš <span tal:replace="domain_name">Domeno pavadinimo</span></p>
+        </footer>
+
+    </body>
+</html>

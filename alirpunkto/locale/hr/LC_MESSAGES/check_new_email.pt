@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Molimo potvrdite svoj zahtjev za ažuriranje adrese e-pošte na <span tal:replace="domain_name">Naziv domene</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Molimo potvrdite svoj zahtjev za ažuriranje adrese e-pošte na IT platformi <span tal:replace="domain_name">Naziv domene</span></h1>
+    <p tal:omit-tag="textual">Vi, ili osoba koja ima pristup vašem računu na <span tal:replace="site_name">Naziv stranice</span> platformi <span tal:replace="domain_name">Naziv domene</span>, zatražili ste od nas da promijenimo adresu e-pošte koju IT infrastruktura <span tal:replace="domain_name">naziv domene</span> koristi za komunikaciju s vama. Nova adresa e-pošte koja se zahtijeva za korištenje u budućnosti je: <span tal:replace="new_email">Nova adresa e-pošte</span>.</p>
+<p tal:omit-tag="textual">Ako potvrđujete da <span tal:replace="new_email">Nova adresa e-pošte</span> treba biti adresa e-pošte koju IT infrastruktura <span tal:replace="domain_name">naziv domene</span> treba u budućnosti koristiti za komunikaciju s vama, molimo kliknite na link za potvrdu u nastavku.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Ako ste napravili grešku, ili ako niste podnijeli ovaj zahtjev, jednostavno ignorirajte ovu e-poštu.</p>
+
+    <p tal:omit-tag="textual">Hvala vam na interesu za naše aktivnosti.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Srdačan pozdrav,</p>
+        <p tal:omit-tag="textual">Tim na <span tal:replace="domain_name">Stranica</span></p>
+    </footer>
+
+</body>
+</html>

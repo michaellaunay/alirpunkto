@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vaše registrace na <span tal:omit-tag="textual" tal:replace="domain_name">Název domény</span>. Další kroky</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Ahoj <span tal:replace="full_name">Jméno žadatele</span>,</h1>
+    <p tal:omit-tag="textual">Děkujeme za podání vaší žádosti na <span tal:replace="domain_name">Název domény</span>!</p>
+
+    <p tal:omit-tag="textual">V závislosti na možnosti, kterou jste zvolili během registrace, jsou zde další kroky:</p>
+
+    <h2 tal:omit-tag="textual">Pokud jste zvolili možnost "Obvyklý člen komunity":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Gratulujeme, nyní jste "Obvyklý člen komunity"!</li>
+        <li tal:omit-tag="textual">Vaše členské číslo bylo stanoveno.</li>
+        <li tal:omit-tag="textual">Byl vám zaslán gratulační e-mail.</li>
+        <li tal:omit-tag="textual">Vaše status žádosti je nyní "SchválenýObvyklýČlenKomunity".</li>
+        <li tal:omit-tag="textual">Z vaší strany není potřeba žádná další akce. Připojte se k našemu <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">pracovnímu prostoru</a> a začněte komunikovat se svými kolegy z komunity!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Pokud jste zvolili možnost "Kooperator":</h2>
+    <p tal:omit-tag="textual">Budete mít právo plně se účastnit našich rozhodovacích procesů a hlasování. V těchto procesech a hlasováních chceme zachovat demokratický princip 'jeden člověk = jeden hlas'. Bylo by neférové, kdyby mohla daná osoba hlasovat několikrát pomocí několika účtů na naší IT platformě. Proto potřebujeme vaši účet spojit s vámi osobně a zajistit, že jste na naší IT platformě identifikováni způsobem, který nelze zaměnit s identitou jiné osoby, tj. s unikátní sadou identifikátorů.</p>
+    <p tal:omit-tag="textual">Dále chceme zajistit, aby pouze občané Evropské unie byli Kooperátory. Důvodem je, že budeme požadovat právo účastnit se veřejných voleb v Evropské unii jako jedna organizace na úrovni EU a potřebujeme prokázat, že zastupujeme pouze občany EU (a ne "zahraniční zájmy").</p>
+    <p tal:omit-tag="textual">Abychom dosáhli těchto cílů, požádáme vás, abyste poskytli následující informace, jak se objevují ve vašich oficiálních identifikačních dokumentech:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Všechna vaše jména (v jejich oficiální transkripci v latinské abecedě pro řečtinu a bulharštinu),</li>
+        <li tal:omit-tag="textual">Všechna vaše příjmení při narození (v jejich oficiální transkripci v latinské abecedě pro řečtinu a bulharštinu),</li>
+        <li tal:omit-tag="textual">Vaše datum narození,</li>
+        <li tal:omit-tag="textual">Vaše státní příslušnost (pouze mezi státními příslušnostmi členských států EU).</li>
+    </ul>
+    <p tal:omit-tag="textual">Tyto informace poskytnete na naší registrační platformě a soubor 3 až 7 náhodně vybraných Kooperátorů, zvaných Ověřovatelé, zkontroluje, zda informace, které jste poskytli na naší registrační platformě, odpovídají těm na vašich oficiálních identifikačních dokumentech. Tedy budete přenášet částečné obrázky vašich oficiálních identifikačních dokumentů přímo těmto Ověřovatelům, aniž byste (z důvodu zabezpečení) používali naši IT platformu.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Existují dvě metody, jak můžete tyto částečné obrázky svých oficiálních identifikačních dokumentů Ověřovatelům předat:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Přes videokonferenci</strong>: Tlačítko vás provede vytvořením předvyplněného e-mailu, v němž můžete navrhnout termíny a časy pro jedinou nebo samostatné videokonference s Ověřovateli, kteří jsou vám přiděleni. Během této (těchto) videokonference (videokonferencí) ukážete svůj oficiální identifikační dokument Ověřovatelům prostřednictvím vaší kamery, přičemž se ujistíte, že např. číslo identifikačního dokumentu a místo narození zůstanou skryté, aby se (z důvodu zabezpečení) nezobrazila kompletní kopie tohoto dokumentu.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Přes přílohu e-mailu</strong>: Tlačítko vám pomůže napsat předvyplněný e-mail, k němuž můžete připojit částečnou kopii vašeho oficiálního identifikačního dokumentu (např. zamaskováním čísla a místa narození).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Každý Ověřovatel poté zkontroluje shodu informací, které jste uvedli ve registračním formuláři naší IT platformy, s těmi na vašem oficiálním identifikačním dokumentu. Každý Ověřovatel poté nezávisle hlasuje na naší IT platformě o této kontrole shody. Pokud většina Ověřovatelů souhlasí s tím, že informace, které jste poskytli na naší registrační platformě, odpovídají těm na vašich oficiálních identifikačních dokumentech, rádi vás přivítáme jako Kooperátora!</p>
+
+    <p tal:omit-tag="textual">Pokud se z nějakého důvodu neuskuteční odeslání e-mailu, bude zaznamenána chybová zpráva a bude učiněn pokus o odeslání e-mailu administrátorovi.</p>
+
+    <p tal:omit-tag="textual">Připomínáme vám, že čas vyhrazený na provedení tohoto ověřovacího procesu je omezen, proto prosím jednejte rychle.</p>
+
+    <p tal:omit-tag="textual">Pokud máte jakékoli dotazy nebo potřebujete další objasnění, neváhejte se s námi spojit.</p>
+
+    <p tal:omit-tag="textual">S pozdravem,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Tým <span tal:replace="domain_name">Název domény</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Poznámka: Tato notifikace byla vygenerována automaticky. Prosím, neodpovídejte přímo na tuto zprávu.</small></p>
+</body>
+</html>

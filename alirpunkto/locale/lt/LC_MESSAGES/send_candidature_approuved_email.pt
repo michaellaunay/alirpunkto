@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Jūsų paraiška <span tal:replace="domain_name">Domeno vardui</span> buvo patvirtinta</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Sveikiname, kad jūsų paraiška buvo patvirtinta!</h1>
+    
+    <p tal:omit-tag="textual">Sveiki, <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Prašančiojo vardas</span>,</p>
+    
+    <p tal:omit-tag="textual">Džiaugiamės galėdami jus informuoti, kad jūsų paraiška <span tal:replace="domain_name">Domeno vardui</span> už <span tal:replace="python:candidature.type">Pareigas</span> buvo patvirtinta.</p>
+
+    <p tal:omit-tag="textual">Dėkojame, kad prisijungėte prie mūsų! Mums malonu jus pasveikinti savo bendruomenėje.</p>
+    
+    <p tal:omit-tag="textual">Dabar, kai jūsų paraiška buvo patvirtinta, galite prisijungti prie mūsų platformos naudodami pseudonimą ir slaptažodį, kuriuos pateikėte paraiškos proceso metu. Prisijungę rasite:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">nuorodas į visas programines aplikacijas, prie kurių turite tiesioginį prieigą. Jums nereikės vėl prisijungti!</li>
+        <li tal:omit-tag="textual">nuorodą į formą, kurioje galite peržiūrėti ir redaguoti savo profilį. Šioje formoje kviečiame prisistatyti kitiems mūsų bendruomenės nariams trumpame „profilio tekste“ ir parodyti mažą nuotrauką, kuri jus reprezentuoja (jūsų „avatarą“);</li>
+        <li tal:omit-tag="textual">nuorodą, kaip atsijungti.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Štai pagrindiniai jūsų profilio elementai, kuriuos užregistravome:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">jūsų pseudonimas: ##PSEUDONYM. Prašome saugiai ir atidžiai išsaugoti šį pseudonimą: tai vienintelis identifikatorius, su kuriuo galite prisijungti prie mūsų IT platformos;</li>
+        <li tal:omit-tag="textual">jūsų slaptažodis: (slaptažodis, kurį pateikėte registracijos metu);</li>
+        <li tal:omit-tag="textual">jūsų el. pašto adresas: (el. pašto adresas, kuriuo siunčiame šį laišką);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">jūsų asmens duomenys: (visi jūsų asmeniniai ir pavardės, jūsų gimimo data, kaip buvo pateikta ir patvirtinta registracijos proceso metu);</li>
+        <li tal:omit-tag="textual">jūsų pageidaujama kalba, kuria bendraujame su jumis: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">antroji kalba, kurią sutinkate naudoti bendraujant su jumis: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">kalba, kurią sutinkate naudoti kaip trečią pasirinkimą bendraujant su jumis: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Jūsų informacijai, čia yra registracijos proceso baigimo detalės:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Paraiškos ID: <span tal:replace="python:candidature.oid">Paraiškos ID</span></li>
+        <li tal:omit-tag="textual">Patvirtinimo data: <span tal:replace="python:candidature.modifications[-1]">Paskutinė perėjimas</span></li>
+        <li tal:omit-tag="textual">Būsena: Patvirtinta</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Laukiame malonumo dirbti kartu su jumis!</p>
+
+    
+    <p tal:omit-tag="textual">Geriausi linkėjimai,</p>
+    <p tal:omit-tag="textual">Komanda <span tal:replace="domain_name">Domeno vardui</span>.</p>
+</body>
+</html>

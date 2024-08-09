@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Промяна в статуса на вашите данни</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Промяна на вашите лични данни в ИТ инфраструктурата на <span tal:replace="domain_name">Име на домейн</span></h1>
+        <p tal:omit-tag="textual">Здравейте<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Име на члена</span>,
+        </p>
+        <p tal:omit-tag="textual">Ето информацията за промяната:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Идентификатор на члена: <span tal:replace="python:member.oid">Идентификатор на члена</span></li>
+            <li tal:omit-tag="textual">Дата на прехода: <span tal:replace="python:member.modifications[-1].datetime">Последен преход</span></li>
+            <li tal:omit-tag="textual">Нов статус: <span tal:replace="python:member.member_state">Нов статус на члена</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Благодарим ви за участието.</p>
+        <p tal:omit-tag="textual">С най-добри пожелания,</p>
+        <p tal:omit-tag="textual">Екипът на <span tal:replace="domain_name">Име на домейн</span></p>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Prašome patvirtinti savo prašymą atnaujinti savo el. pašto adresą <span tal:replace="domain_name">Domeno pavadinimas</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Prašome patvirtinti savo prašymą atnaujinti savo el. pašto adresą IT platformoje <span tal:replace="domain_name">Domeno pavadinimas</span></h1>
+    <p tal:omit-tag="textual">Jūs arba asmuo, turintis prieigą prie jūsų paskyros <span tal:replace="site_name">Svetainės pavadinimas</span> platformoje <span tal:replace="domain_name">Domeno pavadinimas</span>, paprašėte, kad pakeistume el. pašto adresą, kurį <span tal:replace="domain_name">domeno pavadinimas</span> IT infrastruktūra naudoja bendrauti su jumis. Naujas el. pašto adresas, kurį buvo paprašyta naudoti ateityje, yra: <span tal:replace="new_email">Naujas el. pašto adresas</span>.</p>
+<p tal:omit-tag="textual">Jei patvirtinate, kad <span tal:replace="new_email">Naujas el. pašto adresas</span> turėtų būti el. pašto adresas, kurį <span tal:replace="domain_name">domeno pavadinimas</span> IT infrastruktūra turėtų ateityje naudoti bendrauti su jumis, prašome paspausti patvirtinimo nuorodą žemiau.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Jei padarėte klaidą arba jei nesikreipėte dėl šio prašymo, tiesiog ignoruokite šį el. laišką.</p>
+
+    <p tal:omit-tag="textual">Dėkojame už jūsų susidomėjimą mūsų veikla.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Pagarbiai,</p>
+        <p tal:omit-tag="textual">Komanda <span tal:replace="domain_name">Svetainėje</span></p>
+    </footer>
+
+</body>
+</html>

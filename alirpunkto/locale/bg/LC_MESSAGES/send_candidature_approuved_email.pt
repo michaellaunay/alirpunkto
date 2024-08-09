@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Вашето заявление за <span tal:replace="domain_name">Име на домейн</span> е одобрено</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Поздравления за одобрението на вашето заявление!</h1>
+    
+    <p tal:omit-tag="textual">Здравейте <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Име на кандидата</span>,</p>
+    
+    <p tal:omit-tag="textual">С удоволствие ви информираме, че заявлението ви за <span tal:replace="domain_name">Името на домейна</span> за ролята на <span tal:replace="python:candidature.type">Роля</span> е одобрено.</p>
+
+    <p tal:omit-tag="textual">Благодарим ви, че се присъединихте към нас! Щастливи сме да ви приветстваме в нашата общност.</p>
+    
+    <p tal:omit-tag="textual">Сега, когато вашето заявление е одобрено, можете да влезете в нашата платформа с псевдонима и паролата, които предоставихте по време на процеса на кандидатстване. След като влезете, ще намерите:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">връзките към всички софтуерни приложения, до които имате директен достъп. Не е необходимо да влизате отново!</li>
+        <li tal:omit-tag="textual">връзка към формуляра, където можете да прегледате и редактирате собствения си профил. В този формуляр ви насърчаваме да се представите пред другите членове на нашата общност с кратък "текст за профил" и да покажете малка снимка, която ви представя (вашият "аватар");</li>
+        <li tal:omit-tag="textual">връзка за излизане.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Ето основните елементи на вашия профил, които записахме:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">вашият псевдоним: ##PSEUDONYM. Моля, запазете внимателно и сигурно това псевдоним: то е единственият идентификатор, с който можете да влезете в нашата ИТ платформа;</li>
+        <li tal:omit-tag="textual">вашата парола: (паролата, която предоставихте при регистрацията си);</li>
+        <li tal:omit-tag="textual">вашият имейл адрес: (имейл адресът, на който изпращаме настоящия имейл);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">вашите лични данни: (всички ваши имена и фамилни имена, датата на раждане, както е предоставено и проверено по време на процеса на регистрация);</li>
+        <li tal:omit-tag="textual">вашият предпочитан език, на който да взаимодействаме с вас: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">вторият език, който приемате, че можем да използваме за взаимодействие с вас: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">езикът, който приемате, че можем да използваме, като трети избор, за взаимодействие с вас: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">За вашата информация, ето детайлите за финализирането на процеса ви на регистрация:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID на кандидатура: <span tal:replace="python:candidature.oid">ID на заявление</span></li>
+        <li tal:omit-tag="textual">Дата на одобрение: <span tal:replace="python:candidature.modifications[-1]">Последна промяна</span></li>
+        <li tal:omit-tag="textual">Статус: Одобрено</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Очакваме с нетърпение удоволствието да работим заедно с вас!</p>
+
+    
+    <p tal:omit-tag="textual">С най-добри пожелания,</p>
+    <p tal:omit-tag="textual">Екипът на <span tal:replace="domain_name">Име на домейн</span>.</p>
+</body>
+</html>

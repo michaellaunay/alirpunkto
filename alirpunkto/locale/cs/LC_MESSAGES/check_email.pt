@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Registrace na <span tal:replace="domain_name">název domény</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Děkujeme, že jste začali registraci na platformu <span
+                tal:replace="domain_name">název domény</span></h1>
+        <p tal:omit-tag="textual">Abychom ověřili vaši e-mailovou adresu a zajistili, že jste člověk (ne robot), připravili jsme sérii 4 jednoduchých matematických operací. Prosím, proveďte čtyři matematické operace označené od A do D níže a zadejte jejich výsledky do odpovídajících polí na registrační stránce uvedené níže.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operace A je <span tal:content="challenge_A"
+                    tal:omit-tag="textual">První úkol</span></p>
+            <p tal:omit-tag="textual">Operace B je <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Druhý úkol</span></p>
+            <p tal:omit-tag="textual">Operace C je <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Třetí úkol</span></p>
+            <p tal:omit-tag="textual">Operace D je <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Čtvrtý úkol</span></p>
+        </div>
+        <p tal:omit-tag="textual">Odkaz na registrační stránku, na které máte uvést výsledky operací A až D výše:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Děkujeme za váš zájem o naše aktivity. Těšíme se na vaši brzkou návštěvu!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">S pozdravem,</p>
+            <p tal:omit-tag="textual">Tým <span tal:replace="domain_name">název domény</span></p>
+        </footer>
+
+    </body>
+</html>

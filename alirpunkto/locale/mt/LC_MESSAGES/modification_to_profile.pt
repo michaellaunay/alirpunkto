@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Talba ta' Modifika tal-Profili Tiegħek</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Talba ta' Modifika tal-Profili Tiegħek</h1>
+    
+    <p tal:omit-tag="textual">Hello <span tal:replace="member.firstname" tal:condition="exists:member">Isem tal-Utent</span>,</p>
+    
+    <p tal:omit-tag="textual">Irċevejna, fuq il-pjattaforma <span tal:replace="site_name">Isem is-Sit</span> ta' <span tal:replace="domain_name">Isem il-Dominju</span>, talba biex timmodifika l-profil tiegħek. Għal sikurezza tiegħek, meħtieġ li segwi link sikur biex tkompli bil-modifiki. Jekk jogħġbok ikklikkja fuq dan il-URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Link tal-Modifika tal-Profili</a> biex taġġorna l-informazzjoni tal-profil tiegħek.</p>
+    
+    <p tal:omit-tag="textual">Jekk inti ma talbitx din il-modifika tal-profil, jekk jogħġbok injorah din l-email jew ikkuntattja s-sapport jekk ikollok xi tinkwetnajiet.</p>
+    
+    <p tal:omit-tag="textual">Tislijiet,</p>
+    <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem il-Dominju</span>.</p>
+</body>
+</html>

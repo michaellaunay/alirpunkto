@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Din begäran om att ändra profil</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Din begäran om att ändra profil</h1>
+    
+    <p tal:omit-tag="textual">Hej <span tal:replace="member.firstname" tal:condition="exists:member">Användarens namn</span>,</p>
+    
+    <p tal:omit-tag="textual">Vi har mottagit en begäran om att ändra din profil på plattformen <span tal:replace="site_name">Plattformens namn</span> från <span tal:replace="domain_name">Domännamn</span>. För din säkerhet kräver vi att du följer en säker länk för att fortsätta med ändringarna. Vänligen klicka på följande URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Ändra profils länk</a> för att uppdatera din profilinformation.</p>
+    
+    <p tal:omit-tag="textual">Om du inte begärde denna profiländring, vänligen ignorera detta mejl eller kontakta supporten om du har några frågor.</p>
+    
+    <p tal:omit-tag="textual">Med vänliga hälsningar,</p>
+    <p tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Domännamn</span>.</p>
+</body>
+</html>

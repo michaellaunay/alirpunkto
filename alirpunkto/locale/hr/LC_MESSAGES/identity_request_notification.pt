@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vaša registracija na <span tal:omit-tag="textual" tal:replace="domain_name">Naziv domene</span>. Sljedeći koraci</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Pozdrav <span tal:replace="full_name">Ime prijavitelja</span>,</h1>
+    <p tal:omit-tag="textual">Hvala što ste poslali svoju prijavu za <span tal:replace="domain_name">Naziv domene</span>!</p>
+
+    <p tal:omit-tag="textual">Ovisno o opciji koju ste odabrali tijekom registracije, evo sljedećih koraka:</p>
+
+    <h2 tal:omit-tag="textual">Ako ste odabrali opciju "Obični član zajednice":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Čestitamo, sada ste "Obični član zajednice"!</li>
+        <li tal:omit-tag="textual">Vaš broj članstva je odredio.</li>
+        <li tal:omit-tag="textual">Čestitajući e-mail vam je poslan.</li>
+        <li tal:omit-tag="textual">Status vaše prijave je sada "OdobrenObičniČlanZajednice".</li>
+        <li tal:omit-tag="textual">Nema potrebe za daljnjim radnjama s vaše strane. Povežite se s našom <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">radnom površinom</a> i počnite interagirati s drugim članovima zajednice!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Ako ste odabrali opciju "Suradnik":</h2>
+    <p tal:omit-tag="textual">Imat ćete pravo potpuno sudjelovati u našim procesima donošenja odluka i našim glasovanjima. U ovim procesima i glasovanjima želimo očuvati demokratsko načelo 'jedna osoba = jedan glas'. Bilo bi nepravedno da jedna osoba može glasati nekoliko puta koristeći više računa na našoj IT platformi. Stoga je potrebno povezati vaš račun s vama osobno i osigurati da ste identificirani na našoj IT platformi na način koji se ne može zamijeniti s identitetom druge osobe, tj. jedinstvenim skupom identifikatora.</p>
+    <p tal:omit-tag="textual">Osim toga, želimo osigurati da samo građani Europske unije budu Suradnici. Razlog za to je taj što ćemo tražiti pravo sudjelovanja na javnim izborima u Europskoj uniji kao jedna organizacija na razini EU-a i moramo pokazati da predstavljamo samo građane EU-a (a ne "strane interese").</p>
+    <p tal:omit-tag="textual">Kako bismo postigli ove ciljeve, zatražit ćemo vas da pružite sljedeće informacije, kako se pojavljuju u vašim službenim identifikacijskim dokumentima:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Sva vaša imena (u njihovoj službenoj transkripciji latiničnim znakovima za grčki i bugarski),</li>
+        <li tal:omit-tag="textual">Sva vaša prezimena pri rođenju (u njihovoj službenoj transkripciji latiničnim znakovima za grčki i bugarski),</li>
+        <li tal:omit-tag="textual">Vaš datum rođenja,</li>
+        <li tal:omit-tag="textual">Vaša nacionalnost (samo među nacionalnostima država članica EU-a).</li>
+    </ul>
+    <p tal:omit-tag="textual">Te ćete informacije pružiti na našoj platformi za registraciju, a skupina od 3 do 7 nasumično odabranih Suradnika, nazvanih Provjeravatelji, provjerit će da se informacije koje ste pružili na našoj platformi za registraciju podudaraju s onima na vašim službenim identifikacijskim dokumentima. Stoga ćete uputiti djelomične slike svojih službenih identifikacijskih dokumenata izravno tim Provjeravateljima, bez (iz sigurnosnih razloga) korištenja naše IT platforme.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Postoje dvije metode za prenošenje ovih djelomičnih slika vaših službenih identifikacijskih dokumenata Provjeravateljima:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Putem videokonferencije</strong>: Gumb će vas uputiti da izradite unaprijed ispunjeni e-mail, u kojem možete predložiti datume i vrijeme za jedan ili odvojene videokonferencije s Provjeravateljima koji su vam dodijeljeni. Tijekom ove (ovih) videokonferencija, pokazat ćete svoj službeni identifikacijski dokument Provjeravateljima putem vaše kamere, osiguravajući da, npr. broj identifikacijskog dokumenta i mjesto rođenja ostanu skriveni, kako bi se izbjeglo (iz sigurnosnih razloga) da se prikaže puna kopija ovog dokumenta.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Putem e-mail privitka</strong>: Gumb će vam pomoći u pisanju unaprijed ispunjenog e-maila, kojem možete priložiti djelomičnu kopiju svog službenog identifikacijskog dokumenta (npr., maskiranje broja i mjesta rođenja).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Svaki Provjeravatelj će zatim provjeriti usklađenost informacija koje ste pružili u registracijskom obrascu naše IT platforme s onima na vašem službenom identifikacijskom dokumentu. Svaki Provjeravatelj zatim će neovisno glasovati na našoj IT platformi o ovoj provjeri usklađenosti. Ako većina Provjeravatelja prihvati da se informacije koje ste pružili na našoj platformi za registraciju podudaraju s onima na vašim službenim identifikacijskim dokumentima, imat ćemo zadovoljstvo pozdraviti vas kao Suradnika!</p>
+
+    <p tal:omit-tag="textual">Ako slanje e-maila iz bilo kojeg razloga ne uspije, zabilježit će se poruka o pogrešci i pokušat će se poslati e-mail administratoru.</p>
+
+    <p tal:omit-tag="textual">Podsjećamo vas da je vrijeme dodijeljeno za vas da provedete ovaj postupak verifikacije ograničeno, stoga molimo da brzo djelujete.</p>
+
+    <p tal:omit-tag="textual">Ako imate bilo kakvih pitanja ili trebate dodatna pojašnjenja, slobodno nas kontaktirajte.</p>
+
+    <p tal:omit-tag="textual">Srdačan pozdrav,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Tim <span tal:replace="domain_name">Naziv domene</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Napomena: Ova obavijest je generirana automatski. Molimo vas da ne odgovarate izravno na ovu poruku.</small></p>
+</body>
+</html>

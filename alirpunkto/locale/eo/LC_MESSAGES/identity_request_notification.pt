@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Via registrado al <span tal:omit-tag="textual" tal:replace="domain_name">Domin-nomo</span>. Sekvaj paŝoj</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Saluton <span tal:replace="full_name">Nomo de la petanto</span>,</h1>
+    <p tal:omit-tag="textual">Dankon pro sendi vian peton al <span tal:replace="domain_name">Domin-nomo</span>! </p>
+
+    <p tal:omit-tag="textual">Dependante de la opcio, kiun vi elektis dum registrado, jen la sekvaj paŝoj:</p>
+
+    <h2 tal:omit-tag="textual">Se vi elektis la opcion "Normala Komunuma Membro":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Gratulojn, vi nun estas "Normala Komunuma Membro"!</li>
+        <li tal:omit-tag="textual">Via membreca numero estis determinita.</li>
+        <li tal:omit-tag="textual">Gratulmesaĝo estis sendita al vi.</li>
+        <li tal:omit-tag="textual">Via peto nun estas "Aprobita Normala Komunuma Membro".</li>
+        <li tal:omit-tag="textual">Neniu plia agado estas bezonata de vi. Konaktu kun nia <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">laborloko</a> kaj komencu interagi kun viaj samkunsidoj de la Komunumo!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Se vi elektis la opcion "Kooperanto":</h2>
+    <p tal:omit-tag="textual">Vi havos rajton plenumi en niaj decid-procezoj, kaj en niaj voĉdonadoj. En tiuj procezoj kaj voĉdonadoj, ni volas konservi la demokratan principon de 'unu persono = unu voĉo'. Estus maljuste, se iu ajn povus voĉdoni plurfoje uzante plurajn kontojn sur nia IT-platformo. Tial ni bezonas rilati vian konton al vi persone, kaj certigi, ke vi estas identigita sur nia IT-platformo en maniero, kiu ne povas esti konfuzita kun la identeco de alia persono, t.e. kun unika aro de identigiloj.</p>
+    <p tal:omit-tag="textual">Krome, ni volas certigi, ke nur civitanoj de la Eŭropa Unio estas Kooperantoj. La kialo de tio estas, ke ni postulos la rajton partopreni en publikaj elektoj en la Eŭropa Unio kiel unu sola organizo en la skalo de la EU, kaj bezonas montri, ke ni reprezentas nur EU-civitanojn (kaj ne "eksterlandajn interesojn").</p>
+    <p tal:omit-tag="textual">Por atingi tiujn celon, ni petos vin provizi la sekvajn informojn, kiel ili aperas en viaj oficialaj identecaj dokumentoj:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Ĉiuj viaj donitaj nomoj (en ilia oficiala transskribo en latinaj karakteroj por greka kaj bulgara),</li>
+        <li tal:omit-tag="textual">Ĉiuj viaj familiaj nomoj ĉe naskiĝo (en ilia oficiala transskribo en latinaj karakteroj por greka kaj bulgara),</li>
+        <li tal:omit-tag="textual">Via naskiĝdato,</li>
+        <li tal:omit-tag="textual">Via nacieco (inter la naciecoj de membroŝtatoj de la EU nur).</li>
+    </ul>
+    <p tal:omit-tag="textual">Vi provizos ĉi tiun informon sur nia registrado-platformo, kaj aro de 3 ĝis 7 hazarde elektitaj Kooperantoj, nomataj la Kontrolantoj, kontrolios, ke la informoj, kiujn vi provizis sur nia registrado-platformo, kongruas kun tiuj en viaj oficialaj ID-dokumentoj. Tiele vi transdonos partajn bildojn de viaj oficialaj ID-dokumentoj rekte al tiuj Kontrolantoj, sen (pro sekurecaj kialoj) uzante nian IT-platformon.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Estas du metodoj por vi transdoni tiujn partajn bildojn de viaj oficialaj ID-dokumentoj al la Kontrolantoj:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Per Videokonferenco</strong>: Butono gvidos vin en redakti antaŭplenigitan retpoŝton, en kiu vi povas proponi datojn kaj horojn por unu aŭ apartaj videokonferencoj kun la Kontrolantoj asignitaj al vi. Dum tiu(j) videokonferenco(j), vi montrigos vian oficialan ID-dokumenton al la Kontrolantoj per via kamero, certigante, ke ekzemple, la nombro de la ID-dokumento kaj la loko de naskiĝo restas kaŝitaj, por eviti (pro sekurecaj kialoj) havi plenan kopion de ĉi tiu dokumento montrita.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Per Retpoŝta Atentu</strong>: Butono helpos vin skribi antaŭplenigitan retpoŝton, al kiu vi povas aldoni partan kopion de via oficiala ID-dokumento (ekz., maskante la numeron kaj lokon de naskiĝo).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Ĉiu Kontrolanto tiam kontrolos la kongruon de la informoj, kiujn vi provizis en la registro-formularo de nia IT-platformo, kun tiuj en via oficiala identeca dokumento. Ĉiu Kontrolanto tiam sendepende voĉdonos en nia IT-platformo pri ĉi tiu konfirmo de kongruo. Se plimulto de Kontrolantoj akceptas, ke la informoj, kiujn vi provizis en nia registrado-platformo, kongruas kun tiuj en viaj oficialaj ID-dokumentoj, ni ĝojos bonvenigi vin kiel Kooperanton!</p>
+
+    <p tal:omit-tag="textual">Se retpoŝto sendi malsukcesas pro iu ajn kialo, erarma mesagxo estos registrita kaj estos farita provo sendi retpoŝton al la administranto.</p>
+
+    <p tal:omit-tag="textual">Ni reminders, ke la tempo aljuĝita al vi por plenumi ĉi tiun verifikadon estas limigita, tiel ke bonvolu agi rapide.</p>
+
+    <p tal:omit-tag="textual">Se vi havas iujn demandojn aŭ bezonas plian klarigon, bonvolu ne heziti kontakti nin.</p>
+
+    <p tal:omit-tag="textual">Plej bondeziroj,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Domin-nomo</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Notu: Ĉi tiu notico estis generita aŭtomate. Bonvolu ne respondi rekte al ĉi tiu mesaĝo.</small></p>
+</body>
+</html>

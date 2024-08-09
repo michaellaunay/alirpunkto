@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Teie Andmete Oleku Muutus</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Teie Isikuandmete Muudatus IT infrastruktuuris <span tal:replace="domain_name">Domeeninimi</span></h1>
+        <p tal:omit-tag="textual">Tere<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Liikme Nimi</span>,
+        </p>
+        <p tal:omit-tag="textual">Siin on muudatuste üksikasjad:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Liikme ID: <span tal:replace="python:member.oid">Liikme ID</span></li>
+            <li tal:omit-tag="textual">Ülemineku Kuupäev: <span tal:replace="python:member.modifications[-1].datetime">Viimane üleminek</span></li>
+            <li tal:omit-tag="textual">Uus Oleku: <span tal:replace="python:member.member_state">Uus liikme olek</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Aitäh teie osalemise eest.</p>
+        <p tal:omit-tag="textual">Parimate soovidega,</p>
+        <p tal:omit-tag="textual">Meeskond <span tal:replace="domain_name">Domeeninimi</span></p>
+    </body>
+</html>

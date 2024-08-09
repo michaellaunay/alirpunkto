@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Bonvolu konfirmi vian peton por ĝisdatigi vian retpoŝtadreson sur <span tal:replace="domain_name">Domanaj nomo</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Bonvolu konfirmi vian peton por ĝisdatigi vian retpoŝtadreson sur la IT-platformo <span tal:replace="domain_name">Domanaj nomo</span></h1>
+    <p tal:omit-tag="textual">Vi, aŭ persono havanta aliron al via konto sur la <span tal:replace="site_name">Ejo nomo</span> platformo de <span tal:replace="domain_name">Domanaj nomo</span>, petis nin ŝanĝi la retpoŝtadreson, kiun la <span tal:replace="domain_name">domanaj nomo</span> IT-infrastrukturo uzas por interagadi kun vi. La nova retpoŝtadreso, kiun oni petis uzi en la estonteco, estas: <span tal:replace="new_email">Nova retpoŝtadreso</span>.</p>
+<p tal:omit-tag="textual">Se vi konfirmas, ke <span tal:replace="new_email">Nova retpoŝtadreso</span> devus esti la retpoŝtadreso, kiun la <span tal:replace="domain_name">domanaj nomo</span> IT-infrastrukturo devus en la estonteco uzi por interagadi kun vi, bonvolu klaki la konfirman ligon sube.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Se vi faris eraron, aŭ se vi ne faris ĉi tiun peton, simple ignoru ĉi tiun retpoŝton.</p>
+
+    <p tal:omit-tag="textual">Dankon pro via intereso pri niaj aktivadoj.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Plej bondezirojn,</p>
+        <p tal:omit-tag="textual">La teamo ĉe <span tal:replace="domain_name">Ejo</span></p>
+    </footer>
+
+</body>
+</html>

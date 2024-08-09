@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Промяна в статуса на вашата заявка</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Еволюция на вашата заявка към <span tal:replace="domain_name">Име на домейн</span></h1>
+        <p tal:omit-tag="textual">Здравейте<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Име на кандидата</span>,
+        </p>
+        <p tal:omit-tag="textual">Вашата заявка на платформата
+            <span tal:replace="site_url">URL</span> като 
+            <span tal:replace="python:candidature.type">Роля</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">е приета</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">е отхвърлена</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">е в процес на обработка и е променила своя статус</span> . 
+        </p>
+        <p tal:omit-tag="textual">Ето детайлите за нейното еволюиране:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID на кандидатура: <span tal:replace="python:candidature.oid">ID на заявка</span></li>
+            <li tal:omit-tag="textual">Дата на преход: <span tal:replace="python:candidature.modifications[-1].datetime">Последен преход</span></li>
+            <li tal:omit-tag="textual">Нов статус: <span tal:replace="python:candidature.candidature_state">Нов статус на заявката</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Ако е необходимо, можете да прекратите процеса на регистрация сега. Ще можете да го възобновите по-късно, като кликнете на линка по-долу.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Благодарим ви за участието.</p>
+        <p tal:omit-tag="textual">С най-добри пожелания,</p>
+        <p tal:omit-tag="textual">Екипът на <span tal:replace="domain_name">Име на домейн</span></p>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Teie taotlus <span tal:replace="domain_name">Domeeninime</span> jaoks on heakskiidetud</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Palju õnne, teie taotluse heakskiitmise puhul!</h1>
+    
+    <p tal:omit-tag="textual">Tere <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Kandidaadi nimi</span>,</p>
+    
+    <p tal:omit-tag="textual">Meil on hea meel teavitada teid, et teie taotlus <span tal:replace="domain_name">Domeeninime</span> ametikohale <span tal:replace="python:candidature.type">Ametikoht</span> on heaks kiidetud.</p>
+
+    <p tal:omit-tag="textual">Aitäh, et liitute meiega! Meil on hea meel teid meie kogukonnas tervitada.</p>
+    
+    <p tal:omit-tag="textual">Nüüd, kui teie taotlus on heaks kiidetud, saate logida meie platvormile sisse, kasutades teie taotluse käigus esitatud pseudonüümi ja parooli. Pärast sisse logimist leiate:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">lingid kõikidele tarkvararakendustele, millele teil on otsene juurdepääs. Te ei pea uuesti sisse logima!</li>
+        <li tal:omit-tag="textual">lingi vormile, kus saate vaadata ja redigeerida oma profiili. Selles vormis julgustame teid end teistele meie kogukonna liikmetele lühikese "profiilitekstiga" esitama ning kuvama väikest pilti, mis teid esindab (teie "avatar");</li>
+        <li tal:omit-tag="textual">lingi väljalogimiseks.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Siin on teie profiili peamised elemendid, mille me registreerisime:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">teie pseudonüüm: ##PSEUDONYM. Palun hoidke selle pseudonüümi kohta HOOLEGA ja TURVALISELT KIRJENDUST: see on ainus identifikaator, millega saate meie IT-platvormile sisse logida;</li>
+        <li tal:omit-tag="textual">teie parool: (parool, mille esitasite registreerimise ajal);</li>
+        <li tal:omit-tag="textual">teie e-posti aadress: (e-posti aadress, millele saadame selle e-kirja);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">teie isikuandmed: (kõik teie eesnimed ja perekonnanimi, teie sünnikuupäev, nagu on esitatud ja kinnitatud teie registreerimise käigus);</li>
+        <li tal:omit-tag="textual">teie eelistatud keel meiega suhtlemiseks: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">teine keel, mille kasutamiseks nõustute: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">keel, mille kasutamiseks nõustute kolmanda valikuna: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Teie arvestuseks on siin teie registreerimisprotsessi lõpetamise üksikasjad:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Kandidaadi ID: <span tal:replace="python:candidature.oid">Taotluse ID</span></li>
+        <li tal:omit-tag="textual">Heakskiitmise kuupäev: <span tal:replace="python:candidature.modifications[-1]">Viimane üleminek</span></li>
+        <li tal:omit-tag="textual">Staatus: Heaks kiidetud</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Ootame rõõmuga koostööd teiega!</p>
+
+    
+    <p tal:omit-tag="textual">Parimate soovidega,</p>
+    <p tal:omit-tag="textual"><span tal:replace="domain_name">Domeeninime</span> meeskond.</p>
+</body>
+</html>
