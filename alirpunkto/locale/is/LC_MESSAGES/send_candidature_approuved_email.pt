@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Umsókn þín um <span tal:replace="domain_name">Domennaheiti</span> hefur verið samþykkt</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Til hamingju með samþykkt umsóknarinnar þinnar!</h1>
+    
+    <p tal:omit-tag="textual">Halló <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nafn umsækjanda</span>,</p>
+    
+    <p tal:omit-tag="textual">Við erum ánægð með að tilkynna þér að umsókn þín um <span tal:replace="domain_name">Domennaheiti</span> fyrir hlutverkið <span tal:replace="python:candidature.type">Hlutverk</span> hefur verið samþykkt.</p>
+
+    <p tal:omit-tag="textual">Takk fyrir að vera með okkur! Við erum glöð að taka þig í okkar samfélag.</p>
+    
+    <p tal:omit-tag="textual">Nú þegar umsókn þín hefur verið samþykkt, getur þú skráð þig inn á okkar vettvang með það dulnúmer og lykilorð sem þú gafst þegar þú sóttir um. Eftir að þú hefur skráð þig inn, muntu finna:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">tenglar á allar hugbúnaðarsóknir sem þú hefur bein aðgang að. Þú þarft ekki að skrá þig inn aftur!</li>
+        <li tal:omit-tag="textual">tengil á skjalið þar sem þú getur skoðað og breytt eigin prófílnum þínum. Á þessu skjali hvetjum við þig til að kynna þig fyrir öðrum meðliminum í okkar samfélagi með stuttum "prófíltexta" og að sýna litla mynd sem táknar þig (þitt "avatar");</li>
+        <li tal:omit-tag="textual">tengil til að skrá þig út.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Hér eru aðalþættirnir í prófílnum þínum sem við skráðum:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">dulnafn þitt: ##PSEUDONYM. Vinsamlegast varðveittu VANDAFELDA og ÖRUGGA SKRÁ yfir þetta dulnafn: það er eini auðkenni sem þú getur skráð þig inn á okkar IT-vettvang;</li>
+        <li tal:omit-tag="textual">lykilorð þitt: (lykilorðið sem þú gafst þegar þú skráð þig inn);</li>
+        <li tal:omit-tag="textual">netfangið þitt: (netfangið sem við sendum þetta tölvupóst);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">auðkennisgögnin þín: (öll nöfn þín bæði gefin og fjölskyldunöfn, fæðingardagur þinn, eins og gefið var upp og staðfest í gegnum skráninguna);</li>
+        <li tal:omit-tag="textual">valin tungumál fyrir samskipti við þig: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">annað tungumál sem þú samþykkir að við notum í samskiptum við þig: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">tungumál sem þú samþykkir að við notum, sem þriðja valkost, í samskiptum við þig: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Fyrir þína skráningu, hér eru upplýsingar um lokun skráningarferlisins þíns:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Umsóknar ID: <span tal:replace="python:candidature.oid">Umsóknar ID</span></li>
+        <li tal:omit-tag="textual">Samþykkta dagsetning: <span tal:replace="python:candidature.modifications[-1]">Síðasta breyting</span></li>
+        <li tal:omit-tag="textual">Staða: Samþykkt</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Við hlökkum til að vinna saman með þér!</p>
+
+    <p tal:omit-tag="textual">Bestu kveðjur,</p>
+    <p tal:omit-tag="textual">Teymi <span tal:replace="domain_name">Domennaheiti</span>.</p>
+</body>
+</html>

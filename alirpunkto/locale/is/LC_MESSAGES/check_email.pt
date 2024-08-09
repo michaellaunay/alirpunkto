@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Skráning á <span tal:replace="domain_name">Lénsheiti</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Takk fyrir að byrja skráningu þína á palla <span
+                tal:replace="domain_name">Lénsheiti</span></h1>
+        <p tal:omit-tag="textual">Til að staðfesta netfang þitt og tryggja að þú sért manneskja (ekki
+            vélmenni), höfum við útbúið röð af 4 einföldum stærðfræðilegum aðgerðum. Vinsamlegast framkvæmdu
+            fjórar stærðfræðilegar aðgerðir merktar A til D hér að neðan og sláðu inn niðurstöður þeirra í
+            samsvarandi reiti á skráningarsíðunni sem tengd er hér að neðan.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Aðgerð A er <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Fyrsti áskorunin</span></p>
+            <p tal:omit-tag="textual">Aðgerð B er <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Önnur áskorunin</span></p>
+            <p tal:omit-tag="textual">Aðgerð C er <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Þriðja áskorunin</span></p>
+            <p tal:omit-tag="textual">Aðgerð D er <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Fjórða áskorunin</span></p>
+        </div>
+        <p tal:omit-tag="textual">Tengill á skráningarsíðuna þar sem á að skila niðurstöðum aðgerða A til D hér að ofan:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Takk fyrir áhuga þinn á okkar starfsemi. Við hlökkum til að
+            fagna þér fljótlega!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Virðingarfyllst,</p>
+            <p tal:omit-tag="textual">Teaming <span tal:replace="domain_name">Lénsheiti</span></p>
+        </footer>
+
+    </body>
+</html>

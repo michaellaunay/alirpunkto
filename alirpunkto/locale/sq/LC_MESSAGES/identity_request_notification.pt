@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Regjistrimi juaj në <span tal:omit-tag="textual" tal:replace="domain_name">Emri i Domain-it</span>. Hapat Tjetër</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Përshëndetje <span tal:replace="full_name">Emri i Aplikuesit</span>,</h1>
+    <p tal:omit-tag="textual">Faleminderit që keni dorëzuar aplikimin tuaj për <span tal:replace="domain_name">Emri i Domain-it</span>! </p>
+
+    <p tal:omit-tag="textual">Në varësi të opsionit që zgjodhët gjatë regjistrimit, këtu janë hapat e ardhshëm:</p>
+
+    <h2 tal:omit-tag="textual">Nëse zgjodhët opsionin "Anëtar i Zhvilluar":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Urime, tani jeni një "Anëtar i Zhvilluar"!</li>
+        <li tal:omit-tag="textual">Numri juaj i anëtarësisë është përcaktuar.</li>
+        <li tal:omit-tag="textual">Një email urimi është dërguar tek ju.</li>
+        <li tal:omit-tag="textual">Statusi i aplikimit tuaj tani është "MiratuarAnëtarZhvilluar".</li>
+        <li tal:omit-tag="textual">Nuk ka nevojë për veprime të tjera nga ana juaj. Përfshihuni në <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">hapësirën tonë të punës</a> dhe filloni të komunikoni me anëtarët e tjerë të komunitetit!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Nëse zgjodhët opsionin "Bashkëpunëtor":</h2>
+    <p tal:omit-tag="textual">Ju do të keni të drejtë të merrni pjesë plotësisht në proceset tona të vendimmarrjes dhe në votimet tona. Në këto procese dhe votime, dëshirojmë të ruajmë parimin demokratik "një person = një votë". Do të ishte e padrejtë nëse një person i caktuar mund të votojë disa herë duke përdorur disa llogari në platformën tonë IT. Prandaj, ne duhet të lidhim llogarinë tuaj personalisht me ju, dhe të sigurohemi që jeni identifikuar në platformën tonë IT në një mënyrë që nuk mund të ngatërrohet me identitetin e një personi tjetër, dmth me një grup unik identifikuesish.</p>
+    <p tal:omit-tag="textual">Për më tepër, dëshirojmë të sigurohemi që vetëm qytetarët e Bashkimit Europian janë Bashkëpunëtorë. Arsyetimi për këtë është se ne do të kërkojmë të drejtat për të marrë pjesë në zgjedhje publike në Bashkimin Europian si një organizatë e vetme në shkallën e BE-së, dhe kemi nevojë të dëshmojmë se përfaqësojmë vetëm qytetarët e BE-së (dhe jo "interesentë të huaj").</p>
+    <p tal:omit-tag="textual">Për të arritur këto qëllime, ne do t'ju kërkojmë të ofroni informacionin e mëposhtëm, siç shfaqet në dokumentet tuaja të identitetit zyrtar:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Të gjitha emrat tuaj të dhënë (në transkriptimin e tyre zyrtar me shkronja latine për grekët dhe bullgarët),</li>
+        <li tal:omit-tag="textual">Të gjitha mbiemrat tuaj të lindjes (në transkriptimin e tyre zyrtar me shkronja latine për grekët dhe bullgarët),</li>
+        <li tal:omit-tag="textual">Data e lindjes tuaj,</li>
+        <li tal:omit-tag="textual">Shtetësia juaj (mbi shtetësitë e vendeve anëtare të BE-së vetëm).</li>
+    </ul>
+    <p tal:omit-tag="textual">Ju do të ofroni këtë informacion në platformën tonë të regjistrimit, dhe një grup prej 3 deri në 7 Bashkëpunëtorësh të zgjedhur rastësisht, të quajtur Verifikuesit, do të kontrollojnë që informacioni që ofruat në platformën tonë të regjistrimit përputhet me atë në dokumentet tuaja zyrtare të identitetit. Kështu, do të transmetoni fotografi të pjesshme të dokumenteve tuaja zyrtare të identitetit direkt tek këta Verifikues, pa (për arsye sigurie) përdorur platformën tonë IT.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Ka dy metoda për t'i transmetuar këto fotografi të pjesshme të dokumenteve tuaja zyrtare të identitetit Verifikuesve:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Përmes Video Konferencave</strong>: Një buton do t'ju udhëzojë në tregimin e një email-i të plotësuar paraprakisht, në të cilin mund të propozoni datat dhe orët e takimeve për një ose disa video konference me Verifikuesit e caktuar për ju. Gjatë kësaj (kësaj) video konference(e), do t'i tregoni Verifikuesve dokumentin tuaj zyrtar të identitetit përmes kamerës tuaj, duke siguruar që, p.sh. numri i dokumentit të identitetit dhe vendi i lindjes të mbeten të fshehur, për të shmangur (për arsye sigurie) shfaqjen e një kopjeje të plotë të këtij dokumenti.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Përmes Shtesës në Email</strong>: Një buton do t'ju ndihmojë të shkruani një email të plotësuar paraprakisht, në të cilin mund të bashkëngjitni një kopje pjesshme të dokumentit tuaj zyrtar të identitetit (p.sh., duke fshehur numrin dhe vendin e lindjes).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Çdo Verifikues do të kontrollojë përputhshmërinë e informacionit që ofruat në formularin e regjistrimit të platformës sonë IT me atë në dokumentin tuaj zyrtar të identitetit. Çdo Verifikues do të votojë pastaj në mënyrë të pavarur në platformën tonë IT për këtë verifikim të përputhshmërisë. Nëse një shumicë e Verifikuesve pranon që informacioni që ofruat në platformën tonë të regjistrimit përputhet me atë në dokumentet tuaja zyrtare të identitetit, do të kemi kënaqësinë t'ju mirëpresim si Bashkëpunëtor!</p>
+
+    <p tal:omit-tag="textual">Nëse dërgimi i email-it dështoi për ndonjë arsye, një mesazh gabimi do të regjistrohet dhe do të bëhet një përpjekje për të dërguar një email administratorit.</p>
+
+    <p tal:omit-tag="textual">Ju kujtojmë se koha e caktuar për të realizuar këtë proces verifikimi është e kufizuar, prandaj ju lutemi veproni shpejt.</p>
+
+    <p tal:omit-tag="textual">Nëse keni ndonjë pyetje ose keni nevojë për sqarim të mëtejshëm, ju lutemi mos hezitoni të na kontaktoni.</p>
+
+    <p tal:omit-tag="textual">Me respekt,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Ekipi i <span tal:replace="domain_name">Emri i Domain-it</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Shënim: Kjo njoftim është gjeneruar automatikisht. Ju lutemi mos përgjigjni direkt këtij mesazhi.</small></p>
+</body>
+</html>

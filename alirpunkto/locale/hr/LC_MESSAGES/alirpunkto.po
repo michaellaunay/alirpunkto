@@ -1,0 +1,1102 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Dobrodošli"
+
+msgid "username_label"
+msgstr "Korisničko ime"
+
+msgid "password_label"
+msgstr "Lozinka"
+
+msgid "login_label"
+msgstr "Prijava"
+
+msgid "welcome_msg"
+msgstr "Dobrodošli na ${site_name}, centraliziranu uslugu za aplikacije korištene u IT infrastrukturi ${domain_name}."
+
+msgid "all_applications_msg"
+msgstr "Sve aplikacije koje trebate za sudjelovanje u aktivnostima ${domain_name} na jednom mjestu."
+
+msgid "register_or_login_msg"
+msgstr "Registrirajte se ili se prijavite sada da biste započeli."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, centralizirana usluga za aplikacije korištene u IT infrastrukturi ${domain_name}"
+
+msgid "logged_in_msg"
+msgstr "Prijavljeni ste kao ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Možete se odjaviti klikom ovdje"
+
+msgid "logout_label"
+msgstr "Odjava"
+
+msgid "choose_application_msg"
+msgstr "Odaberite aplikaciju kojoj želite pridružiti:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Neispravno korisničko ime ili lozinka. Pokušajte ponovno"
+
+msgid "register_link"
+msgstr "Kreirajte račun"
+
+msgid "password_confirm_label"
+msgstr "Potvrdite lozinku"
+
+msgid "password_confirm_title"
+msgstr "Potvrdite svoju lozinku"
+
+msgid "forgot_password_label"
+msgstr "Zaboravili ste lozinku?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Puno ime(a) kao u vašim službenim identifikacijskim dokumentima"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Puno prezime(a) kao u vašim službenim identifikacijskim dokumentima"
+
+msgid "birthdate_label"
+msgstr "Datum rođenja"
+
+msgid "nationality_label"
+msgstr "Nacionalnost (među građanima Europske unije)"
+
+msgid "cooperator_number_label"
+msgstr "Broj kooperatora"
+
+msgid "pseudonym_label"
+msgstr "Pseudonim"
+
+msgid "email_label"
+msgstr "Email adresa"
+
+msgid "first_interaction_language_label"
+msgstr "Jezik koji preferirate za naše interakcije"
+
+msgid "second_interaction_language_label"
+msgstr "Jezik koji prihvaćate kao drugu opciju za naše interakcije"
+
+msgid "register_label"
+msgstr "Registrirajte se"
+
+msgid "forgot_password_head"
+msgstr "Zaboravljena lozinka"
+
+msgid "forgot_your_password_title"
+msgstr "Zaboravili ste svoju lozinku?"
+
+msgid "enter_your_email_address_label"
+msgstr "Molimo unesite svoju email adresu:"
+
+msgid "submit_button"
+msgstr "Pošaljite"
+
+msgid "candidature_states_draft_value"
+msgstr "Nacrt: Prijava je u nacrtu."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Provjera emaila: Stanje u kojem email adresa podnositelja čeka provjeru."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "Potvrđena ljudska osoba: Email adresa podnositelja je verificirana i dokazano je da je riječ o ljudskoj osobi (potvrđeno je da niste robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Jedinstveni podaci: Podnositelj je unio svoje osobne identifikacijske podatke i provjerili smo da niti jedan trenutni ili nedavni Kooperator ili Obični član Zajednice nema iste "
+"podatke."
+
+msgid "candidature_states_pending_value"
+msgstr "Na čekanju: Prijava je podnesena. Osobni identifikacijski podaci su proslijeđeni Provjeriteljima, ali još nisu pružili svoje povratne informacije."
+
+msgid "candidature_states_approved_value"
+msgstr "Odobreno: Prijava je prihvaćena."
+
+msgid "candidature_states_refused_value"
+msgstr "Odbijeno: Prijava je odbijena."
+
+msgid "candidature_states_draft"
+msgstr "nacrt"
+
+msgid "candidature_states_email_validation"
+msgstr "provjera_emaila"
+
+msgid "candidature_states_confirmed_human"
+msgstr "potvrđena_ljudska_osoba"
+
+msgid "candidature_states_unique_data"
+msgstr "jedinstveni_podaci"
+
+msgid "candidature_states_pending"
+msgstr "na_čekanju"
+
+msgid "candidature_states_approved"
+msgstr "odobreno"
+
+msgid "candidature_states_refused"
+msgstr "odbijeno"
+
+msgid "user_types_ordinary_value"
+msgstr "Obični: Prijava za postati Obični član Zajednice = uz pojednostavljeni proces registracije, bez financijskih obveza, ali bez prava odlučivanja."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Kooperator: Prijava za postati punopravni član Zadruge, Kooperator = uz potpuni proces registracije koji osigurava princip 'jedna osoba = jedan glas' i da je "
+"Podnositelj građanin Europske unije, obvezu kupnje najmanje jedne dionice i plaćanja godišnje članarine, te puna prava odlučivanja."
+
+msgid "user_types_ordinary"
+msgstr "Obični član Zajednice"
+
+msgid "user_types_cooperator"
+msgstr "Kooperator = punopravni član Zadruge"
+
+msgid "vote_types_yes_value"
+msgstr "Da: Glas je pozitivan."
+
+msgid "vote_types_no_value"
+msgstr "Ne: Glas je negativan."
+
+msgid "vote_types_abstain_value"
+msgstr "Suzdržan: Glas je neutralan."
+
+msgid "vote_types_yes"
+msgstr "da"
+
+msgid "vote_types_no"
+msgstr "ne"
+
+msgid "vote_types_abstain"
+msgstr "suzdržan"
+
+msgid "zero"
+msgstr "nula"
+
+msgid "one"
+msgstr "jedan"
+
+msgid "two"
+msgstr "dva"
+
+msgid "three"
+msgstr "tri"
+
+msgid "four"
+msgstr "četiri"
+
+msgid "five"
+msgstr "pet"
+
+msgid "six"
+msgstr "šest"
+
+msgid "seven"
+msgstr "sedam"
+
+msgid "eight"
+msgstr "osam"
+
+msgid "nine"
+msgstr "devet"
+
+msgid "times"
+msgstr "pomnoženo s"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Provjera da ste ljudsko biće. Izračunajte rezultate jednostavnih matematičkih operacija i unesite te rezultate na portal"
+
+msgid "email_candidature_state_changed"
+msgstr "Promjena u statusu vaše prijave na portalu"
+
+msgid "invalid_challenge"
+msgstr "Vaš odgovor je netočan. Molimo unesite novi."
+
+msgid "invalid_email"
+msgstr "Postoji problem s vašom email adresom, molimo provjerite je."
+
+msgid "invalid_choice"
+msgstr "Vaš odabir nije valjan, molimo unesite ga ponovno."
+
+msgid "challenge_instruction_text"
+msgstr "Molimo izračunajte rezultate sljedeće četiri jednostavne matematičke operacije i ispunite odgovarajuća polja kako biste potvrdili svoju email adresu."
+
+msgid "enter_result_label_A"
+msgstr "Molimo unesite rezultat za matematičku operaciju A:"
+
+msgid "result_label_title_A"
+msgstr "Molimo unesite kod koji ste primili putem e-maila ili rezultat matematičke operacije A."
+
+msgid "result_input_title_A"
+msgstr "Kako bismo provjerili vašu email adresu i da ste ljudsko biće (a ne robot), molimo unesite rezultat operacije A koji ste primili putem e-maila."
+
+msgid "enter_result_label_B"
+msgstr "Molimo unesite rezultat za matematičku operaciju B:"
+
+msgid "result_label_title_B"
+msgstr "Molimo unesite kod koji ste primili putem e-maila ili rezultat matematičke operacije B."
+
+msgid "result_input_title_B"
+msgstr "Kako bismo provjerili vašu email adresu i da ste ljudsko biće (a ne robot), molimo unesite rezultat operacije B koji ste primili putem e-maila."
+
+msgid "enter_result_label_C"
+msgstr "Molimo unesite rezultat za matematičku operaciju C:"
+
+msgid "result_label_title_C"
+msgstr "Molimo unesite kod koji ste primili putem e-maila ili rezultat matematičke operacije C."
+
+msgid "result_input_title_C"
+msgstr "Kako bismo provjerili vašu email adresu i da ste ljudsko biće (a ne robot), molimo unesite rezultat operacije C koji ste primili putem e-maila."
+
+msgid "enter_result_label_D"
+msgstr "Molimo unesite rezultat za matematičku operaciju D:"
+
+msgid "result_label_title_D"
+msgstr "Molimo unesite kod koji ste primili putem e-maila ili rezultat matematičke operacije D."
+
+msgid "result_input_title_D"
+msgstr "Kako bismo provjerili vašu email adresu i da ste ljudsko biće (a ne robot), molimo unesite rezultat operacije D koji ste primili putem e-maila."
+
+msgid "verify_button"
+msgstr "Pošaljite"
+
+msgid "submit_email_validation_title"
+msgstr "Kliknite za provjeru unesenih kodova."
+
+msgid "passwords_dont_match"
+msgstr "Lozinke se ne podudaraju."
+
+msgid "password_too_short"
+msgstr "Lozinka je prekratka."
+
+msgid "password_minimum_length"
+msgstr "Lozinka mora imati najmanje ${password_minimum_length} znakova."
+
+msgid "password_too_long"
+msgstr "Lozinka je preduga."
+
+msgid "password_maximum_length"
+msgstr "Lozinka ne smije prelaziti ${password_maximum_length} znakova."
+
+msgid "password_must_contain_digit"
+msgstr "Lozinka mora sadržavati najmanje jednu brojku."
+
+msgid "password_must_contain_uppercase"
+msgstr "Lozinka mora sadržavati najmanje jedno veliko slovo."
+
+msgid "password_must_contain_lowercase"
+msgstr "Lozinka mora sadržavati najmanje jedno malo slovo."
+
+msgid "password_must_contain_special_char"
+msgstr "Lozinka mora sadržavati najmanje jedan od sljedećih znakova: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Molimo unesite svoju lozinku ovdje."
+
+msgid "password_confirm_title_label"
+msgstr "Molimo potvrdite svoju lozinku ovdje."
+
+msgid "password_confirm"
+msgstr "Potvrdite svoju lozinku."
+
+msgid "type_of_registration"
+msgstr "Vrsta registracije"
+
+msgid "type_registration_label"
+msgstr "Odaberite vrstu registracije koja vam odgovara."
+
+msgid "type_registration_choice"
+msgstr "Svaka vrsta registracije dolazi s specifičnim skupom prava, pogodnosti i obveza."
+
+msgid "approved_heading"
+msgstr "Čestitamo na vašem odobrenju!"
+
+msgid "approved_description"
+msgstr "Vaša prijava je odobrena. Sada se možete prijaviti koristeći pseudonim i lozinku koje ste unijeli tijekom procesa prijave."
+
+msgid "invalid_pseudonym"
+msgstr "Nevažeći pseudonim. Trebao bi imati između ${MIN_PSEUDONYM_LENGTH} i ${MAX_PSEUDONYM_LENGTH} znakova i može sadržavati samo slova (A-Z, a-z), brojeve (0-9), donje crte (_), točke (.) , crtice (-) i razmake ( ). Ne može sadržavati slova s naglascima, umalaute i druge dijakritičke znakove specifične za neke jezike."
+
+msgid "invalid_date"
+msgstr "Nevažeći format datuma."
+
+msgid "pseudonym_too_short"
+msgstr "Pseudonim je prekratak."
+
+msgid "pseudonym_minimum_length"
+msgstr "Pseudonim mora imati najmanje ${MIN_PSEUDONYM_LENGTH} znakova."
+
+msgid "pseudonym_too_long"
+msgstr "Pseudonim je predug."
+
+msgid "pseudonym_maximum_length"
+msgstr "Pseudonim ne smije prelaziti ${MAX_PSEUDONYM_LENGTH} znakova."
+
+msgid "pseudonym_allready_exists"
+msgstr "Ovaj pseudonim je već zauzet. Molimo odaberite drugi."
+
+msgid "Select_a_country"
+msgstr "Odaberite državu članicu Europske unije"
+
+msgid "Austria"
+msgstr "AT - Austrija"
+
+msgid "Belgium"
+msgstr "BE - Belgija"
+
+msgid "Bulgaria"
+msgstr "BG - Bugarska"
+
+msgid "Cyprus"
+msgstr "CY - Cipar"
+
+msgid "Czech_Republic"
+msgstr "CZ - Češka"
+
+msgid "Germany"
+msgstr "DE - Njemačka"
+
+msgid "Denmark"
+msgstr "DK - Danska"
+
+msgid "Estonia"
+msgstr "EE - Estonija"
+
+msgid "Spain"
+msgstr "ES - Španjolska"
+
+msgid "Finland"
+msgstr "FI - Finska"
+
+msgid "France"
+msgstr "FR - Francuska"
+
+msgid "Greece"
+msgstr "GR - Grčka"
+
+msgid "Croatia"
+msgstr "HR - Hrvatska"
+
+msgid "Hungary"
+msgstr "HU - Mađarska"
+
+msgid "Ireland"
+msgstr "IE - Irska"
+
+msgid "Italy"
+msgstr "IT - Italija"
+
+msgid "Lithuania"
+msgstr "LT - Litvanija"
+
+msgid "Luxembourg"
+msgstr "LU - Luksemburg"
+
+msgid "Latvia"
+msgstr "LV - Latvija"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Nizozemska"
+
+msgid "Poland"
+msgstr "PL - Poljska"
+
+msgid "Portugal"
+msgstr "PT - Portugal"
+
+msgid "Romania"
+msgstr "RO - Rumunija"
+
+msgid "Sweden"
+msgstr "SE - Švedska"
+
+msgid "Slovenia"
+msgstr "SI - Slovenija"
+
+msgid "Slovakia"
+msgstr "SK - Slovačka"
+
+msgid "full_name_as_in_id_required"
+msgstr "Puno ime(i) je(ju) obavezno."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Puno prezime(a) je(ju) obavezno."
+
+msgid "birthdate_required"
+msgstr "Datum rođenja je obavezan."
+
+msgid "nationality_required"
+msgstr "Nacionalnost je obavezna."
+
+msgid "first_interaction_language_required"
+msgstr "Prvi jezik interakcije je obavezan."
+
+msgid "pending_description"
+msgstr "Vaša prijava se pregledava. Bit ćete obaviješteni putem e-pošte kada bude odobrena."
+
+msgid "candidature_not_found"
+msgstr "Prijava nije pronađena."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr "<div>\n"
+"<h2><b>Hvala vam na interesu za aktivnosti ${domain_name}! Ovo je pravo mjesto za registraciju </b></h2>\n"
+"<p>CosmoPolitička Kooperativa podržava pojedince i transformira postojeći ekonomski, društveni i politički sustav prema radikalno pravednom, održivom, demokratskom i sretnom "
+"društvu, <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Društvo Sporazuma</a>.</p>\n"
+"<p>Dolje ćete naći početak procesa registracije kako biste nam se pridružili. Predlažemo dva nivoa sudjelovanja, s rastućim obvezama i pravima:</p>\n"
+"<ul>\n"
+"<li>kao <b>Obični član naše zajednice</b>, s jednostavnim procesom registracije, bez financijskih obveza, ali bez prava glasa; ili </li>\n"
+"<li>kao <b>Kooperator</b>, punopravni član naše Kooperative, s procesom registracije koji osigurava da se određena osoba može registrirati samo jednom (da se pridržava demokratskog principa \"jedna "
+"osoba = jedan glas\") i da su samo građani Europske unije koji su dostigli svoju punoljetnost Kooperativci, s obvezom kupnje najmanje jednog udjela i plaćanja "
+"godišnjeg doprinosa, i punim pravima glasa. Europska unija je geografski okvir našeg rada  (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">vidi zašto</a>)</li>\n"
+"</ul>\n"
+"<p>Proces registracije uključuje sljedeće korake:</p>\n"
+"<ol>\n"
+"<li>provjeravamo da je e-mail adresu pružio vi, čovjek (a ne robot);</li>\n"
+"<li>tražimo od vas vaš pseudonim, lozinku i preferirani jezik(e) za interakciju s vama;</li>\n"
+"<li>u slučaju da ste se prijavili kao Obični član Zajednice, završili ste i ušli u našu Zajednicu. U slučaju da ste se prijavili kao Kooperator, proces "
+"nastavlja s time da provjerimo ispunjavate li postavljene uvjete za Kooperatora.</li>\n"
+"</ol>\n"
+"<p>Ova provjera se vrši na sljedeći način:</p>\n"
+"<ol>\n"
+"<li>tražimo od vas <b>identifikacijske podatke</b>: vaše ime(i) i prezime(a), vaš datum rođenja;</li>\n"
+"<li>tražimo nekoliko postojećih članova Kooperative (vaših Provjeravača) da potvrde da se informacije na vašem službenom identifikacijskom dokumentu podudaraju s onima koje ste pružili u prethodnom koraku, "
+"na temelju izravne razmjene e-pošte ili videokonferencijskog sastanka s vama;</li>\n"
+"<li>jednom kada su potvrdili ovu podudarnost, bit ćete dobrodošli kao Kooperator, s punim pravima - jednom kada kupite najmanje <a href=\"https://www.cosmopolitical.coop/share\">jedan "
+"udjel</a> i platite svoj <a href=\"https://www.cosmopolitical.coop/yearcontrib\">godišnji doprinos za naše poslovanje</a>.</li>\n"
+"</ol>\n"
+"<p>Molimo započnite svoju registraciju odmah! Radujemo se vašem dobrodošlici u naše aktivnosti.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr "Prvi korak u vašem procesu registracije je potvrditi da ste \n"
+"živa osoba, a ne robot. Za to provjeravamo da možete primiti i \n"
+"razumjeti e-poštu koju ćemo vam poslati: ono što od vas tražimo je \n"
+"jednostavno za ljudsko biće, mnogo složenije za robota."
+
+msgid "identity_verification_label"
+msgstr "Verifikacija identiteta"
+
+msgid "Send_id_copy_by_email"
+msgstr "Pošaljite sken dijela vašeg službenog identifikacijskog dokumenta putem e-pošte."
+
+msgid "Send_video_conference_link"
+msgstr "Pošaljite prijedloge za datum i vremenski okvir videokonferencije."
+
+msgid "Proceed"
+msgstr "Nastavi"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Molimo potvrdite da ste poslali e-poštu Verificatorima."
+
+msgid "sent_confirmation_label"
+msgstr "Potvrda da su e-mailovi poslani Verificatorima"
+
+msgid "submit_email_confirmation_title"
+msgstr "Potvrdite da ste poslali e-poštu."
+
+msgid "confirm_email_send_button_label"
+msgstr "Potvrdi"
+
+msgid "vote_success"
+msgstr "Zahvaljujemo vam na sudjelovanju u procesu glasanja. Vaš glas ${vote} je uspješno zabilježen. Možete promijeniti svoj glas do roka vraćanjem na ovu stranicu."
+
+msgid "cooperator_data_explanation"
+msgstr "<div>\n"
+"    <p>Kao Kooperator, sudjelovat ćete u svim našim odlukama. Ove odluke se donose prema strogim demokratskim procedurama i mogu imati važne posljedice za "
+"Kooperativu i za Kooperatore. Osim toga, Kooperativa namjerava predstavljati građane EU, neovisno od njihova državljanstva - ali samo građane EU. To je osobito "
+"zapravo važno tijekom javnih izbora. Stoga trebamo osigurati tri stvari: (1) da se određena osoba može registrirati najviše jednom, kako bismo osigurali demokratski princip \"jedna osoba = "
+"jedan glas\"; (2) da su svi Kooperatori najmanje punoljetni i (3) da su samo građani Europske unije Kooperatori.</p>\n"
+"    <p>To je razlog zašto ćemo od vas provjeriti neke elemente vaših identifikacijskih podataka, uspoređujući (1) podatke koje ćete unijeti na ovom obrascu tijekom vaše registracije s (2) "
+"informacijama prisutnim na vašim službenim identifikacijskim dokumentima. Ova provjera će se izvršavati od strane niza nasumce odabranih članova Kooperative, Verificatora vaše prijave, "
+"i bit će temeljena na informacijama o vašim službenim identifikacijskim dokumentima koje ćete im izravno dostaviti, putem e-pošte ili tijekom videokonferencije, bez tranzita kroz "
+"ovu online platformu (radi sigurnosti i povjerljivosti).</p>\n"
+"    <p>Podaci koje tražimo od vas i koje će Verificatori provjeriti radi usklađenosti s podacima na vašim službenim identifikacijskim dokumentima su:\n"
+"    <ul>\n"
+"    <li>vaše ime(i) i prezime(a);</li>\n"
+"    <li>vaš datum rođenja;</li>\n"
+"    <li>vaša nacionalnost.</li>\n"
+"    </ul></p>\n"
+"    <p>Samo jedna osoba nosi vaša ime(i), prezime(a) i vaš datum rođenja: vi. Ako pokušate registrirati se ponovo, morat ćete dati iste podatke našem postupku verifikacije, "
+"i odbacit ćemo vašu prijavu, jer ste već Kooperator i ne možete imati više računa za glasanje više od jednom. Bit ćemo sigurni u to jer znamo da samo jedna osoba ima ovu kombinaciju imena(i), "
+"prezime(a) i datum rođenja. Vaš datum rođenja omogućava nam da potvrdimo da ste punoljetni, a vaša nacionalnost omogućava nam da osiguramo da ste doista građanin Europske unije.</p>\n"
+"    <p>Ovi podaci će se koristiti isključivo da bismo provjerili vaš identitet, vašu dob i vašu nacionalnost, i za upravljanje vašim računom kao Kooperatorom. Nikada neće biti prikazani ostalim korisnicima IT platforme ${domain_name}, niti će biti preneseni ili prodani bilo kome, osim za ispunjenje zakonskih zahtjeva javnih tijela pravne vlasti na temelju zahtjeva suca. \"Osoba koja obrađuje podatke\" kako je definirano u <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Općoj uredbi o zaštiti podataka "
+"(GDPR) Europske unije</a> je CosmoPolitička Kooperativa SCE, Europsko zadrugarstvo sa sjedištem na 229 rue Solférino, 59000 Lille, Francuska i registrirano 25. travnja 2023. pod brojem SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Poslali smo vam e-mail s nizom od četiri jednostavne aritmetičke računice koje treba izvršiti, označene od A do D, sve slijedeći isti obrazac: (PRVI BROJ IZMEĐU 1 I 9) "
+"pomnožen s (DRUGIM BROJEM IZMEĐU 1 I 9), plus (TREĆI BROJ IZMEĐU 1 I 9). Da biste izvršili računicu, trebate prvo pomnožiti PRVI BROJ IZMEĐU 1 I 9 "
+"s DRUGIM BROJEM IZMEĐU 1 I 9. Kada dobijete rezultat ovog množenja, trebate tom rezultatu dodati TREĆI BROJ IZMEĐU 1 I 9. Na kraju, trebate zabilježiti "
+"rezultat ovog posljednjeg zbrajanja u kutiju predviđenu za rezultat aritmetičke računice koju izvršavate (među četiri koja smo vam poslali, označene od A do D). "
+"Trebate ponoviti računicu za sve četiri računice poslane vam e-mailom.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>U sklopu procesa registracije kao Kooperant, morate odabrati metodu za verifikaciju svog identiteta. Ova verifikacija vašeg identiteta potrebna je kako bi se osiguralo: (1) "
+"da određena osoba ne registrira više puta s različitim e-mail adresama (time se pridržavamo demokratskog principa: \"jedna osoba - jedan glas\"); (2) da su samo građani "
+"Europske unije koji su navršili punoljetstvo Kooperanti (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >vidi zašto</a>).</p>\n"
+"    <p>Imate dvije opcije za ovaj proces verifikacije:</p>\n"
+" <ul>\n"
+"   <li><b>Pošaljite kopiju svojih identifikacijskih dokumenata e-mailom:</b> Možete odabrati da sigurno pošaljete putem e-maila kopiju svojih identifikacijskih dokumenata izravno nekolicini "
+"slučajno odabranih Kooperanata, vašim Verifikatorima. Ova metoda osigurava brz i izravan način potvrde vašeg identiteta.</li>\n"
+"   <li><b>Dogovorite videokonferencijski sastanak:</b> Alternativno, možete odabrati sesiju videokonferencije na kojoj možete uživo predstaviti svoje identifikacijske dokumente svojim Verifikatorima. "
+"Ova metoda pruža osobniju interakciju i omogućava trenutnu razjašnjenje ako je potrebno, usmeno ako dijelite zajednički jezik, putem chata i automatiziranog prijevoda ako ne.</li>\n"
+" </ul>\n"
+" <p>U oba slučaja, savjetujemo vas, iz sigurnosnih razloga, da sakrijete, na svom službenom identifikacijskom dokumentu, svoje mjesto rođenja i broj identifikacijskog dokumenta, prije nego što "
+"ga kopirate ili pokažete svojim Verifikatorima.</p>\n"
+" <p>Važno je da svoj odabir napravite pravodobno kako bi vaš proces registracije bio nesmetan i pravodoban. Molimo vas osigurajte da je metoda koju odaberete najprikladnija za vas "
+"i usklađena s vašim preferencijama privatnosti.</p>\n"
+" <p>Vaša suradnja u ovom pitanju je vrlo cijenjena i ključna je za održavanje visokih standarda povjerenja i paneuropske demokracije unutar naše Kooperative. Hvala vam na vašem "
+"razumijevanju i aktivnom sudjelovanju u ovom ključnom koraku.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Broj postojećih Kooperanata je prenizak za odabir adekvatnog broja Verifikatora vašeg identiteta. Molimo kontaktirajte administratora sustava na sljedeću adresu "
+"${administrator} kako biste riješili problem."
+
+msgid "email_copy_id_verification_subject"
+msgstr "hr - ${domain_name} - Molim vas da verificirate moj identitet kao novog potencijalnog Kooperanta"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Dragi Verifikatori,\n"
+" Pišem vam kako bih dovršio proces verifikacije identiteta za svoju prijavu da postanem Kooperant ${domain_name}. U privitku ovog e-maila, naći ćete djelomičnu kopiju "
+"mog službenog identifikacijskog dokumenta.\n"
+" Molimo vas da primijetite da su određene osjetljive informacije zamaskirane iz sigurnosnih razloga. Međutim, dokument sadrži informacije koje su vam potrebne za verifikaciju mog "
+"identiteta prema registračnom postupku ${domain_name}.\n"
+" Ljubazno vas molim da pregledate priloženi dokument, ako je moguće, u sljedećih 3 dana, kako biste glasali o adekvatnosti između:\n"
+"\n"
+" - informacija o identitetu koje ste izravno primili e-mailom od IT platforme ${domain_name} (i koje će vam biti przypomenut na sučelju za glasanje) i \n"
+" - informacija o identitetu koje možete pročitati na priloženoj djelomičnoj kopiji mog službenog identifikacijskog dokumenta.\n"
+"\n"
+" Link za vas da glasate o ovoj adekvatnosti je sljedeći: ${voting_url}.\n"
+" Srdačno vam zahvaljujem unaprijed na podršci procesu moje registracije kao Kooperanta ${domain_name}. Ako imate dodatnih pitanja ili trebate dodatne "
+"informacije, slobodno me kontaktirajte izravno na vašem jeziku.\n"
+" S poštovanjem,\n"
+" ${signature}\n"
+" Prilog: [Naziv datoteke identifikacijskog dokumenta]\n"
+" Ovaj e-mail je generiran uz pomoć značajke verifikacije identiteta ${domain_name}. Ako niste Verifikator dodijeljen prijavi ${signature} i ste primili ovaj e-mail greškom, "
+"molim vas obavijestite administratora ${domain_name} na sljedeću adresu: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "hr - ${domain_name} - Molim vas da verificirate moj identitet putem videokonferencije kao novog potencijalnog Kooperanta"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Dragi Verifikatori,\n"
+"    Pišem vam kako bih dovršio proces verifikacije identiteta za svoju prijavu da postanem Kooperant ${domain_name}. Želim predložiti sastanak putem videokonferencije u "
+"tu svrhu.\n"
+"    Ovdje su neki termina koje predlažem za videokonferenciju. Molimo napomenite da živim u Njemačkoj (molimo prilagodite prema svojoj zemlji/regiji prebivališta. Ovo je "
+"potrebno da vaš korespondent zna vašu vremensku zonu), tako da vrijeme dana u kojem živim može biti drugačije od vremena dana u kojem vi živite. Ova videokonferencija "
+"bi trebala trajati najviše 10 minuta: (molim vas da ponudite barem 3 opcije, ako je moguće u različitim vremenima tijekom dana i različitim danima uključujući vikend, svi unutar 10 "
+"dana nakon što pošaljete e-mail)\n"
+"   \n"
+"         - Ponedjeljak, 04. rujna 2023, u 17:30 sati po mom vremenu; (prilagodite prema vašoj dostupnosti)\n"
+"         - Utorak, 05. rujna 2023, u 20:30 sati po mom vremenu; (prilagodite prema vašoj dostupnosti)\n"
+"         - Subota, 09. rujna 2023, u 10:00 sati po mom vremenu. (prilagodite prema vašoj dostupnosti)\n"
+"    \n"
+"    Molimo vas da se sjetite da možemo živjeti u različitim vremenskim zonama! Molimo vas da prenesete ove termine u svoju vremensku zonu.\n"
+"    Videokonferencija će se odvijati putem sljedeće poveznice:\n"
+"(molimo umetnite ovdje poveznicu koju ste pripremili za ovu videokonferenciju. Ovo su naši prijedlozi platformi koje možete koristiti za stvaranje videokonferencije i pružanje "
+"odgovarajuće poveznice:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (besplatan i otvoren izvor)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (besplatan i otvoren izvor)\n"
+"         - Zoom : https://zoom.us/ (proprietarni softver)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (proprietarni softver, platforma izvan plaćenih zidova)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (proprietarni softver, bez troškova pristup platformi)\n"
+"    )\n"
+"    Molimo vas da ljubazno odaberete termin koji vam odgovara i pošaljete mi e-mail s vašim odabirom.\n"
+"    Tijekom sastanka putem videokonferencije, može se dogoditi da ne dijelimo zajednički jezik. Ako je to slučaj, predlažem da usvojimo ljubazan i podržavajući stav jedni prema drugima. "
+"Predlažem da koristimo chat kako bismo se izrazili na našim jezicima, i koristimo strojno prevođenje da bismo razumjeli što naš sugovornik piše.\n"
+"    Kada završite ovaj sastanak putem videokonferencije, ljubazno vas molim da glasate kako biste potvrdili ili opovrgnuli adekvatnost između:\n"
+"\n"
+"     - informacija o identitetu koje ste izravno primili e-mailom od IT platforme ${domain_name} (i koje će vam biti przypomenut na sučelju za glasanje) i \n"
+"    - informacija o identitetu koje ćete vidjeti tijekom videokonferencije.\n"
+"\n"
+" Link za vas da glasate o ovoj adekvatnosti je sljedeći: ${voting_url}.\n"
+"  Srdačno vam zahvaljujem unaprijed na podršci procesu moje registracije kao Kooperanta ${domain_name}. Ako imate dodatnih pitanja ili trebate dodatne "
+"informacije, slobodno me kontaktirajte izravno.\n"
+" S poštovanjem,\n"
+" ${signature}\n"
+" Ovaj e-mail je generiran uz pomoć značajke verifikacije identiteta ${domain_name}. Ako niste Verifikator dodijeljen prijavi ${signature} i ste primili ovaj e-mail greškom, "
+"molim vas obavijestite administratora ${domain_name} na sljedeću adresu: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Ako korisnik postoji, primit će e-mail."
+
+msgid "reset_password_email_subject"
+msgstr "Resetirajte svoju lozinku"
+
+msgid "forget_email_send_error"
+msgstr "Došlo je do greške prilikom slanja e-maila za resetiranje, molimo kontaktirajte administratora na ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "stvoreno"
+
+msgid "member_state_created_value"
+msgstr "Član je stvoren"
+
+msgid "member_state_draft_name"
+msgstr "nacrt"
+
+msgid "member_state_draft_value"
+msgstr "Podaci člana se uređuju"
+
+msgid "member_state_registred_name"
+msgstr "registriran"
+
+msgid "member_state_registred_value"
+msgstr "Podaci člana su spremljeni"
+
+msgid "member_data_modification_request_name"
+msgstr "u modifikaciji"
+
+msgid "member_data_modification_request_value"
+msgstr "Podnesen je zahtjev za izmjenu podataka"
+
+msgid "member_datas_modified_name"
+msgstr "izmijenjeno"
+
+msgid "member_datas_modified_value"
+msgstr "Podaci člana su izmijenjeni"
+
+msgid "email_member_state_changed"
+msgstr "Promjena u vašem profilu člana"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Molimo vas da navedete važu e-mail adresu"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Administratoru nije dopušteno da resetira svoju vlastitu lozinku"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Ako korisnik postoji, e-mail je poslan na njegovu/e-mail adresu s linkom za resetiranje njegove/njene lozinke"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Obje verzije lozinke se ne podudaraju. Molimo se da se uvjerite da se podudaraju i ponovo pošaljete"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Molimo vas da navedete novu lozinku"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Uspješno ste promijenili svoju lozinku"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Došlo je do pogreške tijekom procesa resetiranja vaše lozinke"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Došlo je do pogreške tijekom procesa resetiranja vaše lozinke. Vaša lozinka nije promijenjena"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Član nije pronađen na popisu trenutnih članova"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Hiperveza koju ste koristili za resetiranje lozinke je zastarjela. Molimo koristite najnoviju koju ste primili"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "E-mail koji sadrži matematički izazov koji potvrđuje da je kandidat čovjek (a ne robot) nije poslan."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Pogreška prilikom dostavljanja kandidature"
+
+msgid "modification_to_profile_button_title"
+msgstr "Uredi svoj profil"
+
+msgid "modification_to_profile_button_label"
+msgstr "Uredi profil"
+
+msgid "modification_to_profile_button_description"
+msgstr "Kliknite ovdje da biste dobili sigurnu vezu za promjenu vašeg profila putem e-maila."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Da bi se osigurala sigurnost vaših podataka, jedinstvena veza za promjenu vašeg profila bit će vam poslana putem e-maila. Ovaj proces jamči da samo osoba s pristupom vašoj e-mail adresi "
+"može izvršavati promjene na vašem profilu."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Veza za promjenu vašeg profila na IT infrastrukturi ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Molimo vas da ovdje navedete svoja imena, kako su napisana u vašim službenim identifikacijskim dokumentima, u njihovoj službenoj transkripciji latiničnim znakovima (ako izvorni jezik koristi pismo "
+"drugo od latiničnog)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Molimo vas da ovdje navedete svoja prezimena pri rođenju (tj. NE svoje prezime kao u braku), kako su napisana u vašim službenim identifikacijskim dokumentima, u njihovoj službenoj transkripciji u latiničnim "
+"znakovima (ako izvorni jezik koristi pismo drugo od latiničnog)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Tekst koji vas opisuje (tekst vašeg profila)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Molimo vas da ovdje napišete tekst koji vas opisuje, na vašem preferiranom jeziku, kako bi svi drugi članovi Zajednice mogli malo bolje upoznati vas. Preporučujemo da se usredotočite "
+"na: (1) Odakle dolazite, (2) što radite, (3) što želite raditi kao član Zajednice, i (4) resurse (iskustvo, znanje, vrijeme) koje imate na raspolaganju.\n"
+"Vjerujemo da su ove informacije korisne jer predstavljanje sebe drugima vlastitim riječima daje ljudsko lice vašem digitalnom identitetu na našoj IT infrastrukturi. S "
+"ovim tekstom, svaki član Zajednice bolje vas upoznaje, a to olakšava interakciju!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Molimo vas da navedete svoj datum rođenja u sljedećem formatu: DD/MM/YYYY, tj. (1) dan u mjesecu, na 2 znamenke; (2) broj mjeseca, na 2 znamenke; (3) godina, na 4 znamenke. Samo "
+"osobe koje su napunile 18 godina mogu biti Suradnici. Ako još niste napunili 18 godina, pozivamo vas da se registrirate kao Obični član Zajednice - i da unaprijedite na status Suradnika čim "
+"napunite punoljetnost."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Molimo vas da navedete jednu državu članicu Europske unije čiji ste državljanin. Samo građani Europske unije mogu biti Suradnici"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Molimo vas da odaberete jednu državu članicu Europske unije"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Ovo je jedinstveni broj koji vas identificira u svim procesima koji se odvijaju u Zajednici"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Molimo vas da ovdje unesete pseudonim koji će vas identificirati tijekom cijelog trajanja vaše aktivnosti na našoj IT platformi. STRONG preporučujemo da odaberete pseudonim koji onemogućava "
+"identifikaciju vašeg stvarnog identiteta (ili ga čini iznimno teškim). Na taj način štitite povjerljivost svojih mišljenja (tj. osobnih podataka koji su predmet specifične "
+"zaštite prema Općoj uredbi o zaštiti podataka - GDPR) od bilo kakvih vanjskih pritisaka u stvarnom životu (npr. od strane vašeg poslodavca ili kupaca). Budite vrlo pažljivi! Kada ga "
+"odaberete, nikada nećete moći promijeniti ovaj pseudonim. Odaberite ga pažljivo! \n"
+" Vaš pseudonim mora imati između ${MIN_PSEUDONYM_LENGTH} i ${MAX_PSEUDONYM_LENGTH} znakova i može sadržavati samo slova latiničnog alfabeta (A-Z, a-z), brojeve (0-9), "
+"podvlake (_), točke (.), crtice (-) i razmake ( ). Ne može sadržavati slova s akcentima, umlautima i drugim dijakritičkim znakovima specifičnim za neke jezike."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Navođenje vašeg pseudonima je obavezno"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Molimo vas da navedete svoju lozinku. Vaša lozinka mora imati između ${password_minimum_length} i ${password_maximum_length} znakova, sadržavati najmanje jedan broj, najmanje jedno malo "
+"slovo, najmanje jedno veliko slovo i najmanje jedan od znakova među sljedećima: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Molimo potvrdite svoju lozinku"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Potvrda vaše lozinke je obavezna"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Molimo vas da navedete e-mail adresu koju će IT infrastruktura ${domain_name} koristiti za interakciju s vama.\n"
+"Preporučujemo da odaberete e-mail adresu koju često provjeravate.\n"
+"Potrebne su nam ove informacije jer trebamo komunicirati s vama, kako bismo vas obavijestili o događanjima u Zadrugi, kako bismo vam omogućili da poduzmete mjere ili doprinosite "
+"odlukama. E-mail je najčešće korišten medij u Europi, univerzalan je i temelji se na otvorenim i slobodnim standardima, za razliku od proprietarnih sustava razmjene poruka digitalnih divova (poznatih "
+"i kao 'GAFAM').\n"
+"Ova e-mail adresa će se koristiti isključivo za osiguranje komunikacije između IT infrastrukture ${domain_name} i vas. Nikada neće biti prikazana drugim korisnicima IT "
+"platforme ${domain_name}, niti će biti prenesena ili prodana nikome, osim za ispunjavanje zakonskih zahtjeva državnih organa pod nadzorom zahtjeva suca. \"Kontrolor podataka\" kako je definirano Općom "
+"uredbom o zaštiti podataka (GDPR) Europske unije je CosmoPolitical Cooperative SCE, europsko zadrugarstvo smješteno na adresi 229 rue Solférino, 59000 Lille, Francuska i registrirano 25. travnja 2023. pod "
+"brojem SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Molimo vas da navedete jezik s kojim biste preferirali da IT infrastruktura ${domain_name} komunicira s vama. \n"
+"Preporučujemo da odaberete jezik koji najbolje poznajete, među službenim jezicima Europske unije ili esperantom. Ako je dostupan među onima za koje smo razvili korisničko sučelje, koristit ćemo ga za "
+"interakciju s vama. \n"
+"Potrebne su nam ove informacije jer, iz razloga pravednosti i poštovanja demokratskih načela, želimo komunicirati s vama na jeziku koji najbolje razumijete."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Molimo vas da navedete jezik s kojim biste, kao drugi izbor, prihvatili da IT infrastruktura ${domain_name} komunicira s vama. \n"
+" Preporučujemo da odaberete neki drugi službeni jezik Europske unije ili esperanto, koji razumijete dovoljno dobro. Ako je dostupan među onima za koje smo razvili "
+"korisničko sučelje, a ako vaš preferirani jezik nije dostupan, koristit ćemo ga za komunikaciju s vama. \n"
+" Ove informacije su nam potrebne jer, unatoč našim naporima, može se dogoditi da vaš preferirani jezik nije dostupan na korisničkom sučelju našeg softvera. Stoga vas pitamo "
+"možete li koristiti neki drugi jezik."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Jezik koji prihvaćate kao treći izbor za našu komunikaciju s vama"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Molimo vas da navedete jezik s kojim biste, kao treći izbor, prihvatili da IT infrastruktura ${domain_name} komunicira s vama. \n"
+" Preporučujemo da odaberete neki drugi službeni jezik Europske unije ili esperanto, koji još uvijek možete razumjeti. Ako je dostupan među onima za koje smo razvili "
+"korisničko sučelje, a ako niti vaš preferirani jezik niti vaš drugi jezik nisu dostupni, koristit ćemo ga za komunikaciju s vama. \n"
+" Ove informacije su nam potrebne jer, unatoč našim naporima, može se dogoditi da vaš preferirani jezik i vaš drugi jezik nisu dostupni na korisničkom sučelju našeg softvera. "
+"Stoga vas pitamo možete li koristiti treći jezik. Svjesni smo da je za vas nezadovoljavajuća situacija interagirati s nama koristeći ga - kao što je i nama. Ispričavamo se zbog toga."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Vaša oznaka suradničkog ponašanja"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Kao suradnik, vaša oznaka suradničkog ponašanja rezultat je oznaka koje su vam dodijelili drugi aktivni sudionici u radnim skupinama u kojima ste sudjelovali kako bi definirali "
+"i usvojili prijedloge akcija. Svaki aktivni sudionik može dati oznaku jednaku +1, 0 ili -1, ovisno o tome koliko je vaše ponašanje bilo suradničko tijekom vašeg aktivnog sudjelovanja u "
+"toj radnoj skupini. Ova oznaka se zatim automatski 'zaboravlja' i s vremenom se smanjuje: prepolovljuje se nakon ${forgetting_time_constant} dana. Početna vrijednost vaše "
+"oznake suradničkog ponašanja je nula."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Datum kada je vaša oznaka suradničkog ponašanja zadnji put ažurirana"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Ovo je najnoviji datum kada vam je drugi suradnik dodijelio oznaku nakon završetka vašeg aktivnog sudjelovanja u radnoj skupini koja je definirala i usvojila prijedlog akcije. "
+"Početna vrijednost tog datuma je datum vaše registracije kao suradnika."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Broj dionica zadruge koje posjedujete"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Ovo je ukupni broj dionica zadruge koje posjedujete, nakon što ste ih kupili na našoj web platformi. Pri vašoj registraciji, ovaj broj je jednak nuli. Pozivamo vas da "
+"što je prije moguće pređete na ovu URL adresu: ${url_purchase_shares} kako biste kupili svoje prve dionice. Puni ste prava odlučivanja kao suradnik tek nakon što "
+"kupite najmanje jednu dionicu (i platite svoj godišnji doprinos). Dobrodošli ste kupiti više od jedne dionice, prilikom registracije, ali i u bilo kojem trenutku kasnije. To jača našu "
+"Zadrugu, a svi smo vam zahvalni na tome!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Datum kada vaša trenutna godišnja kontribucija ističe"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Datum kada vaša trenutna godišnja kontribucija ističe, i prije kojeg je morate ponovo platiti kako biste zadržali svoja puna prava odlučivanja kao suradnik. Pri vašoj registraciji, "
+"ovaj datum je postavljen na vrijeme u prošlosti, što znači da ga trebate platiti sada. Pozivamo vas da što je prije moguće pređete na ovu URL adresu: ${url_pay_yearly_contrib} "
+" kako biste platili svoju prvu godišnju kontribuciju i tako sudjelovali u radu naše zadruge. Puni ste prava odlučivanja kao suradnik tek nakon što platite svoju godišnju "
+"kontribuciju (i kupite najmanje jednu dionicu)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Međunarodni broj bankovnog računa (IBAN) vašeg bankovnog računa"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Ako i kada odlučite napustiti Zadrugu (što bi nam svima bilo žao), trebamo vaš IBAN kako bismo mogli prenijeti sredstva za otkup vaših dionica zadruge. Iz sigurnosnih razloga, "
+"preporučujemo vam da navedete ove informacije samo ako i kada planirate napustiti Zadrugu."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Datum kada će svi vaši podaci biti izbrisani iz naše IT infrastrukture"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Ako i kada napustite Zadrugu, vaši osobni podaci će biti pohranjeni na razdoblje od ${Quarantine} dana, prije nego što budu potpuno i nepovratno izbrisani iz naših evidencija. "
+"Ovo je kako bi se osiguralo da suradnik koji napušta Zadrugu zbog loše oznake suradničkog ponašanja ne može odmah ponovno registrirati s novim pseudonimom i oznakom suradničkog ponašanja. "
+"Pri vašoj registraciji, ovaj datum je postavljen na vrlo daleku budućnost."
+
+msgid "avatar_label"
+msgstr "Slika koja vas predstavlja (vaš avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Molimo vas da dostavite sliku koja vas predstavlja kao člana zajednice. U svrhu zaštite od bilo kakvih posljedica od vašeg poslodavca ili klijenata, preporučujemo da ova slika "
+"ne omogućava traganje natrag do vaše stvarne identitete. Općenito ne bi trebala biti fotografija vas samih (zapamtite da se softver za prepoznavanje lica masovno koristi od strane "
+"pretraživača). Slika treba biti u JPEG formatu (ekstenzija .JPG ili .JPEG) i ne veća od 5 MB. \n"
+"Vjerujemo da su ove informacije korisne jer slika olakšava drugim članovima zajednice da vas prepoznaju. Ponekad slika govori mnogo snažnije od dugačkog govora. S ovom slikom "
+"izražavate puno o sebi, na univerzalnom jeziku. Iskoristite to najbolje moguće!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Adresa (URL) koju ste koristili za preuzimanje vašeg procesa prijave s kojeg ste ga prekinuli ne odgovara onoj koju smo registrirali za vas. (Identifikacijski broj prijave u "
+"sjednici i broj u URL-u ne odgovaraju)\n"
+"Molimo vas da koristite samo URL iz posljednjeg emaila koji ste primili."
+
+msgid "check_new_email"
+msgstr "Zatražili ste promjenu svoje email adrese. U budućnosti biste željeli koristiti: ${new_email}. Kao rezultat toga, primit ćete email koji sadrži link za verifikaciju ove nove adrese."
+
+msgid "check_new_email_subject"
+msgstr "Verifikacija vaše nove email adrese"
+
+msgid "check_new_email_send_error"
+msgstr "Slanje verifikacijskog emaila za vašu novu adresu nije uspjelo"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Verifikacijski email za vašu novu adresu je poslan"
+
+msgid "modify_member"
+msgstr "Konzultirajte ili izmijenite člana"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Pogreška pri povezivanju"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Email adresa već postoji"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Email adresa ažurirana"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Greška prilikom ažuriranja email adrese"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Greška prilikom postavljanja polja"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Greška prilikom ažuriranja člana"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Nevažeći OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Nevažeći zahtjev"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP greška"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Podaci člana ažurirani"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Ažuriranje podataka člana nije uspjelo"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Ažuriranje podataka člana je uspješno"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Nedostaju podaci"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Nova email adresa nedostaje"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Bez dopuštenja"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Nije glasač"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Ažuriranje lozinke nije uspjelo"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Ažuriranje lozinke je uspješno"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Registracija nije uspjela"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Registracija je uspješna"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Nepoznat pristupljeni član"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Nepoznat član"
+
+msgid "modify_member_title"
+msgstr "Uredi profil člana"
+
+msgid "select_member_oid_label"
+msgstr "Molimo odaberite člana kako biste uredili njegov/njezin profil:"
+
+msgid "select_member_placeholder"
+msgstr "Pseudonim člana"
+
+msgid "modify_profile"
+msgstr "Možete promijeniti svoj profil klikom ovdje"
+
+msgid "profile"
+msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Vaša adresa e-pošte je uspješno ažurirana. Sada ćete koristiti ovu novu adresu za svu buduću komunikaciju s ${domain_name}. Ako niste zatražili ovu promjenu ili ako imate "
+"bilo kakvih pitanja, slobodno kontaktirajte našu podršku odmah na ${admin_email}. Hvala što ste dio zajednice ${domain_name}!"

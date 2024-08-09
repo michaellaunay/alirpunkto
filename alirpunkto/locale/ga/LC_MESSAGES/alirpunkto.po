@@ -1,0 +1,977 @@
+msgstr "Fáilte"
+
+msgstr "Ainm úsáideora"
+
+msgstr "Pasfhocal"
+
+msgstr "Logáil isteach"
+
+msgstr "Fáilte go ${site_name}, an seirbhís lárnach don iarratais a úsáidtear sa struchtúr TF de chuid ${domain_name}."
+
+msgstr "Gach iarratas atá uait chun páirt a ghlacadh i ngníomhaíochtaí ${domain_name} ar aon áit."
+
+msgstr "Cláraigh nó logáil isteach anois chun tús a chur."
+
+msgstr "${site_name}, an seirbhís lárnach don iarratas a úsáidtear sa struchtúr TF de chuid ${domain_name}"
+
+msgstr "Tá tú logáilte isteach mar ${user}."
+
+msgstr "Is féidir leat logáil amach trí chliceáil anseo"
+
+msgstr "Logáil amach"
+
+msgstr "Rogha an iarratais atá uait a chomhoibriú:"
+
+msgstr "Ainm úsáideora nó pasfhocal neamhbhailí. Léigh é arís le do thoil"
+
+msgstr "Cruthaigh cuntas"
+
+msgstr "Deimhnigh Pasfhocal"
+
+msgstr "Deimhnigh do phasfhocal"
+
+msgstr "An d'fhág tú do phasfhocal?"
+
+msgstr "Ainm iomlán mar atá i do doiciméid aitheantais oifigiúla"
+
+msgstr "Sloinne iomlán mar atá i do doiciméid aitheantais oifigiúla"
+
+msgstr "Dáta breithe"
+
+msgstr "Conradh (i measc na mball atá san Aontas Eorpach)"
+
+msgstr "Uimhir comhoibritheora"
+
+msgstr "Ainm bréige"
+
+msgstr "Seoladh ríomhphoist"
+
+msgstr "An teanga is fearr leat againn chun comhoibriú leat"
+
+msgstr "An teanga a haitheantas tú mar rogha dhóigh chun comhoibriú leat"
+
+msgstr "Cláraigh"
+
+msgstr "Fágadh Pasfhocal"
+
+msgstr "An d'fhág tú do phasfhocal?"
+
+msgstr "Le do thoil, cuir isteach do sheoladh ríomhphoist:"
+
+msgstr "Cuir isteach"
+
+msgstr "Dréacht: Tá an t-iarratas i mód dréachta."
+
+msgstr "Deimhniú Ríomhphoist: An staid ina bhfuil seoladh ríomhphoist an Iarrthóra ag fanacht le deimhniú."
+
+msgstr "Duine Deimhnithe: Tá seoladh ríomhphoist an Iarrthóra fíoraithe, agus tá cruthúnas ar an duine (d'fhíoraigh muid nach robot tú)."
+
+msgstr ""
+"Sonraí Uathúla: Chuir an Iarrthóir a chuid faisnéise aithint phearsanta isteach, agus d'fíoraigh muid nach bhfuil aon Chomhoibritheoir reatha nó le déanaí nó Ball Ríoga den Phobal a dhéanann an "
+"sonraí céanna."
+
+msgstr "Fanann: Tá an t-iarratas curtha isteach. Tá an faisnéis aitheantais phearsanta curtha chuig na Fíoraitheoirí, ach níor thug siad aiseolas fós."
+
+msgstr "Faoi Dhéileáil: Tá an t-iarratas glactha."
+
+msgstr "Diúltaíodh: Tá an t-iarratas diúltaithe."
+
+msgstr "dréacht"
+
+msgstr "deimhniú"
+
+msgstr "duine_deimhithe"
+
+msgstr "sonraí_uathúla"
+
+msgstr "fanfaidh"
+
+msgstr "glactha"
+
+msgstr "diúltaithe"
+
+msgstr "Réaltra: iarratas chun bheith ina Bhall Rialta den Phobal = le próiseas clárúcháin simplí, gan dualgas airgeadais, ach gan cearta cinneadh."
+
+msgstr ""
+"Comhoibritheoir: iarratas chun bheith ina bhall iomlán den Chóip, Comhoibritheoir = le próiseas clárúcháin iomlán a áirithint 'duine amháin = toghadh amháin' agus go bhfuil an "
+"Iarrthóir ina chónaí san Aontas Eorpach, dualgas le haghaidh ait go laige amháin a cheannach agus le haghaidh comhoibriú bliantúil, agus cearta cinneadh iomlána."
+
+msgstr "Ball Rialta den Phobal"
+
+msgstr "Comhoibritheoir = ball iomlán den Chóip"
+
+msgstr "Tá: Tá an toghadh dearfach."
+
+msgstr "Níl: Tá an toghadh diúltach."
+
+msgstr "Gheobhaidh an toghadh. "
+
+msgstr "tá"
+
+msgstr "níl"
+
+msgstr "gheobhaidh"
+
+msgstr "nialas"
+
+msgstr "a haon"
+
+msgstr "a dó"
+
+msgstr "a trí"
+
+msgstr "a ceathair"
+
+msgstr "a cúig"
+
+msgstr "a sé"
+
+msgstr "seacht"
+
+msgstr "hocht"
+
+msgstr "naoi"
+
+msgstr "tugann"
+
+msgstr "móide"
+
+msgstr ", "
+
+msgstr "Ag Seiceáil go bhfuil tú ina duine. Déan na torthaí a chomhoibriú de na hoibríochtaí matamaitíochta simplí agus cuir na torthaí sin isteach ar an gcuirt."
+
+msgstr "Athrú ar stádas do iarratais go dtí an gcuirt"
+
+msgstr "Tá do fhreagra mícheart. Le do thoil, cuir isteach freagra nua."
+
+msgstr "Tá fadhb le do sheoladh ríomhphoist, le do thoil, deimhnigh é."
+
+msgstr "Níl do rogha bailí, le do thoil, cuir isteach arís."
+
+msgstr "Le do thoil, comhoibrigh na torthaí na ghoid sé shimplí matamaitice atá ann agus líon isteach na laige comhfhreagrach le haghaidh deimhniúcháin ríomhphoist."
+
+msgstr "Le do thoil, cuir isteach an toradh le haghaidh oibríocht matamaitice A:"
+
+msgstr "Le do thoil, cuir isteach an cód a gheobh tú trí ríomhphoist nó toradh oibríocht matamaitice A."
+
+msgstr "Chun dúinn a dhíchoimisiún a dhéanamh ar do sheoladh ríomhphoist agus go bhfuil tú ina duine (ní robot), cuir isteach an toradh a léirigh tú trí ríomhphoist a fuair tú."
+
+msgstr "Le do thoil, cuir isteach an toradh le haghaidh oibríocht matamaitice B:"
+
+msgstr "Le do thoil, cuir isteach an cód a gheobh tú trí ríomhphoist nó toradh oibríocht matamaitice B."
+
+msgstr "Chun dúinn a dhíchoimisiún a dhéanamh ar do sheoladh ríomhphoist agus go bhfuil tú ina duine (ní robot), cuir isteach an toradh a léirigh tú trí ríomhphoist a fuair tú."
+
+msgstr "Le do thoil, cuir isteach an toradh le haghaidh oibríocht matamaitice C:"
+
+msgstr "Le do thoil, cuir isteach an cód a gheobh tú trí ríomhphoist nó toradh oibríocht matamaitice C."
+
+msgstr "Chun dúinn a dhíchoimisiún a dhéanamh ar do sheoladh ríomhphoist agus go bhfuil tú ina duine (ní robot), cuir isteach an toradh a léirigh tú trí ríomhphoist a fuair tú."
+
+msgstr "Le do thoil, cuir isteach an toradh le haghaidh oibríocht matamaitice D:"
+
+msgstr "Le do thoil, cuir isteach an cód a gheobh tú trí ríomhphoist nó toradh oibríocht matamaitice D."
+
+msgstr "Chun dúinn a dhíchoimisiún a dhéanamh ar do sheoladh ríomhphoist agus go bhfuil tú ina duine (ní robot), cuir isteach an toradh a léirigh tú trí ríomhphoist a fuair tú."
+
+msgstr "Cuir isteach"
+
+msgstr "Cliceáil chun na cóid a chuir tú isteach a dhaingniú."
+
+msgstr "Níl na pasfhocail ag comhoibriú."
+
+msgstr "Tá an pasfhocal ró-ghairid."
+
+msgstr "Caithfidh an pasfhocal a bheith ar a laghad ${password_minimum_length} carachtair ar fhad."
+
+msgstr "Tá an pasfhocal ró-fhada."
+
+msgstr "Níor chóir go mbeadh an pasfhocal níos mó ná ${password_maximum_length} carachtair."
+
+msgstr "Caithfidh an pasfhocal a bheith ar a laghad comhoibritheoir amháin."
+
+msgstr "Caithfidh an pasfhocal a bheith ar a laghad comhoibritheoir amháin."
+
+msgstr "Caithfidh an pasfhocal a bheith ar a laghad comhoibritheoir amháin."
+
+msgstr "Caithfidh an pasfhocal a bheith ar a laghad comhoibritheoir amháin."
+
+msgstr "Le do thoil, cuir isteach do phasfhocal anseo."
+
+msgstr "Le do thoil, deimhní do phasfhocal anseo."
+
+msgstr "Deimhnigh do phasfhocal." 
+
+msgstr "Cineál Clárúcháin"
+
+msgstr "Roghnaigh an cineál cláraithe a oireann duit."
+
+msgstr "Gach cineál clárúcháin a thagann le sraith ar leith de chearta, sochair agus dualgais."
+
+msgstr "Comhghairdeas ar do dheimhnigh!"
+
+msgid "approved_description"
+msgstr "Tá do chur i láthair faofa. Is féidir leat anois logáil isteach ag baint úsáide as an pseudonym agus pasfhocal a chuir tú ar fáil le linn an próisis iarratais."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Ní féidir le pseudonym a bheith neamhbhailí. Ba chóir go mbeadh sé idir ${MIN_PSEUDONYM_LENGTH} agus ${MAX_PSEUDONYM_LENGTH} carachtar ar fhad agus ní féidir ach le litreacha (A-Z, a-z), uimhir (0-9), fothracha (_), pointeanna "
+"(.), leibhéil (-) agus spásanna ( ). Ní féidir leis litreacha le hionchur, umlauts, agus comhoiriúnachtaí eile a bhaineann le roinnt teangacha a bheith ann."
+
+msgid "invalid_date"
+msgstr "Foirmáit dáta neamhbhailí."
+
+msgid "pseudonym_too_short"
+msgstr "Pseudonym ró-ghearr."
+
+msgid "pseudonym_minimum_length"
+msgstr "Caithfidh an pseudonym a bheith ar a laghad ${MIN_PSEUDONYM_LENGTH} carachtar ar fhad."
+
+msgid "pseudonym_too_long"
+msgstr "Pseudonym ró-fhada."
+
+msgid "pseudonym_maximum_length"
+msgstr "Níl cead dá thoradh an pseudonym a bheith os comhair ${MAX_PSEUDONYM_LENGTH} carachtar."
+
+msgid "pseudonym_allready_exists"
+msgstr "Níl an pseudonym seo in úsáid cheana. Roghnaigh ceann eile le do thoil."
+
+msgid "Select_a_country"
+msgstr "Roghnaigh Ballstát an Aontais Eorpaigh"
+
+msgid "Austria"
+msgstr "AT - An Ostair"
+
+msgid "Belgium"
+msgstr "BE - An Bheilg"
+
+msgid "Bulgaria"
+msgstr "BG - An Bulgáir"
+
+msgid "Cyprus"
+msgstr "CY - An Chipir"
+
+msgid "Czech_Republic"
+msgstr "CZ - An Phoblacht Checa"
+
+msgid "Germany"
+msgstr "DE - An Ghearmáin"
+
+msgid "Denmark"
+msgstr "DK - An Danmhairg"
+
+msgid "Estonia"
+msgstr "EE - An Eastóin"
+
+msgid "Spain"
+msgstr "ES - An Spáinn"
+
+msgid "Finland"
+msgstr "FI - An Fhionlainn"
+
+msgid "France"
+msgstr "FR - An Francach"
+
+msgid "Greece"
+msgstr "GR - An Ghréig"
+
+msgid "Croatia"
+msgstr "HR - An Chróit"
+
+msgid "Hungary"
+msgstr "HU - An Ungáir"
+
+msgid "Ireland"
+msgstr "IE - Éire"
+
+msgid "Italy"
+msgstr "IT - An Iodáil"
+
+msgid "Lithuania"
+msgstr "LT - An Liotuáin"
+
+msgid "Luxembourg"
+msgstr "LU - Lucsamburg"
+
+msgid "Latvia"
+msgstr "LV - An Laitvia"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - An Ísiltír"
+
+msgid "Poland"
+msgstr "PL - An Phóilinn"
+
+msgid "Portugal"
+msgstr "PT - An Phortaingéil"
+
+msgid "Romania"
+msgstr "RO - An Rómáin"
+
+msgid "Sweden"
+msgstr "SE - An tSualainn"
+
+msgid "Slovenia"
+msgstr "SI - An tSlóivéin"
+
+msgid "Slovakia"
+msgstr "SK - An tSlóvaic"
+
+msgid "full_name_as_in_id_required"
+msgstr "Teideal iomlán (í) riachtanach."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Conradh iomlán (í) riachtanach."
+
+msgid "birthdate_required"
+msgstr "Is é do dháta breithe riachtanach."
+
+msgid "nationality_required"
+msgstr "Is é do shíniú riachtanach."
+
+msgid "first_interaction_language_required"
+msgstr "Is é an chéad teanga idirghníomhaithe atá riachtanach."
+
+msgid "pending_description"
+msgstr "Tá do chur i láthair á thagairt. Gheobhaidh tú foláireamh trí ríomhphost a bhaineann leis an bpróiseas tar éis é a fhormhuirear."
+
+msgid "candidature_not_found"
+msgstr "Níl an iarratas le fáil."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Go raibh maith agat as do spéis i ngníomhaíochtaí ${domain_name}! Seo an áit cheart duit chun clárú </b></h2>\n"
+"<p>Tacóidh an Comhoibriú CosmoPholaitiúil leis na daoine agus a athraíonn an córas eacnamaíoch, sóisialta agus polaitiúil atá ann cheana, chuig sochaí a dhéanann ceart, inbhuanaithe, daonlathach agus sona, "
+"an <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Sochaí Comhoibrithe</a>.</p>\n"
+"<p>Thíos gheobhaidh tú tús an phróisis chlárúcháin chun bheith linn. Molaimid dhá leibhéal páirtíochta, le dualgais agus cearta ag méadú:</p>\n"
+"<ul>\n"
+"<li>mar <b>Baill Gnáth de Chumann anseo</b>, le próiseas clárúcháin simplí, gan dhualgais airgeadais, ach gan aon chearta vótála; nó </li>\n"
+"<li>mar <b>Comhoibrithe</b>, comhalta iomlán dár gComhoibriú, le próiseas clárúcháin a chinntíonn go bhféadfadh duine ar leith clárú uair amháin amháin (chun an prionsabal daonlathach \"duine amháin = "
+"vótáil amháin\" a urramú) agus nach ionann comhoibrithe ach saoránaigh na hEorpa do thabhairt aidhm go n-íocfadh siad ar a laghad sciar amháin agus go n-íocthadh siad a "
+"gconradh bliantúil, agus cearta vótála iomlána. Is é an tAontas Eorpach raon geografach dár obair (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">feic céard</a>)</li>\n"
+"</ul>\n"
+"<p>Cuirtear an próiseas clárúcháin i bhfeidhm le na céimeanna seo a leanas:</p>\n"
+"<ol>\n"
+"<li>déanaimid cinneadh go soláthraíodh an seoladh ríomhphoist leatsa, duine (ní le robó);</li>\n"
+"<li>iarrfaimid ort do phseudonym, pasfhocal agus teanga (í) roghnaithe a bhaineann le hidirghníomhú leat;</li>\n"
+"<li>i gcás a cláraigh tú mar Bhall Gnáth den Chumann, tá tú críochnaithe agus taistealaíonn tú sa Chumann. I gcás a cláraigh tú mar Chomhoibrí, leanann an próiseas "
+"mar sin go bhféadfaimid a chur ar íoc go bhfuil tú ag comhoiriúnú leis na coinníollacha atá setaigh le haghaidh a bheith ina Chomhoibrí.</li>\n"
+"</ol>\n"
+"<p>Déantar an fhíorú seo mar seo a leanas:</p>\n"
+"<ol>\n"
+"<li>iarrfaimid ort do <b>sonraí aitheantais</b>: do ainm (í) agus laethanta breithe;</li>\n"
+"<li>iarrfaidh muid ar roinnt ball atá ann de na Comhoibrithe (do Verifiers) chun a fhíorú go comhoiriúnóidh an t-eolas a bhaineann le do doiciméad aitheantais oifigiúil leis an gceann a chuir tú ar fáil san céim roimhe sin, "
+"ar bhonn malartach díreach ríomhphoist nó cruinniú vídeofónálacha leat;</li>\n"
+"<li>nuair atá siad tar éis a dheimhniú an comhoiriúnacht, beidh fáilte romhat mar Chomhoibrí, le cearta iomlána - nuair a bheidh tú tar éis sciar ar a laghad <a href=\"https://www.cosmopolitical.coop/share\">a cheannach "
+"tá buan i gcúrsa bliantúil do na hoibríochtaí</a>.</li>\n"
+"</ol>\n"
+"<p>Tosaigh do chlárú anois! Táimid ag súil le fáilte a chur romhat i ngníomhaíochtaí.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Is é an chéad chéim sa phróiseas clárúcháin ná a fhíorú go bhfuil tú \n"
+"duine, agus nach robó. Dóibh sin, seiceálfaimid go bhfuil tú in ann a fháil agus \n"
+"tuigbheáil ríomhphost a sheolfaidh muid chugat: is é a iarrfaimid ort \n"
+"simplí do dhuine, i bhfad níos casta le haghaidh robó."
+
+msgid "identity_verification_label"
+msgstr "Fíorú Aitheantais"
+
+msgid "Send_id_copy_by_email"
+msgstr "Seolann scan de chuid de do doiciméad aitheantais oifigiúil tríd an ríomhphost."
+
+msgid "Send_video_conference_link"
+msgstr "Seol moltaí maidir le dáta agus am an chruinnithe videofón."
+
+msgid "Proceed"
+msgstr "Lean ort"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Deimhnigh le do thoil go raibh na ríomhphoist seolta chuig na Véalaidh."
+
+msgid "sent_confirmation_label"
+msgstr "Deimhniú go seoladh na ríomhphoist chuig na Véalaidh"
+
+msgid "submit_email_confirmation_title"
+msgstr "Deimhnigh go seoladh na ríomhphoist."
+
+msgid "confirm_email_send_button_label"
+msgstr "Deimhnigh"
+
+msgid "vote_success"
+msgstr "Go raibh maith agat as do rannpháirtíocht sa phróiseas vótála. Tá do vótáil ${vote} curtha ar an gclár go rathúil. Is féidir leat do vótáil a athrú go dtí go dtéann sé ar an teirmin."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Mar Chomhoibrí, beidh tú ag páirt a ghlacadh i ngach ceann dár gcinntí. Glacfaidh na cinntí seo de réir nósanna daonlathacha dian, agus d'fhéadfadh sé a bheith ina thoradh tábhachtach don "
+"Chooperatiú agus don Chomhoibrí. Chomh maith leis sin, tá sé mar aidhm ag an gComhoibriú na saoránaigh de na hEorpa a chur in iúl, neamhspleách ar a náisiúntacht - ach saoránaigh na hEorpa amháin. Tá sé seo go háirithe "
+"tábhachtach le linn toghcháin phoiblí. Mar sin, tá gá linn a chinntiú trí rudaí a dhéanamh: (1) go bhféadfadh duine ar leith clárú ní mó ná uair amháin, mar thacaíocht don prionsabal daonlathach \"duine amháin = "
+"vótáil amháin\"; (2) go bhfuil gach Comhoibrí diongbháilte ar a laghad maidir le aois dleathach agus (3) go dtí go bhfuil saoránaigh na hEorpa amháin ina nComhoibrí.</p>\n"
+"    <p>Sin é an fáth go seiceálfaimid cúpla gné d' údara na n-eolais aitheantais, trí chur i gcomparáid (1) na sonraí a chuirfidh tú isteach ar an bhfoirm seo le linn do chlárúcháin leis (2) an "
+"eolas atá i do doiciméid aitheantais oifigiúla. Déanfaidh an fhoireann de bhaill ón gCooperatiú, na Vérifiers a dhéanfaidh na fíoruithe atá agat, ag brath ar eolas go comhoiriúnach maidir le do doiciméid aitheantais oifigiúla a thabhairt do réir "
+"ríomhphoist nó le linn cruinnithe videotón. Níl sé mar aidhm a chur i gcuimhne don ardán ar líne seo (chun slándála agus rúndachta a choimeád).</p>\n"
+"    <p>Is iad na sonraí a iarrfaimid ort agus go bhfíoróidh na Vérifiers que a chomhoiriúnú leis na sonraí ar do doiciméad aitheantais oifigiúla a bhaineann le:\n"
+"    <ul>\n"
+"    <li>do ainm (í) agus laethanta breithe;</li>\n"
+"    <li>do dháta breithe;</li>\n"
+"    <li>do shíniú.</li>\n"
+"    </ul></p>\n"
+"    <p>Ní réireacht duine amháin a bhíonn le do ainm (í), do shíniú (í) agus do dháta breithe: do. Má chuirfidh tú i gcion, beidh gá duit an t-eolas céanna a sholáthar dár gConradh le haghaidh a fhíorúcháin, "
+"agus ní bheidh an cur i láthair a ngníomhaíochtaí agat, toisc go bhfuil tú faoi láthair ina Chomhoibrí, agus nach féidir a bheith agat ach cuntais amháin chun níos mó ná uair amháin a vótáil. Mura athrófar é, táimid ag brath ar a chead mhór "
+"toisc go bhfuil a fhios againn go bhfuil duine amháin amháin leagtha am ar do chomhcheangal de ainm (í), shíniú (í) agus dháta breithe. Déanann do dháta breithe éasca dúinn a chinneadh gurb é cóipáilte, agus do shíniú a éiríonn linn "
+"glacadh leis gurb é an saoránach de na hEorpa.</p>\n"
+"    <p>Úsáidfimid an t-eolas seo ach le d'aitheantas a fhíorú, do aois agus do shíniú, agus le do chuntas a bhainistiú mar Chomhoibrí. Ní bheidh sé riamh le feiceáil d'úsáideoirí eile ar ardán IT na ${domain_name}, ná ní bheidh sé aistrithe nó díolta do dhuine, seachas chun comhoiriúnachtaí dlí a chomhlíonadh ag údaráis forfheidhmithe poiblí faoin gcoibhinn ag breithniú breithe. Is é an " "
+"\"cúntóir sonraí\" a chinntear faoin <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Rialachán Généralum a Chosc ar Ucht</a> d'Aontas na hEorpa an Comhoibriú CosmoPholaitiúil SCE, "
+"Society Cohoibeara Eorpach bunaithe 229 rue Solférino, 59000 Lille, an Francach agus clárúcháin ar 25 Aibreán 2023 faoi an uimhir SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Cuireadh seaghdha seaghdha ceisteanna arithmetacha simplí chugat trí ríomhphost, a shainaithnítear ó A go D, go léir ag leanúint an patrúin chéanna: (A PRÍOMH UIMHIR AR FHAIDH 1 AGUS 9) "
+"atá comhoibrithe le (A DARA UIMHIR AR FHAIDH 1 AGUS 9), agus (A TRÍÚ UIMHIR AR FHAIDH 1 AGUS 9). Chun an comhoibriú a dhéanamh, ba chóir duit an PRÍOMH UIMHIR AR FHAIDH 1 AGUS 9 "
+"a iolrú leis an DARA UIMHIR AR FHAIDH 1 AGUS 9 ar dtús. Nuair a bheidh torthaí an iolraithe seo agat, ba chóir duit an TRÍÚ UIMHIR AR FHAIDH 1 AGUS 9 a chur leis an toradh sin. Ba chóir duit an "
+"toradh deireanach seo a scríobh síos san athrann atá ar fáil do thorthaí an comhoibriú arithmetach atá á dhéanamh agat (i measc na gceithre atá curtha chugat, a shainaithnítear ó A go D). Ba chóir duit "
+"an comhoibriú a athdhéanamh do na ceithre comhoibriú a cuireadh chugat trí ríomhphost.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Mar chuid den próiseas cláraithe mar Chomhoibritheoir, caithfidh tú modh a roghnú chun do tanásta a fhíorú. Tá anfhíorú do tanásta de dhíth chun a chinntiú: (1) "
+"nár cláraithe duine ar leith go héigean faoi gheilleagar plé ar leith óna aigeanna ríomhphoist éagsúla (tugaimid comhairle i gcás maiorórach: \"duine amháin - vótáil amháin\"); (2) "
+"ní mór d’óga na hEorpa a bhainistiú a bhfuil aois na mná shonraithe bainte léi. (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >féach cén fáth</a>).</p>\n"
+"    <p>Tá dhá rogha agat don phróiseas fíoraithe seo:</p>\n"
+" <ul>\n"
+"   <li><b>Seol cóip de do doiciméad tanásta trí ríomhphost:</b> Is féidir leat roghnú chun cóip de do doiciméad tanásta a sheoladh go slán trí ríomhphost go díreach do shraith bheag de "
+"Chomhoibritheoirí a roghnaíodh go randamach, do Fhirigh. Cinntíonn an modh seo bealach tapa agus díreach chun do tanásta a fhíorú.</li>\n"
+"   <li><b>Socraigh comhoibriú físe:</b> Ina áit sin, d’fhéadfá roghnú comhoibriú físe a chur ar fáil áit a bhféadfaidh tú do doiciméid tanásta a chur i láthair go beo do do Fhirigh. "
+"Cuireann an modh seo comhoibriú níos pearsanta ar fáil agus ligeann sé duit soiléiriú láithreach más gá, go béo más roinn tú teanga choiteann, trí chat agus le haistriúchán uathoibríoch mura "
+"gá é.</li>\n"
+" </ul>\n"
+" <p>Sa dá chás, molaimid duit, dá bhrí sin, do shealbhú a choinneáil ar do doiciméad tanásta, do áit atá tú ag breith agus an uimhir doiciméada, sula gcuirfidh tú é nó a thaispeáint "
+"do na Fhirigh.</p>\n"
+" <p>Tá sé tábhachtach go ndéanfaidh tú do rogha go luath ionas go mbeidh do phróiseas cláraithe réidh agus tráthúil. Déan cinnte go bhfuil an modh a roghnaíonn tú ar an modh is áisiúla duitse "
+"agus go dtugann sé le fios do chuid sainroghanna príobháideacha.</p>\n"
+" <p>Tuigimid go bhfuil do chomhoibriú sa chás seo an-tábhachtach agus is é an eochair do choinníollacha ardchaighdeáin muiníne agus na daonlathachta pan-Eorpach laistigh dár gComhoibriú. Go raibh maith agat as do "
+"tuiscint agus do pháirt gníomhach san gcéim chruinn.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Tá an líon Comhoibritheoirí atá ann faoi láthair ró-íseal chun an líon cuí Fhirigh do do tanásta a roghnú. Déan teagmháil le hadmin faoi do laige, ag an seoladh "
+"${administrator}, chun an fadhb a réiteach."
+
+msgid "email_copy_id_verification_subject"
+msgstr "en - ${domain_name} - Le do thoil, deimhníg mo thana na Comhoibrithe nua"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Dear Fhirigh,\n"
+" Scríobhfaidh mé chugat chun an próiseas fíoraithe tanásta a chur i gcrích do mo chinneadh éirí mar Chomhoibritheoir de ${domain_name}. Gach rith, gheobhaidh tú cóip páirt den mo doiciméad tanásta i "
+"na hiomláin.\n"
+" Tabhair faoi deara go bhfuil roinnt faisnéise íogair masked as cúiseanna slándála. Mar sin féin, tá an doiciméad ag comhthéacs le faisnéis atá de dhíth ort chun mo thana a fhíorú de réir "
+"próiseas cláraithe ${domain_name}.\n"
+" Táim ag iarraidh le do thoil go dtiocfaidh tú ag féachaint ar an doiciméad atá ceangailte mura bhfuil sé indéanta laistigh de na 3 lá atá romhat, chun vótáil ar an cruinneas idir:\n"
+"\n"
+" - an fhaisnéis tanásta a fuair tú go díreach trí ríomhphost ó ardán TEICNEOLAÍOCHTA ${domain_name} (agus luafaítear é sin ar an idirghníomh maidir le vótáil) agus \n"
+" - an fhaisnéis tanásta a bhféadfaidh tú a léamh ar an gcopy pháirta de mo doiciméad tanásta.\n"
+"\n"
+" Tá an nasc duit chun vótáil ar an cruinneas seo ag an méid seo a leanas: ${voting_url}.\n"
+" Go raibh maith agat go mór roimh ré as tacú le mo chlárú mar Chomhoibritheoir ar ${domain_name}. Más gá duit tuilleadh ceisteanna nó faisnéis bhreise, bíodh le do thoil in iúl dom "
+"go díreach i do theanga féin.\n"
+" Le gach beannacht,\n"
+" ${signature}\n"
+" Ceangail: [Ainm na comhoibrithe doiciméad]\n"
+" Cuireadh an ríomhphost seo ar bun le cabhair ó ghné fíoraithe tanásta ${domain_name}. Mura tú an Fhirigh a shonraítear do chinneadh ${signature} agus má fuair tú an ríomhphost seo trí "
+"earráid, le do thoil, inis do riarachán ${domain_name} ag an seoladh seo a leanas: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "en - ${domain_name} - Le do thoil, deimhníg mo thana tríd comhoibriú físe mar Chomhoibritheoir nua"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Dear Fhirigh,\n"
+"    Scríobhfaidh mé chugat chun an próiseas fíoraithe tanásta a chur i gcrích do mo chinneadh éirí mar Chomhoibritheoir de ${domain_name}. Ba mhaith liom comhoibriú físe a mholadh don "
+"chuspóir seo.\n"
+"    Seo iad roinnt ama le roghnaigh mé don chruinniú físe. Tabhair faoi deara go bhfuil mé ag cónaí i nGearmáinis (Le do thoil, coigeartaigh de réir do thír / réigiún) arís de sin, "
+"mar a chonaic mé go mb’fhéidir go mbeadh am an lae ina bhfreagra différent ó am an lae a bhraitheann tú. Ba chóir don chruinniú físe seo nach mbeidh sé ag mair i bhfad níos faide ná 10 nóiméad: "
+"(cuir isteach 3 moill amháin, más féidir ar amanna difriúla de thart ar an lae agus laethanta difriúla, couro le do chois nach bhfuil sé níos lú ná 10 lá tar éis duit an ríomh-phost a sheoladh)\n"
+"   \n"
+"         - Dé Luain, 04 Meán Fómhair 2023, ag 17:30 uair mo chuid; (Coigeartaigh de réir do chumas)\n"
+"         - Dé Máirt, 05 Meán Fómhair 2023, ag 20:30 uair mo chuid; (Coigeartaigh de réir do chumas)\n"
+"         - Dé Sathairn, 09 Meán Fómhair 2023, ag 10:00 uair mo chuid. (Coigeartaigh de réir do chumas)\n"
+"    \n"
+"    Cuimhnigh le do thoil go bhféadfadh sé a bheith go mairimid i réigiún difriúil! Aistrigh an t-am seo le do thír.\n"
+"    Beidh an comhoibriú físe seo ar siúl ag úsáid an nasc seo a leanas:\n"
+"(cuir isteach anseo an nasc a d’ullmhaigh tú don chruinniú físe. Seo iad ár moltaí do na hardáin a d’fhéadfá a úsáid chun an comhoibriú físe a chruthú agus an nasc comhoibrithe a sholáthar:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (bogearraí saor in aisce agus oscailte)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (bogearraí saor in aisce agus oscailte)\n"
+"         - Zoom : https://zoom.us/ (bogearraí seilbhe)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (bogearraí seilbhe, ardán ar chostas) "
+"         - Google Meet : https://meet.google.com/?pli=1 (bogearraí seilbhe, rochtain saor i gcost ar an ardán)\n"
+"    )\n"
+"    Déanfaidh mé go bhfuil caitheamh ináistíocht de na hoiriúnachtaí ama atá i do shon agus seolfaidh tú ríomhphost a bhfuil an rogha agat.\n"
+"    Le linn an chruinniú físe, b’fhéidir go dtarlaigh go mbeadh teanga choiteann againn. Má tá sé seo fíor, molaim go dtabharfaimid aird éigin chuige. Molaimse go n-úsáidfaimid an comhoibriú "
+"chun claochlú a dhéanamh ar ár dtéarmaí, agus go n-úsáidfimíd aistriúchán meaisín chun a thuiscint cad a scríobhann ár gcomhoibrithe.\n"
+"    Nuair a bheidh an chruinniú físe seo réitithe agat, iarrfaidh mé go dtiocfaidh tú ag vótáil chun a dheimhniú nó a dhiúltaigh le cruinneas idir:\n"
+"\n"
+"     - an fhaisnéis tanásta a fuair tú go díreach trí ríomhphost ó ardán TEICNEOLAÍOCHTA ${domain_name} (agus luafaítear é sin ar an idirghníomh maidir le vótáil) agus \n"
+"    - an fhaisnéis tanásta a bhfaighidh tú le linn an chruinniú físe.\n"
+"\n"
+" Tá an nasc duit chun vótáil ar an cruinneas seo ag an méid seo a leanas: ${voting_url}.\n"
+"  Go raibh maith agat go mór roimh ré as tacú le mo chlárú mar Chomhoibritheoir ar ${domain_name}. Más gá duit tuilleadh ceisteanna nó faisnéis bhreise, bíodh le do thoil in iúl dom "
+"go díreach.\n"
+" Le gach beannacht,\n"
+" ${signature}\n"
+" Cuireadh an ríomhphost seo ar bun le cabhair ó ghné fíoraithe tanásta ${domain_name}. Mura tú an Fhirigh a shonraítear do chinneadh ${signature} agus má fuair tú an ríomhphost seo trí "
+"earráid, le do thoil, inis do riarachán ${domain_name} ag an seoladh seo a leanas: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Más ann don úsáideoir, gheobhaidh sé ríomhphost."
+
+msgid "reset_password_email_subject"
+msgstr "Athshocraigh Do Phasfhocal"
+
+msgid "forget_email_send_error"
+msgstr "Tharla earráid nuair a bhí na ríomhphoist athshocraithe á seoladh, déan teagmháil le hadmin, ag ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "cruthaíodh"
+
+msgid "member_state_created_value"
+msgstr "Cruthaíodh an comhoibríoch"
+
+msgid "member_state_draft_name"
+msgstr "dréacht"
+
+msgid "member_state_draft_value"
+msgstr "Tá sonraí an chomhoibrithe á gcur in eagar"
+
+msgid "member_state_registred_name"
+msgstr "cláraithe"
+
+msgid "member_state_registred_value"
+msgstr "Tá sonraí an chomhoibrithe curtha ar fáil"
+
+msgid "member_data_modification_request_name"
+msgstr "ag athrú"
+
+msgid "member_data_modification_request_value"
+msgstr "Rinneadh iarratas ar athrú sonraí"
+
+msgid "member_datas_modified_name"
+msgstr "athraithe"
+
+msgid "member_datas_modified_value"
+msgstr "Tá sonraí an chomhoibrithe athraithe"
+
+msgid "email_member_state_changed"
+msgstr "Athrú ar do phróifíl chomhoibrithe"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Le do thoil, cuir isteach seoladh ríomhphoist bailí"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Níl cead ag an riaráthóir a phasfhocal féin a athshocrú"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Má tá an t-úsáideoir ann, seoladh ríomhphost chuig a seoladh ríomhphoist le nasc chun a phasfhocal a athshocrú"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Níl an dá leagan de na pasfhocail comhoiriúnach. Cuir in áirithe go bhfuil comhoiriúnacht acu, agus seol ar ais é"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Le do thoil, cuir isteach pasfhocal nua"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Athraíodh do phasfhocal go rathúil"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Tharla earráid sa phróiseas atá ag athshocrú do phasfhocal"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Tharla earráid sa phróiseas atá ag athshocrú do phasfhocal. Níor athraíodh do phasfhocal"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Ní bhfuarthas an ball sa liosta ballraíochta reatha"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Tá an hipearnasc a úsáideadh chun do phasfhocal a athshocrú as dáta. Le do thoil, bain úsáid as an ceann is déanaí a fuair tú"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "Ní seoladh an ríomhphost atá ag comhdhéanamh an dúshlán matamaiticiúil a fhíorú go bhfuil an t-iarrthóir duine (nó ní robot) ná."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Earráid nuair a bhíodhar an iarratas"
+
+msgid "modification_to_profile_button_title"
+msgstr "Cuir in eagar Do Chumainn"
+
+msgid "modification_to_profile_button_label"
+msgstr "Cuireann Eagar"
+
+msgid "modification_to_profile_button_description"
+msgstr "Cliceáil anseo chun nasc slán a fháil chun do chontúirt a mhodhnú."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Chun a chinntiú go bhfuil slándáil do shonraí agat, seolfar nasc uathúil chugat chun do phrofíl a mhodhnú trí ríomhphost. Déanann an próiseas seo cinnte go bhfuil an té amháin a bhfuil "
+"aiseanna aige do seoladh ríomhphoist "
+"ár féidir a dhéanamh ar d’fhoirm."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Nasc chun do phrofíl a mhodhnú ar struchtúr TF ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Le do thoil, cuir isteach anseo do chuid ainmneacha mar atá curtha in iúl i do doiciméid ID oifigiúla, ina litriú oifigiúil i gcarachtair Laidineach (más ann do theanga "
+"bhréagach atá ann)."
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Le do thoil, cuir isteach anseo do laige chónaithe i gcloig (i.e. NÍ d'ainm teaghlaigh mar dhuine pósta), mar atá curtha in iúl i do doiciméid ID oifigiúla, ina litriú oifigiúil i gcarachtair Laidineach "
+("(más ann do theanga bhreá no más requestá nó de chineál eile)."
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Téacs ag cur síos ort (téancth clár)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Le do thoil, scríobh anseo téacs ag cur síos ort féin, i do theanga is fearr leat, ionas go mbeidh na baill eile den Chomhoibriú in ann tú a aithint níos fearr. Molaimid duit díriú "
+"ar: (1) Cá as a thagann tú, (2) cad a dhéanann tú, (3) cad ba mhaith leat a dhéanamh mar bhall den Chomhoibriú, agus (4) na hacmhainní (taithí, eolas, ama) atá ar fáil duit.\n"
+"Creidimid go bhfuil an t-eolas seo úsáideach mar go gcuireann tú tú féin in iúl do dhaoine eile le do fhocail féin tugann sé aghaidh dhaonna do do shaintréithe dhigiteacha ar ár struchtúr TF. Le "
+"an téacs seo, faigheann gach ball den Chomhoibriú aithne ort beagán níos fearr, agus éiríonn an comhoibriú sin níos éasca!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Le do thoil, cuireann tú do dháta breithe ar fáil sa fhormáid seo: DD/MM/YYYY, i.e. (1) lá sa mhí, ar 2 dhigit; (2) uimhir na míosa, ar 2 dhigit; (3) an bhliain, ar 4 dhigit. Ní fhéadfadh "
+"duine ar bith a bhfuil 18 bliana breithe comhoibrithe. Mura bhfuil tú fós 18 bliain d'aois, cuirimid fáilte romhat clárú mar Bhall Gnáth-den Chomhoibriú - agus a uasghrádú chuig stádas Comhoibrithe chomh luath agus a chuireann tú "
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Le do thoil, cuir isteach Ballstáit amháin den Aontas Eorpach a bhfuil tú ina shaoránach. Níl cead ag saoránaigh an Aontais Eorpaigh a bheith Comhoibrithe"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Le do thoil, roghnaigh Ballstáit den Aontas Eorpach"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Is é seo an uimhir uathúil a aithníonn tú i ngach próiseas atá ar siúl sa Chomhoibriú"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Le do thoil, cuir isteach anseo an seudainm a aithneoidh tú le linn do gníomhaíochta ar ár n-ardán TF. Molaimid go láidir go roghnaigh seudainm a dhéanann rianú "
+"ar do shaineolas a bheith dodhéanta (nó an-dhiúltach). Mar sin, cosnaíonn tú rúndacht do thuairimí (i.e. sonraí pearsanta a bhfuil cuspóir áirithe cosanta orthu faoin Rialachán Ginearálta um Chaomhnú Sonraí - RGDS) in aghaidh aon fhoirm brú lasmuigh i bhfíor-shaoil (m.sh. ó do fhostóir nó ó do chustaiméirí). Bí cúramach! Nuair atá tú roghnaithe, ní bheidh tú RAR i bhfad in ann an seudainm seo a athrú ina dhiaidh sin. Roghnaigh é go cúramach! \n"
+" Caithfidh do sheudainm a bheith idir ${MIN_PSEUDONYM_LENGTH} agus ${MAX_PSEUDONYM_LENGTH} carachtar agus ní féidir ach laistí na hAinmneacha Laidineacha (A-Z, a-z), uimhreacha (0-9), "
+"íontacha (_), laige (.), comhoiriúnachtaí (-) agus spásanna ( ). Ní féidir bheith ann litir le hailt, umlaut, agus comharthaí diacritici eile ar leithligh do chuid teangacha."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Tá sé riachtanach do sheudainm a sholáthar"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Le do thoil, cuir isteach do phasfhocal. Caithfidh do phasfhocal a bheith idir ${password_minimum_length} agus ${password_maximum_length} carachtair, contain go laige amháin, go laige "
+"litir beag amháin, go laige litir mhór amháin agus ar a laghad laige amháin den charachtar de na rudaí seo a leanas: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Le do thoil, dearbhaigh do phasfhocal"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Tá sé riachtanach do phasfhocal a dhearbhú"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Le do thoil, cuir isteach an seoladh ríomhphoist a úsáidfidh struchtúr TF ${domain_name} chun comhoibriú leat.\n"
+"Molaimid go roghnaigh seoladh ríomhphoist a sheicíonn tú go minic.\n"
+"Tugaimid an t-eolas seo a gcaithfidh tú a bheith ar an eolas faoin dul chun cinn i gConradh, chun deis a chur ar fáil duit gníomhaíocht a dhéanamh nó a chur in iúl maidir le cinntí. Tá ríomhphost "
+"an-mhór tar éis a úsáid san Eoraip, é an chóireáil uilíoch agus tá sé bunaithe ar chaighdeáin oscailte agus saor, in ainneoin na gcórais teachtaireachta comhoibrí atá ag na giants digiteacha (ar a dtugtar na 'GAFAM').\n"
+"Úsáidfear an seoladh ríomhphoist seo go heisiach chun a chinntiú an cumarsáid idir struchtúr TF ${domain_name} agus tú. Ní bheidh sé le feiceáil do na húsáideoirí eile áfach ar ardán TF ${domain_name}, ná ní bheidh sé aistrithe nó díolta do dhuine ar bith, ach chun comhlíonadh riachtanas dlí le húdaráis forfheidhmithe poiblí faoi iarraidh breithiúnas. Is é an \"réiteach sonraí\" mar a shonraítear i Rialachán Ginearálta um Chaomhnú Sonraí (RGDS) den "
+"Aontas Eorpach an Conradh CosmoPolitical SCE, Conradh Eorpach bunaithe 229 rue Solférino, 59000 Lille, an Franc agus g зарегистрáilte ar 25 Aibreán 2023 faoin "
+"uimhir SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Le do thoil, cuir isteach an teanga a bpreferálfaidh tú go ndéanfaidh struchtúr TF ${domain_name} idirghníomhú leat. \n"
+" Molaimid go roghnaigh an teanga a bhfuil tú ar an eolas is fearr, ó na teangacha oifigiúla de chuid an Aontais Eorpaigh nó Esperanto. Mura bhfuil sé ar fáil i measc na n-ardán atá déanta againn, úsáidfimid é chun idirghníomhú leat. \n"
+" Teastaíonn an t-eolas seo uainn de bhrí go bhfuil cúis le caoinfhulaingt agus comhoiriúnacht do na prionsabail dhaonlathacha, is mian linn a dhéanamh idirghníomhú leat i dteanga a thuigeann tú mar is fearr agus a gcuireann cúnamh."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Le do thoil, tabhair an teanga a bheimid in ann glacadh léi, mar rogha dara, gur féidir le bonneagar IT na ${domain_name} idirghníomhú leat. \n"
+" Moltar duit teanga oifigiúil eile de chuid an Aontais Eorpaigh nó Esperanto a roghnú, a thuigeann tú go réasúnta go maith. Má tá sí ar fáil i measc na nteangacha a d'fhorbair muid "
+"comhoiriúnacht úsáideora di, agus má tá d'iallach teanga roghnaithe neamh-infhaighte, úsáidfimid í chun idirghníomhú leat. \n"
+" Teastaíonn an t-eolas seo uainn toisc, in ainneoin ár n-iarrachtaí, go bhféadfadh sé tarlú nach mbeidh d'iallach teanga ar fáil ar chomhhoiriúnacht úsáideora ár gcláir. Sin é an fáth atáimid ag "
+"iarraidh ort más féidir leat teanga eile a úsáid."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "An teanga a ghlactar leis mar rogha tríú chun idirghníomhú leat"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Le do thoil, tabhair an teanga a bheimid in ann glacadh léi, mar rogha tríú, gur féidir le bonneagar IT na ${domain_name} idirghníomhú leat. \n"
+" Moltar duit teanga oifigiúil eile de chuid an Aontais Eorpaigh nó Esperanto a roghnú, a bhfuil tú fós in ann a thuiscint. Má tá sí ar fáil i measc na nteangacha a d'fhorbair muid "
+"comhoiriúnacht úsáideora di, agus má tá d'iallach teanga roghnaithe agus d'teanga dara rogha neamh-infhaighte, úsáidfimid í chun idirghníomhú leat. \n"
+" Teastaíonn an t-eolas seo uainn toisc, in ainneoin ár n-iarrachtaí, go bhféadfadh sé tarlú nach mbeidh d'iallach teanga agus d'iallach teanga dara rogha ar fáil ar chomhhoiriúnacht úsáideora ár gcláir. "
+"Sin é an fáth atáimid ag iarradh ort más féidir leat teanga tríú a úsáid. Tuigimid go bhfuil sé neamhshásúil duit é a úsáid chun idirghníomhú linn - mar atá sé dúinn. Le do thoil, gabhaimid leithscéal as seo."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Do Mark Iomlánaíoch Comhoibrithe"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Mar Chocomhar, tá do Mark Iomlánaíoch Comhoibrithe mar thoradh ar na marcanna a cuireadh ar fáil duit ag na hIarrthóirí Gníomhacha eile sna Grúpaí Oibre a ghlac tú páirt iontu chun sainmhíniú "
+"agus glacadh le Tairiscintí Gníomhaíochta. Is féidir le gach Iarrthóir Gníomhach marc a sholáthar comhoiriúnach le +1, 0 nó -1, ag brath ar cá fhad a bhí do iompar comhoibritheach i rith do "
+"pháirt gníomhach sa ghrúpa oibre sin. De réir sin, déantar an marc a 'dearmad' go huathoibríoch agus laghdaítear é le himeacht ama: laghdaítear é i gciorcal tar éis ${forgetting_time_constant} laethanta. "
+"Is é luach tosaigh do Mark Iomlánaíoch Comhoibrithe ná nialas."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Dáta a nuashonraíodh do Mark Iomlánaíoch Comhoibrithe den deireadh"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Is é seo an dáta is déanaí ar a bhfuaireamar marc ó chomhoibrithe eile i ndiaidh do pháirt gníomhach a chríochnú i gGrúpa Oibre a bhí ag sainmhíniú agus ag glacadh le Tairiscint "
+"Gníomhaíochta. "Is é luach tosaigh an dáta seo atá mar luach do chláraigh mar Chocomhar."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Uimhir na scaireanna atá agat san Chomhoibriú"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Is é seo an líon iomlán na scaireanna atá agat san Chomhoibriú, tar éis duit iad a cheannach ar ár bpróifíl ghréasáin. Ar do chlárú, tá an uimhir seo comhoiriúnach le nialas. Tugaimid cuireadh "
+"duit dul ar aghaidh a chomhfhreagras dá réir chuig an URL seo: ${url_purchase_shares} chun do chéad scaireanna a cheannach. Bainfidh tú sult as do cheart chun cinneadh a dhéanamh go hiomlán mar "
+"Chocomhar amháin tar éis duit a bheith tar éis scaireanna a cheannach (agus d'íocaíocht bhliantúil a dhéanamh). Ba chóir duit fáilte a chur roimh níos mó ná scair amháin a cheannach, nuair a chláraíonn tú, "
+"ach freisin ag am ar bith ina dhiaidh sin. Cuireann sé neart ar ár gComhoibriú, agus táimid ar fad buíoch díot as seo!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Dáta ar a bhfógrar do thíolactha bhliantúil reatha"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Dáta ar a bhfógrar do thíolactha bhliantúil reatha, agus sula gcaithfidh tú í a íoc arís chun do cheartanna cinneoireachta a choinneáil mar Chocomhar. Ar do chlárú, tá an dáta seo socraithe i dtimpeallacht saothair atá thart ar an am, "
+"rud a chiallaíonn go gcaithfidh tú í a íoc anois. Tugaimid cuireadh duit dul ar aghaidh a chomhfhreagras dá réir chuig an URL seo: ${url_pay_yearly_contrib} chun do thiolactha bhliantúil "
+" chéad a íoc, agus mar sin páirt a ghlacadh i ngníomhartha ár gComhoibriú. Bainfidh tú sult as do cheartanna cinneoireachta a choinneáil mar Chocomhar amháin tar éis duit a bheith tar éis do thiolactha bhliantúil "
+"íoc (agus scaireanna a cheannach ar a laghad)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Uimhir Chomhoiriúnachta Baincéireachta Idirnáisiúnta (IBAN) do chuntais bainc"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Más gá a fhágáil ar an gComhoibriú (a bheidh le hifheacht againn), tá gá le do IBAN chun a bheith in ann aistriú chuig tú na tuillte de réir méid i dtaisce na scaireanna atá agat san "
+"Chomhoibriú. As cúiseanna slándála, molaimid duit an t-eolas seo a sholáthar ach amháin má tá tuairim agat go bhfagfaidh tú an Comhoibriú"
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Dáta ar a scriostar do chuid sonraí uile ó ár bonneagar IT"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Más gá a fhágáil ar an gComhoibriú, coimeádtar do shonraí aitheantais ar feadh tréimhse ${Quarantine} laethanta, sula scriostar go hiomlán agus go hiontaofa é ó ár gcomhoiriúnachtaí. "
+"Is é seo chun a chinntiú nach féidir le Chocomhar a fhágáil ar an gComhoibriú toisc go bhfuil a Mark Iomlánaíoch Comhoibrithe ró-mhaith, dul ar ais go gasta le pseudonym virgin agus Mark Iomlánaíoch Comhoibrithe. "
+"Ar do chlárú, tá an dáta seo socraithe i dtodhchaíocht an-ghar."
+
+msgid "avatar_label"
+msgstr "Pictiúr chun tú a chur in iúl (do avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Le do thoil, tabhair pictiúr a léiríonn thú mar bhall den Chomhoireacht. Maidir le cosaint a dhéanamh ort ó aon tuairiscí ó do dhíoltóirí nó cliaint, moltar duit nach mbeadh an pictiúr seo in ann "
+"ó fhanacht ar do aitheantas i saol na fírinne. Ba cheart dó sin go ginearálta nach mbeadh sé ina phictiúr de do féin (cuimhnigh ar go sinsearacht a úsáidtear ag bogearraí aitheantais comhoiriúnachta). Is 
+"é an pictiúr ach amháin i formáid JPEG (sciobadh .JPG nó .JPEG), agus níor cheart dó a bheith níos mó ná 5 MB. \n"
+"Creidimid go bhfuil an t-eolas seo úsáideach toisc go gcabhraíonn pictiúr le baill eile den Chomhoireacht chunn tú a aithint. Uaireanta bíonn pictiúr i bhfad níos neamhchiarálaichte ná "
+"caint fhada. Leis an íomhá seo, tá tú ag cur go leor i gcló faoi do chuid féin, i bhfuinneog uilíoch. Déan an chuid is fearr de!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Níl an seoladh (URL) a d'úsáil tú chun do bhlag na h-iarratais a fháil ó áit ar stop tú ag comhoiriúnach leis an gceann a chláraigh muid duit. (Níl an líon aitheantais iarratais sa "
+"seisiún agus sa líon URL comhoiriúnach)\n"
+"Le do thoil, bain úsáid as an URL ón ríomhphost deireanach a fuair tú."
+
+msgid "check_new_email"
+msgstr "D'iarr tú a athrú do sheoladh ríomhphoist. Sa todhchaí, ba mhaith leat a úsáid: ${new_email}. Mar gheall air sin, gheobhaidh tú ríomhphost a bheidh ina chuimsithe ag nasc chun an seoladh nua a fhíorú."
+
+msgid "check_new_email_subject"
+msgstr "Fíorú do sheoladh ríomhphoist nua"
+
+msgid "check_new_email_send_error"
+msgstr "Theip ar an seoladh ríomhphoist fíorúcháin do do sheoladh nua"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Seoladh ríomhphoist fíorúcháin do do sheoladh nua seolta"
+
+msgid "modify_member"
+msgstr "Déanaigh comhoiriúnacht nó athraigh ball"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Earráid nascleanúna"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Tá an seoladh ríomhphoist ann cheana"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Seoladh ríomhphoist nuashonraithe"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Earráid ag nuashonrú seolaidh ríomhphoist"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Earráid ag socrú an réimse"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Earráid ag nuashonrú ball"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "OID neamhbhailí"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Iarratas neamhbhailí"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "Earráid LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Sonraí ball nuashonraithe"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Theip ar nuashonrú sonraí ball"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Bhí nuashonrú na sonraí ball rathúil"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Sonraí do ghabhann"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Níl seoladh ríomhphoist nua ann"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Níl cead ann"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Ní votéir"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Theip an nuashonrú pasfhocal"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Tá an nuashonrú pasfhocal rathúil"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Theip an clárú"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Tá an clárú rathúil"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Comhalta nach bhfuil ar eolas"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Comhalta nach bhfuil ar eolas"
+
+msgid "modify_member_title"
+msgstr "Cuir próifíl an chomhalta in eagar"
+
+msgid "select_member_oid_label"
+msgstr "Roghnaigh comhalta le próifíl a chur in eagar:"
+
+msgid "select_member_placeholder"
+msgstr "Ainm bréige an chomhalta"
+
+msgid "modify_profile"
+msgstr "Is féidir leat do phróifíl a athrú trí chliceáil anseo"
+
+msgid "profile"
+msgstr "próifíl"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Tá do seoladh ríomhphoist nuashonraithe go rathúil. Beidh tú ag úsáid an seolaidh nua seo do gach cumarsáid sa todhchaí leis an ${domain_name}. Mura bhfuair tú an t-iarratas ar an athrú seo nó má tá "
+"aon cheist agat, ná bíodh aon leisce ort teagmháil a dhéanamh lenár tacaíocht láithreach ag ${admin_email}. Go raibh maith agat as a bheith mar chuid den phobal ${domain_name}!"

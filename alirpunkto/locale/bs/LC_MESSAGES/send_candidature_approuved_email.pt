@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vaša prijava za <span tal:replace="domain_name">Naziv domena</span> je odobrena</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Čestitamo vam na odobravanju vaše prijave!</h1>
+    
+    <p tal:omit-tag="textual">Pozdrav <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Ime podnosioca</span>,</p>
+    
+    <p tal:omit-tag="textual">Sa zadovoljstvom vas obavještavamo da je vaša prijava za <span tal:replace="domain_name">Naziv domene</span> za ulogu <span tal:replace="python:candidature.type">Uloga</span> odobrena.</p>
+
+    <p tal:omit-tag="textual">Hvala što ste se pridružili! Raduje nas da vas možemo pozdraviti u našoj zajednici.</p>
+    
+    <p tal:omit-tag="textual">S obzirom da je vaša prijava odobrena, možete se prijaviti na našu platformu koristeći pseudonim i lozinku koje ste naveli tokom procesa prijave. Nakon prijave, naći ćete:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">linkove na sve softverske aplikacije kojima imate direktan pristup. Ne morate se ponovno prijavljivati!</li>
+        <li tal:omit-tag="textual">link do obrasca gdje možete pregledati i urediti svoj profil. Na ovom obrascu vas ohrabrujemo da se predstavite ostalim članovima naše zajednice u kratkom "profilnom tekstu" i da prikažete malu sliku koja vas predstavlja (vaš "avatar");</li>
+        <li tal:omit-tag="textual">link za odjavu.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Evo glavnih elemenata vašeg profila koje smo zabilježili:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">vaš pseudonim: ##PSEUDONYM. Molimo vas da pažljivo i sigurno zabilježite ovaj pseudonim: to je jedini identifikator kojim se možete prijaviti na našu IT platformu;</li>
+        <li tal:omit-tag="textual">vaša lozinka: (lozinka koju ste naveli prilikom registracije);</li>
+        <li tal:omit-tag="textual">vaša e-mail adresa: (e-mail adresa na koju šaljemo ovaj e-mail);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">vaši identifikacijski podaci: (sva vaša imena i prezimena, datum rođenja, kako je navedeno i potvrđeno tokom procesa registracije);</li>
+        <li tal:omit-tag="textual">vaš preferirani jezik za komunikaciju: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">drugi jezik koji prihvatate da koristimo za komunikaciju: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">jezik koji prihvatate da koristimo, kao treći izbor, za komunikaciju: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Za vašu evidenciju, ovdje su detalji finalizacije vašeg procesa registracije:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID prijave: <span tal:replace="python:candidature.oid">ID prijave</span></li>
+        <li tal:omit-tag="textual">Datum odobrenja: <span tal:replace="python:candidature.modifications[-1]">Posljednja promjena</span></li>
+        <li tal:omit-tag="textual">Status: Odobreno</li>
+    </ul>
+
+    
+    <p tal:omit-tag="textual">Radujemo se saradnji s vama!</p>
+
+    
+    <p tal:omit-tag="textual">S poštovanjem,</p>
+    <p tal:omit-tag="textual">Tim <span tal:replace="domain_name">Naziv domena</span>.</p>
+</body>
+</html>

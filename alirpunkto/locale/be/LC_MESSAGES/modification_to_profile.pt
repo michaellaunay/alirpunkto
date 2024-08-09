@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Запыт на змяненне вашага профілю</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Запыт на змяненне вашага профілю</h1>
+    
+    <p tal:omit-tag="textual">Прывітанне <span tal:replace="member.firstname" tal:condition="exists:member">Імя карыстальніка</span>,</p>
+    
+    <p tal:omit-tag="textual">Мы атрымалі запыт на змяненне вашага профілю на платформе <span tal:replace="site_name">Назва сайта</span> <span tal:replace="domain_name">Назва домена</span>. З-за бяспекі мы патрабуем, каб вы прайшлі па бяспечнай спасылцы для працягнення змен. Калі ласка, націсніце на наступны URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Спасылка на змяненне профілю</a>, каб абнавіць інфармацыю ў вашым профілі.</p>
+    
+    <p tal:omit-tag="textual">Калі вы не запытвалі гэтае змяненне профілю, калі ласка, праігнаруйце гэты электронны ліст або звяжыцеся з падтрымкай, калі ў вас ёсць якія-небудзь пытанні.</p>
+    
+    <p tal:omit-tag="textual">З найлепшымі пажаданнямі,</p>
+    <p tal:omit-tag="textual">Каманда <span tal:replace="domain_name">Назва домена</span>.</p>
+</body>
+</html>

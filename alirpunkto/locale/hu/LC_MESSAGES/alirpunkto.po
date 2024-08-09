@@ -1,0 +1,1105 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Üdvözöljük"
+
+msgid "username_label"
+msgstr "Felhasználónév"
+
+msgid "password_label"
+msgstr "Jelszó"
+
+msgid "login_label"
+msgstr "Bejelentkezés"
+
+msgid "welcome_msg"
+msgstr "Üdvözöljük a ${site_name}-n, amely a ${domain_name} IT infrastruktúrájában használt alkalmazások központosított szolgáltatása."
+
+msgid "all_applications_msg"
+msgstr "Minden alkalmazás, amire szüksége van ahhoz, hogy részt vegyen a ${domain_name} tevékenységeiben, egy helyen."
+
+msgid "register_or_login_msg"
+msgstr "Regisztráljon vagy jelentkezzen be most, hogy elkezdhesse."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, a ${domain_name} IT infrastruktúrájában használt alkalmazások központosított szolgáltatása"
+
+msgid "logged_in_msg"
+msgstr "Bejelentkezve: ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Kijelentkezhet, ha ide kattint"
+
+msgid "logout_label"
+msgstr "Kijelentkezés"
+
+msgid "choose_application_msg"
+msgstr "Válassza ki a csatlakozni kívánt alkalmazást:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Érvénytelen felhasználónév vagy jelszó. Kérjük, próbálja újra"
+
+msgid "register_link"
+msgstr "Fiók létrehozása"
+
+msgid "password_confirm_label"
+msgstr "Jelszó megerősítése"
+
+msgid "password_confirm_title"
+msgstr "Jelszava megerősítése"
+
+msgid "forgot_password_label"
+msgstr "Elfelejtette a jelszavát?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Teljes név a hivatalos dokumentumok szerint"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Teljes vezeték név a hivatalos dokumentumok szerint"
+
+msgid "birthdate_label"
+msgstr "Születési dátum"
+
+msgid "nationality_label"
+msgstr "Nemzetiség (az Európai Unió állampolgárai közül)"
+
+msgid "cooperator_number_label"
+msgstr "Együttes szám"
+
+msgid "pseudonym_label"
+msgstr "Álnév"
+
+msgid "email_label"
+msgstr "Email cím"
+
+msgid "first_interaction_language_label"
+msgstr "Az a nyelv, amelyet preferál, hogy kommunikáljunk Önnel"
+
+msgid "second_interaction_language_label"
+msgstr "A második választásként elfogadott nyelv, amelyen kommunikáljunk Önnel"
+
+msgid "register_label"
+msgstr "Regisztráció"
+
+msgid "forgot_password_head"
+msgstr "Jelszó visszaállítása"
+
+msgid "forgot_your_password_title"
+msgstr "Elfelejtette a jelszavát?"
+
+msgid "enter_your_email_address_label"
+msgstr "Kérjük, adja meg az email címét:"
+
+msgid "submit_button"
+msgstr "Beküldés"
+
+msgid "candidature_states_draft_value"
+msgstr "Páályázat: A pályázat tervezési módban van."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Email Érvényesítés: Az állapot, ahol a Jelölt email címe várja az érvényesítést."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "Igazolt Ember: A Jelölt email címe ellenőrzött, és az emberiesség bizonyítéka megadva (ellenőriztük, hogy nem robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"UniqeData: A Jelölt megadta a személyazonosító adatait, és ellenőriztük, hogy nincs olyan jelenlegi vagy nemrégiben létező Együttműködő vagy Rendkívüli Tag a Közösségben, aki ugyanazokat az "
+"adatokat adta meg."
+
+msgid "candidature_states_pending_value"
+msgstr "Függőben: A pályázatot benyújtották. A személyazonosító adatokat a Verifikátoroknak továbbították, de még nem adtak visszajelzést."
+
+msgid "candidature_states_approved_value"
+msgstr "Jóváhagyva: A pályázatot elfogadták."
+
+msgid "candidature_states_refused_value"
+msgstr "Elutasítva: A pályázatot elutasították."
+
+msgid "candidature_states_draft"
+msgstr "tervezet"
+
+msgid "candidature_states_email_validation"
+msgstr "email_érvényesítés"
+
+msgid "candidature_states_confirmed_human"
+msgstr "igazoltt_humán"
+
+msgid "candidature_states_unique_data"
+msgstr "egyedi_adatok"
+
+msgid "candidature_states_pending"
+msgstr "függőben"
+
+msgid "candidature_states_approved"
+msgstr "jóváhagyva"
+
+msgid "candidature_states_refused"
+msgstr "elutasítva"
+
+msgid "user_types_ordinary_value"
+msgstr "Rendes: A Közösség rendes tagjává válás iránti pályázat = egyszerűsített regisztrációs folyamat, nincs pénzügyi kötelezettség, de nincsenek döntéshozatali jogok."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Együttműködő: A Szövetkezet teljes jogú tagjává válás iránti pályázat, Együttműködő = teljes regisztrációs folyamat, amely biztosítja az 'egy személy = egy szavazat' elvet, és hogy a "
+"Jelölt az Európai Unió állampolgára, az a kötelezettség, hogy legalább egy részvényt vásároljon és éves hozzájárulást fizessen, és teljes döntéshozatali jogok."
+
+msgid "user_types_ordinary"
+msgstr "A Közösség rendes tagja"
+
+msgid "user_types_cooperator"
+msgstr "Együttműködő = a Szövetkezet teljes jogú tagja"
+
+msgid "vote_types_yes_value"
+msgstr "Igen: A szavazat pozitív."
+
+msgid "vote_types_no_value"
+msgstr "Nem: A szavazat negatív."
+
+msgid "vote_types_abstain_value"
+msgstr "Tartózkodás: A szavazat semleges."
+
+msgid "vote_types_yes"
+msgstr "igen"
+
+msgid "vote_types_no"
+msgstr "nem"
+
+msgid "vote_types_abstain"
+msgstr "tartózkodás"
+
+msgid "zero"
+msgstr "nulla"
+
+msgid "one"
+msgstr "egy"
+
+msgid "two"
+msgstr "kettő"
+
+msgid "three"
+msgstr "három"
+
+msgid "four"
+msgstr "négy"
+
+msgid "five"
+msgstr "öt"
+
+msgid "six"
+msgstr "hat"
+
+msgid "seven"
+msgstr "hét"
+
+msgid "eight"
+msgstr "nyolc"
+
+msgid "nine"
+msgstr "kilenc"
+
+msgid "times"
+msgstr "szorozva"
+
+msgid "plus"
+msgstr "plusz"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Az Ön emberi mivoltának ellenőrzése. Számolja ki a egyszerű matematikai műveletek eredményeit, és adja meg ezeket az eredményeket a portálon"
+
+msgid "email_candidature_state_changed"
+msgstr "Változás a pályázata státuszában a portálon"
+
+msgid "invalid_challenge"
+msgstr "A válasza helytelen. Kérjük, adjon meg egy újat."
+
+msgid "invalid_email"
+msgstr "Probléma van az email címével, kérjük, ellenőrizze azt."
+
+msgid "invalid_choice"
+msgstr "A választása érvénytelen, kérjük, adja meg újra."
+
+msgid "challenge_instruction_text"
+msgstr "Kérjük, számolja ki a következő négy egyszerű matematikai művelet eredményeit, és töltse ki a megfelelő mezőket az email címe megerősítéséhez."
+
+msgid "enter_result_label_A"
+msgstr "Kérjük, adja meg az A matematikai művelet eredményét:"
+
+msgid "result_label_title_A"
+msgstr "Kérjük, adja meg az e-mailen kapott kódot vagy az A matematikai művelet eredményét."
+
+msgid "result_input_title_A"
+msgstr "Ahhoz, hogy ellenőrizni tudjuk az email címét és azt, hogy Ön ember (nem robot), kérjük, adja meg az A művelet eredményét, amelyet emailben kapott."
+
+msgid "enter_result_label_B"
+msgstr "Kérjük, adja meg a B matematikai művelet eredményét:"
+
+msgid "result_label_title_B"
+msgstr "Kérjük, adja meg az e-mailen kapott kódot vagy a B matematikai művelet eredményét."
+
+msgid "result_input_title_B"
+msgstr "Ahhoz, hogy ellenőrizni tudjuk az email címét és azt, hogy Ön ember (nem robot), kérjük, adja meg a B művelet eredményét, amelyet emailben kapott."
+
+msgid "enter_result_label_C"
+msgstr "Kérjük, adja meg a C matematikai művelet eredményét:"
+
+msgid "result_label_title_C"
+msgstr "Kérjük, adja meg az e-mailen kapott kódot vagy a C matematikai művelet eredményét."
+
+msgid "result_input_title_C"
+msgstr "Ahhoz, hogy ellenőrizni tudjuk az email címét és azt, hogy Ön ember (nem robot), kérjük, adja meg a C művelet eredményét, amelyet emailben kapott."
+
+msgid "enter_result_label_D"
+msgstr "Kérjük, adja meg a D matematikai művelet eredményét:"
+
+msgid "result_label_title_D"
+msgstr "Kérjük, adja meg az e-mailen kapott kódot vagy a D matematikai művelet eredményét."
+
+msgid "result_input_title_D"
+msgstr "Ahhoz, hogy ellenőrizni tudjuk az email címét és azt, hogy Ön ember (nem robot), kérjük, adja meg a D művelet eredményét, amelyet emailben kapott."
+
+msgid "verify_button"
+msgstr "Beküldés"
+
+msgid "submit_email_validation_title"
+msgstr "Kattintson az megadott kódok érvényesítéséhez."
+
+msgid "passwords_dont_match"
+msgstr "A jelszavak nem egyeznek."
+
+msgid "password_too_short"
+msgstr "A jelszó túl rövid."
+
+msgid "password_minimum_length"
+msgstr "A jelszónak legalább ${password_minimum_length} karakter hosszúnak kell lennie."
+
+msgid "password_too_long"
+msgstr "A jelszó túl hosszú."
+
+msgid "password_maximum_length"
+msgstr "A jelszónak nem szabad meghaladnia a ${password_maximum_length} karaktert."
+
+msgid "password_must_contain_digit"
+msgstr "A jelszónak legalább egy számot kell tartalmaznia."
+
+msgid "password_must_contain_uppercase"
+msgstr "A jelszónak legalább egy nagybetűt kell tartalmaznia."
+
+msgid "password_must_contain_lowercase"
+msgstr "A jelszónak legalább egy kisbetűt kell tartalmaznia."
+
+msgid "password_must_contain_special_char"
+msgstr "A jelszónak legalább az alábbi karakterek közül egyet kell tartalmaznia: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Kérjük, adja meg a jelszavát itt."
+
+msgid "password_confirm_title_label"
+msgstr "Kérjük, erősítse meg a jelszavát itt."
+
+msgid "password_confirm"
+msgstr "Jelszó megerősítése."
+
+msgid "type_of_registration"
+msgstr "Regisztráció típusa"
+
+msgid "type_registration_label"
+msgstr "Válassza ki az Önnek megfelelő regisztrációt."
+
+msgid "type_registration_choice"
+msgstr "Minden regisztrációtípushoz egy specifikus jogok, juttatások és kötelezettségek tartoznak."
+
+msgid "approved_heading"
+msgstr "Gratulálunk az Ön Jóváhagyásához!"
+
+msgid "approved_description"
+msgstr "A jelentkezésedet jóváhagyták. Most már bejelentkezhetsz a megadott álnév és jelszó segítségével."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Érvénytelen álnév. ${MIN_PSEUDONYM_LENGTH} és ${MAX_PSEUDONYM_LENGTH} karakter hosszúságú kell, hogy legyen, és csak betűket (A-Z, a-z), számokat (0-9), aláhúzásokat (_), pontokat "
+"(.), kötőjeleket (-) és szóközöket ( ) tartalmazhat. Nem tartalmazhat ékezetes betűket, umlautokat, és más diakritikus jeleket, amelyek egyes nyelvekre jellemzőek."
+
+msgid "invalid_date"
+msgstr "Érvénytelen dátumformátum."
+
+msgid "pseudonym_too_short"
+msgstr "Az álnév túl rövid."
+
+msgid "pseudonym_minimum_length"
+msgstr "Az álnévnek legalább ${MIN_PSEUDONYM_LENGTH} karakter hosszúságúnak kell lennie."
+
+msgid "pseudonym_too_long"
+msgstr "Az álnév túl hosszú."
+
+msgid "pseudonym_maximum_length"
+msgstr "Az álnév nem haladhatja meg a ${MAX_PSEUDONYM_LENGTH} karaktert."
+
+msgid "pseudonym_allready_exists"
+msgstr "Ez az álnév már használatban van. Kérlek, válassz egy másikat."
+
+msgid "Select_a_country"
+msgstr "Válassz egy tagállamot az Európai Unióból"
+
+msgid "Austria"
+msgstr "AT - Ausztria"
+
+msgid "Belgium"
+msgstr "BE - Belgium"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgária"
+
+msgid "Cyprus"
+msgstr "CY - Ciprus"
+
+msgid "Czech_Republic"
+msgstr "CZ - Cseh Köztársaság"
+
+msgid "Germany"
+msgstr "DE - Németország"
+
+msgid "Denmark"
+msgstr "DK - Dánia"
+
+msgid "Estonia"
+msgstr "EE - Észtország"
+
+msgid "Spain"
+msgstr "ES - Spanyolország"
+
+msgid "Finland"
+msgstr "FI - Finnország"
+
+msgid "France"
+msgstr "FR - Franciaország"
+
+msgid "Greece"
+msgstr "GR - Görögország"
+
+msgid "Croatia"
+msgstr "HR - Horvátország"
+
+msgid "Hungary"
+msgstr "HU - Magyarország"
+
+msgid "Ireland"
+msgstr "IE - Írország"
+
+msgid "Italy"
+msgstr "IT - Olaszország"
+
+msgid "Lithuania"
+msgstr "LT - Litvánia"
+
+msgid "Luxembourg"
+msgstr "LU - Luxemburg"
+
+msgid "Latvia"
+msgstr "LV - Lettország"
+
+msgid "Malta"
+msgstr "MT - Málta"
+
+msgid "Netherlands"
+msgstr "NL - Hollandia"
+
+msgid "Poland"
+msgstr "PL - Lengyelország"
+
+msgid "Portugal"
+msgstr "PT - Portugália"
+
+msgid "Romania"
+msgstr "RO - Románia"
+
+msgid "Sweden"
+msgstr "SE - Svédország"
+
+msgid "Slovenia"
+msgstr "SI - Szlovénia"
+
+msgid "Slovakia"
+msgstr "SK - Szlovákia"
+
+msgid "full_name_as_in_id_required"
+msgstr "Teljes név megadása kötelező."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Teljes vezetéknév megadása kötelező."
+
+msgid "birthdate_required"
+msgstr "Születési dátum megadása kötelező."
+
+msgid "nationality_required"
+msgstr "Állampolgárság megadása kötelező."
+
+msgid "first_interaction_language_required"
+msgstr "Az első interakció nyelve kötelező."
+
+msgid "pending_description"
+msgstr "A jelentkezésed éppen felülvizsgálat alatt áll. E-mailben értesítünk, amint jóváhagyták."
+
+msgid "candidature_not_found"
+msgstr "A jelentkezés nem található."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Köszönjük az érdeklődésedet a ${domain_name} tevékenysége iránt! Ez a megfelelő hely a regisztrációhoz.</b></h2>\n"
+"<p>A CosmoPolitical Cooperative támogatja az egyéneket, és az meglévő gazdasági, társadalmi és politikai rendszert radikálisan igazságos, fenntartható, demokratikus és boldog társadalom irányába alakítja "
+", az <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">egyezmény társadalma</a> felé.</p>\n"
+"<p>Az alábbiakban megtalálod a regisztrációs folyamat kezdetét, hogy csatlakozhass hozzánk. Két részvételi szintet javaslunk, növekvő kötelezettségekkel és jogokkal:</p>\n"
+"<ul>\n"
+"<li>mint <b>a Közösségünk Rendkívüli Tagja</b>, egy egyszerű regisztrációs folyamattal, pénzügyi kötelezettségek nélkül, de szavazati jog nélkül; vagy </li>\n"
+"<li>mint <b>Együttműködő</b>, aki a Szövetkezetünk teljes jogú tagja, a regisztrációs folyamat biztosítja, hogy egy adott személy csak egyszer regisztrálhasson (hogy a demokratikus elvet \"egy "
+"személy = egy szavazat\" betartsuk), és hogy csak az Európai Unió polgárai, akik elérték a felnőttkort, lehetnek Együttműködők, akik elkötelezik magukat arra, hogy vásároljanak legalább egy "
+"részvényt és fizessék meg a éves hozzájárulásukat, valamint teljes szavazati joggal rendelkeznek. Az Európai Unió a munkánk földrajzi területe  (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">miért nézd</a>)</li>\n"
+"</ul>\n"
+"<p>A regisztrációs folyamat a következő lépéseket tartalmazza:</p>\n"
+"<ol>\n"
+"<li>ellenőrizzük, hogy az e-mail címet Te, egy ember adtad meg (nem robot);</li>\n"
+"<li>megkérjük, hogy add meg álnéved, jelszavad és a preferált nyelv(ek)et az interakcióhoz;</li>\n"
+"<li>ha az Közösség Rendkívüli Tagjaként regisztráltál, a folyamat befejeződik, és beléphetsz a Közösségünkbe. Ha Mint Együttműködőként regisztráltál, a folyamat folytatódik, hogy "
+"ellenőrizhessük, megfelelsz a fent megadott feltételeknek, hogy Együttműködő lehess.</li>\n"
+"</ol>\n"
+"<p>Ez az ellenőrzés a következőképpen történik:</p>\n"
+"<ol>\n"
+"<li>megkérjük, hogy add meg <b>személyazonossági adataidat</b>: keresztnevedet és vezetéknévedet, születési dátumodat;</li>\n"
+"<li>megkérjük néhány meglévő tagunkat a Szövetkezetből (a Te Ellenőrzőid), hogy ellenőrizzék, hogy a hivatalos személyazonosító okmányod adatai megfelelnek azoknak, amelyeket az előző lépésben megadtál, "
+"közvetlen e-mailcsere vagy videokonferencia keretein belül;</li>\n"
+"<li>ha megerősítik az egyezést, üdvözölni fogunk mint Együttműködőt, teljes jogokkal - ha vásároltál legalább <a href=\"https://www.cosmopolitical.coop/share\">egy "
+"részvényt</a> és kifizetted az <a href=\"https://www.cosmopolitical.coop/yearcontrib\">éves hozzájárulásod a működésünkhöz</a>.</li>\n"
+"</ol>\n"
+"<p>Kérlek, kezd el a regisztrációdat most! Örömmel várjuk, hogy üdvözölhetünk Tevékenységeinkben.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"A regisztrációs folyamat első lépése annak érvényesítése, hogy Te egy \n"
+"ember vagy, nem pedig egy robot. Ehhez ellenőrizzük, hogy képes vagy-e fogadni és \n"
+"érteni egy e-mailt, amelyet el fogunk küldeni számodra: amit kérünk tőled, az \n"
+"egyszerű egy ember számára, sokkal bonyolultabb egy robot számára."
+
+msgid "identity_verification_label"
+msgstr "Személyazonosság-ellenőrzés"
+
+msgid "Send_id_copy_by_email"
+msgstr "Küldd el a hivatalos személyazonosító okmányod egy részének beolvasott változatát e-mailben."
+
+msgid "Send_video_conference_link"
+msgstr "Küldj javaslatokat a videokonferencia időpontjára és időtartamára."
+
+msgid "Proceed"
+msgstr "Tovább"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Kérlek, erősítsd meg, hogy elküldted az e-maileket az Ellenőrzőknek."
+
+msgid "sent_confirmation_label"
+msgstr "Megerősítés, hogy az e-maileket elküldték az Ellenőrzőknek"
+
+msgid "submit_email_confirmation_title"
+msgstr "Erősítsd meg, hogy elküldted az e-maileket."
+
+msgid "confirm_email_send_button_label"
+msgstr "Megerősít"
+
+msgid "vote_success"
+msgstr "Köszönjük, hogy részt vettél a szavazási folyamatban. A szavazatodat ${vote} sikeresen rögzítettük. A szavazatod módosíthatod a határidőig, ha visszatérsz erre az oldalra."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Mint Együttműködő, részt veszel minden döntésünkben. Ezeket a döntéseket szigorú demokratikus eljárások mentén hozzák meg, és fontos következményekkel járhatnak a "
+"Szövetkezet számára és az Együttműködők számára. Továbbá, a Szövetkezet szándékában áll képviselni az EU állampolgárait, függetlenül állampolgárságuktól - de csak EU állampolgárokat. Ez különösen "
+"fontos a nyilvános választások során. Így három dolgot kell biztosítanunk: (1) hogy egy adott személy nem regisztrálhat többször, hogy betartsuk a demokratikus elvet \"egy személy = "
+"egy szavazat\"; (2) hogy minden Együttműködő legalább nagykorú és (3) hogy csak az Európai Unió polgárai lehetnek Együttműködők.</p>\n"
+"    <p>Ezért a személyazonossági adataid egyes elemeit ellenőrizzük, az (1) az űrlapon megadott adatok és (2) a hivatalos személyazonosító okmányaidon szereplő adatok összehasonlításával. Ez "
+"az ellenőrzés egy véletlenszerűen kiválasztott tagokból álló csoport által fog megtörténni a Szövetkezetből, a regisztrációd Ellenőrzői, és a hivatalos személyazonosító okmányokról "
+"szóló információkon alapul, amelyeket közvetlenül nekik továbbítasz, e-mailben vagy videokonferencia keretein belül, anélkül, hogy átmenne ezen az online platformon (biztonság és "
+"titoktartás érdekében).</p>\n"
+"    <p>Azt az adatot kérjük Tőled, amelyeket az Ellenőrzők össze fogják vetni a hivatalos személyazonosító okmányaid adataival:\n"
+"    <ul>\n"
+"    <li>neved és vezetékneved;</li>\n"
+"    <li>születési dátumod;</li>\n"
+"    <li>állampolgárságod.</li>\n"
+"    </ul></p>\n"
+"    <p>Csak egy ember viseli a nevedet, vezetéknevedet és születési dátumodat: Te. Ha újra megkísérled a regisztrációt, ugyanazokat az adatokat kell megadnod az ellenőrzési "
+"eljárásunkhoz, és el fogjuk utasítani a jelentkezésed, mert már Együttműködő vagy, és nem lehet több fiókod, amellyel többször szavazhatsz. Bízni fogunk ebben, mert tudjuk, hogy egy "
+"embernek csak egy kombinációja van a névnek, vezetéknek és születési dátumnak. A születési dátumod lehetővé teszi számunkra, hogy ellenőrizzük, hogy nagykorú vagy, és az állampolgárságod "
+"biztosítja, hogy valóban az Európai Unió polgára vagy.</p>\n"
+"    <p>Ez az adat kizárólag arra szolgál, hogy ellenőrizzük a személyazonosságodat, korodat és állampolgárságodat, valamint hogy kezelhessük a fiókodat Együttműködőként. Soha nem "
+"tartjuk láthatóvá a ${domain_name} IT platform más felhasználói számára, és nem fogjuk senkinek átadni vagy eladni, kivéve, ha jogi kötelezettségeknek kell eleget tennünk a közérdekű "
+"rendvédelmi hatóságok kérésére, bírói hatáskör alatt. Az \"adatkezelő\" a <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Európai "
+"Unió Általános Adatvédelmi Rendelete (GDPR)</a>, a CosmoPolitical Cooperative SCE, egy európai szövetkezeti társaság, amely a 229 rue Solférino, 59000 Lille, Franciaország címen "
+"lett létrehozva, és 2023. április 25-én jegyezték be a SIREN 951 007 897 szám alatt.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Az e-mailben elküldtünk Önnek négy egyszerű aritmetikai számítást, amelyeket A-tól D-ig azonosítottunk, mindegyik ugyanazt a mintát követi: (EGY ELŐS NUMERUS 1 ÉS 9 KÖZÖTT) "
+"szorozva (EGY MÁSODIK SZÁM 1 ÉS 9 KÖZÖTT), plusz (EGY HARMADIK SZÁM 1 ÉS 9 KÖZÖTT). A számítás elvégzéséhez először szorozza meg AZ ELSŐ SZÁMOT 1 ÉS 9 KÖZÖTT a MÁSODIK SZÁMMAL 1 ÉS 9 KÖZÖTT. "
+"Miután megkaptuk ennek a szorzásnak az eredményét, ehhez kell adni a HARMADIK SZÁMOT 1 ÉS 9 KÖZÖTT. Végül a számítás utolsó összegzésének eredményét le kell írni a megadott dobozba "
+"az aritmetikai számítás eredményéhez, amelyet végrehajt (a négy közül, amelyet e-mailben küldtünk Önnek, A-tól D-ig azonosítva). A számítást mind a négy számításra ismételje meg, amelyet "
+"e-mailben küldtünk Önnek.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>A Kooperátor regisztrációs folyamat részeként ki kell választania egy módszert az önazonosságának ellenőrzésére. Az önazonosságának ellenőrzésére szükség van: (1) "
+"annak biztosítására, hogy egy adott személy ne regisztráljon többször különböző e-mail címekkel (ezúton tekintettel vagyunk a demokratikus elvre: \"egy személy - egy szavazat\"); (2) "
+"hogy csak az Európai Unió állampolgárai, akik elérték a nagykorúságot, legyenek Kooperátorok (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >lásd, miért</a>).</p>\n"
+"    <p>Két lehetősége van erre az ellenőrzési folyamatra:</p>\n"
+" <ul>\n"
+"   <li><b>Levelekben küldje el személyazonosító okmányainak másolatát:</b> Választhatja, hogy biztonságosan egy e-mailben közvetlenül küld el egy másolatot a személyazonosító okmányairól egy kis, véletlenszerűen kiválasztott "
+"Kooperátor csoportra, az Ön Ellenőreire. Ez a módszer gyors és közvetlen módot biztosít az önazonosságának megerősítésére.</li>\n"
+"   <li><b>Szervezzen videokonferencia ülést:</b> Alternatívaként választhat egy videokonferencia ülést, ahol élőben mutathatja be személyazonosító okmányait Ellenőreinek. Ez a "
+"módszer személyesebb interakciót biztosít, és lehetővé teszi a sürgős pontosítást, ha szükséges, szóban, ha közös nyelvet osztanak meg, vagy chat és automatikus fordítás útján, ha nem.</li>\n"
+" </ul>\n"
+" <p>Mindkét esetben javasoljuk, hogy biztonsági okokból takarja el az önálló személyazonosító okmányán a születési helyét és a személyazonosító számot, mielőtt bemásolja azt vagy "
+"megmutatja Ellenőreinek.</p>\n"
+" <p>Fontos, hogy időben hozza meg választását, hogy a regisztrációs folyamata zökkenőmentes és időben történjen. Kérjük, győződjön meg róla, hogy az általános módszer a legkényelmesebb az Ön számára "
+"és összhangban van a magánéletét érintő preferenciáival.</p>\n"
+" <p>Az Ön együttműködése ebben az ügyben nagyra értékelhető, és kulcsfontosságú a szövetkezetünk magas szintű bizalmának és paneurópai demokráciájának fenntartásához. Köszönjük megértését "
+"és aktív részvételét ebben a kulcsfontosságú lépésben.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"A meglévő Kooperátorok száma túl alacsony ahhoz, hogy kiválaszthassuk a megfelelő számú Azonosítját. Kérjük, lépjen kapcsolatba a rendszeradminisztrátorral a következő címen "
+"${administrator}, hogy megoldja a problémát."
+
+msgid "email_copy_id_verification_subject"
+msgstr "hu - ${domain_name} - Kérem, erősítse meg személyazonosságomat új lehetséges Kooperátorként"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Kedves Ellenőrök,\n"
+" Azért írok Önöknek, hogy befejezzem a személyazonosság-ellenőrzési folyamatot a ${domain_name} Kooperátorává válása iránti kérelmemhez. Az e-mailhez csatoltan egy részleges másolatot "
+"találnak az hivatalos személyazonosító okmányomról.\n"
+" Kérjük, vegyék figyelembe, hogy bizonyos érzékeny információk biztonsági okokból le vannak takarva. Azonban a dokumentum tartalmazza az önazonosságom megerősítéséhez szükséges információkat a "
+"${domain_name} regisztrációs folyamata szerint.\n"
+" Kérem, hogy lehetőség szerint a következő 3 napon belül nézzék át a csatolt dokumentumot, hogy szavazhassanak az alábbi megfelelősség alapján:\n"
+"\n"
+" - a személyazonosító információ, amelyet közvetlenül e-mailben kaptak az ${domain_name} IT platformjától (és amelyet a szavazási felületen emlékeztetni fognak) és \n"
+" - a személyazonosító információ, amelyet a csatolt részleges másolatomból olvashatnak.\n"
+"\n"
+" A megfelelősség ma szavazására szolgáló link az alábbi: ${voting_url}.\n"
+" Előre is köszönöm szépen támogatását a ${domain_name} Kooperátorává válásom folyamatában. Ha további kérdése van vagy további információra van szüksége, kérjük, bátran lépjen kapcsolatba velem közvetlenül az Ön saját nyelvén.\n"
+" Üdvözlettel,\n"
+" ${signature}\n"
+" Csatolmány: [Személyazonosító okmány fájl neve]\n"
+" Ez az e-mail a ${domain_name} személyazonoság-ellenőrzési funkciójának segítségével készült. Ha Ön nem az ${signature} kérelméhez rendelt Ellenőr, és tévesen kapta ezt az e-mailt, kérjük, értesítse a ${domain_name} adminisztrátorát a következő címen: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "hu - ${domain_name} - Kérem, erősítse meg személyazonosságomat videokonferencián keresztül új lehetséges Kooperátorként"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Kedves Ellenőrök,\n"
+"    Azért írok Önöknek, hogy befejezzem a személyazonosság-ellenőrzési folyamatot a ${domain_name} Kooperátorává válása iránti kérelmemhez. Ebből a célból szeretnék javasolni egy videokonferencia ülést.\n"
+"    Íme néhány időpont, amelyeket a videokonferenciára javasolok. Kérjük, vegyék figyelembe, hogy Németországban élek (Kérjük, igazítsák az Ön országához / lakóhelyének régiójához. Ez szükséges, "
+"hogy az Ön partnere tudja az Ön időzónáját), így a nap időpontja, ahol élek, eltérhet attól, ahol Ön lakik. Ez a videokonferencia nem tarthat tovább 10 percnél: (kérjük, adjon meg legalább 3 "
+"választási lehetőséget, lehetőség szerint különböző napszakokban és különböző napokon, beleértve a hétvégét is, mindezt 10 napon belül, miután elküldte az e-mailt)\n"
+"   \n"
+"         - 2023. szeptember 4., hétfő, 17:30 az én időm szerint; (Igazítsa az Ön elérhetőségéhez)\n"
+"         - 2023. szeptember 5., kedd, 20:30 az én időm szerint; (Igazítsa az Ön elérhetőségéhez)\n"
+"         - 2023. szeptember 9., szombat, 10:00 az én időm szerint. (Igazítsa az Ön elérhetőségéhez)\n"
+"    \n"
+"    Kérjük, ne feledje, hogy különböző időzónákban élhetünk! Kérjük, transzponálja ezeket az időpontokat a saját időzónájára.\n"
+"    A videokonferencia a következő linken zajlik:\n"
+"(kérjük, itt helyezze el azt a linket, amelyet erre a videokonferenciára készített. Íme, platformjaink javaslatát, amelyeket a videokonferencia és a megfelelő link megszerzésére használhat:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (ingyenes és nyílt forráskódú szoftver)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (ingyenes és nyílt forráskódú szoftver)\n"
+"         - Zoom : https://zoom.us/ (tulajdonosi szoftver)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (tulajdonosi szoftver, a platform elé egy fizetős fal áll)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (tulajdonosi szoftver, költség nélkül hozzáférhető a platformhoz)\n"
+"    )\n"
+"    Kérjük, kiválasztódjon egy megfelelő időpontot, és küldjön nekem egy e-mailt a választásával.\n"
+"    A videokonferencia során előfordulhat, hogy nem osztunk közös nyelvet. Ha ez a helyzet, javaslom, hogy kedves és támogató magatartást tanúsítsunk egymás iránt. Javaslom, hogy használjuk a chatet, hogy kifejezzük magunkat a saját nyelvünkön, "
+"és használjunk gépi fordítást, hogy megértsük, mit ír a másik fél.\n"
+"    Miután tartották ezt a találkozót videokonferencián, kedvesen kérlek, szavazzanak az alábbi megfelelősség megerősítésére vagy cáfolására:\n"
+"\n"
+"     - a személyazonosító információ, amelyet közvetlenül e-mailben kaptak az ${domain_name} IT platformjától (és amelyet a szavazási felületen emlékeztetni fognak) és \n"
+"    - a személyazonosító információ, amelyet a videokonferencia során láttak.\n"
+"\n"
+" A megfelelősség ma szavazására szolgáló link az alábbi: ${voting_url}.\n"
+"  Előre is köszönöm szépen támogatását a ${domain_name} Kooperátorává válásom folyamatában. Ha további kérdése van vagy további információra van szüksége, kérjük, bátran lépjen kapcsolatba velem közvetlenül.\n"
+" Üdvözlettel,\n"
+" ${signature}\n"
+" Ez az e-mail a ${domain_name} személyazonosság-ellenőrzési funkciójának segítségével készült. Ha Ön nem az ${signature} kérelméhez rendelt Ellenőr, és tévesen kapta ezt az e-mailt, kérjük, értesítse a ${domain_name} adminisztrátorát a következő címen: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Ha a felhasználó létezik, e-mailt fog kapni."
+
+msgid "reset_password_email_subject"
+msgstr "Állítsa vissza jelszavát"
+
+msgid "forget_email_send_error"
+msgstr "Hiba történt a visszaállító e-mail küldésekor, kérjük, lépjen kapcsolatba az adminisztrátorral, a ${administrator} címen"
+
+msgid "member_state_created_name"
+msgstr "létrehozva"
+
+msgid "member_state_created_value"
+msgstr "A tag létre lett hozva"
+
+msgid "member_state_draft_name"
+msgstr "tervezet"
+
+msgid "member_state_draft_value"
+msgstr "A tag adatai szerkesztés alatt állnak"
+
+msgid "member_state_registred_name"
+msgstr "regisztrált"
+
+msgid "member_state_registred_value"
+msgstr "A tag adatai el lettek mentve"
+
+msgid "member_data_modification_request_name"
+msgstr "módosítás alatt"
+
+msgid "member_data_modification_request_value"
+msgstr "Adatmódosítási kérelem került benyújtásra"
+
+msgid "member_datas_modified_name"
+msgstr "módosítva"
+
+msgid "member_datas_modified_value"
+msgstr "A tag adatai módosítva lettek"
+
+msgid "email_member_state_changed"
+msgstr "Változás a tagprofiljában"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Kérjük, adjon meg egy érvényes e-mail címet"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "A rendszergazda nem állíthatja vissza a saját jelszavát"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Ha a felhasználó létezik, egy e-mailt küldtünk az ő e-mail címére, amely tartalmaz egy linket a jelszó visszaállításához"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "A két jelszóváltozat nem egyezik. Kérjük, győződjön meg arról, hogy egyezik, és küldje el újra"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Kérjük, adjon meg egy új jelszót"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Sikeresen megváltoztatta a jelszavát"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Hiba történt a jelszó visszaállítása során"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Hiba történt a jelszó visszaállítása során. A jelszava nem változott meg"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "A tag nem található a jelenlegi tagok listáján"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "A jelszó visszaállításához használt hyperlink elavult. Kérjük, használja a legutóbbi, amit kapott"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "A matematikai kihívást tartalmazó e-mail, amely igazolja, hogy a jelölt ember (és nem robot), nem lett elküldve."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Hiba történt a pályázat benyújtásakor"
+
+msgid "modification_to_profile_button_title"
+msgstr "Profilod szerkesztése"
+
+msgid "modification_to_profile_button_label"
+msgstr "Profil szerkesztése"
+
+msgid "modification_to_profile_button_description"
+msgstr "Kattints ide, hogy e-mailben egy biztonságos linket kapj a profilod módosításához."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Adataid biztonságának érdekében egyedi linket küldünk a profilod módosításához e-mailben. Ez a folyamat garantálja, hogy csak az a személy, aki hozzáfér az e-mail címedhez "
+"végezhet változtatásokat a profilodban."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Link a profilod módosításához a ${domain_name} IT infrastruktúráján"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Kérjük, itt add meg az összes keresztnevedet, ahogy az a hivatalos azonosító okmányaidban szerepel, hivatalos latin karakterekre történő átiratban (ha az eredeti nyelv "
+"más, mint a latin ábécé)."
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Kérjük, itt add meg az összes családi nevedet születéskor (azaz NEM a házas személy családi nevét), ahogy az a hivatalos azonosító okmányaidban szerepel, hivatalos latin "
+"karakterekre történő átiratban (ha az eredeti nyelv más, mint a latin ábécé)."
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Önt leíró szöveg (profil szöveg)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Kérjük, írjon ide egy szöveget, amely leírja önmagát, az Ön által preferált nyelven, hogy a Közösség többi tagja jobban megismerhesse Önt. Javasoljuk, hogy összpontosítson "
+"(1) arra, honnan származik, (2) mit csinál, (3) mit szeretne tenni a Közösség tagjaként, és (4) az elérhető erőforrásokra (tapasztalat, tudás, idő).\n"
+"Hisszük, hogy ez az információ hasznos, mert ha saját szavaival mutatkozik be másoknak, az emberi arculatot ad digitális identitásának az IT infrastruktúránkon. Ezzel a szöveggel a "
+"Közösség minden tagja jobban megismerheti Önt, és ez megkönnyíti az interakciót!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Kérjük, adja meg a születési dátumát a következő formátumban: NN/HH/ÉÉÉÉ, azaz (1) a hónap napja, 2 számjegyben; (2) a hónap száma, 2 számjegyben; (3) az év, 4 számjegyben. Csak "
+"azok a személyek lehetnek Közreműködők, akik betöltötték a 18. életévüket. Ha még nem töltötte be a 18. életévét, örömmel invitáljuk, hogy regisztráljon a Közösség Rendkívüli "
+"Tagjaként - és frissítsen Közreműködő státuszra, amint eléri a nagykorúságot."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Kérjük, adja meg egy Európai Uniós tagállam nevét, amelynek polgára. Csak az Európai Unió állampolgárai lehetnek Közreműködők."
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Kérjük, válasszon egy tagállamot az Európai Unióból"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Ez az egyedi szám azonosítja Önt az összes, a Közösségben zajló folyamatban."
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Kérjük, itt adja meg a pszeudónevét, amely az egész időtartam alatt azonosítja Önt az IT platformunkon. STRONGLY ajánljuk, hogy olyan pszeudónevet válasszon, amely lehetetlenné "
+"teszi az Ön valódi identitásának visszakövetését (vagy rendkívül nehézzé). Ezzel megvédi a véleményei titkosságát (azaz a személyes adatokat, amelyek a General Data Protection Regulation - GDPR "
+"alapján külön védelmet igényelnek) a való életben gyakorolt külső nyomástól (például a munkáltatója vagy az ügyfelei részéről). Legyen nagyon óvatos! Ha egyszer kiválasztotta, ezt a "
+"pszeudónevet soha nem tudja megváltoztatni. Válassza gondosan! \n"
+" A pszeudónak ${MIN_PSEUDONYM_LENGTH} és ${MAX_PSEUDONYM_LENGTH} karakter hosszúságú kell lennie, és csak a latin ábécé betűit (A-Z, a-z), számjegyeket (0-9), "
+"aláhúzásjeleket (_), pontokat (.), kötőjeleket (-) és szóközöket ( ) tartalmazhat. Nem tartalmazhat ékezetes betűket, umlautokat és más, bizonyos nyelvekre jellemző diakritikus jeleket."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "A pszeudónév megadása kötelező"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Kérjük, adja meg a jelszavát. A jelszónak ${password_minimum_length} és ${password_maximum_length} karakter hosszúnak kell lennie, tartalmaznia kell legalább egy számjegyet, "
+"legalább egy kisbetűt, legalább egy nagybetűt és legalább egy karaktert az alábbiak közül: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Kérjük, erősítse meg a jelszavát"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "A jelszó megerősítése kötelező"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Kérjük, adja meg azt az e-mail címet, amelyet a ${domain_name} IT infrastruktúrája használni fog Önnel való kapcsolattartásra.\n"
+"Azt javasoljuk, hogy olyan e-mail címet válasszon, amelyet gyakran ellenőriz.\n"
+"Ezen információra azért van szükség, hogy interakcióba léphessünk Önnel, tájékoztathassuk az együttműködés fejleményeiről, és lehetőséget biztosítsunk Önnek arra, hogy "
+"lépéseket tegyen vagy hozzájáruljon a döntésekhez. Az e-mail a legszélesebb körben használt kommunikációs eszköz Európában, univerzális és nyílt, ingyenes szabványokon "
+"alapszik, ellentétben a digitális óriások (más néven 'GAFAM') tulajdonosi üzenetküldő rendszereivel.\n"
+"Ez az e-mail cím kizárólag a ${domain_name} IT infrastruktúrája és Ön közötti kommunikáció biztosítására használható. Soha nem lesz látható a ${domain_name} IT platform más felhasználói számára, és "
+"nem kerül átadásra vagy értékesítésre senkinek, kivéve a jogi követelmények teljesítése érdekében a közjogi hatóságok kérésére egy bíró által. Az "
+"\"adatkezelő\", ahogy azt a General Data Protection Regulation (GDPR) az "
+"Európai Unióban definiálja, a CosmoPolitical Cooperative SCE, egy Európai Szövetkezeti Társadalom, amely a 229 rue Solférino, 59000 Lille, Franciaország címen található, "
+"és 2023. április 25-én iktatták a SIREN 951 007 897 számon."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Kérjük, adja meg azt a nyelvet, amellyel szívesen interakcióba lépne a ${domain_name} IT infrastruktúrájával. \n"
+" Azt javasoljuk, hogy válasszon a legjobban ismert hivatalos nyelvek közül az Európai Unióban vagy az Eszperantó nyelvet. Ha ez elérhető azok között, amelyekhez "
+"userfelületet fejlesztettünk, akkor azt fogjuk használni Önnel való kapcsolattartásra. \n"
+" Ezek az információk azért fontosak, mert a méltányosság és a demokratikus elvek tisztelete érdekében szeretnénk Önnel olyan nyelven kommunikálni, amelyet a lehető "
+"legjobban érteni tud."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Kérjük, adja meg azt a nyelvet, amellyel második választásként elfogadja, hogy a ${domain_name} IT infrastruktúrája interakcióba lépjen Önnel. \n"
+"Javasoljuk, hogy válasszon egy másik hivatalos nyelvet az Európai Unióban, vagy az Eszperantót, amelyet viszonylag jól ért. Ha ez elérhető az általunk fejlesztett felhasználói felületek között, és ha "
+"az Ön által preferált nyelv nem elérhető, akkor ezt fogjuk használni az Önnel való interakcióhoz. \n"
+"Erre az információra szükség van, mert erőfeszítéseink ellenére előfordulhat, hogy az Ön által preferált nyelv nem elérhető a szoftverünk felhasználói felületén. Ezért kérjük "
+"Önt, hogy tud-e használni egy másik nyelvet."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "A harmadik választásként elfogadott nyelv, amellyel interakcióba léphetünk Önnel"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Kérjük, adja meg azt a nyelvet, amellyel harmadik választásként elfogadja, hogy a ${domain_name} IT infrastruktúrája interakcióba lépjen Önnel. \n"
+"Javasoljuk, hogy válasszon egy másik hivatalos nyelvet az Európai Unióban, vagy az Eszperantót, amelyet még mindig tud érteni. Ha ez elérhető az általunk fejlesztett "
+"felhasználói felületek között, és ha sem az Ön által preferált nyelv, sem a második nyelve nem elérhető, akkor ezt fogjuk használni az Önnel való interakcióhoz. \n"
+"Erre az információra szükség van, mert erőfeszítéseink ellenére előfordulhat, hogy az Ön által preferált nyelv és a második nyelve nem elérhető a szoftverünk felhasználói felületén. "
+"Ezért kérjük Önt, hogy használhat-e egy harmadik nyelvet. Tudatában vagyunk annak, hogy az Ön számára azzal való interakció, hogy ezt használja, nem kielégítő helyzet - ahogyan nekünk sem. "
+"Bocsánatot kérünk ezért."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Az Ön Kooperatív Magatartásjegye"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Mint Kooperátor, az Ön Kooperatív Magatartásjegye azokból a jegyekből ered, amelyeket a munkacsoportokban részt vevő többi Aktív Résztvevő adott Önnek, hogy meghatározzák és "
+"elfogadják a Cselekvési Javaslatokat. Minden Aktív Résztvevő +1, 0 vagy -1 értéket adhat, attól függően, hogy az Ön magatartása mennyire volt kooperatív a munkacsoportban való aktív "
+"részvétele során. Ezt a jegyet automatikusan 'elfelejtik', és idővel csökken: ${forgetting_time_constant} nap után a fele. Az Ön Kooperatív Magatartásjegyének kezdeti értéke nulla."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Dátum, amikor az Ön Kooperatív Magatartásjegye utoljára frissítve lett"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Ez a legutolsó dátum, amikor egy másik Kooperátor jegyet osztott Önnek, a Cselekvési Javaslatot meghatározó és elfogadó munkacsoportban való aktív részvételének vége után. "
+"Ennek a dátumnak az alapértelmezett értéke az Ön Kooperátorként történő regisztrálásának dátuma."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "A Kooperatíva által birtokolt részvények száma"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Ez a Kooperatíva által birtokolt részvények teljes száma, miután megvásárolta őket a webportálunkon. Regisztrációkor ez a szám nulla. Kérjük, mielőbb látogasson el erre az URL-re: "
+"${url_purchase_shares}, hogy megvásárolja első részvényeit. Csak azután élvezheti a teljes döntési jogait Kooperátorként, hogy megvásárolt legalább egy részvényt (és kifizette az éves "
+"járulékát). Üdvözöljük, ha több mint egy részvényt vásárol, a regisztrációkor, de bármikor után is. Ez megerősíti a Kooperatívánkat, és mindannyian hálásak vagyunk Önnek ezért!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Dátum, amikor az Ön aktuális éves járulékának érvényessége lejár"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Az a dátum, amikor az Ön aktuális éves járulékának érvényessége lejár, és amely előtt ismét ki kell fizetnie, hogy megőrizhesse a teljes döntési jogait Kooperátorként. Regisztrációkor ez "
+"a dátum a múltban van beállítva, ami azt jelenti, hogy ezt most ki kell fizetnie. Kérjük, mielőbb látogasson el erre az URL-re: ${url_pay_yearly_contrib}, hogy kifizethesse első éves "
+"járulékát, és így részt vehessen a Kooperatívánk működésében. Csak azután élvezheti a teljes döntési jogait Kooperátorként, hogy kifizette éves járulékát (és megvásárolt legalább "
+"egy részvényt)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "A bankszámlájának Nemzetközi Bankszámlaszáma (IBAN)"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Ha és amikor úgy dönt, hogy elhagyja a Kooperatívát (amit mindannyian sajnálnánk), szükségünk van az IBANjára ahhoz, hogy át tudjuk utalni Önnek a részvényeivel kapcsolatos "
+"visszavásárlás eredményét. Biztonsági okokból javasoljuk, hogy ezt az információt csak akkor adja meg, ha és amikor elhagyja a Kooperatívát."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Dátum, amikor minden adatát törlik az IT infrastruktúránkból"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Ha és amikor elhagyja a Kooperatívát, az Ön személyazonosító adatai ${Quarantine} napig megőrzésre kerülnek, mielőtt teljesen és visszavonhatatlanul törölnénk a nyilvántartásainkból. "
+"Ez azért van, hogy biztosítsuk, hogy egy Kooperátor, aki a Kooperatívát elhagyja, mert a Kooperatív Magatartásjegye túl gyenge, nem tud azonnal újra regisztrálni egy teljesen "
+"új álnévvel és Kooperatív Magatartásjeggyel. Regisztrációkor ez a dátum egy nagyon távoli jövőre van beállítva."
+
+msgid "avatar_label"
+msgstr "Egy kép, amely Önt képviseli (az Ön avatárja)"
+
+msgid "avatar_description"
+msgstr ""
+"Kérjük, adjon meg egy képet, amely Önt képviseli a Közösség tagjaként. Azért, hogy megóvjuk Önt az esetleges megtorlásoktól a munkaadójától vagy ügyfeleitől, javasoljuk, hogy ez a kép "
+"ne lehetővé tegye, hogy visszakövessem az Ön valódi életbeli személyazonosságát. Általában tehát ne legyen önarckép (ne feledje, hogy az arcfelismerő szoftvert tömegesen használják "
+"keresőrobotok). A kép csak JPEG formátumú lehet (kiterjesztés: .JPG vagy .JPEG), és nem lehet nagyobb 5 MB-nál. \n"
+"Úgy gondoljuk, hogy ez az információ hasznos, mert egy kép megkönnyíti a Közösség többi tagja számára, hogy felismerje Önt. Néha egy kép sokkal többet mond, mint egy hosszú beszéd. "
+"Ezzel a képpel sokat kifejez Önmagáról, egy univerzális nyelven. Használja ki ezt a lehetőséget!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Az a cím (URL), amelyet az alkalmazási folyamatának visszakeresésére használt, nem egyezik azzal, amelyet Önnek regisztráltunk. (Az alkalmazás azonosító száma a "
+"soron és az URL szám nem egyezik)\n"
+"Kérjük, csak az utolsó e-mailből származó URL-t használja."
+
+msgid "check_new_email"
+msgstr "Kérte, hogy változtassa meg az email címét. A jövőben szeretné használni: ${new_email}. Ennek eredményeként egy e-mailt fog kapni, amely tartalmazni fog egy hivatkozást "
+"ennek az új címnek a megerősítésére."
+
+msgid "check_new_email_subject"
+msgstr "Az új email címének megerősítése"
+
+msgid "check_new_email_send_error"
+msgstr "Az új címhez tartozó megerősítő e-mail küldése nem sikerült"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "A megerősítő e-mail az új címhez elküldve"
+
+msgid "modify_member"
+msgstr "Tag adatainak megtekintése vagy módosítása"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Kapcsolati hiba"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Az email cím már létezik"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Az email cím frissítve"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Hiba az email cím frissítésekor"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Hiba a mező beállításakor"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Hiba a tag frissítésekor"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Érvénytelen OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Érvénytelen kérés"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP hiba"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "A tag adatai frissítve"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "A tag adatainak frissítése nem sikerült"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "A tag adatainak frissítése sikeres"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Hiányzó adatok"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Új email cím hiányzik"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Nincs engedély"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Nem szavazó"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "A jelszó frissítése nem sikerült"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "A jelszó frissítése sikeres"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "A regisztráció nem sikerült"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "A regisztráció sikeres"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Ismeretlen, hozzáfért tag"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Ismeretlen tag"
+
+msgid "modify_member_title"
+msgstr "Tagprofil szerkesztése"
+
+msgid "select_member_oid_label"
+msgstr "Kérjük, válasszon ki egy tagot a profiljának szerkesztéséhez:"
+
+msgid "select_member_placeholder"
+msgstr "A tag álnévre"
+
+msgid "modify_profile"
+msgstr "Profilja megváltoztatásához kattintson ide"
+
+msgid "profile"
+msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Az email címe sikeresen frissítve lett. Mostantól ezt az új címet fogja használni a ${domain_name}-nal folytatott minden jövőbeli kommunikációhoz. Ha nem ön kérte ezt a változtatást, vagy ha bármilyen kérdése van, kérjük, ne habozzon azonnal kapcsolatba lépni ügyfélszolgálatunkkal a ${admin_email} címen. Köszönjük, hogy a ${domain_name} közösség tagja!"

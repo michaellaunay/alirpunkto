@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Breyting á stöðu umsóknar þinnar</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Þróun umsóknar þinnar til <span tal:replace="domain_name">Lénanama</span></h1>
+        <p tal:omit-tag="textual">Halló<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nafn umsækjanda</span>,
+        </p>
+        <p tal:omit-tag="textual">Umsóknin þín á vettvangi
+            <span tal:replace="site_url">URL</span> sem 
+            <span tal:replace="python:candidature.type">Hlutverk</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">hefur verið samþykkt</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">hefur verið hafnað</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">er í vinnslu og hefur breytt stöðu sinni</span> . 
+        </p>
+        <p tal:omit-tag="textual">Hér eru upplýsingar um þróun hennar:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Umsóknar ID: <span tal:replace="python:candidature.oid">Umsóknar ID</span></li>
+            <li tal:omit-tag="textual">Þjónustudagsetning: <span tal:replace="python:candidature.modifications[-1].datetime">Síðasta þjónusta</span></li>
+            <li tal:omit-tag="textual">Ný staða: <span tal:replace="python:candidature.candidature_state">Nýja umsóknarstaða</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Ef þú þarft, geturðu stöðvað skráningarferlið þitt núna. Þú verður í lagi að halda áfram því síðar með því að smella á hlekkinn hér að neðan.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Takk fyrir þátttökuna þína.</p>
+        <p tal:omit-tag="textual">Bestu kveðjur,</p>
+        <p tal:omit-tag="textual">Fyrirtækið <span tal:replace="domain_name">Lénanama</span></p>
+    </body>
+</html>

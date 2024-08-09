@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Ваша заявка на <span tal:replace="domain_name">Доменне ім'я</span> була затверджена</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Вітаємо з затвердженням вашої заявки!</h1>
+    
+    <p tal:omit-tag="textual">Привіт <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Ім'я заявника</span>,</p>
+    
+    <p tal:omit-tag="textual">Ми раді повідомити вам, що ваша заявка на <span tal:replace="domain_name">Доменне ім'я</span> на посаду <span tal:replace="python:candidature.type">Посада</span> була затверджена.</p>
+
+    <p tal:omit-tag="textual">Дякуємо, що приєдналися до нас! Ми раді вітати вас у нашій спільноті.</p>
+    
+    <p tal:omit-tag="textual">Тепер, коли ваша заявка була затверджена, ви можете увійти на нашу платформу, використовуючи псевдонім і пароль, які ви вказали під час подачі заявки. Після входу ви знайдете:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">посилання на всі програмні застосунки, до яких ви маєте прямий доступ. Вам не потрібно входити повторно!</li>
+        <li tal:omit-tag="textual">посилання на форму, де ви можете переглядати і редагувати свій профіль. На цій формі ми заохочуємо вас представити себе іншим членам нашої спільноти в короткому "тексті профілю" і додати невелике зображення, яке представляє вас (ваш "аватар");</li>
+        <li tal:omit-tag="textual">посилання на вихід з системи.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Ось основні елементи вашого профілю, які ми зафіксували:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ваш псевдонім: ##PSEUDONYM. Будь ласка, зберігайте ОБЕРЕЖНИЙ І БЕЗПЕЧНИЙ ЗАПИС цього псевдоніма: він є єдиним ідентифікатором, з яким ви можете увійти на нашу IT платформу;</li>
+        <li tal:omit-tag="textual">ваш пароль: (пароль, який ви вказали під час реєстрації);</li>
+        <li tal:omit-tag="textual">ваша електронна адреса: (електронна адреса, на яку ми відправляємо цей електронний лист);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">ваші особисті дані: (всі ваші ім'я та прізвище, дата народження, як було вказано і перевірено під час процесу реєстрації);</li>
+        <li tal:omit-tag="textual">ваша переважна мова для спілкування з нами: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">друга мова, яку ви приймаєте для спілкування з вами: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">мова, яку ви приймаєте для спілкування з вами, як третій варіант: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Для вашого відома, ось деталі завершення процесу реєстрації:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID заявника: <span tal:replace="python:candidature.oid">ID заявки</span></li>
+        <li tal:omit-tag="textual">Дата затвердження: <span tal:replace="python:candidature.modifications[-1]">Остання зміна</span></li>
+        <li tal:omit-tag="textual">Статус: Затверджено</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Ми сподіваємося на радість роботи разом з вами!</p>
+
+    <p tal:omit-tag="textual">З найкращими побажаннями,</p>
+    <p tal:omit-tag="textual">Команда <span tal:replace="domain_name">Доменне ім'я</span>.</p>
+</body>
+</html>

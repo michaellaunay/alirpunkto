@@ -1,0 +1,1113 @@
+```po
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Mirë se vini"
+
+msgid "username_label"
+msgstr "Emri i përdoruesit"
+
+msgid "password_label"
+msgstr "Fjalëkalimi"
+
+msgid "login_label"
+msgstr "Kyçni"
+
+msgid "welcome_msg"
+msgstr "Mirë se vini në ${site_name}, shërbimi i centralizuar për aplikacionet e përdorura në infrastrukturën IT të ${domain_name}."
+
+msgid "all_applications_msg"
+msgstr "Të gjitha aplikacionet që ju duhen për të marrë pjesë në aktivitetet e ${domain_name} në një vend."
+
+msgid "register_or_login_msg"
+msgstr "Regjistrohuni ose kyçuni tani për të filluar."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, shërbimi i centralizuar për aplikacionet e përdorura në infrastrukturën IT të ${domain_name}"
+
+msgid "logged_in_msg"
+msgstr "Ju jeni të kyçur si ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Mund të dilni duke klikuar këtu"
+
+msgid "logout_label"
+msgstr "Dilni"
+
+msgid "choose_application_msg"
+msgstr "Zgjidhni aplikacionin që dëshironi të bashkoheni:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Emri i përdoruesit ose fjalëkalimi janë të pavlefshëm. Ju lutem provoni përsëri"
+
+msgid "register_link"
+msgstr "Krijo llogari"
+
+msgid "password_confirm_label"
+msgstr "Konfirmoni fjalëkalimin"
+
+msgid "password_confirm_title"
+msgstr "Konfirmoni fjalëkalimin tuaj"
+
+msgid "forgot_password_label"
+msgstr "Harrove fjalëkalimin?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Emri(i) i plotë siç është në dokumentet tuaja zyrtare të identitetit"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Mbiemri(i) i plotë siç është në dokumentet tuaja zyrtare të identitetit"
+
+msgid "birthdate_label"
+msgstr "Data e lindjes"
+
+msgid "nationality_label"
+msgstr "Nacionaliteti (mes atyre të Bashkimit Europian)"
+
+msgid "cooperator_number_label"
+msgstr "Numri i bashkëpunëtorit"
+
+msgid "pseudonym_label"
+msgstr "Pseudonimi"
+
+msgid "email_label"
+msgstr "Adresa e emailit"
+
+msgid "first_interaction_language_label"
+msgstr "Gjuha që preferoni për të bashkëvepruar me ju"
+
+msgid "second_interaction_language_label"
+msgstr "Gjuha që pranoni si një zgjedhje të dytë për të bashkëvepruar me ju"
+
+msgid "register_label"
+msgstr "Regjistrohu"
+
+msgid "forgot_password_head"
+msgstr "Harrove fjalëkalimin"
+
+msgid "forgot_your_password_title"
+msgstr "Harrove fjalëkalimin tuaj?"
+
+msgid "enter_your_email_address_label"
+msgstr "Ju lutem shpërndani adresën tuaj të emailit:"
+
+msgid "submit_button"
+msgstr "Dërgo"
+
+msgid "candidature_states_draft_value"
+msgstr "Draft: Aplikimi është në modalitetin draft."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Validimi i Emailit: Shteti ku adresa e emailit të Aplikantit po pret verifikim."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "ConfirmedHuman: Adresa e emailit të Aplikantit është verifikuar, dhe provat e njerëzisë janë ofruara (ne kemi verifikuar që ju nuk jeni një robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"UniqueData: Aplikanti ka futur të dhënat e tij/saj personale të identifikimit, dhe ne kemi verifikuar që asnjë bashkëpunëtor aktual ose anëtar i zakonshëm i Komunitetit nuk ka të njëjtat "
+"të dhëna."
+
+msgid "candidature_states_pending_value"
+msgstr "Në pritje: Aplikimi është dorëzuar. Të dhënat personale të identifikimit janë transmetuar te Verifikuesit, por ata nuk kanë ofruar ende reagimin e tyre."
+
+msgid "candidature_states_approved_value"
+msgstr "Miratuar: Aplikimi është pranuar."
+
+msgid "candidature_states_refused_value"
+msgstr "Refuzuar: Aplikimi është mohuar."
+
+msgid "candidature_states_draft"
+msgstr "draft"
+
+msgid "candidature_states_email_validation"
+msgstr "validimi_i_emailit"
+
+msgid "candidature_states_confirmed_human"
+msgstr "të_verifikuar_njerëzor"
+
+msgid "candidature_states_unique_data"
+msgstr "të_dhëna_unike"
+
+msgid "candidature_states_pending"
+msgstr "në_pritje"
+
+msgid "candidature_states_approved"
+msgstr "miratuar"
+
+msgid "candidature_states_refused"
+msgstr "refuzuar"
+
+msgid "user_types_ordinary_value"
+msgstr "Ordinar: Një aplikim për t'u bërë një Anëtar ordinar i Komunitetit = me procesin e regjistrimit të thjeshtuar, pa detyrim financiar, por pa të drejta vendimmarrjeje."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Bashkëpunëtor: Një aplikim për t'u bërë një anëtar i plotë i Kooperativës, një Bashkëpunëtor = me një proces të plotë regjistrimi që siguron parimin 'një njeri = një votë' dhe që "
+"Aplikanti është një qytetar i Bashkimit Evropian, detyrimi për të blerë të paktën një pjesë dhe për të paguar një kontribut vjetor, dhe të drejta të plota vendimmarrjeje."
+
+msgid "user_types_ordinary"
+msgstr "Anëtar ordinar i Komunitetit"
+
+msgid "user_types_cooperator"
+msgstr "Bashkëpunëtor = anëtar i plotë i Kooperativës"
+
+msgid "vote_types_yes_value"
+msgstr "Po: Vota është pozitive."
+
+msgid "vote_types_no_value"
+msgstr "Jo: Vota është negative."
+
+msgid "vote_types_abstain_value"
+msgstr "Abstenim: Vota është neutrale."
+
+msgid "vote_types_yes"
+msgstr "po"
+
+msgid "vote_types_no"
+msgstr "jo"
+
+msgid "vote_types_abstain"
+msgstr "abstenim"
+
+msgid "zero"
+msgstr "zero"
+
+msgid "one"
+msgstr "një"
+
+msgid "two"
+msgstr "dy"
+
+msgid "three"
+msgstr "tri"
+
+msgid "four"
+msgstr "katër"
+
+msgid "five"
+msgstr "pesë"
+
+msgid "six"
+msgstr "gjashtë"
+
+msgid "seven"
+msgstr "shtatë"
+
+msgid "eight"
+msgstr "tetë"
+
+msgid "nine"
+msgstr "nëntë"
+
+msgid "times"
+msgstr "shumëzuar me"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Verifikimi që ju jeni një njeri. Llogaritni rezultatet e operacioneve të thjeshta matematike dhe shënoni këto rezultate në portal"
+
+msgid "email_candidature_state_changed"
+msgstr "Ndryshim në statusin e aplikimit tuaj në portal"
+
+msgid "invalid_challenge"
+msgstr "Përgjigjja juaj është e gabuar. Ju lutem shkruani një të re."
+
+msgid "invalid_email"
+msgstr "Ka një problem me adresën tuaj të emailit, ju lutem verifikoni atë."
+
+msgid "invalid_choice"
+msgstr "Zgjedhja juaj nuk është e vlefshme, ju lutem shkruani përsëri."
+
+msgid "challenge_instruction_text"
+msgstr "Ju lutem llogaritni rezultatet e katër operacioneve të thjeshta matematike dhe plotësoni fushat përkatëse për të konfirmuar adresën tuaj të emailit."
+
+msgid "enter_result_label_A"
+msgstr "Ju lutem shkruani rezultatin për operacionin matematikor A:"
+
+msgid "result_label_title_A"
+msgstr "Ju lutem shkruani kodin që morët me email ose rezultatin e operacionit matematikor A."
+
+msgid "result_input_title_A"
+msgstr "Për qëllim që ne të verifikojmë adresën tuaj të emailit dhe që ju jeni një njeri (jo një robot), ju lutem shkruani rezultatin e operacionit A që morët me email."
+
+msgid "enter_result_label_B"
+msgstr "Ju lutem shkruani rezultatin për operacionin matematikor B:"
+
+msgid "result_label_title_B"
+msgstr "Ju lutem shkruani kodin që morët me email ose rezultatin e operacionit matematikor B."
+
+msgid "result_input_title_B"
+msgstr "Për qëllim që ne të verifikojmë adresën tuaj të emailit dhe që ju jeni një njeri (jo një robot), ju lutem shkruani rezultatin e operacionit B që morët me email."
+
+msgid "enter_result_label_C"
+msgstr "Ju lutem shkruani rezultatin për operacionin matematikor C:"
+
+msgid "result_label_title_C"
+msgstr "Ju lutem shkruani kodin që morët me email ose rezultatin e operacionit matematikor C."
+
+msgid "result_input_title_C"
+msgstr "Për qëllim që ne të verifikojmë adresën tuaj të emailit dhe që ju jeni një njeri (jo një robot), ju lutem shkruani rezultatin e operacionit C që morët me email."
+
+msgid "enter_result_label_D"
+msgstr "Ju lutem shkruani rezultatin për operacionin matematikor D:"
+
+msgid "result_label_title_D"
+msgstr "Ju lutem shkruani kodin që morët me email ose rezultatin e operacionit matematikor D."
+
+msgid "result_input_title_D"
+msgstr "Për qëllim që ne të verifikojmë adresën tuaj të emailit dhe që ju jeni një njeri (jo një robot), ju lutem shkruani rezultatin e operacionit D që morët me email."
+
+msgid "verify_button"
+msgstr "Dërgo"
+
+msgid "submit_email_validation_title"
+msgstr "Klikoni për të verifikuar kodet e futur."
+
+msgid "passwords_dont_match"
+msgstr "Fjalëkalimet nuk përputhen."
+
+msgid "password_too_short"
+msgstr "Fjalëkalimi është shumë i shkurtër."
+
+msgid "password_minimum_length"
+msgstr "Fjalëkalimi duhet të jetë të paktën ${password_minimum_length} karaktere i gjatë."
+
+msgid "password_too_long"
+msgstr "Fjalëkalimi është shumë i gjatë."
+
+msgid "password_maximum_length"
+msgstr "Fjalëkalimi nuk duhet të kalojë ${password_maximum_length} karaktere."
+
+msgid "password_must_contain_digit"
+msgstr "Fjalëkalimi duhet të përmbajë të paktën një numër."
+
+msgid "password_must_contain_uppercase"
+msgstr "Fjalëkalimi duhet të përmbajë të paktën një shkronjë të madhe."
+
+msgid "password_must_contain_lowercase"
+msgstr "Fjalëkalimi duhet të përmbajë të paktën një shkronjë të vogël."
+
+msgid "password_must_contain_special_char"
+msgstr "Fjalëkalimi duhet të përmbajë të paktën një nga karakteret e mëposhtëm: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Ju lutem shkruani fjalëkalimin tuaj këtu."
+
+msgid "password_confirm_title_label"
+msgstr "Ju lutem konfirmoni fjalëkalimin tuaj këtu."
+
+msgid "password_confirm"
+msgstr "Konfirmoni fjalëkalimin tuaj."
+
+msgid "type_of_registration"
+msgstr "Lloji i Regjistrimit"
+
+msgid "type_registration_label"
+msgstr "Zgjidhni llojin e regjistrimit që ju përshtatet."
+
+msgid "type_registration_choice"
+msgstr "Çdo lloj regjistrimi vjen me një grup specifik të të drejtave, benefiteve dhe detyrimeve."
+
+msgid "approved_heading"
+msgstr "Urime për Miratimin Tuaj!"
+```
+
+msgid "approved_description"
+msgstr "Aplikimi juaj është miratuar. Tani mund të hyni duke përdorur pseudonimin dhe fjalëkalimin që keni ofruar gjatë procesit të aplikimit."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Pseudonim i pavlefshëm. Ai duhet të jetë midis ${MIN_PSEUDONYM_LENGTH} dhe ${MAX_PSEUDONYM_LENGTH} karakteresh dhe mund të përmbajë vetëm letra (A-Z, a-z), numra (0-9), nënviza (_), pika "
+"(.), lidhëza (-) dhe hapësira ( ). Nuk mund të përmbajë letra me akcent, umlaut, dhe shenja të tjera diakritike specifike për disa gjuhë."
+
+msgid "invalid_date"
+msgstr "Format i pavlefshëm për datën."
+
+msgid "pseudonym_too_short"
+msgstr "Pseudonim shumë i shkurtër."
+
+msgid "pseudonym_minimum_length"
+msgstr "Pseudonimi duhet të ketë të paktën ${MIN_PSEUDONYM_LENGTH} karaktere."
+
+msgid "pseudonym_too_long"
+msgstr "Pseudonim shumë i gjatë."
+
+msgid "pseudonym_maximum_length"
+msgstr "Pseudonimi nuk duhet të kalojë ${MAX_PSEUDONYM_LENGTH} karaktere."
+
+msgid "pseudonym_allready_exists"
+msgstr "Ky pseudonim është tashmë në përdorim. Ju lutemi zgjidhni një tjetër."
+
+msgid "Select_a_country"
+msgstr "Zgjidhni një Shtet Anëtar të Bashkimit Europian"
+
+msgid "Austria"
+msgstr "AT - Austri"
+
+msgid "Belgium"
+msgstr "BE - Belgjikë"
+
+msgid "Bulgaria"
+msgstr "BG - Bullgari"
+
+msgid "Cyprus"
+msgstr "CY - Qipro"
+
+msgid "Czech_Republic"
+msgstr "CZ - Çekia"
+
+msgid "Germany"
+msgstr "DE - Gjermani"
+
+msgid "Denmark"
+msgstr "DK - Danimarkë"
+
+msgid "Estonia"
+msgstr "EE - Estoni"
+
+msgid "Spain"
+msgstr "ES - Spanjë"
+
+msgid "Finland"
+msgstr "FI - Finlandë"
+
+msgid "France"
+msgstr "FR - Francë"
+
+msgid "Greece"
+msgstr "GR - Greqi"
+
+msgid "Croatia"
+msgstr "HR - Kroaci"
+
+msgid "Hungary"
+msgstr "HU - Hungari"
+
+msgid "Ireland"
+msgstr "IE - Irlandë"
+
+msgid "Italy"
+msgstr "IT - Itali"
+
+msgid "Lithuania"
+msgstr "LT - Lituani"
+
+msgid "Luxembourg"
+msgstr "LU - Luksemburg"
+
+msgid "Latvia"
+msgstr "LV - Letoni"
+
+msgid "Malta"
+msgstr "MT - Maltë"
+
+msgid "Netherlands"
+msgstr "NL - Holandë"
+
+msgid "Poland"
+msgstr "PL - Poloni"
+
+msgid "Portugal"
+msgstr "PT - Portugali"
+
+msgid "Romania"
+msgstr "RO - Rumani"
+
+msgid "Sweden"
+msgstr "SE - Suedi"
+
+msgid "Slovenia"
+msgstr "SI - Slloveni"
+
+msgid "Slovakia"
+msgstr "SK - Sllovaki"
+
+msgid "full_name_as_in_id_required"
+msgstr "Emri(t) i plotë është(i) i kërkuar."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Mbiemri(i) i plotë është(i) i kërkuar."
+
+msgid "birthdate_required"
+msgstr "Data e lindjes është e kërkuar."
+
+msgid "nationality_required"
+msgstr "Kënaqësia është e kërkuar."
+
+msgid "first_interaction_language_required"
+msgstr "Gjuha e parë e interaksionit është e kërkuar."
+
+msgid "pending_description"
+msgstr "Aplikimi juaj po shqyrtohet. Do të njoftoheni me email sapo të miratohet."
+
+msgid "candidature_not_found"
+msgstr "Aplikimi nuk u gjet."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Faleminderit për interesin tuaj në aktivitete e ${domain_name}! Këtu është vendi i duhur për të regjistruar</b></h2>\n"
+"<p>KozmoPolitika Kooperative mbështet individë dhe transformon sistemin ekzistues ekonomik, social dhe politik drejt një shoqërie radikalisht të drejtë, të qëndrueshme, demokratike dhe të lumtur, "
+"<a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Shoqëria e Marrëveshjes</a>.</p>\n"
+"<p>Poshtë do të gjeni fillimin e procesit të regjistrimit për t'u bashkuar me ne. Ne propozojmë dy nivele të pjesëmarrjes, me detyra dhe të drejta që rriten:</p>\n"
+"<ul>\n"
+"<li>si një <b>Anëtar i Zakonshëm i Komunitetit Tonë</b>, me një proces të thjeshtë regjistrimi, pa angazhime financiare, por pa të drejta votimi; ose </li>\n"
+"<li>si një <b>Bashkëpunëtor</b>, një anëtar i plotë i Kooperativës sonë, me një proces regjistrimi që siguron që një individ i caktuar mund të regjistrohet vetëm një herë (për të respektuar parimin demokratik \"një "
+"njeri = një votë\") dhe që vetëm qytetarët e Bashkimit Evropian që kanë arritur moshën e madhe janë Bashkëpunëtorë, me angazhimin për të blerë të paktën një aksion dhe për të paguar një "
+"kontribut vjetor dhe të drejta të plota votimi. Bashkimi Evropian është shkalla gjeografike e punës sonë (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">shih pse</a>)</li>\n"
+"</ul>\n"
+"<p>Procesi i regjistrimit përfshin hapat e mëposhtëm:</p>\n"
+"<ol>\n"
+"<li>ne verifikojmë që adresa e-email-it u dha nga ju, një njeri (dhe jo nga një robot);</li>\n"
+"<li>ne ju kërkojmë pseudonimin, fjalëkalimin tuaja dhe gjuhën e preferuar(e) për interaksionin me ju;</li>\n"
+"<li>në rastin kur jeni regjistruar si Anëtar i Zakonshëm të Komunitetit, keni përfunduar dhe hyni në Komunitetin tonë. Në rastin kur jeni regjistruar si Bashkëpunëtor, procesi "
+"vazhdon në mënyrë që të mund të verifikojmë që ju përmbushni kushtet e vendosura më sipër për të qenë një Bashkëpunëtor.</li>\n"
+"</ol>\n"
+"<p>Kjo verifikim bëhet si më poshtë:</p>\n"
+"<ol>\n"
+"<li>ne ju kërkojmë detajet e <b>identitetit</b>: emri(t) dhe mbiemri(t) juaj, data juaj e lindjes;</li>\n"
+"<li>ne kërkojmë disa anëtarë ekzistues të Kooperativës (verifikatorët tuaj) për të verifikuar që informacioni në dokumentin tuaj të identitetit zyrtar përputhet me atë që keni ofruar në hapin e mëparshëm, "
+"në bazë të një shkëmbimi të drejtpërdrejtë të email-eve ose të një takimi videokonference me ju;</li>\n"
+"<li>pasi ata të kenë konfirmuar këtë përputhje, ju do të mirëpriteni si Bashkëpunëtor, me të drejta të plota - pasi të keni blerë të paktën <a href=\"https://www.cosmopolitical.coop/share\">një "
+"aksion</a> dhe paguar kontributin tuaj vjetor për operacionet tona.</li>\n"
+"</ol>\n"
+"<p>Ju lutemi filloni regjistrimin tuaj tani! Ne mezi presim t'ju mirëpresim në aktivitetet tona.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Hapi i parë në procesin tuaj të regjistrimit është të verifikoni se jeni një \n"
+"njeri, dhe jo një robot. Për këtë, ne verifikojmë që mund të pranoni dhe \n"
+"kuptoni një email që do t'ju dërgojmë: çfarë kërkojmë nga ju është \n"
+"e thjeshtë për një njeri, shumë më e komplikuar për një robot."
+
+msgid "identity_verification_label"
+msgstr "Verifikimi i Identitetit"
+
+msgid "Send_id_copy_by_email"
+msgstr "Dërgoni një skan të një pjesë të dokumentit tuaj zyrtar të identifikimit me email."
+
+msgid "Send_video_conference_link"
+msgstr "Dërgoni propozime për datën dhe orarin e një videokonference."
+
+msgid "Proceed"
+msgstr "Vazhdoni"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Ju lutemi konfirmoni që keni dërguar email-et tek Verifikatorët."
+
+msgid "sent_confirmation_label"
+msgstr "Konfirmimi që email-et u dërguan tek Verifikatorët"
+
+msgid "submit_email_confirmation_title"
+msgstr "Konfirmoni që dërguat email-et."
+
+msgid "confirm_email_send_button_label"
+msgstr "Konfirmoni"
+
+msgid "vote_success"
+msgstr "Ju falënderojmë për pjesëmarrjen në procesin e votimit. Vota juaj ${vote} është regjistruar me sukses. Mund ta ndryshoni votën tuaj deri në termin e saj duke kthyer në këtë faqe."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Si një Bashkëpunëtor, do të merrni pjesë në të gjitha vendimet tona. Këto vendime miratohen sipas procedurave demokratike rigoroze, dhe mund të kenë pasoja të rëndësishme për "
+"Kooperativën dhe për Bashkëpunëtorët. Për më tepër, Kooperativa ka për qëllim të përfaqësojë qytetarët e BE, pavarësisht nga nacionaliteti i tyre - por vetëm qytetarë të BE. Kjo është veçanërisht "
+"e rëndësishme gjatë zgjedhjeve publike. Prandaj, kemi nevojë të sigurojmë tre gjëra: (1) që një individ i caktuar mund të regjistrohet jo më shumë se një herë, për të siguruar parimin demokratik \"një "
+"njeri = një votë\"; (2) që të gjithë Bashkëpunëtorët janë të paktën në moshë legale dhe (3) që vetëm qytetarët e Bashkimit Evropian janë Bashkëpunëtorë.</p>\n"
+"    <p>Kjo është arsyeja pse ne do të verifikojmë nga ju disa elemente të të dhënave tuaja të identitetit, duke krahasuar (1) të dhënat që do të introduktoni në këtë formë gjatë regjistrimit tuaj me (2) "
+"informacionin e pranishëm në dokumentet tuaja zyrtare të identitetit. Kjo verifikim do të kryhet nga një grup anëtarësh të përzgjedhur rastësisht të Kooperativës, Verifikatorët e aplikimit tuaj, "
+"dhe do të bazohet në informacionin rreth dokumenteve tuaja zyrtare të identitetit që do t'i transmetoni atyre drejtpërdrejt, me email ose gjatë një videokonference, pa transit përmes "
+"këtyre platformave online (për arsye sigurie dhe besueshmërie).</p>\n"
+"    <p>Të dhënat që ne kërkojmë nga ju dhe që Verifikatorët do të kontrollojnë për përputhshmërinë me të dhënat në dokumentet tuaja zyrtare të identitetit janë:\n"
+"    <ul>\n"
+"    <li>emri(t) dhe mbiemri(t) tuaj;</li>\n"
+"    <li>data juaj e lindjes;</li>\n"
+"    <li>qytetaria juaj.</li>\n"
+"    </ul></p>\n"
+"    <p>Vetëm një person mban emrin tuaj, mbiemrin tuaj dhe datën tuaj të lindjes: ju. Nëse përpiqeni të regjistroheni përsëri, do të duhet të ofroni të njëjtat të dhëna për procedurën tonë të verifikimit, "
+"dhe ne do të refuzojmë aplikimin tuaj, sepse ju tashmë jeni një Bashkëpunëtor, dhe nuk mund të keni disa llogari për të votuar më shumë se një herë. Ne do të jemi të sigurt në këtë sepse "
+"e dimë që vetëm një person ka këtë kombinim emrash, mbiemrash dhe datash të lindjes. Data juaj e lindjes na mundëson të verifikojmë që jeni në moshë të madhe, dhe qytetaria juaj "
+"na mundëson të sigurojmë që ju jeni me të vërtetë një qytetar i Bashkimit Evropian.</p>\n"
+"    <p>Këto të dhëna do të përdoren ekskluzivisht për të verifikuar identitetin tuaj, moshën tuaj dhe qytetarinë tuaj, dhe për të menaxhuar llogarinë tuaj si Bashkëpunëtor. Ato nuk do të shfaqen kurrë për "
+"përdoruesit e tjerë të platformës IT të ${domain_name}, as do të transmetohen ose shiten kujtdo, përveç se për të përmbushur kërkesat ligjore nga autoritetet ligjore publike me kërkesën e një gjykatësi. "
+"\"Kontrolluesi i të dhënave\" siç është përcaktuar nga <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\">Rregulli i Përgjithshëm për Mbrojtjen e të Dhënave "
+"(GDPR) të Bashkimit Evropian</a> është Kooperativa KozmoPolitike SCE, një Shoqatë Evropiane e Kooperativës e krijuar në 229 rue Solférino, 59000 Lille, Francë dhe e regjistruar më 25 "
+"Prill 2023 me numrin SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Ne ju dërguam përmes e-mailit një grup me katër llogaritje të thjeshta aritmetike për të realizuar, të identifikuara nga A në D, të gjitha duke ndjekur të njëjtin model: (A NUMRI I PARË NDËRMJET 1 DHE 9) "
+"shumëzuar me (A NUMRI I DYTË NDËRMJET 1 DHE 9), plus (A NUMRI I TRETË NDËRMJET 1 DHE 9). Për të realizuar llogaritjen, ju duhet së pari të shumëzoni NUMRI I PARË NDËRMJET 1 DHE 9 "
+"me NUMRI I DYTË NDËRMJET 1 DHE 9. Pasi të keni rezultatin e kësaj shumëzimi, ju duhet të shtoni në atë rezultat NUMRI I TRETË NDËRMJET 1 DHE 9. Në fund, ju duhet të shkruani "
+"rezultatin e kësaj shtesë të fundit në kutinë e ofruar për rezultatin e llogaritjes aritmetike që po bëni (midis katër llogaritjeve që ju dërguam, të identifikuara nga A në D). Ju duhet "
+"ta përsërisni llogaritjen për të katër llogaritjet e dërguara përmes e-mailit.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Si pjesë e procesit të regjistrimit si Kooperator, duhet të zgjidhni një metodë për verifikimin e identitetit tuaj. Kjo verifikim e identitetit tuaj është e nevojshme për të siguruar: (1) "
+"që një person i caktuar nuk regjistrohet disa herë me adresa të ndryshme e-mail (ne kështu vëmë re parimin demokratik: \"një person - një votë\"); (2) që vetëm qytetarët e Bashkimit "
+"Europian që kanë arritur moshën e rritur janë Kooperatorë (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >shihni pse</a>).</p>\n"
+"    <p>Keni dy mundësi për këtë proces verifikimi:</p>\n"
+" <ul>\n"
+"   <li><b>Dërgoni një kopje të dokumenteve tuaja të identitetit përmes e-mailit:</b> Ju mund të zgjidhni të dërgoni në mënyrë të sigurt përmes e-mailit një kopje të dokumenteve tuaja të identitetit "
+"drejt një grupi të vogël Kooperatorësh të zgjedhur rastësisht, Verifikuesit tuaj. Kjo metodë siguron një mënyrë të shpejtë dhe të drejtpërdrejtë për të konfirmuar identitetin tuaj.</li>\n"
+"   <li><b>Organizoni një takim me video konferencë:</b> Përndryshe, mund të zgjidhni një sesion video konferencë ku mund të paraqisni dokumentet tuaja të identitetit live për Verifikuesit tuaj. Kjo "
+"metodë ofron një ndërveprim më personal dhe lejon sqarime të menjëhershme nëse është e nevojshme, gojarisht nëse ndani një gjuhë të përbashkët, përmes bisedës dhe përkthimeve automatike nëse jo.</li>\n"
+" </ul>\n"
+" <p>Në të dyja rastet, ne ju këshillojmë, për arsye sigurie, që të fshihni në dokumentin tuaj të identitetit vendin tuaj të lindjes dhe numrin e dokumentit të identitetit, para se ta kopjoni ose "
+"të tregoni atë për Verifikuesit tuaj.</p>\n"
+" <p>Është e rëndësishme që të bëni zgjedhjen tuaj shpejt që procesi juaj i regjistrimit të jetë i qetë dhe në kohë. Ju lutemi sigurohuni që metoda që zgjidhni është më e përshtatshme për ju "
+"dhe përputhet me preferencat tuaja për privatësinë.</p>\n"
+" <p>Kooperimi juaj në këtë çështje vlerësohet shumë dhe është çelësi për ruajtjen e standardeve të larta të besimit dhe demokracisë pan-Europiane brenda Kooperativës tonë. Ju falënderojmë për "
+"kuptimin tuaj dhe pjesëmarrjen aktive në këtë hap vendimtar.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Numri i Kooperatorëve ekzistues është shumë i ulët për të zgjedhur numrin e mjaftueshëm të Verifikuesve të identitetit tuaj. Ju lutemi kontaktoni administratorin e sistemit, në adresën "
+"${administrator}, për të zgjidhur problemin."
+
+msgid "email_copy_id_verification_subject"
+msgstr "en - ${domain_name} - Ju lutem verifikoni identitetin tim si një Kooperator të ri potencial"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Dear Verifiers,\n"
+" Unë po ju shkruaj për të përfunduar procesin e verifikimit të identitetit për aplikimin tim për t’u bërë Kooperator i ${domain_name}. E bashkangjitur këtij e-maili, do të gjeni një kopje të pjesshme të "
+"dokumentit tim zyrtar të identitetit.\n"
+" Ju lutem vini re se disa informacione të ndjeshme janë maskuar për arsye sigurie. Megjithatë, dokumenti përmban informacionin që ju nevojitet për të verifikuar identitetin tim sipas procesit "
+"të regjistrimit të ${domain_name}.\n"
+" Ju lutem kërkoj që të rishikoni dokumentin e bashkangjitur nëse është e mundur brenda 3 ditëve të ardhshme, për të votuar mbi përputhshmërinë mes:\n"
+"\n"
+" - informacionit të identitetit që keni marrë drejtpërdrejt përmes e-mailit nga platforma IT e ${domain_name} (dhe që do t'ju kujtohet në ndërfaqen e votimit) dhe \n"
+" - informacionit të identitetit që mund të lexoni në kopjen e pjesshme të dokumentit tim zyrtar të identitetit.\n"
+"\n"
+" Linku për të votuar mbi këtë përputhshmëri është si më poshtë: ${voting_url}.\n"
+" Ju falenderoj shumë paraprakisht për mbështetje në procesin e regjistrimit tim si Kooperator në ${domain_name}. Nëse keni ndonjë pyetje tjetër ose kërkoni informacion të mëtejshëm, "
+"ju lutem mos hezitoni të kontaktoni drejtpërsëdrejti në gjuhën tuaj.\n"
+" Me respekt,\n"
+" ${signature}\n"
+" Bashkëngjitur: [Emri i skedarit të dokumentit ID]\n"
+" Ky e-mail është gjeneruar me ndihmën e veçorisë së verifikimit të identitetit të ${domain_name}. Nëse nuk jeni Verifikuesi i caktuar për aplikimin e ${signature} dhe keni "
+"pranuar këtë e-mail gabimisht, ju lutemi informoni administratorin e ${domain_name}, në adresën e mëposhtme: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "en - ${domain_name} - Ju lutem verifikoni identitetin tim përmes video konferencës si një Kooperator të ri potencial"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Dear Verifiers,\n"
+"    Unë po ju shkruaj për të përfunduar procesin e verifikimit të identitetit për aplikimin tim për t’u bërë Kooperator i ${domain_name}. Dëshiroj të propozoj një takim me video konferencë për "
+" këtë qëllim.\n"
+"    Ja disa intervale kohore që po sugjeroj për video konferencën. Ju lutem vini re se jetoj në Gjermani (Ju lutem përshtatni sipas vendit / rajonit tuaj të banimit. Kjo është "
+"e nevojshme që korrespondenti juaj të dijë zonën tuaj të kohës), kështu që koha e ditës ku unë jetoj mund të jetë e ndryshme nga koha e ditës ku ju jetoni. Kjo video konferencë nuk duhet të "
+"zgjasë më shumë se 10 minuta: (ju lutem ofroni të paktën 3 mundësi, nëse është e mundur në kohë të ndryshme të ditës dhe në ditë të ndryshme duke përfshirë fundjavën, të gjitha brenda 10 "
+"ditëve pas dërgimit të e-mailit)\n"
+"   \n"
+"         - E hënë, 04 Shtator 2023, në orën 17:30 sipas orës sime; (Përshtatni sipas disponueshmërisë tuaj)\n"
+"         - E martë, 05 Shtator 2023, në orën 20:30 sipas orës sime; (Përshtatni sipas disponueshmërisë tuaj)\n"
+"         - E shtunë, 09 Shtator 2023, në orën 10:00 sipas orës sime. (Përshtatni sipas disponueshmërisë tuaj)\n"
+"    \n"
+"    Ju lutem mos harroni se mund të jetojmë në zona të ndryshme orare! Ju lutem përshtatni këto intervale kohore në zonën tuaj të kohës.\n"
+"    Video konferenca do të zhvillohet duke përdorur linkun e mëposhtëm:\n"
+"(ju lutem futni këtu linkun që keni përgatitur për këtë video konferencë. Këtu janë sugjerimet tona për platforma që mund të përdorni për të krijuar video konferencën dhe të ofroni linkun "
+"përkatës:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (softuer i lirë dhe me burim të hapur)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (softuer i lirë dhe me burim të hapur)\n"
+"         - Zoom : https://zoom.us/ (softuer pronësor)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (softuer pronësor, platformë që kërkon pagesë)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (softuer pronësor, akses pa pagesë në platformë)\n"
+"    )\n"
+"    Ju lutem zgjidhni një interval kohor që ju përshtatet dhe dërgoni një e-mail që përmban zgjedhjen tuaj.\n"
+"    Gjatë takimit të video konferencës, mund të ndodhë që ne të mos ndajmë asnjë gjuhë të përbashkët. Nëse është ky rast, sugjeroj që të adoptojmë një qasje të sjellshme dhe mbështetëse ndaj "
+" njëri-tjetrit. Propozoj që të përdorim bisedën për të shprehur veten në gjuhët tona përkatëse dhe të përdorim përkthimin automatike për të kuptuar atë që shkruan bashkëbiseduesi ynë.\n"
+"    Pasi të keni mbajtur këtë takim përmes video konferencës, unë kërkoj që të votoni për të konfirmuar ose hedhur poshtë përputhshmërinë mes:\n"
+"\n"
+"     - informacionit të identitetit që keni marrë drejtpërdrejt përmes e-mailit nga platforma IT e ${domain_name} (dhe që do t'ju kujtohet në ndërfaqen e votimit) dhe \n"
+"    - informacionit të identitetit që do të keni parë gjatë video konferencës.\n"
+"\n"
+" Linku për të votuar mbi këtë përputhshmëri është si më poshtë: ${voting_url}.\n"
+"  Ju falenderoj shumë paraprakisht për mbështetje në procesin e regjistrimit tim si Kooperator në ${domain_name}. Nëse keni ndonjë pyetje tjetër ose kërkoni informacion të mëtejshëm, "
+"ju lutem mos hezitoni të kontaktoni drejtpërsëdrejti.\n"
+" Me respekt,\n"
+" ${signature}\n"
+" Ky e-mail është gjeneruar me ndihmën e veçorisë së verifikimit të identitetit të ${domain_name}. Nëse nuk jeni Verifikuesi i caktuar për aplikimin e ${signature} dhe keni "
+"pranuar këtë e-mail gabimisht, ju lutem informoni administratorin e ${domain_name}, në adresën e mëposhtme: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Nëse përdoruesi ekziston, ai/ajo do të marrë një email."
+
+msgid "reset_password_email_subject"
+msgstr "Rivendosni Fjalëkalimin Tuaj"
+
+msgid "forget_email_send_error"
+msgstr "Ndodhi një gabim gjatë dërgimit të emailit të rivendosjes, ju lutem kontaktoni administratorin, në ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "krijuar"
+
+msgid "member_state_created_value"
+msgstr "Anëtari është krijuar"
+
+msgid "member_state_draft_name"
+msgstr "skicë"
+
+msgid "member_state_draft_value"
+msgstr "Të dhënat e anëtarit po redaktohen"
+
+msgid "member_state_registred_name"
+msgstr "regjistruar"
+
+msgid "member_state_registred_value"
+msgstr "Të dhënat e anëtarit janë ruajtur"
+
+msgid "member_data_modification_request_name"
+msgstr "duke u modifikuar"
+
+msgid "member_data_modification_request_value"
+msgstr "Një kërkesë për modifikim të të dhënave është paraqitur"
+
+msgid "member_datas_modified_name"
+msgstr "modifikuar"
+
+msgid "member_datas_modified_value"
+msgstr "Të dhënat e anëtarit janë modifikuar"
+
+msgid "email_member_state_changed"
+msgstr "Ndryshim në profilin tuaj të anëtarit"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Ju lutemi jepni një adresë e-maili të vlefshme"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Administratori nuk lejohet të resetojë fjalëkalimin e tij/saj"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Nëse përdoruesi ekziston, një e-mail është dërguar në adresën e tij/saj të e-mailit me një lidhje për të rikuperuar fjalëkalimin"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Dy versionet e fjalëkalimit nuk përputhen. Ju lutemi sigurohuni që ato janë të njëjta dhe dërgoni përsëri"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Ju lutemi jepni një fjalëkalim të ri"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Ju keni ndryshuar me sukses fjalëkalimin tuaj"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Ka ndodhur një gabim gjatë procesit të rikuperimit të fjalëkalimit tuaj"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Ka ndodhur një gabim gjatë procesit të rikuperimit të fjalëkalimit tuaj. Fjalëkalimi juaj nuk u ndryshua"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Anëtari nuk u gjet në listën e anëtarëve aktualë"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Hiperlinku që keni përdorur për të rikuperuar fjalëkalimin tuaj është i skaduar. Ju lutemi përdorni të fundit që keni marrë"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "E-maili që përmbante sfidën matematikore që verifikon se kandidati është njeri (dhe jo robot) nuk u dërgua."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Gabim gjatë angazhimit të kandidaturës"
+
+msgid "modification_to_profile_button_title"
+msgstr "Ndrysho Profilin T tuaj"
+
+msgid "modification_to_profile_button_label"
+msgstr "Ndrysho Profilin"
+
+msgid "modification_to_profile_button_description"
+msgstr "Klikoni këtu për të marrë në e-mail një lidhje të sigurt për të modifikuar profilin tuaj."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+" për të siguruar sigurinë e të dhënave tuaja, një lidhje unike për të modifikuar profilin tuaj do t'ju dërgohet përmes e-mailit. Ky proces garanton që vetëm personi me qasje në adresën tuaj të e-mailit "
+"mund të bëjë ndryshime në profilin tuaj."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Lidhje për të modifikuar profilin tuaj në infrastrukturën IT të ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Ju lutemi jepni këtu të gjitha emrat tuaj, siç janë shkruajtur në dokumentet tuaja zyrtare të identitetit, në transkriptimin e tyre zyrtar në karaktere latine (nëse gjuha origjinale përdor një alfabet "
+"ndryshe nga ai latin)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Ju lutemi jepni këtu të gjitha mbiemrat tuaj në lindje (dmth JO mbiemrin tuaj si një person i martuar), siç janë shkruajtur në dokumentet tuaja zyrtare të identitetit, në transkriptimin e tyre zyrtar në karaktere latine "
+"(nëse gjuha origjinale përdor një alfabet ndryshe nga ai latin)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Teksti që përshkruan ju (teksti i profilit tuaj)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Ju lutemi shkruani këtu një tekst që përshkruan veten, në gjuhën tuaj të preferuar, në mënyrë që të gjithë anëtarët e tjerë të Komunitetit të mund t'ju njohin pak më mirë. Ne sugjerojmë që të fokusoheni "
+"në: (1) Nga vini, (2) çfarë bëni, (3) çfarë dëshironi të bëni si anëtar i Komunitetit, dhe (4) burimet (përvoja, njohuri, kohë) që keni në dispozicion.\n"
+"Ne besojmë se kjo informacion është e dobishme sepse paraqitja e vetes për të tjerët me fjalët tuaja e jep një fytyrë njerëzore identitetit tuaj digjital në infrastrukturën tonë IT. Me "
+" këtë tekst, çdo anëtar i Komunitetit ju njeh pak më mirë, dhe kjo e bën ndërveprimin shumë më të lehtë!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Ju lutemi jepni datën tuaj të lindjes në formatin e mëposhtëm: DD/MM/YYYY, dmth. (1) dita në muaj, në 2 cifra; (2) numri i muajit, në 2 cifra; (3) viti, në 4 cifra. Vetëm "
+"personat që kanë arritur ditëlindjen e tyre të 18-të mund të jenë Bashkëpunues. Nëse ende nuk e keni arritur ditëlindjen e 18-të, ju ftojmë të regjistroheni si Anëtar i zakonshëm të Komunitetit - dhe të "
+"përmirësoheni në statusin e Bashkëpunuesit sapo të arrini moshën e pjekurisë."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Ju lutemi jepni një Shtet Anëtar të Bashkimit Evropian të cilit ju jeni qytetar. Vetëm qytetarët e Bashkimit Evropian mund të jenë Bashkëpunues"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Ju lutemi zgjidhni një Shtet Anëtar të Bashkimit Evropian"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Ky është numri unik që identifikon ju në të gjitha proceset që ndodhin në Komunitet"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Ju lutemi tregoni këtu pseudonimin që do t'ju identifikojë gjatë gjithë kohës së aktivitetit tuaj në platformën tonë IT. Ne rekomandojmë fuqishëm që të zgjidhni një pseudonim që bën të pamundur "
+"ndjekjen mbrapa në identitetin tuaj real (ose shumë të vështirë). Kështu, ju mbroni konfidencialitetin e mendimeve tuaja (dmth. të dhënat personale që janë subjekti i një mbrojtjeje specifike sipas Rregullores "
+" së Përgjithshme për Mbrojtjen e të Dhënave - GDPR) ndaj çdo forme të presionit të jashtëm në jetën reale (p.sh. nga punëdhënësi juaj ose klientët tuaj). Bëni kujdes! Pasi ta keni zgjedhur, asnjëherë "
+"nuk do të jeni në gjendje ta ndryshoni këtë pseudonim. Zgjidhni me kujdes! \n"
+" Pseudonimi juaj duhet të jetë midis ${MIN_PSEUDONYM_LENGTH} dhe ${MAX_PSEUDONYM_LENGTH} karakteresh dhe mund të përmbajë vetëm letra të alfabetit latin (A-Z, a-z), numra (0-9), "
+"nënvizime (_), pika (.), lidhje (-) dhe hapësira ( ). Nuk mund të përmbajë letra me akcent, umlaut dhe simbole të tjera diakritike specifike për disa gjuhë."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Kërkohet të jepni pseudonimin tuaj"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Ju lutemi siguroni fjalëkalimin tuaj. Fjalëkalimi juaj duhet të jetë midis ${password_minimum_length} dhe ${password_maximum_length} karakteresh, të përmbajë të paktën një Shifër, të paktën një "
+"letër të vogël, të paktën një letër të madhe dhe të paktën një nga karakteret në vijim: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Ju lutemi konfirmoni fjalëkalimin tuaj"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Konfirmimi i fjalëkalimit tuaj është i kërkuar"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Ju lutemi jepni adresën e e-mailit që infrastruktura IT e ${domain_name} do të përdorë për të komunikuar me ju.\n"
+"Ne rekomandojmë që të zgjidhni një adresë e-maili që e kontrolloni shpesh.\n"
+"Na nevojitet kjo informacion sepse na nevojitet të komunikojmë me ju, për t'ju mbajtur të informuar mbi zhvillimet në Kooperativë, për t'ju ofruar mundësinë për të vepruar ose për t'u kontribuar në "
+"vendime. E-maili është mjeti më i përdorur në Evropë, është universal dhe bazohet në standarde të hapura dhe të lira, ndryshe nga sistemet private të mesazheve të gjigantëve digjitalë (të njohur "
+"edhe si 'GAFAM').\n"
+"Kjo adresë e-mail do të përdoret ekskluzivisht për të siguruar komunikimin midis infrastruktura IT më të ${domain_name} dhe ju. Ajo nuk do të shfaqet kurrë për përdoruesit e tjerë të platformës IT të "
+"${domain_name}, as nuk do të transmetohet ose shitet askujt, përveç për të plotësuar kërkesat ligjore nga autoritetet publike të zbatimit të ligjit sipas kërkesës së një gjykatësi. \"kontrolluesi i "
+"të dhënave\" siç përcaktohet nga Rregullorja e Përgjithshme për Mbrojtjen e të Dhënave (GDPR) të "
+"Bashkimit Evropian është Kooperativa CosmoPolitical SCE, një Shoqëri Kooperative Evropiane e krijuar në 229 rue Solférino, 59000 Lille, Francë dhe e regjistruar më 25 Prill 2023 nën "
+"numrin SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Ju lutemi jepni gjuhën në të cilën do të preferonit që infrastruktura IT e ${domain_name} të komunikohej me ju. \n"
+" Ne rekomandojmë që të zgjidhni gjuhën që e njihni më mirë, nga gjuhët zyrtare të Bashkimit Evropian ose Esperanto. Nëse ajo është në dispozicion midis atyre për të cilat ne kemi "
+"zhvilluar një ndërfaqe përdoruesi, ne do ta përdorim për të komunikuar me ju. \n"
+" Na nevojitet kjo informacion sepse, për arsye të drejtësisë dhe respektit të parimeve demokratike, ne duam të komunikojmë me ju në një gjuhë që e kuptoni sa më mirë."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Ju lutem jepni gjuhën me të cilën do të pranonit, si një zgjedhje të dytë, që infrastruktura IT e ${domain_name} të interaktojë me ju. \n"
+" Ne rekomandojmë që të zgjidhni një gjuhë tjetër zyrtare të Bashkimit Evropian ose Esperanto, që e kuptoni mjaft mirë. Nëse ajo është e disponueshme mes atyre për të cilat ne kemi "
+"zhvilluar një ndërfaqe përdoruesi, dhe nëse gjuha juaj e preferuar nuk është e disponueshme, ne do ta përdorim atë për të shumëfishuar me ju. \n"
+" Ne kemi nevojë për këtë informacion sepse, pavarësisht përpjekjeve tona, mund të ndodhë që gjuha juaj e preferuar të mos jetë e disponueshme në ndërfaqen e përdoruesve të softuerit tonë. Kjo është arsyeja pse ne po ju kërkojmë "
+"nëse mund të përdorni një gjuhë tjetër."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Gjuha që pranon si një zgjedhje të tretë për të ndërvepruar me ju"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Ju lutem jepni gjuhën me të cilën do të pranonit, si një zgjedhje të tretë, që infrastruktura IT e ${domain_name} të interaktojë me ju. \n"
+" Ne rekomandojmë që të zgjidhni një gjuhë tjetër zyrtare të Bashkimit Evropian ose Esperanto, që akoma mund ta kuptoni. Nëse ajo është e disponueshme mes atyre për të cilat kemi zhvilluar një "
+"ndërfaqe përdoruesi, dhe nëse as gjuha juaj e preferuar as gjuha juaj e dytë nuk janë të disponueshme, ne do ta përdorim atë për të interaguar me ju. \n"
+" Ne kemi nevojë për këtë informacion sepse, pavarësisht përpjekjeve tona, mund të ndodhë që gjuha juaj e preferuar dhe gjuha juaj e dytë të mos jenë të disponueshme në ndërfaqen e përdoruesve të softuerit tonë. "
+"Kjo është arsyeja pse ne po ju kërkojmë nëse mund të përdorni një gjuhë të tretë. Jemi të vetëdijshëm se për ju të interagoni me ne duke e përdorur atë është një situatë jo e kënaqshme për ju - ashtu siç është edhe për ne. Ne "
+"kërkojmë falje për këtë."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Shenja juaj e Shtetit Bashkëpunues"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Si një Bashkëpunëtor, Shenja juaj e Shtetit Bashkëpunues rezulton nga shenjat e caktuara për ju nga pjesëmarrësit e tjerë Aktivë në Grupet e Punës në të cilat keni marrë pjesë për të definuar "
+"dhe adoptuar Propozime Veprimi. Çdo Pjesëmarrës Aktiv mund të japë një shenjë të barabartë me +1, 0 ose -1, varësisht se sa bashkëpunuese ishte sjellja juaj gjatë pjesëmarrjes suaj aktive në atë "
+"Grup Pune. Kjo shenjë pastaj automatikisht 'harrohet' dhe zvogëlohet me kalimin e kohës: ajo reduktohet përgjysmë pas ${forgetting_time_constant} ditësh. Vlera fillestare e Shenjes suaj të Shtetit Bashkëpunues "
+"është zero."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Data kur u përditësua për herë të fundit Shenja juaj e Shtetit Bashkëpunues"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Kjo është data më e fundit kur një Bashkëpunëtor tjetër përcaktoi një shenjë për ju pas përfundimit të pjesëmarrjes suaj aktive në një Grup Pune që ishte duke definuar dhe miratuar një Propozim "
+"Veprimi. Vlera fillestare e asaj date është ajo e regjistrimit tuaj si Bashkëpunëtor."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Numri i aksioneve të Kooperativës që zotëroni"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Ky është numri total i aksioneve të Kooperativës që zotëroni, pasi i keni blerë ato në portalin tonë web. Pas regjistrimit tuaj, ky numër është i barabartë me zero. Ju ftojmë të "
+"përparoni sa më shpejt të jetë e mundur në këtë URL: ${url_purchase_shares} për të blerë aksionin tuaj të parë. Do të shijoni të gjitha të drejtat tuaja për të vendosur si një Bashkëpunëtor vetëm pasi të keni "
+"blerë të paktën një aksion (dhe paguar kontributin tuaj vjetor). Ju jeni të mirëpritur të blini më shumë se një aksion, pas regjistrimit, por edhe çdo herë më pas. Kjo e forcon Kooperativën tonë, dhe të gjithë ne jemi mirënjohës për këtë!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Data kur i skadon kontribucioni juaj vjetor aktual"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Data kur i skadon kontribucioni juaj vjetor aktual, dhe përpara së cilës duhet ta paguani atë përsëri për të mbajtur të gjitha të drejtat tuaja për të vendosur si një Bashkëpunëtor. Pas regjistrimit tuaj, kjo "
+"datë është e vendosur në një kohë në të kaluarën, që do të thotë se duhet ta paguani tani. Ju ftojmë të vazhdoni sa më shpejt të jetë e mundur në këtë URL: ${url_pay_yearly_contrib} për të paguar kontributin tuaj të parë vjetor,"
+"dhe duke marrë kështu pjesë në operacionet e Kooperativës sonë. Do të shijoni të gjitha të drejtat tuaja për të vendosur si një Bashkëpunëtor vetëm pasi të keni paguar kontributin tuaj vjetor (dhe të blini të paktën një aksion)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Numri Ndërkombëtar i Llogarisë Bankare (IBAN) të llogarisë suaj bankare"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Nëse dhe kur vendosni të largoheni nga Kooperativa (çka ne të gjithë do ta ndjejnë keq), na nevojitet IBAN-i juaj për të mundësuar transferimin e të ardhurave nga blerja mbrapa e aksioneve tuaj të "
+"Kooperativës. Për arsye sigurie, ju rekomandojmë që të jepni këtë informacion vetëm nëse dhe kur planifikoni të largoheni nga Kooperativa."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Data kur të gjitha të dhënat tuaja do të fshihen nga infrastruktura jonë IT"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Nëse dhe kur të largoheni nga Kooperativa, të dhënat tuaja identifikuese do të ruhen për një periudhë prej ${Quarantine} ditësh, para se të fshihen plotësisht dhe përhershmërisht nga regjistrat tanë. Kjo është për "
+"të siguruar që një Bashkëpunëtor që largohet nga Kooperativa për shkak të Shenjës së tij/saj të Shtetit Bashkëpunues që është shumë e keqe nuk mund të regjistrohet përsëri menjëherë me një pseudonim të pastër dhe "
+"Shenjë të Shtetit Bashkëpunues. Pas regjistrimit tuaj, kjo datë është vendosur në një të ardhme shumë të largët."
+
+msgid "avatar_label"
+msgstr "Një foto për t'ju përfaqësuar (avatareja juaj)"
+
+msgid "avatar_description"
+msgstr ""
+"Ju lutemi sigurohuni një foto që ju përfaqëson si një anëtar të Komunitetit. Për të mbrojtur nga ndëshkimet nga punëdhënësi ose klientët tuaj, rekomandojmë që kjo foto "
+"të mos lejojë gjurmimin mbrapa në identitetin tuaj në jetën reale. Për këtë arsye, ajo zakonisht nuk duhet të jetë një fotografi e vetes (mos harroni që softueri i njohjes së fytyrës përdoret masivisht nga "
+"robotët e kërkimit). Fotografia duhet të jetë në format JPEG vetëm (zgjerimi .JPG ose .JPEG), dhe jo më e madhe se 5 MB. \n"
+"Ne besojmë se ky informacion është i dobishëm sepse një foto e bën më të lehtë për anëtarët e tjerë të Komunitetit t'ju njohin. Ndonjëherë një foto flet shumë më fort se "
+"një jetëgjatësi përshkrimi. Me këtë imazh, po shprehni shumë për veten tuaj, në një gjuhë universale. Shfrytëzoni sa më shumë!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Adresa (URL) që përdorët për të rikuperuar procesin tuaj të aplikimit nga ku e ndërpritet nuk përputhet me atë që ne regjistruam për ju. (Numri identifikues i aplikimit në "
+"sesi dhe në numrin e URL-së nuk përputhen)\n"
+"Ju lutem përdorni vetëm URL-në nga emaili i fundit që morët."
+
+msgid "check_new_email"
+msgstr "Keni kërkuar të ndryshoni adresën tuaj të emailit. Në të ardhmen, ju do donit të përdorni: ${new_email}. Si rezultat, do të merrni një email që përmban një lidhje për të verifikuar këtë adresë të re."
+
+msgid "check_new_email_subject"
+msgstr "Verifikimi i adresës suaj të re të emailit"
+
+msgid "check_new_email_send_error"
+msgstr "Dërgimi i email-it të verifikimit për adresën tuaj të re ka dështuar"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Emaili i verifikimit për adresën tuaj të re është dërguar"
+
+msgid "modify_member"
+msgstr "Konsultoni ose modifikoni anëtarin"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Gabim lidhjeje"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Adresa e emailit ekziston tashmë"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Adresa e emailit është përditësuar"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Gabim gjatë përditësimit të adresës së emailit"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Gabim gjatë vendosjes së fushës"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Gabim gjatë përditësimit të anëtarit"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "OID i pavlefshëm"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Kërkesë e pavlefshme"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "Gabim LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Të dhënat e anëtarit janë përditësuar"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Përditësimi i të dhënave të anëtarit ka dështuar"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Përditësimi i të dhënave të anëtarit është i suksesshëm"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Të dhënat mungojnë"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Adresa e re e emailit mungon"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Nuk keni leje"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Nuk është votues"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Përditësimi i fjalëkalimit ka dështuar"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Përditësimi i fjalëkalimit është i suksesshëm"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Regjistrimi ka dështuar"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Regjistrimi është i suksesshëm"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Anëtar i pa njohur"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Anëtar i pa njohur"
+
+msgid "modify_member_title"
+msgstr "Modifiko profilin e anëtarit"
+
+msgid "select_member_oid_label"
+msgstr "Ju lutemi zgjidhni një anëtar për të modifikuar profilin e tij/saj:"
+
+msgid "select_member_placeholder"
+msgstr "Pseudonimi i anëtarit"
+
+msgid "modify_profile"
+msgstr "Mund të ndryshoni profilin tuaj duke klikuar këtu"
+
+msgid "profile"
+msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Adresa juaj e emailit është përditësuar me sukses. Tani do të përdorni këtë adresë të re për të gjitha komunikimet e ardhshme me ${domain_name}. Nëse nuk keni kërkuar këtë ndryshim ose nëse keni "
+"ndonjë pyetje, ju lutemi mos hezitoni të kontaktoni mbështetje tonë menjëherë në ${admin_email}. Faleminderit që jeni pjesë e komunitetit ${domain_name}!"

@@ -1,0 +1,1108 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Velkomin"
+
+msgid "username_label"
+msgstr "Notandanafn"
+
+msgid "password_label"
+msgstr "Lykilorð"
+
+msgid "login_label"
+msgstr "Innskrá"
+
+msgid "welcome_msg"
+msgstr "Velkomin á ${site_name}, miðlæga þjónustu fyrir forritin sem notuð eru í upplýsingakerfi ${domain_name}."
+
+msgid "all_applications_msg"
+msgstr "Öll forritin sem þú þarft til að taka þátt í starfsemi ${domain_name} á einum stað."
+
+msgid "register_or_login_msg"
+msgstr "Skráðu þig eða skráðu þig inn núna til að byrja."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, miðlæga þjónustu fyrir forritin sem notuð eru í upplýsingakerfi ${domain_name}"
+
+msgid "logged_in_msg"
+msgstr "Þú ert skráð(ur) inn sem ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Þú getur skráð þig út með því að smella hér"
+
+msgid "logout_label"
+msgstr "Skrá út"
+
+msgid "choose_application_msg"
+msgstr "Veldu forritið sem þú vilt taka þátt í:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Ógilt notandanafn eða lykilorð. Vinsamlegast reyndu aftur"
+
+msgid "register_link"
+msgstr "Búðu til reikning"
+
+msgid "password_confirm_label"
+msgstr "Staðfesta lykilorð"
+
+msgid "password_confirm_title"
+msgstr "Staðfestaðu lykilorðið þitt"
+
+msgid "forgot_password_label"
+msgstr "Gleymdirðu lykilorðinu?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Heiti(n) eins og í opinberum auðkenningarskjölum"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Heila(n) eftirnafn eins og í opinberum auðkenningarskjölum"
+
+msgid "birthdate_label"
+msgstr "Fæðingardagur"
+
+msgid "nationality_label"
+msgstr "Þjóðerni (milli þeirra sem tilheyra Evrópusambandinu)"
+
+msgid "cooperator_number_label"
+msgstr "Samstarfsaðili númer"
+
+msgid "pseudonym_label"
+msgstr "Látnarann"
+
+msgid "email_label"
+msgstr "Netfang"
+
+msgid "first_interaction_language_label"
+msgstr "Tungumálið sem þú vilt að við tölum við þig"
+
+msgid "second_interaction_language_label"
+msgstr "Tungumálið sem þú samþykkir sem annað val til að við tölum við þig"
+
+msgid "register_label"
+msgstr "Skrá"
+
+msgid "forgot_password_head"
+msgstr "Gleymt lykilorð"
+
+msgid "forgot_your_password_title"
+msgstr "Gleymdirðu lykilorðinu þínu?"
+
+msgid "enter_your_email_address_label"
+msgstr "Vinsamlegast sláðu inn netfangið þitt:"
+
+msgid "submit_button"
+msgstr "Senda"
+
+msgid "candidature_states_draft_value"
+msgstr "Drög: Umsóknin er í draga ástandi."
+
+msgid "candidature_states_email_validation_value"
+msgstr "E-mail staðfesting: Ástand þar sem netfang umsækjandans bíður staðfestingar."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "Staðfestur maður: Netfang umsækjandans er staðfest og sannanir eru veittar (við höfum staðfest að þú sért ekki vélmenni)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Einstakar upplýsingar: Umsækjandinn hefur slegið inn sínar persónuupplýsingar og við höfum staðfest að enginn núverandi eða nýlegur samstarfsaðili eða venjulegur meðlimur í samfélaginu sé með "
+"eins gögn."
+
+msgid "candidature_states_pending_value"
+msgstr "Í bið: Umsóknin hefur verið send. Persónuupplýsingar hafa verið sendar til staðfestinga, en þær hafa ekki veitt viðbrögð enn."
+
+msgid "candidature_states_approved_value"
+msgstr "Samþykkt: Umsóknin hefur verið samþykkt."
+
+msgid "candidature_states_refused_value"
+msgstr "Hafnað: Umsóknin hefur verið hafnað."
+
+msgid "candidature_states_draft"
+msgstr "drög"
+
+msgid "candidature_states_email_validation"
+msgstr "e-mail_staðfesting"
+
+msgid "candidature_states_confirmed_human"
+msgstr "staðfestur_maður"
+
+msgid "candidature_states_unique_data"
+msgstr "einstakar_upplýsingar"
+
+msgid "candidature_states_pending"
+msgstr "í_bið"
+
+msgid "candidature_states_approved"
+msgstr "samþykkt"
+
+msgid "candidature_states_refused"
+msgstr "hafnað"
+
+msgid "user_types_ordinary_value"
+msgstr "Venjulegur: Umsókn um að verða venjulegur meðlimur í samfélaginu = með einföldu skráningarferli, engin fjárhagsleg skylda, en engin ákvarðanatöku réttindi."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Samstarfsaðili: Umsókn um að verða fullur meðlimur í Samvinnufélaginu, samstarfsaðili = með fullri skráningu sem tryggir prinsippið 'einn maður = ein rödd' og að "
+"umsækjandinn sé borgari Evrópusambandsins, skylda til að kaupa að minnsta kosti eina hlutabréf og greiða árlega framlag og full ákvarðanatökuréttindi."
+
+msgid "user_types_ordinary"
+msgstr "Venjulegur meðlimur í samfélaginu"
+
+msgid "user_types_cooperator"
+msgstr "Samstarfsaðili = fullur meðlimur í Samvinnufélaginu"
+
+msgid "vote_types_yes_value"
+msgstr "Já: Atkvæðið er jákvætt."
+
+msgid "vote_types_no_value"
+msgstr "Nei: Atkvæðið er neikvætt."
+
+msgid "vote_types_abstain_value"
+msgstr "Fráhald: Atkvæðið er hlutlaust."
+
+msgid "vote_types_yes"
+msgstr "já"
+
+msgid "vote_types_no"
+msgstr "nei"
+
+msgid "vote_types_abstain"
+msgstr "fráhald"
+
+msgid "zero"
+msgstr "núll"
+
+msgid "one"
+msgstr "eitt"
+
+msgid "two"
+msgstr "tvö"
+
+msgid "three"
+msgstr "þrjú"
+
+msgid "four"
+msgstr "fjögur"
+
+msgid "five"
+msgstr "fimm"
+
+msgid "six"
+msgstr "sex"
+
+msgid "seven"
+msgstr "sjö"
+
+msgid "eight"
+msgstr "átta"
+
+msgid "nine"
+msgstr "níu"
+
+msgid "times"
+msgstr "margfaldað með"
+
+msgid "plus"
+msgstr "plús"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Staðfestu að þú sért maður. Reiknaðu út niðurstöður einfaldra stærðfræðilegra aðgerða og sláðu inn þessar niðurstöður á portalinn"
+
+msgid "email_candidature_state_changed"
+msgstr "Breytur í stöðu umsóknar þinnar á portalinn"
+
+msgid "invalid_challenge"
+msgstr "Svar þitt er rangt. Vinsamlegast sláðu inn nýtt."
+
+msgid "invalid_email"
+msgstr "Það er vandamál með netfangið þitt, vinsamlegast staðfestu það."
+
+msgid "invalid_choice"
+msgstr "Val þitt er ekki gilt, vinsamlegast sláðu það aftur inn."
+
+msgid "challenge_instruction_text"
+msgstr "Vinsamlegast reiknaðu út niðurstöður eftirfarandi fjögurra einfaldra stærðfræðilegra aðgerða og fylltu út viðeigandi reiti til að staðfesta netfangið þitt."
+
+msgid "enter_result_label_A"
+msgstr "Vinsamlegast sláðu inn niðurstöðu fyrir stærðfræðilega aðgerð A:"
+
+msgid "result_label_title_A"
+msgstr "Vinsamlegast sláðu inn kóðann sem þú fékkst í gegnum netfang eða niðurstöðu stærðfræðilegu aðgerðar A."
+
+msgid "result_input_title_A"
+msgstr "Til að við getum staðfest netfangið þitt og að þú sért maður (ekki vélmenni), vinsamlegast sláðu inn niðurstöðu aðgerðar A sem þú fékkst í gegnum netfang."
+
+msgid "enter_result_label_B"
+msgstr "Vinsamlegast sláðu inn niðurstöðu fyrir stærðfræðilega aðgerð B:"
+
+msgid "result_label_title_B"
+msgstr "Vinsamlegast sláðu inn kóðann sem þú fékkst í gegnum netfang eða niðurstöðu stærðfræðilegu aðgerðar B."
+
+msgid "result_input_title_B"
+msgstr "Til að við getum staðfest netfangið þitt og að þú sért maður (ekki vélmenni), vinsamlegast sláðu inn niðurstöðu aðgerðar B sem þú fékkst í gegnum netfang."
+
+msgid "enter_result_label_C"
+msgstr "Vinsamlegast sláðu inn niðurstöðu fyrir stærðfræðilega aðgerð C:"
+
+msgid "result_label_title_C"
+msgstr "Vinsamlegast sláðu inn kóðann sem þú fékkst í gegnum netfang eða niðurstöðu stærðfræðilegu aðgerðar C."
+
+msgid "result_input_title_C"
+msgstr "Til að við getum staðfest netfangið þitt og að þú sért maður (ekki vélmenni), vinsamlegast sláðu inn niðurstöðu aðgerðar C sem þú fékkst í gegnum netfang."
+
+msgid "enter_result_label_D"
+msgstr "Vinsamlegast sláðu inn niðurstöðu fyrir stærðfræðilega aðgerð D:"
+
+msgid "result_label_title_D"
+msgstr "Vinsamlegast sláðu inn kóðann sem þú fékkst í gegnum netfang eða niðurstöðu stærðfræðilegu aðgerðar D."
+
+msgid "result_input_title_D"
+msgstr "Til að við getum staðfest netfangið þitt og að þú sért maður (ekki vélmenni), vinsamlegast sláðu inn niðurstöðu aðgerðar D sem þú fékkst í gegnum netfang."
+
+msgid "verify_button"
+msgstr "Senda"
+
+msgid "submit_email_validation_title"
+msgstr "Smelltu til að staðfesta slegin kóða."
+
+msgid "passwords_dont_match"
+msgstr "Lykilorð passa ekki."
+
+msgid "password_too_short"
+msgstr "Lykilorð er of stutt."
+
+msgid "password_minimum_length"
+msgstr "Lykilorð þarf að vera að minnsta kosti ${password_minimum_length} stafir langt."
+
+msgid "password_too_long"
+msgstr "Lykilorð er of langt."
+
+msgid "password_maximum_length"
+msgstr "Lykilorð má ekki fara yfir ${password_maximum_length} stafi."
+
+msgid "password_must_contain_digit"
+msgstr "Lykilorð þarf að innihalda að minnsta kosti eitt taln."
+
+msgid "password_must_contain_uppercase"
+msgstr "Lykilorð þarf að innihalda að minnsta kosti einn hástaf."
+
+msgid "password_must_contain_lowercase"
+msgstr "Lykilorð þarf að innihalda að minnsta kosti einn lágstaf."
+
+msgid "password_must_contain_special_char"
+msgstr "Lykilorð þarf að innihalda að minnsta kosti einn af eftirfarandi táknum: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Vinsamlegast sláðu inn lykilorðið þitt hér."
+
+msgid "password_confirm_title_label"
+msgstr "Vinsamlegast staðfestaðu lykilorðið þitt hér."
+
+msgid "password_confirm"
+msgstr "Staðfestu lykilorðið þitt."
+
+msgid "type_of_registration"
+msgstr "Tegund skráningu"
+
+msgid "type_registration_label"
+msgstr "Veldu þá skráningu sem hentar þér."
+
+msgid "type_registration_choice"
+msgstr "Hver skráning tegund kemur með ákveðnum réttindum, ávinning ogskyldum."
+
+msgid "approved_heading"
+msgstr "Til hamingju með samþykktina!"
+
+msgid "approved_description"
+msgstr "Umsóknin þín hefur verið samþykkt. Þú getur nú skráð þig inn með sifjunarheiti og lykilorði sem þú gafst upp í umsóknarferlinu."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Ógilt sifjunarheiti. Það á að vera á milli ${MIN_PSEUDONYM_LENGTH} og ${MAX_PSEUDONYM_LENGTH} stafa langt og getur aðeins innihaldið bókstafi (A-Z, a-z), tölur (0-9), undirstrik (_), punkta "
+"(.), bandstrik (-) og bil ( ). Það má ekki innihalda bókstafi með hástafi, umlautum og öðrum skáletum sem tilheyra sumum tungum. "
+
+msgid "invalid_date"
+msgstr "Ógild dagsetningaraðferð."
+
+msgid "pseudonym_too_short"
+msgstr "Sifjunarheiti of stutt."
+
+msgid "pseudonym_minimum_length"
+msgstr "Sifjunarheiti verður að vera að minnsta kosti ${MIN_PSEUDONYM_LENGTH} stafa langt."
+
+msgid "pseudonym_too_long"
+msgstr "Sifjunarheiti of langt."
+
+msgid "pseudonym_maximum_length"
+msgstr "Sifjunarheiti má ekki fara yfir ${MAX_PSEUDONYM_LENGTH} stafi."
+
+msgid "pseudonym_allready_exists"
+msgstr "Þetta sifjunarheiti er þegar í notkun. Vinsamlegast veldu annað."
+
+msgid "Select_a_country"
+msgstr "Veldu aðildarríki Evrópusambandsins"
+
+msgid "Austria"
+msgstr "AT - Austurríki"
+
+msgid "Belgium"
+msgstr "BE - Belgía"
+
+msgid "Bulgaria"
+msgstr "BG - Búlgaría"
+
+msgid "Cyprus"
+msgstr "CY - Kýpur"
+
+msgid "Czech_Republic"
+msgstr "CZ - Tékkland"
+
+msgid "Germany"
+msgstr "DE - Þýskaland"
+
+msgid "Denmark"
+msgstr "DK - Danmörk"
+
+msgid "Estonia"
+msgstr "EE - Eistland"
+
+msgid "Spain"
+msgstr "ES - Spánn"
+
+msgid "Finland"
+msgstr "FI - Finnland"
+
+msgid "France"
+msgstr "FR - Frakkland"
+
+msgid "Greece"
+msgstr "GR - Grikkland"
+
+msgid "Croatia"
+msgstr "HR - Króatía"
+
+msgid "Hungary"
+msgstr "HU - Ungverjaland"
+
+msgid "Ireland"
+msgstr "IE - Írland"
+
+msgid "Italy"
+msgstr "IT - Ítalía"
+
+msgid "Lithuania"
+msgstr "LT - Litháen"
+
+msgid "Luxembourg"
+msgstr "LU - Lúxemborg"
+
+msgid "Latvia"
+msgstr "LV - Lettland"
+
+msgid "Malta"
+msgstr "MT - Maltið"
+
+msgid "Netherlands"
+msgstr "NL - Hollands"
+
+msgid "Poland"
+msgstr "PL - Pólland"
+
+msgid "Portugal"
+msgstr "PT - Portúgal"
+
+msgid "Romania"
+msgstr "RO - Rúmenía"
+
+msgid "Sweden"
+msgstr "SE - Svíþjóð"
+
+msgid "Slovenia"
+msgstr "SI - Slóvenía"
+
+msgid "Slovakia"
+msgstr "SK - Slóvakía"
+
+msgid "full_name_as_in_id_required"
+msgstr "Heiti(n) er(n) skylda."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Fullt eftirnafn(n) er(n) skylda."
+
+msgid "birthdate_required"
+msgstr "Fæðingardagur er skylda."
+
+msgid "nationality_required"
+msgstr "Þjóðaréttur er skylda."
+
+msgid "first_interaction_language_required"
+msgstr "Fyrsta samskiptamál er skylda."
+
+msgid "pending_description"
+msgstr "Umsóknin þín er í endurskoðun. Þú munt fá tilkynningu í tölvupósti þegar hún hefur verið samþykkt."
+
+msgid "candidature_not_found"
+msgstr "Umsókn fannst ekki."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Takk fyrir áhugann á starfsemi ${domain_name}! Hér er réttur staður til að skrá þig </b></h2>\n"
+"<p>CosmoPolitical Cooperative styður einstaklinga og umbreytir núverandi efnahagslega, félagslega og pólitíska kerfi í átt að róttæku sanngjörnu, sjálfbæru, lýðræðislegu og hamingjusömu "
+"samfélagi, <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Samfélag samkomulagsins</a>.</p>\n"
+"<p>Hér að neðan finnur þú upphaf skráningarferlisins til að ganga í raðir okkar. Við leggjum til tveggja hætta á þátttöku, með vaxandi skuldbindingum og réttindum:</p>\n"
+"<ul>\n"
+"<li>sem <b>Almenningur í okkar samfélagi</b>, með einföldu skráningarferli, engum fjárhagslegum skuldbindingum, en engum atkvæðisréttum; eða </li>\n"
+"<li>sem <b>Samvinna</b>, fullur aðili að okkar samvinnu, með skráningarferli sem tryggir að tiltekin persóna geti skráð sig einu sinni aðeins (til að virða lýðræðislegu meginregluna \"ein "
+"persóna = eitt atkvæði\") og að aðeins ríkisborgarar Evrópusambandsins, sem hafa náð meirihlutaaldri, séu Samvinna, með því að skuldbinda sig til að kaupa að minnsta kosti eitt hlutabréf og að greiða "
+"árlegan framlag, og fullum atkvæðisréttindum. Evrópusambandið er landfræðilegt svið okkar verka (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">sjá hvers vegna</a>)</li>\n"
+"</ul>\n"
+"<p>Skráningarferlið felur í sér eftirfarandi skref:</p>\n"
+"<ol>\n"
+"<li>við sannreynum að tölvupóstfangið var gefið upp af þér, manneskjunni (og ekki af vél);</li>\n"
+"<li>við biðjum um sifjunarheiti, lykilorð og valið tungumál fyrir samskipti við þig;</li>\n"
+"<li>ef þú hefur skráð þig sem Almennings aðila í samfélagið, hefurðu lokið og gengið inn í okkar samfélag. Ef þú hefur skráð þig sem Samvinna, heldur ferlið áfram svo við getum sannreynt að þú "
+"uppfyllir skilyrði sem sett voru hér að ofan til að vera Samvinna.</li>\n"
+"</ol>\n"
+"<p>Sannprófunin fer fram þannig:</p>\n"
+"<ol>\n"
+"<li>við biðjum um þínar <b>auðkennisupplýsingar</b>: þitt nafn(n) og eftirnafn(n), fæðingardag þinn;</li>\n"
+"<li>við biðjum nokkra núverandi meðlimi samvinnunnar (þína Sannreynendur) um að staðfesta að upplýsingarnar á opinberum auðkenni þínu stemmi við það sem þú gafst upp í fyrra skrefi, "
+"á grundvelli beinnar samskipti í tölvupósti eða myndfundi með þér;</li>\n"
+"<li>þegar þeir hafa staðfest þessa samræmi, verðurðu velkominn sem Samvinna, með fullum réttindum - eftir að þú hefur keypt að minnsta kosti <a href=\"https://www.cosmopolitical.coop/share\">eitt "
+"hlutabréf</a> og greitt <a href=\"https://www.cosmopolitical.coop/yearcontrib\">árlegan framlag til starfsemi okkar</a>.</li>\n"
+"</ol>\n"
+"<p>Vinsamlegast byrjaðu skráninguna þína núna! Við hlökkum til að taka þig í starfsemi okkar.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Fyrsta skrefið í skráningarferlinu þínu er að staðfesta að þú sért \n"
+"mannvera, ekki vél. Til að gera þetta sannreynum við að þú getir fengið og \n"
+"skilið tölvupóst sem við munum senda þér: hvað við biðjum þig um er \n"
+"einfalt fyrir mannveru, miklu flóknara fyrir vél."
+
+msgid "identity_verification_label"
+msgstr "Auðkennisvottun"
+
+msgid "Send_id_copy_by_email"
+msgstr "Sendu skann af hluta af opinberu auðkenni þínu í tölvupósti."
+
+msgid "Send_video_conference_link"
+msgstr "Sendu tillögur um dagsetningu og tíma fyrir myndfundi."
+
+msgid "Proceed"
+msgstr "Fara áfram"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Vinsamlegast staðfestu að þú hafir sent tölvupóstana til Vottunara."
+
+msgid "sent_confirmation_label"
+msgstr "Staðfesting á því að tölvupóstarnir voru sendir til Vottunara"
+
+msgid "submit_email_confirmation_title"
+msgstr "Staðfestu að þú hafir sent tölvupóstana."
+
+msgid "confirm_email_send_button_label"
+msgstr "Staðfesta"
+
+msgid "vote_success"
+msgstr "Við þökkum þér fyrir þátttöku í atkvæðagreiðslunni. Atkvæði þitt ${vote} hefur verið skráð með góðum árangri. Þú getur breytt atkvæði þínu þar til fresturinn rennur út með því að fara aftur á þessa síðu."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Sem Samvinna mun þú taka þátt í öllum ákvörðunum okkar. Þessar ákvörðun eru teknar samkvæmt ströngum lýðræðislegum aðferðum, og geta haft mikil áhrif á "
+"Samvinnuna og Samvinuna. Að auki hefur Samvinnan í hyggju að fulltrúa ríkisborgara ESB, óháð ríkisfangi þeirra - en aðeins ríkisborgararnir í ESB. Þetta er sérstaklega "
+"mikilvægt við opinberar kosningar. Við þurfum því að tryggja þrjú atriði: (1) að tiltekin persóna geti skráð sig ekki meira en einu sinni, til að tryggja lýðræðislegu meginregluna \"ein "
+"persóna = eitt atkvæði\"; (2) að allir Samhverfar séu að minnsta kosti lögráða og (3) að aðeins ríkisborgarar Evrópusambandsins séu Samvinna.</p>\n"
+"    <pÞetta er ástæða þess að við munum staðfesta frá þér nokkra þætti auðkennisupplýsinga þinna, með því að bera saman (1) gögnin sem þú munt setja inn á þessu formi við skráningu þinni við (2) "
+"upplýsingarnar sem eru á opinberum auðkennisvottorðum þínum. Þessi staðfesting mun fara fram af hópi af slembivalin stuðningsmönnum samstarfsins, Vottunara umsóknarinnar þinnar, "
+"og mun byggjast á upplýsingum um opinber auðkenni sem þú munt senda þeim beint, með tölvupósti eða á myndfundi, án þess að fara í gegnum þessa netvettvang (fyrir öryggis- og trúnaðarsakna).</p>\n"
+"    <p>Gögnin sem við biðjum um frá þér og sem Vottunara munu athuga hvort þau stemmi við gögnin á opinberum auðkenni þínum eru:\n"
+"    <ul>\n"
+"    <li>þitt nafn(n) og eftirnafn(n);</li>\n"
+"    <li>fæðingardagur þinn;</li>\n"
+"    <li>ríkiréttur þinn.</li>\n"
+"    </ul></p>\n"
+"    <p>Einungis ein persóna hefur réttindi þín, þitt nafn(n), þitt eftirnafn(n) og þinn fæðingardag: þú. Ef þú reynir að skráð sig aftur, þarftu að gefa sömu gögn í vottunaraferlið okkar, "
+"og við munum hafna umsókninni þinni, því þú ert þegar Samvinna, og getur ekki haft fleiri reikninga til að kjósa fleiri en einu sinni. Við munum treysta á að gera þetta vegna þess að "
+"við vitum að aðeins ein persóna hefur þetta samsetningu nafn(n), eftirnafn(n) og fæðingardag. Fæðingardagurinn þinn gerir okkur mögulegt að sannreyna að þú sért lögráða, og þinn ríkisborgararéttur "
+"gerir okkur kleift að tryggja að þú sért í raun ríkisborgari Evrópusambandsins.</p>\n"
+"    <p>Þessir gögn verða eingöngu notaðir til að staðfesta auðkenni þitt, aldur þinn og ríkisborgararétt þinn, og til að stjórna reikningi þínum sem Samvinna. Þeir verða aldrei birtir öðrum notendum "
+"IT-vettvangs ${domain_name}, né verða þeir afhentir eða seldir einhverjum, nema uppfylla lagalegar kröfur af opinberum lögreglumönnum að beiðni dómsins. \"Gögnastjóri\" eins og skilgreint er í <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Almennum gögnastýringu "
+"(GDPR) Evrópusambandsins</a> er CosmoPolitical Cooperative SCE, evrópsk samvinnufélag stofnað að 229 rue Solférino, 59000 Lille, Frakkland og skráð 25. apríl 2023 undir númeri SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Við sendum þér í tölvupósti fjóra einfaldar reikningartölur sem þú átt að framkvæma, merktar A til D, allar eftir sama munstri: (A FYRSTA TÖLU MILLI 1 OG 9) "
+"faldandi með (A ANNARRI TÖLU MILLI 1 OG 9), auk (A ÞRIÐJU TÖLU MILLI 1 OG 9). Til að framkvæma reikninginn þarftu fyrst að margfalda FYRSTA TÖLU MILLI 1 OG 9 "
+"með ANNARRI TÖLU MILLI 1 OG 9. Þegar þú hefur fengið niðurstöðuna úr þessu margföldun, átt að bæta þeirri niðurstöðu við ÞRIÐJU TÖLU MILLI 1 OG 9. Þú átt að skrifa niður "
+"niðurstöðu þessarar síðustu viðbótar í reitinn fyrir niðurstöðuna af reikningnum sem þú ert að framkvæma (á meðal þeirra fjögurra sem við sendum þér, merktar A til D). Þú átt "
+"að endurtaka reikninginn fyrir allar fjórar reikningarnar sem sendar voru þér í tölvupósti.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Sem hluti af skráningarferlinu sem samverkamanni, þarftu að velja aðferð til að sannreyna auðkenni þitt. Þessi sannprófunn á auðkenni þínu er nauðsynleg til að tryggja: (1) "
+"að ákveðin persóna skrái sig ekki nokkrum sinnum með mismunandi tölvupóstföngum (við tökum hér með hið lýðræðislega prinsip: \"einn aðili - einn atkvæði\"); (2) að aðeins borgarar Evrópusambandsins "
+"sem hafa náð Fullorðinsaldri séu Samverkamenn (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >sjá af hverju</a>).</p>\n"
+"    <p>Þú hefur tvær valkosti fyrir þetta sannprófunarferli:</p>\n"
+" <ul>\n"
+"   <li><b>Sendu afrit af auðkennisvottorðum þínum í tölvupósti:</b> Þú getur valið að senda öruggt afrit af auðkennisvottorðum þínum beint í tölvupósti til lítillar hóps af "
+"tilviljanakenndum Samverkamönnum, þínum Vottendum. Þessi aðferð tryggir hraðari og beinni leið til að staðfesta auðkenni þitt.</li>\n"
+"   <li><b>Raða samræmist vídeófundur:</b> Alternatífur, geturðu valið vídeófund þar sem þú getur kynnt auðkennisvottorðin þín live fyrir Vottendur þína. Þessi aðferð veitir persónulegra "
+"samspil og leyfir tafarlausa skýringar ef þörf krefur, með tali ef þú hefur sameiginlegt tungumál, í gegnum spjall og sjálfvirka þýðingu ef ekki.</li>\n"
+" </ul>\n"
+" <p>Í báðum tilfellum ráðleggjum við þér, af öryggisástæðum, að fela, á opinberu auðkennisvottorði þínu, fæðingarstað þinn og auðkennisvottorð númer, áður en þú afritar það eða "
+"skemmir fyrir Vottendum þínum.</p>\n"
+" <p>Það er mikilvægt að þú gerir val þitt fljótt svo skráningarferlið þitt sé glatt og tímabært. Vinsamlegast tryggðu að aðferðin sem þú velur sé þægilegast fyrir þig "
+"og samræmist persónuverndartegundum þínum.</p>\n"
+" <p>Samvinna þín í þessu máli er mjög metin og skiptir sköpum fyrir viðhalda háum stöðlum um traust og pan-Evrópska lýðræði innan Samvinnufélagsins okkar. Takk fyrir skilning þinn "
+"og virkni í þessu mikilvæga skrefi.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Fjöldi núverandi Samverkamanna er of lítill til að velja viðeigandi fjölda Vottenda auðkennis þíns. Vinsamlegast hafðu samband við kerfisstjóra, á eftirfarandi heimilisfang "
+"${administrator}, til að leysa málið."
+
+msgid "email_copy_id_verification_subject"
+msgstr "is - ${domain_name} - Vinsamlegast staðfesta auðkenni mitt sem nýjan hugsanlegan Samverkamann"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Kæru Vottendur,\n"
+" Ég skrifa til ykkar til að ljúka ferlinu um staðfestingu auðkennis míns fyrir umsókn mína um að verða Samverki hjá ${domain_name}. Meðfylgjandi þessu tölvupósti, munuð þið finna hlutafrit af "
+"opinberu auðkennisvottorði mínu.\n"
+" Vinsamlegast athugaðu að tiltekin viðkvæm gögn hafa verið huldir af öryggisástæðum. Hins vegar inniheldur skjalið upplýsingar sem þú þarft til að staðfesta auðkenni mitt samkvæmt "
+"skráningarferli ${domain_name}.\n"
+" Ég bið vinsamlegast um að þið skoðið viðhengið ef mögulegt er innan næstu 3 daga, til að kjósa um samræmi milli:\n"
+"\n"
+" - auðkennisupplýsinganna sem þú fékkst beint í tölvupósti frá IT vettvangi ${domain_name} (og það mun verða minnt á þig á kjörintarface) og \n"
+" - auðkennisupplýsinganna sem þú getur lesið á viðhenginu af hlutafritinu af opinberu auðkennisvottorði mínu.\n"
+"\n"
+" Tengillinn fyrir þig til að kjósa um þetta samræmi er eftirfarandi: ${voting_url}.\n"
+" Ég þakka þér mjög fyrirfram fyrir að styðja ferlið um skráningu mína sem Samverki hjá ${domain_name}. Ef þú hefur frekari spurningar eða þarft frekari "
+"upplýsingar, skaltu ekki hika við að hafa samband við mig beint á þínu eigin tungumáli.\n"
+" Með bestu kveðju,\n"
+" ${signature}\n"
+" Viðhengi: [Nafn skjalasniðs auðkennis]\n"
+" Þessi tölvupóstur hefur verið búinn til með aðstoð auðkennisvottunar eiginleika ${domain_name}. Ef þú ert ekki Vottandinn sem úthlutað var til umsóknar ${signature} og hefur "
+"fengið þennan tölvupóst um villu, vinsamlegast láttu ${domain_name} kerfisstjóra vita, á eftirfarandi heimilisfang: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "is - ${domain_name} - Vinsamlegast staðfesta auðkenni mitt með vídeófundi sem nýjan hugsanlegan Samverkamann"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Kæru Vottendur,\n"
+"    Ég skrifa til ykkar til að ljúka ferlinu um staðfestingu auðkennis míns fyrir umsókn mína um að verða Samverki hjá ${domain_name}. Ég vil leggja til vídeófundi í þessu "
+"tilgangi.\n"
+"    Hér eru nokkrar tímasetningar sem ég legg til fyrir vídeófundi. Vinsamlegast athugaðu að ég bý í Þýskalandi (Vinsamlegast aðlagaðu samkvæmt þínu landi / svæði búsetu. Þetta er "
+"nauðsynlegt fyrir viðkomandi að vita tímasvæði þitt), svo að tíminn á degi þar sem ég bý kann að vera ólíkur tímum þann daginn þar sem þú býrð. Þessi vídeófundur ætti "
+"ekki að taka lengur en 10 mínútur: (vinsamlegast gefðu að minnsta kosti 3 valkosti, ef mögulegt er á mismunandi tímum dagsins og á mismunandi dögum, þar með talið um helgar, allt innan 10 "
+"daga eftir að þú sendir tölvupóstinn)\n"
+"   \n"
+"         - Mánudagur, 04. september 2023, klukkan 17:30 að mínu tíma; (aðlaga samkvæmt þinni aðgengi)\n"
+"         - Þriðjudagur, 05. september 2023, klukkan 20:30 að mínu tíma; (aðlaga samkvæmt þinni aðgengi)\n"
+"         - Laugardagur, 09. september 2023, klukkan 10:00 að mínu tíma. (aðlaga samkvæmt þinni aðgengi)\n"
+"    \n"
+"    Vinsamlegast mundu að við gætum búið í mismunandi tímasvæðum! Vinsamlegast breyttu þessum tímasetningum fyrir þitt eigið tímasvæði.\n"
+"    Víðfundurinn mun fara fram með eftirfarandi tengli:\n"
+"(vinsamlegast settu hér tengilinn sem þú hefur útbúið fyrir þessa vídeófundi. Hér eru okkar tillögur um vettvang sem þú getur notað til að búa til vídeófundi og veita "
+"viðeigandi tengil:\n"
+"   \n"
+"         - Jitsi Meet: https://meet.jit.si/ (ókeypis og opinn hugbúnaður)\n"
+"         - Framatalk: https://framatalk.org/abc/en/ (ókeypis og opinn hugbúnaður)\n"
+"         - Zoom: https://zoom.us/ (eignarhugbúnaður)\n"
+"         - Microsoft Teams: https://www.microsoft.com/en-gb/microsoft-teams/log-in (eignarhugbúnaður, vettvangur á bakvið greiðslu)\n"
+"         - Google Meet: https://meet.google.com/?pli=1 (eignarhugbúnaður, kostnaðarlaust aðgengi að vettvanginum)\n"
+"    )\n"
+"    Vinsamlegast veldu tímasetur sem hentar þér, og sendu mér tölvupóst þar sem þú hefur valið.\n"
+"    Á meðan á vídeófundi stendur, getur það gerst að við deilum ekki einu máli tungumáli. Ef þetta er raunin, legg ég til að við hafi hver öðrum kurteis og stuðningsfullt viðhorf. "
+"Ég legg til að við notum spjallið til að tjá okkur á okkar eigin tungumálum, og notum vélræna þýðingu til að skilja hvað viðmælandinn okkar er að skrifa.\n"
+"    Þegar þú hefur haldið fundi með vídeófundum, bið ég vinsamlegast að þú kísir að staðfesta eða hafna samræmi milli:\n"
+"\n"
+"     - auðkennisupplýsinganna sem þú fékkst beint í tölvupósti frá IT vettvangi ${domain_name} (og það mun verða minnt á þig á kjörintarface) og \n"
+"    - auðkennisupplýsinganna sem þú hefur séð í vídeófundi.\n"
+"\n"
+" Tengillinn fyrir þig til að kjósa um þetta samræmi er eftirfarandi: ${voting_url}.\n"
+"  Ég þakka þér mjög fyrirfram fyrir að styðja ferlið um skráningu mína sem Samverki hjá ${domain_name}. Ef þú hefur frekari spurningar eða þarft frekari "
+"upplýsingar, skaltu ekki hika við að hafa samband við mig beint.\n"
+" Með bestu kveðju,\n"
+" ${signature}\n"
+" Þessi tölvupóstur hefur verið búinn til með aðstoð auðkennisvottunar eiginleika ${domain_name}. Ef þú ert ekki Vottandinn sem úthlutað var til umsóknar ${signature} og hefur "
+"fengið þennan tölvupóst um villu, vinsamlegast láttu ${domain_name} kerfisstjóra vita, á eftirfarandi heimilisfang: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Ef notandinn er til, mun hann/hún fá tölvupóst."
+
+msgid "reset_password_email_subject"
+msgstr "Nýtaðu lykilorð þitt"
+
+msgid "forget_email_send_error"
+msgstr "Villa kom upp við að senda endurheimtar tölvupóst, vinsamlegast hafðu samband við kerfisstjóra, á ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "búnar til"
+
+msgid "member_state_created_value"
+msgstr "Aðili hefur verið búinn til"
+
+msgid "member_state_draft_name"
+msgstr "drög"
+
+msgid "member_state_draft_value"
+msgstr "Gögn aðila eru í gagnaframkvæmd"
+
+msgid "member_state_registred_name"
+msgstr "skráð"
+
+msgid "member_state_registred_value"
+msgstr "Gögn aðila hafa verið vistaðar"
+
+msgid "member_data_modification_request_name"
+msgstr "í breytingu"
+
+msgid "member_data_modification_request_value"
+msgstr "Fyrirspurn um gögnabreytingu hefur verið lögð fram"
+
+msgid "member_datas_modified_name"
+msgstr "breytt"
+
+msgid "member_datas_modified_value"
+msgstr "Gögn aðila hafa verið breytt"
+
+msgid "email_member_state_changed"
+msgstr "Breyting í aðildarstillingum þínum"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Vinsamlegast gefðu upp gilt netfang"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Sérstakur notandi hefur ekki rétt til að endurstilla eigin lykilorð"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Ef notandinn er til staðar, hefur netfang verið sent á hans/hennar netfang með hlekk til að endurstilla lykilorðið"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Tvær útgáfur af lykilorðinu passa ekki saman. Vinsamlegast tryggðu að þær passi saman og sendu aftur"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Vinsamlegast gefðu upp nýtt lykilorð"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Þú hefur árangursríkt breytt lykilorðinu þínu"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Villa kom upp í ferlinu við endurstillingu lykilorðsins þíns"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Villa kom upp í ferlinu við endurstillingu lykilorðsins þíns. Lykilorðið þitt var ekki breytt"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Meðlimurinn fannst ekki á listanum yfir núverandi meðlimi"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Hlekkurinn sem þú notaðir til að endurstilla lykilorðið þitt er úrelt. Vinsamlegast notaðu þann nýjasta sem þú fékkst"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "Netfangi sem inniheldur stærðfræðilegu áskorunina sem staðfestir að frambjóðandinn sé mannlegur (og ekki vél) var ekki sent."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Villa kom upp við skráningu frambjóðanda"
+
+msgid "modification_to_profile_button_title"
+msgstr "Breyta prófílnum þínum"
+
+msgid "modification_to_profile_button_label"
+msgstr "Breyta prófílnum"
+
+msgid "modification_to_profile_button_description"
+msgstr "Smelltu hér til að fá öruggan hlekk í gegnum netfang til að breyta prófílnum þínum."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Til að tryggja öryggi gagna þinna verður einstakur hlekkur til að breyta prófílnum þínum sendur til þín í gegnum netfang. Þessi ferli tryggir að aðeins sá sem hefur aðgang að netfanginu þínu "
+"getur gert breytingar á prófílnum þínum."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Hlekkur til að breyta prófílnum þínum á IT-infrastrúktúr ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Vinsamlegast gefðu hér upp öll þín nafn(s), eins og skrifað er í opinberum auðkenningarskjölum þínum, í opinberu transkription í latneska stafsetningu (ef frum tungumálið notar stafróf "
+"sem er öðruvísi en latneskt)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Vinsamlegast gefðu hér upp öll þín fjölskyldunafn(s) við fæðingu (þ.e. ekki fjölskyldunafn þitt sem giftur/e), eins og skrifað er í opinberum auðkenningarskjölum þínum, í opinberu "
+"transkription í latneska stafsetningu (ef frum tungumálið notar stafróf sem er öðruvísi en latneskt)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Texti sem lýsir þér (prófíltexti þinn)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Vinsamlegast skrifaðu hér texta sem lýsir þér, á þínu valda tungumáli, svo að allir aðrir meðlimir samfélagsins geti kynnst þér aðeins betur. Við mælum með að þú einbeitir þér að:"
+"(1) Hvar þú kemur frá, (2) hvað þú gerir, (3) hvað þú vilt gera sem meðlimur í samfélaginu, og (4) auðlindir (reynsla, þekking, tími) sem þú hefur til taks.\n"
+"Við teljum að þessar upplýsingar séu gagnlegar vegna þess að að kynna sig fyrir öðrum með eigin orðum gefur mannlegan andlit á rafræna auðkenni þitt á okkar IT-infrastrúktúr. Með "
+"þessum texta kynnist hver meðlimur samfélagsins þér aðeins betur, og það gerir samskipti miklu auðveldari!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Vinsamlegast gefðu upp fæðingardaginn þinn í eftirfarandi sniði: DD/MM/ÁÁÁÁ, þ.e. (1) dagurinn í mánuðinum, á 2 númerum; (2) númer mánaðarins, á 2 númerum; (3) árið, á 4 númerum. "
+"Einungis þeir sem hafa náð 18 ára aldri geta verið samverkamenn. Ef þú hefur ekki enn náð 18 ára aldri, bjóðum við þér að skrá þig sem venjulegan meðlim í samfélaginu - og að "
+"uppfæra í samverkamannastað svo fljótt sem þú nærð lögræði."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Vinsamlegast gefðu upp eitt aðildarríki Evrópusambandsins sem þú ert ríkisborgari í. Einungis ríkisborgarar Evrópusambandsins geta verið samverkamenn"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Vinsamlegast veldu aðildarríki Evrópusambandsins"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Þetta er einstakt númer sem auðkennir þig í öllum ferlum sem eiga sér stað í samfélaginu"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Vinsamlegast sláðu hér inn þann pseudónym sem mun auðkenna þig á meðan á starfsemi þinni á IT-vefnum okkar stendur. Við mælum STRAX með að þú veljir pseudónym sem gerir "
+"það ómögulegt (eða afar erfitt) að rekja aftur til raunverulegrar sjálfsmyndar þinnar. Þannig verndarðu trúnað þinna skoðana (þ.e. persónuupplýsingar sem er tilgangur sérstakrar "
+"verndar samkvæmt almennri persónuverndarlöggjöf - GDPR) gegn öllum myndum ytri þrýstings í raunveruleikanum (t.d. af þínum vinnuveitanda eða viðskiptavinum). Vertu mjög varkár! Þegar þú "
+"velur það, munt þú ALDREI geta breytt þessu pseudónymi eftir á. Veldu það með umhyggju! \n"
+"Þitt pseudónym verður að vera á milli ${MIN_PSEUDONYM_LENGTH} og ${MAX_PSEUDONYM_LENGTH} stafa langt og getur aðeins innihaldið stafi úr latneska stafrófinu (A-Z, a-z), tölur (0-9), "
+"undirstrik (_), punkta (.), bandstrika (-) og bil ( ). Það má ekki innihalda stafi með áferðum, umlaut og öðrum diakritískum merki sem eru sértæk fyrir sumar tungumál."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Skylt er að gefa upp pseudóným"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Vinsamlegast gefðu upp lykilorðið þitt. Lykilorðið þitt verður að vera á milli ${password_minimum_length} og ${password_maximum_length} stafa langt, innihalda að minnsta kosti einn tölustaf, að "
+"minnsta kosti einn lítinn staf, að minnsta kosti einn stóran staf og að minnsta kosti einn af eftirfarandi gerðum: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Vinsamlegast staðfestu lykilorðið þitt"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Staðfesting lykilorðs er skylt"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Vinsamlegast gefðu upp netfangið sem IT-infrastrúktúr ${domain_name} mun nota til að hafa samskipti við þig.\n"
+"Við mælum með að þú veljir netfang sem þú athugar oft.\n"
+"Við þurfum þessar upplýsingar vegna þess að við þurfum að hafa samskipti við þig, til að halda þig upplýstum um framvindu í samvinnunni, til að bjóða þér tækifæri til að grípa til aðgerða eða "
+"taka þátt í ákvörðunum. Netfang er algengasta samskiptamiðillinn í Evrópu, það er alþjóðlegt og byggist á opnum og frjálsum stöðlum, andstætt einkareknum skeytakerfum stafrænu risanna (sjá einnig "
+"sem 'GAFAM').\n"
+"Þetta netfang verður notað einungis til að tryggja samskipti milli IT-infrastrúktúrs ${domain_name} og þín. Það mun aldrei vera sýnt öðrum notendum IT-vefsins ${domain_name}, né verður það "
+"flutt eða selt einstaklingum, nema til að uppfylla lagalegar kröfur frá opinberum réttargæslustofnunum samkvæmt beiðni dómara. \"Gagna stjórnunaraðili\" eins og hann er skilgreindur með almennri "
+"persónuverndarlöggjöf (GDPR) Evrópusambandsins er CosmoPolitical Cooperative SCE, evrópsk samvinnufélag stofnað að 229 rue Solférino, 59000 Lille, Frakklandi og skráð 25. apríl 2023 undir "
+"númerinu SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Vinsamlegast gefðu upp tungumálið sem þú vilt helst að IT-infrastrúktúr ${domain_name} hafi samskipti við þig. \n"
+"Við mælum með að þú veljir tungumálið sem þú þekkir best, úr opinberum tungumálum Evrópusambandsins eða esperanto. Ef það er í boði meðal þeirra sem við höfum þróað notendaviðmót fyrir, munum "
+"við nota það til að hafa samskipti við þig. \n"
+"Við þurfum þessar upplýsingar vegna þess að, af sanngirnisástæðum og vegna virðingar fyrir lýðræðislegum prinsippum, viljum við hafa samskipti við þig á tungumáli sem þú skilur eins og "
+"best."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Vinsamlegast gefið upp tungumálið sem þú myndir samþykkja, sem annað val, að IT-infrastrúktúrinn hjá ${domain_name} eigi samskipti við þig. \n"
+" Við mælum með að þú veljir annað opinbert tungumál Evrópusambandsins eða esperanto, sem þú skilur nokkurn veginn vel. Ef það er í boði meðal þeirra sem við höfum "
+"þróað notendaviðmót fyrir, og ef valið tungumál þitt er óaðgengilegt, munum við nota það til að eiga samskipti við þig. \n"
+" Við þurfum þessar upplýsingar því, að þrátt fyrir okkar viðleitni, getur það gerst að valið tungumál þitt verði óaðgengilegt á notendaviðmóti hugbúnaðar okkar. Þetta er ástæðan "
+"fyrir því að við erum að spyrja þig hvort þú getir notað annað tungumál."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Tungumálið sem þú samþykkir sem þriðja val til að við getum átt samskipti við þig"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Vinsamlegast gefið upp tungumálið sem þú myndir samþykkja, sem þriðja val, að IT-infrastrúktúrinn hjá ${domain_name} eigi samskipti við þig. \n"
+" Við mælum með að þú veljir annað opinbert tungumál Evrópusambandsins eða esperanto, sem þú getur ennþá skilið. Ef það er í boði meðal þeirra sem við höfum þróað "
+"notendaviðmót fyrir, og ef hvorki valda tungumál þín né annað tungumál er ekki aðgengilegt, munum við nota það til að eiga samskipti við þig. \n"
+" Við þurfum þessar upplýsingar því, þrátt fyrir okkar viðleitni, getur það gerst að valið tungumál þitt og annað tungumál þitt verði óaðgengilegt á notendaviðmóti hugbúnaðar okkar. "
+"Þetta er ástæðan fyrir því að við erum að spyrja þig hvort þú getir notað þriðja tungumál. Við erum meðvituð um að það að þú eigir samskipti við okkur í gegnum það er ófullnægjandi aðstæða fyrir þig - eins og fyrir okkur. Við "
+"fögnum því."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Samvinnuhegðunareinkunn þín"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Sem samvinnumaður, er Samvinnuhegðunareinkunn þín afurð einkunna sem aðrir Virk þátttakendur í vinnuhópum sem þú hefur tekið þátt í til að skilgreina "
+"og samþykkja aðgerðar-tillögur hafa veitt þér. Hver Virkur þátttakandi getur veitt einkunn sem er +1, 0 eða -1, miðað við hversu samvinnuþýð hegðun þín var meðan á virkri þátttöku í "
+"þeim vinnuhópi stóð. Þessi einkunn er síðan sjálfkrafa 'gleymd' og minnkar með tímanum: hún er helminguð eftir ${forgetting_time_constant} daga. Upphafsgildið fyrir Samvinnuhegðunareinkunnina "
+"þína er núll."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Dagsetning þar sem Samvinnuhegðunareinkunn þín var síðast uppfærð"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Þetta er síðasta dagsetning þar sem annar samstarfsmaður úthlutaði þér einkunn eftir að þú varst með virkri þátttöku í vinnuhóp sem var að skilgreina og samþykkja aðgerðar "
+"tillögu. Upphafsgildið fyrir þá dagsetningu er það sem skráð var við þig sem samstarfsmaður."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Fjöldi hlutabréfa í Samvinnunni sem þú átt"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Þetta er heildarfjöldi hlutabréfa í Samvinnunni sem þú átt, eftir að hafa keypt þau gegnum vefgátt okkar. Við skráningu þinni er þessi tala jöfn núll. Við hvetjum þig til að "
+"fara eins fljótt og auðið er á þessa URL: ${url_purchase_shares} til að kaupa þitt fyrsta hlutabréf(e). Þú munir njóta fullra ákvörðunarréttar sem samstarfsmaður aðeins eftir að hafa "
+"keypt að minnsta kosti eitt hlutabréf (og greitt árlegt framlag þitt). Þú ert velkomin/n að kaupa fleiri en eitt hlutabréf, við skráningu, en einnig hvenær sem er eftir á. Það styrkir "
+"Samvinnuna okkar, og við erum þakklát fyrir þetta!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Dagsetning þar sem árlegt framlag þitt rennur út"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Dagsetning þar sem árlegt framlag þitt rennur út, og áður en þú þarft að borga aftur til að halda fullum ákvörðunarrétt þínum sem samstarfsmaður. Við skráningu þinni er þessi "
+"dagsetning sett í fortíðina, sem þýðir að þú ættir að borga það núna. Við hvetjum þig til að fara eins fljótt og auðið er á þessa URL: ${url_pay_yearly_contrib} til að borga þitt fyrsta árlega "
+"framlag, og taka þannig þátt í rekstri Samvinnunnar okkar. Þú munir njóta fullra ákvörðunarréttar sem samstarfsmaður aðeins eftir að hafa greitt áralegt framlag þitt (og keypt að minnsta kosti eitt hlutabréf)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Alþjóðlegt bankareikningsnúmer (IBAN) fyrir bankareikninginn þinn"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Ef og þegar þú ákveður að yfirgefa Samvinnuna (sem við myndum öll iðka að við séum) þurfum við IBAN-ið þitt til að geta flutt til þín andvirði til baka af hlutabréfum þínum í "
+"Samvinnunni. Fyrir öryggisástæður mælum við með að þú gefir upp þessar upplýsingar aðeins ef og þegar þú hefur í hyggju að yfirgefa Samvinnuna."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Dagsetning þar sem öll gögn þín verða eytt úr IT-infrastrúktúrnum okkar"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Ef og þegar þú yfirgefur Samvinnuna, verða auðkennisgögn þín varðveitt í ${Quarantine} daga áður en þau verða algerlega og óafturkallanlega eytt úr skráningum okkar. Þetta er til "
+"að tryggja að samstarfsmaður sem yfirgefur Samvinnuna vegna þess að Samvinnuhegðunareinkunn hans/hennar er of slæm geti ekki skráð sig aftur strax undir nýju pseudonym og Samvinnuhegðunareinkunn. Við skráningu þinni er þessi "
+"dagsetning sett í mjög fjarlæga framtíð."
+
+msgid "avatar_label"
+msgstr "Mynd til að tákna þig (avatar þinn)"
+
+msgid "avatar_description"
+msgstr ""
+"Vinsamlegast gefið upp mynd sem táknar þig sem meðlim í samfélaginu. Til að vernda þig frá hvers konar hefndum frá vinnuveitanda eða viðskiptavinum, mælum við með að þessi mynd "
+"vísar ekki hægt til auðkennis þíns í raunveruleikanum. Hún ætti því að vera almennt ekki ljósmynd af þér (mundu að andlitsgreiningarforrit eru víða notuð af "
+"sóknarvélar). Myndin ætti að vera einungis í JPEG sniði (viðauki .JPG eða .JPEG), og ekki stærri en 5 MB. \n"
+"Við teljum að þessar upplýsingar séu gagnlegar vegna þess að mynd auðveldar öðrum meðlimum samfélagsins að þekkja þig. Stundum segir mynd meira en löng ræða. Með þessari mynd, ertu að tjá mikið um þig, á alheims tungumáli. Nýttu þér það!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Netfangið (URL) sem þú notaðir til að sækja umsóknarferlið þar sem þú hélst því uppi passar ekki við það sem við skráðum fyrir þig. (Umsóknar auðkennisnúmerið í "
+"ferðinni og í netfanginu passar ekki)\n"
+"Vinsamlegast notar aðeins URL-ið úr síðasta tölvupósti sem þú fékkst."
+
+msgid "check_new_email"
+msgstr "Þú hefur beðið um að breyta netfanginu þínu. Í framtíðinni viltu nota: ${new_email}. Þess vegna munu þú fá tölvupóst sem inniheldur hlekk til að staðfesta þetta nýja netfang."
+
+msgid "check_new_email_subject"
+msgstr "Staðfesting á nýju netfangi þínu"
+
+msgid "check_new_email_send_error"
+msgstr "Sending staðfestingarpóstsins fyrir nýja netfangið þitt hefur misfarist"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Staðfestingarpósturinn fyrir nýja netfangið þitt hefur verið sendur"
+
+msgid "modify_member"
+msgstr "Ráðið eða breyttu meðlim"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Tengingarvilla"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Netfang er nú þegar til"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Netfang uppfært"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Villa við að uppfæra netfang"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Villa við að stilla reit"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Villa við að uppfæra meðlim"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Ógild OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Ógild beiðni"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP villa"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Gögn meðlims uppfærð"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Uppfærsla á gögnum meðlims hefur misfarist"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Uppfærsla á gögnum meðlims er árangursrík"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Gagn vantar"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Nýja netfangið vantar"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Engin heimild"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Ekki kjósandi"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Að uppfæra lykilorð hefur ekki tekist"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Uppfæring lykilorðs tókst"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Skráning hefur ekki tekist"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Skráning er árangursrík"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Óþekktur aðgangs meðlimur"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Óþekktur meðlimur"
+
+msgid "modify_member_title"
+msgstr "Breita prófíli meðlims"
+
+msgid "select_member_oid_label"
+msgstr "Vinsamlegast veldu meðlim til að breyta prófílnum hans/hennar:"
+
+msgid "select_member_placeholder"
+msgstr "Höfundarnafn meðlims"
+
+msgid "modify_profile"
+msgstr "Þú getur breytt prófílnum þínum með því að smella hér"
+
+msgid "profile"
+msgstr "prófíll"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"E-mailaðgangur þinn hefur verið uppfærður með dagskilt. Þú munt nú nota þessa nýju aðgang fyrir allar framtíðarsamskipti við ${domain_name}. Ef þú baðst ekki um þessa breytingu eða ef þú hefur "
+"einhverjar spurningar, vinsamlegast ekki hika við að hafa samband við stuðninginn okkar strax á ${admin_email}. Þakka þér fyrir að vera hluti af ${domain_name} samfélaginu!"

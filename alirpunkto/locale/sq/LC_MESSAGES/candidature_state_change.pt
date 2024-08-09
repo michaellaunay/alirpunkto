@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Ndryshimi në Statusin e Aplikimit Tuaj</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Evolucioni i Aplikimit Tuaj në <span tal:replace="domain_name">Emri i Domain-it</span></h1>
+        <p tal:omit-tag="textual">Përshëndetje<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Emri i Aplikantit</span>,
+        </p>
+        <p tal:omit-tag="textual">Aplikimi juaj në platformën
+            <span tal:replace="site_url">URL</span> si një 
+            <span tal:replace="python:candidature.type">Rol</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.APPROVED">është pranuar</span>
+            <span tal:condition="python:candidature.candidature_state == CandidatureStates.REFUSED">është refuzuar</span>
+            <span tal:condition="python:candidature.candidature_state not in [CandidatureStates.APPROVED, CandidatureStates.REFUSED]">është në proces dhe ka ndryshuar statusin e saj</span> . 
+        </p>
+        <p tal:omit-tag="textual">Këtu janë detajet e evolucioneve të saj:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">ID e Aplikimit: <span tal:replace="python:candidature.oid">ID e Aplikimit</span></li>
+            <li tal:omit-tag="textual">Data e Kalimit: <span tal:replace="python:candidature.modifications[-1].datetime">Kalimi i fundit</span></li>
+            <li tal:omit-tag="textual">Statusi i Ri: <span tal:replace="python:candidature.candidature_state">Statusi i ri i aplikimit</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+            Nëse keni nevojë, mund të ndërprisni tani procesin tuaj të regjistrimit. Do të jeni në gjendje ta vazhdoni më vonë duke klikuar në lidhjen më poshtë.
+            </li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Faleminderit për pjesëmarrjen tuaj.</p>
+        <p tal:omit-tag="textual">Të fala të mira,</p>
+        <p tal:omit-tag="textual">Ekipi i <span tal:replace="domain_name">Emri i Domain-it</span></p>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Veri Durumunuzdaki Değişiklik</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual"><span tal:replace="domain_name">Alan Adı</span> IT altyapısındaki Kişisel Verilerinizin Değişikliği</h1>
+        <p tal:omit-tag="textual">Merhaba<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Üyenin Adı</span>,
+        </p>
+        <p tal:omit-tag="textual">İşte değişikliklerin detayları:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Üye ID: <span tal:replace="python:member.oid">Üye ID</span></li>
+            <li tal:omit-tag="textual">Geçiş Tarihi: <span tal:replace="python:member.modifications[-1].datetime">Son geçiş</span></li>
+            <li tal:omit-tag="textual">Yeni Durum: <span tal:replace="python:member.member_state">Yeni üye durumu</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Katıldığınız için teşekkür ederiz.</p>
+        <p tal:omit-tag="textual">Saygılarımla,</p>
+        <p tal:omit-tag="textual"><span tal:replace="domain_name">Alan Adı</span> ekibi</p>
+    </body>
+</html>

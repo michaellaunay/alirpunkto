@@ -1,0 +1,1095 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Merħba"
+
+msgid "username_label"
+msgstr "Isem tal-utent"
+
+msgid "password_label"
+msgstr "Password"
+
+msgid "login_label"
+msgstr "Idħol"
+
+msgid "welcome_msg"
+msgstr "Merħba fuq ${site_name}, is-servizz ċentrali għall-applikazzjonijiet użati fl-infrastruttura IT ta' ${domain_name}."
+
+msgid "all_applications_msg"
+msgstr "L-applikazzjonijiet kollha li għandek bżonn biex tieħu sehem fl-attivitajiet ta' ${domain_name} f'post wieħed."
+
+msgid "register_or_login_msg"
+msgstr "Irreġistra jew idħol issa biex tibda."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, is-servizz ċentrali għall-applikazzjonijiet użati fl-infrastruttura IT ta' ${domain_name}"
+
+msgid "logged_in_msg"
+msgstr "Int currently logged in bħala ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Tista' toħroġ billi tikklika hawnhekk"
+
+msgid "logout_label"
+msgstr "Oħroġ"
+
+msgid "choose_application_msg"
+msgstr "Agħżel l-applikazzjoni li tixtieq tingħaqad magħha:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Isem tal-utent jew password invalidi. Għ please itlob mill-ġdid"
+
+msgid "register_link"
+msgstr "Oħloq kont"
+
+msgid "password_confirm_label"
+msgstr "Ikteb il-password mill-ġdid"
+
+msgid "password_confirm_title"
+msgstr "Ikteb il-password tiegħek mill-ġdid"
+
+msgid "forgot_password_label"
+msgstr "Tħossok li tlift il-password?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Isem/sur hekk kif jinsabu fid-dokumenti tal-identità uffiċjali tiegħek"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Kull isem/sur hekk kif jinsabu fid-dokumenti tal-identità uffiċjali tiegħek"
+
+msgid "birthdate_label"
+msgstr "Data tat-twelid"
+
+msgid "nationality_label"
+msgstr "Nazzjonalità (bejn dawk tal-Unjoni Ewropea)"
+
+msgid "cooperator_number_label"
+msgstr "Numru tal-kooperatur"
+
+msgid "pseudonym_label"
+msgstr "Psudonimu"
+
+msgid "email_label"
+msgstr "Indirizz email"
+
+msgid "first_interaction_language_label"
+msgstr "Il-lingwa li tippreferi biex nagħmlu l-interazzjoni miegħek"
+
+msgid "second_interaction_language_label"
+msgstr "Il-lingwa li taċċetta bħala għażla sekondarja biex nagħmlu l-interazzjoni miegħek"
+
+msgid "register_label"
+msgstr "Irreġistra"
+
+msgid "forgot_password_head"
+msgstr "Tħossok li tlift il-password"
+
+msgid "forgot_your_password_title"
+msgstr "Tħossok li tlift il-password tiegħek?"
+
+msgid "enter_your_email_address_label"
+msgstr "Jekk jogħġbok ikteb l-indirizz email tiegħek:"
+
+msgid "submit_button"
+msgstr "Ibgħat"
+
+msgid "candidature_states_draft_value"
+msgstr "Bozza: L-applikazzjoni hija fil-mod ta' bozza."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Verifika tal-email: Il-istat fejn l-indirizz email tal-Applikant qed jistenna verifika."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "KonfermatBniedem: L-indirizz email tal-Applikant hu verifikat, u provi tal-umanità huma pprovduti (aħna għamilna verifika li m'intix robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Data Unika: L-Applikant introduċa d-dettalji ta' identifikazzjoni personali tiegħu/tagħha, u aħna stabbilixxejna li l-ebda kooperatur attwali jew riċenti jew Membru Ordinarju tal-Komunità ma għandu l-istess "
+"data."
+
+msgid "candidature_states_pending_value"
+msgstr "Mistenna: L-applikazzjoni ġiet sottomessa. Id-dettalji ta' identifikazzjoni personali ġew trażmessi lill-Verifikaturi, iżda għadhom ma tawhxhomx il-feedback tagħhom."
+
+msgid "candidature_states_approved_value"
+msgstr "Aċċettat: L-applikazzjoni ġiet aċċettata."
+
+msgid "candidature_states_refused_value"
+msgstr "Miċħud: L-applikazzjoni ġiet miċħuda."
+
+msgid "candidature_states_draft"
+msgstr "bozza"
+
+msgid "candidature_states_email_validation"
+msgstr "verifika tal-email"
+
+msgid "candidature_states_confirmed_human"
+msgstr "konfermat_bniedem"
+
+msgid "candidature_states_unique_data"
+msgstr "data_unika"
+
+msgid "candidature_states_pending"
+msgstr "mistenna"
+
+msgid "candidature_states_approved"
+msgstr "aċċettat"
+
+msgid "candidature_states_refused"
+msgstr "miċħud"
+
+msgid "user_types_ordinary_value"
+msgstr "Ordinarju: Applikazzjoni biex issir Membru Ordinarju tal-Komunità = bl-proċess ta' reġistrazzjoni semplifikat, mingħajr dmir finanzjarju, iżda mingħajr drittijiet ta' deċiżjoni."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Kooperatur: Applikazzjoni biex issir membru sħiħ tal-Kooperativa, Kooperatur = bl-proċess ta' reġistrazzjoni komplut li jiżgura l-prinċipju 'persuna waħda = vot wieħed' u li l-"
+"Applikant huwa ċittadin tal-Unjoni Ewropea, dmir li jixtri mill-inqas parti waħda u li jagħmel kontribuzzjoni annwali, u drittijiet ta' deċiżjoni sħaħ."
+
+msgid "user_types_ordinary"
+msgstr "Membru Ordinarju tal-Komunità"
+
+msgid "user_types_cooperator"
+msgstr "Kooperatur = membru sħiħ tal-Kooperativa"
+
+msgid "vote_types_yes_value"
+msgstr "Iva: Il-vot huwa pożittiv."
+
+msgid "vote_types_no_value"
+msgstr "Le: Il-vot huwa negattiv."
+
+msgid "vote_types_abstain_value"
+msgstr "Astjenja: Il-vot huwa neutrali."
+
+msgid "vote_types_yes"
+msgstr "iva"
+
+msgid "vote_types_no"
+msgstr "le"
+
+msgid "vote_types_abstain"
+msgstr "astjenja"
+
+msgid "zero"
+msgstr "zero"
+
+msgid "one"
+msgstr "wieħed"
+
+msgid "two"
+msgstr "tnejn"
+
+msgid "three"
+msgstr "tlieta"
+
+msgid "four"
+msgstr "erba'"
+
+msgid "five"
+msgstr "ħames"
+
+msgid "six"
+msgstr "sitt"
+
+msgid "seven"
+msgstr "seba'"
+
+msgid "eight"
+msgstr "tmien"
+
+msgid "nine"
+msgstr "nove"
+
+msgid "times"
+msgstr "multiplikat minn"
+
+msgid "plus"
+msgstr "u"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Qegħdin niċċekkjaw li int bniedem. Ikteb ir-riżultati tal-operazzjonijiet matematiċi sempliċi u daħħal dawn ir-riżultati fil-portale"
+
+msgid "email_candidature_state_changed"
+msgstr "Bidla fil-istatus tal-applikazzjoni tiegħek fil-portale"
+
+msgid "invalid_challenge"
+msgstr "Iva t-tweġiba tiegħek mhix korretta. Jekk jogħġbok daħħal waħda ġdida."
+
+msgid "invalid_email"
+msgstr "Hemm problema mal-indirizz email tiegħek, jekk jogħġbok ivverifikaħ."
+
+msgid "invalid_choice"
+msgstr "Il-għażla tiegħek mhix valida, jekk jogħġbok daħħalha mill-ġdid."
+
+msgid "challenge_instruction_text"
+msgstr "Jekk jogħġbok ikteb ir-riżultati tal-erba' operazzjonijiet matematiċi sempliċi li ġejjin u iffillja l-kampijiet korrespondenti biex tikkonferma l-indirizz email tiegħek."
+
+msgid "enter_result_label_A"
+msgstr "Jekk jogħġbok daħħal ir-riżultat għall-operazzjoni matematikali A:"
+
+msgid "result_label_title_A"
+msgstr "Jekk jogħġbok daħħal il-kodifika li riċevejt permezz ta' email jew ir-riżultat tal-operazzjoni matematikali A."
+
+msgid "result_input_title_A"
+msgstr "Biex inkunu nista' nikkonfermaw l-indirizz email tiegħek u li int bniedem (mhux robot), jekk jogħġbok daħħal ir-riżultat tal-operazzjoni A li riċevejt permezz ta' email."
+
+msgid "enter_result_label_B"
+msgstr "Jekk jogħġbok daħħal ir-riżultat għall-operazzjoni matematikali B:"
+
+msgid "result_label_title_B"
+msgstr "Jekk jogħġbok daħħal il-kodifika li riċevejt permezz ta' email jew ir-riżultat tal-operazzjoni matematikali B."
+
+msgid "result_input_title_B"
+msgstr "Biex inkunu nista' nikkonfermaw l-indirizz email tiegħek u li int bniedem (mhux robot), jekk jogħġbok daħħal ir-riżultat tal-operazzjoni B li riċevejt permezz ta' email."
+
+msgid "enter_result_label_C"
+msgstr "Jekk jogħġbok daħħal ir-riżultat għall-operazzjoni matematikali C:"
+
+msgid "result_label_title_C"
+msgstr "Jekk jogħġbok daħħal il-kodifika li riċevejt permezz ta' email jew ir-riżultat tal-operazzjoni matematikali C."
+
+msgid "result_input_title_C"
+msgstr "Biex inkunu nista' nikkonfermaw l-indirizz email tiegħek u li int bniedem (mhux robot), jekk jogħġbok daħħal ir-riżultat tal-operazzjoni C li riċevejt permezz ta' email."
+
+msgid "enter_result_label_D"
+msgstr "Jekk jogħġbok daħħal ir-riżultat għall-operazzjoni matematikali D:"
+
+msgid "result_label_title_D"
+msgstr "Jekk jogħġbok daħħal il-kodifika li riċevejt permezz ta' email jew ir-riżultat tal-operazzjoni matematikali D."
+
+msgid "result_input_title_D"
+msgstr "Biex inkunu nista' nikkonfermaw l-indirizz email tiegħek u li int bniedem (mhux robot), jekk jogħġbok daħħal ir-riżultat tal-operazzjoni D li riċevejt permezz ta' email."
+
+msgid "verify_button"
+msgstr "Ibgħat"
+
+msgid "submit_email_validation_title"
+msgstr "Ikklikkja biex tikkonferma l-kodiċi ddettaljat."
+
+msgid "passwords_dont_match"
+msgstr "Il-passwords ma jaqblux."
+
+msgid "password_too_short"
+msgstr "Il-password hija wisq qasira."
+
+msgid "password_minimum_length"
+msgstr "Il-password trid tkun mill-inqas ${password_minimum_length} karattri twal."
+
+msgid "password_too_long"
+msgstr "Il-password hija wisq twila."
+
+msgid "password_maximum_length"
+msgstr "Il-password ma għandhiex taqbeż ${password_maximum_length} karattri."
+
+msgid "password_must_contain_digit"
+msgstr "Il-password trid tinkludi mill-inqas wieħed minn dawk."
+
+msgid "password_must_contain_uppercase"
+msgstr "Il-password trid tinkludi mill-inqas ittra b'ittra kbira."
+
+msgid "password_must_contain_lowercase"
+msgstr "Il-password trid tinkludi mill-inqas ittra b'ittra iżgħar."
+
+msgid "password_must_contain_special_char"
+msgstr "Il-password trid tinkludi mill-inqas wieħed mill-karattri li ġejjin: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Jekk jogħġbok daħħal il-password tiegħek hawn."
+
+msgid "password_confirm_title_label"
+msgstr "Jekk jogħġbok ikteb il-password tiegħek mill-ġdid hawn."
+
+msgid "password_confirm"
+msgstr "Ikteb il-password tiegħek mill-ġdid."
+
+msgid "type_of_registration"
+msgstr "Tip ta' Reġistrazzjoni"
+
+msgid "type_registration_label"
+msgstr "Agħżel it-tip ta' reġistrazzjoni li jikkunsidra tiegħek."
+
+msgid "type_registration_choice"
+msgstr "Kull tip ta' reġistrazzjoni jiġi ma' sett speċifiku ta' drittijiet, benefiċċji u obbligazzjonijiet."
+
+msgid "approved_heading"
+msgstr "Prosit għar-Reġistrazzjoni Tiegħek!"
+
+msgid "approved_description"
+msgstr "L-applikazzjoni tiegħek ġiet approvata. Issa tista' tidħol bil-pseudonimu u l-password li pprovdejthom matul il-proċess tal-applikazzjoni."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Il-pseudonimu mhuwiex validu. Għandu jkun bejn ${MIN_PSEUDONYM_LENGTH} u ${MAX_PSEUDONYM_LENGTH} karattri u jista' jikkonsisti biss minn littri (A-Z, a-z), numri (0-9), underscores (_), punti "
+"(.), traċċi (-) u spazji ( ). Ma jistax jinkludi littri bl-akkenti, umlauts, u sinjali diakritiċi oħra speċifiċi għal xi lingwi."
+
+msgid "invalid_date"
+msgstr "Format ta' data mhux validu."
+
+msgid "pseudonym_too_short"
+msgstr "Pseudonimu wisq qasir."
+
+msgid "pseudonym_minimum_length"
+msgstr "Il-pseudonimu għandu jkun ta' mill-inqas ${MIN_PSEUDONYM_LENGTH} karattri twal."
+
+msgid "pseudonym_too_long"
+msgstr "Pseudonimu wisq twil."
+
+msgid "pseudonym_maximum_length"
+msgstr "Il-pseudonimu ma jistax jaqbeż ${MAX_PSEUDONYM_LENGTH} karattri."
+
+msgid "pseudonym_allready_exists"
+msgstr "Dan il-pseudonimu huwa diġà fl-użu. Jekk jogħġbok agħżel wieħed differenti."
+
+msgid "Select_a_country"
+msgstr "Agħżel Stat Membru tal-Unijoni Ewropea"
+
+msgid "Austria"
+msgstr "AT - Awstrija"
+
+msgid "Belgium"
+msgstr "BE - Belgju"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgaria"
+
+msgid "Cyprus"
+msgstr "CY - Ċipru"
+
+msgid "Czech_Republic"
+msgstr "CZ - Repubbliċa Ċeka"
+
+msgid "Germany"
+msgstr "DE - Ġermanja"
+
+msgid "Denmark"
+msgstr "DK - Danimarka"
+
+msgid "Estonia"
+msgstr "EE - Estonja"
+
+msgid "Spain"
+msgstr "ES - Spanja"
+
+msgid "Finland"
+msgstr "FI - Finlandja"
+
+msgid "France"
+msgstr "FR - Franza"
+
+msgid "Greece"
+msgstr "GR - Greċja"
+
+msgid "Croatia"
+msgstr "HR - Kroazja"
+
+msgid "Hungary"
+msgstr "HU - Ungherija"
+
+msgid "Ireland"
+msgstr "IE - Irlanda"
+
+msgid "Italy"
+msgstr "IT - Italja"
+
+msgid "Lithuania"
+msgstr "LT - Litwanja"
+
+msgid "Luxembourg"
+msgstr "LU - Luksemburgu"
+
+msgid "Latvia"
+msgstr "LV - Lituanija"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Olanda"
+
+msgid "Poland"
+msgstr "PL - Polonja"
+
+msgid "Portugal"
+msgstr "PT - Portogall"
+
+msgid "Romania"
+msgstr "RO - Rumänja"
+
+msgid "Sweden"
+msgstr "SE - Svezja"
+
+msgid "Slovenia"
+msgstr "SI - Slovenja"
+
+msgid "Slovakia"
+msgstr "SK - Slovakkja"
+
+msgid "full_name_as_in_id_required"
+msgstr "Isem(kun) sħiħ(iet) huma meħtieġa."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Kunjom/kunomi sħiħ(iet) huma meħtieġa."
+
+msgid "birthdate_required"
+msgstr "Data tat-twelid hija meħtieġa."
+
+msgid "nationality_required"
+msgstr "Nazzjonalità hija meħtieġa."
+
+msgid "first_interaction_language_required"
+msgstr "Il-lingwa tal-ewwel interazzjoni hija meħtieġa."
+
+msgid "pending_description"
+msgstr "L-applikazzjoni tiegħek qed tiġi riveduta. Inti se tiġi nnutata permezz ta' email ladarba tiġi approvata."
+
+msgid "candidature_not_found"
+msgstr "Applikazzjoni ma ġietx encontrada."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Grazzi talli wrejjt interes fil-attivitajiet ta' ${domain_name}! Hawnhekk hu l-post it-tajjeb għalik biex tirreġistra </b></h2>\n"
+"<p>Il-Kooperativa CosmoPolitika tappoġġa individwi u trasformi s-sistema ekonomika, soċjali u politika eżistenti lejn soċjetà radikalment ġusta, sostenibbli, demokratika u ferħana, "
+"il-<a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Soċjetà ta' Ftehim</a>.</p>\n"
+"<p>Hawn taħt issib l-bidu tal-proċess ta' registrazzjoni biex tingħaqad magħna. Aħna noffru żewġ livelli ta' parteċipazzjoni, bil-obbligi u d-drittijiet li jiżdiedu:</p>\n"
+"<ul>\n"
+"<li>bħala <b>Membru Ordinarju tal-Komunità tagħna</b>, b'proċess sempliċi ta' registrazzjoni, l-ebda impenn finanzjarju, iżda mingħajr drittijiet ta' vot; jew </li>\n"
+"<li>bħala <b>Kooperatur</b>, membru sħiħ tal-Kooperativa tagħna, b'proċess ta' registrazzjoni li jiżgura li persuna speċifika tista' tirreġistra darba biss (bħala rispett għall-prinċipju demokratiku \"persuna "
+"waħda = vot wieħed\") u li l-Kooperaturi huma biss ċittadini tal-Unjoni Ewropea li waslu għall-età tal-kunsens, bl-impenn li jixtru mill-inqas share waħda u li jħallsu kontribut annwali, u drittijiet ta' vot sħaħ. L-Unjoni Ewropea hija s-skop ġeografiku tax-xogħol tagħna  (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">ara għala</a>)</li>\n"
+"</ul>\n"
+"<p>Il-proċess ta' registrazzjoni jinkludi l-passi li ġejjin:</p>\n"
+"<ol>\n"
+"<li>niċċekkjaw li l-indirizz email ġie pprovdut minnek, persuna (u mhux minn robot);</li>\n"
+"<li>nistaqsu għalik għall-pseudonimu tiegħek, password u lingwa(e) preferita(e) għall-interazzjoni miegħek;</li>\n"
+"<li>fil-każ fejn irreġistrajt bħala Membru Ordinarju tal-Komunità, int spiċċajt u tidħol fil-Komunità tagħna. Fil-każ fejn irreġistrajt bħala Kooperatur, il-proċess "
+"kompli sabiex nistaqsu biex niċċekkjaw li qed tikkonforma mal-kundizzjonijiet stabbiliti hawn fuq biex tkun Kooperatur.</li>\n"
+"</ol>\n"
+"<p>Din il-verifika ssir kif ġej:</p>\n"
+"<ol>\n"
+"<li>ninnota li staqsejna għalik dettalji ta' <b>indentità</b>: isem(kun) u kunjom(kun), id-data tat-twelid tiegħek;</li>\n"
+"<li>nistaqsu lil ftit membri eżistenti tal-Kooperativa (il-Verifikaturi tiegħek) biex jiċċekkjaw li l-informazzjoni fuq id-dokument uffiċjali tal-identità tiegħek tikkonforma ma' dik li pprovdejtu fl-aħħar pass, "
+"fuq il-bażi ta' scambju dirett ta' email jew ta' laqgħa ta' videokonferenza miegħek;</li>\n"
+"<li>ladarba jikkonfermaw din il-kuntrazzjoni, inti se tintlaqat bħala Kooperatur, bid-drittijiet sħaħ - ladarba tkun xtrajt mill-inqas <a href=\"https://www.cosmopolitical.coop/share\">share waħda</a> "
+"u ħallsit il-<a href=\"https://www.cosmopolitical.coop/yearcontrib\">kontribut annwali għall-operazzjonijiet tagħna</a>.</li>\n"
+"</ol>\n"
+"<p>Jekk jogħġbok ibda r-reġistrazzjoni tiegħek issa! Aħna nistennew li n.accolluk fil-attivitajiet tagħna.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Il-pass iniziali fil-proċess tiegħek ta' registrazzjoni hu li niċċekkjaw li int \n"
+"bniedem, u mhux robot. Għal dan, niċċekkjaw li int tista' tirċievi u \n"
+"tfakkar email li se nibagħtulek: dak li qed nitolbu minnek hu \n"
+"sempliċi għal bniedem, ħafna iktar kumpless għal robot."
+
+msgid "identity_verification_label"
+msgstr "Verifika tal-Identità"
+
+msgid "Send_id_copy_by_email"
+msgstr "Ibagħti skan ta' parti mid-dokument uffiċjali tal-identità tiegħek bil-email."
+
+msgid "Send_video_conference_link"
+msgstr "Ibagħti proposti għall-data u l-ħin ta' videokonferenza."
+
+msgid "Proceed"
+msgstr "Kompli"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Jekk jogħġbok ikkuntattja li għandek bgħat il-email lill-Verifikaturi."
+
+msgid "sent_confirmation_label"
+msgstr "Konferma li l-email saret mibgħuta lill-Verifikaturi"
+
+msgid "submit_email_confirmation_title"
+msgstr "Ikkonferma li bgħatt l-email."
+
+msgid "confirm_email_send_button_label"
+msgstr "Ikkanferma"
+
+msgid "vote_success"
+msgstr "Nirringrazzjak talli ħadt sehem fil-proċess ta' votazzjoni. Il-vot tiegħek ${vote} ġie rreġistrat b’suċċess. Tista’ tbiddel il-vot tiegħek sal-limitu tiegħu b’mod li terġa’ lura għal din il-paġna."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Bħala Kooperatur, inti se tieħu sehem f'kull waħda mill-deċiżjonijiet tagħna. Dawn id-deċiżjonijiet jiġu adottati skont proċeduri demokratiċi rigorżi, u jistgħu għandhom konsegwenzi sinifikanti għall-"
+"Kooperativa u għall-Kooperaturi. Barra minn hekk, il-Kooperativa għandha l-intenzjoni li tirrappreżenta ċ-ċittadini tal-UE, b'mod indipendenti mill-nazzjonalità tagħhom - iżda ċ-ċittadini tal-UE biss. Dan huwa partikolarment "
+"jekk tissodisfa r-rekwiżiti ta' għall-elezzjonijiet pubbliċi. Għalhekk għandna bżonn nżommu ħsibijiet tlieta: (1) li persuna speċifika ma tistax tirreġistra aktar minn darba, sabiex tiġi żgurata l-prinċipju demokratiku \"persuna "
+"waħda = vot wieħed\"; (2) li l-kooperaturi kollha jkunu ta' età legali u (3) li ċ-ċittadini tal-Unjoni Ewropea biss huma kooperaturi.</p>\n"
+"    <p>Din hija r-raġuni li se niċċekkjaw miegħek xi elementi tad-data tal-identità tiegħek, billi nikkomparaw (1) id-data li int se tiddaħħal f'dan il-formola matul ir-reġistrazzjoni tiegħek ma' (2) l-informazzjoni preżenti fid-dokumenti uffiċjali "
+"tal-identità tiegħek. Din il-verifika se ssir minn sett ta' membri magħżula b'mod każwali tal-Kooperativa, il-Verifikaturi tal-applikazzjoni tiegħek, u se tkun ibbażata fuq l-informazzjoni dwar id-dokumenti uffiċjali tal-identità tiegħek li "
+"int se ttransmitti lilhom diretament, bil-email jew waqt videokonferenza, mingħajr aċċess għall-pjattaforma online (għall-finijiet ta' sigurtà u kunfidenzjalità).</p>\n"
+"    <p>Id-data li qed nitolbu minnek u li l-Verifikaturi se jikkontrollaw għall-konformità mad-data fuq id-dokumenti uffiċjali tal-identità tiegħek hija:\n"
+"    <ul>\n"
+"    <li>ismek(a) u kunjom(kun);</li>\n"
+"    <li>id-data tat-twelid tiegħek;</li>\n"
+"    <li>iċ-ċittadinanza tiegħek.</li>\n"
+"    </ul></p>\n"
+"    <p>Biss persuna waħda għandha ismek(a), kunjom(kun) u id-data tat-twelid tiegħek: int. Jekk tipprova tirreġistra mill-ġdid, ikollok bżonn tipprovdi l-istess data għall-proċedura ta' verifika tagħna, u aħna se nixlijawn 
+"il-applikazzjoni tiegħek, għax int diġà kooperatur, u ma tistax tkun għandek diversi konti biex tivvota aktar minn darba. Aħna se nkunu fiduċjużi fil-funzjoni tagħna għax nafu li biss persuna waħda għandha din il-kombinazzjoni ta' ismijiet, kunjom u data tat-twelid. Id-data tat-twelid tiegħek tippermetti li niċċekkjaw li int ta' età legali, u ċ-ċittadinanza tiegħek tippermetti li nikkonfermaw li intจริง ċittadin tal-Unjoni Ewropea.</p>\n"
+"    <p>Din id-data se tiġi utilizzata esklussivament biex nikkonfermaw l-identità tiegħek, l-età tiegħek u ċ-ċittadinanza tiegħek, u biex nmanageda l-kont tiegħek bħala Kooperatur. Qatt mhu se jiġi murija lil oħra utenti tal-pjattaforma IT ta' ${domain_name}, u lanqas se jiġi trasmess jew mibjugħ lil xi ħadd, ħlief biex jissodisfa r-rekwiżiti legali mill-awtoritajiet ta' forzi tal-liġi pubbliċi taħt talba ta' ġudikant. Il \"data controller\" kif definit mill-<a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Regolament Ġenerali dwar Protezzjoni tad-Data (GDPR) tal-Unjoni Ewropea</a> huwa l-Kooperativa CosmoPolitika SCE, Soċjetà Kooperativa Ewropea stabbilita 229 rue Solférino, 59000 Lille, Franza u rreġistrata fl-25 ta' April 2023 taħt in-numru SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Aħna bgħatna lilek permezz ta' e-mail sett ta' erba' kalkuli aritmetiċi sempliċi li trid twettaq, identifikati minn A sa D, kollha li jiddependu mis-sistema l-istess: (NUMRU PRIM FOST 1 U 9) "
+"misjuba minn (NUMRU SEKOND FOST 1 U 9), iżid (NUMRU TIELET FOST 1 U 9). Għalhekk, biex twettaq il-kalkulu, għandek l-ewwel kolla l-NUMRU PRIM FOST 1 U 9 "
+"bl-NUMRU SEKOND FOST 1 U 9. Ladarba jkollok ir-riżultat ta' din il-multiplikazzjoni, għandek iżżid miegħu l-NUMRU TIELET FOST 1 U 9. Għandek finalment tikteb ir-riżultat ta' "
+"din l-aħħar żidħa fil-kaxxa magħmula għall-industrija tal-kalkulu aritmetiku li qed twettaq (bejn l-erba' li bgħatna lilek, identifikati minn A sa D). Għandek "
+"terġa' tagħmel il-kalkulu għall-erba' kalkoli li bgħatna lilek permezz ta' e-mail.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Fil-proċess ta' reġistrazzjoni bħala Kooperatur, għandek tagħżel mod biex tiċċertifika l-identità tiegħek. Din il-validazzjoni tal-identità tiegħek hija meħtieġa biex tiżgura: (1) "
+"li persuna certa ma tistax tirreġistra b'mod ripetut bl-indirizzi ta' e-mail differenti (hawnhekk qed nsegwu l-prinċipju demokratiku: \"persuna waħda - vot wieħed\"); (2) li biss ċittadini tal-"
+"Unjoni Ewropea li kisbu l-età ta' adulti huma Kooperaturi (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >ara għaliex</a>).</p>\n"
+"    <p>Għandek żewġ għażliet għal dan il-proċess ta' verifika:</p>\n"
+" <ul>\n"
+"   <li><b>Ibgħat kopja ta' d-dokumenti tal-identità tiegħek permezz ta' e-mail:</b> Tista' tagħżel li tibgħat b'mod sigurtà permezz ta' e-mail kopja ta' d-dokumenti tal-identità tiegħek direttament lil setgħa żgħira ta' Kooperaturi magħżula b'riskju, il-Verifikaturi tiegħek. Dan il-metodu jiżgura mod mgħaġġel u dirett biex tiċċertifika l-identità tiegħek.</li>\n"
+"   <li><b>Organizza laqgħa tal-konferenza bit-televiżjoni:</b> Alternattivament, tista' tagħżel sessjoni tal-konferenza bit-televiżjoni fejn tista' tippreżenta d-dokumenti tal-identità tiegħek live lil Verifikaturi tiegħek. Dan il-metodu jipprovdi interazzjoni aktar personali u jippermetti chiarifikazzjoni immedjata jekk hemm bżonn, b'mod verbali jekk tinqara lingwa komuni, permezz tal-chat u traduzzjoni awtomatika jekk le.</li>\n"
+" </ul>\n"
+" <p>F'kull każ, nitolbok, għal raġunijiet ta' sigurtà, li tħares, fid-dokument tal-identità uffiċjali tiegħek, il-post tat-twelid tiegħek u n-numru tad-dokument tal-identità, qabel ma tikkopja jew "
+"turih lil Verifikaturi tiegħek.</p>\n"
+" <p>Hu importanti li tagħmel il-għażla tiegħek bil-ħeffa biex il-proċess ta' reġistrazzjoni tiegħek ikun bla xkiel u fil-ħin. Jekk jogħġbok, żgura li l-mod li tagħżel huwa l-aktar konvenjenti għalik "
+"u li jikkonforma mal-preferenzi tiegħek għall-privatezza.</p>\n"
+" <p>Il-kooperazzjoni tiegħek f'dan il-każ hija apprezzata ħafna u hija ewlenija biex iżżomm il-livelli għoljin ta' fiduċja u demokrazija pan-Ewropea fil-Kooperattiva tagħna. Grazzi talli "
+"għandek għarfien u parteċipazzjoni attiva f'din il-pass kruċjali.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Il-ħażina ta' Kooperaturi eżistenti hija daqshekk baxxa li ma tistax tiġi magħżula l-għadd adekwat ta' Verifikaturi tal-identità tiegħek. Jekk jogħġbok ikkuntattja l-amministratur tas-sistema, fl-indirizz "
+"${administrator}, biex isolvi l-kwistjoni."
+
+msgid "email_copy_id_verification_subject"
+msgstr "en - ${domain_name} - Jekk jogħġbok iċċertifika l-identità tiegħi bħala Kooperatur ġdid potenzjali"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Għeżież Verifikaturi,\n"
+" Ninsab qed nikteb lilkom biex inkun żiemed il-proċess ta' verifika tal-identità għal applikazzjoni tiegħi biex insir Kooperatur ta' ${domain_name}. Mtaqqba ma' din l-e-mail, issib kopja parzjali "
+"ta' d-dokument tal-identità uffiċjali tiegħi.\n"
+" Jekk jogħġbok innota li ċerti informazzjoni sensittiva ġiet ipprottetta għal raġunijiet ta' sigurtà. Madankollu, id-dokument fih l-informazzjoni li għandek bżonn biex tiċċertifika l-identità tiegħi skont il-"
+"proċess ta' reġistrazzjoni ta' ${domain_name}.\n"
+" B'hekk, nitolbok bil-qalb li taraw id-dokument imtaqqab jekk ikun possibbli matul il-3 ijiem li ġejjin, biex tgħaddu vot fuq l-adegwatezza bejn:\n"
+"\n"
+" - l-informazzjoni tal-identità li rċevejt direttament permezz ta' e-mail mill-pjattaforma IT ta' ${domain_name} (u li se tiġi rmemorata lilek fuq il-kontroll ta' votazzjoni) u \n"
+" - l-informazzjoni tal-identità li tista' taqra fuq il-kopja parzjali tal-dokument tal-identità uffiċjali tiegħi.\n"
+"\n"
+" Il-ligazzjoni għall-vot tiegħek fuq din l-adegwatezza hija l-għada: ${voting_url}.\n"
+" Napprezza ħafna bil-qalb lilkom għall-appoġġ tal-proċess tar-reġistrazzjoni tiegħi bħala Kooperatur għal ${domain_name}. Jekk għandek xi mistoqsijiet addizzjonali jew teħtieġ informazzjoni oħra "
+"waħda, jekk jogħġbok ikkanċella me drittament bil-lingwa tiegħek stess.\n"
+" Tislijiet, \n"
+" ${signature}\n"
+" Anness: [Isem tal-fajl tad-dokument tal-identità]\n"
+" Din l-e-mail ġiet ġenerata bl-għajnuna tal-karatteristika ta' verifika tal-identità ta' ${domain_name}. Jekk m'intix il-Verifikatur assenjati għall-applikazzjoni ta' ${signature} u receiving this email in error, jekk jogħġbok informaq il-amministratur ta' ${domain_name}, fl-indirizz li ġej: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "en - ${domain_name} - Jekk jogħġbok iċċertifika l-identità tiegħi permezz ta' konferenza bit-televiżjoni bħala Kooperatur ġdid potenzjali"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Għeżież Verifikaturi,\n"
+"    Ninsab qed nikteb lilkom biex inkun żiemed il-proċess ta' verifika tal-identità għal applikazzjoni tiegħi biex insir Kooperatur ta' ${domain_name}. Nixtieq nipproponi laqgħa tal-konferenza bit-televiżjoni għal "
+"dan il-għan.\n"
+"    Hawn huma xi slots ta' żmien li qed nissuġġerixxi għall-konferenza bit-televiżjoni. Jekk jogħġbok innota li ngħix fil-Ġermanja (Jekk jogħġbok aġġusta skont il-pajjiż / reġjun tiegħek. Dan huwa "
+"meħtieġ sabiex il-korrispondent tiegħek jifhem il-ħin tal-familja tiegħek), b'hekk il-ħin tal-għodwa fejn ngħix jista' jkun differenti mill-ħin tal-għada fejn qiegħed. Din il-konferenza bit-televiżjoni għandha "
+"titla' lejn 10 minuti: (jistgħu jinkiseb mill-inqas 3 għażliet, jekk huwa possibbli f'ħinijiet differenti tal-ġurnata u f'days differenti inklużi fit-toroq, kollha tagħhom fi żmien 10 "
+"jiem wara li tibgħat l-e-mail)\n"
+"   \n"
+"         - Il-Ħadd, 04 ta' Settembru 2023, f'17:30 l-ħin tiegħi; (Aġġusta skont l-iskeda tiegħek)\n"
+"         - It-Tlieta, 05 ta' Settembru 2023, f'20:30 l-ħin tiegħi; (Aġġusta skont l-iskeda tiegħek)\n"
+"         - Il-Ħadd, 09 ta' Settembru 2023, f'10:00 l-ħin tiegħi. (Aġġusta skont l-iskeda tiegħek)\n"
+"    \n"
+"    Jekk jogħġbok ftakar li nistgħu ngħixu f'żoni ta' ħin differenti! Jekk jogħġbok irrispondi dawn il-slots ta' ħin għall-ħin tiegħek stess.\n"
+"    Il-konferenza bit-televiżjoni se ssir bl-użu ta' din il-ligazzjoni:\n"
+"(jewa niżżel hawnhekk il-ligazzjoni li ħprepared għal din il-konferenza. Hawn huma l-proposti tagħna tal-pjattaformi li tista' tuża biex toħloq il-konferenza bit-televiżjoni u toffri l-ligazzjoni rilevanti:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (softwer b'xejn u miftuħ)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (softwer b'xejn u miftuħ)\n"
+"         - Zoom : https://zoom.us/ (softwer proprjetarju)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (softwer proprjetarju, pjattaforma mitfugħa)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (softwer proprjetarju, aċċess mingħajr spejjeż għall-pjattaforma)\n"
+"    )\n"
+"    Jekk jogħġbok jaħdem li tagħżel slot ta' waqt li jikkonformaw, u ibgħatli e-mail li fiha l-għażla tiegħek.\n"
+"    Matul il-laqgħa tal-konferenza bit-televiżjoni, jista' jiġri li ma nistgħux naqsmu l-ebda lingwa komuni. Jekk dan huwa l-każ, nissuġġerixxi li naġixxu b'atteġġjament tajjeb u appoġġ favur "
+"xulxin. Nipproponi li nużaw il-chat biex nesprimi lili nfsoq bil-lingwi rispettivi tagħna, u nużaw it-traduzzjoni tal-makna biex nifhmu x'jiktbilna l-interlocutor tagħna.\n"
+"    Triqni li saħħaqqt din il-laqgħa permezz tal-konferenza bit-televiżjoni, nitolbok bil-qalb li tivvota biex tikkonferma jew tiċħad l-adegwatezza bejn:\n"
+"\n"
+"     - l-informazzjoni tal-identità li rċevejt direttament permezz ta' e-mail mill-pjattaforma IT ta' ${domain_name} (u li se tiġi rmemorata lilek fuq il-kontroll tal-vot) u \n"
+"    - l-informazzjoni tal-identità li tkun tista' tkun iltaqa' magħha matul il-konferenza bit-televiżjoni.\n"
+"\n"
+" Il-ligazzjoni għall-vot tiegħek fuq din l-adegwatezza hija l-għada: ${voting_url}.\n"
+"  Napprezza ħafna bil-qalb lilkom għall-appoġġ tal-proċess tar-reġistrazzjoni tiegħi bħala Kooperatur għal ${domain_name}. Jekk għandek xi mistoqsijiet addizzjonali jew teħtieġ informazzjoni oħra "
+"waħda, jekk jogħġbok ikkanċella me drittament.\n"
+" Tislijiet,\n"
+" ${signature}\n"
+" Din l-e-mail ġiet ġenerata bl-għajnuna tal-karatteristika ta' verifika tal-identità ta' ${domain_name}. Jekk m'intix il-Verifikatur assenjati għall-applikazzjoni ta' ${signature} u receiving this email in error, jekk jogħġbok informaq il-amministratur ta' ${domain_name}, fl-indirizz li ġej: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Jekk l-utent jeżisti, hu/jhi se jirċievi e-mail."
+
+msgid "reset_password_email_subject"
+msgstr "Irresta l-password tiegħek"
+
+msgid "forget_email_send_error"
+msgstr "Saret żball meta nbgħat l-e-mail ta' irrestawra, jekk jogħġbok ikkuntattja l-amministratur, fl-${administrator}"
+
+msgid "member_state_created_name"
+msgstr "maħluq"
+
+msgid "member_state_created_value"
+msgstr "Il-membru ġie maħluq"
+
+msgid "member_state_draft_name"
+msgstr "bozza"
+
+msgid "member_state_draft_value"
+msgstr "Il-data tal-membru qed tiġi modifikata"
+
+msgid "member_state_registred_name"
+msgstr "ir-reġistrat"
+
+msgid "member_state_registred_value"
+msgstr "Il-data tal-membru ġiet salvata"
+
+msgid "member_data_modification_request_name"
+msgstr "qed jinbidel"
+
+msgid "member_data_modification_request_value"
+msgstr "Talba għall-modifika tad-data ġiet sottomessa"
+
+msgid "member_datas_modified_name"
+msgstr "modifikat"
+
+msgid "member_datas_modified_value"
+msgstr "Il-data tal-membru ġiet immodifikata"
+
+msgid "email_member_state_changed"
+msgstr "Bidla fil-profil tal-membru tiegħek"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Jekk jogħġbok ipprovdi indirizz e-mail validu"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "L-amministratur mhuwiex permess li jresetja l-password tiegħu/ha"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Jekk l-utent jeżisti, ġew mibgħuta e-mail lill-indirizz tiegħu/ha bl-iskont li jresetja l-password tiegħu/ha"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Il-verżjonijiet tnejn tal-password ma jiġux aċċettati. Jekk jogħġbok żgura li huma, u sottometti mill-ġdid"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Jekk jogħġbok ipprovdi password ġdida"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Inti b'suċċess tbiegħed il-password tiegħek"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Żball ġara fil-proċess tar-reżet tal-password tiegħek"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Żball ġara fil-proċess tar-reżet tal-password tiegħek. Il-password tiegħek ma nbidletx"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Il-membru ma nstabx fil-lista tal-membri attwali"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Il-hyperlink li użajt biex tirresetja l-password tiegħek huwa obsolet. Jekk jogħġbok uża l-aħħar wieħed li riċevejt"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "L-e-mail li tinkludi l-isfida matematika li tiċċertifika li l-kandidatu huwa uman (u mhux robot) ma ntbagħtetx."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Żball meta jikkonferma l-kandidatura"
+
+msgid "modification_to_profile_button_title"
+msgstr "Editja Profil Tiegħek"
+
+msgid "modification_to_profile_button_label"
+msgstr "Editja Profil"
+
+msgid "modification_to_profile_button_description"
+msgstr "Agħfas hawn biex tirċievi bl-e-mail link sikur biex tibdel il-profil tiegħek."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+" biex tiżgura s-sigurta tad-data tiegħek, se jintbagħat link uniku biex tbiddel il-profil tiegħek permezz tal-e-mail. Dan il-proċess jiggarantixxi li biss il-persuna li għandha aċċess għall-indirizz tal-e-mail tiegħek "
+"tista' tagħmel bidliet fil-profil tiegħek."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Link biex tibdel il-profil tiegħek fuq l-infrastruttura IT ta' ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi hawnhekk l-isem sħiħ tiegħek, kif miktub fid-dokumenti uffiċjali tiegħek, fit-traskrizzjoni uffiċjali tagħhom bil-karattri Latin (jekk il-lingwa oriġinali tuża alfabett "
+"+ divers minħabba l-Latin)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi hawnhekk l-isem tal-familja tiegħek (i.e. MHUX isem tal-familja tiegħek bħala persuna miżżewġa), kif miktub fid-dokumenti uffiċjali tiegħek, fit-traskrizzjoni uffiċjali tagħhom bil-karattri Latin "
+"(jekk il-lingwa oriġinali tuża alfabett divers minħabba l-Latin)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Test li jiddeskrivi lilek innifsek (it-test tal-profil tiegħek)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Jekk jogħġbok ikteb hawnhekk test li jiddeskrivi lilek innifsek, fil-lingwa tiegħek magħżula, sabiex il-membri l-oħra kollha tal-Komunità ikunu jistgħu jinkwetaw jaħsbu fik ftit aħjar. Nissuġġerixxu li tiffoka "
+"(1) Fejn ġejt, (2) x'inhuma l-attivitajiet tiegħek, (3) x'tixtieq tagħmel bħala membru tal-Komunità, u (4) ir-riżorsi (esperjenza, għarfien, ħin) li għandek aċċessibbli."
+"Aħna nemmnu li din l-informazzjoni hija utli perché tippreżenta lilek innifsek lit-titilati bil-kliem tiegħek tagħti wiċċ uman għall-identità diġitali tiegħek fuq l-infrastruttura IT tagħna. Bi "
+"dan it-test, kull membru tal-Komunità jitgħallem jiskopri lilek innifsek ftit aħjar, u dan jagħmel l-interazzjoni ħafna aktar faċli!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi d-data tal-għeluq tiegħek fil-format li ġej: DD/MM/YYYY, jiġifieri (1) il-ġurnata fil-xahar, bil-2 ċifri; (2) in-numru tax-xahar, bil-2 ċifri; (3) l-għaxar snin, b'4 ċifri. Biss "
+"persuni li laħqu t-18 il-ġurnata tagħhom jistgħu jkunu Koperaturi. Jekk għadek ma laħaqt ix-xahar tiegħek, nistednuk biex tirreġistra bħala Membru Ordinarju tal-Komunità - u biex "
+"tiggradwa għal status ta' Koperatur hekk kif tilħaq l-età ta' l-maġġoranza."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Jekk jogħġbok ipprovdi Stat Membru tal-Unjoni Ewropea li int cittadin. Biss ċittadini tal-Unjoni Ewropea jistgħu jkunu Koperaturi"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Jekk jogħġbok agħżel Stat Membru tal-Unjoni Ewropea"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Dan huwa n-numru uniku li jidentifikak f'kull proċess li jiġri fil-Komunità"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Jekk jogħġbok daħħal hawnhekk il-pseudonimu li se jidentifikak għall-perjodu kollu tal-attività tiegħek fuq il-pjattaforma IT tagħna. Aħna NIRREKOMANDAW b'saħħa li tagħżel pseudonimu li jagħmel l-iċċakkla "
+"sa biex tnaqqas it-tweġib tal-identità tiegħek impossibbli (jew estremament diffiċli). B'hekk, inti tipproteġi l-kunfidenzjalità tal-opinjonijiet tiegħek (i.e. data personali li huma l-għan ta' protezzjoni speċifika it-tawwija tal-Ġenerali tad-Protezzjoni tal-Date - GDPR) kontra kwalunkwe forma ta' pressjoni esterna fil-ħajja reali (pereżempju mill-impjegatur tiegħek jew mill-klijenti tiegħek). Kun ħafna attent! Ladarba tagħżiltu, qatt m'għandek tkun jista' tibdel dan il-pseudonimu wara. Agħżilha b'attenzjoni! \n"
+" Il-pseudonimu tiegħek għandu jkun bejn ${MIN_PSEUDONYM_LENGTH} u ${MAX_PSEUDONYM_LENGTH} karattri twal u jista' jikkonsisti biss minn ittri tal-alfabett Latin (A-Z, a-z), in-numri (0-9), "
+"underscores (_), dots (.), dash (-) u spazji ( ). Ma jista' jikkonsisti mit-titoli bil-akkenti, umlauts, u sinjali diakritici oħra speċifiċi għal xi lingwi."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Il-forniment tal-pseudonimu tiegħek huwa meħtieġ"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi l-password tiegħek. Il-password tiegħek għandha tkun bejn ${password_minimum_length} u ${password_maximum_length} karattri twal, tinkludi mill-inqas digit wieħed, mill-inqas ittra waħda żgħira "
+"u mill-inqas ittra waħda kolla u mill-inqas wieħed mill-karattri bejn dawn: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', ='." 
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Jekk jogħġbok ikkonferma l-password tiegħek"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Il-konferma tal-password tiegħek hija meħtieġa"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi l-indirizz e-mail li l-infrastruttura IT ta' ${domain_name} se tuża biex interazzjoni miegħek.\n"
+"Nissuġġerixxu li tagħżel indirizz e-mail li tiċċekkja spiss.\n"
+" Għandna bżonn din l-informazzjoni għax għandna bżonn interazzjoni miegħek, biex inżommuk infurmat dwar l-iżviluppi fil-Koperattiva, biex noffrulek l-opportunità li tieħu azzjoni jew tikkontribwixxi għal "
+"deċiżjonijiet. L-e-mail hija l-aktar medju użat fl-Ewropa, hija universali u hija ibbażata fuq standards miftuħa u ħielsa, b'mod differenti mid-sistemi ta' messaggistika dwar il-giganti diġitali (magħrufa wkoll bħala 'GAFAM').\n"
+"Dan l-indirizz e-mail se jkun użat esklussivament biex tiżgura l-komunikazzjoni bejn l-infrastruttura IT ta' ${domain_name} u inti. Qatt ma se jkun viżibbli għall-użers l-oħra tal-pjattaforma IT ta' ${domain_name}, lanqas se tiġi trasmessa jew ibjugħha lil ħadd, ħlief biex twettaq ir-rekwiżiti legali mill-awtoritajiet tal-liġi pubblice taħt talba ta' ġudikant. Il"
+"\"kuntrollur tad-data\" kif definit mill-General Data Protection Regulation (GDPR) tal-"
+"Unjoni Ewropea hija l-CosmoPolitical Cooperative SCE, Soċjetà Kooperattiva Ewropea stabbilita 229 rue Solférino, 59000 Lille, Franza u registrata fl-25 ta' april 2023 taħt in-numru SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi l-lingwa li tixtieq li l-infrastruttura IT ta' ${domain_name} interaġi miegħek. \n"
+"Nissuġġerixxu li tagħżel il-lingwa li taf l-aqwa, minn fost il-lingwi uffiċjali tal-Unjoni Ewropea jew l-Esperanto. Jekk disponibbli minn dawk għalihom li tlestijna interfaċċa utent, nużawha biex ninteraġixxu miegħek. \n"
+"Aħna għandna bżonn din l-informazzjoni għax, minħabba l-fairness u r-rispett għall-prinċipji demokratika, nixtiequ li ninteraġixxu miegħek f'lingwa li tifhem kemm jista' jkun."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi l-lingwa li tixtieq li l-infrastruttura IT ta' ${domain_name} tinteraġixxi miegħek, bħala għażla sekonda. \n"
+" Nirrakkomandaw li tagħżel lingwa oħra uffiċjali tal-Unjoni Ewropea jew Esperanto, li tifhem biżżejjed. Jekk din hija disponibbli fost dawk għal li għandhom aħna "
+"żviluppat interfax ta' użytkowników, u jekk il-lingwa preferuta tiegħek m'għandhiex tkun disponibbli, aħna nużawha biex ninteraġixxu miegħek. \n"
+" Għandna bżonn din l-informazzjoni għaliex, minkejja l-isforzi tagħna, jista' jiġri li l-lingwa preferuta tiegħek m'għandhiex tkun disponibbli fuq l-interfax ta' tagħna "
+"softwer tal-użytkowników. Din hija r-raġuni għaliex qed nistaqsu "
+"jkollok tuża lingwa oħra."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Il-lingwa li taċċetta bħala għażla tat-tielet biex ninteraġixxu miegħek"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi l-lingwa li tixtieq li l-infrastruttura IT ta' ${domain_name} tinteraġixxi miegħek, bħala għażla tat-tielet. \n"
+" Nirrakkomandaw li tagħżel lingwa oħra uffiċjali tal-Unjoni Ewropea jew Esperanto, li għadek tista' tifhem. Jekk din hija disponibbli fost dawk li aħna żviluppajna "
+"interfajċ ta' użytkowników, u jekk lanqas il-lingwa preferita tiegħek u lanqas it-tieni lingwa tiegħek mhumiex disponibbli, aħna nużawha biex ninteraġixxu miegħek. \n"
+" Għandna bżonn din l-informazzjoni għaliex, minkejja l-isforzi tagħna, jista' jiġri li l-lingwa preferuta tiegħek u t-tieni lingwa tiegħek ma jkunux disponibbli fuq l-interfax ta' tagħna "
+"softwer. Din hija r-raġuni għaliex qed nistaqsu jekk tistax tuża lingwa tat-tielet. Aħna naf li biex tinteraġixxi magħna billi tużaha huwa situazzjoni mhux sodisfaċenti għalik - bħalma hi għalina. Naqsu "
+"għal dan."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Il-Marka tal-Imġieba Koopertiva tiegħek"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+" bħala Kooperatur, il-Marka tal-Imġieba Koopertiva tiegħek hija r-riżultat tal-marki allokati lilek mill-parteċipanti attivi l-oħra fil-Gruppi ta' Ħidma li int ħadt sehem biex iddefinixxi "
+"u tadotta Proposti ta' Azzjoni. Kull Parteċipant Attiv jista' jagħti marka likwida +1, 0 jew -1, skont kemm kienet koopertiva l-imġieba tiegħek matul il-parteċipazzjoni attiva tiegħek f'dak il-"
+"Grupp ta' Ħidma. Din il-marka mbagħad tintesa 'awtomatikament' u tiġi njorata matul iż-żmien: tiġi mqassma bi 50% wara ${forgetting_time_constant} jum. Il-valur inizjali tal-Marka tal-Imġieba "
+"Koopertiva tiegħek huwa zer."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Data fejn il-Marka tal-Imġieba Koopertiva tiegħek ġiet aġġornata riċentement"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Din hija l-aħħar data fejn Kooperatur ieħor alloka marka lilek wara l-kunsinna tal-parteċipazzjoni attiva tiegħek f'Gruppo ta' Ħidma li kien qed iddefinixxi u jadotta Proposta ta' Azzjoni. "
+"Il-valur inizjali dik id-data huwa dak ta' reġistrazzjoni tiegħek bħala Kooperatur."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Numru ta' shares tal-Koopazzjoni li għandek"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Dan huwa n-numru totali ta' shares tal-Koopazzjoni li għandek, wara li akkwistawhom fuq il-portal web tagħna. Wara r-reġistrazzjoni tiegħek, dan in-numru huwa ugwali għall-zeru. Nistednuk "
+"tbiegħ il-pront f'dan l-URL: ${url_purchase_shares} biex tixtri l-ewwel share tiegħek. Int se tgawdi d-drittijiet tiegħek bħala Kooperatur biss wara li tkun akkwista lejn l-anqas share waħda "
+"(u ħallast il-kontribuzzjoni annwali tiegħek). Inti mistenni li tixtri aktar minn share waħda, wara r-reġistrazzjoni, iżda wkoll fi kwalunkwe ħin wara. Dan isaħħaħ il-Koopazzjoni tagħna, u aħna lkoll "
+"nibżgħu ħafna minnek għal dan!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Data fejn il-kontribuzzjoni annwali attwali tiegħek tkun fi tmiemha"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Data fejn il-kontribuzzjoni annwali attwali tiegħek tkun fi tmiemha, u qabel din id-data trid tħallasha mill-ġdid biex iżżomm d-drittijiet kollha ta' teħid deċiżjonijiet tiegħek bħala Kooperatur. Wara r-reġistrazzjoni "
+"tiegħek, din id-data tiġi stabbilita fil-passat, li jfisser li trid tħallasha issa. Nistednuk "
+"tbiegħ il-pront f'dan l-URL: ${url_pay_yearly_contrib} biex tħallas il-ħlas annwali tiegħek, u b'hekk tattendi għall-operazzjonijiet tal-Koopazzjoni tagħna. Int se tgawdi d-drittijiet tiegħek bħala "
+"Kooperatur biss wara li tkun ħallast il-kontribuzzjoni annwali tiegħek (u akkwistat lejn anqas share waħda)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Numru ta' Kont Bankarju Internazzjonali (IBAN) ta' kont bankarju tiegħek"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Jekk u meta tiddeċiedi li titlaq mill-Koopazzjoni (li aħna lkoll niddispjaċik), għandna bżonn il-IBAN tiegħek biex inkunu nistgħu ntransferulek il-proċedimenti tal-bejgħ tal-share tiegħek tal-Koopazzjoni. "
+"Fuq raġunijiet ta' sigurtà, nawgura li tipprovdi din l-informazzjoni biss jekk u meta tistenna li telqet mill-Koopazzjoni."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Data fejn id-data kollha tiegħek se tiġi msakkra mill-infrastruttura IT tagħna"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Jekk u meta titlaq mill-Koopazzjoni, id-data identitarja tiegħek se tiġi żgħażgħa għal perjodu ta' ${Quarantine} ġurnata, qabel ma tiġi msakkra kompletament u irreversibbli mill-rekords tagħna. Dan hu "
+"biex niżguraw li Kooperatur li jitlaq mill-Koopazzjoni minħabba li l-Marka tal-Imġieba tiegħu/ħa hija ħażina wisq ma jistax jerġa' jirreġistra immedjatament b'pseudonimu nadif u bil-Markar ta' "
+"Imġieba Koopertiva. Wara ir-reġistrazzjoni tiegħek, din id-data tiġi stabbilita f'ħin futur ħafna distant."
+
+msgid "avatar_label"
+msgstr "Ritratt biex jirrappreżentak (avatar tiegħek)"
+
+msgid "avatar_description"
+msgstr ""
+"Jekk jogħġbok ipprovdi ritratt li jirrappreżentak bħala membru tal-Komunità. Għal skopijiet ta' protezzjoni minn kull ritorsjoni mill-impjegatur tiegħek jew mill-klijenti tiegħek, nirrakkomandaw li dak ir-ritratt "
+"ma jippermetti xejn biex jiddistinga l-identità tiegħek fil-ħajja reali. Għandu għalhekk, f'ġeneral, ma jkunx fotografija tiegħek innifsek (Ftakar li s-software ta' riconoxximent tal-wiċċ qed jintuża massivament mill "
+"robot ta' tfittxija). Ir-ritratt għandu jkun f'formatt JPEG biss (estensjoni .JPG jew .JPEG), u mhux akbar minn 5 MB. \n"
+" Aħna nemmnu li din l-informazzjoni hija utli għaliex ritratt jagħmel aktar faċli għall-membri l-oħra tal-Komunità biex jirrikonoxxu lilek. Kultant ritratt jitkellem ħafna iktar minn "
+"diskors twil. B'dan l-immaġini, qed tesprimi ħafna dwar lilek innifsek, f'lingwa universali. Agħmel l-aħjar minn dan!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Id-dmir (URL) li għamiltu biex tirkupra l-proċess tal-applikazzjoni tiegħek minn fejn waqaf m'għandux jaqbiż l-għaral li registrajna għalik. (In-numru ta' identifikazzjoni tal-applikazzjoni fil-"
+"sessjoni u fin-numru tal-URL ma jaqbħux) \n"
+"Jekk jogħġbok uża biss l-URL mid-diskors l-aħħar li rċevejt."
+
+msgid "check_new_email"
+msgstr "Inti talbet li tibdil l-indirizz email tiegħek. Fil-futur, tixtieq tuża: ${new_email}. B'hekk se tirċievi email li fiha jkun hemm link biex tiċċertifika dan l-indirizz ġdid."
+
+msgid "check_new_email_subject"
+msgstr "Verifika tal-indirizz email ġdid tiegħek"
+
+msgid "check_new_email_send_error"
+msgstr "L-għoti tal-email ta' verifika għall-indirizz ġdid tiegħek fallew"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "L-email ta' verifika għall-indirizz ġdid tiegħek inbdlet"
+
+msgid "modify_member"
+msgstr "Ikonsulta jew ibdillek membru"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Żball fil-konnessjoni"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "L-indirizz email diġà jeżisti"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "L-indirizz email aġġornat"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Żball fil-ħin ta' aġġornament tal-email"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Żball fil-ħin ta' stabbiliment tal-qasam"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Żball fil-ħin ta' aġġornament tal-membru"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "OID mhux valida"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Talba mhux valida"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "Żball LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Id-data tal-membru aġġornata"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "L-aġġornament tad-data tal-membru fallew"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "L-aġġornament tad-data tal-membru huwa ta' suċċess"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Data nieqsa"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "L-indirizz email ġdid huwa nieqes"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Ebda permess"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Mhux elettur"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Il-ħlas għall-aġġornament falla"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Il-ħlas għall-aġġornament għandu suċċess"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Ir-reġistrazzjoni falla"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Ir-reġistrazzjoni għandha suċċess"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Membru aċċessat mhux magħruf"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Membru mhux magħruf"
+
+msgid "modify_member_title"
+msgstr "Editja l-profil tal-membru"
+
+msgid "select_member_oid_label"
+msgstr "Jekk jogħġbok agħżel membru biex timmodifika l-profil tiegħu/ha:"
+
+msgid "select_member_placeholder"
+msgstr "Pseudonimu tal-membru"
+
+msgid "modify_profile"
+msgstr "Tista' tbiddel il-profil tiegħek billi tikklikkja hawn"
+
+msgid "profile"
+msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Il-indirizz tal-kura elettronika tiegħek ilu ma ġie aġġornat b'suċċess. Issa se tuża dan l-indirizz ġdid għal komunikazzjonijiet futuri kollha ma ${domain_name}. Jekk inti m'għandekx mitluba dan il-bidla jew jekk għandek "
+"mistoqsijiet, jekk jogħġbok ma tiddejjaqx tqabbad mal-appoġġ tagħna immedjatament fuq ${admin_email}. Grazzi li int parti mill-komunità ta' ${domain_name}!"

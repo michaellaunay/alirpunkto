@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual"><span tal:replace="domain_name">Alan adı</span>'na Kayıt</title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual"><span tal:replace="domain_name">Alan adı</span> platformuna kayıt işleminize başladığınız için teşekkür ederiz</h1>
+        <p tal:omit-tag="textual">E-posta adresinizi doğrulamak ve sizin bir insan (robot değil) olduğunuzu temin etmek için, 4 basit matematiksel işlemden oluşan bir dizi geliştirdik. A'dan D'ye kadar etiketlenmiş dört matematiksel işlemi aşağıda gerçekleştirin ve sonuçlarını aşağıda bağlantısı verilen kayıt sayfasındaki ilgili alanlara girin.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">İşlem A <span tal:content="challenge_A" tal:omit-tag="textual">Birinci meydan okuma</span></p>
+            <p tal:omit-tag="textual">İşlem B <span tal:content="challenge_B" tal:omit-tag="textual">İkinci meydan okuma</span></p>
+            <p tal:omit-tag="textual">İşlem C <span tal:content="challenge_C" tal:omit-tag="textual">Üçüncü meydan okuma</span></p>
+            <p tal:omit-tag="textual">İşlem D <span tal:content="challenge_D" tal:omit-tag="textual">Dördüncü meydan okuma</span></p>
+        </div>
+        <p tal:omit-tag="textual">Yukarıda A'dan D'ye kadar işlemlerin sonuçlarını sağlamanız gereken kayıt sayfasının bağlantısı:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Faaliyetlerimize gösterdiğiniz ilgi için teşekkür ederiz. Sizi yakında karşılamayı dört gözle bekliyoruz!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Saygılarımla,</p>
+            <p tal:omit-tag="textual"><span tal:replace="domain_name">Alan adı</span> ekibi</p>
+        </footer>
+
+    </body>
+</html>

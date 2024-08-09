@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Калі ласка, пацвердзіце свой запыт на абнаўленне адрасу электроннай пошты на <span tal:replace="domain_name">Назва дамена</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Калі ласка, пацвердзіце свой запыт на абнаўленне адрасу электроннай пошты на ІТ-платформе <span tal:replace="domain_name">Назва дамена</span></h1>
+    <p tal:omit-tag="textual">Вы або чалавек, які мае доступ да вашага акаўнта на платформе <span tal:replace="site_name">Назва сайта</span> <span tal:replace="domain_name">Назва дамена</span>, запрасілі нас змяніць адрас электроннай пошты, які інфраструктура ІТ <span tal:replace="domain_name">назва дамена</span> выкарыстоўвае для ўзаемадзеяння з вамі. Новы адрас электроннай пошты, які запрасілі выкарыстоўваць у будучыні: <span tal:replace="new_email">Новы адрас электроннай пошты</span>.</p>
+<p tal:omit-tag="textual">Калі вы пацвярджаеце, што <span tal:replace="new_email">Новы адрас электроннай пошты</span> павінны быць адрасам электроннай пошты, які інфраструктура ІТ <span tal:replace="domain_name">назва дамена</span> павінна выкарыстоўваць у будучай для ўзаемадзеяння з вамі, калі ласка, націсніце на спасылку пацверджання ніжэй.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Калі вы зрабілі памылку або калі вы не рабілі гэтага запыту, проста ігнаруйце гэты электронны ліст.</p>
+
+    <p tal:omit-tag="textual">Дзякуй за ваш інтарэс да нашай дзейнасці.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">З павагай,</p>
+        <p tal:omit-tag="textual">Каманда <span tal:replace="domain_name">Сайта</span></p>
+    </footer>
+
+</body>
+</html>

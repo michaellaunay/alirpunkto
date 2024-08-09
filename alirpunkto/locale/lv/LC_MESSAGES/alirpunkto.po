@@ -1,0 +1,1104 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Laipni lūdzam"
+
+msgid "username_label"
+msgstr "Lietotājvārds"
+
+msgid "password_label"
+msgstr "Parole"
+
+msgid "login_label"
+msgstr "Pieteikties"
+
+msgid "welcome_msg"
+msgstr "Laipni lūdzam ${site_name}, centralizētajā pakalpojumā IT infrastruktūrā izmantotajām lietojumprogrammām ${domain_name}."
+
+msgid "all_applications_msg"
+msgstr "Visas lietojumprogrammas, kas nepieciešamas, lai piedalītos ${domain_name} aktivitātēs, vienuviet."
+
+msgid "register_or_login_msg"
+msgstr "Reģistrējieties vai pierakstieties, lai uzsāktu."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, centralizētais pakalpojums IT infrastruktūrā izmantotajām lietojumprogrammām ${domain_name}"
+
+msgid "logged_in_msg"
+msgstr "Jūs esat pieteicies kā ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Jūs varat izrakstīties, noklikšķinot šeit"
+
+msgid "logout_label"
+msgstr "Izrakstīties"
+
+msgid "choose_application_msg"
+msgstr "Izvēlieties lietojumprogrammu, kurai vēlaties pievienoties:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Nederīgs lietotājvārds vai parole. Lūdzu, mēģiniet vēlreiz"
+
+msgid "register_link"
+msgstr "Izveidot kontu"
+
+msgid "password_confirm_label"
+msgstr "Apstipriniet paroli"
+
+msgid "password_confirm_title"
+msgstr "Apstipriniet savu paroli"
+
+msgid "forgot_password_label"
+msgstr "Aizmirsāt paroli?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Pilns vārds(-i) kā tas ir jūsu oficiālajos identitātes dokumentos"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Pilns uzvārds(-i) kā tas ir jūsu oficiālajos identitātes dokumentos"
+
+msgid "birthdate_label"
+msgstr "Dzimšanas datums"
+
+msgid "nationality_label"
+msgstr "Nacionalitāte (no Eiropas Savienības valstīm)"
+
+msgid "cooperator_number_label"
+msgstr "Sadarbības numurs"
+
+msgid "pseudonym_label"
+msgstr "Pseidonīms"
+
+msgid "email_label"
+msgstr "E-pasta adrese"
+
+msgid "first_interaction_language_label"
+msgstr "Valoda, kurā vēlaties, lai mēs ar jums sazinātos"
+
+msgid "second_interaction_language_label"
+msgstr "Valoda, ko pieņemat kā otro iespēju, lai mēs sazinātos ar jums"
+
+msgid "register_label"
+msgstr "Reģistrēties"
+
+msgid "forgot_password_head"
+msgstr "Aizmirsāt paroli"
+
+msgid "forgot_your_password_title"
+msgstr "Aizmirsāt savu paroli?"
+
+msgid "enter_your_email_address_label"
+msgstr "Lūdzu, ievadiet savu e-pasta adresi:"
+
+msgid "submit_button"
+msgstr "Sūtīt"
+
+msgid "candidature_states_draft_value"
+msgstr "Melnraksts: Pieteikums ir melnraksta režīmā."
+
+msgid "candidature_states_email_validation_value"
+msgstr "E-pasta validācija: Stāvoklis, kurā pieteicēja e-pasta adrese gaida validāciju."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "ApstiprinātaPersona: Pieteicēja e-pasta adrese ir pārbaudīta, un ir sniegts pierādījums par cilvēka esamību (mēs esam pārbaudījuši, ka jūs neesat robots)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Unikālie dati: Pieteicējs ir ievadījis savus personas identifikācijas datus, un mēs esam pārbaudījuši, ka nevienam esošam vai nesenam Sadarbības dalībniekam vai Parastajam dalībniekam nav "
+"tādu pašu datu."
+
+msgid "candidature_states_pending_value"
+msgstr "Gaidīšana: Pieteikums ir iesniegts. Personas identifikācijas dati ir nodoti Verifikatorēm, bet tās vēl nav sniegušas savu atsauksmi."
+
+msgid "candidature_states_approved_value"
+msgstr "Apstiprināts: Pieteikums ir pieņemts."
+
+msgid "candidature_states_refused_value"
+msgstr "Noraidīts: Pieteikums ir noraidīts."
+
+msgid "candidature_states_draft"
+msgstr "melnraksts"
+
+msgid "candidature_states_email_validation"
+msgstr "e-pasta_validācija"
+
+msgid "candidature_states_confirmed_human"
+msgstr "apstiprināta_persoma"
+
+msgid "candidature_states_unique_data"
+msgstr "unikālie_dati"
+
+msgid "candidature_states_pending"
+msgstr "gaidīšana"
+
+msgid "candidature_states_approved"
+msgstr "apstiprināts"
+
+msgid "candidature_states_refused"
+msgstr "noraidīts"
+
+msgid "user_types_ordinary_value"
+msgstr "Parasts: Pieteikums kļūt par Parasto dalībnieku Kopienā = ar vienkāršotu reģistrācijas procesu, bez finansiālām saistībām, bet bez lēmumu pieņemšanas tiesībām."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Sadarbības dalībnieks: Pieteikums kļūt par pilnopiederošu Kooperatīva dalībnieku = ar pilnu reģistrācijas procesu, kas nodrošina principu 'viens cilvēks = viena balss', un tam, "
+"lai pieteicējs būtu Eiropas Savienības pilsonis, pienākums iegādāties vismaz vienu akciju un samaksāt ikgadēju maksu, kā arī pilnas lēmumu pieņemšanas tiesības."
+
+msgid "user_types_ordinary"
+msgstr "Parastais Kopienas dalībnieks"
+
+msgid "user_types_cooperator"
+msgstr "Sadarbības dalībnieks = pilnopiederošs Kooperatīva dalībnieks"
+
+msgid "vote_types_yes_value"
+msgstr "Jā: Balsojums ir pozitīvs."
+
+msgid "vote_types_no_value"
+msgstr "Nē: Balsojums ir negatīvs."
+
+msgid "vote_types_abstain_value"
+msgstr "Atturēties: Balsojums ir neitrāls."
+
+msgid "vote_types_yes"
+msgstr "jā"
+
+msgid "vote_types_no"
+msgstr "nē"
+
+msgid "vote_types_abstain"
+msgstr "atturēties"
+
+msgid "zero"
+msgstr "nulle"
+
+msgid "one"
+msgstr "viens"
+
+msgid "two"
+msgstr "divi"
+
+msgid "three"
+msgstr "trīs"
+
+msgid "four"
+msgstr "četri"
+
+msgid "five"
+msgstr "pieci"
+
+msgid "six"
+msgstr "seši"
+
+msgid "seven"
+msgstr "septi"
+
+msgid "eight"
+msgstr "astoņi"
+
+msgid "nine"
+msgstr "deviņi"
+
+msgid "times"
+msgstr "reiz"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Pārbaudiet, vai esat cilvēks. Aprēķiniet vienkāršas matemātiskas operācijas rezultātus un ievadiet šos rezultātus portālā"
+
+msgid "email_candidature_state_changed"
+msgstr "Izmaiņas jūsu pieteikuma statusā portālā"
+
+msgid "invalid_challenge"
+msgstr "Jūsu atbilde ir nepareiza. Lūdzu, ievadiet jaunu."
+
+msgid "invalid_email"
+msgstr "Jūsu e-pasta adresē ir problēma, lūdzu, pārbaudiet to."
+
+msgid "invalid_choice"
+msgstr "Jūsu izvēle nav derīga, lūdzu, ievadiet to vēlreiz."
+
+msgid "challenge_instruction_text"
+msgstr "Lūdzu, aprēķiniet sekojošo četru vienkāršo matemātisko operāciju rezultātus un aizpildiet attiecīgos laukus, lai apstiprinātu savu e-pasta adresi."
+
+msgid "enter_result_label_A"
+msgstr "Lūdzu, ievadiet rezultātu matemātiskajai operācijai A:"
+
+msgid "result_label_title_A"
+msgstr "Lūdzu, ievadiet kodu, ko saņēmāt pa e-pastu, vai matemātiskās operācijas A rezultātu."
+
+msgid "result_input_title_A"
+msgstr "Lai mēs varētu pārbaudīt jūsu e-pasta adresi un to, ka jūs esat cilvēks (nevis robots), lūdzu, ievadiet matemātiskās operācijas A rezultātu, ko saņēmāt pa e-pastu."
+
+msgid "enter_result_label_B"
+msgstr "Lūdzu, ievadiet rezultātu matemātiskajai operācijai B:"
+
+msgid "result_label_title_B"
+msgstr "Lūdzu, ievadiet kodu, ko saņēmāt pa e-pastu, vai matemātiskās operācijas B rezultātu."
+
+msgid "result_input_title_B"
+msgstr "Lai mēs varētu pārbaudīt jūsu e-pasta adresi un to, ka jūs esat cilvēks (nevis robots), lūdzu, ievadiet matemātiskās operācijas B rezultātu, ko saņēmāt pa e-pastu."
+
+msgid "enter_result_label_C"
+msgstr "Lūdzu, ievadiet rezultātu matemātiskajai operācijai C:"
+
+msgid "result_label_title_C"
+msgstr "Lūdzu, ievadiet kodu, ko saņēmāt pa e-pastu, vai matemātiskās operācijas C rezultātu."
+
+msgid "result_input_title_C"
+msgstr "Lai mēs varētu pārbaudīt jūsu e-pasta adresi un to, ka jūs esat cilvēks (nevis robots), lūdzu, ievadiet matemātiskās operācijas C rezultātu, ko saņēmāt pa e-pastu."
+
+msgid "enter_result_label_D"
+msgstr "Lūdzu, ievadiet rezultātu matemātiskajai operācijai D:"
+
+msgid "result_label_title_D"
+msgstr "Lūdzu, ievadiet kodu, ko saņēmāt pa e-pastu, vai matemātiskās operācijas D rezultātu."
+
+msgid "result_input_title_D"
+msgstr "Lai mēs varētu pārbaudīt jūsu e-pasta adresi un to, ka jūs esat cilvēks (nevis robots), lūdzu, ievadiet matemātiskās operācijas D rezultātu, ko saņēmāt pa e-pastu."
+
+msgid "verify_button"
+msgstr "Sūtīt"
+
+msgid "submit_email_validation_title"
+msgstr "Noklikšķiniet, lai pārbaudītu ievadītos kodus."
+
+msgid "passwords_dont_match"
+msgstr "Paroles nesakrīt."
+
+msgid "password_too_short"
+msgstr "Parole ir pārāk īsa."
+
+msgid "password_minimum_length"
+msgstr "Parolei jābūt vismaz ${password_minimum_length} rakstzīmēm gara."
+
+msgid "password_too_long"
+msgstr "Parole ir pārāk gara."
+
+msgid "password_maximum_length"
+msgstr "Parolei nedrīkst pārsniegt ${password_maximum_length} rakstzīmes."
+
+msgid "password_must_contain_digit"
+msgstr "Parolei jāietver vismaz viena cipara."
+
+msgid "password_must_contain_uppercase"
+msgstr "Parolei jāietver vismaz viena lielā burta."
+
+msgid "password_must_contain_lowercase"
+msgstr "Parolei jāietver vismaz viena mazā burta."
+
+msgid "password_must_contain_special_char"
+msgstr "Parolei jāietver vismaz viens no šādiem simboliem: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Lūdzu, ievadiet savu paroli šeit."
+
+msgid "password_confirm_title_label"
+msgstr "Lūdzu, apstipriniet savu paroli šeit."
+
+msgid "password_confirm"
+msgstr "Apstipriniet savu paroli."
+
+msgid "type_of_registration"
+msgstr "Reģistrācijas veids"
+
+msgid "type_registration_label"
+msgstr "Izvēlieties sev atbilstošo reģistrācijas veidu."
+
+msgid "type_registration_choice"
+msgstr "Katrs reģistrācijas veids nāk ar konkrētu tiesību, ieguvumu un pienākumu kopumu."
+
+msgid "approved_heading"
+msgstr "Apsveicu ar apstiprinājumu!"
+
+msgid "approved_description"
+msgstr "Jūsu pieteikums ir apstiprināts. Tagad varat pieteikties, izmantojot pseidonimu un paroli, ko sniedzāt pieteikšanās procesā."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Nederīgs pseidonims. Tam vajadzētu būt no ${MIN_PSEUDONYM_LENGTH} līdz ${MAX_PSEUDONYM_LENGTH} rakstzīmēm garam un tas var saturēt tikai burtus (A-Z, a-z), ciparus (0-9), zemsvītras (_) , punktus "
+"(.), svītras (-) un atstarpes ( ). Tam nedrīkst būt burti ar akcentiem, diērezi, un citiem diakritiskajiem zīmēm, kas raksturīgas dažādām valodām."
+
+msgid "invalid_date"
+msgstr "Nederīgs datuma formāts."
+
+msgid "pseudonym_too_short"
+msgstr "Pseidonims ir pārāk īss."
+
+msgid "pseudonym_minimum_length"
+msgstr "Pseidonim ir jābūt vismaz ${MIN_PSEUDONYM_LENGTH} rakstzīmes garam."
+
+msgid "pseudonym_too_long"
+msgstr "Pseidonims ir pārāk garš."
+
+msgid "pseudonym_maximum_length"
+msgstr "Pseidonim nedrīkst pārsniegt ${MAX_PSEUDONYM_LENGTH} rakstzīmes."
+
+msgid "pseudonym_allready_exists"
+msgstr "Šis pseidonims jau tiek izmantots. Lūdzu, izvēlieties citu."
+
+msgid "Select_a_country"
+msgstr "Izvēlieties Eiropas Savienības dalībvalsti"
+
+msgid "Austria"
+msgstr "AT - Austrija"
+
+msgid "Belgium"
+msgstr "BE - Beļģija"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgārija"
+
+msgid "Cyprus"
+msgstr "CY - Kipra"
+
+msgid "Czech_Republic"
+msgstr "CZ - Čehija"
+
+msgid "Germany"
+msgstr "DE - Vācija"
+
+msgid "Denmark"
+msgstr "DK - Dānija"
+
+msgid "Estonia"
+msgstr "EE - Igaunija"
+
+msgid "Spain"
+msgstr "ES - Spānija"
+
+msgid "Finland"
+msgstr "FI - Somija"
+
+msgid "France"
+msgstr "FR - Francija"
+
+msgid "Greece"
+msgstr "GR - Grieķija"
+
+msgid "Croatia"
+msgstr "HR - Horvātija"
+
+msgid "Hungary"
+msgstr "HU - Ungārija"
+
+msgid "Ireland"
+msgstr "IE - Īrija"
+
+msgid "Italy"
+msgstr "IT - Itālija"
+
+msgid "Lithuania"
+msgstr "LT - Lietuva"
+
+msgid "Luxembourg"
+msgstr "LU - Luksemburge"
+
+msgid "Latvia"
+msgstr "LV - Latvija"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Nīderlande"
+
+msgid "Poland"
+msgstr "PL - Polija"
+
+msgid "Portugal"
+msgstr "PT - Portugāle"
+
+msgid "Romania"
+msgstr "RO - Rumānija"
+
+msgid "Sweden"
+msgstr "SE - Zviedrija"
+
+msgid "Slovenia"
+msgstr "SI - Slovēnija"
+
+msgid "Slovakia"
+msgstr "SK - Slovākija"
+
+msgid "full_name_as_in_id_required"
+msgstr "Pilns vārds(-di) ir obligāti jānorāda."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Pilna uzvārds(-di) ir obligāti jānorāda."
+
+msgid "birthdate_required"
+msgstr "Dzimšanas datums ir obligāti jānorāda."
+
+msgid "nationality_required"
+msgstr "Nacionalitāte ir obligāti jānorāda."
+
+msgid "first_interaction_language_required"
+msgstr "Pirmā saziņas valoda ir obligāti jānorāda."
+
+msgid "pending_description"
+msgstr "Jūsu pieteikums tiek pārskatīts. Jūs tiksiet informēts pa e-pastu, tiklīdz tas būs apstiprināts."
+
+msgid "candidature_not_found"
+msgstr "Pieteikums nav atrasts."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Paldies par jūsu interesi par ${domain_name} aktivitātēm! Šeit ir pareizā vieta, kur reģistrēties</b></h2>\n"
+"<p>CosmoPolitical Cooperatīvs atbalsta indivīdus un pārveido esošo ekonomisko, sociālo un politisko sistēmu par radikāli taisnīgu, ilgtspējīgu, demokrātisku un laimīgu "
+"sabiedrību, <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Sadarbības sabiedrību</a>.</p>\n"
+"<p>Šeit ir reģistrācijas procesa sākums, lai pievienotos mums. Mēs piedāvājam divus dalības līmeņus, ar pieaugošām saistībām un tiesībām:</p>\n"
+"<ul>\n"
+"<li>kā <b>parasts kopienas loceklis</b>, ar vienkāršu reģistrēšanās procesu, bez finansiālām saistībām, bet bez balsošanas tiesībām; vai </li>\n"
+"<li>kā <b>kooperators</b>, pilntiesīgs mūsu Cooperatīva loceklis, ar reģistrēšanās procesu, kas nodrošina, ka konkrēta persona var reģistrēties tikai vienu reizi (lai ievērotu demokrātisko principu \"viena "
+"persona = viens balsojums\") un ka tikai Eiropas Savienības pilsoņi, kas sasnieguši pilngadību, ir Kooperatori, ar saistību iegādāties vismaz vienu daļu un maksāt "
+"gadu contribu, un pilnām balsošanas tiesībām. Eiropas Savienība ir mūsu darba ģeogrāfiskais ietvars (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">skatīt, kāpēc</a>)</li>\n"
+"</ul>\n"
+"<p>Reģistrācijas process ietver sekojošus soļus:</p>\n"
+"<ol>\n"
+"<li>mēs pārbaudām, vai e-pasta adrese tika sniegta no jums, cilvēka (nevis robota);</li>\n"
+"<li>mēs lūdzam jūs sniegt savu pseidonimu, paroli un izvēlētās valodas(-as) saziņai ar jums;</li>\n"
+"<li>ja jūs reģistrējāties kā parasts kopienas loceklis, jūs esat pabeidzis un pievienojaties mūsu Kopienai. Ja jūs reģistrējāties kā kooperators, process turpinās, lai mēs varētu pārbaudīt, vai jūs atbilstat iepriekš minētajiem nosacījumiem, lai būtu Kooperators.</li>\n"
+"</ol>\n"
+"<p>Šī pārbaude tiek veikta šādi:</p>\n"
+"<ol>\n"
+"<li>mēs lūdzam jūs sniegt <b>identitātes datus</b>: jūsu vārds(-i) un uzvārds(-i), jūsu dzimšanas datums;</li>\n"
+"<li>mēs lūdzam dažus esošos Cooperatīva dalībniekus (jūsu pārbaudītājus), lai viņi apstiprinātu, ka informācija par jūsu oficiālo identitātes dokumentu atbilst iepriekš sniegtajai informācijai, "
+"pamatojoties uz tiešu e-pasta apmaiņu vai videokonferences sapulci ar jums;</li>\n"
+"<li>kad viņi būs apstiprinājuši šo atbilstību, jūs tiksiet laipni uzņemti kā Kooperators, ar pilnām tiesībām - kad jūs būsiet iegādājies vismaz <a href=\"https://www.cosmopolitical.coop/share\">vienu "
+"daļu</a> un samaksājis savu <a href=\"https://www.cosmopolitical.coop/yearcontrib\">gada ieguldījumu mūsu darbībām</a>.</li>\n"
+"</ol>\n"
+"<p>Uzsāciet savu reģistrāciju tagad! Mēs ceram jūs laipni uzņemt mūsu aktivitātēs.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Pirmais solis jūsu reģistrācijas procesā ir validēt, ka jūs esat \n"
+"cilvēks, nevis robots. Tāpēc mēs pārbaudām, vai jūs varat saņemt un \n"
+"izprast e-pastu, ko mēs jums nosūtīsim: tas, ko mēs no jums lūdzam, ir \n"
+"vienkārši cilvēkam, daudz sarežģītāk robotam."
+
+msgid "identity_verification_label"
+msgstr "Identitātes pārbaude"
+
+msgid "Send_id_copy_by_email"
+msgstr "Nosūtiet skanu no daļas jūsu oficiālā identitātes dokumenta pa e-pastu."
+
+msgid "Send_video_conference_link"
+msgstr "Nosūtiet priekšlikumus par videokonferences datumu un laiku."
+
+msgid "Proceed"
+msgstr "Turpināt"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Lūdzu, apstipriniet, ka esat nosūtījis e-pastus pārbaudītājiem."
+
+msgid "sent_confirmation_label"
+msgstr "Apstiprinājums, ka e-pasti tika nosūtīti pārbaudītājiem"
+
+msgid "submit_email_confirmation_title"
+msgstr "Apstipriniet, ka esat nosūtījis e-pastus."
+
+msgid "confirm_email_send_button_label"
+msgstr "Apstiprināt"
+
+msgid "vote_success"
+msgstr "Paldies, ka piedalījāties balsošanas procesā. Jūsu balss ${vote} ir veiksmīgi reģistrēta. Jūs varat mainīt savu balsi līdz tās beigu termiņam, atgriežoties šajā lapā."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Kā kooperators, jūs piedalīsieties visās mūsu lēmumos. Šie lēmumi tiek pieņemti stingros demokrātiskos procesos, un tiem var būt nozīmīgas sekas gan "
+"Cooperatīvam, gan Kooperatoriem. Turklāt Cooperatīvs plāno pārstāvēt ES pilsoņus, neatkarīgi no viņu nacionalitātes - bet tikai ES pilsoņus. Tas ir īpaši "
+"nopietni publisko vēlēšanu laikā. Tāpēc mums ir jānodrošina trīs lietas: (1) ka attiecīgā persona var reģistrēties ne vairāk kā vienu reizi, lai nodrošinātu demokrātisko principu \"viena persona = "
+"viens balsojums\"; (2) ka visi Kooperatori ir vismaz pilngadīgi un (3) ka tikai Eiropas Savienības pilsoņi ir Kooperatori.</p>\n"
+"    <p>Tāpēc mēs pārbaudīsim jūs no dažiem jūsu identitātes datiem, salīdzinot (1) datus, kurus jūs ievadīsiet šajā formā, kad reģistrējaties, ar (2) "
+"informāciju jūsu oficiālajos identitātes dokumentos. Šo pārbaudi veiks nejauši izvēlēti Cooperatīva locekļi, jūsu pieteikuma pārbaudītāji, "
+"un tā balstīsies uz informāciju par jūsu oficiālajiem identitātes dokumentiem, kurus jūs tieši pārsūtīsiet viņiem, pa e-pastu vai videokonferences laikā, nesūtīt "
+"caur šo tiešsaistes platformu (drošības un konfidencialitātes labad).</p>\n"
+"    <p>Šie dati, kurus mēs prasām no jums, un par kuriem pārbaudītāji pārbaudīs atbilstību jūsu oficiālajos identitātes dokumentos ir:\n"
+"    <ul>\n"
+"    <li>jūsu vārds(-i) un uzvārds(-i);</li>\n"
+"    <li>jūsu dzimšanas datums;</li>\n"
+"    <li>jūsu pilsonība.</li>\n"
+"    </ul></p>\n"
+"    <p>Vienīgais, kam pieder jūsu vārdi, uzvārdi un dzimšanas datums: jūs. Ja jūs mēģināsiet reģistrēties vēlreiz, jums būs jāsniedz tie paši dati mūsu verificēšanas "
+"procesam, un mēs noraidīsim jūsu pieteikumu, jo jūs jau esat Kooperators un nevarat būt vairāk nekā vienā kontā, lai balsotu vairāk nekā vienu reizi. Mēs rīkosimies ar pārliecību, jo "
+"mēs zinām, ka tikai viena persona ir šāda vārdu, uzvārdu un dzimšanas datuma kombinācija. Jūsu dzimšanas datums ļauj mums pārbaudīt, ka jūs esat pilngadīgs, un jūsu pilsonība "
+"ļauj mums nodrošināt jums, ka jūs patiešām esat Eiropas Savienības pilsonis.</p>\n"
+"    <p>Šie dati tiks izmantoti tikai mūsu identitātes, vecuma un pilsonības pārbaudei un jūsu konta pārvaldīšanai kā Kooperatoram. Tie nekad netiks rādīti citiem "
+"IT platformas ${domain_name} lietotājiem, un tie netiks nodoti vai pārdoti nevienam, izņemot juridisko prasību izpildīšanu no publisko tiesību ievērošanas iestādēm, pamatojoties uz "
+"tiesneša pieprasījumu. \"Datu kontrolieris\", kā noteikts <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Vispārīgajā datu aizsardzības "
+"regulā (GDPR) Eiropas Savienībā</a>, ir CosmoPolitical Cooperative SCE, Eiropas Kooperatīva sabiedrība, kas dibināta 229 rue Solférino, 59000 Lille, Francijā un reģistrēta 25. "
+"aprīlī 2023. gadā ar numuru SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Mēs nosūtījām jums pa e-pastu komplektu ar četriem vienkāršiem matemātiskiem uzdevumiem, kas identificēti no A līdz D, visi seko tam pašam paraugam: (A PIRMIE NUMURS STARPE 1 UN 9) "
+"reiz (Otrs NUMURS STARPE 1 UN 9), plus (TREŠAIS NUMURS STARPE 1 UN 9). Lai veiktu aprēķinu, vispirms jums jāsareizina PIRMIE NUMURS STARPE 1 UN 9 "
+"ar OTRU NUMURU STARPE 1 UN 9. Kad jums ir rezultāts šai reizināšanai, jums jāpievieno pie šī rezultāta TREŠAIS NUMURS STARPE 1 UN 9. Visbeidzot, jums jāpieraksta "
+"rezultāts šai pēdējai pievienošanai norādītajā kastē par aprēķinu, ko veicat (starpcitu četriem, ko mēs jums nosūtījām, identificētiem no A līdz D). Jums jāpārveic aprēķins visiem četriem uzdevumiem, kurus esam nosūtījuši pa e-pastu.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Kā daļa no reģistrācijas procesa kā Kooperators, jums jāizvēlas metode jūsu identitātes verifikācijai. Šī identitātes verifikācija ir nepieciešama, lai nodrošinātu: (1) "
+"ka konkrēta persona nereģistrējas vairākkārt ar dažādām e-pasta adresēm (mēs šeit ievērojam demokrātisko principu: \"viena persona - viens balsojums\"); (2) ka tikai Eiropas Savienības pilsoņi, kas ir sasnieguši pilngadību, ir Kooperatori (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >sk. kāpēc</a>).</p>\n"
+"    <p>Jums ir divas iespējas šim verifikācijas procesam:</p>\n"
+" <ul>\n"
+"   <li><b>Nosūtiet savu identitātes dokumentu kopiju pa e-pastu:</b> Jūs varat izvēlēties droši nosūtīt pa e-pastu identitātes dokumentu kopiju tieši nelielam izlozētam "
+"Kooperatoru skaitam, jūsu Verifikatoriem. Šī metode nodrošina ātru un tiešu jūsu identitātes apstiprināšanas veidu.</li>\n"
+"   <li><b>Organizējiet video konferenci:</b> Alternatīvi, jūs varat izvēlēties video konferences sesiju, kurā jūs varat tiešsaistē prezentēt savus identitātes dokumentus saviem Verifikatoriem. Šī "
+"metode nodrošina personīgāku mijiedarbību un ļauj nekavējoties noskaidrot jautājumus, ja nepieciešams, mutiski, ja runājat vienā valodā, vai izmantojot čatu un automātisko tulkošanu, ja nē.</li>\n"
+" </ul>\n"
+" <p>Abos gadījumos mēs iesakām jums, drošības apsvērumu dēļ, slēpt savā oficiālajā identitātes dokumentā jūsu dzimšanas vietu un identitātes dokumenta numuru, pirms kopējat vai "
+"rādāt to saviem Verifikatoriem.</p>\n"
+" <p>Ir svarīgi, lai jūs savu izvēli veiktu ātri, lai reģistrācijas process noritētu vienmērīgi un laikā. Lūdzu, pārliecinieties, ka izvēlētā metode ir visērtākā jums "
+"un atbilst jūsu privātuma preferencēm.</p>\n"
+" <p>Jūsu sadarbība šajā jautājumā ir ļoti novērtēta un ir svarīgs elements, lai uzturētu augstus uzticības un pan-eiropas demokrātijas standartus mūsu Kooperatīvā. Paldies par jūsu "
+"izpratni un aktīvu līdzdalību šajā svarīgajā solī.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Esošo Kooperatoru skaits ir pārāk zems, lai izvēlētos atbilstošu Verifikatoru skaitu jūsu identitātei. Lūdzu, sazinieties ar sistēmas administratoru, uz sekojošo adresi "
+"${administrator}, lai atrisinātu šo jautājumu."
+
+msgid "email_copy_id_verification_subject"
+msgstr "lv - ${domain_name} - Lūdzu, pārbaudiet manu identitāti kā jaunu potenciālo Kooperatoru"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Godājamie Verifikatori,\n"
+" Es rakstu jums, lai pabeigtu identitātes verifikācijas procesu par manu pieteikumu kļūt par Kooperatoru ${domain_name}. Šim e-pastam pievienota daļēja mana oficiālā identitātes dokumenta kopija.\n"
+" Lūdzu, ņemiet vērā, ka noteikta sensitīva informācija ir maskēta drošības apsvērumu dēļ. Tomēr dokuments satur informāciju, kas jums nepieciešama, lai pārbaudītu manu identitāti saskaņā ar "
+"reģistrācijas procesu ${domain_name}.\n"
+" Es laipni lūdzu jūs izvērtēt pievienoto dokumentu, ja iespējams, tuvāko 3 dienu laikā, lai balsotu par atbilstību starp:\n"
+"\n"
+" - identitātes informāciju, ko jūs saņēmāt tieši pa e-pastu no ${domain_name} IT platformas (un kas būs atgādināta jums balsu saskarnē) un \n"
+" - identitātes informāciju, ko jūs varat redzēt pievienotajā daļējā manas oficiālā identitātes dokumenta kopijā.\n"
+"\n"
+" Saiet, kurā jūs varat balsot par šo atbilstību, ir sekojošs: ${voting_url}.\n"
+" Es jau iepriekš sirsnīgi pateicos jums par atbalstu manas reģistrācijas procesā kā Kooperatoram ${domain_name}. Ja jums ir kādi jautājumi vai nepieciešama papildu informācija, lūdzu, nekautrējieties sazināties ar mani tieši savā valodā.\n"
+" Ar cieņu,\n"
+" ${signature}\n"
+" Pievienotais fails: [Identitātes dokumenta faila nosaukums]\n"
+" Šis e-pasts ir izveidots ar ${domain_name} identitātes verifikācijas funkcijas palīdzību. Ja jūs neesat Verifikators, kas piešķirts ${signature} pieteikumam, un esat saņēmis šo e-pastu kļūdas dēļ, lūdzu, informējiet ${domain_name} administratoru, uz sekojošo adresi: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "lv - ${domain_name} - Lūdzu, pārbaudiet manu identitāti video konferencē kā jaunu potenciālo Kooperatoru"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Godājamie Verifikatori,\n"
+"    Es rakstu jums, lai pabeigtu identitātes verifikācijas procesu par manu pieteikumu kļūt par Kooperatoru ${domain_name}. Es vēlētos piedāvāt video konferences sanāksmi šim mērķim.\n"
+"    Šeit ir daži laika sloti, kurus es ierosinu video konferencei. Lūdzu, ņemiet vērā, ka es dzīvoju Vācijā (lūdzu, pielāgojiet atbilstoši savai valstij / dzīves reģionam. Tas ir "
+"nepieciešams, lai jūsu kolēģi zinātu jūsu laika zonu), tāpēc dienas laiks, kurā es dzīvoju, var atšķirties no dienas laika, kurā dzīvojat jūs. Šai video konferencei vajadzētu "
+"ilgst ne ilgāk kā 10 minūtes: (lūdzu, sniedziet vismaz 3 iespējas, ja iespējams, dažādos dienas laikos un dažādās dienās, ieskaitot nedēļas nogales, visas no tām 10 "
+"dienu laikā pēc e-pasta nosūtīšanas)\n"
+"   \n"
+"         - Pirmdiena, 2023. gada 4. septembris, plkst. 17:30 manā laikā; (pielāgojiet atbilstoši savai pieejamībai)\n"
+"         - Otrdiena, 2023. gada 5. septembris, plkst. 20:30 manā laikā; (pielāgojiet atbilstoši savai pieejamībai)\n"
+"         - Sestdiena, 2023. gada 9. septembris, plkst. 10:00 manā laikā. (pielāgojiet atbilstoši savai pieejamībai)\n"
+"    \n"
+"    Lūdzu, atcerieties, ka mēs varam dzīvot dažādās laika zonās! Lūdzu, pārveidojiet šos laika slotus uz savu laika zonu.\n"
+"    Video konference notiks, izmantojot sekojošo saiti:\n"
+"(lūdzu, ievietojiet šeit saiti, kuru esat sagatavojis šai videokonferencei. Šeit ir mūsu ieteikumi platformas, ko jūs varat izmantot, lai radītu videokonferenci un sniegtu "
+"atbilstošo saiti:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (bezmaksas un atvērtā koda programmatūra)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (bezmaksas un atvērtā koda programmatūra)\n"
+"         - Zoom : https://zoom.us/ (patenta programmatūra)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (patenta programmatūra, platforma aiz maksas sienas)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (patenta programmatūra, bezmaksas pieeja platformai)\n"
+"    )\n"
+"    Lūdzu, laipni izvēlieties laikā slotu, kas jums piemērots, un nosūtiet man e-pastu ar savu izvēli.\n"
+"    Video konferences sanāksmes laikā var gadīties, ka mums nav kopīgas valodas. Ja tā ir, es ierosinu, ka mēs pieņemam laipnu un atbalstošu attieksmi viens pret otru. Es ierosinu, "
+"lai mēs izmantotu čatu, lai izteiktu sevi savās attiecīgajās valodās, un izmantotu mašīntulkošanu, lai saprastu, ko raksta mūsu sarunu biedrs.\n"
+"    Kad jūs esat rīkojis šo sanāksmi video konferencē, es laipni lūdzu, lai jūs balsotu, lai apstiprinātu vai noliegtu atbilstību starp:\n"
+"\n"
+"     - identitātes informāciju, ko jūs saņēmāt tieši pa e-pastu no ${domain_name} IT platformas (un kas būs atgādināta jums balsu saskarnē) un \n"
+"    - identitātes informāciju, ko jūs būsit redzējis video konferences laikā.\n"
+"\n"
+" Saites, kur jūs varat balsot par šo atbilstību, ir sekojoša: ${voting_url}.\n"
+"  Es jau iepriekš sirsnīgi pateicos jums par atbalstu manas reģistrācijas procesā kā Kooperatoram ${domain_name}. Ja jums ir kādi jautājumi vai nepieciešama papildu "
+"informācija, lūdzu, nekautrējieties sazināties ar mani tieši.\n"
+" Ar cieņu,\n"
+" ${signature}\n"
+" Šis e-pasts ir izveidots ar ${domain_name} identitātes verifikācijas funkcijas palīdzību. Ja jūs neesat Verifikators, kas piešķirts ${signature} pieteikumam, un esat saņēmis šo e-pastu kļūdas dēļ, lūdzu, informējiet ${domain_name} administratoru, uz sekojošo adresi: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Ja lietotājs pastāv, viņš saņems e-pastu."
+
+msgid "reset_password_email_subject"
+msgstr "Atjaunojiet savu paroli"
+
+msgid "forget_email_send_error"
+msgstr "Radās kļūda, sūtot atjaunošanas e-pastu, lūdzu, sazinieties ar administratoru uz ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "izveidots"
+
+msgid "member_state_created_value"
+msgstr "Dalībnieks ir izveidots"
+
+msgid "member_state_draft_name"
+msgstr "sagatavots"
+
+msgid "member_state_draft_value"
+msgstr "Dalībnieka dati tiek rediģēti"
+
+msgid "member_state_registred_name"
+msgstr "reģistrēts"
+
+msgid "member_state_registred_value"
+msgstr "Dalībnieka dati ir saglabāti"
+
+msgid "member_data_modification_request_name"
+msgstr "tiek modificēts"
+
+msgid "member_data_modification_request_value"
+msgstr "Iesniegts datu modificēšanas pieprasījums"
+
+msgid "member_datas_modified_name"
+msgstr "modificēts"
+
+msgid "member_datas_modified_value"
+msgstr "Dalībnieka dati ir modificēti"
+
+msgid "email_member_state_changed"
+msgstr "Izmaiņas jūsu dalībnieka profilā"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Lūdzu, norādiet derīgu e-pasta adresi"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Administratoram nav atļauts atiestatīt savu paroli"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Ja lietotājs pastāv, uz viņa/viņas e-pasta adresi ir nosūtīts e-pasts ar saiti, lai atiestatītu paroli"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Divas paroles versijas nav vienādas. Lūdzu, pārliecinieties, ka tās atbilst un iesniedziet vēlreiz"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Lūdzu, norādiet jaunu paroli"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Jūs esat veiksmīgi mainījis savu paroli"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Notikusi kļūda, atiestatot jūsu paroli"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Notikusi kļūda, atiestatot jūsu paroli. Jūsu parole netika mainīta"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Dalībnieks netika atrasts pašreizējo dalībnieku sarakstā"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Hipersaite, ko izmantojāt, lai atiestatītu paroli, ir novecojusi. Lūdzu, izmantojiet jaunāko, ko saņēmāt"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "E-pasts, kas satur matemātisko izaicinājumu, kas apstiprina, ka kandidāts ir cilvēks (nevis robots), netika nosūtīts."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Kļūda, iesniedzot kandidātūru"
+
+msgid "modification_to_profile_button_title"
+msgstr "Rediģēt profilu"
+
+msgid "modification_to_profile_button_label"
+msgstr "Rediģēt profilu"
+
+msgid "modification_to_profile_button_description"
+msgstr "Noklikšķiniet šeit, lai pa e-pastu saņemtu drošu saiti profila modificēšanai."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Ņemot vērā jūsu datu drošību, unikāla saite profila modificēšanai tiks nosūtīta jums pa e-pastu. Šis process garantē, ka tikai persona ar piekļuvi jūsu e-pasta adresei "
+"var veikt izmaiņas jūsu profilā."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Saita modificēt jūsu profilu IT infrastruktūrā ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Lūdzu, norādiet šeit visus jūsu vārdu(-us), kā rakstīts jūsu oficiālajos ID dokumentos, oficiālajā transkripcijā latīņu rakstībā (ja oriģināla valoda izmanto alfabētu "
+"atšķirīgu no latīņu rakstības)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Lūdzu, norādiet šeit visus jūsu uzvārdu(-us) piedzimšanas brīdī (t.i., NEVIS jūsu uzvārdu kā precētu personu), kā rakstīts jūsu oficiālajos ID dokumentos, oficiālajā "
+"transkripcijā latīņu rakstībā (ja oriģināla valoda izmanto alfabētu atšķirīgu no latīņu rakstības)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Teksts, kas apraksta jūs (jūsu profila teksts)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Lūdzu, uzrakstiet šeit tekstu, kas apraksta jūs, jūsu izvēlētajā valodā, lai visi pārējie kopienas dalībnieki varētu jūs iepazīt labāk. Mēs ieteiktu koncentrēties "
+"uz: (1) No kurienes jūs esat, (2) ko jūs darāt, (3) ko vēlaties darīt kā kopienas dalībnieks, un (4) resursi (pieredze, zināšanas, laiks), kas jums ir pieejami.\n"
+"Mēs uzskatām, ka šī informācija ir noderīga, jo iepazīstināšana ar sevi citiem saviem vārdiem dod cilvēka seju jūsu digitālajai identitātei mūsu IT infrastruktūrā. Ar "
+"šo tekstu katrs kopienas dalībnieks iepazīst jūs labāk, un tas padara mijiedarbību daudz vieglāku!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Lūdzu, norādiet savu dzimšanas datumu šādā formātā: DD/MM/YYYY, t.i. (1) diena mēnesī, 2 cipari; (2) mēneša numurs, 2 cipari; (3) gads, 4 cipari. Tikai "
+"personas, kas sasniegušas 18 gadu vecumu, var būt kooperatori. Ja jūs joprojām neesat sasniedzis 18 gadu vecumu, aicinām jūs reģistrēties kā parasts kopienas dalībnieks - un "
+"pāriet uz kooperatīva statusu tiklīdz sasniegsiet pilngadību."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Lūdzu, norādiet viena Eiropas Savienības dalībvalsti, kuras pilsonis jūs esat. Tikai Eiropas Savienības pilsoņi var būt kooperatori"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Lūdzu, izvēlieties vienu Eiropas Savienības dalībvalsti"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Tas ir unikālais numurs, kas identificē jūs visos procesos, kas notiek kopienā"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Lūdzu, norādiet šeit pseidonīmu, kas identificēs jūs visu jūsu darbības laiku mūsu IT platformā. Mēs STRONGI ieteicam izvēlēties pseidonīmu, kas apgrūtina "
+"atpakaļsekošanu uz jūsu patieso identitāti (vai padara to ļoti grūtu). Tādējādi jūs aizsargājat savu viedokļu konfidencialitāti (t.i., personas datus, kuriem ir īpaša aizsardzība saskaņā ar "
+"Vispārīgo datu aizsardzības regulējumu - GDPR) pret jebkāda veida ārējo spiedienu reālajā dzīvē (piemēram, no jūsu darba devēja vai klientiem). Esiet ļoti uzmanīgs! Kad jūs "
+"to esat izvēlējies, jūs NIKAD vairs nevarēsit mainīt šo pseidonīmu. Izvēlieties to uzmanīgi! \n"
+" Jūsu pseidonīmam jābūt no ${MIN_PSEUDONYM_LENGTH} līdz ${MAX_PSEUDONYM_LENGTH} rakstzīmēm garam un var saturēt tikai latīņu alfabēta burtus (A-Z, a-z), ciparus (0-9), "
+"apakšsvītras (_), punktus (.), mīnusus (-) un atstarpes ( ). Tam nedrīkst būt burtu ar akcēntiem, umlautiem un citiem diakritiskajiem znakie, kas ir raksturīgi dažām valodām."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Pseidonīma norādīšana ir obligāta"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Lūdzu, norādiet savu paroli. Jūsu parolei jābūt no ${password_minimum_length} līdz ${password_maximum_length} rakstzīmēm garai, jāietver vismaz viens cipars, vismaz viens maza burta "
+"burts, vismaz viens liela burta burts un vismaz viens no šādiem simboliem: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Lūdzu, apstipriniet savu paroli"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Jūsu paroles apstiprināšana ir obligāta"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Lūdzu, norādiet e-pasta adresi, kuru IT infrastruktūra ${domain_name} izmantos, lai sazinātos ar jums.\n"
+"Mēs iesakām izvēlēties e-pasta adresi, ko bieži pārbaudāt.\n"
+"Mums nepieciešama šī informācija, jo mums ir jāsaņemt jums ziņas par notikumiem Kooperatīva darbībā, jāsniedz jums iespēja rīkoties vai piedalīties "
+"lēmumos. E-pasts ir visplašāk izmantotais saziņas līdzeklis Eiropā, tas ir universāls un balstās uz atvērtajiem un brīvajiem standartiem, atšķirībā no digitālajiem milžu (tā saukto 'GAFAM') "
+"patenta ziņojumu sistēmām.\n"
+"Šī e-pasta adrese tiks izmantota tikai saziņai starp IT infrastruktūru ${domain_name} un jums. To nekad neparādīs citiem IT platformas ${domain_name} lietotājiem, kā arī to "
+"nesūtīs vai nepārdos ikvienam, izņemot gadījumus, kad tas ir vajadzīgs likumisko prasību izpildei no valsts tiesību aktiem, pieprasījuma gadījumā no tiesneša. \"Datu kontrolieris\", "
+"kā definēts Vispārīgajā datu aizsardzības regulējumā (GDPR) Eiropas Savienībā ir CosmoPolitical Cooperative SCE, Eiropas kooperatīva sabiedrība, reģistrēta 229 rue Solférino, "
+"59000 Lille, Francija, un reģistrēta 2023. gada 25. aprīlī ar numuru SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Lūdzu, norādiet valodu, ar kuru jūs vēlētos, lai IT infrastruktūra ${domain_name} sazinātos ar jums. \n"
+"Mēs iesakām izvēlēties valodu, ko vislabāk pārzināt, no Eiropas Savienības oficiālajām valodām vai esperanto. Ja tas ir pieejams starp tām, par kurām mums ir "
+"izstrādāta lietotāja saskarne, mēs to izmantosim, lai sazinātos ar jums. \n"
+"Mums nepieciešama šī informācija, jo, ievērojot taisnīgumu un cieņu pret demokrātiskajām principiem, mēs vēlamies sazināties ar jums valodā, ko jūs saprotat, cik iespējams."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Lūdzu, norādiet valodu, ar kuru jūs piekristu, kā otro izvēli, lai ${domain_name} IT infrastruktūra sazinātos ar jums. \n"
+" Mēs iesakām izvēlēties citu Eiropas Savienības oficiālo valodu vai esperanto, ko jūs saprotat pietiekami labi. Ja tā ir pieejama starp tām, kurām mēs esam izstrādājuši "
+"lietotāja saskarni, un ja jūsu izvēlētā valoda nav pieejama, mēs to izmantosim saziņai ar jums. \n"
+" Mums nepieciešama šī informācija, jo, neskatoties uz mūsu centieniem, var gadīties, ka jūsu izvēlētā valoda nav pieejama mūsu programmatūras lietotāja saskarnē. Tāpēc mēs jautājam "
+"jums, vai jūs varat izmantot citu valodu."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Valoda, ko jūs pieņemat kā trešo izvēli saziņai ar jums"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Lūdzu, norādiet valodu, ar kuru jūs piekristu, kā trešo izvēli, lai ${domain_name} IT infrastruktūra sazinātos ar jums. \n"
+" Mēs iesakām izvēlēties citu Eiropas Savienības oficiālo valodu vai esperanto, ko jūs joprojām varat saprast. Ja tā ir pieejama starp tām, kurām mēs esam izstrādājuši "
+"lietotāja saskarni, un ja ne jūsu izvēlētā valoda, ne otrā valoda nav pieejama, mēs to izmantosim saziņai ar jums. \n"
+" Mums nepieciešama šī informācija, jo, neskatoties uz mūsu centieniem, var gadīties, ka jūsu izvēlētā valoda un jūsu otrā valoda nav pieejamas mūsu programmatūras lietotāja saskarnē. "
+"Tāpēc mēs jautājam jums, vai jūs varat izmantot trešo valodu. Mēs apzināmies, ka jums ir neapmierinoša situācija, sazinoties ar mums, izmantojot šo valodu - kā arī mums. Mēs "
+"atvainojamies par to."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Jūsu sadarbības uzvedības atzīme"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Kā sadarbojoties, jūsu sadarbības uzvedības atzīme ir rezultāts atzīmēm, ko jums piešķīruši citi aktīvie dalībnieki darba grupās, kurās jūs esat piedalījies, lai definētu "
+"un pieņemtu rīcības priekšlikumus. Katrs aktīvais dalībnieks var sniegt atzīmi, kas ir +1, 0 vai -1, atkarībā no tā, cik sadarbīga jūsu uzvedība bija jūsu aktīvās dalības laikā šajā "
+"darba grupā. Šī atzīme pēc tam automātiski tiek 'aizmirsta' un laika gaitā samazinās: pēc ${forgetting_time_constant} dienām tā tiek puskārtota. Jūsu sadarbības uzvedības "
+"atzīmes sākotnējā vērtība ir nulle."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Datums, kad jūsu sadarbības uzvedības atzīme tika pēdējo reizi atjaunināta"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Šis ir pēdējais datums, kad cits sadarbojoties piešķīra jums atzīmi pēc jūsu aktīvās dalības pārtraukšanas darba grupā, kas definēja un pieņēma rīcības priekšlikumu. "
+"Sākotnējā šī datuma vērtība ir jūsu reģistrēšanās datums kā sadarbojoties"
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Kooperatīva akciju skaits, kas jums pieder"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Šis ir kopējais kooperatīva akciju skaits, kas jums pieder, pēc to iegādes mūsu tīmekļa portālā. Reģistrējoties, šis skaitlis ir vienāds ar nulli. Mēs aicinām jūs "
+"steigties, lai apmeklētu šo URL: ${url_purchase_shares}, lai iegādātos savu pirmo akciju(s). Jūs gūsiet pilnīgas lēmumu pieņemšanas tiesības kā sadarbojoties tikai pēc tam, kad iegādāsieties "
+"vismaz vienu akciju (un samaksāsiet savu ikgadējo iemaksu). Jums ir iespēja iegādāties vairāk nekā vienu akciju, reģistrējoties, bet arī jebkurā laikā pēc tam. Tas stiprina mūsu "
+"kooperatīvu, un mēs visi jums esam par to pateicīgi!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Datums, kad beidzas jūsu pašreizējā ikgadējā iemaksa"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Datums, kad beidzas jūsu pašreizējā ikgadējā iemaksa, un pirms kura jums ir jāpārskaita tā atkārtoti, lai saglabātu pilnīgas lēmumu pieņemšanas tiesības kā sadarbojoties. "
+"Reģistrējoties, šis datums ir noteikts laikā pagātnē, kas nozīmē, ka jums tas jāmaksā tagad. Mēs aicinām jūs steidzami apmeklēt šo URL: ${url_pay_yearly_contrib}, lai "
+"samaksātu savu pirmo ikgadējo iemaksu un tādējādi piedalītos mūsu kooperatīva darbībā. Jūs gūsiet pilnīgas lēmumu pieņemšanas tiesības kā sadarbojoties tikai pēc tam, kad "
+"esat samaksājis savu ikgadējo iemaksu (un iegādājies vismaz vienu akciju)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Starptautiskais bankas konta numurs (IBAN) jūsu bankas kontam"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Ja un kad jūs nolemsiet iziet no kooperatīva (kas visiem mums būtu žēl), mums ir nepieciešams jūsu IBAN, lai varētu pārskaitīt jums ieņēmumus no mūsu akciju atpirkšanas no "
+"kooperatīva. Drošības apsvērumu dēļ iesakām sniegt šo informāciju tikai tad, kad plānojat iziet no kooperatīva."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Datums, kad no mūsu IT infrastruktūras tiks izdzēsti visi jūsu dati"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Ja un kad jūs iziet no kooperatīva, jūsu identitātes dati tiks glabāti ${Quarantine} dienas, pirms tiks pilnībā un neatgriezeniski izdzēsti no mūsu ierakstiem. Tas tiek darīts "
+"lai nodrošinātu, ka sadarbotājs, kurš iznāk no kooperatīva, jo viņa/savas sadarbības uzvedības atzīme ir pārāk slikta, nevar nekavējoties reģistrēties ar jaunu pseidonīmu un kooperatīva "
+"sadarbības uzvedības atzīmi. Reģistrējoties, šis datums ir noteikts ļoti tālā nākotnē."
+
+msgid "avatar_label"
+msgstr "Attēls, lai jūs pārstāvētu (jūsu avatars)"
+
+msgid "avatar_description"
+msgstr ""
+"Lūdzu, sniedziet attēlu, kas pārstāv jūs kā kopienas dalībnieku. Lai pasargātu jūs no kādām reprizālijām no jūsu darba devēja vai klientiem, mēs iesakām, lai šis attēls "
+"neļautu atpazīt jūsu identitāti reālajā dzīvē. Tāpēc parasti tam nevajadzētu būt pašbildēm (atcerieties, ka sejas atpazīšanas programmatūra tiek masveidā izmantota "
+"meklēšanas robotos). Attēlam vajadzētu būt tikai JPEG formātā (paplašinājums .JPG vai .JPEG) un ne lielākam par 5 MB. \n"
+"Mēs uzskatām, ka šī informācija ir noderīga, jo attēls atvieglo citiem kopienas dalībniekiem jūs atpazīt. Dažreiz attēls runā daudz skaļāk nekā garš runas vārds. "
+"Ar šo attēlu jūs izsakāt daudz par sevi, universālā valodā. Izmantojiet to maksimāli!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Adrese (URL), kuru jūs izmantojāt, lai atjaunotu savu pieteikuma procesu no vietas, kurā jūs to pārtraucāt, nesakrīt ar to, ko mēs reģistrējām jūsu vārdā. "
+"(Pieteikuma identifikācijas numurs sesijā un URL numurs nesakrīt)\n"
+"Lūdzu, izmantojiet tikai pēdējā e-pasta adresi no tā, ko saņēmāt."
+
+msgid "check_new_email"
+msgstr "Jūs esat lūdzis mainīt savu e-pasta adresi. Nākotnē jūs vēlētos izmantot: ${new_email}. Tā rezultātā jūs saņemsiet e-pastu ar saiti, lai apstiprinātu šo jauno adresi."
+
+msgid "check_new_email_subject"
+msgstr "Jūsu jaunās e-pasta adreses apstiprināšana"
+
+msgid "check_new_email_send_error"
+msgstr "Verifikācijas e-pasta nosūtīšana par jauno adresi neizdevās"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Verifikācijas e-pasts jūsu jaunajai adresei ir nosūtīts"
+
+msgid "modify_member"
+msgstr "Konsultējieties vai mainiet dalībnieku"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Savienojuma kļūda"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "E-pasta adrese jau pastāv"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "E-pasta adrese atjaunināta"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Kļūda, atjauninot e-pasta adresi"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Kļūda, iestādot lauku"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Kļūda, atjauninot dalībnieku"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Nederīgs OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Nederīgs pieprasījums"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP kļūda"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Dalībnieka dati atjaunināti"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Dalībnieku datu atjaunināšana neizdevās"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Dalībnieku datu atjaunināšana ir veiksmīga"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Trūkstoši dati"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Jaunā e-pasta adrese trūkst"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Nav atļaujas"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Nav vēlētājs"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Paroles atjaunināšana nav izdevusies"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Paroles atjaunināšana ir veiksmīga"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Reģistrācija nav izdevusies"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Reģistrācija ir veiksmīga"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Nepazīstams piekļūts biedrs"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Nepazīstams biedrs"
+
+msgid "modify_member_title"
+msgstr "Rediģēt biedra profilu"
+
+msgid "select_member_oid_label"
+msgstr "Lūdzu, izvēlieties biedru, lai rediģētu viņa/viņas profilu:"
+
+msgid "select_member_placeholder"
+msgstr "Biedra pseidonīms"
+
+msgid "modify_profile"
+msgstr "Jūs varat mainīt savu profilu, noklikšķinot šeit"
+
+msgid "profile"
+msgstr "profiils"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Jūsu e-pasta adrese ir veiksmīgi atjaunināta. Tagad jūs izmantosiet šo jauno adresi visām turpmākajām saziņām ar ${domain_name}. Ja jūs neesat pieprasījis šo izmaiņu vai ja jums ir "
+"jautājumi, lūdzu, nekavējoties sazinieties ar mūsu atbalstu, rakstot uz ${admin_email}. Paldies, ka esat daļa no ${domain_name} kopienas!"

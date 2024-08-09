@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Endring av statusen til dataene dine</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Endring av dine personopplysninger på IT-infrastrukturen til <span tal:replace="domain_name">Domene Navn</span></h1>
+        <p tal:omit-tag="textual">Hei<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Medlemsnavn</span>,
+        </p>
+        <p tal:omit-tag="textual">Her er detaljene om endringen:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Medlems-ID: <span tal:replace="python:member.oid">Medlems-ID</span></li>
+            <li tal:omit-tag="textual">Overgangsdag: <span tal:replace="python:member.modifications[-1].datetime">Siste overgang</span></li>
+            <li tal:omit-tag="textual">Ny status: <span tal:replace="python:member.member_state">Ny medlemsstatus</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Takk for din deltakelse.</p>
+        <p tal:omit-tag="textual">Med vennlig hilsen,</p>
+        <p tal:omit-tag="textual">Teamet i <span tal:replace="domain_name">Domene Navn</span></p>
+    </body>
+</html>

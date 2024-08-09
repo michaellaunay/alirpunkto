@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Aplikimi juaj për <span tal:replace="domain_name">Emri i Domainit</span> është miratuar</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Urime për miratimin e aplikimit tuaj!</h1>
+    
+    <p tal:omit-tag="textual">Përshëndetje <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Emri i Aplikantit</span>,</p>
+    
+    <p tal:omit-tag="textual">Na vjen mirë t'ju informojmë se aplikimi juaj për <span tal:replace="domain_name">Emri i Domainit</span> për rolin e <span tal:replace="python:candidature.type">Roli</span> është miratuar.</p>
+
+    <p tal:omit-tag="textual">Faleminderit që u bashkuat me ne! Jemi të lumtur t'ju mirëpresim në Komunitetin tonë.</p>
+    
+    <p tal:omit-tag="textual">Tani që aplikimi juaj është miratuar, mund të hyni në platformën tonë duke përdorur pseudonimin dhe fjalëkalimin që keni ofruar gjatë procesit të aplikimit. Pasi të keni hyrë, do të gjeni:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">lidhjet për të gjitha aplikacionet softuerike që keni qasje direkt. Nuk keni nevojë të hyni përsëri!</li>
+        <li tal:omit-tag="textual">një lidhje me formularin ku mund të shikoni dhe editoni profilin tuaj. Në këtë formular, ju inkurajojmë të prezantoni veten para anëtarëve të tjerë të Komunitetit tonë në një "tekst profili" të shkurtër dhe të shfaqni një foto të vogël që ju paraqet (avatarin tuaj);</li>
+        <li tal:omit-tag="textual">një lidhje për të dalë.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Ja disa elemente kryesore të profilit tuaj që ne i kemi regjistruar:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">pseudonimi juaj: ##PSEUDONYM. Ju lutem mbani një REGJISTRIM TË KRAHËT DHE TË SIGURT të këtij pseudonimi: është e vetmja identifikues me të cilin mund të hyni në platformën tonë IT;</li>
+        <li tal:omit-tag="textual">fjalëkalimi juaj: (fjalëkalimi që keni ofruar gjatë regjistrimit tuaj);</li>
+        <li tal:omit-tag="textual">adresa juaj e-email: (adresa e-email ku ne dërgojmë këtë email);</li>
+        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">të dhënat tuaja të identitetit: (të gjitha emrat tuaj dhe emrat e familjes, data e lindjes tuaj, siç janë ofruar dhe verifikuar gjatë procesit tuaj të regjistrimit);</li>
+        <li tal:omit-tag="textual">gjuha juaj e preferuar për të na kontaktuar: ##LANGUAGE_1;</li>
+        <li tal:omit-tag="textual">gjuha e dytë që pranon që ne ta përdorim për të komunikuar me ju: ##LANGUAGE_2;</li>
+        <li tal:omit-tag="textual">gjuha që pranon që ne ta përdorim, si zgjedhja e tretë, për të komunikuar me ju: ##LANGUAGE_3.</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Për regjistrimet tuaja, këtu janë detajet e përfundimit të procesit tuaj të regjistrimit:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID e Aplikimit: <span tal:replace="python:candidature.oid">ID e Aplikimit</span></li>
+        <li tal:omit-tag="textual">Data e Miratimit: <span tal:replace="python:candidature.modifications[-1]">Transicioni i Fundit</span></li>
+        <li tal:omit-tag="textual">Statusi: Miratuar</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Presim me kënaqësi të punojmë së bashku me ju!</p>
+
+    <p tal:omit-tag="textual">Me respekt,</p>
+    <p tal:omit-tag="textual">Ekipa e <span tal:replace="domain_name">Emrit të Domainit</span>.</p>
+</body>
+</html>

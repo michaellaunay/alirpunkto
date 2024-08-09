@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Kërkesa për Modifikimin e Profilit Tuaj</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Kërkesa për Modifikimin e Profilit Tuaj</h1>
+    
+    <p tal:omit-tag="textual">Përshëndetje <span tal:replace="member.firstname" tal:condition="exists:member">Emri i Përdoruesit</span>,</p>
+    
+    <p tal:omit-tag="textual">Kemi marrë, në platformën <span tal:replace="site_name">Emri i Site-it</span> të <span tal:replace="domain_name">Emri i Domain-it</span>, një kërkesë për të modifikuar profilin tuaj. Për sigurinë tuaj, kërkojmë që të ndiqni një lidhje të sigurt për të vazhduar me modifikimet. Ju lutemi klikoni në URL-në e mëposhtme <a href="${page_with_oid}" tal:attributes="href page_with_oid">Lidhja për Modifikimin e Profilit</a> për të përditësuar informacionin e profilit tuaj.</p>
+    
+    <p tal:omit-tag="textual">Nëse nuk keni kërkuar këtë modifikim të profilit, ju lutemi injoroni këtë email ose kontaktoni suportin nëse keni ndonjë shqetësim.</p>
+    
+    <p tal:omit-tag="textual">Me respekt,</p>
+    <p tal:omit-tag="textual">Ekipi i <span tal:replace="domain_name">Emri i Domain-it</span>.</p>
+</body>
+</html>

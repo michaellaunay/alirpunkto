@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vaša registracija za <span tal:omit-tag="textual" tal:replace="domain_name">Ime domena</span>. Sledeći koraci</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Zdravo <span tal:replace="full_name">Ime podnosioca prijave</span>,</h1>
+    <p tal:omit-tag="textual">Hvala vam što ste podneli svoju prijavu za <span tal:replace="domain_name">Ime domena</span>! </p>
+
+    <p tal:omit-tag="textual">U zavisnosti od opcije koju ste izabrali prilikom registracije, evo sledećih koraka:</p>
+
+    <h2 tal:omit-tag="textual">Ako ste izabrali opciju "Obični član zajednice":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Čestitamo, sada ste "Obični član zajednice"!</li>
+        <li tal:omit-tag="textual">Vaš broj članstva je utvrđen.</li>
+        <li tal:omit-tag="textual">Pošaljemo vam čestitku putem email-a.</li>
+        <li tal:omit-tag="textual">Status vaše prijave je sada "OdobrenObičniČlanZajednice".</li>
+        <li tal:omit-tag="textual">Nema potrebe za daljim radnjama s vaše strane. Priključite se našem <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">radnom prostoru</a> i počnite da komunicirate sa svojim kolegama članovima zajednice!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Ako ste izabrali opciju "Kooperator":</h2>
+    <p tal:omit-tag="textual">Bićete ovlašćeni da potpuno učestvujete u našim procesima donošenja odluka i glasanjima. U ovim procesima i glasanjima želimo da očuvamo demokratski princip 'jedna osoba = jedan glas'. Bilo bi nepravedno da neka osoba može da glasa više puta koristeći više naloga na našoj IT platformi. Stoga moramo da povežemo vaš nalog lično s vama i osiguramo da ste na našoj IT platformi identifikovani na način koji se ne može pomešati s identitetom druge osobe, tj. sa jedinstvenim setom identifikatora.</p>
+    <p tal:omit-tag="textual">Pored toga, želimo da osiguramo da samo građani Evropske unije budu Kooperatori. Razlog za to je što ćemo zatražiti pravo da učestvujemo na javnim izborima u Evropskoj uniji kao jedna organizacija na nivou EU i treba da pokažemo da predstavljamo samo građane EU (a ne "strane interese").</p>
+    <p tal:omit-tag="textual">Da bismo postigli ove ciljeve, tražićemo od vas da dostavite sledeće informacije, kako se pojavljuju u vašim zvaničnim identifikacionim dokumentima:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Sva vaša imena (u njihovoj zvaničnoj transkripciji latiničnim slovima za Grčku i Bugarsku),</li>
+        <li tal:omit-tag="textual">Sva vaša prezimena pri rođenju (u njihovoj zvaničnoj transkripciji latiničnim slovima za Grčku i Bugarsku),</li>
+        <li tal:omit-tag="textual">Vaš datum rođenja,</li>
+        <li tal:omit-tag="textual">Vaša nacionalnost (samo među nacionalnostima država članica EU).</li>
+    </ul>
+    <p tal:omit-tag="textual">Ove informacije ćete dostaviti na našoj platformi za registraciju, a skup od 3 do 7 nasumično odabranih Kooperatora, zvanih Verifikatori, će proveriti da li se informacije koje ste dostavili na našoj platformi za registraciju podudaraju s onima na vašim zvaničnim ID dokumentima. Stoga ćete proslediti delimične slike svojih zvaničnih ID dokumenata direktno ovim Verifikatorima, bez (zbog bezbednosti) korišćenja naše IT platforme.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Postoje dve metode za vas da prenesete ove delimične slike svojih zvaničnih ID dokumenata Verifikatorima:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Putem video konferencije</strong>: Dugme će vam pomoći da napišete unapred popunjen email, u kojem možete predložiti datume i vremena za video konferencije sa Verifikatorima koji su vam dodeljeni. Tokom ove (ovih) video konferencija, prikazaćete svoj zvanični ID dokument Verifikatorima putem vaše kamere, vodeći računa da npr. broj ID dokumenta i mesto rođenja ostanu skriveni, kako biste izbegli (zbog bezbednosnih razloga) da se prikaže puna kopija ovog dokumenta.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Putem email priloga</strong>: Dugme će vam pomoći da napišete unapred popunjen email, kojem možete priložiti delimičnu kopiju svog zvaničnog ID dokumenta (npr. zamaskirajući broj i mesto rođenja).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Svaki Verifikator će zatim proveriti usklađenost informacija koje ste dostavili na registracionom obrascu naše IT platforme s onima na vašem zvaničnom identifikacionom dokumentu. Svaki Verifikator će zatim nezavisno glasati na našoj IT platformi o ovoj provere usklađenosti. Ako većina Verifikatora prihvati da se informacije koje ste dostavili na našoj platformi za registraciju podudaraju s onima na vašim zvaničnim ID dokumentima, imaćemo zadovoljstvo da vas dočekamo kao Kooperatora!</p>
+
+    <p tal:omit-tag="textual">Ako slanje email-a iz bilo kog razloga ne uspe, biće zabeležena poruka o grešci i pokušaće se poslati email administratoru.</p>
+
+    <p tal:omit-tag="textual">Podsećamo vas da je vreme koje vam je dodeljeno za obavljanje ovog procesa verifikacije ograničeno, stoga molimo da brzo delujete.</p>
+
+    <p tal:omit-tag="textual">Ako imate bilo kakvih pitanja ili vam je potrebna dodatna pojašnjenja, slobodno nas kontaktirajte.</p>
+
+    <p tal:omit-tag="textual">Srdačan pozdrav,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Tim <span tal:replace="domain_name">Ime domena</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Napomena: Ova obaveštenja su generisana automatski. Molimo ne odgovarajte direktno na ovu poruku.</small></p>
+</body>
+</html>

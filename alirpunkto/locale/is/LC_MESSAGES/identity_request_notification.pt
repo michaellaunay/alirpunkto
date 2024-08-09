@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Skráning þín hjá <span tal:omit-tag="textual" tal:replace="domain_name">Lénanama</span>. Næstu skref</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Halló <span tal:replace="full_name">Nafn Umsækjanda</span>,</h1>
+    <p tal:omit-tag="textual">Takk fyrir að senda inn umsókn þína hjá <span tal:replace="domain_name">Lénanama</span>! </p>
+
+    <p tal:omit-tag="textual">Fyrirgefðu að velja þá valkost sem þú valdir við skráningu, hér eru næstu skref:</p>
+
+    <h2 tal:omit-tag="textual">Ef þú valdir "Venjulegur samfélagsmeðlimur" valkostinn:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Til hamingju, þú ert nú "Venjulegur samfélagsmeðlimur"!</li>
+        <li tal:omit-tag="textual">Aðildarnúmer þitt hefur verið ákveðið.</li>
+        <li tal:omit-tag="textual">Til hamingju tölvupóstur hefur verið sendur til þín.</li>
+        <li tal:omit-tag="textual">Umsóknarstaðan þín er nú "Samþykkt Venjulegur Samfélagsmeðlimur".</li>
+        <li tal:omit-tag="textual">Engin frekari aðgerð er nauðsynleg frá þinni hálfu. Tengdu þig við okkar <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">vinnusvæði</a> og byrjaðu að eiga samskipti við aðra meðlimi samfélagsins!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Ef þú valdir "Samvinnuþjarkurinn" valkostinn:</h2>
+    <p tal:omit-tag="textual">Þú munt eiga rétt á að taka fullt þátt í ákvarðanatökuferlum okkar, og í atkvæðagreiðslum okkar. Í þessum ferlum og atkvæðagreiðslum viljum við varðveita lýðræðisréttinn 'einn einstaklingur = eitt atkvæði'. Það væri óréttlátt ef ákveðinn einstaklingur gæti veitt atkvæði nokkrum sinnum með því að nota mörg aðgangsrit á IT-vettvangi okkar. Við þurfum því að tengja aðganginn þinn við þig persónulega, og tryggja að þú sért auðkenndur á IT-vettvangi okkar á hátt sem ekki er hægt að rugla saman við auðkenni annarrar persónu, þ.e. með einstökum auðkennum.</p>
+    <p tal:omit-tag="textual">Auk þess viljum við tryggja að aðeins borgarar Evrópusambandsins séu Samvinnuþjarkarnir. Ástæðan fyrir þessu er sú að við munum krafast réttinda til að taka þátt í opinberum kosningum í Evrópusambandinu sem eina stofnun á skala Evrópusambandsins, og þurfum að sýna fram á að við stöndum aðeins fyrir borgurum Evrópusambandsins (en ekki "erlendum hagsmunum").</p>
+    <p tal:omit-tag="textual">Til að ná þessum markmiðum munum við biðja þig um að veita eftirfarandi upplýsingar, eins og þær koma fram í opinberum auðkennisgögnum þínum:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Öll þín eigin nafngift (í opinberri skrifuðu útgáfu latneskra stafa fyrir gríska og búlgarska),</li>
+        <li tal:omit-tag="textual">Allar þínar fjölskyldu nafngiftir við fæðingu (í opinberri skrifuðu útgáfu latneskra stafa fyrir gríska og búlgarska),</li>
+        <li tal:omit-tag="textual">Fæðingardagurinn þinn,</li>
+        <li tal:omit-tag="textual">Þjóðerni þitt (aðeins meðal þjóðernanna í aðildarríkjum Evrópusambandsins).</li>
+    </ul>
+    <p tal:omit-tag="textual">Þú munt veita þessa upplýsingar á skráningarpallinum okkar, og hópur af 3 til 7 handvalinni Samvinnuþjarkum, sem kallast Styrkleikar, mun skoða að upplýsingarnar sem þú veittir á skráningarpallinum okkar samræmist þeim á opinberu auðkennisgögnum þínum. Þú munt því senda hluta af opinberum auðkennisgögnum þínum beint til þessara Styrkleika, án þess að (fyrir öryggisástæður) nota IT-pallinn okkar.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Það eru tvær aðferðir fyrir þig að senda þessa hluta af opinberum auðkennisgögnum þínum til Styrkleikanna:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Í gegnum fjarfund</strong>: Nappinn mun leiða þig í að búa til forfyllta tölvupóst, þar sem þú getur lagt til tíma og dagsetningar fyrir einn eða aðskilda fjarfundi með Styrkleikunum sem úthlutaðir eru þér. Á þessu (þessum) fjarfundi, muntu sýna opinbera auðkennisgödnið þitt fyrir Styrkleikunum í gegnum myndavél þína, þar sem tryggt er að t.d. númerið á auðkennisgögninu og fæðingarstaðurinn verði falin til að forðast (fyrir öryggisástæður) að fullfermisafrit af þessu skjali komi fram.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Í gegnum viðhengi tölvupósts</strong>: Nappinn mun aðstoða þig við að skrifa forfylltan tölvupóst, þar sem þú getur viðsatt hluta af afrit af opinberu auðkennisgögnum þínum (t.d. dulbúið númerið og fæðingarstaðinn).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Hver Styrkleiki mun síðan skoða samræmi upplýsinganna sem þú veittir á skráningareyflinum okkar á IT-vettvangi við þau á opinberu auðkennisgögnunum þínum. Hver Styrkleiki mun síðan sjálfstætt atkvæðagreiða á IT-vettvangi um þetta samræmi skoðun. Ef meirihluti Styrkleika samþykkir að upplýsingarnar sem þú veittir á skráningarpallinum samræmist þeim á opinberu auðkennisgögnum þínum, munum við hafa ánægju af því að fagna þér sem Samvinnuþjarki!</p>
+
+    <p tal:omit-tag="textual">Ef tölvupóstur fer þó ekki í gegn af einhverjum ástæðum, verður villuskilaboð skráð og reynt verður að senda tölvupóst til stjórnanda.</p>
+
+    <p tal:omit-tag="textual">Við minnum þig á að tímabilið sem úthlutað er fyrir þig til að framkvæma þessa staðfestingarferli er takmarkað, svo vinsamlegast aðgerðir hratt.</p>
+
+    <p tal:omit-tag="textual">Ef þú hefur einhverjar spurningar eða þarft frekari skýringar, vinsamlegast ekki hika við að hafa samband við okkur.</p>
+
+    <p tal:omit-tag="textual">Bestu kveðjur,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Teamið <span tal:replace="domain_name">Lénanama</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Athugið: Þessi tilkynning hefur verið búin til sjálfvirkt. Vinsamlegast ekki svara beint þessari skilaboðum.</small></p>
+</body>
+</html>

@@ -1,0 +1,1084 @@
+# Alirpunkto pot dosyası.
+# Telif Hakkı (C) 2023 Michaël Launay
+# Bu dosya Alirpunkto paketi ile aynı lisans altında dağıtılmaktadır.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Proje-Id-Sürüm: 0.1\n"
+"Rapor-Msgid-Hata-Bilgisi: michaellaunay@logikascium.com\n"
+"POT-Oluşturulma-Tarihi: 2023-06-15 12:36+0200\n"
+"PO-Düzeltme-Tarihi: 2024-06-07 09:33+0200\n"
+"Son-Çevirmen: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Dil-Takımı: Fransızca <dev@logikascium.com>\n"
+"Dil: tr\n"
+"MIME-Sürümü: 1.0\n"
+"İçerik-Tipi: metin/düz; charset=UTF-8\n"
+"İçerik-Transfer-Kodlaması: 8bit\n"
+"X-Üretici: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Hoş geldiniz"
+
+msgid "username_label"
+msgstr "Kullanıcı Adı"
+
+msgid "password_label"
+msgstr "Şifre"
+
+msgid "login_label"
+msgstr "Giriş"
+
+msgid "welcome_msg"
+msgstr "${site_name}\'a hoş geldiniz, ${domain_name}\'ın BT altyapısında kullanılan uygulamalar için merkezi hizmet."
+
+msgid "all_applications_msg"
+msgstr "${domain_name}\'da faaliyetlere katılmanız için ihtiyacınız olan tüm uygulamalar tek bir yerde."
+
+msgid "register_or_login_msg"
+msgstr "Başlamak için şimdi kaydolun veya giriş yapın."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, ${domain_name}\'ın BT altyapısında kullanılan uygulamalar için merkezi hizmet"
+
+msgid "logged_in_msg"
+msgstr "${user} olarak giriş yaptınız."
+
+msgid "log_out_invitation_msg"
+msgstr "Buraya tıklayarak çıkış yapabilirsiniz"
+
+msgid "logout_label"
+msgstr "Çıkış yap"
+
+msgid "choose_application_msg"
+msgstr "Katılmak istediğiniz uygulamayı seçin:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Geçersiz kullanıcı adı veya şifre. Lütfen tekrar deneyin"
+
+msgid "register_link"
+msgstr "Hesap oluştur"
+
+msgid "password_confirm_label"
+msgstr "Şifreyi Onayla"
+
+msgid "password_confirm_title"
+msgstr "Şifrenizi onaylayın"
+
+msgid "forgot_password_label"
+msgstr "Şifrenizi mi unuttunuz?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Resmi kimlik belgelerinizdeki gibi tam ad(lar)"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Resmi kimlik belgelerinizdeki gibi tam soyad(lar)"
+
+msgid "birthdate_label"
+msgstr "Doğum Tarihi"
+
+msgid "nationality_label"
+msgstr "Milliyet (Avrupa Birliği'ne ait olanlar arasından)"
+
+msgid "cooperator_number_label"
+msgstr "Ortak numarası"
+
+msgid "pseudonym_label"
+msgstr "Takma ad"
+
+msgid "email_label"
+msgstr "E-posta adresi"
+
+msgid "first_interaction_language_label"
+msgstr "Sizinle etkileşimde bulunmamız için tercih ettiğiniz dil"
+
+msgid "second_interaction_language_label"
+msgstr "Sizinle etkileşimde bulunmamız için ikinci tercih olarak kabul ettiğiniz dil"
+
+msgid "register_label"
+msgstr "Kayıt ol"
+
+msgid "forgot_password_head"
+msgstr "Şifreyi Unuttum"
+
+msgid "forgot_your_password_title"
+msgstr "Şifrenizi mi unuttunuz?"
+
+msgid "enter_your_email_address_label"
+msgstr "Lütfen e-posta adresinizi girin:"
+
+msgid "submit_button"
+msgstr "Gönder"
+
+msgid "candidature_states_draft_value"
+msgstr "Taslak: Başvuru taslak modundadır."
+
+msgid "candidature_states_email_validation_value"
+msgstr "E-posta Doğrulaması: Başvurucunun e-posta adresinin doğrulanmayı beklediği durum."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "Onaylı İnsan: Başvurucunun e-posta adresi doğrulandı ve insan olduğuna dair kanıt sağlandı (robot olmadığınız doğrulandı)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Tekil Veri: Başvuran kendi kişisel kimlik verilerini girdi ve mevcut veya yakın zamanda Topluluğun herhangi bir Kooperatörü veya Olağan Üyesinin aynı verilere sahip olmadığı doğrulandı."
+
+msgid "candidature_states_pending_value"
+msgstr "Beklemede: Başvuru gönderildi. Kişisel kimlik verileri Doğrulayıcılara iletildi, ancak henüz geri bildirim sağlamadılar."
+
+msgid "candidature_states_approved_value"
+msgstr "Onaylı: Başvuru kabul edildi."
+
+msgid "candidature_states_refused_value"
+msgstr "Reddedildi: Başvuru reddedildi."
+
+msgid "candidature_states_draft"
+msgstr "taslak"
+
+msgid "candidature_states_email_validation"
+msgstr "e-posta_doğrulaması"
+
+msgid "candidature_states_confirmed_human"
+msgstr "onaylı_insan"
+
+msgid "candidature_states_unique_data"
+msgstr "tekil_veri"
+
+msgid "candidature_states_pending"
+msgstr "beklemede"
+
+msgid "candidature_states_approved"
+msgstr "onaylı"
+
+msgid "candidature_states_refused"
+msgstr "reddedildi"
+
+msgid "user_types_ordinary_value"
+msgstr "Sıradan: Toplulukta Sıradan Üye olma başvurusu = basitleştirilmiş kayıt süreciyle, mali yükümlülük yok, ancak karar verme hakları yok."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Kooperatör: Kooperatifin tam üyesi olma başvurusu, bir Kooperatör = 'bir kişi = bir oy' ilkesini garanti eden tam kayıt süreci ile ve Başvuranın Avrupa Birliği vatandaşı olması, en az bir hisse satın alma zorunluluğu ve yıllık katkı yapma yükümlülüğü ile birlikte tüm karar verme haklarına sahip."
+
+msgid "user_types_ordinary"
+msgstr "Topluluğun Sıradan Üyesi"
+
+msgid "user_types_cooperator"
+msgstr "Kooperatör = Kooperatifin tam üyesi"
+
+msgid "vote_types_yes_value"
+msgstr "Evet: Oy pozitif."
+
+msgid "vote_types_no_value"
+msgstr "Hayır: Oy negatif."
+
+msgid "vote_types_abstain_value"
+msgstr "Çekimser: Oy nötr."
+
+msgid "vote_types_yes"
+msgstr "evet"
+
+msgid "vote_types_no"
+msgstr "hayır"
+
+msgid "vote_types_abstain"
+msgstr "çekimser"
+
+msgid "zero"
+msgstr "sıfır"
+
+msgid "one"
+msgstr "bir"
+
+msgid "two"
+msgstr "iki"
+
+msgid "three"
+msgstr "üç"
+
+msgid "four"
+msgstr "dört"
+
+msgid "five"
+msgstr "beş"
+
+msgid "six"
+msgstr "altı"
+
+msgid "seven"
+msgstr "yedi"
+
+msgid "eight"
+msgstr "sekiz"
+
+msgid "nine"
+msgstr "dokuz"
+
+msgid "times"
+msgstr "çarpı"
+
+msgid "plus"
+msgstr "artı"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Sizin insan olduğunuzu doğrulamak. Basit matematik işlemlerinin sonuçlarını hesaplayın ve bu sonuçları portalda girin"
+
+msgid "email_candidature_state_changed"
+msgstr "Portalınızdaki başvurunuzun durumu değişti"
+
+msgid "invalid_challenge"
+msgstr "Cevabınız yanlış. Lütfen yeni bir tane girin."
+
+msgid "invalid_email"
+msgstr "E-posta adresinizde bir sorun var, lütfen kontrol edin."
+
+msgid "invalid_choice"
+msgstr "Seçiminiz geçersiz, lütfen tekrar girin."
+
+msgid "challenge_instruction_text"
+msgstr "Lütfen aşağıdaki dört basit matematik işleminin sonuçlarını hesaplayın ve e-posta adresinizi doğrulamak için karşılık gelen alanları doldurun."
+
+msgid "enter_result_label_A"
+msgstr "Lütfen matematik işlemi A için sonucu girin:"
+
+msgid "result_label_title_A"
+msgstr "Lütfen e-posta ile aldığınız kodu veya matematik işlemi A'nın sonucunu girin."
+
+msgid "result_input_title_A"
+msgstr "E-posta adresinizin doğrulanması ve sizin insan (robot değil) olduğunuzun doğrulanması için, e-posta ile aldığınız matematik işlemi A'nın sonucunu girin."
+
+msgid "enter_result_label_B"
+msgstr "Lütfen matematik işlemi B için sonucu girin:"
+
+msgid "result_label_title_B"
+msgstr "Lütfen e-posta ile aldığınız kodu veya matematik işlemi B'nın sonucunu girin."
+
+msgid "result_input_title_B"
+msgstr "E-posta adresinizin doğrulanması ve sizin insan (robot değil) olduğunuzun doğrulanması için, e-posta ile aldığınız matematik işlemi B'nın sonucunu girin."
+
+msgid "enter_result_label_C"
+msgstr "Lütfen matematik işlemi C için sonucu girin:"
+
+msgid "result_label_title_C"
+msgstr "Lütfen e-posta ile aldığınız kodu veya matematik işlemi C'nin sonucunu girin."
+
+msgid "result_input_title_C"
+msgstr "E-posta adresinizin doğrulanması ve sizin insan (robot değil) olduğunuzun doğrulanması için, e-posta ile aldığınız matematik işlemi C'nin sonucunu girin."
+
+msgid "enter_result_label_D"
+msgstr "Lütfen matematik işlemi D için sonucu girin:"
+
+msgid "result_label_title_D"
+msgstr "Lütfen e-posta ile aldığınız kodu veya matematik işlemi D'nin sonucunu girin."
+
+msgid "result_input_title_D"
+msgstr "E-posta adresinizin doğrulanması ve sizin insan (robot değil) olduğunuzun doğrulanması için, e-posta ile aldığınız matematik işlemi D'nin sonucunu girin."
+
+msgid "verify_button"
+msgstr "Gönder"
+
+msgid "submit_email_validation_title"
+msgstr "Girilen kodları doğrulamak için tıklayın."
+
+msgid "passwords_dont_match"
+msgstr "Şifreler uyuşmuyor."
+
+msgid "password_too_short"
+msgstr "Şifre çok kısa."
+
+msgid "password_minimum_length"
+msgstr "Şifre en az ${password_minimum_length} karakter uzunluğunda olmalıdır."
+
+msgid "password_too_long"
+msgstr "Şifre çok uzun."
+
+msgid "password_maximum_length"
+msgstr "Şifre ${password_maximum_length} karakterden fazla olmamalıdır."
+
+msgid "password_must_contain_digit"
+msgstr "Şifre en az bir rakam içermelidir."
+
+msgid "password_must_contain_uppercase"
+msgstr "Şifre en az bir büyük harf içermelidir."
+
+msgid "password_must_contain_lowercase"
+msgstr "Şifre en az bir küçük harf içermelidir."
+
+msgid "password_must_contain_special_char"
+msgstr "Şifre aşağıdaki karakterlerden en az birini içermelidir: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Lütfen şifrenizi buraya girin."
+
+msgid "password_confirm_title_label"
+msgstr "Lütfen şifrenizi buraya onaylayın."
+
+msgid "password_confirm"
+msgstr "Şifrenizi onaylayın."
+
+msgid "type_of_registration"
+msgstr "Kayıt Türü"
+
+msgid "type_registration_label"
+msgstr "Sizin için uygun kayıt türünü seçin."
+
+msgid "type_registration_choice"
+msgstr "Her kayıt türü, belirli bir hak, fayda ve yükümlülük seti ile birlikte gelir."
+
+msgid "approved_heading"
+msgstr "Onayınız için tebrikler!"
+
+msgid "approved_description"
+msgstr "Başvurunuz onaylandı. Artık başvuru sürecinde verdiğiniz takma ad ve şifre ile giriş yapabilirsiniz."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Geçersiz takma ad. Takma ad ${MIN_PSEUDONYM_LENGTH} ile ${MAX_PSEUDONYM_LENGTH} karakter arasında olmalı ve yalnızca harfler (A-Z, a-z), rakamlar (0-9), alt çizgi (_), nokta "
+"(.), eksi (-) ve boşluk ( ) içerebilir. Aksanlı harfler, umlautlar ve bazı dillere özgü diğer diakritik işaretleri içeremez."
+
+msgid "invalid_date"
+msgstr "Geçersiz tarih formatı."
+
+msgid "pseudonym_too_short"
+msgstr "Takma ad çok kısa."
+
+msgid "pseudonym_minimum_length"
+msgstr "Takma ad en az ${MIN_PSEUDONYM_LENGTH} karakter uzunluğunda olmalıdır."
+
+msgid "pseudonym_too_long"
+msgstr "Takma ad çok uzun."
+
+msgid "pseudonym_maximum_length"
+msgstr "Takma ad ${MAX_PSEUDONYM_LENGTH} karakteri geçmemelidir."
+
+msgid "pseudonym_allready_exists"
+msgstr "Bu takma ad zaten kullanımda. Lütfen farklı bir tane seçin."
+
+msgid "Select_a_country"
+msgstr "Avrupa Birliği Üye Devletlerinden birini seçin"
+
+msgid "Austria"
+msgstr "AT - Avusturya"
+
+msgid "Belgium"
+msgstr "BE - Belçika"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgaristan"
+
+msgid "Cyprus"
+msgstr "CY - Kıbrıs"
+
+msgid "Czech_Republic"
+msgstr "CZ - Çek Cumhuriyeti"
+
+msgid "Germany"
+msgstr "DE - Almanya"
+
+msgid "Denmark"
+msgstr "DK - Danimarka"
+
+msgid "Estonia"
+msgstr "EE - Estonya"
+
+msgid "Spain"
+msgstr "ES - İspanya"
+
+msgid "Finland"
+msgstr "FI - Finlandiya"
+
+msgid "France"
+msgstr "FR - Fransa"
+
+msgid "Greece"
+msgstr "GR - Yunanistan"
+
+msgid "Croatia"
+msgstr "HR - Hırvatistan"
+
+msgid "Hungary"
+msgstr "HU - Macaristan"
+
+msgid "Ireland"
+msgstr "IE - İrlanda"
+
+msgid "Italy"
+msgstr "IT - İtalya"
+
+msgid "Lithuania"
+msgstr "LT - Litvanya"
+
+msgid "Luxembourg"
+msgstr "LU - Lüksemburg"
+
+msgid "Latvia"
+msgstr "LV - Letonya"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Hollanda"
+
+msgid "Poland"
+msgstr "PL - Polonya"
+
+msgid "Portugal"
+msgstr "PT - Portekiz"
+
+msgid "Romania"
+msgstr "RO - Romanya"
+
+msgid "Sweden"
+msgstr "SE - İsveç"
+
+msgid "Slovenia"
+msgstr "SI - Slovenya"
+
+msgid "Slovakia"
+msgstr "SK - Slovakya"
+
+msgid "full_name_as_in_id_required"
+msgstr "Tam isim(ler) gereklidir."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Tam soyisim(ler) gereklidir."
+
+msgid "birthdate_required"
+msgstr "Doğum tarihi gereklidir."
+
+msgid "nationality_required"
+msgstr "Uyruk gereklidir."
+
+msgid "first_interaction_language_required"
+msgstr "İlk etkileşim dili gereklidir."
+
+msgid "pending_description"
+msgstr "Başvurunuz inceleniyor. Onaylandığında e-posta yoluyla bilgilendirileceksiniz."
+
+msgid "candidature_not_found"
+msgstr "Başvuru bulunamadı."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>${domain_name} etkinliklerine gösterdiğiniz ilgi için teşekkürler! Kayıt olmanız için doğru yer burasıdır.</b></h2>\n"
+"<p>CosmoPolitical Kooperatifi, bireyleri desteklemekte ve mevcut ekonomik, sosyal ve politik sistemi köklü olarak adil, sürdürülebilir, demokratik ve mutlu bir "
+"sosyete yönünde dönüştürmektedir; bu topluluk <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Anlaşma Toplumu</a>.</p>\n"
+"<p>Aşağıda, bize katılmak için kayıt sürecinin başlangıcını bulacaksınız. Artan yükümlülükler ve haklarla iki katılım düzeyi öneriyoruz:</p>\n"
+"<ul>\n"
+"<li><b>Topluluğumuzun Sıradan Üyesi</b> olarak basit bir kayıt süreci ile, finansal yükümlülük olmadan ancak oy verme hakkı olmadan; veya </li>\n"
+"<li><b>Kooperatör</b> olarak, Kooperatifimizin tam üyesi, belirli bir kişinin yalnızca bir kez kaydolmasını sağlayan bir kayıt süreci ile (demokratik ilke \"bir "
+"kişinin = bir oy\" ilkesine dikkat ederek) ve yalnızca reşit olan Avrupa Birliği vatandaşlarının Kooperatör olduğu, en az bir hisse satın alma ve yıllık katkı ödeme taahhüdü bulunan ve tam oy verme haklarına sahip bir üye. Avrupa Birliği, çalışmalarımızın coğrafi kapsamıdır (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">nedenini öğrenin</a>)</li>\n"
+"</ul>\n"
+"<p>Kayıt süreci aşağıdaki adımları içerir:</p>\n"
+"<ol>\n"
+"<li>e-posta adresinin sizin, bir insan tarafından sağlandığını doğruluyoruz (bir robot tarafından değil);</li>\n"
+"<li>takma ad, şifre ve sizinle etkileşim için tercih ettiğiniz dil(ler)i istiyoruz;</li>\n"
+"<li>Topluluğun Sıradan Üyesi olarak kaydolduğunuz takdirde, işlemi tamamlamış ve topluluğumuza katılmış olursunuz. Kooperatör olarak kaydolduğunuz takdirde, yukarıda belirtilen koşullara uygunluğunuzu doğrulamak için işlem devam eder.</li>\n"
+"</ol>\n"
+"<p>Bu doğrulama aşağıdaki şekilde gerçekleştirilir:</p>\n"
+"<ol>\n"
+"<li><b>kimlik bilgilerinizi</b> isteriz: ad(lar)ınız ve soyad(lar)ınız, doğum tarihiniz;</li>\n"
+"<li>Kooperatifin mevcut birkaç üyesinden (Doğrulayıcılarınız) resmi kimlik belgenizdeki bilgilerin, önceki adımda sağladığınız bilgilerle eşleştiğini doğrulamalarını isteriz; bu, sizinle e-posta veya video konferans görüşmesi yoluyla doğrudan bilgi alışverişi temellidir;</li>\n"
+"<li>Bu eşleşmeyi teyit ettiklerinde, sizleri Kooperatör olarak, tam haklarla karşılayacağız - en az <a href=\"https://www.cosmopolitical.coop/share\">bir hisse</a> satın aldıktan ve <a href=\"https://www.cosmopolitical.coop/yearcontrib\">yıllık katkınızı</a> ödedikten sonra.</li>\n"
+"</ol>\n"
+"<p>Lütfen kaydınıza şimdi başlayın! Etkinliklerimizde sizi karşılamayı dört gözle bekliyoruz.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Kayıt sürecinizdeki ilk adım, sizin bir \n"
+"insan olduğunuzu ve bir robot olmadığınızı doğrulamaktır. Bunun için, size göndereceğimiz bir e-postayı alıp almadığınızı ve anladığınızı doğruluyoruz: "
+"sizden talep ettiklerimiz, bir insan için basit, bir robot için çok daha karmaşıktır."
+
+msgid "identity_verification_label"
+msgstr "Kimlik Doğrulama"
+
+msgid "Send_id_copy_by_email"
+msgstr "Resmi kimlik belgenizin bir kısmının taramasını e-posta ile gönderin."
+
+msgid "Send_video_conference_link"
+msgstr "Video konferansın tarih ve saat dilimi için öneriler gönderin."
+
+msgid "Proceed"
+msgstr "Devam et"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Lütfen Doğrulayıcılara e-postaları gönderdiğinizi onaylayın."
+
+msgid "sent_confirmation_label"
+msgstr "E-postaların Doğrulayıcılara gönderildiğine dair onay"
+
+msgid "submit_email_confirmation_title"
+msgstr "E-postaları gönderdiğinizi onaylayın."
+
+msgid "confirm_email_send_button_label"
+msgstr "Onayla"
+
+msgid "vote_success"
+msgstr "Oy verme sürecine katıldığınız için teşekkür ederiz. Oyunuz ${vote} başarıyla kaydedildi. Bu sayfaya dönerek oyunuza kadar değişiklik yapabilirsiniz."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Kooperatör olarak, tüm kararlarımıza katılacaksınız. Bu kararlar titiz demokratik prosedürlerle benimsenir ve Kooperatif ve Kooperatörler için önemli sonuçlar doğurabilir. Ayrıca, Kooperatif, AB vatandaşlarını temsil etmeyi amaçlamaktadır; bu, bulundukları uyruktan bağımsız olarak - ancak sadece AB vatandaşlarıdır. Bu, kamu seçimlerinde özellikle önemlidir. Bu nedenle, üç şeyi sağlamamız gerekiyor: (1) belirli bir kişinin yalnızca bir kez kaydolmasını sağlamak, böylece demokratik ilke \"bir kişi = bir oy\" ilkesini güvence altına almak; (2) tüm Kooperatörlerin en az reşit olması ve (3) yalnızca Avrupa Birliği vatandaşlarının Kooperatör olması.</p>\n"
+"    <p>Bu nedenle, sizden bazı kimlik verilerinizi doğrulamak için, (1) kaydolduğunuz formda gireceğiniz verilerle (2) resmi kimlik belgelerinizdeki bilgileri karşılaştıracağız. Bu doğrulama, Kooperatifin rastgele seçilmiş bir üyesi tarafından, başvurunuzun Doğrulayıcıları tarafından gerçekleştirilecek ve kimlik belgelerinize ilişkin bilgileri doğrudan e-posta veya video konferans yoluyla sizden alarak yapılacaktır; bu sürecin bu çevrimiçi platformdan hiç transit geçmemesi adına (güvenlik ve gizlilik açısından).</p>\n"
+"    <p>Bizim sizden talep ettiğimiz ve Doğrulayıcıların resmi kimlik belgelerinizdeki verilerle uyumunu kontrol edeceği veriler şunlardır:\n"
+"    <ul>\n"
+"    <li>ad(lar)ınız ve soyad(lar)ınız;</li>\n"
+"    <li>doğum tarihiniz;</li>\n"
+"    <li>uyrukluğunuz.</li>\n"
+"    </ul></p>\n"
+"    <p>Ad(lar)ınız, soyad(lar)ınız ve doğum tarihiniz sadece bir kişiye aittir: size. Tekrar kaydolmayı denerseniz, doğrulama sürecimize aynı verileri sağlamanız gerekecek ve başvurunuz reddedilecektir çünkü zaten bir Kooperatörsünüz ve birden fazla hesap açarak birden fazla oy kullanamazsınız. Bunu yaparken güvenimiz vardır çünkü yalnızca bir kişi bu ad(lar), soyad(lar) ve doğum tarihi kombinasyonuna sahiptir. Doğum tarihiniz, reşit olduğunuzu doğrulamamıza olanak tanır ve uyrukluğunuz, gerçekten de Avrupa Birliği vatandaşı olduğunuzu doğrulamamız için gereklidir.</p>\n"
+"    <p>Bu veriler, yalnızca kimliğinizi, yaşınızı ve uyrukluluğunuzu doğrulamak ve Kooperatör olarak hesabınızı yönetmek için kullanılacaktır. ${domain_name} IT platformunun diğer kullanıcılarına asla gösterilmeyecek, hiçbirine aktarılmayacak veya satılmayacaktır; sadece bir mahkeme talebi üzerine kamu hukuk otoriteleri tarafından verilen yasal gereklilikleri yerine getirmek için kullanılacaktır. <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Avrupa Birliği Genel Veri Koruma Yönetmeliği (GDPR)</a> gereğince \"veri denetleyicisi\", 229 rue Solférino, 59000 Lille, Fransa adresinde kurulu CosmoPolitical Kooperatif SCE, 25 Nisan 2023 tarihinde SIREN 951 007 897 numarasıyla kayıtlıdır.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Size e-posta ile, A'dan D'ye kadar belirlenmiş dört basit aritmetik işlemi gerçekleştirmesi için bir set gönderdik; hepsi aynı kalıbı takip ediyor: (1 ile 9 arasında BİR İLK NUMARA) "
+"ile (1 ile 9 arasında BİR İKİNCİ NUMARA) çarpılmış, ardından (1 ile 9 arasında BİR ÜÇÜNCÜ NUMARA) eklenmiştir. İşlemi gerçekleştirmek için, önce 1 ile 9 arasında BİR İLK NUMARAYI "
+"1 ile 9 arasında BİR İKİNCİ NUMARA ile çarpmalısınız. Bu çarpmanın sonucunu aldıktan sonra, bu sonuca 1 ile 9 arasında BİR ÜÇÜNCÜ NUMARAYI eklemelisiniz. Nihayetinde, bu son "
+"eklemenin sonucunu, yaptığınız aritmetik işlemin sonucu için sağlanan kutuya yazmalısınız (size göndermiş olduğumuz dört işlemden A'dan D'ye kadar olanlardan birine). Size e-posta "
+"ile gönderilen dört işlemi de etkiniz üzerinde tekrarlamalısınız.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Bir Kooperatör olarak kayıt sürecinin bir parçası olarak, kimliğinizi doğrulamak için bir yöntem seçmelisiniz. Bu kimlik doğrulaması, (1) belirli bir kişinin farklı e-posta adresleri "
+"ile birden fazla kez kayıt olmamasını sağlamak için gereklidir (burada demokratik ilkeye saygı duymaktayız: \"bir kişi - bir oy\"); (2) yalnızca reşit olan Avrupa Birliği vatandaşlarının "
+"Kooperatör olabilmesini sağlamak içindir (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >nedenini buradan görün</a>).</p>\n"
+"    <p>Bu doğrulama süreci için iki seçeneğiniz vardır:</p>\n"
+" <ul>\n"
+"   <li><b>Kimlik belgelerinizin bir kopyasını e-posta ile gönderin:</b> Kimlik belgelerinizin bir kopyasını, güvenli bir biçimde rastgele seçilmiş bir grup Kooperatöre, doğrulayıcılarınıza "
+"e-posta ile göndermeyi seçebilirsiniz. Bu yöntem, kimliğinizi doğrulamanın hızlı ve doğrudan bir yolunu sağlar.</li>\n"
+"   <li><b>Bir video konferans toplantısı düzenleyin:</b> Alternatif olarak, kimlik belgelerinizi canlı olarak doğrulayıcılarınıza sunabileceğiniz bir video konferans oturumu düzenlemeyi "
+"seçebilirsiniz. Bu yöntem, daha kişisel bir etkileşim sağlar ve gerekirse, ortak bir dile sahip olduğunuzda sözlü olarak açıklama yapma, değilse sohbet ve otomatik çeviri ile anlık "
+"açıklama yapma imkanı sunar.</li>\n"
+" </ul>\n"
+" <p>Her iki durumda da, güvenlik nedenleriyle, resmi kimlik belgenizde doğum yerinizi ve kimlik belgesi numaranızı gizlemenizi öneriyoruz, belgenizi kopyalamadan veya doğrulayıcılarınıza "
+"Göstermeden önce.</p>\n"
+" <p>Seçiminizi hızlı bir şekilde yapmanız önemlidir, böylece kayıt süreciniz sorunsuz ve zamanında ilerlesin. Seçtiğiniz yöntemin sizin için en uygun olanı olduğundan ve gizlilik "
+"tercihlerinizle uyumlu olduğundan emin olun.</p>\n"
+" <p>Bu konudaki işbirliğiniz çok değerli ve Kooperatifimiz içinde yüksek güven standartları ve pan-avrupa demokrasisinin korunması için anahtar rol oynamaktadır. Anlayışınız ve "
+"bu kritik adımda aktif katılımınız için teşekkür ederiz.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Mevcut Kooperatör sayısı, kimliğinizi doğrulamak için yeterli sayıda doğrulayıcının seçilmesi için çok düşük. Lütfen durumu çözmek için sistem yöneticisi ile ${administrator} "
+"adresinden iletişime geçin."
+
+msgid "email_copy_id_verification_subject"
+msgstr "tr - ${domain_name} - Lütfen yeni bir potansiyel Kooperatör olarak kimliğimi doğrulayın"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Değerli Doğrulayıcılar,\n"
+" Kimliğimi ${domain_name} Kooperatörü olma başvurum için doğrulama sürecini tamamlamak amacıyla size yazıyorum. Bu e-postaya ekli olarak, resmi kimlik belgemin kısmi bir kopyasını "
+"bulacaksınız.\n"
+" Lütfen belirli hassas bilgilerin güvenlik nedenleriyle gizlendiğini unutmayın. Ancak belge, ${domain_name} kayıt sürecine göre kimliğimi doğrulamak için gereken bilgileri içermektedir.\n"
+" Ekteki belgeyi mümkünse önümüzdeki 3 gün içinde incelemenizi rica ediyorum, aşağıdakiler arasında uygunluk konusunda oy kullanmak için:\n"
+"\n"
+" - ${domain_name} IT platformundan doğrudan e-posta ile aldığınız kimlik bilgileri (ve oylama arayüzünde size hatırlatılacaktır) ve \n"
+" - sizin için ektin kısmi kopyasındaki resmi kimlik belgemde okuyabileceğiniz kimlik bilgileri.\n"
+"\n"
+" Bu uygunluk konusunda oy kullanmanız için bağlantı: ${voting_url}.\n"
+" Başvurumun ${domain_name} Kooperatörü olarak kaydını desteklemeniz için şimdiden size çok teşekkür ediyorum. Herhangi bir sorunuz veya ek bilgi talebiniz olması durumunda, lütfen "
+"kendi dilinizde benimle doğrudan iletişime geçmekten çekinmeyin.\n"
+" Saygılarımla,\n"
+" ${signature}\n"
+" Ek: [Kimlik belgesi dosyasının adı]\n"
+" Bu e-posta, ${domain_name}'in kimlik doğrulama özelliği yardımıyla oluşturulmuştur. Eğer bu e-posta ${signature}'in başvurusu için atanmış Doğrulayıcı değilseniz ve bu e-postayı "
+"yanlışlıkla aldıysanız, lütfen ${domain_name} yöneticisine aşağıdaki adresten bilgi verin: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "tr - ${domain_name} - Lütfen video konferans yoluyla yeni bir potansiyel Kooperatör olarak kimliğimi doğrulayın"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Değerli Doğrulayıcılar,\n"
+"    Kimliğimi ${domain_name} Kooperatörü olma başvurum için doğrulama sürecini tamamlamak amacıyla size yazıyorum. Bu amaçla bir video konferans toplantısı önermek istiyorum.\n"
+"    İşte video konferans için önerdiğim bazı zaman dilimleri. Lütfen Almanya'da yaşadığımı unutmayın (Lütfen ikamet ettiğiniz ülkeye / bölgeye göre ayarlayın. Bu, muhatabınızın zaman "
+"zonunuzu bilmesi için gereklidir), dolayısıyla yaşadığım yerdeki gün saati, yaşadığınız yerdekinden farklı olabilir. Bu video konferans, 10 dakikadan uzun sürmemelidir: (lütfen mümkünse "
+"günde birkaç farklı vakitte ve hafta sonları da dahil olmak üzere en az 3 seçenek sağlayın; hepsinin e-posta gönderdikten sonraki 10 gün içerisinde olması gerekir)\n"
+"   \n"
+"         - Pazartesi, 04 Eylül 2023, saat 17:30 benim saatimle; (Müsaitliğinize göre ayarlayın)\n"
+"         - Salı, 05 Eylül 2023, saat 20:30 benim saatimle; (Müsaitliğinize göre ayarlayın)\n"
+"         - Cumartesi, 09 Eylül 2023, saat 10:00 benim saatimle. (Müsaitliğinize göre ayarlayın)\n"
+"    \n"
+"    Farklı zaman dilimlerinde yaşayabileceğimizi unutmayın! Lütfen bu zaman dilimlerini kendi zaman diliminize çevirin.\n"
+"    Video konferans aşağıdaki bağlantı üzerinden gerçekleşecektir:\n"
+"(lütfen buraya bu video konferans için hazırladığınız bağlantıyı ekleyin. Video konferans oluşturmak ve ilgili bağlantıyı sağlamak için kullanabileceğiniz platform önerilerimiz:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (ücretsiz ve açık kaynak yazılım)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (ücretsiz ve açık kaynak yazılım)\n"
+"         - Zoom : https://zoom.us/ (telif hakkı yazılım)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (telif hakkı yazılım, ücretli platform)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (telif hakkı yazılım, platforma ücretsiz erişim)\n"
+"    )\n"
+"    Lütfen size uygun bir zaman dilimini seçin ve seçimlerinizi içeren bir e-posta gönderin.\n"
+"    Video konferans toplantısı sırasında herhangi bir ortak dil paylaşamayacağımız mümkündür. Bu durumda, birbirimize nazik ve destekleyici bir tutum benimsemeyi öneriyorum. "
+"Sohbeti, kendi dillerimizle kendimizi ifade etmek için kullanmayı, diyalog kurarken kimin ne yazdığını anlamak için ise makine çevirisini kullanmayı öneriyorum.\n"
+"    Video konferansını yaptıktan sonra, aşağıdakiler arasında uygunluk konusunu onaylamak veya reddetmek için oy kullanmanızı rica ediyorum:\n"
+"\n"
+"     - ${domain_name} IT platformundan doğrudan e-posta ile aldığınız kimlik bilgileri (ve oylama arayüzünde size hatırlatılacaktır) ve \n"
+"    - video konferans sırasında göreceğiniz kimlik bilgileri.\n"
+"\n"
+" Bu uygunluk konusunda oy kullanmanız için bağlantı: ${voting_url}.\n"
+"  Başvurumun ${domain_name} Kooperatörü olarak kaydını desteklemeniz için şimdiden size çok teşekkür ediyorum. Herhangi bir sorunuz veya ek bilgi talebiniz olması durumunda, "
+"lütfen benimle doğrudan iletişime geçmekten çekinmeyin.\n"
+" Saygılarımla,\n"
+" ${signature}\n"
+" Bu e-posta, ${domain_name}'in kimlik doğrulama özelliği yardımıyla oluşturulmuştur. Eğer bu e-posta ${signature}'in başvurusu için atanmış Doğrulayıcı değilseniz ve bu e-postayı "
+"yanlışlıkla aldıysanız, lütfen ${domain_name} yöneticisine aşağıdaki adresten bilgi verin: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Kullanıcı mevcutsa, e-posta alacaktır."
+
+msgid "reset_password_email_subject"
+msgstr "Şifrenizi Sıfırlayın"
+
+msgid "forget_email_send_error"
+msgstr "Sıfırlama e-postası gönderilirken bir hata oluştu, lütfen ${administrator} ile iletişime geçin."
+
+msgid "member_state_created_name"
+msgstr "oluşturuldu"
+
+msgid "member_state_created_value"
+msgstr "Üye oluşturulmuştur"
+
+msgid "member_state_draft_name"
+msgstr "taslak"
+
+msgid "member_state_draft_value"
+msgstr "Üye verileri düzenlenmektedir"
+
+msgid "member_state_registred_name"
+msgstr "kaydedildi"
+
+msgid "member_state_registred_value"
+msgstr "Üye verileri kaydedilmiştir"
+
+msgid "member_data_modification_request_name"
+msgstr "değiştirilmektedir"
+
+msgid "member_data_modification_request_value"
+msgstr "Bir veri değiştirme talebi yapılmıştır"
+
+msgid "member_datas_modified_name"
+msgstr "değiştirilmiş"
+
+msgid "member_datas_modified_value"
+msgstr "Üye verileri değiştirilmiştir"
+
+msgid "email_member_state_changed"
+msgstr "Üye profilinizde değişiklik"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Lütfen geçerli bir e-posta adresi sağlayın"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Yönetici kendi parolasını sıfırlayamaz"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Kullanıcı mevcutsa, parolasını sıfırlamak için bir bağlantıyla birlikte e-posta adresine bir e-posta gönderilmiştir"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "İki şifre versiyonu eşleşmiyor. Lütfen onları karşılaştırın ve tekrar gönderin"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Lütfen yeni bir parola sağlayın"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Parolanızı başarıyla değiştirdiniz"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Parolanızı sıfırlama sürecinde bir hata oluştu"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Parolanızı sıfırlama sürecinde bir hata oluştu. Parolanız değiştirilmedi"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Üye mevcut üyeler listesinde bulunamadı"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Parolanızı sıfırlamak için kullandığınız bağlantı geçersizdir. Lütfen aldığınız en son bağlantıyı kullanın"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "Adayın insan olduğunu (robot değil) doğrulayan matematiksel zorluğu içeren e-posta gönderilmedi."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Adaylığı kaydederken hata"
+
+msgid "modification_to_profile_button_title"
+msgstr "Profilinizi Düzenleyin"
+
+msgid "modification_to_profile_button_label"
+msgstr "Profil Düzenle"
+
+msgid "modification_to_profile_button_description"
+msgstr "Profilinizi düzenlemek için e-posta ile güvenli bir bağlantı almak için buraya tıklayın."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Verilerinizin güvenliğini sağlamak için, profilinizi düzenlemek üzere size benzersiz bir bağlantı e-posta ile gönderilecektir. Bu süreç, yalnızca e-posta adresinize erişimi olan kişinin "
+"profilinizde değişiklik yapabileceğini garanti eder."
+
+msgid "modification_to_profile_email_subject"
+msgstr "${domain_name} IT altyapısında profilinizi düzenlemek için bağlantı"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Lütfen burada resmi kimlik belgelerinizde yazılı olan ad(lar)ınızı, resmi olarak Latin karakterler ile transkribe edilmiş şekilde belirtiniz (orijinal dil Latin alfabesinden farklı bir alfabe "
+"kullanıyorsa)."
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Lütfen burada resmi kimlik belgelerinizde yazılı olan soyad(lar)ınızı, evlenmiş bir kişi olarak değil, doğumda yazıldığı gibi, resmi olarak Latin karakterler ile transkribe "
+"edilmiş şekilde belirtiniz (orijinal dil Latin alfabesinden farklı bir alfabe kullanıyorsa)."
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Sizi tanımlayan metin (profil metniniz)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Lütfen burada kendinizi tanımlayan bir metin yazın, tercih ettiğiniz dilde, böylece diğer Topluluk üyeleri sizi biraz daha yakından tanıyabilirler. Öneriyoruz ki odaklanın "
+"(1) Nereden geldiğiniz, (2) ne yaptığınız, (3) Topluluk üyesi olarak ne yapmak istediğiniz ve (4) sahip olduğunuz kaynaklar (deneyim, bilgi, zaman) konuları üzerine.\n"
+"Bu bilginin yararlı olduğunu düşünüyoruz çünkü kendinizi başkalarına kendi sözlerinizle tanıtmak, dijital kimliğinize insani bir yüz kazandırıyor. Bu metin ile, her Topluluk üyesi "
+"sizi biraz daha yakından tanıyor ve bu etkileşimi çok daha kolay hale getiriyor!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Lütfen doğum tarihinizi aşağıdaki formatta sağlayın: GG/AA/YYYY, yani (1) ay içindeki gün, 2 haneli; (2) ayın numarası, 2 haneli; (3) yıl, 4 haneli. Sadece 18. yaşına basan "
+"kişiler Kooperatör olabilir. Eğer henüz 18 yaşınıza basmadıysanız, lütfen Topluluğun Olağan Üyesi olarak kaydolmayı ve reşit olunca Kooperatör statüsüne terfi etmeyi "
+"öneriyoruz."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Lütfen vatandaşı olduğunuz Avrupa Birliği Üye Devletlerinden birini belirtin. Sadece Avrupa Birliği vatandaşları Kooperatör olabilir."
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Lütfen bir Avrupa Birliği Üye Devleti seçin"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Bu, Toplulukta gerçekleşen tüm işlemlerde sizi tanımlayan benzersiz numaradır."
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Lütfen burada, IT platformumuzdaki faaliyetiniz süresince sizi tanımlayacak takma adınızı girin. Takma adınızın gerçek kimliğinize geri iz sürülmesini imkansız (veya son derece zor) "
+"hale getirecek bir adı seçmenizi ŞİDDETLE öneriyoruz. Böylece, görüşlerinizin gizliliğini (yani, Genel Veri Koruma Yönetmeliği - GDPR uyarınca özel olarak korunması gereken "
+"kişisel veriler) gerçek hayattaki herhangi bir dış baskıya (örneğin, işvereniniz veya müşterileriniz aracılığıyla) karşı korumuş olursunuz. Çok dikkatli olun! Bir kez seçtiğinizde, "
+"bu takma adı bir daha asla değiştiremeyeceksiniz. Dikkatlice seçin! \n"
+" Takma adınız ${MIN_PSEUDONYM_LENGTH} ile ${MAX_PSEUDONYM_LENGTH} karakter arasında olmalı ve yalnızca Latin alfabesinin harflerini (A-Z, a-z), rakamları (0-9), "
+"alt çizgileri (_), noktaları (.), tireleri (-) ve boşlukları ( ) içerebilir. Aksanlı, ünlü uyumlu harfler ve bazı dillere özgü diğer diakritik işaretlerden oluşamaz."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Takma ad sağlamanız zorunludur"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Lütfen parolanızı sağlayın. Parolanız ${password_minimum_length} ile ${password_maximum_length} karakter arasında olmalı, en az bir rakam, en az bir küçük harf, en az bir büyük "
+"harf ve aşağıdaki karakterlerden en az birini içermelidir: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Lütfen parolanızı onaylayın"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Parolanızı onaylamak zorunludur"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Lütfen ${domain_name} IT altyapısının sizinle etkileşimde bulunacağı e-posta adresini sağlayın.\n"
+"Sıklıkla kontrol ettiğiniz bir e-posta adresi seçmenizi öneririz.\n"
+"Bu bilgiyi ihtiyaç duyuyoruz çünkü sizinle etkileşimde bulunmak, Kooperatif'teki gelişmelerden sizi haberdar etmek, harekete geçme veya kararlara katkıda bulunma fırsatını "
+"sunmak için ihtiyacımız var. E-posta, Avrupa'da en yaygın kullanılan iletişim aracı, evrenseldir ve dijital devlerin (aynı zamanda 'GAFAM' olarak bilinen) mülkye dayalı mesajlaşma "
+"sistemlerine kıyasla açık ve özgür standartlara dayanmaktadır.\n"
+"Bu e-posta adresi, yalnızca ${domain_name} IT altyapısı ile sizin aranızda iletişimi sağlamak için kullanılacaktır. Diğer ${domain_name} IT platformu kullanıcılarına asla "
+"gösterilmeyecek, yasal gereklilikleri yerine getirmek amacı dışında kimseye iletilmeyecek veya satılmayacaktır. Genel Veri Koruma Yönetmeliği (GDPR) tarafından belirtilen \"veri "
+"denetleyici\" Avrupa Birliği'nde CosmoPolitical Cooperative SCE, 229 rue Solférino, 59000 Lille, Fransa adresinde kurulmuş ve 25 Nisan 2023 tarihinde SIREN numarası 951 "
+"007 897 ile kaydedilmiştir."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Lütfen, ${domain_name} IT altyapısının sizinle etkileşimde bulunurken tercih edeceğiniz dili belirtin. \n"
+"En iyi bildiğiniz, Avrupa Birliği'nin resmi dillerinden veya Esperanto'dan birini seçmenizi öneririz. Eğer, kullanıcı arayüzü geliştirdiğimiz diller arasındaysa, sizinle "
+"etkileşimde bulunmak için bunu kullanacağız. \n"
+"Bu bilgiyi ihtiyaç duyuyoruz çünkü adalet ve demokratik ilkelere saygı açısından, sizinle mümkün olduğunca iyi anlayabileceğiniz bir dilde etkileşimde bulunmak istiyoruz."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Lütfen, ${domain_name}'ın IT altyapısının sizinle etkileşime geçmesini ikinci tercih olarak kabul edeceğiniz dili belirtin. \n"
+"Anlayabileceğiniz başka bir Avrupa Birliği resmi dili veya Esperanto seçmenizi öneriyoruz. Eğer kullanıcı arayüzü geliştirdiğimiz dillerden biri olarak mevcutsa ve tercih ettiğiniz dil "
+"mevcut değilse, sizinle etkileşim kurmak için bunu kullanacağız. \n"
+"Bu bilgiyi istiyoruz çünkü çabalarımıza rağmen, tercih ettiğiniz dilin yazılımımızın kullanıcı arayüzünde mevcut olmaması durumuyla karşılaşabiliriz. Bu nedenle başka bir dil kullanıp kullanamayacağınızı "
+"soruyoruz."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Bizimle etkileşime geçmek için üçüncü tercih olarak kabul ettiğiniz dil"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Lütfen, ${domain_name}'ın IT altyapısının sizinle etkileşime geçmesini üçüncü tercih olarak kabul edeceğiniz dili belirtin. \n"
+"Anlayabileceğiniz başka bir Avrupa Birliği resmi dili veya Esperanto seçmenizi öneriyoruz. Eğer kullanıcı arayüzü geliştirdiğimiz dillerden biri olarak mevcutsa ve ne tercih ettiğiniz dil ne de "
+"ikinci diliniz mevcutsa, sizinle etkileşim kurmak için bunu kullanacağız. \n"
+"Bu bilgiyi istiyoruz çünkü çabalarımıza rağmen, tercih ettiğiniz dilin ve ikinci dilinizin yazılımımızın kullanıcı arayüzünde mevcut olmaması durumuyla karşılaşabiliriz. Bu nedenle size üçüncü bir dil "
+"kullanıp kullanamayacağınızı soruyoruz. Bununla bizimle etkileşimde bulunmanızın sizin için tatmin edici bir durum olmadığını biliyoruz - bu bizim için de öyle. Bunun için özür dileriz."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Kooperatif Davranış Puanınız"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Bir İşbirlikçi olarak, Kooperatif Davranış Puanınız, sizin katıldığınız Çalışma Gruplarındaki diğer Aktif Katılımcılar tarafından verilen puanlardan oluşur. Her Aktif Katılımcı, o Çalışma Grubu içindeki aktif katılımınız sırasında "
+"davranışınızın ne kadar işbirlikçi olduğu konusunda +1, 0 veya -1 puan verebilir. Bu puan ardından otomatik olarak 'unutulur' ve zamanla azalır: ${forgetting_time_constant} gün sonra yarıya indirilir. "
+"Kooperatif Davranış Puanınızın başlangıç değeri sıfırdır."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Kooperatif Davranış Puanınızın en son güncellendiği tarih"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Bu, başka bir İşbirlikçinin, bir İşbirliği Teklifi tanımlayıp benimsemeyi sağlayan bir Çalışma Grubundaki aktif katılımınızın sona ermesinin ardından size puan verdiği en son tarihtir. "
+"O tarihin başlangıç değeri, İşbirlikçi olarak kaydolduğunuz tarihtir."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Sahip olduğunuz Kooperatif hisseleri sayısı"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Bu, web portalımızdan satın aldığınız Kooperatif hisselerinin toplam sayısıdır. Kaydolduğunuzda bu sayı sıfırdır. İlk hissenizi satın almak için mümkün olan en kısa sürede bu URL'ye gitmenizi "
+"öneriyoruz: ${url_purchase_shares}. En az bir hisseyi (ve yıllık katkınızı) satın aldıktan sonra, bir İşbirlikçi olarak tam karar alma haklarınızı elde edeceksiniz. Kayıt sırasında birden fazla hisse satın "
+"almanıza da izin verilir, ancak ayrıca sonrasında da her zaman satın alabilirsiniz. Bu, Kooperatifimizi güçlendirir ve bunun için sizlere minnettarız!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Mevcut yıllık katkınızın süresinin dolacağı tarih"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Mevcut yıllık katkınızın süresinin dolacağı tarih ve bu tarihten önce tam karar alma haklarınızı korumak için yeniden ödemeniz gereken tarih. Kaydolduğunuzda, bu tarih geçmişte bir zamana ayarlanmıştır, "
+"bu da şimdi ödemeniz gerektiği anlamına gelir. İlk yıllık katkınızı ödemek için mümkün olan en kısa sürede bu URL'ye gitmenizi öneriyoruz: ${url_pay_yearly_contrib} ve böylece Kooperatifimizin "
+"faaliyetlerine katılabilirsiniz. Yıllık katkınızı (ve en az bir hissenizi) ödedikten sonra, bir İşbirlikçi olarak tam karar alma haklarınızı elde edeceksiniz."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Banka hesabınızın Uluslararası Banka Hesap Numarası (IBAN)"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Kooperatifi terk etmeye karar verirseniz (bunu hepimiz üzülerek karşılarız), Kooperatif hisselerinizin geri satın alımından elde ettiğimiz geliri size transfer edebilmemiz için IBAN'ınıza "
+"ihtiyacımız var. Güvenlik nedeniyle, bu bilgiyi yalnızca Kooperatifi terk etmeyi planladığınızda vermenizi öneririz."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Tüm verilerinizin IT altyapımızdan silineceği tarih"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Kooperatifi terk ettiğinizde, kimlik verilerinizin ${Quarantine} gün süreyle tutulacağı ve ardından kayıtlarımızdan tamamen ve geri alınamaz bir şekilde silineceği anlamına gelir. Bu, kooperatife "
+"katılan bir İşbirlikçinin, Kooperatif Davranış Puanı çok düşük olduğunda Kooperatifi terk edip hemen yeni bir takma ad ve Kooperatif Davranış Puanıyla yeniden kaydolmasını engellemek içindir. "
+"Kaydolduğunuzda, bu tarih oldukça uzak bir gelecekte ayarlanmıştır."
+
+msgid "avatar_label"
+msgstr "Sizi temsil edecek bir resim (avatarınız)"
+
+msgid "avatar_description"
+msgstr ""
+"Lütfen, sizi topluluk üyesi olarak temsil eden bir resim sağlayın. İşvereninizden veya müşterilerinizden herhangi bir baskıdan korunmanız adına, bu resmin gerçek kimliğinizi geriye izlemeyi "
+"sağlamamasını öneriyoruz. Bu nedenle, genellikle kendinizin bir fotoğrafı olmamalıdır (unutmayın ki yüz tanıma yazılımları arama robotları tarafından yaygın şekilde kullanılmaktadır). Resim yalnızca JPEG formatında "
+"olmalı (uzantısı .JPG veya .JPEG) ve 5 MB'tan büyük olmamalıdır. \n"
+"Bu bilginin faydalı olduğunu düşünüyoruz çünkü bir resim, toplulukta diğer üyelerin sizi tanımasını kolaylaştırır. Bazen bir resim, uzun bir konuşmadan çok daha fazla şey anlatır. "
+"Bu resimle, kendiniz hakkında önemli şeyler ifade ediyorsunuz, evrensel bir dilde. Bunun en iyi şekilde kullanın!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Kayıt işleminizde kesildiğiniz yerden alınan adres (URL) bizim kaydettiğimiz adresle eşleşmiyor. (Oturumdaki başvuru kimlik numarası ve URL numarası eşleşmiyor)\n"
+"Sadece aldığınız son e-postadaki URL'yi kullanın."
+
+msgid "check_new_email"
+msgstr "E-posta adresinizi değiştirmek istediniz. Gelecekte, şu adresi kullanmak istiyorsunuz: ${new_email}. Sonuç olarak, bu yeni adresi doğrulamak için içeren bir e-posta alacaksınız."
+
+msgid "check_new_email_subject"
+msgstr "Yeni e-posta adresinizin doğrulanması"
+
+msgid "check_new_email_send_error"
+msgstr "Yeni adresiniz için doğrulama e-postası gönderilirken hata oluştu"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Yeni adresiniz için doğrulama e-postası gönderilmiştir"
+
+msgid "modify_member"
+msgstr "Üyeyi gözden geçirin veya değiştirin"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Bağlantı hatası"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "E-posta adresi zaten mevcut"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "E-posta adresi güncellendi"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "E-posta adresini güncellerken hata oluştu"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Alan ayarlanırken hata oluştu"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Üyeyi güncellerken hata oluştu"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Geçersiz OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Geçersiz talep"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP hatası"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Üye verileri güncellendi"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Üye verilerinin güncellenmesi başarısız oldu"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Üye verilerinin güncellenmesi başarılı oldu"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Eksik veri"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Yeni e-posta adresi eksik"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "İzin yok"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Seçmen değil"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Şifre güncelleme işlemi başarısız oldu"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Şifre güncelleme işlemi başarılı oldu"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Kayıt işlemi başarısız oldu"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Kayıt işlemi başarılı oldu"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Bilinmeyen erişilen üye"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Bilinmeyen üye"
+
+msgid "modify_member_title"
+msgstr "Üye profilini düzenle"
+
+msgid "select_member_oid_label"
+msgstr "Lütfen profili düzenlemek için bir üye seçin:"
+
+msgid "select_member_placeholder"
+msgstr "Üyenin takma adı"
+
+msgid "modify_profile"
+msgstr "Profilinizi buraya tıklayarak değiştirebilirsiniz"
+
+msgid "profile"
+msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"E-posta adresiniz başarıyla güncellenmiştir. Artık tüm gelecekteki iletişimleriniz için bu yeni adresi kullanacaksınız. Bu değişikliği talep etmediyseniz veya herhangi bir sorunuz varsa, lütfen "
+"destek ile hemen iletişime geçmekten çekinmeyin: ${admin_email}. ${domain_name} topluluğunun bir parçası olduğunuz için teşekkür ederiz!"

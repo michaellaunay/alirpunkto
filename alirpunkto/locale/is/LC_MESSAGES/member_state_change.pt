@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Breyting á stöðunni á gögnum þínum</title>
+    </head>
+    <body tal:omit-tag="textual">
+        <h1 tal:omit-tag="textual">Breyting á persónuupplýsingum þínum á IT-inngræðum <span tal:replace="domain_name">Heimilisfang</span></h1>
+        <p tal:omit-tag="textual">Halló<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nafn meðlimar</span>,
+        </p>
+        <p tal:omit-tag="textual">Hér eru upplýsingar um breytinguna:</p>
+        <ul tal:omit-tag="textual">
+            <li tal:omit-tag="textual">Meðlimur ID: <span tal:replace="python:member.oid">Meðlimur ID</span></li>
+            <li tal:omit-tag="textual">Breytingardagur: <span tal:replace="python:member.modifications[-1].datetime">Síðasta breyting</span></li>
+            <li tal:omit-tag="textual">Ný stöða: <span tal:replace="python:member.member_state">Ný meðlimastöða</span></li>
+            <li tal:omit-tag="textual" tal:condition="exists:page_register_with_oid">
+                <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+                    <span tal:replace="string:${page_register_with_oid}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <p tal:omit-tag="textual">Takk fyrir þátttökuna.</p>
+        <p tal:omit-tag="textual">Bestu kveðjur,</p>
+        <p tal:omit-tag="textual">Teamið hjá <span tal:replace="domain_name">Heimilisfang</span></p>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Lütfen <span tal:replace="domain_name">Alan adı</span> e-posta adresinizi güncelleme isteğinizi onaylayın</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Lütfen <span tal:replace="domain_name">Alan adı</span> IT platformunda e-posta adresinizi güncelleme isteğinizi onaylayın</h1>
+    <p tal:omit-tag="textual">Siz veya <span tal:replace="domain_name">Domain adı</span> hesabınıza erişimi olan bir kişi, <span tal:replace="site_name">Site adı</span> platformundaki e-posta adresini değiştirmemizi istedi. Gelecekte kullanılmak üzere istenen yeni e-posta adresi: <span tal:replace="new_email">Yeni e-posta adresi</span>.</p>
+<p tal:omit-tag="textual">Eğer <span tal:replace="new_email">Yeni e-posta adresi</span>'nin <span tal:replace="domain_name">domain adı</span> IT altyapısının sizinle etkileşim kurmak için gelecekte kullanması gereken e-posta adresi olduğunu onaylıyorsanız, lütfen aşağıdaki onay bağlantısına tıklayınız.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Eğer bir hata yaptıysanız veya bu isteği siz yapmadıysanız, bu e-postayı göz ardı edin.</p>
+
+    <p tal:omit-tag="textual">Faaliyetlerimize olan ilginiz için teşekkür ederiz.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Saygılarımla,</p>
+        <p tal:omit-tag="textual"><span tal:replace="domain_name">Site</span> ekibi</p>
+    </footer>
+
+</body>
+</html>

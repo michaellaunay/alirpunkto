@@ -1,0 +1,1111 @@
+# Alirpunkto pot fil.
+# Copyright (C) 2023 Michaël Launay
+# Denne fil distribueres under den samme licens som Alirpunkto-pakken.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: Dansk <dev@logikascium.com>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Velkommen"
+
+msgid "username_label"
+msgstr "Brugernavn"
+
+msgid "password_label"
+msgstr "Adgangskode"
+
+msgid "login_label"
+msgstr "Log ind"
+
+msgid "welcome_msg"
+msgstr "Velkommen til ${site_name}, den centraliserede service for de applikationer, der bruges i IT-infrastrukturen af ${domain_name}."
+
+msgid "all_applications_msg"
+msgstr "Alle de applikationer, du har brug for for at deltage i aktiviteterne i ${domain_name} ét sted."
+
+msgid "register_or_login_msg"
+msgstr "Registrer dig eller log ind nu for at komme i gang."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, den centraliserede service for de applikationer, der bruges i IT-infrastrukturen af ${domain_name}"
+
+msgid "logged_in_msg"
+msgstr "Du er logget ind som ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Du kan logge ud ved at klikke her"
+
+msgid "logout_label"
+msgstr "Log ud"
+
+msgid "choose_application_msg"
+msgstr "Vælg den applikation, du ønsker at deltage i:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Ugyldigt brugernavn eller adgangskode. Prøv venligst igen"
+
+msgid "register_link"
+msgstr "Opret konto"
+
+msgid "password_confirm_label"
+msgstr "Bekræft adgangskode"
+
+msgid "password_confirm_title"
+msgstr "Bekræft din adgangskode"
+
+msgid "forgot_password_label"
+msgstr "Glemt adgangskode?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Fuldt navn(e) som i dine officielle identitetsdokumenter"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Fuldt efternavn(e) som i dine officielle identitetsdokumenter"
+
+msgid "birthdate_label"
+msgstr "Fødselsdato"
+
+msgid "nationality_label"
+msgstr "Nationalitet (blandt dem i Den Europæiske Union)"
+
+msgid "cooperator_number_label"
+msgstr "Samarbejdspartnernummer"
+
+msgid "pseudonym_label"
+msgstr "Pseudonym"
+
+msgid "email_label"
+msgstr "Emailadresse"
+
+msgid "first_interaction_language_label"
+msgstr "Det sprog, du foretrækker, at vi interagerer med dig på"
+
+msgid "second_interaction_language_label"
+msgstr "Det sprog, du accepterer som et andet valg for, at vi interagerer med dig"
+
+msgid "register_label"
+msgstr "Registrer"
+
+msgid "forgot_password_head"
+msgstr "Glemt adgangskode"
+
+msgid "forgot_your_password_title"
+msgstr "Glemt din adgangskode?"
+
+msgid "enter_your_email_address_label"
+msgstr "Indtast venligst din emailadresse:"
+
+msgid "submit_button"
+msgstr "Indsend"
+
+msgid "candidature_states_draft_value"
+msgstr "Udkast: Ansøgningen er i udkaststilstand."
+
+msgid "candidature_states_email_validation_value"
+msgstr "E-mailvalidering: Den tilstand, hvor ansøgerens e-mailadresse afventer validering."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "BekræftetMenneske: Ansøgerens e-mailadresse er verificeret, og bevis for menneskelighed er givet (vi har verificeret, at du ikke er en robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"UnikData: Ansøgeren har indtastet sine personlige identifikationsdata, og vi har verificeret, at ingen nuværende eller nylige samarbejdspartner eller ordinært medlem af fællesskabet har de samme "
+"data."
+
+msgid "candidature_states_pending_value"
+msgstr "Afventer: Ansøgningen er blevet indsendt. De personlige identifikationsdata er blevet sendt til verificatorerne, men de har endnu ikke givet deres tilbagemelding."
+
+msgid "candidature_states_approved_value"
+msgstr "Godkendt: Ansøgningen er blevet accepteret."
+
+msgid "candidature_states_refused_value"
+msgstr "Afvist: Ansøgningen er blevet nægtet."
+
+msgid "candidature_states_draft"
+msgstr "udkast"
+
+msgid "candidature_states_email_validation"
+msgstr "email_validering"
+
+msgid "candidature_states_confirmed_human"
+msgstr "bekræftet_menneske"
+
+msgid "candidature_states_unique_data"
+msgstr "unik_data"
+
+msgid "candidature_states_pending"
+msgstr "afventer"
+
+msgid "candidature_states_approved"
+msgstr "godkendt"
+
+msgid "candidature_states_refused"
+msgstr "afvist"
+
+msgid "user_types_ordinary_value"
+msgstr "Almindelig: En ansøgning om at blive et ordinært medlem af fællesskabet = med en forenklet registreringsproces, ingen økonomisk pligt, men ingen beslutningsretter."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Samarbejdspartner: En ansøgning om at blive fuldgyldigt medlem af kooperativet, en samarbejdspartner = med en fuldstændig registreringsproces, der sikrer 'én person = én stemme'-princippet, og at "
+"ansøgeren er borger i Den Europæiske Union, pligten til at købe mindst én andel og betale et årligt gebyr, og fulde beslutningsretter."
+
+msgid "user_types_ordinary"
+msgstr "Ordinært medlem af fællesskabet"
+
+msgid "user_types_cooperator"
+msgstr "Samarbejdspartner = fuldgyldigt medlem af kooperativet"
+
+msgid "vote_types_yes_value"
+msgstr "Ja: Stemmen er positiv."
+
+msgid "vote_types_no_value"
+msgstr "Nej: Stemmen er negativ."
+
+msgid "vote_types_abstain_value"
+msgstr "Afholde sig: Stemmen er neutral."
+
+msgid "vote_types_yes"
+msgstr "ja"
+
+msgid "vote_types_no"
+msgstr "nej"
+
+msgid "vote_types_abstain"
+msgstr "afholde sig"
+
+msgid "zero"
+msgstr "nul"
+
+msgid "one"
+msgstr "én"
+
+msgid "two"
+msgstr "to"
+
+msgid "three"
+msgstr "tre"
+
+msgid "four"
+msgstr "fire"
+
+msgid "five"
+msgstr "fem"
+
+msgid "six"
+msgstr "seks"
+
+msgid "seven"
+msgstr "syv"
+
+msgid "eight"
+msgstr "otte"
+
+msgid "nine"
+msgstr "ni"
+
+msgid "times"
+msgstr "ganget med"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Verificering af, at du er et menneske. Beregn resultaterne af enkle matematiske operationer og indtast disse resultater på portalen"
+
+msgid "email_candidature_state_changed"
+msgstr "Ændring i status for din ansøgning til portalen"
+
+msgid "invalid_challenge"
+msgstr "Dit svar er forkert. Indtast venligst et nyt."
+
+msgid "invalid_email"
+msgstr "Der er et problem med din emailadresse, venligst verificer den."
+
+msgid "invalid_choice"
+msgstr "Dit valg er ikke gyldigt, indtast det venligst igen."
+
+msgid "challenge_instruction_text"
+msgstr "Indtast venligst resultaterne af de følgende fire enkle matematiske operationer og udfyld de relevante felter for at bekræfte din emailadresse."
+
+msgid "enter_result_label_A"
+msgstr "Indtast venligst resultatet for matematisk operation A:"
+
+msgid "result_label_title_A"
+msgstr "Indtast venligst koden, du modtog per e-mail, eller resultatet af den matematiske operation A."
+
+msgid "result_input_title_A"
+msgstr "For at vi kan verificere din e-mailadresse og sikre, at du er et menneske (ikke en robot), skal du indtaste resultatet af operation A, som du modtog per e-mail."
+
+msgid "enter_result_label_B"
+msgstr "Indtast venligst resultatet for matematisk operation B:"
+
+msgid "result_label_title_B"
+msgstr "Indtast venligst koden, du modtog per e-mail, eller resultatet af den matematiske operation B."
+
+msgid "result_input_title_B"
+msgstr "For at vi kan verificere din e-mailadresse og sikre, at du er et menneske (ikke en robot), skal du indtaste resultatet af operation B, som du modtog per e-mail."
+
+msgid "enter_result_label_C"
+msgstr "Indtast venligst resultatet for matematisk operation C:"
+
+msgid "result_label_title_C"
+msgstr "Indtast venligst koden, du modtog per e-mail, eller resultatet af den matematiske operation C."
+
+msgid "result_input_title_C"
+msgstr "For at vi kan verificere din e-mailadresse og sikre, at du er et menneske (ikke en robot), skal du indtaste resultatet af operation C, som du modtog per e-mail."
+
+msgid "enter_result_label_D"
+msgstr "Indtast venligst resultatet for matematisk operation D:"
+
+msgid "result_label_title_D"
+msgstr "Indtast venligst koden, du modtog per e-mail, eller resultatet af den matematiske operation D."
+
+msgid "result_input_title_D"
+msgstr "For at vi kan verificere din e-mailadresse og sikre, at du er et menneske (ikke en robot), skal du indtaste resultatet af operation D, som du modtog per e-mail."
+
+msgid "verify_button"
+msgstr "Indsend"
+
+msgid "submit_email_validation_title"
+msgstr "Klik for at verificere de indtastede koder."
+
+msgid "passwords_dont_match"
+msgstr "Adgangskoderne stemmer ikke overens."
+
+msgid "password_too_short"
+msgstr "Adgangskode er for kort."
+
+msgid "password_minimum_length"
+msgstr "Adgangskoden skal være mindst ${password_minimum_length} tegn lang."
+
+msgid "password_too_long"
+msgstr "Adgangskode er for lang."
+
+msgid "password_maximum_length"
+msgstr "Adgangskoden må ikke overskride ${password_maximum_length} tegn."
+
+msgid "password_must_contain_digit"
+msgstr "Adgangskoden skal indeholde mindst ét tal."
+
+msgid "password_must_contain_uppercase"
+msgstr "Adgangskoden skal indeholde mindst ét stort bogstav."
+
+msgid "password_must_contain_lowercase"
+msgstr "Adgangskoden skal indeholde mindst ét lille bogstav."
+
+msgid "password_must_contain_special_char"
+msgstr "Adgangskoden skal indeholde mindst ét af følgende tegn: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Indtast venligst din adgangskode her."
+
+msgid "password_confirm_title_label"
+msgstr "Bekræft venligst din adgangskode her."
+
+msgid "password_confirm"
+msgstr "Bekræft din adgangskode."
+
+msgid "type_of_registration"
+msgstr "Type af registrering"
+
+msgid "type_registration_label"
+msgstr "Vælg den type registrering, der passer til dig."
+
+msgid "type_registration_choice"
+msgstr "Hver type registrering kommer med et specifikt sæt af rettigheder, fordele og forpligtelser."
+
+msgid "approved_heading"
+msgstr "Tillykke med din godkendelse!"
+
+msgid "approved_description"
+msgstr "Din ansøgning er blevet godkendt. Du kan nu logge ind ved hjælp af det pseudonym og den adgangskode, du gav under ansøgningsprocessen."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Ugyldigt pseudonym. Det skal være mellem ${MIN_PSEUDONYM_LENGTH} og ${MAX_PSEUDONYM_LENGTH} tegn langt og kan kun indeholde bogstaver (A-Z, a-z), tal (0-9), underscores (_), prikker "
+"(.), bindestreger (-) og mellemrum ( ). Det kan ikke indeholde bogstaver med accenter, diakritiske tegn og andre diakritiske tegn, der er specifikke for nogle sprog."
+
+msgid "invalid_date"
+msgstr "Ugyldigt datoformat."
+
+msgid "pseudonym_too_short"
+msgstr "Pseudonym for kort."
+
+msgid "pseudonym_minimum_length"
+msgstr "Pseudonymet skal være mindst ${MIN_PSEUDONYM_LENGTH} tegn langt."
+
+msgid "pseudonym_too_long"
+msgstr "Pseudonym for langt."
+
+msgid "pseudonym_maximum_length"
+msgstr "Pseudonymet må ikke overstige ${MAX_PSEUDONYM_LENGTH} tegn."
+
+msgid "pseudonym_allready_exists"
+msgstr "Dette pseudonym er allerede i brug. Vælg venligst et andet."
+
+msgid "Select_a_country"
+msgstr "Vælg et medlemsland i Den Europæiske Union"
+
+msgid "Austria"
+msgstr "AT - Østrig"
+
+msgid "Belgium"
+msgstr "BE - Belgien"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgarien"
+
+msgid "Cyprus"
+msgstr "CY - Cypern"
+
+msgid "Czech_Republic"
+msgstr "CZ - Tjekkiet"
+
+msgid "Germany"
+msgstr "DE - Tyskland"
+
+msgid "Denmark"
+msgstr "DK - Danmark"
+
+msgid "Estonia"
+msgstr "EE - Estland"
+
+msgid "Spain"
+msgstr "ES - Spanien"
+
+msgid "Finland"
+msgstr "FI - Finland"
+
+msgid "France"
+msgstr "FR - Frankrig"
+
+msgid "Greece"
+msgstr "GR - Grækenland"
+
+msgid "Croatia"
+msgstr "HR - Kroatien"
+
+msgid "Hungary"
+msgstr "HU - Ungarn"
+
+msgid "Ireland"
+msgstr "IE - Irland"
+
+msgid "Italy"
+msgstr "IT - Italien"
+
+msgid "Lithuania"
+msgstr "LT - Litauen"
+
+msgid "Luxembourg"
+msgstr "LU - Luxembourg"
+
+msgid "Latvia"
+msgstr "LV - Letland"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Holland"
+
+msgid "Poland"
+msgstr "PL - Polen"
+
+msgid "Portugal"
+msgstr "PT - Portugal"
+
+msgid "Romania"
+msgstr "RO - Rumænien"
+
+msgid "Sweden"
+msgstr "SE - Sverige"
+
+msgid "Slovenia"
+msgstr "SI - Slovenien"
+
+msgid "Slovakia"
+msgstr "SK - Slovakiet"
+
+msgid "full_name_as_in_id_required"
+msgstr "Fulde navn(e) er påkrævet."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Fulde efternavn(e) er påkrævet."
+
+msgid "birthdate_required"
+msgstr "Fødselsdatoen er påkrævet."
+
+msgid "nationality_required"
+msgstr "Nationalitet er påkrævet."
+
+msgid "first_interaction_language_required"
+msgstr "Det første interaktionssprog er påkrævet."
+
+msgid "pending_description"
+msgstr "Din ansøgning er under behandling. Du vil blive underrettet via e-mail, når den er blevet godkendt."
+
+msgid "candidature_not_found"
+msgstr "Ansøgningen blev ikke fundet."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Tak for din interesse i aktiviteterne hos ${domain_name}! Her er det rigtige sted for dig at registrere dig </b></h2>\n"
+"<p>Den CosmoPolitiske Kooperative støtter individer og transformerer det eksisterende økonomiske, sociale og politiske system mod et radikalt retfærdigt, bæredygtigt, demokratisk og lykkeligt "
+"samfund, <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Samskabet</a>.</p>\n"
+"<p>Nedenfor finder du starten på registreringsprocessen for at deltage i vores fællesskab. Vi foreslår to niveauer af deltagelse, med stigende forpligtelser og rettigheder:</p>\n"
+"<ul>\n"
+"<li>som en <b>Ordinary Member of our Community</b>, med en simpel registreringsproces, ingen økonomiske forpligtelser, men uden stemmerettigheder; eller </li>\n"
+"<li>som en <b>Cooperator</b>, et fuldgyldigt medlem af vores kooperative, med en registreringsproces der sikrer, at en given person kun kan registrere sig én gang (for at følge det demokratiske princip \"én "
+"person = én stemme\") og at kun borgere i den Europæiske Union der har nået deres myndighedsalder er Cooperators, med forpligtelsen til at købe mindst én andel og betale et "
+"årligt bidrag, og fulde stemmerettigheder. Den Europæiske Union er det geografiske område for vores arbejde (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">se hvorfor</a>)</li>\n"
+"</ul>\n"
+"<p>Registreringsprocessen omfatter følgende trin:</p>\n"
+"<ol>\n"
+"<li>vi verificerer, at e-mailadressen blev givet af dig, et menneske (og ikke en robot);</li>\n"
+"<li>vi beder dig om dit pseudonym, adgangskode og foretrukket sprog(s) for interaktion med dig;</li>\n"
+"<li>i tilfælde af at du registrerede dig som et Ordinary Member of the Community, har du færdiggjort og er indtrådt i vores fællesskab. I tilfælde af at du registrerede dig som en Cooperator, fortsætter processen "
+"så vi kan verificere, at du overholder de betingelser, der er fastsat ovenfor for at være en Cooperator.</li>\n"
+"</ol>\n"
+"<p>Denne verifikation udføres som følger:</p>\n"
+"<ol>\n"
+"<li>vi beder dig om dine <b>identitetsoplysninger</b>: dit/dine fornavn(e) og efternavn(e), din fødselsdato;</li>\n"
+"<li>vi beder et par eksisterende medlemmer af kooperativet (dine verificerende) om at kontrollere, at oplysningerne på dit officielle identitetsdokument matcher dem, du gav i det forrige trin, "
+"baseret på en direkte udveksling af e-mails eller et videokonferencemøde med dig;</li>\n"
+"<li>når de har bekræftet denne overensstemmelse, vil du blive budt velkommen som en Cooperator, med fulde rettigheder - når du har købt mindst <a href=\"https://www.cosmopolitical.coop/share\">én "
+"andel</a> og betalt dit <a href=\"https://www.cosmopolitical.coop/yearcontrib\">årlige bidrag til vores operationer</a>.</li>\n"
+"</ol>\n"
+"<p>Begynd venligst din registrering nu! Vi ser frem til at byde dig velkommen i vores aktiviteter.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Det første skridt i din registreringsproces er at validere, at du er en \n"
+"Menneskelig, og ikke en robot. For dette, verificerer vi at du kan modtage og \n"
+"forstå en e-mail, som vi vil sende til dig: hvad vi beder dig om er \n"
+"enkelt for et menneske, men meget mere komplekst for en robot."
+
+msgid "identity_verification_label"
+msgstr "Identitetsverifikation"
+
+msgid "Send_id_copy_by_email"
+msgstr "Send en scan af en del af dit officielle identitetsdokument via e-mail."
+
+msgid "Send_video_conference_link"
+msgstr "Send forslag til dato og tidsrum for en video konferencemøde."
+
+msgid "Proceed"
+msgstr "Fortsæt"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Bekræft venligst, at du har sendt e-mails til verificerende."
+
+msgid "sent_confirmation_label"
+msgstr "Bekræftelse på, at e-mails blev sendt til verificerende"
+
+msgid "submit_email_confirmation_title"
+msgstr "Bekræft, at du har sendt e-mails."
+
+msgid "confirm_email_send_button_label"
+msgstr "Bekræft"
+
+msgid "vote_success"
+msgstr "Vi takker dig for at deltage i afstemningsprocessen. Din stemme ${vote} er blevet registreret. Du kan ændre din stemme indtil deadline ved at vende tilbage til denne side."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Som Cooperator vil du deltage i alle vores beslutninger. Disse beslutninger vedtages efter strenge demokratiske procedurer, og kan have vigtige konsekvenser for "
+"kooperativet og for Cooperators. Derudover har kooperativet til hensigt at repræsentere EU-borgere, uafhængigt af deres nationalitet - men kun EU-borgere. Dette er særligt "
+"vigtigt under offentlige valg. Vi skal derfor sikre tre ting: (1) at en given person ikke kan registrere sig mere end én gang, så vi sikrer det demokratiske princip \"én person = "
+"én stemme\"; (2) at alle Cooperators er mindst myndige og (3) at kun borgere i den Europæiske Union er Cooperators.</p>\n"
+"    <p>Dette er grunden til, at vi vil verificere nogle elementer af dine identitetsdata, ved at sammenligne (1) de data, du indtaster på denne formular under din registrering med (2) de "
+"oplysninger, der er til stede på dine officielle identitetsdokumenter. Denne verifikation vil blive udført af et sæt tilfældigt udvalgte medlemmer af kooperativet, verificeringspersoner for din ansøgning, "
+"og vil være baseret på oplysninger vedrørende dine officielle identitetsdokumenter, som du vil transmittere direkte til dem, via e-mail eller under en videokonference, uden transit gennem "
+"denne online platform (af hensyn til sikkerhed og fortrolighed).</p>\n"
+"    <p>De data, vi anmoder om fra dig, og som verificeringspersonerne vil kontrollere for overensstemmelse med dataene på dine officielle identitetsdokumenter, er:\n"
+"    <ul>\n"
+"    <li>dit navn(e) og efternavn(e);</li>\n"
+"    <li>din fødselsdato;</li>\n"
+"    <li>dit statsborgerskab.</li>\n"
+"    </ul></p>\n"
+"    <p>Kun én person bærer dit navn(e), efternavn(e) og din fødselsdato: dig. Hvis du forsøger at registrere dig igen, skal du give de samme data til vores verificerings "
+"procedure, og vi vil afvise din ansøgning, fordi du allerede er en Cooperator, og ikke kan have flere konti for at stemme mere end én gang. Vi vil være sikre på at gøre dette, fordi "
+"vi ved, at kun én person har denne kombination af navn(e), efternavn(e) og fødselsdato. Din fødselsdato gør det muligt for os at verificere, at du er myndig, og dit statsborgerskab "
+"giver os mulighed for at sikre, at du faktisk er en borger i den Europæiske Union.</p>\n"
+"    <p>Denne data vil udelukkende blive brugt til at verificere din identitet, din alder og dit statsborgerskab, og til at administrere din konto som Cooperator. Det vil aldrig blive vist til "
+"andre brugere af IT-platformen hos ${domain_name}, ej heller vil det blive overført eller solgt til nogen, bortset fra at opfylde lovgivningskrav fra offentlige retshåndhævende myndigheder efter "
+"anmodning fra en dommer. Den \"dataansvarlige\", som defineret af <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\">Generel Data Beskyttelsesforordning (GDPR) i "
+"Den Europæiske Union</a>, er CosmoPolitical Cooperative SCE, et europæisk kooperativ selskab etableret 229 rue Solférino, 59000 Lille, Frankrig og registreret den 25. "
+"april 2023 under nummer SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Vi har sendt dig et sæt af fire simple aritmetiske beregninger via e-mail, identificeret fra A til D, som alle følger det samme mønster: (ET FØRSTE TAL MELLEM 1 OG 9) "
+"ganget med (ET ANDET TAL MELLEM 1 OG 9), plus (ET TREDJE TAL MELLEM 1 OG 9). For at udføre beregningen skal du først gange DET FØRSTE TAL MELLEM 1 OG 9 "
+"med DET ANDEN TAL MELLEM 1 OG 9. Når du har resultatet af denne multiplikation, skal du lægge DET TREDJE TAL MELLEM 1 OG 9 til dette resultat. Du skal til slut skrive resultatet "
+"af denne sidste addition i boksen, der er tilgængelig for resultatet af den aritmetiske beregning, du udfører (blandt de fire vi har sendt til dig, identificeret fra A til D). Du skal "
+"gentage beregningen for alle fire beregninger sendt til dig via e-mail.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Som en del af registreringsprocessen som Kooperatør, skal du vælge en metode til verifikation af din identitet. Denne verifikation af din identitet er nødvendig for at sikre: (1) "
+"at en given person ikke registrerer sig flere gange med forskellige e-mailadresser (her hører vi det demokratiske princip: \"én person - én stemme\"); (2) at kun statsborgere i "
+"Den Europæiske Union, der har nået myndighedsalderen, er Kooperatører (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >se hvorfor</a>).</p>\n"
+"    <p>Du har to muligheder for denne verifikationsproces:</p>\n"
+" <ul>\n"
+"   <li><b>Send en kopi af dine identitetsdokumenter via e-mail:</b> Du kan vælge at sende en sikker kopi af dine identitetsdokumenter via e-mail direkte til et lille sæt af tilfældigt udvalgte "
+"Kooperatører, dine Verifikatorer. Denne metode sikrer en hurtig og direkte måde at bekræfte din identitet på.</li>\n"
+"   <li><b>Arranger et videokonference-møde:</b> Alternativt kan du vælge at deltage i en videokonference, hvor du kan præsentere dine identitetsdokumenter live for dine Verifikatorer. Denne "
+"metode giver en mere personlig interaktion og muliggør øjeblikkelig afklaring, hvis nødvendigt, mundtligt hvis du deler et fælles sprog, via chat og automatisk oversættelse, hvis ikke.</li>\n"
+" </ul>\n"
+" <p>I begge tilfælde råder vi dig, af sikkerhedsmæssige grunde, til at skjule, på dit officielle identitetsdokument, dit fødested og identitetsdokumentnummeret, før du kopierer det eller "
+"viser det til dine Verifikatorer.</p>\n"
+" <p>Det er vigtigt, at du træffer dit valg hurtigt, så din registreringsproces forløber glat og til tiden. Sørg for, at den metode, du vælger, er den mest bekvemme for dig "
+"og stemmer overens med dine præferencer for privatliv.</p>\n"
+" <p>Din samarbejde i denne sag er meget værdsat og er nøglen til at opretholde de høje standarder for tillid og paneuropæisk demokrati inden for vores Kooperativ. Tak for din "
+"forståelse og aktive deltagelse i dette afgørende skridt.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Antallet af eksisterende Kooperatører er for lavt til at vælge det tilstrækkelige antal Verifikatorer af din identitet. Kontakt venligst systemadministratoren på følgende adresse "
+"${administrator} for at løse problemet."
+
+msgid "email_copy_id_verification_subject"
+msgstr "da - ${domain_name} - Venligst verificer min identitet som en ny potentiel Kooperatør"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Kære Verifikatorer,\n"
+" Jeg skriver til jer for at fuldføre identitetsverifikationsprocessen for min ansøgning om at blive Kooperatør af ${domain_name}. Vedhæftet denne e-mail finder I en delvis kopi af "
+"mit officielle identitetsdokument.\n"
+" Bemærk venligst, at visse følsomme oplysninger er maskeret af sikkerhedsmæssige årsager. Dokumentet indeholder dog de oplysninger, I har brug for for at verificere min identitet i henhold til "
+"registreringsprocessen for ${domain_name}.\n"
+" Jeg anmoder venligst om, at I gennemgår det vedhæftede dokument, hvis muligt inden for de næste 3 dage, for at stemme om overensstemmelsen mellem:\n"
+"\n"
+" - de identitetsoplysninger, som I direkte har modtaget via e-mail fra IT-platformen for ${domain_name} (og som vil blive mindet om jer på stemmegrænsefladen) og \n"
+" - de identitetsoplysninger, som I kan læse på den vedhæftede delvise kopi af mit officielle identitetsdokument.\n"
+"\n"
+" Linket til at stemme om denne overensstemmelse er følgende: ${voting_url}.\n"
+" Jeg takker jer meget på forhånd for at støtte processen for min registrering som Kooperatør i ${domain_name}. Hvis I har yderligere spørgsmål eller har brug for yderligere "
+"oplysninger, er I velkomne til at kontakte mig direkte på jeres eget sprog.\n"
+" Venlig hilsen,\n"
+" ${signature}\n"
+" Vedhæftning: [Navn på ID-dokumentfil]\n"
+" Denne e-mail er blevet genereret med assistance fra ${domain_name}'s identitetsverifikationsfunktion. Hvis I ikke er den Verifikator, der er tildelt ansøgningen fra ${signature}, og har "
+"modtaget denne e-mail ved en fejl, bedes I informere administratoren for ${domain_name} på følgende adresse: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "da - ${domain_name} - Venligst verificer min identitet via videokonference som en ny potentiel Kooperatør"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Kære Verifikatorer,\n"
+"    Jeg skriver til jer for at fuldføre identitetsverifikationsprocessen for min ansøgning om at blive Kooperatør af ${domain_name}. Jeg vil gerne foreslå et videokonference-møde til "
+"det formål.\n"
+"    Her er nogle tidsrum, som jeg foreslår til videokonferencen. Bemærk venligst, at jeg bor i Tyskland (tilpas venligst i henhold til dit land/region), så tidspunktet, hvor jeg bor, "
+"måske er forskelligt fra tidspunktet, hvor du bor. Denne videokonference bør ikke vare mere end 10 minutter: (angiv venligst mindst 3 muligheder, hvis muligt på forskellige tidspunkter på dagen "
+"og på forskellige dage, herunder i weekenden, alle inden for 10 dage efter at du har sendt e-mailen)\n"
+"   \n"
+"         - Mandag, 04. september 2023, kl. 17:30 min tid; (tilpas i henhold til din tilgængelighed)\n"
+"         - Tirsdag, 05. september 2023, kl. 20:30 min tid; (tilpas i henhold til din tilgængelighed)\n"
+"         - Lørdag, 09. september 2023, kl. 10:00 min tid. (tilpas i henhold til din tilgængelighed)\n"
+"    \n"
+"    Husk venligst, at vi måske lever i forskellige tidszoner! Venligst konverter disse tidsrum til din egen tidszone.\n"
+"    Videokonferencen vil finde sted ved hjælp af følgende link:\n"
+"(indsæt venligst her det link, som du har forberedt til denne videokonference. Her er vores forslag til platforme, som du kan bruge til at oprette videokonferencen og give det "
+"tilhørende link:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (gratis og open-source software)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (gratis og open-source software)\n"
+"         - Zoom : https://zoom.us/ (proprietær software)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (proprietær software, platform bag betalingsmuren)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (proprietær software, gratis adgang til platformen)\n"
+"    )\n"
+"    Vælg venligst et tidsrum, der passer dig, og send mig en e-mail med din valgte tid.\n"
+"    Under videokonference-mødet kan det ske, at vi ikke deler et fælles sprog. Hvis dette er tilfældet, foreslår jeg, at vi indtager en venlig og støttende holdning over for hinanden. Jeg foreslår, "
+"at vi bruger chatten til at udtrykke os på vores respektive sprog, og bruger maskinoversættelse til at forstå, hvad vores samtalepartner skriver.\n"
+"    Når I har afholdt dette møde via videokonference, beder jeg venligst om, at I stemmer for at bekræfte eller afvise overensstemmelsen mellem:\n"
+"\n"
+"     - de identitetsoplysninger, som I direkte har modtaget via e-mail fra IT-platformen for ${domain_name} (og som vil blive mindet om jer på stemmegrænsefladen) og \n"
+"    - de identitetsoplysninger, som I vil have set under videokonferencen.\n"
+"\n"
+" Linket til at stemme om denne overensstemmelse er følgende: ${voting_url}.\n"
+"  Jeg takker jer meget varmt på forhånd for at støtte processen for min registrering som Kooperatør i ${domain_name}. Hvis I har yderligere spørgsmål eller har brug for yderligere "
+"oplysninger, er I velkomne til at kontakte mig direkte.\n"
+" Venlig hilsen,\n"
+" ${signature}\n"
+" Denne e-mail er blevet genereret med assistance fra ${domain_name}'s identitetsverifikationsfunktion. Hvis du ikke er den Verifikator, der er tildelt ansøgningen fra ${signature} og har "
+"modtaget denne e-mail ved en fejl, bedes du informere administratoren for ${domain_name} på følgende adresse: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Hvis brugeren eksisterer, vil han/hun modtage en e-mail."
+
+msgid "reset_password_email_subject"
+msgstr "Nulstil dit kodeord"
+
+msgid "forget_email_send_error"
+msgstr "Der opstod en fejl under afsendelse af nulstillings-e-mail, kontakt venligst administratoren på ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "oprettet"
+
+msgid "member_state_created_value"
+msgstr "Medlemmet er blevet oprettet"
+
+msgid "member_state_draft_name"
+msgstr "kladde"
+
+msgid "member_state_draft_value"
+msgstr "Medlemmets data redigeres"
+
+msgid "member_state_registred_name"
+msgstr "registrerede"
+
+msgid "member_state_registred_value"
+msgstr "Medlemmets data er blevet gemt"
+
+msgid "member_data_modification_request_name"
+msgstr "bliver ændret"
+
+msgid "member_data_modification_request_value"
+msgstr "En anmodning om datamodifikation er blevet sendt"
+
+msgid "member_datas_modified_name"
+msgstr "ændret"
+
+msgid "member_datas_modified_value"
+msgstr "Medlemmets data er blevet ændret"
+
+msgid "email_member_state_changed"
+msgstr "Ændring i din medlemsprofil"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Venligst angiv en gyldig e-mailadresse"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Administratorer må ikke nulstille deres egen adgangskode"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Hvis brugeren eksisterer, er en e-mail sendt til hans/hendes e-mailadresse med et link til at nulstille hans/hendes adgangskode"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "De to versioner af adgangskoden stemmer ikke overens. Venligst sørg for, at de gør, og send igen"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Venligst angiv en ny adgangskode"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Du har succesfuldt ændret din adgangskode"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Der er opstået en fejl under processen med at nulstille din adgangskode"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Der er opstået en fejl under processen med at nulstille din adgangskode. Din adgangskode blev ikke ændret"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Medlemmet blev ikke fundet på listen over nuværende medlemmer"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Hyperlinket, du brugte til at nulstille din adgangskode, er forældet. Venligst brug det nyeste, du har modtaget"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "E-mailen, der indeholdt den matematiske udfordring, der bekræfter, at kandidaten er menneskelig (og ikke en robot), blev ikke sendt."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Fejl ved indsendelse af kandidatur"
+
+msgid "modification_to_profile_button_title"
+msgstr "Rediger din profil"
+
+msgid "modification_to_profile_button_label"
+msgstr "Rediger profil"
+
+msgid "modification_to_profile_button_description"
+msgstr "Klik her for at modtage en sikker link til at modificere din profil pr. e-mail."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"For at sikre sikkerheden for dine data vil et unikt link til at ændre din profil blive sendt til dig via e-mail. Denne proces garanterer, at kun den person, der har adgang til din e-mailadresse "
+"kan foretage ændringer på din profil."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Link til at modificere din profil på IT-infrastrukturen ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Venligst angiv her alle dine fornavne, som de er skrevet i dine officielle ID-dokumenter, i deres officielle transkription med latinske tegn (hvis det originale sprog bruger et alfabet "
+"forskelligt fra det latinske)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Venligst angiv her alle dine efternavne ved fødslen (dvs. IKKE dit efternavn som voksen), som de er skrevet i dine officielle ID-dokumenter, i deres officielle transkription med latinske "
+"tegn (hvis det originale sprog bruger et alfabet forskelligt fra det latinske)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Tekst, der beskriver dig (din profiltekst)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Venligst skriv her en tekst, der beskriver dig selv, på dit foretrukne sprog, så alle andre medlemmer af fællesskabet kan lære dig lidt bedre at kende. Vi foreslår, at du fokuserer "
+"på: (1) Hvor du kommer fra, (2) hvad du laver, (3) hvad du ønsker at gøre som medlem af fællesskabet, og (4) de ressourcer (erfaring, viden, tid), som du har til rådighed.\n"
+"Vi mener, at denne information er nyttig, fordi det at introducere sig selv med egne ord giver et menneskeligt ansigt til din digitale identitet på vores IT-infrastruktur. Med "
+"denne tekst lærer hvert medlem af fællesskabet dig lidt bedre at kende, og det gør interaktionen meget lettere!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Venligst angiv din fødselsdato i følgende format: DD/MM/YYYY, dvs. (1) dagen i måneden, med 2 cifre; (2) månedens nummer, med 2 cifre; (3) året, med 4 cifre. Kun "
+"personer, der har nået deres 18. fødselsdag, kan være samarbejdspartnere. Hvis du ikke har nået din 18. fødselsdag, inviterer vi dig til at registrere dig som almindeligt medlem af fællesskabet - og til at "
+"opgradere til samarbejdspartnerstatus, så snart du når myndighedsalderen."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Venligst angiv ét medlemsland i Den Europæiske Union, som du er borger i. Kun borgere i Den Europæiske Union kan være samarbejdspartnere."
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Venligst vælg et medlemsland i Den Europæiske Union"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Dette er det unikke nummer, der identificerer dig i alle processer, der finder sted i fællesskabet"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Venligst angiv her det pseudonym, der vil identificere dig i hele din aktivitet på vores IT-platform. Vi anbefaler STRAX, at du vælger et pseudonym, der gør det umuligt (eller ekstremt vanskeligt) at spore "
+"tilbage til din sande identitet. Dermed beskytter du fortroligheden af dine meninger (dvs. personlige data, der har formålet med en bestemt beskyttelse under den Generelle Data Beskyttelsesforordning - GDPR) mod enhver form for ekstern pres i det virkelige liv (f.eks. fra din arbejdsgiver eller dine kunder). Vær meget forsigtig! Når du først har valgt det, vil du ALDRIG kunne ændre dette pseudonym efterfølgende. Vælg det med omhu! \n"
+" Dit pseudonym skal være mellem ${MIN_PSEUDONYM_LENGTH} og ${MAX_PSEUDONYM_LENGTH} tegn langt og kan kun indeholde bogstaver fra det latinske alfabet (A-Z, a-z), tal (0-9), "
+"underscores (_), punktummer (.), bindestreger (-) og mellemrum ( ). Det kan ikke indeholde bogstaver med accenter, umlauter og andre diakritiske tegn, der er specifikke for nogle sprog."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Det er påkrævet at angive dit pseudonym"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Venligst angiv din adgangskode. Din adgangskode skal være mellem ${password_minimum_length} og ${password_maximum_length} tegn lang, indeholde mindst ét tal, mindst ét lille bogstav, "
+"mindst ét stort bogstav og mindst ét af tegnene blandt følgende: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Venligst bekræft din adgangskode"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Det er påkrævet at bekræfte din adgangskode"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Venligst angiv den e-mailadresse, som IT-infrastrukturen af ${domain_name} vil bruge til at interagere med dig.\n"
+"Vi anbefaler, at du vælger en e-mailadresse, som du ofte kontrollerer.\n"
+"Vi har brug for denne information, fordi vi har brug for at interagere med dig for at holde dig informeret om udviklingen i Kooperativet, for at give dig muligheden for at handle eller bidrage til "
+"beslutninger. E-mail er det mest anvendte middel i Europa, det er universelt og er baseret på åbne og frie standarder, i modsætning til de proprietære messagingsystemer fra de digitale giganter (også "
+"kendt som 'GAFAM').\n"
+" Denne e-mailadresse vil kun blive brugt til at sikre kommunikationen mellem IT-infrastrukturen af ${domain_name} og dig. Den vil aldrig blive vist til de andre brugere af IT "
+"platformen fra ${domain_name}, og den vil heller ikke blive overført eller solgt til nogen, undtagen for at opfylde lovkrav fra offentlige retshåndhævende myndigheder under anmodning fra en dommer. "
+"\"Dataansvarlig\", som defineret af den Generelle Data Beskyttelsesforordning (GDPR) for "
+"Den Europæiske Union, er den CosmoPolitical Cooperative SCE, et Europæisk Kooperativ Selskab etableret på 229 rue Solférino, 59000 Lille, Frankrig og registreret den 25. april 2023 under "
+"nummer SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Venligst angiv det sprog, du foretrækker, at IT-infrastrukturen af ${domain_name} interagerer med dig. \n"
+" Vi anbefaler, at du vælger det sprog, du kender bedst, blandt de officielle sprog i Den Europæiske Union eller esperanto. Hvis det er tilgængeligt blandt dem, for hvilke vi har "
+"udviklet en brugergrænseflade, vil vi bruge det til at interagere med dig. \n"
+" Vi har brug for denne information, fordi vi af hensyn til retfærdighed og respekt for demokratiske principper ønsker at interagere med dig på et sprog, som du forstår så godt som "
+"muligt."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Angiv venligst det sprog, som du ville acceptere som et andet valg, at IT-infrastrukturen for ${domain_name} interagerer med dig. \n"
+" Vi anbefaler, at du vælger et andet officielt sprog i Den Europæiske Union eller esperanto, som du forstår rimeligt godt. Hvis det er tilgængeligt blandt dem, som vi har "
+"udviklet et brugerinterface til, og hvis dit foretrukne sprog ikke er tilgængeligt, vil vi bruge dette til at interagere med dig. \n"
+" Vi har brug for denne information, fordi det, på trods af vores bestræbelser, kan ske, at dit foretrukne sprog ikke er tilgængeligt på brugerinterfacet for vores software. Dette er grunden til, "
+"at vi spørger dig, om du kan bruge et andet sprog."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Det sprog, du accepterer som et tredje valg, for at vi kan interagere med dig"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Angiv venligst det sprog, som du ville acceptere som et tredje valg, at IT-infrastrukturen for ${domain_name} interagerer med dig. \n"
+" Vi anbefaler, at du vælger et andet officielt sprog i Den Europæiske Union eller esperanto, som du stadig kan forstå. Hvis det er tilgængeligt blandt dem, som vi har udviklet "
+"et brugerinterface til, og hvis hverken dit foretrukne sprog eller dit andet sprog er tilgængeligt, vil vi bruge dette til at interagere med dig. \n"
+" Vi har brug for denne information, fordi det, på trods af vores bestræbelser, kan ske, at dit foretrukne sprog og dit andet sprog ikke er tilgængelige på brugerinterfacet for vores software. "
+"Dette er grunden til, at vi spørger dig, om du kan bruge et tredje sprog. Vi er klar over, at det er en utilfredsstillende situation for dig at interagere med os ved hjælp af det - ligesom det er for os. Vi "
+"undskylder for dette."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Din samarbejdsvurderingsscore"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Som samarbejdspartner resulterer din samarbejdsvurderingsscore fra de vurderinger, der er tildelt dig af de andre aktive deltagere i de arbejdsgrupper, hvor du har deltaget for at definere "
+"og vedtage handlingsforslag. Hver aktiv deltager kan give en vurdering lig med +1, 0 eller -1, alt efter hvor samarbejdsvillig din opførsel var under din aktive deltagelse i den "
+"arbejdsgruppe. Denne vurdering 'glemmes' automatisk og forfalder over tid: den halveres efter ${forgetting_time_constant} dage. Den indledende værdi af din samarbejdsvurderingsscore "
+"er nul."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Dato hvor din samarbejdsvurderingsscore sidst blev opdateret"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Dette er den seneste dato, hvor en anden samarbejdspartner tildelte dig en vurdering efter afslutningen af din aktive deltagelse i en arbejdsgruppe, der definerede og vedtog et handlingsforslag. "
+"Den indledende værdi af denne dato er den dag, du blev registreret som samarbejdspartner."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Antal aktier i kooperativet, som du ejer"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Dette er det samlede antal aktier i kooperativet, som du ejer, efter at have købt dem på vores webportal. Ved din registrering er dette tal lig med nul. Vi inviterer dig til "
+"at gå videre så hurtigt som muligt til denne URL: ${url_purchase_shares} for at købe dine første aktier. Du vil først have fulde beslutningsretter som samarbejdspartner, efter at have "
+"købt mindst én aktie (og betalt dit årlige bidrag). Du er velkommen til at købe mere end én aktie ved registreringen, men også når som helst efterfølgende. Det styrker vores "
+"kooperativ, og vi er alle taknemmelige for dette!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Dato, hvor dit nuværende årlige bidrag udløber"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Dato, hvor dit nuværende årlige bidrag udløber, og før hvilken du skal betale det igen for at bevare dine fulde beslutningsretter som samarbejdspartner. Ved din registrering er denne "
+"dato sat til et tidspunkt i fortiden, hvilket betyder, at du skal betale det nu. Vi inviterer dig til at gå videre så hurtigt som muligt til denne URL: ${url_pay_yearly_contrib} for at betale dit første årlige "
+"bidrag og dermed deltage i driften af vores kooperativ. Du vil først have fulde beslutningsretter som samarbejdspartner, efter at have betalt dit årlige "
+"bidrag (og købt mindst én aktie)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Internationalt bankkontonummer (IBAN) for din bankkonto"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Hvis og når du beslutter at forlade kooperativet (hvilket vi alle ville beklage), har vi brug for dit IBAN for at kunne overføre fortjenesten fra vores tilbagekøb af dine aktier i "
+"kooperativet til dig. Af sikkerhedsmæssige årsager anbefaler vi, at du kun giver denne information, hvis og når du forventer at forlade kooperativet."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Dato, hvor alle dine data vil blive slettet fra vores IT-infrastruktur"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Hvis og når du forlader kooperativet, vil dine identitetsdata blive opbevaret i en periode på ${Quarantine} dage, før de bliver slettet helt og irrevocabeligt fra vores registre. Dette er for "
+"at sikre, at en samarbejdspartner, der forlader kooperativet, fordi hans/hendes samarbejdsvurderingsscore er for dårlig, ikke kan registrere sig igen med det samme med et rent pseudonym og "
+"samarbejdsvurderingsscore. Ved din registrering er denne dato sat til en meget fjern fremtid."
+
+msgid "avatar_label"
+msgstr "Et billede til at repræsentere dig (dit avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Angiv venligst et billede, der repræsenterer dig som medlem af fællesskabet. For at beskytte dig mod repressalier fra din arbejdsgiver eller kunder anbefaler vi, at dette billede "
+"ikke muliggør sporing tilbage til din identitet i det virkelige liv. Det bør derfor generelt set ikke være et fotografi af dig selv (husk, at ansigtsgenkendelsessoftware ofte anvendes af "
+"søgerobotter). Billedet bør kun være i JPEG-format (filtypenavne .JPG eller .JPEG) og ikke større end 5 MB. \n"
+"Vi mener, at denne information er nyttig, fordi et billede gør det lettere for de andre medlemmer af fællesskabet at genkende dig. Nogle gange taler et billede meget højere end "
+"en lang tale. Med dette billede udtrykker du meget om dig selv på et universelt sprog. Udnyt det bedst muligt!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Den adresse (URL), du brugte til at hente din ansøgningsproces, hvor du afbrød den, matcher ikke den, vi har registreret for dig. (Ansøgningsidentifikationsnummeret i "
+"sessionen og i URL-nummeret matcher ikke)\n"
+"Brug venligst kun URL fra den sidste e-mail, du modtog."
+
+msgid "check_new_email"
+msgstr "Du har bedt om at ændre din e-mailadresse. I fremtiden vil du gerne bruge: ${new_email}. Som følge heraf vil du modtage en e-mail med et link til at validere denne nye adresse."
+
+msgid "check_new_email_subject"
+msgstr "Verifikation af din nye e-mailadresse"
+
+msgid "check_new_email_send_error"
+msgstr "Afsendelsen af verifikations-e-mailen til din nye adresse er mislykkedes"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Verifikations-e-mailen til din nye adresse er blevet sendt"
+
+msgid "modify_member"
+msgstr "Konsulter eller ændre medlem"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Forbindelsesfejl"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "E-mailadresse eksisterer allerede"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "E-mailadresse opdateret"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Fejl under opdatering af e-mailadresse"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Fejl under indstilling af felt"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Fejl under opdatering af medlem"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Ugyldig OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Ugyldig anmodning"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP-fejl"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Medlemsdata opdateret"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Opdatering af medlemsdata er mislykkedes"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Opdatering af medlemsdata er lykkedes"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Mangler data"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Ny e-mailadresse mangler"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Ingen tilladelse"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Ikke vælger"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Opdatering af adgangskode er mislykkedes"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Opdatering af adgangskode er vellykket"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Registrering er mislykkedes"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Registrering er vellykket"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Ukendt tilgået medlem"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Ukendt medlem"
+
+msgid "modify_member_title"
+msgstr "Rediger medlemsprofil"
+
+msgid "select_member_oid_label"
+msgstr "Vælg venligst et medlem for at redigere hans/hendes profil:"
+
+msgid "select_member_placeholder"
+msgstr "Medlemmets pseudonym"
+
+msgid "modify_profile"
+msgstr "Du kan ændre din profil ved at klikke her"
+
+msgid "profile"
+msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Din e-mailadresse er blevet opdateret med succes. Du vil nu bruge denne nye adresse til al fremtidig kommunikation med ${domain_name}. Hvis du ikke har anmodet om denne ændring, eller hvis du har "
+"nogen spørgsmål, så tøv ikke med at kontakte vores support med det samme på ${admin_email}. Tak fordi du er en del af ${domain_name} fællesskabet!"

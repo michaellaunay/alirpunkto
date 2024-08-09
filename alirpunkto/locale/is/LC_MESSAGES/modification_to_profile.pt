@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Breytingarbeiðni á prófílnum þínum</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Breytingarbeiðni á prófílnum þínum</h1>
+    
+    <p tal:omit-tag="textual">Halló <span tal:replace="member.firstname" tal:condition="exists:member">Nafn notanda</span>,</p>
+    
+    <p tal:omit-tag="textual">Við höfum fengið, á <span tal:replace="site_name">Nafn síðunnar</span> vettvanginum hjá <span tal:replace="domain_name">Dómain nafni</span>, beiðni um að breyta prófílnum þínum. Til að tryggja öryggi þitt krafðumst við þess að þú fylgir öruggri krók til að halda áfram með breytingarnar. Vinsamlegast smelltu á eftirfarandi URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Breyta prófíl tengill</a> til að uppfæra upplýsingarnar í prófílnum þínum.</p>
+    
+    <p tal:omit-tag="textual">Ef þú gerðir ekki þessa beiðni um prófílbreytingu, vinsamlegast hafðu yfir þessu tölvupósti eða hafðu samband við þjónustu ef þú hefur einhverjar áhyggjur.</p>
+    
+    <p tal:omit-tag="textual">Bestu kveðjur,</p>
+    <p tal:omit-tag="textual">Teamið hjá <span tal:replace="domain_name">Dómain nafni</span>.</p>
+</body>
+</html>

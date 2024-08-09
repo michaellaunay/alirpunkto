@@ -1,0 +1,1108 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Vítejte"
+
+msgid "username_label"
+msgstr "Uživatelské jméno"
+
+msgid "password_label"
+msgstr "Heslo"
+
+msgid "login_label"
+msgstr "Přihlásit se"
+
+msgid "welcome_msg"
+msgstr "Vítejte na ${site_name}, centralizované službě pro aplikace používané v IT infrastruktuře ${domain_name}."
+
+msgid "all_applications_msg"
+msgstr "Všechny aplikace, které potřebujete k účasti na aktivitách ${domain_name}, na jednom místě."
+
+msgid "register_or_login_msg"
+msgstr "Zaregistrujte se nebo se přihlaste nyní, abyste mohli začít."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, centralizovaná služba pro aplikace používané v IT infrastruktuře ${domain_name}"
+
+msgid "logged_in_msg"
+msgstr "Jste přihlášeni jako ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Můžete se odhlásit kliknutím zde"
+
+msgid "logout_label"
+msgstr "Odhlásit se"
+
+msgid "choose_application_msg"
+msgstr "Vyberte aplikaci, do které se chcete připojit:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Neplatné uživatelské jméno nebo heslo. Zkuste to prosím znovu"
+
+msgid "register_link"
+msgstr "Vytvořit účet"
+
+msgid "password_confirm_label"
+msgstr "Potvrdit heslo"
+
+msgid "password_confirm_title"
+msgstr "Potvrďte své heslo"
+
+msgid "forgot_password_label"
+msgstr "Zapomněli jste heslo?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Celé jméno(jména) podle vašich oficiálních identifikačních dokladů"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Celé příjmení(příjmení) podle vašich oficiálních identifikačních dokladů"
+
+msgid "birthdate_label"
+msgstr "Datum narození"
+
+msgid "nationality_label"
+msgstr "Národnost (mezi národy Evropské unie)"
+
+msgid "cooperator_number_label"
+msgstr "Číslo spolupracovníka"
+
+msgid "pseudonym_label"
+msgstr "Přezdívka"
+
+msgid "email_label"
+msgstr "Emailová adresa"
+
+msgid "first_interaction_language_label"
+msgstr "Jazyk, ve kterém preferujete naši interakci"
+
+msgid "second_interaction_language_label"
+msgstr "Jazyk, který přijímáte jako druhou možnost pro naši interakci"
+
+msgid "register_label"
+msgstr "Registrovat"
+
+msgid "forgot_password_head"
+msgstr "Zapomenuté heslo"
+
+msgid "forgot_your_password_title"
+msgstr "Zapomněli jste své heslo?"
+
+msgid "enter_your_email_address_label"
+msgstr "Prosím, zadejte svou emailovou adresu:"
+
+msgid "submit_button"
+msgstr "Odeslat"
+
+msgid "candidature_states_draft_value"
+msgstr "Návrh: Žádost je v režimu návrhu."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Ověření emailu: Stav, kdy žádost o ověření emailové adresy čeká na potvrzení."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "OvěřenoLidský: Emailová adresa žadatele byla ověřena a důkaz o člověčenství byl poskytnut (ověřili jsme, že nejste robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"JedinečnáData: Žadatel zadal své osobní identifikační údaje a ověřili jsme, že žádný současný nebo nedávný spolupracovník nebo řádný člen komunity nemá stejné "
+"údaje."
+
+msgid "candidature_states_pending_value"
+msgstr "Čeká: Žádost byla podána. Osobní identifikační údaje byly předány ověřovatelům, ale ještě nepodali svou zpětnou vazbu."
+
+msgid "candidature_states_approved_value"
+msgstr "Schváleno: Žádost byla přijata."
+
+msgid "candidature_states_refused_value"
+msgstr "Odmítnuto: Žádost byla zamítnuta."
+
+msgid "candidature_states_draft"
+msgstr "návrh"
+
+msgid "candidature_states_email_validation"
+msgstr "ověření_emailu"
+
+msgid "candidature_states_confirmed_human"
+msgstr "ověřeno_lidský"
+
+msgid "candidature_states_unique_data"
+msgstr "jedinečná_data"
+
+msgid "candidature_states_pending"
+msgstr "čekající"
+
+msgid "candidature_states_approved"
+msgstr "schváleno"
+
+msgid "candidature_states_refused"
+msgstr "odmítnuto"
+
+msgid "user_types_ordinary_value"
+msgstr "Řádný: Žádost o staňte se řádným členem komunity = se zjednodušeným registračním procesem, bez finanční povinnosti, ale bez rozhodovacích práv."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Spolupracovník: Žádost o staňte se řádným členem družstva, spolupracovníkem = s kompletním registračním procesem, který zajišťuje princip 'jeden člověk = jeden hlas' a že "
+"žadatel je občanem Evropské unie, povinnost zakoupit alespoň jeden podíl a platit roční příspěvek, a plná rozhodovací práva."
+
+msgid "user_types_ordinary"
+msgstr "Řádný člen komunity"
+
+msgid "user_types_cooperator"
+msgstr "Spolupracovník = řádný člen družstva"
+
+msgid "vote_types_yes_value"
+msgstr "Ano: Hlasování je pozitivní."
+
+msgid "vote_types_no_value"
+msgstr "Ne: Hlasování je negativní."
+
+msgid "vote_types_abstain_value"
+msgstr "Zdržet se: Hlasování je neutrální."
+
+msgid "vote_types_yes"
+msgstr "ano"
+
+msgid "vote_types_no"
+msgstr "ne"
+
+msgid "vote_types_abstain"
+msgstr "zdržet se"
+
+msgid "zero"
+msgstr "nula"
+
+msgid "one"
+msgstr "jedna"
+
+msgid "two"
+msgstr "dva"
+
+msgid "three"
+msgstr "tři"
+
+msgid "four"
+msgstr "čtyři"
+
+msgid "five"
+msgstr "pět"
+
+msgid "six"
+msgstr "šest"
+
+msgid "seven"
+msgstr "sedm"
+
+msgid "eight"
+msgstr "osm"
+
+msgid "nine"
+msgstr "devět"
+
+msgid "times"
+msgstr "krát"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Ověření, že jste člověk. Vypočítejte výsledky jednoduchých matematických operací a zadejte tyto výsledky na portálu"
+
+msgid "email_candidature_state_changed"
+msgstr "Změna stavu vaší žádosti k portálu"
+
+msgid "invalid_challenge"
+msgstr "Vaše odpověď je nesprávná. Zadejte prosím novou."
+
+msgid "invalid_email"
+msgstr "S vaší emailovou adresou je problém, prosím ověřte ji."
+
+msgid "invalid_choice"
+msgstr "Vaše volba není platná, prosím zadejte ji znovu."
+
+msgid "challenge_instruction_text"
+msgstr "Prosím, vypočtěte výsledky následujících čtyř jednoduchých matematických operací a vyplňte odpovídající pole pro potvrzení vaší emailové adresy."
+
+msgid "enter_result_label_A"
+msgstr "Prosím, zadejte výsledek pro matematickou operaci A:"
+
+msgid "result_label_title_A"
+msgstr "Prosím, zadejte kód, který jste obdrželi emailem, nebo výsledek matematické operace A."
+
+msgid "result_input_title_A"
+msgstr "Abychom mohli ověřit vaši emailovou adresu a že jste člověk (ne robot), prosím zadejte výsledek operace A, který jste obdrželi emailem."
+
+msgid "enter_result_label_B"
+msgstr "Prosím, zadejte výsledek pro matematickou operaci B:"
+
+msgid "result_label_title_B"
+msgstr "Prosím, zadejte kód, který jste obdrželi emailem, nebo výsledek matematické operace B."
+
+msgid "result_input_title_B"
+msgstr "Abychom mohli ověřit vaši emailovou adresu a že jste člověk (ne robot), prosím zadejte výsledek operace B, který jste obdrželi emailem."
+
+msgid "enter_result_label_C"
+msgstr "Prosím, zadejte výsledek pro matematickou operaci C:"
+
+msgid "result_label_title_C"
+msgstr "Prosím, zadejte kód, který jste obdrželi emailem, nebo výsledek matematické operace C."
+
+msgid "result_input_title_C"
+msgstr "Abychom mohli ověřit vaši emailovou adresu a že jste člověk (ne robot), prosím zadejte výsledek operace C, který jste obdrželi emailem."
+
+msgid "enter_result_label_D"
+msgstr "Prosím, zadejte výsledek pro matematickou operaci D:"
+
+msgid "result_label_title_D"
+msgstr "Prosím, zadejte kód, který jste obdrželi emailem, nebo výsledek matematické operace D."
+
+msgid "result_input_title_D"
+msgstr "Abychom mohli ověřit vaši emailovou adresu a že jste člověk (ne robot), prosím zadejte výsledek operace D, který jste obdrželi emailem."
+
+msgid "verify_button"
+msgstr "Odeslat"
+
+msgid "submit_email_validation_title"
+msgstr "Klikněte pro ověření zadaných kódů."
+
+msgid "passwords_dont_match"
+msgstr "Hesla se neshodují."
+
+msgid "password_too_short"
+msgstr "Heslo je příliš krátké."
+
+msgid "password_minimum_length"
+msgstr "Heslo musí mít alespoň ${password_minimum_length} znaků."
+
+msgid "password_too_long"
+msgstr "Heslo je příliš dlouhé."
+
+msgid "password_maximum_length"
+msgstr "Heslo by nemělo překročit ${password_maximum_length} znaků."
+
+msgid "password_must_contain_digit"
+msgstr "Heslo musí obsahovat alespoň jednu číslici."
+
+msgid "password_must_contain_uppercase"
+msgstr "Heslo musí obsahovat alespoň jedno velké písmeno."
+
+msgid "password_must_contain_lowercase"
+msgstr "Heslo musí obsahovat alespoň jedno malé písmeno."
+
+msgid "password_must_contain_special_char"
+msgstr "Heslo musí obsahovat alespoň jeden z následujících znaků: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Prosím, zadejte zde své heslo."
+
+msgid "password_confirm_title_label"
+msgstr "Prosím, potvrďte zde své heslo."
+
+msgid "password_confirm"
+msgstr "Potvrďte své heslo."
+
+msgid "type_of_registration"
+msgstr "Typ registrace"
+
+msgid "type_registration_label"
+msgstr "Vyberte typ registrace, který vám vyhovuje."
+
+msgid "type_registration_choice"
+msgstr "Každý typ registrace přichází s konkrétními právy, výhodami a povinnostmi."
+
+msgid "approved_heading"
+msgstr "Gratulujeme k vašemu schválení!"
+
+msgid "approved_description"
+msgstr "Vaše žádost byla schválena. Nyní se můžete přihlásit pomocí pseudonymu a hesla, které jste zadali během procesu žádosti."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Neplatný pseudonym. Měl by mít mezi ${MIN_PSEUDONYM_LENGTH} a ${MAX_PSEUDONYM_LENGTH} znaky a může obsahovat pouze písmena (A-Z, a-z), číslice (0-9), podtržítka (_), tečky "
+"(.), pomlčky (-) a mezery ( ). Nemůže obsahovat písmena s diakritikou, umělci a dalšími diakritickými znaménky specifickými pro některé jazyky."
+
+msgid "invalid_date"
+msgstr "Neplatný formát data."
+
+msgid "pseudonym_too_short"
+msgstr "Pseudonym je příliš krátký."
+
+msgid "pseudonym_minimum_length"
+msgstr "Pseudonym musí mít alespoň ${MIN_PSEUDONYM_LENGTH} znaků."
+
+msgid "pseudonym_too_long"
+msgstr "Pseudonym je příliš dlouhý."
+
+msgid "pseudonym_maximum_length"
+msgstr "Pseudonym nesmí překročit ${MAX_PSEUDONYM_LENGTH} znaků."
+
+msgid "pseudonym_allready_exists"
+msgstr "Tento pseudonym je již používán. Prosím, vyberte jiný."
+
+msgid "Select_a_country"
+msgstr "Vyberte členský stát Evropské unie"
+
+msgid "Austria"
+msgstr "AT - Rakousko"
+
+msgid "Belgium"
+msgstr "BE - Belgie"
+
+msgid "Bulgaria"
+msgstr "BG - Bulharsko"
+
+msgid "Cyprus"
+msgstr "CY - Kypr"
+
+msgid "Czech_Republic"
+msgstr "CZ - Česká republika"
+
+msgid "Germany"
+msgstr "DE - Německo"
+
+msgid "Denmark"
+msgstr "DK - Dánsko"
+
+msgid "Estonia"
+msgstr "EE - Estonsko"
+
+msgid "Spain"
+msgstr "ES - Španělsko"
+
+msgid "Finland"
+msgstr "FI - Finsko"
+
+msgid "France"
+msgstr "FR - Francie"
+
+msgid "Greece"
+msgstr "GR - Řecko"
+
+msgid "Croatia"
+msgstr "HR - Chorvatsko"
+
+msgid "Hungary"
+msgstr "HU - Maďarsko"
+
+msgid "Ireland"
+msgstr "IE - Irsko"
+
+msgid "Italy"
+msgstr "IT - Itálie"
+
+msgid "Lithuania"
+msgstr "LT - Litva"
+
+msgid "Luxembourg"
+msgstr "LU - Lucembursko"
+
+msgid "Latvia"
+msgstr "LV - Lotyšsko"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Nizozemsko"
+
+msgid "Poland"
+msgstr "PL - Polsko"
+
+msgid "Portugal"
+msgstr "PT - Portugalsko"
+
+msgid "Romania"
+msgstr "RO - Rumunsko"
+
+msgid "Sweden"
+msgstr "SE - Švédsko"
+
+msgid "Slovenia"
+msgstr "SI - Slovinsko"
+
+msgid "Slovakia"
+msgstr "SK - Slovensko"
+
+msgid "full_name_as_in_id_required"
+msgstr "Celé jméno(y) je(jou) požadováno."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Celé příjmení(í) je(jou) požadováno."
+
+msgid "birthdate_required"
+msgstr "Datum narození je požadováno."
+
+msgid "nationality_required"
+msgstr "Národnost je požadována."
+
+msgid "first_interaction_language_required"
+msgstr "První jazyk interakce je požadován."
+
+msgid "pending_description"
+msgstr "Vaše žádost je v procesu posuzování. Budete informováni e-mailem, jakmile bude schválena."
+
+msgid "candidature_not_found"
+msgstr "Žádost nebyla nalezena."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Děkujeme za váš zájem o aktivity ${domain_name}! Zde je správné místo pro vaši registraci </b></h2>\n"
+"<p>Kooperativa CosmoPolitical podporuje jednotlivce a transformuje stávající ekonomický, sociální a politický systém směrem k radikálně spravedlivé, udržitelné, demokratické a šťastné "
+"společnosti, <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Společnost dohody</a>.</p>\n"
+"<p>Níže naleznete začátek registračního procesu, abyste se k nám připojili. Navrhujeme dvě úrovně účasti, s rostoucími povinnostmi a právy:</p>\n"
+"<ul>\n"
+"<li>jako <b>řádný člen naší komunity</b>, s jednoduchým registračním procesem, bez finančních závazků, ale bez volebních práv; nebo </li>\n"
+"<li>jako <b>Kooperator</b>, úplný člen naší kooperativy, s registračním procesem, který zajišťuje, že daná osoba se registruje pouze jednou (na základě demokratického principu \"jedna "
+"osoba = jeden hlas\") a že pouze občané Evropské unie, kteří dosáhli věku zletilosti, jsou Kooperátory, s povinností zakoupit alespoň jednu akcii a platit "
+"roční příspěvek a plnými volebními právy. Evropská unie je geografickým rámcem naší práce (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">viz proč</a>)</li>\n"
+"</ul>\n"
+"<p>Registrační proces zahrnuje následující kroky:</p>\n"
+"<ol>\n"
+"<li>ověříme, že e-mailovou adresu poskytl člověk, a nikoli robot;</li>\n"
+"<li>požádáme vás o váš pseudonym, heslo a preferovaný jazyk(y) pro interakci s vámi;</li>\n"
+"<li>v případě, že jste se registrovali jako řádný člen komunity, jste hotovi a vstupujete do naší komunity. V případě, že jste se registrovali jako Kooperator, proces "
+"pokračuje, abychom mohli ověřit, že splňujete výše uvedené podmínky být Kooperatorem.</li>\n"
+"</ol>\n"
+"<p>Toto ověření probíhá následujícím způsobem:</p>\n"
+"<ol>\n"
+"<li>požádáme vás o vaše <b>identifikační údaje</b>: vaše jméno(a) a příjmení(a), vaše datum narození;</li>\n"
+"<li>požádáme několik stávajících členů kooperativy (vaše ověřovatele), aby ověřili, že informace na vašem oficiálním identifikačním dokladu odpovídají těm, které jste uvedli v předchozím kroku, "
+"na základě přímé výměny e-mailů nebo videokonferenčního setkání s vámi;</li>\n"
+"<li>jakmile potvrdí tuto shodu, budete vítáni jako Kooperator, s plnými právy - jakmile zakoupíte alespoň <a href=\"https://www.cosmopolitical.coop/share\">jednu "
+"akcii</a> a zaplatíte svůj <a href=\"https://www.cosmopolitical.coop/yearcontrib\">roční příspěvek na naše operace</a>.</li>\n"
+"</ol>\n"
+"<p>Prosím, začněte svou registraci nyní! Těšíme se na vaši účast v našich aktivitách.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Prvním krokem ve vašem registračním procesu je ověřit, že jste \n"
+"člověk a nikoli robot. K tomu ověřujeme, že můžete přijmout a \n"
+"pochopit e-mail, který vám zašleme: to, co od vás požadujeme, je \n"
+"pro člověka jednoduché, pro robota mnohem složitější."
+
+msgid "identity_verification_label"
+msgstr "Ověření identity"
+
+msgid "Send_id_copy_by_email"
+msgstr "Zašlete sken části vašeho oficiálního identifikačního dokladu e-mailem."
+
+msgid "Send_video_conference_link"
+msgstr "Zašlete návrhy na datum a čas videokonference."
+
+msgid "Proceed"
+msgstr "Pokračovat"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Prosím potvrďte, že jste poslali e-maily ověřovatelům."
+
+msgid "sent_confirmation_label"
+msgstr "Potvrzení, že e-maily byly zaslány ověřovatelům"
+
+msgid "submit_email_confirmation_title"
+msgstr "Potvrďte, že jste e-maily poslali."
+
+msgid "confirm_email_send_button_label"
+msgstr "Potvrdit"
+
+msgid "vote_success"
+msgstr "Děkujeme vám za účast v hlasovacím procesu. Váš hlas ${vote} byl úspěšně zaznamenán. Můžete změnit svůj hlas až do termínu tím, že se vrátíte na tuto stránku."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Jako Kooperator se podílíte na všech našich rozhodnutích. Tato rozhodnutí se přijímají přísnými demokratickými postupy a mohou mít důležité důsledky pro "
+"kooperativu a pro Kooperátory. Navíc má kooperativa v úmyslu zastupovat občany EU, nezávisle na jejich národnosti - ale pouze občany EU. To je obzvláště "
+"důležité během veřejných voleb. Proto musíme zajistit tři věci: (1) aby se daná osoba mohla registrovat maximálně jednou, čímž zajistíme demokratický princip \"jeden člověk = "
+"jeden hlas\"; (2) aby všichni Kooperátory byli alespoň zletilí a (3) aby pouze občané Evropské unie byli Kooperátory.</p>\n"
+"    <p>Proto ověříme od vás některé prvky vašich identifikačních údajů porovnáním (1) údajů, které na tomto formuláři uvedete při registraci, s (2) "
+"informacemi uvedenými na vašich oficiálních identifikačních dokladech. Toto ověření provede soubor náhodně vybraných členů kooperativy, ověřovatelé vaší žádosti, "
+"a bude založeno na informacích ohledně vašich oficiálních identifikačních dokladů, které jim přímo předáte, e-mailem nebo během videokonference, bez přenosu přes "
+"tuto online platformu (pro zajištění bezpečnosti a důvěrnosti).</p>\n"
+"    <p>Údaje, které od vás požadujeme a které budou ověřovatelé kontrolovat z hlediska souladu s údaji na vašich oficiálních identifikačních dokladech, jsou:\n"
+"    <ul>\n"
+"    <li>vaše jméno(a) a příjmení(a);</li>\n"
+"    <li>vaše datum narození;</li>\n"
+"    <li>vaše státní příslušnost.</li>\n"
+"    </ul></p>\n"
+"    <p>Jediná osoba, která nese vaše jméno(a), příjmení(a) a datum narození, jste vy. Pokud se pokusíte zaregistrovat znovu, budete muset poskytnout stejné údaje naší verifikační "
+"proceduře a vaši žádost odmítneme, protože již jste Kooperator, a nemůžete mít několik účtů, abyste mohli hlasovat více než jednou. Budeme si tímto být jisti, protože "
+"víme, že pouze jedna osoba má tuto kombinaci jméno(a), příjmení(a) a datum narození. Vaše datum narození nám umožňuje ověřit, že jste zletilí, a vaše státní příslušnost "
+"nám umožňuje zajistit, že jste skutečně občanem Evropské unie.</p>\n"
+"    <p>Tato data budou použita výhradně k ověření vaší identity, vašeho věku a vaší státní příslušnosti, a k řízení vašeho účtu jako Kooperátora. Nikdy nebudou zobrazena ostatním "
+"uživatelům IT platformy ${domain_name}, ani nebudou předána nebo prodána nikomu, s výjimkou plnění právních požadavků orgánů veřejného práva na základě žádosti soudce. \"Správce údajů\", "
+"jak je definováno v <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Obecném nařízení o ochraně osobních údajů (GDPR) Evropské unie</a>, "
+"je CosmoPolitical Cooperative SCE, Evropská družstevní společnost se sídlem na adrese 229 rue Solférino, 59000 Lille, Francie, registrovaná 25. dubna 2023 pod číslem SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Poslali jsme vám e-mailem sadu čtyř jednoduchých aritmetických výpočtů, které je třeba provést, označených od A do D, všechny podle stejného vzoru: (A PRVNÍ ČÍSLO MEZI 1 A 9) "
+"násobeno (A DRUHÉ ČÍSLO MEZI 1 A 9), plus (A TŘETÍ ČÍSLO MEZI 1 A 9). Nejprve byste měli vynásobit PRVNÍ ČÍSLO MEZI 1 A 9 "
+"DRUHÝM ČÍSLEM MEZI 1 A 9. Jakmile máte výsledek tohoto násobení, měli byste k tomu přidat TŘETÍ ČÍSLO MEZI 1 A 9. Nakonec byste měli napsat výsledný "
+"výsledek této poslední adice do pole určeného pro výsledek aritmetického výpočtu, který provádíte (mezi čtyřmi, které jsme vám zaslali, označenými od A do D). Měli byste "
+"opakovat výpočet pro všechny čtyři výpočty, které jsme vám poslali e-mailem.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>V rámci registračního procesu jako spolupracovník musíte zvolit metodu pro ověření vaší identity. Toto ověření vaší identity je potřeba, aby se zajistilo: (1) "
+"že daná osoba se neregistruje několikrát s různými e-mailovými adresami (tímto se řídíme demokratickým principem: \"jeden člověk - jeden hlas\"); (2) že pouze občané "
+"Evropské unie, kteří dosáhli zletilosti, jsou spolupracovníci (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >viz proč</a>).</p>\n"
+"    <p>Máte dvě možnosti pro tento proces ověření:</p>\n"
+" <ul>\n"
+"   <li><b>Poslat kopii vašich identifikačních dokumentů e-mailem:</b> Můžete se rozhodnout poslat bezpečně e-mailem kopii vašich identifikačních dokumentů přímo malé skupině náhodně vybraných "
+"spolupracovníků, vašim Ověřovatelům. Tato metoda zajišťuje rychlý a přímý způsob potvrzení vaší identity.</li>\n"
+"   <li><b>Domluvit si video konferenci:</b> Alternativně můžete zvolit video konferenční sezení, kde můžete prezentovat své identifikační dokumenty přímo svým Ověřovatelům. Tato "
+"metoda poskytuje osobnější interakci a umožňuje okamžité objasnění, pokud je potřeba, ústně, pokud sdílíte společný jazyk, prostřednictvím chatu a automatizovaného překladu, pokud ne.</li>\n"
+" </ul>\n"
+" <p>V obou případech vám doporučujeme z bezpečnostních důvodů zakrýt na vaší oficiální identifikační dokumentu místo narození a číslo dokladu, než jej zkopírujete nebo "
+"ukážete svým Ověřovatelům.</p>\n"
+" <p>Je důležité, abyste svůj výběr učinili co nejdříve, aby byl váš registrační proces hladký a včasný. Prosím, ujistěte se, že metoda, kterou zvolíte, je pro vás nejpohodlnější "
+"a odpovídá vašim preferencím soukromí.</p>\n"
+" <p>Vaše spolupráce v této věci je velmi oceněna a je klíčová pro udržování vysokých standardů důvěry a panevropské demokracie v naší Kooperativě. Děkujeme vám za "
+"pochopení a aktivní účast v tomto zásadním kroku.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Počet stávajících Spolupracovníků je příliš nízký na to, aby bylo možné vybrat odpovídající počet Ověřovatelů vaší identity. Prosím, kontaktujte správce systému na následující "
+"adrese ${administrator}, aby problém vyřešil."
+
+msgid "email_copy_id_verification_subject"
+msgstr "cs - ${domain_name} - Ověřte prosím moji identitu jako nového potenciálního Spolupracovníka"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Vážení Ověřovatelé,\n"
+" Píšu vám, abych dokončil proces ověření identity pro mou žádost stát se Spolupracovníkem ${domain_name}. V příloze tohoto e-mailu najdete částečnou kopii "
+"mého oficiálního identifikačního dokumentu.\n"
+" Vezměte prosím na vědomí, že některé citlivé informace byly zakryty z bezpečnostních důvodů. Dokument však obsahuje informace, které potřebujete k ověření mé identity podle "
+"registračního procesu ${domain_name}.\n"
+" Laskavě žádám, abyste zkontrolovali přiložený dokument, pokud to bude možné, během následujících 3 dnů, abyste hlasovali o souladu mezi:\n"
+"\n"
+" - informacemi o identitě, které jste obdrželi přímo e-mailem z IT platformy ${domain_name} (a které vám připomeneme na hlasovací rozhraní) a \n"
+" - informacemi o identitě, které můžete přečíst v přiložené částečné kopii mého oficiálního identifikačního dokumentu.\n"
+"\n"
+" Odkaz pro vás k hlasování o tomto souladu je následující: ${voting_url}.\n"
+" Děkuji vám předem za podporu procesu mé registrace jako Spolupracovníka na ${domain_name}. Pokud máte další otázky nebo potřebujete další "
+"informace, neváhejte mě kontaktovat přímo ve svém jazyce.\n"
+" S pozdravem,\n"
+" ${signature}\n"
+" Příloha: [Název souboru identifikačního dokumentu]\n"
+" Tento e-mail byl vygenerován s pomocí funkce ověřování identity ${domain_name}. Pokud nejste Ověřovatel přiřazený k žádosti ${signature} a tento e-mail jste obdrželi "
+"omylem, prosím informujte správce ${domain_name} na následující adrese: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "cs - ${domain_name} - Ověřte prosím moji identitu prostřednictvím video konference jako nového potenciálního Spolupracovníka"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Vážení Ověřovatelé,\n"
+"    Píšu vám, abych dokončil proces ověření identity pro mou žádost stát se Spolupracovníkem ${domain_name}. Rád bych navrhl video konferenční setkání pro "
+"tento účel.\n"
+"    Zde jsou některé časové sloty, které navrhuji pro video konferenci. Vezměte prosím na vědomí, že žiji v Německu (prosím, upravte podle své země / regionu bydliště. To je "
+"nutné, aby váš korespondent znal vaši časovou zónu), takže čas, kdy žiji, může být jiný než čas, kdy žijete vy. Tato video konference by neměla trvat déle než 10 minut: (prosím, "
+"poskytněte alespoň 3 možnosti, pokud možno v různých časech dne a v různých dnech, včetně víkendu, všechny v rámci 10 "
+"dnů od odeslání e-mailu)\n"
+"   \n"
+"         - Pondělí, 04. září 2023, v 17:30 hodin mého času; (Upravte podle své dostupnosti)\n"
+"         - Úterý, 05. září 2023, v 20:30 hodin mého času; (Upravte podle své dostupnosti)\n"
+"         - Sobota, 09. září 2023, v 10:00 hodin mého času. (Upravte podle své dostupnosti)\n"
+"    \n"
+"    Nezapomeňte, že můžeme žít v různých časových zónách! Prosím, přeneste tyto časové sloty do své vlastní časové zóny.\n"
+"    Video konference se uskuteční pomocí následujícího odkazu:\n"
+"(prosím, vložte zde odkaz, který jste připravili pro tuto videokonferenci. Zde jsou naše návrhy platforem, které můžete použít k vytvoření videokonference a poskytnout odpovídající odkaz:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (zdarma a open-source software)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (zdarma a open-source software)\n"
+"         - Zoom : https://zoom.us/ (proprietární software)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (proprietární software, platforma za paywall)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (proprietární software, bezplatný přístup na platformu)\n"
+"    )\n"
+"    Prosím, vyberte si časový slot, který vám vyhovuje, a pošlete mi e-mail s vaší volbou.\n"
+"    Během videokonference se může stát, že nebudeme sdílet žádný společný jazyk. Pokud tomu tak bude, navrhuji, abychom přijali laskavý a podpůrný přístup vůči sobě. Navrhuji využít chat k vyjádření se v našich příslušných jazycích a použít strojový překlad k pochopení toho, co náš interlocutor píše.\n"
+"    Jakmile se tato videokonference uskuteční, laskavě žádám, abyste hlasovali o potvrzení nebo odmítnutí souladu mezi:\n"
+"\n"
+"     - informacemi o identitě, které jste obdrželi přímo e-mailem z IT platformy ${domain_name} (a které vám připomeneme na hlasovacím rozhraní) a \n"
+"    - informacemi o identitě, které jste viděli během videokonference.\n"
+"\n"
+" Odkaz pro vás k hlasování o tomto souladu je následující: ${voting_url}.\n"
+"  Děkuji vám předem za podporu procesu mé registrace jako Spolupracovníka na ${domain_name}. Pokud máte další otázky nebo potřebujete další "
+"informace, neváhejte mě kontaktovat přímo.\n"
+" S pozdravem,\n"
+" ${signature}\n"
+" Tento e-mail byl vygenerován s pomocí funkce ověřování identity ${domain_name}. Pokud nejste Ověřovatel přiřazený k žádosti ${signature} a tento e-mail jste obdrželi "
+"omylem, prosím informujte správce ${domain_name} na následující adrese: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Pokud uživatel existuje, obdrží e-mail."
+
+msgid "reset_password_email_subject"
+msgstr "Obnovte své heslo"
+
+msgid "forget_email_send_error"
+msgstr "Při odesílání e-mailu pro obnovu hesla došlo k chybě, prosím kontaktujte správce na ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "vytvořeno"
+
+msgid "member_state_created_value"
+msgstr "Člen byl vytvořen"
+
+msgid "member_state_draft_name"
+msgstr "návrh"
+
+msgid "member_state_draft_value"
+msgstr "Data člena jsou editována"
+
+msgid "member_state_registred_name"
+msgstr "registrován"
+
+msgid "member_state_registred_value"
+msgstr "Data člena byla uložena"
+
+msgid "member_data_modification_request_name"
+msgstr "je měněno"
+
+msgid "member_data_modification_request_value"
+msgstr "Žádost o změnu dat byla podána"
+
+msgid "member_datas_modified_name"
+msgstr "změněno"
+
+msgid "member_datas_modified_value"
+msgstr "Data člena byla změněna"
+
+msgid "email_member_state_changed"
+msgstr "Změna ve vašem profilu člena"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Prosím, zadejte platnou e-mailovou adresu."
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Administrátor si nemůže resetovat vlastní heslo."
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Pokud uživatel existuje, byl na jeho e-mailovou adresu odeslán e-mail s odkazem na resetování jeho hesla."
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Obě verze hesla se neshodují. Prosím, ujistěte se, že ano, a odešlete znovu."
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Prosím, zadejte nové heslo."
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Úspěšně jste změnili své heslo."
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Během procesu resetování hesla došlo k chybě."
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Během procesu resetování hesla došlo k chybě. Vaše heslo nebylo změněno."
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Člen nebyl nalezen v seznamu aktuálních členů."
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Hypertextový odkaz, který jste použili pro resetování hesla, je zastaralý. Prosím, použijte ten nejnovější, který jste obdrželi."
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "E-mail obsahující matematickou výzvu, která ověřuje, že kandidát je člověk (a ne robot), nebyl odeslán."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Chyba při odesílání kandidatury."
+
+msgid "modification_to_profile_button_title"
+msgstr "Upravit Váš profil."
+
+msgid "modification_to_profile_button_label"
+msgstr "Upravit profil."
+
+msgid "modification_to_profile_button_description"
+msgstr "Klikněte sem pro zaslání bezpečného odkazu na úpravu vašeho profilu."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Aby byla zajištěna bezpečnost vašich dat, bude vám na e-mail zaslán jedinečný odkaz pro úpravu vašeho profilu. Tento proces zaručuje, že pouze osoba s přístupem k vaší e-mailové "
+"adresy může provádět změny ve vašem profilu."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Odkaz pro úpravu vašeho profilu na IT infrastruktuře ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Prosím, uveďte zde všechny vaše křestní jméno(jména), jak jsou napsána ve vašich oficiálních identifikačních dokumentech, v jejich oficiální transkripci latinkou (pokud originální jazyk "
+"používá abecedu různou od latinky)."
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Prosím, uveďte zde všechna vaše příjmení při narození (tj. NE vaše příjmení jako vdaná osoba), jak jsou napsána ve vašich oficiálních identifikačních dokumentech, v jejich oficiální "
+"transkripci latinkou (pokud originální jazyk používá abecedu různou od latinky)."
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Text popisující vás (váš profilový text)."
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Prosím, zde napište text popisující vás, ve vašem preferovaném jazyce, abyste se mohli lépe představit ostatním členům komunity. Doporučujeme se zaměřit na: (1) Odkud pocházíte, "
+"(2) co děláte, (3) co chcete dělat jako člen komunity a (4) jaké zdroje (zkušenosti, znalosti, čas) máte k dispozici.\n"
+"Věříme, že tyto informace jsou užitečné, protože představit se ostatním svými vlastními slovy dává lidskou tvář vaší digitální identitě na naší IT infrastruktuře. S tímto textem se "
+"každý člen komunity může lépe seznámit a to usnadní interakci!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Prosím, uveďte své datum narození v následujícím formátu: DD/MM/YYYY, tj. (1) den v měsíci na 2 číslicích; (2) číslo měsíce na 2 číslicích; (3) rok na 4 číslicích. Pouze "
+"osoby, které dosáhly věku 18 let, mohou být spolupracovníky. Pokud jste ještě nedosáhli 18 let, zveme vás, abyste se zaregistrovali jako řádný člen komunity - a abyste se upgradovali na "
+"status spolupracovníka, jakmile dosáhnete dospělosti."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Prosím, uveďte jeden členský stát Evropské unie, jehož jste občanem. Pouze občané Evropské unie mohou být spolupracovníky."
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Prosím, vyberte členský stát Evropské unie."
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Toto je jedinečné číslo, které vás identifikuje ve všech procesech probíhajících v komunitě."
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Prosím, zde zadejte pseudonym, který vás bude identifikovat po celé období vaší činnosti na naší IT platformě. DŮRAZNĚ doporučujeme vybrat pseudonym, který znemožní (nebo "
+"extremně ztíží) zpětné sledování k vaší skutečné identitě. Tímto způsobem chráníte důvěrnost svých názorů (tj. osobních údajů, které podléhají ochranným opatřením podle Obecného nařízení "
+"o ochraně osobních údajů - GDPR) proti jakékoli formě vnějšího tlaku v reálném životě (např. ze strany vašeho zaměstnavatele nebo vašich klientů). Buďte velmi opatrní! Jakmile jej "
+"vyberete, NIKDY nebudete moci později toto pseudonym změnit. Zvolte jej pečlivě! \n"
+" Váš pseudonym musí mít délku mezi ${MIN_PSEUDONYM_LENGTH} a ${MAX_PSEUDONYM_LENGTH} znaky a může obsahovat pouze písmena latinské abecedy (A-Z, a-z), číslice (0-9), "
+"podtržítka (_), tečky (.), pomlčky (-) a mezery ( ). Nemůže obsahovat písmena s diakritikou, přehláskami a dalšími diakritickými znaménky specifickými pro některé jazyky."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Uvedení vašeho pseudonyma je povinné."
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Prosím, uveďte své heslo. Vaše heslo musí mít délku mezi ${password_minimum_length} a ${password_maximum_length} znaky, obsahovat alespoň jednu číslici, alespoň jedno malé "
+"písmeno, alespoň jedno velké písmeno a alespoň jeden z následujících znaků: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Prosím, potvrďte své heslo."
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Potvrzení vašeho hesla je povinné."
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Prosím, uveďte e-mailovou adresu, kterou bude IT infrastruktura ${domain_name} používat pro komunikaci s vámi.\n"
+"Doporučujeme zvolit e-mailovou adresu, kterou často kontrolujete.\n"
+"Potřebujeme tyto informace, protože s vámi potřebujeme komunikovat, abychom vás udržovali v obraze o vývoji v družstvu, abychom vám nabídli možnost jednat nebo přispět "
+"k rozhodnutím. E-mail je nejširší používaný prostředek v Evropě, je univerzální a vychází z otevřených a svobodných standardů, na rozdíl od proprietárních zprávových systémů digitálních "
+"gigantů (známých také jako 'GAFAM').\n"
+"Tato e-mailová adresa bude používána výhradně k zajištění komunikace mezi IT infrastrukturou ${domain_name} a vámi. Nebude nikdy zobrazena ostatním uživatelům IT platformy "
+"${domain_name}, ani nebude předána nebo prodána nikomu, kromě splnění právních požadavků ze strany veřejných orgánů vymáhajících právo na základě žádosti soudce. \"Správce údajů\" "
+"jak je definováno Obecným nařízením o ochraně osobních údajů (GDPR) Evropské unie, je CosmoPolitical Cooperative SCE, evropská družstevní společnost se sídlem na adrese 229 rue "
+"Solférino, 59000 Lille, Francie a registrována dne 25. dubna 2023 pod číslem SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Prosím, uveďte jazyk, s nímž byste preferovali, aby s vámi IT infrastruktura ${domain_name} komunikovala. \n"
+"Doporučujeme zvolit jazyk, který nejlépe ovládáte, z mezi oficiálních jazyků Evropské unie nebo esperanta. Pokud je to možné mezi těmi, pro které jsme vyvinuli uživatelské rozhraní, "
+"budeme ho používat pro interakci s vámi. \n"
+"Potřebujeme tyto informace, protože z důvodů spravedlnosti a respektu k demokratickým principům chceme s vámi komunikovat jazykem, kterému rozumíte co nejlépe."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Prosím, uveďte jazyk, se kterým byste akceptovali, jako druhou volbu, aby s vámi IT infrastruktura ${domain_name} komunikovala. \n"
+" Doporučujeme zvolit jiný úřední jazyk Evropské unie nebo esperanto, které rozumíte přiměřeně dobře. Pokud je dostupný mezi těmi, pro které jsme "
+"vyvinuli uživatelské rozhraní, a pokud váš preferovaný jazyk není dostupný, použijeme ho pro interakci s vámi. \n"
+" Toto informace potřebujeme, protože navzdory našim snahám se může stát, že váš preferovaný jazyk nebude dostupný v uživatelském rozhraní našeho softwaru. Proto se ptáme, "
+"jestli můžete použít jiný jazyk."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Jazyk, který akceptujete jako třetí volbu pro interakci s vámi"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Prosím, uveďte jazyk, se kterým byste akceptovali, jako třetí volbu, aby s vámi IT infrastruktura ${domain_name} komunikovala. \n"
+" Doporučujeme zvolit jiný úřední jazyk Evropské unie nebo esperanto, které stále můžete rozumět. Pokud je dostupný mezi těmi, pro které jsme vyvinuli "
+"uživatelské rozhraní, a pokud ani váš preferovaný jazyk, ani váš druhý jazyk nejsou dostupné, použijeme ho pro interakci s vámi. \n"
+" Tuto informaci potřebujeme, protože navzdory našim snahám se může stát, že váš preferovaný jazyk a váš druhý jazyk nebudou dostupné v uživatelském rozhraní našeho softwaru. "
+"Proto se ptáme, jestli můžete použít třetí jazyk. Jsme si vědomi, že pro vás je interakce s námi v tomto jazyce neuspokojivou situací - stejně jako pro nás. Omlouváme se za to."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Vaše značka kooperativního chování"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Jako kooperator, vaše značka kooperativního chování je výsledkem značek, které vám přidělili ostatní aktivní účastníci pracovních skupin, ve kterých jste se podíleli na definování "
+"a přijetí návrhů akcí. Každý aktivní účastník může poskytnout známku rovnou +1, 0 nebo -1, v závislosti na tom, jak kooperativní bylo vaše chování během vaší aktivní účasti v té "
+"pracovní skupině. Tato značka je automaticky 'zapomenuta' a postupně se ztrácí: je zmenšena na polovinu po ${forgetting_time_constant} dnech. Počáteční hodnota vaší značky kooperativního chování "
+"je nula."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Datum, kdy byla vaše značka kooperativního chování naposledy aktualizována"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Toto je nejnovější datum, kdy vám jiný kooperator přidělil známku po skončení vaší aktivní účasti v pracovní skupině, která definovala a přijímala návrh akcí. Počáteční hodnota toho data je "
+"datum vaší registrace jako kooperátora."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Počet akcií družstva, které vlastníte"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Toto je celkový počet akcií družstva, které vlastníte, po jejich koupi na našem webovém portálu. Po vaší registraci je tento počet roven nule. Zveme vás, abyste "
+"co nejdříve navštívili tuto URL: ${url_purchase_shares} pro nákup vaší první akcie(í). Plných rozhodovacích práv se jako kooperator dočkáte pouze po zakoupení "
+"alespoň jedné akcie (a zaplacení vašeho ročního příspěvku). Můžete zakoupit více než jednu akcii při registraci, ale také kdykoli později. Posiluje to naše "
+"družstvo a jsme vám za to vděční!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Datum, kdy vyprší váš aktuální roční příspěvek"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Datum, kdy vyprší váš aktuální roční příspěvek, a před kterým ho musíte znovu zaplatit, abyste si udrželi plná rozhodovací práva jako kooperator. Po vaší registraci je "
+"toto datum nastavena na dobu v minulosti, což znamená, že byste měli nyní zaplatit. Zveme vás, abyste co nejdříve navštívili tuto URL: ${url_pay_yearly_contrib} "
+"pro zaplacení vašeho prvního ročního příspěvku a tím se zapojili do operací našeho družstva. Plných rozhodovacích práv se jako kooperator dočkáte pouze poté, "
+"co zaplatíte svůj roční příspěvek (a zakoupíte alespoň jednu akcii)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Mezinárodní číslo bankovního účtu (IBAN) vašeho bankovního účtu"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Pokud a kdy se rozhodnete opustit družstvo (což by nás všechny mrzelo), potřebujeme váš IBAN, abychom vám mohli převést výnosy z našeho zpětného odkupu vašich akcií družstva. "
+"Z bezpečnostních důvodů doporučujeme poskytnout tyto informace pouze pokud a kdy se očekáváte, že opustíte družstvo."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Datum, kdy budou všechna vaše data vymazána z naší IT infrastruktury"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Pokud a kdy opustíte družstvo, budou vaše osobní údaje udržovány po dobu ${Quarantine} dní, než budou plně a neodvolatelně vymazány z našich záznamů. To je zajištěno "
+"proto, aby kooperator, který opouští družstvo, protože jeho/její značka kooperativního chování je příliš špatná, nemohl okamžitě znovu zaregistrovat s čistým pseudonymem a "
+"kooperativní značkou chování. Po vaší registraci je toto datum nastaveno na velmi vzdálenou budoucnost."
+
+msgid "avatar_label"
+msgstr "Obrázek, který vás představuje (váš avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Prosím, poskytněte obrázek, který vás reprezentuje jako člena komunity. Abychom vás chránili před případnými odvetnými opatřeními od vašeho zaměstnavatele nebo klientů, doporučujeme, "
+"aby tento obrázek neumožňoval zjistit vaši identitu v reálném životě. Měl by to tedy obecně být ne fotografii vás samotného (nezapomeňte, že software pro rozpoznávání obličejů je masivně "
+"používán vyhledávacími roboty). Obrázek by měl být pouze ve formátu JPEG (přípona .JPG nebo .JPEG) a nesmí být větší než 5 MB. \n"
+"Věříme, že tyto informace jsou užitečné, protože obrázek usnadňuje ostatním členům komunity vás rozpoznat. Někdy obrázek říká mnohem více než dlouhé proslovy. S tímto obrázkem vyjadřujete "
+"mnoho o sobě, v univerzálním jazyce. Využijte toho co nejvíce!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Adresa (URL), kterou jste použili k získání vašeho procesu žádosti, odkud jste jej přerušili, se neshoduje s tou, kterou jsme vám zaregistrovali. (Identifikační číslo žádosti v "
+"session a číslo v URL se neshodují)\n"
+"Prosím, používejte pouze URL z posledního e-mailu, který jste obdrželi."
+
+msgid "check_new_email"
+msgstr "Požádali jste o změnu vaší e-mailové adresy. V budoucnu byste chtěli používat: ${new_email}. V důsledku toho obdržíte e-mail obsahující odkaz na potvrzení této nové adresy."
+
+msgid "check_new_email_subject"
+msgstr "Ověření vaší nové e-mailové adresy"
+
+msgid "check_new_email_send_error"
+msgstr "Odeslání ověřovacího e-mailu pro vaši novou adresu selhalo"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Ověřovací e-mail pro vaši novou adresu byl odeslán"
+
+msgid "modify_member"
+msgstr "Konzultovat nebo upravit člena"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Chyba připojení"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "E-mailová adresa již existuje"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "E-mailová adresa byla aktualizována"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Chyba při aktualizaci e-mailové adresy"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Chyba při nastavování pole"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Chyba při aktualizaci člena"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Neplatný OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Neplatný požadavek"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "Chyba LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Údaje člena byly aktualizovány"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Aktualizace údajů člena selhala"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Aktualizace údajů člena byla úspěšná"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Chybějící data"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Nová e-mailová adresa chybí"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Žádné oprávnění"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Není voličem"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Aktualizace hesla se nezdařila"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Aktualizace hesla byla úspěšná"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Registrace se nezdařila"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Registrace byla úspěšná"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Neznámý přistupovaný člen"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Neznámý člen"
+
+msgid "modify_member_title"
+msgstr "Upravit profil člena"
+
+msgid "select_member_oid_label"
+msgstr "Vyberte člena, jehož profil chcete upravit:"
+
+msgid "select_member_placeholder"
+msgstr "Pseudonym člena"
+
+msgid "modify_profile"
+msgstr "Můžete změnit svůj profil kliknutím sem"
+
+msgid "profile"
+msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Vaše e-mailová adresa byla úspěšně aktualizována. Nyní budete používat tuto novou adresu pro veškerou budoucí komunikaci s ${domain_name}. Pokud jste tuto změnu nepožadovali nebo pokud máte "
+"jakékoli dotazy, neváhejte nás okamžitě kontaktovat na ${admin_email}. Děkujeme, že jste součástí komunity ${domain_name}!"

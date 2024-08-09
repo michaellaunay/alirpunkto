@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Ju lutemi konfirmoni kërkesën tuaj për të përditësuar adresën tuaj të emailit në <span tal:replace="domain_name">Emri i domain-it</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Ju lutemi konfirmoni kërkesën tuaj për të përditësuar adresën tuaj të emailit në platformën IT <span tal:replace="domain_name">Emri i domain-it</span></h1>
+    <p tal:omit-tag="textual">Ju, ose një person me akses në llogarinë tuaj në platformën <span tal:replace="site_name">Emri i faqes</span> të <span tal:replace="domain_name">Emri i domain-it</span>, keni kërkuar që ne të ndryshojmë adresën e emailit që infrastruktura IT e <span tal:replace="domain_name">emrit të domain-it</span> përdor për t’u lidhur me ju. Adresa e re e emailit që u kërkua të përdoret në të ardhmen është: <span tal:replace="new_email">Adresa e re e emailit</span>.</p>
+<p tal:omit-tag="textual">Nëse konfirmoni që <span tal:replace="new_email">Adresa e re e emailit</span> duhet të jetë adresa e emailit që infrastruktura IT e <span tal:replace="domain_name">emrit të domain-it</span> duhet të përdorë në të ardhmen për t’u lidhur me ju, ju lutemi klikoni në lidhjen e konfirmimit më poshtë.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Nëse keni bërë një gabim, ose nëse nuk e keni bërë këtë kërkesë, thjesht injoroni këtë email.</p>
+
+    <p tal:omit-tag="textual">Faleminderit për interesin tuaj në aktivitetet tona.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Me respekt të lartë,</p>
+        <p tal:omit-tag="textual">Ekipi në <span tal:replace="domain_name">Faqen</span></p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Regjistrimi në <span tal:replace="domain_name">Emri i domain-it</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Faleminderit që nisët regjistrimin tuaj në platformën <span
+                tal:replace="domain_name">Emri i domain-it</span></h1>
+        <p tal:omit-tag="textual">Për të verifikuar adresën tuaj të emailit dhe për të siguruar që jeni një njeri (jo një robot), kemi hartuar një seri prej 4 operacioneve matematikore të thjeshta. Ju lutemi kryeni katër operacionet matematike të etiketuar nga A në D më poshtë dhe shkruani rezultatet e tyre në fushat përkatëse në faqen e regjistrimit të lidhur më poshtë.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Operacioni A është <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Sfida e parë</span></p>
+            <p tal:omit-tag="textual">Operacioni B është <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Sfida e dytë</span></p>
+            <p tal:omit-tag="textual">Operacioni C është <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Sfida e tretë</span></p>
+            <p tal:omit-tag="textual">Operacioni D është <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Sfida e katërt</span></p>
+        </div>
+        <p tal:omit-tag="textual">Lidhja për faqen e regjistrimit në të cilën duhet të jepni rezultatet e operacioneve A në D më sipër:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Faleminderit për interesin tuaj në aktivitetet tona. Presim me padurim t'ju mirëpresim së shpejti!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Sinqerisht,</p>
+            <p tal:omit-tag="textual">Ekipi i <span tal:replace="domain_name">Emri i domain-it</span></p>
+        </footer>
+
+    </body>
+</html>

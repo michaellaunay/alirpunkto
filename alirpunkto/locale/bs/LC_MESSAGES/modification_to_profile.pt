@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vaš zahtjev za izmjenu profila</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Vaš zahtjev za izmjenu profila</h1>
+    
+    <p tal:omit-tag="textual">Zdravo <span tal:replace="member.firstname" tal:condition="exists:member">Ime Korisnika</span>,</p>
+    
+    <p tal:omit-tag="textual">Primili smo zahtjev za izmjenu vašeg profila na platformi <span tal:replace="site_name">Naziv Sajta</span> od <span tal:replace="domain_name">Naziv Domen</span>. Zbog vaše sigurnosti, zahtijevamo da slijedite sigurnu vezu kako biste nastavili sa izmjenama. Molimo vas da kliknete na sljedeći URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Link za izmjenu profila</a> kako biste ažurirali podatke o svom profilu.</p>
+    
+    <p tal:omit-tag="textual">Ako niste tražili ovu izmjenu profila, molimo vas da ignorirate ovaj email ili kontaktirate podršku ako imate bilo kakvih pitanja.</p>
+    
+    <p tal:omit-tag="textual">S poštovanjem,</p>
+    <p tal:omit-tag="textual">Tim <span tal:replace="domain_name">Naziv Domen</span>.</p>
+</body>
+</html>

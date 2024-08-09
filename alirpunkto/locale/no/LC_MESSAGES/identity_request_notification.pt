@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Din registrering til <span tal:omit-tag="textual" tal:replace="domain_name">Domenenavn</span>. Neste trinn</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Hei <span tal:replace="full_name">Søkers navn</span>,</h1>
+    <p tal:omit-tag="textual">Takk for at du har sendt inn søknaden din til <span tal:replace="domain_name">Domenenavn</span>! </p>
+
+    <p tal:omit-tag="textual">Avhengig av alternativet du valgte under registreringen, her er de neste trinnene:</p>
+
+    <h2 tal:omit-tag="textual">Hvis du valgte alternativet "Vanlig medlemskap":</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Gratulerer, du er nå et "Vanlig medlem"!</li>
+        <li tal:omit-tag="textual">Ditt medlemsnummer har blitt bestemt.</li>
+        <li tal:omit-tag="textual">En gratulerings-e-post har blitt sendt til deg.</li>
+        <li tal:omit-tag="textual">Din søknadsstatus er nå "GodkjentVanligMedlem".</li>
+        <li tal:omit-tag="textual">Det kreves ingen videre handling fra din side. Koble til vår <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">arbeidsplass</a> og begynn å samhandle med andre medlemmer av fellesskapet!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Hvis du valgte alternativet "Samarbeidspartner":</h2>
+    <p tal:omit-tag="textual">Du vil ha rett til å delta fullt ut i våre beslutningsprosesser og i våre stemmer. I disse prosessene og stemmene ønsker vi å bevare det demokratiske prinsippet om 'én person = én stemme'. Det ville være urettferdig om en gitt person kunne stemme flere ganger ved å bruke flere kontoer på vår IT-plattform. Vi må derfor knytte kontoen din til deg personlig, og sørge for at du er identifisert på vår IT-plattform på en måte som ikke kan forveksles med identiteten til en annen person, dvs. med en unik sett av identifikatorer.</p>
+    <p tal:omit-tag="textual">I tillegg ønsker vi å sikre at bare borgere i Den europeiske union er samarbeidspartnere. Årsaken til dette er at vi vil kreve retten til å delta i offentlige valg i Den europeiske union som en enkelt organisasjon på EU-nivå, og trenger å demonstrere at vi bare representerer EU-borgere (og ikke "utenlandske interesser").</p>
+    <p tal:omit-tag="textual">For å oppnå disse målene, vil vi be deg om å oppgi følgende informasjon, slik den fremkommer i dine offisielle identitetsdokumenter:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Alle dine fornavn (i deres offisielle transkripsjon i latinske tegn for gresk og bulgarsk),</li>
+        <li tal:omit-tag="textual">Alle dine etternavn ved fødsel (i deres offisielle transkripsjon i latinske tegn for gresk og bulgarsk),</li>
+        <li tal:omit-tag="textual">Din fødselsdato,</li>
+        <li tal:omit-tag="textual">Din nasjonalitet (blant nasjonalitetene til EU-medlemsland).</li>
+    </ul>
+    <p tal:omit-tag="textual">Du vil gi denne informasjonen på vår registreringsplattform, og et sett med 3 til 7 tilfeldig utvalgte samarbeidspartnere, kalt Verifikatorene, vil sjekke at informasjonen du har gitt på vår registreringsplattform stemmer overens med den på dine offisielle ID-dokumenter. Du vil derfor sende delvise bilder av dine offisielle ID-dokumenter direkte til disse Verifikatorene, uten (for sikkerhetens skyld) å bruke vår IT-plattform.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Det finnes to metoder for deg å sende disse delvise bildene av dine offisielle ID-dokumenter til Verifikatorene:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via videokonferanse</strong>: En knapp vil veilede deg i å utarbeide en ferdig e-post, der du kan foreslå datoer og tider for en enkelt eller separate videokonferanser med Verifikatorene som er tildelt deg. Under denne (disse) videokonferansen(e) vil du vise ditt offisielle ID-dokument til Verifikatorene via kameraet ditt, og sørge for at f.eks. nummeret på ID-dokumentet og fødelsesstedet forblir skjult, for å unngå (av sikkerhetsmessige årsaker) å vise en full kopi av dette dokumentet.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via e-postvedlegg</strong>: En knapp vil hjelpe deg med å skrive en ferdig e-post, til hvilken du kan legge ved en delvis kopi av ditt offisielle ID-dokument (f.eks. skjule nummeret og fødestedet).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Hver Verifikator vil deretter sjekke samsvaret mellom informasjonen du oppga i registreringsskjemaet på vår IT-plattform og den på ditt offisielle identitetsdokument. Hver Verifikator vil deretter uavhengig stemme på vår IT-plattform om denne samsvaret. Hvis et flertall av Verifikatorene aksepterer at informasjonen du oppga på vår registreringsplattform stemmer overens med den på dine offisielle ID-dokumenter, vil vi ha gleden av å ønske deg velkommen som en samarbeidspartner!</p>
+
+    <p tal:omit-tag="textual">Skulle sending av e-post mislykkes av en eller annen grunn, vil en feilmelding bli logget og det vil bli gjort et forsøk på å sende en e-post til administratoren.</p>
+
+    <p tal:omit-tag="textual">Vi minner deg om at tiden du har til å utføre denne verifiseringsprosessen er begrenset, så vær så snill å handle raskt.</p>
+
+    <p tal:omit-tag="textual">Hvis du har noen spørsmål eller trenger ytterligere avklaring, ikke nøl med å kontakte oss.</p>
+
+    <p tal:omit-tag="textual">Vennlig hilsen,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Teamet til <span tal:replace="domain_name">Domenenavn</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Merk: Denne meldingen har blitt generert automatisk. Vennligst ikke svar direkte på denne meldingen.</small></p>
+</body>
+</html>

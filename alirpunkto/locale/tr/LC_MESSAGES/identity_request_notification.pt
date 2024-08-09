@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual"><span tal:omit-tag="textual" tal:replace="domain_name">Alan adı</span>'na olan kaydınız. Sonraki adımlar</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Merhaba <span tal:replace="full_name">Başvuranın Adı</span>,</h1>
+    <p tal:omit-tag="textual"><span tal:replace="domain_name">Alan adı</span>'na başvurunuzu sunduğunuz için teşekkür ederiz! </p>
+
+    <p tal:omit-tag="textual">Kayıt sırasında seçtiğiniz seçeneğe bağlı olarak, işte sonraki adımlar:</p>
+
+    <h2 tal:omit-tag="textual">Eğer "Sıradan Topluluk Üyesi" seçeneğini seçtiyseniz:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Tebrikler, artık bir "Sıradan Topluluk Üyesi"siniz!</li>
+        <li tal:omit-tag="textual">Üyelik numaranız tespit edilmiştir.</li>
+        <li tal:omit-tag="textual">Sizlere tebrik e-postası gönderilmiştir.</li>
+        <li tal:omit-tag="textual">Başvuru durumunuz artık "OnaylıSıradanToplulukÜyesi"dir.</li>
+        <li tal:omit-tag="textual">Tarafınızdan başka bir eylem gerekmiyor. <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">çalışma alanımıza</a> bağlanın ve topluluk üyelerinizle etkileşimde bulunun!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">Eğer "Kooperatör" seçeneğini seçtiyseniz:</h2>
+    <p tal:omit-tag="textual">Karar alma süreçlerimize ve oylarımıza tam katılım hakkına sahip olacaksınız. Bu süreçlerde ve oylarda, 'bir kişi = bir oy' demokratik ilkesini korumak istiyoruz. Belirli bir kişinin IT platformumuzda birden fazla hesap kullanarak birkaç kez oy verme imkanı olması adil olmayacaktır. Bu nedenle, hesabınızı kişisel olarak sizinle ilişkilendirmemiz ve IT platformumuzda kimliğinizin başka bir kişiyle karıştırılamayacak şekilde, yani benzersiz bir tanımlayıcı setiyle tanımlanmasını sağlamamız gerekmektedir.</p>
+    <p tal:omit-tag="textual">Ayrıca, yalnızca Avrupa Birliği vatandaşlarının Kooperatör olmasını sağlamak istiyoruz. Bunun nedeni, Avrupa Birliği'nde tek bir kuruluş olarak kamu seçimlerine katılma hakkını talep edeceğiz ve yalnızca AB vatandaşlarını temsil ettiğimizi (ve "yabancı çıkarları" temsil etmediğimizi) göstermemiz gerekmektedir.</p>
+    <p tal:omit-tag="textual">Bu hedeflere ulaşmak için, resmi kimlik belgelerinizdeki gibi aşağıdaki bilgileri sağlamanızı isteyeceğiz:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Tüm adlarınız (Yunan ve Bulgar için resmi transkripsiyonlarıyla Latince karakterlerle),</li>
+        <li tal:omit-tag="textual">Doğumda sahip olduğunuz tüm soyadlar (Yunan ve Bulgar için resmi transkripsiyonlarıyla Latince karakterlerle),</li>
+        <li tal:omit-tag="textual">Doğum tarihiniz,</li>
+        <li tal:omit-tag="textual">Milliyetiniz (yalnızca AB Üye Devletleri'nin milliyetleri arasından).</li>
+    </ul>
+    <p tal:omit-tag="textual">Bu bilgileri kayıt platformumuza sağlayacaksınız ve size atanan 3 ile 7 arasında rastgele seçilen Kooperatörlerden oluşan bir grup, yani Doğrulayıcılar, kayıt platformumuzda sağladığınız bilgilerin resmi kimlik belgelerinizdeki bilgilerle örtüştüğünü kontrol edecektir. Bu nedenle, resmi kimlik belgelerinizin kısmi görüntülerini doğrudan bu Doğrulayıcılara iletecek, (güvenlik nedeniyle) IT platformumuzu kullanmayacaksınız.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Bu kısmi görüntüleri Doğrulayıcılara iletmek için iki yöntem vardır:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Video Konferansı aracılığıyla</strong>: Size atanan Doğrulayıcılarla bir veya birden fazla video konferans için randevu tarihleri önerdiğiniz önceden doldurulmuş bir e-posta oluşturmanızı sağlayan bir buton olacaktır. Bu video konferanslarda, resmi kimlik belgenizi Doğrulayıcılara kameranız aracılığıyla göstererek, örneğin kimlik belgesinin numarasının ve doğum yerinin gizli kaldığından emin olacaksınız, böylece bu belgenin tam kopyasının sergilenmesi engellenmiş olacaktır.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">E-posta Eki aracılığıyla</strong>: Resmi kimlik belgenizin kısmi bir kopyasını ekleyebileceğiniz önceden doldurulmuş bir e-posta yazmanıza yardımcı olacak bir buton olacaktır (örneğin, numarayı ve doğum yerini gizleyerek).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Her Doğrulayıcı, IT platformumuzda sağladığınız bilgilerin kayıt formundaki bilgilerle resmi kimlik belgenizdeki bilgilerle uyumluluğunu kontrol edecektir. Her Doğrulayıcı, uyumluluğun doğrulanması konusunda bağımsız olarak IT platformumuzda oy kullanacaktır. Eğer Doğrulayıcıların çoğunluğu, kayıt platformumuzda sağladığınız bilgilerin resmi kimlik belgelerinizdeki bilgilerle örtüştüğünü kabul ederse, sizi bir Kooperatör olarak ağırlamaktan mutluluk duyacağız!</p>
+
+    <p tal:omit-tag="textual">E-posta gönderimi herhangi bir nedenle başarısız olursa, bir hata mesajı kaydedilecektir ve yöneticinin e-posta alması için bir deneme yapılacaktır.</p>
+
+    <p tal:omit-tag="textual">Bu doğrulama sürecini gerçekleştirmeniz için ayrılan zamanın sınırlı olduğunu hatırlatırız, bu yüzden lütfen hızlı hareket edin.</p>
+
+    <p tal:omit-tag="textual">Herhangi bir sorunuz varsa veya daha fazla açıklamaya ihtiyacınız olursa, lütfen bizimle iletişime geçmekten çekinmeyin.</p>
+
+    <p tal:omit-tag="textual">Saygılarımızla,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual"> <span tal:replace="domain_name">Alan Adı</span> ekibi</strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Not: Bu bildirim otomatik olarak oluşturulmuştur. Lütfen bu mesaja doğrudan yanıt vermeyin.</small></p>
+</body>
+</html>

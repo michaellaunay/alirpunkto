@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+    <head tal:omit-tag="textual">
+        <title tal:omit-tag="textual">Рэгістрацыя на <span tal:replace="domain_name">Доменнае імя</span></title>
+    </head>
+    <body tal:omit-tag="textual">
+
+        <h1 tal:omit-tag="textual">Дзякуй за пачатак рэгістрацыі на платформу <span
+                tal:replace="domain_name">Доменнае імя</span></h1>
+        <p tal:omit-tag="textual">Для пацверджання вашай электроннай пошты і ўпэўненасці, што вы чалавек (а не
+            робот), мы падрыхтавалі серыю з 4 простых матэматычных аперацый. Калі ласка, выканайце
+            чатыры матэматычныя задачы, адзначаныя літарамі ад A да D ніжэй, і увядзіце іх вынікі ў
+            адпаведныя палі на старонцы рэгістрацыі, спасылка на якою знаходзіцца ніжэй.</p>
+        <div tal:omit-tag="textual">
+
+            <p tal:omit-tag="textual">Аперацыя A: <span tal:content="challenge_A"
+                    tal:omit-tag="textual">Першае выклік</span></p>
+            <p tal:omit-tag="textual">Аперацыя B: <span tal:content="challenge_B"
+                    tal:omit-tag="textual">Другое выклік</span></p>
+            <p tal:omit-tag="textual">Аперацыя C: <span tal:content="challenge_C"
+                    tal:omit-tag="textual">Трэцяе выклік</span></p>
+            <p tal:omit-tag="textual">Аперацыя D: <span tal:content="challenge_D"
+                    tal:omit-tag="textual">Чацвёртае выклік</span></p>
+        </div>
+        <p tal:omit-tag="textual">Спасылка на старонку рэгістрацыі, дзе трэба прадставіць вынікі аперацый A да D вышэй:</p>
+        <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
+            <span tal:replace="string:${page_register_with_oid}"></span>
+        </a>
+
+        <p tal:omit-tag="textual">Дзякуй за ваш інтарэс да нашай дзейнасці. Чакаем вашага прыходу!</p>
+
+        <footer tal:omit-tag="textual">
+            <p tal:omit-tag="textual">Шчыра,</p>
+            <p tal:omit-tag="textual">Каманда <span tal:replace="domain_name">Доменнае імя</span></p>
+        </footer>
+
+    </body>
+</html>

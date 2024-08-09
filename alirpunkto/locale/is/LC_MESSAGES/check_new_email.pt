@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Vinsamlegast staðfestið beiðni ykkar um að uppfæra netfangið ykkar á <span tal:replace="domain_name">Lénanafni</span></title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Vinsamlegast staðfestið beiðni ykkar um að uppfæra netfangið ykkar á IT pallinum <span tal:replace="domain_name">Lénanafni</span></h1>
+    <p tal:omit-tag="textual">Þú, eða einhver sem hefur aðgang að reikningi þínum á <span tal:replace="site_name">Vefsíðu</span> palli <span tal:replace="domain_name">Lénanafni</span>, hefur beðið okkur um að breyta netfanginu sem <span tal:replace="domain_name">lénanafnið</span> IT innviðir nota til að hafa samband við þig. Nýja netfangið sem óskað var eftir að verði notað í framtíðinni er: <span tal:replace="new_email">Nýtt netfang</span>.</p>
+<p tal:omit-tag="textual">Ef þú staðfestir að <span tal:replace="new_email">Nýtt netfang</span> eigi að vera netfangið sem <span tal:replace="domain_name">lénanafnið</span> IT innviðir eigi að nota til að hafa samband við þig í framtíðinni, vinsamlegast smelltu á staðfestingartengilinn hér að neðan.</p>
+    <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
+        <span tal:replace="string:${check_new_email_view}"></span>
+    </a>
+
+    <p tal:omit-tag="textual">Ef þú gerðir mistök, eða ef þú gerðir ekki þessa beiðni, skaltu einfaldlega hunsa þennan tölvupóst.</p>
+
+    <p tal:omit-tag="textual">Takk fyrir áhugann á starfsemi okkar.</p>
+    
+    <footer tal:omit-tag="textual">
+        <p tal:omit-tag="textual">Bestu kveðjur,</p>
+        <p tal:omit-tag="textual">Teamið á <span tal:replace="domain_name">Vefsíðu</span></p>
+    </footer>
+
+</body>
+</html>

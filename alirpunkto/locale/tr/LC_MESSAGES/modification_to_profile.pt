@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Profil Değişiklik Talebiniz</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Profil Değişiklik Talebiniz</h1>
+    
+    <p tal:omit-tag="textual">Merhaba <span tal:replace="member.firstname" tal:condition="exists:member">Kullanıcı Adı</span>,</p>
+    
+    <p tal:omit-tag="textual">Biz, <span tal:replace="domain_name">Domain Name</span> platformunda, <span tal:replace="site_name">Site Adı</span> için profilinizi değiştirmek üzere bir talep aldık. Güvenliğiniz için, değişikliklere devam etmek üzere güvenli bir bağlantıyı takip etmenizi talep ediyoruz. Lütfen profil bilgilerinizi güncellemek için aşağıdaki URL'ye tıklayın <a href="${page_with_oid}" tal:attributes="href page_with_oid">Profil Değişiklik Bağlantısı</a>.</p>
+    
+    <p tal:omit-tag="textual">Eğer bu profil değişikliği talebinde bulunmadıysanız, lütfen bu e-postayı yok sayın veya herhangi bir endişeniz varsa destek ile iletişime geçin.</p>
+    
+    <p tal:omit-tag="textual">Saygılarımızla,</p>
+    <p tal:omit-tag="textual"><span tal:replace="domain_name">Domain Name</span> ekibi.</p>
+</body>
+</html>

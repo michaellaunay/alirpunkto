@@ -1,0 +1,1101 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: French <dev@logikascium.com>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Tervetuloa"
+
+msgid "username_label"
+msgstr "Käyttäjänimi"
+
+msgid "password_label"
+msgstr "Salasana"
+
+msgid "login_label"
+msgstr "Kirjaudu sisään"
+
+msgid "welcome_msg"
+msgstr "Tervetuloa ${site_name}, keskitetty palvelu sovelluksille, joita käytetään ${domain_name} IT-infrastruktuurissa."
+
+msgid "all_applications_msg"
+msgstr "Kaikki sovellukset, joita tarvitset osallistuaaksesi ${domain_name} toimiin yhdessä paikassa."
+
+msgid "register_or_login_msg"
+msgstr "Rekisteröidy tai kirjaudu sisään aloittaaksesi."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, keskitetty palvelu sovelluksille, joita käytetään ${domain_name} IT-infrastruktuurissa"
+
+msgid "logged_in_msg"
+msgstr "Olet kirjautunut sisään käyttäjänä ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Voit kirjautua ulos napsauttamalla tästä"
+
+msgid "logout_label"
+msgstr "Kirjaudu ulos"
+
+msgid "choose_application_msg"
+msgstr "Valitse sovellus, johon haluat liittyä:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Virheellinen käyttäjänimi tai salasana. Yritä uudelleen"
+
+msgid "register_link"
+msgstr "Luo tili"
+
+msgid "password_confirm_label"
+msgstr "Vahvista salasana"
+
+msgid "password_confirm_title"
+msgstr "Vahvista salasanasi"
+
+msgid "forgot_password_label"
+msgstr "Unohditko salasanan?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Koko nimi virallisissa henkilöllisyysasiakirjoissa"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Koko sukunimi virallisissa henkilöllisyysasiakirjoissa"
+
+msgid "birthdate_label"
+msgstr "Syntymäaika"
+
+msgid "nationality_label"
+msgstr "Kansalaisuus (EU:n kansalaiset)"
+
+msgid "cooperator_number_label"
+msgstr "Yhteistyökumppanin numero"
+
+msgid "pseudonym_label"
+msgstr "Salanimi"
+
+msgid "email_label"
+msgstr "Sähköpostiosoite"
+
+msgid "first_interaction_language_label"
+msgstr "Kieli, jota haluat meidän käyttävän kanssasi"
+
+msgid "second_interaction_language_label"
+msgstr "Kieli, jonka hyväksyt toissijaisena valintana kanssamme vuorovaikuttamisessa"
+
+msgid "register_label"
+msgstr "Rekisteröidy"
+
+msgid "forgot_password_head"
+msgstr "Unohdit salasanan"
+
+msgid "forgot_your_password_title"
+msgstr "Unohditko salasanasi?"
+
+msgid "enter_your_email_address_label"
+msgstr "Ole hyvä ja syötä sähköpostiosoitteesi:"
+
+msgid "submit_button"
+msgstr "Lähetä"
+
+msgid "candidature_states_draft_value"
+msgstr "Luonnos: Hakemus on luonnostelu."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Sähköpostin vahvistus: Tila, jossa hakijan sähköpostiosoitetta odotetaan vahvistusta."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "Vahvistettu ihminen: Hakijan sähköpostiosoite on vahvistettu ja todiste ihmisyydestä on esitetty (olemme varmistaneet, että et ole robotti)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Yksilölliset tiedot: Hakija on syöttänyt henkilökohtaiset tunnistetietonsa, ja olemme vahvistaneet, että yhtään nykyistä tai äskettäin toimivaa yhteistyökumppania tai tavallista jäsentä yhteisössä ei ole samoja "
+"tietoja."
+
+msgid "candidature_states_pending_value"
+msgstr "Odottaa: Hakemus on lähetetty. Henkilökohtaiset tunnistetiedot on toimitettu tarkistajille, mutta he eivät ole vielä antaneet palautetta."
+
+msgid "candidature_states_approved_value"
+msgstr "Hyväksytty: Hakemus on hyväksytty."
+
+msgid "candidature_states_refused_value"
+msgstr "Hylätty: Hakemus on hylätty."
+
+msgid "candidature_states_draft"
+msgstr "luonnos"
+
+msgid "candidature_states_email_validation"
+msgstr "sähköpostin_vahvistus"
+
+msgid "candidature_states_confirmed_human"
+msgstr "vahvistettu_ihminen"
+
+msgid "candidature_states_unique_data"
+msgstr "yksilölliset_tiedot"
+
+msgid "candidature_states_pending"
+msgstr "odottaa"
+
+msgid "candidature_states_approved"
+msgstr "hyväksytty"
+
+msgid "candidature_states_refused"
+msgstr "hylätty"
+
+msgid "user_types_ordinary_value"
+msgstr "Tavallinen: Hakemus tulla tavalliseksi jäseneksi yhteisössä = yksinkertaistettu rekisteröintiprosessi, ei taloudellista velvoitetta, mutta ei päätöksentekovaltaa."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Yhteistyökumppani: Hakemus tulla täysjäseneksi osuuskunnassa, yhteistyökumppani = täydellinen rekisteröintiprosessi, joka takaa 'yhden henkilön = yksi ääni' periaatteen ja että "
+"hakija on Euroopan unionin kansalainen, velvollisuus ostaa vähintään yksi osake ja maksaa vuotuinen maksu sekä täysi päätöksentekovalta."
+
+msgid "user_types_ordinary"
+msgstr "Tavallinen jäsen yhteisössä"
+
+msgid "user_types_cooperator"
+msgstr "Yhteistyökumppani = täysjäsen osuuskunnassa"
+
+msgid "vote_types_yes_value"
+msgstr "Kyllä: Ääni on myönteinen."
+
+msgid "vote_types_no_value"
+msgstr "Ei: Ääni on kielteinen."
+
+msgid "vote_types_abstain_value"
+msgstr "Tyhjää: Ääni on neutraali."
+
+msgid "vote_types_yes"
+msgstr "kyllä"
+
+msgid "vote_types_no"
+msgstr "ei"
+
+msgid "vote_types_abstain"
+msgstr "tyhjää"
+
+msgid "zero"
+msgstr "nolla"
+
+msgid "one"
+msgstr "yksi"
+
+msgid "two"
+msgstr "kaksi"
+
+msgid "three"
+msgstr "kolme"
+
+msgid "four"
+msgstr "neljä"
+
+msgid "five"
+msgstr "viisi"
+
+msgid "six"
+msgstr "kuusi"
+
+msgid "seven"
+msgstr "seitsemän"
+
+msgid "eight"
+msgstr "kahdeksan"
+
+msgid "nine"
+msgstr "yhdeksän"
+
+msgid "times"
+msgstr "kerrottuna"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Vahvistetaan, että olet ihminen. Laske yksinkertaisten matemaattisten operaatioiden tulokset ja syötä nämä tulokset portaalissa"
+
+msgid "email_candidature_state_changed"
+msgstr "Muutokset hakemuksesi tilassa portaaliin"
+
+msgid "invalid_challenge"
+msgstr "Vastauksesi on väärin. Syötä uusi."
+
+msgid "invalid_email"
+msgstr "Sähköpostiosoitteessasi on ongelma, tarkista se."
+
+msgid "invalid_choice"
+msgstr "Valintasi ei ole voimassa, syötä se uudelleen."
+
+msgid "challenge_instruction_text"
+msgstr "Ole hyvä ja laske seuraavien neljän yksinkertaisen matemaattisen operaatio tulokset ja täytä vastaavat kentät vahvistaaksesi sähköpostiosoitteesi."
+
+msgid "enter_result_label_A"
+msgstr "Ole hyvä ja syötä matemaattisen toiminnon A tulos:"
+
+msgid "result_label_title_A"
+msgstr "Ole hyvä ja syötä sähköpostitse saamasi koodi tai matemaattisen toiminnon A tulos."
+
+msgid "result_input_title_A"
+msgstr "Vahvistaaksemme sähköpostiosoitteesi ja sen, että olet ihminen (et robotti), syötä matemaattisen toiminnon A tulos, jonka olet saanut sähköpostitse."
+
+msgid "enter_result_label_B"
+msgstr "Ole hyvä ja syötä matemaattisen toiminnon B tulos:"
+
+msgid "result_label_title_B"
+msgstr "Ole hyvä ja syötä sähköpostitse saamasi koodi tai matemaattisen toiminnon B tulos."
+
+msgid "result_input_title_B"
+msgstr "Vahvistaaksemme sähköpostiosoitteesi ja sen, että olet ihminen (et robotti), syötä matemaattisen toiminnon B tulos, jonka olet saanut sähköpostitse."
+
+msgid "enter_result_label_C"
+msgstr "Ole hyvä ja syötä matemaattisen toiminnon C tulos:"
+
+msgid "result_label_title_C"
+msgstr "Ole hyvä ja syötä sähköpostitse saamasi koodi tai matemaattisen toiminnon C tulos."
+
+msgid "result_input_title_C"
+msgstr "Vahvistaaksemme sähköpostiosoitteesi ja sen, että olet ihminen (et robotti), syötä matemaattisen toiminnon C tulos, jonka olet saanut sähköpostitse."
+
+msgid "enter_result_label_D"
+msgstr "Ole hyvä ja syötä matemaattisen toiminnon D tulos:"
+
+msgid "result_label_title_D"
+msgstr "Ole hyvä ja syötä sähköpostitse saamasi koodi tai matemaattisen toiminnon D tulos."
+
+msgid "result_input_title_D"
+msgstr "Vahvistaaksemme sähköpostiosoitteesi ja sen, että olet ihminen (et robotti), syötä matemaattisen toiminnon D tulos, jonka olet saanut sähköpostitse."
+
+msgid "verify_button"
+msgstr "Lähetä"
+
+msgid "submit_email_validation_title"
+msgstr "Napsauta vahvistaaksesi syötetyt koodit."
+
+msgid "passwords_dont_match"
+msgstr "Salasanat eivät täsmää."
+
+msgid "password_too_short"
+msgstr "Salasana on liian lyhyt."
+
+msgid "password_minimum_length"
+msgstr "Salasanan on oltava vähintään ${password_minimum_length} merkkiä pitkä."
+
+msgid "password_too_long"
+msgstr "Salasana on liian pitkä."
+
+msgid "password_maximum_length"
+msgstr "Salasanan ei tulisi ylittää ${password_maximum_length} merkkiä."
+
+msgid "password_must_contain_digit"
+msgstr "Salasanassa on oltava vähintään yksi numero."
+
+msgid "password_must_contain_uppercase"
+msgstr "Salasanassa on oltava vähintään yksi iso kirjain."
+
+msgid "password_must_contain_lowercase"
+msgstr "Salasanassa on oltava vähintään yksi pieni kirjain."
+
+msgid "password_must_contain_special_char"
+msgstr "Salasanassa on oltava ainakin yksi seuraavista merkeistä: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Syötä salasanasi tähän."
+
+msgid "password_confirm_title_label"
+msgstr "Vahvista salasanasi tässä."
+
+msgid "password_confirm"
+msgstr "Vahvista salasanasi."
+
+msgid "type_of_registration"
+msgstr "Rekisteröintitapa"
+
+msgid "type_registration_label"
+msgstr "Valitse sinulle sopiva rekisteröintitapa."
+
+msgid "type_registration_choice"
+msgstr "Jokaisella rekisteröintityypillä on erityiset oikeudet, edut ja velvoitteet."
+
+msgid "approved_heading"
+msgstr "Onnittelut hyväksynnästäsi!"
+
+msgid "approved_description"
+msgstr "Hakemuksesi on hyväksytty. Voit nyt kirjautua sisään käyttäen hakuprosessissa antamaasi salanimeä ja salasanaa."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Virheellinen salanimi. Sen on oltava ${MIN_PSEUDONYM_LENGTH} ja ${MAX_PSEUDONYM_LENGTH} merkin pituinen ja se voi sisältää vain kirjaimia (A-Z, a-z), numeroita (0-9), alaviivoja (_), pisteitä "
+"(.), viivoja (-) ja välejä ( ). Se ei voi sisältää aksenttimerkkejä, umlautteja tai muita diakriittisiä merkkejä, jotka ovat tyypillisiä joillekin kielille."
+
+msgid "invalid_date"
+msgstr "Virheellinen päivämäärämuoto."
+
+msgid "pseudonym_too_short"
+msgstr "Salanimi on liian lyhyt."
+
+msgid "pseudonym_minimum_length"
+msgstr "Salanimen on oltava vähintään ${MIN_PSEUDONYM_LENGTH} merkiä pitkä."
+
+msgid "pseudonym_too_long"
+msgstr "Salanimi on liian pitkä."
+
+msgid "pseudonym_maximum_length"
+msgstr "Salanimen on oltava enintään ${MAX_PSEUDONYM_LENGTH} merkkiä pitkä."
+
+msgid "pseudonym_allready_exists"
+msgstr "Tätä salaimeä käytetään jo. Valitse toinen."
+
+msgid "Select_a_country"
+msgstr "Valitse Euroopan unionin jäsenvaltio"
+
+msgid "Austria"
+msgstr "AT - Itävalta"
+
+msgid "Belgium"
+msgstr "BE - Belgia"
+
+msgid "Bulgaria"
+msgstr "BG - Bulgaria"
+
+msgid "Cyprus"
+msgstr "CY - Kypros"
+
+msgid "Czech_Republic"
+msgstr "CZ - Tšekki"
+
+msgid "Germany"
+msgstr "DE - Saksa"
+
+msgid "Denmark"
+msgstr "DK - Tanska"
+
+msgid "Estonia"
+msgstr "EE - Viro"
+
+msgid "Spain"
+msgstr "ES - Espanja"
+
+msgid "Finland"
+msgstr "FI - Suomi"
+
+msgid "France"
+msgstr "FR - Ranska"
+
+msgid "Greece"
+msgstr "GR - Kreikka"
+
+msgid "Croatia"
+msgstr "HR - Kroatia"
+
+msgid "Hungary"
+msgstr "HU - Unkari"
+
+msgid "Ireland"
+msgstr "IE - Irlanti"
+
+msgid "Italy"
+msgstr "IT - Italia"
+
+msgid "Lithuania"
+msgstr "LT - Liettua"
+
+msgid "Luxembourg"
+msgstr "LU - Luxembourg"
+
+msgid "Latvia"
+msgstr "LV - Latvia"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Alankomaat"
+
+msgid "Poland"
+msgstr "PL - Puola"
+
+msgid "Portugal"
+msgstr "PT - Portugali"
+
+msgid "Romania"
+msgstr "RO - Romania"
+
+msgid "Sweden"
+msgstr "SE - Ruotsi"
+
+msgid "Slovenia"
+msgstr "SI - Slovenia"
+
+msgid "Slovakia"
+msgstr "SK - Slovakia"
+
+msgid "full_name_as_in_id_required"
+msgstr "Täydellinen nimi vaaditaan."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Täydellinen sukunimi vaaditaan."
+
+msgid "birthdate_required"
+msgstr "Syntymäpäivä vaaditaan."
+
+msgid "nationality_required"
+msgstr "Kansalaisuus vaaditaan."
+
+msgid "first_interaction_language_required"
+msgstr "Ensimmäinen vuorovaikutuskieli on pakollinen."
+
+msgid "pending_description"
+msgstr "Hakemustasi käsitellään parhaillaan. Saat ilmoituksen sähköpostitse, kun se on hyväksytty."
+
+msgid "candidature_not_found"
+msgstr "Hakemusta ei löytynyt."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Kiitos mielenkiinnostasi ${domain_name}:n toimintaan! Tässä on oikea paikka rekisteröityä </b></h2>\n"
+"<p>CosmoPolitical Cooperative tukee yksilöitä ja muuttaa olemassa olevaa taloudellista, sosiaalista ja poliittista järjestelmää kohti radikaalisti oikeudenmukaista, kestävää, demokraattista ja onnellista "
+"yhteiskuntaa, <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Sopimusyhteiskunta</a>.</p>\n"
+"<p>Alla löydät aloittamisen rekisteröintiprosessista liittyäksesi meihin. Ehdotamme kahta osallistumistasona, joilla on kasvavia velvoitteita ja oikeuksia:</p>\n"
+"<ul>\n"
+"<li> <b>Yhteisön tavallinen jäsen</b>, jossa on yksinkertainen rekisteröintiprosessi, ei taloudellisia velvoitteita, mutta ei äänestysoikeutta; tai </li>\n"
+"<li> <b>Yhteistyökumppani</b>, täydellinen jäsen osuuskuntaamme, rekisteröintimenettely, joka varmistaa, että tietty henkilö voi rekisteröityä vain kerran (kunnioittaaksemme demokraattista periaatetta \"yksi "
+"henkilö = yksi ääni\") ja että vain Euroopan unionin kansalaiset, jotka ovat saavuttaneet aikuisikäisyyden, ovat yhteistyökumppaneita, sitoutuen hankkimaan vähintään yhden osakkeen ja maksamaan "
+"vuosimaksun, sekä täynnä äänestysoikeuksia. Euroopan unioni on työn maantieteellinen alue  (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">katso miksi</a>)</li>\n"
+"</ul>\n"
+"<p>Rekisteröintiprosessi sisältää seuraavat vaiheet:</p>\n"
+"<ol>\n"
+"<li>vahvistamme, että sähköpostiosoite on annettu sinulta, ihmisenä (eikä robotilta);</li>\n"
+"<li>pyydämme sinulta salanimeä, salasanaa ja mieltymyskieliäsi vuorovaikutuksessa kanssasi;</li>\n"
+"<li>tapauksessa, jolloin rekisteröidyt yhteisön tavalliseksi jäseneksi, olet valmis ja pääset yhteisöömme. Jos rekisteröidyt yhteistyökumppaniksi, prosessi jatkuu, jotta voimme varmistaa, että täytät "
+"edellä mainitut ehdot ollaksesi yhteistyökumppani.</li>\n"
+"</ol>\n"
+"<p>Tämä vahvistus tehdään seuraavasti:</p>\n"
+"<ol>\n"
+"<li>pyydämme sinulta <b>henkilöllisyystietoja</b>: etunimet ja sukunimet, syntymäpäiväsi;</li>\n"
+"<li>pyydämme muutamaa osuuskuntaamme kuuluvaa jäsentä (tarkastajia) vahvistamaan, että virallisessa henkilöllisyysdokumentissasi olevat tiedot vastaavat aikaisemmassa vaiheessa antamiasi tietoja, "
+"suoran sähköpostivaihdon tai videokonferenssin avulla;</li>\n"
+"<li>kun he ovat vahvistaneet tämän vastaavuuden, sinut toivotetaan tervetulleeksi yhteistyökumppaniksi, täysillä oikeuksilla - kun olet hankkinut vähintään <a href=\"https://www.cosmopolitical.coop/share\">yksi "
+"osake</a> ja maksanut <a href=\"https://www.cosmopolitical.coop/yearcontrib\">vuosimaksusi toimintaamme</a>.</li>\n"
+"</ol>\n"
+"<p>Aloita rekisteröinti nyt! Odotamme innolla toivotamme sinut tervetulleeksi toimintaamme.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"Rekisteröintiprosessisi ensimmäinen vaihe on todistaa, että olet \n"
+"inhimillinen olento, etkä robotti. Tätä varten vahvistamme, että pystyt vastaanottamaan ja \n"
+"ymmärtämään sähköpostin, jonka lähetämme sinulle: pyytämämme on \n"
+"ihmiselle yksinkertaista, mutta robotille huomattavasti monimutkaisempaa."
+
+msgid "identity_verification_label"
+msgstr "Henkilöllisyyden vahvistaminen"
+
+msgid "Send_id_copy_by_email"
+msgstr "Lähetä skannaus osasta virallista henkilöllisyystodistustasi sähköpostitse."
+
+msgid "Send_video_conference_link"
+msgstr "Lähetä ehdotuksia videokonferenssin päivämäärästä ja ajasta."
+
+msgid "Proceed"
+msgstr "Jatka"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Vahvista, että olet lähettänyt sähköpostit tarkastajille."
+
+msgid "sent_confirmation_label"
+msgstr "Vahvistus, että sähköpostit on lähetetty tarkastajille"
+
+msgid "submit_email_confirmation_title"
+msgstr "Vahvista, että olet lähettänyt sähköpostit."
+
+msgid "confirm_email_send_button_label"
+msgstr "Vahvista"
+
+msgid "vote_success"
+msgstr "Kiitämme sinua osallistumisestasi äänestysprosessiin. Äänesi ${vote} on rekisteröity onnistuneesti. Voit muuttaa ääntäsi määräaikaan asti palaamalla tälle sivulle."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Yhteistyökumppanina osallistut kaikkiin päätöksiimme. Nämä päätökset hyväksytään tiukkojen demokraattisten menettelyjen mukaan ja niillä voi olla tärkeitä seurauksia "
+"osuuskunnalle ja yhteistyökumppaneille. Lisäksi osuuskunta aikoo edustaa EU-kansalaisia, riippumatta heidän kansallisuudestaan - mutta vain EU-kansalaisia. Tämä on erityisen "
+"tärkeää vaaleissa. Meidän on siksi varmistettava kolme asiaa: (1) että tietty henkilö voi rekisteröityä enintään kerran, jotta voidaan pitää kiinni demokraattisesta periaatteesta \"yksi "
+"henkilö = yksi ääni\"; (2) että kaikki yhteistyökumppanit ovat vähintään täysi-ikäisiä ja (3) että vain Euroopan unionin kansalaiset ovat yhteistyökumppaneita.</p>\n"
+"    <p> Tästä syystä tarkistamme sinulta joitakin henkilöllisyystietojasi vertaamalla (1) tietoja, jotka annat tässä lomakkeessa rekisteröitymisesi yhteydessä, (2) virallisissa henkilöllisyystodistuksissasi "
+"olevia tietoja. Tämä vahvistus tehdään satunnaisesti valittujen osuuskuntaamme kuuluvien jäsenten, hakemuksesi tarkastajien, toimesta, ja se perustuu tietoihin virallisista henkilöllisyystodistuksistasi, "
+"jotka lähetät heille suoraan joko sähköpostitse tai videokonferenssissa, ilman siirtymistä tämän verkkopalvelun kautta (turvallisuuden ja luottamuksellisuuden vuoksi).</p>\n"
+"    <p>Pyydämme sinulta ja tarkastajat tarkistavat virallisten henkilöllisyystodistustesi tietojen yhteensopivuutta:\n"
+"    <ul>\n"
+"    <li>nimesi ja sukunimesi;</li>\n"
+"    <li>syntymäpäiväsi;</li>\n"
+"    <li>kansalaisuutesi.</li>\n"
+"    </ul></p>\n"
+"    <p>Vain yksi henkilö kantaa nimesi, sukunimesi ja syntymäpäiväsi: sinä. Jos yrität rekisteröityä uudelleen, sinun on annettava sama data vahvistusmenettelyymme, ja hylkäämme hakemuksesi, sillä olet jo "
+"yhteistyökumppani etkä voi omistaa useita tilejä äänestäaksesi enemmän kuin kerran. Luotamme siihen, koska tiedämme, että vain yksi henkilö on saanut tämän yhdistelmän nimeä, sukunimeä ja syntymäpäivää. "
+"Syntymäpäiväsi mahdollistaa meidän vahvistaa, että olet täysi-ikäinen, ja kansalaisuutesi varmistaa, että olet todella Euroopan unionin kansalainen.</p>\n"
+"    <p>Tietojasi käytetään yksinomaan identiteettisi, ikäsi ja kansalaisuutesi vahvistamiseen sekä tilisi hallintaan yhteistyökumppanina. Niitä ei koskaan näytetä ${domain_name}:n IT-alustan muille käyttäjille, eikä niitä siirretä tai myydä kenellekään, ellei ole täytettävä lainvelvoitteita yleisen lainvalvontaviranomaisten vaatimuksista tuomarin pyynnöstä. \"Tietojen hallinnoija\" kuten määritellään <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> Euroopan unionin yleisessä tietosuoja-asetuksessa "
+"(GDPR)</a> on CosmoPolitical Cooperative SCE, eurooppalainen osuuskuntayhtiö, joka on perustettu 229 rue Solférino, 59000 Lille, Ranska ja rekisteröity 25. huhtikuuta 2023 numerolla SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Olemme lähettäneet sinulle sähköpostitse joukon neljä yksinkertaista laskutoimitusta suorittamista varten, jotka on merkitty A:sta D:hen, kaikki noudattaen samaa kaavaa: (A ENSIMMÄINEN NUMERO 1 JA 9 VÄLILLÄ) "
+"kerrottuna (TOINEN NUMERO 1 JA 9 VÄLILLÄ), plus (KOLMAS NUMERO 1 JA 9 VÄLILLÄ). Suorittaaksesi laskutoimituksen, sinun pitäisi ensin kertoa ENSIMMÄINEN NUMERO 1 JA 9 VÄLILLÄ "
+"TOISELLA NUMEROLLA 1 JA 9 VÄLILLÄ. Kun olet saanut tämän kertolaskun tuloksen, sinun pitäisi lisätä tähän tulokseen KOLMAS NUMERO 1 JA 9 VÄLILLÄ. Lopuksi sinun tulisi kirjoittaa "
+"tämän viimeisen yhteenlaskun tulos laatikkoon, joka on varattu kyseisen laskutoimituksen tulokselle (neljästä, jotka lähetimme sinulle, merkitty A:sta D:hen). Sinun tulisi "
+"toistaa laskutoimitus kaikille neljälle laskutoimitukselle, jotka lähetimme sinulle sähköpostitse.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Osana rekisteröintiprosessia Kooperatiivin jäseneksi, sinun on valittava tapa henkilöllisyytesi vahvistamiseksi. Tämä henkilöllisyyden vahvistaminen on tarpeen varmistamaan: (1) "
+"että tietty henkilö ei rekisteröidy useita kertoja eri sähköpostiosoitteilla (otamme tässä huomioon demokraattisen periaatteen: \"yksi henkilö - yksi ääni\"); (2) että vain Euroopan "
+"unionin kansalaiset, jotka ovat saavuttaneet täysi-ikäisyyden, voivat olla Kooperatiivin jäseniä (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >katso miksi</a>).</p>\n"
+"    <p>Sinulla on kaksi vaihtoehtoa tämän vahvistamisprosessin osalta:</p>\n"
+" <ul>\n"
+"   <li><b>Lähetä kopio henkilöllisyystodistuksistasi sähköpostitse:</b> Voit valita lähettää turvallisesti sähköpostitse kopion henkilöllisyystodistuksistasi suoraan pienelle joukolle satunnaisesti valittuja "
+"Kooperatiivin jäseniä, jotka ovat Vahvistajiasi. Tämä menetelmä varmistaa nopean ja suoran tavan vahvistaa henkilöllisyytesi.</li>\n"
+"   <li><b>Järjestä videokonferenssi:</b> Vaihtoehtoisesti voit valita videokonferenssisession, jossa voit esittää henkilöllisyystodistuksesi livenä Vahvistajillesi. Tämä "
+"menetelmä tarjoaa henkilökohtaisemman vuorovaikutuksen ja mahdollistaa välittömän selvityksen, jos tarpeen, suullisesti, jos yhteinen kieli on käytössä, chatin ja automaattisen käännöksen kautta, jos ei.</li>\n"
+" </ul>\n"
+" <p>Molemmissa tapauksissa suosittelemme, turvallisuussyistä, että peität virallisessa henkilöllisyystodistuksessasi syntymäpaikkasi ja henkilöllisyystodistuksen numeron, ennen kuin kopioit sen tai "
+"näytät sen Vahvistajillesi.</p>\n"
+" <p>On tärkeää, että teet valintasi nopeasti, jotta rekisteröintiprosessisi sujuu ongelmitta ja ajallaan. Varmista, että valitsemasi menetelmä on sinulle mukavin ja sopii yksityisyysohjeidesi kanssa.</p>\n"
+" <p>Yhteistyösi tässä asiassa on erittäin arvostettua ja avain korkeiden luottamuksen ja eurooppalaisen demokratian standardien ylläpitämiseen Kooperatiivissamme. Kiitos ymmärryksestäsi ja aktiivisesta osallistumisestasi tässä tärkeässä vaiheessa.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Nykyisten Kooperatiivin jäsenten määrä on liian alhainen, jotta voitaisiin valita riittävä määrä henkilöllisyytesi vahvistajia. Ota yhteyttä järjestelmänvalvojaan seuraavassa osoitteessa "
+"${administrator}, ongelman ratkaisemiseksi."
+
+msgid "email_copy_id_verification_subject"
+msgstr "fi - ${domain_name} - Vahvistathan henkilöllisyyteni uutena potentiaalisena Kooperatiivin jäsenenä"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Hyvät Vahvistajat,\n"
+" Kirjoitan teille täydentääkseni henkilöllisyyden vahvistamisprosessia hakemukseni osalta Kooperatiiviksi ${domain_name}. Liitteenä tälle sähköpostille löydät osittaisen kopion "
+"virallisesta henkilöllisyystodistuksestani.\n"
+" Huomaathan, että tietty herkkiä tietoja on peitetty turvallisuussyistä. Kuitenkin asiakirja sisältää tiedot, joita tarvitsette varmistaaksenne henkilöllisyyteni ${domain_name}n "
+"rekisteröintiprosessin mukaisesti.\n"
+" Pyydän, että tarkastelisitte liitettyä asiakirjaa mahdollisuuksien mukaan seuraavien 3 päivän aikana, jotta voitte äänestää seuraavasta suhteesta:\n"
+"\n"
+" - identiteettitiedot, jotka saitte suoraan sähköpostitse IT-alustalta ${domain_name} (ja jotka muistutetaan teille äänestysliittymässä) ja \n"
+" - identiteettitiedot, jotka voitte lukea liitteenä olevasta osittaisesta henkilöllisyystodistuksen kopista.\n"
+"\n"
+" Äänestämiseen tarvittava linkki on seuraava: ${voting_url}.\n"
+" Kiitän teitä lämpimästi etukäteen tuestanne hakemukseni rekisteröinnissä Kooperatiiviksi ${domain_name}. Jos teillä on lisäkysymyksiä tai tarvitsette lisätietoja, olkaa hyvä ja ottakaa minuun yhteyttä suoraan omalla kielellänne.\n"
+" Parhain terveisin,\n"
+" ${signature}\n"
+" Liite: [Henkilöllisyystodistustiedoston nimi]\n"
+" Tämä sähköposti on luotu ${domain_name}n henkilöllisyyden vahvistusominaisuuden avulla. Jos et ole vahvistaja, joka on nimetty ${signature}n hakemukseen ja olet saanut tämän sähköpostin erehdyksessä, "
+"ilmoita ${domain_name}n järjestelmänvalvojalle seuraavassa osoitteessa: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "fi - ${domain_name} - Vahvistathan henkilöllisyyteni videokonferenssin kautta uutena potentiaalisena Kooperatiivin jäsenenä"
+
+msgid "email_video_id_verification_body"
+msgstr ""
+"Hyvät Vahvistajat,\n"
+"    Kirjoitan teille täydentääkseni henkilöllisyyden vahvistamisprosessia hakemukseni osalta Kooperatiiviksi ${domain_name}. Haluaisin ehdottaa videokonferenssitapaamista tätä varten.\n"
+"    Tässä on joitakin aikarajoja, joita ehdotan videokonferenssia varten. Huomautan, että asun Saksassa (sovita tämä oman maasi/alueesi mukaan. Tämä on tarpeen, jotta yhteyshenkilösi tietää aikavyöhykkeesi), "
+"joten se päiväaika, jossa asun, saattaa olla erilainen kuin se päiväaika, jossa sinä asut. Tämän videokonferenssin tulisi kestää enintään 10 minuuttia: (tarjoa vähintään 3 vaihtoehtoa, "
+"mahdollisuuksien mukaan eri vuorokauden aikoina ja eri päivinä, mukaan lukien viikonloppuna, kaikki 10 päivän sisällä siitä, kun lähetät sähköpostin)\n"
+"   \n"
+"         - Maanantai, 04. syyskuuta 2023, kello 17:30 paikallisaikani mukaan; (sovita oman saatavuutesi mukaan)\n"
+"         - Tiistai, 05. syyskuuta 2023, kello 20:30 paikallisaikani mukaan; (sovita oman saatavuutesi mukaan)\n"
+"         - Lauantai, 09. syyskuuta 2023, kello 10:00 paikallisaikani mukaan. (sovita oman saatavuutesi mukaan)\n"
+"    \n"
+"    Muista, että saatamme elää eri aikavyöhykkeillä! Muunna nämä aikarajat omaan aikavyöhykkeeseesi.\n"
+"    Videokonferenssi pidetään seuraavan linkin kautta:\n"
+"(lisää tähän linkki, jonka olet valmistanut tätä videokonferenssia varten. Tässä on ehdotuksiamme alustoista, joita voit käyttää videokonferenssin järjestämiseen ja vastaavan linkin tarjoamiseen:\n"
+"   \n"
+"         - Jitsi Meet : https://meet.jit.si/ (ilmainen ja avoimen lähdekoodin ohjelmisto)\n"
+"         - Framatalk : https://framatalk.org/abc/en/ (ilmainen ja avoimen lähdekoodin ohjelmisto)\n"
+"         - Zoom : https://zoom.us/ (omistusoikeudellinen ohjelmisto)\n"
+"         - Microsoft Teams : https://www.microsoft.com/en-gb/microsoft-teams/log-in (omistusoikeudellinen ohjelmisto, alusta maksumuurin takana)\n"
+"         - Google Meet : https://meet.google.com/?pli=1 (omistusoikeudellinen ohjelmisto, kustannukseton pääsy alustalle)\n"
+"    )\n"
+"    Ole hyvä ja valitse aikaraja, joka sopii sinulle, ja lähetä minulle sähköposti, jossa on valintasi.\n"
+"    Videokonferenssitapaamisen aikana voi tapahtua, että emme jaa yhteistä kieltä. Jos näin on, ehdotan, että ottaisimme toisiamme kohtaan ystävällisen ja tukevan asenteen. Ehdotan, että käytämme chattia "
+"ilmaistaksemme itsemme omilla kielillämme, ja käytämme konekäännöstä ymmärtääksemme, mitä keskustelukumppanimme kirjoittaa.\n"
+"    Kun olet pitänyt tämän tapaamisen videokonferenssin kautta, pyydän, että äänestät joko vahvistaaksesi tai kumotaksesi suhteen:\n"
+"\n"
+"     - identiteettitiedot, jotka saitte suoraan sähköpostitse IT-alustalta ${domain_name} (ja jotka muistutetaan teille äänestysliittymässä) ja \n"
+"    - identiteettitiedot, joita olet nähnyt videokonferenssin aikana.\n"
+"\n"
+" Äänestämiseen tarvittava linkki on seuraava: ${voting_url}.\n"
+"  Kiitän teitä lämpimästi etukäteen tuestanne hakemukseni rekisteröinnissä Kooperatiiviksi ${domain_name}. Jos teillä on lisäkysymyksiä tai tarvitsette lisätietoja, olkaa hyvä ja ottakaa minuun yhteyttä suoraan.\n"
+" Parhain terveisin,\n"
+" ${signature}\n"
+" Tämä sähköposti on luotu ${domain_name}n henkilöllisyyden vahvistusominaisuuden avulla. Jos et ole vahvistaja, joka on nimetty ${signature}n hakemukseen ja olet saanut tämän sähköpostin erehdyksessä, "
+"ilmoita ${domain_name}n järjestelmänvalvojalle seuraavassa osoitteessa: ${administrator}."
+
+msgid "forget_email_in_member_list"
+msgstr "Jos käyttäjä on olemassa, hän saa sähköpostin."
+
+msgid "reset_password_email_subject"
+msgstr "Nollaa Salasanasi"
+
+msgid "forget_email_send_error"
+msgstr "Sähköpostin lähettämisessä tapahtui virhe, ota yhteyttä järjestelmänvalvojaan osoitteessa ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "luotu"
+
+msgid "member_state_created_value"
+msgstr "Jäsen on luotu"
+
+msgid "member_state_draft_name"
+msgstr "luonnos"
+
+msgid "member_state_draft_value"
+msgstr "Jäsenen tietoja muokataan"
+
+msgid "member_state_registred_name"
+msgstr "rekisteröity"
+
+msgid "member_state_registred_value"
+msgstr "Jäsenen tiedot on tallennettu"
+
+msgid "member_data_modification_request_name"
+msgstr "muokataan"
+
+msgid "member_data_modification_request_value"
+msgstr "Tietojen muokkaamista koskeva pyyntö on lähetetty"
+
+msgid "member_datas_modified_name"
+msgstr "muokattu"
+
+msgid "member_datas_modified_value"
+msgstr "Jäsenen tiedot on muokattu"
+
+msgid "email_member_state_changed"
+msgstr "Muutoksia jäsenprofiilissasi"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Ole hyvä ja anna voimassa oleva sähköpostiosoite"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Järjestelmänvalvojalla ei ole oikeutta nollata omaa salasanaansa"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Jos käyttäjä on olemassa, sähköpostiviesti on lähetetty hänen sähköpostiosoitteeseensa, jossa on linkki salasanan nollaamista varten"
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Kaksi salasana versiota eivät täsmää. Varmista, että ne täsmäävät, ja toimita uudelleen"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Ole hyvä ja anna uusi salasana"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Olet onnistuneesti muuttanut salasanaasi"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Salasanan nollaamisprosessissa on tapahtunut virhe"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Salasanan nollaamisprosessissa on tapahtunut virhe. Salasanasi ei muuttunut"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Jäsentä ei löytynyt nykyisten jäsenten listalta"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Linkki, jota käytit salasanasi nollaamiseen, on vanhentunut. Ole hyvä ja käytä uutta linkkiä, jonka sait"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "Sähköpostia, joka sisältää matemaattisen haasteen varmistaaksesi, että ehdokas on ihminen (eikä robotti), ei lähetetty."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Virhe ehdokkuuden sitouttamisessa"
+
+msgid "modification_to_profile_button_title"
+msgstr "Muokkaa profiiliasi"
+
+msgid "modification_to_profile_button_label"
+msgstr "Muokkaa profiilia"
+
+msgid "modification_to_profile_button_description"
+msgstr "Klikkaa tästä saadaksesi sähköpostitse turvallisen linkin profiilisi muokkaamista varten."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Tietojesi turvallisuuden varmistamiseksi ainutlaatuinen linkki profiilisi muokkaamista varten lähetetään sinulle sähköpostitse. Tämä prosessi varmistaa, että ainoastaan mahdollisuus "
+"omaa sähköpostiosoitteeseesi on henkilö, joka voi tehdä muutoksia profiiliisi."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Linkki muokata profiiliasi IT-infrastruktuurissa ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Ole hyvä ja anna kaikkien etunimesi, kuten ne on kirjoitettu virallisissa henkilöllisyystodistuksissasi, virallisessa transkriptiossa latinalaisilla merkeillä (jos alkuperäinen kieli käyttää "
+"erilaista aakkostoa kuin latina)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Ole hyvä ja anna kaikki sukunimesi syntymässä (eli EI perhesukunimeäsi avioitumisen jälkeen), kuten ne on kirjoitettu virallisissa henkilöllisyystodistuksissasi, virallisessa "
+"transkriptiossa latinalaisilla merkeillä (jos alkuperäinen kieli käyttää erilaista aakkostoa kuin latina)"
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Kuvaus sinusta (profiiliteksti)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Ole hyvä ja kirjoita tähän teksti, joka kuvaa itseäsi, valitsemallasi kielellä, jotta kaikki muut yhteisön jäsenet voivat tutustua sinuun paremmin. Suosittelemme, että keskityt "
+"(1) Mistä olet kotoisin, (2) mitä teet, (3) mitä haluat tehdä yhteisön jäsenenä ja (4) resursseihin (kokemus, tieto, aika), joita sinulla on käytettävissäsi.\n"
+"Uskomme, että tämä tieto on hyödyllistä, koska itsesi esittely muiden kanssa omilla sanoillasi antaa inhimillisen kasvot digitaaliseen identiteettiisi IT-infrastruktuurissamme. Tämän tekstin "
+"kanssa jokainen yhteisön jäsen oppii tuntemaan sinut hieman paremmin, mikä helpottaa vuorovaikutusta huomattavasti!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Ole hyvä ja anna syntymäpäiväsi seuraavassa muodossa: PP/KK/VVVV, eli (1) päivä kuukaudessa, 2 numerolla; (2) kuukauden numero, 2 numerolla; (3) vuosi, 4 numerolla. Vain "
+"henkilöt, jotka ovat saavuttaneet 18 vuoden, voivat olla yhteistyökumppaneita. Jos et ole vielä saavuttanut 18 vuotta, kutsumme sinua rekisteröitymään tavallisena jäsenenä yhteisössä - ja "
+"nousemaan yhteistyökumppanimäärään heti, kun saavutat täysi-ikäisyyden."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Ole hyvä ja anna yksi Euroopan unionin jäsenvaltio, jonka kansalainen olet. Vain Euroopan unionin kansalaiset voivat olla yhteistyökumppaneita"
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Ole hyvä ja valitse yksi Euroopan unionin jäsenvaltio"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Tämä on ainutlaatuinen numero, joka tunnistaa sinut kaikissa yhteisössä tapahtuvissa prosesseissa"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Ole hyvä ja syötä tänne pseudonyymi, joka tunnistaa sinut koko toiminta-aikasi ajan IT-alustallamme. Suosittelemme VAHVASTI, että valitset pseudonyymin, joka tekee todellisen identiteettisi "
+"seuraamisesta mahdotonta (tai erittäin vaikeaa). Tämä suojaa mielipiteidesi luottamuksellisuutta (eli henkilötietoja, joille myönnetään erityistä suojaa yleisen tietosuoja-asetuksen - "
+"GDPR - mukaan) kaikenlaista ulkopuolista painetta vastaan oikeassa elämässä (esim. työnantajaltasi tai asiakkailtasi). Ole erittäin varovainen! Kun olet valinnut sen, et koskaan voi "
+"muuttaa tätä pseudonyymiä jälkeenpäin. Valitse se huolella! \n"
+"Pseudonyymisi on oltava ${MIN_PSEUDONYM_LENGTH} - ${MAX_PSEUDONYM_LENGTH} merkin välillä ja se voi sisältää vain latinalaisen aakkoston kirjaimia (A-Z, a-z), numeroita (0-9), "
+"alaviivoja (_), pisteitä (.), viivoja (-) ja välilyöntejä ( ). Se ei voi sisältää akuutteja merkkejä, umlautteja eikä muita diakritaaleja, jotka ovat tyypillisiä joillekin kielille."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Pseudonyymin antaminen on pakollista"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Ole hyvä ja anna salasana. Salasanasi on oltava ${password_minimum_length} - ${password_maximum_length} merkin välillä, sisällettävä vähintään yksi numero, vähintään yksi pieni "
+"kirjain, vähintään yksi iso kirjain ja vähintään yksi seuraavista merkeistä: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Ole hyvä ja vahvista salasanasi"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Salasanan vahvistaminen on pakollista"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Ole hyvä ja anna se sähköpostiosoite, jota IT-infrastruktuuri ${domain_name} käyttää kommunikoidakseen kanssasi.\n"
+"Suosittelemme, että valitset sähköpostiosoitteen, jota tarkistat usein.\n"
+"Tarvitsemme tämän tiedon, koska tarvitsemme vuorovaikutusta kanssasi, pitääksesi sinut ajan tasalla säätiön kehityksistä, tarjotaksemme sinulle mahdollisuuden toimia tai osallistua "
+"päätöksiin. Sähköposti on yleisimmin käytetty väline Euroopassa, se on yleismaailmallinen ja perustuu avoimiin ja ilmaiseksi saatavilla oleviin standardeihin, toisin kuin digitaalisten jättiläisten (niin "
+"kutsuttujen 'GAFAM') omistamat viestintäjärjestelmät.\n"
+"Tätä sähköpostiosoitetta käytetään yksinomaan varmistamaan kommunikointi IT-infrastruktuurin ${domain_name} ja sinun välilläsi. Sitä ei koskaan näytetä muiden käyttäjien nähtäväksi IT-alustalla "
+"${domain_name}, eikä sitä siirretä tai myydä kenellekään, ellei täytetä lakisääteisiä vaatimuksia julkisen lainvalvontaviranomaisten pyynnöstä tuomarin vaatimuksen mukaan. 'Tietojen hallinnoija', "
+"kuten yleisessä tietosuoja-asetuksessa (GDPR) Euroopan unionin mukaan on CosmoPolitical Cooperative SCE, eurooppalainen osuuskunta, joka on perustettu osoitteeseen 229 rue Solférino, 59000 Lille, "
+"Ranska ja rekisteröity 25. huhtikuuta 2023 numerolla SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Ole hyvä ja anna kieli, jolla haluaisit IT-infrastruktuurin ${domain_name} kommunikoivan kanssasi. \n"
+"Suosittelemme, että valitset kielen, jonka tunnet parhaiten, Euroopan unionin virallisista kielistä tai esperantosta. Jos se on saatavilla niistä, joille olemme kehittäneet käyttöliittymän, "
+"kutsumme sen käyttöön kanssasi. \n"
+"Tarvitsemme tämän tiedon, koska oikeudenmukaisuuden ja demokraattisten periaatteiden kunnioittamisen vuoksi haluamme kommunikoida kanssasi kielellä, jota ymmärrät mahdollisimman hyvin."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Ilmoita kieli, jolla hyväksyt, toissijaisena vaihtoehtona, että ${domain_name} IT-infrastruktuuri on vuorovaikutuksessa kanssasi. \n"
+" Suosittelemme valitsemaan jonkin toisen EU:n virallisen kielen tai esperanton, jota ymmärrät kohtuullisesti hyvin. Jos se on saatavilla niiden joukossa, joille olemme kehittäneet "
+"käyttöliittymän, ja jos suosikkikielesi ei ole käytettävissä, käytämme sitä vuorovaikutuksessasi. \n"
+" Tarvitsemme tämän tiedon, koska huolimatta ponnisteluistamme voi käydä niin, että suosikkikielesi ei ole saatavilla ohjelmistomme käyttöliittymässä. Siksi kysymme "
+"sinulta, voitko käyttää jotain toista kieltä."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Kieli, jonka hyväksyt kolmantena vaihtoehtona kanssamme vuorovaikutukseen"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Ilmoita kieli, jolla hyväksyt, kolmantena vaihtoehtona, että ${domain_name} IT-infrastruktuuri on vuorovaikutuksessa kanssasi. \n"
+" Suosittelemme valitsemaan jonkin toisen EU:n virallisen kielen tai esperanton, jota edelleen ymmärrät. Jos se on saatavilla niiden joukossa, joille olemme kehittäneet "
+"käyttöliittymän, ja jos mikään suosikkikielesi tai toissijainen kielesi ei ole saatavilla, käytämme sitä vuorovaikutuksessasi. \n"
+" Tarvitsemme tämän tiedon, koska huolimatta ponnisteluistamme voi käydä niin, että suosikkikielesi ja toissijainen kielesi eivät ole saatavilla ohjelmistomme käyttöliittymässä. "
+"Siksi kysymme sinulta, voitko käyttää kolmatta kieltä. Olemme tietoisia siitä, että vuorovaikutuksesi kanssamme sen avulla on sinulle tyytymättömyyden tilanne - kuten se on meillekin. "
+"Pyydämme anteeksi tätä."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Sinun yhteistyökäyttäytymisen merkintäsi"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Yhteistyokumppanina yhteistyökäyttäytymisen merkintäsi on seurausta niistä merkinnöistä, jotka muut aktiiviset osallistujat ovat antaneet sinulle työryhmissä, joissa olet osallistunut "
+"toimintasuunnitelmien määrittelyyn ja hyväksymiseen. Jokainen aktiivinen osallistuja voi antaa merkinnän +1, 0 tai -1, sen mukaan kuinka yhteistyöhaluista käyttäytymisesi oli aktiivisen "
+"osallistumisesi aikana kyseisessä työryhmässä. Tämä merkintä unohtuu automaattisesti ja heikkenee ajan myötä: se puolittuu ${forgetting_time_constant} päivän välein. "
+"Yhteistyökäyttäytymisen merkintäsi alkusarvo on nolla."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Päivämäärä, jolloin yhteistyökäyttäytymisen merkintäsi viimeksi päivitettiin"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Tämä on viimeisin päivämäärä, jolloin toinen yhteistyökumppani antoi sinulle merkinnän sen jälkeen, kun aktiivinen osallistumisesi työryhmässä, joka määritteli ja hyväksyi toimintasuunnitelman, "
+"päättyi. Tämän päivämäärän alkuarvo on rekisteröitymisesi ajankohta yhteistyökumppanina."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Osakkeiden määrä, joita omistat osuuskunta"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Tämä on osakkeiden kokonaismäärä, joita omistat osuuskunnasta sen jälkeen, kun olet ostanut ne verkkoportaaliimme. Rekisteröitymisesi yhteydessä tämä määrä on nolla. Kutsumme sinut "
+"edistämään mahdollisimman pian tälle URL-osoitteelle: ${url_purchase_shares} ostamaan ensimmäisen osakkeesi. Saat täyden päätöksentekovaltaisi osuuskunta jäsenenä vain sen jälkeen, "
+"kun olet ostanut vähintään yhden osakkeen (ja maksanut vuotuisen kontribuution). Sinut on tervetullut ostamaan enemmän kuin yksi osake rekisteröitymisen yhteydessä, mutta myös myöhemmin. "
+"Se vahvistaa osuuskuntamme, ja olemme kaikki kiitollisia siitä!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Päivämäärä, jolloin nykyinen vuotuinen kontribuutionne päättyy"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Päivämäärä, jolloin nykyinen vuotuinen kontribuutionne päättyy, ja ennen tätä päivämäärää on maksettava se uudelleen säilyttääksesi täydet päätöksentekovaltaisi osuuskuntana. "
+"Rekisteröitymisesi yhteydessä tämä päivämäärä on asetettu menneisyyteen, mikä tarkoittaa, että sinun tulisi maksaa se nyt. Kutsumme sinut edistämään mahdollisimman pian tälle "
+"URL-osoitteelle: ${url_pay_yearly_contrib} maksamaan ensimmäinen vuotuinen kontribuutionne ja näin ollen osallistumaan osuuskuntamme toimintaan. Saat täyden päätöksentekovaltaisi "
+"osuuskunta jäsenenä vain sen jälkeen, kun olet maksanut vuotuisen kontribuution (ja ostanut vähintään yhden osakkeen)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Pankkitilisi kansainvälinen tilinumero (IBAN)"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Jos ja kun päätät poistua osuuskunnasta (mikä surettaa meitä kaikkia), tarvitsemme IBAN:si voidaksemme siirtää sinulle osuuskunnan osakkeidesi takaisinhankinnan tuoton. "
+"Turvallisuussyistä suosittelemme antamaan tämän tiedon vain silloin, jos ja kun odotat poistuvasi osuuskunnasta."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Päivämäärä, jolloin kaikki tietosi poistetaan IT-infrastruktuuristamme"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Jos ja kun poistut osuuskunnasta, henkilöllisyystietosi säilytetään ${Quarantine} päivän ajan, ennen kuin ne poistetaan täysin ja peruuttamattomasti rekistereistämme. Tämä varmistaa, "
+"että osuuskunta jättävä yhteiskumppani, jonka yhteistyökäyttäytymisen merkintä on liian huono, ei voi rekisteröityä uudelleen heti puhtaalla nimimerkillä ja yhteistyökäyttäytymisen merkinnällä. "
+"Rekisteröitymisesi yhteydessä tämä päivämäärä on asetettu hyvin kauas tulevaisuuteen."
+
+msgid "avatar_label"
+msgstr "Kuva, joka esittää sinua (avatarisi)"
+
+msgid "avatar_description"
+msgstr ""
+"Ilmoita kuva, joka esittää sinua yhteisön jäsenenä. Suojataksemme sinua työnantajasi tai asiakkaidesi mahdollisilta kostotoimilta, suosittelemme, että tämä kuva ei mahdollista jäljittää "
+"takaisin todelliseen henkilöllisyyteesi. Sen tulisi siis yleensä olla valokuva itsestäsi (muista, että kasvojentunnistusohjelmia käytetään laajasti hakuroboteissa). Kuva tulisi olla vain JPEG-muodossa "
+"(tiedostopääte .JPG tai .JPEG), eikä suurempi kuin 5 MB. \n"
+"Uskomme, että tämä tieto on hyödyllistä, koska kuva helpottaa yhteisön muiden jäsenten tunnistamista. Joskus kuva puhuu paljon kovemmin kuin pitkä puhe. Tällä kuvalla ilmaiset paljon "
+"itsestäsi universaalilla kielellä. Hyödynnä sitä parhaalla mahdollisella tavalla!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Käyttämäsi osoite (URL), jolla haet hakemustasi keskeyttämisen jälkeen, ei vastaa sitä, jonka olemme rekisteröineet sinulle. (Hakemuksen tunnistenumero istunnossa ja URL-osoite "
+"eivät vastaa)\n"
+"Käytä vain viimeisestä saamastasi sähköpostista löytyvää URL-osoitetta."
+
+msgid "check_new_email"
+msgstr "Olet pyytänyt sähköpostiosoitteesi vaihtamista. Tulevaisuudessa haluat käyttää: ${new_email}. Tämän vuoksi saat sähköpostin, joka sisältää linkin tämän uuden osoitteen "
+"vahvistamiseksi."
+
+msgid "check_new_email_subject"
+msgstr "Uuden sähköpostiosoitteesi vahvistus"
+
+msgid "check_new_email_send_error"
+msgstr "Vahvistussähköpostin lähettäminen uudelle osoitteellesi epäonnistui"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "Vahvistussähköposti uudelle osoitteellesi on lähetetty"
+
+msgid "modify_member"
+msgstr "Konsultoida tai muokata jäsentä"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Yhteysvirhe"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "Sähköpostiosoite on jo olemassa"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "Sähköpostiosoite päivitetty"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Virhe sähköpostiosoitteen päivittämisessä"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Virhe kentän asettamisessa"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Virhe jäsentietojen päivittämisessä"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Virheellinen OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Virheellinen pyyntö"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "LDAP-virhe"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Jäsenen tiedot päivitetty"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Jäsenen tietojen päivitys epäonnistui"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Jäsenen tietojen päivitys onnistui"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Puuttuvat tiedot"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Uusi sähköpostiosoite puuttuu"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Ei oikeuksia"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Ei äänestäjä"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Salasanan päivitys on epäonnistunut"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Salasanan päivitys on onnistunut"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Rekisteröinti on epäonnistunut"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Rekisteröinti on onnistunut"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Tuntematon käytetty jäsen"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Tuntematon jäsen"
+
+msgid "modify_member_title"
+msgstr "Muokkaa jäsenprofiilia"
+
+msgid "select_member_oid_label"
+msgstr "Valitse jäsen muokataksesi hänen profiiliaan:"
+
+msgid "select_member_placeholder"
+msgstr "Jäsenen pseudosnimi"
+
+msgid "modify_profile"
+msgstr "Voit vaihtaa profiiliasi napsauttamalla täällä"
+
+msgid "profile"
+msgstr "profiili"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Elektroninen osoitteesi on päivitetty onnistuneesti. Käytät nyt tätä uutta osoitetta kaikessa tulevassa viestinnässä ${domain_name}:n kanssa. Jos et pyytänyt tätä muutosta tai jos sinulla on "
+"kysymyksiä, älä epäröi ottaa heti yhteyttä tukeemme osoitteessa ${admin_email}. Kiitos, että olet osa ${domain_name} yhteisöä!"
