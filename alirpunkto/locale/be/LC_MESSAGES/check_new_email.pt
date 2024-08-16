@@ -19,6 +19,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">З павагай,</p>
         <p tal:omit-tag="textual">Каманда <span tal:replace="domain_name">Сайта</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Дадатковая інфармацыя аб арганізацыі</p>
     </footer>
 
 </body>

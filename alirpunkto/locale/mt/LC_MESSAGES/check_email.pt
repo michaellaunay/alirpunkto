@@ -33,6 +33,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Sincerament,</p>
             <p tal:omit-tag="textual">It-tim ta’ <span tal:replace="domain_name">Isem id-domenju</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Dettalji tal-Organizzazzjoni</p>
         </footer>
 
     </body>

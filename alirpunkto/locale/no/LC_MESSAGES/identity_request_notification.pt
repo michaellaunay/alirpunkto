@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Vennlig hilsen,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Teamet til <span tal:replace="domain_name">Domenenavn</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Merk: Denne meldingen har blitt generert automatisk. Vennligst ikke svar direkte på denne meldingen.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organisasjonsdetaljer</p>
 </body>
 </html>

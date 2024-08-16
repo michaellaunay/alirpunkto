@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Pagarbiai,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Komanda <span tal:replace="domain_name">Domeno pavadinimas</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Pastaba: Ši pranešimas buvo automatiškai sugeneruotas. Prašome neatsakyti tiesiogiai į šį pranešimą.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organizacijos detalės</p>
 </body>
 </html>

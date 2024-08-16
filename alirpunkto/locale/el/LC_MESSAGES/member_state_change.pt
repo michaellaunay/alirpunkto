@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Σας ευχαριστούμε για τη συμμετοχή σας.</p>
         <p tal:omit-tag="textual">Με εκτίμηση,</p>
         <p tal:omit-tag="textual">Η ομάδα του <span tal:replace="domain_name">Όνομα Τομέα</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Λεπτομέρειες Οργάνωσης</p>
     </body>
 </html>

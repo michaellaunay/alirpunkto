@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Parimate soovidega,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Team <span tal:replace="domain_name">Domeeninimi</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Märkus: See teade on genereeritud automaatselt. Palun ärge vastake sellele sõnumile otse.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Lisateave organisatsiooni kohta</p>
 </body>
 </html>

@@ -17,5 +17,6 @@
     
     <p tal:omit-tag="textual">Met vriendelijke groet,</p>
     <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name">Domeinnaam</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organisatiedetails</p>
 </body>
 </html>

@@ -51,5 +51,6 @@
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Het <span tal:replace="domain_name">Domein naam</span> Team</strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note: Deze melding is automatisch gegenereerd. Gelieve niet rechtstreeks op dit bericht te antwoorden.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organisatiedetails</p>
 </body>
 </html>

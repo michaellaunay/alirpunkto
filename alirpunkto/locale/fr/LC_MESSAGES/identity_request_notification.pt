@@ -49,6 +49,7 @@
 
     <p tal:omit-tag="textual">Sincères salutations,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Nom domaine</span></strong></p>
-    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note : Cette notification a été générée automatiquement. Veuillez ne pas répondre directement à ce message.</small></p> 
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note : Cette notification a été générée automatiquement. Veuillez ne pas répondre directement à ce message.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Détails de l'organisation</p>
 </body>
 </html>

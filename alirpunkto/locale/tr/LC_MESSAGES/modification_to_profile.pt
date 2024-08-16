@@ -17,5 +17,6 @@
     
     <p tal:omit-tag="textual">Saygılarımızla,</p>
     <p tal:omit-tag="textual"><span tal:replace="domain_name">Domain Name</span> ekibi.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organizasyon detayları</p>
 </body>
 </html>

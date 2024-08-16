@@ -44,5 +44,6 @@
 
     <p tal:omit-tag="textual">Me respekt,</p>
     <p tal:omit-tag="textual">Ekipa e <span tal:replace="domain_name">Emrit të Domainit</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detajet e Organizatës</p>
 </body>
 </html>

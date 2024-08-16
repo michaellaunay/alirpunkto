@@ -27,6 +27,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Z poważaniem,</p>
             <p tal:omit-tag="textual">Zespół w <span tal:replace="domain_name">Site</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Szczegóły organizacji</p>
         </footer>
 
     </body>

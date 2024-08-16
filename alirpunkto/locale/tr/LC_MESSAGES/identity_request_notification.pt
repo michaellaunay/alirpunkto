@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Saygılarımızla,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual"> <span tal:replace="domain_name">Alan Adı</span> ekibi</strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Not: Bu bildirim otomatik olarak oluşturulmuştur. Lütfen bu mesaja doğrudan yanıt vermeyin.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organizasyon detayları</p>
 </body>
 </html>

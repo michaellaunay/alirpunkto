@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Dankon pro via partopreno.</p>
         <p tal:omit-tag="textual">Kun plej bonaj salutoj,</p>
         <p tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Doman Nomo</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Detaloj de la Organizo</p>
     </body>
 </html>

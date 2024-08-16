@@ -19,6 +19,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Plej bondezirojn,</p>
         <p tal:omit-tag="textual">La teamo ĉe <span tal:replace="domain_name">Ejo</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Pliaj informoj pri la organizo</p>
     </footer>
 
 </body>

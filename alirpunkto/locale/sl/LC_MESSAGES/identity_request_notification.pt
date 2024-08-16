@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Lep pozdrav,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Ekipa <span tal:replace="domain_name">Ime domene</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Opomba: Ta obvestilo je bilo samodejno ustvarjeno. Prosimo, ne odgovarjajte neposredno na to sporočilo.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Podrobnosti organizacije</p>
 </body>
 </html>

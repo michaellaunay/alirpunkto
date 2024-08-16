@@ -17,5 +17,6 @@
     
     <p tal:omit-tag="textual">Un saludo,</p>
     <p tal:omit-tag="textual">El equipo de <span tal:replace="domain_name">Nombre_dominio</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Información adicional sobre la organización</p>
 </body>
 </html>

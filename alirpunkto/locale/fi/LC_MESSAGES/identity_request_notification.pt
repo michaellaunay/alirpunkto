@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Parhain terveisin,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Tiimi <span tal:replace="domain_name">Verkkotunnus</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Huomaa: Tämä ilmoitus on luotu automaattisesti. Älä vastaa suoraan tähän viestiin.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organisaation tiedot</p>
 </body>
 </html>

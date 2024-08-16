@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">S poštovanjem,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Tim <span tal:replace="domain_name">Imena Domen</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Napomena: Ova obavijest je generisana automatski. Molimo ne odgovarajte direktno na ovu poruku.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Dodatne informacije o organizaciji</p>
 </body>
 </html>

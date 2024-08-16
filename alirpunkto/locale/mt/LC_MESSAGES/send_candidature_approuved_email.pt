@@ -46,5 +46,6 @@
     
     <p tal:omit-tag="textual">Tislijiet,</p>
     <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem il-Domejn</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Dettalji tal-Organizzazzjoni</p>
 </body>
 </html>

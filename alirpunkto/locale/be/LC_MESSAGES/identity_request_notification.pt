@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">З найлепшымі пажаданнямі,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Каманда <span tal:replace="domain_name">Назва дамена</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Заўвага: Гэта паведамленне было сгенеравана аўтаматычна. Калі ласка, не адказвайце непасрэдна на гэтае паведамленне.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Дадатковая інфармацыя аб арганізацыі</p>
 </body>
 </html>

@@ -33,6 +33,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">С уважение,</p>
             <p tal:omit-tag="textual">Екипът на <span tal:replace="domain_name">Име на домейн</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Допълнителна информация за организацията</p>
         </footer>
 
     </body>

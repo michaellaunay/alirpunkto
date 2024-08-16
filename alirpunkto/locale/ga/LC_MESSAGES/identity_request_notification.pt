@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Le dea-ghuí,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Foireann <span tal:replace="domain_name">Ainm an Domhain</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nóta: Tá an foláireamh seo ginte go huathoibríoch. Ná freagair díreach an teachtaireacht seo.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Sonraí an Eagraíochta</p>
 </body>
 </html>

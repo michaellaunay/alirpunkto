@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Tack för din medverkan.</p>
         <p tal:omit-tag="textual">Vänliga hälsningar,</p>
         <p tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Domännamn</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organisationsdetaljer</p>
     </body>
 </html>

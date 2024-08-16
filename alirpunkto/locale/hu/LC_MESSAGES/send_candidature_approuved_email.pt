@@ -46,5 +46,6 @@
     
     <p tal:omit-tag="textual">Üdvözlettel,</p>
     <p tal:omit-tag="textual">A <span tal:replace="domain_name">Domain Név</span> csapata.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Szervezeti részletek</p>
 </body>
 </html>

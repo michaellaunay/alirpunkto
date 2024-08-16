@@ -33,6 +33,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">З повагою,</p>
             <p tal:omit-tag="textual">Команда <span tal:replace="domain_name">Назва домену</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Додаткова інформація про організацію</p>
         </footer>
 
     </body>

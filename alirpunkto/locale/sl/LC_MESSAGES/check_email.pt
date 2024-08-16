@@ -32,6 +32,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">S spoštovanjem,</p>
             <p tal:omit-tag="textual">Ekipa <span tal:replace="domain_name">Ime domene</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Podrobnosti organizacije</p>
         </footer>
 
     </body>

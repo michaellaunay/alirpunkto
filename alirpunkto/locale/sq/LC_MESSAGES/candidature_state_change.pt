@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Faleminderit për pjesëmarrjen tuaj.</p>
         <p tal:omit-tag="textual">Të fala të mira,</p>
         <p tal:omit-tag="textual">Ekipi i <span tal:replace="domain_name">Emri i Domain-it</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Detajet e Organizatës</p>
     </body>
 </html>

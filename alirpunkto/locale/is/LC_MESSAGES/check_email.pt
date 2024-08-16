@@ -33,6 +33,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Virðingarfyllst,</p>
             <p tal:omit-tag="textual">Teaming <span tal:replace="domain_name">Lénsheiti</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Upplýsingar um fyrirtækið</p>
         </footer>
 
     </body>

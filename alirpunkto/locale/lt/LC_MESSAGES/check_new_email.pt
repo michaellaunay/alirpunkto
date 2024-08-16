@@ -19,6 +19,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Pagarbiai,</p>
         <p tal:omit-tag="textual">Komanda <span tal:replace="domain_name">Svetainėje</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organizacijos detalės</p>
     </footer>
 
 </body>

@@ -75,6 +75,7 @@ def callback_view(request):
         logout(request) # Enforce logout before processing login
         site_name = request.params.get('site_name', 'AlirPunkto')
         domain_name = request.params.get('domain_name', 'alirpunkto.org')
+        organization_details = request.params.get('organization_details', 'AlirPunkto')
         oid = decoded_payload['employeeNumber']
         # The user is in the ldap directory
         member = update_member_from_ldap(oid, request) # force update of the user
@@ -84,7 +85,8 @@ def callback_view(request):
             return {
                 'error': _('invalid username or password'),
                 'site_name': site_name,
-                'domain_name': domain_name
+                'domain_name': domain_name,
+                'organization_details': organization_details
             }
         user = User(
             member.pseudonym,
@@ -95,6 +97,7 @@ def callback_view(request):
         )
         request.session['site_name'] = site_name
         request.session['domain_name'] = domain_name
+        request.session['organization_details'] = organization_details
         request.session['logged_in'] = True
         request.session['user'] = user.to_json()
         now = datetime.now()

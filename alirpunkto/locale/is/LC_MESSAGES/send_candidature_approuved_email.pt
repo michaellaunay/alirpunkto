@@ -44,5 +44,6 @@
 
     <p tal:omit-tag="textual">Bestu kveðjur,</p>
     <p tal:omit-tag="textual">Teymi <span tal:replace="domain_name">Domennaheiti</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Upplýsingar um stofnun</p>
 </body>
 </html>

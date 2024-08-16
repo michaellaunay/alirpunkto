@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Kiitos osallistumisestasi.</p>
         <p tal:omit-tag="textual">Parhain terveisin,</p>
         <p tal:omit-tag="textual">Tiimi <span tal:replace="domain_name">Verkkotunnus</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organisaation tiedot</p>
     </body>
 </html>

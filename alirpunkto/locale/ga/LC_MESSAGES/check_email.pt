@@ -34,6 +34,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Le meas,</p>
             <p tal:omit-tag="textual">Foireann <span tal:replace="domain_name">Ainm an dómain</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Sonraí faoi eagraíocht</p>
         </footer>
 
     </body>

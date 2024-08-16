@@ -19,6 +19,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Med vennlig hilsen,</p>
         <p tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Nettsted</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organisasjonsdetaljer</p>
     </footer>
 
 </body>

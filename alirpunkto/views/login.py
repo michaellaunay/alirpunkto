@@ -38,6 +38,7 @@ def login_view(request):
     logged_in = request.params.get('logged_in', False)
     site_name = request.params.get('site_name', 'AlirPunkto')
     domain_name = request.params.get('domain_name', 'alirpunkto.org')
+    organization_details = request.params.get('organization_details', 'AlirPunkto')
     username = request.params.get('username', "")
     user = request.session.get('user', None)
     if 'form.submitted' in request.params:
@@ -55,7 +56,8 @@ def login_view(request):
                 return {
                     'error': _('invalid_username_or_password'),
                     'site_name': site_name,
-                    'domain_name': domain_name
+                    'domain_name': domain_name,
+                    'organization_details': organization_details
                 }
             user = check_password(username, oid, password)
         if user is not None:
@@ -68,6 +70,7 @@ def login_view(request):
             request.session['created_at'] = current_time
             request.session['site_name'] = site_name
             request.session['domain_name'] = domain_name
+            request.session['organization_details'] = organization_details
                         # Request Keycloak token
             sso_token = get_keycloak_token(user, password)
             if sso_token:
@@ -91,7 +94,8 @@ def login_view(request):
             return {
                 'error': _('invalid_username_or_password'),
                 'site_name': site_name,
-                'domain_name': domain_name
+                'domain_name': domain_name,
+                'organization_details': organization_details
             }
     else:
         logout(request) # Enforce logout before processing login
@@ -99,6 +103,7 @@ def login_view(request):
         'logged_in': True if user else False,
         'site_name': site_name,
         'domain_name': domain_name,
+        'organization_details': organization_details,
         'user': username
     }
 

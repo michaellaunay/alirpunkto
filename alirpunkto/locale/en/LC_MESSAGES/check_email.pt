@@ -33,6 +33,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Sincerely,</p>
             <p tal:omit-tag="textual">The team of <span tal:replace="domain_name">Domain name</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Organization details</p>
         </footer>
 
     </body>

@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Üdvözlettel,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">A <span tal:replace="domain_name">Domain Név</span> csapata</strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Megjegyzés: Ez a értesítés automatikusan generálódott. Kérjük, ne válaszoljon közvetlenül erre az üzenetre.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Szervezeti részletek</p>
 </body>
 </html>

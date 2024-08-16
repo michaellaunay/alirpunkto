@@ -51,5 +51,6 @@
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Echipa <span tal:replace="domain_name">Domain name</span></strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Această notificare a fost generată automat. Vă rugăm să nu răspundeți direct la acest mesaj.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detalii despre organizație</p>
 </body>
 </html>

@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Med vänliga hälsningar,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Teamet på <span tal:replace="domain_name">Domännamn</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Notera: Denna avisering har genererats automatiskt. Vänligen svara inte direkt på detta meddelande.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organisationsdetaljer</p>
 </body>
 </html>

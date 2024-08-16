@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Ačiū už jūsų dalyvavimą.</p>
         <p tal:omit-tag="textual">Pagarbiai,</p>
         <p tal:omit-tag="textual">Komanda iš <span tal:replace="domain_name">Domeno pavadinimo</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organizacijos detalės</p>
     </body>
 </html>

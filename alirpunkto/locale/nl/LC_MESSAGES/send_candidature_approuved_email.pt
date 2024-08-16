@@ -44,5 +44,6 @@
     
     <p tal:omit-tag="textual">Gegroet, </p>
     <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name" >Sitenaam</span></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organisatiedetails</p>
 </body>
 </html>

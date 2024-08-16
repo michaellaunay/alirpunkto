@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">S pozdravom,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Tím <span tal:replace="domain_name">Doménového mena</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Poznámka: Táto notifikácia bola automaticky vygenerovaná. Prosím, neodpovedajte priamo na túto správu.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Podrobnosti o organizácii</p>
 </body>
 </html>

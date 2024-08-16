@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Plej bondeziroj,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Domin-nomo</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Notu: Ĉi tiu notico estis generita aŭtomate. Bonvolu ne respondi rekte al ĉi tiu mesaĝo.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detaloj de la Organizo</p>
 </body>
 </html>

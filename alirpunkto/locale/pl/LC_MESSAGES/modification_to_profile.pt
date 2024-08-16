@@ -17,5 +17,6 @@
     
     <p tal:omit-tag="textual">Z wyrazami szacunku,</p>
     <p tal:omit-tag="textual">Zespół <span tal:replace="domain_name">Nazwa_domeny</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Szczegóły organizacji</p>
 </body>
 </html>

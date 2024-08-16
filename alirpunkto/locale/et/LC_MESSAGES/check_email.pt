@@ -29,6 +29,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Lugupidamisega,</p>
             <p tal:omit-tag="textual">Meeskond <span tal:replace="domain_name">Domeeninimi</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Organisatsiooni üksikasjad</p>
         </footer>
 
     </body>

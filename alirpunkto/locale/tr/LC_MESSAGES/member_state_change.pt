@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Katıldığınız için teşekkür ederiz.</p>
         <p tal:omit-tag="textual">Saygılarımla,</p>
         <p tal:omit-tag="textual"><span tal:replace="domain_name">Alan Adı</span> ekibi</p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organizasyon detayları</p>
     </body>
 </html>

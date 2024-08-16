@@ -33,6 +33,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">S úctou,</p>
             <p tal:omit-tag="textual">Tím <span tal:replace="domain_name">názov domény</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Podrobnosti o organizácii</p>
         </footer>
 
     </body>

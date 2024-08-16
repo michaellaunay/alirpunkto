@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Ďakujeme za vašu účast.</p>
         <p tal:omit-tag="textual">S pozdravom,</p>
         <p tal:omit-tag="textual">Tím <span tal:replace="domain_name">Názov domény</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Podrobnosti o organizácii</p>
     </body>
 </html>

@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Hvala vam na učešću.</p>
         <p tal:omit-tag="textual">S poštovanjem,</p>
         <p tal:omit-tag="textual">Tim <span tal:replace="domain_name">Naziv domena</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Dodatne informacije o organizaciji</p>
     </body>
 </html>

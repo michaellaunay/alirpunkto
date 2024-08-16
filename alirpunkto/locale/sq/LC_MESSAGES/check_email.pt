@@ -29,6 +29,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Sinqerisht,</p>
             <p tal:omit-tag="textual">Ekipi i <span tal:replace="domain_name">Emri i domain-it</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Detajet e organizatës</p>
         </footer>
 
     </body>

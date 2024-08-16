@@ -44,5 +44,6 @@
 
     <p tal:omit-tag="textual">Kun plej bonaj salutoj,</p>
     <p tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Domajno Nomo</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detaloj de la Organizo</p>
 </body>
 </html>

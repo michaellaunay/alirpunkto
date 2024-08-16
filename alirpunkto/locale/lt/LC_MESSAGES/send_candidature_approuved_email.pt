@@ -46,5 +46,6 @@
     
     <p tal:omit-tag="textual">Geriausi linkėjimai,</p>
     <p tal:omit-tag="textual">Komanda <span tal:replace="domain_name">Domeno vardui</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organizacijos detalės</p>
 </body>
 </html>

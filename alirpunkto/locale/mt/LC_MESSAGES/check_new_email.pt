@@ -19,6 +19,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">L-aħjar saluti,</p>
         <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Is-sit</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Dettalji tal-organizzazzjoni</p>
     </footer>
 
 </body>

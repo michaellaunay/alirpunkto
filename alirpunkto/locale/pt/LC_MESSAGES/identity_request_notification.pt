@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Atenciosamente,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">A equipe de <span tal:replace="domain_name">Nome do Domínio</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Esta notificação foi gerada automaticamente. Por favor, não responda diretamente a esta mensagem.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detalhes da Organização</p>
 </body>
 </html>

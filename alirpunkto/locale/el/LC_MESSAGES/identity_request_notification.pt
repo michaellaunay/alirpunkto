@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Με εκτίμηση,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Η ομάδα του <span tal:replace="domain_name">Όνομα Τομέα</span>.</strong></p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Σημείωση: Αυτή η ειδοποίηση δημιουργήθηκε αυτόματα. Παρακαλώ μην απαντήσετε απευθείας σε αυτό το μήνυμα.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Λεπτομέρειες Οργάνωσης</p>
 </body>
 </html>

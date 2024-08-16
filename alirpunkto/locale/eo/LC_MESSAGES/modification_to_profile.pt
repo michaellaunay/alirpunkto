@@ -17,5 +17,6 @@
     
     <p tal:omit-tag="textual">Plej bondezirojn,</p>
     <p tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Nomo de Domajno</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detaloj de Organizo</p>
 </body>
 </html>

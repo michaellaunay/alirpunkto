@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Best regards,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">The team of <span tal:replace="domain_name">Domain Name</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note: This notification has been generated automatically. Please do not reply directly to this message.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organization details</p>
 </body>
 </html>

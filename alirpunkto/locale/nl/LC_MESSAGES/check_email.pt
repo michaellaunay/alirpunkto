@@ -27,6 +27,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual"> Hoogachtend,</p>
             <p tal:omit-tag="textual">Het team van <span tal:replace="domain_name">Site</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Organisatie details</p>
         </footer>
 
     </body>

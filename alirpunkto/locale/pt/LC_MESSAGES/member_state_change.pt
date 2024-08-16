@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Obrigado por sua participação.</p>
         <p tal:omit-tag="textual">Atenciosamente,</p>
         <p tal:omit-tag="textual">A equipe de <span tal:replace="domain_name">Nome do Domínio</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Detalhes da Organização</p>
     </body>
 </html>

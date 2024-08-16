@@ -33,6 +33,7 @@ from alirpunkto.constants_and_globals import (
     SITE_NAME,
     DOMAIN_NAME,
     ADMIN_EMAIL,
+    ORGANIZATION_DETAILS,
 )
 from pyramid.i18n import Translator
 from ..utils import (
@@ -109,6 +110,7 @@ def _handle_candidature_state(
             result = handle_default_state(request, candidature)
     result["site_name"] = request.registry.settings.get('site_name')
     result["domain_name"] = request.registry.settings.get('domain_name')
+    result["organization_details"] = request.registry.settings.get('organization_details')
     return result
 
 def handle_draft_state(request: Request, candidature: Candidature) -> dict:
@@ -598,6 +600,7 @@ def prepare_for_cooperator(
                 'signature': MAIL_SIGNATURE.format(
                     site_name=request.registry.settings.get('site_name'),
                     domain_name=request.registry.settings.get('domain_name'),
+                    organization_details=request.registry.settings.get('organization_details'),
                     fullname = candidature.data.fullname,
                     fullsurname = candidature.data.fullsurname,
                 )
@@ -620,9 +623,11 @@ def get_template_parameters_for_cooperator(
         voting_url = voting_url[0]
     site_name=request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
+    organization_details = request.registry.settings.get('organization_details')
     signature = MAIL_SIGNATURE.format(
         site_name=site_name,
         domain_name=domain_name,
+        organization_details=organization_details,
         fullname = candidature.data.fullname,
         fullsurname = candidature.data.fullsurname if getattr(
             candidature.data,
@@ -634,6 +639,7 @@ def get_template_parameters_for_cooperator(
         "voting_url":voting_url,
         "signature":signature,
         "site_name":site_name,
+        "organization_details":organization_details,
         "domain_name":domain_name,
     }
     email_copy_id_verification_body = _(

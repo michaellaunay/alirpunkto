@@ -41,6 +41,7 @@ def login_view(request):
     user = User.from_json(user)
     site_name = request.session['site_name']
     domain_name = request.session['domain_name']
+    organization_details = request.session['organization_details']
     username = user.name
     oid = request.session['oid'] if 'oid' in request.session else request.params.get('oid', "")
     if oid and 'oid' not in request.session:
@@ -50,7 +51,8 @@ def login_view(request):
         return {
             'error': _('invalid_oid'),
             'site_name': site_name,
-            'domain_name': domain_name
+            'domain_name': domain_name,
+            'organization_details': organization_details
             }
     candidature = canditures[oid]
 
@@ -63,7 +65,8 @@ def login_view(request):
         return {
             'error': _('not_voter'),
             'site_name': site_name,
-            'domain_name': domain_name
+            'domain_name': domain_name,
+            'organization_details': organization_details
         }
     #@TODO check if the user can vote (if time is not passed )
     pass
@@ -76,7 +79,8 @@ def login_view(request):
                 'error': _('Invalid voting choice!'),
                 'message': _('not_voter'),
                 'site_name': site_name,
-                'domain_name': domain_name
+                'domain_name': domain_name,
+                'organization_details': organization_details
             }       
         voter.vote = vote
 
@@ -126,6 +130,7 @@ def login_view(request):
                     'logged_in': True if user else False,
                     'site_name': site_name,
                     'domain_name': domain_name,
+                    'organization_details': organization_details,
                     'user': username,
                     'candidature': candidature,
                     'VotingChoice': VotingChoice,
@@ -137,6 +142,7 @@ def login_view(request):
             'logged_in': True if user else False,
             'site_name': site_name,
             'domain_name': domain_name,
+            'organization_details': organization_details,
             'user': username,
             'candidature': candidature,
             'VotingChoice': VotingChoice,
@@ -152,6 +158,7 @@ def login_view(request):
         'logged_in': True if user else False,
         'site_name': site_name,
         'domain_name': domain_name,
+        'organization_details': organization_details,
         'user': username,
         'candidature': candidature,
         'VotingChoice': VotingChoice,

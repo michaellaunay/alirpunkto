@@ -19,6 +19,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Üdvözlettel,</p>
         <p tal:omit-tag="textual">A <span tal:replace="domain_name">Webhely</span> csapata</p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Szervezeti részletek</p>
     </footer>
 
 </body>

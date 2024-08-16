@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Дякуємо за вашу участь.</p>
         <p tal:omit-tag="textual">З найкращими побажаннями,</p>
         <p tal:omit-tag="textual">Команда <span tal:replace="domain_name">Назва домену</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Додаткова інформація про організацію</p>
     </body>
 </html>

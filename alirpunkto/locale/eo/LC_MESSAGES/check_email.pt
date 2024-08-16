@@ -29,6 +29,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Sincere,</p>
             <p tal:omit-tag="textual">La teamo de <span tal:replace="domain_name">Domananomo</span></p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Detaloj de la Organizo</p>
         </footer>
 
     </body>

@@ -46,6 +46,7 @@ def check_new_email(request):
                 'error': _('invalid_oid'),
                 'site_name': request.session.get('site_name', 'AlirPunkto'),
                 'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+                'organization_details': request.session.get('organization_details', 'AlirPunkto'),
                 'admin_email': ADMIN_EMAIL,  
             }
         decrypted_member = get_candidature_by_oid(decrypted_oid, request)
@@ -55,6 +56,7 @@ def check_new_email(request):
                 'error': _('candidature_not_found'),
                 'site_name': request.session.get('site_name', 'AlirPunkto'),
                 'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+                'organization_details': request.session.get('organization_details', 'AlirPunkto'),
                 'admin_email': ADMIN_EMAIL,  
             }
         new_email = decrypted_member.new_email
@@ -64,6 +66,7 @@ def check_new_email(request):
                 'error': _('no_new_email'),
                 'site_name': request.session.get('site_name', 'AlirPunkto'),
                 'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+                'organization_details': request.session.get('organization_details', 'AlirPunkto'),
                 'admin_email': ADMIN_EMAIL,  
             }
         decrypted_member.new_email = None
@@ -75,18 +78,21 @@ def check_new_email(request):
             return {
                 'error': _('email_update_error'),
                 'site_name': request.session.get('site_name', 'AlirPunkto'),
-                'domain_name': request.session.get('domain_name', 'alirpunkto.org')
+                'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+                'organization_details': request.session.get('organization_details', 'AlirPunkto'),
             }
         transaction.commit()
         return {
             'success': _('email_updated'),
             'site_name': request.session.get('site_name', 'AlirPunkto'),
             'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+            'organization_details': request.session.get('organization_details', 'AlirPunkto'),
             'admin_email': ADMIN_EMAIL,  
         }
     return {
         'error': _('invalid_request'),
         'site_name': request.session.get('site_name', 'AlirPunkto'),
         'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
+        'organization_details': request.session.get('organization_details', 'AlirPunkto'),
         'admin_email': ADMIN_EMAIL,  
     }

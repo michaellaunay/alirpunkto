@@ -44,5 +44,6 @@
     <p tal:omit-tag="textual">¡Estamos deseando tener el placer de trabajar contigo!</p>
     <p tal:omit-tag="textual">Un saludo,</p>
     <p tal:omit-tag="textual">El equipo de <span tal:replace="domain_name">Nombre del sitio</span></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detalles de la organización</p>
 </body>
 </html>

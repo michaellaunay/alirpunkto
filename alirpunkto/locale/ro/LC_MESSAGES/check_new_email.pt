@@ -20,6 +20,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Cele mai bune salutări,</p>
         <p tal:omit-tag="textual">Echipa de la <span tal:replace="domain_name">Site</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Detalii despre organizație</p>
     </footer>
 
 </body>

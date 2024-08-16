@@ -81,6 +81,7 @@ def get_email(request):
     user = User.from_json(user_json)
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
+    organization_details = request.registry.settings.get('organization_details')
     email_id = request.params.get('email_id', None)
     link = request.session.get('link', None)
 

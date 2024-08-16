@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Takk fyrir þátttökuna þína.</p>
         <p tal:omit-tag="textual">Bestu kveðjur,</p>
         <p tal:omit-tag="textual">Fyrirtækið <span tal:replace="domain_name">Lénanama</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Upplýsingar um fyrirtækið</p>
     </body>
 </html>

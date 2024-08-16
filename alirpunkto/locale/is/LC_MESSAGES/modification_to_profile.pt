@@ -17,5 +17,6 @@
     
     <p tal:omit-tag="textual">Bestu kveðjur,</p>
     <p tal:omit-tag="textual">Teamið hjá <span tal:replace="domain_name">Dómain nafni</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Upplýsingar um fyrirtækið</p>
 </body>
 </html>

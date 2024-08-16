@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">С най-добри пожелания,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Екипът на <span tal:replace="domain_name">Име на домейн</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Забележка: Тази нотификация е генерирана автоматично. Моля, не отговаряйте директно на това съобщение.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Допълнителна информация за организацията</p>
 </body>
 </html>

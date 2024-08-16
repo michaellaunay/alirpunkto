@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Grazzi talli parteċipat.</p>
         <p tal:omit-tag="textual">B'rispett,</p>
         <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem tal-Dominu</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Dettalji tal-Organizzazzjoni</p>
     </body>
 </html>

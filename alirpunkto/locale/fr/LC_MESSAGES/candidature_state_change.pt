@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Merci de votre participation.</p>
         <p tal:omit-tag="textual">Meilleures salutations,</p>
         <p tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Nom du site</span></p>.
+        <p tal:omit-tag="textual" tal:content="organization_details">Détails de l'organisation</p>
     </body>
 </html>

@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Kiitos osallistumisestasi.</p>
         <p tal:omit-tag="textual">Ystävällisin terveisin,</p>
         <p tal:omit-tag="textual">Tiimi osoitteessa <span tal:replace="domain_name">Domain Name</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organisaation tiedot</p>
     </body>
 </html>

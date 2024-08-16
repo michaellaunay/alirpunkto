@@ -19,6 +19,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Me respekt të lartë,</p>
         <p tal:omit-tag="textual">Ekipi në <span tal:replace="domain_name">Faqen</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Detajet e organizatës</p>
     </footer>
 
 </body>

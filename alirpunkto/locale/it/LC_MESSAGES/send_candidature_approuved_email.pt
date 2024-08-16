@@ -45,5 +45,6 @@
     
     <p tal:omit-tag="textual">Buoni saluti,</p>
     <p tal:omit-tag="textual">Il team di <span tal:replace="domain_name">Nome del sito</span></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Dettagli dell'organizzazione</p>
 </body>
 </html>

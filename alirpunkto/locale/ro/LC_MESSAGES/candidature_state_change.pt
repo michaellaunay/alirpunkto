@@ -35,5 +35,6 @@
         <p tal:omit-tag="textual">Mulțumim pentru participare.</p>
         <p tal:omit-tag="textual">Cele mai bune salutări,</p>
         <p tal:omit-tag="textual">Echipa de la <span tal:replace="domain_name">Domain Name</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Detalii despre organizație</p>
     </body>
 </html>

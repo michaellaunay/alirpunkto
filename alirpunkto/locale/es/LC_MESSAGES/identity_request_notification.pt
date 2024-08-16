@@ -51,5 +51,6 @@
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">El <span tal:replace="domain_name">Nombre sitio</span> Equipo</strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Esta notificación se ha generado automáticamente. Por favor, no responda directamente a este mensaje.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detalles de la organización</p>
 </body>
 </html>

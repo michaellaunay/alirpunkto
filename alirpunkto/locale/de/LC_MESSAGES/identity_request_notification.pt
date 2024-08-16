@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Mit freundlichen Grüßen,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Das <span tal:replace="domain_name">Domain name</span> Team</strong></p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Hinweis: Diese Mitteilung wurde automatisch generiert. Bitte antworten Sie nicht direkt auf diese Nachricht.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organisationsdetails</p>
 </body>
 </html>

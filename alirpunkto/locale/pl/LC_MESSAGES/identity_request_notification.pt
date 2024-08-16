@@ -51,5 +51,6 @@
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Zespół <span tal:replace="domain_name">Domain name</span></strong></p>
 
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Uwaga: To powiadomienie zostało wygenerowane automatycznie. Proszę nie odpowiadać bezpośrednio na tę wiadomość.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Szczegóły organizacji</p>
 </body>
 </html>

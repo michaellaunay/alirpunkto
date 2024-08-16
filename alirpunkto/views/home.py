@@ -38,6 +38,7 @@ def home_view(request):
         logged_in = request.session['logged_in'] = False
     site_name = request.registry.settings.get('site_name', 'AlirPunkto')
     domain_name = request.registry.settings.get('domain_name', 'alirpunkto.org')
+    organization_details = request.registry.settings.get('organization_details', 'AlirPunkto')
     user = request.session.get('user', None)
     user = loads(user) if user else {'name':'unknown'}
     if SSO_REFRESH in request.session:
@@ -63,6 +64,7 @@ def home_view(request):
         'logged_in': logged_in,
         'site_name': site_name,
         'domain_name': domain_name,
+        'organization_details': organization_details,
         'user': user,
         'applications': applications
     }

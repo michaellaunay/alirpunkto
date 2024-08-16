@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Me respekt,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Ekipi i <span tal:replace="domain_name">Emri i Domain-it</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Shënim: Kjo njoftim është gjeneruar automatikisht. Ju lutemi mos përgjigjni direkt këtij mesazhi.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Detajet e organizatës</p>
 </body>
 </html>

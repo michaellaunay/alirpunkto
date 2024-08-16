@@ -17,5 +17,6 @@
     
     <p tal:omit-tag="textual">Ystävällisin terveisin,</p>
     <p tal:omit-tag="textual">Tiimi <span tal:replace="domain_name">Verkkotunnuksen nimi</span>:sta.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organisaation tiedot</p>
 </body>
 </html>

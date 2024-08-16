@@ -19,6 +19,7 @@
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Saygılarımla,</p>
         <p tal:omit-tag="textual"><span tal:replace="domain_name">Site</span> ekibi</p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organizasyon detayları</p>
     </footer>
 
 </body>

@@ -44,5 +44,6 @@
 
     <p tal:omit-tag="textual">Le gach dea-ghuí,</p>
     <p tal:omit-tag="textual">Foireann an <span tal:replace="domain_name">Ainm Domaain</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Sonraí an Eagraíochta</p>
 </body>
 </html>

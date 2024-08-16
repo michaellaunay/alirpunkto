@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Grazzi tal-parteċipazzjoni tiegħek.</p>
         <p tal:omit-tag="textual">Is-sliem it-tajjeb,</p>
         <p tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem tal-Domenju</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Dettalji tal-Organizzazzjoni</p>
     </body>
 </html>

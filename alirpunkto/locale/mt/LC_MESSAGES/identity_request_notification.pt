@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Tislijiet,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">It-tim ta' <span tal:replace="domain_name">Isem tad-Domain</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Nota: Din in-notifika ġiet imġedda awtomatikament. Jekk jogħġbok ma rridux irrispettivament din il-messaġġ.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Dettalji tal-Organizzazzjoni</p>
 </body>
 </html>

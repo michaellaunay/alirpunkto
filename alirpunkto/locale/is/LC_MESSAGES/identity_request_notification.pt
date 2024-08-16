@@ -50,5 +50,6 @@
     <p tal:omit-tag="textual">Bestu kveðjur,</p>
     <p tal:omit-tag="textual"><strong tal:omit-tag="textual">Teamið <span tal:replace="domain_name">Lénanama</span></strong>.</p>
     <p tal:omit-tag="textual"><small tal:omit-tag="textual">Athugið: Þessi tilkynning hefur verið búin til sjálfvirkt. Vinsamlegast ekki svara beint þessari skilaboðum.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Upplýsingar um fyrirtækið</p>
 </body>
 </html>

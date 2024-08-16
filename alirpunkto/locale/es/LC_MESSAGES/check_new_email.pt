@@ -18,8 +18,9 @@
     <p tal:omit-tag="textual">Gracias por tu interés en nuestras actividades.</p>
     
     <footer tal:omit-tag="textual">
-        <p tal:omit-tag="textual">Un saludo,</p> <p
+        <p tal:omit-tag="textual">Un saludo,</p>
         <p tal:omit-tag="textual">El equipo de <span tal:replace="domain_name">Sitio</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Información adicional sobre la organización</p>
     </footer>
 
 </body>

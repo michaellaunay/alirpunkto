@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Takk for din deltakelse.</p>
         <p tal:omit-tag="textual">Med vennlig hilsen,</p>
         <p tal:omit-tag="textual">Teamet i <span tal:replace="domain_name">Domene Navn</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Organisasjonsdetaljer</p>
     </body>
 </html>

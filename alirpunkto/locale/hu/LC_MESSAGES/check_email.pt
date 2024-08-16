@@ -29,6 +29,7 @@
         <footer tal:omit-tag="textual">
             <p tal:omit-tag="textual">Tisztelettel,</p>
             <p tal:omit-tag="textual">A <span tal:replace="domain_name">Domain név</span> csapata</p>
+            <p tal:omit-tag="textual" tal:content="organization_details">Szervezeti részletek</p>
         </footer>
 
     </body>

@@ -25,5 +25,6 @@
         <p tal:omit-tag="textual">Go raibh maith agat as do rannpháirtíocht.</p>
         <p tal:omit-tag="textual">Le gach dea-ghuí,</p>
         <p tal:omit-tag="textual">Foireann <span tal:replace="domain_name">Ainm Domhain</span></p>
+        <p tal:omit-tag="textual" tal:content="organization_details">Sonraí an Eagraíochta</p>
     </body>
 </html>
