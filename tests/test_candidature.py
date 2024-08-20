@@ -56,6 +56,7 @@ def test_candidature_uuid():
     # while set(tries).intersection(references) != references:
     #     tries.append(random.randint(0,POPULATION))
     our_uuid = cycle(tries)
+    original_uuid = MemberDataFunctions.func_uuid  # Save the original function
     MemberDataFunctions.func_uuid = lambda: f"test{next(our_uuid):0>5}"
     unique_uuids = set([MemberDataFunctions.func_uuid() for x in range(0,len(tries))])
     # Because we create exact POPULATION candidatures, we are sure that the uuid will be unique
@@ -66,6 +67,7 @@ def test_candidature_uuid():
     # Ensure uniqueness of Candidature UUIDs
     for uuid in unique_uuids:
         assert uuid in candidatures
-
+    # Restore the original function
+    MemberDataFunctions.func_uuid = original_uuid
     
 # @TODO: test candidature functions

@@ -23,8 +23,14 @@ def test_login(testapp):
 
 def test_register(testapp):
     res = testapp.get('/register', status=200)
-    assert b'Register' in res.body
+    # check the email send form
+    assert b'<form method="POST"' in res.body
+    assert b'<input class="email-input" type="email" name="email"' in res.body
+    assert b'<input type="submit" value="Submit" name="submit"' in res.body
 
 def test_forgot_password(testapp):
     res = testapp.get('/forgot_password', status=200)
-    assert b'Forgot password' in res.body
+    assert b'Forgot your password ?' in res.body
+    assert b'<form method="POST">' in res.body
+    assert b'<input type="email" id="email" name="email" required>' in res.body
+    assert b'<input type="submit" name="submit" value="Submit">' in res.body
