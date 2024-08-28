@@ -2228,3 +2228,46 @@ Le script Python `translate.py` permet de traduire le contenu textuel des fichie
 **Avantages :**
 - Ce script permet de traduire l'application vers toutes les langues supportée par le LLM.
 - Il est spécialement conçu pour manipuler et traduire des fichiers de localisation tout en préservant la structure syntaxique, ce qui le rend particulièrement adapté à la gestion des fichiers `.po` et `.pt`.
+
+# 2024-08-28
+Un problème avec le "fixture" de la génération de challenge est apparue dans les tests unitaires.
+Le problème rencontré est lié à la manière dont Python gère les importations de modules et à la manière dont les outils de mock, comme `unittest.mock.patch`, fonctionnent.
+
+### L'importation doit être déplacée au plus près du code
+
+Lorsque nous importons un module en Python, le code du module est exécuté une seule fois, et le module est mis en cache dans le système de modules de Python. Cela signifie que si nous importons une fonction à partir d'un module au début de votre fichier, cette fonction est "fixée" à ce moment-là, et même si nous appliquons un mock plus tard, le code continue à utiliser la version déjà importée.
+
+### Exemple d'importation classique :
+
+```python
+from alirpunkto.utils import generate_math_challenges
+
+def handle_draft_state(request, candidature):
+    candidature.challenge = generate_math_challenges(request)
+```
+
+Dans ce cas, lorsque le fichier `register.py` est importé, la fonction `generate_math_challenges` est résolue immédiatement. Si nous essayons de la mocker plus tard dans nos tests, le mock n'aura pas d'effet sur le code qui utilise déjà cette fonction, car Python utilise la version déjà importée.
+
+### Solution : Importation locale
+
+En déplaçant l'importation juste avant l'appel de la fonction, comme dans notre exemple, nous forçons Python à réimporter la fonction à chaque fois que la ligne est exécutée. Cela signifie que si nous avons appliqué un mock avant cet appel, Python utilisera la version mockée de la fonction.
+
+```python
+def handle_draft_state(request, candidature):
+    from alirpunkto.utils import generate_math_challenges  # Due to unit test fixture bug, we need to import here
+    candidature.challenge = generate_math_challenges(request)
+```
+
+### Explication détaillée :
+
+1. **Importation précoce (importation en tête du fichier)** : Lorsque nous importons `generate_math_challenges` au début du fichier, Python lie la fonction à la variable locale `generate_math_challenges` dans le module `register.py`. Toute tentative de patch de cette fonction dans le cadre de notre test patchera le module original, mais le code de `register.py` continuera à utiliser la fonction originale déjà importée.
+
+2. **Importation locale (juste avant l'appel)** : En déplaçant l'importation dans le corps de la fonction, Python résout à nouveau la fonction chaque fois que la ligne est atteinte. Si un mock est appliqué dans nos tests, Python récupérera la version mockée de la fonction.
+
+### Pourquoi cela arrive-t-il dans les tests unitaires ?
+
+Les outils de mock, comme `unittest.mock.patch`, fonctionnent en remplaçant la fonction dans le module où elle est importée. Si nous avons déjà importé la fonction, Python n'utilisera pas la version patchée dans ce contexte. En déplaçant l'importation au moment où elle est nécessaire, nous nous assurons que Python utilisera la version actuelle de la fonction, y compris la version patchée.
+
+### Conclusion
+
+Le fait de devoir déplacer l'importation montre une limitation liée au mécanisme d'importation de Python et à la manière dont les mocks sont appliqués dans les tests. En déplaçant l'importation dans le corps de la fonction, nous permettons à Python de capturer la version mockée de la fonction lors des tests, ce qui permet au mock de fonctionner correctement.
