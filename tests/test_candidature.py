@@ -5,9 +5,12 @@ from datetime import datetime
 from unittest.mock import Mock, patch
 from ZODB.Connection import Connection
 from itertools import cycle
+from ldap3 import Connection as LDAPConnection
+from unittest.mock import patch
 
 mocked_zodb = Mock(spec=Connection) # Mock the ZODB connection
 mocked_zodb.root.return_value = {} # Mock the root of the ZODB database
+mocked_ldap = Mock(spec=LDAPConnection) # Mock the LDAP connection
 
 # Mock the datetime function used in the Candidature class
 MemberDataFunctions.func_now = lambda: datetime(2023, 1, 1)
@@ -56,18 +59,21 @@ def test_candidature_uuid():
     # while set(tries).intersection(references) != references:
     #     tries.append(random.randint(0,POPULATION))
     our_uuid = cycle(tries)
-    original_uuid = MemberDataFunctions.func_uuid  # Save the original function
-    MemberDataFunctions.func_uuid = lambda: f"test{next(our_uuid):0>5}"
-    unique_uuids = set([MemberDataFunctions.func_uuid() for x in range(0,len(tries))])
-    # Because we create exact POPULATION candidatures, we are sure that the uuid will be unique
-    # Populating the candidatures
-    for indice in range(0, len(unique_uuids)):
-        candidature = Candidature()
-        candidatures[candidature.oid] = candidature
-    # Ensure uniqueness of Candidature UUIDs
-    for uuid in unique_uuids:
-        assert uuid in candidatures
-    # Restore the original function
-    MemberDataFunctions.func_uuid = original_uuid
+    # Use patch to temporarily replace func_uuid
+    with patch(
+            'alirpunkto.models.member.MemberDataFunctions.func_uuid',
+            side_effect=lambda: f"test{next(our_uuid):0>5}"
+        ):
+        # Generate a set of unique UUIDs using the mocked func_uuid
+        unique_uuids = set([MemberDataFunctions.func_uuid() for _ in range(len(tries))])
+
+        # Create candidatures using the simulated UUIDs
+        for _ in range(len(unique_uuids)):
+            candidature = Candidature()
+            candidatures[candidature.oid] = candidature
+
+        # Check that each unique UUID is present in the candidatures
+        for uuid in unique_uuids:
+            assert uuid in candidatures
     
 # @TODO: test candidature functions

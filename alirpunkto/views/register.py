@@ -38,7 +38,7 @@ from alirpunkto.constants_and_globals import (
 from pyramid.i18n import Translator
 from ..utils import (
     get_candidatures,
-    generate_math_challenges, is_valid_email,
+    is_valid_email,
     register_user_to_ldap,
     is_valid_password, is_valid_unique_pseudonym, random_voters,
     send_validation_email,
@@ -137,7 +137,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
         )
         if error:
             return error
-
+        from alirpunkto.utils import generate_math_challenges # Due to unit test fixture bogue, we need to import here
         candidature.challenge = generate_math_challenges(request)
 
         if not attempt_send_validation_email(request, candidature):
