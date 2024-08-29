@@ -137,7 +137,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
         )
         if error:
             return error
-        from alirpunkto.utils import generate_math_challenges # Due to unit test fixture bogue, we need to import here
+        from alirpunkto.utils import generate_math_challenges # Due to the precedence of unit test fixture imports, we need to import it here
         candidature.challenge = generate_math_challenges(request)
 
         if not attempt_send_validation_email(request, candidature):
