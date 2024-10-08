@@ -37,6 +37,7 @@ def ini_file(request):
 def app_settings(ini_file):
     return get_appsettings(ini_file)
 
+
 @pytest.fixture(scope='session')
 def app(app_settings):
     return main({}, **app_settings)
@@ -55,8 +56,6 @@ def tm():
 def testapp(app, tm):
     testapp = webtest.TestApp(app, extra_environ={
         'HTTP_HOST': 'example.com',
-        'tm.active': True,
-        'tm.manager': tm,
     })
 
     return testapp
@@ -96,21 +95,33 @@ def dummy_request(tm):
     return request
 from unittest.mock import patch
 import pytest
-
-@pytest.fixture
-def mock_generate_math_challenges():
-    mocked_challenges = {
+mocked_challenges = {
         "A": ("three times four plus two", 14),
         "B": ("five times seven plus six", 41),
         "C": ("eight times one plus nine", 17),
         "D": ("two times three plus seven", 13),
     }
+@pytest.fixture
+def mock_generate_math_challenges():    
     with patch('alirpunkto.utils.generate_math_challenges', return_value=mocked_challenges):
         yield
 
 @pytest.fixture
 def mailer_setup(testapp):
-    mailer = DummyMailer()
+    class CustomDummyMailer(DummyMailer):
+        def send(self, message):
+            """Mock sending a transactional message via SMTP.
+
+            The message is appended to the 'outbox' list and returns True
+            to indicate success, mimicking the behavior of the real Mailer.
+            This is a patch to https://github.com/Pylons/pyramid_mailer/issues/101
+
+            :param message: a 'Message' instance.
+            :return: True to indicate the message was 'sent' successfully.
+            """
+            self.outbox.append(message)
+            return True  # Indicate that the send was successful
+    mailer = CustomDummyMailer()
     testapp.app.registry['mailer'] = mailer
     return mailer
 

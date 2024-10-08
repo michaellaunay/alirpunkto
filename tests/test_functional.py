@@ -7,15 +7,6 @@ from unittest.mock import patch
 
 _ = TranslationStringFactory('alirpunkto')
 
-@pytest.fixture
-def new_session(testapp):
-    # Configure une nouvelle session avant chaque test
-    session_factory = testapp.app.registry['session_factory']
-    session = session_factory()
-
-    # Injecter la nouvelle session dans la requête
-    testapp.app.registry['session'] = session
-    return session
 
 def test_root(testapp):
     res = testapp.get('/', status=200)
@@ -37,8 +28,11 @@ def test_login(testapp):
 
 
 def test_register(testapp, mock_generate_math_challenges, dummy_config, dummy_request, mailer_setup):
+    """Test the registration page"""
     # Access the registration page
-    res = testapp.get('/register', status=200)
+    headers = {'Accept-Language': 'en'}  # Ensure the test runs with the English locale
+    res = testapp.get('/register', status=200, headers=headers)
+    assert res.status_code == 200
     assert b'<form method="POST"' in res.body
 
     # Submit the registration form
@@ -48,7 +42,6 @@ def test_register(testapp, mock_generate_math_challenges, dummy_config, dummy_re
         'submit': 'Submit'
     }
 
-    headers = {'Accept-Language': 'en'}  # Ensure the test runs with the English locale
     # mook generate_math_challenges
     res = testapp.post('/register', form, status=200, headers=headers)
     assert res.status_code == 200
@@ -69,6 +62,29 @@ def test_register(testapp, mock_generate_math_challenges, dummy_config, dummy_re
     assert "eight times one plus nine" in message.body
     assert "two times three plus seven" in message.body
 
+    import re
+    pattern = r"http://.*/register\?oid=([a-zA-Z0-9%]+)"
+    match = re.search(pattern, message.body)
+    assert match is not None
+    oid = match.group(1)
+
+    res = testapp.get(f'/register?oid={oid}', status=200, headers=headers)
+    assert res.status_code == 200
+
+    # Post the challenge result to validate the email
+    from tests.conftest import mocked_challenges
+    form = {
+        'challenge': 'A',
+        'response': mocked_challenges["A"][1],
+        'submit': 'Submit'
+    }
+
+    res = testapp.post(f'/register?oid={oid}', form, status=302, headers=headers)
+    assert res.status_code == 302
+
+    res = res.follow()
+    assert res.status_code == 200
+    assert b'success' in res.body
 
 def test_forgot_password(testapp):
     res = testapp.get('/forgot_password', status=200)

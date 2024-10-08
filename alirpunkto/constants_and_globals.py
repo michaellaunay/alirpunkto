@@ -3,7 +3,7 @@
 
 # Description: Constants for the alirpunkto app
 from typing import Final
-import os, pytz
+import os, sys, pytz
 from dotenv import load_dotenv, get_key, find_dotenv
 from pyramid.i18n import (
     TranslationStringFactory,
@@ -11,6 +11,8 @@ from pyramid.i18n import (
 import logging
 import re
 
+# PyTest execution
+PYTEST_CURRENT_TEST: Final = 'PYTEST_CURRENT_TEST' in os.environ or 'pytest' in sys.modules
 # Load environment variables from .env.
 dotenv_path: Final = find_dotenv()
 load_dotenv(dotenv_path)
