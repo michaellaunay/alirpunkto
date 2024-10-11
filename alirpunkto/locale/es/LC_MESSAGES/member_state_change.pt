@@ -17,7 +17,7 @@
             <li tal:omit-tag="textual">Nuevo estado: <span tal:replace="python:member.member_state">Nuevo estado de miembro</span></li>
             <li tal:omit-tag="textual" tal:condition="exists:string">
                 <a tal:attributes="href string:${page_register_with_oid}" tal:omit-tag="textual">
-                    <span tal:replace="string:${page_register_with_oid}"></span>
+                    <span tal:omit-tag="textual" tal:replace="string:${page_register_with_oid}"></span>
                 </a>
             </li>
         </ul>
