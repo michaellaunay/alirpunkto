@@ -23,7 +23,8 @@ from unittest.mock import patch
 import pytest
 import transaction
 import webtest
-from alirpunkto import main
+from ldap3 import Server, Connection, MOCK_SYNC
+from ldap3.core.exceptions import LDAPException
 
 def pytest_addoption(parser):
     parser.addoption('--ini', action='store', metavar='INI_FILE')
@@ -39,8 +40,25 @@ def app_settings(ini_file):
 
 
 @pytest.fixture(scope='session')
-def app(app_settings):
-    return main({}, **app_settings)
+def mocked_ldap():
+    """Fixture to mock an empty LDAP server and connection."""
+    # Configure the mocked LDAP server
+    server = Server('my_fake_ldap_server', get_info=MOCK_SYNC)
+
+    # Create a mocked LDAP connection
+    try:
+        conn = Connection(
+            server, user='cn=admin,dc=example,dc=com',
+            password='A_GREAT_PASSWORD', client_strategy=MOCK_SYNC)
+        conn.bind()
+    except LDAPException as e:
+        pytest.fail(f"Failed to bind to mocked LDAP server: {e}")
+
+    # Yield the empty connection to be used in the tests
+    yield conn
+
+    # Cleanup: Unbind the connection after the test
+    conn.unbind()
 
 @pytest.fixture
 def tm():
@@ -93,8 +111,7 @@ def dummy_request(tm):
     request.tm = tm
     request.locale_name = 'en'
     return request
-from unittest.mock import patch
-import pytest
+
 mocked_challenges = {
         "A": ("three times four plus two", 14),
         "B": ("five times seven plus six", 41),
@@ -143,3 +160,9 @@ def dummy_config(dummy_request):
         yield config
         from alirpunkto.utils import logout
         logout(dummy_request)
+
+@pytest.fixture(scope='session')
+def app(app_settings):
+    from alirpunkto import main
+    return main({}, **app_settings)
+
