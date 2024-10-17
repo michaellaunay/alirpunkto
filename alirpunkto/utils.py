@@ -61,14 +61,13 @@ from .constants_and_globals import (
 )
 from pyramid.i18n import get_localizer
 from ldap3 import (
-    Server,
     Connection,
     ALL,
     MODIFY_ADD,
     MODIFY_REPLACE,
-    SAFE_SYNC,
     SUBTREE
 )
+from .ldap_factory import get_ldap_server, get_ldap_connection
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
 import random
@@ -114,29 +113,6 @@ def get_members(request)->Members:
     conn = get_connection(request)
     return Members.get_instance(connection=conn)
 
-def get_ldap_connection(use_ssl=LDAP_USE_SSL) -> Connection:
-    """Get an LDAP connection secure or not depending of LDAP_USE_SSL global.
-    Returns:
-        Connection: the unsecure LDAP connexion
-    """
-    # define an unsecure LDAP server, requesting info on DSE and schema
-    server = Server(LDAP_SERVER,
-        #use_ssl=use_ssl,
-        get_info=ALL
-    )
-    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
-        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
-    )# define the user to authenticate
-    # define an unsecure LDAP connection, using the credentials above
-    conn = Connection(
-        server,
-        ldap_login,
-        get_secret(LDAP_PASSWORD),
-        auto_bind=True,
-        # client_strategy=SAFE_SYNC # Normaly prevent injection attacks but in this case clear conn.entries and conn.response!
-    )
-    return conn
-
 def get_member_by_email(email: str) -> Union[Dict[str, str], None]:
     """Get the members from LDAP by their email.
     Args:
@@ -145,7 +121,10 @@ def get_member_by_email(email: str) -> Union[Dict[str, str], None]:
         dict: The members found for the given email
         None: If no member is found
     """
-    with get_ldap_connection() as conn:
+    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    )
+    with get_ldap_connection(get_secret(LDAP_PASSWORD), ldap_login) as conn:
         conn.search(
             LDAP_BASE_DN,
             f'(mail={email.strip()})',
@@ -165,7 +144,10 @@ def get_ldap_member_list(
         list: list of tuples ('cn', 'uid', 'isActive', 'employeeType')
         representing the ldap members.
     """
-    with get_ldap_connection() as conn:
+    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    )
+    with get_ldap_connection(get_secret(LDAP_PASSWORD), ldap_login) as conn:
         conn.search(
             LDAP_BASE_DN,
             '(objectClass=*)',
@@ -353,7 +335,10 @@ def is_valid_unique_pseudonym(pseudonym):
         }
 
     # define an unsecure LDAP server, requesting info on DSE and schema
-    with get_ldap_connection() as conn:
+    ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+        if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+    ) 
+    with get_ldap_connection(get_secret(LDAP_PASSWORD), ldap_login) as conn:
         # Verify that the pseudonym is not already registered
         conn.search(
             LDAP_BASE_DN,
@@ -553,7 +538,10 @@ def update_member_from_ldap(
         None: if not found in ldap
     """
     try:
-        with get_ldap_connection() as conn:
+        ldap_login=(f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+            if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+        )
+        with get_ldap_connection(get_secret(LDAP_PASSWORD), ldap_login) as conn:
             # Extend the list of attributes retrieved to include all those
             # added during registration
             conn.search(
@@ -767,7 +755,6 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
         list: A list of voters in the format:
             [{'cn': 'name', 'sn': 'surname', 'mail': 'email'}, ...]
     """
-    server = Server(LDAP_SERVER, get_info=ALL)
     ldap_login = (f"{LDAP_LOGIN},"
                   f"{(LDAP_OU + ',') if LDAP_OU else ''}"
                   f"{LDAP_BASE_DN}"
@@ -779,11 +766,10 @@ def random_voters(request: Request) -> List[Dict[str, str]]:
         number_of_voters = DEFAULT_NUMBER_OF_VOTERS
         log.warning(f"Use {DEFAULT_NUMBER_OF_VOTERS=} "
             "as number of voters due to exception.")
-    with Connection(
-            server,
-            ldap_login,
+    with get_ldap_connection(
             get_secret(LDAP_PASSWORD),
-            auto_bind=True
+            ldap_login,
+            ldap_auto_bind=True
         ) as conn:
         potential_voters = get_potential_voters(conn)
         random.shuffle(potential_voters)
@@ -829,13 +815,12 @@ def get_oid_from_pseudonym(
     pseudonym = pseudonym.strip()
     if not pseudonym_pattern.match(pseudonym):
         return None
-    server = Server(LDAP_SERVER, get_info=ALL)
     ldap_login = f"{LDAP_LOGIN},{LDAP_OU if LDAP_OU else ''},{LDAP_BASE_DN}"
     while ',,' in ldap_login:
         ldap_login = ldap_login.replace(',,', ',')
-    with Connection(
-            server, ldap_login,
+    with get_ldap_connection(
             get_secret(LDAP_PASSWORD),
+            ldap_login,
             auto_bind=True
         ) as conn:
         conn.search(
@@ -867,7 +852,7 @@ def register_user_to_ldap(request, candidature, password):
         return error
 
     # Continue to register the user to LDAP
-    with get_ldap_connection() as conn:
+    with get_ldap_connection(get_secret(LDAP_PASSWORD)) as conn:
 
         # DN for the new entry
         dn = (f"uid={candidature.oid},{LDAP_OU},{LDAP_BASE_DN}"
@@ -977,7 +962,7 @@ def update_member_password(request, member_oid, new_password):
     """
 
     # Connect to the LDAP server
-    with get_ldap_connection() as conn:
+    with get_ldap_connection(get_secret(LDAP_PASSWORD)) as conn:
         # DN for the member
         dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
             if LDAP_OU else f"uid={member_oid},{LDAP_BASE_DN}"
@@ -1019,7 +1004,7 @@ def update_ldap_member(
     """
 
     # Connect to the LDAP server
-    with get_ldap_connection() as conn:
+    with get_ldap_connection(get_secret(LDAP_PASSWORD)) as conn:
 
         # DN for the member
         dn = (f"uid={member.oid},{LDAP_OU},{LDAP_BASE_DN}"

@@ -117,12 +117,11 @@ def create_ldap_groups_if_not_exists():
     """
 
     # Connecting to the LDAP Server
-    server = Server(LDAP_SERVER, get_info=ALL)
-    conn = Connection(
-        server,
-        f"{LDAP_LOGIN},{LDAP_BASE_DN}",
+    from .ldap_factory import get_ldap_connection
+    conn = get_ldap_connection(
         get_secret(LDAP_PASSWORD),
-        auto_bind=True
+        f"{LDAP_LOGIN},{LDAP_BASE_DN}",
+        ldap_auto_bind=True
     )
 
     admin_dn = f"uid={LDAP_ADMIN_OID},cn={ADMIN_LOGIN},{LDAP_BASE_DN}"
