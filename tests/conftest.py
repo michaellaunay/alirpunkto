@@ -23,7 +23,7 @@ from unittest.mock import patch
 import pytest
 import transaction
 import webtest
-from ldap3 import Server, Connection, MOCK_SYNC
+from ldap3 import Server, Connection, MOCK_SYNC, OFFLINE_SLAPD_2_4, ALL
 from ldap3.core.exceptions import LDAPException
 
 def pytest_addoption(parser):
@@ -39,26 +39,32 @@ def app_settings(ini_file):
     return get_appsettings(ini_file)
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='session', autouse=True)
 def mocked_ldap():
-    """Fixture to mock an empty LDAP server and connection."""
-    # Configure the mocked LDAP server
-    server = Server('my_fake_ldap_server', get_info=MOCK_SYNC)
+    """Fixture to mock an OpenLDAP server and connection with recorded exchanges."""
+    # Create a mock server with OpenLDAP schema
+    from alirpunkto.ldap_factory import get_ldap_connection
+    conn = get_ldap_connection('A_GREAT_PASSWORD', ldap_client_strategy=MOCK_SYNC)
+    # Add entries to the mock server
+    # Root entry with OpenLDAP-specific object classes
+    conn.strategy.add_entry('dc=example,dc=com', {
+        'objectClass': ['top', 'dcObject', 'organization'],
+        'dc': 'example',
+        'o': 'Example Organization'
+    })
 
-    # Create a mocked LDAP connection
-    try:
-        conn = Connection(
-            server, user='cn=admin,dc=example,dc=com',
-            password='A_GREAT_PASSWORD', client_strategy=MOCK_SYNC)
-        conn.bind()
-    except LDAPException as e:
-        pytest.fail(f"Failed to bind to mocked LDAP server: {e}")
+    # Admin user entry with appropriate object classes
+    conn.strategy.add_entry('cn=admin,dc=example,dc=com', {
+        'objectClass': ['top', 'person', 'organizationalPerson', 'inetOrgPerson'],
+        'cn': 'admin',
+        'sn': 'Administrator',
+        'userPassword': 'A_GREAT_PASSWORD'
+    })
 
-    # Yield the empty connection to be used in the tests
-    yield conn
+    # The strategy automatically records all requests and responses
+    # Access them via conn.strategy.requests and conn.strategy.responses
 
-    # Cleanup: Unbind the connection after the test
-    conn.unbind()
+    return conn
 
 @pytest.fixture
 def tm():

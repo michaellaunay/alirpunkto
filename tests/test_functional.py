@@ -43,7 +43,7 @@ def test_register(testapp, mock_generate_math_challenges, dummy_config, dummy_re
     # mook generate_math_challenges
     res = testapp.post('/register', form, status=200, headers=headers)
     assert res.status_code == 200
-
+    assert "error" not in str(res.html)
     # Check the email sent
     mailer = mailer_setup
     assert len(mailer.outbox) == 1

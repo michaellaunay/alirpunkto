@@ -71,10 +71,12 @@ def get_ldap_connection(
             server,
             user='cn=admin,dc=example,dc=com',
             password='A_GREAT_PASSWORD',
-            client_strategy=MOCK_SYNC,
-            auto_bind=True
+            auto_bind=ldap_auto_bind,
+            client_strategy=MOCK_SYNC
         )
-        return conn       
+        if ldap_auto_bind:
+            conn.bind() # Force the binding of the connection because auto_bind seems not to be working
+        return conn
     # define an unsecure LDAP connection, using the credentials above
     conn = Connection(
         server,

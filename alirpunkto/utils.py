@@ -821,7 +821,7 @@ def get_oid_from_pseudonym(
     with get_ldap_connection(
             get_secret(LDAP_PASSWORD),
             ldap_login,
-            auto_bind=True
+            ldap_auto_bind=True
         ) as conn:
         conn.search(
             LDAP_BASE_DN,
