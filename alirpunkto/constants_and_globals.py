@@ -29,6 +29,9 @@ LDAP_USE_SSL: Final = (
 )
 LDAP_PASSWORD: Final = "LDAP_PASSWORD" # use get_secret to get the password
 LDAP_LOGIN: Final = get_key(dotenv_path, "LDAP_LOGIN")
+LDAP_USER: Final = (f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+    if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+)
 ADMIN_LOGIN: Final = get_key(dotenv_path, "ADMIN_LOGIN")
 ADMIN_PASSWORD: Final = "ADMIN_PASSWORD" # use get_secret to get the password
 ADMIN_EMAIL: Final = get_key(dotenv_path, "ADMIN_EMAIL")

@@ -7,11 +7,10 @@ from typing import Union
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
-from ldap3 import Server, Connection, ALL
 from ldap3.core.exceptions import LDAPBindError
+from alirpunkto.ldap_factory import get_ldap_connection
 from alirpunkto.constants_and_globals import (
     _,
-    LDAP_SERVER,
     LDAP_OU,
     LDAP_BASE_DN,
     log,
@@ -119,15 +118,15 @@ def check_password(username:str, oid:str, password:str) -> Union[None, User]:
         User: a User instance if the password is correct, None otherwise
     """
     # define an unsecure LDAP server, requesting info on DSE and schema
-    server = Server(LDAP_SERVER, get_info=ALL)
-    ldap_login=(
+    ldap_user=(
         f"uid={oid},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU
         else f"uid={oid},{LDAP_BASE_DN}"
     ) # define the user to authenticate
-    log.debug(f"Trying to authenticate {ldap_login=} with {password=}")
+    log.debug(f"Trying to authenticate {ldap_user=} with {password=}")
     try:
         # define an unsecure LDAP connection, using the credentials above
-        with Connection(server, ldap_login, password, auto_bind=True) as conn:
+        with get_ldap_connection(ldap_user=ldap_user,
+            ldap_password=password, ldap_auto_bind=True) as conn:
             conn.search(
                 LDAP_BASE_DN,
                 '(uid={})'.format(oid),
