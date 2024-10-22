@@ -62,7 +62,6 @@ from .constants_and_globals import (
 from pyramid.i18n import get_localizer
 from ldap3 import (
     Connection,
-    ALL,
     MODIFY_ADD,
     MODIFY_REPLACE,
     SUBTREE
@@ -802,8 +801,6 @@ def get_oid_from_pseudonym(
     pseudonym = pseudonym.strip()
     if not pseudonym_pattern.match(pseudonym):
         return None
-    while ',,' in ldap_user:
-        ldap_user = ldap_user.replace(',,', ',')
     with get_ldap_connection(ldap_user=LDAP_USER,
             ldap_password=get_secret(LDAP_PASSWORD),
             ldap_auto_bind=True
