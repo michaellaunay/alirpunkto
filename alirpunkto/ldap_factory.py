@@ -6,10 +6,7 @@
 from .constants_and_globals import (
     LDAP_SERVER,
     LDAP_USE_SSL,
-    LDAP_LOGIN,
-    LDAP_PASSWORD,
-    LDAP_BASE_DN,
-    LDAP_OU,
+    LDAP_USER,
     PYTEST_CURRENT_TEST
 )
 
@@ -51,10 +48,8 @@ def get_ldap_server(
     return get_ldap_server.server
 
 def get_ldap_connection(
+        ldap_user, #LDAP_USER
         ldap_password, #get_secret(LDAP_PASSWORD)
-        ldap_login=LDAP_LOGIN,
-        ldap_ou=LDAP_OU,
-        ldap_base_dn=LDAP_BASE_DN,
         ldap_auto_bind=True,
         ldap_use_ssl=LDAP_USE_SSL,
         ldap_get_info=ALL,
@@ -69,8 +64,8 @@ def get_ldap_connection(
         # Create a mocked LDAP connection with MOCK_SYNC strategy
         conn = Connection(
             server,
-            user='cn=admin,dc=example,dc=com',
-            password='A_GREAT_PASSWORD',
+            user=ldap_user,
+            password=ldap_password,
             auto_bind=ldap_auto_bind,
             client_strategy=MOCK_SYNC
         )
@@ -80,7 +75,7 @@ def get_ldap_connection(
     # define an unsecure LDAP connection, using the credentials above
     conn = Connection(
         server,
-        ldap_login,
+        ldap_user,
         ldap_password,
         auto_bind=ldap_auto_bind,
         client_strategy=ldap_client_strategy

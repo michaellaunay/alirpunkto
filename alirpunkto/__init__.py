@@ -17,17 +17,15 @@ from pyramid.session import SignedCookieSessionFactory
 import deform
 from pkg_resources import resource_filename
 from pyramid.threadlocal import get_current_request
-from ldap3 import Server, Connection, ALL
 
 from .constants_and_globals import (
     _,
     log,
     SECRET_KEY,
     LDAP_ADMIN_OID,
-    LDAP_SERVER,
     LDAP_BASE_DN,
     LDAP_OU,
-    LDAP_LOGIN,
+    LDAP_USER,
     LDAP_PASSWORD,
     AVAILABLE_LANGUAGES,
     ADMIN_LOGIN,
@@ -118,9 +116,8 @@ def create_ldap_groups_if_not_exists():
 
     # Connecting to the LDAP Server
     from .ldap_factory import get_ldap_connection
-    conn = get_ldap_connection(
-        get_secret(LDAP_PASSWORD),
-        f"{LDAP_LOGIN},{LDAP_BASE_DN}",
+    conn = get_ldap_connection(ldap_user=LDAP_USER,
+        ldap_password=get_secret(LDAP_PASSWORD),
         ldap_auto_bind=True
     )
 

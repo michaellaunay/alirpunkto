@@ -17,8 +17,9 @@ def test_login(testapp):
     res = testapp.get('/login', status=200)
     assert b'Login' in res.body
     # Mock ldap
-
-    post = {'username': 'admin', 'password': 'admin', 'form.submitted': 'True'}
+    from alirpunkto.constants_and_globals import LDAP_LOGIN, LDAP_PASSWORD
+    from alirpunkto.secret_manager import get_secret
+    post = {'username': LDAP_LOGIN, 'password': get_secret(LDAP_PASSWORD), 'form.submitted': 'True'}
     res = testapp.post('/login', post, status=200)
     assert res.status_code == 200
     assert b'Invalid username or password. Please try again' in res.body

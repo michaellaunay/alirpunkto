@@ -44,8 +44,12 @@ def app_settings(ini_file):
 def mocked_ldap():
     """Fixture to mock an OpenLDAP server and connection with recorded exchanges."""
     # Create a mock server with OpenLDAP schema
+    from alirpunkto.constants_and_globals import LDAP_LOGIN, LDAP_USER, LDAP_PASSWORD
     from alirpunkto.ldap_factory import get_ldap_connection
-    conn = get_ldap_connection('A_GREAT_PASSWORD', ldap_client_strategy=MOCK_SYNC)
+    from alirpunkto.secret_manager import get_secret
+    conn = get_ldap_connection(ldap_user=LDAP_USER,
+        ldap_password=get_secret(LDAP_PASSWORD),
+        ldap_client_strategy=MOCK_SYNC)
 
     def extract_syntax(syntax_str):
         """Extract the syntax OID without size limit."""
@@ -217,9 +221,9 @@ def mocked_ldap():
     # Admin user entry with appropriate object classes
     conn.strategy.add_entry('cn=admin,dc=example,dc=com', {
         'objectClass': ['top', 'person', 'organizationalPerson', 'inetOrgPerson'],
-        'cn': 'admin',
+        'cn': LDAP_LOGIN,
         'sn': 'Administrator',
-        'userPassword': 'A_GREAT_PASSWORD'
+        'userPassword': get_secret(LDAP_PASSWORD)
     })
 
     # The strategy automatically records all requests and responses

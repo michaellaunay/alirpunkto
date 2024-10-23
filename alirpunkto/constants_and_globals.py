@@ -21,14 +21,17 @@ load_dotenv(dotenv_path)
 # Not Final due to __init__ initialization
 SECRET_KEY: Final = "SECRET_KEY"
 LDAP_SERVER: Final = os.getenv("LDAP_SERVER")
-LDAP_BASE_DN: Final = get_key(dotenv_path, "LDAP_BASE_DN")
+LDAP_BASE_DN: Final = get_key(dotenv_path, "LDAP_BASE_DN") if not PYTEST_CURRENT_TEST else "dc=example,dc=com"
 LDAP_OU: Final = get_key(dotenv_path, "LDAP_OU")
 LDAP_USE_SSL: Final = (
     (get_key(dotenv_path, "LDAP_USE_SSL") or "False").lower()
     in ['true', '1', "yes", "y"]
 )
 LDAP_PASSWORD: Final = "LDAP_PASSWORD" # use get_secret to get the password
-LDAP_LOGIN: Final = get_key(dotenv_path, "LDAP_LOGIN")
+LDAP_LOGIN: Final = get_key(dotenv_path, "LDAP_LOGIN") if not PYTEST_CURRENT_TEST else "admin"
+LDAP_USER: Final = (f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
+    if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
+) if not PYTEST_CURRENT_TEST else "cn=admin,dc=example,dc=com"
 ADMIN_LOGIN: Final = get_key(dotenv_path, "ADMIN_LOGIN")
 ADMIN_PASSWORD: Final = "ADMIN_PASSWORD" # use get_secret to get the password
 ADMIN_EMAIL: Final = get_key(dotenv_path, "ADMIN_EMAIL")
