@@ -25,6 +25,7 @@ import transaction
 import webtest
 from ldap3 import Server, Connection, MOCK_SYNC, OFFLINE_SLAPD_2_4, ALL
 from ldap3.core.exceptions import LDAPException
+from ldap3.protocol.rfc4512 import SchemaInfo, AttributeTypeInfo, ObjectClassInfo
 
 def pytest_addoption(parser):
     parser.addoption('--ini', action='store', metavar='INI_FILE')
@@ -45,6 +46,166 @@ def mocked_ldap():
     # Create a mock server with OpenLDAP schema
     from alirpunkto.ldap_factory import get_ldap_connection
     conn = get_ldap_connection('A_GREAT_PASSWORD', ldap_client_strategy=MOCK_SYNC)
+
+    def extract_syntax(syntax_str):
+        """Extract the syntax OID without size limit."""
+        if '{' in syntax_str:
+            syntax_oid = syntax_str.split('{')[0]
+        else:
+            syntax_oid = syntax_str
+        return syntax_oid.strip("'")
+
+    # Define custom attributes
+    nationality_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.1',
+        name='nationality',
+        description='Nationality of the individual',
+        equality='caseIgnoreMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{40}'),
+        single_value=True
+    )
+
+    birthdate_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.2',
+        name='birthdate',
+        description='Birth date of the individual',
+        equality='caseIgnoreMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{10}'),
+        single_value=True
+    )
+
+    second_language_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.3',
+        name='secondLanguage',
+        description='Second language of the individual',
+        equality='caseIgnoreMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{40}'),
+        single_value=True
+    )
+
+    cooperative_behaviour_mark_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.4',
+        name='cooperativeBehaviourMark',
+        description='Cooperative Behaviour Mark, expected to be a floating-point number stored as a string',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{127}'),
+        single_value=True
+    )
+
+    cooperative_behavior_mark_update_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.5',
+        name='cooperativeBehaviorMarkUpdate',
+        description='Last Update Time of the Cooperative Behaviour Mark',
+        syntax='1.3.6.1.4.1.1466.115.121.1.24',  # Generalized Time Syntax
+        single_value=True
+    )
+
+    third_language_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.6',
+        name='thirdLanguage',
+        description='Third Interaction Language',
+        syntax='1.3.6.1.4.1.1466.115.121.1.15',
+        single_value=True
+    )
+
+    is_active_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.7',
+        name='isActive',
+        description='Indicates if the user is active',
+        equality='booleanMatch',
+        syntax='1.3.6.1.4.1.1466.115.121.1.7',
+        single_value=True
+    )
+
+    number_shares_owned_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.8',
+        name='numberSharesOwned',
+        description='Number of Shares Owned',
+        syntax='1.3.6.1.4.1.1466.115.121.1.27'  # Integer Syntax
+    )
+
+    date_end_validity_yearly_contribution_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.9',
+        name='dateEndValidityYearlyContribution',
+        description='End Date of Validity for Yearly Contribution',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{10}'),
+        single_value=True
+    )
+
+    iban_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.10',
+        name='IBAN',
+        description='IBAN bank account number of the individual',
+        equality='caseIgnoreMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{34}'),
+        single_value=True
+    )
+
+    unique_member_of_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.11',
+        name='uniqueMemberOf',
+        description='DN of the group to which the user belongs',
+        equality='distinguishedNameMatch',
+        syntax='1.3.6.1.4.1.1466.115.121.1.12'  # Distinguished Name Syntax
+    )
+
+    date_erasure_all_data_attribute = AttributeTypeInfo(
+        oid='1.3.6.1.4.1.61000.1.12',
+        name='dateErasureAllData',
+        description='Date by which the user data should be erased',
+        equality='generalizedTimeMatch',
+        ordering='generalizedTimeOrderingMatch',
+        substring='caseIgnoreSubstringsMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24{8}'),
+        single_value=True
+    )
+
+    # Add the attributes to the schema
+    attributes = [
+        nationality_attribute,
+        birthdate_attribute,
+        second_language_attribute,
+        cooperative_behaviour_mark_attribute,
+        cooperative_behavior_mark_update_attribute,
+        third_language_attribute,
+        is_active_attribute,
+        number_shares_owned_attribute,
+        date_end_validity_yearly_contribution_attribute,
+        iban_attribute,
+        unique_member_of_attribute,
+        date_erasure_all_data_attribute
+    ]
+    from alirpunkto.ldap_factory import get_ldap_server
+    schema_info = get_ldap_server()._schema_info
+    for attr in attributes:
+        schema_info.attribute_types[attr.name] = attr
+        schema_info.attribute_types[attr.oid] = attr
+
+    # Define the custom object class
+    alirpunkto_person_class = ObjectClassInfo(
+        oid='1.3.6.1.4.1.61000.2.2.1',
+        name='alirpunktoPerson',
+        description='AlirPunkto specific person object class',
+        superior=['inetOrgPerson'],
+        kind='structural',
+        must_contain=['uid', 'cn', 'sn', 'mail', 'employeeType', 'isActive'],
+        may_contain=[
+            'givenName', 'nationality', 'birthdate', 'preferredLanguage', 'description',
+            'jpegPhoto', 'secondLanguage', 'thirdLanguage', 'cooperativeBehaviourMark',
+            'cooperativeBehaviorMarkUpdate', 'numberSharesOwned',
+            'dateEndValidityYearlyContribution', 'IBAN', 'uniqueMemberOf'
+        ]
+    )
+
+    # Add the object class to the schema
+    schema_info.object_classes[alirpunkto_person_class.name] = alirpunkto_person_class
+    schema_info.object_classes[alirpunkto_person_class.oid] = alirpunkto_person_class
+
+    # Add the custom schema to the mocked server
+    from alirpunkto.ldap_factory import get_ldap_connection
+    server = get_ldap_server()
+    server._schema_info = schema_info  # Replace the schema with the alirpunkto's schema
+   
+
     # Add entries to the mock server
     # Root entry with OpenLDAP-specific object classes
     conn.strategy.add_entry('dc=example,dc=com', {
