@@ -191,25 +191,32 @@ def init_alirpunkto_ldap_shema():
     server._schema_info = schema_info  # Replace the schema with the alirpunkto's schema
 
     # Create the connection
+    from alirpunkto.constants_and_globals import LDAP_USER, LDAP_PASSWORD
+    from alirpunkto.secret_manager import get_secret
+
+    # Add necessary entries for your tests
+    from alirpunkto.constants_and_globals import (
+        LDAP_BASE_DN, LDAP_OU
+    )
+
     conn = get_ldap_connection(
-        ldap_password='A_GREAT_PASSWORD',
-        ldap_user='cn=admin,dc=example,dc=com',
+        ldap_password=get_secret(LDAP_PASSWORD),
+        ldap_user=LDAP_USER,
         ldap_client_strategy=MOCK_SYNC,
         ldap_auto_bind=True
     )
 
-    # Add necessary entries for your tests
-    conn.strategy.add_entry('dc=example,dc=com', {
+    conn.strategy.add_entry(LDAP_BASE_DN, {
         'objectClass': ['top', 'dcObject', 'organization'],
-        'dc': 'example',
+        'dc': LDAP_BASE_DN.split(',')[0].split('=')[1],
         'o': 'Example Organization'
     })
 
-    conn.strategy.add_entry('cn=admin,dc=example,dc=com', {
+    conn.strategy.add_entry(LDAP_BASE_DN, {
         'objectClass': ['top', 'person', 'organizationalPerson', 'inetOrgPerson'],
         'cn': 'admin',
         'sn': 'Administrator',
-        'userPassword': 'A_GREAT_PASSWORD'
+        'userPassword': get_secret(LDAP_PASSWORD)
     })
 
     # Example of adding a user using the custom object class
