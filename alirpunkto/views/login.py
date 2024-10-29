@@ -34,7 +34,6 @@ def login_view(request):
     Args:
         request (pyramid.request.Request): the request
     """
-    logged_in = request.params.get('logged_in', False)
     site_name = request.params.get('site_name', 'AlirPunkto')
     domain_name = request.params.get('domain_name', 'alirpunkto.org')
     organization_details = request.params.get('organization_details', 'AlirPunkto')

@@ -14,15 +14,24 @@ def test_notfound(testapp):
     assert res.status_code == 404
 
 def test_login(testapp):
+    # Test the login page
     res = testapp.get('/login', status=200)
     assert b'Login' in res.body
-    # Mock ldap
-    from alirpunkto.constants_and_globals import LDAP_LOGIN, LDAP_PASSWORD
+    from alirpunkto.constants_and_globals import ADMIN_LOGIN, ADMIN_PASSWORD
     from alirpunkto.secret_manager import get_secret
-    post = {'username': LDAP_LOGIN, 'password': get_secret(LDAP_PASSWORD), 'form.submitted': 'True'}
-    res = testapp.post('/login', post, status=200)
-    assert res.status_code == 200
-    assert b'Invalid username or password. Please try again' in res.body
+    # Test the login with the admin credentials
+    post = {'username': ADMIN_LOGIN, 'password': get_secret(ADMIN_PASSWORD), 'form.submitted': 'True'}
+    res = testapp.post('/login', post, status=302)
+    assert res.status_code == 302
+    res = res.follow()
+    assert b'Invalid username or password. Please try again' not in res.body
+    # Test the logout
+    res = testapp.get('/logout', status=302)
+    assert res.status_code == 302
+    res = res.follow()
+    assert b'login' in res.body
+    # Test the login with a wrong password
+
 
 
 def test_register(testapp, mock_generate_math_challenges, dummy_config, dummy_request, mailer_setup):

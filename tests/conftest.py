@@ -23,9 +23,8 @@ from unittest.mock import patch
 import pytest
 import transaction
 import webtest
-from ldap3 import Server, Connection, MOCK_SYNC, OFFLINE_SLAPD_2_4, ALL
-from ldap3.core.exceptions import LDAPException
-from ldap3.protocol.rfc4512 import SchemaInfo, AttributeTypeInfo, ObjectClassInfo
+from ldap3 import MOCK_SYNC
+from ldap3.protocol.rfc4512 import AttributeTypeInfo, ObjectClassInfo
 
 def pytest_addoption(parser):
     parser.addoption('--ini', action='store', metavar='INI_FILE')
@@ -44,7 +43,7 @@ def app_settings(ini_file):
 def mocked_ldap():
     """Fixture to mock an OpenLDAP server and connection with recorded exchanges."""
     # Create a mock server with OpenLDAP schema
-    from alirpunkto.constants_and_globals import LDAP_LOGIN, LDAP_USER, LDAP_PASSWORD
+    from alirpunkto.constants_and_globals import LDAP_LOGIN, LDAP_USER, LDAP_PASSWORD, ADMIN_PASSWORD, LDAP_BASE_DN
     from alirpunkto.ldap_factory import get_ldap_connection
     from alirpunkto.secret_manager import get_secret
     conn = get_ldap_connection(ldap_user=LDAP_USER,
@@ -212,17 +211,17 @@ def mocked_ldap():
 
     # Add entries to the mock server
     # Root entry with OpenLDAP-specific object classes
-    conn.strategy.add_entry('dc=example,dc=com', {
+    conn.strategy.add_entry(LDAP_BASE_DN, {
         'objectClass': ['top', 'dcObject', 'organization'],
-        'dc': 'example',
+        'dc': LDAP_BASE_DN.split(',')[0].split('=')[1],
         'o': 'Example Organization'
     })
 
     # Admin user entry with appropriate object classes
-    conn.strategy.add_entry('cn=admin,dc=example,dc=com', {
+    conn.strategy.add_entry(LDAP_USER, {
         'objectClass': ['top', 'person', 'organizationalPerson', 'inetOrgPerson'],
         'cn': LDAP_LOGIN,
-        'sn': 'Administrator',
+        'sn': LDAP_LOGIN,
         'userPassword': get_secret(LDAP_PASSWORD)
     })
 
