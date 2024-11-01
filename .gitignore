@@ -27,4 +27,4 @@ Data*.fs*
 coverage
 test
 *.sqlite
-/include
+include/
