@@ -351,23 +351,24 @@ class RegisterForm(schema.CSRFSchema):
 
     def prepare_for_ordinary(self):
         """Prepare the form for an ordinary user."""
-        if 'pseudonym' in self.children:
+        field_names = [item.name for item in self.children]
+        if 'fullname' in field_names:
             self.children.remove(self.get('fullname'))
-        if 'fullsurname' in self.children:
+        if 'fullsurname' in field_names:
             self.children.remove(self.get('fullsurname'))
-        if 'birthdate' in self.children:
+        if 'birthdate' in field_names:
             self.children.remove(self.get('birthdate'))
-        if 'nationality' in self.children:
+        if 'nationality' in field_names:
             self.children.remove(self.get('nationality'))
-        if 'cooperative_behaviour_mark' in self.children:
+        if 'cooperative_behaviour_mark' in field_names:
             self.children.remove(self.get('cooperative_behaviour_mark'))
-        if 'cooperative_behaviour_mark_update' in self.children:
+        if 'cooperative_behaviour_mark_update' in field_names:
             self.children.remove(self.get('cooperative_behaviour_mark_update'))
-        if 'number_shares_owned' in self.children:
+        if 'number_shares_owned' in field_names:
             self.children.remove(self.get('number_shares_owned'))
-        if 'date_end_validity_yearly_contribution' in self.children:
+        if 'date_end_validity_yearly_contribution' in field_names:
             self.children.remove(self.get('date_end_validity_yearly_contribution'))
-        if 'iban' in self.children:
+        if 'iban' in field_names:
             self.children.remove(self.get('iban'))
 
     def prepare_for_modification(self, read_only_fields: dict, writable_field_values: dict):

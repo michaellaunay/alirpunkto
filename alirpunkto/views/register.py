@@ -90,6 +90,12 @@ def _handle_candidature_state(
     - Dict: A dictionary with the rendered state view.
     """
     result = None
+    log.debug(f"Handling candidature state: request method: {request.method}")
+    if request.method == 'POST':
+        log.debug(f"Handling candidature state: request POST: {request.POST}")
+    log.debug(f"Handling candidature state: {candidature.candidature_state}")
+    log.debug(f"Handling candidature oid: {getattr(candidature,'oid', 'Not defined')}")
+    log.debug(f"Handling candidature type: {getattr(candidature, 'type', 'Not defined')}")
     match candidature.candidature_state:
         case CandidatureStates.DRAFT:
             result = handle_draft_state(request, candidature)

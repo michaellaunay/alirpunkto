@@ -97,14 +97,14 @@ def test_register_ordinary(testapp, mock_generate_math_challenges, dummy_config,
 
     # Verify the presence of "password" and "email" input fields
     assert any(input_tag.get('type') == 'password' for input_tag in inputs), "Password input not found."
-    assert any(input_tag.get('name') == 'fullname' for input_tag in inputs), "Fullname input not found."
-    assert any(input_tag.get('name') == 'fullsurname' for input_tag in inputs), "Fullsurname input not found."
+    assert not any(input_tag.get('name') == 'fullname' for input_tag in inputs), "Full name must not be asked for ordinary user."
+    assert not any(input_tag.get('name') == 'fullsurname' for input_tag in inputs), "Full surname must not be asked for ordinary user."
     assert any(input_tag.get('name') == 'description' for input_tag in inputs), "Description input not found."
-    assert any(input_tag.get('name') == 'date' for input_tag in inputs), "Date input not found."
+    assert not any(input_tag.get('name') == 'birthdate' for input_tag in inputs), "Burth date  must not be asked for ordinary user."
     assert any(input_tag.get('name') == 'pseudonym' for input_tag in inputs), "Pseudonym input not found."
 
     selects = soup.find_all('select')
-    assert any(choice.get('name') == 'nationality' for choice in selects), "Nationality input not found."
+    assert not any(choice.get('name') == 'nationality' for choice in selects), "Nationality input must not be asked for ordinary user."
     assert any(choice.get('name') == 'lang1' for choice in selects), "Lang1 input not found."
     assert any(choice.get('name') == 'lang2' for choice in selects), "Lang2 input not found."
     assert any(choice.get('name') == 'lang3' for choice in selects), "Lang3 input not found."
@@ -119,11 +119,11 @@ def test_register_ordinary(testapp, mock_generate_math_challenges, dummy_config,
 
     # Prepare the form dictionary to submit the filled-out form
     form = {
-        'fullname': 'John Doe',          # Example full name
-        'fullsurname': 'Doe',            # Example surname
+    #    'fullname': 'John Doe',          # Example full name # Not for ordinary users
+    #    'fullsurname': 'Doe',            # Example surname # Not for ordinary users
         'description': 'A brief description about myself.',
-        'date': '01/01/1990',            # Example birthdate
-        'nationality': 'FR',             # Example nationality (France)
+    #    'birthdate': '1990-01-01',            # Example birthdate # Not for ordinary users
+    #    'nationality': 'FR',             # Example nationality (France) # Not for ordinary users
         'pseudonym': 'johndoe123',       # Example pseudonym
         'password': 'Password123#@',      # Example password
         'password_confirm': 'Password123#@',  # Password confirmation
@@ -226,7 +226,7 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     assert any(input_tag.get('name') == 'fullname' for input_tag in inputs), "Fullname input not found."
     assert any(input_tag.get('name') == 'fullsurname' for input_tag in inputs), "Fullsurname input not found."
     assert any(input_tag.get('name') == 'description' for input_tag in inputs), "Description input not found."
-    assert any(input_tag.get('name') == 'date' for input_tag in inputs), "Date input not found."
+    assert any(input_tag.get('name') == 'birthdate' for input_tag in inputs), "Birthdate input not found."
     assert any(input_tag.get('name') == 'pseudonym' for input_tag in inputs), "Pseudonym input not found."
 
     selects = soup.find_all('select')
@@ -248,7 +248,7 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
         'fullname': 'Jahn Doe',          # Example full name
         'fullsurname': 'Doe',            # Example surname
         'description': 'A brief description about myself.',
-        'date': '01/01/1999',            # Example birthdate
+        'birthdate': '1999-01-01',            # Example birthdate
         'nationality': 'FR',             # Example nationality (France)
         'pseudonym': 'jahndoe321',       # Example pseudonym
         'password': 'Password321#@',      # Example password

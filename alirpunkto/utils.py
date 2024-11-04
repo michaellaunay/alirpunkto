@@ -1473,6 +1473,9 @@ def get_keycloak_token(user: User, password: str) -> Optional[str]:
     Returns:
         Optional[str]: The full json if the request is successful, None otherwise.
     """
+    if PYTEST_CURRENT_TEST:
+        log.warning("SSO token retrieval is not yet implemented for pytest.")
+        return None
     if not KEYCLOAK_SERVER_URL or not KEYCLOAK_REALM:
         log.warning("Keycloak server URL or realm not set.")
         return None
