@@ -119,11 +119,7 @@ def test_register_ordinary(testapp, mock_generate_math_challenges, dummy_config,
 
     # Prepare the form dictionary to submit the filled-out form
     form = {
-    #    'fullname': 'John Doe',          # Example full name # Not for ordinary users
-    #    'fullsurname': 'Doe',            # Example surname # Not for ordinary users
         'description': 'A brief description about myself.',
-    #    'birthdate': '1990-01-01',            # Example birthdate # Not for ordinary users
-    #    'nationality': 'FR',             # Example nationality (France) # Not for ordinary users
         'pseudonym': 'johndoe123',       # Example pseudonym
         'password': 'Password123#@',      # Example password
         'password_confirm': 'Password123#@',  # Password confirmation
@@ -226,7 +222,12 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     assert any(input_tag.get('name') == 'fullname' for input_tag in inputs), "Fullname input not found."
     assert any(input_tag.get('name') == 'fullsurname' for input_tag in inputs), "Fullsurname input not found."
     assert any(input_tag.get('name') == 'description' for input_tag in inputs), "Description input not found."
-    assert any(input_tag.get('name') == 'birthdate' for input_tag in inputs), "Birthdate input not found."
+
+    # birthdate input is a bit obvious
+    assert any(input_tag.get('name') == '__start__' and input_tag.get('value') == 'birthdate:mapping' for input_tag in inputs), "Birthdate input not found."
+    assert any(input_tag.get('name') == 'date' for input_tag in inputs), "Birthdate input not found."
+    assert any(input_tag.get('name') == '__end__' and input_tag.get('value') == 'birthdate:mapping' for input_tag in inputs), "Birthdate input not found."
+
     assert any(input_tag.get('name') == 'pseudonym' for input_tag in inputs), "Pseudonym input not found."
 
     selects = soup.find_all('select')
@@ -248,7 +249,9 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
         'fullname': 'Jahn Doe',          # Example full name
         'fullsurname': 'Doe',            # Example surname
         'description': 'A brief description about myself.',
-        'birthdate': '1999-01-01',            # Example birthdate
+        '__start__': 'birthdate:mapping',
+        'date': '1999-01-01',            # Example birthdate
+        '__end__': 'birthdate:mapping',
         'nationality': 'FR',             # Example nationality (France)
         'pseudonym': 'jahndoe321',       # Example pseudonym
         'password': 'Password321#@',      # Example password
