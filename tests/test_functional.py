@@ -157,6 +157,7 @@ def test_register_ordinary(testapp, mock_generate_math_challenges, dummy_config,
 def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_config, dummy_request, mailer_setup):
     """Test the registration page for cooperator"""
     # Access the registration page
+    from alirpunkto.constants_and_globals import ADMIN_EMAIL
     headers = {'Accept-Language': 'en'}  # Ensure the test runs with the English locale
     res = testapp.get('/register', status=200, headers=headers)
     assert res.status_code == 200
@@ -265,7 +266,33 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     # Submit the filled form
     res = testapp.post(f'/register', form, status=200, headers=headers)
     assert res.status_code == 200
-    # @TODO Correct form due to error
+    assert "Send a copy of your identity documents by email" in str(res.html), "The message to send the identity documents is not displayed."
+    assert "Arrange a video conference meeting" in str(res.html), "The message to arrange a video conference meeting is not displayed."
+    assert len(mailer.outbox) == 3
+    message = mailer.outbox[2]
+    assert message.recipients == [email]
+    expected_subject = localizer.translate(_("email_candidature_state_changed"))
+    assert message.subject == expected_subject   # @TODO Correct form due to error
+    url_mail = re.search(r"http://example.com/register\?oid=([a-zA-Z0-9%]+)", message.body)
+    assert url_mail is not None
+    oid_value = url_mail.group(1)
+    res_mail = testapp.get(f'/register?oid={oid_value}', status=200)
+    assert res_mail.html == res.html, "The result page is not the same as the one sent by email."
+    # @TODO check the javascript is workging with Selenium
+    button_send_email = res.html.find("button")
+    assert button_send_email is not None
+    assert "data-emails" in button_send_email.attrs
+    assert button_send_email.attrs["data-emails"] == ADMIN_EMAIL
+    assert button_send_email.attrs["data-user-email"] == email
+    assert button_send_email.attrs["email_copy_id_verification_body"]
+
+    form = {
+        "identity_verification": "email", # The user chooses to send the identity documents by email
+        "submit_button": "Confirm"
+    }
+    # @TODO check "video" option
+    res = testapp.post(f'/register', form, status=200)
+    assert res.status_code == 200
 
 def test_forgot_password(testapp):
     res = testapp.get('/forgot_password', status=200)
