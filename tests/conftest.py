@@ -220,8 +220,8 @@ def mocked_ldap():
     # Admin user entry with appropriate object classes
     conn.strategy.add_entry(LDAP_USER, {
         'objectClass': ['top', 'person', 'organizationalPerson', 'inetOrgPerson'],
-        'cn': LDAP_LOGIN,
-        'sn': LDAP_LOGIN,
+        'cn': LDAP_LOGIN.split(',')[0].split('=')[1],
+        'sn': LDAP_LOGIN.split(',')[0].split('=')[1],
         'userPassword': get_secret(LDAP_PASSWORD)
     })
 

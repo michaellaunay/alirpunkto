@@ -157,7 +157,7 @@ def test_register_ordinary(testapp, mock_generate_math_challenges, dummy_config,
 def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_config, dummy_request, mailer_setup):
     """Test the registration page for cooperator"""
     # Access the registration page
-    from alirpunkto.constants_and_globals import ADMIN_EMAIL
+    from alirpunkto.constants_and_globals import ADMIN_EMAIL, DOMAIN_NAME, SITE_NAME
     headers = {'Accept-Language': 'en'}  # Ensure the test runs with the English locale
     res = testapp.get('/register', status=200, headers=headers)
     assert res.status_code == 200
@@ -192,8 +192,8 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     assert "two times three plus seven" in message.body
 
     import re
-    pattern = r"http://.*/register\?oid=([a-zA-Z0-9%]+)"
-    match = re.search(pattern, message.body)
+    register_pattern = r"http://.*/register\?oid=([a-zA-Z0-9%]+)"
+    match = re.search(register_pattern, message.body)
     assert match is not None
     oid = match.group(1)
 
@@ -262,6 +262,7 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
         'lang3': 'es',                   # Tertiary language
         'submit': 'Submit'
     }
+    cooperator_form = form.copy() # backup the form for final check
 
     # Submit the filled form
     res = testapp.post(f'/register', form, status=200, headers=headers)
@@ -285,6 +286,10 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     assert button_send_email.attrs["data-emails"] == ADMIN_EMAIL
     assert button_send_email.attrs["data-user-email"] == email
     assert button_send_email.attrs["email_copy_id_verification_body"]
+    vote_pattern = r"http://.*/vote\?oid=([a-zA-Z0-9%-]+)"
+    match = re.search(vote_pattern, button_send_email.attrs["email_copy_id_verification_body"])
+    assert match is not None, "The vote URL is not in the email body."
+    url_vote = match.group(0)
 
     form = {
         "identity_verification": "email", # The user chooses to send the identity documents by email
@@ -293,6 +298,60 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     # @TODO check "video" option
     res = testapp.post(f'/register', form, status=200)
     assert res.status_code == 200
+    res = testapp.post(f'/logout', form, status=302)
+    assert res.status_code == 302
+    # Admin login
+    from alirpunkto.constants_and_globals import ADMIN_LOGIN, ADMIN_PASSWORD
+    from alirpunkto.secret_manager import get_secret
+    post = {'username': ADMIN_LOGIN, 'password': get_secret(ADMIN_PASSWORD), 'form.submitted': 'True'}
+    res = testapp.post('/login', post, status=302)
+    assert res.status_code == 302
+    res = res.follow()
+    assert b'Invalid username or password. Please try again' not in res.body
+    # Admin vote
+    res = testapp.get(url_vote, status=200)
+    assert res.status_code == 200
+    assert "Vote for the Candidature" in str(res.html)
+    form = res.forms[0]
+    assert form is not None, "Vote form not found."
+    # verify the form has the vote field
+    assert 'vote' in form.fields, "Vote field not found in the form."
+    # form.fields is an OrderedDict({'vote': [<Radio name="vote" id="vote_YES">], 'submit': [<Submit name="submit">]})
+    # filed the response
+    form = {
+        'vote': 'YES',
+        'submit': 'Submit'
+    }
+    res = testapp.post(url_vote, form, status=200)
+    assert res.status_code == 200
+    message = mailer.outbox[-1]
+    assert "CandidatureStates.APPROVED" in message.body, "The candidature is not approved."
+        #verify the user is in the mocked ldap
+    from alirpunkto.constants_and_globals import LDAP_USER, LDAP_PASSWORD, LDAP_BASE_DN
+    from ldap3 import SUBTREE
+    from alirpunkto.ldap_factory import get_ldap_connection
+    from alirpunkto.secret_manager import get_secret
+    conn = get_ldap_connection(LDAP_USER, get_secret(LDAP_PASSWORD))
+    res = conn.search(LDAP_BASE_DN,
+        f'(mail={email.strip()})',
+        search_scope=SUBTREE,
+        attributes=['cn', 'uid', 'isActive', 'employeeType', 'mail',
+        'preferredLanguage', 'sn', 'description'])
+    assert res == True
+    assert conn.entries[-1].mail.value == email
+    assert conn.entries[-1].employeeType.value == 'COOPERATOR'
+    assert conn.entries[-1].isActive.value == True
+    assert conn.entries[-1].cn.value == cooperator_form['pseudonym']
+    assert conn.entries[-1].sn.value == cooperator_form['fullsurname']
+    assert conn.entries[-1].preferredLanguage.value == cooperator_form['lang1']
+    assert conn.entries[-1].description.value == cooperator_form['description']
+    # due to a bug in the LDAP mock, the birthdate is not retrieved directly
+    res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','birthdate'])
+    assert conn.entries[-1].birthdate.value[0:8] == cooperator_form['date'].replace('-',"")
+    res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','secondLanguage'])
+    assert conn.entries[-1].secondLanguage.value == cooperator_form['lang2'] # why mocked ldap does not retrieve this attribute ???
+    res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','thirdLanguage'])
+    assert conn.entries[-1].thirdLanguage.value == cooperator_form['lang3'] # Mocked ldap does not retrieve this attribute ???
 
 def test_forgot_password(testapp):
     res = testapp.get('/forgot_password', status=200)
