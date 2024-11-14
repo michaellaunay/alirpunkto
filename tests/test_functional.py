@@ -151,8 +151,16 @@ def test_register_ordinary(testapp, mock_generate_math_challenges, dummy_config,
     assert conn.entries[-1].cn.value == form['pseudonym']
     assert conn.entries[-1].sn.value == form['pseudonym'] # For ordinary users, the speudonyme is stored as the sn attribute
     assert conn.entries[-1].preferredLanguage.value == form['lang1']
-    #assert conn.entries[-1].secondLanguage.value == form['lang2'] # why mocked ldap does not retrieve this attribute ???
-    #assert conn.entries[-1].thirdLanguage.value == form['lang3'] # Mocked ldap does not retrieve this attribute ???
+    res = conn.search(LDAP_BASE_DN,
+        f'(mail={email.strip()})',
+        search_scope=SUBTREE,
+        attributes=['cn', 'uid', 'secondLanguage'])
+    assert conn.entries[-1].secondLanguage.value == form['lang2'] # why mocked ldap does not retrieve this attribute with other ???
+    res = conn.search(LDAP_BASE_DN,
+        f'(mail={email.strip()})',
+        search_scope=SUBTREE,
+        attributes=['cn', 'uid', 'thirdLanguage'])    
+    assert conn.entries[-1].thirdLanguage.value == form['lang3'] # Mocked ldap does not retrieve this attribute whith other ???
 
 def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_config, dummy_request, mailer_setup):
     """Test the registration page for cooperator"""
@@ -352,6 +360,8 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     assert conn.entries[-1].secondLanguage.value == cooperator_form['lang2'] # why mocked ldap does not retrieve this attribute ???
     res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','thirdLanguage'])
     assert conn.entries[-1].thirdLanguage.value == cooperator_form['lang3'] # Mocked ldap does not retrieve this attribute ???
+    res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','nationality'])
+    assert conn.entries[-1].nationality.value == cooperator_form['nationality'] # Mocked ldap does not retrieve this attribute ???
 
 def test_forgot_password(testapp):
     res = testapp.get('/forgot_password', status=200)
