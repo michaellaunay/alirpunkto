@@ -343,8 +343,26 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     res = conn.search(LDAP_BASE_DN,
         f'(mail={email.strip()})',
         search_scope=SUBTREE,
-        attributes=['cn', 'uid', 'isActive', 'employeeType', 'mail',
+        attributes=[
+        'cn', 'uid', 'isActive', 'employeeType', 'mail',
         'preferredLanguage', 'sn', 'description'])
+    # Due to a bug in the LDAP mock, the request below does not return the attributes 
+    assert res == True
+    # Due to a bug in the LDAP mock, the request below could not return the attributes in one request
+    #uid = conn.entries[-1].uid.value
+    #res = conn.search(
+    #        LDAP_BASE_DN,
+    #        f'(uid={uid})',
+    #        attributes=[
+    #            'cn', 'mail', 'employeeType', 'sn', 'uid', 
+    #            'employeeNumber', 'isActive', 'gn', 'nationality',
+    #            'birthdate', 'preferredLanguage', 'secondLanguage',
+    #            'cooperativeBehaviourMark',
+    #            'cooperativeBehaviorMarkUpdate', 'numberSharesOwned',
+    #            'dateEndValidityYearlyContribution', 'uniqueMemberOf',
+    #            'iban', 'dateErasureAllData'
+    #        ]
+
     assert res == True
     assert conn.entries[-1].mail.value == email
     assert conn.entries[-1].employeeType.value == 'COOPERATOR'
@@ -355,7 +373,9 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     assert conn.entries[-1].description.value == cooperator_form['description']
     # due to a bug in the LDAP mock, the birthdate is not retrieved directly
     res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','birthdate'])
-    assert conn.entries[-1].birthdate.value[0:8] == cooperator_form['date'].replace('-',"")
+    year, month, day = cooperator_form['date'].split('-')
+    import datetime
+    assert conn.entries[-1].birthdate.value == datetime.datetime(int(year), int(month), int(day), tzinfo=datetime.timezone.utc) 
     res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','secondLanguage'])
     assert conn.entries[-1].secondLanguage.value == cooperator_form['lang2'] # why mocked ldap does not retrieve this attribute ???
     res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','thirdLanguage'])

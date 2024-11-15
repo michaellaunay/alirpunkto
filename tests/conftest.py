@@ -71,9 +71,9 @@ def mocked_ldap():
     birthdate_attribute = AttributeTypeInfo(
         oid='1.3.6.1.4.1.61000.1.2',
         name='birthdate',
-        description='Birth date of the individual',
-        equality='caseIgnoreMatch',
-        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{10}'),
+        description='Birth date of the individual in ISO 8601 format',
+        equality='generalizedTimeMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24{8}'),
         single_value=True
     )
 
@@ -129,8 +129,9 @@ def mocked_ldap():
     date_end_validity_yearly_contribution_attribute = AttributeTypeInfo(
         oid='1.3.6.1.4.1.61000.1.9',
         name='dateEndValidityYearlyContribution',
-        description='End Date of Validity for Yearly Contribution',
-        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{10}'),
+        description='End Date of Validity for Yearly Contribution in ISO 8601 format',
+        equality='generalizedTimeMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24{8}'),
         single_value=True
     )
 
