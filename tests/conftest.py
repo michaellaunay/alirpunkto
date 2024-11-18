@@ -73,7 +73,7 @@ def mocked_ldap():
         name='birthdate',
         description='Birth date of the individual in ISO 8601 format',
         equality='generalizedTimeMatch',
-        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24{8}'),
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24'),
         single_value=True
     )
 
@@ -131,7 +131,7 @@ def mocked_ldap():
         name='dateEndValidityYearlyContribution',
         description='End Date of Validity for Yearly Contribution in ISO 8601 format',
         equality='generalizedTimeMatch',
-        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24{8}'),
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24'),
         single_value=True
     )
 
@@ -159,7 +159,7 @@ def mocked_ldap():
         equality='generalizedTimeMatch',
         ordering='generalizedTimeOrderingMatch',
         substring='caseIgnoreSubstringsMatch',
-        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24{8}'),
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24'),
         single_value=True
     )
 
