@@ -72,8 +72,8 @@ def mocked_ldap():
         oid='1.3.6.1.4.1.61000.1.2',
         name='birthdate',
         description='Birth date of the individual in ISO 8601 format',
-        equality='generalizedTimeMatch',
-        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24'),
+        equality='caseIgnoreMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{25}'),
         single_value=True
     )
 
@@ -130,8 +130,8 @@ def mocked_ldap():
         oid='1.3.6.1.4.1.61000.1.9',
         name='dateEndValidityYearlyContribution',
         description='End Date of Validity for Yearly Contribution in ISO 8601 format',
-        equality='generalizedTimeMatch',
-        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24'),
+        equality='caseIgnoreMatch',
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{25}'),
         single_value=True
     )
 
@@ -156,10 +156,9 @@ def mocked_ldap():
         oid='1.3.6.1.4.1.61000.1.12',
         name='dateErasureAllData',
         description='Date by which the user data should be erased',
-        equality='generalizedTimeMatch',
-        ordering='generalizedTimeOrderingMatch',
+        equality='caseIgnoreMatch',
         substring='caseIgnoreSubstringsMatch',
-        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.24'),
+        syntax=extract_syntax('1.3.6.1.4.1.1466.115.121.1.15{25}'),
         single_value=True
     )
 

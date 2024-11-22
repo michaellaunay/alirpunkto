@@ -492,7 +492,7 @@ def handle_confirmed_human_state(request, candidature):
             if birthdate:
                 try:
                     parameters['birthdate'] = datetime.datetime.strptime(
-                    birthdate, '%Y-%m-%d'
+                    birthdate[:10], '%Y-%m-%d'
                     ).date()
                 except ValueError:
                     return {

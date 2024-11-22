@@ -259,7 +259,7 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
         'fullsurname': 'Doe',            # Example surname
         'description': 'A brief description about myself.',
         '__start__': 'birthdate:mapping',
-        'date': '1999-01-01',            # Example birthdate
+        'date': '1999-01-01T00:00:00Z',            # Example birthdate
         '__end__': 'birthdate:mapping',
         'nationality': 'FR',             # Example nationality (France)
         'pseudonym': 'jahndoe321',       # Example pseudonym
@@ -373,9 +373,7 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
     assert conn.entries[-1].description.value == cooperator_form['description']
     # due to a bug in the LDAP mock, the birthdate is not retrieved directly
     res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','birthdate'])
-    year, month, day = cooperator_form['date'].split('-')
-    import datetime
-    assert conn.entries[-1].birthdate.value == datetime.datetime(int(year), int(month), int(day), tzinfo=datetime.timezone.utc) 
+    assert conn.entries[-1].birthdate.value == cooperator_form['date']
     res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','secondLanguage'])
     assert conn.entries[-1].secondLanguage.value == cooperator_form['lang2'] # why mocked ldap does not retrieve this attribute ???
     res = conn.search(LDAP_BASE_DN, f'(mail={email.strip()})', search_scope=SUBTREE, attributes=['cn', 'uid','thirdLanguage'])
