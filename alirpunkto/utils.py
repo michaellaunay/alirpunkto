@@ -560,7 +560,7 @@ def update_member_from_ldap(
             new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
             new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
             if new_birthdate:
-                new_birthdate = datetime.strptime(new_birthdate, "%Y-%m-%dT%H%M%sZ")
+                new_birthdate = datetime.strptime(new_birthdate, "%Y-%m-%dT%H:%M:%SZ")
             new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
             new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
             member = get_member_by_oid(oid, request, False)
@@ -571,11 +571,11 @@ def update_member_from_ldap(
                 else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
             cooperative_behaviour_mark_update = member_entry.cooperativeBehaviorMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviorMarkUpdate') else None
             if cooperative_behaviour_mark_update:
-                cooperative_behaviour_mark_update = datetime.strptime(cooperative_behaviour_mark_update, "%Y-%m-%dT%H%M%sZ")
+                cooperative_behaviour_mark_update = datetime.strptime(cooperative_behaviour_mark_update, "%Y-%m-%dT%H:%M:%SZ")
             number_shares_owned = member_entry.numberSharesOwned.value if hasattr(member_entry, 'numberSharesOwned') else None
             date_end_validity_yearly_contribution = member_entry.dateEndValidityYearlyContribution.value if hasattr(member_entry, 'dateEndValidityYearlyContribution') else None
             if date_end_validity_yearly_contribution:
-                date_end_validity_yearly_contribution = datetime.strptime(date_end_validity_yearly_contribution, "%Y-%m-%dT%H%M%sZ")
+                date_end_validity_yearly_contribution = datetime.strptime(date_end_validity_yearly_contribution, "%Y-%m-%dT%H:%M:%SZ")
             unique_member_of = member_entry.uniqueMemberOf.value if hasattr(member_entry, 'uniqueMemberOf') else None
             iban = member_entry.iban.value if hasattr(member_entry, 'iban') else None
             date_erasure_all_data = member_entry.dateErasureAllData.value if hasattr(member_entry, 'dateErasureAllData') else None
@@ -1012,7 +1012,7 @@ def update_ldap_member(
         if 'nationality' in fields_to_update:
             attributes['nationality'] = [(MODIFY_REPLACE,[member.data.nationality])]
         if 'birthdate' in fields_to_update:
-            attributes['birthdate'] = [(MODIFY_REPLACE,[member.data.birthdate.strftime("%Y-%m-%dT%H%M%sZ")])]
+            attributes['birthdate'] = [(MODIFY_REPLACE,[member.data.birthdate.strftime("%Y-%m-%dT%H:%M:%SZ")])]
         if 'lang1' in fields_to_update:
             attributes['preferredLanguage'] = [(MODIFY_REPLACE,[member.data.lang1])]
         if 'lang2' in fields_to_update:
