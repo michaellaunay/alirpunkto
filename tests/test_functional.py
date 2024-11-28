@@ -259,7 +259,7 @@ def test_register_cooperator(testapp, mock_generate_math_challenges, dummy_confi
         'fullsurname': 'Doe',            # Example surname
         'description': 'A brief description about myself.',
         '__start__': 'birthdate:mapping',
-        'date': '1999-01-01T00:00:00Z',            # Example birthdate
+        'date': '1999-01-01T00:00:00',            # Example birthdate
         '__end__': 'birthdate:mapping',
         'nationality': 'FR',             # Example nationality (France)
         'pseudonym': 'jahndoe321',       # Example pseudonym

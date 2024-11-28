@@ -71,6 +71,9 @@ DEFAULT_SESSION_TIMEOUT: Final = int(os.getenv("DEFAULT_SESSION_TIMEOUT", 7*60*6
 
 EUROPEAN_ZONES: Final = [tz for tz in pytz.all_timezones if tz.startswith('Europe')]
 
+# LDAP Time Format
+LDAP_TIME_FORMAT: Final = "%Y-%m-%dT%H:%M:%S"
+
 def get_locales():
     """Return the list of available locales.
     Returns:
