@@ -59,7 +59,8 @@ from .constants_and_globals import (
     SITE_NAME,
     DOMAIN_NAME,
     ORGANIZATION_DETAILS,
-    LDAP_TIME_FORMAT
+    LDAP_TIME_FORMAT,
+    LDAP_TIME_LEN
 )
 from pyramid.i18n import get_localizer
 from ldap3 import (
