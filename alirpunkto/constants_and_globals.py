@@ -73,6 +73,7 @@ EUROPEAN_ZONES: Final = [tz for tz in pytz.all_timezones if tz.startswith('Europ
 
 # LDAP Time Format
 LDAP_TIME_FORMAT: Final = "%Y-%m-%dT%H:%M:%S"
+LDAP_TIME_LEN= Final = 19
 
 def get_locales():
     """Return the list of available locales.
