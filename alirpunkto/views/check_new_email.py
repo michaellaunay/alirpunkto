@@ -5,7 +5,7 @@
 from pyramid.view import view_config
 from alirpunkto.utils import (
     decrypt_oid,
-    get_candidature_by_oid,
+    get_member_by_oid,
     update_ldap_member,
 )
 
@@ -49,7 +49,7 @@ def check_new_email(request):
                 'organization_details': request.session.get('organization_details', 'AlirPunkto'),
                 'admin_email': ADMIN_EMAIL,  
             }
-        decrypted_member = get_candidature_by_oid(decrypted_oid, request)
+        decrypted_member = get_member_by_oid(decrypted_oid, request)
         if decrypted_member is None:
             log.error(f"check_new_email: Candidature not found for oid {decrypted_oid}")
             return {
