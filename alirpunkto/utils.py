@@ -60,7 +60,7 @@ from .constants_and_globals import (
     DOMAIN_NAME,
     ORGANIZATION_DETAILS,
     LDAP_TIME_FORMAT,
-    LDAP_TIME_LEN
+    LDAP_TIME_LENGTH
 )
 from pyramid.i18n import get_localizer
 from ldap3 import (
@@ -562,7 +562,7 @@ def update_member_from_ldap(
             new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
             new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
             if new_birthdate:
-                new_birthdate = new_birthdate[:LDAP_TIME_LEN]
+                new_birthdate = new_birthdate[:LDAP_TIME_LENGTH]
                 new_birthdate = datetime.strptime(new_birthdate, LDAP_TIME_FORMAT)
             new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
             new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
@@ -574,12 +574,12 @@ def update_member_from_ldap(
                 else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
             cooperative_behaviour_mark_update = member_entry.cooperativeBehaviorMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviorMarkUpdate') else None
             if cooperative_behaviour_mark_update:
-                cooperative_behaviour_mark_update = cooperative_behaviour_mark_update[:LDAP_TIME_LEN]
+                cooperative_behaviour_mark_update = cooperative_behaviour_mark_update[:LDAP_TIME_LENGTH]
                 cooperative_behaviour_mark_update = datetime.strptime(cooperative_behaviour_mark_update, LDAP_TIME_FORMAT)
             number_shares_owned = member_entry.numberSharesOwned.value if hasattr(member_entry, 'numberSharesOwned') else None
             date_end_validity_yearly_contribution = member_entry.dateEndValidityYearlyContribution.value if hasattr(member_entry, 'dateEndValidityYearlyContribution') else None
             if date_end_validity_yearly_contribution:
-                date_end_validity_yearly_contribution = date_end_validity_yearly_contribution[:LDAP_TIME_LEN]
+                date_end_validity_yearly_contribution = date_end_validity_yearly_contribution[:LDAP_TIME_LENGTH]
                 date_end_validity_yearly_contribution = datetime.strptime(date_end_validity_yearly_contribution, LDAP_TIME_FORMAT)
             unique_member_of = member_entry.uniqueMemberOf.value if hasattr(member_entry, 'uniqueMemberOf') else None
             iban = member_entry.iban.value if hasattr(member_entry, 'iban') else None

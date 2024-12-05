@@ -26,14 +26,12 @@ from alirpunkto.models.member import (
 from alirpunkto.constants_and_globals import (
     _,
     MAIL_SIGNATURE,
-    CANDIDATURE_OID,
-    MEMBER_OID,
-    SEED_LENGTH,
     log,
-    SITE_NAME,
-    DOMAIN_NAME,
     ADMIN_EMAIL,
-    ORGANIZATION_DETAILS,
+    LDAP_TIME_FORMAT,
+    LDAP_TIME_LENGTH,
+    LDAP_DATE_LENGTH,
+    LDAP_DEFAULT_HOUR,
 )
 from pyramid.i18n import Translator
 from ..utils import (
@@ -48,7 +46,6 @@ from ..utils import (
 )
 from alirpunkto.models.model_permissions import get_access_permissions
 from alirpunkto.models.permissions import Permissions
-import json
 
 @view_config(route_name='register',
              renderer='alirpunkto:templates/register.pt')
@@ -492,8 +489,9 @@ def handle_confirmed_human_state(request, candidature):
             if birthdate:
                 try:
                     parameters['birthdate'] = datetime.datetime.strptime(
-                    birthdate[:10], '%Y-%m-%d'
-                    ).date()
+                    birthdate[:LDAP_TIME_LENGTH] if len(birthdate) >= LDAP_TIME_LENGTH else (birthdate[:LDAP_DATE_LENGTH]+LDAP_DEFAULT_HOUR),
+                    LDAP_TIME_FORMAT
+                    )
                 except ValueError:
                     return {
                         'form': form.render(appstruct=appstruct),
