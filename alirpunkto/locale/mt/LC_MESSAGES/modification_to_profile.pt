@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Talba ta' Modifika tal-Profili Tiegħek</h1>
     
-    <p tal:omit-tag="textual">Hello <span tal:replace="member.firstname" tal:condition="exists:member">Isem tal-Utent</span>,</p>
+    <p tal:omit-tag="textual">Hello <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Isem tal-Utent</span>,</p>
     
     <p tal:omit-tag="textual">Irċevejna, fuq il-pjattaforma <span tal:replace="site_name">Isem is-Sit</span> ta' <span tal:replace="domain_name">Isem il-Dominju</span>, talba biex timmodifika l-profil tiegħek. Għal sikurezza tiegħek, meħtieġ li segwi link sikur biex tkompli bil-modifiki. Jekk jogħġbok ikklikkja fuq dan il-URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Link tal-Modifika tal-Profili</a> biex taġġorna l-informazzjoni tal-profil tiegħek.</p>
     

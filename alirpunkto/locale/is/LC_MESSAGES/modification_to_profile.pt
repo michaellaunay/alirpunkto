@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Breytingarbeiðni á prófílnum þínum</h1>
     
-    <p tal:omit-tag="textual">Halló <span tal:replace="member.firstname" tal:condition="exists:member">Nafn notanda</span>,</p>
+    <p tal:omit-tag="textual">Halló <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Nafn notanda</span>,</p>
     
     <p tal:omit-tag="textual">Við höfum fengið, á <span tal:replace="site_name">Nafn síðunnar</span> vettvanginum hjá <span tal:replace="domain_name">Dómain nafni</span>, beiðni um að breyta prófílnum þínum. Til að tryggja öryggi þitt krafðumst við þess að þú fylgir öruggri krók til að halda áfram með breytingarnar. Vinsamlegast smelltu á eftirfarandi URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Breyta prófíl tengill</a> til að uppfæra upplýsingarnar í prófílnum þínum.</p>
     

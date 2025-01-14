@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Jūsu profila modifikācijas pieprasījums</h1>
     
-    <p tal:omit-tag="textual">Sveiki <span tal:replace="member.firstname" tal:condition="exists:member">Lietotāja vārds</span>,</p>
+    <p tal:omit-tag="textual">Sveiki <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Lietotāja vārds</span>,</p>
     
     <p tal:omit-tag="textual">Mēs esam saņēmuši, uz <span tal:replace="site_name">Vietnes nosaukums</span> platformas no <span tal:replace="domain_name">Domēna nosaukums</span>, pieprasījumu modificēt jūsu profilu. Jūsu drošības labad mēs pieprasām, lai jūs sekojat drošam saitei, lai turpinātu modifikācijas. Lūdzu, noklikšķiniet uz šīs URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Uzlabot profila saiti</a>, lai atjauninātu savu profila informāciju.</p>
     

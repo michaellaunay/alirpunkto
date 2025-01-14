@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Profiilisi muutospyyntö</h1>
     
-    <p tal:omit-tag="textual">Hei <span tal:replace="member.firstname" tal:condition="exists:member">Käyttäjän nimi</span>,</p>
+    <p tal:omit-tag="textual">Hei <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Käyttäjän nimi</span>,</p>
     
     <p tal:omit-tag="textual">Olemme vastaanottaneet pyynnön muuttaa profiiliasi <span tal:replace="site_name">Verkkosivun nimi</span> -alustalla, joka kuuluu <span tal:replace="domain_name">Verkkotunnuksen nimi</span>. Turvallisuutesi vuoksi vaadimme, että seuraat turvallista linkkiä jatkaaksesi muutoksia. Ole hyvä ja napsauta seuraavaa URL-osoitetta <a href="${page_with_oid}" tal:attributes="href page_with_oid">Muokkaa profiilia -linkki</a> päivittääksesi profiilitietosi.</p>
     

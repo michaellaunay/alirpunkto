@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Jūsų profilio modifikacijos prašymas</h1>
     
-    <p tal:omit-tag="textual">Sveiki <span tal:replace="member.firstname" tal:condition="exists:member">Vartotojo Vardas</span>,</p>
+    <p tal:omit-tag="textual">Sveiki <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Vartotojo Vardas</span>,</p>
     
     <p tal:omit-tag="textual">Gavome prašymą modifikuoti jūsų profilį <span tal:replace="site_name">Vietos Pavadinimas</span> platformoje <span tal:replace="domain_name">Domeno Pavadinimas</span>. Jūsų saugumui reikia, kad paspaustumėte saugų nuorodą, kad galėtumėte tęsti modifikacijas. Prašome paspausti šią nuorodą <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modifikuoti profilio nuorodą</a>, kad atnaujintumėte savo profilio informaciją.</p>
     
