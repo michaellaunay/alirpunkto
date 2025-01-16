@@ -1412,6 +1412,7 @@ def send_check_new_email(
 
     template_vars = {
         'check_new_email_view':url,
+        'speudonym': member.pseudonym,
         'site_url': site_url,
         'site_name': site_name,
         'domain_name': domain_name,
