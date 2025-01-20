@@ -1396,7 +1396,7 @@ def send_check_new_email(
 
     email = member.email # The email to send to.
     localizer = get_localizer(request)
-    subject = localizer.translate(_('email_validation_subject'))
+    subject = localizer.translate(_('check_new_email_subject'))
     seed = member.email_send_status_history[-1].seed
     parameter = encrypt_oid(
         member.oid,
