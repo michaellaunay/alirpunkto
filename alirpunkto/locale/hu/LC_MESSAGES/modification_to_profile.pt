@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">A profilod módosítási kérelme</h1>
     
-    <p tal:omit-tag="textual">Szia <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Felhasználó neve</span>,</p>
+    <p tal:omit-tag="textual">Szia <span tal:define="recipient_name python:pseudonym if 'pseudonym' in globals() else (member.pseudonym if member and hasattr(member, 'pseudonym') else '') " tal:replace="recipient_name">Felhasználó neve</span>,</p>
     
     <p tal:omit-tag="textual">Megkaptuk a <span tal:replace="site_name">Webhely neve</span> platformon a <span tal:replace="domain_name">Domain név</span> kérését a profilod módosítására. A biztonságod érdekében arra kérünk, hogy kövesd a biztonságos linket a módosítások folytatásához. Kérlek, kattints az alábbi URL-re <a href="${page_with_oid}" tal:attributes="href page_with_oid">Profil módosítási link</a>, hogy frissíthesd a profilod adatait.</p>
     

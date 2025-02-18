@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual" >Jouw profielwijzigingsverzoek</h1>
     
-    <p tal:omit-tag="textual">Hallo <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Gebruikersnaam</span>,</p>
+    <p tal:omit-tag="textual">Hallo <span tal:define="recipient_name python:pseudonym if 'pseudonym' in globals() else (member.pseudonym if member and hasattr(member, 'pseudonym') else '') " tal:replace="recipient_name">Gebruikersnaam</span>,</p>
     
     <p tal:omit-tag="textual">Wij hebben op het <span tal:replace="site_name">Site Name</span> platform van <span tal:replace="domain_name">Domain Name</span> een verzoek ontvangen om jouw profiel aan te passen. Voor je veiligheid vragen we je een beveiligde link te volgen om verder te gaan met de wijzigingen. Klik op de volgende URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modify Profile Link</a> om je profielgegevens bij te werken.</p>
     

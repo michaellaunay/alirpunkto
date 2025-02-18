@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Din forespørsel om profilmodifikasjon</h1>
     
-    <p tal:omit-tag="textual">Hei <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Brukerens navn</span>,</p>
+    <p tal:omit-tag="textual">Hei <span tal:define="recipient_name python:pseudonym if 'pseudonym' in globals() else (member.pseudonym if member and hasattr(member, 'pseudonym') else '') " tal:replace="recipient_name">Brukerens navn</span>,</p>
     
     <p tal:omit-tag="textual">Vi har mottatt, på plattformen <span tal:replace="site_name">Stedets navn</span> til <span tal:replace="domain_name">Domenenavn</span>, en forespørsel om å modifisere profilen din. For din sikkerhet krever vi at du følger en sikker lenke for å fortsette med modifikasjonene. Vennligst klikk på følgende URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modifiser profil lenke</a> for å oppdatere informasjonen din om profilen.</p>
     

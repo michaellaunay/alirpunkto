@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Kërkesa për Modifikimin e Profilit Tuaj</h1>
     
-    <p tal:omit-tag="textual">Përshëndetje <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Emri i Përdoruesit</span>,</p>
+    <p tal:omit-tag="textual">Përshëndetje <span tal:define="recipient_name python:pseudonym if 'pseudonym' in globals() else (member.pseudonym if member and hasattr(member, 'pseudonym') else '') " tal:replace="recipient_name">Emri i Përdoruesit</span>,</p>
     
     <p tal:omit-tag="textual">Kemi marrë, në platformën <span tal:replace="site_name">Emri i Site-it</span> të <span tal:replace="domain_name">Emri i Domain-it</span>, një kërkesë për të modifikuar profilin tuaj. Për sigurinë tuaj, kërkojmë që të ndiqni një lidhje të sigurt për të vazhduar me modifikimet. Ju lutemi klikoni në URL-në e mëposhtme <a href="${page_with_oid}" tal:attributes="href page_with_oid">Lidhja për Modifikimin e Profilit</a> për të përditësuar informacionin e profilit tuaj.</p>
     

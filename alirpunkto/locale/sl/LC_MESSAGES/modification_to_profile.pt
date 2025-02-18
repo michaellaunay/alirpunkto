@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Vaša zahteva za spremembo profila</h1>
     
-    <p tal:omit-tag="textual">Pozdravljen(a) <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Ime uporabnika</span>,</p>
+    <p tal:omit-tag="textual">Pozdravljen(a) <span tal:define="recipient_name python:pseudonym if 'pseudonym' in globals() else (member.pseudonym if member and hasattr(member, 'pseudonym') else '') " tal:replace="recipient_name">Ime uporabnika</span>,</p>
     
     <p tal:omit-tag="textual">Prejeli smo zahtevo za spremembo vašega profila na platformi <span tal:replace="site_name">Ime strani</span> na <span tal:replace="domain_name">Ime domene</span>. Za vašo varnost zahtevamo, da sledite varni povezavi, da nadaljujete s spremembami. Prosim, kliknite na naslednjo URL povezavo <a href="${page_with_oid}" tal:attributes="href page_with_oid">Povezava za spremembo profila</a>, da posodobite informacije o svojem profilu.</p>
     

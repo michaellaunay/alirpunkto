@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Sua Solicitação de Modificação de Perfil</h1>
     
-    <p tal:omit-tag="textual">Olá <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Nome do Usuário</span>,</p>
+    <p tal:omit-tag="textual">Olá <span tal:define="recipient_name python:pseudonym if 'pseudonym' in globals() else (member.pseudonym if member and hasattr(member, 'pseudonym') else '') " tal:replace="recipient_name">Nome do Usuário</span>,</p>
     
     <p tal:omit-tag="textual">Recebemos, na plataforma <span tal:replace="site_name">Nome do Site</span> de <span tal:replace="domain_name">Nome do Domínio</span>, uma solicitação para modificar seu perfil. Para sua segurança, solicitamos que você siga um link seguro para proceder com as modificações. Por favor, clique no seguinte URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Link para Modificar Perfil</a> para atualizar as informações do seu perfil.</p>
     

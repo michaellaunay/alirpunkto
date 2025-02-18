@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Via Profilo-Modifaĝa Peto</h1>
     
-    <p tal:omit-tag="textual">Saluton <span tal:define="display_value python:pseudonym if 'pseudonym' in globals() else member.pseudonym if member and hasattr(member, 'pseudonym') else " tal:replace="display_value">Nomo de Uzanto</span>,</p>
+    <p tal:omit-tag="textual">Saluton <span tal:define="recipient_name python:pseudonym if 'pseudonym' in globals() else (member.pseudonym if member and hasattr(member, 'pseudonym') else '') " tal:replace="recipient_name">Nomo de Uzanto</span>,</p>
     
     <p tal:omit-tag="textual">Ni ricevis, sur la <span tal:replace="site_name">Nome de Loko</span> platformo de <span tal:replace="domain_name">Nomo de Domajno</span>, peton por modifi vian profilon. Por via sekureco, ni postulas, ke vi sekvu sekuran ligon por daŭrigi kun la modifoj. Bonvolu klaki sur la sekva URL <a href="${page_with_oid}" tal:attributes="href page_with_oid">Modifi Profilan Ligon</a> por ĝisdatigi viajn profilajn informojn.</p>
     
