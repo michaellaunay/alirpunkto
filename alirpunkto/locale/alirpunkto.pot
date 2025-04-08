@@ -252,7 +252,7 @@ msgid "result_label_title_A"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation A."
 
 msgid "result_input_title_A"
-msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation A that you received per e-mail."
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation A that you received per e-mail. Please check your spam folder. It is possible that the e-mail that we sent you be there."
 
 msgid "enter_result_label_B"
 msgstr "Please enter the result for mathematical operation B:"
@@ -567,6 +567,7 @@ msgstr ""
 "by the SECOND NUMBER BETWEEN 1 AND 9. Once you have the result of this multiplication, you should add to that result the THIRD NUMBER BETWEEN 1 AND 9. You should finally write down the "
 "result of this last addition in the box provided for the result of the arithmetic computation you are performing (among the four that we sent to you, identified from A to D). You should "
 "repeat the computation for all four computations sent to you by e-mail.</p>\n"
+"<p> Please check your spam folder. It is possible that the e-mail that we sent you be there.</p>\n"
 "</div>"
 
 msgid "cooperator_data_choose_verification_explanation"
@@ -664,7 +665,7 @@ msgstr ""
 "received this email in error, please inform the ${domain_name} administrator, at the following adress: ${administrator}."
 
 msgid "forget_email_in_member_list"
-msgstr "If the user exists, s/he will receive an email."
+msgstr "If the user exists, s/he will receive an email. Please check your spam folder. It is possible that the e-mail that we sent you be there."
 
 msgid "reset_password_email_subject"
 msgstr "Reset Your Password"
@@ -715,7 +716,7 @@ msgstr "The administrator is not allowed to reset his/her own password"
 
 #: alirpunkto/views/forgot_password.py:174
 msgid "forget_email_sent"
-msgstr "If the user exists, an e-mail has been sent to his/her e-mail address with a link to reset his/her password"
+msgstr "If the user exists, an e-mail has been sent to his/her e-mail address with a link to reset his/her password. Please check your spam folder. It is possible that the e-mail that we sent you be there."
 
 #: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
 msgid "password_not_match"
@@ -764,8 +765,9 @@ msgstr "Click here to receive by email a secure link to modify your profile."
 
 msgid "modification_to_profile_explanation_content"
 msgstr ""
-"To ensure the security of your data, a unique link to modify your profile will be sent to you via email. This process guarantees that only the person with access to your email address "
-"can make changes to your profile."
+"<p>To ensure the security of your data, a unique link to modify your profile will be sent to you via email. This process guarantees that only the person with access to your email address "
+"can make changes to your profile.</p>\n"
+"<p> Please check your spam folder. It is possible that the e-mail that we sent you be there.</p>\n"
 
 msgid "modification_to_profile_email_subject"
 msgstr "Link to modify your profile on the IT infrastructure of ${domain_name}"
@@ -985,7 +987,7 @@ msgid "candidature_mixed"
 msgstr ""
 "The address (URL) you used to retrieve your application process from where you interrupted it does not match the one we registered for you. (The application identification number in the "
 "session and in the URL number do not match)\n"
-"Please use only the URL from the last email you received."
+"Please use only the URL from the last email you received. Please check your spam folder. It is possible that the e-mail that we sent you be there."
 
 msgid "check_new_email"
 msgstr "You have asked to change your email address. In future, you would like to use: ${new_email}. As a result you will receive an email containing a link to validate this new address."
@@ -998,7 +1000,7 @@ msgstr "The sending of the verification email for your new address has failed"
 
 #: alirpunkto/views/modify_member.py:228
 msgid "check_new_email_send"
-msgstr "The verification email for your new address has been sent"
+msgstr "The verification email for your new address has been sent. Please check your spam folder. It is possible that the e-mail that we sent you be there."
 
 msgid "modify_member"
 msgstr "Consult or modify member"
