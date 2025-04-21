@@ -243,7 +243,7 @@ msgid "invalid_choice"
 msgstr "Your choice is not valid, please enter it again."
 
 msgid "challenge_instruction_text"
-msgstr "Please comppute the results of the following four simple mathematical operations and fill in the corresponding fields to confirm your email address."
+msgstr "Please comppute the results of the following four simple mathematical operations and fill in the corresponding fields to confirm your email address. Please check your spam folder. It is possible that the e-mail that we sent you be there."
 
 msgid "enter_result_label_A"
 msgstr "Please enter the result for mathematical operation A:"
@@ -252,7 +252,7 @@ msgid "result_label_title_A"
 msgstr "Please enter the code you received per e-mail or the result of the mathematical operation A."
 
 msgid "result_input_title_A"
-msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation A that you received per e-mail. Please check your spam folder. It is possible that the e-mail that we sent you be there."
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation A that you received per e-mail."
 
 msgid "enter_result_label_B"
 msgstr "Please enter the result for mathematical operation B:"
