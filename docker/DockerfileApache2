@@ -1,0 +1,37 @@
+# Utiliser Ubuntu 24.04 comme base
+FROM ubuntu:24.04
+
+# Désactiver l’interactivité d’apt
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Mise à jour et installation d’Apache2, Certbot et modules nécessaires
+RUN apt-get update && apt-get install -y \
+    apache2 \
+    libxml2 \
+    certbot \
+    python3-certbot-apache \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# Activer les modules Apache requis
+RUN a2enmod ssl rewrite proxy proxy_http headers
+
+# Copier le fichier de configuration Apache pour le domaine alirpunkto.com
+# Ce fichier devra être placé dans le même répertoire que ce Dockerfile
+COPY etc/apache2/sites-available/alirpunkto.com.conf /etc/apache2/sites-available/alirpunkto.com.conf
+
+# Activer le site et désactiver la configuration par défaut si souhaité
+RUN a2ensite alirpunkto.com.conf && a2dissite 000-default.conf
+
+# Copier le script d'entrypoint (voir ci-dessous)
+COPY start_apache2.sh /start_apache2.sh
+RUN chmod +x /start_apache2.sh
+
+# Exposer les ports HTTP et HTTPS
+EXPOSE 80 443
+
+# Volumes pour la persistance des certificats (et potentiellement des logs)
+VOLUME ["/etc/letsencrypt", "/var/lib/letsencrypt"]
+
+# Démarrer via le script d'entrypoint
+ENTRYPOINT ["/start_apache2.sh"]

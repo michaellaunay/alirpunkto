@@ -1,0 +1,59 @@
+# /etc/postfix/main.cf
+
+compatibility_level = 3.6
+
+# Désactivation des notifications inutiles
+biff = no
+append_dot_mydomain = no
+readme_directory = no
+
+# Paramètres TLS (utiliser des certificats valides en production)
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_use_tls = yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+# Stockage des mails au format Maildir
+home_mailbox = Maildir/
+mail_spool_directory = /var/spool/mail/
+
+# Paramètres de domaine
+myhostname = alirpunkto.com
+mydomain = alirpunkto.com
+myorigin = alirpunkto.com
+
+# Utilisé pour l'émission uniquement
+relayhost = 
+relay_domains = alirpunkto.com
+mydestination = alirpunkto.com
+
+# Interfaces réseau
+inet_interfaces = all
+
+# Réseaux autorisés (ajustez en fonction de votre environnement Docker)
+
+# Restrictions de relais pour éviter l'open relay
+#smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+smtpd_relay_restrictions = permit_mynetworks, reject
+
+# Augmenter la verbosité des logs
+debug_peer_level = 2
+debug_peer_list = 127.0.0.1
+
+# Activer le logging détaillé
+maillog_file = /var/log/mail.log
+
+# Resolution de noms
+inet_interfaces = all
+inet_protocols = ipv4
+#smtp_host_lookup = native
+#smtp_bind_address = 212.83.163.229
+
+# Améliorer la gestion DNS
+smtp_host_lookup = dns
+smtp_dns_support_level = enabled
+disable_dns_lookups = no
+
+# Modifier mynetworks pour inclure le réseau Docker
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 172.18.0.0/16

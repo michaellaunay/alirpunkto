@@ -1,0 +1,43 @@
+# Utiliser Ubuntu 24.04 comme image de base
+FROM ubuntu:24.04
+LABEL maintainer="votre.nom@example.com"
+
+# Désactiver l'interactivité d'apt
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Installer Postfix, opendkim, opendkim-tools, mailutils et quelques utilitaires (dnsutils par exemple)
+RUN apt-get update && apt-get install -y \
+    postfix \
+    opendkim \
+    opendkim-tools \
+    mailutils \
+    iproute2 \
+    postfix-policyd-spf-python \
+    dnsutils \
+    socat \
+ && rm -rf /var/lib/apt/lists/*
+
+# Créer des points de montage pour persistance des données :
+# - /etc/postfix      : pour la configuration de Postfix (fichiers de conf montés depuis l'hôte)
+# - /var/spool/postfix : pour stocker (et/ou relayer) les mails
+# - /etc/opendkim     : pour la configuration d'OpenDKIM
+# - /etc/dkimkeys     : pour stocker les clés DKIM (la clé privée ainsi que le fichier TXT à publier)
+VOLUME ["/var/spool/postfix", "/etc/dkimkeys", "/var/log"]
+
+# Copier le script d'initialisation dans l'image
+COPY start_postfix.sh /start_postfix.sh
+# Copier la configuration postfix 
+COPY etc/postfix/main.cf /etc/postfix/main.cf
+RUN chmod +x /start_postfix.sh
+
+# Copier la configuration dkim
+COPY etc/opendkim.conf /etc/opendkim.conf
+
+# Exposer le port SMTP (25)
+EXPOSE 25
+
+# Mettre à jour les packets
+RUN apt-get update && apt-get dist-upgrade -y && rm -rf /var/lib/apt/lists/*
+
+# Lancer le script d'initialisation en tant que commande par défaut
+CMD ["/start_postfix.sh"]

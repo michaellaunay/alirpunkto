@@ -1,0 +1,106 @@
+FROM ubuntu:20.04
+
+# Désactiver les interactions pendant l'installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+###########################################################################
+# 1. Configuration des locales
+###########################################################################
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends locales && \
+    locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8
+
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+###########################################################################
+# 2. Installation des outils d'authentification et de gestion VCS
+###########################################################################
+# On installe ici subversion
+# ainsi que gnupg2, gpg-agent et pinentry-curses pour la gestion des signatures.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      subversion \
+      gnupg2 \
+      gpg-agent \
+      pinentry-curses
+
+###########################################################################
+# 3. Installation des dépendances de compilation et Python2
+###########################################################################
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      wget curl build-essential \
+      python2 python2-dev python-is-python2 \
+      python-setuptools \
+      libxml2-dev libxslt1-dev zlib1g-dev libssl-dev libjpeg-dev libreadline-dev \
+      graphviz libpcre3 libpcre3-dev libpcrecpp0v5 \
+      libbz2-dev libzip-dev libsqlite3-dev \
+      libfreetype6-dev libtiff-dev libncurses5-dev libmysqlclient-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+###########################################################################
+# 4. Installation d'extensions optionnelles (memcached)
+###########################################################################
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      libmemcached11 libmemcached-dev memcached && \
+    rm -rf /var/lib/apt/lists/*
+
+###########################################################################
+# 5. Installation d'utilitaires complémentaires
+###########################################################################
+# On installe ici net-tools, ca-certificates 
+# et vim pour l'édition.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      net-tools ca-certificates vim && \
+    update-ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+# Installation de git (pour compléter la gestion VCS déjà présente avec subversion)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git && \
+    rm -rf /var/lib/apt/lists/*
+
+###########################################################################
+# 6. Création de l'utilisateur « zope »
+###########################################################################
+# Le premier Dockerfile utilisait UID/GID 1001.
+RUN groupadd -g 1001 zope && \
+    useradd -m -u 1001 -g 1001 -s /bin/bash zope
+
+# Création du répertoire de travail et attribution des droits
+RUN mkdir -p /home/zope && chown zope:zope /home/zope
+WORKDIR /home/zope
+
+###########################################################################
+# 6.1 Outils de debogage réseau, si nécessaire
+###########################################################################
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      telnet net-tools dnsutils && \
+     rm -rf /var/lib/apt/lists/*
+
+###########################################################################
+# 7. Déclaration du volume
+###########################################################################
+VOLUME ["/opt/alirpunkto"]
+
+###########################################################################
+# 8. Copie du script start_zope.sh et permission d'exécution
+###########################################################################
+COPY start_zope.sh /start_zope.sh
+RUN chmod +x /start_zope.sh
+
+###########################################################################
+# 9. Passage à l'utilisateur « zope »
+###########################################################################
+USER zope
+
+# On définit le script comme point d'entrée (ENTRYPOINT) ===
+ENTRYPOINT ["/start_zope.sh"]
+
+CMD []
+
