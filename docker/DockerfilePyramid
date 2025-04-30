@@ -1,7 +1,24 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # Désactiver les interactions pendant l'installation
 ENV DEBIAN_FRONTEND=noninteractive
+
+# Documentation sur l'utilisation des options de débogage
+# Pour construire l'image avec les outils de débogage :
+#   docker build --build-arg BUILD_WITH_DEBUG=1 -t alirpunkto:debug .
+# 
+# Pour construire l'image sans les outils de débogage (par défaut) :
+#   docker build -t alirpunkto:prod .
+# 
+# Pour exécuter le conteneur en spécifiant la variable après la construction :
+#   docker run -e BUILD_WITH_DEBUG=1 -p 6543:6543 alirpunkto:prod
+#   docker run -e BUILD_WITH_DEBUG=0 -p 6543:6543 alirpunkto:debug
+#
+# Pour utiliser vos propres fichiers (sans clonage automatique du dépôt) :
+#   docker run -v $(pwd):/home/alirpunkto/app -p 6543:6543 alirpunkto:prod
+#
+# Pour ne monter que le répertoire var pour la persistance des données :
+#   docker run -v $(pwd)/var:/home/alirpunkto/app/var -p 6543:6543 alirpunkto:prod
 
 ###########################################################################
 # 1. Configuration des locales
@@ -17,27 +34,28 @@ ENV LC_ALL en_US.UTF-8
 ###########################################################################
 # 2. Installation des outils d'authentification et de gestion VCS
 ###########################################################################
-# On installe ici subversion
+# On installe git pour la gestion de version
 # ainsi que gnupg2, gpg-agent et pinentry-curses pour la gestion des signatures.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      subversion \
+      git \
       gnupg2 \
       gpg-agent \
       pinentry-curses
 
 ###########################################################################
-# 3. Installation des dépendances de compilation et Python2
+# 3. Installation des dépendances de compilation et Python3
 ###########################################################################
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       wget curl build-essential \
-      python2 python2-dev python-is-python2 \
-      python-setuptools \
+      python3 python3-dev python3-pip python3-venv \
+      python3-setuptools python3-wheel \
       libxml2-dev libxslt1-dev zlib1g-dev libssl-dev libjpeg-dev libreadline-dev \
       graphviz libpcre3 libpcre3-dev libpcrecpp0v5 \
       libbz2-dev libzip-dev libsqlite3-dev \
-      libfreetype6-dev libtiff-dev libncurses5-dev libmysqlclient-dev && \
+      libfreetype6-dev libtiff-dev libncurses5-dev \
+      libldap2-dev libsasl2-dev && \
     rm -rf /var/lib/apt/lists/*
 
 ###########################################################################
@@ -49,58 +67,79 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ###########################################################################
-# 5. Installation d'utilitaires complémentaires
+# 5. Variable d'environnement pour les outils de débogage
 ###########################################################################
-# On installe ici net-tools, ca-certificates 
-# et vim pour l'édition.
+# Cette variable peut être définie lors du build ou du run
+# BUILD_WITH_DEBUG=1 docker build ...
+# ou
+# docker run -e BUILD_WITH_DEBUG=1 ...
+ARG BUILD_WITH_DEBUG=0
+ENV BUILD_WITH_DEBUG=${BUILD_WITH_DEBUG}
+
+###########################################################################
+# 5.1 Installation d'utilitaires de base
+###########################################################################
+# On installe toujours ca-certificates qui est essentiel
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-      net-tools ca-certificates vim && \
+    apt-get install -y --no-install-recommends ca-certificates && \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
-# Installation de git (pour compléter la gestion VCS déjà présente avec subversion)
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends git && \
-    rm -rf /var/lib/apt/lists/*
+###########################################################################
+# 5.2 Installation conditionnelle d'utilitaires complémentaires
+###########################################################################
+# Installation conditionnelle de net-tools et vim pour l'édition
+RUN if [ "$BUILD_WITH_DEBUG" = "1" ] ; then \
+        apt-get update && \
+        apt-get install -y --no-install-recommends \
+          net-tools vim && \
+        rm -rf /var/lib/apt/lists/* ; \
+    fi
 
 ###########################################################################
-# 6. Création de l'utilisateur « zope »
+# 5.3 Outils de débogage réseau, installés conditionnellement
 ###########################################################################
-# Le premier Dockerfile utilisait UID/GID 1001.
-RUN groupadd -g 1001 zope && \
-    useradd -m -u 1001 -g 1001 -s /bin/bash zope
+RUN if [ "$BUILD_WITH_DEBUG" = "1" ] ; then \
+        apt-get update && \
+        apt-get install -y --no-install-recommends \
+          telnet dnsutils iputils-ping curl && \
+        rm -rf /var/lib/apt/lists/* ; \
+    fi
+
+###########################################################################
+# 6. Création de l'utilisateur « alirpunkto »
+###########################################################################
+RUN groupadd -g 1001 alirpunkto && \
+    useradd -m -u 1001 -g 1001 -s /bin/bash alirpunkto
 
 # Création du répertoire de travail et attribution des droits
-RUN mkdir -p /home/zope && chown zope:zope /home/zope
-WORKDIR /home/zope
+RUN mkdir -p /home/alirpunkto/app && chown -R alirpunkto:alirpunkto /home/alirpunkto
+WORKDIR /home/alirpunkto/app
 
 ###########################################################################
-# 6.1 Outils de debogage réseau, si nécessaire
+# 7. Configuration du volume et préparation des scripts
 ###########################################################################
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-      telnet net-tools dnsutils && \
-     rm -rf /var/lib/apt/lists/*
+# Le volume sera créé s'il n'existe pas déjà
+# Si aucun montage n'est effectué, le script de démarrage clonera le dépôt
+VOLUME ["/home/alirpunkto/app/var"]
+
+# Copie du script de démarrage et permission d'exécution
+COPY start_pyramid.sh /start_pyramid.sh
+RUN chmod +x /start_pyramid.sh && \
+    chown alirpunkto:alirpunkto /start_pyramid.sh
+
+# S'assurer que l'utilisateur alirpunkto a les droits nécessaires
+RUN chown -R alirpunkto:alirpunkto /home/alirpunkto
 
 ###########################################################################
-# 7. Déclaration du volume
+# 8. Passage à l'utilisateur « alirpunkto »
 ###########################################################################
-VOLUME ["/opt/alirpunkto"]
+USER alirpunkto
 
-###########################################################################
-# 8. Copie du script start_zope.sh et permission d'exécution
-###########################################################################
-COPY start_zope.sh /start_zope.sh
-RUN chmod +x /start_zope.sh
+# Exposer le port pour waitress
+EXPOSE 6543
 
-###########################################################################
-# 9. Passage à l'utilisateur « zope »
-###########################################################################
-USER zope
+# On définit le script comme point d'entrée (ENTRYPOINT)
+ENTRYPOINT ["/start_pyramid.sh"]
 
-# On définit le script comme point d'entrée (ENTRYPOINT) ===
-ENTRYPOINT ["/start_zope.sh"]
-
-CMD []
-
+CMD ["production.ini"]
