@@ -1,27 +1,27 @@
 FROM ubuntu:22.04
 
-# Désactiver les interactions pendant l'installation
+# Disable interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Documentation sur l'utilisation des options de débogage
-# Pour construire l'image avec les outils de débogage :
+# Documentation on using debugging options
+# To build the image with debugging tools:
 #   docker build --build-arg BUILD_WITH_DEBUG=1 -t alirpunkto:debug .
 # 
-# Pour construire l'image sans les outils de débogage (par défaut) :
+# To build the image without debugging tools (default):
 #   docker build -t alirpunkto:prod .
 # 
-# Pour exécuter le conteneur en spécifiant la variable après la construction :
+# To run the container specifying the variable after building:
 #   docker run -e BUILD_WITH_DEBUG=1 -p 6543:6543 alirpunkto:prod
 #   docker run -e BUILD_WITH_DEBUG=0 -p 6543:6543 alirpunkto:debug
 #
-# Pour utiliser vos propres fichiers (sans clonage automatique du dépôt) :
+# To use your own files (without automatic repository cloning):
 #   docker run -v $(pwd):/home/alirpunkto/app -p 6543:6543 alirpunkto:prod
 #
-# Pour ne monter que le répertoire var pour la persistance des données :
+# To mount only the var directory for data persistence:
 #   docker run -v $(pwd)/var:/home/alirpunkto/app/var -p 6543:6543 alirpunkto:prod
 
 ###########################################################################
-# 1. Configuration des locales
+# 1. Locale configuration
 ###########################################################################
 RUN apt-get update && \
     apt-get install -y --no-install-recommends locales && \
@@ -32,10 +32,10 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 ###########################################################################
-# 2. Installation des outils d'authentification et de gestion VCS
+# 2. Installation of authentication and version control tools
 ###########################################################################
-# On installe git pour la gestion de version
-# ainsi que gnupg2, gpg-agent et pinentry-curses pour la gestion des signatures.
+# Installing git for version control
+# as well as gnupg2, gpg-agent and pinentry-curses for signature management
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       git \
@@ -44,7 +44,7 @@ RUN apt-get update && \
       pinentry-curses
 
 ###########################################################################
-# 3. Installation des dépendances de compilation et Python3
+# 3. Installation of compilation dependencies and Python3
 ###########################################################################
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -59,7 +59,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ###########################################################################
-# 4. Installation d'extensions optionnelles (memcached)
+# 4. Installation of optional extensions (memcached)
 ###########################################################################
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -67,28 +67,28 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 ###########################################################################
-# 5. Variable d'environnement pour les outils de débogage
+# 5. Environment variable for debugging tools
 ###########################################################################
-# Cette variable peut être définie lors du build ou du run
+# This variable can be defined during build or run
 # BUILD_WITH_DEBUG=1 docker build ...
-# ou
+# or
 # docker run -e BUILD_WITH_DEBUG=1 ...
 ARG BUILD_WITH_DEBUG=0
 ENV BUILD_WITH_DEBUG=${BUILD_WITH_DEBUG}
 
 ###########################################################################
-# 5.1 Installation d'utilitaires de base
+# 5.1 Installation of basic utilities
 ###########################################################################
-# On installe toujours ca-certificates qui est essentiel
+# Always install ca-certificates which is essential
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates && \
     update-ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 ###########################################################################
-# 5.2 Installation conditionnelle d'utilitaires complémentaires
+# 5.2 Conditional installation of complementary utilities
 ###########################################################################
-# Installation conditionnelle de net-tools et vim pour l'édition
+# Conditional installation of net-tools and vim for editing
 RUN if [ "$BUILD_WITH_DEBUG" = "1" ] ; then \
         apt-get update && \
         apt-get install -y --no-install-recommends \
@@ -97,7 +97,7 @@ RUN if [ "$BUILD_WITH_DEBUG" = "1" ] ; then \
     fi
 
 ###########################################################################
-# 5.3 Outils de débogage réseau, installés conditionnellement
+# 5.3 Network debugging tools, conditionally installed
 ###########################################################################
 RUN if [ "$BUILD_WITH_DEBUG" = "1" ] ; then \
         apt-get update && \
@@ -107,39 +107,39 @@ RUN if [ "$BUILD_WITH_DEBUG" = "1" ] ; then \
     fi
 
 ###########################################################################
-# 6. Création de l'utilisateur « alirpunkto »
+# 6. Creation of the "alirpunkto" user
 ###########################################################################
 RUN groupadd -g 1001 alirpunkto && \
     useradd -m -u 1001 -g 1001 -s /bin/bash alirpunkto
 
-# Création du répertoire de travail et attribution des droits
+# Creation of the working directory and assignment of permissions
 RUN mkdir -p /home/alirpunkto/app && chown -R alirpunkto:alirpunkto /home/alirpunkto
 WORKDIR /home/alirpunkto/app
 
 ###########################################################################
-# 7. Configuration du volume et préparation des scripts
+# 7. Volume configuration and script preparation
 ###########################################################################
-# Le volume sera créé s'il n'existe pas déjà
-# Si aucun montage n'est effectué, le script de démarrage clonera le dépôt
+# The volume will be created if it doesn't already exist
+# If no mounting is performed, the startup script will clone the repository
 VOLUME ["/home/alirpunkto/app/var"]
 
-# Copie du script de démarrage et permission d'exécution
+# Copy the startup script and set execution permissions
 COPY start_pyramid.sh /start_pyramid.sh
 RUN chmod +x /start_pyramid.sh && \
     chown alirpunkto:alirpunkto /start_pyramid.sh
 
-# S'assurer que l'utilisateur alirpunkto a les droits nécessaires
+# Ensure the alirpunkto user has the necessary permissions
 RUN chown -R alirpunkto:alirpunkto /home/alirpunkto
 
 ###########################################################################
-# 8. Passage à l'utilisateur « alirpunkto »
+# 8. Switch to the "alirpunkto" user
 ###########################################################################
 USER alirpunkto
 
-# Exposer le port pour waitress
+# Expose the port for waitress
 EXPOSE 6543
 
-# On définit le script comme point d'entrée (ENTRYPOINT)
+# Set the script as the entry point
 ENTRYPOINT ["/start_pyramid.sh"]
 
 CMD ["production.ini"]

@@ -2,95 +2,95 @@
 
 set -e
 
-# Ce script permet de démarrer l'application Pyramid Alirpunkto
+# This script starts the Pyramid Alirpunkto application
 
-# Vérification du mode débogage
+# Check debug mode
 if [ "$BUILD_WITH_DEBUG" = "1" ]; then
-    echo "Mode débogage activé - outils complémentaires disponibles (vim, net-tools, telnet, dnsutils, etc.)"
+    echo "Debug mode enabled - additional tools available (vim, net-tools, telnet, dnsutils, etc.)"
 else
-    echo "Mode débogage désactivé - fonctionnement minimal"
+    echo "Debug mode disabled - minimal functionality"
 fi
 
-# Vérification si le répertoire de l'application est vide (aucun fichier Pyramid)
+# Check if the application directory is empty (no Pyramid files)
 APP_DIR="/home/alirpunkto/app"
 if [ ! -f "${APP_DIR}/setup.py" ] || [ ! -d "${APP_DIR}/alirpunkto" ]; then
-    echo "Le répertoire de l'application semble vide ou incomplet. Clonage du dépôt Git..."
+    echo "The application directory appears empty or incomplete. Cloning Git repository..."
     
-    # Sauvegarde de tout fichier .env existant
+    # Backup any existing .env file
     if [ -f "${APP_DIR}/.env" ]; then
         cp "${APP_DIR}/.env" /tmp/.env.backup
     fi
     
-    # Nettoyage du répertoire (sauf var/ si existant)
+    # Clean the directory (except var/ if it exists)
     find "${APP_DIR}" -mindepth 1 -maxdepth 1 -not -name "var" -exec rm -rf {} \;
     
-    # Clonage du dépôt Git
+    # Clone the Git repository
     git clone https://github.com/michaellaunay/alirpunkto.git /tmp/alirpunkto
     
-    # Copie des fichiers du dépôt vers le répertoire de l'application
+    # Copy the repository files to the application directory
     cp -a /tmp/alirpunkto/. "${APP_DIR}/"
     rm -rf /tmp/alirpunkto
     
-    # Restauration du fichier .env s'il existait
+    # Restore the .env file if it existed
     if [ -f "/tmp/.env.backup" ]; then
         cp /tmp/.env.backup "${APP_DIR}/.env"
         rm /tmp/.env.backup
     fi
     
-    echo "Dépôt Git cloné avec succès."
+    echo "Git repository cloned successfully."
 fi
 
-# Vérification de l'existence du répertoire var
+# Check for the existence of the var directory
 if [ ! -d "${APP_DIR}/var" ]; then
-    echo "Création du répertoire var et de ses sous-répertoires..."
+    echo "Creating var directory and its subdirectories..."
     mkdir -p "${APP_DIR}/var/log" "${APP_DIR}/var/datas" "${APP_DIR}/var/filestorage" "${APP_DIR}/var/sessions"
     chown -R alirpunkto:alirpunkto "${APP_DIR}/var"
 fi
 
-# Vérification des dossiers nécessaires
+# Check for necessary folders
 mkdir -p "${APP_DIR}/var/log" "${APP_DIR}/var/datas" "${APP_DIR}/var/filestorage" "${APP_DIR}/var/sessions"
 
-# Vérification du fichier .env
+# Check for .env file
 if [ ! -f "${APP_DIR}/.env" ]; then
-    echo "Fichier .env non trouvé, création d'un fichier exemple..."
+    echo ".env file not found, creating an example file..."
     if [ -f "${APP_DIR}/.env.example" ]; then
         cp "${APP_DIR}/.env.example" "${APP_DIR}/.env"
-        echo "Veuillez modifier le fichier .env avec vos paramètres personnalisés."
+        echo "Please modify the .env file with your custom parameters."
     else
-        echo "ATTENTION: Fichier .env.example non trouvé. Impossible de créer un .env par défaut."
+        echo "WARNING: .env.example file not found. Unable to create a default .env."
     fi
 fi
 
-# Vérification que le fichier de configuration existe
+# Check if the configuration file exists
 if [ ! -f "$1" ]; then
-    echo "Erreur: Le fichier de configuration $1 n'existe pas!"
+    echo "Error: Configuration file $1 doesn't exist!"
     echo "Usage: start_pyramid.sh [config.ini]"
     exit 1
 fi
 
-# Vérification/création de l'environnement virtuel Python
+# Check/create Python virtual environment
 VENV_DIR="/home/alirpunkto/venv"
 if [ ! -d "$VENV_DIR" ] || [ ! -f "${VENV_DIR}/bin/activate" ]; then
-    echo "Création d'un nouvel environnement virtuel Python..."
+    echo "Creating a new Python virtual environment..."
     python3 -m venv "$VENV_DIR"
     source "${VENV_DIR}/bin/activate"
     pip install --upgrade pip setuptools wheel
     
-    # Installation du package en mode éditable si setup.py existe
+    # Install the package in editable mode if setup.py exists
     if [ -f "${APP_DIR}/setup.py" ]; then
-        echo "Installation du package alirpunkto..."
+        echo "Installing the alirpunkto package..."
         pip install -e "${APP_DIR}/[testing]"
     else
-        echo "ATTENTION: setup.py non trouvé. L'installation du package a échoué."
+        echo "WARNING: setup.py not found. Package installation failed."
     fi
 else
-    echo "Utilisation de l'environnement virtuel existant."
+    echo "Using existing virtual environment."
     source "${VENV_DIR}/bin/activate"
 fi
 
-# Activation de l'environnement virtuel Python
+# Activate Python virtual environment
 source "${VENV_DIR}/bin/activate"
 
-# Exécution de l'application avec pserve
-echo "Démarrage de l'application Alirpunkto avec la configuration: $1"
+# Run the application with pserve
+echo "Starting the Alirpunkto application with configuration: $1"
 exec pserve "$@"
