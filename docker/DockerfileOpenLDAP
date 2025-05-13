@@ -1,0 +1,37 @@
+FROM ubuntu:22.04
+
+# Avoid interactive prompts during installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update package lists and install OpenLDAP server, client utilities and ldapvi
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        slapd \
+        ldap-utils \
+        ldapvi \
+        ca-certificates \
+        ssl-cert \
+        vim \
+        schema2ldif \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create directory for startup scripts
+RUN mkdir -p /docker-entrypoint-initdb.d
+
+# Create startup script to initialize LDAP if needed
+COPY ./start_ldap.sh /
+RUN chmod +x /start_ldap.sh
+
+# Create volume for LDAP configuration
+VOLUME ["/etc/ldap", "/var/lib/ldap"]
+
+# Expose LDAP and LDAPS ports
+EXPOSE 389 636
+
+# Set the entrypoint to our custom start script
+ENTRYPOINT ["/start_ldap.sh"]
+
+# Default command - keep the container running
+CMD ["slapd", "-h", "ldap:/// ldapi:/// ldaps:///", "-g", "openldap", "-u", "openldap", "-d", "256"]
