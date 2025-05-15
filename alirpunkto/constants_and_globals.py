@@ -77,6 +77,10 @@ LDAP_TIME_LENGTH: Final = 19
 LDAP_DATE_LENGTH: Final = 10
 LDAP_DEFAULT_HOUR: Final = "T12:00:00"
 
+# LDAP test contener
+USE_DOCKER_LDAP: Final = os.getenv("USE_DOCKER_LDAP", "").lower() in ['true', '1', 'yes', 'y']
+DOCKER_LDAP_PORT: Final = int(os.getenv("DOCKER_LDAP_PORT", "3389"))
+
 def get_locales():
     """Return the list of available locales.
     Returns:

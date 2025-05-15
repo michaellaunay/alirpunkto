@@ -26,6 +26,7 @@ from alirpunkto.constants_and_globals import (
     CANDIDATURE_OID,
     MEMBER_OID,
     ACCESSED_MEMBER_OID,
+    LDAP_ADMIN_OID
 )
 from alirpunkto.schemas.register_form import RegisterForm
 from pyramid.i18n import Translator
@@ -75,6 +76,14 @@ def modify_member(request):
         if user:
             oid = json.loads(user).get("oid", None)
     if oid:
+        if oid == LDAP_ADMIN_OID:
+            return {
+                "form": None,
+                "member": None,
+                "accessed_member": None,
+                "accessed_members": members,
+                "error": _('system_admin_cannot_modify_member'),
+            }
         member = get_member_by_oid(oid, request, True)
         if not member:
             member = update_member_from_ldap(oid, request)

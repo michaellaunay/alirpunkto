@@ -503,6 +503,9 @@ def get_member_by_oid(
     Returns:
         Member: the member or None if not found or not a Member
     """
+    if oid == LDAP_ADMIN_OID:
+        # The admin is not an ldap member
+        return None
     members = get_members(request)
     member = members[oid] if oid in members else None
     if update and not isinstance(member, Member):
@@ -728,7 +731,7 @@ def get_potential_voters(conn: Connection) -> List[Dict[str, str]]:
     return conn.entries
 
 def get_admin_user()->  User:
-        """return the admin User from the sttings.
+        """return the admin User from the settings.
         Args:
             request (pyramid.request.Request): the request
         Returns:
@@ -739,6 +742,7 @@ def get_admin_user()->  User:
         oid = LDAP_ADMIN_OID
         admin_user = User(name, mail, oid)
         return admin_user
+
 
 def random_voters(request: Request) -> List[Dict[str, str]]:
     """

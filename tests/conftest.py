@@ -14,20 +14,24 @@
 # - dummy_config: Returns a dummy Configurator object for mock configuration and pushing threadlocals.
 
 import os
+import time
+import socket
+import subprocess
 from pyramid.paster import get_appsettings
 from pyramid.scripting import prepare
 from pyramid.testing import DummyRequest, testConfig, setUp
 from pyramid_mailer.testing import DummyMailer
 
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 import pytest
 import transaction
 import webtest
-from ldap3 import MOCK_SYNC
+from ldap3 import MOCK_SYNC, ALL, SUBTREE
 from ldap3.protocol.rfc4512 import AttributeTypeInfo, ObjectClassInfo
 
 def pytest_addoption(parser):
     parser.addoption('--ini', action='store', metavar='INI_FILE')
+    parser.addoption('--use-docker-ldap', action='store_true', help='Use Docker LDAP container for testing')
 
 @pytest.fixture(scope='session')
 def ini_file(request):
@@ -38,14 +42,171 @@ def ini_file(request):
 def app_settings(ini_file):
     return get_appsettings(ini_file)
 
+def is_port_in_use(port, host='localhost'):
+    """Check if a port is in use"""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        return s.connect_ex((host, port)) == 0
 
 @pytest.fixture(scope='session', autouse=True)
-def mocked_ldap():
-    """Fixture to mock an OpenLDAP server and connection with recorded exchanges."""
-    # Create a mock server with OpenLDAP schema
+def ldap_server(request):
+    """
+    Fixture to either use a Docker LDAP container or mock LDAP based on options.
+    """
+    use_docker = request.config.getoption('--use-docker-ldap', False)
+    
+    if use_docker:
+        # Set environment variable to indicate Docker LDAP usage
+        os.environ['USE_DOCKER_LDAP'] = 'true'
+        
+        # Check if the LDAP container is already running
+        ldap_port = 3389
+        if is_port_in_use(ldap_port):
+            print(f"LDAP port {ldap_port} already in use, assuming container is running")
+            # Wait a bit to ensure the LDAP server is fully initialized
+            time.sleep(2)
+            return setup_real_ldap_connection()
+        
+        # Start the LDAP container using docker-compose
+        print("Starting LDAP test container...")
+        try:
+            subprocess.run(
+                ["docker-compose", "-f", "docker-compose.test.yml", "up", "-d"],
+                check=True
+            )
+            
+            # Wait for LDAP to be ready
+            max_attempts = 30
+            for attempt in range(max_attempts):
+                try:
+                    if is_port_in_use(ldap_port):
+                        time.sleep(5)  # Give a bit more time for LDAP to fully initialize
+                        conn = setup_real_ldap_connection()
+                        print("LDAP container is up and running")
+                        
+                        # Register the finalizer to stop the container
+                        def finalizer():
+                            print("Stopping LDAP test container...")
+                            subprocess.run(
+                                ["docker-compose", "-f", "docker-compose.test.yml", "down"],
+                                check=False
+                            )
+                        request.addfinalizer(finalizer)
+                        
+                        return conn
+                except Exception as e:
+                    print(f"Waiting for LDAP to be ready, attempt {attempt+1}/{max_attempts}: {e}")
+                    time.sleep(2)
+            
+            raise Exception("LDAP container failed to start and be ready in time")
+        except Exception as e:
+            print(f"Error starting LDAP container: {e}")
+            # If there was an error starting the container, fall back to the mock
+            os.environ['USE_DOCKER_LDAP'] = 'false'
+            return setup_mock_ldap()
+    else:
+        # Ensure the environment variable is set to false
+        os.environ['USE_DOCKER_LDAP'] = 'false'
+        return setup_mock_ldap()
+
+def setup_real_ldap_connection():
+    """Set up a connection to the real LDAP test container"""
+    from alirpunkto.constants_and_globals import LDAP_BASE_DN
+    from alirpunkto.ldap_factory import get_ldap_connection
+    from alirpunkto.secret_manager import get_secret
+    
+    # Get credentials from environment or use defaults for the test container
+    admin_dn = f"cn=admin,{LDAP_BASE_DN}"
+    admin_password = os.environ.get('LDAP_ADMIN_PASSWORD', 'test_password')
+    
+    # Connect to the LDAP server
+    conn = get_ldap_connection(
+        ldap_user=admin_dn,
+        ldap_password=admin_password,
+        ldap_auto_bind=True,
+        ldap_use_ssl=False,
+        ldap_server='localhost',
+        ldap_port=3389
+    )
+    
+    # Initialize test data
+    initialize_ldap_for_tests(conn, LDAP_BASE_DN)
+    
+    return conn
+
+def initialize_ldap_for_tests(conn, base_dn):
+    """Initialize the LDAP server with necessary test data"""
+    try:
+        # Check if the base DN exists
+        conn.search(base_dn, '(objectClass=*)', search_scope=SUBTREE)
+        if not conn.entries:
+            conn.add(base_dn, ['top', 'dcObject', 'organization'], 
+                    {'dc': base_dn.split(',')[0].split('=')[1], 'o': 'Test Organization'})
+            print(f"Created base DN: {base_dn}")
+        
+        # Create organizational units if they don't exist
+        for ou in ['users', 'groups']:
+            ou_dn = f'ou={ou},{base_dn}'
+            conn.search(ou_dn, '(objectClass=*)', search_scope=SUBTREE)
+            if not conn.entries:
+                conn.add(ou_dn, ['top', 'organizationalUnit'], {'ou': ou})
+                print(f"Created OU: {ou_dn}")
+        
+        # Create required groups
+        create_test_groups(conn, base_dn)
+        
+        # Ensure admin user exists
+        from alirpunkto.constants_and_globals import ADMIN_LOGIN, ADMIN_PASSWORD, LDAP_ADMIN_OID
+        from alirpunkto.secret_manager import get_secret
+        
+        admin_dn = f"cn={ADMIN_LOGIN},ou=users,{base_dn}"
+        conn.search(admin_dn, '(objectClass=*)', search_scope=SUBTREE)
+        if not conn.entries:
+            conn.add(admin_dn, 
+                attributes={
+                    'objectClass': ['top', 'person', 'organizationalPerson', 'inetOrgPerson'],
+                    'cn': ADMIN_LOGIN,
+                    'sn': ADMIN_LOGIN,
+                    'uid': LDAP_ADMIN_OID,
+                    'userPassword': get_secret(ADMIN_PASSWORD)
+                }
+            )
+            print(f"Created admin user: {admin_dn}")
+    
+    except Exception as e:
+        print(f"Error initializing LDAP for tests: {e}")
+        raise
+
+def create_test_groups(conn, base_dn):
+    """Create the necessary groups for testing"""
+    from alirpunkto.constants_and_globals import LDAP_ADMIN_OID, ADMIN_LOGIN
+    
+    admin_dn = f"cn={ADMIN_LOGIN},ou=users,{base_dn}"
+    
+    groups = [
+        {"name": "ordinaryMembersGroup", "description": "Group for ordinary members"},
+        {"name": "cooperatorsGroup", "description": "Group for cooperators"}
+    ]
+    
+    for group in groups:
+        group_dn = f"cn={group['name']},ou=groups,{base_dn}"
+        conn.search(group_dn, '(objectClass=*)', search_scope=SUBTREE)
+        if not conn.entries:
+            conn.add(group_dn, 
+                attributes={
+                    'objectClass': ['top', 'groupOfUniqueNames'],
+                    'cn': group['name'],
+                    'description': group['description'],
+                    'uniqueMember': admin_dn
+                }
+            )
+            print(f"Created group: {group_dn}")
+
+def setup_mock_ldap():
+    """Set up the mock LDAP for testing when Docker is not available"""
     from alirpunkto.constants_and_globals import LDAP_LOGIN, LDAP_USER, LDAP_PASSWORD, ADMIN_PASSWORD, LDAP_BASE_DN
     from alirpunkto.ldap_factory import get_ldap_connection
     from alirpunkto.secret_manager import get_secret
+    
     conn = get_ldap_connection(ldap_user=LDAP_USER,
         ldap_password=get_secret(LDAP_PASSWORD),
         ldap_client_strategy=MOCK_SYNC)
@@ -208,7 +369,6 @@ def mocked_ldap():
     server = get_ldap_server()
     server._schema_info = schema_info  # Replace the schema with the alirpunkto's schema
    
-
     # Add entries to the mock server
     # Root entry with OpenLDAP-specific object classes
     conn.strategy.add_entry(LDAP_BASE_DN, {
@@ -225,10 +385,12 @@ def mocked_ldap():
         'userPassword': get_secret(LDAP_PASSWORD)
     })
 
-    # The strategy automatically records all requests and responses
-    # Access them via conn.strategy.requests and conn.strategy.responses
-
     return conn
+
+@pytest.fixture(scope='session')
+def mocked_ldap(ldap_server):
+    """Alias for backward compatibility"""
+    return ldap_server
 
 @pytest.fixture
 def tm():
@@ -335,4 +497,3 @@ def dummy_config(dummy_request):
 def app(app_settings):
     from alirpunkto import main
     return main({}, **app_settings)
-

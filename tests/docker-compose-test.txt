@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  ldap-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: alirpunkto-ldap-test
+    environment:
+      - LDAP_ADMIN_PASSWORD=test_password
+      - TEST_MODE=1
+    ports:
+      - "3389:389"  # Utiliser un port non standard pour éviter les conflits
+    volumes:
+      - ./schema:/etc/ldap/schema
+      - ./test-data:/test-data
+    healthcheck:
+      test: ["CMD", "ldapsearch", "-x", "-H", "ldap://localhost", "-b", "", "-s", "base", "+"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
