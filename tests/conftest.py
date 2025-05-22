@@ -52,14 +52,15 @@ def ldap_server(request):
     """
     Fixture to either use a Docker LDAP container or mock LDAP based on options.
     """
+    from alirpunkto.constants_and_globals import TEST_WITH_DOCKER_LDAP_PORT
+
     use_docker = request.config.getoption('--use-docker-ldap', False)
-    
     if use_docker:
         # Set environment variable to indicate Docker LDAP usage
         os.environ['USE_DOCKER_LDAP'] = 'true'
         
         # Check if the LDAP container is already running
-        ldap_port = 3389
+        ldap_port = TEST_WITH_DOCKER_LDAP_PORT
         if is_port_in_use(ldap_port):
             print(f"LDAP port {ldap_port} already in use, assuming container is running")
             # Wait a bit to ensure the LDAP server is fully initialized
@@ -404,8 +405,9 @@ def tm():
 
 @pytest.fixture
 def testapp(app, tm):
+    from alirpunkto.constants_and_globals import HTTP_TEST_HOST
     testapp = webtest.TestApp(app, extra_environ={
-        'HTTP_HOST': 'example.com',
+        'HTTP_HOST': HTTP_TEST_HOST,
     })
 
     return testapp

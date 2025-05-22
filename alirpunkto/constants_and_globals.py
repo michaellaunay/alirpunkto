@@ -23,6 +23,7 @@ load_dotenv(dotenv_path)
 # Not Final due to __init__ initialization
 SECRET_KEY: Final = "SECRET_KEY"
 LDAP_SERVER: Final = os.getenv("LDAP_SERVER")
+LDAP_PORT: Final = int(os.getenv("LDAP_PORT", 389))
 LDAP_BASE_DN: Final = get_key(dotenv_path, "LDAP_BASE_DN") if not PYTEST_CURRENT_TEST else "dc=example,dc=com"
 LDAP_OU: Final = get_key(dotenv_path, "LDAP_OU")
 LDAP_USE_SSL: Final = (
@@ -76,10 +77,33 @@ LDAP_TIME_FORMAT: Final = "%Y-%m-%dT%H:%M:%S"
 LDAP_TIME_LENGTH: Final = 19
 LDAP_DATE_LENGTH: Final = 10
 LDAP_DEFAULT_HOUR: Final = "T12:00:00"
-
+# LDAPT test
+TEST_LDAP_SERVER: Final = os.getenv("TEST_LDAP_SERVER", "my_fake_ldap_server")
+HTTP_TEST_HOST: Final = os.getenv("HTTP_TEST_HOST", "example.com")
 # LDAP test contener
-USE_DOCKER_LDAP: Final = os.getenv("USE_DOCKER_LDAP", "").lower() in ['true', '1', 'yes', 'y']
-DOCKER_LDAP_PORT: Final = int(os.getenv("DOCKER_LDAP_PORT", "3389"))
+TEST_WITH_DOCKER_LDAP: Final = os.getenv("TEST_WITH_DOCKER_LDAP", "").lower() in ['true', '1', 'yes', 'y']
+TEST_WITH_DOCKER_LDAP_SERVER: Final = os.getenv("TEST_WITH_DOCKER_LDAP_SERVER", "localhost")
+TEST_WITH_DOCKER_LDAP_PORT: Final = int(os.getenv("TEST_WITH_DOCKER_LDAP_PORT", "3389"))
+def get_ldap_server_name():
+    """Get the LDAP server name.
+    Returns:
+        str: The LDAP server name.
+    """
+    if PYTEST_CURRENT_TEST:
+        if TEST_WITH_DOCKER_LDAP:
+            return TEST_WITH_DOCKER_LDAP_SERVER
+        else:
+            return TEST_LDAP_SERVER
+    return LDAP_SERVER
+
+def get_ldap_server_port():
+    """Get the LDAP server port.
+    Returns:
+        int: The LDAP server port.
+    """
+    if PYTEST_CURRENT_TEST and TEST_WITH_DOCKER_LDAP:
+        return TEST_WITH_DOCKER_LDAP_PORT
+    return LDAP_PORT
 
 def get_locales():
     """Return the list of available locales.

@@ -1,7 +1,6 @@
 from typing import Final
 from .constants_and_globals import (
     log,
-    dotenv_path,
     SECRET_KEY,
     LDAP_PASSWORD,
     ADMIN_PASSWORD,
@@ -9,7 +8,7 @@ from .constants_and_globals import (
     KEYCLOAK_CLIENT_ID,
     KEYCLOAK_CLIENT_SECRET,
 )
-import os, inspect
+import os
 
 def get_secret(secret_name: str) -> str:
     """Get the secret from the secret manager.
