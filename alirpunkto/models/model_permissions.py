@@ -88,6 +88,38 @@ ADMIN_MEMBER_PERMISSIONS : Final = MemberPermissions(
     modifications=Permissions.ACCESS | Permissions.READ
 )
 
+# Permissions for provider members to access cooperator member properties.
+PROVIDER_MEMBER_PERMISSIONS = MemberPermissions(
+    data=MemberDataPermissions(
+        fullname=Permissions.ACCESS | Permissions.READ,
+        fullsurname=Permissions.ACCESS | Permissions.READ,
+        description=Permissions.ACCESS | Permissions.READ,
+        nationality=Permissions.ACCESS | Permissions.READ,
+        birthdate=Permissions.ACCESS | Permissions.READ,
+        password=Permissions.NONE,
+        password_confirm=Permissions.NONE,
+        lang1=Permissions.ACCESS | Permissions.READ,
+        lang2=Permissions.ACCESS | Permissions.READ,
+        lang3=Permissions.ACCESS | Permissions.READ,
+        cooperative_behaviour_mark=Permissions.ACCESS | Permissions.READ,
+        cooperative_behaviour_mark_update=Permissions.ACCESS | Permissions.READ,
+        # Permissions spéciales pour PROVIDER : modification des parts et cotisations
+        number_shares_owned=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+        date_end_validity_yearly_contribution=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+        iban=Permissions.ACCESS | Permissions.READ,
+        role=Permissions.ACCESS | Permissions.READ,
+    ),
+    oid=Permissions.ACCESS | Permissions.READ,
+    member_state=Permissions.ACCESS | Permissions.READ,
+    type=Permissions.ACCESS | Permissions.READ,
+    email=Permissions.ACCESS | Permissions.READ,
+    seed=Permissions.ACCESS,
+    email_send_status_history=Permissions.ACCESS | Permissions.READ,
+    pseudonym=Permissions.ACCESS | Permissions.READ,
+    modifications=Permissions.ACCESS | Permissions.READ
+)
+
+
 # CandidaturePermissions is a frozen dataclass that stores the permissions for each
 # attribute of the Candidature dataclass.
 CandidaturePermissions = make_dataclass(
@@ -631,6 +663,15 @@ access = {
         MemberStates.DATA_MODIFIED: BASIC_MEMBER_PERMISSIONS,
         MemberStates.EXCLUDED: NO_MEMBER_PERMISSIONS,
         MemberStates.DELETED: NO_MEMBER_PERMISSIONS
+    },
+    'PROVIDER': {
+        MemberStates.CREATED: NO_MEMBER_PERMISSIONS,
+        MemberStates.DRAFT: NO_MEMBER_PERMISSIONS,
+        MemberStates.REGISTRED: PROVIDER_MEMBER_PERMISSIONS,
+        MemberStates.DATA_MODIFICATION_REQUESTED: PROVIDER_MEMBER_PERMISSIONS,
+        MemberStates.DATA_MODIFIED: PROVIDER_MEMBER_PERMISSIONS,
+        MemberStates.EXCLUDED: NO_MEMBER_PERMISSIONS,
+        MemberStates.DELETED: NO_MEMBER_PERMISSIONS,
     }
 }
 

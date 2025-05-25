@@ -180,8 +180,8 @@ def validate_candidature_choice_and_email(
             'MemberTypes': MemberTypes, 
             'error': email_error['error']
         }
-
-    if choice not in MemberTypes.get_names():
+    if choice not in MemberTypes.get_names() \
+        or choice not in [MemberTypes.ORDINARY.name, MemberTypes.COOPERATOR.name]:
         return {
             'candidature': candidature, 
             'MemberTypes': MemberTypes,

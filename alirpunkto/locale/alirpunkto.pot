@@ -1113,3 +1113,27 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Your email address has been successfully updated. You will now use this new address for all future communications with ${domain_name}.If you did not request this change or if you have "
 "any questions, please do not hesitate to contact our support immediately at ${admin_email}.Thank you for being a part of the ${domain_name} community!"
+
+msgid "member_types_administrator_value"
+msgstr "Administrator member"
+
+msgid "member_types_administrator"
+msgstr "Administrator member type"
+
+msgid "member_types_ordinary_value"
+msgstr "Oridnary member"
+
+msgid "member_types_ordinary"
+msgstr "Oridnary member type"
+
+msgid "member_types_cooperator_value"
+msgstr "Cooperator member"
+
+msgid "member_types_cooperator"
+msgstr "Cooperator member type"
+
+msgid "member_types_provider"
+msgstr "Provider member type"
+
+msgid "member_types_provider_value"
+msgstr "Provider member"

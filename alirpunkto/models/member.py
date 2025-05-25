@@ -112,10 +112,14 @@ class EmailSendStatus(Enum):
 class MemberTypes(Enum) :
     """Types of member.
     """
+    # Administrator: The member is an administrator.
+    ADMINISTRATOR = "member_types_administrator_value"
     # Ordinary: The member is an ordinary member.
     ORDINARY = "member_types_ordinary_value"
     # Cooperator: The member is a cooperator member.
     COOPERATOR = "member_types_cooperator_value"
+    # Provider: The member is a provider member.
+    PROVIDER = "member_types_provider_value"
     @classmethod
     def get_i18n_id(cls, name:Type['MemberTypes']) -> str:
         """Get the i18n id of the member type.
@@ -125,6 +129,10 @@ class MemberTypes(Enum) :
             The i18n id of the member type.
         """
         match name:
+            case cls.ADMINISTRATOR.name :
+                return "member_types_administrator"
+            case cls.ADMINISTRATOR.value :
+                return "member_types_administrator_value"
             case cls.ORDINARY.name :
                 return "member_types_ordinary"
             case cls.COOPERATOR.name :
@@ -133,6 +141,10 @@ class MemberTypes(Enum) :
                 return "member_types_ordinary_value"
             case cls.COOPERATOR.value :
                 return "member_types_cooperator_value"
+            case cls.PROVIDER.name :
+                return "member_types_provider"
+            case cls.PROVIDER.value :
+                return "member_types_provider_value"
             case _ :
                 # should never happen
                 log.error(f"Unknown member type: {name}")
