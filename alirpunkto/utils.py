@@ -505,7 +505,8 @@ def get_member_by_oid(
     """
     if oid == LDAP_ADMIN_OID:
         # The admin is not an ldap member
-        return None
+        user = get_admin_user(request) # Force the creation of the admin Member if it does not exist
+        return get_members(request)[LDAP_ADMIN_OID]
     members = get_members(request)
     member = members[oid] if oid in members else None
     if update and not isinstance(member, Member):
@@ -555,6 +556,9 @@ def update_member_from_ldap(
                 ]
             )
             if len(conn.entries) == 0:
+                if oid == LDAP_ADMIN_OID:
+                    # If the admin is not found in LDAP, we fake it
+                    return get_members(request)[LDAP_ADMIN_OID]
                 log.warning(f"User {oid} not found in LDAP")
                 return None
             member_entry = conn.entries[0]
@@ -730,7 +734,7 @@ def get_potential_voters(conn: Connection) -> List[Dict[str, str]]:
     conn.search(LDAP_BASE_DN, filter_str, attributes=['uid', 'cn', 'mail', 'sn'])
     return conn.entries
 
-def get_admin_user()->  User:
+def get_admin_user(request)->  User:
         """return the admin User from the settings.
         Args:
             request (pyramid.request.Request): the request
@@ -740,9 +744,20 @@ def get_admin_user()->  User:
         name = ADMIN_LOGIN
         mail = ADMIN_EMAIL
         oid = LDAP_ADMIN_OID
-        admin_user = User(name, mail, oid)
+        admin_user = User(name, mail, oid, True, MemberTypes.ADMINISTRATOR.name)
+        if LDAP_ADMIN_OID not in get_members(request) :
+            # If the admin user is not in the members, we add it
+            admin_data = MemberDatas(
+                fullname=name,
+                fullsurname=name,
+                lang1='en',
+                lang2='fr',
+                role=MemberTypes.ADMINISTRATOR,
+                cooperative_behaviour_mark=DEFAULT_COOPERATIVE_BEHAVIOUR_MARK
+            )
+            admin_member = Member(admin_data, LDAP_ADMIN_OID, MemberStates.REGISTRED, MemberTypes.ADMINISTRATOR, mail)
+            get_members(request)[LDAP_ADMIN_OID] = admin_member
         return admin_user
-
 
 def random_voters(request: Request) -> List[Dict[str, str]]:
     """

@@ -44,7 +44,7 @@ def login_view(request):
         password = request.params['password']
         if is_admin(username, password):
             # The user is the ldap admin
-            user = get_admin_user()
+            user = get_admin_user(request)
             oid = user.oid
         else:
             oid = get_oid_from_pseudonym(username, request)

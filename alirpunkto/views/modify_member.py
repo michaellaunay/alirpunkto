@@ -76,14 +76,6 @@ def modify_member(request):
         if user:
             oid = json.loads(user).get("oid", None)
     if oid:
-        if oid == LDAP_ADMIN_OID:
-            return {
-                "form": None,
-                "member": None,
-                "accessed_member": None,
-                "accessed_members": members,
-                "error": _('system_admin_cannot_modify_member'),
-            }
         member = get_member_by_oid(oid, request, True)
         if not member:
             member = update_member_from_ldap(oid, request)
