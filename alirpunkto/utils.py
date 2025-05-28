@@ -568,9 +568,21 @@ def update_member_from_ldap(
             new_fullname = member_entry.gn.value if hasattr(member_entry, 'gn') else None
             new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
             new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
+            def get_date(date_str: str, oid: str) -> Optional[datetime]:
+                """Helper function to parse date strings."""
+                try :
+                    return datetime.strptime(date_str, LDAP_TIME_FORMAT)
+                except ValueError:
+                    log.error(f"Invalid date format for {oid}: {date_str}")
+                    try:
+                        # Try to parse as ISO format
+                        return datetime.fromisoformat(date_str)
+                    except ValueError:
+                        log.error(f"Date format is not ISO for {oid}: {date_str}")
+                        return None
             if new_birthdate:
-                new_birthdate = new_birthdate[:LDAP_TIME_LENGTH]
-                new_birthdate = datetime.strptime(new_birthdate, LDAP_TIME_FORMAT)
+                new_birthdate = new_birthdate[:LDAP_TIME_LENGTH] # Ensure correct length
+                new_birthdate = get_date(new_birthdate, oid)
             new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
             new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
             member = get_member_by_oid(oid, request, False)
@@ -582,12 +594,12 @@ def update_member_from_ldap(
             cooperative_behaviour_mark_update = member_entry.cooperativeBehaviorMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviorMarkUpdate') else None
             if cooperative_behaviour_mark_update:
                 cooperative_behaviour_mark_update = cooperative_behaviour_mark_update[:LDAP_TIME_LENGTH]
-                cooperative_behaviour_mark_update = datetime.strptime(cooperative_behaviour_mark_update, LDAP_TIME_FORMAT)
+                cooperative_behaviour_mark_update = get_date(cooperative_behaviour_mark_update, oid)
             number_shares_owned = member_entry.numberSharesOwned.value if hasattr(member_entry, 'numberSharesOwned') else None
             date_end_validity_yearly_contribution = member_entry.dateEndValidityYearlyContribution.value if hasattr(member_entry, 'dateEndValidityYearlyContribution') else None
             if date_end_validity_yearly_contribution:
                 date_end_validity_yearly_contribution = date_end_validity_yearly_contribution[:LDAP_TIME_LENGTH]
-                date_end_validity_yearly_contribution = datetime.strptime(date_end_validity_yearly_contribution, LDAP_TIME_FORMAT)
+                date_end_validity_yearly_contribution = get_date(date_end_validity_yearly_contribution, oid)
             unique_member_of = member_entry.uniqueMemberOf.value if hasattr(member_entry, 'uniqueMemberOf') else None
             iban = member_entry.iban.value if hasattr(member_entry, 'iban') else None
             date_erasure_all_data = member_entry.dateErasureAllData.value if hasattr(member_entry, 'dateErasureAllData') else None

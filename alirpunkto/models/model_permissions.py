@@ -508,7 +508,7 @@ access = {
             modifications=Permissions.ACCESS | Permissions.READ
         )
     },
-    'Admin' : {
+    'Administrator' : {
         MemberStates.CREATED: BASIC_MEMBER_PERMISSIONS,
         MemberStates.DRAFT: MemberPermissions(
             data=MemberDataPermissions(
