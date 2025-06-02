@@ -7,12 +7,9 @@ from alirpunkto.utils import (
     get_member_by_oid,
     is_valid_password,
     is_valid_email,
-    update_member_password,
     update_member_from_ldap,
     update_ldap_member,
-    send_member_state_change_email,
     send_check_new_email,
-    get_members,
     get_ldap_member_list,
 )
 
@@ -26,14 +23,12 @@ from alirpunkto.constants_and_globals import (
     CANDIDATURE_OID,
     MEMBER_OID,
     ACCESSED_MEMBER_OID,
-    LDAP_ADMIN_OID
 )
 from alirpunkto.schemas.register_form import RegisterForm
 from pyramid.i18n import Translator
 import deform
 from alirpunkto.models.permissions import Permissions
 from alirpunkto.models.model_permissions import (
-    MemberDataPermissions,
     get_access_permissions
 )
 from dataclasses import fields
@@ -55,18 +50,6 @@ def modify_member(request):
     accessed_member_oid = None
     form = None
     schema = None
-    ldap_members= get_ldap_member_list()
-    members = {user.oid:user.name for user in ldap_members}
-    """
-    members = {k:m.pseudonym
-        for (k,m) in get_members(request).items()
-            if m.member_state in (
-                MemberStates.DATA_MODIFIED,
-                MemberStates.DATA_MODIFICATION_REQUESTED,
-                MemberStates.REGISTRED
-            )
-    }
-    """
     transaction = request.tm
     message = None
     oid = (request.session.get(CANDIDATURE_OID, None)
@@ -95,6 +78,9 @@ def modify_member(request):
             "accessed_members": members,
             "error": _('unknown_member'),
         }
+    # The member is known and will be recognized as the accessor.
+    ldap_members= get_ldap_member_list()
+    members = {user.oid:user.name for user in ldap_members}
     accessor_member = member
     if "submit" in request.POST or 'modify' in request.POST:
         if "submit" in request.POST:
