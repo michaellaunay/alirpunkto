@@ -17,6 +17,7 @@ tmp/
 var/
 bin/
 lib/
+lib64/
 .obsidian
 Data*.fs*
 *.sublime-project
