@@ -6,7 +6,7 @@
                 <label for="accessed_member_oid" i18n:translate="select_member_oid_label">Select the member</label>
                 <select id="accessed_member_oid" name="accessed_member_oid" required>
                     <option value="" disabled selected i18n:translate="select_member_placeholder">Select a member</option>
-                    <option tal:repeat="(oid,pseudonym) accessed_members.items()" tal:attributes="value oid" tal:content="pseudonym"></option>
+                    <option tal:repeat="(oid,pseudonym) providers.items()" tal:attributes="value oid" tal:content="pseudonym"></option>
                 </select>
                 <input type="submit" name="submit" value="Submit" i18n:attributes="value submit_button">
             </form>

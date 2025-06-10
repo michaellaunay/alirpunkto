@@ -31,10 +31,10 @@ from alirpunkto.constants_and_globals import (
 from alirpunkto.schemas.register_form import RegisterForm
 from pyramid.i18n import Translator
 import deform
+from alirpunkto.models.users import User
 from alirpunkto.models.permissions import Permissions
 from alirpunkto.models.model_permissions import (
     MemberDataPermissions,
-
     get_access_permissions
 )
 from dataclasses import fields
@@ -48,7 +48,7 @@ manage_provider_schema = {
     'website': {'type': 'string', 'required': False, 'empty': True},
 }
 
-@view_config(route_name='manage_provider', renderer='json')
+@view_config(route_name='manage_provider', renderer='alirpunkto:templates/manage_provider.pt')
 def manage_provider_view(request):
     """Manage provider view.
 
@@ -62,7 +62,8 @@ def manage_provider_view(request):
     accessed_member_oid = None
     form = None
     if user:
-        oid = json.loads(user).get('oid', None)
+        user = User.from_json(user)
+        oid = user.oid
     if not oid:
         return {'error': _('user_not_logged_in')}
     accessor_member = get_member_by_oid(oid, request, True)
