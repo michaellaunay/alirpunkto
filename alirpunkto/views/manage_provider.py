@@ -6,19 +6,18 @@ from alirpunkto.utils import (
     get_member_by_oid,
     is_valid_password,
     is_valid_email,
-    update_member_password,
     update_member_from_ldap,
+    register_user_to_ldap,
     update_ldap_member,
     send_member_state_change_email,
     send_check_new_email,
-    get_members,
     get_ldap_member_list,
 )
 
 from alirpunkto.models.member import (
+    Member,
     MemberStates,
     MemberTypes,
-    EmailSendStatus,
 )
 from alirpunkto.constants_and_globals import (
     _,
@@ -115,13 +114,12 @@ def manage_provider_view(request):
                 provider = get_member_by_oid(provider_email, request, True)
                 if provider:
                     return {'member':user, 'form':None, 'providers': providers, 'error': _('provider_already_exists')}
-                # Create new provider member
-                provider = update_ldap_member(provider_email, {
-                    'name': provider_pseudonym,
-                    'email': provider_email,
-                    'password': provider_password,
-                    'type': MemberTypes.PROVIDER,
-                }, request)
+                provider = Member(
+                    type=MemberTypes.PROVIDER,
+                    email=provider_email,
+                    pseudonym=provider_pseudonym)
+                # Create new provider member for the provider
+                provider = register_user_to_ldap(request, provider, provider_password)
                 if not provider:
                     return {'member':user, 'form':None, 'providers': providers, 'error': _('provider_creation_failed')}
                 send_member_state_change_email(provider, MemberStates.ACTIVE, request)
