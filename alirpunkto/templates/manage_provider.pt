@@ -5,12 +5,30 @@
             <form method="POST">
                 <!-- Email Field -->
                 <div class="register_email">
-                    <label i18n:translate="email_label"
-                        title="Enter your email address here."
-                        i18n:attributes="title email_title_label">Email</label>
-                    <input class="email-input" type="email" name="email"
-                        title="Your email address will be used for account verification and communication."
-                        i18n:attributes="title email_title_input" />
+                    <div>
+                        <label i18n:translate="pseudonym"
+                            title="Enter your pseudonym here."
+                            i18n:attributes="title pseudonym_title_label">Pseudonym</label>
+                        <input class="form-control" type="text" name="provider_pseudonym"
+                            title="The provider pseudonym will be used for account identification."
+                            i18n:attributes="title provider_pseudonym_title_input" />
+                    </div>
+                    <div>
+                        <label i18n:translate="provider_password_label"
+                            title="Enter the provider password here."
+                            i18n:attributes="title provider_password_title_label">Provider password</label>
+                        <input class="form-control" type="password" name="provider_password"
+                            title="Your password will be used for account security."
+                            i18n:attributes="title password_title_input" />
+                    </div>
+                    <div>
+                        <label i18n:translate="email_label"
+                            title="Enter your email address here."
+                            i18n:attributes="title email_title_label">Email</label>
+                        <input class="email-input" type="email" name="provider_email"
+                            title="Your email address will be used for account verification and communication."
+                            i18n:attributes="title email_title_input" />
+                    </div>
                 </div>
 
                 <!-- Submit Button -->
@@ -29,6 +47,14 @@
                     </select>
                     <input type="submit" name="submit" value="Submit" i18n:attributes="value submit_button">
                 </form>
+            </div>
+            <div tal:condition="exists:error" tal:omit-tag="">
+                <div class="error">
+                    <p tal:content="error">Error message here</p>
+                </div>
+                <div class="error" tal:condition="exists:error_details">
+                    <p tal:content="error_details">Error details message here</p>
+                </div>
             </div>
         </div>
     </div>
