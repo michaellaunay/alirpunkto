@@ -7,7 +7,7 @@ cn: alirpunktoPerson
 # 'mail': candidature.email
 # 'cn': candidature.pseudonym
 # 'employeeNumber': candidature.oid
-# 'employeeType': candidature.type.name 'ORDINARY' or 'CONTRIBUTOR'
+# 'employeeType': candidature.type.name 'ORDINARY' or 'CONTRIBUTOR' or 'ADMINISTRATOR' or 'PROVIDER'
 # `gn`: candidature.fullname `gn` is for `givenName`
 # `sn`: candidature.fullsurname
 # `preferredLanguage`:candidature.lang1

@@ -1,7 +1,7 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <h1 i18n:translate="add_provider_title">Add a provider ?</h1>
-        <div tal:condition="python:member.type == 'ADMINISTRATOR'">
+        <div tal:condition="python:member and member.type == 'ADMINISTRATOR'">
             <form method="POST">
                 <!-- Email Field -->
                 <div class="register_email">

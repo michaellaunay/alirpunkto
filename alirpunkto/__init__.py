@@ -126,6 +126,8 @@ def create_ldap_groups_if_not_exists():
     groups = [
         {"name": "ordinaryMembersGroup", "description": "Group for ordinary members of the cooperative"},
         {"name": "cooperatorsGroup", "description": "Group for active cooperators of the cooperative"},
+        {"name": "administratorsGroup", "description": "Group for active administrators of the cooperative"},
+        {"name": "providersGroup", "description": "Group for active providers of the cooperative"},
         {"name": "boardMembersGroup", "description": "Group for board members of the cooperative"},
         {"name": "mediationArbitrationCouncilGroup", "description": "Group for members of the Mediation Arbitration Council"},
         {"name": "candidatesMissingShareYearContribGroup", "description": "Group for members who have not contributed their share for the current year"},

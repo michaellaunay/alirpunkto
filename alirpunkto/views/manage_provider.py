@@ -16,6 +16,7 @@ from alirpunkto.utils import (
 
 from alirpunkto.models.member import (
     Member,
+    MemberDatas,
     MemberStates,
     MemberTypes,
 )
@@ -115,6 +116,7 @@ def manage_provider_view(request):
                 if provider:
                     return {'member':user, 'form':None, 'providers': providers, 'error': _('provider_already_exists')}
                 provider = Member(
+                    data=MemberDatas(lang1="en", lang2="en", lang3="en"),
                     type=MemberTypes.PROVIDER,
                     email=provider_email,
                     pseudonym=provider_pseudonym)

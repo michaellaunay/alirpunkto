@@ -927,6 +927,12 @@ def register_user_to_ldap(request, candidature, password):
             case MemberTypes.ORDINARY:
                 groups.append(
                     f"cn=ordinaryMembersGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
+            case MemberTypes.ADMINISTRATOR:
+                # Admins are not stored in LDAP, so we skip this
+                log.debug(f"Admin {pseudonym} does not have a group in LDAP.")
+            case MemberTypes.PROVIDER:
+                groups.append(
+                    f"cn=providerMembersGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
             case _:
                 log.error(f"Unsupported member type {candidature.type}")
         # If there are groups the user belongs to, add them to the uniqueMemberOf attribute
@@ -947,6 +953,15 @@ def register_user_to_ldap(request, candidature, password):
                         conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
                     case MemberTypes.ORDINARY:
                         group_dn = ("cn=ordinaryMembersGroup,"
+                                    f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
+                                    f"{LDAP_BASE_DN}"
+                        )
+                        conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
+                    case MemberTypes.ADMINISTRATOR:
+                        # Admins are not stored in LDAP, so we skip this
+                        log.debug(f"Admin {pseudonym} does not have a group in LDAP.")
+                    case MemberTypes.PROVIDER:
+                        group_dn = ("cn=providersGroup,"
                                     f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
                                     f"{LDAP_BASE_DN}"
                         )
