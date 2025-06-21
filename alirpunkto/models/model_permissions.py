@@ -664,7 +664,7 @@ access = {
         MemberStates.EXCLUDED: NO_MEMBER_PERMISSIONS,
         MemberStates.DELETED: NO_MEMBER_PERMISSIONS
     },
-    'PROVIDER': {
+    'Provider': {
         MemberStates.CREATED: NO_MEMBER_PERMISSIONS,
         MemberStates.DRAFT: NO_MEMBER_PERMISSIONS,
         MemberStates.REGISTRED: PROVIDER_MEMBER_PERMISSIONS,
