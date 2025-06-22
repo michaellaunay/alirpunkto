@@ -19,6 +19,7 @@ from alirpunkto.models.member import (
     MemberDatas,
     MemberStates,
     MemberTypes,
+    EmailSendStatus
 )
 from alirpunkto.constants_and_globals import (
     _,
@@ -81,8 +82,7 @@ def manage_provider_view(request):
             'form':None,
             'providers': {},
             'error': _('must_be_administrator')}
-    ldap_members = get_ldap_member_list((MemberTypes.PROVIDER,))
-    providers = {provider.oid:provider.name for provider in ldap_members}
+    providers = get_ldap_member_list((MemberTypes.PROVIDER.name,))
     if request.method == "POST":
         if "add_provider" in request.POST:
             provider_email = request.params.get('provider_email', None)
@@ -121,11 +121,20 @@ def manage_provider_view(request):
                     email=provider_email,
                     pseudonym=provider_pseudonym)
                 # Create new provider member for the provider
-                provider = register_user_to_ldap(request, provider, provider_password)
-                if not provider:
+                result = register_user_to_ldap(request, provider, provider_password)
+                if result and result['status'] == 'error':
                     return {'member':user, 'form':None, 'providers': providers, 'error': _('provider_creation_failed')}
-                send_member_state_change_email(provider, MemberStates.ACTIVE, request)
-                send_check_new_email(provider, request)
+                provider.add_email_send_status(
+                    EmailSendStatus.IN_PREPARATION, 
+                    "manage_provider_view"
+                )
+                send_member_state_change_email(request=request,
+                    member=provider,
+                    sending_function_name = 'manage_provider_view',
+                    template_name='provider_created_email',
+                    subject='provider_role_activated',
+                    )
+                request.tm.commit()                
                 return {'member':user, 'form':None, 'providers': providers, 'success': _('provider_created')}
             except Exception as e:
                 log.error(f"Error creating provider: {e}")

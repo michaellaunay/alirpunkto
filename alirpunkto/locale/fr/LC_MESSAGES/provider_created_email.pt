@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:omit-tag="textual">
+  <head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Votre compte Provider est désormais actif</title>
+  </head>
+  <body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">
+      Activation de votre compte Provider sur <span tal:replace="domain_name">Nom du domaine</span>
+    </h1>
+
+    <p tal:omit-tag="textual">
+      Bonjour<span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du Provider</span>,
+    </p>
+
+    <p tal:omit-tag="textual">
+      Votre inscription en tant que <strong>Provider</strong> sur notre plateforme
+      <a tal:attributes="href site_url"><span tal:replace="site_url">URL de la plateforme</span></a>
+      a bien été finalisée.
+    </p>
+
+    <p tal:omit-tag="textual">
+      Vous avez maintenant accès à l’interface de gestion vous permettant de consulter et de modifier
+      les attributs des membres pour lesquels vous avez reçu les droits nécessaires.
+    </p>
+
+    <p tal:omit-tag="textual">
+      Si vous avez des questions ou rencontrez un problème, n’hésitez pas à contacter notre équipe de support.
+    </p>
+
+    <p tal:omit-tag="textual">Merci pour votre collaboration.</p>
+    <p tal:omit-tag="textual">Cordialement,</p>
+    <p tal:omit-tag="textual">
+      L’équipe de <span tal:replace="domain_name">Nom du domaine</span>
+    </p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Coordonnées de l’organisation</p>
+  </body>
+</html>

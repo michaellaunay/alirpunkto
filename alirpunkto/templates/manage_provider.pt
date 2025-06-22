@@ -38,12 +38,14 @@
                 />
             </form>
             <h1 i18n:translate="modify_provider_title">Modify a provider ?</h1>
-            <div class="container" i18n:domain="alirpunkto" tal:condition="providers">
+            <div class="container" i18n:domain="alirpunkto" tal:condition="exists:providers">
                 <form method="POST">
                     <label for="accessed_member_oid" i18n:translate="select_member_oid_label">Select the provider</label>
                     <select id="accessed_member_oid" name="accessed_member_oid" required>
                         <option value="" disabled selected i18n:translate="select_member_placeholder">Select a member</option>
-                        <option tal:repeat="(oid,pseudonym) accessed_members.items()" tal:attributes="value oid" tal:content="pseudonym"></option>
+                        <tal:block tal:repeat="provider providers">
+                            <option tal:attributes="value provider.oid" tal:content="provider.name"></option>
+                        </tal:block>
                     </select>
                     <input type="submit" name="submit" value="Submit" i18n:attributes="value submit_button">
                 </form>

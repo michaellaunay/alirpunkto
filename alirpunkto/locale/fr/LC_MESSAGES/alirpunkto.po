@@ -1129,3 +1129,6 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Votre adresse de courriel a été mise à jour avec succès. Vous utiliserez maintenant cette nouvelle adresse pour toutes les communications futures avec ${domain_name}. Si vous n'avez pas demandé ce changement ou si vous avez "
 "des questions, n'hésitez pas à contacter notre support immédiatement à ${admin_email}. Merci de faire partie de la communauté ${domain_name}!"
+
+msgid "provider_role_activated"
+msgstr "Votre compte prestataire a été créé."
