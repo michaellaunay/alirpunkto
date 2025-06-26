@@ -585,6 +585,7 @@ def update_member_from_ldap(
                 new_birthdate = get_date(new_birthdate, oid)
             new_preferred_language = member_entry.preferredLanguage.value if hasattr(member_entry, 'preferredLanguage') else None
             new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
+            new_third_language = member_entry.thirdLanguage.value if hasattr(member_entry, 'thirdLanguage') else None
             member = get_member_by_oid(oid, request, False)
             cooperative_behaviour_mark = (
                 float(member_entry.cooperativeBehaviourMark.value
@@ -616,6 +617,7 @@ def update_member_from_ldap(
                 password_confirm = None,
                 lang1 = new_preferred_language,
                 lang2 = new_second_language,
+                lang3 = new_third_language,
                 role = new_type,
                 cooperative_behaviour_mark = cooperative_behaviour_mark,
                 cooperative_behaviour_mark_update = cooperative_behaviour_mark_update,
@@ -896,9 +898,11 @@ def register_user_to_ldap(request, candidature, password):
                 # Use the fullsurname as sn
                 "isActive": "True",
                 "preferredLanguage" : candidature.data.lang1,
-                "secondLanguage" : candidature.data.lang2,
-                "thirdLanguage" : candidature.data.lang3
             }
+            if hasattr(candidature.data, 'lang2'):
+                attributes['secondLanguage'] = candidature.data.lang2
+            if hasattr(candidature.data, 'lang3'):
+                attributes['thirdLanguage'] = candidature.data.lang3
             if candidature.data.description:
                 attributes['description'] = candidature.data.description
         except Exception as e:
