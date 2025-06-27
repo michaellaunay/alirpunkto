@@ -67,7 +67,7 @@ def modify_member(request):
                     "form": None,
                     "member": None,
                     "accessed_member": None,
-                    "accessed_members": members,
+                    "accessed_members": [],
                     "error": _('unknown_member'),
                 }
     else:
@@ -75,7 +75,7 @@ def modify_member(request):
             "form": None,
             "member": None,
             "accessed_member": None,
-            "accessed_members": members,
+            "accessed_members": [],
             "error": _('unknown_member'),
         }
     # The member is known and will be recognized as the accessor.
