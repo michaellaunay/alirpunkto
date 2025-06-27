@@ -91,7 +91,7 @@ msgid "candidature_states_confirmed_human_value"
 msgstr "KonfirmitaHomo: La retpoŝta adreso de la petanto estas konfirmita, kaj pruvo de homaro estas provizita (ni konfirmis ke vi ne estas roboto)."
 
 msgid "candidature_states_unique_data_value"
-msgstr "UnikaDatumo: La petanto enigis siajn personajn identigajn datumojn, kaj ni konfirmis ke neniu aktuala aŭ lastatempa Kooperativo aŭ Ordinara Membro de la Komunumo havas la samajn datumojn."
+msgstr "UnikaDatumo: La petanto enigis siajn personajn identigajn datumojn, kaj ni konfirmis ke neniu aktuala aŭ lastatempa Kooperativano aŭ Ordinara Membro de la Komunumo havas la samajn datumojn."
 
 msgid "candidature_states_pending_value"
 msgstr "Pendanta: La aplikado estas sendita. La personaj identigaj datumoj estas transdonitaj al la Kontrolantoj, sed ili ankoraŭ ne donis sian feedback-on."
@@ -127,13 +127,13 @@ msgid "user_types_ordinary_value"
 msgstr "Ordinara: Aplikado por Ordinara Membro de la Komunumo = kun simpligita registra proceduro, nenia financa devo, sed sen decido-faraj rajtoj."
 
 msgid "user_types_cooperator_value"
-msgstr "Koopera: Aplikado por plena membro de la Kooperativo, Koopero = kun kompletigita registra proceduro certigante la principon 'unu persono = unu voĉo', la devo aĉeti almenaŭ unu parton kaj pagi jaran kontribuon, kaj plenaj decido-faraj rajtoj."
+msgstr "Kooperativano: Aplikado por plena membro de la Kooperativo, Kooperativano = kun kompletigita registra proceduro certigante la principon 'unu persono = unu voĉo', la devo aĉeti almenaŭ unu parton kaj pagi jaran kontribuon, kaj plenaj decido-faraj rajtoj."
 
 msgid "user_types_ordinary"
 msgstr "ordinara membro"
 
 msgid "user_types_cooperator"
-msgstr "koopera membro"
+msgstr "Kooperativano"
 
 msgid "vote_types_yes_value"
 msgstr "Jes: La voĉdono estas pozitiva."
