@@ -668,7 +668,7 @@ msgid "forget_email_in_member_list"
 msgstr "Si l'utilisateur existe, il/elle recevra un courriel. Si vous n'avez pas reçu de courriel d'ici quelques minutes, veuillez vérifier votre dossier de pourriels (spams). Il est possible que le courriel que nous vous avons envoyé s'y trouve."
 
 msgid "reset_password_email_subject"
-msgstr "Réinitialisez votre mot de passe"
+msgstr "Réinitialise ton mot de passe"
 
 msgid "forget_email_send_error"
 msgstr "Une erreur s'est produite lors de l'envoi du courriel de réinitialisation, veuillez contacter l'administrateur à ${administrator}"
