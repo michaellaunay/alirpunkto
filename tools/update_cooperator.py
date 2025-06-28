@@ -9,8 +9,12 @@ import requests
 
 # --- Constantes ---
 
-LOGIN_URL: Final[str] = "https://alirpunkto.cosmopolitical.coop/login"
-MODIFY_URL: Final[str] = "https://alirpunkto.cosmopolitical.coop/modify_member"
+DOMAINE = "https://alirpunkto.cosmopolitical.coop"
+
+LOGIN_PATH= "login"
+LOGIN_URL = f"{DOMAINE}/{LOGIN_PATH}"
+MODIFY_PATH = "modify_member"
+MODIFY_URL = f"{DOMAINE}/{MODIFY_PATH}"
 
 # Messages de succès dans plusieurs langues
 SUCCESS_MESSAGES: Final[list[str]] = [
@@ -44,18 +48,20 @@ def parse_args() -> argparse.Namespace:
                         help="OID du membre à modifier")
     parser.add_argument("--number-shares", type=str, help="Nombre de parts sociales à renseigner")
     parser.add_argument("--validity-date", type=str, help="Date de fin de validité de la cotisation (YYYY-MM-DD)")
+    parser.add_argument("--base_url", type=str, default=DOMAINE,)
     return parser.parse_args()
 
 def login(session: requests.Session, username: str, password: str) -> None:
     """
     Se connecte au portail Alirpunkto et initialise la session.
     """
-    res = session.post(LOGIN_URL, data={
+    result = session.post(LOGIN_URL, data={
         "username": username,
         "password": password,
-        "form.submitted": "true"
+        "form.submitted": "True"
     })
-    if "Connexion" in res.text or "Connection" in res.text:
+
+    if not all(keyword in result.text for keyword in [username, "profile", "modify_member"]):
         raise ValueError("Échec de la connexion : identifiants invalides.")
 
 def save_cookies(session: requests.Session, path: Path) -> None:
@@ -71,8 +77,8 @@ def modify_member(session: requests.Session, oid: str, shares: str | None, valid
     Sélectionne un membre puis envoie les modifications (parts / date cotisation).
     """
     # Étape 1 : sélection du membre
-    select_res = session.post(MODIFY_URL, data={"accessed_member_oid": oid})
-    if "Veuillez sélectionner" in select_res.text or "Please select" in select_res.text:
+    select_res = session.post(MODIFY_URL, data={"accessed_member_oid": oid,"submit": "Submit"})
+    if oid not in select_res.text:
         raise RuntimeError("Erreur de sélection du membre (mauvais OID ?)")
 
     # Si aucune modif demandée, on s’arrête ici
@@ -85,17 +91,26 @@ def modify_member(session: requests.Session, oid: str, shares: str | None, valid
         csrf_token = select_res.text.split('name="csrf_token" value="')[1].split('"')[0]
     except IndexError:
         raise RuntimeError("Impossible d’extraire le token CSRF.")
-
-    # Étape 3 : préparation des données du POST
+    
+    # Étape 3 : modification des données du membre
     post_data = {
-        "csrf_token": csrf_token,
-        "modify": "modify"
+        "accessed_member_oid": oid,
+        "modify": "modify",
+        "__formid__": "deform",
+        "charset": "UTF-8",
+
     }
 
     if shares:
         post_data["number_shares_owned"] = shares
 
     if validity_date:
+        # Vérification du format de la date
+        try:
+            from datetime import datetime
+            datetime.strptime(validity_date, "%Y-%m-%d")
+        except ValueError:
+            raise ValueError("La date de validité doit être au format YYYY-MM-DD.")
         post_data["__start__"] = "date_end_validity_yearly_contribution:mapping"
         post_data["date"] = validity_date
         post_data["__end__"] = "date_end_validity_yearly_contribution:mapping"
@@ -115,6 +130,11 @@ def main() -> None:
     args = parse_args()
 
     load_env_file(args.env)
+    DOMAINE = args.base_url or os.getenv("base_url") or DOMAINE
+    global LOGIN_URL
+    LOGIN_URL = f"{DOMAINE}/{LOGIN_PATH}"
+    global MODIFY_URL
+    MODIFY_URL = f"{DOMAINE}/{MODIFY_PATH}"
 
     login_val = args.login or os.getenv("login")
     password_val = args.password or os.getenv("password")
