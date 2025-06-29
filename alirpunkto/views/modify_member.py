@@ -3,6 +3,7 @@
 # date: 2024-04-19
 
 from pyramid.view import view_config
+import datetime
 from alirpunkto.utils import (
     get_member_by_oid,
     is_valid_password,
@@ -23,6 +24,10 @@ from alirpunkto.constants_and_globals import (
     CANDIDATURE_OID,
     MEMBER_OID,
     ACCESSED_MEMBER_OID,
+    LDAP_TIME_FORMAT,
+    LDAP_TIME_LENGTH,
+    LDAP_DATE_LENGTH,
+    LDAP_DEFAULT_HOUR,
 )
 from alirpunkto.schemas.register_form import RegisterForm
 from pyramid.i18n import Translator
@@ -49,6 +54,7 @@ def modify_member(request):
     member = None
     accessed_member_oid = None
     form = None
+    appstruct = None
     schema = None
     transaction = request.tm
     message = None
@@ -157,7 +163,7 @@ def modify_member(request):
             translator=Translator
         )
         return {
-            "form": form.render(appstruct=appstruct),
+            "form": form.render(appstruct=appstruct) if form else None,
             "member": member,
             "accessed_members": {},
             "accessed_member": accessed_member.oid,
@@ -183,6 +189,39 @@ def modify_member(request):
         ])
         err = None
         fields_to_update = []
+    
+        #manage dform date fields
+        date_parameters = {}
+        iterator = iter(request.params.items())
+        for key, value in iterator:
+            if key == '__start__':
+                current_key = value.split(':')[0]  # remove ':mapping' from dform date field
+                date_value = None
+                # We move forward until we find 'date' then '__end__'
+                for k, v in iterator:
+                    if k == 'date':
+                        try:
+                            # For the moment we take only the last date value
+                            # Format date as YYYYMMDDHHMMSSZ
+                            date_value = datetime.datetime.strptime(
+                                v[:LDAP_TIME_LENGTH] if len(v) >= LDAP_TIME_LENGTH else (v[:LDAP_DATE_LENGTH]+LDAP_DEFAULT_HOUR),
+                                LDAP_TIME_FORMAT
+                                )
+                        except ValueError as e:
+                            log.error(f"Error while parsing date {v}: {e}")
+                            request.session.flash(_('invalid_date_format'), 'error')
+                            return {
+                                "member": member,
+                                "accessed_members": {},
+                                "accessed_member": accessed_member.oid,
+                                "form": form.render(appstruct=appstruct) if form else None,
+                                "error": _('invalid_date'),
+                            }
+                    elif k == '__end__':
+                        break
+                date_parameters[current_key] = date_value
+
+        #restrict the writable fields to the granted before update it
         for field in writable_fields:
             if (
                 field in request.POST 
@@ -192,13 +231,12 @@ def modify_member(request):
                         accessed_member.data, field, NotImplemented)
                     or request.POST[field] != getattr(
                         accessed_member, field, NotImplemented)
-                )):
+                )) or field in date_parameters:
                 if (
                     field == "email" and accessed_member_oid == member.oid and
                     "email" in request.POST and "email" in writable_fields
                 ):
                     email = request.POST['email']
-                    #@TODO change to manage other changed fields
                     if email != accessed_member.email:
                         err = is_valid_email(email, request)
                         if err:
@@ -207,7 +245,7 @@ def modify_member(request):
                                 "member": member,
                                 "accessed_members": {},
                                 "accessed_member": accessed_member.oid,
-                                "form": form.render() if form else None,
+                                "form": form.render(appstruct=appstruct) if form else None,
                                 "error":err,
                                 }
                         accessed_member.new_email = email
@@ -232,7 +270,7 @@ def modify_member(request):
                                 "member": member,
                                 "accessed_member": accessed_member,
                                 "accessed_members": {},
-                                "form": form.render() if form else None,
+                                "form": form.render(appstruct=appstruct) if form else None,
                             }
                         try:
                             transaction.commit()
@@ -261,7 +299,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render() if form else None,
+                            "form": form.render(appstruct=appstruct) if form else None,
                             "error":_('password_not_match'),
                         }
                     if password == "":
@@ -270,29 +308,30 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render() if form else None,
+                            "form": form.render(appstruct=appstruct) if form else None,
                             "error":_('password_required'),
                         }
                     err = is_valid_password(password)
                 else:
                     #@TODO cast the value to the right type
+                    requested_value = request.POST[field] if field not in date_parameters else date_parameters[field]
                     if field in accessed_member.data.get_field_names():
-                        if getattr(accessed_member.data, field) != request.POST[field]:
-                            setattr(accessed_member.data, field, request.POST[field])
+                        if getattr(accessed_member.data, field) != requested_value:
+                            setattr(accessed_member.data, field, requested_value)
                             fields_to_update.append(field)
                     elif field in dir(accessed_member):
-                        if getattr(accessed_member, field) != request.POST[field]:
-                            setattr(accessed_member, field, request.POST[field])
+                        if getattr(accessed_member, field) != requested_value:
+                            setattr(accessed_member, field, requested_value)
                             fields_to_update.append(field)
                     else:
-                        log.error(f"Unknown field {field} to {request.POST[field]}")
+                        log.error(f"Unknown field {field} to {requested_value}")
                         error = _('error_while_setting_field', mapping={'field': field})
                         request.session.flash(_('error_while_setting_field'), error)
                         return {
                             "member": member,
                             "accessed_members": members,
                             "accessed_member": accessed_member.oid,
-                            "form": form.render() if form else None,
+                            "form": form.render(appstruct=appstruct) if form else None,
                             "error": error,
                         }
         # write modifications in ldap
@@ -305,7 +344,7 @@ def modify_member(request):
                 "member": member,
                 "accessed_members": members,
                 "accessed_member": accessed_member.oid,
-                "form": form.render(),
+                "form": form.render(appstruct=appstruct) if form else None,
                 "error":_('error_while_updating_member'),
                 }
         accessed_member.member_state = MemberStates.DATA_MODIFIED
