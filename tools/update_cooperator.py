@@ -1,4 +1,23 @@
 #!/usr/bin/env python3
+"""
+Script to update LDAP contributor data via the AlirPunkto portal.
+
+Author: Michaël Launay
+Date: 2025-06-29
+Email: michaellaunay@logikascium.com
+Version: 0.1
+
+This script allows updating contributor data such as the number of shares 
+or membership validity date by interacting with the AlirPunkto platform.
+
+Raises:
+    FileNotFoundError: If the specified .env file is not found.
+    ValueError: If login credentials are invalid or input data is incorrect.
+    RuntimeError: If member selection or data modification fails.
+
+Returns:
+    None
+"""
 
 from typing import Final
 import argparse
@@ -7,53 +26,51 @@ from pathlib import Path
 from dotenv import load_dotenv
 import requests
 
-# --- Constantes ---
+# Constantes
 
 DOMAINE = "https://alirpunkto.cosmopolitical.coop"
-
 LOGIN_PATH= "login"
 LOGIN_URL = f"{DOMAINE}/{LOGIN_PATH}"
 MODIFY_PATH = "modify_member"
 MODIFY_URL = f"{DOMAINE}/{MODIFY_PATH}"
 
-# Messages de succès dans plusieurs langues
+# Success messages in multiple languages
 SUCCESS_MESSAGES: Final[list[str]] = [
     "Member data updated",               # anglais
     "Données du membre mises à jour",   # français
 ]
 
-# --- Fonctions ---
-
+# Functions
 def load_env_file(env_path: Path) -> None:
     """
-    Charge les variables d’environnement depuis le fichier .env donné.
+    Loads environment variables from the specified .env file.
     """
     if env_path.exists():
         load_dotenv(dotenv_path=env_path)
     else:
-        raise FileNotFoundError(f".env introuvable à l’emplacement : {env_path}")
+        raise FileNotFoundError(f".env file not found at location: {env_path}")
 
 def parse_args() -> argparse.Namespace:
     """
-    Analyse les arguments de ligne de commande.
+    Parses command-line arguments.
     """
-    parser = argparse.ArgumentParser(description="Connexion et modification de membre Alirpunkto.")
+    parser = argparse.ArgumentParser(description="Login and member modification for Alirpunkto.")
     parser.add_argument("--env", "-e", type=Path, default=Path(".env"),
-                        help="Chemin du fichier .env (défaut : ./env)")
-    parser.add_argument("--login", "-l", type=str, help="Login (prioritaire sur .env)")
-    parser.add_argument("--password", "-p", type=str, help="Mot de passe (prioritaire sur .env)")
+                        help="Path to the .env file (default: ./env)")
+    parser.add_argument("--login", "-l", type=str, help="Login (overrides .env)")
+    parser.add_argument("--password", "-p", type=str, help="Password (overrides .env)")
     parser.add_argument("--cookie", "-c", type=Path,
-                        help="Chemin du fichier pour stocker les cookies de session")
+                        help="Path to the file to store session cookies")
     parser.add_argument("--oid", "-o", type=str, required=True,
-                        help="OID du membre à modifier")
-    parser.add_argument("--number-shares", type=str, help="Nombre de parts sociales à renseigner")
-    parser.add_argument("--validity-date", type=str, help="Date de fin de validité de la cotisation (YYYY-MM-DD)")
+                        help="OID of the member to modify")
+    parser.add_argument("--number-shares", type=str, help="Number of shares to specify")
+    parser.add_argument("--validity-date", type=str, help="End date of membership validity (YYYY-MM-DD)")
     parser.add_argument("--base_url", type=str, default=DOMAINE,)
     return parser.parse_args()
 
 def login(session: requests.Session, username: str, password: str) -> None:
     """
-    Se connecte au portail Alirpunkto et initialise la session.
+    Logs into the Alirpunkto portal and initializes the session.
     """
     result = session.post(LOGIN_URL, data={
         "username": username,
@@ -62,11 +79,11 @@ def login(session: requests.Session, username: str, password: str) -> None:
     })
 
     if not all(keyword in result.text for keyword in [username, "profile", "modify_member"]):
-        raise ValueError("Échec de la connexion : identifiants invalides.")
+        raise ValueError("Login failed: invalid credentials.")
 
 def save_cookies(session: requests.Session, path: Path) -> None:
     """
-    Sauvegarde les cookies de session dans un fichier texte.
+    Saves session cookies to a text file.
     """
     with open(path, "w") as f:
         for cookie in session.cookies:
@@ -74,25 +91,25 @@ def save_cookies(session: requests.Session, path: Path) -> None:
 
 def modify_member(session: requests.Session, oid: str, shares: str | None, validity_date: str | None) -> None:
     """
-    Sélectionne un membre puis envoie les modifications (parts / date cotisation).
+    Selects a member and sends modifications (shares / membership validity date).
     """
-    # Étape 1 : sélection du membre
+    # Step 1: Select the member
     select_res = session.post(MODIFY_URL, data={"accessed_member_oid": oid,"submit": "Submit"})
     if oid not in select_res.text:
-        raise RuntimeError("Erreur de sélection du membre (mauvais OID ?)")
+        raise RuntimeError("Member selection error (wrong OID?)")
 
-    # Si aucune modif demandée, on s’arrête ici
+    # If no modifications are requested, stop here
     if not shares and not validity_date:
-        print("Aucune modification demandée.")
+        print("No modifications requested.")
         return
 
-    # Étape 2 : récupération du token CSRF
+    # Step 2: Retrieve the CSRF token
     try:
         csrf_token = select_res.text.split('name="csrf_token" value="')[1].split('"')[0]
     except IndexError:
-        raise RuntimeError("Impossible d’extraire le token CSRF.")
+        raise RuntimeError("Unable to extract the CSRF token.")
     
-    # Étape 3 : modification des données du membre
+    # Step 3: Modify member data
     post_data = {
         "accessed_member_oid": oid,
         "modify": "modify",
@@ -110,22 +127,21 @@ def modify_member(session: requests.Session, oid: str, shares: str | None, valid
             from datetime import datetime
             datetime.strptime(validity_date, "%Y-%m-%d")
         except ValueError:
-            raise ValueError("La date de validité doit être au format YYYY-MM-DD.")
+            raise ValueError("The validity date must be in the format YYYY-MM-DD.")
         post_data["__start__"] = "date_end_validity_yearly_contribution:mapping"
         post_data["date"] = validity_date
         post_data["__end__"] = "date_end_validity_yearly_contribution:mapping"
 
-    # Étape 4 : envoi des modifications
+    # Step 4: Send the modifications
     update_res = session.post(MODIFY_URL, data=post_data)
 
-    # Vérification de la réponse : multi-langue
+    # Response verification: multi-language
     if any(success_msg in update_res.text for success_msg in SUCCESS_MESSAGES):
-        print("✅ Données mises à jour avec succès.")
+        print("✅ Data successfully updated.")
     else:
-        print("⚠️ La mise à jour n’a pas été confirmée. Vérifie manuellement.")
+        print("⚠️ The update was not confirmed. Please check manually.")
 
-# --- Point d’entrée ---
-
+# Entry point
 def main() -> None:
     args = parse_args()
 
@@ -140,7 +156,7 @@ def main() -> None:
     password_val = args.password or os.getenv("password")
 
     if not login_val or not password_val:
-        raise ValueError("Le login et le mot de passe doivent être définis dans .env ou en paramètre.")
+        raise ValueError("Login and password must be defined in the .env file or provided as parameters.")
 
     with requests.Session() as session:
         login(session, login_val, password_val)
