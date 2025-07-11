@@ -11,7 +11,7 @@ from typing import List, Tuple
 
 def find_missing_environments(text: str) -> List[Tuple[str, str]]:
     """
-    Find missing \begin or \end commands for environments.
+    Find missing \\begin or \\end commands for environments.
     Returns list of (environment_name, missing_type) tuples.
     """
     begin_matches = re.findall(r'\\begin\{([^}]+)\}', text)
