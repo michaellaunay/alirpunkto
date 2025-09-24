@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Your registation to <span tal:omit-tag="textual" tal:replace="domain_name">Domain name</span>. Next steps</title>
+</head>
+<body tal:omit-tag="textual">
+
+    <h1 tal:omit-tag="textual">Hello <span tal:replace="full_name">Applicant's Name</span>,</h1>
+    <p tal:omit-tag="textual">Thank you for submitting your application to <span tal:replace="domain_name">Domain name</span>! </p>
+
+    <p tal:omit-tag="textual">Depending on the option you chose during registration, here are the next steps:</p>
+
+    <h2 tal:omit-tag="textual">If you chose the "Ordinary Community Member" option:</h2>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Congratulations, you are now an "Ordinary Community Member"!</li>
+        <li tal:omit-tag="textual">Your membership number has been determined.</li>
+        <li tal:omit-tag="textual">A congratulatory email has been sent to you.</li>
+        <li tal:omit-tag="textual">Your application status is now "ApprovedOrdinaryCommunityMember".</li>
+        <li tal:omit-tag="textual">No further action is needed from your part. Connect to our <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">workspace</a> and start interacting with your fellow Members of the Community!</li>
+    </ol>
+
+    <h2 tal:omit-tag="textual">If you chose the "Cooperator" option:</h2>
+    <p tal:omit-tag="textual">You will be entitled to participate fully in our decision-making processes, and in our votes. In these processes and votes, we want to preserve the democratic principle of 'one person = one vote'. It would be unfair if a given person could vote several times by using several accounts on our IT platform. We hence need to relate your account to you personally, and make sure that you are identified on our IT platform in a way that cannot be mistaken with the identity of another person, i.e. with a unique set of identifiers.</p>
+    <p tal:omit-tag="textual">In addition, we want to ensure that only citizens of the European Union are Cooperators. The reason for this is that we will claim the right to participate in public elections in the European Union as a single organisation at the scale of the EU, and need to demonstrate that we represent EU citizens only (and not "foreign interests").</p>
+    <p tal:omit-tag="textual">In order to achieve these goals, we will request you to provide the following information, as they appear in your official identity documents:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">All your given names (in their official transcription in Latin characters for Greek and Bulgarian),</li>
+        <li tal:omit-tag="textual">All your family names at birth (in their official transcription in Latin characters for Greek and Bulgarian),</li>
+        <li tal:omit-tag="textual">Your date of birth,</li>
+        <li tal:omit-tag="textual">Your nationality (among the nationalities of EU Member States only).</li>
+    </ul>
+    <p tal:omit-tag="textual">You will provide this information on our registration platform, and a set of 3 to 7 randomly-selected Cooperators, called the Verifiers, will check that the information that you provided on our registration platform matches that on your official ID documents. You will hence transmit partial pictures of your official ID documents directly to these Verifiers, without (for the sake of seciurity) using our IT platform.</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">There are two methods for you to transmit these partial pictures of your official ID documents to the Verifiers:</strong></p>
+    <ol tal:omit-tag="textual">
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via Video Conferencing</strong>: A button will guide you in drafting a pre-filled email, in which you can propose appointment dates and times for a single or separate video conference(s) with the Verifiers assigned to you. During this (these) videoconference(s), you will show your official ID document to the Verifiers via your camera, making sure that e.g. the number of the ID document and the place of birth remains hidden, so as to avoid (for security reasons) having a full copy of this document displayed.</li>
+        <li tal:omit-tag="textual"><strong tal:omit-tag="textual">Via Email Attachment</strong>: A button will assist you in writing a pre-filled email, to which you can attach a partial copy of your official ID document (e.g., masking the number and place of birth).</li>
+    </ol>
+
+    <p tal:omit-tag="textual">Each Verifier will then check the conformity of the information you provided on the registration form of our IT platform with that on your official identity document. Each Verifier will then independently vote on our IT platform on this verification of conformity. If a majority of Verifiers accepts that the information that you provided on our registration platform matches that on your official ID documents, wde will have the pleasure to welcome you as a Cooperator!</p>
+
+    <p tal:omit-tag="textual">Should email sending fail for any reason, an error message will be logged and an attempt will be made to send an email to the administrator.</p>
+
+    <p tal:omit-tag="textual">We remind you that the time allocated for you to perform this verification process is limited, so please act quickly.</p>
+
+    <p tal:omit-tag="textual">If you have any questions or need further clarification, please do not hesitate to contact us.</p>
+
+    <p tal:omit-tag="textual">Best regards,</p>
+    <p tal:omit-tag="textual"><strong tal:omit-tag="textual">The team of <span tal:replace="domain_name">Domain Name</span></strong>.</p>
+    <p tal:omit-tag="textual"><small tal:omit-tag="textual">Note: This notification has been generated automatically. Please do not reply directly to this message.</small></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organization details</p>
+</body>
+</html>
