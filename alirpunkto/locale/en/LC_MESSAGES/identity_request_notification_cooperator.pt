@@ -11,19 +11,7 @@
     <h1 tal:omit-tag="textual">Hello <span tal:replace="full_name">Applicant's Name</span>,</h1>
     <p tal:omit-tag="textual">Thank you for submitting your application to <span tal:replace="domain_name">Domain name</span>! </p>
 
-    <p tal:omit-tag="textual">Depending on the option you chose during registration, here are the next steps:</p>
-
-    <h2 tal:omit-tag="textual">If you chose the "Ordinary Community Member" option:</h2>
-    <ol tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Congratulations, you are now an "Ordinary Community Member"!</li>
-        <li tal:omit-tag="textual">Your membership number has been determined.</li>
-        <li tal:omit-tag="textual">A congratulatory email has been sent to you.</li>
-        <li tal:omit-tag="textual">Your application status is now "ApprovedOrdinaryCommunityMember".</li>
-        <li tal:omit-tag="textual">No further action is needed from your part. Connect to our <a tal:omit-tag="textual" href="https://workspace.cosmopolitical.coop/login">workspace</a> and start interacting with your fellow Members of the Community!</li>
-    </ol>
-
-    <h2 tal:omit-tag="textual">If you chose the "Cooperator" option:</h2>
-    <p tal:omit-tag="textual">You will be entitled to participate fully in our decision-making processes, and in our votes. In these processes and votes, we want to preserve the democratic principle of 'one person = one vote'. It would be unfair if a given person could vote several times by using several accounts on our IT platform. We hence need to relate your account to you personally, and make sure that you are identified on our IT platform in a way that cannot be mistaken with the identity of another person, i.e. with a unique set of identifiers.</p>
+    <p tal:omit-tag="textual">As a Cooperator, you will be entitled to participate fully in our decision-making processes, and in our votes. In these processes and votes, we want to preserve the democratic principle of 'one person = one vote'. It would be unfair if a given person could vote several times by using several accounts on our IT platform. We hence need to relate your account to you personally, and make sure that you are identified on our IT platform in a way that cannot be mistaken with the identity of another person, i.e. with a unique set of identifiers.</p>
     <p tal:omit-tag="textual">In addition, we want to ensure that only citizens of the European Union are Cooperators. The reason for this is that we will claim the right to participate in public elections in the European Union as a single organisation at the scale of the EU, and need to demonstrate that we represent EU citizens only (and not "foreign interests").</p>
     <p tal:omit-tag="textual">In order to achieve these goals, we will request you to provide the following information, as they appear in your official identity documents:</p>
     <ul tal:omit-tag="textual">
