@@ -467,11 +467,14 @@ def handle_confirmed_human_state(request, candidature):
             appstruct['lang3'] = request.params['lang3']
         if 'description' in request.params:
             appstruct['description'] = request.params['description']
-        parameters = {
-            k: request.params[k]
-            for k in MemberDatas.__dataclass_fields__.keys()
-            if k in request.params
-        }
+        parameters = {}
+        for field_name in MemberDatas.__dataclass_fields__.keys():
+            if field_name not in request.params:
+                continue
+            value = request.params[field_name]
+            if field_name in ('lang2', 'lang3') and not value:
+                continue
+            parameters[field_name] = value
         # @TODO use permission than member type to manipulate the data
         if candidature.type == MemberTypes.COOPERATOR:
             # Extract birthdate from request only for coopereator
@@ -740,4 +743,3 @@ def handle_default_state(request, candidature):
         'MemberTypes': MemberTypes,
         'error':"handle_default_state Not yet implemented"
     }
-

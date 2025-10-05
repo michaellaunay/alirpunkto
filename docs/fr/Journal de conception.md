@@ -2271,3 +2271,11 @@ Les outils de mock, comme `unittest.mock.patch`, fonctionnent en remplaçant la 
 ### Conclusion
 
 Le fait de devoir déplacer l'importation montre une limitation liée au mécanisme d'importation de Python et à la manière dont les mocks sont appliqués dans les tests. En déplaçant l'importation dans le corps de la fonction, nous permettons à Python de capturer la version mockée de la fonction lors des tests, ce qui permet au mock de fonctionner correctement.
+
+# 2025-10-05
+@TODO régler le problème suivant :
+Remarque concernant alirpunkto/constants_and_globals.py:24 (et le bloc qui l'entoure jusqu'à environ la ligne 160) charge presque tous les paramètres opérationnels directement depuis les variables d'environnement ou les entrées .env dès l'importation du module. Par exemple, l'hôte/port LDAP, les identifiants d'administrateur, les points de terminaison Keycloak et les paramètres de messagerie. Aucune protection ne vérifie si une valeur est manquante ou malformée avant son utilisation par d'autres modules ; la plupart des valeurs sont intégrées à la configuration Pyramid (￼alirpunkto/__init__.py:178) ou aux assistants LDAP (￼alirpunkto/ldap_factory.py:18) longtemps après l'importation.
+
+De ce fait, une faute de frappe subtile ou l'absence d'une variable d'environnement ne déclenche généralement une exception que lorsqu'un chemin de code déréférence le paramètre (par exemple, lors de la création d'un nom unique LDAP ou de l'envoi d'un e-mail), ce qui peut se produire bien avant le traitement des requêtes, voire lors de certains rôles/tests. Cette latence rend les échecs de déploiement plus difficiles à diagnostiquer.
+
+L'ajout d'une routine de validation (ou au moins la documentation des variables obligatoires) lors du démarrage permettrait de détecter les lacunes de configuration à l'avance et de fournir des messages d'erreur plus clairs.

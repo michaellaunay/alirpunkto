@@ -24,6 +24,9 @@ from alirpunkto.models.model_permissions import MemberDataPermissionsType, Membe
 from dataclasses import fields
 
 locales_as_choices = [(key, value) for key, value in EUROPEAN_LOCALES.items()]
+optional_locales_as_choices = [
+    ('', _('language_none_option')),
+] + locales_as_choices
 
 def get_majority_date():
     """Return the date of majority."""
@@ -205,7 +208,11 @@ class RegisterForm(schema.CSRFSchema):
         description = _('second_interaction_language_description',
             mapping={'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME,
                 'organization_details': ORGANIZATION_DETAILS}),
-        widget = SelectWidget(values=locales_as_choices),
+        widget = SelectWidget(
+            values=optional_locales_as_choices,
+            null_value='',
+        ),
+        missing='',
     )
     lang3 = colander.SchemaNode(
         colander.String(),
@@ -213,7 +220,11 @@ class RegisterForm(schema.CSRFSchema):
         description = _('third_interaction_language_description',
             mapping={'domain_name': DOMAIN_NAME, 'site_name': SITE_NAME,
                 'organization_details': ORGANIZATION_DETAILS}),
-        widget = SelectWidget(values=locales_as_choices),
+        widget = SelectWidget(
+            values=optional_locales_as_choices,
+            null_value='',
+        ),
+        missing='',
     )
     cooperative_behaviour_mark = colander.SchemaNode(
         colander.Float(),
@@ -530,5 +541,4 @@ class RegisterForm(schema.CSRFSchema):
 
         self.get('cooperative_number').widget.readonly = True
         self.get('cooperative_number').widget.value = read_only_fields['cooperative_number']
-
 
