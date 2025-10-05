@@ -1375,10 +1375,15 @@ def send_validation_email(
     Returns:
         bool: True if the email is successfully sent, False otherwise.
     """
-    template_path = get_local_template(
-        request,
-        LOCALE_LANG_MESSAGES + "check_email" + ZPT_EXTENSION
-    ).abspath()
+    try:
+        template_path = LOCALE_LANG_MESSAGES + "check_email" + ZPT_EXTENSION
+        template_path = get_local_template(
+            request,
+            template_path
+        ).abspath()
+    except Exception as e:
+        log.error(f"Error while getting template '{template_path}' for email validation: {e}")
+        return False
 
     email = candidature.email # The email to send to.
     challenge = candidature.challenge # The math challenge for email validation.
