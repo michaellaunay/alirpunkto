@@ -69,17 +69,23 @@ class MemberStates(Enum) :
             case cls.CREATED.value :
                 return "member_state_created_value"
             case cls.DRAFT.name :
+                return "member_state_draft_name"
+            case cls.DRAFT.value :
                 return "member_state_draft_value"
             case cls.DATA_MODIFICATION_REQUESTED.name :
+                return "member_data_modification_request_name"
+            case cls.DATA_MODIFICATION_REQUESTED.value :
                 return "member_data_modification_request_value"
             case cls.DATA_MODIFIED.name :
+                return "member_datas_modified_name"
+            case cls.DATA_MODIFIED.value :
                 return "member_datas_modified_value"
             case cls.EXCLUDED.name :
                 return "member_datas_excluded_name"
-            case cls.DELETED.name :
-                return "member_datas_deleted_name"
             case cls.EXCLUDED.value :
                 return "member_datas_excluded_value"
+            case cls.DELETED.name :
+                return "member_datas_deleted_name"
             case cls.DELETED.value :
                 return "member_datas_deleted_value"
             case _ :
