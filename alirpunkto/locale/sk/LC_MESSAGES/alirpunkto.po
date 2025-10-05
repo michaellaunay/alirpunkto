@@ -1,0 +1,1060 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2025-10-05 21:02+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: Slovak <dev@logikascium.com>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
+msgid "welcome"
+msgstr "Vitajte"
+
+msgid "username_label"
+msgstr "Používateľské meno"
+
+msgid "password_label"
+msgstr "Heslo"
+
+msgid "login_label"
+msgstr "Prihlásiť sa"
+
+msgid "welcome_msg"
+msgstr "Vitajte na ${site_name}, centralizovanej službe pre aplikácie používané v IT infraštruktúre ${domain_name}."
+
+msgid "all_applications_msg"
+msgstr "Všetky aplikácie, ktoré potrebujete na účasť na aktivitách ${domain_name}, nájdete na jednom mieste."
+
+msgid "register_or_login_msg"
+msgstr "Zaregistrujte sa alebo sa prihláste, aby ste mohli začať."
+
+msgid "logged_in_msg_title"
+msgstr "${site_name}, centralizovaná služba pre aplikácie používané v IT infraštruktúre ${domain_name}"
+
+msgid "logged_in_msg"
+msgstr "Ste prihlásený ako ${user}."
+
+msgid "log_out_invitation_msg"
+msgstr "Môžete sa odhlásiť kliknutím sem"
+
+msgid "logout_label"
+msgstr "Odhlásiť sa"
+
+msgid "choose_application_msg"
+msgstr "Vyberte aplikáciu, ku ktorej sa chcete pripojiť:"
+
+#: views/login.py:23
+msgid "invalid_username_or_password"
+msgstr "Neplatné používateľské meno alebo heslo. Skúste to znova."
+
+msgid "register_link"
+msgstr "Vytvoriť účet"
+
+msgid "password_confirm_label"
+msgstr "Potvrďte heslo"
+
+msgid "password_confirm_title"
+msgstr "Potvrďte svoje heslo"
+
+msgid "forgot_password_label"
+msgstr "Zabudnuté heslo?"
+
+msgid "full_name_as_in_id_label"
+msgstr "Celé meno tak, ako je uvedené vo vašich úradných dokladoch totožnosti"
+
+msgid "full_surname_as_in_id_label"
+msgstr "Celé priezvisko tak, ako je uvedené vo vašich úradných dokladoch totožnosti"
+
+msgid "birthdate_label"
+msgstr "Dátum narodenia"
+
+msgid "nationality_label"
+msgstr "Štátna príslušnosť (spomedzi členských štátov Európskej únie)"
+
+msgid "cooperator_number_label"
+msgstr "Číslo spolupracovníka"
+
+msgid "pseudonym_label"
+msgstr "Pseudonym"
+
+msgid "email_label"
+msgstr "E-mailová adresa"
+
+msgid "first_interaction_language_label"
+msgstr "Jazyk, ktorý uprednostňujete na komunikáciu s nami"
+
+msgid "second_interaction_language_label"
+msgstr "Jazyk, ktorý prijímate ako druhú možnosť na komunikáciu s nami"
+
+msgid "language_none_option"
+msgstr "Žiadny"
+
+msgid "register_label"
+msgstr "Zaregistrovať sa"
+
+msgid "forgot_password_head"
+msgstr "Zabudnuté heslo"
+
+msgid "forgot_your_password_title"
+msgstr "Zabudli ste svoje heslo?"
+
+msgid "enter_your_email_address_label"
+msgstr "Zadajte svoju e-mailovú adresu:"
+
+msgid "submit_button"
+msgstr "Odoslať"
+
+msgid "candidature_states_draft_value"
+msgstr "Koncept: Žiadosť je v režime konceptu."
+
+msgid "candidature_states_email_validation_value"
+msgstr "Overenie e-mailu: Stav, v ktorom sa čaká na overenie e-mailovej adresy žiadateľa."
+
+msgid "candidature_states_confirmed_human_value"
+msgstr "Potvrdený človek: E-mailová adresa žiadateľa bola overená a bol poskytnutý dôkaz o ľudskosti (overili sme, že nie ste robot)."
+
+msgid "candidature_states_unique_data_value"
+msgstr ""
+"Jedinečné údaje: Žiadateľ zadal svoje osobné identifikačné údaje a my sme overili, že žiadny súčasný ani nedávny spolupracovník alebo obyčajný člen komunity nemá rovnaké údaje."
+
+msgid "candidature_states_pending_value"
+msgstr "Čaká sa: Žiadosť bola odoslaná. Osobné identifikačné údaje boli odoslané overovateľom, ale zatiaľ neposkytli spätnú väzbu."
+
+msgid "candidature_states_approved_value"
+msgstr "Schválené: Žiadosť bola prijatá."
+
+msgid "candidature_states_refused_value"
+msgstr "Zamietnuté: Žiadosť bola odmietnutá."
+
+msgid "candidature_states_draft"
+msgstr "koncept"
+
+msgid "candidature_states_email_validation"
+msgstr "overenie_emailu"
+
+msgid "candidature_states_confirmed_human"
+msgstr "potvrdený_človek"
+
+msgid "candidature_states_unique_data"
+msgstr "jedinečné_údaje"
+
+msgid "candidature_states_pending"
+msgstr "čaká_sa"
+
+msgid "candidature_states_approved"
+msgstr "schválené"
+
+msgid "candidature_states_refused"
+msgstr "zamietnuté"
+
+# Slovenský preklad (slovenčina)
+msgid "user_types_ordinary_value"
+msgstr "Riadny člen: Žiadosť o členstvo ako riadny člen komunity – so zjednodušeným procesom registrácie, bez finančných povinností, ale bez rozhodovacích práv."
+
+msgid "user_types_cooperator_value"
+msgstr ""
+"Spolupracovník: Žiadosť o členstvo ako plnohodnotný člen družstva – s úplným procesom registrácie, ktorý zabezpečuje princíp „jeden človek = jeden hlas“ a že žiadateľ je občanom Európskej únie, "
+"povinnosť kúpiť aspoň jeden podiel a platiť ročný príspevok, a plné rozhodovacie práva."
+
+msgid "user_types_ordinary"
+msgstr "Riadny člen komunity"
+
+msgid "user_types_cooperator"
+msgstr "Spolupracovník = plnohodnotný člen družstva"
+
+msgid "vote_types_yes_value"
+msgstr "Áno: Hlas je kladný."
+
+msgid "vote_types_no_value"
+msgstr "Nie: Hlas je záporný."
+
+msgid "vote_types_abstain_value"
+msgstr "Zdržal sa: Hlas je neutrálny."
+
+msgid "vote_types_yes"
+msgstr "áno"
+
+msgid "vote_types_no"
+msgstr "nie"
+
+msgid "vote_types_abstain"
+msgstr "zdržal sa"
+
+msgid "zero"
+msgstr "nula"
+
+msgid "one"
+msgstr "jeden"
+
+msgid "two"
+msgstr "dva"
+
+msgid "three"
+msgstr "tri"
+
+msgid "four"
+msgstr "štyri"
+
+msgid "five"
+msgstr "päť"
+
+msgid "six"
+msgstr "šesť"
+
+msgid "seven"
+msgstr "sedem"
+
+msgid "eight"
+msgstr "osem"
+
+msgid "nine"
+msgstr "deväť"
+
+msgid "times"
+msgstr "krát"
+
+msgid "plus"
+msgstr "plus"
+
+msgid "plus_prefix"
+msgstr ", "
+
+msgid "email_validation_subject"
+msgstr "Overenie, že ste človek. Vypočítajte výsledky jednoduchých matematických operácií a zadajte ich na portáli."
+
+msgid "email_candidature_state_changed"
+msgstr "Zmena stavu vašej žiadosti na portáli"
+
+msgid "invalid_challenge"
+msgstr "Vaša odpoveď nie je správna. Zadajte prosím novú."
+
+msgid "invalid_email"
+msgstr "Vyskytol sa problém s vašou e-mailovou adresou, overte ju prosím."
+
+msgid "invalid_choice"
+msgstr "Vaša voľba nie je platná, zadajte ju prosím znova."
+
+msgid "challenge_instruction_text"
+msgstr "Vypočítajte výsledky nasledujúcich štyroch jednoduchých matematických operácií a vyplňte zodpovedajúce polia, aby ste potvrdili svoju e-mailovú adresu. Ak do niekoľkých minút nedostanete e-mail, skontrolujte priečinok so spamom. Je možné, že e-mail, ktorý sme vám poslali, sa tam nachádza."
+
+msgid "enter_result_label_A"
+msgstr "Zadajte výsledok matematickej operácie A:"
+
+msgid "result_label_title_A"
+msgstr "Zadajte kód, ktorý ste dostali e-mailom, alebo výsledok matematickej operácie A."
+
+msgid "result_input_title_A"
+msgstr "Aby sme mohli overiť vašu e-mailovú adresu a že ste človek (nie robot), zadajte výsledok operácie A, ktorý ste dostali e-mailom."
+
+msgid "enter_result_label_B"
+msgstr "Zadajte výsledok matematickej operácie B:"
+
+msgid "result_label_title_B"
+msgstr "Zadajte kód, ktorý ste dostali e-mailom, alebo výsledok matematickej operácie B."
+
+msgid "result_input_title_B"
+msgstr "Aby sme mohli overiť vašu e-mailovú adresu a že ste človek (nie robot), zadajte výsledok operácie B, ktorý ste dostali e-mailom."
+
+msgid "enter_result_label_C"
+msgstr "Zadajte výsledok matematickej operácie C:"
+
+msgid "result_label_title_C"
+msgstr "Zadajte kód, ktorý ste dostali e-mailom, alebo výsledok matematickej operácie C."
+
+msgid "result_input_title_C"
+msgstr "Aby sme mohli overiť vašu e-mailovú adresu a že ste človek (nie robot), zadajte výsledok operácie C, ktorý ste dostali e-mailom."
+
+msgid "enter_result_label_D"
+msgstr "Zadajte výsledok matematickej operácie D:"
+
+msgid "result_label_title_D"
+msgstr "Zadajte kód, ktorý ste dostali e-mailom, alebo výsledok matematickej operácie D."
+
+msgid "result_input_title_D"
+msgstr "Aby sme mohli overiť vašu e-mailovú adresu a že ste človek (nie robot), zadajte výsledok operácie D, ktorý ste dostali e-mailom."
+
+msgid "verify_button"
+msgstr "Odoslať"
+
+msgid "submit_email_validation_title"
+msgstr "Kliknite pre overenie zadaných kódov."
+
+msgid "passwords_dont_match"
+msgstr "Heslá sa nezhodujú."
+
+msgid "password_too_short"
+msgstr "Heslo je príliš krátke."
+
+msgid "password_minimum_length"
+msgstr "Heslo musí mať aspoň ${password_minimum_length} znakov."
+
+msgid "password_too_long"
+msgstr "Heslo je príliš dlhé."
+
+msgid "password_maximum_length"
+msgstr "Heslo by nemalo presiahnuť ${password_maximum_length} znakov."
+
+msgid "password_must_contain_digit"
+msgstr "Heslo musí obsahovať aspoň jednu číslicu."
+
+msgid "password_must_contain_uppercase"
+msgstr "Heslo musí obsahovať aspoň jedno veľké písmeno."
+
+msgid "password_must_contain_lowercase"
+msgstr "Heslo musí obsahovať aspoň jedno malé písmeno."
+
+msgid "password_must_contain_special_char"
+msgstr "Heslo musí obsahovať aspoň jeden z nasledujúcich znakov: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+msgid "password_title_label"
+msgstr "Zadajte svoje heslo sem."
+
+# Slovenský preklad (slovenčina)
+msgid "password_confirm_title_label"
+msgstr "Potvrďte svoje heslo tu."
+
+msgid "password_confirm"
+msgstr "Potvrďte svoje heslo."
+
+msgid "type_of_registration"
+msgstr "Typ registrácie"
+
+msgid "type_registration_label"
+msgstr "Vyberte typ registrácie, ktorý vám najviac vyhovuje."
+
+msgid "type_registration_choice"
+msgstr "Každý typ registrácie prináša konkrétnu sadu práv, výhod a povinností."
+
+msgid "approved_heading"
+msgstr "Gratulujeme k schváleniu!"
+
+msgid "approved_description"
+msgstr "Vaša žiadosť bola schválená. Teraz sa môžete prihlásiť pomocou pseudonymu a hesla, ktoré ste zadali počas procesu žiadosti."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Neplatný pseudonym. Mal by mať dĺžku medzi ${MIN_PSEUDONYM_LENGTH} a ${MAX_PSEUDONYM_LENGTH} znakmi a môže obsahovať iba písmená (A-Z, a-z), čísla (0-9), podčiarkovníky (_), bodky (.), "
+"pomlčky (-) a medzery ( ). Nemôže obsahovať písmená s diakritikou, prehláskami ani inými diakritickými znamienkami špecifickými pre niektoré jazyky."
+
+msgid "invalid_date"
+msgstr "Neplatný formát dátumu."
+
+msgid "pseudonym_too_short"
+msgstr "Pseudonym je príliš krátky."
+
+msgid "pseudonym_minimum_length"
+msgstr "Pseudonym musí mať aspoň ${MIN_PSEUDONYM_LENGTH} znakov."
+
+msgid "pseudonym_too_long"
+msgstr "Pseudonym je príliš dlhý."
+
+msgid "pseudonym_maximum_length"
+msgstr "Pseudonym nesmie presiahnuť ${MAX_PSEUDONYM_LENGTH} znakov."
+
+msgid "pseudonym_allready_exists"
+msgstr "Tento pseudonym sa už používa. Vyberte si prosím iný."
+
+msgid "Select_a_country"
+msgstr "Vyberte členský štát Európskej únie"
+
+msgid "Austria"
+msgstr "AT - Rakúsko"
+
+msgid "Belgium"
+msgstr "BE - Belgicko"
+
+msgid "Bulgaria"
+msgstr "BG - Bulharsko"
+
+msgid "Cyprus"
+msgstr "CY - Cyprus"
+
+msgid "Czech_Republic"
+msgstr "CZ - Česko"
+
+msgid "Germany"
+msgstr "DE - Nemecko"
+
+msgid "Denmark"
+msgstr "DK - Dánsko"
+
+msgid "Estonia"
+msgstr "EE - Estónsko"
+
+msgid "Spain"
+msgstr "ES - Španielsko"
+
+msgid "Finland"
+msgstr "FI - Fínsko"
+
+msgid "France"
+msgstr "FR - Francúzsko"
+
+msgid "Greece"
+msgstr "GR - Grécko"
+
+msgid "Croatia"
+msgstr "HR - Chorvátsko"
+
+msgid "Hungary"
+msgstr "HU - Maďarsko"
+
+msgid "Ireland"
+msgstr "IE - Írsko"
+
+msgid "Italy"
+msgstr "IT - Taliansko"
+
+msgid "Lithuania"
+msgstr "LT - Litva"
+
+msgid "Luxembourg"
+msgstr "LU - Luxembursko"
+
+msgid "Latvia"
+msgstr "LV - Lotyšsko"
+
+msgid "Malta"
+msgstr "MT - Malta"
+
+msgid "Netherlands"
+msgstr "NL - Holandsko"
+
+msgid "Poland"
+msgstr "PL - Poľsko"
+
+msgid "Portugal"
+msgstr "PT - Portugalsko"
+
+msgid "Romania"
+msgstr "RO - Rumunsko"
+
+msgid "Sweden"
+msgstr "SE - Švédsko"
+
+msgid "Slovenia"
+msgstr "SI - Slovinsko"
+
+msgid "Slovakia"
+msgstr "SK - Slovensko"
+
+msgid "full_name_as_in_id_required"
+msgstr "Celé meno je povinné."
+
+msgid "full_surname_as_in_id_required"
+msgstr "Celé priezvisko je povinné."
+
+msgid "birthdate_required"
+msgstr "Dátum narodenia je povinný."
+
+msgid "nationality_required"
+msgstr "Štátna príslušnosť je povinná."
+
+msgid "first_interaction_language_required"
+msgstr "Prvý jazyk komunikácie je povinný."
+
+msgid "pending_description"
+msgstr "Vaša žiadosť sa momentálne posudzuje. Po jej schválení budete informovaný e-mailom."
+
+msgid "candidature_not_found"
+msgstr "Žiadosť sa nenašla."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Ďakujeme za váš záujem o aktivity ${domain_name}! Tu je správne miesto, kde sa môžete zaregistrovať.</b></h2>\n"
+"<p>Kooperatíva CosmoPolitical podporuje jednotlivcov a mení existujúci ekonomický, sociálny a politický systém smerom k hlboko spravodlivej, udržateľnej, demokratickej a šťastnej "
+"spoločnosti, <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Spoločnosti dohody</a>.</p>\n"
+"<p>Nižšie nájdete začiatok procesu registrácie, aby ste sa k nám mohli pridať. Ponúkame dve úrovne účasti so zvyšujúcimi sa povinnosťami a právami:</p>\n"
+"<ul>\n"
+"<li>ako <b>Riadny člen našej komunity</b> – s jednoduchým registračným procesom, bez finančných záväzkov, ale bez hlasovacích práv; alebo</li>\n"
+"<li>ako <b>Spolupracovník</b> – plnohodnotný člen našej družstevnej organizácie, s registračným procesom, ktorý zabezpečuje, že daná osoba sa môže zaregistrovať iba raz (v súlade s "
+"demokratickým princípom „jeden človek = jeden hlas“) a že len občania Európskej únie, ktorí dosiahli plnoletosť, môžu byť spolupracovníkmi, s povinnosťou kúpiť aspoň jeden podiel a "
+"platiť ročný príspevok, a s plnými hlasovacími právami. Európska únia je geografickým rámcom našej činnosti (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">pozrite prečo</a>).</li>\n"
+"</ul>\n"
+"<p>Proces registrácie obsahuje nasledujúce kroky:</p>\n"
+"<ol>\n"
+"<li>overíme, že e-mailová adresa bola poskytnutá vami, človekom (a nie robotom);</li>\n"
+"<li>požiadame vás o váš pseudonym, heslo a preferovaný jazyk(y) na komunikáciu s vami;</li>\n"
+"<li>ak ste sa zaregistrovali ako Riadny člen komunity, proces sa týmto krokom končí a stávate sa členom. Ak ste sa zaregistrovali ako Spolupracovník, proces pokračuje, aby sme mohli "
+"overiť, že spĺňate podmienky uvedené vyššie pre spolupracovníkov.</li>\n"
+"</ol>\n"
+"<p>Overenie prebieha nasledovne:</p>\n"
+"<ol>\n"
+"<li>požiadame vás o <b>údaje o totožnosti</b>: vaše meno a priezvisko, dátum narodenia;</li>\n"
+"<li>niekoľkých existujúcich členov družstva (vašich overovateľov) požiadame, aby prostredníctvom priamej e-mailovej komunikácie s vami potvrdili, že (1) údaje vo vašom úradnom doklade "
+"totožnosti sa zhodujú s údajmi, ktoré ste poskytli, a že (2) fotografia na vašom doklade totožnosti sa zhoduje s vašou aktuálnou selfie fotografiou;</li>\n"
+"<li>keď tieto zhody potvrdia, budete privítaný ako Spolupracovník s plnými právami – po tom, čo zakúpite aspoň <a href=\"https://www.cosmopolitical.coop/share\">jeden podiel</a> a "
+"zaplatíte <a href=\"https://www.cosmopolitical.coop/yearcontrib\">ročný príspevok na našu činnosť</a>.</li>\n"
+"</ol>\n"
+"<p>Začnite svoju registráciu už teraz! Tešíme sa na vašu účasť v našich aktivitách.</p>\n"
+"</div>"
+
+# Slovenský preklad (slovenčina)
+msgid "human_verification_description"
+msgstr ""
+"Prvým krokom vo vašom procese registrácie je overenie, že ste \n"
+"ľudská bytosť a nie robot. Na tento účel overíme, že môžete prijať a \n"
+"porozumieť e-mailu, ktorý vám pošleme: to, čo od vás požadujeme, je \n"
+"jednoduché pre človeka, ale oveľa zložitejšie pre robota."
+
+msgid "identity_verification_label"
+msgstr "Overenie totožnosti"
+
+msgid "Send_id_copy_by_email"
+msgstr "Pošlite nedávnu selfie a sken časti vášho úradného dokladu totožnosti e-mailom."
+
+msgid "Send_video_conference_link"
+msgstr "VYMAZANÉ."
+
+msgid "Proceed"
+msgstr "Pokračovať"
+
+msgid "confirm_sent_emails_to_validators"
+msgstr "Potvrďte, že ste odoslali e-maily overovateľom."
+
+msgid "sent_confirmation_label"
+msgstr "Potvrdenie, že e-maily boli odoslané overovateľom"
+
+msgid "submit_email_confirmation_title"
+msgstr "Potvrďte, že ste odoslali e-maily."
+
+msgid "confirm_email_send_button_label"
+msgstr "Potvrdiť"
+
+msgid "vote_success"
+msgstr "Ďakujeme vám za účasť na hlasovaní. Váš hlas ${vote} bol úspešne zaznamenaný. Svoj hlas môžete zmeniť až do termínu uzávierky návratom na túto stránku."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Ako spolupracovník sa budete podieľať na všetkých našich rozhodnutiach. Tieto rozhodnutia sa prijímajú podľa prísnych demokratických postupov a môžu mať dôležité dôsledky pre "
+"družstvo aj pre spolupracovníkov. Okrem toho družstvo zastupuje občanov EÚ nezávisle od ich národnosti – ale iba občanov EÚ. To je obzvlášť dôležité počas verejných volieb. Preto musíme "
+"zabezpečiť tri veci: (1) že jedna osoba sa nemôže zaregistrovať viackrát, aby sa zachoval demokratický princíp „jeden človek = jeden hlas“; (2) že všetci spolupracovníci sú plnoletí a "
+"(3) že spolupracovníkmi sú len občania Európskej únie.</p>\n"
+"    <p>Preto od vás overíme niektoré údaje o vašej totožnosti porovnaním:\n"
+"    <ul>\n"
+"    <li>(1) údajov, ktoré zadáte do tohto formulára počas registrácie, s (2) informáciami uvedenými na vašom úradnom doklade totožnosti, a </li>\n"
+"    <li>(3) fotografie na vašom úradnom doklade totožnosti s (4) vašou aktuálnou selfie (aktuálna = urobená v deň odoslania e-mailu).</li>\n"
+"    </ul></p>\n"
+"    <p>Toto overenie vykoná skupina náhodne vybraných členov družstva – overovatelia vašej žiadosti – "
+"na základe (a) vašej aktuálnej selfie a (b) čiastočného skenu vášho úradného dokladu totožnosti, ktoré im pošlete priamo e-mailom, bez prechodu cez túto online platformu (z dôvodu "
+"bezpečnosti a dôvernosti).</p>\n"
+"    <p>Údaje, ktoré od vás požadujeme a ktoré overovatelia porovnajú s údajmi na vašom úradnom doklade totožnosti, sú:\n"
+"    <ul>\n"
+"    <li>vaše meno a priezvisko,</li>\n"
+"    <li>dátum narodenia,</li>\n"
+"    <li>vaše občianstvo.</li>\n"
+"    </ul></p>\n"
+"    <p>Len jedna osoba má túto kombináciu mena, priezviska a dátumu narodenia: vy. Ak sa pokúsite zaregistrovať znova, budete musieť poskytnúť tie isté údaje a vaša žiadosť bude odmietnutá, "
+"pretože už ste spolupracovníkom a nemôžete mať viac účtov na viacnásobné hlasovanie. Budeme si tým istí, pretože vieme, že len jedna osoba má túto kombináciu mena, priezviska a dátumu narodenia. "
+"Váš dátum narodenia nám umožňuje overiť, že ste plnoletý, a vaše občianstvo potvrdzuje, že ste občanom Európskej únie.</p>\n"
+"    <p>Tieto údaje budú použité výlučne na overenie vašej totožnosti, veku a občianstva a na správu vášho účtu ako spolupracovníka. Nikdy nebudú zobrazené iným používateľom IT platformy ${domain_name}, "
+"ani nebudú poskytnuté či predané komukoľvek inému, s výnimkou zákonnej požiadavky orgánov činných v trestnom konaní na základe rozhodnutia súdu. \"Prevádzkovateľ údajov\" podľa "
+"<a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\">Všeobecného nariadenia o ochrane údajov (GDPR)</a> Európskej únie je CosmoPolitical Cooperative SCE, "
+"európske družstvo so sídlom na adrese 229 rue Solférino, 59000 Lille, Francúzsko, zaregistrované 25. apríla 2023 pod číslom SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>Poslali sme vám e-mailom súbor štyroch jednoduchých aritmetických výpočtov označených od A po D, všetky nasledujú rovnaký vzor: (PRVÉ ČÍSLO MEDZI 1 A 9) "
+"vynásobené (DRUHÝM ČÍSLOM MEDZI 1 A 9), plus (TRETIE ČÍSLO MEDZI 1 A 9). Aby ste výpočet vykonali, najskôr vynásobte PRVÉ ČÍSLO DRUHÝM ČÍSLOM. Potom k výsledku násobenia pripočítajte "
+"TRETIE ČÍSLO. Výsledok tohto sčítania napíšte do poľa určeného pre daný výpočet (medzi štyrmi, ktoré sme vám poslali, označené A až D). Tento postup opakujte pre všetky štyri výpočty, ktoré ste dostali e-mailom.</p>\n"
+"<p>Ak ste e-mail nedostali v priebehu niekoľkých minút, skontrolujte priečinok so spamom. Je možné, že e-mail, ktorý sme vám poslali, sa tam nachádza.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>V rámci procesu registrácie ako spolupracovník overíme vašu totožnosť. Toto overenie je potrebné na zabezpečenie: (1) "
+"aby sa tá istá osoba nezaregistrovala viackrát s rôznymi e-mailovými adresami (v súlade s demokratickým princípom „jeden človek – jeden hlas“); (2) že spolupracovníkmi sú len občania "
+"Európskej únie, ktorí dosiahli plnoletosť (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >pozrite prečo</a>).</p>\n"
+"<p>Na tento účel bezpečne odošlete e-mailom (1) svoju aktuálnu selfie (aktuálna = urobená v deň odoslania e-mailu) a (2) čiastočnú kópiu vášho dokladu totožnosti priamo malej skupine "
+"náhodne vybraných spolupracovníkov – vašim overovateľom. Z bezpečnostných dôvodov vám odporúčame, aby ste na svojom úradnom doklade totožnosti pred odoslaním zakryli miesto narodenia, "
+"podpis a číslo dokladu.</p>\n"
+"<p>Vaša spolupráca v tejto veci je veľmi cenená a je kľúčová pre zachovanie vysokého štandardu dôvery a paneurópskej demokracie v rámci nášho družstva. Ďakujeme vám za pochopenie a aktívnu účasť v tomto dôležitom kroku.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"Počet existujúcich spolupracovníkov je príliš nízky na výber primeraného počtu overovateľov vašej totožnosti. Kontaktujte správcu systému na nasledujúcej adrese ${administrator}, aby ste problém vyriešili."
+
+msgid "email_copy_id_verification_subject"
+msgstr "sk - ${domain_name} - Prosím, overte moju totožnosť ako nového potenciálneho spolupracovníka"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Vážení overovatelia,\n"
+" píšem vám, aby som dokončil proces overenia totožnosti pre moju žiadosť o členstvo ako spolupracovník ${domain_name}. V prílohe tohto e-mailu nájdete:\n"
+"- moju aktuálnu selfie (urobenú dnes); a\n"
+"- čiastočnú kópiu môjho úradného dokladu totožnosti.\n"
+" Upozorňujem, že niektoré citlivé informácie (miesto narodenia, podpis, číslo dokladu) boli z bezpečnostných dôvodov zakryté. Dokument však obsahuje informácie potrebné na overenie mojej totožnosti podľa "
+"postupu registrácie ${domain_name}.\n"
+" Láskavo vás žiadam, aby ste priložené dokumenty skontrolovali, ak je to možné, do 3 dní, a hlasovali o zhode medzi:\n"
+"\n"
+" - údajmi o totožnosti, ktoré ste dostali priamo e-mailom z IT platformy ${domain_name} (a ktoré vám budú pripomenuté v hlasovacom rozhraní), a \n"
+" - údajmi o totožnosti, ktoré môžete prečítať na priloženej čiastočnej kópii môjho úradného dokladu totožnosti;\n"
+"a medzi:\n"
+"- mojou aktuálnou selfie a\n"
+"- fotografiou na mojom úradnom doklade totožnosti.\n"
+" Odkaz na hlasovanie o tejto zhode je nasledujúci: ${voting_url}.\n"
+" Vopred vám úprimne ďakujem za podporu procesu mojej registrácie ako spolupracovníka ${domain_name}. Ak máte akékoľvek otázky alebo potrebujete ďalšie informácie, pokojne ma kontaktujte priamo vo vašom jazyku.\n"
+" S pozdravom,\n"
+" ${signature}\n"
+" Prílohy:\n"
+"- Čiastočná kópia môjho dokladu totožnosti;\n"
+"- Aktuálna selfie.\n"
+" Tento e-mail bol vygenerovaný pomocou funkcie overenia totožnosti ${domain_name}. Ak nie ste overovateľ pridelený k žiadosti ${signature} a dostali ste tento e-mail omylom, informujte správcu ${domain_name} na nasledujúcej adrese: ${administrator}."
+
+msgid "email_video_id_verification_subject"
+msgstr "VYMAZANÉ"
+
+msgid "email_video_id_verification_body"
+msgstr "VYMAZANÉ"
+# Slovenský preklad (slovenčina)
+msgid "forget_email_in_member_list"
+msgstr "Ak používateľ existuje, dostane e-mail. Ak ste e-mail nedostali v priebehu niekoľkých minút, skontrolujte priečinok so spamom. Je možné, že e-mail, ktorý sme vám poslali, sa tam nachádza."
+
+msgid "reset_password_email_subject"
+msgstr "Obnovenie vášho hesla"
+
+msgid "forget_email_send_error"
+msgstr "Počas odosielania e-mailu na obnovenie hesla sa vyskytla chyba, kontaktujte administrátora na adrese ${administrator}"
+
+msgid "member_state_created_name"
+msgstr "vytvorené"
+
+msgid "member_state_created_value"
+msgstr "Člen bol vytvorený"
+
+msgid "member_state_draft_name"
+msgstr "návrh"
+
+msgid "member_state_draft_value"
+msgstr "Údaje člena sa upravujú"
+
+msgid "member_state_registred_name"
+msgstr "zaregistrovaný"
+
+msgid "member_state_registred_value"
+msgstr "Údaje člena boli uložené"
+
+msgid "member_data_modification_request_name"
+msgstr "v úprave"
+
+msgid "member_data_modification_request_value"
+msgstr "Bola podaná žiadosť o úpravu údajov"
+
+msgid "member_datas_modified_name"
+msgstr "upravené"
+
+msgid "member_datas_modified_value"
+msgstr "Údaje člena boli upravené"
+
+msgid "email_member_state_changed"
+msgstr "Zmena vo vašom členskom profile"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+msgid "forget_no_mail"
+msgstr "Zadajte platnú e-mailovú adresu"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+msgid "forget_admin_user"
+msgstr "Administrátor nemá povolené obnoviť svoje vlastné heslo"
+
+#: alirpunkto/views/forgot_password.py:174
+msgid "forget_email_sent"
+msgstr "Ak používateľ existuje, e-mail s odkazom na obnovenie hesla bol odoslaný na jeho e-mailovú adresu. Ak ste e-mail nedostali v priebehu niekoľkých minút, skontrolujte priečinok so spamom. Je možné, že e-mail, ktorý sme vám poslali, sa tam nachádza."
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+msgid "password_not_match"
+msgstr "Obe verzie hesla sa nezhodujú. Uistite sa, že sú rovnaké, a odošlite znova."
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+msgid "password_required"
+msgstr "Zadajte nové heslo"
+
+#: alirpunkto/views/forgot_password.py:229
+msgid "password_changed"
+msgstr "Vaše heslo bolo úspešne zmenené"
+
+#: alirpunkto/views/forgot_password.py:234
+msgid "forget_confirmation_email_send_error"
+msgstr "Počas procesu obnovy hesla sa vyskytla chyba"
+
+#: alirpunkto/views/forgot_password.py:239
+msgid "password_not_changed"
+msgstr "Počas procesu obnovy hesla sa vyskytla chyba. Vaše heslo nebolo zmenené"
+
+#: alirpunkto/views/forgot_password.py:264
+msgid "member_not_found"
+msgstr "Člen nebol nájdený v zozname aktuálnych členov"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+msgid "url_is_obsolete"
+msgstr "Hyperlink, ktorý ste použili na obnovenie hesla, je zastaraný. Použite prosím najnovší odkaz, ktorý ste dostali"
+
+#: alirpunkto/views/register.py:182
+msgid "email_not_sent"
+msgstr "E-mail obsahujúci matematickú úlohu na overenie, že kandidát je človek (a nie robot), nebol odoslaný."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+msgid "error_committing_candidature"
+msgstr "Chyba pri ukladaní žiadosti"
+
+msgid "modification_to_profile_button_title"
+msgstr "Upravte svoj profil"
+
+msgid "modification_to_profile_button_label"
+msgstr "Upraviť profil"
+
+msgid "modification_to_profile_button_description"
+msgstr "Kliknite sem, aby ste dostali e-mailom bezpečný odkaz na úpravu svojho profilu."
+
+# Slovenský preklad (slovenčina)
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"Aby bola zabezpečená ochrana vašich údajov, jedinečný odkaz na úpravu vášho profilu vám bude odoslaný e-mailom. Tento proces zaručuje, že zmeny vo vašom profile môže vykonať iba osoba, "
+"ktorá má prístup k vašej e-mailovej adrese."
+"Ak ste e-mail nedostali v priebehu niekoľkých minút, skontrolujte priečinok so spamom. Je možné, že e-mail, ktorý sme vám poslali, sa tam nachádza."
+
+msgid "modification_to_profile_email_subject"
+msgstr "Odkaz na úpravu vášho profilu v IT infraštruktúre ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Uveďte tu všetky svoje krstné mená tak, ako sú napísané vo vašich úradných dokladoch totožnosti, v ich oficiálnom prepise latinkou (ak pôvodný jazyk používa iné písmo ako latinské)."
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Uveďte tu všetky svoje priezviská pri narodení (t. j. NIE priezvisko po sobáši), tak ako sú napísané vo vašich úradných dokladoch totožnosti, v ich oficiálnom prepise latinkou (ak "
+"pôvodný jazyk používa iné písmo ako latinské)."
+
+#: alirpunkto/schemas/register_form.py:47
+msgid "description_label"
+msgstr "Text, ktorý vás opisuje (profilový text)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Napíšte sem text, v ktorom sa predstavíte, vo svojom preferovanom jazyku, aby vás ostatní členovia komunity mohli lepšie spoznať. Odporúčame zamerať sa na: (1) odkiaľ pochádzate, (2) čo "
+"robíte, (3) čo chcete robiť ako člen komunity a (4) aké zdroje (skúsenosti, vedomosti, čas) máte k dispozícii.\n"
+"Veríme, že tieto informácie sú užitočné, pretože keď sa predstavíte vlastnými slovami, dávate svojej digitálnej identite na našej IT infraštruktúre ľudskú tvár.\n"
+"Tento text umožní každému členovi komunity, aby vás lepšie spoznal, čo výrazne uľahčí vzájomnú komunikáciu!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Uveďte svoj dátum narodenia v nasledujúcom formáte: DD/MM/RRRR, t. j. (1) deň v mesiaci v dvoch čísliciach; (2) číslo mesiaca v dvoch čísliciach; (3) rok v štyroch čísliciach. Iba osoby, "
+"ktoré dosiahli 18 rokov, sa môžu stať spolupracovníkmi. Ak ste ešte nedosiahli vek 18 rokov, pozývame vás, aby ste sa zaregistrovali ako riadny člen komunity – a prešli na stav "
+"spolupracovníka hneď, ako dosiahnete plnoletosť."
+
+#: alirpunkto/schemas/register_form.py:67
+msgid "nationality_description"
+msgstr "Uveďte členský štát Európskej únie, ktorého ste občanom. Iba občania EÚ sa môžu stať spolupracovníkmi."
+
+#: alirpunkto/schemas/register_form.py:70
+msgid "select_a_country"
+msgstr "Vyberte členský štát Európskej únie"
+
+#: alirpunkto/schemas/register_form.py:104
+msgid "cooperator_number_description"
+msgstr "Toto je jedinečné číslo, ktoré vás identifikuje vo všetkých procesoch prebiehajúcich v rámci komunity."
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr "Je potrebné zadať číslo spolupracovníka."
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Zadajte pseudonym, ktorý vás bude identifikovať počas celej vašej aktivity na našej IT platforme. DÔRAZNE odporúčame vybrať si pseudonym, ktorý znemožní (alebo výrazne sťaží) spätné "
+"dohľadanie vašej skutočnej identity. Týmto chránite dôvernosť svojich názorov (t. j. osobných údajov, ktoré sú predmetom osobitnej ochrany podľa všeobecného nariadenia o ochrane "
+"osobných údajov – GDPR) pred akýmkoľvek tlakom v reálnom živote (napr. zo strany zamestnávateľa alebo zákazníkov). Buďte veľmi opatrní! Po jeho výbere už svoj pseudonym NIKDY nebudete môcť zmeniť. "
+"Vyberte si ho s rozvahou!\n"
+" Váš pseudonym musí mať dĺžku medzi ${MIN_PSEUDONYM_LENGTH} a ${MAX_PSEUDONYM_LENGTH} znakmi a môže obsahovať iba písmená latinskej abecedy (A-Z, a-z), čísla (0-9), podčiarkovníky (_), "
+"bodky (.), pomlčky (-) a medzery ( ). Nesmie obsahovať písmená s diakritikou, prehláskami ani inými špecifickými znakmi niektorých jazykov."
+
+#: alirpunkto/schemas/register_form.py:115
+msgid "pseudonym_required"
+msgstr "Zadanie pseudonymu je povinné."
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Zadajte svoje heslo. Vaše heslo musí mať dĺžku medzi ${password_minimum_length} a ${password_maximum_length} znakmi, obsahovať aspoň jednu číslicu, aspoň jedno malé písmeno, aspoň jedno "
+"veľké písmeno a aspoň jeden z nasledujúcich znakov: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+# Slovenský preklad (slovenčina)
+#: alirpunkto/schemas/register_form.py:130
+msgid "password_confirm_description"
+msgstr "Potvrďte svoje heslo"
+
+#: alirpunkto/schemas/register_form.py:132
+msgid "confirm_password_required"
+msgstr "Potvrdenie hesla je povinné"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Uveďte e-mailovú adresu, ktorú bude IT infraštruktúra ${domain_name} používať na komunikáciu s vami.\n"
+"Odporúčame zvoliť e-mailovú adresu, ktorú pravidelne kontrolujete.\n"
+"Tieto informácie potrebujeme, aby sme s vami mohli komunikovať, informovať vás o novinkách v družstve a ponúknuť vám možnosť zapojiť sa do rozhodovania alebo činností. E-mail je v Európe "
+"najrozšírenejší komunikačný prostriedok – univerzálny, otvorený a založený na slobodných štandardoch, na rozdiel od proprietárnych systémov digitálnych gigantov (tzv. „GAFAM“).\n"
+"Táto e-mailová adresa sa bude používať výhradne na zabezpečenie komunikácie medzi IT infraštruktúrou ${domain_name} a vami. Nikdy sa nezobrazí ostatným používateľom platformy ${domain_name}, "
+"ani sa neposkytne ani nepredá nikomu inému, s výnimkou zákonných požiadaviek orgánov verejnej moci na základe súdneho príkazu. „Prevádzkovateľom údajov“ podľa všeobecného nariadenia o ochrane osobných údajov (GDPR) "
+"Európskej únie je CosmoPolitical Cooperative SCE, európske družstvo so sídlom na adrese 229 rue Solférino, 59000 Lille, Francúzsko, zaregistrované 25. apríla 2023 pod číslom SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Uveďte jazyk, v ktorom si želáte, aby s vami IT infraštruktúra ${domain_name} komunikovala.\n"
+"Odporúčame zvoliť jazyk, ktorý ovládate najlepšie, spomedzi úradných jazykov Európskej únie alebo esperanta. Ak je dostupný medzi tými, pre ktoré sme vyvinuli používateľské rozhranie, budeme ho používať na komunikáciu s vami.\n"
+"Túto informáciu potrebujeme, pretože z dôvodov rovnosti a rešpektovania demokratických princípov chceme s vami komunikovať v jazyku, ktorému čo najlepšie rozumiete."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Uveďte jazyk, v ktorom akceptujete, ako druhú možnosť, komunikáciu zo strany IT infraštruktúry ${domain_name}.\n"
+"Odporúčame zvoliť iný úradný jazyk Európskej únie alebo esperanto, ktorému rozumiete dostatočne dobre. Ak je dostupný medzi tými, pre ktoré sme vyvinuli používateľské rozhranie, a váš preferovaný jazyk nie je dostupný, použijeme tento jazyk.\n"
+"Túto informáciu potrebujeme, pretože napriek našej snahe sa môže stať, že váš preferovaný jazyk nebude dostupný v používateľskom rozhraní nášho softvéru. Preto sa pýtame, či môžete použiť iný jazyk."
+
+#: alirpunkto/schemas/register_form.py:156
+msgid "third_interaction_language_label"
+msgstr "Jazyk, ktorý akceptujete ako tretiu možnosť komunikácie s nami"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Uveďte jazyk, v ktorom akceptujete, ako tretiu možnosť, komunikáciu zo strany IT infraštruktúry ${domain_name}.\n"
+"Odporúčame zvoliť iný úradný jazyk Európskej únie alebo esperanto, ktorému ešte rozumiete. Ak je dostupný medzi tými, pre ktoré sme vyvinuli používateľské rozhranie, a ak nie je dostupný ani váš preferovaný, ani druhý jazyk, použijeme tento jazyk.\n"
+"Túto informáciu potrebujeme, pretože sa môže stať, že ani váš preferovaný, ani druhý jazyk nebudú dostupné v našom softvéri. Preto sa pýtame, či môžete použiť tretí jazyk. Uvedomujeme si, že komunikácia v ňom môže byť pre vás neuspokojivá – rovnako ako pre nás. Ospravedlňujeme sa za to."
+
+#: alirpunkto/schemas/register_form.py:163
+msgid "cooperative_behaviour_mark_label"
+msgstr "Vaše hodnotenie kooperatívneho správania"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"Ako spolupracovník získavate hodnotenie kooperatívneho správania na základe známok, ktoré vám prideľujú ostatní aktívni účastníci pracovných skupín, v ktorých ste sa zúčastnili na tvorbe a schvaľovaní návrhov opatrení. Každý aktívny účastník môže udeliť známku +1, 0 alebo -1 podľa toho, ako kooperatívne ste sa správali počas svojej účasti v danej skupine. Toto hodnotenie sa automaticky „zabúda“ – po ${forgetting_time_constant} dňoch sa jeho hodnota zníži na polovicu. Počiatočná hodnota vášho hodnotenia je nula."
+
+#: alirpunkto/schemas/register_form.py:169
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Dátum poslednej aktualizácie vášho hodnotenia kooperatívneho správania"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"Toto je dátum, kedy vám naposledy iný spolupracovník pridelil hodnotenie po skončení vašej aktívnej účasti v pracovnej skupine, ktorá definovala a schvaľovala návrh opatrenia. Počiatočná hodnota tohto dátumu zodpovedá dátumu vašej registrácie ako spolupracovníka."
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr "Dátum aktualizácie hodnotenia je povinný."
+
+#: alirpunkto/schemas/register_form.py:180
+msgid "number_shares_owned_label"
+msgstr "Počet podielov družstva, ktoré vlastníte"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"Toto je celkový počet podielov družstva, ktoré vlastníte po ich zakúpení na našom webovom portáli. Pri registrácii je tento počet rovný nule. Odporúčame, aby ste čo najskôr navštívili túto adresu: ${url_purchase_shares} a zakúpili si svoj prvý podiel (alebo viac podielov). Plné rozhodovacie práva ako spolupracovník získate až po zakúpení aspoň jedného podielu (a po zaplatení ročného príspevku). Podiely si môžete zakúpiť nielen pri registrácii, ale aj kedykoľvek neskôr – tým posilňujete naše družstvo a sme vám za to vďační."
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr "Uvedenie počtu vlastnených podielov je povinné."
+
+#: alirpunkto/schemas/register_form.py:188
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Dátum, kedy vyprší platnosť vášho aktuálneho ročného príspevku"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Dátum, do ktorého je platný váš aktuálny ročný príspevok a pred ktorým ho musíte opätovne zaplatiť, aby ste si zachovali plné rozhodovacie práva ako spolupracovník. Pri registrácii je tento dátum nastavený do minulosti, čo znamená, že by ste ho mali zaplatiť teraz. Odporúčame, aby ste čo najskôr navštívili túto adresu: ${url_pay_yearly_contrib} a zaplatili svoj prvý ročný príspevok – tým podporíte činnosť nášho družstva. Plné rozhodovacie práva získate až po zaplatení ročného príspevku (a po zakúpení aspoň jedného podielu)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr "Dátum vypršania platnosti ročného príspevku je povinný."
+
+#: alirpunkto/schemas/register_form.py:199
+msgid "iban_label"
+msgstr "Medzinárodné číslo bankového účtu (IBAN) vášho bankového účtu"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"Ak sa rozhodnete opustiť družstvo (čo by nás všetkých mrzelo), potrebujeme váš IBAN, aby sme vám mohli previesť výnos z odkúpenia vašich podielov v družstve. "
+"Z bezpečnostných dôvodov odporúčame poskytnúť túto informáciu len vtedy, ak skutočne plánujete odísť z družstva."
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr "IBAN je povinný údaj."
+
+#: alirpunkto/schemas/register_form.py:207
+msgid "date_erasure_all_data_title"
+msgstr "Dátum, kedy budú všetky vaše údaje vymazané z našej IT infraštruktúry"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"Ak opustíte družstvo, vaše identifikačné údaje sa budú uchovávať počas ${Quarantine} dní, predtým než budú úplne a nezvratne vymazané z našich záznamov. "
+"Toto opatrenie zabezpečuje, aby spolupracovník, ktorý odišiel z dôvodu nízkeho hodnotenia kooperatívneho správania, nemohol okamžite znovu zaregistrovať nový účet s čistým pseudonymom "
+"a nulovým hodnotením. Pri registrácii je tento dátum nastavený na veľmi vzdialenú budúcnosť."
+
+msgid "avatar_label"
+msgstr "Obrázok, ktorý vás reprezentuje (váš avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Uveďte obrázok, ktorý vás bude reprezentovať ako člena komunity. Aby ste sa ochránili pred možnými dôsledkami zo strany zamestnávateľa alebo klientov, odporúčame, aby obrázok "
+"neumožňoval identifikáciu vašej skutočnej identity. Z tohto dôvodu by to spravidla nemala byť vaša fotografia (majte na pamäti, že softvér na rozpoznávanie tváre je masovo používaný "
+"vyhľadávacími robotmi). Obrázok musí byť vo formáte JPEG (s príponou .JPG alebo .JPEG) a nesmie presiahnuť veľkosť 5 MB.\n"
+"Veríme, že tento údaj je užitočný, pretože obrázok uľahčuje ostatným členom komunity zapamätať si vás. Niekedy obrázok povie viac ako dlhý text. "
+"Týmto obrázkom o sebe vyjadrujete veľa, v univerzálnom jazyku. Využite to naplno!"
+
+msgid "candidature_mixed"
+msgstr ""
+"Adresa (URL), ktorú ste použili na obnovenie procesu registrácie z miesta, kde ste ho prerušili, nezodpovedá tej, ktorú sme vám priradili. (Identifikačné číslo žiadosti v relácii a v URL sa nezhodujú.)\n"
+"Použite prosím iba URL z posledného e-mailu, ktorý ste dostali. Ak ste e-mail nedostali v priebehu niekoľkých minút, skontrolujte priečinok so spamom. "
+"Je možné, že e-mail, ktorý sme vám poslali, sa tam nachádza."
+
+msgid "check_new_email"
+msgstr "Požiadali ste o zmenu e-mailovej adresy. Do budúcna chcete používať: ${new_email}. V dôsledku toho dostanete e-mail s odkazom na overenie tejto novej adresy."
+
+msgid "check_new_email_subject"
+msgstr "Overenie vašej novej e-mailovej adresy"
+
+msgid "check_new_email_send_error"
+msgstr "Odoslanie e-mailu na overenie novej adresy zlyhalo"
+
+#: alirpunkto/views/modify_member.py:228
+msgid "check_new_email_send"
+msgstr "E-mail na overenie vašej novej adresy bol odoslaný. Ak ste e-mail nedostali v priebehu niekoľkých minút, skontrolujte priečinok so spamom. Je možné, že e-mail, ktorý sme vám poslali, sa tam nachádza."
+
+msgid "modify_member"
+msgstr "Zobraziť alebo upraviť člena"
+
+#: alirpunkto/utils.py:187
+msgid "connection_error"
+msgstr "Chyba pripojenia"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+msgid "email_allready_exist"
+msgstr "E-mailová adresa už existuje"
+
+#: alirpunkto/views/check_new_email.py:95
+msgid "email_updated"
+msgstr "E-mailová adresa bola aktualizovaná"
+
+#: alirpunkto/views/check_new_email.py:89
+msgid "email_update_error"
+msgstr "Chyba pri aktualizácii e-mailovej adresy"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+msgid "error_while_setting_field"
+msgstr "Chyba pri nastavovaní poľa"
+
+#: alirpunkto/views/modify_member.py:276
+msgid "error_while_updating_member"
+msgstr "Chyba pri aktualizácii člena"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+msgid "invalid_oid"
+msgstr "Neplatný OID"
+
+#: alirpunkto/views/check_new_email.py:100
+msgid "invalid_request"
+msgstr "Neplatná požiadavka"
+
+#: alirpunkto/utils.py:217
+msgid "ldap_error"
+msgstr "Chyba LDAP"
+
+#: alirpunkto/views/modify_member.py:288
+msgid "member_data_updated"
+msgstr "Údaje člena boli aktualizované"
+
+#: alirpunkto/utils.py:932
+msgid "member_update_failed"
+msgstr "Aktualizácia údajov člena zlyhala"
+
+#: alirpunkto/utils.py:929
+msgid "member_update_successful"
+msgstr "Aktualizácia údajov člena prebehla úspešne"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+msgid "missing_data"
+msgstr "Chýbajúce údaje"
+
+#: alirpunkto/views/check_new_email.py:78
+msgid "no_new_email"
+msgstr "Nová e-mailová adresa chýba"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+msgid "no_permission"
+msgstr "Nedostatočné oprávnenie"
+
+#: alirpunkto/views/vote.py:64
+msgid "not_voter"
+msgstr "Nie ste oprávnený volič"
+
+#: alirpunkto/utils.py:870
+msgid "password_update_failed"
+msgstr "Aktualizácia hesla zlyhala"
+
+#: alirpunkto/utils.py:867
+msgid "password_update_successful"
+msgstr "Aktualizácia hesla prebehla úspešne"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+msgid "registration_failed"
+msgstr "Registrácia zlyhala"
+
+#: alirpunkto/utils.py:830
+msgid "registration_successful"
+msgstr "Registrácia bola úspešná"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+msgid "unknown_accessed_member"
+msgstr "Neznámy prístup k členovi"
+
+#: alirpunkto/views/modify_member.py:82
+msgid "unknown_member"
+msgstr "Neznámy člen"
+
+msgid "modify_member_title"
+msgstr "Upraviť profil člena"
+
+msgid "select_member_oid_label"
+msgstr "Vyberte člena, ktorého profil chcete upraviť:"
+
+msgid "select_member_placeholder"
+msgstr "Pseudonym člena"
+
+msgid "modify_profile"
+msgstr "Svoj profil môžete upraviť kliknutím sem"
+
+msgid "profile"
+msgstr "profil"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Vaša e-mailová adresa bola úspešne aktualizovaná. Odteraz budete používať túto novú adresu pre všetku budúcu komunikáciu s ${domain_name}. "
+"Ak ste túto zmenu nepožiadali alebo máte otázky, okamžite kontaktujte našu podporu na ${admin_email}. "
+"Ďakujeme, že ste súčasťou komunity ${domain_name}!"
+
+msgid "provider_role_activated"
+msgstr "Váš poskytovateľský účet bol vytvorený"

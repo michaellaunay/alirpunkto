@@ -9,9 +9,9 @@ msgstr ""
 "Proje-Id-Sürüm: 0.1\n"
 "Rapor-Msgid-Hata-Bilgisi: michaellaunay@logikascium.com\n"
 "POT-Oluşturulma-Tarihi: 2023-06-15 12:36+0200\n"
-"PO-Düzeltme-Tarihi: 2024-06-07 09:33+0200\n"
+"PO-Düzeltme-Tarihi: 2025-10-05 22:33+0200\n"
 "Son-Çevirmen: Michaël Launay <michaellaunay@logikascium.com>\n"
-"Dil-Takımı: Fransızca <dev@logikascium.com>\n"
+"Dil-Takımı: Türkçe <dev@logikascium.com>\n"
 "Dil: tr\n"
 "MIME-Sürümü: 1.0\n"
 "İçerik-Tipi: metin/düz; charset=UTF-8\n"
@@ -31,16 +31,16 @@ msgid "login_label"
 msgstr "Giriş"
 
 msgid "welcome_msg"
-msgstr "${site_name}\'a hoş geldiniz, ${domain_name}\'ın BT altyapısında kullanılan uygulamalar için merkezi hizmet."
+msgstr "${site_name}'a hoş geldiniz, ${domain_name}'ın BT altyapısında kullanılan uygulamalar için merkezi hizmet."
 
 msgid "all_applications_msg"
-msgstr "${domain_name}\'da faaliyetlere katılmanız için ihtiyacınız olan tüm uygulamalar tek bir yerde."
+msgstr "${domain_name}'da faaliyetlere katılmanız için ihtiyacınız olan tüm uygulamalar tek bir yerde."
 
 msgid "register_or_login_msg"
 msgstr "Başlamak için şimdi kaydolun veya giriş yapın."
 
 msgid "logged_in_msg_title"
-msgstr "${site_name}, ${domain_name}\'ın BT altyapısında kullanılan uygulamalar için merkezi hizmet"
+msgstr "${site_name}, ${domain_name}'ın BT altyapısında kullanılan uygulamalar için merkezi hizmet"
 
 msgid "logged_in_msg"
 msgstr "${user} olarak giriş yaptınız."
@@ -96,6 +96,9 @@ msgstr "Sizinle etkileşimde bulunmamız için tercih ettiğiniz dil"
 
 msgid "second_interaction_language_label"
 msgstr "Sizinle etkileşimde bulunmamız için ikinci tercih olarak kabul ettiğiniz dil"
+
+msgid "language_none_option"
+msgstr "Hiçbiri"
 
 msgid "register_label"
 msgstr "Kayıt ol"

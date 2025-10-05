@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"PO-Revision-Date: 2025-10-05 21:33+0200\n"
 "Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
 "Language-Team: Dansk <dev@logikascium.com>\n"
 "Language: da\n"
@@ -96,6 +96,9 @@ msgstr "Det sprog, du foretrækker, at vi interagerer med dig på"
 
 msgid "second_interaction_language_label"
 msgstr "Det sprog, du accepterer som et andet valg for, at vi interagerer med dig"
+
+msgid "language_none_option"
+msgstr "Ingen"
 
 msgid "register_label"
 msgstr "Registrer"

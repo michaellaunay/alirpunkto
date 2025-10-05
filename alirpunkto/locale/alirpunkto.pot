@@ -97,6 +97,9 @@ msgstr "The language you prefer for us to interact with you"
 msgid "second_interaction_language_label"
 msgstr "The language you accept as a second choice for us to interact with you"
 
+msgid "language_none_option"
+msgstr "None"
+
 msgid "register_label"
 msgstr "Register"
 

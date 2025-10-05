@@ -1,4 +1,3 @@
-```po
 # Alirpunkto pot file.
 # Copyright (C) 2023 Michaël Launay
 # This file is distributed under the same license as the Alirpunkto package.
@@ -10,10 +9,10 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"PO-Revision-Date: 2025-10-05 21:33+0200\n"
 "Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
-"Language-Team: French <dev@logikascium.com>\n"
-"Language: en\n"
+"Language-Team: shqip <dev@logikascium.com>\n"
+"Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -97,6 +96,9 @@ msgstr "Gjuha që preferoni për të bashkëvepruar me ju"
 
 msgid "second_interaction_language_label"
 msgstr "Gjuha që pranoni si një zgjedhje të dytë për të bashkëvepruar me ju"
+
+msgid "language_none_option"
+msgstr "Asnjë"
 
 msgid "register_label"
 msgstr "Regjistrohu"
@@ -335,7 +337,6 @@ msgstr "Çdo lloj regjistrimi vjen me një grup specifik të të drejtave, benef
 
 msgid "approved_heading"
 msgstr "Urime për Miratimin Tuaj!"
-```
 
 msgid "approved_description"
 msgstr "Aplikimi juaj është miratuar. Tani mund të hyni duke përdorur pseudonimin dhe fjalëkalimin që keni ofruar gjatë procesit të aplikimit."

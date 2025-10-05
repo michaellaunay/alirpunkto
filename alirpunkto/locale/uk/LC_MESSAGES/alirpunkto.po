@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
 "POT-Creation-Date: 2023-06-15 12:36+0200\n"
-"PO-Revision-Date: 2024-06-07 09:33+0200\n"
+"PO-Revision-Date: 2025-10-05 22:33+0200\n"
 "Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
-"Language-Team: French <dev@logikascium.com>\n"
-"Language: en\n"
+"Language-Team: українська <dev@logikascium.com>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -96,6 +96,9 @@ msgstr "Мова, яку ви надаєте, щоб ми взаємодіяли
 
 msgid "second_interaction_language_label"
 msgstr "Мова, яку ви приймаєте як другий вибір для взаємодії з вами"
+
+msgid "language_none_option"
+msgstr "Жоден"
 
 msgid "register_label"
 msgstr "Зареєструватися"

@@ -1,3 +1,23 @@
+# Alirpunkto pot file.
+# Copyright (C) 2023 Michaël Launay
+# This file is distributed under the same license as the Alirpunkto package.
+# Michaël Launay <michaellaunay@logikascium.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: michaellaunay@logikascium.com\n"
+"POT-Creation-Date: 2023-06-15 12:36+0200\n"
+"PO-Revision-Date: 2025-10-05 21:02+0200\n"
+"Last-Translator: Michaël Launay <michaellaunay@logikascium.com>\n"
+"Language-Team: Eesti <dev@logikascium.com>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.3\n"
+
 msgid "welcome"
 msgstr "Tere tulemast"
 
@@ -75,6 +95,9 @@ msgstr "Keel, milles soovite, et me teiega suhtleksime"
 
 msgid "second_interaction_language_label"
 msgstr "Keel, mille aktsepteerite teiseks valikuks meie suhtlemiseks"
+
+msgid "language_none_option"
+msgstr "Puudub"
 
 msgid "register_label"
 msgstr "Registreeri"
