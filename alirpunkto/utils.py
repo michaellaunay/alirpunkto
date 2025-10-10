@@ -67,6 +67,7 @@ from ldap3 import (
     Connection,
     MODIFY_ADD,
     MODIFY_REPLACE,
+    MODIFY_DELETE,
     SUBTREE
 )
 from .ldap_factory import get_ldap_server, get_ldap_connection
@@ -899,9 +900,9 @@ def register_user_to_ldap(request, candidature, password):
                 "isActive": "True",
                 "preferredLanguage" : candidature.data.lang1,
             }
-            if hasattr(candidature.data, 'lang2'):
+            if hasattr(candidature.data, 'lang2') and candidature.data.lang2 not in (None, ''):
                 attributes['secondLanguage'] = candidature.data.lang2
-            if hasattr(candidature.data, 'lang3'):
+            if hasattr(candidature.data, 'lang3') and candidature.data.lang3 not in (None, ''):
                 attributes['thirdLanguage'] = candidature.data.lang3
             if candidature.data.description:
                 attributes['description'] = candidature.data.description
@@ -1071,9 +1072,15 @@ def update_ldap_member(
         if 'lang1' in fields_to_update:
             attributes['preferredLanguage'] = [(MODIFY_REPLACE,[member.data.lang1])]
         if 'lang2' in fields_to_update:
-            attributes['secondLanguage'] = [(MODIFY_REPLACE,[member.data.lang2])]
+            if member.data.lang2 not in (None, ''):
+                attributes['secondLanguage'] = [(MODIFY_REPLACE,[member.data.lang2])]
+            else:
+                attributes['secondLanguage'] = [(MODIFY_DELETE,[])]
         if 'lang3' in fields_to_update:
-            attributes['thirdLanguage'] = [(MODIFY_REPLACE,[member.data.lang3])]
+            if member.data.lang3 not in (None, ''):
+                attributes['thirdLanguage'] = [(MODIFY_REPLACE,[member.data.lang3])]
+            else:
+                attributes['thirdLanguage'] = [(MODIFY_DELETE,[])]
         if 'is_active' in fields_to_update:
             attributes['isActive'] = [(MODIFY_REPLACE, [member.data.is_active])]
         if 'cooperative_behaviour_mark' in fields_to_update:
