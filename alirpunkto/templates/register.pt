@@ -159,13 +159,11 @@
                         <p>It is important to make your choice promptly to facilitate a smooth and timely registration process. Please ensure that the method you choose is the most convenient for you and aligns with your privacy preferences.</p>
                         <p>Your cooperation in this matter is greatly appreciated and is key to maintaining the high standards of trust and security within our Cooperative. Thank you for your understanding and active participation in this crucial step.</p>
                     </div>
-                    <label i18n:translate="identity_verification_label">Identity Verification</label>
-                    <select id="identity_verification">
-                        <option value="email" i18n:translate="Send_id_copy_by_email">Send a copy of
-                            your identity card by email.</option>
-                        <option value="video" i18n:translate="Send_video_conference_link">Send a
-                            video conference date.</option>
-                    </select>
+                    <label for="identity_verification" i18n:translate="identity_verification_label">Identity Verification</label>
+                    <p class="form-control-plaintext" i18n:translate="Send_id_copy_by_email">
+                        Send a copy of your identity card by email.
+                    </p>
+                    <input type="hidden" id="identity_verification" value="email" />
                     <!-- Add data-emails attribute to store voter emails -->
                     <button onclick="sendEmail()"
                         data-emails="${','.join([voter.email for voter in candidature.voters])}"
