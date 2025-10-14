@@ -279,13 +279,13 @@ msgstr "Inserire il risultato dell'operazione matematica A:"
 msgid "result_label_title_A"
 msgstr ""
 "Inserire il codice ricevuto via e-mail o il risultato dell'operazione "
-"matematica A."
+"matematica A. "
 
 msgid "result_input_title_A"
 msgstr ""
 "Affinché possiamo verificare il vostro indirizzo e-mail e che siate un "
 "essere umano (non un robot), vi preghiamo di inserire il risultato "
-"dell'operazione A che avete ricevuto per e-mail."
+"dell'operazione A che avete ricevuto per e-mail. Se non ha ricevuto alcuna e-mail nei prossimi minuti, la invitiamo a controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì."
 
 msgid "enter_result_label_B"
 msgstr "Inserire il risultato dell'operazione matematica B:"
@@ -682,7 +682,8 @@ msgstr ""
 "il risultato di quest'ultima addizione nella casella prevista per il "
 "risultato del calcolo aritmetico che state eseguendo (tra i quattro che vi "
 "abbiamo inviato, identificati da A a D). Ripetete il calcolo per tutti e "
-"quattro i calcoli che vi abbiamo inviato per e-mail.</p>\n"
+"quattro i calcoli che vi abbiamo inviato per e-mail. </p>\n"
+"<p>Se non ha ricevuto alcuna e-mail nei prossimi minuti, la invitiamo a controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì.</p>\n"
 "</div>"
 
 msgid "cooperator_data_choose_verification_explanation"
@@ -816,7 +817,7 @@ msgstr ""
 "indirizzo ${administrator}."
 
 msgid "forget_email_in_member_list"
-msgstr "Se l'utente/a esiste, riceverà un'e-mail."
+msgstr "Se l'utente/a esiste, riceverà un'e-mail. Se non ha ricevuto alcuna e-mail nei prossimi minuti, la invitiamo a controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì."
 
 msgid "reset_password_email_subject"
 msgstr "Reimposta la tua password"
@@ -873,7 +874,7 @@ msgstr "L'amministratore non è autorizzato a reimpostare la propria password"
 msgid "forget_email_sent"
 msgstr ""
 "Se l'utente esiste, è stata inviata un'e-mail al suo indirizzo di posta "
-"elettronica con un link per reimpostare la password"
+"elettronica con un link per reimpostare la password. Se non ha ricevuto alcuna e-mail nei prossimi minuti, la invitiamo a controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì."
 
 #: alirpunkto/views/forgot_password.py:197
 #: alirpunkto/views/forgot_password.py:198
@@ -936,10 +937,11 @@ msgstr ""
 
 msgid "modification_to_profile_explanation_content"
 msgstr ""
-"Per garantire la sicurezza dei vostri dati, vi verrà inviato via e-mail un "
+"<p>Per garantire la sicurezza dei vostri dati, vi verrà inviato via e-mail un "
 "link unico per modificare il vostro profilo. Questo processo garantisce che "
 "solo la persona che ha accesso al vostro indirizzo e-mail possa apportare "
-"modifiche al vostro profilo."
+"modifiche al vostro profilo.</p>\n"
+"<p>Se non ha ricevuto alcuna e-mail nei prossimi minuti, la invitiamo a controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì. </p>\n"
 
 msgid "modification_to_profile_email_subject"
 msgstr ""
@@ -1263,7 +1265,8 @@ msgstr ""
 "dove è stato interrotto non corrisponde a quello registrato per voi. (il "
 "numero di identificazione della candidatura nella sessione e il numero "
 "dell'URL non corrispondono)\n"
-"Si prega di utilizzare solo l'URL dell'ultima e-mail ricevuta."
+"Si prega di utilizzare solo l'URL dell'ultima e-mail ricevuta.\n "
+"Se non ha ricevuto alcuna e-mail nei prossimi minuti, la invitiamo a controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì."
 
 msgid "check_new_email"
 msgstr ""
@@ -1280,7 +1283,7 @@ msgstr ""
 
 #: alirpunkto/views/modify_member.py:228
 msgid "check_new_email_send"
-msgstr "L'e-mail di verifica del nuovo indirizzo è stata inviata"
+msgstr "L'e-mail di verifica del nuovo indirizzo è stata inviata. La preghiamo di controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì."
 
 #: alirpunkto/utils.py:187
 msgid "connection_error"
