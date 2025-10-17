@@ -294,6 +294,9 @@ msgstr ""
 "Vă rugăm să calculați rezultatele următoarelor patru operații matematice "
 "simple și să completați câmpurile corespunzătoare pentru a vă confirma "
 "adresa de e-mail."
+"Dacă nu ați primit niciun e-mail în următoarele câteva minute, "
+"vă rugăm să verificați folderul de spam. "
+"Este posibil ca e-mailul pe care vi l-am trimis să se afle acolo."
 
 #, fuzzy
 msgid "enter_result_label_A"
@@ -797,6 +800,9 @@ msgstr ""
 "calculului aritmetic pe care îl efectuați (dintre cele patru pe care vi le-"
 "am trimis, identificate de la A la D). Trebuie să repetați calculul pentru "
 "toate cele patru calcule care v-au fost trimise prin e-mail.</p>\n"
+"<p>Dacă nu ați primit niciun e-mail în următoarele câteva minute, "
+"vă rugăm să verificați folderul de spam. "
+"Este posibil ca e-mailul pe care vi l-am trimis să se afle acolo.</p>\n"
 "</div>"
 
 #, fuzzy
@@ -960,7 +966,7 @@ msgstr ""
 
 #, fuzzy
 msgid "forget_email_in_member_list"
-msgstr "Dacă utilizatorul există, acesta va primi un e-mail."
+msgstr "Dacă utilizatorul există, acesta va primi un e-mail. Dacă nu ați primit niciun e-mail în următoarele câteva minute, vă rugăm să verificați folderul de spam. Este posibil ca e-mailul pe care vi l-am trimis să se afle acolo."
 
 msgid "reset_password_email_subject"
 msgstr "Resetea-za parola"
@@ -1028,7 +1034,10 @@ msgstr "Administratorul nu are voie să își reseteze propria parolă"
 msgid "forget_email_sent"
 msgstr ""
 "Dacă utilizatorul există, a fost trimis un e-mail la adresa sa de e-mail cu "
-"un link pentru resetarea parolei"
+"un link pentru resetarea parolei. "
+"Dacă nu ați primit niciun e-mail în următoarele câteva minute, "
+"vă rugăm să verificați folderul de spam. "
+"Este posibil ca e-mailul pe care vi l-am trimis să se afle acolo."
 
 #: alirpunkto/views/forgot_password.py:197
 #: alirpunkto/views/forgot_password.py:198
@@ -1105,6 +1114,9 @@ msgstr ""
 "link unic pentru a vă modifica profilul. Acest proces garantează că numai "
 "persoana care are acces la adresa dvs. de e-mail poate face modificări la "
 "profilul dvs."
+"Dacă nu ați primit niciun e-mail în următoarele câteva minute, "
+"vă rugăm să verificați folderul de spam. "
+"Este posibil ca e-mailul pe care vi l-am trimis să se afle acolo."
 
 #, fuzzy
 msgid "modification_to_profile_email_subject"
@@ -1474,6 +1486,9 @@ msgstr ""
 "Ați cerut să vă schimbați adresa de e-mail. Pe viitor, ați dori să "
 "utilizați: ${new_email}. Ca urmare, veți primi un e-mail care conține un "
 "link pentru a valida această nouă adresă."
+"Dacă nu ați primit niciun e-mail în următoarele câteva minute, "
+"vă rugăm să verificați folderul de spam. "
+"Este posibil ca e-mailul pe care vi l-am trimis să se afle acolo."
 
 #, fuzzy
 msgid "check_new_email_subject"
@@ -1486,7 +1501,7 @@ msgstr "Trimiterea e-mailului de verificare pentru noua dvs. adresă a eșuat"
 #: alirpunkto/views/modify_member.py:228
 #, fuzzy
 msgid "check_new_email_send"
-msgstr "E-mailul de verificare pentru noua ta adresă a fost trimis"
+msgstr "E-mailul de verificare pentru noua ta adresă a fost trimis. Dacă nu ați primit niciun e-mail în următoarele câteva minute, vă rugăm să verificați folderul de spam. Este posibil ca e-mailul pe care vi l-am trimis să se afle acolo."
 
 #: alirpunkto/utils.py:187
 #, fuzzy
