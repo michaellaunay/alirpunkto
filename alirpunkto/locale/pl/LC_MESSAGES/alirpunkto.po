@@ -295,7 +295,7 @@ msgstr "Twój wybór jest nieprawidłowy, wprowadź go ponownie."
 msgid "challenge_instruction_text"
 msgstr ""
 "Oblicz wyniki poniższych czterech prostych działań matematycznych i wypełnij "
-"odpowiednie pola, aby potwierdzić swój adres e-mail."
+"odpowiednie pola, aby potwierdzić swój adres e-mail. Jeśli w ciągu kilku minut nie otrzymają Państwo żadnej wiadomości e-mail, proszę sprawdzić folder spam. Możliwe, że wysłana przez nas wiadomość znajduje się właśnie tam."
 
 #, fuzzy
 msgid "enter_result_label_A"
@@ -783,6 +783,7 @@ msgstr ""
 "arytmetycznego (spośród czterech, które wysłaliśmy, oznaczonych od A do D). "
 "Powtórz obliczenia dla wszystkich czterech obliczeń wysłanych do Ciebie e-"
 "mailem.</p>\n"
+"<p>Jeśli w ciągu kilku minut nie otrzymają Państwo żadnej wiadomości e-mail, proszę sprawdzić folder spam. Możliwe, że wysłana przez nas wiadomość znajduje się właśnie tam.</p>\n"
 "</div>"
 
 #, fuzzy
@@ -860,7 +861,7 @@ msgstr "DELETED"
 
 #, fuzzy
 msgid "forget_email_in_member_list"
-msgstr "Jeśli użytkownik istnieje, otrzyma wiadomość e-mail."
+msgstr "Jeśli użytkownik istnieje, otrzyma wiadomość e-mail. Jeśli w ciągu kilku minut nie otrzymają Państwo żadnej wiadomości e-mail, proszę sprawdzić folder spam. Możliwe, że wysłana przez nas wiadomość znajduje się właśnie tam."
 
 msgid "reset_password_email_subject"
 msgstr "Zresetuj hasło"
@@ -928,7 +929,7 @@ msgstr "Administrator nie może zresetować własnego hasła"
 msgid "forget_email_sent"
 msgstr ""
 "Jeśli użytkownik istnieje, na jego adres e-mail została wysłana wiadomość z "
-"linkiem umożliwiającym zresetowanie hasła"
+"linkiem umożliwiającym zresetowanie hasła. Jeśli w ciągu kilku minut nie otrzymają Państwo żadnej wiadomości e-mail, proszę sprawdzić folder spam. Możliwe, że wysłana przez nas wiadomość znajduje się właśnie tam."
 
 #: alirpunkto/views/forgot_password.py:197
 #: alirpunkto/views/forgot_password.py:198
@@ -1000,7 +1001,9 @@ msgstr ""
 "Aby zapewnić bezpieczeństwo Twoich danych, unikalny link do modyfikacji "
 "Twojego profilu zostanie wysłany do Ciebie pocztą elektroniczną. Proces ten "
 "gwarantuje, że tylko osoba mająca dostęp do Twojego adresu e-mail może "
-"wprowadzać zmiany w Twoim profilu."
+"wprowadzać zmiany w Twoim profilu. "
+"Jeśli w ciągu kilku minut nie otrzymają Państwo żadnej wiadomości e-mail, "
+"proszę sprawdzić folder spam. Możliwe, że wysłana przez nas wiadomość znajduje się właśnie tam."
 
 #, fuzzy
 msgid "modification_to_profile_email_subject"
@@ -1347,6 +1350,8 @@ msgstr ""
 "przerwałeś, nie jest zgodny z adresem, który zarejestrowaliśmy dla Ciebie. "
 "(Numer identyfikacyjny aplikacji w sesji i numer adresu URL nie są zgodne)\n"
 "Użyj tylko adresu URL z ostatniej otrzymanej wiadomości e-mail."
+"Jeśli w ciągu kilku minut nie otrzymają Państwo żadnej wiadomości e-mail, "
+"proszę sprawdzić folder spam. Możliwe, że wysłana przez nas wiadomość znajduje się właśnie tam."
 
 #, fuzzy
 msgid "check_new_email"
@@ -1367,7 +1372,7 @@ msgstr ""
 #: alirpunkto/views/modify_member.py:228
 #, fuzzy
 msgid "check_new_email_send"
-msgstr "E-mail weryfikacyjny dla nowego adresu został wysłany"
+msgstr "E-mail weryfikacyjny dla nowego adresu został wysłany. Jeśli w ciągu kilku minut nie otrzymają Państwo żadnej wiadomości e-mail, proszę sprawdzić folder spam. Możliwe, że wysłana przez nas wiadomość znajduje się właśnie tam."
 
 #: alirpunkto/utils.py:187
 msgid "connection_error"
