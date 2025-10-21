@@ -1109,3 +1109,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Vaše e-mailová adresa byla úspěšně aktualizována. Nyní budete používat tuto novou adresu pro veškerou budoucí komunikaci s ${domain_name}. Pokud jste tuto změnu nepožadovali nebo pokud máte "
 "jakékoli dotazy, neváhejte nás okamžitě kontaktovat na ${admin_email}. Děkujeme, že jste součástí komunity ${domain_name}!"
+
+msgid "vote_msg"
+msgstr "Vítejte na Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Chystáte se hlasovat o tom, zda přijmete nebo odmítnete přihlášku uživatele ${name}. Jeho/její přístup na portál závisí na vašem rozhodnutí. Ať už na základě dokumentů zaslaných e-mailem nebo během videokonference, doufáme, že jste mohli ověřit totožnost žadatele. Prosíme, abyste tuto kontrolu provedli pečlivě, protože na ní závisí integrita našeho webu."
+
+msgid "vote_legend"
+msgstr "Vyberte svou volbu:"
+
+msgid "voting_header"
+msgstr "Hlasujte o kandidatuře"
+
+msgid "submit_vote_title"
+msgstr "Kliknutím odešlete svůj hlas."

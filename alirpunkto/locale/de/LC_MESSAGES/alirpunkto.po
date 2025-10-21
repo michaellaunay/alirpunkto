@@ -1071,3 +1071,18 @@ msgstr ""
 "Ihre E-Mail-Adresse wurde erfolgreich aktualisiert. Sie werden ab sofort diese neue Adresse für alle zukünftigen Kommunikationen mit ${domain_name} verwenden. "
 "Falls Sie diese Änderung nicht angefordert haben oder Fragen haben, zögern Sie bitte nicht, sich sofort an unseren Support unter ${admin_email} zu wenden. "
 "Vielen Dank, dass Sie Teil der ${domain_name}-Community sind!"
+
+msgid "vote_msg"
+msgstr "Willkommen bei Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Sie sind dabei, darüber abzustimmen, ob der Antrag von ${name} angenommen oder abgelehnt wird. Seine/Ihre Zulassung zum Portal hängt von Ihrer Entscheidung ab. Ob anhand der per E-Mail erhaltenen Dokumente oder während einer Videokonferenz – wir hoffen, dass Sie die Identität der antragstellenden Person prüfen konnten. Bitte führen Sie diese Überprüfung sorgfältig durch, denn die Integrität unserer Seite hängt davon ab."
+
+msgid "vote_legend"
+msgstr "Wählen Sie Ihre Stimme:"
+
+msgid "voting_header"
+msgstr "Stimmen Sie über die Kandidatur ab"
+
+msgid "submit_vote_title"
+msgstr "Klicken Sie, um Ihre Stimme abzugeben."

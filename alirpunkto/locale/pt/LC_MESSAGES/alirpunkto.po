@@ -1021,3 +1021,18 @@ msgstr "perfil"
 msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Seu endereço de e-mail foi atualizado com sucesso. Você usará este novo endereço para todas as comunicações futuras com ${domain_name}. Se você não solicitou esta alteração ou se tiver dúvidas, entre em contato com nosso suporte imediatamente no ${admin_email}. Obrigado por fazer parte da comunidade ${domain_name}!"
+
+msgid "vote_msg"
+msgstr "Bem-vindo ao Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Está prestes a votar se deve aceitar ou rejeitar a candidatura de ${name}. O acesso da pessoa candidata ao portal depende da sua decisão. Quer através dos documentos recebidos por e-mail, quer durante uma videoconferência, esperamos que tenha conseguido verificar a identidade do candidato. Pedimos que realize esta validação com cuidado, pois a integridade do nosso site depende disso."
+
+msgid "vote_legend"
+msgstr "Escolha o seu voto:"
+
+msgid "voting_header"
+msgstr "Vote na candidatura"
+
+msgid "submit_vote_title"
+msgstr "Clique para enviar o seu voto."

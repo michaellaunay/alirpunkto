@@ -1085,3 +1085,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "E-posta adresiniz başarıyla güncellenmiştir. Artık tüm gelecekteki iletişimleriniz için bu yeni adresi kullanacaksınız. Bu değişikliği talep etmediyseniz veya herhangi bir sorunuz varsa, lütfen "
 "destek ile hemen iletişime geçmekten çekinmeyin: ${admin_email}. ${domain_name} topluluğunun bir parçası olduğunuz için teşekkür ederiz!"
+
+msgid "vote_msg"
+msgstr "Alirpunkto'ya hoş geldiniz, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "${name} adlı kişinin başvurusunu kabul edip etmeyeceğiniz konusunda oy kullanmak üzeresiniz. Portal erişimi sizin kararınıza bağlıdır. İster e-posta ile alınan belgeler ister bir video konferans sırasında olsun, adayın kimliğini doğrulayabildiğinizi umuyoruz. Sitemizin bütünlüğü buna bağlı olduğundan lütfen bu doğrulamayı özenle tamamlayın."
+
+msgid "vote_legend"
+msgstr "Oyunuzu seçin:"
+
+msgid "voting_header"
+msgstr "Adaylık için oy verin"
+
+msgid "submit_vote_title"
+msgstr "Oyunuzu göndermek için tıklayın."

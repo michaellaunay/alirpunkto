@@ -1096,3 +1096,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Il-indirizz tal-kura elettronika tiegħek ilu ma ġie aġġornat b'suċċess. Issa se tuża dan l-indirizz ġdid għal komunikazzjonijiet futuri kollha ma ${domain_name}. Jekk inti m'għandekx mitluba dan il-bidla jew jekk għandek "
 "mistoqsijiet, jekk jogħġbok ma tiddejjaqx tqabbad mal-appoġġ tagħna immedjatament fuq ${admin_email}. Grazzi li int parti mill-komunità ta' ${domain_name}!"
+
+msgid "vote_msg"
+msgstr "Merħba f'Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Int se tivvota dwar jekk taċċettax jew tirrifjutax l-applikazzjoni ta' ${name}. L-aċċess tiegħu/tagħha għall-portal jiddependi mid-deċiżjoni tiegħek. Kemm jekk permezz ta' dokumenti riċevuti bl-email kif ukoll matul vidjokonferenza, nittamaw li stajt tivverifika l-identità tal-applikant. Nitolbuk twettaq din il-verifika b'attenzjoni, għax l-integrità tas-sit tagħna tiddependi minnha."
+
+msgid "vote_legend"
+msgstr "Agħżel il-vot tiegħek:"
+
+msgid "voting_header"
+msgstr "Ivota fuq il-kandidatura"
+
+msgid "submit_vote_title"
+msgstr "Ikklikkja biex tibgħat il-vot tiegħek."

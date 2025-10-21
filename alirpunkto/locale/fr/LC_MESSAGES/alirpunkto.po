@@ -1090,3 +1090,18 @@ msgstr ""
 
 msgid "provider_role_activated"
 msgstr "Votre compte prestataire a été créé."
+
+msgid "vote_msg"
+msgstr "Bienvenue sur Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Vous êtes sur le point de voter pour accepter ou refuser la candidature de ${name}. L'accès au portail dépend de votre décision. Que ce soit à partir des documents reçus par courriel ou lors d'une visioconférence, nous espérons que vous avez pu vérifier l'identité du candidat. Nous vous invitons à effectuer cette validation avec diligence, car l'intégrité de notre site en dépend."
+
+msgid "vote_legend"
+msgstr "Choisissez votre vote :"
+
+msgid "voting_header"
+msgstr "Votez pour la candidature"
+
+msgid "submit_vote_title"
+msgstr "Cliquez pour soumettre votre vote."

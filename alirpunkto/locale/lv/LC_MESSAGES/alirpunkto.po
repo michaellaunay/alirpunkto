@@ -1105,3 +1105,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Jūsu e-pasta adrese ir veiksmīgi atjaunināta. Tagad jūs izmantosiet šo jauno adresi visām turpmākajām saziņām ar ${domain_name}. Ja jūs neesat pieprasījis šo izmaiņu vai ja jums ir "
 "jautājumi, lūdzu, nekavējoties sazinieties ar mūsu atbalstu, rakstot uz ${admin_email}. Paldies, ka esat daļa no ${domain_name} kopienas!"
+
+msgid "vote_msg"
+msgstr "Laipni lūgti Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Jūs gatavojaties balsot par to, vai pieņemt vai noraidīt ${name} pieteikumu. Viņa piekļuve portālam ir atkarīga no jūsu lēmuma. Neatkarīgi no tā, vai dokumentus saņēmāt pa e-pastu vai videokonferencē, ceram, ka jums izdevās pārbaudīt pretendenta identitāti. Lūdzam šo pārbaudi veikt rūpīgi, jo no tās ir atkarīga mūsu vietnes integritāte."
+
+msgid "vote_legend"
+msgstr "Izvēlieties savu balsojumu:"
+
+msgid "voting_header"
+msgstr "Balsojiet par kandidatūru"
+
+msgid "submit_vote_title"
+msgstr "Noklikšķiniet, lai iesniegtu savu balsi."

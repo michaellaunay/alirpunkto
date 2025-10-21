@@ -942,8 +942,8 @@ msgstr ""
 "<p>Per garantire la sicurezza dei vostri dati, vi verrà inviato via e-mail un "
 "link unico per modificare il vostro profilo. Questo processo garantisce che "
 "solo la persona che ha accesso al vostro indirizzo e-mail possa apportare "
-"modifiche al vostro profilo.</p>\n"
-"<p>Se non ha ricevuto alcuna e-mail nei prossimi minuti, la invitiamo a controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì. </p>\n"
+"modifiche al vostro profilo.</p>"
+"<p>Se non ha ricevuto alcuna e-mail nei prossimi minuti, la invitiamo a controllare la sua cartella spam. È possibile che l'e-mail che le abbiamo inviato sia lì. </p>"
 
 msgid "modification_to_profile_email_subject"
 msgstr ""
@@ -1410,3 +1410,18 @@ msgstr ""
 #~ "pressione esterna nella vita reale (ad esempio da parte del vostro datore "
 #~ "di lavoro o dei vostri clienti). Fate molta attenzione! Una volta scelto, "
 #~ "non potrete MAI più cambiare questo pseudonimo. Sceglietelo con cura! "
+
+msgid "vote_msg"
+msgstr "Benvenuto su Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Stai per votare se accettare o respingere la candidatura di ${name}. Il suo accesso al portale dipende dalla tua decisione. Che si tratti dei documenti ricevuti via e-mail o di una videoconferenza, speriamo che tu abbia potuto verificare l'identità del candidato. Ti chiediamo di completare questa verifica con cura, perché l'integrità del nostro sito dipende da essa."
+
+msgid "vote_legend"
+msgstr "Scegli il tuo voto:"
+
+msgid "voting_header"
+msgstr "Vota la candidatura"
+
+msgid "submit_vote_title"
+msgstr "Clicca per inviare il tuo voto."

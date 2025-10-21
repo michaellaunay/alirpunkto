@@ -1112,3 +1112,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Adresa juaj e emailit është përditësuar me sukses. Tani do të përdorni këtë adresë të re për të gjitha komunikimet e ardhshme me ${domain_name}. Nëse nuk keni kërkuar këtë ndryshim ose nëse keni "
 "ndonjë pyetje, ju lutemi mos hezitoni të kontaktoni mbështetje tonë menjëherë në ${admin_email}. Faleminderit që jeni pjesë e komunitetit ${domain_name}!"
+
+msgid "vote_msg"
+msgstr "Mirë se erdhët në Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Jeni gati të votoni nëse do ta pranoni apo do ta refuzoni aplikimin e ${name}. Qasja e tij/saj në portal varet nga vendimi juaj. Qoftë përmes dokumenteve të marra me email apo gjatë një videokonference, shpresojmë që keni mundur të verifikoni identitetin e aplikantit. Ju lutemi kryeni këtë verifikim me kujdes, sepse nga ai varet integriteti i faqes sonë."
+
+msgid "vote_legend"
+msgstr "Zgjidhni votën tuaj:"
+
+msgid "voting_header"
+msgstr "Votoni për kandidaturën"
+
+msgid "submit_vote_title"
+msgstr "Klikoni për të dërguar votën tuaj."

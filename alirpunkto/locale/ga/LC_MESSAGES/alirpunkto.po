@@ -1105,3 +1105,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Tá do seoladh ríomhphoist nuashonraithe go rathúil. Beidh tú ag úsáid an seolaidh nua seo do gach cumarsáid sa todhchaí leis an ${domain_name}. Mura bhfuair tú an t-iarratas ar an athrú seo nó má tá "
 "aon cheist agat, ná bíodh aon leisce ort teagmháil a dhéanamh lenár tacaíocht láithreach ag ${admin_email}. Go raibh maith agat as a bheith mar chuid den phobal ${domain_name}!"
+
+msgid "vote_msg"
+msgstr "Fáilte go Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Tá tú ar tí vótáil maidir le glacadh nó diúltú d'iarratas ${name}. Braitheann a rochtain ar an tairseach ar do chinneadh. Cibé acu trí dhoiciméid a fuarthas ar ríomhphost nó le linn físchomhdhála, tá súil againn gur éirigh leat aitheantas an iarratasóra a fhíorú. Iarraimid ort an fíorú seo a dhéanamh go cúramach, mar braitheann sláine ár suíomh air."
+
+msgid "vote_legend"
+msgstr "Roghnaigh do vóta:"
+
+msgid "voting_header"
+msgstr "Vótáil ar an iarratas"
+
+msgid "submit_vote_title"
+msgstr "Cliceáil chun do vóta a chur isteach."

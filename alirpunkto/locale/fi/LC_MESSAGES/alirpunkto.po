@@ -1102,3 +1102,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Elektroninen osoitteesi on päivitetty onnistuneesti. Käytät nyt tätä uutta osoitetta kaikessa tulevassa viestinnässä ${domain_name}:n kanssa. Jos et pyytänyt tätä muutosta tai jos sinulla on "
 "kysymyksiä, älä epäröi ottaa heti yhteyttä tukeemme osoitteessa ${admin_email}. Kiitos, että olet osa ${domain_name} yhteisöä!"
+
+msgid "vote_msg"
+msgstr "Tervetuloa Alirpunktoon, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Olet juuri äänestämässä siitä, hyväksytäänkö vai hylätäänkö hakemus käyttäjältä ${name}. Hänen pääsynsä portaaliin riippuu päätöksestäsi. Olipa kyse sähköpostitse saaduista asiakirjoista tai videokonferenssista, toivomme, että pystyit varmistamaan hakijan henkilöllisyyden. Pyydämme sinua suorittamaan tämän tarkistuksen huolellisesti, sillä sivustomme luotettavuus riippuu siitä."
+
+msgid "vote_legend"
+msgstr "Valitse äänesi:"
+
+msgid "voting_header"
+msgstr "Äänestä hakemuksesta"
+
+msgid "submit_vote_title"
+msgstr "Napsauta lähettääksesi äänesi."

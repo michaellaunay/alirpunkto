@@ -1109,3 +1109,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "E-mailaðgangur þinn hefur verið uppfærður með dagskilt. Þú munt nú nota þessa nýju aðgang fyrir allar framtíðarsamskipti við ${domain_name}. Ef þú baðst ekki um þessa breytingu eða ef þú hefur "
 "einhverjar spurningar, vinsamlegast ekki hika við að hafa samband við stuðninginn okkar strax á ${admin_email}. Þakka þér fyrir að vera hluti af ${domain_name} samfélaginu!"
+
+msgid "vote_msg"
+msgstr "Vertu velkomin á Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Þú ert að fara að greiða atkvæði um hvort samþykkja eigi eða hafna umsókn ${name}. Aðgangur umsækjandans að vefnum ræðst af ákvörðun þinni. Hvort sem það var með skjölum sem bárust í tölvupósti eða í gegnum myndfund, vonum við að þér hafi tekist að staðfesta auðkenni umsækjandans. Við biðjum þig að framkvæma þessa staðfestingu af kostgæfni, því áreiðanleiki vefsvæðisins byggir á henni."
+
+msgid "vote_legend"
+msgstr "Veldu atkvæði þitt:"
+
+msgid "voting_header"
+msgstr "Greiddu atkvæði um umsóknina"
+
+msgid "submit_vote_title"
+msgstr "Smelltu til að senda atkvæðið."

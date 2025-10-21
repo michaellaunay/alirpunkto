@@ -1088,3 +1088,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Teie e-posti aadress on edukalt uuendatud. Nüüd kasutate seda uut aadressi kõigi edasiste suhtluste jaoks ${domain_name}ga. Kui te ei palunud seda muutust või kui teil on "
 "küsimusi, siis ärge kõhelge meie toega kohe ühendust võtta aadressil ${admin_email}. Aitäh, et olete ${domain_name} kogukonna liige!"
+
+msgid "vote_msg"
+msgstr "Tere tulemast Alirpunktosse, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Olete peagi hääletamas, kas ${name} taotlus vastu võtta või tagasi lükata. Tema juurdepääs portaalile sõltub teie otsusest. Olenemata sellest, kas saite dokumendid e-posti teel või videokonverentsil, loodame, et saite taotleja isiku tuvastada. Palume teil see kinnitamine hoolikalt läbi viia, sest meie saidi terviklikkus sõltub sellest."
+
+msgid "vote_legend"
+msgstr "Valige oma hääl:"
+
+msgid "voting_header"
+msgstr "Hääletage kandidatuuri üle"
+
+msgid "submit_vote_title"
+msgstr "Klõpsake, et esitada oma hääl."

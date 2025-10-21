@@ -1515,3 +1515,18 @@ msgstr ""
 #~ "zewnętrznej w prawdziwym życiu (np. ze strony pracodawcy lub klientów). "
 #~ "Bądź bardzo ostrożny! Raz wybranego pseudonimu NIGDY nie będzie można "
 #~ "później zmienić. Wybierz go ostrożnie! "
+
+msgid "vote_msg"
+msgstr "Witamy w Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Za chwilę zagłosujesz, czy zaakceptować, czy odrzucić zgłoszenie ${name}. Dostęp tej osoby do portalu zależy od twojej decyzji. Niezależnie od tego, czy dokumenty otrzymałeś drogą e-mailową, czy podczas wideokonferencji, mamy nadzieję, że udało ci się potwierdzić tożsamość kandydata. Prosimy, abyś przeprowadził tę weryfikację starannie, ponieważ od niej zależy integralność naszej strony."
+
+msgid "vote_legend"
+msgstr "Wybierz swój głos:"
+
+msgid "voting_header"
+msgstr "Zagłosuj nad kandydaturą"
+
+msgid "submit_vote_title"
+msgstr "Kliknij, aby przesłać swój głos."

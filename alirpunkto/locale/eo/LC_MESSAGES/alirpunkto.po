@@ -191,3 +191,18 @@ msgstr "Solvu la defion kaj entajpu la respondon en la portalo"
 
 msgid "email_candidature_state_changed"
 msgstr "Ŝanĝo en la stato de via kandidaturo"
+
+msgid "vote_msg"
+msgstr "Bonvenon al Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Vi baldaŭ voĉdonos pri tio ĉu akcepti aŭ rifuzi la aliĝon de ${name}. Lia/ŝia aliro al la portalo dependas de via decido. Ĉu per dokumentoj ricevitaj retpoŝte aŭ dum videokonferenco, ni esperas ke vi povis kontroli la identecon de la kandidato. Ni petas vin zorgeme plenumi tiun konfirman paŝon, ĉar la integreco de nia retejo dependas de ĝi."
+
+msgid "vote_legend"
+msgstr "Elektu vian voĉon:"
+
+msgid "voting_header"
+msgstr "Voĉdonu pri la kandidatiĝo"
+
+msgid "submit_vote_title"
+msgstr "Alklaku por sendi vian voĉon."

@@ -1058,3 +1058,18 @@ msgstr ""
 
 msgid "provider_role_activated"
 msgstr "Váš poskytovateľský účet bol vytvorený"
+
+msgid "vote_msg"
+msgstr "Vitajte na Alirpunkte, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Čoskoro budete hlasovať o tom, či prihlášku ${name} prijať alebo odmietnuť. Jeho/jej prístup k portálu závisí od vášho rozhodnutia. Či už na základe dokumentov doručených e-mailom alebo počas videokonferencie, veríme, že sa vám podarilo overiť totožnosť uchádzača. Prosíme vás, aby ste túto kontrolu vykonali dôsledne, pretože od nej závisí integrita nášho webu."
+
+msgid "vote_legend"
+msgstr "Zvoľte svoj hlas:"
+
+msgid "voting_header"
+msgstr "Hlasujte o kandidatúre"
+
+msgid "submit_vote_title"
+msgstr "Kliknite pre odoslanie svojho hlasu."

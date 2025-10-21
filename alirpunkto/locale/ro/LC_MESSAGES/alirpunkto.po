@@ -1648,3 +1648,18 @@ msgstr ""
 #~ "din partea angajatorului sau a clienților dumneavoastră). Fiți foarte "
 #~ "atenți! Odată ce l-ați ales, nu veți putea NICIODATĂ să schimbați "
 #~ "ulterior acest pseudonim. Alegeți-l cu grijă!"
+
+msgid "vote_msg"
+msgstr "Bine ați venit pe Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Sunteți pe cale să votați dacă acceptați sau respingeți cererea lui ${name}. Accesul său la portal depinde de decizia dumneavoastră. Indiferent dacă ați primit documentele prin e-mail sau în timpul unei videoconferințe, sperăm că ați putut verifica identitatea solicitantului. Vă rugăm să efectuați această verificare cu atenție, deoarece integritatea site-ului nostru depinde de ea."
+
+msgid "vote_legend"
+msgstr "Alegeți votul:"
+
+msgid "voting_header"
+msgstr "Votați pentru candidatură"
+
+msgid "submit_vote_title"
+msgstr "Faceți clic pentru a trimite votul."

@@ -6,7 +6,8 @@
     <div metal:fill-slot="content">
         <div class="container" i18n:domain="alirpunkto">
             <h1 i18n:translate="vote_msg">Welcome to Alirpunkto,  <tal:var i18n:name="site_name">${site_name}</tal:var>.</h1>
-            <div tal:condition="not: exists:error">
+            <div tal:condition="not: exists:error"
+                tal:define="localizer request.localizer">
                 <div>
                     <p i18n:translate="welcome_voter" tal:condition="not registered_vote">
                         You are about to vote on whether to accept or reject the application of
@@ -17,7 +18,10 @@
                         We kindly ask you to proceed with this validation diligently, as the integrity of our site depends on it.
                     </p>
                     <p tal:condition="registered_vote" i18n:translate="vote_success">
-                        <span i18n:name="vote" >${VotingChoice[vote].value}</span>
+                        <span i18n:name="vote"
+                            tal:content="python:localizer.translate(_(VotingChoice[vote].value))">
+                            ${VotingChoice[vote].value}
+                        </span>
                     </p>
                 </div>
                 <div>
@@ -31,30 +35,27 @@
                     </ul>
                 </div>
                 <h3 i18n:translate="voting_header">Vote for the Candidature</h3>
-                <form method="POST" action="${request.route_url('vote')}">
-                    <div tal:define="votingChoices python:VotingChoice.get_names()">
-                        <form method="post" action="path_to_voting_endpoint">
-                            <fieldset>
-                                <legend i18n:translate="vote_legend">Choose your vote:</legend>
-                                <ul>
-                                    <li tal:repeat="choice votingChoices">
-                                        <!-- Radio button for each voting choice -->
-                                        <input type="radio" name="vote" 
-                                            tal:attributes="value choice; 
-                                                            id 'vote_' + choice; 
-                                                            checked 'checked' if repeat.choice.index == 0 else None" />
-                                        <label tal:attributes="for 'vote_' + choice"
-                                            i18n:translate="python:VotingChoice.get_i18n_id(choice)">
-                                            ${VotingChoice[choice].value}
-                                        </label>
-                                    </li>
-                                </ul>
-                                <input type="submit" value="Submit" name="submit"
-                                    title="Click to submit your vote."
-                                    i18n:attributes="title submit_vote_title; value submit_button"/>
-                            </fieldset>
-                        </form>
-                    </div>
+                <form method="POST" action="${request.route_url('vote')}"
+                    tal:define="votingChoices python:VotingChoice.get_names()">
+                    <fieldset>
+                        <legend i18n:translate="vote_legend">Choose your vote:</legend>
+                        <ul>
+                            <li tal:repeat="choice votingChoices">
+                                <!-- Radio button for each voting choice -->
+                                <input type="radio" name="vote" 
+                                    tal:attributes="value choice; 
+                                                    id 'vote_' + choice; 
+                                                    checked 'checked' if repeat.choice.index == 0 else None" />
+                                <label tal:attributes="for 'vote_' + choice"
+                                    tal:content="python:localizer.translate(_(VotingChoice[choice].value))">
+                                    ${VotingChoice[choice].value}
+                                </label>
+                            </li>
+                        </ul>
+                        <input type="submit" value="Submit" name="submit"
+                            title="Click to submit your vote."
+                            i18n:attributes="title submit_vote_title; value submit_button"/>
+                    </fieldset>
                 </form>
             </div>
             <div tal:condition="exists:error" tal:omit-tag="">

@@ -1112,3 +1112,18 @@ msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Din e-mailadresse er blevet opdateret med succes. Du vil nu bruge denne nye adresse til al fremtidig kommunikation med ${domain_name}. Hvis du ikke har anmodet om denne ændring, eller hvis du har "
 "nogen spørgsmål, så tøv ikke med at kontakte vores support med det samme på ${admin_email}. Tak fordi du er en del af ${domain_name} fællesskabet!"
+
+msgid "vote_msg"
+msgstr "Velkommen til Alirpunkto, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Du er ved at stemme om, hvorvidt ansøgningen fra ${name} skal accepteres eller afvises. Vedkommendes adgang til portalen afhænger af din beslutning. Uanset om det er via dokumenter modtaget pr. e-mail eller under en videokonference, håber vi, at du har kunnet bekræfte ansøgerens identitet. Vi beder dig omhyggeligt at gennemføre denne validering, da vores sitets integritet afhænger af den."
+
+msgid "vote_legend"
+msgstr "Vælg din stemme:"
+
+msgid "voting_header"
+msgstr "Stem om ansøgningen"
+
+msgid "submit_vote_title"
+msgstr "Klik for at indsende din stemme."

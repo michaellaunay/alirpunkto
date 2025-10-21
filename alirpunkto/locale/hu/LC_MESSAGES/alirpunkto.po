@@ -1106,3 +1106,18 @@ msgstr "profil"
 msgid "check_new_email_confirmed_msg"
 msgstr ""
 "Az email címe sikeresen frissítve lett. Mostantól ezt az új címet fogja használni a ${domain_name}-nal folytatott minden jövőbeli kommunikációhoz. Ha nem ön kérte ezt a változtatást, vagy ha bármilyen kérdése van, kérjük, ne habozzon azonnal kapcsolatba lépni ügyfélszolgálatunkkal a ${admin_email} címen. Köszönjük, hogy a ${domain_name} közösség tagja!"
+
+msgid "vote_msg"
+msgstr "Üdvözöljük az Alirpunkto oldalon, ${site_name}."
+
+msgid "welcome_voter"
+msgstr "Hamarosan szavaz arról, hogy elfogadja-e vagy elutasítja ${name} jelentkezését. A portálhoz való hozzáférése az ön döntésétől függ. Akár az e-mailben kapott dokumentumok, akár egy videókonferencia alapján, reméljük, hogy sikerült ellenőriznie a jelentkező személyazonosságát. Kérjük, végezze el ezt az ellenőrzést gondosan, mert webhelyünk integritása múlik rajta."
+
+msgid "vote_legend"
+msgstr "Válassza ki szavazatát:"
+
+msgid "voting_header"
+msgstr "Szavazzon a pályázatról"
+
+msgid "submit_vote_title"
+msgstr "Kattintson a szavazat elküldéséhez."
