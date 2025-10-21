@@ -64,6 +64,16 @@ button, input[type="submit"] {
 button:hover, input[type="submit"]:hover {
   background-color: #0056b3;
 }
+button:disabled,
+input[type="submit"]:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+button:disabled:hover,
+input[type="submit"]:disabled:hover {
+  background-color: #6c757d;
+}
 input[type="email"], select {
   width: 100%;
   padding: 10px;

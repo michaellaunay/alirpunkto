@@ -19,7 +19,12 @@ function sendEmail() {
     }
 
     window.location.href = `mailto:${encodeURIComponent(userEmail)}?bcc=${encodeURIComponent(emails)}&subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    document.getElementById("submit_button").disabled = false;
+
+    const submitButton = document.getElementById("submit_button");
+    if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.removeAttribute("disabled");
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
