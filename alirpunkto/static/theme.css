@@ -82,6 +82,152 @@ input[type="email"], select {
   border: 1px solid #ccc;
 }
 
+.member-form,
+form.deform {
+  margin-top: 20px;
+  padding: 24px;
+  border: 1px solid #e1e5eb;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+.member-form fieldset,
+form.deform fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.member-form legend,
+form.deform legend {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+.member-form > p,
+form.deform > p {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+.member-form label,
+form.deform label {
+  display: block;
+  font-weight: 600;
+  color: #1f3659;
+  margin-bottom: 0.35rem;
+}
+.member-form .field,
+.member-form .form-group,
+.member-form .deformRequired,
+form.deform .field,
+form.deform .form-group,
+form.deform .deformRequired {
+  margin-bottom: 1.25rem;
+}
+.member-form input:not([type="checkbox"]),
+.member-form select,
+.member-form textarea,
+form.deform input:not([type="checkbox"]),
+form.deform select,
+form.deform textarea {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #c7d2e2;
+  background-color: #ffffff;
+  color: #1f2a37;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.member-form input:not([type="checkbox"]):focus,
+.member-form select:focus,
+.member-form textarea:focus,
+form.deform input:not([type="checkbox"]):focus,
+form.deform select:focus,
+form.deform textarea:focus {
+  border-color: #3f8cff;
+  box-shadow: 0 0 0 3px rgba(63, 140, 255, 0.2);
+  outline: none;
+}
+.member-form input[readonly],
+.member-form textarea[readonly],
+.member-form input:disabled,
+.member-form select:disabled,
+.member-form textarea:disabled,
+form.deform input[readonly],
+form.deform textarea[readonly],
+form.deform input:disabled,
+form.deform select:disabled,
+form.deform textarea:disabled {
+  background-color: #f4f6fb;
+  border-color: #d6dde8;
+  color: #5b6b80;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.member-form input[readonly]:focus,
+.member-form textarea[readonly]:focus,
+.member-form input:disabled:focus,
+.member-form select:disabled:focus,
+.member-form textarea:disabled:focus,
+form.deform input[readonly]:focus,
+form.deform textarea[readonly]:focus,
+form.deform input:disabled:focus,
+form.deform select:disabled:focus,
+form.deform textarea:disabled:focus {
+  border-color: #d6dde8;
+  box-shadow: none;
+}
+.member-form .help-block,
+form.deform .help-block {
+  display: block !important;
+  margin-top: 0.35rem !important;
+  font-size: 0.85rem;
+  color: #6b7280 !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+.member-form .error,
+.member-form .error .help-block,
+form.deform .error,
+form.deform .error .help-block {
+  color: #b91c1c !important;
+}
+.member-form button,
+.member-form input[type="submit"],
+form.deform button,
+form.deform input[type="submit"] {
+  margin-top: 10px;
+}
+.member-form .form-control-static,
+.member-form .deform-readonly-text,
+form.deform .form-control-static,
+form.deform .deform-readonly-text {
+  padding: 0.65rem 0.8rem;
+  background-color: #f8f9fd;
+  border: 1px solid #e1e5eb;
+  border-radius: 6px;
+  color: #3f4a5a;
+  font-weight: 500;
+}
+.member-form .form-group.readonly label,
+form.deform .form-group.readonly label {
+  color: #4b5563;
+}
+.member-form .form-control-static + .help-block,
+form.deform .form-control-static + .help-block {
+  margin-top: 0.5rem !important;
+}
+
+.member-form .form-group::after,
+form.deform .form-group::after {
+  content: "";
+  display: block;
+  clear: both;
+  width: 0;
+  height: 0;
+}
+
 .message {
   margin: 10px 0;
   padding: 10px;
@@ -99,7 +245,10 @@ input[type="email"], select {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombre pour la profondeur */
 }
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 1px solid #052e5a;
+  border-radius: 1em;
 }
 
 /* Erreurs et validations */
@@ -150,4 +299,10 @@ footer a {
 }
 footer a:hover {
   color: #a8d8ea;
+}
+
+.deform-form-buttons {
+  margin-top: 20px;
+  text-align: right;
+  border: none;
 }

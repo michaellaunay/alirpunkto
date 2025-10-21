@@ -11,7 +11,7 @@
                 <input type="submit" name="submit" value="Submit" i18n:attributes="value submit_button">
             </form>
         </div>
-        <div tal:condition="form">
+        <div tal:condition="form" class="member-form">
             <p i18n:translate="modify_member_fill_form">Please fill the fields</p>
             <span tal:replace="structure form">Form Content</span>
         </div>
@@ -31,4 +31,3 @@
         </div>
     </div>
 </div>
-
