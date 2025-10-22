@@ -1092,16 +1092,16 @@ msgid "provider_role_activated"
 msgstr "Votre compte prestataire a été créé."
 
 msgid "vote_msg"
-msgstr "Bienvenue sur Alirpunkto, ${site_name}."
+msgstr "Bienvenue à la Vérification d'identité pour l'inscription d'un candidat Coopérateur sur ${site_name}."
 
 msgid "welcome_voter"
-msgstr "Vous êtes sur le point de voter pour accepter ou refuser la candidature de ${name}. L'accès au portail dépend de votre décision. Que ce soit à partir des documents reçus par courriel ou lors d'une visioconférence, nous espérons que vous avez pu vérifier l'identité du candidat. Nous vous invitons à effectuer cette validation avec diligence, car l'intégrité de notre site en dépend."
+msgstr "Tu vas voter pour accepter ou refuser la candidature de ${name} en tant que Coopérateur de ${site_name}. Son admission en tant que Coopérateur à part entière de ${site_name} dépend de ta décision. Tu as reçu directement par e-mail de ${name} des documents : une copie partielle de sa pièce d'identité officielle et un selfie récent. Tu as pu comparer (a) les informations d'identité figurant sur la pièce d'identité officielle avec celles fournies par ${name} sur ce portail lors de son inscription et qui sont rappelées ci-dessous et (b) la photo figurant sur la pièce d'identité officielle avec le selfie récent. Nous te demandons de bien vouloir procéder à cette validation avec attention, car l'intégrité de nos processus démocratiques en dépend, mais aussi avec diligence, car ${name} attend ta décision pour participer à nos activités."
 
 msgid "vote_legend"
-msgstr "Choisissez votre vote :"
+msgstr "Choisis ton vote :"
 
 msgid "voting_header"
-msgstr "Votez pour la candidature"
+msgstr "Vote sur l'inscription en tant que Coopérateur"
 
 msgid "submit_vote_title"
-msgstr "Cliquez pour soumettre votre vote."
+msgstr "Clique pour soumettre ton vote."
