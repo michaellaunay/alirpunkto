@@ -1073,16 +1073,16 @@ msgstr ""
 "Vielen Dank, dass Sie Teil der ${domain_name}-Community sind!"
 
 msgid "vote_msg"
-msgstr "Willkommen bei Alirpunkto, ${site_name}."
+msgstr "Willkommen bei der Identitätsüberprüfung für die Registrierung eines Genossenschaftskandidaten bei ${Site_name}."
 
 msgid "welcome_voter"
-msgstr "Sie sind dabei, darüber abzustimmen, ob der Antrag von ${name} angenommen oder abgelehnt wird. Seine/Ihre Zulassung zum Portal hängt von Ihrer Entscheidung ab. Ob anhand der per E-Mail erhaltenen Dokumente oder während einer Videokonferenz – wir hoffen, dass Sie die Identität der antragstellenden Person prüfen konnten. Bitte führen Sie diese Überprüfung sorgfältig durch, denn die Integrität unserer Seite hängt davon ab."
+msgstr "Du stimmst jetzt darüber ab, ob du die Bewerbung von ${name} als Genossenschaftler von ${site_name} annehmen oder ablehnen sollst. Seine/ihre Aufnahme als vollwertiger Genossenschaftler von ${site_name} hängt von deiner Entscheidung ab. Du hast direkt von ${name} Dokumente per E-Mail erhalten: eine Teilkopie seines/ihres offiziellen Ausweises und ein aktuelles Selfie. Du konntest (a) die Identitätsdaten auf dem amtlichen Ausweis mit denen vergleichen, die ${name} bei der Anmeldung auf diesem Portal angegeben hat und die unten angemerkt sind, und (b) das Foto auf dem amtlichen Ausweis mit dem aktuellen Selfie. Wir bitten dich, diese Validierung sorgfältig vorzunehmen, da die Integrität unserer demokratischen Prozesse davon abhängt, aber dennoch fleißig zu sein, denn ${name} wartet auf deine Entscheidung, um an unseren Aktivitäten teilzunehmen."
 
 msgid "vote_legend"
-msgstr "Wählen Sie Ihre Stimme:"
+msgstr "Wähle deine Stimme:"
 
 msgid "voting_header"
-msgstr "Stimmen Sie über die Kandidatur ab"
+msgstr "Stimme über die Registrierung als Genossenschaftler ab"
 
 msgid "submit_vote_title"
-msgstr "Klicken Sie, um Ihre Stimme abzugeben."
+msgstr "Klicke, um deine Stimme abzugeben."
