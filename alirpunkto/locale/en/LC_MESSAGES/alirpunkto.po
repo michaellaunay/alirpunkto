@@ -1083,16 +1083,16 @@ msgid "provider_role_activated"
 msgstr "Your Provider Account Has Been Created"
 
 msgid "vote_msg"
-msgstr "Welcome to Alirpunkto, ${site_name}."
+msgstr "Welcome to the Verification of identity for the registration of a candidate Cooperator to ${site_name}."
 
 msgid "welcome_voter"
-msgstr "You are about to vote on whether to accept or reject the application of ${name}. Their admission to the portal depends on your decision. Whether through documents received via email or during a video conference, we hope you were able to verify the applicant's identity. We kindly ask you to proceed with this validation diligently, as the integrity of our site depends on it."
+msgstr "You are about to vote on whether to accept or reject the application of ${name} as a Cooperator of ${site_name}. His / her admission as a full Cooperator of ${site_name} depends on your decision. You have received documents directly from ${name} via e-mail: a partial copy of his/her official identity document and a recent selfie. You were able to compare (a) the identity details on the official identity document with those that ${name} provided on this portal upon registration and that are reminded below and (b) the photograph on the official identity document with the recent selfie. We kindly ask you to proceed with this validation with attention, as the integrity of our democratic processes depends on it, but yet diligently, because ${name} is waiting for your decision to participate in our activities."
 
 msgid "vote_legend"
 msgstr "Choose your vote:"
 
 msgid "voting_header"
-msgstr "Vote for the Candidature"
+msgstr "Vote on the registration as a Cooperator"
 
 msgid "submit_vote_title"
 msgstr "Click to submit your vote."
