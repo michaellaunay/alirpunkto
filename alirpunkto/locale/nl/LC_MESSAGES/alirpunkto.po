@@ -1357,16 +1357,24 @@ msgstr ""
 #~ "veranderen. Kies het met zorg!"
 
 msgid "vote_msg"
-msgstr "Welkom bij Alirpunkto, ${site_name}."
+msgstr "Welkom bij de verificatie van de identiteit voor de registratie van een kandidaat-Coöperator bij ${site_name}."
 
 msgid "welcome_voter"
-msgstr "Je staat op het punt te stemmen over het accepteren of afwijzen van de aanvraag van ${name}. Zijn/haar toegang tot het portaal hangt af van jouw beslissing. Of het nu via documenten is die per e-mail zijn ontvangen of tijdens een videogesprek, we hopen dat je de identiteit van de aanvrager hebt kunnen controleren. We vragen je om deze controle zorgvuldig uit te voeren, omdat de integriteit van onze site ervan afhangt."
+msgstr ""
+"Je staat op het punt om te stemmen over het al dan niet accepteren van de registratie van ${name} als Coöperator van ${site_name}. Of hij/zij wordt toegelaten als volwaardig Coöperator van ${site_name} hangt af van jouw beslissing. \n"
+"Je hebt rechtstreeks van ${name} via e-mail documenten ontvangen: een gedeeltelijke kopie van zijn/haar officiële identiteitsbewijs en een recente selfie. \n"
+"Op deze pagina beslis je of: \n"
+"(1) de recente selfie van de persoon overeenkomt met de foto op zijn/haar officiële identiteitsbewijs en \n"
+"(2) de identiteitsgegevens die je van deze persoon op dit portaal hebt ontvangen bij zijn/haar registratie (die hieronder zijn weergegeven) overeenkomen met die op zijn/haar officiële identiteitsbewijs. \n"
+"Wees heel voorzichtig! Om de registratie te kunnen accepteren, moeten ALLE elementen strikt IDENTIEK zijn tussen de identiteitsgegevens die je bij de registratie hebt ontvangen en die op het officiële identiteitsbewijs. In alle andere gevallen, zelfs bij een klein verschil, of als je twijfelt aan de echtheid van het officiële identiteitsbewijs, MOET je de registratie weigeren. \n"
+"Je kunt minder streng zijn wat betreft de overeenstemming tussen de foto en de selfie: houd rekening met de effecten van leeftijd en verschillen in belichting, achtergrond, enz. Als je weet hoe je dat moet doen, vragen we je ook om te checken of de datum waarop de selfie is genomen dezelfde is als de datum waarop de e-mail is verstuurd, of daar in ieder geval dichtbij ligt. \n"
+"We vragen je vriendelijk om deze validatie zorgvuldig uit te voeren, omdat de integriteit van onze democratische processen ervan afhangt, maar ook snel, omdat ${name} wacht op jouw beslissing om deel te nemen aan onze activiteiten."
 
 msgid "vote_legend"
 msgstr "Kies je stem:"
 
 msgid "voting_header"
-msgstr "Stem over de kandidatuur"
+msgstr "Stem op de registratie als een Coöperator"
 
 msgid "submit_vote_title"
-msgstr "Klik om je stem in te dienen."
+msgstr "Klik om je stem uit te brengen."
