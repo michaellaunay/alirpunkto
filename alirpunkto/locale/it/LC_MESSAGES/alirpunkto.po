@@ -1412,16 +1412,24 @@ msgstr ""
 #~ "non potrete MAI più cambiare questo pseudonimo. Sceglietelo con cura! "
 
 msgid "vote_msg"
-msgstr "Benvenuto su Alirpunkto, ${site_name}."
+msgstr "Benvenuto nella verifica dell’identità per la registrazione di un candidato Cooperatore a ${site_name}."
 
 msgid "welcome_voter"
-msgstr "Stai per votare se accettare o respingere la candidatura di ${name}. Il suo accesso al portale dipende dalla tua decisione. Che si tratti dei documenti ricevuti via e-mail o di una videoconferenza, speriamo che tu abbia potuto verificare l'identità del candidato. Ti chiediamo di completare questa verifica con cura, perché l'integrità del nostro sito dipende da essa."
+msgstr ""
+"Stai per votare se accettare o rifiutare la registrazione di ${name} come Cooperatore di ${site_name}. La sua ammissione come Cooperatore a pieno titolo di ${site_name} dipende dalla tua decisione. \n"
+"Hai ricevuto direttamente da ${name} via e-mail i documenti: una copia parziale del suo documento d'identità ufficiale e un selfie recente. \n"
+"In questa pagina dovrai decidere se: \n"
+"(1) il selfie recente della persona corrisponde alla fotografia sul suo documento d'identità ufficiale e \n"
+"(2) i dati identificativi ricevuti da questa persona su questo portale al momento della sua registrazione (riportati di seguito) corrispondono a quelli presenti sul suo documento di identità ufficiale. \n"
+"Fai molta attenzione! Per poter accettare la registrazione, TUTTI gli elementi devono essere rigorosamente IDENTICI tra i dati identificativi ricevuti al momento della registrazione e quelli presenti sul documento di identità ufficiale. In tutti gli altri casi, anche con una sola piccola differenza, o se hai dubbi sull'autenticità del documento d'identità ufficiale, DEVI rifiutare la registrazione. \n"
+"Puoi essere meno rigoroso riguardo alla corrispondenza tra la foto e il selfie: ti preghiamo di considerare gli effetti dell'età e delle differenze di illuminazione, sfondo, ecc. Se sai come fare, ti chiediamo anche di controllare che la data in cui è stato scattato il selfie sia la stessa data in cui è stata inviata l'e-mail, o almeno che sia vicina. \n"
+"Ti chiediamo gentilmente di procedere con questa convalida con attenzione, poiché da essa dipende l'integrità dei nostri processi democratici, ma anche con diligenza, perché ${name} sta aspettando la tua decisione per partecipare alle nostre attività."
 
 msgid "vote_legend"
 msgstr "Scegli il tuo voto:"
 
 msgid "voting_header"
-msgstr "Vota la candidatura"
+msgstr "Vota la registrazione come Cooperatore"
 
 msgid "submit_vote_title"
 msgstr "Clicca per inviare il tuo voto."
