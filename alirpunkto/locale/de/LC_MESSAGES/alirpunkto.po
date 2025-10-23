@@ -1073,7 +1073,7 @@ msgstr ""
 "Vielen Dank, dass Sie Teil der ${domain_name}-Community sind!"
 
 msgid "vote_msg"
-msgstr "Willkommen bei der Identitätsüberprüfung für die Registrierung eines Genossenschaftskandidaten bei ${Site_name}."
+msgstr "Willkommen bei der Identitätsprüfung für die Registrierung eines Kandidaten als Genossenschaftler bei ${site_name}."
 
 msgid "welcome_voter"
 msgstr ""
