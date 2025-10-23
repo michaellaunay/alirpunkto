@@ -1517,16 +1517,24 @@ msgstr ""
 #~ "później zmienić. Wybierz go ostrożnie! "
 
 msgid "vote_msg"
-msgstr "Witamy w Alirpunkto, ${site_name}."
+msgstr "Witamy w procesie weryfikacji tożsamości kandydata do rejestracji jako Współpracownik serwisu ${site_name}"
 
 msgid "welcome_voter"
-msgstr "Za chwilę zagłosujesz, czy zaakceptować, czy odrzucić zgłoszenie ${name}. Dostęp tej osoby do portalu zależy od twojej decyzji. Niezależnie od tego, czy dokumenty otrzymałeś drogą e-mailową, czy podczas wideokonferencji, mamy nadzieję, że udało ci się potwierdzić tożsamość kandydata. Prosimy, abyś przeprowadził tę weryfikację starannie, ponieważ od niej zależy integralność naszej strony."
+msgstr ""
+"Za chwilę zagłosujesz nad przyjęciem lub odrzuceniem rejestracji ${name} jako Współpracownika serwisu ${site_name}. Twoja decyzja zadecyduje o przyjęciu tej osoby jako pełnoprawnego Współpracownika ${site_name}. \n"
+"Otrzymałeś dokumenty bezpośrednio od ${name} pocztą elektroniczną: częściową kopię jego/jej oficjalnego dokumentu tożsamości oraz aktualne selfie. \n"
+"Na tej stronie zdecydujesz, czy: \n"
+"(1) aktualne selfie tej osoby jest zgodne ze zdjęciem w jej oficjalnym dokumencie tożsamości oraz \n"
+"(2) dane tożsamościowe otrzymane od tej osoby na tym portalu podczas rejestracji (przedstawione poniżej) są zgodne z danymi zawartymi w jej oficjalnym dokumencie tożsamości. \n"
+"Bądź bardzo ostrożny! Aby zaakceptować rejestrację, WSZYSTKIE elementy muszą być identyczne w danych tożsamościowych otrzymanych podczas rejestracji i w oficjalnym dokumencie tożsamości. We wszystkich innych przypadkach, nawet przy jednej niewielkiej różnicy lub jeśli masz wątpliwości co do autentyczności oficjalnego dokumentu tożsamości, MUSISZ odmówić rejestracji. \n"
+"Możesz być mniej rygorystyczny w kwestii zgodności zdjęcia z selfie: weź pod uwagę wpływ wieku oraz różnice w oświetleniu, tle itp. Jeśli wiesz, jak to zrobić, prosimy również o sprawdzenie, czy data wykonania selfie jest datą wysłania wiadomości e-mail lub przynajmniej jest zbliżona do tej daty. \n"
+"Uprzejmie prosimy o dokładne przeprowadzenie tej weryfikacji, ponieważ zależy od niej integralność naszych procesów demokratycznych, ale jednocześnie o zachowanie należytej staranności, ponieważ ${name} czeka na twoją decyzję o udziale w naszych działaniach"
 
 msgid "vote_legend"
 msgstr "Wybierz swój głos:"
 
 msgid "voting_header"
-msgstr "Zagłosuj nad kandydaturą"
+msgstr "Głosuj na rejestrację jako Współpracownik"
 
 msgid "submit_vote_title"
-msgstr "Kliknij, aby przesłać swój głos."
+msgstr "Kliknij, aby oddać swój głos"
