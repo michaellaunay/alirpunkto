@@ -3,6 +3,7 @@
 # date: 2024-04-19
 
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 import datetime
 from alirpunkto.utils import (
     get_member_by_oid,
@@ -58,12 +59,31 @@ def modify_member(request):
     schema = None
     transaction = request.tm
     message = None
+    logged_in = request.session.get('logged_in', False)
+    session_user = request.session.get("user")
+    if not logged_in or not session_user:
+        log.info("modify_member: session expired or user not logged in")
+        request.session['logged_in'] = False
+        request.session.pop('user', None)
+        request.session.flash(_('user_not_logged_in'), 'error')
+        return HTTPFound(location=request.route_url('home'))
+
+    if isinstance(session_user, dict):
+        user_data = session_user
+    else:
+        try:
+            user_data = json.loads(session_user)
+        except (TypeError, json.JSONDecodeError):
+            log.warning("modify_member: unable to decode user session payload, redirecting to home")
+            request.session['logged_in'] = False
+            request.session.pop('user', None)
+            request.session.flash(_('user_not_logged_in'), 'error')
+            return HTTPFound(location=request.route_url('home'))
+
     oid = (request.session.get(CANDIDATURE_OID, None)
         or request.session.get(MEMBER_OID, None))
     if not oid:
-        user = request.session.get("user", None)
-        if user:
-            oid = json.loads(user).get("oid", None)
+        oid = user_data.get("oid")
     if oid:
         member = get_member_by_oid(oid, request, True)
         if not member:
