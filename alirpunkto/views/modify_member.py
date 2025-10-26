@@ -59,6 +59,7 @@ def modify_member(request):
     schema = None
     transaction = request.tm
     message = None
+    error = None
     logged_in = request.session.get('logged_in', False)
     session_user = request.session.get("user")
     if not logged_in or not session_user:
