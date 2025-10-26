@@ -93,7 +93,7 @@ def modify_member(request):
                     "form": None,
                     "member": None,
                     "accessed_member": None,
-                    "accessed_members": [],
+                    "accessed_members": {},
                     "error": _('unknown_member'),
                 }
     else:
@@ -347,13 +347,13 @@ def modify_member(request):
                         log.error(f"Unknown field {field} to {requested_value}")
                         error = _('error_while_setting_field', mapping={'field': field})
                         request.session.flash(_('error_while_setting_field'), error)
-                        return {
-                            "member": member,
-                            "accessed_members": members,
-                            "accessed_member": accessed_member.oid,
-                            "form": form.render(appstruct=appstruct) if form else None,
-                            "error": error,
-                        }
+                    return {
+                        "member": member,
+                        "accessed_members": members,
+                        "accessed_member": accessed_member.oid,
+                        "form": form.render(appstruct=appstruct) if form else None,
+                        "error": error,
+                    }
         # write modifications in ldap
 
         sending_success = None
@@ -374,7 +374,7 @@ def modify_member(request):
             "member": member,
             "form": None,
             "accessed_member":accessed_member,
-            "accessed_members": [],
+            "accessed_members": {},
             "message": message if message else _('member_data_updated'),
         }
         

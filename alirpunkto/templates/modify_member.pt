@@ -6,7 +6,11 @@
                 <label for="accessed_member_oid" i18n:translate="select_member_oid_label">Select the member</label>
                 <select id="accessed_member_oid" name="accessed_member_oid" required>
                     <option value="" disabled selected i18n:translate="select_member_placeholder">Select a member</option>
-                    <option tal:repeat="(item_key,item_value) accessed_members.items()" tal:attributes="value item_key" tal:content="python:str(item_key) + item_value" tal:condition="python:item_key and item_value"></option>
+                    <option tal:repeat="(item_key, item_value) items"
+                        tal:define="items accessed_members.items()"
+                        tal:attributes="value item_key"
+                        tal:condition="items"
+                        tal:content="item_value"></option>
                 </select>
                 <input type="submit" name="submit" value="Submit" i18n:attributes="value submit_button">
             </form>
