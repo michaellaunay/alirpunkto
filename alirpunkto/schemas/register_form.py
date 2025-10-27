@@ -114,7 +114,7 @@ class RegisterForm(schema.CSRFSchema):
             ('BE', _('Belgium')),
             ('BG', _('Bulgaria')),
             ('CY', _('Cyprus')),
-            ('CZ', _('CZ - Czechi')),
+            ('CZ', _('Czechia')),
             ('DE', _('Germany')),
             ('DK', _('Denmark')),
             ('EE', _('Estonia')),
