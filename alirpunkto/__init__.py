@@ -258,10 +258,11 @@ def main(global_config, **settings):
         config.add_subscriber(add_renderer_globals, 'pyramid.events.BeforeRender')
 
     deform_template_dir = resource_filename('deform', 'templates/')
+    custom_deform_template_dir = resource_filename('alirpunkto', 'templates/deform/')
     def translator(term):
         return get_localizer(get_current_request()).translate(term)
     zpt_renderer = deform.ZPTRendererFactory(
-        [deform_template_dir],
+        [custom_deform_template_dir, deform_template_dir],
         translator=translator,
     )
     deform.Form.set_default_renderer(zpt_renderer)
