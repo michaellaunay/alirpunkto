@@ -688,6 +688,7 @@ def get_access_permissions(accessed: Member, accessor : Member) -> MemberPermiss
     is_owner = accessed == accessor
     # Even though 'candidature' is imported in the file, it is not recognized here!
     from alirpunkto.models.candidature import Candidature
+    log.debug(f"Getting access permissions for accessor {accessor.oid} {accessor.member_state} ({accessor.type.name}) on accessed {accessed.oid} ({'Candidature' if isinstance(accessed, Candidature) else 'Member'})")
     match (is_owner, accessed, accessor):
         # If the accessor is the owner of the accessed member
         case (True, _, _):
@@ -702,6 +703,7 @@ def get_access_permissions(accessed: Member, accessor : Member) -> MemberPermiss
             permissions = access[accessor.type.name.capitalize()][accessed.member_state]
         case (False, _, _):
             permissions = access[accessor.type.name.capitalize()][accessed.member_state]
+    log.debug(f"Permissions: {permissions}")
     return permissions
 
 if __name__ == "__main__":
