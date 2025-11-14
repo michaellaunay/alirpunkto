@@ -564,6 +564,12 @@ msgstr ""
 "    <p>Diese Daten werden ausschließlich verwendet, um Ihre Identität, Ihr Alter und Ihre Staatsangehörigkeit zu überprüfen und um Ihr Konto als Genossenschaftler zu verwalten. Sie werden niemals anderen Benutzern der IT-Plattform von ${domain_name} angezeigt, noch werden sie an irgendjemanden übermittelt oder verkauft, außer um gesetzliche Anforderungen der öffentlichen Strafverfolgungsbehörden auf Anordnung eines Richters zu erfüllen. Der \"Datenverantwortliche\" im Sinne der <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A02016R0679-20160504\">Allgemeinen Datenschutzverordnung (GDPR) der Europäischen Union</a> ist die KosmoPolitische Genossenschaft (CosmoPolitical Coperative SCE), eine Europäische Genossenschaft mit Sitz in der 229 rue Solférino, 59000 Lille, Frankreich und registriert am 25. April 2023 unter der Nummer SIREN 951 007 897.</p>\n"
 "</div>"
 
+msgid "ordinary_member_data_explanation"
+msgstr ""
+"Als ordentliches Mitglied der ${domain_name} Community werden Sie mit den anderen Mitgliedern und unserer IT-Plattform interagieren.\n"
+"Damit dies für Sie und die anderen Mitglieder der Community so effizient und respektvoll wie möglich abläuft, wären wir Ihnen dankbar, wenn Sie die im folgenden Formular angeforderten Informationen bereitstellen könnten.\n"
+"Diese Daten werden ausschließlich verwendet, um Ihr Konto als ordentliches Mitglied der Community zu verwalten. Sie werden niemals anderen Benutzern der IT-Plattform von ${domain_name} angezeigt, noch werden sie an irgendjemanden übermittelt oder verkauft, außer um gesetzliche Anforderungen der öffentlichen Strafverfolgungsbehörden auf Anordnung eines Richters zu erfüllen. Der \"Datenverantwortliche\" im Sinne der <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A02016R0679-20160504\">Allgemeinen Datenschutzverordnung (GDPR) der Europäischen Union</a> ist die KosmoPolitische Genossenschaft (CosmoPolitical Coperative SCE), eine Europäische Genossenschaft mit Sitz in der 229 rue Solférino, 59000 Lille, Frankreich und registriert am 25. April 2023 unter der Nummer SIREN 951 007 897."
+
 msgid "human_verification_explanation"
 msgstr ""
 "<div>\n"
