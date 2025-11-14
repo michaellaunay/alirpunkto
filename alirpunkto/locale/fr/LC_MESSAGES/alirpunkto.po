@@ -563,6 +563,12 @@ msgstr ""
 "    <p>Ces données seront utilisées exclusivement pour vérifier votre identité, votre âge et votre nationalité, et pour gérer votre compte de Coopérateur. Elles ne seront jamais affichées aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmises ou vendues à quiconque, sauf pour répondre aux exigences légales des autorités judiciaires publiques sur demande d'un juge. Le \"responsable du traitement des données\", tel que défini par le <a href=\"https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A02016R0679-20160504\"> Règlement général sur la protection des données (RGPD) de l'Union européenne</a>, est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le numéro SIREN 951 007 897.</p>\n"
 "</div>"
 
+msgid "ordinary_member_data_explanation"
+msgstr ""
+"En tant que Membre ordinaire de la Communauté de ${domain_name}, vous interagirez avec les autres membres et avec notre plateforme informatique.\n"
+"Afin que cela fonctionne de la manière la plus efficace et la plus respectueuse possible pour vous et pour les autres membres de la Communauté, nous vous serions reconnaissants de bien vouloir fournir les informations demandées dans le formulaire ci-dessous.\n"
+"Ces données seront utilisées exclusivement pour nous permettre de gérer votre compte en tant que Membre ordinaire de la Communauté de ${domain_name}. Elles ne seront jamais affichées aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmises ou vendues à quiconque, sauf pour répondre aux exigences légales des autorités judiciaires publiques sur demande d'un juge. Le \"responsable du traitement des données\", tel que défini par le <a href=\"https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A02016R0679-20160504\"> Règlement général sur la protection des données (RGPD) de l'Union européenne</a>, est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le numéro SIREN 951 007 897."
+
 msgid "human_verification_explanation"
 msgstr ""
 "<div>\n"
