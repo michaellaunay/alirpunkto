@@ -87,12 +87,11 @@ def _handle_candidature_state(
     - Dict: A dictionary with the rendered state view.
     """
     result = None
-    log.debug(f"Handling candidature state: request method: {request.method}")
     if request.method == 'POST':
         log.debug(f"Handling candidature state: request POST: {request.POST}")
-    log.debug(f"Handling candidature state: {candidature.candidature_state}")
-    log.debug(f"Handling candidature oid: {getattr(candidature,'oid', 'Not defined')}")
-    log.debug(f"Handling candidature type: {getattr(candidature, 'type', 'Not defined')}")
+    else:
+        log.debug(f"Handling candidature state: request method: {request.method}")
+    log.debug(f"Handling candidature state of id: {id(candidature)}, state:{candidature.candidature_state}, oid:{getattr(candidature,'oid', 'Not defined')}, type: {getattr(candidature, 'type', 'Not defined')}")
     match candidature.candidature_state:
         case CandidatureStates.DRAFT:
             result = handle_draft_state(request, candidature)
@@ -130,7 +129,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
     Returns:
         dict: Candidature data and error messages or HTTPFound on success.
     """
-    log.debug(f"Handling draft state for candidature {candidature.oid}")
+    log.debug(f"Handling draft state for candidature id:{id(candidature)}, oid:{candidature.oid}")
     if 'submit' in request.POST:
         email = request.params['email']
         choice = request.params['choice']
@@ -139,11 +138,13 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
             email, choice, request, candidature
         )
         if error:
+            log.debug(f"Handling draft state for candidature error {error}")
             return error
         from alirpunkto.utils import generate_math_challenges # Due to the precedence of unit test fixture imports, we need to import it here
         candidature.challenge = generate_math_challenges(request)
 
         if not attempt_send_validation_email(request, candidature):
+            log.debug(f"Handling draft state for candidature email_not_sent")
             return {
                 'candidature': candidature,
                 'MemberTypes': MemberTypes,
@@ -276,7 +277,7 @@ def handle_email_validation_state(
         dict: Response dictionary containing candidature data, form rendering,
               and error messages as needed.
     """
-    log.debug(f"Handling email validation state for candidature {candidature.oid}")
+    log.debug(f"Handling email validation state for candidature id:{id(candidature)}, oid:{candidature.oid}")
     if 'submit' in request.POST:
         # Validate the challenge
         challenge_error = validate_challenge(request, candidature)
@@ -375,7 +376,7 @@ def handle_confirmed_human_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    log.debug(f"Handling confirmed human state for candidature {candidature.oid}")
+    log.debug(f"Handling confirmed human state for candidature id:{id(candidature)}, oid:{candidature.oid}")
     schema = RegisterForm().bind(request=request)
     permissions = get_access_permissions(candidature, candidature)
     if not permissions or permissions == Permissions.NONE:
@@ -678,7 +679,7 @@ def handle_unique_data_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    log.debug(f"Handling unique data state for candidature {candidature.oid}")
+    log.debug(f"Handling unique data state for candidature id:{id(candidature)}, oid:{candidature.oid}")
     if not candidature.voters:
         prepare_for_cooperator(request, candidature)
     if 'confirm' in request.POST:
@@ -721,7 +722,7 @@ def handle_pending_state(request, candidature):
     Returns:
         HTTPFound: the HTTP found response
     """
-    log.debug(f"Handling pending state for candidature {candidature.oid}")
+    log.debug(f"Handling pending state for candidature id:{id(candidature)}, oid:{candidature.oid}")
     return {
         'candidature': candidature,
         'MemberTypes': MemberTypes,
