@@ -592,7 +592,15 @@ msgid "identity_verification_label"
 msgstr "Identiteitscontrole"
 
 msgid "Send_id_copy_by_email"
-msgstr "Stuur ons alstublieft per e-mail een recente selfie en een gescande kopie van een deel van uw officiële identiteitsbewijs."
+msgstr ""
+"Stuur ons alstublieft per e-mail een recente selfie en een scan van een deel van uw officiële identiteitsbewijs. \n"
+"Om dit te doen:\n"
+"1. Open uw e-mailprogramma (Thunderbird, Outlook, tabblad in uw browser met uw webmail geopend);\n"
+"2. Klik op de knop \"Doorgaan\" hieronder. Er verschijnt een concept-e-mail in uw e-mailprogramma. De geadresseerden zijn uw Verificateurs. Wijzig deze niet;\n"
+"3. Voeg als bijlagen bij de concept-e-mail (a) uw recente selfie en (b) de scan van een deel van uw officiële identiteitsbewijs toe. U kunt desgewenst de tekst van de e-mail aanpassen, maar dat is waarschijnlijk niet nodig;\n"
+"4. Verstuur de e-mail;\n"
+"5. Klik vervolgens op de knop \"Bevestigen\" hieronder."
+
 
 msgid "Send_video_conference_link"
 msgstr "DELETED"
