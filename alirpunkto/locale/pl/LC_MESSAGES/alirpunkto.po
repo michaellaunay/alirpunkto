@@ -684,7 +684,14 @@ msgstr "Weryfikacja tożsamości"
 
 #, fuzzy
 msgid "Send_id_copy_by_email"
-msgstr "Prześlij nam e-mailem aktualne selfie oraz zeskanowaną kopię części swojego oficjalnego dokumentu tożsamości."
+msgstr ""
+"Proszę przesłać nam e-mailem swoje aktualne zdjęcie selfie oraz skan części swojego oficjalnego dokumentu tożsamości. \n"
+"Aby to zrobić:\n"
+"1. Proszę otworzyć klienta poczty e-mail (Thunderbird, Outlook, kartę przeglądarki z otwartą pocztą internetową);\n"
+"2. Proszę kliknąć przycisk \"Kontynuuj\" poniżej. W kliencie poczty e-mail pojawi się szkic wiadomości. Adresatami są Państwa Weryfikatorzy. Proszę ich nie zmieniać;\n"
+"3. Dodaj do szkicu wiadomości e-mail jako załączniki (a) swoje aktualne zdjęcie selfie oraz (b) skan części swojego oficjalnego dokumentu tożsamości. Jeśli chcecie, możecie zmienić treść wiadomości e-mail, ale nie powinno to być konieczne;\n"
+"4. Wyślijcie wiadomość e-mail;\n"
+"5. Po zakończeniu kliknijcie przycisk \"Potwierdź\" poniżej".
 
 #, fuzzy
 msgid "Send_video_conference_link"
