@@ -573,6 +573,11 @@ msgstr ""
 "April 2023 under the number SIREN 951 007 897.</p>\n"
 "</div>"
 
+msgid "ordinary_member_data_explanation"
+msgstr ""
+"As an Ordinary Member of the ${domain_name} Community, you will interact with its other members and with our IT platform .\n"
+"For this to work in the most efficient and respectful way for you and for the other members of the Community, we would be grateful if you could provide the information requested in the form below."
+
 msgid "human_verification_explanation"
 msgstr ""
 "<div>\n"
