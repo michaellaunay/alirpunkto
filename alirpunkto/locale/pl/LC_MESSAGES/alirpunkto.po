@@ -774,7 +774,7 @@ msgstr ""
 "CosmoPolitical Cooperative SCE, spółdzielnia europejska z siedzibą 229 rue "
 "Solférino, 59000 Lille, Francja i zarejestrowana 25 kwietnia 2023 r. pod "
 "numerem SIREN 951 007 897.</p>\n"
-"<p><b>Ważna informacja:</b> W rzadkich przypadkach może się zdarzyć, że poniższy formularz nie wyświetla się prawidłowo: nie pokazuje miejsca, w którym należy podać pseudonim, adres e-mail będzie edytowalny... W takim przypadku wystarczy kliknąć przycisk \"Wyślij\" poniżej. Wyświetlony formularz będzie poprawny i będzie można go łatwo wypełnić.</p>"
+"<p><b>Ważna informacja:</b> W rzadkich przypadkach może się zdarzyć, że poniższy formularz nie wyświetla się prawidłowo: nie pokazuje miejsca, w którym należy podać pseudonim, adres e-mail będzie edytowalny... W takim przypadku wystarczy kliknąć przycisk \"Wyślij\" poniżej. Wyświetlony formularz będzie poprawny i będzie można go łatwo wypełnić.</p>\n"
 "</div>"
 
 msgid "ordinary_member_data_explanation"
