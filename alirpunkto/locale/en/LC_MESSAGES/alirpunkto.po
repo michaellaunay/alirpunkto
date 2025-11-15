@@ -540,9 +540,6 @@ msgstr "Confirm"
 msgid "vote_success"
 msgstr "We thank you for participating in the voting process. Your vote ${vote} has been successfully recorded. You can change your vote until its deadline by returning to this page."
 
-msgid "vote_success"
-msgstr "We thank you for participating in the voting process. Your vote ${vote} has been successfully recorded. You can change your vote until its deadline by returning to this page."
-
 msgid "cooperator_data_explanation"
 msgstr ""
 "<div>\n"
