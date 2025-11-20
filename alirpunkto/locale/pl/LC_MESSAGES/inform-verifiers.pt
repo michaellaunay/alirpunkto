@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+tal:omit-tag="textual">
+<head>
+<title> Pomóż zweryfikować nową rejestrację na platformie <span tal:replace="domain_name">Domain Name</span></title>
+</head>
+<body>
+<h1>Potrzebujemy twojej pomocy w weryfikacji danych identyfikacyjnych kandydata do współpracy!</h1>
+
+<p>Szanowny <span tal:replace="verifier" tal:condition="exists:user">Imię i nazwisko weryfikatora</span>,</p>
+
+<p>Zostałeś losowo wybrany przez platformę <span tal:replace="domain_name">Domain Name</span> do pełnienia funkcji weryfikatora, którego zadaniem jest weryfikacja tożsamości osoby, która właśnie zarejestrowała się online. Każdy nowy członek jest błogosławieństwem i szansą dla <span tal:replace="domain_name">Nazwa domeny</span>! Musimy być wdzięczni za wysiłek i odwagę każdej osoby, która do nas dołącza. Prosimy o wsparcie tych wysiłków i dobrej woli poprzez oddanie głosu pod następującym adresem URL: {subject_url}, w terminie do {date_end_vote}.</p>
+
+<p>Poniżej znajduje się opis procesu weryfikacji danych tożsamości nowo zarejestrowanej osoby.</p>
+
+<p>Przy każdej nowej rejestracji na platformie <span tal:replace="domain_name">Domain Name</span> system losowo wybiera od 3 do 7 istniejących członków i prosi ich o weryfikację tożsamości nowo zarejestrowanej osoby. Ważne jest bowiem sprawdzenie, czy każda osoba fizyczna jest powiązana z jednym członkiem platformy i tylko z jednym, czy jej obywatelstwo należy do obywatelstw państw członkowskich Unii Europejskiej oraz czy osiągnęła pełnoletność (18 lat). W ten sposób unikamy sytuacji, w której dana osoba fizyczna głosuje kilka razy na platformie pod kilkoma różnymi pseudonimami, i zapewniamy, że reprezentujemy wyłącznie interesy obywateli Unii Europejskiej.</p>
+
+<p>Aby zweryfikować tożsamość tej osoby, wystarczy wykonać następujące czynności:</p>
+<ol>
+<li> dzisiaj otrzymałeś wiadomość e-mail od osoby, która właśnie zarejestrowała się na platformie (jeśli nie, sprawdź folder spam lub napisz do tej osoby). Adres e-mail tej osoby, z którego wysłała ci wiadomość (i na który należy napisać, jeśli nie otrzymałeś żadnej wiadomości), to {subject_email}. Wiadomość ta zawierała (1) aktualne selfie oraz (2) skan oficjalnego dokumentu tożsamości. Ze względów bezpieczeństwa zalecamy osobie, która właśnie się zarejestrowała, aby podczas skanowania ukryła swoje miejsce urodzenia, numer dokumentu tożsamości i podpis: kopia będzie celowo niekompletna;</li>
+<li> najpóźniej do dnia {date_end_vote} wejdź na stronę: {subject_url}. Na tej stronie zdecydujesz, czy (1) aktualne selfie osoby pasuje do zdjęcia w jej dokumencie tożsamości oraz (2) dane tożsamościowe otrzymane od tej osoby (które zostaną wyświetlone na stronie i są zamieszczone poniżej) pasują do danych zawartych w oficjalnym dokumencie tożsamości, którego kopię otrzymałeś pocztą elektroniczną od nowo zarejestrowanej osoby. Bądź bardzo ostrożny! Abyś mógł zaakceptować rejestrację, WSZYSTKIE elementy muszą być dokładnie IDENTYCZNE między danymi tożsamościowymi otrzymanymi podczas rejestracji a danymi zawartymi w oficjalnym dokumencie tożsamości. We wszystkich innych przypadkach, nawet przy jednej niewielkiej różnicy, jeśli masz wątpliwości co do autentyczności oficjalnego dokumentu tożsamości, MUSISZ odmówić rejestracji. Możesz być mniej rygorystyczny w kwestii zgodności zdjęcia z selfie: weź pod uwagę wpływ wieku oraz różnice w oświetleniu, tle itp. Jeśli wiesz, jak to zrobić, prosimy również o sprawdzenie, czy data wykonania selfie jest datą wysłania wiadomości e-mail lub przynajmniej jest zbliżona do tej daty.</li>
+<li> Po wykonaniu tej czynności, niezależnie od jej wyniku, prosimy o usunięcie z komputera wszystkich kopii selfie i oficjalnego dokumentu tożsamości, które otrzymałeś od nowo zarejestrowanej osoby, oraz o poinformowanie jej o tym fakcie, wysyłając wiadomość e-mail na adres {subject_email}.</li>
+</ol>
+<p>Dane tożsamości otrzymane od osoby podczas rejestracji, które są również wyświetlane na stronie głosowania, są następujące:</p>
+<ul>
+<li> Nazwisko (nazwiska): {subject_last_name}</li>
+<li> Imię (imiona): {subject_first_name}</li>
+<li> Data urodzenia: {birth_date}</li>
+<li> Obywatelstwo: {citizenship}</li> 
+</ul>
+<p>Proces weryfikacji musi zostać zakończony najpóźniej w dniu {date_end_vote}. Po upływie tego terminu proces weryfikacji zostanie zamknięty, a twoja decyzja nie zostanie uwzględniona. Jeśli do tego dnia żaden weryfikator nie odda głosu, rejestracja zostanie domyślnie odrzucona. Jak już wspomniano, każdy nowy członek jest błogosławieństwem i szansą dla <span tal:replace="domain_name">Nazwa domeny</span>! Prosimy o wsparcie wysiłków i dobrej woli nowego członka poprzez szybkie oddanie głosu pod następującym adresem URL: {subject_url}, w każdym razie przed datą {date_end_vote}!</p>
+
+<p>Bardzo dziękujemy za pomoc.</p>
+
+<p>Z poważaniem.</p>
+<p>Zespół <span tal:replace="domain_name">Domain Name</span>.</p>
+<p tal:content="organization_details">Szczegóły organizacji</p>
+</body>
+
+</html>
