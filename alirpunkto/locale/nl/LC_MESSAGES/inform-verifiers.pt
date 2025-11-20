@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+tal:omit-tag="textual">
+<head>
+<title> Help ons even om een nieuwe registratie op het <span tal:replace="domain_name">Domeinnaam</span>platform te checken</title>
+</head>
+<body>
+<h1>We hebben je hulp nodig om de identiteitsgegevens van een kandidaat-Coöperator te checken!</h1>
+
+<p>Beste <span tal:replace="verifier" tal:condition="exists:user">Naam van de verificateur</span>,</p>
+
+
+
+<p>Je bent willekeurig gekozen door het <span tal:replace="domain_name">Domain Name</span> platform om als Verificateur op te treden. Je taak is om de identiteit te checken van iemand die zich net online heeft geregistreerd. Elk nieuw lid is een zegen en een kans voor <span tal:replace="domain_name">Domeinnaam</span>! We moeten dankbaar zijn voor de inspanningen en de moed van iedereen die zich bij ons aansluit. Steun die inspanningen en goede wil door te stemmen op de volgende URL: {subject_url}, op of vóór {date_end_vote}.</p>
+
+<p>Hieronder vind je een beschrijving van het proces voor het checken van de identiteitsgegevens van een nieuw geregistreerde persoon.</p>
+
+<p>Bij elke nieuwe registratie op het <span tal:replace="domain_name">Domain Name</span>-platform kiest het systeem willekeurig 3 tot 7 bestaande leden en vraagt hen om de identiteit van de nieuw geregistreerde persoon te checken. Het is namelijk belangrijk om te checken of elke natuurlijke persoon aan één lid op het platform is gekoppeld, dat zijn/haar nationaliteit een van de lidstaten van de Europese Unie is en dat hij/zij meerderjarig is (18 jaar). Zo voorkomen we dat een bepaalde natuurlijke persoon meerdere keren op het platform stemt onder verschillende pseudoniemen en zorgen we ervoor dat we alleen de belangen van burgers van de Europese Unie vertegenwoordigen.</p>
+
+<p>Om de identiteit van deze persoon te verifiëren, hoef je alleen maar de volgende stappen te volgen:</p>
+<ol>
+<li> Je hebt vandaag een e-mail gekregen van de persoon die zich net op het platform heeft geregistreerd (als dat niet zo is, kijk dan even in je spamfolder of stuur de persoon een berichtje). Het e-mailadres van deze persoon, van waaruit hij/zij je de e-mail heeft gestuurd (en waarnaar je kunt schrijven als je niets hebt ontvangen), is {subject_email}. Deze e-mail bevatte (1) een recente selfie en (2) een scan van een officieel identiteitsbewijs. Om veiligheidsredenen raden we de persoon die zich net heeft geregistreerd aan om zijn/haar geboorteplaats, identiteitsnummer en handtekening te verbergen bij het scannen: de kopie zal opzettelijk onvolledig zijn;</li>
+<li> ga uiterlijk op {date_end_vote} naar de volgende URL: {subject_url}. Op deze pagina bepaal je of (1) de recente selfie van de persoon overeenkomt met de foto op zijn/haar identiteitsbewijs en (2) de identiteitsgegevens die je van deze persoon hebt ontvangen (die op de pagina worden weergegeven en hieronder zijn weergegeven) overeenkomen met die op het officiële identiteitsbewijs, waarvan je een kopie per e-mail hebt ontvangen van de nieuw geregistreerde persoon. Wees heel voorzichtig! Om de registratie te accepteren, moeten ALLE elementen helemaal IDENTIEK zijn tussen de identiteitsgegevens die je bij de registratie hebt gekregen en die op het officiële identiteitsbewijs. In alle andere gevallen, zelfs bij een klein verschil, moet je de registratie weigeren als je twijfelt aan de echtheid van het officiële identiteitsbewijs. Je kunt minder streng zijn wat betreft de overeenstemming tussen de foto en de selfie: houd rekening met de effecten van leeftijd en verschillen in belichting, achtergrond, enz. Als je weet hoe je dit moet doen, vragen we je ook om te controleren of de datum waarop de selfie is genomen, overeenkomt met de datum waarop de e-mail is verzonden, of in ieder geval dicht in de buurt ligt.</li>
+<li> Nadat je dit hebt gedaan, en ongeacht het resultaat, vragen we je vriendelijk om alle kopieën van de selfie en het officiële identiteitsbewijs die je van de nieuw geregistreerde persoon hebt gekregen, van je computer te verwijderen en hem/haar hiervan op de hoogte te stellen door een e-mail te sturen naar {subject_email}.</li>
+</ol>
+<p>De identiteitsgegevens die we van de persoon hebben gekregen bij zijn/haar registratie, en die ook op de stempagina staan, zijn de volgende:</p>
+<ul>
+<li> Achternaam/achternamen: {subject_last_name}</li>
+<li> Voornaam/voornamen: {subject_first_name}</li>
+<li> Geboortedatum: {birth_date}</li>
+<li> Nationaliteit: {citizenship}</li> 
+</ul>
+<p>Het verificatieproces moet op of voor {date_end_vote} zijn afgerond. Na deze datum wordt het verificatieproces gesloten en wordt er geen rekening gehouden met je beslissing. Als er op deze datum nog geen Verificateur heeft gestemd, wordt de registratie standaard geweigerd. Zoals gezegd is elk nieuw lid een zegen en een kans voor <span tal:replace="domain_name">Domeinnaam</span>! Steun de inspanningen en goede wil van dit nieuwe lid door snel te stemmen op de volgende URL: {subject_url}, en in ieder geval op of vóór {date_end_vote}!</p>
+
+<p>Hartelijk dank voor je hulp. </p>
+
+<p>Met vriendelijke groet. </p>
+<p>Het team van <span tal:replace="domain_name">Domain Name</span>. </p>
+<p tal:content="organization_details">Organisatiegegevens</p>
+</body>
+</html>
