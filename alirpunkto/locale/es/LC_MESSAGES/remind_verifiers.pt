@@ -12,7 +12,7 @@ tal:omit-tag="textual">
 <p>Estimado <span tal:replace="verifier" tal:condition="exists:user">Nombre del Verificador</span>,</p>
 
 
-<p>Como recordarás, has sido seleccionado al azar por la plataforma ${domain_name} para actuar como Verificador, cuya tarea consiste en verificar la identidad de una persona que acaba de registrarse en línea. Que sepamos, aún no has votado. Por favor, hazlo en la siguiente URL {subject_url}, ¡en o antes de {date_end_vote}, es decir, en {notice_time_verifiers} días! Por favor, actúa con rapidez.</p>
+<p>Como recordarás, has sido seleccionado al azar por la plataforma de <span tal:replace="domain_name">Domain Name</span> para actuar como Verificador, cuya tarea consiste en verificar la identidad de una persona que acaba de registrarse en línea. Que sepamos, aún no has votado. Por favor, hazlo en la siguiente URL {subject_url}, ¡en o antes de {date_end_vote}, es decir, en {notice_time_verifiers} días! Por favor, actúa con rapidez.</p>
 
 <p>Para tu comodidad, aquí tienes un recordatorio del proceso de verificación de los datos de identidad de una persona recién inscrita.</p>
 
