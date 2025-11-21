@@ -4,7 +4,7 @@ xmlns:i18n="http://xml.zope.org/namespaces/i18n"
 xmlns:tal="http://xml.zope.org/namespaces/tal"
 tal:omit-tag="textual">
 <head>
-<title> Erinnerung - Bitte hilf mit, eine neue Registrierung auf der <span tal:replace="domain_name">Domain Name</span>Plattform zu verifizieren. Fristende in {notice_time_verifiers} Tagen</title>
+<title> Erinnerung - Bitte hilf mit, eine neue Registrierung auf der <span tal:replace="domain_name">Domain Name</span> Plattform zu verifizieren. Fristende in {notice_time_verifiers} Tagen</title>
 </head>
 <body>
 <h1>Deine Hilfe wird benötigt, um die Identitätsdaten eines Kandidaten zu verifizieren!</h1>
