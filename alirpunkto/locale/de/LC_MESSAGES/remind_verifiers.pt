@@ -27,7 +27,7 @@ tal:omit-tag="textual">
 <ul>
 <li>Nachname(n): {subject_last_name}</li>
 <li>Vorname(n): {subject_first_name}</li>
-<li>Geburtsdatum: {birthdate}</li>
+<li>Geburtsdatum: {birth_date}</li>
 <li>Staatsbürgerschaft: {citizenship}</li>
  
 </ul>
