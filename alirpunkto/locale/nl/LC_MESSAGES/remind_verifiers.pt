@@ -9,10 +9,10 @@ tal:omit-tag="textual">
 <body>
 <h1>We hebben je hulp nodig om de identiteitsgegevens van een kandidaat-Coöperator te checken!</h1>
 
-<p>Beste <span tal:replace="verifier" tal:condition="exists:user">Naam van de verificateur</span>,</p>
+<p>Beste <span tal:replace="verifier" tal:condition="exists:user">Pseudonim van de verificateur</span>,</p>
 
 
-<p>Zoals je je misschien herinnert, ben je willekeurig geselecteerd door het platform ${domain_name} om als Verificateur op te treden. Je taak is om de identiteit te verifiëren van een persoon die zich net online heeft geregistreerd. Voor zover wij weten, heb je nog niet gestemd. Doe dit alsjeblieft via de volgende URL: {subject_url}, op of voor {date_end_vote}, dat is over {notice_time_verifiers} dagen! Doe dit alsjeblieft snel.</p>
+<p>Zoals je je misschien herinnert, ben je willekeurig geselecteerd door het platform <span tal:replace="domain_name">Domain Name</span> om als Verificateur op te treden. Je taak is om de identiteit te verifiëren van een persoon die zich net online heeft geregistreerd. Voor zover wij weten, heb je nog niet gestemd. Doe dit alsjeblieft via de volgende URL: {subject_url}, op of voor {date_end_vote}, dat is over {notice_time_verifiers} dagen! Doe dit alsjeblieft snel.</p>
 
 <p>Voor je gemak volgt hier een herinnering aan het proces voor het verifiëren van de identiteitsgegevens van een nieuw geregistreerde persoon.</p>
 
