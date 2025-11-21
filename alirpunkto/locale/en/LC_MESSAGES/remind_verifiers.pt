@@ -11,7 +11,7 @@
     
     <p>Dear <span tal:replace="verifier" tal:condition="exists:user">Verifiers's Pseudonym</span>,</p>
 
-<p>As you may remember, you have been randomly selected by the ${domain_name} platfom to act as a Verifier, whose task is to verify the identity of a person that has just registered on line. To our knowledge, you have not voted yet. Please do so at the following URL: {subject_url}, on or before {date_end_vote}, which means in {notice_time_verifiers} days! Please act swiftly.</p>
+<p>As you may remember, you have been randomly selected by the <span tal:replace="domain_name">Domain Name</span> platfom to act as a Verifier, whose task is to verify the identity of a person that has just registered on line. To our knowledge, you have not voted yet. Please do so at the following URL: {subject_url}, on or before {date_end_vote}, which means in {notice_time_verifiers} days! Please act swiftly.</p>
 
 <p>For your convenience, here is a reminder of the process of verification of the identity data of a newly registered person.</p>
 
