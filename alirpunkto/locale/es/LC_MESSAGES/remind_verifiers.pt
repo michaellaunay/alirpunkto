@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+tal:omit-tag="textual">
+<head>
+<title>Recordatorio - Por favor, ayuda a verificar un nuevo registro en la plataforma <span tal:replace="domain_name">domain_name</span>. Plazo en {notice_time_verifiers} días</title>
+</head>
+<body>
+<h1>¡Se necesita tu ayuda para verificar los Datos de Identidad de un candidato a Cooperador!</h1>
+
+<p>Estimado <span tal:replace="verifier" tal:condition="exists:user">Nombre del Verificador</span>,</p>
+
+
+<p>Como recordarás, has sido seleccionado al azar por la plataforma ${domain_name} para actuar como Verificador, cuya tarea consiste en verificar la identidad de una persona que acaba de registrarse en línea. Que sepamos, aún no has votado. Por favor, hazlo en la siguiente URL {subject_url}, ¡en o antes de {date_end_vote}, es decir, en {notice_time_verifiers} días! Por favor, actúa con rapidez.</p>
+
+<p>Para tu comodidad, aquí tienes un recordatorio del proceso de verificación de los datos de identidad de una persona recién inscrita.</p>
+
+<p>En cada nuevo registro en la plataforma <span tal:replace="domain_name">domain_name</span>, el sistema selecciona aleatoriamente de 3 a 7 miembros existentes, y les pide que verifiquen la identidad de la persona recién registrada. De hecho, es importante comprobar que cada persona física está relacionada con un miembro de la plataforma y sólo con uno, que su ciudadanía se encuentra entre las de los Estados miembros de la Unión Europea, y que ha alcanzado la mayoría de edad (18 años). De este modo, evitamos que una determinada persona física vote varias veces en la plataforma bajo varios seudónimos diferentes, y nos aseguramos de que representamos únicamente los intereses de los ciudadanos de la Unión Europea.</p> <p>
+
+<p>Para llevar a cabo esta verificación de la identidad de esta persona, sólo tienes que seguir los siguientes pasos:</p> 
+<ol>
+<li> has recibido hoy un correo electrónico de la persona que se acaba de registrar en la plataforma (si no es así, comprueba tu carpeta de correo no deseado, o escribe a la persona). La dirección de correo electrónico de esta persona, desde la que te ha enviado su correo (y a la que debes escribir en caso de no recibir nada), es {subject_email}. Este correo electrónico contenía (1) un selfie reciente y (2) el escaneado de un documento oficial de identidad. Por razones de seguridad, aconsejamos a la persona que se acaba de inscribir que oculte su lugar de nacimiento, el número del documento de identidad y la firma al escanearlo: la copia estará deliberadamente incompleta;</li> 
+<li> como muy tarde el {date_end_vote}, accede a la siguiente URL: {subject_url}. En esta página, decidirás si (1) el selfie reciente de la persona coincide con la fotografía de su documento de identidad y (2) los Datos de Identidad recibidos de esta persona (que se mostrarán en la página y se reproducen a continuación) coinciden con los presentes en el documento de identidad oficial, cuya copia has recibido por correo electrónico de la persona recién registrada. ¡Ten mucho cuidado! Para que aceptes la inscripción, TODOS los elementos deben ser estrictamente IDÉNTICOS entre los Datos de Identidad recibidos en el momento de la inscripción, y los que figuran en el documento oficial de identidad. En todos los demás casos, incluso con una única diferencia menor, si dudas de la autenticidad del documento de identidad oficial, DEBES rechazar la inscripción. Puedes ser menos estricto en cuanto a la coincidencia entre la fotografía y el selfie: ten en cuenta los efectos de la edad y de las diferencias de iluminación, fondo, etc. Si sabes cómo hacerlo, también te pedimos que compruebes que la fecha en la que se tomó el selfie es la fecha en la que se envió el correo electrónico, o al menos se aproxima a ella;</li> <li>
+<li> Una vez realizada esta operación, y sea cual sea su resultado, te rogamos que destruyas de tu ordenador todas las copias que puedas tener del selfie y del documento oficial de identidad que hayas recibido de la persona recién registrada, y que le informes de esta destrucción, enviándole un correo electrónico a {subject_email}.</li>.
+</ol>
+<p>Los Datos de Identidad que se reciben de la persona en el momento de su inscripción, y que también se muestran en la página de votación, son los siguientes:</p>
+<ul>
+<li> Apellido(s): {subject_last_name}</li>
+<li> Nombre(s): {subject_first_name}</li>
+<li> Fecha de nacimiento: {birth_date}</li>
+<li> Nacionalidad: {citizenship}</li>
+ 
+</ul>
+<p>El proceso de Verificación debe completarse en o antes del {date_end_vote}, en {notice_time_verifiers} días. Más allá de esta fecha, el proceso de Verificación se cerrará, y tu decisión no se tendrá en cuenta. Por defecto, si ningún Verificador ha votado en esa fecha, se rechazará la inscripción. Como hemos dicho, ¡cada nuevo miembro es una bendición y una oportunidad para <span tal:replace="domain_name">domain_name</span>! Por favor, apoya el esfuerzo y la buena voluntad de este nuevo miembro votando rápidamente en la siguiente URL: {subject_url}, y en cualquier caso en o antes del {date_end_vote}, ¡en sólo {notice_time_verifiers} días!</p>
+
+<p>Te agradecemos mucho tu ayuda.</p>
+
+<p>Un cordial saludo.</p>
+<p>El equipo de <span tal:replace="domain_name">domain_name</span>.</p>
+<p tal:content="organization_details">Detalles de la organización</p>
+</body>
+</html>
