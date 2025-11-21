@@ -11,7 +11,7 @@ tal:omit-tag="textual">
 
 <p>Cher.e <span tal:replace="verifier" tal:condition="exists:user">Nom du vérificateur</span>,</p>
 
-<p>Comme tu t'en souviens peut-être, tu as été choisi.e au hasard par la plateforme ${domain_name} pour être Vérificateur.trice, et ta tâche est de vérifier l'identité d'une personne qui vient de s'inscrire en ligne. D'après ce que nous savons, tu n'as pas encore voté. Fais-le à l'adresse suivante : {subject_url}, avant le {date_end_vote}, c'est-à-dire dans {notice_time_verifiers} jours ! Agis rapidement.</p>
+<p>Comme tu t'en souviens peut-être, tu as été choisi.e au hasard par la plateforme de <span tal:replace="domain_name">Domain Name</span> pour être Vérificateur.trice, et ta tâche est de vérifier l'identité d'une personne qui vient de s'inscrire en ligne. D'après ce que nous savons, tu n'as pas encore voté. Fais-le à l'adresse suivante : {subject_url}, avant le {date_end_vote}, c'est-à-dire dans {notice_time_verifiers} jours ! Agis rapidement.</p>
 
 <p>Pour te faciliter la tâche, voici un rappel de la procédure de vérification des données d'identité d'une personne nouvellement inscrite.</p>
 
