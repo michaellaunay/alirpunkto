@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+tal:omit-tag="textual">
+<head>
+<title> Erinnerung - Bitte hilf mit, eine neue Registrierung auf der <span tal:replace="domain_name">Domain Name</span>Plattform zu verifizieren. Fristende in {notice_time_verifiers} Tagen</title>
+</head>
+<body>
+<h1>Deine Hilfe wird benötigt, um die Identitätsdaten eines Kandidaten zu verifizieren!</h1>
+
+<p>Liebe*r <span tal:replace="Verifier" tal:condition="exists:user">Pseudonym des Überprüfers</span>,</p>
+
+<p>Wie du dich vielleicht erinnerst, wurdest du von der ${domain_name}-Plattform nach dem Zufallsprinzip ausgewählt, um als Verifizierer zu fungieren, dessen Aufgabe es ist, die Identität einer Person zu überprüfen, die sich gerade online registriert hat. Unseres Wissens nach hast du noch nicht gewählt. Bitte tue dies unter der folgenden URL: {subject_url}, am oder vor {date_end_vote}, das heißt in {notice_time_verifiers} Tagen! Bitte handle schnell.</p>
+
+<p>Zu deiner Erleichterung findest du hier eine Erinnerung an den Prozess der Überprüfung der Identitätsdaten einer neu registrierten Person.</p>
+
+<p>Bei jeder neuen Registrierung auf der <span tal:replace="domain_name">Domain Name</span> Plattform wählt das System zufällig 3 bis 7 bestehende Mitglieder aus und bittet sie, die Identität der neu registrierten Person zu überprüfen. Es ist wichtig zu überprüfen, dass jede natürliche Person mit einem Mitglied der Plattform und nur mit diesem verwandt ist, dass sie die Staatsbürgerschaft eines Mitgliedstaates der Europäischen Union besitzt und dass sie volljährig ist (18 Jahre). Dadurch vermeiden wir, dass eine natürliche Person mehrmals unter verschiedenen Pseudonymen auf der Plattform abstimmt, und stellen sicher, dass wir nur die Interessen von Bürgern der Europäischen Union vertreten.</p>
+
+<p>Um diese Überprüfung der Identität dieser Person durchzuführen, musst du nur die folgenden Schritte befolgen:</p>
+<ol>
+<li> Du hast heute eine E-Mail von der Person erhalten, die sich gerade auf der Plattform registriert hat (falls nicht, überprüfe bitte deinen Spam-Ordner oder schreibe die Person an). Die E-Mail-Adresse dieser Person, von der sie dir ihre E-Mail geschickt hat (und an die du schreiben musst, falls du nichts erhalten hast), lautet {subject_email}. Diese E-Mail enthielt (1) ein aktuelles Selfie und (2) einen Scan eines offiziellen Ausweises. Aus Sicherheitsgründen raten wir der Person, die sich gerade angemeldet hat, ihren Geburtsort, die Nummer des Ausweises und ihre Unterschrift beim Scannen zu verbergen: Die Kopie ist absichtlich unvollständig;</li>
+<li> spätestens am {date_end_vote}, rufe die folgende URL auf: {subject_url}. Auf dieser Seite entscheidest du, ob (1) das aktuelle Selfie der Person mit dem Foto auf ihrem Ausweisdokument übereinstimmt und (2) die von dieser Person erhaltenen Identitätsdaten (die auf der Seite angezeigt werden und unten abgebildet sind) mit denen auf dem offiziellen Ausweisdokument übereinstimmen, von dem du eine Kopie per E-Mail von der neu registrierten Person erhalten hast. Sei sehr vorsichtig! Damit du die Anmeldung akzeptieren kannst, müssen ALLE Elemente zwischen den bei der Anmeldung erhaltenen Identitätsdaten und denen auf dem amtlichen Ausweis strikt identisch sein. In allen anderen Fällen, selbst bei einer einzigen, geringfügigen Abweichung, MUSST du die Anmeldung ablehnen, wenn du Zweifel an der Echtheit des offiziellen Ausweises hast. Bei der Übereinstimmung zwischen dem Foto und dem Selfie kannst du weniger streng sein: Berücksichtige bitte die Auswirkungen des Alters und die Unterschiede bei Beleuchtung, Hintergrund usw. Wenn du weißt, wie es geht, bitten wir dich außerdem zu überprüfen, ob das Datum, an dem das Selfie aufgenommen wurde, mit dem Datum übereinstimmt, an dem die E-Mail verschickt wurde, oder ob es zumindest nahe daran liegt;</li>
+<li> Sobald du diesen Vorgang durchgeführt hast, bitten wir dich, unabhängig vom Ergebnis, alle Kopien des Selfies und des offiziellen Ausweises, die du von der neu registrierten Person erhalten hast, von deinem Computer zu löschen und sie per E-Mail an {subject_email} über die Löschung zu informieren.</li>
+</ol>
+<p>Die Identitätsdaten, die die Person bei ihrer Registrierung erhalten hat und die auch auf der Abstimmungsseite angezeigt werden, sind die folgenden:</p>
+<ul>
+<li>Nachname(n): {subject_last_name}</li>
+<li>Vorname(n): {subject_first_name}</li>
+<li>Geburtsdatum: {birthdate}</li>
+<li>Staatsbürgerschaft: {citizenship}</li>
+ 
+</ul>
+<p>Der Verifizierungsprozess muss bis zum {date_end_vote}, also innerhalb von {notice_time_verifiers} Tagen, abgeschlossen sein. Nach diesem Datum wird der Überprüfungsprozess geschlossen und deine Entscheidung wird nicht mehr berücksichtigt. Wenn bis zu diesem Datum kein Überprüfer abgestimmt hat, wird die Anmeldung standardmäßig abgelehnt. Wie gesagt, jedes neue Mitglied ist ein Segen und eine Chance für <span tal:replace="domain_name">Domain Name</span>! Bitte unterstütze die Bemühungen und den guten Willen dieses neuen Mitglieds, indem du schnell unter der folgenden URL abstimmst: {subject_url}, und auf jeden Fall am oder vor {date_end_vote}, in nur {notice_time_verifiers} Tagen!</p>
+
+<p>Wir danken dir sehr für deine Hilfe.</p>
+
+<p>Mit freundlichen Grüßen.</p>
+<p>Das Team von <span tal:replace="domain_name">Domain Name</span>.</p>
+<p tal:content="organisation_details">Organisationsdetails</p>
+</body>
+</html>
