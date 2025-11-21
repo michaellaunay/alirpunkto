@@ -11,7 +11,7 @@ tal:omit-tag="textual">
 
 <p>Liebe*r <span tal:replace="Verifier" tal:condition="exists:user">Pseudonym des Überprüfers</span>,</p>
 
-<p>Wie du dich vielleicht erinnerst, wurdest du von der ${domain_name}-Plattform nach dem Zufallsprinzip ausgewählt, um als Verifizierer zu fungieren, dessen Aufgabe es ist, die Identität einer Person zu überprüfen, die sich gerade online registriert hat. Unseres Wissens nach hast du noch nicht gewählt. Bitte tue dies unter der folgenden URL: {subject_url}, am oder vor {date_end_vote}, das heißt in {notice_time_verifiers} Tagen! Bitte handle schnell.</p>
+<p>Wie du dich vielleicht erinnerst, wurdest du von der <span tal:replace="domain_name">Domain Name</span>-Plattform nach dem Zufallsprinzip ausgewählt, um als Verifizierer zu fungieren, dessen Aufgabe es ist, die Identität einer Person zu überprüfen, die sich gerade online registriert hat. Unseres Wissens nach hast du noch nicht gewählt. Bitte tue dies unter der folgenden URL: {subject_url}, am oder vor {date_end_vote}, das heißt in {notice_time_verifiers} Tagen! Bitte handle schnell.</p>
 
 <p>Zu deiner Erleichterung findest du hier eine Erinnerung an den Prozess der Überprüfung der Identitätsdaten einer neu registrierten Person.</p>
 
