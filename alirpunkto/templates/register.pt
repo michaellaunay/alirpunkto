@@ -67,7 +67,7 @@
                 <!-- EMAIL_VALIDATION Status Section -->
                 <div tal:condition="python:status == 'EMAIL_VALIDATION'">
                     <div class="member-form">
-                        <div class="explanation">
+                        <div class="explanation" tal:define="domain_name domain_name">
                             <div i18n:translate="human_verification_description">The first step in your registration process is to validate that you are a
                                 human being, and not a robot. For this, we verify that you can receive and
                                 understand an e-mail that we will send to you: what we request from you is
@@ -138,7 +138,9 @@
                 <div tal:condition="python:status == 'CONFIRMED_HUMAN'">
                     <div class="member-form">
                         <div class="explanation">
-                            <tal:block tal:replace="structure _('cooperator_data_explanation')">
+                            <tal:cooperator
+                                tal:condition="python:getattr(candidature, 'type', None) == MemberTypes.COOPERATOR"
+                                tal:replace="structure _('cooperator_data_explanation')">
                                 <p>As a Cooperator, you will participate in all our decisions. These decisions are adopted along rigorous democratic procedures, and can have important consequences for the Cooperative and for the Cooperators. In addition, the Cooperative intends to represent the EU citizens, independently from their nationality - but EU citizens only. This is particularly important during public elections. We hence need to ensure three things: (1) that a given person can register no more than once, so as to ensure the democratic principle "one person = one vote"; (2) that all Cooperators are at least of legal age and (3) that only citizens of the European Union are Cooperators.</p>
                                 <p>This is why we will verify from you some elements of your identity data, by comparing (1) the data that you will introduce on this form upon your registration with (2) the information present on your official identity documents. This verification will be performed by a set of ##variable = NUMBER OF VERIFIERS## randomly-selected members of the Cooperative, the Verifiers of your application, and will be based upon information regarding your official identity documents that you will transmit to them directly, by e-mail or during a videoconference, with no transit through this online platform (for the sake of security and confidentiality).</p>
                                 <p>The data that we request from you and that the Verifiers will check for conformity with the data on your official identity documents is:
@@ -149,7 +151,18 @@
                                 </ul></p>
                                 <p>Only one person bears your name(s), your surname(s) and your date of birth: you. If you attempt to register again, you will need to provide the same data to our verification procedure, and we will reject your application, because you already are a Cooperator, and cannot have several accounts to vote more than once. We will be confident in doing so because we know that only one person has this combination of name(s), surname(s) and date of birth. Your date of birth enables us to verify that you are of legal age, and your citizenship enables us to ensure that you are indeed a citizen of the European Union.</p>
                                 <p>This data will be used exclusively for us to verify your identity, your age and your citizenship, and to manage your account as a Cooperator. It will not be transmitted or sold to anyone, except to fulfill legal requirements by public authorities. The "data controller" as defined by the <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>
-                            </tal:block>
+                            </tal:cooperator>
+                            <tal:ordinary
+                                tal:condition="python:getattr(candidature, 'type', None) == MemberTypes.ORDINARY"
+                                >
+                                <div i18n:translate="ordinary_member_data_explanation">
+                                <h2>Please provide the information that we need to register you as an Ordinary Member of the Community</h2>
+                                <p>As an Ordinary Member of the <tal:var i18n:name="domain_name">${domain_name}</tal:var> Community, you will interact with its other members and with our IT platform.</p>
+                                <p>For this to work in the most efficient and respectful way for you and for the other members of the Community, we would be grateful if you could provide the information requested in the form below.</p>
+                                <p>This data will be used exclusively for us to manage your account as an Ordinary Member of the ${domain_name} Community. It will never be displayed to the other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the request of a judge. The "data controller" as defined by the <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>
+                                <p><b>Important notice:</b> In rare cases, it may happen that the form below does not display properly: it will not show you where to provide your Pseudonym, your e-mail address will be editable... If this happens, just click on the "Submit" button below. This form that will appear will be correct, and you will be able to fill it easily.</p>
+                                </div>
+                            </tal:ordinary>
                         </div>
                         <span tal:replace="structure form">Form Content</span>
                     </div>
