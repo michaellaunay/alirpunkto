@@ -38,6 +38,6 @@ tal:omit-tag="textual">
 
 <p>Cordialement.</p>
 <p>L'équipe de <span tal:replace="domain_name">Nom de domaine</span>.</p>
-<p tal:content="organization_details">Détails de l'organisation</span>.</p>
+<p tal:content="organization_details">Détails de l'organisation.</p>
 </body>
 </html>
