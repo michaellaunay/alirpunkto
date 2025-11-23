@@ -660,6 +660,8 @@ def _notify_verifiers_of_submission(
         template_path = _resolve_inform_verifier_template(
             _get_voter_language(request, voter)
         )
+        subject_ts = _("inform_verifier_subject", {'domain_name': domain_name})
+        subject_text = request.localizer.translate(subject_ts)
         template_vars = {
             'domain_name': domain_name,
             'organization_details': organization_details,
@@ -668,14 +670,21 @@ def _notify_verifiers_of_submission(
         try:
             success = send_email(
                 request,
-                subject=None,
+                subject=subject_text,
                 recipients=[voter.email],
                 template_path=template_path,
                 template_vars=template_vars,
                 format_vars=format_vars,
-                derive_subject_from_title=True
+                derive_subject_from_title=False
             )
-            if not success:
+            if success:
+                log.info(
+                    "Queued verification email for %s regarding candidature %s",
+                    voter.email,
+                    candidature.oid
+                )
+                request.tm.commit()
+            else:
                 log.error(
                     "Unable to queue verification email for %s regarding candidature %s",
                     voter.email,

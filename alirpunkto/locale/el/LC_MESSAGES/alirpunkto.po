@@ -1051,3 +1051,6 @@ msgstr "Ψηφίστε για την υποψηφιότητα"
 
 msgid "submit_vote_title"
 msgstr "Κάντε κλικ για να υποβάλετε την ψήφο σας."
+msgid "inform_verifier_subject"
+msgstr "Please help us verify a new registration on ${domain_name}"
+

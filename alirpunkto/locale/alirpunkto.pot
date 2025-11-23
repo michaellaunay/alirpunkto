@@ -1128,3 +1128,5 @@ msgstr "Vote on the registration as a Cooperator"
 
 msgid "submit_vote_title"
 msgstr "Click to submit your vote."
+msgid "inform_verifier_subject"
+msgstr "Please help us verify a new registration on ${domain_name}"

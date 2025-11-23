@@ -1133,3 +1133,6 @@ msgstr "Szavazzon a pályázatról"
 
 msgid "submit_vote_title"
 msgstr "Kattintson a szavazat elküldéséhez."
+msgid "inform_verifier_subject"
+msgstr "Please help us verify a new registration on ${domain_name}"
+

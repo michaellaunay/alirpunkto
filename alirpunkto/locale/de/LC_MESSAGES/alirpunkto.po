@@ -1113,3 +1113,6 @@ msgstr "Stimme über die Registrierung als Genossenschaftler ab"
 
 msgid "submit_vote_title"
 msgstr "Klicke, um deine Stimme abzugeben."
+msgid "inform_verifier_subject"
+msgstr "Please help us verify a new registration on ${domain_name}"
+

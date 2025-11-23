@@ -1139,3 +1139,6 @@ msgstr "Votoni për kandidaturën"
 
 msgid "submit_vote_title"
 msgstr "Klikoni për të dërguar votën tuaj."
+msgid "inform_verifier_subject"
+msgstr "Please help us verify a new registration on ${domain_name}"
+

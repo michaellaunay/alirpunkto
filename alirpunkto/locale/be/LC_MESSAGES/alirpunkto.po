@@ -1131,3 +1131,6 @@ msgstr "Галасуйце за кандыдатуру"
 
 msgid "submit_vote_title"
 msgstr "Націсніце, каб адправіць свой голас."
+msgid "inform_verifier_subject"
+msgstr "Please help us verify a new registration on ${domain_name}"
+

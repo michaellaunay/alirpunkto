@@ -1141,3 +1141,6 @@ msgstr "Rösta om kandidaturen"
 
 msgid "submit_vote_title"
 msgstr "Klicka för att skicka in din röst."
+msgid "inform_verifier_subject"
+msgstr "Please help us verify a new registration on ${domain_name}"
+

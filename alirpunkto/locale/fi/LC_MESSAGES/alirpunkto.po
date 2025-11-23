@@ -1129,3 +1129,6 @@ msgstr "Äänestä hakemuksesta"
 
 msgid "submit_vote_title"
 msgstr "Napsauta lähettääksesi äänesi."
+msgid "inform_verifier_subject"
+msgstr "Please help us verify a new registration on ${domain_name}"
+
