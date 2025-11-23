@@ -223,7 +223,7 @@
                     <p i18n:translate="approved_description">Your application has been approved. You
                         can now log in using the pseudonym and password you provided during the
                         application process.</p>
-                    <a href="login" class="login-button"
+                    <a href="sso_login" class="login-button"
                         i18n:attributes="href login_page_url; inner-text login_button_label">Login</a>
                 </div>
 
