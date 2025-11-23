@@ -50,6 +50,7 @@ MAIL_SIGNATURE: Final = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on
 DOMAIN_NAME: Final = os.getenv("DOMAIN_NAME")
 SITE_NAME: Final = os.getenv("SITE_NAME")
 ORGANIZATION_DETAILS: Final = os.getenv("organization_details")
+VERIFIER_VOTE_DEADLINE_DAYS: Final = int(os.getenv("VERIFIER_VOTE_DEADLINE_DAYS", 7))
 KEYCLOAK_SERVER_URL:Final = get_key(dotenv_path, "KEYCLOAK_SERVER_URL",None) # The keycloak server
 KEYCLOAK_REALM:Final = get_key(dotenv_path, "KEYCLOAK_REALM",None) # The realm
 # The client id of this application for keycloak

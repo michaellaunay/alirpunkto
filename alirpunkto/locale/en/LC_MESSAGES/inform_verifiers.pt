@@ -37,8 +37,8 @@
 <p>We thank you very much for your help.</p>
 
 <p>Kind regards.</p>
-    <p>The team of <span tal:replace="domain_name">Domain Name</span>.</p>
-    <p tal:content="organization_details">Organization details</p>
+<p>The team of <span tal:replace="domain_name">Domain Name</span>.</p>
+<p tal:content="organization_details">Organization details</p>
 </body>
 
 </html>

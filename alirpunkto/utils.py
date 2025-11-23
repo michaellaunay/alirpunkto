@@ -2,7 +2,7 @@
 # author: Michaël Launay
 # date: 2023-09-30
 
-from typing import Union, Tuple, Dict, List, Optional
+from typing import Union, Tuple, Dict, List, Optional, Any
 from datetime import datetime, timedelta, timezone
 from pyramid.request import Request
 from alirpunkto.models.member import (
@@ -78,6 +78,7 @@ import hashlib
 from cryptography.fernet import Fernet
 import base64
 from .models.users import User
+import html
 import json
 from .secret_manager import get_secret
 import requests
@@ -390,7 +391,9 @@ def send_email(
         subject:str,
         recipients:list,
         template_path:str,
-        template_vars:Dict= {}
+        template_vars: Optional[Dict] = None,
+        format_vars: Optional[Dict[str, Any]] = None,
+        derive_subject_from_title: bool = False
     ) -> bool:
     """
     Generic function to send emails.
@@ -405,33 +408,59 @@ def send_email(
     Returns:
         bool: True if email is sent successfully, otherwise False.
     """
+    template_vars = template_vars or {}
+
     def clean_text(text):
         # Remove redundant newlines and HTML DOCTYPE
         text = re.sub(r'\n{2,}', '\n', text)
         text = re.sub(r'<!DOCTYPE html>\n?', '', text)
         return text.strip()
 
+    def extract_subject_from_html(body: str) -> Optional[str]:
+        match = re.search(r'<title>(.*?)</title>', body, re.IGNORECASE | re.DOTALL)
+        if not match:
+            return None
+        raw_title = re.sub(r'\s+', ' ', match.group(1).strip())
+        return html.unescape(raw_title)
+
+    base_values = {**template_vars, "textual": True}
     text_body = render_to_response(
         template_path,
         request=request,
-        value={**template_vars, "textual":True}
+        value=base_values
     ).text
     text_body = clean_text(text_body)
 
+    html_values = {**template_vars, "textual": False}
     html_body = render_to_response(
         template_path,
         request=request,
-        value={**template_vars, "textual":False}
-    ).body
+        value=html_values
+    ).body.decode('utf-8')
+
+    if format_vars:
+        try:
+            text_body = text_body.format(**format_vars)
+            html_body = html_body.format(**format_vars)
+        except KeyError as exc:
+            log.error(f"Missing email format variable {exc} for template {template_path}")
+            raise
+
+    resolved_subject = subject
+    if derive_subject_from_title and not resolved_subject:
+        resolved_subject = extract_subject_from_html(html_body)
+
+    if not resolved_subject:
+        raise ValueError("Subject must be provided or derivable from the template title.")
 
     sender = request.registry.settings['mail.default_sender']
 
     message = Message(
-        subject=subject,
+        subject=resolved_subject,
         sender=sender,
         recipients=recipients,
         body=text_body,
-        html=html_body.decode('utf-8'),
+        html=html_body,
         extra_headers={'Content-Transfer-Encoding': 'quoted-printable',
             'Content-Type': "text/plain; charset='utf-8'"},
     )
@@ -1605,4 +1634,3 @@ def refresh_keycloak_token(refresh_token: str) -> Optional[dict]:
     else:
         log.error(f"Failed to refresh SSO token: {response.status_code} - {response.text}")
         return None
-

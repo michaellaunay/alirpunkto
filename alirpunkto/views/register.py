@@ -32,16 +32,23 @@ from alirpunkto.constants_and_globals import (
     LDAP_TIME_LENGTH,
     LDAP_DATE_LENGTH,
     LDAP_DEFAULT_HOUR,
+    VERIFIER_VOTE_DEADLINE_DAYS,
 )
 from pyramid.i18n import Translator
+from pyramid.path import AssetResolver
+
+INFORM_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/inform_verifiers.pt'
+VERIFIER_TEMPLATE_RESOLVER = AssetResolver('alirpunkto')
 from ..utils import (
     get_candidatures,
+    get_member_by_oid,
     is_valid_email,
     register_user_to_ldap,
     is_valid_password, is_valid_unique_pseudonym, random_voters,
     send_validation_email,
     send_confirm_validation_email,
     send_candidature_state_change_email,
+    send_email,
     retrieve_candidature,
 )
 from alirpunkto.models.model_permissions import get_access_permissions
@@ -615,6 +622,112 @@ def prepare_for_cooperator(
             }
     return None
 
+def _notify_verifiers_of_submission(
+        request: Request,
+        candidature: Candidature
+    ) -> None:
+    """Inform selected verifiers that a candidature is awaiting their review."""
+    if not candidature.voters or getattr(candidature, 'verifiers_notified', False):
+        return
+    domain_name = request.registry.settings.get('domain_name')
+    organization_details = request.registry.settings.get('organization_details')
+    voting_url = request.route_url('vote', _query={'oid': candidature.oid})
+    if isinstance(voting_url, tuple):
+        voting_url = voting_url[0]
+
+    deadline = getattr(candidature, 'verification_deadline', None)
+    if not deadline:
+        deadline = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(
+            days=VERIFIER_VOTE_DEADLINE_DAYS
+        )
+        candidature.verification_deadline = deadline
+    date_end_vote = deadline.strftime('%Y-%m-%d')
+
+    candidate_data = getattr(candidature, 'data', None)
+    format_vars = {
+        'subject_url': voting_url,
+        'date_end_vote': date_end_vote,
+        'subject_email': candidature.email or '',
+        'subject_last_name': getattr(candidate_data, 'fullsurname', '') if candidate_data else '',
+        'subject_first_name': getattr(candidate_data, 'fullname', '') if candidate_data else '',
+        'birth_date': _format_birthdate(getattr(candidate_data, 'birthdate', None)) if candidate_data else '',
+        'citizenship': getattr(candidate_data, 'nationality', '') if candidate_data else '',
+    }
+
+    for voter in candidature.voters:
+        if not voter.email:
+            continue
+        template_path = _resolve_inform_verifier_template(
+            _get_voter_language(request, voter)
+        )
+        template_vars = {
+            'domain_name': domain_name,
+            'organization_details': organization_details,
+            'verifier': _get_verifier_name(request, voter),
+        }
+        try:
+            success = send_email(
+                request,
+                subject=None,
+                recipients=[voter.email],
+                template_path=template_path,
+                template_vars=template_vars,
+                format_vars=format_vars,
+                derive_subject_from_title=True
+            )
+            if not success:
+                log.error(
+                    "Unable to queue verification email for %s regarding candidature %s",
+                    voter.email,
+                    candidature.oid
+                )
+        except Exception as exc:
+            log.error(
+                "Error while notifying verifier %s for candidature %s: %s",
+                voter.email,
+                candidature.oid,
+                exc
+            )
+    candidature.verifiers_notified = True
+
+def _resolve_inform_verifier_template(language: Optional[str]) -> str:
+    lang = (language or 'en').lower()
+    lang = lang.split('_')[0].split('-')[0]
+    template = INFORM_VERIFIER_TEMPLATE.format(lang=lang)
+    try:
+        return VERIFIER_TEMPLATE_RESOLVER.resolve(template).abspath()
+    except Exception as exc:
+        log.error(
+            "Error resolving verifier template for %s (%s), fallback to English.",
+            lang,
+            exc
+        )
+        fallback = INFORM_VERIFIER_TEMPLATE.format(lang='en')
+        return VERIFIER_TEMPLATE_RESOLVER.resolve(fallback).abspath()
+
+def _get_voter_language(request: Request, voter: Voter) -> Optional[str]:
+    member = get_member_by_oid(voter.oid, request, True)
+    if member and getattr(member, 'data', None):
+        return getattr(member.data, 'lang1', None)
+    return None
+
+def _get_verifier_name(request: Request, voter: Voter) -> str:
+    member = get_member_by_oid(voter.oid, request, True)
+    if member and getattr(member, 'data', None):
+        first_name = getattr(member.data, 'fullname', '')
+        last_name = getattr(member.data, 'fullsurname', '')
+        full_name = " ".join(part for part in [first_name, last_name] if part)
+        if full_name.strip():
+            return full_name
+    return voter.pseudonym
+
+def _format_birthdate(birthdate: Optional[datetime.date]) -> str:
+    if isinstance(birthdate, datetime.datetime):
+        return birthdate.strftime('%Y-%m-%d')
+    if isinstance(birthdate, datetime.date):
+        return birthdate.strftime('%Y-%m-%d')
+    return str(birthdate) if birthdate else ''
+
 def get_template_parameters_for_cooperator(
         request:Request,
         candidature:Candidature
@@ -694,6 +807,7 @@ def handle_unique_data_state(request, candidature):
                 EmailSendStatus.SENT,
                 "send_candidature_pending_email"
             )
+            _notify_verifiers_of_submission(request, candidature)
             transaction.commit()
             return {
                 'candidature': candidature,
