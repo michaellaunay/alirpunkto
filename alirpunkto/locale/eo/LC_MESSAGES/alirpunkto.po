@@ -210,3 +210,5 @@ msgstr "Alklaku por sendi vian voĉon."
 msgid "inform_verifier_subject"
 msgstr "Bonvolu helpi nin konfirmi novan registriĝon sur la platformo de ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Memorigo – Bonvolu helpi nin konfirmi novan registriĝon en la platformo de ${domain_name}. Limdato en {notice_time_verifiers} tagoj."
