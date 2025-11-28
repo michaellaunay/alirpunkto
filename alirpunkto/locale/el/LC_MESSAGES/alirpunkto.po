@@ -1055,3 +1055,5 @@ msgstr "Κάντε κλικ για να υποβάλετε την ψήφο σα�
 msgid "inform_verifier_subject"
 msgstr "Παρακαλούμε βοηθήστε μας να επαληθεύσουμε μια νέα εγγραφή στην πλατφόρμα του ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Υπενθύμιση - Βοηθήστε μας να επαληθεύσουμε μια νέα εγγραφή στην πλατφόρμα του ${domain_name}. Η προθεσμία λήγει σε ${notice_time_verifiers} ημέρες."
