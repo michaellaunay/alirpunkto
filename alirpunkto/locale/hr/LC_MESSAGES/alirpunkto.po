@@ -1133,3 +1133,5 @@ msgstr "Kliknite za slanje svog glasa."
 msgid "inform_verifier_subject"
 msgstr "Molimo vas da nam pomognete potvrditi novu registraciju na platformi ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Podsjetnik – molimo vas da nam pomognete potvrditi novu registraciju na platformi ${domain_name}. Rok je u roku od ${notice_time_verifiers} dana."
