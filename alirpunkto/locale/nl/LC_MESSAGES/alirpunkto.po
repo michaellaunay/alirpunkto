@@ -1411,3 +1411,5 @@ msgstr "Klik om je stem uit te brengen."
 msgid "inform_verifier_subject"
 msgstr "Help ons even om een nieuwe registratie op het platform van ${domain_name} te checken."
 
+msgid "remind_verifier_subject"
+msgstr "Herinnering - Help ons even om een nieuwe registratie op het platform van ${domain_name} te checken. Termijn in ${notice_time_verifiers} dagen"
