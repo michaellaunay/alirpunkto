@@ -4,12 +4,12 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head>
-    <title> Please help to verify a new registration on the <span tal:replace="domain_name">Domain Name</span>platform</title>
+    <title> Please help us to verify a new registration on the <span tal:replace="domain_name">Domain Name</span>platform</title>
 </head>
 <body>
     <h1>Your help is needed to verify the Identity Data of a candidate Cooperator!</h1>
     
-    <p>Dear <span tal:replace="verifier" tal:condition="exists:user">Verifiers's Name</span>,</p>
+    <p>Dear <span tal:replace="verifier" tal:condition="exists:user">Verifiers's Pseudonym</span>,</p>
 
 
 
@@ -42,3 +42,4 @@
 </body>
 
 </html>
+
