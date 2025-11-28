@@ -1127,3 +1127,5 @@ msgstr "Ikklikkja biex tibgħat il-vot tiegħek."
 msgid "inform_verifier_subject"
 msgstr "Jekk jogħġbok għinna nivverifikaw reġistrazzjoni ġdida fuq il-pjattaforma ta' ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Tfakkirija – jekk jogħġbok għinna nivverifikaw reġistrazzjoni ġdida fuq il-pjattaforma ta' ${domain_name}. L-iskadenza hi fi ${notice_time_verifiers} ijiem."
