@@ -1119,4 +1119,4 @@ msgid "inform_verifier_subject"
 msgstr "Por favor, ayúdanos a verificar un nuevo registro en la plataforma de ${domain_name}"
 
 msgid "remind_verifier_subject"
-msgstr "Recordatorio - Por favor, ayúdanos a verificar un nuevo registro en la plataforma de ${domain_name}. Plazo en {notice_time_verifiers} días"
+msgstr "Recordatorio - Por favor, ayúdanos a verificar un nuevo registro en la plataforma de ${domain_name}. Plazo en ${notice_time_verifiers} días"
