@@ -1142,3 +1142,5 @@ msgstr "Натисніть, щоб надіслати свій голос."
 msgid "inform_verifier_subject"
 msgstr "Допоможіть нам перевірити нову реєстрацію на платформі ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Нагадування - Допоможіть нам перевірити нову реєстрацію на платформі ${domain_name}. Термін - ${notice_time_verifiers} днів."
