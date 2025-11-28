@@ -1118,4 +1118,4 @@ msgid "inform_verifier_subject"
 msgstr "Bitte hilf uns, eine neue Registrierung auf der Plattform von ${domain_name} zu verifizieren"
 
 msgid "remind_verifier_subject"
-msgstr "Erinnerung - Bitte hilf uns, eine neue Registrierung auf der Plattform von ${domain_name} zu verifizieren. Frist in {notice_time_verifiers} Tagen"
+msgstr "Erinnerung - Bitte hilf uns, eine neue Registrierung auf der Plattform von ${domain_name} zu verifizieren. Frist in ${notice_time_verifiers} Tagen"
