@@ -1132,6 +1132,7 @@ msgstr "Vótáil ar an iarratas"
 
 msgid "submit_vote_title"
 msgstr "Cliceáil chun do vóta a chur isteach."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Cabhraigh linn, le do thoil, le fíorú clárúcháin nua ar ardán ${domain_name}"
 
