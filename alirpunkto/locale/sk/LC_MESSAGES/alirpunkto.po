@@ -1089,3 +1089,5 @@ msgstr "Kliknite pre odoslanie svojho hlasu."
 msgid "inform_verifier_subject"
 msgstr "Pomôžte nám overiť novú registráciu na platforme ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Pripomienka – Pomôžte nám overiť novú registráciu na platforme ${domain_name}. Termín je ${notice_time_verifiers} dní."
