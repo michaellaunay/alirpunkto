@@ -1444,3 +1444,5 @@ msgstr "Clicca per inviare il tuo voto."
 msgid "inform_verifier_subject"
 msgstr "Ti preghiamo di aiutarci a verificare una nuova registrazione sulla piattaforma di ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Promemoria - Aiutaci a verificare una nuova registrazione sulla piattaforma di ${domain_name}. Scadenza in ${notice_time_verifiers} giorni"
