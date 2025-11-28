@@ -1123,6 +1123,7 @@ msgstr "Ivota fuq il-kandidatura"
 
 msgid "submit_vote_title"
 msgstr "Ikklikkja biex tibgħat il-vot tiegħek."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Jekk jogħġbok għinna nivverifikaw reġistrazzjoni ġdida fuq il-pjattaforma ta' ${domain_name}"
 
