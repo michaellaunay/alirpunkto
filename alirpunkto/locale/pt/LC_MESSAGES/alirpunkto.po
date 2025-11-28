@@ -1048,6 +1048,7 @@ msgstr "Vote na candidatura"
 
 msgid "submit_vote_title"
 msgstr "Clique para enviar o seu voto."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Por favor, ajuda-nos a verificar um novo registo na plataforma de ${domain_name}"
 
