@@ -1407,6 +1407,7 @@ msgstr "Stem op de registratie als een Coöperator"
 
 msgid "submit_vote_title"
 msgstr "Klik om je stem uit te brengen."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Help ons even om een nieuwe registratie op het platform van ${domain_name} te checken."
 
