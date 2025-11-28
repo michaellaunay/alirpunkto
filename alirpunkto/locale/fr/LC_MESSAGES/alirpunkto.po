@@ -1137,4 +1137,4 @@ msgid "inform_verifier_subject"
 msgstr "Aide-nous à vérifier une nouvelle inscription sur la plateforme de ${domain_name}"
 
 msgid "remind_verifier_subject"
-msgstr "Rappel - Aide-nous à vérifier une nouvelle inscription sur la plateforme de ${domain_name}. Date limite dans {notice_time_verifiers} jours"
+msgstr "Rappel - Aide-nous à vérifier une nouvelle inscription sur la plateforme de ${domain_name}. Date limite dans ${notice_time_verifiers} jours"
