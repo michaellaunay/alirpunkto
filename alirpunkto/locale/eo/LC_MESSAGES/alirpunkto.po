@@ -206,6 +206,7 @@ msgstr "Voĉdonu pri la kandidatiĝo"
 
 msgid "submit_vote_title"
 msgstr "Alklaku por sendi vian voĉon."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Bonvolu helpi nin konfirmi novan registriĝon sur la platformo de ${domain_name}"
 
