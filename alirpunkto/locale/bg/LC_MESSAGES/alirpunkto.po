@@ -1120,3 +1120,5 @@ msgstr "Щракнете, за да изпратите своя вот."
 msgid "inform_verifier_subject"
 msgstr "Моля, помогнете ни да потвърдим нова регистрация на платформата на ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Напомняне - Моля, помогнете ни да потвърдим нова регистрация на платформата на ${domain_name}. Краен срок в ${notice_time_verifiers} дни"
