@@ -1132,6 +1132,7 @@ msgstr "Balsojiet par kandidatūru"
 
 msgid "submit_vote_title"
 msgstr "Noklikšķiniet, lai iesniegtu savu balsi."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Lūdzu, palīdziet mums apstiprināt jaunu reģistrāciju platformā ${domain_name}"
 
