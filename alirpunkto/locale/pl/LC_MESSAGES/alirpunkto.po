@@ -1565,6 +1565,7 @@ msgstr "Głosuj na rejestrację jako Współpracownik"
 
 msgid "submit_vote_title"
 msgstr "Kliknij, aby oddać swój głos"
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Pomóż nam zweryfikować nową rejestrację na platformie ${domain_name}"
 
