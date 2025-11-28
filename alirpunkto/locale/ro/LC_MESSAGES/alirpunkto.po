@@ -1675,6 +1675,7 @@ msgstr "Votați pentru candidatură"
 
 msgid "submit_vote_title"
 msgstr "Faceți clic pentru a trimite votul."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Vă rugăm să ne ajutați să verificăm o nouă înregistrare pe platforma ${domain_name}}"
 
