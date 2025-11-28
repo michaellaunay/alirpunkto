@@ -1116,3 +1116,5 @@ msgstr "Oyunuzu göndermek için tıklayın."
 msgid "inform_verifier_subject"
 msgstr "${domain_name} platformunda yeni bir kaydı doğrulamamıza yardımcı olun lütfen."
 
+msgid "remind_verifier_subject"
+msgstr "Hatırlatma - ${domain_name} platformunda yeni bir kaydı doğrulamamıza yardımcı olun lütfen. Son tarih ${notice_time_verifiers} gün içinde."
