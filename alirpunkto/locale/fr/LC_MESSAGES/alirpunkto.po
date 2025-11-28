@@ -1132,6 +1132,7 @@ msgstr "Vote sur l'inscription en tant que Coopérateur"
 
 msgid "submit_vote_title"
 msgstr "Clique pour soumettre ton vote."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Aide-nous à vérifier une nouvelle inscription sur la plateforme de ${domain_name}"
 
