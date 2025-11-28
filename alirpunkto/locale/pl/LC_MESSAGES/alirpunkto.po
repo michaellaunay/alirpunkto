@@ -1569,3 +1569,5 @@ msgstr "Kliknij, aby oddać swój głos"
 msgid "inform_verifier_subject"
 msgstr "Pomóż nam zweryfikować nową rejestrację na platformie ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Przypomnienie – pomóż nam zweryfikować nową rejestrację na platformie ${domain_name}. Termin upływa za ${notice_time_verifiers} dni."
