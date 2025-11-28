@@ -1136,4 +1136,4 @@ msgid "inform_verifier_subject"
 msgstr "Калі ласка, дапамажыце нам праверыць новую рэгістрацыю на платформе ${domain_name}"
 
 msgid "remind_verifier_subject"
-msgstr "Нагадваем - калі ласка, дапамажыце нам праверыць новую рэгістрацыю на платформе ${domain_name}. Апошні тэрмін - праз {notice_time_verifiers} дзён."
+msgstr "Нагадваем - калі ласка, дапамажыце нам праверыць новую рэгістрацыю на платформе ${domain_name}. Апошні тэрмін - праз ${notice_time_verifiers} дзён."
