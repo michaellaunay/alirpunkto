@@ -1143,3 +1143,5 @@ msgstr "Klikoni për të dërguar votën tuaj."
 msgid "inform_verifier_subject"
 msgstr "Ju lutemi na ndihmoni të verifikojmë një regjistrim të ri në platformën e ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Kujtesë - Ju lutemi na ndihmoni të verifikojmë një regjistrim të ri në platformën ${domain_name}. Afati është në ${notice_time_verifiers} ditë."
