@@ -1119,3 +1119,5 @@ msgstr "Klõpsake, et esitada oma hääl."
 msgid "inform_verifier_subject"
 msgstr "Palun aidake meil kontrollida uut registreerimist platvormil ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Meeldetuletus – Palun aidake meil kontrollida uut registreerimist platvormil ${domain_name}. Tähtaeg on ${notice_time_verifiers} päeva pärast."
