@@ -1679,3 +1679,5 @@ msgstr "Faceți clic pentru a trimite votul."
 msgid "inform_verifier_subject"
 msgstr "Vă rugăm să ne ajutați să verificăm o nouă înregistrare pe platforma ${domain_name}}"
 
+msgid "remind_verifier_subject"
+msgstr "Memento - Vă rugăm să ne ajutați să verificăm o nouă înregistrare pe platforma ${domain_name}. Termen limită în ${notice_time_verifiers} zile"
