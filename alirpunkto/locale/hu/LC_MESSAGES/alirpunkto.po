@@ -1137,3 +1137,5 @@ msgstr "Kattintson a szavazat elküldéséhez."
 msgid "inform_verifier_subject"
 msgstr "Kérjük, segítsen nekünk ellenőrizni egy új regisztrációt a ${domain_name} platformon."
 
+msgid "remind_verifier_subject"
+msgstr "Emlékeztető - Kérjük, segítsen nekünk ellenőrizni egy új regisztrációt a ${domain_name} platformon. Határidő: ${notice_time_verifiers} napon belül."
