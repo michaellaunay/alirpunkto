@@ -1143,3 +1143,5 @@ msgstr "Klik for at indsende din stemme."
 msgid "inform_verifier_subject"
 msgstr "Hjælp os med at bekræfte en ny registrering på platformen ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Påmindelse - Hjælp os med at bekræfte en ny registrering på platformen ${domain_name}. Frist om ${notice_time_verifiers} dage."
