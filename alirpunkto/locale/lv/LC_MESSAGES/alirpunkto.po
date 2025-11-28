@@ -1136,3 +1136,5 @@ msgstr "Noklikšķiniet, lai iesniegtu savu balsi."
 msgid "inform_verifier_subject"
 msgstr "Lūdzu, palīdziet mums apstiprināt jaunu reģistrāciju platformā ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Atgādinājums — lūdzu, palīdziet mums apstiprināt jaunu reģistrāciju platformā ${domain_name}. Termiņš ir ${notice_time_verifiers} dienas."
