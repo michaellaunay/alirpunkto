@@ -1143,3 +1143,5 @@ msgstr "Kliknite za oddajo svojega glasu."
 msgid "inform_verifier_subject"
 msgstr "Prosimo, pomagajte nam preveriti novo registracijo na platformi ${domain_name}."
 
+msgid "remind_verifier_subject"
+msgstr "Opomnik – Prosimo, pomagajte nam preveriti novo registracijo na platformi ${domain_name}. Rok je ${notice_time_verifiers} dni."
