@@ -1136,3 +1136,5 @@ msgstr "Cliceáil chun do vóta a chur isteach."
 msgid "inform_verifier_subject"
 msgstr "Cabhraigh linn, le do thoil, le fíorú clárúcháin nua ar ardán ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Meabhrúchán - Cuidigh linn, le do thoil, clárú nua ar ardán ${domain_name} a fhíorú. Spriocdháta i ${notice_time_verifiers} lá."
