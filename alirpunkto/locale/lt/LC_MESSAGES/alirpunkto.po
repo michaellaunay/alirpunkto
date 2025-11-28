@@ -1136,3 +1136,5 @@ msgstr "Spustelėkite, norėdami pateikti savo balsą."
 msgid "inform_verifier_subject"
 msgstr "Prašome padėti mums patvirtinti naują registraciją platformoje ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Pranešimas – Prašome padėti mums patvirtinti naują registraciją platformoje ${domain_name}. Terminas – per ${notice_time_verifiers} dienų."
