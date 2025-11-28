@@ -1136,6 +1136,7 @@ msgstr "Greiddu atkvæði um umsóknina"
 
 msgid "submit_vote_title"
 msgstr "Smelltu til að senda atkvæðið."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Vinsamlegast hjálpaðu okkur að staðfesta nýja skráningu á vettvangi ${domain_name}"
 
