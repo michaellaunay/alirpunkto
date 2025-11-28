@@ -1138,6 +1138,7 @@ msgstr "Голосуйте за кандидатуру"
 
 msgid "submit_vote_title"
 msgstr "Натисніть, щоб надіслати свій голос."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Допоможіть нам перевірити нову реєстрацію на платформі ${domain_name}"
 
