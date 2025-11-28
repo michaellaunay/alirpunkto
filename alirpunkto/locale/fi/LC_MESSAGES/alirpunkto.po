@@ -1133,3 +1133,5 @@ msgstr "Napsauta lähettääksesi äänesi."
 msgid "inform_verifier_subject"
 msgstr "Auta meitä vahvistamaan uusi rekisteröityminen alustalla ${domain_name}"
 
+msgid "remind_verifier_subject"
+msgstr "Muistutus - Auta meitä vahvistamaan uusi rekisteröityminen alustalla ${domain_name}. Määräaika on ${notice_time_verifiers} päivää."
