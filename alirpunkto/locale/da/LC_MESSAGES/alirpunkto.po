@@ -1139,6 +1139,7 @@ msgstr "Stem om ansøgningen"
 
 msgid "submit_vote_title"
 msgstr "Klik for at indsende din stemme."
+
 msgid "inform_verifier_subject"
-msgstr "Please help us verify a new registration on ${domain_name}"
+msgstr "Hjælp os med at bekræfte en ny registrering på platformen ${domain_name}"
 
