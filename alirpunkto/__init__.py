@@ -38,6 +38,8 @@ from .constants_and_globals import (
     MAIL_SSL,
     DEFAULT_SESSION_TIMEOUT,
     DEFAULT_NUMBER_OF_VOTERS,
+    NOTICE_TIME_VERIFIERS,
+    PYTEST_CURRENT_TEST,
     KEYCLOAK_REDIRECT_PATH,
 )
 from .secret_manager import get_secret
@@ -59,6 +61,17 @@ def add_localizer(event):
     # add the localizer and auto_translate to the registry
     request.registry.localizer = localizer
     request.registry.translate = auto_translate
+
+@subscriber(NewRequest)
+def remind_pending_verifiers(event):
+    """Send reminder emails to verifiers when needed."""
+    if PYTEST_CURRENT_TEST:
+        return
+    try:
+        from .views.register import send_verifier_reminder_emails
+        send_verifier_reminder_emails(event.request)
+    except Exception as exc:
+        log.error("Error while sending verifier reminders: %s", exc)
 
 def add_renderer_globals(event):
     """add_renderer_globals is used to add the localizer to the renderer globals
@@ -195,6 +208,9 @@ def main(global_config, **settings):
         config.registry.settings['site_logo'] = settings['site_logo']
         config.registry.settings['site_logo_small'] = settings['site_logo_small']
         
+        settings['notice_time_verifiers'] = settings['notice_time_verifiers'] if 'notice_time_verifiers' in settings else os.environ.get('NOTICE_TIME_VERIFIERS', NOTICE_TIME_VERIFIERS)
+        config.registry.settings['notice_time_verifiers'] = int(settings['notice_time_verifiers'])
+
         # get secret key from environment variable
         config.registry.settings["mail.default_sender"] = settings['mail.default_sender'] # I didn't find a way to pass the default_sender to the views...
         # Create a mailer object

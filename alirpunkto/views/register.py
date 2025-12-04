@@ -8,11 +8,12 @@
 # date: 2023-06-15
 
 import datetime
-from typing import Dict, Optional,Union
+from typing import Dict, Optional, Union
 import deform
 from deform import ValidationFailure
 from pyramid.view import view_config
 from pyramid.request import Request
+from pyramid.i18n import get_localizer
 from alirpunkto.schemas.register_form import RegisterForm
 from alirpunkto.models.candidature import (
     Candidature, CandidatureStates, 
@@ -33,11 +34,14 @@ from alirpunkto.constants_and_globals import (
     LDAP_DATE_LENGTH,
     LDAP_DEFAULT_HOUR,
     VERIFIER_VOTE_DEADLINE_DAYS,
+    NOTICE_TIME_VERIFIERS,
+    DEFAULT_NUMBER_OF_VOTERS,
 )
 from pyramid.i18n import Translator
 from pyramid.path import AssetResolver
 
 INFORM_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/inform_verifiers.pt'
+REMIND_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/remind_verifiers.pt'
 VERIFIER_TEMPLATE_RESOLVER = AssetResolver('alirpunkto')
 from ..utils import (
     get_candidatures,
@@ -121,6 +125,57 @@ def _handle_candidature_state(
     result["domain_name"] = request.registry.settings.get('domain_name')
     result["organization_details"] = request.registry.settings.get('organization_details')
     return result
+
+def _get_voting_url(request: Request, candidature: Candidature) -> str:
+    voting_url = request.route_url('vote', _query={'oid': candidature.oid})
+    if isinstance(voting_url, tuple):
+        voting_url = voting_url[0]
+    return voting_url
+
+def _get_notice_time_verifiers(request: Request) -> int:
+    try:
+        return int(request.registry.settings.get(
+            'notice_time_verifiers',
+            NOTICE_TIME_VERIFIERS
+        ))
+    except Exception as exc:
+        log.error("Invalid notice_time_verifiers setting: %s", exc)
+        return NOTICE_TIME_VERIFIERS
+
+def _get_number_of_verifiers(request: Request) -> int:
+    try:
+        return int(request.registry.settings.get(
+            'number_of_voters',
+            DEFAULT_NUMBER_OF_VOTERS
+        ))
+    except Exception as exc:
+        log.error("Invalid number_of_voters setting: %s", exc)
+        return DEFAULT_NUMBER_OF_VOTERS
+
+def _build_verifier_email_format_vars(
+        request: Request,
+        candidature: Candidature,
+        deadline: datetime.datetime,
+        notice_time_verifiers: Optional[int] = None
+    ) -> Dict[str, str]:
+    candidate_data = getattr(candidature, 'data', None)
+    confirmation_date = getattr(candidature, 'verifiers_notified_at', None)
+    confirmation_str = (
+        confirmation_date.strftime('%Y-%m-%d')
+        if confirmation_date else ''
+    )
+    return {
+        'subject_url': _get_voting_url(request, candidature),
+        'date_end_vote': deadline.strftime('%Y-%m-%d'),
+        'subject_email': candidature.email or '',
+        'subject_last_name': getattr(candidate_data, 'fullsurname', '') if candidate_data else '',
+        'subject_first_name': getattr(candidate_data, 'fullname', '') if candidate_data else '',
+        'birth_date': _format_birthdate(getattr(candidate_data, 'birthdate', None)) if candidate_data else '',
+        'citizenship': getattr(candidate_data, 'nationality', '') if candidate_data else '',
+        'notice_time_verifiers': notice_time_verifiers if notice_time_verifiers is not None else '',
+        'number_verifiers': _get_number_of_verifiers(request),
+        'date_confirmation_Applicant_ready': confirmation_str,
+    }
 
 def handle_draft_state(request: Request, candidature: Candidature) -> dict:
     """
@@ -631,28 +686,19 @@ def _notify_verifiers_of_submission(
         return
     domain_name = request.registry.settings.get('domain_name')
     organization_details = request.registry.settings.get('organization_details')
-    voting_url = request.route_url('vote', _query={'oid': candidature.oid})
-    if isinstance(voting_url, tuple):
-        voting_url = voting_url[0]
-
     deadline = getattr(candidature, 'verification_deadline', None)
     if not deadline:
         deadline = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(
             days=VERIFIER_VOTE_DEADLINE_DAYS
         )
         candidature.verification_deadline = deadline
-    date_end_vote = deadline.strftime('%Y-%m-%d')
+    candidature.verifiers_notified_at = datetime.datetime.now(datetime.timezone.utc)
 
-    candidate_data = getattr(candidature, 'data', None)
-    format_vars = {
-        'subject_url': voting_url,
-        'date_end_vote': date_end_vote,
-        'subject_email': candidature.email or '',
-        'subject_last_name': getattr(candidate_data, 'fullsurname', '') if candidate_data else '',
-        'subject_first_name': getattr(candidate_data, 'fullname', '') if candidate_data else '',
-        'birth_date': _format_birthdate(getattr(candidate_data, 'birthdate', None)) if candidate_data else '',
-        'citizenship': getattr(candidate_data, 'nationality', '') if candidate_data else '',
-    }
+    format_vars = _build_verifier_email_format_vars(
+        request,
+        candidature,
+        deadline
+    )
 
     for voter in candidature.voters:
         if not voter.email:
@@ -714,6 +760,21 @@ def _resolve_inform_verifier_template(language: Optional[str]) -> str:
         fallback = INFORM_VERIFIER_TEMPLATE.format(lang='en')
         return VERIFIER_TEMPLATE_RESOLVER.resolve(fallback).abspath()
 
+def _resolve_remind_verifier_template(language: Optional[str]) -> str:
+    lang = (language or 'en').lower()
+    lang = lang.split('_')[0].split('-')[0]
+    template = REMIND_VERIFIER_TEMPLATE.format(lang=lang)
+    try:
+        return VERIFIER_TEMPLATE_RESOLVER.resolve(template).abspath()
+    except Exception as exc:
+        log.error(
+            "Error resolving reminder template for %s (%s), fallback to English.",
+            lang,
+            exc
+        )
+        fallback = REMIND_VERIFIER_TEMPLATE.format(lang='en')
+        return VERIFIER_TEMPLATE_RESOLVER.resolve(fallback).abspath()
+
 def _get_voter_language(request: Request, voter: Voter) -> Optional[str]:
     member = get_member_by_oid(voter.oid, request, True)
     if member and getattr(member, 'data', None):
@@ -736,6 +797,103 @@ def _format_birthdate(birthdate: Optional[datetime.date]) -> str:
     if isinstance(birthdate, datetime.date):
         return birthdate.strftime('%Y-%m-%d')
     return str(birthdate) if birthdate else ''
+
+def send_verifier_reminder_emails(request: Request) -> None:
+    """Send reminder emails to verifiers who have not voted as the deadline approaches."""
+    notice_time_verifiers = _get_notice_time_verifiers(request)
+    if notice_time_verifiers < 0:
+        log.error("notice_time_verifiers must be positive; falling back to default.")
+        notice_time_verifiers = NOTICE_TIME_VERIFIERS
+    candidatures = get_candidatures(request)
+    monitored_candidatures = getattr(candidatures, 'monitored_members', candidatures)
+    now = datetime.datetime.now(datetime.timezone.utc)
+    reminder_delta = datetime.timedelta(days=notice_time_verifiers)
+    domain_name = request.registry.settings.get('domain_name')
+    organization_details = request.registry.settings.get('organization_details')
+    localizer = getattr(request, 'localizer', None) or get_localizer(request)
+
+    for candidature in list(monitored_candidatures.values()):
+        if not isinstance(candidature, Candidature):
+            continue
+        if getattr(candidature, 'candidature_state', None) != CandidatureStates.PENDING:
+            continue
+        if getattr(candidature, 'verifier_reminder_sent', False):
+            continue
+
+        deadline = getattr(candidature, 'verification_deadline', None)
+        if not deadline:
+            continue
+        if deadline.tzinfo is None:
+            deadline = deadline.replace(tzinfo=datetime.timezone.utc)
+        reminder_time = deadline - reminder_delta
+        if now < reminder_time or now > deadline:
+            continue
+
+        pending_voters = [v for v in candidature.voters if not getattr(v, 'vote', None)]
+        if not pending_voters:
+            continue
+
+        format_vars = _build_verifier_email_format_vars(
+            request,
+            candidature,
+            deadline,
+            notice_time_verifiers
+        )
+
+        reminder_sent = False
+        for voter in pending_voters:
+            if not voter.email:
+                continue
+            template_path = _resolve_remind_verifier_template(
+                _get_voter_language(request, voter)
+            )
+            subject_ts = _(
+                "remind_verifier_subject",
+                {
+                    'domain_name': domain_name,
+                    'notice_time_verifiers': notice_time_verifiers
+                }
+            )
+            subject_text = localizer.translate(subject_ts)
+            template_vars = {
+                'domain_name': domain_name,
+                'organization_details': organization_details,
+                'verifier': _get_verifier_name(request, voter),
+            }
+            try:
+                success = send_email(
+                    request,
+                    subject=subject_text,
+                    recipients=[voter.email],
+                    template_path=template_path,
+                    template_vars=template_vars,
+                    format_vars=format_vars,
+                    derive_subject_from_title=False
+                )
+                if success:
+                    reminder_sent = True
+                    log.info(
+                        "Queued reminder email for %s regarding candidature %s",
+                        voter.email,
+                        candidature.oid
+                    )
+                else:
+                    log.error(
+                        "Unable to queue reminder email for %s regarding candidature %s",
+                        voter.email,
+                        candidature.oid
+                    )
+            except Exception as exc:
+                log.error(
+                    "Error while preparing reminder for verifier %s on candidature %s: %s",
+                    voter.email,
+                    candidature.oid,
+                    exc
+                )
+
+        if reminder_sent:
+            candidature.verifier_reminder_sent = True
+            candidature.verifier_reminder_sent_at = now
 
 def get_template_parameters_for_cooperator(
         request:Request,
