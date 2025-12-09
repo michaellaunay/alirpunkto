@@ -17,7 +17,7 @@ tal:omit-tag="textual">
 
 <p>Di seguito troverai una descrizione del processo di verifica dei dati di identità di una persona appena registrata.</p>
 
-<p>Ad ogni nuova registrazione sulla piattaforma <span tal:replace="domain_name">domain_name</span>, il sistema seleziona casualmente da 3 a 7 membri esistenti e chiede loro di verificare l'identità della persona appena registrata. Infatti, è importante verificare che ogni persona fisica sia legata a un membro della piattaforma e a uno solo, che la sua cittadinanza sia compresa tra quelle degli Stati membri dell'Unione Europea e che abbia raggiunto la maggiore età (18 anni). In questo modo, evitiamo che una determinata persona fisica voti più volte sulla piattaforma con diversi pseudonimi e ci assicuriamo di rappresentare esclusivamente gli interessi dei cittadini dell'Unione Europea.</p>
+<p>Ad ogni nuova registrazione sulla piattaforma <span tal:replace="domain_name">domain_name</span>, il sistema seleziona casualmente {number_verifiers} membri esistenti e chiede loro di verificare l'identità della persona appena registrata. Infatti, è importante verificare che ogni persona fisica sia legata a un membro della piattaforma e a uno solo, che la sua cittadinanza sia compresa tra quelle degli Stati membri dell'Unione Europea e che abbia raggiunto la maggiore età (18 anni). In questo modo, evitiamo che una determinata persona fisica voti più volte sulla piattaforma con diversi pseudonimi e ci assicuriamo di rappresentare esclusivamente gli interessi dei cittadini dell'Unione Europea.</p>
 
 <p>Per effettuare la verifica dell'identità di questa persona, è sufficiente seguire i seguenti passaggi:</p>
 <ol>
