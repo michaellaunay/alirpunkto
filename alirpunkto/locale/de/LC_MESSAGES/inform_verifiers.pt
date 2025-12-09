@@ -15,7 +15,7 @@ tal:omit-tag="textual">
 
 <p>Nachfolgend findest du eine Beschreibung des Prozesses zur Überprüfung der Identitätsdaten einer neu registrierten Person.</p>
 
-<p>Bei jeder neuen Registrierung auf der <span tal:replace="domain_name">Domain Name</span> Plattform wählt das System zufällig 3 bis 7 bestehende Mitglieder aus und bittet sie, die Identität der neu registrierten Person zu überprüfen. Es ist wichtig zu überprüfen, dass jede natürliche Person mit einem Mitglied der Plattform und nur mit diesem verwandt ist, dass sie die Staatsbürgerschaft eines Mitgliedstaates der Europäischen Union besitzt und dass sie volljährig ist (18 Jahre). Dadurch vermeiden wir, dass eine natürliche Person mehrmals unter verschiedenen Pseudonymen auf der Plattform abstimmt, und stellen sicher, dass wir nur die Interessen von Bürgern der Europäischen Union vertreten.</p>
+<p>Bei jeder neuen Registrierung auf der <span tal:replace="domain_name">Domain Name</span> Plattform wählt das System zufällig {number_verifiers} bestehende Mitglieder aus und bittet sie, die Identität der neu registrierten Person zu überprüfen. Es ist wichtig zu überprüfen, dass jede natürliche Person mit einem Mitglied der Plattform und nur mit diesem verwandt ist, dass sie die Staatsbürgerschaft eines Mitgliedstaates der Europäischen Union besitzt und dass sie volljährig ist (18 Jahre). Dadurch vermeiden wir, dass eine natürliche Person mehrmals unter verschiedenen Pseudonymen auf der Plattform abstimmt, und stellen sicher, dass wir nur die Interessen von Bürgern der Europäischen Union vertreten.</p>
 
 <p>Um diese Überprüfung der Identität dieser Person durchzuführen, musst du nur die folgenden Schritte befolgen:</p>
 <ol>
