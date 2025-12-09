@@ -17,7 +17,7 @@ tal:omit-tag="textual">
 
 <p>Tu trouveras ci-dessous une description du processus de vérification des données d'identité d'une personne nouvellement inscrite.</p>
 
-<p>À chaque nouvelle inscription sur la plateforme <span tal:replace="domain_name">Nom de domaine</span>, le système sélectionne au hasard 3 à 7 membres existants et leur demande de vérifier l'identité de la personne nouvellement inscrite. En effet, il est important de vérifier que chaque personne physique est liée à un seul et unique membre de la plateforme, que sa nationalité fait partie de celles des États membres de l'Union européenne et qu'elle a atteint l'âge de la majorité (18 ans). Nous évitons ainsi qu'une même personne physique vote plusieurs fois sur la plateforme sous plusieurs pseudonymes différents et nous nous assurons de ne représenter que les intérêts des citoyen.ne.s de l'Union européenne.</p>
+<p>À chaque nouvelle inscription sur la plateforme <span tal:replace="domain_name">Nom de domaine</span>, le système sélectionne au hasard {number_verifiers} membres existants et leur demande de vérifier l'identité de la personne nouvellement inscrite. En effet, il est important de vérifier que chaque personne physique est liée à un seul et unique membre de la plateforme, que sa nationalité fait partie de celles des États membres de l'Union européenne et qu'elle a atteint l'âge de la majorité (18 ans). Nous évitons ainsi qu'une même personne physique vote plusieurs fois sur la plateforme sous plusieurs pseudonymes différents et nous nous assurons de ne représenter que les intérêts des citoyen.ne.s de l'Union européenne.</p>
 
 <p>Pour vérifier l'identité de cette personne, il suffit de suivre les étapes suivantes :</p>
 <ol>
