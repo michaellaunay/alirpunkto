@@ -16,7 +16,7 @@ tal:omit-tag="textual">
 
 <p>Para tu comodidad, aquí tienes un recordatorio del proceso de verificación de los datos de identidad de una persona recién inscrita.</p>
 
-<p>En cada nuevo registro en la plataforma <span tal:replace="domain_name">domain_name</span>, el sistema selecciona aleatoriamente de 3 a 7 miembros existentes, y les pide que verifiquen la identidad de la persona recién registrada. De hecho, es importante comprobar que cada persona física está relacionada con un miembro de la plataforma y sólo con uno, que su ciudadanía se encuentra entre las de los Estados miembros de la Unión Europea, y que ha alcanzado la mayoría de edad (18 años). De este modo, evitamos que una determinada persona física vote varias veces en la plataforma bajo varios seudónimos diferentes, y nos aseguramos de que representamos únicamente los intereses de los ciudadanos de la Unión Europea.</p> <p>
+<p>En cada nuevo registro en la plataforma <span tal:replace="domain_name">domain_name</span>, el sistema selecciona aleatoriamente {number_verifiers} miembros existentes, y les pide que verifiquen la identidad de la persona recién registrada. De hecho, es importante comprobar que cada persona física está relacionada con un miembro de la plataforma y sólo con uno, que su ciudadanía se encuentra entre las de los Estados miembros de la Unión Europea, y que ha alcanzado la mayoría de edad (18 años). De este modo, evitamos que una determinada persona física vote varias veces en la plataforma bajo varios seudónimos diferentes, y nos aseguramos de que representamos únicamente los intereses de los ciudadanos de la Unión Europea.</p> <p>
 
 <p>Para llevar a cabo esta verificación de la identidad de esta persona, sólo tienes que seguir los siguientes pasos:</p> 
 <ol>
