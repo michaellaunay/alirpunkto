@@ -17,7 +17,7 @@ tal:omit-tag="textual">
 
 <p>Hieronder vind je een beschrijving van het proces voor het checken van de identiteitsgegevens van een nieuw geregistreerde persoon.</p>
 
-<p>Bij elke nieuwe registratie op het <span tal:replace="domain_name">Domain Name</span>-platform kiest het systeem willekeurig 3 tot 7 bestaande leden en vraagt hen om de identiteit van de nieuw geregistreerde persoon te checken. Het is namelijk belangrijk om te checken of elke natuurlijke persoon aan één lid op het platform is gekoppeld, dat zijn/haar nationaliteit een van de lidstaten van de Europese Unie is en dat hij/zij meerderjarig is (18 jaar). Zo voorkomen we dat een bepaalde natuurlijke persoon meerdere keren op het platform stemt onder verschillende pseudoniemen en zorgen we ervoor dat we alleen de belangen van burgers van de Europese Unie vertegenwoordigen.</p>
+<p>Bij elke nieuwe registratie op het <span tal:replace="domain_name">Domain Name</span>-platform kiest het systeem willekeurig {number_verifiers} bestaande leden en vraagt hen om de identiteit van de nieuw geregistreerde persoon te checken. Het is namelijk belangrijk om te checken of elke natuurlijke persoon aan één lid op het platform is gekoppeld, dat zijn/haar nationaliteit een van de lidstaten van de Europese Unie is en dat hij/zij meerderjarig is (18 jaar). Zo voorkomen we dat een bepaalde natuurlijke persoon meerdere keren op het platform stemt onder verschillende pseudoniemen en zorgen we ervoor dat we alleen de belangen van burgers van de Europese Unie vertegenwoordigen.</p>
 
 <p>Om de identiteit van deze persoon te verifiëren, hoef je alleen maar de volgende stappen te volgen:</p>
 <ol>
