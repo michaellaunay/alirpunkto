@@ -15,7 +15,7 @@ tal:omit-tag="textual">
 
 <p>Dla twojej wygody przypominamy proces weryfikacji danych tożsamości nowo zarejestrowanej osoby.</p>
 
-<p>Przy każdej nowej rejestracji na platformie <span tal:replace="domain_name">Domain Name</span> system losowo wybiera od 3 do 7 istniejących członków i prosi ich o weryfikację tożsamości nowo zarejestrowanej osoby. Ważne jest bowiem sprawdzenie, czy każda osoba fizyczna jest powiązana z jednym członkiem platformy i tylko z jednym, czy jej obywatelstwo należy do obywatelstw państw członkowskich Unii Europejskiej oraz czy osiągnęła pełnoletność (18 lat). W ten sposób unikamy sytuacji, w której dana osoba fizyczna głosuje kilka razy na platformie pod kilkoma różnymi pseudonimami, i zapewniamy, że reprezentujemy wyłącznie interesy obywateli Unii Europejskiej.</p>
+<p>Przy każdej nowej rejestracji na platformie <span tal:replace="domain_name">Domain Name</span> system losowo wybiera {number_verifiers} istniejących członków i prosi ich o weryfikację tożsamości nowo zarejestrowanej osoby. Ważne jest bowiem sprawdzenie, czy każda osoba fizyczna jest powiązana z jednym członkiem platformy i tylko z jednym, czy jej obywatelstwo należy do obywatelstw państw członkowskich Unii Europejskiej oraz czy osiągnęła pełnoletność (18 lat). W ten sposób unikamy sytuacji, w której dana osoba fizyczna głosuje kilka razy na platformie pod kilkoma różnymi pseudonimami, i zapewniamy, że reprezentujemy wyłącznie interesy obywateli Unii Europejskiej.</p>
 
 <p>Aby zweryfikować tożsamość tej osoby, wystarczy wykonać następujące czynności:</p>
 <ol>
