@@ -17,7 +17,7 @@
 
 <p>Malsupre vi trovos priskribon de la procezo de kontrolo de la identecaj datumoj de nove registrita persono.</p>
 
-<p>Ĉe ĉiu nova registrado en la platformo <span tal:replace="domain_name">Domain Name</span>, la sistemo hazarde elektas 3 ĝis 7 ekzistantajn membrojn, kaj petas ilin kontroli la identecon de la nove registrita persono. Efektive, gravas kontroli, ke ĉiu natura persono estas ligita al unu membro en la platformo, kaj nur al unu, ke ties civitaneco estas inter tiuj de la Membroŝtatoj de la Eŭropa Unio, kaj ke tiu atingis la plenkreskan aĝon (18 jaroj). Tiel ni evitas, ke iu natura persono voĉdonu plurfoje en la platformo sub pluraj malsamaj pseŭdonimoj, kaj ni certigas, ke ni reprezentas nur la interesojn de civitanoj de la Eŭropa Unio.</p>
+<p>Ĉe ĉiu nova registrado en la platformo <span tal:replace="domain_name">Domain Name</span>, la sistemo hazarde elektas {number_verifiers} ekzistantajn membrojn, kaj petas ilin kontroli la identecon de la nove registrita persono. Efektive, gravas kontroli, ke ĉiu natura persono estas ligita al unu membro en la platformo, kaj nur al unu, ke ties civitaneco estas inter tiuj de la Membroŝtatoj de la Eŭropa Unio, kaj ke tiu atingis la plenkreskan aĝon (18 jaroj). Tiel ni evitas, ke iu natura persono voĉdonu plurfoje en la platformo sub pluraj malsamaj pseŭdonimoj, kaj ni certigas, ke ni reprezentas nur la interesojn de civitanoj de la Eŭropa Unio.</p>
 
 <p>Por plenumi ĉi tiun identigan kontrolon, vi nur bezonas sekvi la jenajn paŝojn:</p>
 <ol>
