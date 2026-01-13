@@ -1,43 +1,33 @@
 #!/bin/bash
-set -e
+#set -e
 
 # Ensure LDAP directories exist with correct ownership.
 mkdir -p /etc/ldap /var/lib/ldap
 chown -R openldap:openldap /etc/ldap /var/lib/ldap
 
-LDAP_ENV_FILE="${LDAP_ENV_FILE:-/alirpunkto.env}"
 LDIF_PATH="${INITIAL_USERS_LDIF:-/initials_users.ldif}"
 MARKER_PATH="${LDAP_INIT_MARKER:-/var/lib/ldap/.initials_users_loaded}"
-CONFIG_MARKER_PATH="${LDAP_CONFIG_MARKER:-/var/lib/ldap/.slapd_configured}"
 LDAP_URI="${LDAP_URI:-ldap://localhost}"
+LDAPI_URI="${LDAPI_URI:-ldapi:///}"
+CONFIG_MARKER_PATH="${LDAP_CONFIG_MARKER:-/var/lib/ldap/.slapd_configured}"
+LDAP_PASSWORD_FILE="${LDAP_PASSWORD_FILE:-/run/secrets/ldap_password}"
 
-if [ -f "$LDAP_ENV_FILE" ]; then
-  set -a
-  . "$LDAP_ENV_FILE"
-  set +a
+if [ -z "$LDAP_PASSWORD" ] && [ -f "$LDAP_PASSWORD_FILE" ]; then
+  LDAP_PASSWORD="$(cat "$LDAP_PASSWORD_FILE")"
 fi
 
 if [ -n "$LDAP_BASE_DN" ]; then
   LDAP_DOMAIN="$(echo "$LDAP_BASE_DN" | tr -d ' ' | sed -e 's/dc=//g' -e 's/,/./g')"
 fi
 
-if [ -n "$LDAP_LOGIN" ] && [ -n "$LDAP_BASE_DN" ]; then
-  if echo "$LDAP_LOGIN" | grep -q ','; then
-    LDAP_ADMIN_DN="${LDAP_ADMIN_DN:-$LDAP_LOGIN}"
-  else
-    LDAP_ADMIN_DN="${LDAP_ADMIN_DN:-$LDAP_LOGIN,$LDAP_BASE_DN}"
-  fi
-fi
-LDAP_ADMIN_PASSWORD="${LDAP_ADMIN_PASSWORD:-$LDAP_PASSWORD}"
-
-if [ ! -f "$CONFIG_MARKER_PATH" ] && [ -n "$LDAP_BASE_DN" ] && [ -n "$LDAP_ADMIN_PASSWORD" ]; then
+if [ ! -f "$CONFIG_MARKER_PATH" ] && [ -n "$LDAP_BASE_DN" ] && [ -n "$LDAP_PASSWORD" ]; then
   LDAP_ORGANIZATION="${LDAP_ORGANIZATION:-$LDAP_DOMAIN}"
   debconf-set-selections <<EOF
 slapd slapd/no_configuration boolean false
 slapd slapd/domain string $LDAP_DOMAIN
 slapd shared/organization string $LDAP_ORGANIZATION
-slapd slapd/password1 password $LDAP_ADMIN_PASSWORD
-slapd slapd/password2 password $LDAP_ADMIN_PASSWORD
+slapd slapd/password1 password $LDAP_PASSWORD
+slapd slapd/password2 password $LDAP_PASSWORD
 slapd slapd/backend select MDB
 slapd slapd/purge_database boolean true
 slapd slapd/move_old_database boolean true
@@ -68,12 +58,8 @@ if [ "${args[0]}" = "slapd" ]; then
   done
 
   if [ -f "$LDIF_PATH" ] && [ ! -f "$MARKER_PATH" ]; then
-    if [ -n "$LDAP_ADMIN_DN" ] && [ -n "$LDAP_ADMIN_PASSWORD" ]; then
-      ldapadd -x -H "$LDAP_URI" -D "$LDAP_ADMIN_DN" -w "$LDAP_ADMIN_PASSWORD" -f "$LDIF_PATH"
-      touch "$MARKER_PATH"
-    else
-      echo "LDAP_ADMIN_DN or LDAP_ADMIN_PASSWORD not set; skipping initial LDIF load."
-    fi
+    ldapadd -Y EXTERNAL -H "$LDAPI_URI" -f "$LDIF_PATH"
+    touch "$MARKER_PATH"
   fi
 
   wait "$slapd_pid"

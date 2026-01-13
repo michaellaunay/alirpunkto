@@ -24,8 +24,6 @@ RUN mkdir -p /docker-entrypoint-initdb.d
 # Create startup script to initialize LDAP if needed
 COPY ./start_ldap.sh /
 COPY ./initials_users.ldif /initials_users.ldif
-COPY ./.env /alirpunkto.env
-ENV LDAP_ENV_FILE=/alirpunkto.env
 RUN chmod +x /start_ldap.sh
 
 # Create volume for LDAP configuration
