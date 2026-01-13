@@ -1,0 +1,51 @@
+dn: uid=00000001-0002-0003-0004-000000000005,dc=cosmopolitical,dc=coop
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: alirpunktoPerson
+uid: 00000001-0002-0003-0004-000000000005
+sn: Launay
+cn:: TWljaGHDq2wgTGF1bmF5
+employeeNumber: 00000001-0002-0003-0004-000000000005
+employeeType: COOPERATOR
+isActive: TRUE
+preferredLanguage: fr
+secondLanguage: en
+givenName:: TWljaGHDq2w=
+nationality: FR
+cooperativeBehaviourMark: 0
+description: Logikascium CIO
+thirdLanguage: eo
+userPassword:: VW5TdXBlck1vdERlUGFzc2XDgENoYW5nZXI=
+uniqueMemberOf: cn=boardMembersGroup,dc=cosmopolitical,dc=coop
+uniqueMemberOf: cn=communityMembersGroup,dc=cosmopolitical,dc=coop
+uniqueMemberOf: cn=cooperatorsGroup,dc=cosmopolitical,dc=coop
+birthdate: 1937-10-29T12:00:00
+mail: michaellaunay@example.com
+numberSharesOwned: 8
+dateEndValidityYearlyContribution: 2026-07-28T12:00:00
+
+dn: uid=00000006-0007-0008-0009-000000000000,dc=cosmopolitical,dc=coop
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: alirpunktoPerson
+uid: 00000006-0007-0008-0009-000000000000
+sn: Zibell
+cn: Sergio Arbarviro
+employeeNumber: 00000006-0007-0008-0009-000000000000
+employeeType: COOPERATOR
+isActive: TRUE
+preferredLanguage: fr
+secondLanguage: en
+thirdLanguage: de
+givenName: Laurent, Jean-Serge
+nationality: FR
+cooperativeBehaviourMark: 0
+description: I am one of the founders of the CosmoPolitical Cooperative, and currently the chairman of its Board. I am an engineer and an economist by training, and have strongly contributed to the drafting of the "Society of Agreement".
+uniqueMemberOf: cn=boardMembersGroup,dc=cosmopolitical,dc=coop
+uniqueMemberOf: cn=communityMembersGroup,dc=cosmopolitical,dc=coop
+uniqueMemberOf: cn=cooperatorsGroup,dc=cosmopolitical,dc=coop
+birthdate: 1999-10-29T12:00:00
+mail: sergio.arbarviro@example.org
+userPassword: 1865D-Menaj!
+numberSharesOwned: 1
+dateEndValidityYearlyContribution: 2026-09-19T12:00:00

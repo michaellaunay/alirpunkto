@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Avoid interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         slapd \
+        debconf-utils \
         ldap-utils \
         ldapvi \
         ca-certificates \
@@ -22,6 +23,9 @@ RUN mkdir -p /docker-entrypoint-initdb.d
 
 # Create startup script to initialize LDAP if needed
 COPY ./start_ldap.sh /
+COPY ./initials_users.ldif /initials_users.ldif
+COPY ./.env /alirpunkto.env
+ENV LDAP_ENV_FILE=/alirpunkto.env
 RUN chmod +x /start_ldap.sh
 
 # Create volume for LDAP configuration
