@@ -34,6 +34,6 @@ EXPOSE 389 636
 
 # Set the entrypoint to our custom start script
 ENTRYPOINT ["/start_ldap.sh"]
-
 # Default command - keep the container running
 CMD ["slapd", "-h", "ldap:/// ldapi:/// ldaps:///", "-g", "openldap", "-u", "openldap", "-d", "256"]
+#ENTRYPOINT [ "/bin/bash" ]

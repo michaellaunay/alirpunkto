@@ -31,3 +31,9 @@ test
 include/
 pyvenv.cfg
 alirpunkto/static/logo_cosmopolitical.png
+docker/secret/*
+!docker/secret/.gitkeep
+docker/etc/ldap/*
+!docker/etc/ldap/.gitkeep
+docker/var/*
+!docker/var/.gitkeep

@@ -1,11 +1,12 @@
 #!/bin/bash
 #set -e
-
+set -x
 # Ensure LDAP directories exist with correct ownership.
 mkdir -p /etc/ldap /var/lib/ldap
 chown -R openldap:openldap /etc/ldap /var/lib/ldap
 
 LDIF_PATH="${INITIAL_USERS_LDIF:-/initials_users.ldif}"
+LDIF_SCHEMA="${LDAP_SCHEMA_LDIF:-/alirpunkto_schema.ldif}"
 MARKER_PATH="${LDAP_INIT_MARKER:-/var/lib/ldap/.initials_users_loaded}"
 LDAP_URI="${LDAP_URI:-ldap://localhost}"
 LDAPI_URI="${LDAPI_URI:-ldapi:///}"
@@ -56,6 +57,10 @@ if [ "${args[0]}" = "slapd" ]; then
     fi
     sleep 1
   done
+
+  if [ -f $LDIF_SCHEMA ]; then
+    ldapadd -Y EXTERNAL -H "$LDAPI_URI" -f "$LDIF_SCHEMA"
+  fi
 
   if [ -f "$LDIF_PATH" ] && [ ! -f "$MARKER_PATH" ]; then
     ldapadd -Y EXTERNAL -H "$LDAPI_URI" -f "$LDIF_PATH"
