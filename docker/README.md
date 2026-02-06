@@ -37,16 +37,25 @@ while IFS='=' read -r var _; do
 done < <(env)
 
 # Create the docker image for ldap service
-docker build -f docker/DockerfileOpenLDAP  -t alirpunkto-ldap docker
+docker buildx build -f docker/DockerfileOpenLDAP  -t alirpunkto-ldap docker
+
+docker volume create alirpunkto_ldap_etc
+docker volume create alirpunkto_ldap_var
 # Run the Docker container
 docker run --name alirpunkto-ldap \
   -p 8389:389 -p 8636:636 \
   -e LDAP_BASE_DN="$LDAP_BASE_DN" \
   -e LDAP_ORGANIZATION="$LDAP_ORGANIZATION" \
   -e LDAP_PASSWORD_FILE=/run/secrets/ldap_password \
-  -v `pwd`/alirpunkto/alirpunkto_schema.ldif:/alirpunkto_schema.ldif \
-  -v `pwd`/alirpunkto_ldap_data:/var/lib/ldap \
-  -v `pwd`/etc/ldap:/etc/ldap \
-  -v `pwd`/secrets/ldap_password:/run/secrets/ldap_password:ro \
+  -v $(pwd)/alirpunkto/alirpunkto_schema.ldif:/alirpunkto_schema.ldif \
+  -v alirpunkto_ldap_etc:/etc/ldap \
+  -v alirpunkto_ldap_var:/var/lib/ldap \
+  -v $(pwd)/secrets/ldap_password:/run/secrets/ldap_password:ro \
   alirpunkto-ldap
+```
+
+If volumes existe you must delete them :
+```bash
+docker volume rm alirpunkto_ldap_etc
+docker volume rm alirpunkto_ldap_var
 ```

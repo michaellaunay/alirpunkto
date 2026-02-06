@@ -36,4 +36,3 @@ EXPOSE 389 636
 ENTRYPOINT ["/start_ldap.sh"]
 # Default command - keep the container running
 CMD ["slapd", "-h", "ldap:/// ldapi:/// ldaps:///", "-g", "openldap", "-u", "openldap", "-d", "256"]
-#ENTRYPOINT [ "/bin/bash" ]
