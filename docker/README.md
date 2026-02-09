@@ -36,6 +36,11 @@ while IFS='=' read -r var _; do
   esac
 done < <(env)
 
+# Update initials_users exemple with LDAP_BASE_DN from .env
+# Please change the two initial ldap user
+sed "s/dc=cosmopolitical,dc=coop/${LDAP_BASE_DN}/g" \
+  docker/initials_users.ldif > docker/initials_users.generated.ldif
+
 # Create the docker image for ldap service
 docker buildx build -f docker/DockerfileOpenLDAP  -t alirpunkto-ldap docker
 
