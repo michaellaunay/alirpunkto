@@ -5,8 +5,8 @@
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Merci de commencer votre inscription sur la plateforme <span tal:replace="domain_name">Nom domaine</span></h1>
-    <p tal:omit-tag="textual">Pour vérifier votre adresse e-mail et vous assurer que vous êtes un humain (et non un robot), nous avons conçu une série de 4 opérations mathématiques simples. Veuillez effectuer les quatre opérations mathématiques étiquetées de A à D ci-dessous et entrez leurs résultats dans les champs correspondants sur la page d'inscription liée ci-dessous.</p>
+    <h1 tal:omit-tag="textual">Merci de commencer ton inscription sur la plateforme <span tal:replace="domain_name">Nom domaine</span></h1>
+    <p tal:omit-tag="textual">Pour vérifier ton adresse e-mail et t'assurer que tu es un humain (et non un robot), nous avons conçu une série de 4 opérations mathématiques simples. Effectue les quatre opérations mathématiques étiquetées de A à D ci-dessous et entre leurs résultats dans les champs correspondants sur la page d'inscription liée ci-dessous.</p>
     <div tal:omit-tag="textual">
 
         <p tal:omit-tag="textual">L'opération A est <span tal:content="challenge_A" tal:omit-tag="textual">Le premier défi</span></p>
@@ -18,7 +18,7 @@
         <span tal:replace="string:${page_register_with_oid}"></span>
     </a>
 
-    <p tal:omit-tag="textual">Merci pour votre intérêt pour nos activités. Nous avons hâte de vous accueillir bientôt !</p>
+    <p tal:omit-tag="textual">Merci pour ton intérêt pour nos activités. Nous avons hâte de t'accueillir bientôt !</p>
     
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Cordialement,</p>
