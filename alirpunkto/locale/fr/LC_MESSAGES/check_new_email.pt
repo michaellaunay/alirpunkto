@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:tal="http://xml.zope.org/namespaces/tal" tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Veuillez confirmer votre demande de mise à jour de votre adresse de courriel sur <span tal:replace="domain_name">Nom de domaine</span></title>.
+    <title tal:omit-tag="textual">Confirme ta demande de mise à jour de ton adresse de courriel sur <span tal:replace="domain_name">Nom de domaine</span></title>.
 </head>
 <body tal:omit-tag="textual">
 
-    <h1 tal:omit-tag="textual">Veuillez confirmer votre demande de mise à jour de votre adresse de courriel sur la plateforme informatique de <span tal:replace="domain_name">Nom de domaine</span></h1>.
-    <p tal:omit-tag="textual">Vous, ou une personne ayant accès à votre compte sur la plateforme <span tal:replace="site_name">nom du site</span> de <span tal:replace=" domain_name">nom du domaine</span>, nous avez demandé de modifier l'adresse de courriel que l'infrastructure informatique de <span tal:replace="domain_name">nom du domaine</span> utilise pour interagir avec vous. La nouvelle adresse de courriel qui a été demandée pour être utilisée à l'avenir est la suivante : <span tal:replace="new_email">Nouvelle adresse de courriel</span>.</p>
-<p tal:omit-tag="textual">Si vous confirmez que <span tal:replace="new_email">New email address</span> doit être l'adresse de courriel que l'infrastructure informatique de <span tal:replace="domain_name">domain name</span> doit à l'avenir utiliser pour interagir avec vous, veuillez cliquer sur le lien de confirmation ci-dessous.</p>
+    <h1 tal:omit-tag="textual">Confirme ta demande de mise à jour de ton adresse de courriel sur la plateforme informatique de <span tal:replace="domain_name">Nom de domaine</span></h1>.
+    <p tal:omit-tag="textual">Toi, ou une personne ayant accès à ton compte sur la plateforme <span tal:replace="site_name">nom du site</span> de <span tal:replace=" domain_name">nom du domaine</span>, nous as demandé de modifier l'adresse de courriel que l'infrastructure informatique de <span tal:replace="domain_name">nom du domaine</span> utilise pour interagir avec toi. La nouvelle adresse de courriel demandée pour être utilisée à l'avenir est la suivante : <span tal:replace="new_email">Nouvelle adresse de courriel</span>.</p>
+<p tal:omit-tag="textual">Si tu confirmes que <span tal:replace="new_email">New email address</span> doit être l'adresse de courriel que l'infrastructure informatique de <span tal:replace="domain_name">domain name</span> doit à l'avenir utiliser pour interagir avec toi, clique sur le lien de confirmation ci-dessous.</p>
 
     <a tal:attributes="href string:${check_new_email_view}" tal:omit-tag="textual">
         <span tal:replace="string:${check_new_email_view}"></span>
     </a>
 
-    <p tal:omit-tag="textual">Si vous avez fait une erreur, ou si vous n'avez pas fait cette demande, ignorez simplement le présent courriel.</p>
+    <p tal:omit-tag="textual">Si tu as fait une erreur, ou si tu n'as pas fait cette demande, ignore simplement ce courriel.</p>
     
-    <p tal:omit-tag="textual">Merci pour votre intérêt pour nos activités.</p>
+    <p tal:omit-tag="textual">Merci pour ton intérêt pour nos activités.</p>
     
     <footer tal:omit-tag="textual">
         <p tal:omit-tag="textual">Cordialement,</p>
