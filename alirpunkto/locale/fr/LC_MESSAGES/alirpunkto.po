@@ -34,29 +34,29 @@ msgid "welcome_msg"
 msgstr "Bienvenue sur ${site_name}, le service centralisé pour les applications utilisées dans l'infrastructure informatique de ${domain_name}."
 
 msgid "all_applications_msg"
-msgstr "Toutes les applications dont vous avez besoin pour participer aux activités de ${domain_name} en un seul endroit."
+msgstr "Toutes les applications dont tu as besoin pour participer aux activités de ${domain_name} en un seul endroit."
 
 msgid "register_or_login_msg"
-msgstr "Inscrivez-vous ou connectez-vous maintenant pour commencer."
+msgstr "Inscris-toi ou connecte-toi maintenant pour commencer."
 
 msgid "logged_in_msg_title"
 msgstr "${site_name}, le service centralisé pour les applications utilisées dans l'infrastructure informatique de ${domain_name}"
 
 msgid "logged_in_msg"
-msgstr "Vous êtes connecté en tant que ${user}."
+msgstr "Tu es connecté en tant que ${user}."
 
 msgid "log_out_invitation_msg"
-msgstr "Vous pouvez vous déconnecter en cliquant ici"
+msgstr "Tu peux te déconnecter en cliquant ici"
 
 msgid "logout_label"
 msgstr "Se déconnecter"
 
 msgid "choose_application_msg"
-msgstr "Choisissez l'application à laquelle vous souhaitez vous connecter :"
+msgstr "Choisis l'application à laquelle tu souhaites te connecter :"
 
 #: views/login.py:23
 msgid "invalid_username_or_password"
-msgstr "Nom d'utilisateur ou mot de passe invalide. Veuillez réessayer"
+msgstr "Nom d'utilisateur ou mot de passe invalide. Réessaie"
 
 msgid "register_link"
 msgstr "Créer un compte"
@@ -65,16 +65,16 @@ msgid "password_confirm_label"
 msgstr "Confirmer le mot de passe"
 
 msgid "password_confirm_title"
-msgstr "Confirmez votre mot de passe"
+msgstr "Confirme ton mot de passe"
 
 msgid "forgot_password_label"
 msgstr "Mot de passe oublié ?"
 
 msgid "full_name_as_in_id_label"
-msgstr "Prénom(s) complet(s) qu'il(s) figure(nt) sur vos documents d'identité officiels"
+msgstr "Prénom(s) complet(s) qu'il(s) figure(nt) sur tes documents d'identité officiels"
 
 msgid "full_surname_as_in_id_label"
-msgstr "Nom(s) de famille complet(s) qu'il(s) figure(nt) sur vos documents d'identité officiels"
+msgstr "Nom(s) de famille complet(s) qu'il(s) figure(nt) sur tes documents d'identité officiels"
 
 msgid "birthdate_label"
 msgstr "Date de naissance"
@@ -92,10 +92,10 @@ msgid "email_label"
 msgstr "Adresse de courriel"
 
 msgid "first_interaction_language_label"
-msgstr "La langue que vous préférez pour que nous interagissions avec vous"
+msgstr "La langue que tu préfères pour que nous interagissions avec toi"
 
 msgid "second_interaction_language_label"
-msgstr "La langue que vous acceptez comme second choix pour que nous interagissions avec vous"
+msgstr "La langue que tu acceptes comme second choix pour que nous interagissions avec toi"
 
 msgid "language_none_option"
 msgstr "Aucune"
@@ -107,10 +107,10 @@ msgid "forgot_password_head"
 msgstr "Mot de passe oublié ?"
 
 msgid "forgot_your_password_title"
-msgstr "Avez-vous oublié votre mot de passe ?"
+msgstr "As-tu oublié ton mot de passe ?"
 
 msgid "enter_your_email_address_label"
-msgstr "Veuillez entrer votre adresse de courriel :"
+msgstr "Entre ton adresse de courriel :"
 
 msgid "submit_button"
 msgstr "Soumettre"
@@ -122,7 +122,7 @@ msgid "candidature_states_email_validation_value"
 msgstr "Validation de l'adresse de courriel : L'état où l'adresse de courriel du candidat est en attente de validation."
 
 msgid "candidature_states_confirmed_human_value"
-msgstr "Humain confirmé : L'adresse de courriel du candidat est vérifiée, et la preuve d'humanité est fournie (nous avons vérifié que vous n'êtes pas un robot)."
+msgstr "Humain confirmé : L'adresse de courriel du candidat est vérifiée, et la preuve d'humanité est fournie (nous avons vérifié que tu n'es pas un robot)."
 
 msgid "candidature_states_unique_data_value"
 msgstr ""
@@ -231,64 +231,64 @@ msgid "plus_prefix"
 msgstr ", "
 
 msgid "email_validation_subject"
-msgstr "Vérifiez que vous êtes un humain. Calculez les résultats d'opérations mathématiques simples et saisissez ces résultats sur le portail."
+msgstr "Vérifie que tu es un humain. Calcule les résultats d'opérations mathématiques simples et saisis ces résultats sur le portail."
 
 msgid "email_candidature_state_changed"
-msgstr "Changement de l'état de votre candidature sur le portail."
+msgstr "Changement de l'état de ta candidature sur le portail."
 
 msgid "invalid_challenge"
-msgstr "Votre réponse est incorrecte. Veuillez en saisir une nouvelle."
+msgstr "Ta réponse est incorrecte. Saisis-en une nouvelle."
 
 msgid "invalid_email"
-msgstr "Il y a un problème avec votre adresse de courriel, veuillez la vérifier."
+msgstr "Il y a un problème avec ton adresse de courriel, vérifie-la."
 
 msgid "invalid_choice"
-msgstr "Votre choix n'est pas valide, veuillez le saisir à nouveau."
+msgstr "Ton choix n'est pas valide, saisis-le à nouveau."
 
 msgid "challenge_instruction_text"
-msgstr "Veuillez calculer les résultats des quatre opérations mathématiques simples suivantes et remplir les champs correspondants pour confirmer votre adresse de courriel. Si vous n'avez pas reçu de courriel d'ici quelques minutes, veuillez vérifier votre dossier de pourriels (spams). Il est possible que le courriel que nous vous avons envoyé s'y trouve."
+msgstr "Calcule les résultats des quatre opérations mathématiques simples suivantes et remplis les champs correspondants pour confirmer ton adresse de courriel. Si tu n'as pas reçu de courriel d'ici quelques minutes, vérifie ton dossier de pourriels (spams). Il est possible que le courriel que nous t'avons envoyé s'y trouve."
 
 msgid "enter_result_label_A"
-msgstr "Veuillez saisir le résultat de l'opération mathématique A :"
+msgstr "Saisis le résultat de l'opération mathématique A :"
 
 msgid "result_label_title_A"
-msgstr "Veuillez entrer le code que vous avez reçu par courriel ou le résultat de l'opération mathématique A."
+msgstr "Entre le code que tu as reçu par courriel ou le résultat de l'opération mathématique A."
 
 msgid "result_input_title_A"
-msgstr "Pour que nous puissions vérifier votre adresse de courriel et que vous êtes un humain (et non un robot), veuillez saisir le résultat de l'opération A que vous avez reçue par courriel."
+msgstr "Pour que nous puissions vérifier ton adresse de courriel et que tu es un humain (et non un robot), saisis le résultat de l'opération A que tu as reçue par courriel."
 
 msgid "enter_result_label_B"
-msgstr "Veuillez saisir le résultat de l'opération mathématique B :"
+msgstr "Saisis le résultat de l'opération mathématique B :"
 
 msgid "result_label_title_B"
-msgstr "Veuillez saisir le code que vous avez reçu par courriel ou le résultat de l'opération mathématique B."
+msgstr "Saisis le code que tu as reçu par courriel ou le résultat de l'opération mathématique B."
 
 msgid "result_input_title_B"
-msgstr "Pour que nous puissions vérifier votre adresse de courriel et que vous êtes un humain (et non un robot), veuillez saisir le résultat de l'opération B que vous avez reçue par courriel."
+msgstr "Pour que nous puissions vérifier ton adresse de courriel et que tu es un humain (et non un robot), saisis le résultat de l'opération B que tu as reçue par courriel."
 
 msgid "enter_result_label_C"
-msgstr "Veuillez saisir le résultat de l'opération mathématique C :"
+msgstr "Saisis le résultat de l'opération mathématique C :"
 
 msgid "result_label_title_C"
-msgstr "Veuillez saisir le code que vous avez reçu par courriel ou le résultat de l'opération mathématique C."
+msgstr "Saisis le code que tu as reçu par courriel ou le résultat de l'opération mathématique C."
 
 msgid "result_input_title_C"
-msgstr "Pour que nous puissions vérifier votre adresse de courriel et que vous êtes un humain (et non un robot), veuillez saisir le résultat de l'opération C que vous avez reçue par courriel."
+msgstr "Pour que nous puissions vérifier ton adresse de courriel et que tu es un humain (et non un robot), saisis le résultat de l'opération C que tu as reçue par courriel."
 
 msgid "enter_result_label_D"
-msgstr "Veuillez saisir le résultat de l'opération mathématique D :"
+msgstr "Saisis le résultat de l'opération mathématique D :"
 
 msgid "result_label_title_D"
-msgstr "Veuillez saisir le code que vous avez reçu par courriel ou le résultat de l'opération mathématique D."
+msgstr "Saisis le code que tu as reçu par courriel ou le résultat de l'opération mathématique D."
 
 msgid "result_input_title_D"
-msgstr "Pour que nous puissions vérifier votre adresse de courriel et que vous êtes un humain (et non un robot), veuillez saisir le résultat de l'opération D que vous avez reçue par courriel."
+msgstr "Pour que nous puissions vérifier ton adresse de courriel et que tu es un humain (et non un robot), saisis le résultat de l'opération D que tu as reçue par courriel."
 
 msgid "verify_button"
 msgstr "Soumettre"
 
 msgid "submit_email_validation_title"
-msgstr "Cliquez pour vérifier les codes saisis."
+msgstr "Clique pour vérifier les codes saisis."
 
 msgid "passwords_dont_match"
 msgstr "Les mots de passe ne correspondent pas."
@@ -318,28 +318,28 @@ msgid "password_must_contain_special_char"
 msgstr "Le mot de passe doit contenir au moins un des caractères suivants : '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
 msgid "password_title_label"
-msgstr "Veuillez saisir votre mot de passe ici."
+msgstr "Saisis ton mot de passe ici."
 
 msgid "password_confirm_title_label"
-msgstr "Veuillez confirmer votre mot de passe ici."
+msgstr "Confirme ton mot de passe ici."
 
 msgid "password_confirm"
-msgstr "Confirmez votre mot de passe."
+msgstr "Confirme ton mot de passe."
 
 msgid "type_of_registration"
 msgstr "Type d'inscription"
 
 msgid "type_registration_label"
-msgstr "Sélectionnez le type d'inscription qui vous convient."
+msgstr "Sélectionne le type d'inscription qui te convient."
 
 msgid "type_registration_choice"
 msgstr "Chaque type d'inscription s'accompagne d'un ensemble spécifique de droits, d'avantages et d'obligations."
 
 msgid "approved_heading"
-msgstr "Félicitations pour l'approbation de votre candidature !"
+msgstr "Félicitations pour l'approbation de ta candidature !"
 
 msgid "approved_description"
-msgstr "Votre demande a été approuvée. Vous pouvez maintenant vous connecter en utilisant le pseudonyme et le mot de passe que vous avez fournis lors du processus de candidature."
+msgstr "Ta demande a été approuvée. Tu peux maintenant te connecter en utilisant le pseudonyme et le mot de passe que tu as fournis lors du processus de candidature."
 
 msgid "invalid_pseudonym"
 msgstr ""
@@ -362,10 +362,10 @@ msgid "pseudonym_maximum_length"
 msgstr "Le pseudonyme ne doit pas dépasser ${MAX_PSEUDONYM_LENGTH} caractères."
 
 msgid "pseudonym_allready_exists"
-msgstr "Ce pseudonyme est déjà utilisé. Veuillez en choisir un autre."
+msgstr "Ce pseudonyme est déjà utilisé. Choisis-en un autre."
 
 msgid "Select_a_country"
-msgstr "Sélectionnez un État membre de l'Union européenne"
+msgstr "Sélectionne un État membre de l'Union européenne"
 
 msgid "Austria"
 msgstr "AT - Autriche"
@@ -464,7 +464,7 @@ msgid "first_interaction_language_required"
 msgstr "La première langue d'interaction est requise."
 
 msgid "pending_description"
-msgstr "Votre candidature est en cours d'examen. Vous serez informé.e par courriel une fois qu'elle aura été approuvée."
+msgstr "Ta candidature est en cours d'examen. Tu seras informé.e par courriel une fois qu'elle aura été approuvée."
 
 msgid "candidature_not_found"
 msgstr "Candidature introuvable."
@@ -472,9 +472,9 @@ msgstr "Candidature introuvable."
 msgid "cosmopolitical_cooperative_description"
 msgstr ""
 "<div>\n"
-"<h2><b>Merci de votre intérêt pour les activités de ${domain_name}! Vous êtes au bon endroit pour vous inscrire </b></h2>\n"
+"<h2><b>Merci de ton intérêt pour les activités de ${domain_name}! Tu es au bon endroit pour t'inscrire </b></h2>\n"
 "<p>La Coopérative CosmoPolitique soutient les individus et transforme le système économique, social et politique existant vers une société profondément juste, durable, démocratique et heureuse, le <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Société de l'Accord</a>.</p>\n"
-"<p>Vous trouverez ci-dessous le début du processus d'inscription pour nous rejoindre. Nous proposons deux niveaux de participation, avec des obligations et des droits croissants :</p>\n"
+"<p>Tu trouveras ci-dessous le début du processus d'inscription pour nous rejoindre. Nous proposons deux niveaux de participation, avec des obligations et des droits croissants :</p>\n"
 "<ul>\n"
 "<li>en tant que <b>Membre Ordinaire de notre Communauté</b>, avec un processus d'inscription simple, sans engagements financiers, mais sans droits de vote ; ou </li>\n"
 "<li>en tant que <b>Coopérateur</b>, un membre à part entière de notre Coopérative, avec un processus d'inscription garantissant qu'une personne donnée ne peut s'inscrire qu'une seule fois (pour respecter le principe démocratique \"une "
@@ -483,40 +483,38 @@ msgstr ""
 "</ul>\n"
 "<p>Le processus d'inscription comprend les étapes suivantes :</p>\n"
 "<ol>\n"
-"<li>nous vérifions que l'adresse de courriel a été fournie par vous, un être humain (et non par un robot) ;</li>\n"
-"<li>nous vous demandons votre pseudonyme, votre mot de passe et la(les) langue(s) que vous préférez pour que nous interagissions avec vous ;</li>\n"
-"<li>dans le cas où vous vous êtes inscrit.e en tant que Membre Ordinaire de la Communauté, vous avez terminé et entrez dans notre Communauté. Dans le cas où vous vous êtes inscrit.e en tant que Coopérateur, le processus "
-"se poursuit afin que nous puissions vérifier que vous respectez les conditions énoncées ci-dessus pour être un Coopérateur.</li>\n"
+"<li>nous vérifions que l'adresse de courriel a été fournie par toi, un être humain (et non par un robot) ;</li>\n"
+"<li>nous te demandons ton pseudonyme, ton mot de passe et la(les) langue(s) que tu préfères pour que nous interagissions avec toi ;</li>\n"
+"<li>dans le cas où tu t'es inscrit.e en tant que Membre Ordinaire de la Communauté, tu as terminé et entres dans notre Communauté. Dans le cas où tu t'es inscrit.e en tant que Coopérateur, le processus "
+"se poursuit afin que nous puissions vérifier que tu respectes les conditions énoncées ci-dessus pour être un Coopérateur.</li>\n"
 "</ol>\n"
 "<p>Cette vérification se fait comme suit :</p>\n"
 "<ol>\n"
-"<li>nous vous demandons vos <b>données d'identité</b> : vos prénom(s) et nom(s) de famille, votre date de naissance ;</li>\n"
-"<li>Nous demandons à quelques membres actuels de la Coopérative (vos Vérificateurs) de vérifier, sur la base d'un échange direct de courriels avec vous, que (1) les informations figurant sur votre pièce d'identité officielle correspondent à celles que vous avez fournies à l'étape précédente et que (2) la photo figurant sur votre pièce d'identité officielle correspond à un selfie récent de vous ;</li>"
-"<li>Une fois qu'ils auront confirmé ces correspondances, vous serez accueilli.e en tant que Coopérateur, avec tous les droits correspondants, après avoir acheté au moins <a href=\"https://www.cosmopolitical.coop/share\"> une " 
-"part sociale</a> et payé votre <a href=\"https://www.cosmopolitical.coop/yearcontrib\">contribution annuelle à nos activités</a>.</li>\n"
+"<li>nous te demandons tes <b>données d'identité</b> : tes prénom(s) et nom(s) de famille, ta date de naissance ;</li>\n"
+"<li>Nous demandons à quelques membres actuels de la Coopérative (tes Vérificateurs) de vérifier, sur la base d'un échange direct de courriels avec toi, que (1) les informations figurant sur ta pièce d'identité officielle correspondent à celles que tu as fournies à l'étape précédente et que (2) la photo figurant sur ta pièce d'identité officielle correspond à un selfie récent de toi ;</li>"
+"<li>Une fois qu'ils auront confirmé ces correspondances, tu seras accueilli.e en tant que Coopérateur, avec tous les droits correspondants, après avoir acheté au moins <a href=\"https://www.cosmopolitical.coop/share\"> une " 
+"part sociale</a> et payé ta <a href=\"https://www.cosmopolitical.coop/yearcontrib\">contribution annuelle à nos activités</a>.</li>\n"
 "</ol>\n"
-"<p>Commencez à vous inscrire dès maintenant ! Nous nous réjouissons de la perspective de vous accueillir dans nos activités.</p>\n"
+"<p>Commence à t'inscrire dès maintenant ! Nous nous réjouissons de la perspective de t'accueillir dans nos activités.</p>\n"
 "</div>"
-
 msgid "human_verification_description"
 msgstr ""
-"La première étape de votre processus d'inscription est de valider que vous êtes un \n"
-"être humain, et non un robot. Pour cela, nous vérifions que vous pouvez recevoir et \n"
-"comprendre un courriel que nous vous enverrons : ce que nous vous demandons est \n"
+"La première étape de ton processus d'inscription est de valider que tu es un \n"
+"être humain, et non un robot. Pour cela, nous vérifions que tu peux recevoir et \n"
+"comprendre un courriel que nous t'enverrons : ce que nous te demandons est \n"
 "simple pour un être humain, bien plus complexe pour un robot."
 
 msgid "identity_verification_label"
 msgstr "Vérification d'identité"
-
 msgid "Send_id_copy_by_email"
 msgstr ""
-"Veuillez envoyer par courriel une photo récente de vous et une copie scannée d'une partie de votre pièce d'identité officielle.\n"
+"Envoie par courriel une photo récente de toi et une copie scannée d'une partie de ta pièce d'identité officielle.\n"
 "Pour ce faire :\n"
-"1. Ouvrez votre client de messagerie (Thunderbird, Outlook, onglet de votre navigateur avec votre messagerie web ouverte) ;\n"
-"2. Cliquez sur le bouton \"Poursuivre la procédure\" ci-dessous. Un brouillon de courriel s'affiche dans votre client de messagerie. Les destinataires sont vos Vérificateurs. Veuillez ne pas les modifier ;\n"
-"3. Ajoutez en pièces jointes au brouillon de courriel (a) votre selfie récent et (b) le scan d'une partie de votre pièce d'identité officielle. Vous pouvez modifier le texte du courriel si vous le souhaitez, mais cela ne devrait pas être nécessaire ;\n"
- "4. Envoyez le courriel ;\n"
- "5. Une fois cela fait, cliquez sur le bouton \"Confirmer\" ci-dessous."
+"1. Ouvre ton client de messagerie (Thunderbird, Outlook, onglet de ton navigateur avec ta messagerie web ouverte) ;\n"
+"2. Clique sur le bouton \"Poursuivre la procédure\" ci-dessous. Un brouillon de courriel s'affiche dans ton client de messagerie. Les destinataires sont tes Vérificateurs. Ne les modifie pas ;\n"
+"3. Ajoute en pièces jointes au brouillon de courriel (a) ton selfie récent et (b) le scan d'une partie de ta pièce d'identité officielle. Tu peux modifier le texte du courriel si tu le souhaites, mais cela ne devrait pas être nécessaire ;\n"
+"4. Envoie le courriel ;\n"
+"5. Une fois cela fait, clique sur le bouton \"Confirmer\" ci-dessous."
 
 msgid "Send_video_conference_link"
 msgstr "DELETED"
@@ -525,85 +523,85 @@ msgid "Proceed"
 msgstr "Poursuivre la procédure"
 
 msgid "confirm_sent_emails_to_validators"
-msgstr "Veuillez confirmer que vous avez envoyé les courriels aux Vérificateurs."
+msgstr "Confirme que tu as envoyé les courriels aux Vérificateurs."
 
 msgid "sent_confirmation_label"
 msgstr "Confirmation que les courriels ont été envoyés aux Vérificateurs"
 
 msgid "submit_email_confirmation_title"
-msgstr "Confirmer que vous avez envoyé les courriels."
+msgstr "Confirmer que tu as envoyé les courriels."
 
 msgid "confirm_email_send_button_label"
 msgstr "Confirmer"
 
 msgid "vote_success"
-msgstr "Nous vous remercions de participer au processus de vote. Votre vote ${vote} a été enregistré avec succès. Vous pouvez modifier votre vote jusqu'à sa date limite en revenant à cette page."
+msgstr "Nous te remercions de participer au processus de vote. Ton vote ${vote} a été enregistré avec succès. Tu peux modifier ton vote jusqu'à sa date limite en revenant à cette page."
 
 msgid "cooperator_data_explanation"
 msgstr ""
 "<div>\n"
-"<h2>Veuillez fournir les informations nécessaires pour vous inscrire en tant que Coopérateur</h2>"
-"    <p>En tant que Coopérateur, vous participerez à toutes nos décisions. Ces décisions sont adoptées selon des procédures démocratiques rigoureuses et peuvent avoir d'importantes conséquences pour la "
+"<h2>Fournis les informations nécessaires pour t'inscrire en tant que Coopérateur</h2>"
+"    <p>En tant que Coopérateur, tu participeras à toutes nos décisions. Ces décisions sont adoptées selon des procédures démocratiques rigoureuses et peuvent avoir d'importantes conséquences pour la "
 "Coopérative et pour les Coopérateurs. De plus, la Coopérative a l'intention de représenter les citoyens de l'UE, indépendamment de leur nationalité - mais seulement les citoyens de l'UE. Cela est particulièrement "
 "important lors des élections publiques. Nous devons donc garantir trois choses : (1) qu'une personne donnée ne peut pas s'inscrire plus d'une fois, afin de garantir le principe démocratique \"une personne = "
 "une voix\" ; (2) que tous les Coopérateurs sont majeurs et (3) que seuls les citoyen.ne.s de l'Union européenne sont Coopérateurs.</p>\n"
-"    <p>C'est pourquoi nous allons vérifier auprès de vous certains éléments de vos données d'identité, en comparant (1) les données que vous introduirez sur ce formulaire lors de votre inscription avec (2) les "
-"informations figurant sur votre pièce d'identité officielle et (3) la photographie figurant sur votre pièce d'identité officielle avec (4) un selfie récent de vous (récent = pris le jour où vous envoyez l'e-mail). Cette vérification sera effectuée par un groupe de membres de la Coopérative sélectionnés au hasard, les Vérificateurs de votre demande, " 
-"et sera fondée sur (a) un selfie récent de vous et (b) une numérisation partielle de votre pièce d'identité officielle que vous leur transmettrez directement par e-mail, sans passer par"
+"    <p>C'est pourquoi nous allons vérifier auprès de toi certains éléments de tes données d'identité, en comparant (1) les données que tu introduiras sur ce formulaire lors de ton inscription avec (2) les "
+"informations figurant sur ta pièce d'identité officielle et (3) la photographie figurant sur ta pièce d'identité officielle avec (4) un selfie récent de toi (récent = pris le jour où tu envoies l'e-mail). Cette vérification sera effectuée par un groupe de membres de la Coopérative sélectionnés au hasard, les Vérificateurs de ta demande, " 
+"et sera fondée sur (a) un selfie récent de toi et (b) une numérisation partielle de ta pièce d'identité officielle que tu leur transmettras directement par e-mail, sans passer par"
 "cette plateforme en ligne (pour des raisons de sécurité et de confidentialité).</p>\n"
-"    <p>Les données que nous vous demandons et dont vos Vérificateurs "
-"vérifieront la conformité avec les données figurant sur vos documents "
+"    <p>Les données que nous te demandons et dont tes Vérificateurs "
+"vérifieront la conformité avec les données figurant sur tes documents "
 "d'identité officiels sont les suivantes :\n"
 "    <ul>\n"
-"    <li>votre(s) nom(s) et prénom(s) ;</li>\n"
-"    <li>votre date de naissance ;</li>\n"
-"    <li>votre nationalité.</li>\n"
+"    <li>tes nom(s) et prénom(s) ;</li>\n"
+"    <li>ta date de naissance ;</li>\n"
+"    <li>ta nationalité.</li>\n"
 "    </ul></p>\n"
-"    <p>Une seule personne porte votre(s) nom(s), votre(s) prénom(s) et votre date de naissance : vous. Si vous tentez de vous inscrire à nouveau, vous devrez fournir les mêmes données à notre procédure de vérification, "
-"et nous rejetterons votre demande, car vous êtes déjà un Coopérateur et ne pouvez pas avoir plusieurs comptes pour voter plus d'une fois. Nous avons confiance en cela car nous savons qu'une seule personne a cette combinaison de nom(s), prénom(s) et date de naissance. Votre date de naissance nous permet de vérifier que vous êtes majeur.e, et votre nationalité nous permet de nous assurer que vous êtes bien citoyen.ne de l'Union européenne.</p>\n"
-"    <p>Ces données seront utilisées exclusivement pour vérifier votre identité, votre âge et votre nationalité, et pour gérer votre compte de Coopérateur. Elles ne seront jamais affichées aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmises ou vendues à quiconque, sauf pour répondre aux exigences légales des autorités judiciaires publiques sur demande d'un juge. Le \"responsable du traitement des données\", tel que défini par le <a href=\"https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A02016R0679-20160504\"> Règlement général sur la protection des données (RGPD) de l'Union européenne</a>, est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le numéro SIREN 951 007 897.</p>\n"
-"<p><b>Avis important :</b> Dans de rares cas, il peut arriver que le formulaire ci-dessous ne s'affiche pas correctement : il ne vous indiquera pas où saisir votre pseudonyme, votre adresse de courriel sera modifiable... Si cela se produit, veuillez cliquer sur le bouton \"Soumettre\" ci-dessous. Le formulaire qui s'affichera sera correct et vous pourrez le remplir facilement.</p>\n"
+"    <p>Une seule personne porte tes nom(s), tes prénom(s) et ta date de naissance : toi. Si tu tentes de t'inscrire à nouveau, tu devras fournir les mêmes données à notre procédure de vérification, "
+"et nous rejetterons ta demande, car tu es déjà un Coopérateur et ne peux pas avoir plusieurs comptes pour voter plus d'une fois. Nous avons confiance en cela car nous savons qu'une seule personne a cette combinaison de nom(s), prénom(s) et date de naissance. Ta date de naissance nous permet de vérifier que tu es majeur.e, et ta nationalité nous permet de nous assurer que tu es bien citoyen.ne de l'Union européenne.</p>\n"
+"    <p>Ces données seront utilisées exclusivement pour vérifier ton identité, ton âge et ta nationalité, et pour gérer ton compte de Coopérateur. Elles ne seront jamais affichées aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmises ou vendues à quiconque, sauf pour répondre aux exigences légales des autorités judiciaires publiques sur demande d'un juge. Le \"responsable du traitement des données\", tel que défini par le <a href=\"https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A02016R0679-20160504\"> Règlement général sur la protection des données (RGPD) de l'Union européenne</a>, est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le numéro SIREN 951 007 897.</p>\n"
+"<p><b>Avis important :</b> Dans de rares cas, il peut arriver que le formulaire ci-dessous ne s'affiche pas correctement : il ne t'indiquera pas où saisir ton pseudonyme, ton adresse de courriel sera modifiable... Si cela se produit, clique sur le bouton \"Soumettre\" ci-dessous. Le formulaire qui s'affichera sera correct et tu pourras le remplir facilement.</p>\n"
 "</div>"
 
 msgid "ordinary_member_data_explanation"
 msgstr ""
 "<div>\n"
-"<h2>Veuillez fournir les informations nécessaires pour vous inscrire en tant que Membre ordinaire de la Communauté</h2>"
-"<p>En tant que Membre ordinaire de la Communauté de ${domain_name}, vous interagirez avec les autres membres et avec notre plateforme informatique.</p>\n"
-"<p>Afin que cela fonctionne de la manière la plus efficace et la plus respectueuse possible pour vous et pour les autres membres de la Communauté, nous vous serions reconnaissants de bien vouloir fournir les informations demandées dans le formulaire ci-dessous.</p>\n"
-"<p>Ces données seront utilisées exclusivement pour nous permettre de gérer votre compte en tant que Membre ordinaire de la Communauté de ${domain_name}. Elles ne seront jamais affichées aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmises ou vendues à quiconque, sauf pour répondre aux exigences légales des autorités judiciaires publiques sur demande d'un juge. Le \"responsable du traitement des données\", tel que défini par le <a href=\"https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A02016R0679-20160504\"> Règlement général sur la protection des données (RGPD) de l'Union européenne</a>, est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le numéro SIREN 951 007 897.</p>\n"
-"<p><b>Avis important :</b> Dans de rares cas, il peut arriver que le formulaire ci-dessous ne s'affiche pas correctement : il ne vous indiquera pas où saisir votre pseudonyme, votre adresse de courriel sera modifiable... Si cela se produit, veuillez cliquer sur le bouton \"Soumettre\" ci-dessous. Le formulaire qui s'affichera sera correct et vous pourrez le remplir facilement.</p>\n"
+"<h2>Fournis les informations nécessaires pour t'inscrire en tant que Membre ordinaire de la Communauté</h2>"
+"<p>En tant que Membre ordinaire de la Communauté de ${domain_name}, tu interagiras avec les autres membres et avec notre plateforme informatique.</p>\n"
+"<p>Afin que cela fonctionne de la manière la plus efficace et la plus respectueuse possible pour toi et pour les autres membres de la Communauté, nous te serions reconnaissants de bien vouloir fournir les informations demandées dans le formulaire ci-dessous.</p>\n"
+"<p>Ces données seront utilisées exclusivement pour nous permettre de gérer ton compte en tant que Membre ordinaire de la Communauté de ${domain_name}. Elles ne seront jamais affichées aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmises ou vendues à quiconque, sauf pour répondre aux exigences légales des autorités judiciaires publiques sur demande d'un juge. Le \"responsable du traitement des données\", tel que défini par le <a href=\"https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A02016R0679-20160504\"> Règlement général sur la protection des données (RGPD) de l'Union européenne</a>, est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le numéro SIREN 951 007 897.</p>\n"
+"<p><b>Avis important :</b> Dans de rares cas, il peut arriver que le formulaire ci-dessous ne s'affiche pas correctement : il ne t'indiquera pas où saisir ton pseudonyme, ton adresse de courriel sera modifiable... Si cela se produit, clique sur le bouton \"Soumettre\" ci-dessous. Le formulaire qui s'affichera sera correct et tu pourras le remplir facilement.</p>\n"
 "</div>"
 
 msgid "human_verification_explanation"
 msgstr ""
 "<div>\n"
-"    <p>Nous vous avons envoyé par courriel un ensemble de quatre calculs arithmétiques simples à réaliser, identifiés de A à D, tous suivant le même modèle : (UN PREMIER NOMBRE ENTRE 1 ET 9) "
-"multiplié par (UN DEUXIÈME NOMBRE ENTRE 1 ET 9), plus (UN TROISIÈME NOMBRE ENTRE 1 ET 9). Pour effectuer le calcul, vous devez d'abord multiplier le PREMIER NOMBRE ENTRE 1 ET 9 "
-"par le DEUXIÈME NOMBRE ENTRE 1 ET 9. Une fois que vous avez le résultat de cette multiplication, vous devez ajouter à ce résultat le TROISIÈME NOMBRE ENTRE 1 ET 9. Vous devez enfin écrire le "
-"résultat de cette dernière addition dans la case prévue pour le résultat du calcul arithmétique que vous effectuez (parmi les quatre que nous vous avons envoyés, identifiés de A à D). Vous devez "
+"    <p>Nous t'avons envoyé par courriel un ensemble de quatre calculs arithmétiques simples à réaliser, identifiés de A à D, tous suivant le même modèle : (UN PREMIER NOMBRE ENTRE 1 ET 9) "
+"multiplié par (UN DEUXIÈME NOMBRE ENTRE 1 ET 9), plus (UN TROISIÈME NOMBRE ENTRE 1 ET 9). Pour effectuer le calcul, tu dois d'abord multiplier le PREMIER NOMBRE ENTRE 1 ET 9 "
+"par le DEUXIÈME NOMBRE ENTRE 1 ET 9. Une fois que tu as le résultat de cette multiplication, tu dois ajouter à ce résultat le TROISIÈME NOMBRE ENTRE 1 ET 9. Tu dois enfin écrire le "
+"résultat de cette dernière addition dans la case prévue pour le résultat du calcul arithmétique que tu effectues (parmi les quatre que nous t'avons envoyés, identifiés de A à D). Tu dois "
 "répéter le calcul pour les quatre calculs envoyés par courriel.</p>\n"
-"<p>Si vous n'avez pas reçu de courriel d'ici quelques minutes, veuillez vérifier votre dossier de pourriels (spams). Il est possible que le courriel que nous vous avons envoyé s'y trouve.</p>\n"
+"<p>Si tu n'as pas reçu de courriel d'ici quelques minutes, vérifie ton dossier de pourriels (spams). Il est possible que le courriel que nous t'avons envoyé s'y trouve.</p>\n"
 "</div>"
 
 msgid "cooperator_data_choose_verification_explanation"
 msgstr ""
 "<div>\n"
-"    <p>Dans le cadre du processus d'inscription en tant que Coopérateur, nous vérifierons votre identité. Cette vérification de votre identité est nécessaire "
+"    <p>Dans le cadre du processus d'inscription en tant que Coopérateur, nous vérifierons ton identité. Cette vérification de ton identité est nécessaire "
 "pour garantir : (1) qu'une personne donnée ne s'inscrit pas plusieurs fois avec différentes adresses de courriel (nous veillons ainsi au principe démocratique : \"une personne - une voix\"); (2) "
 "que seul.e.s les citoyen.ne.s majeur.e.s de l'Union Européenne sont des Coopérateurs (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >voir pourquoi</a>).</p>\n"
-"    <p>Pour ce faire, vous devrez envoyer par courriel sécurisé (1) un selfie récent de vous (récent = pris le jour où vous envoyez l'e-mail) et (2) une copie partielle de vos documents d'identité directement à un petit groupe de Coopérateurs, vos Vérificateurs. Pour des raisons de sécurité, nous vous recommandons de masquer votre lieu de naissance,, votre signature et le numéro de votre document d'identité officiel avant de le copier.</p>\n"
-" <p>Votre coopération dans cette affaire est grandement appréciée et est essentielle pour maintenir les normes élevées de confiance et de démocratie paneuropéenne au sein de notre Coopérative. Merci "
-"de votre compréhension et de votre participation active à cette étape cruciale.</p>\n"
+"    <p>Pour ce faire, tu devras envoyer par courriel sécurisé (1) un selfie récent de toi (récent = pris le jour où tu envoies l'e-mail) et (2) une copie partielle de tes documents d'identité directement à un petit groupe de Coopérateurs, tes Vérificateurs. Pour des raisons de sécurité, nous te recommandons de masquer ton lieu de naissance, ta signature et le numéro de ton document d'identité officiel avant de le copier.</p>\n"
+" <p>Ta coopération dans cette affaire est grandement appréciée et est essentielle pour maintenir les normes élevées de confiance et de démocratie paneuropéenne au sein de notre Coopérative. Merci "
+"de ta compréhension et de ta participation active à cette étape cruciale.</p>\n"
 "</div>"
 
 msgid "voters_not_selected"
 msgstr ""
-"Le nombre de Coopérateurs existants est trop faible pour sélectionner le nombre adéquat de Vérificateurs de votre identité. Veuillez contacter l'administrateur du système à l'adresse suivante "
+"Le nombre de Coopérateurs existants est trop faible pour sélectionner le nombre adéquat de Vérificateurs de ton identité. Contacte l'administrateur du système à l'adresse suivante "
 "${administrator}, pour résoudre le problème."
 
 msgid "email_copy_id_verification_subject"
-msgstr "fr - ${domain_name} - Veuillez vérifier mon identité en tant que nouveau Coopérateur potentiel"
+msgstr "fr - ${domain_name} - Vérifie mon identité en tant que nouveau Coopérateur potentiel"
 
 msgid "email_copy_id_verification_body"
 msgstr ""
@@ -614,7 +612,7 @@ msgstr ""
 "- une copie partielle de ma pièce d'identité officielle.\n"
 " Veuillez noter que certaines informations sensibles ont été masquées pour des raisons de sécurité (lieu de naissance, numéro, signature). Cependant, le document contient les informations nécessaires pour vérifier mon identité selon "
 "le processus d'inscription de ${domain_name}.\n"
-" Je vous prie de bien vouloir examiner les documents ci-joints, afin de "
+" Merci d'examiner les documents ci-joints, afin de "
 "voter si possible dans les 3 jours sur l'adéquation entre  :\n"
 "\n"
 " - les informations d'identité que vous avez reçues directement par courriel de la plateforme informatique de ${domain_name} (et qui vous seront rappelées sur l'interface de vote) et \n"
@@ -624,15 +622,15 @@ msgstr ""
 "- la photo sur ma pièce d'identité officielle.\n"
 "\n"
 " Le lien pour voter sur cette adéquation est le suivant : ${voting_url}.\n"
-" Je vous remercie très chaleureusement par avance de soutenir le processus de mon inscription en tant que Coopérateur de ${domain_name}. Si vous avez d'autres questions ou avez besoin d'informations "
+" Merci beaucoup par avance de soutenir le processus de mon inscription en tant que Coopérateur de ${domain_name}. Si vous avez d'autres questions ou avez besoin d'informations "
 "supplémentaires, n'hésitez pas à me contacter directement dans votre propre langue.\n"
 " Cordialement,\n"
 " ${signature}\n"
 " Pièces jointes :\n"
 "- Copie partielle de ma pièce d'identité ;\n"
 "- Selfie récent.\n"
-" Ce courriel a été généré avec l'assistance de la fonction de vérification d'identité de ${domain_name}. Si vous n'êtes pas le Vérificateur assigné à la candidature de ${signature} et que vous "
-"avez reçu ce courriel par erreur, veuillez informer l'administrateur de ${domain_name}, à l'adresse suivante : ${administrator}."
+" Ce courriel a été généré avec l'assistance de la fonction de vérification d'identité de ${domain_name}. Si tu n'es pas le Vérificateur assigné à la candidature de ${signature} et que tu "
+"as reçu ce courriel par erreur, informe l'administrateur de ${domain_name}, à l'adresse suivante : ${administrator}."
 
 msgid "email_video_id_verification_subject"
 msgstr "DELETED"
@@ -641,14 +639,13 @@ msgid "email_video_id_verification_body"
 msgstr "DELETED"
 
 msgid "forget_email_in_member_list"
-msgstr "Si l'utilisateur existe, il/elle recevra un courriel. Si vous n'avez pas reçu de courriel d'ici quelques minutes, veuillez vérifier votre dossier de pourriels (spams). Il est possible que le courriel que nous vous avons envoyé s'y trouve."
+msgstr "Si l'utilisateur existe, il/elle recevra un courriel. Si tu n'as pas reçu de courriel d'ici quelques minutes, vérifie ton dossier de pourriels (spams). Il est possible que le courriel que nous t'avons envoyé s'y trouve."
 
 msgid "reset_password_email_subject"
 msgstr "Réinitialise ton mot de passe"
 
 msgid "forget_email_send_error"
-msgstr "Une erreur s'est produite lors de l'envoi du courriel de réinitialisation, veuillez contacter l'administrateur à ${administrator}"
-
+msgstr "Une erreur s'est produite lors de l'envoi du courriel de réinitialisation, contacte l'administrateur à ${administrator}"
 msgid "member_state_created_name"
 msgstr "créé"
 
@@ -680,11 +677,11 @@ msgid "member_datas_modified_value"
 msgstr "Les données du membre ont été modifiées"
 
 msgid "email_member_state_changed"
-msgstr "Changement dans votre profil de membre"
+msgstr "Changement dans ton profil de membre"
 
 #: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
 msgid "forget_no_mail"
-msgstr "Veuillez fournir une adresse de courriel valide"
+msgstr "Entre une adresse de courriel valide"
 
 #: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
 msgid "forget_admin_user"
@@ -692,27 +689,26 @@ msgstr "L'administrateur n'est pas autorisé à réinitialiser son propre mot de
 
 #: alirpunkto/views/forgot_password.py:174
 msgid "forget_email_sent"
-msgstr "Si l'utilisateur existe, un courriel a été envoyé à son adresse de courriel avec un lien pour réinitialiser son mot de passe. Si vous n'avez pas reçu de courriel d'ici quelques minutes, veuillez vérifier votre dossier de pourriels (spams). Il est possible que le courriel que nous vous avons envoyé s'y trouve."
+msgstr "Si l'utilisateur existe, un courriel a été envoyé à son adresse de courriel avec un lien pour réinitialiser son mot de passe. Si tu n'as pas reçu de courriel d'ici quelques minutes, vérifie ton dossier de pourriels (spams). Il est possible que le courriel que nous t'avons envoyé s'y trouve."
 
 #: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
 msgid "password_not_match"
-msgstr "Les deux versions du mot de passe ne correspondent pas. Veuillez vous assurer que c'est le cas et soumettre à nouveau votre demande"
+msgstr "Les deux versions du mot de passe ne correspondent pas. Assure-toi que c'est le cas et soumets à nouveau ta demande"
 
-#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
-msgid "password_required"
-msgstr "Veuillez fournir un nouveau mot de passe"
+#: alirpunkto/views/forgot_password.py:202 msgid "password_required"
+msgstr "Entre un nouveau mot de passe"
 
 #: alirpunkto/views/forgot_password.py:229
 msgid "password_changed"
-msgstr "Votre mot de passe a été modifié avec succès"
+msgstr "Ton mot de passe a été modifié avec succès"
 
 #: alirpunkto/views/forgot_password.py:234
 msgid "forget_confirmation_email_send_error"
-msgstr "Une erreur s'est produite lors du processus de réinitialisation de votre mot de passe"
+msgstr "Une erreur s'est produite lors du processus de réinitialisation de ton mot de passe"
 
 #: alirpunkto/views/forgot_password.py:239
 msgid "password_not_changed"
-msgstr "Une erreur s'est produite lors du processus de réinitialisation de votre mot de passe. Votre mot de passe n'a pas été modifié"
+msgstr "Une erreur s'est produite lors du processus de réinitialisation de ton mot de passe. Ton mot de passe n'a pas été modifié"
 
 #: alirpunkto/views/forgot_password.py:264
 msgid "member_not_found"
@@ -720,7 +716,7 @@ msgstr "Le membre n'a pas été trouvé dans la liste des membres actuels"
 
 #: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
 msgid "url_is_obsolete"
-msgstr "Le lien hypertexte que vous avez utilisé pour réinitialiser votre mot de passe est obsolète. Veuillez utiliser le dernier lien reçu"
+msgstr "Le lien hypertexte que tu as utilisé pour réinitialiser ton mot de passe est obsolète. Utilise le dernier lien reçu"
 
 #: alirpunkto/views/register.py:182
 msgid "email_not_sent"
@@ -731,69 +727,63 @@ msgid "error_committing_candidature"
 msgstr "Erreur lors de la validation de la candidature"
 
 msgid "modification_to_profile_button_title"
-msgstr "Modifier votre profil"
+msgstr "Modifier ton profil"
 
 msgid "modification_to_profile_button_label"
 msgstr "Modifier le profil"
 
 msgid "modification_to_profile_button_description"
-msgstr "Cliquez ici pour recevoir par courriel un lien sécurisé pour modifier votre profil."
+msgstr "Clique ici pour recevoir par courriel un lien sécurisé pour modifier ton profil."
 
 msgid "modification_to_profile_explanation_content"
 msgstr ""
-"Pour garantir la sécurité de vos données, un lien unique pour modifier votre profil vous sera envoyé par courriel. Ce processus garantit que seule la personne ayant accès à votre adresse courriel "
-"peut apporter des modifications à votre profil."
-"Si vous n'avez pas reçu de courriel d'ici quelques minutes, veuillez vérifier votre dossier de pourriels (spams). Il est possible que le courriel que nous vous avons envoyé s'y trouve."
+"Pour garantir la sécurité de tes données, un lien unique pour modifier ton profil te sera envoyé par courriel. Ce processus garantit que seule la personne ayant accès à ton adresse courriel "
+"peut apporter des modifications à ton profil. "
+"Si tu n'as pas reçu de courriel d'ici quelques minutes, vérifie ton dossier de pourriels (spams). Il est possible que le courriel que nous t'avons envoyé s'y trouve."
 
 msgid "modification_to_profile_email_subject"
-msgstr "Lien pour modifier votre profil sur l'infrastructure informatique de ${domain_name}"
+msgstr "Lien pour modifier ton profil sur l'infrastructure informatique de ${domain_name}"
 
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Veuillez fournir ici tous vos prénom(s), tel(s) qu'écrit(s) dans vos documents d'identité officiels, dans leur transcription officielle en caractères latins (si la langue d'origine utilise un alphabet "
+"Entre ici tous tes prénom(s), tel(s) qu'écrit(s) dans tes documents d'identité officiels, dans leur transcription officielle en caractères latins (si la langue d'origine utilise un alphabet "
 "different du latin)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Veuillez fournir ici tous vos nom(s) de famille à la naissance (c'est-à-dire PAS votre nom de famille en tant que personne mariée), tel(s) qu'écrit(s) dans vos documents d'identité officiels, dans leur transcription officielle en caractères latins (si la langue d'origine utilise un alphabet différent du latin)"
+"Entre ici tous tes nom(s) de famille à la naissance (c'est-à-dire PAS ton nom de famille en tant que personne mariée), tel(s) qu'écrit(s) dans tes documents d'identité officiels, dans leur transcription officielle en caractères latins (si la langue d'origine utilise un alphabet différent du latin)"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
-msgstr "Texte vous décrivant (votre texte de profil)"
+msgstr "Texte te décrivant (ton texte de profil)"
 
 #: alirpunkto/schemas/register_form.py:48
 msgid "description_description"
 msgstr ""
-"Veuillez écrire ici un texte vous la langue de votre "
-"choix, afin que les autres membres de la Communauté puissent vous "
-"connaître. Nous vous suggérons de vous concentrer sur : "
-"(1) D'où vous venez, (2) ce que vous faites, (3) ce que vous souhaitez faire en tant que membre de la Communauté, et (4) les ressources (expérience, connaissances, temps) dont vous disposez.\n"
-"Nous pensons que ces informations sont utiles car le fait de vous "
-"présenter aux autres avec vos propres mots donne un visage humain à votre "
-"identité numérique sur notre infrastructure informatique.\n Grâce à ce texte, "
-"chaque membre de la Communauté apprend à vous connaître un peu mieux, ce qui "
-"facilite grandement l'interaction !"
+"Écris ici un texte dans la langue de ton choix, afin que les autres membres de la Communauté puissent te connaître. Nous te suggérons de te concentrer sur : "
+"(1) D'où tu viens, (2) ce que tu fais, (3) ce que tu souhaites faire en tant que membre de la Communauté, et (4) les ressources (expérience, connaissances, temps) dont tu disposes.\n"
+"Nous pensons que ces informations sont utiles car le fait de te présenter aux autres avec tes propres mots donne un visage humain à ton identité numérique sur notre infrastructure informatique.\n Grâce à ce texte, "
+"chaque membre de la Communauté apprend à te connaître un peu mieux, ce qui facilite grandement l'interaction !"
 
 #: alirpunkto/schemas/register_form.py:55
 msgid "birthdate_description"
 msgstr ""
-"Veuillez fournir votre date de naissance au format suivant : JJ/MM/AAAA, c'est-à-dire (1) le jour du mois, sur 2 chiffres ; (2) le numéro du mois, sur 2 chiffres ; (3) l'année, sur 4 chiffres. Seules "
-"les personnes ayant atteint leur 18ème anniversaire peuvent être Coopérateurs. Si vous n'avez pas encore atteint votre 18ème anniversaire, nous vous invitons à vous inscrire en tant que Membre Ordinaire de la Communauté - et à "
-"passer au statut de Coopérateur dès que vous atteindrez l'âge de la majorité."
+"Entre ta date de naissance au format suivant : JJ/MM/AAAA, c'est-à-dire (1) le jour du mois, sur 2 chiffres ; (2) le numéro du mois, sur 2 chiffres ; (3) l'année, sur 4 chiffres. Seules "
+"les personnes ayant atteint leur 18ème anniversaire peuvent être Coopérateurs. Si tu n'as pas encore atteint ton 18ème anniversaire, inscris-toi en tant que Membre Ordinaire de la Communauté - et passe au statut de Coopérateur dès que tu atteindras l'âge de la majorité."
 
 #: alirpunkto/schemas/register_form.py:67
 msgid "nationality_description"
-msgstr "Veuillez fournir un État membre de l'Union Européenne dont vous êtes citoyen.ne. Seuls les citoyen.ne.s de l'Union Européenne peuvent être Coopérateurs"
+msgstr "Entre un État membre de l'Union Européenne dont tu es citoyen.ne. Seuls les citoyen.ne.s de l'Union Européenne peuvent être Coopérateurs"
 
 #: alirpunkto/schemas/register_form.py:70
 msgid "select_a_country"
-msgstr "Veuillez sélectionner un État membre de l'Union Européenne"
+msgstr "Sélectionne un État membre de l'Union Européenne"
 
 #: alirpunkto/schemas/register_form.py:104
 msgid "cooperator_number_description"
-msgstr "C'est le numéro unique qui vous identifie dans tous les processus se déroulant dans la Communauté"
+msgstr "C'est le numéro unique qui t'identifie dans tous les processus se déroulant dans la Communauté"
 
 #: alirpunkto/schemas/register_form.py:106
 msgid "cooperator_number_required"
@@ -802,38 +792,37 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:112
 msgid "pseudonym_description"
 msgstr ""
-"Veuillez entrer ici le pseudonyme qui vous identifiera pendant toute la durée de votre activité sur notre plateforme informatique. Nous RECOMMANDONS FORTEMENT de choisir un pseudonyme qui rend la traçabilité "
-"vers votre véritable identité impossible (ou extrêmement difficile). Ainsi, vous protégez la confidentialité de vos opinions (c'est-à-dire les données personnelles qui font l'objet d'une protection spécifique en vertu du Règlement Général sur la Protection des Données - RGPD) contre toute forme de pression externe dans la vie réelle (par exemple, de la part de votre employeur ou de vos clients). Soyez très prudent.e ! Une fois choisi, vous ne pourrez JAMAIS changer ce pseudonyme par la suite. Choisissez-le avec soin ! \n"
-" Votre pseudonyme doit contenir entre ${MIN_PSEUDONYM_LENGTH} et ${MAX_PSEUDONYM_LENGTH} caractères et ne peut contenir que des lettres de l'alphabet latin (A-Z, a-z), des chiffres (0-9), "
+"Entre ici le pseudonyme qui t'identifiera pendant toute la durée de ton activité sur notre plateforme informatique. Nous RECOMMANDONS FORTEMENT de choisir un pseudonyme qui rend la traçabilité "
+"vers ta véritable identité impossible (ou extrêmement difficile). Ainsi, tu protèges la confidentialité de tes opinions (c'est-à-dire les données personnelles qui font l'objet d'une protection spécifique en vertu du Règlement Général sur la Protection des Données - RGPD) contre toute forme de pression externe dans la vie réelle (par exemple, de la part de ton employeur ou de tes clients). Sois très prudent.e ! Une fois choisi, tu ne pourras JAMAIS changer ce pseudonyme par la suite. Choisis-le avec soin ! \n"
+" Ton pseudonyme doit contenir entre ${MIN_PSEUDONYM_LENGTH} et ${MAX_PSEUDONYM_LENGTH} caractères et ne peut contenir que des lettres de l'alphabet latin (A-Z, a-z), des chiffres (0-9), "
 "des tirets bas (_), des points (.), des traits d'union (-) et des espaces ( ). Il ne peut pas contenir de lettres avec accents, des trémas et d'autres signes diacritiques spécifiques à certaines langues."
-
 #: alirpunkto/schemas/register_form.py:115
 msgid "pseudonym_required"
-msgstr "La fourniture de votre pseudonyme est requise"
+msgstr "La fourniture de ton pseudonyme est requise"
 
 #: alirpunkto/schemas/register_form.py:121
 msgid "password_description"
 msgstr ""
-"Veuillez fournir votre mot de passe. Votre mot de passe doit comporter entre ${password_minimum_length} et ${password_maximum_length} caractères, contenir au moins un chiffre, au moins une lettre minuscule, "
+"Entre ton mot de passe. Ton mot de passe doit comporter entre ${password_minimum_length} et ${password_maximum_length} caractères, contenir au moins un chiffre, au moins une lettre minuscule, "
 "au moins une lettre majuscule et au moins un des caractères suivants : '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
 #: alirpunkto/schemas/register_form.py:130
 msgid "password_confirm_description"
-msgstr "Veuillez confirmer votre mot de passe"
+msgstr "Confirme ton mot de passe"
 
 #: alirpunkto/schemas/register_form.py:132
 msgid "confirm_password_required"
-msgstr "La confirmation de votre mot de passe est requise"
+msgstr "La confirmation de ton mot de passe est requise"
 
 #: alirpunkto/schemas/register_form.py:138
 msgid "email_description"
 msgstr ""
-"Veuillez fournir l'adresse de courriel que l'infrastructure informatique de ${domain_name} utilisera pour interagir avec vous.\n"
-"Nous vous recommandons de choisir une adresse de courriel que vous vérifiez souvent.\n"
-"Nous avons besoin de cette information car nous devons interagir avec vous, vous tenir informé.e des événements de la Coopérative, vous offrir la possibilité d'agir ou de contribuer aux "
-"décisions. Le courriel est le médium le plus utilisé en Europe, il est universel et est basé sur des normes ouvertes et libres, contrairement aux systèmes de messagerie propriétaires des géants du numérique (également "
+"Entre l'adresse de courriel que l'infrastructure informatique de ${domain_name} utilisera pour interagir avec toi.\n"
+"Nous te recommandons de choisir une adresse de courriel que tu vérifies souvent.\n"
+"Nous avons besoin de cette information car nous devons interagir avec toi, te tenir informé.e des événements de la Coopérative, te donner la possibilité d'agir ou de contribuer aux "
+"décisions. Le courriel est le médium le plus utilisé en Europe, il est universel et basé sur des normes ouvertes et libres, contrairement aux systèmes de messagerie propriétaires des géants du numérique (également "
 "appelés 'GAFAM').\n"
-"Cette adresse de courriel sera utilisée exclusivement pour garantir la communication entre l'infrastructure informatique de ${domain_name} et vous. Elle ne sera jamais affichée aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmise ou vendue à qui que ce soit, sauf pour répondre aux exigences légales des autorités publiques chargées de "
+"Cette adresse de courriel sera utilisée exclusivement pour garantir la communication entre l'infrastructure informatique de ${domain_name} et toi. Elle ne sera jamais affichée aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmise ou vendue à qui que ce soit, sauf pour répondre aux exigences légales des autorités publiques chargées de "
 "l'application de la loi, à la demande d'un juge. Le "
 "\"responsable du traitement des données\" tel que défini par le Règlement Général sur la Protection des Données (RGPD) de l' "
 "Union Européenne est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le "
@@ -842,159 +831,149 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
 msgstr ""
-"Veuillez indiquer la langue avec laquelle vous préféreriez que l'infrastructure informatique de ${domain_name} interagisse avec vous. \n"
-" Nous vous recommandons de choisir la langue que vous connaissez le mieux, parmi les langues officielles de l'Union Européenne ou l'espéranto. Si elle est disponible parmi celles pour lesquelles nous avons "
-"développé une interface utilisateur, nous l'utiliserons pour interagir avec vous. \n"
-" Nous avons besoin de cette information car, pour des raisons d'équité et de respect des principes démocratiques, nous souhaitons interagir avec vous dans une langue que vous comprenez le mieux possible."
+"Indique la langue avec laquelle tu préférerais que l'infrastructure informatique de ${domain_name} interagisse avec toi. \n"
+"Nous te recommandons de choisir la langue que tu connais le mieux, parmi les langues officielles de l'Union Européenne ou l'espéranto. Si elle est disponible parmi celles pour lesquelles nous avons "
+"développé une interface utilisateur, nous l'utiliserons pour interagir avec toi. \n"
+"Nous avons besoin de cette information car, pour des raisons d'équité et de respect des principes démocratiques, nous souhaitons interagir avec toi dans une langue que tu comprends le mieux possible."
 
 #: alirpunkto/schemas/register_form.py:151
 msgid "second_interaction_language_description"
 msgstr ""
-"Veuillez indiquer la langue avec laquelle vous accepteriez, comme second choix, que l'infrastructure informatique de ${domain_name} interagisse avec vous. \n"
-" Nous vous recommandons de choisir une autre langue officielle de l'Union Européenne ou l'espéranto, que vous comprenez raisonnablement bien. Si elle est disponible parmi celles pour lesquels nous avons "
-"développé une interface utilisateur, et si votre langue préférée n'est pas disponible, nous l'utiliserons pour interagir avec vous. \n"
-" Nous avons besoin de cette information car, malgré nos efforts, il se peut que votre langue préférée ne soit pas disponible sur l'interface utilisateur de notre logiciel. C'est pourquoi nous vous demandons si "
-"vous pouvez utiliser une autre langue."
+"Indique la langue avec laquelle tu accepterais, comme second choix, que l'infrastructure informatique de ${domain_name} interagisse avec toi. \n"
+"Nous te recommandons de choisir une autre langue officielle de l'Union Européenne ou l'espéranto, que tu comprends raisonnablement bien. Si elle est disponible parmi celles pour lesquelles nous avons "
+"développé une interface utilisateur, et si ta langue préférée n'est pas disponible, nous l'utiliserons pour interagir avec toi. \n"
+"Nous avons besoin de cette information car, malgré nos efforts, il se peut que ta langue préférée ne soit pas disponible sur l'interface utilisateur de notre logiciel. C'est pourquoi nous te demandons si "
+"tu peux utiliser une autre langue."
 
 #: alirpunkto/schemas/register_form.py:156
 msgid "third_interaction_language_label"
-msgstr "La langue que vous acceptez comme troisième choix pour que nous interagissions avec vous"
+msgstr "La langue que tu acceptes comme troisième choix pour que nous interagissions avec toi"
 
 msgid "third_interaction_language_description"
 msgstr ""
-"Veuillez indiquer la langue avec laquelle vous accepteriez, comme troisième choix, que l'infrastructure informatique de ${domain_name} interagisse avec vous. \n"
-" Nous vous recommandons de choisir une autre langue officielle de l'Union Européenne ou l'espéranto, que vous pouvez encore comprendre. Si elle est disponible parmi ceux pour lesquels nous avons développé une "
-"interface utilisateur, et si ni votre langue préférée ni votre seconde langue ne sont disponibles, nous l'utiliserons pour interagir avec vous. \n"
-" Nous avons besoin de cette information car, malgré nos efforts, il se peut que votre langue préférée et votre seconde langue ne soient pas disponibles sur l'interface utilisateur de notre logiciel. C'est "
-"pourquoi nous vous demandons si vous pouvez utiliser une troisième langue. Nous sommes conscients que pour vous interagir avec nous en l'utilisant est une situation insatisfaisante pour vous - comme pour nous. Nous vous prions de nous en excuser."
+"Indique la langue avec laquelle tu accepterais, comme troisième choix, que l'infrastructure informatique de ${domain_name} interagisse avec toi. \n"
+"Nous te recommandons de choisir une autre langue officielle de l'Union Européenne ou l'espéranto, que tu peux encore comprendre. Si elle est disponible parmi ceux pour lesquels nous avons développé une "
+"interface utilisateur, et si ni ta langue préférée ni ta seconde langue ne sont disponibles, nous l'utiliserons pour interagir avec toi. \n"
+"Nous avons besoin de cette information car, malgré nos efforts, il se peut que ta langue préférée et ta seconde langue ne soient pas disponibles sur l'interface utilisateur de notre logiciel. C'est "
+"pourquoi nous te demandons si tu peux utiliser une troisième langue. Nous savons que pour toi interagir avec nous en l'utilisant est une situation insatisfaisante pour toi - comme pour nous. Nous te prions de nous en excuser."
 
 #: alirpunkto/schemas/register_form.py:163
 msgid "cooperative_behaviour_mark_label"
-msgstr "Votre Note de Comportement Coopératif"
+msgstr "Ta Note de Comportement Coopératif"
 
 msgid "cooperative_behaviour_mark_description"
 msgstr ""
-"En tant que Coopérateur, votre Note de Comportement Coopératif résulte des notes attribuées par les autres Participants Actifs dans les Groupes de Travail auxquels vous avez participé pour définir "
-"et adopter des Propositions d'Action. Chaque Participant Actif peut donner une note égale à +1, 0 ou -1, selon le degré de coopération dont vous avez fait "
-"preuve au cours de votre participation active à ce groupe de travail. Cette note est ensuite automatiquement 'oubliée' et diminue avec le temps : elle est réduite de moitié après ${forgetting_time_constant} jours. La valeur initiale de votre Note de Comportement "
+"En tant que Coopérateur, ta Note de Comportement Coopératif résulte des notes attribuées par les autres Participants Actifs dans les Groupes de Travail auxquels tu as participé pour définir "
+"et adopter des Propositions d'Action. Chaque Participant Actif peut donner une note égale à +1, 0 ou -1, selon le degré de coopération dont tu as fait "
+"preuve au cours de ta participation active à ce groupe de travail. Cette note est ensuite automatiquement 'oubliée' et diminue avec le temps : elle est réduite de moitié après ${forgetting_time_constant} jours. La valeur initiale de ta Note de Comportement "
 "Coopératif est zéro."
 
 #: alirpunkto/schemas/register_form.py:169
 msgid "cooperative_behaviour_mark_update_label"
-msgstr "Date à laquelle votre Note de Comportement Coopératif a été mise à jour pour la dernière fois"
+msgstr "Date à laquelle ta Note de Comportement Coopératif a été mise à jour pour la dernière fois"
 
 #: alirpunkto/schemas/register_form.py:170
 msgid "cooperative_behaviour_mark_update_description"
 msgstr ""
-"C'est la dernière date à laquelle un autre Coopérateur vous a attribué une note à l'issue de votre participation active à un Groupe de Travail qui définissait et adoptait une Proposition d'Action. La valeur initiale de cette date est celle de votre inscription en tant que Coopérateur"
+"C'est la dernière date à laquelle un autre Coopérateur t'a attribué une note à l'issue de ta participation active à un Groupe de Travail qui définissait et adoptait une Proposition d'Action. La valeur initiale de cette date est celle de ton inscription en tant que Coopérateur"
 
 #: alirpunkto/schemas/register_form.py:171
 msgid "cooperative_behaviour_mark_update_required"
 msgstr ""
-
 #: alirpunkto/schemas/register_form.py:180
 msgid "number_shares_owned_label"
-msgstr "Nombre de parts sociales  de la Coopérative que vous possédez"
+msgstr "Nombre de parts sociales de la Coopérative que tu possèdes"
 
 #: alirpunkto/schemas/register_form.py:181
 msgid "number_shares_owned_description"
 msgstr ""
-"Il s'agit du nombre total de parts sociales de la Coopérative que vous "
-"possédez, après les avoir achetées sur notre portail web. Lors de votre "
-"inscription, ce nombre est égal à zéro. Nous vous invitons à vous rendre dès "
-"que possible à cette URL : ${url_purchase_shares} pour acheter votre (vos) "
-"première(s) part(s) sociale(s). Vous ne bénéficierez de tous vos droits de "
-"décision en tant que Coopérateur qu'après avoir acheté au moins une part "
-"sociale (et payé votre contribution annuelle). Vous pouvez acheter plus "
-"d'une part sociale, lors de votre inscription, mais aussi à tout moment par "
-"la suite. Cela renforce notre Coopérative et nous vous en sommes tou.te.s "
+"Il s'agit du nombre total de parts sociales de la Coopérative que tu possèdes, après les avoir achetées sur notre portail web. Lors de ton inscription, ce nombre est égal à zéro. Nous t'invitons à te rendre dès "
+"que possible à cette URL : ${url_purchase_shares} pour acheter ta (tes) première(s) part(s) sociale(s). Tu ne bénéficieras de tous tes droits de décision en tant que Coopérateur qu'après avoir acheté au moins une part "
+"sociale (et payé ta contribution annuelle). Tu peux acheter plus d'une part sociale, lors de ton inscription, mais aussi à tout moment par la suite. Cela renforce notre Coopérative et nous t'en sommes tou.te.s "
 "reconnaissant.e.s !"
-
 
 #: alirpunkto/schemas/register_form.py:183
 msgid "number_shares_owned_required"
-msgstr ""
+msgstr "Le nombre de parts sociales que tu possèdes est requis"
 
 #: alirpunkto/schemas/register_form.py:188
 msgid "date_end_validity_yearly_contribution_label"
-msgstr "Date à laquelle votre contribution annuelle actuelle expire"
+msgstr "Date à laquelle ta contribution annuelle actuelle expire"
 
 #: alirpunkto/schemas/register_form.py:189
 msgid "date_end_validity_yearly_contribution_description"
 msgstr ""
-"Date à laquelle votre contribution annuelle actuelle expire, et avant laquelle vous devez la payer à nouveau pour conserver vos pleins droits de décision en tant que Coopérateur. Lors de votre inscription, cette "
-"date est fixée à un moment dans le passé, ce qui signifie que vous devez la payer maintenant. Nous vous invitons à vous rendre dès que possible à cette URL : ${url_pay_yearly_contrib} pour payer votre première contribution annuelle, et ainsi participer aux opérations de notre Coopérative. Vous ne jouirez de "
-"vos pleins droits de décision en tant que Coopérateur qu'après avoir payé "
-"votre cotisation annuelle "
+"Date à laquelle ta contribution annuelle actuelle expire, et avant laquelle tu dois la payer à nouveau pour conserver tes pleins droits de décision en tant que Coopérateur. Lors de ton inscription, cette "
+"date est fixée à un moment dans le passé, ce qui signifie que tu dois la payer maintenant. Nous t'invitons à te rendre dès que possible à cette URL : ${url_pay_yearly_contrib} pour payer ta première contribution annuelle, et ainsi participer aux opérations de notre Coopérative. Tu ne jouiras de "
+"tes pleins droits de décision en tant que Coopérateur qu'après avoir payé "
+"ta cotisation annuelle "
 "(et acheté au moins une part sociale)."
 
 #: alirpunkto/schemas/register_form.py:190
 msgid "date_end_validity_yearly_contribution_required"
-msgstr ""
+msgstr "La date de ta contribution annuelle est requise"
 
 #: alirpunkto/schemas/register_form.py:199
 msgid "iban_label"
-msgstr "Numéro International de Compte Bancaire (IBAN) de votre compte bancaire"
+msgstr "Numéro International de Compte Bancaire (IBAN) de ton compte bancaire"
 
 #: alirpunkto/schemas/register_form.py:200
 msgid "iban_description"
 msgstr ""
-"Si et quand vous décidez de quitter la Coopérative (ce que nous regretterions tous), "
-"nous avons besoin de votre IBAN pour pouvoir vous transférer le produit de "
-"notre rachat de vos parts de la Coopérative. Pour des raisons de sécurité, "
-"nous vous conseillons de ne fournir cette information que si et quand vous "
-"prévoyez de quitter la Coopérative"
+"Si et quand tu décides de quitter la Coopérative (ce que nous regretterions tous), "
+"nous avons besoin de ton IBAN pour pouvoir te transférer le produit de "
+"notre rachat de tes parts de la Coopérative. Pour des raisons de sécurité, "
+"nous te conseillons de ne fournir cette information que si et quand tu "
+"prévois de quitter la Coopérative"
 
 #: alirpunkto/schemas/register_form.py:202
 msgid "iban_required"
-msgstr ""
+msgstr "Ton IBAN est requis"
 
 #: alirpunkto/schemas/register_form.py:207
 msgid "date_erasure_all_data_title"
-msgstr "Date à laquelle toutes vos données seront effacées de notre infrastructure informatique"
+msgstr "Date à laquelle toutes tes données seront effacées de notre infrastructure informatique"
 
 #: alirpunkto/schemas/register_form.py:208
 msgid "date_erasure_all_data_description"
 msgstr ""
-"Si et quand vous quittez la Coopérative, vos données d'identité seront conservées pendant une durée de ${Quarantine} jours, avant d'être entièrement et irrévocablement supprimées de nos archives. Ceci est pour "
-"assurer qu'un Coopérateur quittant la Coopérative parce que sa Note de Comportement Coopératif est trop mauvaise ne puisse pas se réinscrire immédiatement avec un pseudonyme et une Note de Comportement Coopératif vierges. Lors de votre inscription, cette date est fixée dans un futur très lointain"
+"Si et quand tu quittes la Coopérative, tes données d'identité seront conservées pendant une durée de ${Quarantine} jours, avant d'être entièrement et irrévocablement supprimées de nos archives. Ceci est pour "
+"assurer qu'un Coopérateur quittant la Coopérative parce que sa Note de Comportement Coopératif est trop mauvaise ne puisse pas se réinscrire immédiatement avec un pseudonyme et une Note de Comportement Coopératif vierges. Lors de ton inscription, cette date est fixée dans un futur très lointain"
 
 msgid "avatar_label"
-msgstr "Une image pour vous représenter (votre avatar)"
+msgstr "Une image pour te représenter (ton avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Veuillez fournir une image vous représentant en tant que membre de la Communauté. Afin de vous préserver de toute représaille de la part de votre employeur ou de vos clients, nous vous recommandons que cette image "
-"ne permette pas de remonter jusqu'à votre identité dans la vie réelle. Elle ne devrait donc généralement pas être une photographie de vous-même (rappelez-vous que les logiciels de reconnaissance faciale sont massivement utilisés par "
+"Fournis une image te représentant en tant que membre de la Communauté. Afin de te préserver de toute représaille de la part de ton employeur ou de tes clients, nous te recommandons que cette image "
+"ne permette pas de remonter jusqu'à ton identité dans la vie réelle. Elle ne devrait donc généralement pas être une photographie de toi-même (rappelle-toi que les logiciels de reconnaissance faciale sont massivement utilisés par "
 "les robots de recherche). L'image doit être uniquement au format JPEG (extension .JPG ou .JPEG), et ne doit pas dépasser 5 Mo. \n"
-"  Nous pensons que cette information est utile car une image permet "
-"aux autres membres de la Communauté de vous reconnaître plus facilement. "
+"Nous pensons que cette information est utile car une image permet "
+"aux autres membres de la Communauté de te reconnaître plus facilement. "
 "Parfois, une image est plus parlante qu'un long discours. Avec cette image, "
-"vous exprimez beaucoup de choses sur vous, dans un langage universel. "
-"Profitez-en !"
-
-
+"tu exprimes beaucoup de choses sur toi, dans un langage universel. "
+"Profites-en !"
 msgid "candidature_mixed"
 msgstr ""
-"L'adresse (URL) que vous avez utilisée pour retrouver votre procédure de "
-"candidature où vous l'aviez interrompue ne correspond pas à celle que "
-"nous avons enregistrée pour vous.(Le numéro de la candidature dans la "
+"L'adresse (URL) que tu as utilisée pour retrouver ta procédure de "
+"candidature où tu l'avais interrompue ne correspond pas à celle que "
+"nous avons enregistrée pour toi. (Le numéro de la candidature dans la "
 "session et celui de l'URL ne correspondent pas).\n"
-"Veuillez utiliser uniquement l'URL du dernier courriel que vous avez reçu.\n" 
-"Si vous n'avez pas reçu de courriel d'ici quelques minutes, veuillez vérifier votre dossier de pourriels (spams). Il est possible que le courriel que nous vous avons envoyé s'y trouve."
+"Utilise uniquement l'URL du dernier courriel que tu as reçu.\n"
+"Si tu n'as pas reçu de courriel d'ici quelques minutes, vérifie ton dossier de pourriels (spams). Il est possible que le courriel que nous t'avons envoyé s'y trouve."
 
 msgid "check_new_email"
-msgstr "Vous avez demandé à changer votre adresse de courriel. À l'avenir, vous souhaitez utiliser : ${new_email}. En conséquence, vous recevrez un courriel contenant un lien pour valider cette nouvelle adresse."
+msgstr "Tu as demandé à changer ton adresse de courriel. À l'avenir, tu souhaites utiliser : ${new_email}. En conséquence, tu recevras un courriel contenant un lien pour valider cette nouvelle adresse."
 
 msgid "check_new_email_subject"
-msgstr "Vérification de votre nouvelle adresse de courriel"
+msgstr "Vérification de ta nouvelle adresse de courriel"
 
 msgid "check_new_email_send_error"
-msgstr "L'envoi du courriel de vérification pour votre nouvelle adresse a échoué"
+msgstr "L'envoi du courriel de vérification pour ta nouvelle adresse a échoué"
 
 #: alirpunkto/views/modify_member.py:228
 msgid "check_new_email_send"
-msgstr "Le courriel de vérification pour votre nouvelle adresse a été envoyé. Si vous n'avez pas reçu de courriel d'ici quelques minutes, veuillez vérifier votre dossier de pourriels (spams). Il est possible que le courriel que nous vous avons envoyé s'y trouve."
+msgstr "Le courriel de vérification pour ta nouvelle adresse a été envoyé. Si tu n'as pas reçu de courriel d'ici quelques minutes, vérifie ton dossier de pourriels (spams). Il est possible que le courriel que nous t'avons envoyé s'y trouve."
 
 msgid "modify_member"
 msgstr "Consulter ou modifier le membre"
@@ -1091,21 +1070,21 @@ msgid "modify_member_title"
 msgstr "Modifier le profil du membre"
 
 msgid "select_member_oid_label"
-msgstr "Veuillez sélectionner un membre pour modifier son profil :"
+msgstr "Sélectionne un membre pour modifier son profil :"
 
 msgid "select_member_placeholder"
 msgstr "Pseudonyme du membre"
 
 msgid "modify_profile"
-msgstr "Vous pouvez changer votre profil en cliquant ici"
+msgstr "Tu peux changer ton profil en cliquant ici"
 
 msgid "profile"
 msgstr "profil"
 
 msgid "check_new_email_confirmed_msg"
 msgstr ""
-"Votre adresse de courriel a été mise à jour avec succès. Vous utiliserez maintenant cette nouvelle adresse pour toutes les communications futures avec ${domain_name}. Si vous n'avez pas demandé ce changement ou si vous avez "
-"des questions, n'hésitez pas à contacter notre support immédiatement à ${admin_email}. Merci de faire partie de la communauté ${domain_name}!"
+"Ton adresse de courriel a été mise à jour avec succès. Tu utiliseras maintenant cette nouvelle adresse pour toutes les communications futures avec ${domain_name}. "
+"Si tu n'as pas demandé ce changement ou si tu as des questions, contacte immédiatement notre support à ${admin_email}. Merci de faire partie de la communauté ${domain_name} !"
 
 msgid "provider_role_activated"
 msgstr "Votre compte prestataire a été créé."
