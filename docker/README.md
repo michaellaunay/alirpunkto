@@ -12,9 +12,16 @@ LDAP_SECRET_FILE="$SECRETS_DIR/ldap_password"
 mkdir -p "$SECRETS_DIR"
 chmod 700 "$SECRETS_DIR"
 
+# Copy your .env into the docker directory to customize it, or create a proper link
+# Check if docker.env exist
+if [[ ! -e docker/.env ]]; then
+  ln -s .env docker/.env
+  echo "Create link docker/.env to .env"
+fi
+ 
 # Load .env file and export variables
 set -a
-source .env
+source docker/.env
 set +a
 
 # Copy LDAP_PASSWORD into a secret file
@@ -38,9 +45,11 @@ done < <(env)
 
 # Update initials_users exemple with LDAP_BASE_DN from .env
 # Please change the two initial ldap user
-sed "s/dc=cosmopolitical,dc=coop/${LDAP_BASE_DN}/g" \
+sed "s/dc=alirpunkto,dc=org/${LDAP_BASE_DN}/g" \
   docker/initials_users.ldif > docker/initials_users.generated.ldif
 
+# copy alirpunkto/alirpunkto_schema.ldif in docker directory
+cp alirpunkto/alirpunkto_schema.ldif docker/
 # Create the docker image for ldap service
 docker buildx build -f docker/DockerfileOpenLDAP  -t alirpunkto-ldap docker
 
@@ -52,7 +61,6 @@ docker run --name alirpunkto-ldap \
   -e LDAP_BASE_DN="$LDAP_BASE_DN" \
   -e LDAP_ORGANIZATION="$LDAP_ORGANIZATION" \
   -e LDAP_PASSWORD_FILE=/run/secrets/ldap_password \
-  -v $(pwd)/alirpunkto/alirpunkto_schema.ldif:/alirpunkto_schema.ldif \
   -v alirpunkto_ldap_etc:/etc/ldap \
   -v alirpunkto_ldap_var:/var/lib/ldap \
   -v $(pwd)/secrets/ldap_password:/run/secrets/ldap_password:ro \

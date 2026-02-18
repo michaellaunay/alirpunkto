@@ -1,51 +1,165 @@
-dn: uid=00000001-0002-0003-0004-000000000005,dc=cosmopolitical,dc=coop
-objectClass: top
-objectClass: inetOrgPerson
-objectClass: alirpunktoPerson
-uid: 00000001-0002-0003-0004-000000000005
-sn: Launay
-cn:: TWljaGHDq2wgTGF1bmF5
-employeeNumber: 00000001-0002-0003-0004-000000000005
-employeeType: COOPERATOR
-isActive: TRUE
-preferredLanguage: fr
-secondLanguage: en
-givenName:: TWljaGHDq2w=
-nationality: FR
-cooperativeBehaviourMark: 0
-description: Logikascium CIO
-thirdLanguage: eo
-userPassword:: VW5TdXBlck1vdERlUGFzc2XDgENoYW5nZXI=
-uniqueMemberOf: cn=boardMembersGroup,dc=cosmopolitical,dc=coop
-uniqueMemberOf: cn=communityMembersGroup,dc=cosmopolitical,dc=coop
-uniqueMemberOf: cn=cooperatorsGroup,dc=cosmopolitical,dc=coop
-birthdate: 1937-10-29T12:00:00
-mail: michaellaunay@example.com
-numberSharesOwned: 8
-dateEndValidityYearlyContribution: 2026-07-28T12:00:00
+# =====================
+# Groups
+# =====================
 
-dn: uid=00000006-0007-0008-0009-000000000000,dc=cosmopolitical,dc=coop
+dn: cn=communityGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: communityGroup
+description: Group for members of the community who are not yet coperators
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=providersGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: providersGroup
+description: Group for active providers of the coperative
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=sanctionedGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: sanctionedGroup
+description: Group for sanctioned members
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=coperatorsGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: coperatorsGroup
+description: Group for active coperators of the coperative
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+uniqueMember: uid=123a456a-bb78-9012-3456-7f890abc1d2e,dc=alirpunkto,dc=org
+uniqueMember: uid=9eb02a19-b2b2-1bfb-9521-d7115b3a99d8,dc=alirpunkto,dc=org
+
+dn: cn=boardMembersGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: boardMembersGroup
+description: Group for board members of the coperative
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+uniqueMember: uid=123a456a-bb78-9012-3456-7f890abc1d2e,dc=alirpunkto,dc=org
+uniqueMember: uid=9eb02a19-b2b2-1bfb-9521-d7115b3a99d8,dc=alirpunkto,dc=org
+
+dn: cn=administratorsGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: administratorsGroup
+description: Group for active administrators of the coperative
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=ordinaryMembersGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: ordinaryMembersGroup
+description: Group for ordinary members of the coperative
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=communityMembersGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: communityMembersGroup
+description: Group for members of the community who are not yet coperators
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+uniqueMember: uid=123a456a-bb78-9012-3456-7f890abc1d2e,dc=alirpunkto,dc=org
+uniqueMember: uid=9eb02a19-b2b2-1bfb-9521-d7115b3a99d8,dc=alirpunkto,dc=org
+
+dn: cn=suspendedBoardMembersGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: suspendedBoardMembersGroup
+description: Group for suspended board members
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=candidatesMissingShareGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: candidatesMissingShareGroup
+description: Group for members who have not contributed their share
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=mediationArbitrationCouncilGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: mediationArbitrationCouncilGroup
+description: Group for members of the Mediation Arbitration Council
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=candidatesMissingYearContribGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: candidatesMissingYearContribGroup
+description: Group for members who have not contributed for the current year
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=sanctionedMissingYearContribGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: sanctionedMissingYearContribGroup
+description: Group for sanctioned members who have not contributed for the current year
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=candidatesMissingShareYearContribGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: candidatesMissingShareYearContribGroup
+description: Group for members who have not contributed their share for the current year
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+dn: cn=suspendedMediationArbitrationCouncilGroup,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: suspendedMediationArbitrationCouncilGroup
+description: Group for suspended members of the Mediation Arbitration Council
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
+
+
+# =====================
+# Users
+# =====================
+
+dn: uid=123a456a-bb78-9012-3456-7f890abc1d2e,dc=alirpunkto,dc=org
 objectClass: top
 objectClass: inetOrgPerson
 objectClass: alirpunktoPerson
-uid: 00000006-0007-0008-0009-000000000000
+uid: 123a456a-bb78-9012-3456-7f890abc1d2e
 sn: Zibell
 cn: Sergio Arbarviro
-employeeNumber: 00000006-0007-0008-0009-000000000000
-employeeType: COOPERATOR
+employeeNumber: 123a456a-bb78-9012-3456-7f890abc1d2e
+employeeType: COPERATOR
 isActive: TRUE
 preferredLanguage: fr
 secondLanguage: en
 thirdLanguage: de
-givenName: Laurent, Jean-Serge
+givenName: Sergio
 nationality: FR
 cooperativeBehaviourMark: 0
-description: I am one of the founders of the CosmoPolitical Cooperative, and currently the chairman of its Board. I am an engineer and an economist by training, and have strongly contributed to the drafting of the "Society of Agreement".
-uniqueMemberOf: cn=boardMembersGroup,dc=cosmopolitical,dc=coop
-uniqueMemberOf: cn=communityMembersGroup,dc=cosmopolitical,dc=coop
-uniqueMemberOf: cn=cooperatorsGroup,dc=cosmopolitical,dc=coop
-birthdate: 1999-10-29T12:00:00
-mail: sergio.arbarviro@example.org
-userPassword: 1865D-Menaj!
+description: I am one of the founders of the alirpunkto coperative, and currently the chairman of its Board.
+birthdate: 1999-06-08T12:00:00
+mail: sergio.arbarviro@kuneagi.org
+userPassword: Un mot de passe incroyable
 numberSharesOwned: 1
 dateEndValidityYearlyContribution: 2026-09-19T12:00:00
+
+dn: uid=9eb02a19-b2b2-1bfb-9521-d7115b3a99d8,dc=alirpunkto,dc=org
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: alirpunktoPerson
+uid: 9eb02a19-b2b2-1bfb-9521-d7115b3a99d8
+sn: Longnez
+cn: Programisto
+employeeNumber: 9eb02a19-b2b2-1bfb-9521-d7115b3a99d8
+employeeType: COPERATOR
+isActive: TRUE
+preferredLanguage: fr
+secondLanguage: en
+thirdLanguage: eo
+givenName: Michaël
+nationality: FR
+cooperativeBehaviourMark: 0
+description: Logikascium CIO
+birthdate: 1984-03-14T12:00:00
+mail: contact+alirpunkto@ecreall.com
+userPassword: Encore un super mot de passe!
+numberSharesOwned: 8
+dateEndValidityYearlyContribution: 2026-07-28T12:00:00
