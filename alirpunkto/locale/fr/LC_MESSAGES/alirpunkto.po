@@ -695,7 +695,8 @@ msgstr "Si l'utilisateur existe, un courriel a été envoyé à son adresse de c
 msgid "password_not_match"
 msgstr "Les deux versions du mot de passe ne correspondent pas. Assure-toi que c'est le cas et soumets à nouveau ta demande"
 
-#: alirpunkto/views/forgot_password.py:202 msgid "password_required"
+#: alirpunkto/views/forgot_password.py:202
+msgid "password_required"
 msgstr "Entre un nouveau mot de passe"
 
 #: alirpunkto/views/forgot_password.py:229
