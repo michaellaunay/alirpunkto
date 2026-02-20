@@ -11,6 +11,7 @@ echo "docker volume rm alirpunkto_ldap_etc"
 docker volume rm alirpunkto_ldap_etc || true
 echo "docker volume rm alirpunkto_ldap_var"
 docker volume rm alirpunkto_ldap_var || true
+echo "remove docker/var/*"
 
 echo "Cleanup finished."
 

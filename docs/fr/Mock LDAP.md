@@ -487,30 +487,4 @@ Si vous disposez d'un serveur LDAP réel avec votre schéma personnalisé, vous 
 
    **Note :** Cette méthode suppose que vous avez accès au serveur LDAP réel et que vous pouvez extraire le schéma complet.
 
-# 2026-02-11 à 2026-02-13 
-
-### 1. Correction de la Hiérarchie des Classes (Modèle de Données)
-
-- **Problématique :** La classe `alirpunktoPerson` était initialement définie comme `STRUCTURAL` en tentant d'hériter de `inetOrgPerson`. Or, le standard LDAP (RFC 4512) interdit la dérivation directe entre deux classes structurelles.
-- **Solution :** Passage de `alirpunktoPerson` en type **`AUXILIARY`**.
-- **Optimisation :** Nettoyage des attributs redondants. Les attributs déjà présents dans `inetOrgPerson` (comme `mail`, `uid`, `cn`, `sn`) ont été retirés de la définition de `alirpunktoPerson` pour éviter les conflits de schéma, tout en restant utilisables sur l'entrée finale grâce à la multi-appartenance aux classes d'objets.
-
-### 2. Mise en Conformité du Format OLC (Online Configuration)
-
-- **Correction de l'Entête :** Alignement strict du format **OLC** pour l'injection dans `cn=config`.
-- **Sensibilité à la Casse :** Rectification de l'identifiant `cn` dans le schéma pour assurer la cohérence entre le Distinguished Name (`dn: cn=alirpunktoPerson...`) et l'attribut `cn: alirpunktoPerson`.
-- **Interopérabilité Applicative :** Maintien du format `DirectoryString` pour les dates (`birthdate`, `dateEndValidityYearlyContribution`) malgré la préférence LDAP pour `GeneralizedTime`, afin de garantir la compatibilité avec les limitations de lecture de l'application cliente Drupal.
-### 3. Fiabilisation du Déploiement Docker
-
-- **Persistance vs Initialisation :** Remplacement du montage de volume pour les données initiales par une instruction **`COPY`** dans le Dockerfile (`COPY ./initials_users.ldif /initials_users.ldif`). Cela garantit que l'image est "prête à l'emploi" et contient ses données de base de manière immuable.
-    
-- **Robustesse du Script de démarrage (`start_ldap.sh`) :** * Ajout de traces d'exécution (`set -x`) pour faciliter le debug via `docker logs`.
-    
-    - Implémentation de vérifications post-chargement via `ldapsearch` pour confirmer la présence effective des attributs critiques (ex: `isActive`) avant de finaliser le démarrage.
-    - Automatisation du chargement du schéma `inetorgperson.ldif` s'il est absent, car il est une dépendance obligatoire pour les utilisateurs `alirpunkto`.
-
-### 4. État Final des Données Initiales
-
-- **Structure des Groupes :** Création d'une arborescence complète de groupes (`communityGroup`, `coperatorsGroup`, `boardMembersGroup`, etc.) utilisant la classe `groupOfUniqueNames` pour la gestion des droits.
-    
-- **Utilisateurs de Test :** Injection des premiers membres avec l'ensemble des attributs personnalisés : IBAN, nombre de parts sociales (`numberSharesOwned`), et langues parlées.`
+`

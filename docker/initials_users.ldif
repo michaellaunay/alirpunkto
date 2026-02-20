@@ -119,7 +119,6 @@ uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc
 # =====================
 
 dn: uid=123a456a-bb78-9012-3456-7f890abc1d2e,dc=alirpunkto,dc=org
-objectClass: top
 objectClass: inetOrgPerson
 objectClass: alirpunktoPerson
 uid: 123a456a-bb78-9012-3456-7f890abc1d2e
@@ -142,7 +141,6 @@ numberSharesOwned: 1
 dateEndValidityYearlyContribution: 2026-09-19T12:00:00
 
 dn: uid=9eb02a19-b2b2-1bfb-9521-d7115b3a99d8,dc=alirpunkto,dc=org
-objectClass: top
 objectClass: inetOrgPerson
 objectClass: alirpunktoPerson
 uid: 9eb02a19-b2b2-1bfb-9521-d7115b3a99d8
