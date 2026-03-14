@@ -1,99 +1,94 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
-#############################
-# Fixe les permissions si nécessaire
-#############################
-# 1. Corriger les permissions du spool Postfix si le répertoire est monté
-if [ -d "/var/spool/postfix" ] ; then
-  chown -R postfix:postfix /var/spool/postfix
-  chmod -R 750 /var/spool/postfix
-fi
-# 2. Corriger les permissions de la clé DKIM privée, si elle existe
-if [ -f "/etc/dkimkeys/dkim.private" ] ; then
-  chown root:opendkim /etc/dkimkeys/dkim.private
-  chmod 660 /etc/dkimkeys/dkim.private
-fi
-# 3. Corriger les permissions du fichier de log des mails
-if [ -f "/var/log/mail.log" ] ; then
-  chown postfix:root /var/log/mail.log
-fi
+DOMAIN="${DOMAIN:-alirpunkto.com}"
+POSTFIX_MYHOSTNAME="${POSTFIX_MYHOSTNAME:-${DOMAIN}}"
+POSTFIX_RELAYHOST="${POSTFIX_RELAYHOST:-}"
+POSTFIX_INET_PROTOCOLS="${POSTFIX_INET_PROTOCOLS:-ipv4}"
+POSTFIX_MESSAGE_SIZE_LIMIT="${POSTFIX_MESSAGE_SIZE_LIMIT:-26214400}"
+FAILOVER_IP="${FAILOVER_IP:-}"
 
-#############################
-# Utilisation de l'adresse ipfailover
-#############################
-if [ -n "$FAILOVER_IP" ]; then
-    echo "[Init] Paramétrage de l'IP de FailOver : $FAILOVER_IP"
-    if grep -q "^smtp_bind_address" /etc/postfix/main.cf; then
-        sed -i "s/^smtp_bind_address.*/smtp_bind_address = $FAILOVER_IP/" /etc/postfix/main.cf
-    else
-        echo "smtp_bind_address = $FAILOVER_IP" >> /etc/postfix/main.cf
+cleanup() {
+    if [ -n "${POSTFIX_PID:-}" ] && kill -0 "${POSTFIX_PID}" 2>/dev/null; then
+        kill "${POSTFIX_PID}" 2>/dev/null || true
+        wait "${POSTFIX_PID}" 2>/dev/null || true
     fi
+    if [ -n "${OPENDKIM_PID:-}" ] && kill -0 "${OPENDKIM_PID}" 2>/dev/null; then
+        kill "${OPENDKIM_PID}" 2>/dev/null || true
+        wait "${OPENDKIM_PID}" 2>/dev/null || true
+    fi
+}
+trap cleanup EXIT INT TERM
+
+mkdir -p /etc/dkimkeys /run/opendkim /var/spool/postfix
+chown root:opendkim /etc/dkimkeys /run/opendkim
+chmod 775 /run/opendkim
+
+if [ -d "/var/spool/postfix" ]; then
+    chown -R postfix:postfix /var/spool/postfix
+    chmod 750 /var/spool/postfix
 fi
 
-#############################
-# Mise à jour de Postfix
-#############################
+if [ ! -f "/etc/dkimkeys/dkim.private" ]; then
+    echo "[Init] Generating DKIM key for ${DOMAIN}"
+    opendkim-genkey -D /etc/dkimkeys -d "${DOMAIN}" -s dkim
+fi
 
-# Extraction du CIDR associé à l’interface eth0
-# On filtre sur "scope global" pour éviter les adresses de loopback, link local...
-# On suppose ici qu'il n'y a qu'une seule IP / interface ou qu’on veut la première occurrence
-SUBNET=$(ip -o -f inet addr show eth0 | awk '/scope global/ {print $4}' | head -n1)
+chown root:opendkim /etc/dkimkeys/dkim.private
+chmod 640 /etc/dkimkeys/dkim.private
 
-echo "Détection du réseau Docker : $SUBNET"
+cat > /etc/opendkim/KeyTable <<EOF
+dkim._domainkey.${DOMAIN} ${DOMAIN}:dkim:/etc/dkimkeys/dkim.private
+EOF
 
-# Retirer la ligne "mynetworks" si elle existe déjà
-sed -i '/^mynetworks /d' /etc/postfix/main.cf
+cat > /etc/opendkim/SigningTable <<EOF
+*@${DOMAIN} dkim._domainkey.${DOMAIN}
+EOF
 
-# Réécrire une ligne mynetworks (127.0.0.0/8 et le SUBNET détecté)
-# Vous pouvez ajouter d'autres sous-réseaux ou ne pas retirer la ligne précédente si vous préférez cumuler.
-echo "mynetworks = 127.0.0.0/8, $SUBNET" >> /etc/postfix/main.cf
+cat > /etc/opendkim/TrustedHosts <<EOF
+127.0.0.1
+localhost
+${DOMAIN}
+EOF
 
-echo "Mise à jour de la directive mynetworks, contenu actuel :"
-grep -E '^mynetworks' /etc/postfix/main.cf || true
+postconf -e "myhostname = ${POSTFIX_MYHOSTNAME}"
+postconf -e "mydomain = ${DOMAIN}"
+postconf -e "myorigin = ${DOMAIN}"
+postconf -e "mydestination = localhost"
+postconf -e "relay_domains = ${DOMAIN}"
+postconf -e "inet_interfaces = all"
+postconf -e "inet_protocols = ${POSTFIX_INET_PROTOCOLS}"
+postconf -e "message_size_limit = ${POSTFIX_MESSAGE_SIZE_LIMIT}"
+postconf -e "milter_protocol = 6"
+postconf -e "milter_default_action = accept"
+postconf -e "smtpd_milters = unix:/run/opendkim/opendkim.sock"
+postconf -e "non_smtpd_milters = unix:/run/opendkim/opendkim.sock"
+postconf -e 'smtpd_relay_restrictions = permit_mynetworks,reject_unauth_destination'
 
-#############################
-# Génération automatique de la clé DKIM
-#############################
-if [ -n "$DOMAIN" ]; then
-  if [ ! -f "/etc/dkimkeys/dkim.private" ]; then
-    echo "[Init] Génération de la paire DKIM pour le domaine $DOMAIN"
-    mkdir -p /etc/dkimkeys
-    cd /etc/dkimkeys
-    # L'option -t active le mode test (vous pouvez retirer -t en production une fois validé)
-    opendkim-genkey -D . -d "$DOMAIN" -s dkim -t
-    chown root:opendkim dkim.private
-    chmod 660 dkim.private
-    echo "=> La clé DKIM a été générée. Voici le contenu du fichier dkim.txt à publier en TXT dans votre zone DNS :"
-    cat dkim.txt
-    echo ""
-  else
-    echo "[Init] Clé DKIM déjà présente, pas de génération."
-  fi
+if [ -n "${POSTFIX_RELAYHOST}" ]; then
+    postconf -e "relayhost = ${POSTFIX_RELAYHOST}"
+fi
+
+if [ -n "${FAILOVER_IP}" ]; then
+    postconf -e "smtp_bind_address = ${FAILOVER_IP}"
+fi
+
+SUBNET="$(ip -o -f inet addr show eth0 | awk '/scope global/ {print $4}' | head -n1 || true)"
+if [ -n "${SUBNET}" ]; then
+    postconf -e "mynetworks = 127.0.0.0/8 ${SUBNET}"
 else
-  echo "[Init] Variable DOMAIN non définie, aucune clé DKIM générée."
+    postconf -e "mynetworks = 127.0.0.0/8"
 fi
 
-#############################
-# Démarrage d'OpenDKIM
-#############################
-echo "[Init] Démarrage d'OpenDKIM..."
-/usr/sbin/opendkim -x /etc/opendkim.conf &
+echo "[Init] Starting OpenDKIM"
+/usr/sbin/opendkim -f -x /etc/opendkim.conf &
+OPENDKIM_PID=$!
 
-#############################
-# Router localement le port 9025 vers 25
-#############################
-socat TCP-LISTEN:9025,fork TCP:localhost:25 &
+echo "[Init] DNS record to publish for DKIM:"
+cat /etc/dkimkeys/dkim.txt
 
-#############################
-# Démarrage de Postfix
-#############################
-echo "[Init] Démarrage de Postfix..."
-# Démarrage en arrière-plan de Postfix
-postfix start
+echo "[Init] Starting Postfix"
+postfix start-fg &
+POSTFIX_PID=$!
 
-#############################
-# Maintenir le conteneur actif en affichant les logs Postfix
-#############################
-echo "[Init] Affichage des logs Postfix (Ctrl-C pour quitter)..."
-tail -F /var/log/mail.log
+wait -n "${OPENDKIM_PID}" "${POSTFIX_PID}"

@@ -1,37 +1,35 @@
-# Utiliser Ubuntu 24.04 comme base
 FROM ubuntu:24.04
 
-# Désactiver l’interactivité d’apt
+# Avoid interactive apt prompts during image build.
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Mise à jour et installation d’Apache2, Certbot et modules nécessaires
-RUN apt-get update && apt-get install -y \
+# Install Apache, Certbot, and the small runtime needed to render the vhost template.
+RUN apt-get update && apt-get install -y --no-install-recommends \
     apache2 \
-    libxml2 \
     certbot \
+    gettext-base \
     python3-certbot-apache \
-    vim \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Activer les modules Apache requis
-RUN a2enmod ssl rewrite proxy proxy_http headers
+# Enable the Apache modules required for TLS termination and reverse proxying.
+RUN a2enmod ssl rewrite proxy proxy_http headers remoteip
 
-# Copier le fichier de configuration Apache pour le domaine alirpunkto.com
-# Ce fichier devra être placé dans le même répertoire que ce Dockerfile
-COPY etc/apache2/sites-available/alirpunkto.com.conf /etc/apache2/sites-available/alirpunkto.com.conf
+# Copy the generic site template used by the container entrypoint.
+# The client-specific file `alirpunkto.cosmopolitical.coop.conf` is kept in the
+# repository as a reference and is not enabled by default in this generic image.
+COPY etc/apache2/sites-available/alirpunkto.conf.template /templates/alirpunkto.conf.template
+COPY start_apache2.sh /usr/local/bin/start_apache2.sh
 
-# Activer le site et désactiver la configuration par défaut si souhaité
-RUN a2ensite alirpunkto.com.conf && a2dissite 000-default.conf
+# Make the startup script executable and disable the default site.
+RUN chmod +x /usr/local/bin/start_apache2.sh \
+    && a2dissite 000-default.conf
 
-# Copier le script d'entrypoint (voir ci-dessous)
-COPY start_apache2.sh /start_apache2.sh
-RUN chmod +x /start_apache2.sh
-
-# Exposer les ports HTTP et HTTPS
+# Expose HTTP and HTTPS.
 EXPOSE 80 443
 
-# Volumes pour la persistance des certificats (et potentiellement des logs)
-VOLUME ["/etc/letsencrypt", "/var/lib/letsencrypt"]
+# Persist Let's Encrypt material and Apache logs.
+VOLUME ["/etc/letsencrypt", "/var/lib/letsencrypt", "/var/log/apache2"]
 
-# Démarrer via le script d'entrypoint
-ENTRYPOINT ["/start_apache2.sh"]
+# Start Apache through the custom entrypoint.
+ENTRYPOINT ["/usr/local/bin/start_apache2.sh"]

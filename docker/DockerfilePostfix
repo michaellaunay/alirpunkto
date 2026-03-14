@@ -1,12 +1,10 @@
-# Utiliser Ubuntu 24.04 comme image de base
 FROM ubuntu:24.04
-LABEL maintainer="votre.nom@example.com"
 
-# Désactiver l'interactivité d'apt
+# Avoid interactive apt prompts during image build.
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Installer Postfix, opendkim, opendkim-tools, mailutils et quelques utilitaires (dnsutils par exemple)
-RUN apt-get update && apt-get install -y \
+# Install Postfix, OpenDKIM, and the minimal diagnostic/runtime tools used by the entrypoint.
+RUN apt-get update && apt-get install -y --no-install-recommends \
     postfix \
     opendkim \
     opendkim-tools \
@@ -14,30 +12,24 @@ RUN apt-get update && apt-get install -y \
     iproute2 \
     postfix-policyd-spf-python \
     dnsutils \
-    socat \
+    ca-certificates \
+    procps \
  && rm -rf /var/lib/apt/lists/*
 
-# Créer des points de montage pour persistance des données :
-# - /etc/postfix      : pour la configuration de Postfix (fichiers de conf montés depuis l'hôte)
-# - /var/spool/postfix : pour stocker (et/ou relayer) les mails
-# - /etc/opendkim     : pour la configuration d'OpenDKIM
-# - /etc/dkimkeys     : pour stocker les clés DKIM (la clé privée ainsi que le fichier TXT à publier)
-VOLUME ["/var/spool/postfix", "/etc/dkimkeys", "/var/log"]
-
-# Copier le script d'initialisation dans l'image
-COPY start_postfix.sh /start_postfix.sh
-# Copier la configuration postfix 
+# Copy the base configuration files and the startup script.
 COPY etc/postfix/main.cf /etc/postfix/main.cf
-RUN chmod +x /start_postfix.sh
-
-# Copier la configuration dkim
 COPY etc/opendkim.conf /etc/opendkim.conf
+COPY start_postfix.sh /usr/local/bin/start_postfix.sh
 
-# Exposer le port SMTP (25)
+# Prepare runtime directories and mark the entrypoint executable.
+RUN chmod +x /usr/local/bin/start_postfix.sh \
+    && mkdir -p /etc/dkimkeys /run/opendkim
+
+# Persist the mail queue and DKIM keys.
+VOLUME ["/var/spool/postfix", "/etc/dkimkeys"]
+
+# Expose SMTP.
 EXPOSE 25
 
-# Mettre à jour les packets
-RUN apt-get update && apt-get dist-upgrade -y && rm -rf /var/lib/apt/lists/*
-
-# Lancer le script d'initialisation en tant que commande par défaut
-CMD ["/start_postfix.sh"]
+# Start Postfix through the custom entrypoint.
+ENTRYPOINT ["/usr/local/bin/start_postfix.sh"]
