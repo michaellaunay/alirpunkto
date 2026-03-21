@@ -36,7 +36,7 @@ fi
 if [ ! -f "$CONFIG_MARKER_PATH" ] && [ -n "${LDAP_BASE_DN:-}" ] && [ -n "${LDAP_PASSWORD:-}" ]; then
   LDAP_ORGANIZATION="${LDAP_ORGANIZATION:-$LDAP_DOMAIN}"
 
-  if [[ DEBUG_LDAP ]]; then
+  if [[ "${DEBUG_LDAP}" = "true" ]]; then
     echo "debconf-set-selections <<EOF" \
       "slapd slapd/no_configuration boolean false" \
       "slapd slapd/domain string $LDAP_DOMAIN" \
