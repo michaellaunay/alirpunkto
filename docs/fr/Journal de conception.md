@@ -2312,3 +2312,170 @@ L'ajout d'une routine de validation (ou au moins la documentation des variables 
 Il a fallu supprimer tous les commentaires et sauts de ligne du fichier `alirpunkto/alirpunkto_schema.ldif` pour que le schéma LDAP puisse enfin être chargé correctement par le conteneur Docker. Ceci en raison d'une application stricte du format `cn=config` du ldif, du coup OpenLDAP crée l’entrée mais ignore les définitions internes...
 
 Attention : le fait de monter le schéma sous forme de volume permet au conteneur de le modifier directement, s'il n'est pas passer avec l'option ":ro" lors du `docker run`. Il faut donc être vigilant, car toute modification effectuée par `slapd` sera répercutée sur le fichier hôte.
+
+# 2026-03-30
+Je n'ai pas accès au fichier `Journal de conception.md` directement, mais j'ai tout le contexte nécessaire. Voici l'entrée à ajouter :
+
+---
+
+```markdown
+# 2025-03-30
+
+## Conteneurisation Docker du stack AlirPunkto
+
+### Contexte
+
+Pour faciliter le déploiement d'AlirPunkto sur n'importe quelle machine sans
+avoir à installer et configurer manuellement OpenLDAP, Postfix, Pyramid et
+Apache, nous avons mis en place une infrastructure Docker complète. L'objectif
+est qu'un nouvel administrateur puisse déployer le projet en deux commandes.
+
+### Qu'est-ce que Docker et Docker Compose ?
+
+**Docker** est un outil qui permet d'empaqueter une application et tout son
+environnement (système, bibliothèques, configuration) dans une boîte isolée
+appelée **conteneur**. Un conteneur se comporte toujours de la même façon
+quelle que soit la machine hôte, ce qui élimine le classique problème « ça
+marche sur ma machine ».
+
+Un conteneur est créé à partir d'une **image**, elle-même construite à partir
+d'un fichier texte appelé `Dockerfile` qui décrit les étapes d'installation
+(un peu comme une recette de cuisine).
+
+**Docker Compose** est un outil complémentaire qui permet de décrire dans un
+seul fichier YAML (`docker-compose.yml`) plusieurs conteneurs qui fonctionnent
+ensemble, leurs dépendances, leurs volumes de données persistants et leur réseau
+commun. Au lieu de lancer 4 commandes `docker run` à la main dans le bon ordre,
+on fait simplement :
+
+```bash
+docker compose -f docker/docker-compose.yml up -d
+```
+
+### Architecture du stack
+
+Le stack AlirPunkto est composé de quatre services qui démarrent dans l'ordre
+suivant, chacun attendant que le précédent soit opérationnel avant de démarrer
+(mécanisme de **healthcheck**) :
+
+```
+alirpunkto-ldap ──┐
+                  ├──► alirpunkto-pyramid ──► alirpunkto-apache2
+alirpunkto-postfix┘
+```
+
+- **alirpunkto-ldap** : le serveur OpenLDAP qui stocke les utilisateurs et
+  leurs rôles. C'est la brique la plus critique ; tous les autres services en
+  dépendent.
+- **alirpunkto-postfix** : le serveur de mail qui permet à l'application
+  d'envoyer des e-mails (confirmations de candidature, réinitialisation de mot
+  de passe, etc.). Il génère automatiquement une clé DKIM au premier démarrage.
+- **alirpunkto-pyramid** : l'application web elle-même, qui démarre uniquement
+  quand LDAP et Postfix sont prêts.
+- **alirpunkto-apache2** : le reverse proxy TLS qui reçoit les requêtes HTTPS
+  publiques et les transmet à Pyramid. Il peut optionnellement demander un
+  certificat Let's Encrypt automatiquement.
+
+### Qu'est-ce qu'un healthcheck ?
+
+Un healthcheck est une commande que Docker exécute périodiquement à l'intérieur
+d'un conteneur pour vérifier qu'il est vraiment opérationnel (et pas seulement
+démarré). Par exemple pour LDAP :
+
+```yaml
+healthcheck:
+  test: ["CMD", "ldapsearch", "-x", "-H", "ldap://localhost", "-s", "base", "-b", ""]
+  interval: 10s    # vérifie toutes les 10 secondes
+  timeout: 5s      # échec si pas de réponse en 5 secondes
+  retries: 5       # déclare le service "unhealthy" après 5 échecs consécutifs
+  start_period: 15s # ignore les échecs pendant les 15 premières secondes
+```
+
+Sans ce mécanisme, Pyramid démarrerait avant que LDAP soit prêt à accepter des
+connexions, et l'application planterait au démarrage.
+
+### Gestion des secrets
+
+Les mots de passe ne sont jamais passés en variable d'environnement en clair
+dans le `docker-compose.yml`. Docker Compose dispose d'un mécanisme de
+**secrets** : le mot de passe est stocké dans un fichier sur l'hôte
+(`docker/secrets/ldap_password`, en mode 600) et est monté à l'intérieur du
+conteneur sous `/run/secrets/ldap_password`, accessible uniquement par le
+processus qui en a besoin.
+
+### Le script `init.sh`
+
+Docker Compose ne propose pas d'interface interactive au premier démarrage.
+Nous avons donc créé `docker/init.sh`, un script shell à lancer une seule fois
+avant le premier `docker compose up`. Il pose des questions à l'administrateur
+(nom de domaine, mot de passe LDAP, deux premiers utilisateurs et leurs rôles)
+et génère automatiquement trois fichiers :
+
+- `docker/.env` : toutes les variables de configuration du stack
+- `docker/secrets/ldap_password` : le mot de passe LDAP isolé dans un fichier
+  protégé
+- `docker/initials_users.generated.ldif` : le fichier d'initialisation LDAP
+  avec les deux premiers utilisateurs, dont les mots de passe sont hashés via
+  `slappasswd` (format `{SSHA}`) — jamais stockés en clair
+
+### Problèmes rencontrés et solutions
+
+**Chemins relatifs dans docker-compose.yml**
+
+Un piège classique avec Docker Compose : les chemins des `volumes` bind-mount
+sont relatifs au **répertoire courant au moment du lancement**, et non à
+l'emplacement du fichier `docker-compose.yml`. Comme on lance toujours depuis
+la racine du dépôt, tous les chemins sont donc de la forme `./alirpunkto/...`
+et `./docker/...`. Une version antérieure utilisait `../alirpunkto/...` (chemin
+relatif au répertoire `docker/`), ce qui cassait silencieusement si on lançait
+depuis la racine.
+
+**Healthcheck Postfix**
+
+La commande `postfix status` peut retourner un code de succès même quand le
+daemon SMTP n'écoute pas encore sur le port 25. On lui a substitué une
+vérification directe du port :
+
+```bash
+ss -ltn | grep -q ':25'
+```
+
+Cette commande vérifie réellement qu'un processus écoute sur le port 25, ce
+qui est le seul critère qui compte pour les services qui en dépendent.
+
+**Contexte de build Docker**
+
+Le `Dockerfile` de Pyramid doit copier l'intégralité du projet dans l'image
+(sources Python, templates, traductions, etc.). Son contexte de build doit
+donc obligatoirement être la racine du dépôt et non le répertoire `docker/`.
+On spécifie cela explicitement dans le Compose :
+
+```yaml
+build:
+  context: .                        # racine du dépôt
+  dockerfile: docker/DockerfilePyramid
+```
+
+**Mode debug dans les Dockerfiles**
+
+En production, des outils comme `vim` ou `ldapvi` ne doivent pas être présents
+dans les images — ils augmentent la surface d'attaque et le poids de l'image.
+Mais ils sont indispensables lors du débogage. On a adopté le pattern
+`BUILD_WITH_DEBUG`, déjà utilisé dans `DockerfilePyramid`, et on l'a appliqué
+à `DockerfileOpenLDAP` :
+
+```dockerfile
+ARG BUILD_WITH_DEBUG=0
+RUN apt-get install -y slapd ldap-utils ... \
+    && if [ "$BUILD_WITH_DEBUG" = "1" ]; then \
+         apt-get install -y vim ldapvi; \
+       fi
+```
+
+En production on construit normalement. En debug :
+
+```bash
+docker buildx build --build-arg BUILD_WITH_DEBUG=1 \
+  -f docker/DockerfileOpenLDAP -t alirpunkto-ldap:debug .
+```
+```
