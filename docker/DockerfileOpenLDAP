@@ -3,44 +3,57 @@ FROM ubuntu:24.04
 LABEL maintainer="michaellaunay+alirpunkto@logikascium.com" \
       description="OpenLDAP server for AlirPunkto"
 
-# Install OpenLDAP server and client utilities.
-# - ldapvi and vim are excluded: not needed in a production image.
-#   Use a debug build or `docker exec` with a separate tooling image instead.
-# - schema2ldif is kept because start_ldap.sh may rely on it at runtime.
-
-
 # Avoid interactive prompts during installation
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive w.
 
-# Update package lists and install OpenLDAP server, client utilities and ldapvi
+# Set to "1" at build time to include interactive debugging tools (vim, ldapvi).
+# Production builds must leave this unset or set to "0".
+# Usage: docker buildx build --build-arg BUILD_WITH_DEBUG=1 ...
+ARG BUILD_WITH_DEBUG=0
+ENV BUILD_WITH_DEBUG=${BUILD_WITH_DEBUG}
+
+# Install OpenLDAP server and client utilities.
+# schema2ldif is kept because start_ldap.sh may rely on it at runtime.
+# vim and ldapvi are only added when BUILD_WITH_DEBUG=1.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         slapd \
         debconf-utils \
         ldap-utils \
-        ldapvi \
         ca-certificates \
         ssl-cert \
-        vim \
         schema2ldif \
-        && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*
+    && if [ "$BUILD_WITH_DEBUG" = "1" ]; then \
+        apt-get install -y --no-install-recommends vim ldapvi; \
+    fi \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create directory for startup scripts
+# Directory for optional user-supplied init scripts (*.sh, *.ldif).
+# Nothing is placed here by the image itself; callers may bind-mount it.
 RUN mkdir -p /docker-entrypoint-initdb.d
 
-# Create volume for LDAP configuration
-VOLUME ["/etc/ldap", "/var/lib/ldap", "/schema"]
-
-# Create startup script to initialize LDAP if needed
+# Copy the initial users LDIF and the entrypoint script.
+# NOTE: userPassword values in initials_users.ldif must be pre-hashed with
+# `slappasswd` (e.g. {SSHA}…) before building this image. Storing plaintext
+# passwords in the image is a critical security risk.
 COPY ./initials_users.ldif /initials_users.ldif
-COPY ./start_ldap.sh /
+COPY ./start_ldap.sh /start_ldap.sh
 RUN chmod +x /start_ldap.sh
 
-# Expose LDAP and LDAPS ports
+# Volumes are declared AFTER all COPY/RUN instructions so that the files
+# copied above are visible regardless of whether the caller mounts these paths.
+# /schema must be bind-mounted at `docker run` time and must contain
+# alirpunkto_schema.ldif; the container will abort early if it is missing.
+VOLUME ["/etc/ldap", "/var/lib/ldap", "/schema"]
+
+# Standard LDAP (389) and LDAPS (636) ports.
+# The host-side mapping (-p 8389:389) is left to the caller.
 EXPOSE 389 636
 
-# Set the entrypoint to our custom start script
 ENTRYPOINT ["/start_ldap.sh"]
-# Default command - keep the container running
+
+# Default command passed to the entrypoint: start slapd with all three
+# listeners and a moderate debug level (256 = stats).
+# Override at `docker run` time to pass a different debug level or subcommand.
 CMD ["slapd", "-h", "ldap:/// ldapi:/// ldaps:///", "-g", "openldap", "-u", "openldap", "-d", "256"]

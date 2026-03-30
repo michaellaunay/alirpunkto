@@ -1,0 +1,169 @@
+# =============================================================================
+# docker/docker-compose.yml — AlirPunkto full stack
+#
+# Run ALL commands from the REPOSITORY ROOT:
+#
+#   docker compose -f docker/docker-compose.yml up -d
+#   docker compose -f docker/docker-compose.yml logs -f
+#   docker compose -f docker/docker-compose.yml down
+#
+# Prerequisites: run ./docker/init.sh once before the first `up`.
+# =============================================================================
+
+name: alirpunkto
+
+# docker compose resolves env_file paths relative to the Compose file itself,
+# but bind-mount paths are relative to the working directory (repo root here).
+# We keep both consistent by anchoring everything to the repo root.
+
+env_file:
+  - docker/.env
+
+services:
+
+  # ── OpenLDAP ──────────────────────────────────────────────────────────────
+  ldap:
+    build:
+      # context = repo root so the schema file is reachable without ../
+      context: .
+      dockerfile: docker/DockerfileOpenLDAP
+      args:
+        BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-0}
+    image: alirpunkto-ldap
+    container_name: alirpunkto-ldap
+    restart: unless-stopped
+    networks:
+      - alirpunkto-net
+    ports:
+      - "8389:389"
+      - "8636:636"
+    environment:
+      LDAP_BASE_DN: ${LDAP_BASE_DN}
+      LDAP_ORGANIZATION: ${LDAP_ORGANIZATION}
+      LDAP_PASSWORD_FILE: /run/secrets/ldap_password
+      INITIAL_USERS_LDIF: /initials_users.generated.ldif
+    secrets:
+      - ldap_password
+    volumes:
+      - alirpunkto_ldap_etc:/etc/ldap
+      - alirpunkto_ldap_var:/var/lib/ldap
+      # Schema and generated LDIF — paths are relative to repo root (cwd).
+      - ./alirpunkto/alirpunkto_schema.ldif:/schema/alirpunkto_schema.ldif:ro
+      - ./docker/initials_users.generated.ldif:/initials_users.generated.ldif:ro
+    healthcheck:
+      test: ["CMD", "ldapsearch", "-x", "-H", "ldap://localhost", "-s", "base", "-b", ""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── Postfix ───────────────────────────────────────────────────────────────
+  postfix:
+    build:
+      context: .
+      dockerfile: docker/DockerfilePostfix
+    image: alirpunkto-postfix
+    container_name: alirpunkto-postfix
+    restart: unless-stopped
+    networks:
+      - alirpunkto-net
+    ports:
+      - "9025:25"
+    environment:
+      DOMAIN: ${DOMAIN}
+      POSTFIX_MYHOSTNAME: ${POSTFIX_MYHOSTNAME}
+      POSTFIX_RELAYHOST: ${POSTFIX_RELAYHOST:-}
+      POSTFIX_INET_PROTOCOLS: ${POSTFIX_INET_PROTOCOLS:-ipv4}
+    volumes:
+      - alirpunkto_postfix_spool:/var/spool/postfix
+      - alirpunkto_postfix_dkim:/etc/dkimkeys
+    healthcheck:
+      # `postfix status` can return 0 even when master is not yet listening.
+      # Checking for an open port 25 is more reliable.
+      test: ["CMD", "sh", "-c", "ss -ltn | grep -q ':25'"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── Pyramid ───────────────────────────────────────────────────────────────
+  pyramid:
+    build:
+      # Must be repo root: DockerfilePyramid copies the whole project.
+      context: .
+      dockerfile: docker/DockerfilePyramid
+      args:
+        BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-0}
+    image: alirpunkto-pyramid
+    container_name: alirpunkto-pyramid
+    restart: unless-stopped
+    networks:
+      - alirpunkto-net
+    ports:
+      - "6543:6543"
+    environment:
+      LDAP_SERVER: alirpunkto-ldap
+      LDAP_PORT: 389
+      MAIL_HOST: alirpunkto-postfix
+    volumes:
+      - alirpunkto_pyramid_var:/home/alirpunkto/app/var
+      - ./docker/.env:/home/alirpunkto/app/.env:ro
+    depends_on:
+      ldap:
+        condition: service_healthy
+      postfix:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://localhost:6543/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  # ── Apache2 ───────────────────────────────────────────────────────────────
+  apache2:
+    build:
+      context: .
+      dockerfile: docker/DockerfileApache2
+    image: alirpunkto-apache2
+    container_name: alirpunkto-apache2
+    restart: unless-stopped
+    networks:
+      - alirpunkto-net
+    ports:
+      - "8080:80"
+      - "8443:443"
+    environment:
+      APACHE_SERVER_NAME: ${APACHE_SERVER_NAME}
+      APACHE_BACKEND_HOST: alirpunkto-pyramid
+      APACHE_BACKEND_PORT: 6543
+      ENABLE_CERTBOT: ${ENABLE_CERTBOT:-false}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-}
+    volumes:
+      - alirpunkto_apache_letsencrypt:/etc/letsencrypt
+      - alirpunkto_apache_letsencrypt_lib:/var/lib/letsencrypt
+    depends_on:
+      pyramid:
+        condition: service_healthy
+
+# ── Named volumes ─────────────────────────────────────────────────────────────
+volumes:
+  alirpunkto_ldap_etc:
+  alirpunkto_ldap_var:
+  alirpunkto_postfix_spool:
+  alirpunkto_postfix_dkim:
+  alirpunkto_pyramid_var:
+  alirpunkto_apache_letsencrypt:
+  alirpunkto_apache_letsencrypt_lib:
+
+# ── Networks ──────────────────────────────────────────────────────────────────
+networks:
+  alirpunkto-net:
+    name: alirpunkto-net
+    driver: bridge
+
+# ── Secrets ───────────────────────────────────────────────────────────────────
+# Path is relative to the Compose file location (docker/).
+secrets:
+  ldap_password:
+    file: docker/secrets/ldap_password

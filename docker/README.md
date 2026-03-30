@@ -1,58 +1,114 @@
 # Docker Images
 
-This directory contains the Dockerfiles and startup scripts for the main Alirpunkto services:
+This directory contains the Dockerfiles, startup scripts, and the Compose stack
+for the main Alirpunkto services:
 
 - `DockerfileOpenLDAP`
 - `DockerfilePyramid`
 - `DockerfileApache2`
 - `DockerfilePostfix`
 
-## Prerequisites
+> **All commands are run from the repository root**, not from inside `docker/`.
 
-- Run the commands from the repository root unless noted otherwise.
-- Create a dedicated Docker network so the containers can resolve each other by name:
+---
+
+## Quick start (recommended)
+
+### 1. Run the initialiser
 
 ```bash
-docker network create alirpunkto-net
+chmod +x docker/init.sh
+./docker/init.sh
 ```
 
-- If you want to customize runtime settings, copy your main `.env` file to `docker/.env` and adjust it for container usage.
+The script asks for:
 
-## OpenLDAP
+- domain name and maintainer e-mail
+- LDAP admin password
+- first and second bootstrap users (name, e-mail, language, nationality, role)
+- Apache / Let's Encrypt settings
+- Postfix relay host (optional)
 
-For security reasons, store the LDAP password in `docker/secrets/ldap_password`.
+It generates:
 
-Example preparation:
+| File | Description |
+|---|---|
+| `docker/.env` | All runtime variables consumed by Compose |
+| `docker/secrets/ldap_password` | LDAP password file (mode 600, **never commit**) |
+| `docker/initials_users.generated.ldif` | Bootstrap users with hashed passwords |
+
+> **Security note:** passwords are hashed with `slappasswd` ({SSHA}).
+> The script warns if `slappasswd` is not installed (`apt install slapd`).
+
+### 2. Start the stack
 
 ```bash
-mkdir -p docker/secrets
-chmod 700 docker/secrets
-cp .env docker/.env
-set -a
-source docker/.env
-set +a
-umask 077
-printf '%s' "$LDAP_PASSWORD" > docker/secrets/ldap_password
-sed "s|dc=alirpunkto,dc=org|${LDAP_BASE_DN}|g" \
-  docker/initials_users.ldif > docker/initials_users.generated.ldif
+docker compose -f docker/docker-compose.yaml up -d
 ```
 
-Build the image:
+Compose starts services in dependency order using healthchecks:
+
+1. `alirpunkto-ldap` + `alirpunkto-postfix` (in parallel)
+2. `alirpunkto-pyramid` (waits for both)
+3. `alirpunkto-apache2` (waits for Pyramid)
+
+The `alirpunkto-net` network is created automatically.
+
+### 3. Reset and reinitialise
 
 ```bash
-docker buildx build -f docker/DockerfileOpenLDAP -t alirpunkto-ldap docker
+docker compose -f docker/docker-compose.yaml down
+docker volume rm alirpunkto_ldap_etc alirpunkto_ldap_var
+./docker/init.sh
+docker compose -f docker/docker-compose.yaml up -d
 ```
 
-Create persistent volumes:
+---
+
+## Debug builds
+
+Both `DockerfileOpenLDAP` and `DockerfilePyramid` accept `BUILD_WITH_DEBUG=1`
+to add tools like `vim`, `ldapvi`, `dnsutils`, and `iputils-ping`:
 
 ```bash
+# OpenLDAP debug image
+docker buildx build \
+  --build-arg BUILD_WITH_DEBUG=1 \
+  -f docker/DockerfileOpenLDAP \
+  -t alirpunkto-ldap:debug .
+
+# Pyramid debug image
+docker build \
+  --build-arg BUILD_WITH_DEBUG=1 \
+  -f docker/DockerfilePyramid \
+  -t alirpunkto-pyramid:debug .
+```
+
+You can also set `BUILD_WITH_DEBUG=1` in `docker/.env` so that
+`docker compose build` picks it up automatically.
+
+---
+
+## Manual operation (without Compose)
+
+Useful for troubleshooting or rebuilding a single service. Source the env file
+first:
+
+```bash
+set -a && source docker/.env && set +a
+```
+
+### OpenLDAP
+
+```bash
+# Build (context = repo root)
+docker buildx build -f docker/DockerfileOpenLDAP -t alirpunkto-ldap .
+
+# Create volumes
 docker volume create alirpunkto_ldap_etc
 docker volume create alirpunkto_ldap_var
-```
 
-Run the container:
-
-```bash
+# Run
 docker run --name alirpunkto-ldap \
   --network alirpunkto-net \
   -p 8389:389 \
@@ -60,40 +116,28 @@ docker run --name alirpunkto-ldap \
   -e LDAP_BASE_DN="$LDAP_BASE_DN" \
   -e LDAP_ORGANIZATION="$LDAP_ORGANIZATION" \
   -e LDAP_PASSWORD_FILE=/run/secrets/ldap_password \
+  -e INITIAL_USERS_LDIF=/initials_users.generated.ldif \
   -v "$(pwd)/alirpunkto/alirpunkto_schema.ldif:/schema/alirpunkto_schema.ldif:ro" \
+  -v "$(pwd)/docker/initials_users.generated.ldif:/initials_users.generated.ldif:ro" \
   -v alirpunkto_ldap_etc:/etc/ldap \
   -v alirpunkto_ldap_var:/var/lib/ldap \
   -v "$(pwd)/docker/secrets/ldap_password:/run/secrets/ldap_password:ro" \
   alirpunkto-ldap
-```
 
-If you need a clean LDAP reinitialization:
-
-```bash
+# Clean reinitialization
 docker rm -f alirpunkto-ldap
-docker volume rm alirpunkto_ldap_etc
-docker volume rm alirpunkto_ldap_var
+docker volume rm alirpunkto_ldap_etc alirpunkto_ldap_var
 ```
 
-## Pyramid
+### Pyramid
 
-`DockerfilePyramid` copies the whole project into the image, so its build context must be the repository root.
-
-Build the image:
+`DockerfilePyramid` copies the whole project — build context must be the repo root.
 
 ```bash
 docker build -f docker/DockerfilePyramid -t alirpunkto-pyramid .
-```
 
-Create a persistent volume for application data:
-
-```bash
 docker volume create alirpunkto_pyramid_var
-```
 
-Run the container:
-
-```bash
 docker run --name alirpunkto-pyramid \
   --network alirpunkto-net \
   -p 6543:6543 \
@@ -101,44 +145,29 @@ docker run --name alirpunkto-pyramid \
   -e LDAP_PORT=389 \
   -e MAIL_HOST=alirpunkto-postfix \
   -v alirpunkto_pyramid_var:/home/alirpunkto/app/var \
-  -v "$(pwd)/.env:/home/alirpunkto/app/.env:ro" \
+  -v "$(pwd)/docker/.env:/home/alirpunkto/app/.env:ro" \
   alirpunkto-pyramid
 ```
 
-Notes:
-
-- The container starts `pserve production.ini` by default.
-- If needed, you can override the configuration file:
+Override the config file if needed:
 
 ```bash
 docker run --rm alirpunkto-pyramid development.ini
 ```
 
-## Apache2
-
-This image provides a generic TLS reverse proxy for the Pyramid container. The repository also contains a client-specific reference file named `alirpunkto.cosmopolitical.coop.conf`; it is kept as documentation and is not enabled automatically by the generic image.
-
-Build the image:
+### Apache2
 
 ```bash
-docker build -f docker/DockerfileApache2 -t alirpunkto-apache2 docker
-```
+docker build -f docker/DockerfileApache2 -t alirpunkto-apache2 .
 
-Create persistent volumes for Let's Encrypt data:
-
-```bash
 docker volume create alirpunkto_apache_letsencrypt
 docker volume create alirpunkto_apache_letsencrypt_lib
-```
 
-Run the container:
-
-```bash
 docker run --name alirpunkto-apache2 \
   --network alirpunkto-net \
   -p 8080:80 \
   -p 8443:443 \
-  -e APACHE_SERVER_NAME=alirpunkto.com \
+  -e APACHE_SERVER_NAME="$APACHE_SERVER_NAME" \
   -e APACHE_BACKEND_HOST=alirpunkto-pyramid \
   -e APACHE_BACKEND_PORT=6543 \
   -e ENABLE_CERTBOT=false \
@@ -147,72 +176,51 @@ docker run --name alirpunkto-apache2 \
   alirpunkto-apache2
 ```
 
-To let the container request certificates itself, set:
+To request a TLS certificate automatically:
 
 ```bash
--e ENABLE_CERTBOT=true \
--e LETSENCRYPT_EMAIL=admin@example.org
+  -e ENABLE_CERTBOT=true \
+  -e LETSENCRYPT_EMAIL="$LETSENCRYPT_EMAIL"
 ```
 
-## Postfix
-
-This image is intended for SMTP submission/relay from the application side and generates DKIM keys on first start if none are mounted.
-
-Build the image:
+### Postfix
 
 ```bash
-docker build -f docker/DockerfilePostfix -t alirpunkto-postfix docker
-```
+docker build -f docker/DockerfilePostfix -t alirpunkto-postfix .
 
-Create persistent volumes:
-
-```bash
 docker volume create alirpunkto_postfix_spool
 docker volume create alirpunkto_postfix_dkim
-```
 
-Run the container:
-
-```bash
 docker run --name alirpunkto-postfix \
   --network alirpunkto-net \
   -p 9025:25 \
-  -e DOMAIN=alirpunkto.com \
-  -e POSTFIX_MYHOSTNAME=mail.alirpunkto.com \
+  -e DOMAIN="$DOMAIN" \
+  -e POSTFIX_MYHOSTNAME="$POSTFIX_MYHOSTNAME" \
   -v alirpunkto_postfix_spool:/var/spool/postfix \
   -v alirpunkto_postfix_dkim:/etc/dkimkeys \
   alirpunkto-postfix
 ```
 
-Optional variables:
+Optional variables: `POSTFIX_RELAYHOST`, `POSTFIX_INET_PROTOCOLS`,
+`POSTFIX_MESSAGE_SIZE_LIMIT`, `FAILOVER_IP`.
 
-- `POSTFIX_RELAYHOST=[smtp.provider.example]:587`
-- `POSTFIX_INET_PROTOCOLS=ipv4`
-- `POSTFIX_MESSAGE_SIZE_LIMIT=26214400`
-- `FAILOVER_IP=x.x.x.x`
-
-On first start, the container prints the DKIM DNS record to the container logs:
+On first start, retrieve the DKIM DNS record with:
 
 ```bash
 docker logs alirpunkto-postfix
 ```
 
-## Suggested Startup Order
-
-Start the services in this order:
-
-1. `alirpunkto-ldap`
-2. `alirpunkto-postfix`
-3. `alirpunkto-pyramid`
-4. `alirpunkto-apache2`
+---
 
 ## Logs
 
-The current strategy is to rely on container stdout/stderr instead of persisting log files inside containers:
-
 ```bash
+# Individual containers
 docker logs -f alirpunkto-ldap
 docker logs -f alirpunkto-postfix
 docker logs -f alirpunkto-pyramid
 docker logs -f alirpunkto-apache2
+
+# Full stack via Compose
+docker compose -f docker/docker-compose.yaml logs -f
 ```
