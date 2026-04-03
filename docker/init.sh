@@ -373,5 +373,5 @@ echo -e "  User 1       : ${BOLD}${USER1_FIRSTNAME} ${USER1_LASTNAME}${RESET} <$
 echo -e "  User 2       : ${BOLD}${USER2_FIRSTNAME} ${USER2_LASTNAME}${RESET} <${USER2_EMAIL}> — ${USER2_ROLE} [${USER2_UUID}]"
 echo
 echo -e "Next step:"
-echo -e "  ${CYAN}${BOLD}docker compose -f docker/docker-compose.yml up -d${RESET}"
+echo -e "  ${CYAN}${BOLD}docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d${RESET}"
 echo

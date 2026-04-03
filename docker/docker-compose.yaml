@@ -1,23 +1,22 @@
 # =============================================================================
-# docker/docker-compose.yml — AlirPunkto full stack
+# docker/docker-compose.yaml — AlirPunkto full stack
 #
 # Run ALL commands from the REPOSITORY ROOT:
 #
-#   docker compose -f docker/docker-compose.yml up -d
-#   docker compose -f docker/docker-compose.yml logs -f
-#   docker compose -f docker/docker-compose.yml down
+#   docker compose -f docker/docker-compose.yaml up -d
+#   docker compose -f docker/docker-compose.yaml logs -f
+#   docker compose -f docker/docker-compose.yaml down
 #
 # Prerequisites: run ./docker/init.sh once before the first `up`.
 # =============================================================================
 
 name: alirpunkto
 
-# docker compose resolves env_file paths relative to the Compose file itself,
-# but bind-mount paths are relative to the working directory (repo root here).
-# We keep both consistent by anchoring everything to the repo root.
-
-env_file:
-  - docker/.env
+# All environment variables are loaded from docker/.env via --env-file at
+# launch time (see README). This avoids the top-level env_file key which
+# requires Docker Compose >= 2.24 and is not universally supported.
+#
+#   docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
 
 services:
 
@@ -163,7 +162,8 @@ networks:
     driver: bridge
 
 # ── Secrets ───────────────────────────────────────────────────────────────────
-# Path is relative to the Compose file location (docker/).
+# Path is relative to the working directory (repo root) when launching
+# with: docker compose --env-file docker/.env -f docker/docker-compose.yaml
 secrets:
   ldap_password:
     file: docker/secrets/ldap_password

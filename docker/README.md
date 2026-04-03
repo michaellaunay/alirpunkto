@@ -43,7 +43,7 @@ It generates:
 ### 2. Start the stack
 
 ```bash
-docker compose -f docker/docker-compose.yaml up -d
+docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
 ```
 
 Compose starts services in dependency order using healthchecks:
@@ -57,10 +57,10 @@ The `alirpunkto-net` network is created automatically.
 ### 3. Reset and reinitialise
 
 ```bash
-docker compose -f docker/docker-compose.yaml down
+docker compose --env-file docker/.env -f docker/docker-compose.yaml down
 docker volume rm alirpunkto_ldap_etc alirpunkto_ldap_var
 ./docker/init.sh
-docker compose -f docker/docker-compose.yaml up -d
+docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
 ```
 
 ---
@@ -222,5 +222,5 @@ docker logs -f alirpunkto-pyramid
 docker logs -f alirpunkto-apache2
 
 # Full stack via Compose
-docker compose -f docker/docker-compose.yaml logs -f
+docker compose --env-file docker/.env -f docker/docker-compose.yaml logs -f
 ```
