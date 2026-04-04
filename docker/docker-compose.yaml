@@ -16,6 +16,11 @@ name: alirpunkto
 # launch time (see README). This avoids the top-level env_file key which
 # requires Docker Compose >= 2.24 and is not universally supported.
 #
+# IMPORTANT — path resolution: Docker Compose resolves context: and volume
+# bind-mount paths relative to the location of this file (docker/).
+# Therefore all paths use .. to reach the repository root, and ./ for
+# paths inside docker/ itself.
+#
 #   docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
 
 services:
@@ -23,8 +28,8 @@ services:
   # ── OpenLDAP ──────────────────────────────────────────────────────────────
   ldap:
     build:
-      # context = repo root so the schema file is reachable without ../
-      context: .
+      # context = repo root (docker-compose.yaml lives in docker/, so .. goes up one level)
+      context: ..
       dockerfile: docker/DockerfileOpenLDAP
       args:
         BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-0}
@@ -47,8 +52,8 @@ services:
       - alirpunkto_ldap_etc:/etc/ldap
       - alirpunkto_ldap_var:/var/lib/ldap
       # Schema and generated LDIF — paths are relative to repo root (cwd).
-      - ./alirpunkto/alirpunkto_schema.ldif:/schema/alirpunkto_schema.ldif:ro
-      - ./docker/initials_users.generated.ldif:/initials_users.generated.ldif:ro
+      - ../alirpunkto/alirpunkto_schema.ldif:/schema/alirpunkto_schema.ldif:ro
+      - ./initials_users.generated.ldif:/initials_users.generated.ldif:ro
     healthcheck:
       test: ["CMD", "ldapsearch", "-x", "-H", "ldap://localhost", "-s", "base", "-b", ""]
       interval: 10s
@@ -59,7 +64,7 @@ services:
   # ── Postfix ───────────────────────────────────────────────────────────────
   postfix:
     build:
-      context: .
+      context: ..
       dockerfile: docker/DockerfilePostfix
     image: alirpunkto-postfix
     container_name: alirpunkto-postfix
@@ -89,7 +94,7 @@ services:
   pyramid:
     build:
       # Must be repo root: DockerfilePyramid copies the whole project.
-      context: .
+      context: ..
       dockerfile: docker/DockerfilePyramid
       args:
         BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-0}
@@ -106,7 +111,7 @@ services:
       MAIL_HOST: alirpunkto-postfix
     volumes:
       - alirpunkto_pyramid_var:/home/alirpunkto/app/var
-      - ./docker/.env:/home/alirpunkto/app/.env:ro
+      - ./.env:/home/alirpunkto/app/.env:ro
     depends_on:
       ldap:
         condition: service_healthy
@@ -122,7 +127,7 @@ services:
   # ── Apache2 ───────────────────────────────────────────────────────────────
   apache2:
     build:
-      context: .
+      context: ..
       dockerfile: docker/DockerfileApache2
     image: alirpunkto-apache2
     container_name: alirpunkto-apache2
@@ -166,4 +171,4 @@ networks:
 # with: docker compose --env-file docker/.env -f docker/docker-compose.yaml
 secrets:
   ldap_password:
-    file: docker/secrets/ldap_password
+    file: ./secrets/ldap_password
