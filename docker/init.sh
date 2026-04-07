@@ -12,6 +12,7 @@
 #   docker/initials_users.generated.ldif
 # =============================================================================
 set -euo pipefail
+set -x
 
 # ── Anchor to repo root ───────────────────────────────────────────────────────
 # The script lives in docker/; we want all paths relative to the repo root.
@@ -143,7 +144,7 @@ ask_optional LDAP_OU "LDAP organisational unit (leave empty if none)"
 # alirpunkto/generate_secret.py is the canonical way documented in the README.
 GENERATE_SECRET="${REPO_ROOT}/alirpunkto/generate_secret.py"
 if [ -f "${GENERATE_SECRET}" ]; then
-    SECRET_KEY="$(python3 "${GENERATE_SECRET}")"
+    SECRET_KEY="$(python3 "${GENERATE_SECRET}" | grep -oP '(?<=SECRET_KEY=")[^"]+')"
     info "SECRET_KEY generated via alirpunkto/generate_secret.py"
 else
     SECRET_KEY="$(python3 -c "import secrets, base64; print(base64.urlsafe_b64encode(secrets.token_bytes(32)).decode())")"
@@ -210,6 +211,22 @@ else
     MAIL_PASSWORD="None"
 fi
 
+# ── LDAP server (can differ from container name in non-Docker deployments) ────
+
+echo
+info "=== LDAP server ==="
+ask LDAP_SERVER "LDAP server hostname seen by Pyramid" "alirpunkto-ldap"
+ask LDAP_PORT   "LDAP port" "389"
+
+# ── Keycloak (SSO) ────────────────────────────────────────────────────────────
+
+echo
+info "=== Keycloak / SSO settings (leave defaults to skip SSO) ==="
+ask_optional KEYCLOAK_SERVER_URL    "Keycloak server URL (e.g. https://auth.example.org)"
+ask_optional KEYCLOAK_REALM         "Keycloak realm"
+ask_optional KEYCLOAK_CLIENT_ID     "Keycloak client ID"
+ask_optional KEYCLOAK_CLIENT_SECRET "Keycloak client secret"
+
 # ── write docker/.env ─────────────────────────────────────────────────────────
 
 mkdir -p "${DOCKER_DIR}"
@@ -218,46 +235,53 @@ cat > "${ENV_FILE}" <<EOF
 # Do NOT commit this file to version control.
 
 # ── General ───────────────────────────────────────────────────────────────────
-DOMAIN=${DOMAIN}
-MAINTAINER_EMAIL=${MAINTAINER_EMAIL}
+DOMAIN="${DOMAIN}"
+MAINTAINER_EMAIL="${MAINTAINER_EMAIL}"
 
 # ── Application ───────────────────────────────────────────────────────────────
-SECRET_KEY=${SECRET_KEY}
+SECRET_KEY="${SECRET_KEY}"
 
 # ── LDAP ──────────────────────────────────────────────────────────────────────
-LDAP_BASE_DN=${LDAP_BASE_DN}
-LDAP_ORGANIZATION=${LDAP_ORGANIZATION}
-LDAP_LOGIN=${LDAP_LOGIN}
-LDAP_OU=${LDAP_OU}
+LDAP_SERVER="${LDAP_SERVER}"
+LDAP_PORT=${LDAP_PORT}
+LDAP_BASE_DN="${LDAP_BASE_DN}"
+LDAP_ORGANIZATION="${LDAP_ORGANIZATION}"
+LDAP_LOGIN="${LDAP_LOGIN}"
+LDAP_OU="${LDAP_OU}"
+LDAP_PASSWORD="${LDAP_PASSWORD}"
 LDAP_PASSWORD_FILE=/run/secrets/ldap_password
 
 # ── Apache ────────────────────────────────────────────────────────────────────
-APACHE_SERVER_NAME=${APACHE_SERVER_NAME}
+APACHE_SERVER_NAME="${APACHE_SERVER_NAME}"
 APACHE_BACKEND_HOST=alirpunkto-pyramid
 APACHE_BACKEND_PORT=6543
 ENABLE_CERTBOT=${ENABLE_CERTBOT}
-LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+LETSENCRYPT_EMAIL="${LETSENCRYPT_EMAIL}"
 
 # ── Postfix ───────────────────────────────────────────────────────────────────
-POSTFIX_MYHOSTNAME=${POSTFIX_MYHOSTNAME}
-POSTFIX_RELAYHOST=${POSTFIX_RELAYHOST}
+POSTFIX_MYHOSTNAME="${POSTFIX_MYHOSTNAME}"
+POSTFIX_RELAYHOST="${POSTFIX_RELAYHOST}"
 POSTFIX_INET_PROTOCOLS=ipv4
 
 # ── Mail (Pyramid → SMTP) ─────────────────────────────────────────────────────
 MAIL_SERVER=alirpunkto-postfix
 MAIL_PORT=${MAIL_PORT}
-MAIL_SENDER=${MAIL_SENDER}
+MAIL_SENDER="${MAIL_SENDER}"
 MAIL_USERNAME=${MAIL_USERNAME}
 MAIL_PASSWORD=${MAIL_PASSWORD}
 
 # ── Admin ─────────────────────────────────────────────────────────────────────
-ADMIN_LOGIN=${ADMIN_LOGIN}
-ADMIN_EMAIL=${ADMIN_EMAIL}
-ADMIN_PASSWORD=${ADMIN_PASSWORD}
+ADMIN_LOGIN="${ADMIN_LOGIN}"
+ADMIN_EMAIL="${ADMIN_EMAIL}"
+ADMIN_PASSWORD="${ADMIN_PASSWORD}"
 
-# ── Pyramid ───────────────────────────────────────────────────────────────────
-LDAP_SERVER=alirpunkto-ldap
-LDAP_PORT=389
+# ── Keycloak / SSO ────────────────────────────────────────────────────────────
+KEYCLOAK_SERVER_URL="${KEYCLOAK_SERVER_URL}"
+KEYCLOAK_REALM="${KEYCLOAK_REALM}"
+KEYCLOAK_CLIENT_ID="${KEYCLOAK_CLIENT_ID}"
+KEYCLOAK_CLIENT_SECRET="${KEYCLOAK_CLIENT_SECRET}"
+
+# ── Pyramid (internal container names) ───────────────────────────────────────
 MAIL_HOST=alirpunkto-postfix
 EOF
 success "docker/.env written."
@@ -376,6 +400,8 @@ echo -e "  LDAP base DN : ${BOLD}${LDAP_BASE_DN}${RESET}"
 echo -e "  User 1       : ${BOLD}${USER1_FIRSTNAME} ${USER1_LASTNAME}${RESET} <${USER1_EMAIL}> — ${USER1_ROLE} [${USER1_UUID}]"
 echo -e "  User 2       : ${BOLD}${USER2_FIRSTNAME} ${USER2_LASTNAME}${RESET} <${USER2_EMAIL}> — ${USER2_ROLE} [${USER2_UUID}]"
 echo
-echo -e "Next step:"
+echo -e "Next step :"
+echo -e "If docker-compose >= 2 :"
 echo -e "  ${CYAN}${BOLD}docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d${RESET}"
-echo
+echo -e "Else if docker-compose == 1.* :"
+echo -e "  ${CYAN}${BOLD}docker-compose --env-file docker/.env -f docker/docker-compose.yaml up -d${RESET}"

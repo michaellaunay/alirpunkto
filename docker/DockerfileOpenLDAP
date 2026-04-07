@@ -4,7 +4,7 @@ LABEL maintainer="michaellaunay+alirpunkto@logikascium.com" \
       description="OpenLDAP server for AlirPunkto"
 
 # Avoid interactive prompts during installation
-ENV DEBIAN_FRONTEND=noninteractive w.
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Set to "1" at build time to include interactive debugging tools (vim, ldapvi).
 # Production builds must leave this unset or set to "0".

@@ -1,0 +1,55 @@
+# =============================================================================
+# .dockerignore — exclut du contexte de build Docker les fichiers inutiles
+# ou inaccessibles. Utilisé principalement par DockerfilePyramid dont le
+# contexte est la racine du repo.
+# =============================================================================
+
+# Contrôle de version
+.git
+.gitignore
+
+# Docker itself — on exclut tout sauf start_pyramid.sh dont DockerfilePyramid a besoin
+docker/
+!docker/start_pyramid.sh
+
+# Environnements virtuels Python
+bin/
+lib/
+lib64/
+include/
+pyvenv.cfg
+*.egg-info/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+.eggs/
+
+# Données runtime locales — remplacées par le volume monté
+var/
+share/
+
+# Fichiers de configuration sensibles
+.env
+secrets/
+
+# Documentation
+docs/
+# README.txt, CHANGES.txt et MANIFEST.in sont référencés par setup.py — ne pas exclure
+*.md
+*.rst
+
+# Tests
+tests/
+pytest.ini
+testing.ini
+
+# Outils de développement
+tools/
+
+# Fichiers IDE et OS
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store

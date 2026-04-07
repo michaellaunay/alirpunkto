@@ -10,16 +10,16 @@
 # Prerequisites: run ./docker/init.sh once before the first `up`.
 # =============================================================================
 
-name: alirpunkto
-
 # All environment variables are loaded from docker/.env via --env-file at
 # launch time (see README). This avoids the top-level env_file key which
 # requires Docker Compose >= 2.24 and is not universally supported.
 #
 # IMPORTANT — path resolution: Docker Compose resolves context: and volume
 # bind-mount paths relative to the location of this file (docker/).
-# Therefore all paths use .. to reach the repository root, and ./ for
-# paths inside docker/ itself.
+# - context: .  → docker/          (OpenLDAP, Postfix, Apache2)
+# - context: .. → repo root        (Pyramid only: needs the full source tree)
+# - ./foo        → docker/foo      (files inside docker/)
+# - ../foo       → repo_root/foo   (files outside docker/)
 #
 #   docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
 
@@ -28,9 +28,9 @@ services:
   # ── OpenLDAP ──────────────────────────────────────────────────────────────
   ldap:
     build:
-      # context = repo root (docker-compose.yaml lives in docker/, so .. goes up one level)
-      context: ..
-      dockerfile: docker/DockerfileOpenLDAP
+      # context = docker/ directory (compose file location)
+      context: .
+      dockerfile: DockerfileOpenLDAP
       args:
         BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-0}
     image: alirpunkto-ldap
@@ -64,8 +64,8 @@ services:
   # ── Postfix ───────────────────────────────────────────────────────────────
   postfix:
     build:
-      context: ..
-      dockerfile: docker/DockerfilePostfix
+      context: .
+      dockerfile: DockerfilePostfix
     image: alirpunkto-postfix
     container_name: alirpunkto-postfix
     restart: unless-stopped
@@ -127,8 +127,8 @@ services:
   # ── Apache2 ───────────────────────────────────────────────────────────────
   apache2:
     build:
-      context: ..
-      dockerfile: docker/DockerfileApache2
+      context: .
+      dockerfile: DockerfileApache2
     image: alirpunkto-apache2
     container_name: alirpunkto-apache2
     restart: unless-stopped
