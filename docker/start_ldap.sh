@@ -36,7 +36,7 @@ fi
 if [ ! -f "$CONFIG_MARKER_PATH" ] && [ -n "${LDAP_BASE_DN:-}" ] && [ -n "${LDAP_PASSWORD:-}" ]; then
   LDAP_ORGANIZATION="${LDAP_ORGANIZATION:-$LDAP_DOMAIN}"
 
-  if [[ "${DEBUG_LDAP}" = "true" ]]; then
+  if [[ DEBUG_LDAP ]]; then
     echo "debconf-set-selections <<EOF" \
       "slapd slapd/no_configuration boolean false" \
       "slapd slapd/domain string $LDAP_DOMAIN" \
@@ -128,7 +128,9 @@ if [ "${args[0]}" = "slapd" ]; then
   else
     if [ -f "$LDIF_PATH" ] && [ ! -f "$MARKER_PATH" ]; then
       echo "Importing initial users from $LDIF_PATH"
-      if ldapadd -x \
+      # -c : continue on error (tolerates err=68 Already Exists for groups
+      #      that slapd may have pre-created during dpkg-reconfigure)
+      if ldapadd -c -x \
         -D "cn=admin,$LDAP_BASE_DN" \
         -w "$LDAP_PASSWORD" \
         -H "$LDAP_URI" \
@@ -136,6 +138,9 @@ if [ "${args[0]}" = "slapd" ]; then
         touch "$MARKER_PATH"
         echo "Initial users imported successfully"
       else
+        # ldapadd -c exits non-zero only if NO entry succeeded at all.
+        # A partial import (some already existed) exits 0, so reaching
+        # here means a genuine failure — abort.
         echo "Failed to load initial users" >&2
         kill "$slapd_pid"
         exit 1

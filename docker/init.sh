@@ -12,7 +12,6 @@
 #   docker/initials_users.generated.ldif
 # =============================================================================
 set -euo pipefail
-set -x
 
 # ── Anchor to repo root ───────────────────────────────────────────────────────
 # The script lives in docker/; we want all paths relative to the repo root.
@@ -124,6 +123,12 @@ echo
 info "Repository root : ${REPO_ROOT}"
 info "Docker dir      : ${DOCKER_DIR}"
 echo
+echo -e "${BOLD}${CYAN}Important — before starting the stack:${RESET}"
+echo -e "  The file ${BOLD}production.ini${RESET} at the repo root contains site-specific"
+echo -e "  settings (mail, applications, organisation details, etc.)."
+echo -e "  Review and adapt it to your deployment BEFORE running docker compose."
+echo -e "  It will be bind-mounted read-only into the Pyramid container."
+echo
 
 # ── general settings ──────────────────────────────────────────────────────────
 
@@ -144,7 +149,9 @@ ask_optional LDAP_OU "LDAP organisational unit (leave empty if none)"
 # alirpunkto/generate_secret.py is the canonical way documented in the README.
 GENERATE_SECRET="${REPO_ROOT}/alirpunkto/generate_secret.py"
 if [ -f "${GENERATE_SECRET}" ]; then
-    SECRET_KEY="$(python3 "${GENERATE_SECRET}" | grep -oP '(?<=SECRET_KEY=")[^"]+')"
+    # generate_secret.py outputs: SECRET_KEY="value"
+    # We extract only the value part with sed.
+    SECRET_KEY="$(python3 "${GENERATE_SECRET}" | grep -oP '(?<=SECRET_KEY=")[^"]+')" 
     info "SECRET_KEY generated via alirpunkto/generate_secret.py"
 else
     SECRET_KEY="$(python3 -c "import secrets, base64; print(base64.urlsafe_b64encode(secrets.token_bytes(32)).decode())")"
@@ -300,93 +307,32 @@ USER2_HASHED_PW="$(hash_password "${USER2_PASSWORD}")"
 TODAY="$(date -u +"%Y-%m-%dT%H:%M:%S")"
 
 # ── generate initials_users.generated.ldif ────────────────────────────────────
+# Delegated to docker/generate_ldif.py which handles:
+# - base DN substitution
+# - removal of demo users from template
+# - clean group block reconstruction with correct uniqueMember entries
+# - no duplicate blocks or missing blank lines
 
 if [ ! -f "${LDIF_TEMPLATE}" ]; then
     error "Template not found: ${LDIF_TEMPLATE}"
     exit 1
 fi
 
-# Replace the placeholder base DN with the real one and strip the two
-# hardcoded test users (keep only the admin placeholder uniqueMember).
-sed "s|dc=alirpunkto,dc=org|${LDAP_BASE_DN}|g" "${LDIF_TEMPLATE}" \
-    | grep -v "^uniqueMember: uid=[^0]" \
-    > "${LDIF_OUT}"
-
-# Append bootstrap users
-cat >> "${LDIF_OUT}" <<EOF
-
-# =====================
-# Users
-# =====================
-
-dn: uid=${USER1_UUID},${LDAP_BASE_DN}
-objectClass: inetOrgPerson
-objectClass: alirpunktoPerson
-uid: ${USER1_UUID}
-sn: ${USER1_LASTNAME}
-cn: ${USER1_FIRSTNAME} ${USER1_LASTNAME}
-employeeNumber: ${USER1_UUID}
-employeeType: ${USER1_ROLE}
-isActive: TRUE
-preferredLanguage: ${USER1_LANG}
-givenName: ${USER1_FIRSTNAME}
-nationality: ${USER1_NATIONALITY}
-cooperativeBehaviourMark: 0
-mail: ${USER1_EMAIL}
-userPassword: ${USER1_HASHED_PW}
-numberSharesOwned: 1
-dateEndValidityYearlyContribution: ${TODAY}
-
-dn: uid=${USER2_UUID},${LDAP_BASE_DN}
-objectClass: inetOrgPerson
-objectClass: alirpunktoPerson
-uid: ${USER2_UUID}
-sn: ${USER2_LASTNAME}
-cn: ${USER2_FIRSTNAME} ${USER2_LASTNAME}
-employeeNumber: ${USER2_UUID}
-employeeType: ${USER2_ROLE}
-isActive: TRUE
-preferredLanguage: ${USER2_LANG}
-givenName: ${USER2_FIRSTNAME}
-nationality: ${USER2_NATIONALITY}
-cooperativeBehaviourMark: 0
-mail: ${USER2_EMAIL}
-userPassword: ${USER2_HASHED_PW}
-numberSharesOwned: 1
-dateEndValidityYearlyContribution: ${TODAY}
-EOF
+# Pass all arguments as a NUL-separated env vars to avoid word-splitting
+# on values that may contain spaces (names, passwords, etc.)
+GENERATE_LDIF_ARGS=(
+    "${LDIF_TEMPLATE}"
+    "${LDIF_OUT}"
+    "${LDAP_BASE_DN}"
+    "${USER1_UUID}" "${USER1_ROLE}" "${USER1_FIRSTNAME}" "${USER1_LASTNAME}"
+    "${USER1_LANG}" "${USER1_NATIONALITY}" "${USER1_EMAIL}" "${USER1_HASHED_PW}"
+    "${USER2_UUID}" "${USER2_ROLE}" "${USER2_FIRSTNAME}" "${USER2_LASTNAME}"
+    "${USER2_LANG}" "${USER2_NATIONALITY}" "${USER2_EMAIL}" "${USER2_HASHED_PW}"
+    "${TODAY}"
+)
+python3 "${DOCKER_DIR}/generate_ldif.py" "${GENERATE_LDIF_ARGS[@]}"
 
 success "docker/initials_users.generated.ldif written."
-
-# ── add group memberships for new users ──────────────────────────────────────
-
-add_member_to_group() {
-    local uuid="$1" role="$2"
-    local dn="uid=${uuid},${LDAP_BASE_DN}"
-    local groups=("communityMembersGroup")
-    case "$role" in
-        COPERATOR)       groups+=("coperatorsGroup") ;;
-        ORDINARY_MEMBER) groups+=("ordinaryMembersGroup") ;;
-        BOARD_MEMBER)    groups+=("boardMembersGroup" "coperatorsGroup") ;;
-        ADMINISTRATOR)   groups+=("administratorsGroup" "coperatorsGroup") ;;
-    esac
-    for g in "${groups[@]}"; do
-        # Insert the new uniqueMember line after the last existing one for that group
-        sed -i "/^cn: ${g}$/,/^$/ {
-            /^uniqueMember:/ { h; d }
-            /^$/ { x; /./{ p; x }; x }
-        }" "${LDIF_OUT}" 2>/dev/null || true
-        # Simpler fallback: append after the group block's last uniqueMember
-        perl -i -0pe \
-            "s|(cn: ${g}\n(?:.*\n)*?)(uniqueMember: [^\n]+\n)(?!uniqueMember)|\${1}\${2}uniqueMember: ${dn}\n|" \
-            "${LDIF_OUT}" 2>/dev/null || true
-    done
-}
-
-add_member_to_group "${USER1_UUID}" "${USER1_ROLE}"
-add_member_to_group "${USER2_UUID}" "${USER2_ROLE}"
-
-success "Group memberships updated."
 
 # ── summary ───────────────────────────────────────────────────────────────────
 
@@ -400,8 +346,11 @@ echo -e "  LDAP base DN : ${BOLD}${LDAP_BASE_DN}${RESET}"
 echo -e "  User 1       : ${BOLD}${USER1_FIRSTNAME} ${USER1_LASTNAME}${RESET} <${USER1_EMAIL}> — ${USER1_ROLE} [${USER1_UUID}]"
 echo -e "  User 2       : ${BOLD}${USER2_FIRSTNAME} ${USER2_LASTNAME}${RESET} <${USER2_EMAIL}> — ${USER2_ROLE} [${USER2_UUID}]"
 echo
-echo -e "Next step :"
-echo -e "If docker-compose >= 2 :"
-echo -e "  ${CYAN}${BOLD}docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d${RESET}"
-echo -e "Else if docker-compose == 1.* :"
-echo -e "  ${CYAN}${BOLD}docker-compose --env-file docker/.env -f docker/docker-compose.yaml up -d${RESET}"
+echo -e "Next steps:"
+echo -e "  1. Review and adapt ${BOLD}production.ini${RESET} to your deployment:"
+echo -e "     ${BOLD}${REPO_ROOT}/production.ini${RESET}"
+echo -e "     (mail settings, site name, application URLs, organisation details)"
+echo
+echo -e "  2. Start the stack:"
+echo -e "     ${CYAN}${BOLD}docker-compose --env-file docker/.env -f docker/docker-compose.yaml up -d${RESET}"
+echo

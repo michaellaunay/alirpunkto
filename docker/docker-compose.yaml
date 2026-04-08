@@ -112,6 +112,9 @@ services:
     volumes:
       - alirpunkto_pyramid_var:/home/alirpunkto/app/var
       - ./.env:/home/alirpunkto/app/.env:ro
+      # production.ini contains site-specific settings (mail, apps, org details).
+      # Edit it at the repo root before first launch, then it is injected read-only.
+      - ../production.ini:/home/alirpunkto/app/production.ini:ro
     depends_on:
       ldap:
         condition: service_healthy
