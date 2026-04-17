@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     procps \
  && rm -rf /var/lib/apt/lists/*
-
+   
 # Copy the base configuration files and the startup script.
 COPY etc/postfix/main.cf /etc/postfix/main.cf
 COPY etc/opendkim.conf /etc/opendkim.conf
@@ -24,6 +24,9 @@ COPY start_postfix.sh /usr/local/bin/start_postfix.sh
 # Prepare runtime directories and mark the entrypoint executable.
 RUN chmod +x /usr/local/bin/start_postfix.sh \
     && mkdir -p /etc/dkimkeys /run/opendkim
+
+RUN chmod +x /usr/local/bin/start_postfix.sh \
+    && mkdir -p /etc/dkimkeys /run/opendkim /etc/opendkim
 
 # Persist the mail queue and DKIM keys.
 VOLUME ["/var/spool/postfix", "/etc/dkimkeys"]

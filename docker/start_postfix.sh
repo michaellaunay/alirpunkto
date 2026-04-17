@@ -20,7 +20,7 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-mkdir -p /etc/dkimkeys /run/opendkim /var/spool/postfix
+mkdir -p /etc/dkimkeys /run/opendkim /var/spool/postfix /etc/opendkim
 chown root:opendkim /etc/dkimkeys /run/opendkim
 chmod 775 /run/opendkim
 

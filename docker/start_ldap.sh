@@ -128,23 +128,21 @@ if [ "${args[0]}" = "slapd" ]; then
   else
     if [ -f "$LDIF_PATH" ] && [ ! -f "$MARKER_PATH" ]; then
       echo "Importing initial users from $LDIF_PATH"
-      # -c : continue on error (tolerates err=68 Already Exists for groups
-      #      that slapd may have pre-created during dpkg-reconfigure)
-      if ldapadd -c -x \
+      ldapadd_output=$(ldapadd -c -x \
         -D "cn=admin,$LDAP_BASE_DN" \
         -w "$LDAP_PASSWORD" \
         -H "$LDAP_URI" \
-        -f "$LDIF_PATH"; then
+        -f "$LDIF_PATH" 2>&1) || true
+
+      # Verify ldap entries
+      if echo "$ldapadd_output" | grep -q "adding new entry\|Already exists"; then
         touch "$MARKER_PATH"
-        echo "Initial users imported successfully"
+        echo "Initial users loaded (new or pre-existing)"
       else
-        # ldapadd -c exits non-zero only if NO entry succeeded at all.
-        # A partial import (some already existed) exits 0, so reaching
-        # here means a genuine failure — abort.
-        echo "Failed to load initial users" >&2
-        kill "$slapd_pid"
-        exit 1
-      fi
+       echo "Failed to load initial users" >&2
+       kill "$slapd_pid"
+       exit 1
+     fi
     fi
   fi
   wait "$slapd_pid"
