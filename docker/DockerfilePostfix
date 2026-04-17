@@ -23,9 +23,6 @@ COPY start_postfix.sh /usr/local/bin/start_postfix.sh
 
 # Prepare runtime directories and mark the entrypoint executable.
 RUN chmod +x /usr/local/bin/start_postfix.sh \
-    && mkdir -p /etc/dkimkeys /run/opendkim
-
-RUN chmod +x /usr/local/bin/start_postfix.sh \
     && mkdir -p /etc/dkimkeys /run/opendkim /etc/opendkim
 
 # Persist the mail queue and DKIM keys.
