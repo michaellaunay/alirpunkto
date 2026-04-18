@@ -29,7 +29,8 @@ requires = [
     "py3dns",
     "validate_email",
     "cryptography",
-    "bcrypt"
+    "bcrypt",
+    "requests"
 ]
 
 tests_require = [
