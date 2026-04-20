@@ -256,6 +256,7 @@ LDAP_ORGANIZATION="${LDAP_ORGANIZATION}"
 LDAP_LOGIN="${LDAP_LOGIN}"
 LDAP_OU="${LDAP_OU}"
 LDAP_PASSWORD="${LDAP_PASSWORD}"
+LDAP_USE_SSL=false
 LDAP_PASSWORD_FILE=/run/secrets/ldap_password
 
 # ── Apache ────────────────────────────────────────────────────────────────────
@@ -272,10 +273,13 @@ POSTFIX_INET_PROTOCOLS=ipv4
 
 # ── Mail (Pyramid → SMTP) ─────────────────────────────────────────────────────
 MAIL_SERVER=alirpunkto-postfix
+MAIL_HOST=alirpunkto-postfix
 MAIL_PORT=${MAIL_PORT}
 MAIL_SENDER="${MAIL_SENDER}"
 MAIL_USERNAME=${MAIL_USERNAME}
 MAIL_PASSWORD=${MAIL_PASSWORD}
+MAIL_TLS=false
+MAIL_SSL=false
 
 # ── Admin ─────────────────────────────────────────────────────────────────────
 ADMIN_LOGIN="${ADMIN_LOGIN}"

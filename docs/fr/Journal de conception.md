@@ -2485,4 +2485,5 @@ Le chiffrement des mots de passe ldap des premiers utilisateurs dans le ldiff re
 ```bash
 sudo apt-get install slapd
 ```
-
+Sur le serveur de production où l'on utilise docker-compose, il faut adapter production.ini au réseau des conteneurs.
+Le listen = localhost:6543 est critique — dans un conteneur, localhost ne route pas vers l'extérieur du conteneur. Waitress doit écouter sur 0.0.0.0:6543 pour être joignable depuis Apache et depuis le healthcheck.
