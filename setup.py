@@ -27,11 +27,12 @@ requires = [
     "pyramid_beaker",
     "pyramid_mailer",
     "py3dns",
+    "PyJWT"
     "validate_email",
     "python-keycloak",
     "cryptography",
     "bcrypt",
-    "requests"
+    "requests",
 ]
 
 tests_require = [
