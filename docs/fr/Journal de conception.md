@@ -2479,3 +2479,10 @@ docker buildx build --build-arg BUILD_WITH_DEBUG=1 \
   -f docker/DockerfileOpenLDAP -t alirpunkto-ldap:debug .
 ```
 ```
+
+# 2026-04-20
+Le chiffrement des mots de passe ldap des premiers utilisateurs dans le ldiff requière d'installer slapd sur l'hôte 
+```bash
+sudo apt-get install slapd
+```
+
