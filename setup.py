@@ -28,6 +28,7 @@ requires = [
     "pyramid_mailer",
     "py3dns",
     "validate_email",
+    "python-keycloak",
     "cryptography",
     "bcrypt",
     "requests"
