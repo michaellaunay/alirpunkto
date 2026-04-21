@@ -27,7 +27,7 @@ requires = [
     "pyramid_beaker",
     "pyramid_mailer",
     "py3dns",
-    "PyJWT"
+    "PyJWT",
     "validate_email",
     "python-keycloak",
     "cryptography",
