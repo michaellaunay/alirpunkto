@@ -138,8 +138,8 @@ services:
     networks:
       - alirpunkto-net
     ports:
-      - "8080:80"
-      - "8443:443"
+      - "80:80"
+      - "443:443"
     environment:
       APACHE_SERVER_NAME: ${APACHE_SERVER_NAME}
       APACHE_BACKEND_HOST: alirpunkto-pyramid
