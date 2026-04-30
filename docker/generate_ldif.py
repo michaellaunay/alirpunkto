@@ -54,10 +54,10 @@ ADMIN_PLACEHOLDER = "00000000-0000-0000-0000-000000000000"
 def role_to_groups(role: str) -> list[str]:
     groups = ["communityMembersGroup"]
     mapping = {
-        "COPERATOR":       ["coperatorsGroup"],
+        "COPERATOR":       ["cooperatorsGroup"],
         "ORDINARY_MEMBER": ["ordinaryMembersGroup"],
-        "BOARD_MEMBER":    ["boardMembersGroup", "coperatorsGroup"],
-        "ADMINISTRATOR":   ["administratorsGroup", "coperatorsGroup",
+        "BOARD_MEMBER":    ["boardMembersGroup", "cooperatorsGroup"],
+        "ADMINISTRATOR":   ["administratorsGroup", "cooperatorsGroup",
                             "communityMembersGroup"],
     }
     groups += mapping.get(role, [])

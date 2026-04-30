@@ -6,14 +6,14 @@ dn: cn=communityGroup,dc=alirpunkto,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
 cn: communityGroup
-description: Group for members of the community who are not yet coperators
+description: Group for members of the community who are not yet cooperators
 uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
 
 dn: cn=providersGroup,dc=alirpunkto,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
 cn: providersGroup
-description: Group for active providers of the coperative
+description: Group for active providers of the cooperative
 uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
 
 dn: cn=sanctionedGroup,dc=alirpunkto,dc=org
@@ -23,11 +23,11 @@ cn: sanctionedGroup
 description: Group for sanctioned members
 uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
 
-dn: cn=coperatorsGroup,dc=alirpunkto,dc=org
+dn: cn=cooperatorsGroup,dc=alirpunkto,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
-cn: coperatorsGroup
-description: Group for active coperators of the coperative
+cn: cooperatorsGroup
+description: Group for active cooperators of the cooperative
 uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
 uniqueMember: uid=123a456a-bb78-9012-3456-7f890abc1d2e,dc=alirpunkto,dc=org
 uniqueMember: uid=9eb02a19-b2b2-1bfb-9521-d7115b3a99d8,dc=alirpunkto,dc=org
@@ -36,7 +36,7 @@ dn: cn=boardMembersGroup,dc=alirpunkto,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
 cn: boardMembersGroup
-description: Group for board members of the coperative
+description: Group for board members of the cooperative
 uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
 uniqueMember: uid=123a456a-bb78-9012-3456-7f890abc1d2e,dc=alirpunkto,dc=org
 uniqueMember: uid=9eb02a19-b2b2-1bfb-9521-d7115b3a99d8,dc=alirpunkto,dc=org
@@ -45,21 +45,21 @@ dn: cn=administratorsGroup,dc=alirpunkto,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
 cn: administratorsGroup
-description: Group for active administrators of the coperative
+description: Group for active administrators of the cooperative
 uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
 
 dn: cn=ordinaryMembersGroup,dc=alirpunkto,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
 cn: ordinaryMembersGroup
-description: Group for ordinary members of the coperative
+description: Group for ordinary members of the cooperative
 uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
 
 dn: cn=communityMembersGroup,dc=alirpunkto,dc=org
 objectClass: top
 objectClass: groupOfUniqueNames
 cn: communityMembersGroup
-description: Group for members of the community who are not yet coperators
+description: Group for members of the community who are not yet cooperators
 uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=alirpunkto,dc=org
 uniqueMember: uid=123a456a-bb78-9012-3456-7f890abc1d2e,dc=alirpunkto,dc=org
 uniqueMember: uid=9eb02a19-b2b2-1bfb-9521-d7115b3a99d8,dc=alirpunkto,dc=org
@@ -133,7 +133,7 @@ thirdLanguage: de
 givenName: Sergio
 nationality: FR
 cooperativeBehaviourMark: 0
-description: I am one of the founders of the alirpunkto coperative, and currently the chairman of its Board.
+description: I am one of the founders of the alirpunkto cooperative, and currently the chairman of its Board.
 birthdate: 1999-06-08T12:00:00
 mail: sergio.arbarviro@kuneagi.org
 userPassword: Un mot de passe incroyable
