@@ -24,21 +24,30 @@ chmod +x docker/init.sh
 The script asks for:
 
 - domain name and maintainer e-mail
-- LDAP admin password
+- LDAP admin password and login DN prefix
+- application admin account (login, e-mail, password, and `LDAP_ADMIN_OID` — the UUID
+  used by Pyramid to identify the admin entry in LDAP; defaults to a generated UUID,
+  **do not leave the all-zero placeholder in production**)
 - first and second bootstrap users (name, e-mail, language, nationality, role)
 - Apache / Let's Encrypt settings
 - Postfix relay host (optional)
+- LDAP server hostname and port as seen by the Pyramid container
+- Keycloak / SSO settings (optional)
 
 It generates:
 
 | File | Description |
 |---|---|
-| `docker/.env` | All runtime variables consumed by Compose |
+| `docker/.env` | All runtime variables consumed by Compose (includes `LDAP_ADMIN_OID`) |
 | `docker/secrets/ldap_password` | LDAP password file (mode 600, **never commit**) |
-| `docker/initials_users.generated.ldif` | Bootstrap users with hashed passwords |
+| `docker/initials_users.generated.ldif` | Bootstrap users with hashed passwords (admin + 2 users) |
 
 > **Security note:** passwords are hashed with `slappasswd` ({SSHA}).
 > The script warns if `slappasswd` is not installed (`apt install slapd`).
+>
+> **`LDAP_ADMIN_OID`** is the UUID stored as `uid` in the LDAP admin entry and
+> read by Pyramid via `constants_and_globals.py`. It must match between the
+> generated LDIF and the `.env` file — `init.sh` guarantees this automatically.
 
 ### 2. Start the stack
 
@@ -62,6 +71,11 @@ docker volume rm alirpunkto_ldap_etc alirpunkto_ldap_var
 ./docker/init.sh
 docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
 ```
+
+> If you also want to wipe the Pyramid object database (ZODB):
+> ```bash
+> docker volume rm alirpunkto_pyramid_var
+> ```
 
 ---
 
@@ -207,8 +221,66 @@ Optional variables: `POSTFIX_RELAYHOST`, `POSTFIX_INET_PROTOCOLS`,
 On first start, retrieve the DKIM DNS record with:
 
 ```bash
-docker logs alirpunkto-postfix
+docker logs alirpunkto-postfix | grep -A 10 "DNS record to publish"
 ```
+
+Create a DNS TXT record for `dkim._domainkey.<your-domain>` with the `p=` value
+shown (concatenate the quoted strings, strip parentheses and quotes).
+
+---
+
+## Inspecting a running container
+
+```bash
+# Open a shell in any container
+docker exec -it alirpunkto-ldap bash
+docker exec -it alirpunkto-pyramid bash
+docker exec -it alirpunkto-postfix bash
+docker exec -it alirpunkto-apache2 bash
+```
+
+### Query LDAP from inside the LDAP container
+
+```bash
+ldapsearch -x \
+  -H ldap://localhost \
+  -D "cn=admin,$LDAP_BASE_DN" \
+  -w "$LDAP_PASSWORD" \
+  -b "$LDAP_BASE_DN" \
+  "(objectClass=inetOrgPerson)"
+```
+
+### Python REPL with the full Pyramid environment
+
+```bash
+docker exec -it alirpunkto-pyramid bash
+source /home/alirpunkto/venv/bin/activate
+cd /home/alirpunkto/app
+pshell production.ini   # loads the app; registry, request and root are available
+```
+
+Or query LDAP directly with `ldap3`:
+
+```python
+from ldap3 import Server, Connection, ALL, SUBTREE
+server = Server('ldap://alirpunkto-ldap', get_info=ALL)
+conn = Connection(server,
+    user='cn=admin,dc=example,dc=com',
+    password='secret', auto_bind=True)
+conn.search('dc=example,dc=com', '(objectClass=inetOrgPerson)',
+    attributes=['cn', 'mail', 'employeeType'])
+for e in conn.entries:
+    print(e)
+conn.unbind()
+```
+
+> Use **tmux** on the host before running `docker exec` so that an SSH
+> disconnection does not kill your session:
+> ```bash
+> tmux new -s debug
+> docker exec -it alirpunkto-pyramid bash
+> # reconnect later with: tmux attach -t debug
+> ```
 
 ---
 

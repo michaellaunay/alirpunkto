@@ -2487,3 +2487,20 @@ sudo apt-get install slapd
 ```
 Sur le serveur de production où l'on utilise docker-compose, il faut adapter production.ini au réseau des conteneurs.
 Le listen = localhost:6543 est critique — dans un conteneur, localhost ne route pas vers l'extérieur du conteneur. Waitress doit écouter sur 0.0.0.0:6543 pour être joignable depuis Apache et depuis le healthcheck.
+
+# 2026-04-23
+
+Pour aller chercher la clé dkim du conteneur Postfix :
+```bash
+zope@kuneagi02:~/alirpunkto$ docker logs alirpunkto-postfix | grep -A 10 "DNS record to publish"
+[Init] DNS record to publish for DKIM:
+dkim._domainkey	IN	TXT	( "v=DKIM1; h=sha256; k=rsa; "
+postfix/postlog: warning: not owned by root: /var/spool/postfix/usr/lib
+	  "p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxuC+zE5b7LW9ftbTeond5fiUSNJWBRCVSP4KlSozce3Hl7TOKgGkuwfT7rl0BGZZ7/i4Lg/DCKRAKXaN8L5cE10h2G68U47AYxD6nevwfJZ/QM2WAyvNyccntaO9IPxquzeXn3xNlUIkP9Zytn9UA62mc7fahwMHxoeQpFSFePO1BfUmPIo3TSsOlCIMB83pCO7zNLnAq4FEmr"
+postfix/postlog: warning: not owned by root: /var/spool/postfix/usr/lib/zoneinfo
+	  "TniPz8iOEGWu6nmHiIIHMBGxloB4jMOzOIPBOJP5sTwe01UhXrF+17KNfxE90P9+ThcvsqaUKQunEB6xxnqXvuhvn3gaUFlX8iEcv3i9eVYJVBPY2VHw4Fh0gWhq11S3Tvz+6sFQIDAQAB" )  ; ----- DKIM key dkim for testalirpunkto.cosmopolitical.coop
+postfix/postlog: warning: not owned by root: /var/spool/postfix/usr/lib/sasl2
+[Init] Starting Postfix
+postfix/postlog: starting the Postfix mail system
+
+```

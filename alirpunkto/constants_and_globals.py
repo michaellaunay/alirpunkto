@@ -158,7 +158,7 @@ CANDIDATURE_OID: Final = 'candidature_oid'
 MEMBER_OID: Final = 'member_oid'
 ACCESSED_MEMBER_OID: Final = 'accessed_member_oid'
 SEED_LENGTH: Final = 10
-LDAP_ADMIN_OID: Final = "00000000-0000-0000-0000-000000000000"
+LDAP_ADMIN_OID: Final = os.getenv("LDAP_ADMIN_OID", "00000000-0000-0000-0000-000000000000")
 
 MIN_PSEUDONYM_LENGTH: Final = 5 # Minimum pseudonym length
 MAX_PSEUDONYM_LENGTH: Final = 20 # Maximum pseudonym length

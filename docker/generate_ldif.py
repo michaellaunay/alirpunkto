@@ -4,6 +4,7 @@ docker/generate_ldif.py — Generate initials_users.generated.ldif
 
 Called by docker/init.sh with positional arguments:
   template ldif_out base_dn
+  admin_uuid admin_login admin_email admin_pw
   user1_uuid user1_role user1_first user1_last user1_lang user1_nat user1_email user1_pw
   user2_uuid user2_role user2_first user2_last user2_lang user2_nat user2_email user2_pw
   today
@@ -11,6 +12,7 @@ Called by docker/init.sh with positional arguments:
 Fixes produced by this rewrite vs the previous sed/perl approach:
 - Demo users (hardcoded UUIDs) are stripped from the template entirely.
 - uniqueMember references to demo users are removed from all groups.
+- The admin placeholder (00000000-...) is replaced by the real LDAP_ADMIN_OID.
 - Group blocks are rebuilt cleanly with no duplicate or missing blank lines.
 - Bootstrap users are added to the correct groups based on their role.
 - No double "# Users" section in the output.
@@ -21,8 +23,9 @@ import sys
 
 # ── Arguments ────────────────────────────────────────────────────────────────
 
-if len(sys.argv) != 21:
+if len(sys.argv) != 25:
     print(f"Usage: {sys.argv[0]} template out base_dn "
+          "admin_uuid admin_login admin_email admin_pw "
           "u1_uuid u1_role u1_first u1_last u1_lang u1_nat u1_email u1_pw "
           "u2_uuid u2_role u2_first u2_last u2_lang u2_nat u2_email u2_pw "
           "today", file=sys.stderr)
@@ -32,6 +35,7 @@ if len(sys.argv) != 21:
     sys.exit(1)
 
 (TEMPLATE, OUT, LDAP_BASE_DN,
+ ADMIN_UUID, ADMIN_LOGIN, ADMIN_EMAIL, ADMIN_PW,
  U1_UUID, U1_ROLE, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW,
  U2_UUID, U2_ROLE, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW,
  TODAY) = sys.argv[1:]
@@ -42,6 +46,9 @@ DEMO_UUIDS = {
     "9eb02a19-b2b2-1bfb-9521-d7115b3a99d8",
 }
 
+# The old hardcoded admin placeholder — replaced by the real ADMIN_UUID
+ADMIN_PLACEHOLDER = "00000000-0000-0000-0000-000000000000"
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def role_to_groups(role: str) -> list[str]:
@@ -50,10 +57,11 @@ def role_to_groups(role: str) -> list[str]:
         "COPERATOR":       ["coperatorsGroup"],
         "ORDINARY_MEMBER": ["ordinaryMembersGroup"],
         "BOARD_MEMBER":    ["boardMembersGroup", "coperatorsGroup"],
-        "ADMINISTRATOR":   ["administratorsGroup", "coperatorsGroup"],
+        "ADMINISTRATOR":   ["administratorsGroup", "coperatorsGroup",
+                            "communityMembersGroup"],
     }
     groups += mapping.get(role, [])
-    return groups
+    return list(set(groups))  # deduplicate
 
 
 def user_entry(uuid, first, last, lang, nat, email, pw, role, base_dn, today):
@@ -77,6 +85,27 @@ def user_entry(uuid, first, last, lang, nat, email, pw, role, base_dn, today):
         f"dateEndValidityYearlyContribution: {today}",
     ])
 
+
+def admin_entry(uuid, login, email, pw, base_dn, today):
+    """Generate the LDAP admin entry using LDAP_ADMIN_OID as uid."""
+    return "\n".join([
+        f"dn: uid={uuid},{base_dn}",
+        "objectClass: inetOrgPerson",
+        "objectClass: alirpunktoPerson",
+        f"uid: {uuid}",
+        f"sn: {login}",
+        f"cn: {login}",
+        f"employeeNumber: {uuid}",
+        "employeeType: ADMINISTRATOR",
+        "isActive: TRUE",
+        "preferredLanguage: fr",
+        f"givenName: {login}",
+        f"mail: {email}",
+        f"userPassword: {pw}",
+        "numberSharesOwned: 0",
+        f"dateEndValidityYearlyContribution: {today}",
+    ])
+
 # ── Read and normalise template ───────────────────────────────────────────────
 
 with open(TEMPLATE) as f:
@@ -85,12 +114,15 @@ with open(TEMPLATE) as f:
 # Replace placeholder base DN
 raw = raw.replace("dc=alirpunkto,dc=org", LDAP_BASE_DN)
 
+# Replace admin placeholder UUID with the real LDAP_ADMIN_OID everywhere
+raw = raw.replace(ADMIN_PLACEHOLDER, ADMIN_UUID)
+
 # Split into LDIF blocks separated by one or more blank lines
 blocks = re.split(r"\n{2,}", raw.strip())
 
 # ── Process blocks ────────────────────────────────────────────────────────────
 
-group_blocks = []   # list of dicts: {dn, lines (without uniqueMember), members (set)}
+group_blocks = []   # list of dicts: {cn, lines (without uniqueMember), members (set)}
 
 for block in blocks:
     lines = block.strip().splitlines()
@@ -114,13 +146,12 @@ for block in blocks:
         for l in lines:
             if l.startswith("uniqueMember:"):
                 ref = l.split(":", 1)[1].strip()
-                # Keep only the admin placeholder, drop demo user refs
+                # Drop demo user refs; keep admin (now substituted) and others
                 is_demo = any(f"uid={u}" in ref for u in DEMO_UUIDS)
                 if not is_demo:
                     members.add(ref)
             else:
                 non_member_lines.append(l)
-        # Extract cn value for matching later
         cn_val = None
         for l in non_member_lines:
             if l.startswith("cn:"):
@@ -132,7 +163,14 @@ for block in blocks:
             "members": members,
         })
 
-# ── Add bootstrap users to their groups ───────────────────────────────────────
+# ── Add admin to its groups ───────────────────────────────────────────────────
+
+ADMIN_DN = f"uid={ADMIN_UUID},{LDAP_BASE_DN}"
+for gb in group_blocks:
+    if gb["cn"] in role_to_groups("ADMINISTRATOR"):
+        gb["members"].add(ADMIN_DN)
+
+# ── Add bootstrap users to their groups ──────────────────────────────────────
 
 for uuid, role in [(U1_UUID, U1_ROLE), (U2_UUID, U2_ROLE)]:
     dn = f"uid={uuid},{LDAP_BASE_DN}"
@@ -146,13 +184,19 @@ out_parts = ["# =====================\n# Groups\n# ====================="]
 
 for gb in group_blocks:
     block_lines = gb["lines"][:]
-    # Append uniqueMember lines in stable order (admin placeholder first)
-    for m in sorted(gb["members"], key=lambda x: (0 if "00000000" in x else 1, x)):
+    # Admin DN first, then others in stable alphabetical order
+    for m in sorted(gb["members"],
+                    key=lambda x: (0 if ADMIN_UUID in x else 1, x)):
         block_lines.append(f"uniqueMember: {m}")
     out_parts.append("\n".join(block_lines))
 
 out_parts.append("# =====================\n# Users\n# =====================")
 
+# Admin entry first
+out_parts.append(admin_entry(ADMIN_UUID, ADMIN_LOGIN, ADMIN_EMAIL, ADMIN_PW,
+                              LDAP_BASE_DN, TODAY))
+
+# Bootstrap users
 for (uuid, first, last, lang, nat, email, pw, role) in [
     (U1_UUID, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW, U1_ROLE),
     (U2_UUID, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW, U2_ROLE),

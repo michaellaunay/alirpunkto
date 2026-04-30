@@ -166,6 +166,9 @@ info "=== Application admin account ==="
 ask ADMIN_LOGIN    "Admin login" "admin"
 ask ADMIN_EMAIL    "Admin e-mail" "${MAINTAINER_EMAIL}"
 ask_secret ADMIN_PASSWORD "Admin password"
+ask LDAP_ADMIN_OID "Admin OID (leave empty to use null uid)" "00000000-0000-0000-0000-000000000000"
+info "Admin UID will be: ${LDAP_ADMIN_OID}"
+ADMIN_HASHED_PW="$(hash_password "${ADMIN_PASSWORD}")"
 
 # ── first user ────────────────────────────────────────────────────────────────
 
@@ -285,6 +288,7 @@ MAIL_SSL=false
 ADMIN_LOGIN="${ADMIN_LOGIN}"
 ADMIN_EMAIL="${ADMIN_EMAIL}"
 ADMIN_PASSWORD="${ADMIN_PASSWORD}"
+LDAP_ADMIN_OID="${LDAP_ADMIN_OID}"
 
 # ── Keycloak / SSO ────────────────────────────────────────────────────────────
 KEYCLOAK_SERVER_URL="${KEYCLOAK_SERVER_URL}"
@@ -328,6 +332,7 @@ GENERATE_LDIF_ARGS=(
     "${LDIF_TEMPLATE}"
     "${LDIF_OUT}"
     "${LDAP_BASE_DN}"
+    "${LDAP_ADMIN_OID}" "${ADMIN_LOGIN}" "${ADMIN_EMAIL}" "${ADMIN_HASHED_PW}"
     "${USER1_UUID}" "${USER1_ROLE}" "${USER1_FIRSTNAME}" "${USER1_LASTNAME}"
     "${USER1_LANG}" "${USER1_NATIONALITY}" "${USER1_EMAIL}" "${USER1_HASHED_PW}"
     "${USER2_UUID}" "${USER2_ROLE}" "${USER2_FIRSTNAME}" "${USER2_LASTNAME}"
@@ -347,6 +352,7 @@ echo -e "${GREEN}${BOLD}══════════════════�
 echo
 echo -e "  Domain       : ${BOLD}${DOMAIN}${RESET}"
 echo -e "  LDAP base DN : ${BOLD}${LDAP_BASE_DN}${RESET}"
+echo -e "  Admin        : ${BOLD}${ADMIN_LOGIN}${RESET} <${ADMIN_EMAIL}> — ADMINISTRATOR [${LDAP_ADMIN_OID}]"
 echo -e "  User 1       : ${BOLD}${USER1_FIRSTNAME} ${USER1_LASTNAME}${RESET} <${USER1_EMAIL}> — ${USER1_ROLE} [${USER1_UUID}]"
 echo -e "  User 2       : ${BOLD}${USER2_FIRSTNAME} ${USER2_LASTNAME}${RESET} <${USER2_EMAIL}> — ${USER2_ROLE} [${USER2_UUID}]"
 echo
