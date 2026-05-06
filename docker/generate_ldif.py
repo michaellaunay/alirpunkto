@@ -4,9 +4,9 @@ docker/generate_ldif.py — Generate initials_users.generated.ldif
 
 Called by docker/init.sh with positional arguments:
   template ldif_out base_dn
-  admin_uuid admin_login admin_email admin_pw
-  user1_uuid user1_role user1_first user1_last user1_lang user1_nat user1_email user1_pw
-  user2_uuid user2_role user2_first user2_last user2_lang user2_nat user2_email user2_pw
+  admin_uuid admin_login admin_pseudonym admin_email admin_pw
+  user1_uuid user1_role user1_pseudonym user1_first user1_last user1_lang user1_nat user1_email user1_pw
+  user2_uuid user2_role user2_pseudonym user2_first user2_last user2_lang user2_nat user2_email user2_pw
   today
 
 Fixes produced by this rewrite vs the previous sed/perl approach:
@@ -23,11 +23,11 @@ import sys
 
 # ── Arguments ────────────────────────────────────────────────────────────────
 
-if len(sys.argv) != 25:
+if len(sys.argv) != 27:
     print(f"Usage: {sys.argv[0]} template out base_dn "
-          "admin_uuid admin_login admin_email admin_pw "
-          "u1_uuid u1_role u1_first u1_last u1_lang u1_nat u1_email u1_pw "
-          "u2_uuid u2_role u2_first u2_last u2_lang u2_nat u2_email u2_pw "
+          "admin_uuid admin_login admin_pseudonym admin_email admin_pw "
+          "u1_uuid u1_role u1_pseudonym u1_first u1_last u1_lang u1_nat u1_email u1_pw "
+          "u2_uuid u2_role u2_pseudonym u2_first u2_last u2_lang u2_nat u2_email u2_pw "
           "today", file=sys.stderr)
     print(f"Received {len(sys.argv) - 1} arguments:", file=sys.stderr)
     for i, a in enumerate(sys.argv[1:], 1):
@@ -35,9 +35,9 @@ if len(sys.argv) != 25:
     sys.exit(1)
 
 (TEMPLATE, OUT, LDAP_BASE_DN,
- ADMIN_UUID, ADMIN_LOGIN, ADMIN_EMAIL, ADMIN_PW,
- U1_UUID, U1_ROLE, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW,
- U2_UUID, U2_ROLE, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW,
+ ADMIN_UUID, ADMIN_LOGIN, ADMIN_PSEUDONYM, ADMIN_EMAIL, ADMIN_PW,
+ U1_UUID, U1_ROLE, U1_PSEUDONYM, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW,
+ U2_UUID, U2_ROLE, U2_PSEUDONYM, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW,
  TODAY) = sys.argv[1:]
 
 # UUIDs of demo / placeholder users present in the template — strip them
@@ -64,14 +64,16 @@ def role_to_groups(role: str) -> list[str]:
     return list(set(groups))  # deduplicate
 
 
-def user_entry(uuid, first, last, lang, nat, email, pw, role, base_dn, today):
+def user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role, base_dn, today):
+    """cn is set to the pseudonym — this is the login identifier used by Pyramid
+    (get_oid_from_pseudonym searches by cn, pseudonym_pattern enforces ASCII only)."""
     return "\n".join([
         f"dn: uid={uuid},{base_dn}",
         "objectClass: inetOrgPerson",
         "objectClass: alirpunktoPerson",
         f"uid: {uuid}",
         f"sn: {last}",
-        f"cn: {first} {last}",
+        f"cn: {pseudonym}",
         f"employeeNumber: {uuid}",
         f"employeeType: {role}",
         "isActive: TRUE",
@@ -86,15 +88,16 @@ def user_entry(uuid, first, last, lang, nat, email, pw, role, base_dn, today):
     ])
 
 
-def admin_entry(uuid, login, email, pw, base_dn, today):
-    """Generate the LDAP admin entry using LDAP_ADMIN_OID as uid."""
+def admin_entry(uuid, login, pseudonym, email, pw, base_dn, today):
+    """Generate the LDAP admin entry using LDAP_ADMIN_OID as uid.
+    cn is set to the pseudonym — the login identifier used by Pyramid."""
     return "\n".join([
         f"dn: uid={uuid},{base_dn}",
         "objectClass: inetOrgPerson",
         "objectClass: alirpunktoPerson",
         f"uid: {uuid}",
         f"sn: {login}",
-        f"cn: {login}",
+        f"cn: {pseudonym}",
         f"employeeNumber: {uuid}",
         "employeeType: ADMINISTRATOR",
         "isActive: TRUE",
@@ -193,15 +196,15 @@ for gb in group_blocks:
 out_parts.append("# =====================\n# Users\n# =====================")
 
 # Admin entry first
-out_parts.append(admin_entry(ADMIN_UUID, ADMIN_LOGIN, ADMIN_EMAIL, ADMIN_PW,
+out_parts.append(admin_entry(ADMIN_UUID, ADMIN_LOGIN, ADMIN_PSEUDONYM, ADMIN_EMAIL, ADMIN_PW,
                               LDAP_BASE_DN, TODAY))
 
 # Bootstrap users
-for (uuid, first, last, lang, nat, email, pw, role) in [
-    (U1_UUID, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW, U1_ROLE),
-    (U2_UUID, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW, U2_ROLE),
+for (uuid, pseudonym, first, last, lang, nat, email, pw, role) in [
+    (U1_UUID, U1_PSEUDONYM, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW, U1_ROLE),
+    (U2_UUID, U2_PSEUDONYM, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW, U2_ROLE),
 ]:
-    out_parts.append(user_entry(uuid, first, last, lang, nat, email, pw, role,
+    out_parts.append(user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role,
                                 LDAP_BASE_DN, TODAY))
 
 with open(OUT, "w") as f:

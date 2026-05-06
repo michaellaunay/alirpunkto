@@ -25,10 +25,10 @@ The script asks for:
 
 - domain name and maintainer e-mail
 - LDAP admin password and login DN prefix
-- application admin account (login, e-mail, password, and `LDAP_ADMIN_OID` — the UUID
+- application admin account (login, e-mail, password, pseudonym, and `LDAP_ADMIN_OID` — the UUID
   used by Pyramid to identify the admin entry in LDAP; defaults to a generated UUID,
   **do not leave the all-zero placeholder in production**)
-- first and second bootstrap users (name, e-mail, language, nationality, role)
+- first and second bootstrap users (name, e-mail, language, nationality, role, pseudonym)
 - Apache / Let's Encrypt settings
 - Postfix relay host (optional)
 - LDAP server hostname and port as seen by the Pyramid container
@@ -48,6 +48,11 @@ It generates:
 > **`LDAP_ADMIN_OID`** is the UUID stored as `uid` in the LDAP admin entry and
 > read by Pyramid via `constants_and_globals.py`. It must match between the
 > generated LDIF and the `.env` file — `init.sh` guarantees this automatically.
+>
+> **Pseudonym** is the login identifier typed in the web interface. It is stored
+> as the LDAP `cn` attribute and must be 5–20 ASCII characters (`[a-zA-Z0-9_.-]`).
+> Names with accents (e.g. `Michaël`) cannot be used as-is — choose an ASCII
+> pseudonym such as `michael.launay` or `mlaunay` instead.
 
 ### 2. Start the stack
 

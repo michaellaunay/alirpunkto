@@ -87,6 +87,27 @@ ask_role() {
     done
 }
 
+ask_pseudonym() {
+    # ask_pseudonym <var_name> <user_label>
+    # Validates against Pyramid pseudonym_pattern:
+    # 5-20 chars, ASCII only: letters, digits, underscore, dot, dash
+    local var="$1" label="$2"
+    local value=""
+    while true; do
+        read -rp "$(echo -e "${BOLD}Pseudonym (login) for ${label}${RESET} (5-20 chars, ASCII [a-zA-Z0-9_.-]): ")" value
+        if [[ ${#value} -lt 5 ]]; then
+            error "Pseudonym too short (minimum 5 characters)."
+        elif [[ ${#value} -gt 20 ]]; then
+            error "Pseudonym too long (maximum 20 characters)."
+        elif [[ ! "$value" =~ ^[a-zA-Z0-9_.\-][a-zA-Z0-9_.\- ]{0,18}[a-zA-Z0-9_.\-]$ ]]; then
+            error "Invalid pseudonym. Use only ASCII letters, digits, underscore, dot or dash (5-20 chars)."
+        else
+            printf -v "$var" '%s' "$value"
+            break
+        fi
+    done
+}
+
 generate_uuid() {
     if command -v uuidgen &>/dev/null; then
         uuidgen | tr '[:upper:]' '[:lower:]'
@@ -168,6 +189,7 @@ ask ADMIN_EMAIL    "Admin e-mail" "${MAINTAINER_EMAIL}"
 ask_secret ADMIN_PASSWORD "Admin password"
 ask LDAP_ADMIN_OID "Admin OID (leave empty to use null uid)" "00000000-0000-0000-0000-000000000000"
 info "Admin UID will be: ${LDAP_ADMIN_OID}"
+ask_pseudonym ADMIN_PSEUDONYM "${ADMIN_LOGIN}"
 ADMIN_HASHED_PW="$(hash_password "${ADMIN_PASSWORD}")"
 
 # ── first user ────────────────────────────────────────────────────────────────
@@ -180,6 +202,7 @@ ask USER1_EMAIL       "E-mail"
 ask USER1_LANG        "Preferred language (ISO 639-1)" "fr"
 ask USER1_NATIONALITY "Nationality (ISO 3166-1 alpha-2)" "FR"
 ask_role USER1_ROLE   "${USER1_FIRSTNAME} ${USER1_LASTNAME}"
+ask_pseudonym USER1_PSEUDONYM "${USER1_FIRSTNAME} ${USER1_LASTNAME}"
 ask_secret USER1_PASSWORD "Password for ${USER1_FIRSTNAME} ${USER1_LASTNAME}"
 USER1_UUID="$(generate_uuid)"
 
@@ -193,6 +216,7 @@ ask USER2_EMAIL       "E-mail"
 ask USER2_LANG        "Preferred language (ISO 639-1)" "fr"
 ask USER2_NATIONALITY "Nationality (ISO 3166-1 alpha-2)" "FR"
 ask_role USER2_ROLE   "${USER2_FIRSTNAME} ${USER2_LASTNAME}"
+ask_pseudonym USER2_PSEUDONYM "${USER2_FIRSTNAME} ${USER2_LASTNAME}"
 ask_secret USER2_PASSWORD "Password for ${USER2_FIRSTNAME} ${USER2_LASTNAME}"
 USER2_UUID="$(generate_uuid)"
 
@@ -332,10 +356,10 @@ GENERATE_LDIF_ARGS=(
     "${LDIF_TEMPLATE}"
     "${LDIF_OUT}"
     "${LDAP_BASE_DN}"
-    "${LDAP_ADMIN_OID}" "${ADMIN_LOGIN}" "${ADMIN_EMAIL}" "${ADMIN_HASHED_PW}"
-    "${USER1_UUID}" "${USER1_ROLE}" "${USER1_FIRSTNAME}" "${USER1_LASTNAME}"
+    "${LDAP_ADMIN_OID}" "${ADMIN_LOGIN}" "${ADMIN_PSEUDONYM}" "${ADMIN_EMAIL}" "${ADMIN_HASHED_PW}"
+    "${USER1_UUID}" "${USER1_ROLE}" "${USER1_PSEUDONYM}" "${USER1_FIRSTNAME}" "${USER1_LASTNAME}"
     "${USER1_LANG}" "${USER1_NATIONALITY}" "${USER1_EMAIL}" "${USER1_HASHED_PW}"
-    "${USER2_UUID}" "${USER2_ROLE}" "${USER2_FIRSTNAME}" "${USER2_LASTNAME}"
+    "${USER2_UUID}" "${USER2_ROLE}" "${USER2_PSEUDONYM}" "${USER2_FIRSTNAME}" "${USER2_LASTNAME}"
     "${USER2_LANG}" "${USER2_NATIONALITY}" "${USER2_EMAIL}" "${USER2_HASHED_PW}"
     "${TODAY}"
 )
