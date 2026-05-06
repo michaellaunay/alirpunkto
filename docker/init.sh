@@ -93,13 +93,15 @@ ask_pseudonym() {
     # 5-20 chars, ASCII only: letters, digits, underscore, dot, dash
     local var="$1" label="$2"
     local value=""
+    # Pattern stored in variable — bash =~ does not support {n,m} inline
+    local pattern="^[a-zA-Z0-9_.][a-zA-Z0-9_. -]{0,18}[a-zA-Z0-9_.]$"
     while true; do
         read -rp "$(echo -e "${BOLD}Pseudonym (login) for ${label}${RESET} (5-20 chars, ASCII [a-zA-Z0-9_.-]): ")" value
         if [[ ${#value} -lt 5 ]]; then
             error "Pseudonym too short (minimum 5 characters)."
         elif [[ ${#value} -gt 20 ]]; then
             error "Pseudonym too long (maximum 20 characters)."
-        elif [[ ! "$value" =~ ^[a-zA-Z0-9_.\-][a-zA-Z0-9_.\- ]{0,18}[a-zA-Z0-9_.\-]$ ]]; then
+        elif [[ ! "$value" =~ $pattern ]]; then
             error "Invalid pseudonym. Use only ASCII letters, digits, underscore, dot or dash (5-20 chars)."
         else
             printf -v "$var" '%s' "$value"
