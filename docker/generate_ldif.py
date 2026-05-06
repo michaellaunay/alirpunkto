@@ -23,7 +23,7 @@ import sys
 
 # ── Arguments ────────────────────────────────────────────────────────────────
 
-if len(sys.argv) != 27:
+if len(sys.argv) != 28:
     print(f"Usage: {sys.argv[0]} template out base_dn "
           "admin_uuid admin_login admin_pseudonym admin_email admin_pw "
           "u1_uuid u1_role u1_pseudonym u1_first u1_last u1_lang u1_nat u1_email u1_pw "
