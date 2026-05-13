@@ -15,6 +15,7 @@ Fixes produced by this rewrite vs the previous sed/perl approach:
 - The admin placeholder (00000000-...) is replaced by the real LDAP_ADMIN_OID.
 - Group blocks are rebuilt cleanly with no duplicate or missing blank lines.
 - Bootstrap users are added to the correct groups based on their role.
+- uniqueMemberOf is set on each user entry to mirror group membership.
 - No double "# Users" section in the output.
 """
 
@@ -54,7 +55,7 @@ ADMIN_PLACEHOLDER = "00000000-0000-0000-0000-000000000000"
 def role_to_groups(role: str) -> list[str]:
     groups = ["communityMembersGroup"]
     mapping = {
-        "COPERATOR":       ["cooperatorsGroup"],
+        "COOPERATOR":      ["cooperatorsGroup"],
         "ORDINARY_MEMBER": ["ordinaryMembersGroup"],
         "BOARD_MEMBER":    ["boardMembersGroup", "cooperatorsGroup"],
         "ADMINISTRATOR":   ["administratorsGroup", "cooperatorsGroup",
@@ -69,6 +70,7 @@ def user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role, base_dn
     (get_oid_from_pseudonym searches by cn, pseudonym_pattern enforces ASCII only)."""
     return "\n".join([
         f"dn: uid={uuid},{base_dn}",
+        "objectClass: top",
         "objectClass: inetOrgPerson",
         "objectClass: alirpunktoPerson",
         f"uid: {uuid}",
@@ -85,7 +87,7 @@ def user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role, base_dn
         f"userPassword: {pw}",
         "numberSharesOwned: 1",
         f"dateEndValidityYearlyContribution: {today}",
-    ])
+    ] + [f"uniqueMemberOf: cn={g},{base_dn}" for g in role_to_groups(role)])
 
 
 def admin_entry(uuid, login, pseudonym, email, pw, base_dn, today):
@@ -93,6 +95,7 @@ def admin_entry(uuid, login, pseudonym, email, pw, base_dn, today):
     cn is set to the pseudonym — the login identifier used by Pyramid."""
     return "\n".join([
         f"dn: uid={uuid},{base_dn}",
+        "objectClass: top",
         "objectClass: inetOrgPerson",
         "objectClass: alirpunktoPerson",
         f"uid: {uuid}",
