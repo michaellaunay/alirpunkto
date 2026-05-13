@@ -73,7 +73,7 @@ ask_role() {
     # ask_role <var_name> <user_label>
     local var="$1" label="$2"
     echo -e "${BOLD}Role for ${label}:${RESET}"
-    local roles=("COOPERATOR" "ORDINARY_MEMBER" "BOARD_MEMBER" "ADMINISTRATOR")
+    local roles=("COPERATOR" "ORDINARY_MEMBER" "BOARD_MEMBER" "ADMINISTRATOR")
     local i=1
     for r in "${roles[@]}"; do echo "  $i) $r"; ((i++)); done
     local choice=""
@@ -206,6 +206,10 @@ ask USER1_NATIONALITY "Nationality (ISO 3166-1 alpha-2)" "FR"
 ask_role USER1_ROLE   "${USER1_FIRSTNAME} ${USER1_LASTNAME}"
 ask_pseudonym USER1_PSEUDONYM "${USER1_FIRSTNAME} ${USER1_LASTNAME}"
 ask_secret USER1_PASSWORD "Password for ${USER1_FIRSTNAME} ${USER1_LASTNAME}"
+ask_optional USER1_SECOND_LANG  "Second language (ISO 639-1)"
+ask_optional USER1_THIRD_LANG   "Third language (ISO 639-1)"
+ask_optional USER1_BIRTHDATE    "Birthdate (YYYY-MM-DDT12:00:00)"
+ask_optional USER1_DESCRIPTION  "Short description / bio"
 USER1_UUID="$(generate_uuid)"
 
 # ── second user ───────────────────────────────────────────────────────────────
@@ -220,6 +224,10 @@ ask USER2_NATIONALITY "Nationality (ISO 3166-1 alpha-2)" "FR"
 ask_role USER2_ROLE   "${USER2_FIRSTNAME} ${USER2_LASTNAME}"
 ask_pseudonym USER2_PSEUDONYM "${USER2_FIRSTNAME} ${USER2_LASTNAME}"
 ask_secret USER2_PASSWORD "Password for ${USER2_FIRSTNAME} ${USER2_LASTNAME}"
+ask_optional USER2_SECOND_LANG  "Second language (ISO 639-1)"
+ask_optional USER2_THIRD_LANG   "Third language (ISO 639-1)"
+ask_optional USER2_BIRTHDATE    "Birthdate (YYYY-MM-DDT12:00:00)"
+ask_optional USER2_DESCRIPTION  "Short description / bio"
 USER2_UUID="$(generate_uuid)"
 
 # ── Apache / TLS ──────────────────────────────────────────────────────────────
@@ -364,6 +372,8 @@ GENERATE_LDIF_ARGS=(
     "${USER2_UUID}" "${USER2_ROLE}" "${USER2_PSEUDONYM}" "${USER2_FIRSTNAME}" "${USER2_LASTNAME}"
     "${USER2_LANG}" "${USER2_NATIONALITY}" "${USER2_EMAIL}" "${USER2_HASHED_PW}"
     "${TODAY}"
+    "${USER1_SECOND_LANG}" "${USER1_THIRD_LANG}" "${USER1_BIRTHDATE}" "${USER1_DESCRIPTION}"
+    "${USER2_SECOND_LANG}" "${USER2_THIRD_LANG}" "${USER2_BIRTHDATE}" "${USER2_DESCRIPTION}"
 )
 python3 "${DOCKER_DIR}/generate_ldif.py" "${GENERATE_LDIF_ARGS[@]}"
 

@@ -2,12 +2,16 @@
 """
 docker/generate_ldif.py — Generate initials_users.generated.ldif
 
-Called by docker/init.sh with positional arguments:
+Called by docker/init.sh with positional arguments (mandatory):
   template ldif_out base_dn
   admin_uuid admin_login admin_pseudonym admin_email admin_pw
   user1_uuid user1_role user1_pseudonym user1_first user1_last user1_lang user1_nat user1_email user1_pw
   user2_uuid user2_role user2_pseudonym user2_first user2_last user2_lang user2_nat user2_email user2_pw
   today
+
+Optional positional arguments (appended after today, empty string if absent):
+  u1_second_lang u1_third_lang u1_birthdate u1_description
+  u2_second_lang u2_third_lang u2_birthdate u2_description
 
 Fixes produced by this rewrite vs the previous sed/perl approach:
 - Demo users (hardcoded UUIDs) are stripped from the template entirely.
@@ -15,7 +19,6 @@ Fixes produced by this rewrite vs the previous sed/perl approach:
 - The admin placeholder (00000000-...) is replaced by the real LDAP_ADMIN_OID.
 - Group blocks are rebuilt cleanly with no duplicate or missing blank lines.
 - Bootstrap users are added to the correct groups based on their role.
-- uniqueMemberOf is set on each user entry to mirror group membership.
 - No double "# Users" section in the output.
 """
 
@@ -24,12 +27,15 @@ import sys
 
 # ── Arguments ────────────────────────────────────────────────────────────────
 
-if len(sys.argv) != 28:
+# 27 mandatory args + script name = 28 minimum; up to 35 with optional attrs
+if len(sys.argv) < 28:
     print(f"Usage: {sys.argv[0]} template out base_dn "
           "admin_uuid admin_login admin_pseudonym admin_email admin_pw "
           "u1_uuid u1_role u1_pseudonym u1_first u1_last u1_lang u1_nat u1_email u1_pw "
           "u2_uuid u2_role u2_pseudonym u2_first u2_last u2_lang u2_nat u2_email u2_pw "
-          "today", file=sys.stderr)
+          "today "
+          "[u1_second_lang u1_third_lang u1_birthdate u1_description "
+          "u2_second_lang u2_third_lang u2_birthdate u2_description]", file=sys.stderr)
     print(f"Received {len(sys.argv) - 1} arguments:", file=sys.stderr)
     for i, a in enumerate(sys.argv[1:], 1):
         print(f"  [{i:02d}] {repr(a)}", file=sys.stderr)
@@ -39,7 +45,10 @@ if len(sys.argv) != 28:
  ADMIN_UUID, ADMIN_LOGIN, ADMIN_PSEUDONYM, ADMIN_EMAIL, ADMIN_PW,
  U1_UUID, U1_ROLE, U1_PSEUDONYM, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW,
  U2_UUID, U2_ROLE, U2_PSEUDONYM, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW,
- TODAY) = sys.argv[1:]
+ TODAY,
+ U1_SECOND_LANG, U1_THIRD_LANG, U1_BIRTHDATE, U1_DESCRIPTION,
+ U2_SECOND_LANG, U2_THIRD_LANG, U2_BIRTHDATE, U2_DESCRIPTION,
+ ) = (sys.argv[1:] + [""] * 8)[:35]
 
 # UUIDs of demo / placeholder users present in the template — strip them
 DEMO_UUIDS = {
@@ -65,10 +74,11 @@ def role_to_groups(role: str) -> list[str]:
     return list(set(groups))  # deduplicate
 
 
-def user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role, base_dn, today):
+def user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role, base_dn, today,
+               second_lang=None, third_lang=None, birthdate=None, description=None):
     """cn is set to the pseudonym — this is the login identifier used by Pyramid
     (get_oid_from_pseudonym searches by cn, pseudonym_pattern enforces ASCII only)."""
-    return "\n".join([
+    lines = [
         f"dn: uid={uuid},{base_dn}",
         "objectClass: top",
         "objectClass: inetOrgPerson",
@@ -80,20 +90,34 @@ def user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role, base_dn
         f"employeeType: {role}",
         "isActive: TRUE",
         f"preferredLanguage: {lang}",
+    ]
+    if second_lang:
+        lines.append(f"secondLanguage: {second_lang}")
+    if third_lang:
+        lines.append(f"thirdLanguage: {third_lang}")
+    lines += [
         f"givenName: {first}",
         f"nationality: {nat}",
         "cooperativeBehaviourMark: 0",
+    ]
+    if description:
+        lines.append(f"description: {description}")
+    if birthdate:
+        lines.append(f"birthdate: {birthdate}")
+    lines += [
         f"mail: {email}",
         f"userPassword: {pw}",
         "numberSharesOwned: 1",
         f"dateEndValidityYearlyContribution: {today}",
-    ] + [f"uniqueMemberOf: cn={g},{base_dn}" for g in role_to_groups(role)])
+    ]
+    lines += [f"uniqueMemberOf: cn={g},{base_dn}" for g in sorted(role_to_groups(role))]
+    return "\n".join(lines)
 
 
 def admin_entry(uuid, login, pseudonym, email, pw, base_dn, today):
     """Generate the LDAP admin entry using LDAP_ADMIN_OID as uid.
     cn is set to the pseudonym — the login identifier used by Pyramid."""
-    return "\n".join([
+    lines = [
         f"dn: uid={uuid},{base_dn}",
         "objectClass: top",
         "objectClass: inetOrgPerson",
@@ -110,7 +134,10 @@ def admin_entry(uuid, login, pseudonym, email, pw, base_dn, today):
         f"userPassword: {pw}",
         "numberSharesOwned: 0",
         f"dateEndValidityYearlyContribution: {today}",
-    ])
+    ]
+    lines += [f"uniqueMemberOf: cn={g},{base_dn}"
+              for g in sorted(role_to_groups("ADMINISTRATOR"))]
+    return "\n".join(lines)
 
 # ── Read and normalise template ───────────────────────────────────────────────
 
@@ -122,6 +149,24 @@ raw = raw.replace("dc=alirpunkto,dc=org", LDAP_BASE_DN)
 
 # Replace admin placeholder UUID with the real LDAP_ADMIN_OID everywhere
 raw = raw.replace(ADMIN_PLACEHOLDER, ADMIN_UUID)
+
+# Normalise the admin uniqueMember reference: the template uses
+# "uid=ADMIN_UUID,cn=admin,dc=..." but entries use "uid=ADMIN_UUID,dc=..."
+raw = re.sub(
+    rf"uid={re.escape(ADMIN_UUID)},cn=[^,]+,({re.escape(LDAP_BASE_DN)})",
+    rf"uid={ADMIN_UUID},\1",
+    raw
+)
+
+# Normalise the admin uniqueMember reference: the template uses
+# "uid=ADMIN_UUID,cn=admin,dc=..." but entries use "uid=ADMIN_UUID,dc=..."
+# Replace any "uid={ADMIN_UUID},cn=admin,{base}" with "uid={ADMIN_UUID},{base}"
+import re as _re
+raw = _re.sub(
+    rf"uid={re.escape(ADMIN_UUID)},cn=[^,]+,({re.escape(LDAP_BASE_DN)})",
+    rf"uid={ADMIN_UUID},\1",
+    raw
+)
 
 # Split into LDIF blocks separated by one or more blank lines
 blocks = re.split(r"\n{2,}", raw.strip())
@@ -203,12 +248,19 @@ out_parts.append(admin_entry(ADMIN_UUID, ADMIN_LOGIN, ADMIN_PSEUDONYM, ADMIN_EMA
                               LDAP_BASE_DN, TODAY))
 
 # Bootstrap users
-for (uuid, pseudonym, first, last, lang, nat, email, pw, role) in [
-    (U1_UUID, U1_PSEUDONYM, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW, U1_ROLE),
-    (U2_UUID, U2_PSEUDONYM, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW, U2_ROLE),
+for (uuid, pseudonym, first, last, lang, nat, email, pw, role,
+         second_lang, third_lang, birthdate, description) in [
+    (U1_UUID, U1_PSEUDONYM, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW, U1_ROLE,
+     U1_SECOND_LANG, U1_THIRD_LANG, U1_BIRTHDATE, U1_DESCRIPTION),
+    (U2_UUID, U2_PSEUDONYM, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW, U2_ROLE,
+     U2_SECOND_LANG, U2_THIRD_LANG, U2_BIRTHDATE, U2_DESCRIPTION),
 ]:
     out_parts.append(user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role,
-                                LDAP_BASE_DN, TODAY))
+                                LDAP_BASE_DN, TODAY,
+                                second_lang=second_lang or None,
+                                third_lang=third_lang or None,
+                                birthdate=birthdate or None,
+                                description=description or None))
 
 with open(OUT, "w") as f:
     f.write("\n\n".join(out_parts) + "\n")
