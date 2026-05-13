@@ -577,7 +577,7 @@ def update_member_from_ldap(
                 f'(uid={oid})',
                 attributes=[
                     'cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword',
-                    'employeeNumber', 'isActive', 'gn', 'nationality',
+                    'employeeNumber', 'isActive', 'givenName', 'nationality',
                     'birthdate', 'preferredLanguage', 'secondLanguage',
                     'cooperativeBehaviourMark',
                     'cooperativeBehaviorMarkUpdate', 'numberSharesOwned',
@@ -594,8 +594,15 @@ def update_member_from_ldap(
             member_entry = conn.entries[0]
             new_email = member_entry.mail.value if hasattr(member_entry, 'mail') else None
             new_pseudonym = member_entry.cn.value if hasattr(member_entry, 'cn') else None
-            new_type = MemberTypes[member_entry.employeeType.value] if hasattr(member_entry, 'employeeType') else None
-            new_fullname = member_entry.gn.value if hasattr(member_entry, 'gn') else None
+            if hasattr(member_entry, 'employeeType') and member_entry.employeeType.value:
+                try:
+                    new_type = MemberTypes[member_entry.employeeType.value]
+                except KeyError:
+                    log.warning(f"Unknown employeeType '{member_entry.employeeType.value}' for {oid}, defaulting to ORDINARY")
+                    new_type = MemberTypes.ORDINARY
+            else:
+                new_type = None
+            new_fullname = member_entry.givenName.value if hasattr(member_entry, 'givenName') else None
             new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
             new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
             def get_date(date_str: str, oid: str) -> Optional[datetime]:
