@@ -103,6 +103,7 @@ ask_pseudonym() {
             error "Pseudonym too long (maximum 20 characters)."
         elif [[ ! "$value" =~ $pattern ]]; then
             error "Invalid pseudonym. Use only ASCII letters, digits, underscore, dot or dash (5-20 chars)."
+            # REMARRK: In the main code, spaces are allowed in pseudonyms. I suggest amending here to match the same conditions set on the pseudonym
         else
             printf -v "$var" '%s' "$value"
             break
@@ -210,6 +211,7 @@ ask_optional USER1_SECOND_LANG  "Second language (ISO 639-1)"
 ask_optional USER1_THIRD_LANG   "Third language (ISO 639-1)"
 ask_optional USER1_BIRTHDATE    "Birthdate (YYYY-MM-DDT12:00:00)"
 ask_optional USER1_DESCRIPTION  "Short description / bio"
+# I suggest making the request for the "Description" mandatory, and not optional. The reason is that I don't know what is provided by default when left void and fear that it be considered as a security threat.
 USER1_UUID="$(generate_uuid)"
 
 # ── second user ───────────────────────────────────────────────────────────────
@@ -228,6 +230,7 @@ ask_optional USER2_SECOND_LANG  "Second language (ISO 639-1)"
 ask_optional USER2_THIRD_LANG   "Third language (ISO 639-1)"
 ask_optional USER2_BIRTHDATE    "Birthdate (YYYY-MM-DDT12:00:00)"
 ask_optional USER2_DESCRIPTION  "Short description / bio"
+# I suggest making the request for the "Description" mandatory, and not optional. The reason is that I don't know what is provided by default when left void and fear that it be considered as a security threat.
 USER2_UUID="$(generate_uuid)"
 
 # ── Apache / TLS ──────────────────────────────────────────────────────────────
