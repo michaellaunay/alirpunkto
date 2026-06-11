@@ -283,5 +283,9 @@ def main(global_config, **settings):
     )
     deform.Form.set_default_renderer(zpt_renderer)
     create_ldap_groups_if_not_exists()
+    # Populate the DB with LDAP entries
+    # The import of utils here avoids changing the initialization order of the variables.
+    from .utils import get_ldap_member_list
+    get_ldap_member_list() #Initialize the member objects
 
     return config.make_wsgi_app()
