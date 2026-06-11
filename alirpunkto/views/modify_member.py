@@ -359,13 +359,13 @@ def modify_member(request):
                         log.error(f"Unknown field {field} to {requested_value}")
                         error = _('error_while_setting_field', mapping={'field': field})
                         request.session.flash(_('error_while_setting_field'), error)
-                    return {
-                        "member": member,
-                        "accessed_members": members,
-                        "accessed_member": accessed_member.oid,
-                        "form": form.render(appstruct=appstruct) if form else None,
-                        "error": error,
-                    }
+                        return {
+                            "member": member,
+                            "accessed_members": members,
+                            "accessed_member": accessed_member.oid,
+                            "form": form.render(appstruct=appstruct) if form else None,
+                            "error": error,
+                        }
         # write modifications in ldap
 
         sending_success = None
