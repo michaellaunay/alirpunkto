@@ -125,15 +125,19 @@ def modify_member(request):
                 "error": _('unknown_accessed_member'),
             }
         # Update the accessed member from the ldap
-        accessed_member = update_member_from_ldap(accessed_member_oid, request)
-        # Memorize the moddification request
-        if accessed_member.member_state != MemberStates.DATA_MODIFICATION_REQUESTED:
-            request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
-            accessed_member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
-            transaction.commit()
-        elif ACCESSED_MEMBER_OID not in request.session:
-            request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
+        try:
+            accessed_member = update_member_from_ldap(accessed_member_oid, request)
+        except Exception as e:
+            log.error(f"Failed to fetch accessed_member {accessed_member_oid}: {e}")
+            return {
+                "form": None,
+                "member": member,
+                "accessed_member": None,
+                "accessed_members": members,
+                "error": _('ldap_error_retry'),
+            }
         if not accessed_member:
+            log.error(f'No consistency ldap entry for {accessed_member_oid}')
             return {
                 "form": None,
                 "member": member,
@@ -141,6 +145,13 @@ def modify_member(request):
                 "accessed_members": members,
                 "error": _('unknown_accessed_member')
             }
+        # Memorize the moddification request
+        if accessed_member.member_state != MemberStates.DATA_MODIFICATION_REQUESTED:
+            request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
+            accessed_member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
+            transaction.commit()
+        elif ACCESSED_MEMBER_OID not in request.session:
+            request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
         permissions = get_access_permissions(accessed_member, accessor_member)
         if not permissions or permissions == Permissions.NONE:
             log.warning(

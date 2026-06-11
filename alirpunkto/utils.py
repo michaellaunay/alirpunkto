@@ -3,7 +3,7 @@
 # date: 2023-09-30
 
 from typing import Union, Tuple, Dict, List, Optional, Any
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from pyramid.request import Request
 from alirpunkto.models.member import (
     Members,
@@ -17,7 +17,7 @@ from .models.candidature import (
     Candidature,
     CandidatureStates,
 )
-from pyramid_mailer.message import Message, Attachment
+from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection
 from pyramid.path import AssetResolver
 from .constants_and_globals import (
@@ -68,8 +68,9 @@ from ldap3 import (
     MODIFY_ADD,
     MODIFY_REPLACE,
     MODIFY_DELETE,
-    SUBTREE
+    SUBTREE,
 )
+from ldap3.core.exceptions import LDAPException
 from .ldap_factory import get_ldap_server, get_ldap_connection
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
@@ -579,7 +580,7 @@ def update_member_from_ldap(
                     'cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword',
                     'employeeNumber', 'isActive', 'givenName', 'nationality',
                     'birthdate', 'preferredLanguage', 'secondLanguage',
-                    'cooperativeBehaviourMark',
+                    'thirdLanguage','cooperativeBehaviourMark',
                     'cooperativeBehaviorMarkUpdate', 'numberSharesOwned',
                     'dateEndValidityYearlyContribution', 'uniqueMemberOf',
                     'iban', 'dateErasureAllData'
@@ -699,9 +700,12 @@ def update_member_from_ldap(
                 log.debug(f"Update Member {oid} with new second language {new_second_language}")
                 member.data.lang2 = new_second_language
         return member
+    except LDAPException as e:
+        log.error(f"LDAP connection/query error for user {oid}: {e}")
+        raise
     except Exception as e:
-        log.error(f"Error while searching for user {oid} in LDAP: {e}")
-        return None
+        log.error(f"Unexpected error while processing LDAP data for {oid}: {e}")
+        raise
 
 def get_candidature_from_request(request: Request)->Candidature:
     """Get the candidature from the request.
