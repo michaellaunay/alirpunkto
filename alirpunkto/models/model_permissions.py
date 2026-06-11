@@ -675,39 +675,70 @@ access = {
     }
 }
 
-def get_access_permissions(accessed: Member, accessor : Member) -> MemberPermissionsType:
+def get_access_permissions(accessed: Member, accessor: Member) -> MemberPermissionsType:
     """Get the data access permissions for a member accessing another member's data.
     Selects the access rights based on the type and role of the members passed as parameters.
+
     Args:
         accessed (Member): The member whose data is being accessed.
         accessor (Member): The member accessing the data.
+
     Returns:
         MemberPermissions: The access permissions for the accessor.
     """
     permissions = None
     is_owner = accessed == accessor
-    # Even though 'candidature' is imported in the file, it is not recognized here!
-    from alirpunkto.models.candidature import Candidature
-    log.debug(f"Getting access permissions for accessor id:{id(accessor)}, oid:{accessor.oid} state:{accessor.member_state} type:({accessor.type.name}), on accessed id:{id(accessed)}, oid:{accessed.oid}, type:{type(accessed).__name__} state:{accessed.member_state}")
+
+    log.debug(
+        f"Getting access permissions for accessor id:{id(accessor)}, "
+        f"oid:{accessor.oid} state:{accessor.member_state} "
+        f"type:({accessor.type.name}), on accessed id:{id(accessed)}, "
+        f"oid:{accessed.oid}, type:{type(accessed).__name__} "
+        f"state:{accessed.member_state}"
+    )
+
     match (is_owner, accessed, accessor):
         # If the accessor is the owner of the accessed member
         case (True, _, _):
             if isinstance(accessed, Candidature):
-                log.debug(f"Accessor is owner of candidature access['Owner'][({accessed.candidature_state}, {accessed.type})]")
+                log.debug(
+                    f"Accessor is owner of candidature "
+                    f"access['Owner'][({accessed.candidature_state}, {accessed.type})]"
+                )
                 permissions = access['Owner'][(accessed.candidature_state, accessed.type)]
             else:
-                log.debug(f"Accessor is owner of member access['Owner'][{accessed.member_state}]")
+                log.debug(
+                    f"Accessor is owner of member "
+                    f"access['Owner'][{accessed.member_state}]"
+                )
                 permissions = access['Owner'][accessed.member_state]
-        # else if accessed is a Candidature and the accessor is a voter
-        case (False, Candidature, _) if getattr(accessed, "voters", None) and accessed.voters and accessor.oid in accessed.voters:
-            log.debug(f"Accessor is voter of candidature access['voter'][{accessed.member_state}]")
-            permissions = access['voter'][accessed.member_state]
-        case (False, Candidature, _):
-            log.debug(f"Accessor is not owner of candidature access['{accessor.type.name.capitalize()}'][({accessed.candidature_state}, {accessed.type})]")
-            permissions = access[accessor.type.name.capitalize()][accessed.member_state]
+
+        # Else if accessed is a Candidature and the accessor is a voter
+        case (False, Candidature(), _) if (
+            getattr(accessed, "voters", None)
+            and accessed.voters
+            and accessor.oid in accessed.voters
+        ):
+            log.debug(
+                f"Accessor is voter of candidature "
+                f"access['voter'][{accessed.candidature_state}]"
+            )
+            permissions = access['voter'][accessed.candidature_state]
+
+        case (False, Candidature(), _):
+            log.debug(
+                f"Accessor is not owner of candidature "
+                f"access['{accessor.type.name.capitalize()}'][{accessed.candidature_state}]"
+            )
+            permissions = access[accessor.type.name.capitalize()][accessed.candidature_state]
+
         case (False, _, _):
-            log.debug(f"Accessor is not owner of member access['{accessor.type.name.capitalize()}'][{accessed.member_state}]")
+            log.debug(
+                f"Accessor is not owner of member "
+                f"access['{accessor.type.name.capitalize()}'][{accessed.member_state}]"
+            )
             permissions = access[accessor.type.name.capitalize()][accessed.member_state]
+
     log.debug(f"Permissions: {permissions}")
     return permissions
 
