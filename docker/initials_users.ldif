@@ -125,7 +125,7 @@ uid: 123a456a-bb78-9012-3456-7f890abc1d2e
 sn: Zibell
 cn: Sergio Arbarviro
 employeeNumber: 123a456a-bb78-9012-3456-7f890abc1d2e
-employeeType: COPERATOR
+employeeType: COOPERATOR
 isActive: TRUE
 preferredLanguage: fr
 secondLanguage: en
@@ -147,7 +147,7 @@ uid: 9eb02a19-b2b2-1bfb-9521-d7115b3a99d8
 sn: Longnez
 cn: Programisto
 employeeNumber: 9eb02a19-b2b2-1bfb-9521-d7115b3a99d8
-employeeType: COPERATOR
+employeeType: COOPERATOR
 isActive: TRUE
 preferredLanguage: fr
 secondLanguage: en

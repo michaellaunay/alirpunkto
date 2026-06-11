@@ -73,7 +73,7 @@ ask_role() {
     # ask_role <var_name> <user_label>
     local var="$1" label="$2"
     echo -e "${BOLD}Role for ${label}:${RESET}"
-    local roles=("COPERATOR" "ORDINARY_MEMBER" "BOARD_MEMBER" "ADMINISTRATOR")
+    local roles=("COOPERATOR" "ORDINARY_MEMBER" "BOARD_MEMBER" "ADMINISTRATOR")
     local i=1
     for r in "${roles[@]}"; do echo "  $i) $r"; ((i++)); done
     local choice=""
