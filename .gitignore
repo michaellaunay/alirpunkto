@@ -37,3 +37,4 @@ docker/etc/ldap/*
 !docker/etc/ldap/.gitkeep
 docker/var/*
 !docker/var/.gitkeep
+initials_users.generated.ldif
