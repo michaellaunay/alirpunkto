@@ -850,8 +850,8 @@ They can view the registration procedure.
 - Password
 - Confirm password
 - Cooperator number
-- Cooperative Behavior Note
-- Date and time of last update of the Cooperative Behavior Note
+- Cooperative Behaviour Mark
+- Date and time of last update of the Cooperative Behaviour Mark
 - Email address
 - Rank 1 interaction language
 - Rank 2 interaction language (@TODO Add the option "not specified" in the form)
@@ -884,8 +884,8 @@ They can only enter their email and cannot see any other fields.
 - Password: invisible - not editable
 - Confirm password: invisible - not editable
 - Cooperator number: invisible - not editable
-- Cooperative Behavior Note: invisible - not editable
-- Date and time of last update of the Cooperative Behavior Note: invisible - not editable
+- Cooperative Behaviour Mark: invisible - not editable
+- Date and time of last update of the Cooperative Behaviour Mark: invisible - not editable
 - Email address: VISIBLE - EDITABLE - REQUIRED
 - Rank 1 interaction language: invisible - not editable
 - Rank 2 interaction language: invisible - not editable
@@ -918,8 +918,8 @@ character by answering the mathematical challenge, but has not yet entered their
 - Password: VISIBLE - EDITABLE - REQUIRED
 - Confirm password: VISIBLE - EDITABLE - REQUIRED
 - Cooperator number: VISIBLE - not editable
-- Cooperative Behavior Note: invisible - not editable
-- Date and time of last update of the Cooperative Behavior Note: invisible - not editable
+- Cooperative Behaviour Mark: invisible - not editable
+- Date and time of last update of the Cooperative Behaviour Mark: invisible - not editable
 - Email address: VISIBLE - not editable
 - Rank 1 interaction language: VISIBLE - EDITABLE - REQUIRED
 - Rank 2 interaction language: VISIBLE - EDITABLE - optional
@@ -956,8 +956,8 @@ Upon each login, alirpunkto offers them to modify or complete their data accordi
 - Password: invisible - not editable (modifiable only through the "forgot password" procedure)
 - Confirm password: invisible - not editable (modifiable only through the "forgot password" procedure)
 - Cooperator number: VISIBLE - not editable
-- Cooperative Behavior Note: invisible - not editable
-- Date and time of last update of the Cooperative Behavior Note: invisible - not editable
+- Cooperative Behaviour Mark: invisible - not editable
+- Date and time of last update of the Cooperative Behaviour Mark: invisible - not editable
 - Email address: VISIBLE - EDITABLE - optional
 - Rank 1 interaction language: VISIBLE - EDITABLE - optional
 - Rank 2 interaction language: VISIBLE - EDITABLE - optional
@@ -1004,8 +1004,8 @@ The user has answered the mathematical challenge and thus proved that they are h
 - Password: VISIBLE - EDITABLE - REQUIRED
 - Confirm password: VISIBLE - EDITABLE - REQUIRED
 - Cooperator number: VISIBLE - not editable
-- Cooperative Behavior Note: invisible - not editable
-- Date and time of last update of the Cooperative Behavior Note: invisible - not editable
+- Cooperative Behaviour Mark: invisible - not editable
+- Date and time of last update of the Cooperative Behaviour Mark: invisible - not editable
 - Email address: VISIBLE - not editable
 - Rank 1 interaction language: VISIBLE - EDITABLE - REQUIRED
 - Rank 2 interaction language: VISIBLE - EDITABLE - optional
@@ -1037,8 +1037,8 @@ The state of the Application is then PENDING.
 - Password: invisible - not modifiable (modifiable only through the "forgot password" procedure)
 - Confirm password: invisible - not modifiable (modifiable only through the "forgot password" procedure)
 - Cooperator number: VISIBLE - not modifiable
-- Cooperative Behavior Note: invisible - not modifiable
-- Date and time of last update of the Cooperative Behavior Note: invisible - not modifiable
+- Cooperative Behaviour Mark: invisible - not modifiable
+- Date and time of last update of the Cooperative Behaviour Mark: invisible - not modifiable
 - Email address: VISIBLE - MODIFIABLE - optional
 - Rank 1 interaction language: VISIBLE - MODIFIABLE - optional
 - Rank 2 interaction language: VISIBLE - MODIFIABLE - optional
@@ -1074,8 +1074,8 @@ The candidate's identity data has been validated by the Verifiers, and therefore
 - Password: invisible - not modifiable (modifiable only through the "forgot password" procedure)
 - Confirm password: invisible - not modifiable (modifiable only through the "forgot password" procedure)
 - Cooperator number: VISIBLE - not modifiable
-- Cooperative Behavior Note: invisible - not modifiable
-- Last update date and time of Cooperative Behavior Note: invisible - not modifiable
+- Cooperative Behaviour Mark: invisible - not modifiable
+- Last update date and time of Cooperative Behaviour Mark: invisible - not modifiable
 - Email address: VISIBLE - MODIFIABLE - optional
 - Interaction language rank 1: VISIBLE - MODIFIABLE - optional
 - Interaction language rank 2: VISIBLE - MODIFIABLE - optional
@@ -1121,8 +1121,8 @@ They belong to the 2 groups: ordinaryMembersGroup, candidatesMissingYearContribG
 - Password: invisible - not modifiable (modifiable only through the "forgot password" procedure)
 - Confirm password: invisible - not modifiable (modifiable only through the "forgot password" procedure)
 - Cooperator number: VISIBLE - not modifiable
-- Cooperative Behavior Note: VISIBLE - not modifiable (only through KuneAgi instances)
-- Last update date and time of Cooperative Behavior Note: VISIBLE - not modifiable (only through KuneAgi instances)
+- Cooperative Behaviour Mark: VISIBLE - not modifiable (only through KuneAgi instances)
+- Last update date and time of Cooperative Behaviour Mark: VISIBLE - not modifiable (only through KuneAgi instances)
 - Email address: VISIBLE - MODIFIABLE - optional
 - Interaction language rank 1: VISIBLE - MODIFIABLE - optional
 - Interaction language rank 2: VISIBLE - MODIFIABLE - optional
@@ -1188,8 +1188,8 @@ Once they have been reimbursed and the Quarantine period has expired, alirpunkto
 - Password: invisible - not modifiable (modifiable only through the "forgot password" procedure)
 - Confirm password: invisible - not modifiable (modifiable only through the "forgot password" procedure)
 - Cooperator number: VISIBLE - not modifiable
-- Cooperative Behavior Note: VISIBLE - not modifiable (only through KuneAgi instances)
-- Last update date and time of Cooperative Behavior Note: VISIBLE - not modifiable (only through KuneAgi instances)
+- Cooperative Behaviour Mark: VISIBLE - not modifiable (only through KuneAgi instances)
+- Last update date and time of Cooperative Behaviour Mark: VISIBLE - not modifiable (only through KuneAgi instances)
 - Email address: VISIBLE - MODIFIABLE - optional
 - Interaction language rank 1: VISIBLE - MODIFIABLE - optional
 - Interaction language rank 2: VISIBLE - MODIFIABLE - optional

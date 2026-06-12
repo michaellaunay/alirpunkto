@@ -581,7 +581,7 @@ def update_member_from_ldap(
                     'employeeNumber', 'isActive', 'givenName', 'nationality',
                     'birthdate', 'preferredLanguage', 'secondLanguage',
                     'thirdLanguage','cooperativeBehaviourMark',
-                    'cooperativeBehaviorMarkUpdate', 'numberSharesOwned',
+                    'cooperativeBehaviourMarkUpdate', 'numberSharesOwned',
                     'dateEndValidityYearlyContribution', 'uniqueMemberOf',
                     'iban', 'dateErasureAllData'
                 ]
@@ -630,7 +630,7 @@ def update_member_from_ldap(
                     or DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
                 if hasattr(member_entry, 'cooperativeBehaviourMark')
                 else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
-            cooperative_behaviour_mark_update = member_entry.cooperativeBehaviorMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviorMarkUpdate') else None
+            cooperative_behaviour_mark_update = member_entry.cooperativeBehaviourMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviourMarkUpdate') else None
             if cooperative_behaviour_mark_update:
                 cooperative_behaviour_mark_update = cooperative_behaviour_mark_update[:LDAP_TIME_LENGTH]
                 cooperative_behaviour_mark_update = get_date(cooperative_behaviour_mark_update, oid)
@@ -1068,7 +1068,7 @@ def update_ldap_member(
     fields_to_update:List[str]=[
         'email', 'sn', 'description', 'employeeType', 'gn', 'nationality',
         'birthdate', 'preferredLanguage', 'secondLanguage', 'thirdLanguage',
-        'cooperativeBehaviourMark', 'cooperativeBehaviorMarkUpdate',
+        'cooperativeBehaviourMark', 'cooperativeBehaviourMarkUpdate',
         'numberSharesOwned', 'dateEndValidityYearlyContribution', 'IBAN',
         'uniqueMemberOf', 'dateErasureAllData'
     ]
@@ -1126,7 +1126,7 @@ def update_ldap_member(
         if 'cooperative_behaviour_mark' in fields_to_update:
             attributes['cooperativeBehaviourMark'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark])]
         if 'cooperative_behaviour_mark_update' in fields_to_update:
-            attributes['cooperativeBehaviorMarkUpdate'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark_update.strftime(LDAP_TIME_FORMAT)])]
+            attributes['cooperativeBehaviourMarkUpdate'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark_update.strftime(LDAP_TIME_FORMAT)])]
         if 'number_shares_owned' in fields_to_update:
             attributes['numberSharesOwned'] = [(MODIFY_REPLACE, [str(member.data.number_shares_owned)])]
         if 'date_end_validity_yearly_contribution' in fields_to_update:
