@@ -247,7 +247,7 @@ def retrieve_candidature(
     if candidature:
         request.session[CANDIDATURE_OID] = candidature.oid
     else:
-        log.error(f"No candidature found for oid {decrypted_oid | session_oid | user_oid}")
+        log.error(f"No candidature found for oid {decrypted_oid or session_oid or user_oid}")
         return None, {
             'candidature': None,
             'MemberTypes': None,
@@ -1126,7 +1126,7 @@ def update_ldap_member(
         if 'cooperative_behaviour_mark' in fields_to_update:
             attributes['cooperativeBehaviourMark'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark])]
         if 'cooperative_behaviour_mark_update' in fields_to_update:
-            attributes['cooperativeBehaviorMarkUpdate'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark_updated.strftime(LDAP_TIME_FORMAT)])]
+            attributes['cooperativeBehaviorMarkUpdate'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark_update.strftime(LDAP_TIME_FORMAT)])]
         if 'number_shares_owned' in fields_to_update:
             attributes['numberSharesOwned'] = [(MODIFY_REPLACE, [str(member.data.number_shares_owned)])]
         if 'date_end_validity_yearly_contribution' in fields_to_update:
