@@ -155,7 +155,7 @@ def modify_member(request):
         permissions = get_access_permissions(accessed_member, accessor_member)
         if not permissions or permissions == Permissions.NONE:
             log.warning(
-                f'No permission to access member datas: {accessed_member_oid.oid}'
+                f'No permission to access member datas: {accessed_member_oid}'
             )
             request.session.flash(_('no_permission'), 'error')
             return {
@@ -283,7 +283,7 @@ def modify_member(request):
                         accessed_member.new_email = email
                         transaction.commit()
                         email_template = "reset_password_email"
-                        member.add_email_send_status(
+                        accessed_member.add_email_send_status(
                             EmailSendStatus.IN_PREPARATION, 
                             email_template
                         )
