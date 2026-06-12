@@ -26,7 +26,7 @@ def get_secret(secret_name: str) -> str:
         SECRET_KEY_VALUE: Final = os.getenv(SECRET_KEY, None)
         del os.environ[SECRET_KEY]
         # check if secret is not empty an make it accessible from the views
-        if not SECRET_KEY:
+        if not SECRET_KEY_VALUE:
             raise ValueError("You must provide a base64 value for SECRET_KEY")
         get_secret.secrets = {
             SECRET_KEY: SECRET_KEY_VALUE,
