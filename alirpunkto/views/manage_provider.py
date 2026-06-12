@@ -142,21 +142,30 @@ def manage_provider_view(request):
         elif "update" in request.POST:
             accessed_provider_oid = request.params.get(ACCESSED_MEMBER_OID, None)
             if not accessed_provider_oid:
-                return {'error': _('accessed_member_oid_missing')}
+                return {
+                    "member": user,
+                    "form": None,
+                    "providers": providers,
+                    'error': _('accessed_member_oid_missing')
+                }
             member = get_member_by_oid(accessed_provider_oid, request, True)
             if not member:
-                return {'error': _('member_not_found')}
+                return {
+                    "member": user,
+                    "form": None,
+                    "providers": providers,
+                    'error': _('member_not_found')
+                }
             form = RegisterForm(request, schema=manage_provider_schema, member=member)
             if 'form.submitted' in request.params:
                 try:
                     form.validate(request.params)
                     data = form.get_data()
-                    if not is_valid_email(data['email']):
+                    if is_valid_email(data['email']):
                         return {'member':user, 'form':None, 'providers': providers, 'error': _('invalid_email')}
-                    if not is_valid_password(data.get('password', '')):
+                    if is_valid_password(data.get('password', '')):
                         return {'member':user, 'form':None, 'providers': providers, 'error': _('invalid_password')}
-                    update_member_from_ldap(member.oid, request)
-                    update_ldap_member(member.oid, data, request)
+                    update_ldap_member(request, member, data)
                     send_member_state_change_email(member, MemberStates.ACTIVE, request)
                     return {'member':user, 'form':None, 'providers': providers, 'success': _('provider_updated')}
                 except deform.ValidationFailure as e:
