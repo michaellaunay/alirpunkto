@@ -103,7 +103,7 @@ def login_view(request):
                 # send email to the candidature owner
                 email_template = "send_candidature_approuved_email"
             else:
-                candidature.candidature_state = CandidatureStates.REJECTED
+                candidature.candidature_state = CandidatureStates.REFUSED
                 candidature.add_email_send_status(
                     EmailSendStatus.IN_PREPARATION, 
                     "send_candidature_rejected_email"
