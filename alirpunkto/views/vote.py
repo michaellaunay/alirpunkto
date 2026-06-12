@@ -43,7 +43,7 @@ def login_view(request):
     domain_name = request.session['domain_name']
     organization_details = request.session['organization_details']
     username = user.name
-    oid = request.session['oid'] if 'oid' in request.session else request.params.get('oid', "")
+    oid = request.params.get("oid") or request.session.get("oid", "")
     if oid and 'oid' not in request.session:
         request.session['oid'] = oid
     canditures = get_candidatures(request)
