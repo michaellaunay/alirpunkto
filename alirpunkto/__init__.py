@@ -181,7 +181,7 @@ def main(global_config, **settings):
         hash_object = hashlib.sha256()
         hash_object.update(get_secret(SECRET_KEY).encode('utf-8'))
         derived_secret = hash_object.hexdigest()
-        session_factory = SignedCookieSessionFactory(derived_secret, timeout=DEFAULT_SESSION_TIMEOUT)        
+        session_factory = SignedCookieSessionFactory(derived_secret, timeout=DEFAULT_SESSION_TIMEOUT, httponly=True, secure=True, samesite='Lax')        
         config.set_session_factory(session_factory)
 
         config.include('pyramid_chameleon')
