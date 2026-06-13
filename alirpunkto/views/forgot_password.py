@@ -37,6 +37,7 @@ from alirpunkto.schemas.register_form import RegisterForm
 from pyramid.i18n import Translator
 import deform
 import colander
+from alirpunkto.secret_manager import encrypt_secret_for_logs
 
 @view_config(
     route_name='forgot_password',
@@ -217,7 +218,7 @@ def forgot_password(request):
                 "forgot_password",
             )
             transaction.commit()
-            log.debug(f"Password changed for {member.oid} to {password}")
+            log.debug(f"Password changed for {member.oid} to {encrypt_secret_for_logs(password)}")
             log.info(f"Password changed for {member.oid}")
             if 'success' in result and result['success']:
                 return {"message":_('password_changed'), "member": member, "form": None}

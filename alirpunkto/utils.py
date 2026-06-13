@@ -81,7 +81,7 @@ import base64
 from .models.users import User
 import html
 import json
-from .secret_manager import get_secret
+from .secret_manager import get_secret, encrypt_secret_for_logs
 import requests
 import re
 
@@ -984,7 +984,7 @@ def register_user_to_ldap(request, candidature, password):
         if groups:
             attributes['uniqueMemberOf'] = groups
 
-        log.debug(f"LDAP Add {dn=},{attributes=}, {password=}")
+        log.debug(f"LDAP Add {dn=},{attributes=}, {encrypt_secret_for_logs(password)=}")
         # Add the new user to LDAP
         try:
             success = conn.add(dn, attributes=attributes)

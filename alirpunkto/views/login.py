@@ -26,6 +26,7 @@ from alirpunkto.utils import (
     logout,
     get_keycloak_token,
 )
+from alirpunkto.secret_manager import encrypt_secret_for_logs
 
 @view_config(route_name='login', renderer='alirpunkto:templates/login.pt')
 def login_view(request):
@@ -121,7 +122,7 @@ def check_password(username:str, oid:str, password:str) -> Union[None, User]:
         f"uid={oid},{LDAP_OU},{LDAP_BASE_DN}" if LDAP_OU
         else f"uid={oid},{LDAP_BASE_DN}"
     ) # define the user to authenticate
-    log.debug(f"Trying to authenticate {ldap_user=} with {password=}")
+    log.debug(f"Trying to authenticate {ldap_user=} with {encrypt_secret_for_logs(password)=}")
     try:
         # define an unsecure LDAP connection, using the credentials above
         with get_ldap_connection(ldap_user=ldap_user,
