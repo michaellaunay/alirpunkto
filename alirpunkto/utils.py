@@ -983,8 +983,8 @@ def register_user_to_ldap(request, candidature, password):
         # If there are groups the user belongs to, add them to the uniqueMemberOf attribute
         if groups:
             attributes['uniqueMemberOf'] = groups
-
-        log.debug(f"LDAP Add {dn=},{attributes=}, {encrypt_secret_for_logs(password)=}")
+        safe_attributes = {k: v for k, v in attributes.items() if k != 'userPassword'}
+        log.debug(f"LDAP Add {dn=}, {safe_attributes=}, userPassword={encrypt_secret_for_logs(password)}")
         # Add the new user to LDAP
         try:
             success = conn.add(dn, attributes=attributes)
