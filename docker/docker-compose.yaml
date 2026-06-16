@@ -109,6 +109,7 @@ services:
       LDAP_SERVER: alirpunkto-ldap
       LDAP_PORT: 389
       MAIL_HOST: alirpunkto-postfix
+      MAIL_PORT: 25
     volumes:
       - alirpunkto_pyramid_var:/home/alirpunkto/app/var
       - ./.env:/home/alirpunkto/app/.env:ro

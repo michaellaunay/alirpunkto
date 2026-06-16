@@ -250,7 +250,7 @@ info "=== Postfix settings ==="
 ask POSTFIX_MYHOSTNAME "Mail hostname" "mail.${DOMAIN}"
 ask_optional POSTFIX_RELAYHOST "Relay host (e.g. [smtp.provider.example]:587)"
 ask MAIL_SENDER    "Mail sender address (From:)" "${MAINTAINER_EMAIL}"
-ask MAIL_PORT      "SMTP port used by Pyramid to reach Postfix" "9025"
+ask MAIL_PORT      "SMTP port used by Pyramid to reach Postfix" "25"
 ask_optional MAIL_USERNAME "SMTP auth username (leave empty if none)"
 if [ -n "${MAIL_USERNAME}" ]; then
     ask_secret MAIL_PASSWORD "SMTP auth password"
