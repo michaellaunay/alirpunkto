@@ -3,6 +3,9 @@
         <h1 i18n:translate="add_provider_title">Add a provider ?</h1>
         <div tal:condition="python:member and member.type == 'ADMINISTRATOR'">
             <form method="POST">
+                <div> <!-- CSRF Token Field -->
+                    <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
+                </div>
                 <!-- Email Field -->
                 <div class="register_email">
                     <div>
@@ -40,6 +43,9 @@
             <h1 i18n:translate="modify_provider_title">Modify a provider ?</h1>
             <div class="container" i18n:domain="alirpunkto" tal:condition="exists:providers">
                 <form method="POST">
+                    <div> <!-- CSRF Token Field -->
+                        <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
+                    </div>
                     <label for="accessed_member_oid" i18n:translate="select_member_oid_label">Select the provider</label>
                     <select id="accessed_member_oid" name="accessed_member_oid" required>
                         <option value="" disabled selected i18n:translate="select_member_placeholder">Select a member</option>

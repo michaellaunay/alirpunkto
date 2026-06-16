@@ -37,6 +37,9 @@
                 <h3 i18n:translate="voting_header">Vote for the Candidature</h3>
                 <form method="POST" action="${request.route_url('vote')}"
                     tal:define="votingChoices python:VotingChoice.get_names()">
+                    <div> <!-- CSRF Token Field -->
+                        <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
+                    </div>
                     <fieldset>
                         <legend i18n:translate="vote_legend">Choose your vote:</legend>
                         <ul>
@@ -54,7 +57,7 @@
                         </ul>
                         <input type="submit" value="Submit" name="submit"
                             title="Click to submit your vote."
-                            i18n:attributes="title submit_vote_title; value submit_button"/>
+                            i18n:attributes="title submit_vote_title; value submit_button" />
                     </fieldset>
                 </form>
             </div>

@@ -20,9 +20,10 @@
                     </p>
                     <p>
                         <form method="POST" action="modify_member">
+                            <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
                             <span i18n:translate="modify_profile">You can change your profile by clicking</span>
-                            <input type="hidden" id="accessed_member_oid" name="accessed_member_oid" tal:attributes="value user['oid']" value="None">
-                            <input class="btn btn-link" type="submit" name="submit" value="modify_profile" i18n:attributes="value profile">
+                            <input type="hidden" id="accessed_member_oid" name="accessed_member_oid" tal:attributes="value user['oid']" value="None" />
+                            <input class="btn btn-link" type="submit" name="submit" value="modify_profile" i18n:attributes="value profile" />
                         </form>
                     </p>
                     <p>

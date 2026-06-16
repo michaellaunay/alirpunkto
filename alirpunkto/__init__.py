@@ -1,3 +1,4 @@
+from pyramid import config
 import os, pytz, hashlib
 from collections import defaultdict
 from pyramid.config import Configurator
@@ -183,7 +184,8 @@ def main(global_config, **settings):
         derived_secret = hash_object.hexdigest()
         session_factory = SignedCookieSessionFactory(derived_secret, timeout=DEFAULT_SESSION_TIMEOUT, httponly=True, secure=True, samesite='Lax')        
         config.set_session_factory(session_factory)
-
+        config.set_default_csrf_options(require_csrf=True)
+        
         config.include('pyramid_chameleon')
         config.include('pyramid_tm')
         config.include('pyramid_retry')
