@@ -538,7 +538,7 @@ msgid "confirm_email_send_button_label"
 msgstr "Bestätigen"
 
 msgid "vote_success"
-msgstr "Wir danken Ihnen für Ihre Teilnahme am Abstimmungsprozess. Ihre Stimme ${vote} wurde erfolgreich aufgezeichnet. Sie können Ihre Stimme bis zur Frist ändern, indem Sie zu dieser Seite zurückkehren."
+msgstr "Wir bedanken uns bei dir für deine Teilnahme an der Abstimmung. Deine Stimme ${vote} wurde erfolgreich aufgezeichnet. Du kannst deine Stimme bis zur Frist ändern, indem du zu dieser Seite zurückkehrst."
 
 msgid "cooperator_data_explanation"
 msgstr ""
