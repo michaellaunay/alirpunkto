@@ -535,7 +535,7 @@ msgid "confirm_email_send_button_label"
 msgstr "Confirmer"
 
 msgid "vote_success"
-msgstr "Nous te remercions de participer au processus de vote. Ton vote ${vote} a été enregistré avec succès. Tu peux modifier ton vote jusqu'à sa date limite en revenant à cette page."
+msgstr "Nous te remercions d'avoir participé au processus de vote. Ton vote ${vote} a été enregistré avec succès. Tu peux modifier ton vote jusqu'à sa date limite en revenant à cette page."
 
 msgid "cooperator_data_explanation"
 msgstr ""
