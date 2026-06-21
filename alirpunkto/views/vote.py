@@ -92,7 +92,7 @@ def login_view(request):
             # send email to the candidature owner
             count_yes = [v.vote for v in candidature.voters].count(VotingChoice.YES.name)
             count_no = [v.vote for v in candidature.voters].count(VotingChoice.NO.name)
-            if count_yes > count_no:
+            if count_yes >= count_no:
                 candidature.candidature_state = CandidatureStates.APPROVED
                 register_user_to_ldap(request, candidature, candidature.data.password)
                 candidature.add_email_send_status(
