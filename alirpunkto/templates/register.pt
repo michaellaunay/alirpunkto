@@ -35,7 +35,7 @@
                                     i18n:attributes="title email_title_label">Email</label>
                                 <input class="email-input" type="email" name="email"
                                     title="Your email address will be used for account verification and communication."
-                                    i18n:attributes="title email_title_input" />
+                                    i18n:attributes="title email_description" />
                             </div>
 
                             <!-- Type of Registration -->
