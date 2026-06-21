@@ -590,6 +590,32 @@ def handle_confirmed_human_state(request, candidature):
                 candidatures.monitored_members.pop(candidature.oid, None)
                 candidature.candidature_state = CandidatureStates.APPROVED
                 email_template = "send_candidature_approuved_email"
+# ADDITIONS BY VIBE - START
+            # Send FINAL e-mail
+                template_path = "alirpunkto:templates/send_candidature_approuved_email.pt"
+                template_vars = {
+                    #@TODO Complement the list of variables
+                    'candidature': candidature,
+                    'site_name': site_name,
+                    'domain_name': domain_name,
+                    'organization_details': organization_details,
+                    'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                    }
+                send_result = send_email(
+                    request,
+                    subject="",
+                    recipients=[candidature.email],
+                    template_path=template_path,
+                    template_vars=template_vars,
+                    derive_subject_from_title=True
+                    )
+                if send_result:
+                    candidature.add_email_send_status(EmailSendStatus.SENT, "send_candidature_approuved_email")
+                    transaction.commit()
+                else:
+                    candidature.add_email_send_status(EmailSendStatus.ERROR, "send_candidature_approuved_email")
+                    transaction.abort()
+# ADDITIONS BY VIBE - END
             case MemberTypes.COOPERATOR:
                 candidature.candidature_state = CandidatureStates.UNIQUE_DATA
                 email_template = "send_candidature_pending_email"
