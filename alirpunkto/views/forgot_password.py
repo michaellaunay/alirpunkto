@@ -60,14 +60,12 @@ def forgot_password(request):
     if member:
         schema = RegisterForm().bind(request=request)
         read_only_fields = {
-            "email": member.email,
             "pseudonym": member.pseudonym,
             "cooperative_number": member.oid
         }
 
         writable_field_values = {"password": "", "password_confirm": ""}
-        schema.prepare_for_modification(read_only_fields,
-            writable_field_values)
+        schema.prepare_for_modification(writable_field_values)
         appstruct = {
             'cooperative_number': member.oid,
             'email': member.email,
