@@ -1253,7 +1253,7 @@ def send_member_state_change_email(request: Request,
     url = request.route_url('register', _query={'oid': parameter})
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
-    organization_details = ORGANIZATION_DETAILS
+    organization_details = request.registry.settings.get('organization_details')
     domain_name = request.registry.settings.get('domain_name')
     #We don't have user yet so we use the email parts befor the @ or pseudonym if it exists
     user = (member.pseudonym if hasattr(member, "pseudonym")
@@ -1372,7 +1372,7 @@ def send_email_to_member(request: Request,
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
-    organization_details = ORGANIZATION_DETAILS
+    organization_details = request.registry.settings.get('organization_details')
 
     template_vars = {
         'page_with_oid': url,
@@ -1447,7 +1447,7 @@ def send_validation_email(
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
-    organization_details = ORGANIZATION_DETAILS
+    organization_details = request.registry.settings.get('organization_details')
 
     template_vars = {
         'challenge_A': challenge["A"][0],
@@ -1510,7 +1510,7 @@ def send_check_new_email(
     site_url = request.route_url('home')
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
-    organization_details = ORGANIZATION_DETAILS
+    organization_details = request.registry.settings.get('organization_details')
 
     template_vars = {
         'check_new_email_view':url,
