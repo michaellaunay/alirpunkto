@@ -15,6 +15,7 @@ from alirpunkto.models.member import (
 from alirpunkto.utils import (
     get_candidatures,
     send_confirm_validation_email,
+    send_email,
     send_candidature_state_change_email,
     register_user_to_ldap
 )
@@ -102,6 +103,36 @@ def login_view(request):
                 transaction.commit()
                 # send email to the candidature owner
                 email_template = "send_candidature_approuved_email"
+                send_candidature_state_change_email(
+                request,
+                candidature)
+# ADDITIONS BY VIBE - START
+            # Send FINAL e-mail
+                template_path = "alirpunkto:templates/send_candidature_approuved_email.pt"
+                template_vars = {
+                    #@TODO Complement the list of variables
+                    'candidature': candidature,
+                    'site_name': site_name,
+                    'domain_name': domain_name,
+                    'organization_details': organization_details,
+                    'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                    }
+                send_result = send_email(
+                    request,
+                    subject="",
+                    recipients=[candidature.email],
+                    template_path=template_path,
+                    template_vars=template_vars,
+                    derive_subject_from_title=True
+                    )
+                if send_result:
+                    candidature.add_email_send_status(EmailSendStatus.SENT, "send_candidature_approuved_email")
+                    transaction.commit()
+                else:
+                    candidature.add_email_send_status(EmailSendStatus.ERROR, "send_candidature_approuved_email")
+                    transaction.abort()
+# ADDITIONS BY VIBE - END
+            
             else:
                 candidature.candidature_state = CandidatureStates.REFUSED
                 candidature.add_email_send_status(
@@ -110,12 +141,35 @@ def login_view(request):
                 )
                 transaction.commit()
                 email_template = "send_candidature_rejected_email"
-            # send email to the candidature owner
-            send_candidature_state_change_email(
+                send_candidature_state_change_email(
                 request,
-                candidature,
-                email_template
-            )
+                candidature)
+# ADDITIONS BY VIBE - START
+            # Send FINAL e-mail
+                template_path = "alirpunkto:templates/send_candidature_rejected_email.pt"
+                template_vars = {
+                    #@TODO Complement the list of variables
+                    'candidature': candidature,
+                    'site_name': site_name,
+                    'domain_name': domain_name,
+                    'organization_details': organization_details,
+                    'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                    }
+                send_result = send_email(
+                    request,
+                    subject="",
+                    recipients=[candidature.email],
+                    template_path=template_path,
+                    template_vars=template_vars,
+                    derive_subject_from_title=True
+                    )
+                if send_result:
+                    candidature.add_email_send_status(EmailSendStatus.SENT, "send_candidature_approuved_email")
+                    transaction.commit()
+                else:
+                    candidature.add_email_send_status(EmailSendStatus.ERROR, "send_candidature_approuved_email")
+                    transaction.abort()
+# ADDITIONS BY VIBE - END            
             try:
                 candidature.add_email_send_status(EmailSendStatus.SENT, email_template)
                 transaction.commit()
@@ -153,6 +207,7 @@ def login_view(request):
         #@TODO if date is passed, compute the result with the votes
 
         #@TODO send email to the candidature owner
+    
 
     return {
         'logged_in': True if user else False,
