@@ -929,6 +929,7 @@ def get_template_parameters_for_cooperator(
         "site_name":site_name,
         "organization_details":organization_details,
         "domain_name":domain_name,
+        "administrator": ADMIN_EMAIL,
     }
     email_copy_id_verification_body = _(
         "email_copy_id_verification_body",
