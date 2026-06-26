@@ -38,3 +38,6 @@ docker/etc/ldap/*
 docker/var/*
 !docker/var/.gitkeep
 initials_users.generated.ldif
+docker/.env.test
+docker/certs
+test.ini
