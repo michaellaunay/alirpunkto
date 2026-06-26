@@ -39,5 +39,7 @@ docker/var/*
 !docker/var/.gitkeep
 initials_users.generated.ldif
 docker/.env.test
-docker/certs
+docker/certs/
 test.ini
+docker/initials_users.test.generated.ldif
+docker/secrets/

@@ -11,13 +11,25 @@ from pyramid.i18n import (
 import logging
 import re
 
+
+def env_bool(name: str, default: bool = False) -> bool:
+    """Get a boolean value from an environment variable."""
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {"true", "1", "yes", "y", "on"}
+
 # PyTest execution
 PYTEST_CURRENT_TEST: Final = 'PYTEST_CURRENT_TEST' in os.environ or 'pytest' in sys.modules
 # USE SSO DURING TESTS
-PYTEST_SSO_TEST: Final = not PYTEST_CURRENT_TEST or os.getenv("PYTEST_USE_SSO", False)
+PYTEST_SSO_TEST: Final = not PYTEST_CURRENT_TEST or env_bool("PYTEST_USE_SSO", False)
+
 # Load environment variables from .env.
 dotenv_path: Final = find_dotenv()
 load_dotenv(dotenv_path)
+
+# Disable MX DNS checks in pytest and local/offline Docker test stacks.
+DISABLE_EMAIL_MX_CHECKS: Final = env_bool("DISABLE_EMAIL_MX_CHECKS", PYTEST_CURRENT_TEST)
 
 # LDAP informations are stored in environment variables
 # Not Final due to __init__ initialization

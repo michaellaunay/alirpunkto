@@ -223,8 +223,9 @@ generate_env_file() {
 # Local/offline test configuration. Do not use these credentials in production.
 
 BUILD_WITH_DEBUG=1
-INSTALL_EXTRAS_TESTING=false
-DEBUG_LDAP=false
+INSTALL_EXTRAS_TESTING=true
+DEBUG_LDAP=true
+SKIP_INITIAL_LDAP=false
 
 DOMAIN="${DOMAIN}"
 MAINTAINER_EMAIL="${MAINTAINER_EMAIL}"
@@ -255,6 +256,7 @@ POSTFIX_MESSAGE_SIZE_LIMIT=26214400
 POSTFIX_TEST_MODE=true
 POSTFIX_DISABLE_EXTERNAL_DELIVERY=true
 
+DISABLE_EMAIL_MX_CHECKS=true
 MAIL_SERVER=alirpunkto-test-postfix
 MAIL_HOST=alirpunkto-test-postfix
 MAIL_PORT=25

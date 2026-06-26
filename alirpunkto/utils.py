@@ -60,7 +60,8 @@ from .constants_and_globals import (
     DOMAIN_NAME,
     ORGANIZATION_DETAILS,
     LDAP_TIME_FORMAT,
-    LDAP_TIME_LENGTH
+    LDAP_TIME_LENGTH,
+    DISABLE_EMAIL_MX_CHECKS,
 )
 from pyramid.i18n import get_localizer
 from ldap3 import (
@@ -268,7 +269,7 @@ def is_not_a_valid_email_address(
         None: if the email is valid
     """
     try:
-        if not validate_email(email, check_mx=check_mx and not PYTEST_CURRENT_TEST):
+        if not validate_email(email, check_mx=check_mx and not DISABLE_EMAIL_MX_CHECKS):
             return {'error': _('invalid_email')}
     except Exception as e:
         log.error(f"Error while validating email {email}: {e}")

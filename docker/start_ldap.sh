@@ -7,6 +7,7 @@ mkdir -p /etc/ldap /var/lib/ldap
 chown -R openldap:openldap /etc/ldap /var/lib/ldap
 
 DEBUG_LDAP=${DEBUG_LDAP:-false}
+SKIP_INITIAL_LDAP=${SKIP_INITIAL_LDAP:-false}
 LDIF_PATH="${INITIAL_USERS_LDIF:-/initials_users.ldif}"
 LDIF_SCHEMA="${LDAP_SCHEMA_LDIF:-/schema/alirpunkto_schema.ldif}"
 MARKER_PATH="${LDAP_INIT_MARKER:-/var/lib/ldap/.initials_users_loaded}"
@@ -36,7 +37,7 @@ fi
 if [ ! -f "$CONFIG_MARKER_PATH" ] && [ -n "${LDAP_BASE_DN:-}" ] && [ -n "${LDAP_PASSWORD:-}" ]; then
   LDAP_ORGANIZATION="${LDAP_ORGANIZATION:-$LDAP_DOMAIN}"
 
-  if [[ DEBUG_LDAP ]]; then
+  if [[ "$DEBUG_LDAP" = "true" ]]; then
     echo "debconf-set-selections <<EOF" \
       "slapd slapd/no_configuration boolean false" \
       "slapd slapd/domain string $LDAP_DOMAIN" \
@@ -123,8 +124,8 @@ if [ "${args[0]}" = "slapd" ]; then
   '(olcAttributeTypes=*isActive*)' 
 
   # Load initial users if not already done
-  if [ "$DEBUG_LDAP" = "true" ]; then
-    echo "[DEBUG MODE] Skipping initials_users.ldif loading"
+  if [ "$SKIP_INITIAL_LDAP" = "true" ]; then
+    echo "[LDAP] SKIP_INITIAL_LDAP=true: skipping initial users LDIF loading"
   else
     if [ -f "$LDIF_PATH" ] && [ ! -f "$MARKER_PATH" ]; then
       echo "Importing initial users from $LDIF_PATH"

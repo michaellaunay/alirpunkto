@@ -37,7 +37,8 @@ services:
       LDAP_ORGANIZATION: ${LDAP_ORGANIZATION}
       LDAP_PASSWORD_FILE: /run/secrets/ldap_password
       INITIAL_USERS_LDIF: /initials_users.test.generated.ldif
-      DEBUG_LDAP: ${DEBUG_LDAP:-false}
+      DEBUG_LDAP: ${DEBUG_LDAP:-true}
+      SKIP_INITIAL_LDAP: ${SKIP_INITIAL_LDAP:-false}
     secrets:
       - ldap_password
     volumes:
@@ -110,7 +111,8 @@ services:
       MAIL_PORT: 25
       MAIL_TLS: "false"
       MAIL_SSL: "false"
-      INSTALL_EXTRAS_TESTING: ${INSTALL_EXTRAS_TESTING:-false}
+      DISABLE_EMAIL_MX_CHECKS: ${DISABLE_EMAIL_MX_CHECKS:-true}
+      INSTALL_EXTRAS_TESTING: ${INSTALL_EXTRAS_TESTING:-true}
     volumes:
       - alirpunkto_test_pyramid_var:/home/alirpunkto/app/var
       - ./.env.test:/home/alirpunkto/app/.env:ro
