@@ -9,7 +9,7 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">We regret to inform  you of the rejection of your Application</h1>
     
-    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p>
+    <p tal:omit-tag="textual">Hello <span tal:replace="python:candidature.pseudonym">Applicant's Name</span>,</p>
     
     <p tal:omit-tag="textual">We regret to inform you that your application to the <span tal:replace="domain_name">Domain name</span> for the role of <span tal:replace="python:candidature.type">Role</span> has been rejected. The reason for this is that a majority of Verifiers considered that the information that you provided on your identity (given and family names, date of birth) did not match those of your official identity documents, or that your recent selfie did not sufficiently match the photograph of your official identity document. If you believe that this is an error, we invite you to submit your application again, maybe with clearer copies of your official identity documents or a better selfie image.</p>
     <p tal:omit-tag="textual">We are aware of the disappointment and frustration that this rejection may cause you, and apologise for this. On the other hand, we invite you to consider that the rigour of our application process is needed to ensure that the democratic principle "one person - one vote" is respected in our Cooperative, and that only citizens of the European Union above 18 years of age are allowed to be Cooperators.</p>
