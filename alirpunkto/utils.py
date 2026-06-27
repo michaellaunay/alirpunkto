@@ -62,6 +62,7 @@ from .constants_and_globals import (
     LDAP_TIME_FORMAT,
     LDAP_TIME_LENGTH,
     DISABLE_EMAIL_MX_CHECKS,
+    OID_LINK_TTL_SECONDS,
 )
 from pyramid.i18n import get_localizer
 from ldap3 import (
@@ -79,7 +80,7 @@ from pyramid.renderers import render_to_response
 import random
 import hmac
 import hashlib
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, InvalidToken
 import base64
 from .models.users import User
 import html
@@ -197,7 +198,8 @@ def retrieve_candidature(
         decrypted_oid, seed = decrypt_oid(
             encrypted_oid,
             SEED_LENGTH,
-            request.registry.settings['session.secret'])
+            request.registry.settings['session.secret']
+            )
         candidature = get_candidature_by_oid(decrypted_oid, request)
         if candidature is None:
             error = _('candidature_not_found')
@@ -740,20 +742,39 @@ def generate_key(secret:str)->bytes:
     sha256.update(secret.encode())
     return sha256.digest()
 
-def decrypt_oid(encrypted_oid: str, seed_size: int, secret: str) -> Tuple[str, str]:
+def decrypt_oid(
+    encrypted_oid: str,
+    seed_size: int,
+    secret: str,
+    ttl: Optional[int] = None,
+) -> Tuple[Optional[str], Optional[str]]:
     """Decrypt the OID using the SECRET and return the decrypted OID and seed.
+
+    The Fernet token embeds its creation time, so a token older than ``ttl``
+    seconds is rejected: reset and verification links expire. Any failure
+    (tampered, malformed or expired token) returns ``(None, None)`` instead of
+    raising, so callers can handle an invalid link gracefully.
 
     Args:
         encrypted_oid (str): The encrypted OID.
         seed_size (int): The size of the seed.
         secret (str): The secret to use to decrypt the OID.
+        ttl (int | None): Maximum token age in seconds. When None (default),
+            OID_LINK_TTL_SECONDS is read at call time.
 
     Returns:
-        tuple: The decrypted OID and the seed.
+        tuple: (decrypted OID, seed), or (None, None) if the token is invalid
+        or expired.
     """
+    if ttl is None:
+        ttl = OID_LINK_TTL_SECONDS
     fernet = Fernet(secret)
-    decoded_encrypted_oid = base64.urlsafe_b64decode(encrypted_oid)
-    decrypted_message = fernet.decrypt(decoded_encrypted_oid).decode()
+    try:
+        decoded_encrypted_oid = base64.urlsafe_b64decode(encrypted_oid)
+        decrypted_message = fernet.decrypt(decoded_encrypted_oid, ttl=ttl).decode()
+    except (InvalidToken, ValueError, TypeError) as e:
+        log.warning(f"Invalid or expired OID token: {e}")
+        return None, None
     index = len(decrypted_message) - seed_size
     return decrypted_message[:index], decrypted_message[index:]
 

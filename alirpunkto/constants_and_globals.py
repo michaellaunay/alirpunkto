@@ -170,6 +170,11 @@ CANDIDATURE_OID: Final = 'candidature_oid'
 MEMBER_OID: Final = 'member_oid'
 ACCESSED_MEMBER_OID: Final = 'accessed_member_oid'
 SEED_LENGTH: Final = 10
+# Maximum age, in seconds, of an OID link (password reset, email
+# verification...). Past this delay the encrypted token is rejected.
+OID_LINK_TTL_SECONDS: Final = int(
+    os.getenv("ALIRPUNKTO_OID_LINK_TTL_SECONDS", str(24 * 60 * 60))
+)
 LDAP_ADMIN_OID: Final = os.getenv("LDAP_ADMIN_OID", "00000000-0000-0000-0000-000000000000")
 
 MIN_PSEUDONYM_LENGTH: Final = 5 # Minimum pseudonym length
