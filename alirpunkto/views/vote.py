@@ -40,9 +40,9 @@ def login_view(request):
         request.session['redirect_url'] = request.current_route_url()
         return HTTPFound(location=request.route_url('login'))
     user = User.from_json(user)
-    site_name = request.session['site_name']
-    domain_name = request.session['domain_name']
-    organization_details = request.session['organization_details']
+    site_name = request.registry.settings.get('site_name')
+    domain_name = request.registry.settings.get('domain_name')
+    organization_details = request.registry.settings.get('organization_details')
     username = user.name
     oid = request.params.get("oid") or request.session.get("oid", "")
     if oid and 'oid' not in request.session:
