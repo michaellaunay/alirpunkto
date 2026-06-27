@@ -72,7 +72,8 @@ from ldap3 import (
     SUBTREE,
 )
 from ldap3.core.exceptions import LDAPException
-from .ldap_factory import get_ldap_server, get_ldap_connection
+from ldap3.utils.conv import escape_filter_chars
+from .ldap_factory import get_ldap_connection
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
 import random
@@ -124,14 +125,13 @@ def get_member_by_email(email: str) -> Union[Dict[str, str], None]:
     Args:
         email (str): the email of the member
     Returns:
-        dict: The members found for the given email
-        None: If no member is found
+        list: the matching LDAP entries (empty list if none)
     """
     with get_ldap_connection(ldap_user = LDAP_USER,
         ldap_password=get_secret(LDAP_PASSWORD)) as conn:
         conn.search(
             LDAP_BASE_DN,
-            f'(mail={email.strip()})',
+            f'(mail={escape_filter_chars(email.strip())})',
             search_scope=SUBTREE,
             attributes=['cn', 'uid', 'isActive', 'employeeType']
         )
@@ -342,7 +342,7 @@ def is_valid_unique_pseudonym(pseudonym):
         # Verify that the pseudonym is not already registered
         conn.search(
             LDAP_BASE_DN,
-            f"(cn={pseudonym})",
+            f"(cn={escape_filter_chars(pseudonym)})",
             attributes=['cn']
         ) # search for the user in the LDAP directory
         # Verify that the candidate is not already registered
@@ -576,7 +576,7 @@ def update_member_from_ldap(
             # added during registration
             conn.search(
                 LDAP_BASE_DN,
-                f'(uid={oid})',
+                f'(uid={escape_filter_chars(oid)})',
                 attributes=[
                     'cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword',
                     'employeeNumber', 'isActive', 'givenName', 'nationality',
@@ -888,7 +888,7 @@ def get_oid_from_pseudonym(
         ) as conn:
         conn.search(
             LDAP_BASE_DN,
-            '(cn={})'.format(pseudonym),
+            f'(cn={escape_filter_chars(pseudonym)})',
             attributes=['employeeNumber']
         ) # search for the user in the LDAP directory
         if len(conn.entries) == 0:

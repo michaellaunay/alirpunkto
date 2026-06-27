@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
 from ldap3.core.exceptions import LDAPBindError
+from ldap3.utils.conv import escape_filter_chars
 from alirpunkto.ldap_factory import get_ldap_connection
 from alirpunkto.constants_and_globals import (
     _,
@@ -129,7 +130,7 @@ def check_password(username:str, oid:str, password:str) -> Union[None, User]:
             ldap_password=password, ldap_auto_bind=True) as conn:
             conn.search(
                 LDAP_BASE_DN,
-                '(uid={})'.format(oid),
+                f'(uid={escape_filter_chars(oid)})',
                 attributes=['cn', 'uid','mail', 'employeeNumber']
             ) # search for the user in the LDAP directory
             if len(conn.entries) == 0:
