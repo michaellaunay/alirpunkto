@@ -77,6 +77,7 @@ from .ldap_factory import get_ldap_connection
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
 import random
+import hmac
 import hashlib
 from cryptography.fernet import Fernet
 import base64
@@ -1165,8 +1166,15 @@ def is_admin(username:str, password:str)-> bool:
     bool: Returns True if the provided username and password match the administrator's credentials,
     otherwise returns False.
     """
-    return (username.strip(), password.strip()) == \
-        (ADMIN_LOGIN.split("=")[-1], get_secret(ADMIN_PASSWORD))
+    admin_login = ADMIN_LOGIN.split("=")[-1]
+    admin_password = get_secret(ADMIN_PASSWORD)
+    username_matches = hmac.compare_digest(
+        username.strip().encode("utf-8"), admin_login.encode("utf-8")
+    )
+    password_matches = hmac.compare_digest(
+        password.encode("utf-8"), admin_password.encode("utf-8")
+    )
+    return username_matches and password_matches
 
 def get_local_template(request, pattern_path):
     """
