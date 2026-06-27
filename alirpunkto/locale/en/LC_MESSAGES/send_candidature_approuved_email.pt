@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Here are main elements of your profile that we recorded:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">your pseudonym: ##PSEUDONYM. Please keep a CAREFUL AND SECURE RECORD of this pseudonym: it is the only identifier with which you can log in to our IT platform;</li>
+        <li tal:omit-tag="textual">your pseudonym: <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>. Please keep a CAREFUL AND SECURE RECORD of this pseudonym: it is the only identifier with which you can log in to our IT platform;</li>
         <li tal:omit-tag="textual">your password: (the password that you provided upon your registration);</li>
         <li tal:omit-tag="textual">your e-mail address: (the e-mail address to which we send the present e-mail);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">your identity data: (all your given and family names, your date of birth, as provided and verified during your registration process);</li>
-        <li tal:omit-tag="textual">your preferred language for us to interact with you: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">the second language that you accept that we use to interact with you: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">the language that you accept that we use, as a third choice, to interact with you: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type=MemberTypes.COOPERATOR">your identity data: (all your given and family names, your date of birth, as provided and verified during your registration process);</li>
+        <li tal:omit-tag="textual">your preferred language for us to interact with you: <span tal:replace="python:candidature.lang1">Language_1</span>;</li>
+        <li tal:omit-tag="textual">the second language that you accept that we use to interact with you: <span tal:replace="python:candidature.lang2">Language_2</span>;</li>
+        <li tal:omit-tag="textual">the language that you accept that we use, as a third choice, to interact with you: <span tal:replace="python:candidature.lang3">Language_3</span>.</li>
         </ul>
 
     <p tal:omit-tag="textual">For your records, here are the details of the finalisation of your registration process:</p>
