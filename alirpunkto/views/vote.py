@@ -110,12 +110,9 @@ def login_view(request):
             # Send FINAL e-mail
                 template_path = "alirpunkto:templates/send_candidature_approuved_email.pt"
                 template_vars = {
-                    #@TODO Complement the list of variables
-                    'candidature': candidature,
-                    'site_name': site_name,
+                   'candidature': candidature,
                     'domain_name': domain_name,
-                    'organization_details': organization_details,
-                    'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                    'organization_details': organization_details
                     }
                 send_result = send_email(
                     request,
@@ -148,12 +145,9 @@ def login_view(request):
             # Send FINAL e-mail
                 template_path = "alirpunkto:templates/send_candidature_rejected_email.pt"
                 template_vars = {
-                    #@TODO Complement the list of variables
                     'candidature': candidature,
-                    'site_name': site_name,
                     'domain_name': domain_name,
-                    'organization_details': organization_details,
-                    'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                    'organization_details': organization_details
                     }
                 send_result = send_email(
                     request,
