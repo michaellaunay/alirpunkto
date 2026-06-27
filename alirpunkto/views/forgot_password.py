@@ -116,15 +116,15 @@ def forgot_password(request):
             # 3.1) If the mail does not exist, AlirPunkto displays a message
             # indicating that if the user exists, he will receive an email
             # 3.2) End of the procedure
-            return {"error":_('forget_email_in_member_list'), "member": None, "form": None}
+            return {"message":_('forget_email_sent'), "member": None, "form": None}
         # 4) AlirPunkto retrieves information about the user from the ldap
         if len(members) > 1:
             log.warning(f'Multiple members found for mail: {mail[:512]}')
         ldap_member = members[0]
         uid = str(ldap_member['uid']) # cast ldap3's type to str
         if uid == LDAP_ADMIN_OID:
-            log.warning(f'Admin user cannot reset password: {mail[:512]}')
-            return {"error":_('forget_admin_user'), "member": None, "form": None}
+            log.warning(f'Admin user password reset attempt for: {mail[:512]}')
+            return {"message":_('forget_email_sent'), "member": None, "form": None}
         # 5) If an instance of Member (an application, or any other
         # derived object) exists for this OID it's updated from LDAP, if not, a MemberDatas
         # instance is created with LDAP informations, and stored in the MemberDatas list.
@@ -133,7 +133,8 @@ def forgot_password(request):
         member = update_member_from_ldap(uid, request)
         transaction.commit()
         if not member:
-            return {"error":_('forget_email_in_member_list'), "member": None, "form": None}       
+            log.error(f'Could not load member from LDAP for uid {uid}')
+            return {"message":_('forget_email_sent'), "member": None, "form": None}       
         # 5.1) AlirPunkto checks if there is a user being modified
         # get the list of users being modified
         root = get_connection(request).root()
@@ -169,7 +170,7 @@ def forgot_password(request):
                 EmailSendStatus.SENT,
                 email_template
             )
-            return {"message":_('forget_email_sent'), "member": member, "form": None}
+            return {"message":_('forget_email_sent'), "member": None, "form": None}
         except Exception as e:
             log.error(
                 f"Error while reset password {member.oid} : {e}"
@@ -181,7 +182,7 @@ def forgot_password(request):
             # 11) The user receives the email and musts clicks on the link to continue
             # 11.1) If the link is invalid or expired, AlirPunkto displays an error message
             # 11.2) Return to 1
-            return {"member":None, "error":_('forget_email_send_error'), "form": None}
+            return {"message":_('forget_email_sent'), "member": None, "form": None}
     elif 'modify' in request.POST and oid and member:
             # 11.1) If the link is invalid or expired, AlirPunkto displays an error message
         # 12) AlirPunkto displays the forgot_password.pt zpt to enter the new password
