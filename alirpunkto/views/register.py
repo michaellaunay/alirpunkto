@@ -540,7 +540,7 @@ def handle_confirmed_human_state(request, candidature):
             parameters[field_name] = value
         # @TODO use permission than member type to manipulate the data
         if candidature.type == MemberTypes.COOPERATOR:
-            # Extract birthdate from request only for coopereator
+            # Extract birthdate from request only for cooperator
             # This is a bit convoluted because of the way deform handles nested forms
             start_birthdate = False
             birthdate = None
@@ -594,12 +594,9 @@ def handle_confirmed_human_state(request, candidature):
             # Send FINAL e-mail
                 template_path = "alirpunkto:templates/send_candidature_approuved_email.pt"
                 template_vars = {
-                    #@TODO Complement the list of variables
                     'candidature': candidature,
-                    'site_name': site_name,
                     'domain_name': domain_name,
-                    'organization_details': organization_details,
-                    'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                    'organization_details': organization_details,                    
                     }
                 send_result = send_email(
                     request,
