@@ -596,7 +596,7 @@ def handle_confirmed_human_state(request, candidature):
                 template_vars = {
                     'candidature': candidature,
                     'domain_name': domain_name,
-                    'organization_details': organization_details,                    
+                    'organization_details': organization_details                   
                     }
                 send_result = send_email(
                     request,
