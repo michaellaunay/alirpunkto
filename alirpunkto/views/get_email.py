@@ -16,8 +16,10 @@ from alirpunkto.utils import (
 from functools import lru_cache
 from typing import Set
 import re
-# Compile the regular expression for reuse
-injection_pattern = re.compile(r'eval\(|exec\(|__import__')
+# email_id is used to build a template path below. Restrict it to a template
+# name (lowercase letters, digits, underscores): this forbids '/', '\' and '.',
+# which closes path traversal on the LC_MESSAGES directory.
+VALID_EMAIL_ID = re.compile(r'[a-z0-9_]+')
 
 @lru_cache(maxsize=128)
 def extract_zpt_variables(file_path: str) -> Set[str]:
@@ -65,11 +67,6 @@ def get_email(request):
     Args:
         request (pyramid.request.Request): the request
     """
-    # Check for code injection in URL parameters
-    if any("python" in value or injection_pattern.search(value) for value in request.params.values()):
-        log.error("Potential code injection attempt detected.")
-        return HTTPBadRequest("Invalid request parameters")
-    
     # Check if the user is logged in
     logged_in = request.session.get('logged_in', False)
     user_json = request.session.get('user', None)
@@ -85,11 +82,10 @@ def get_email(request):
     email_id = request.params.get('email_id', None)
     link = request.session.get('link', None)
 
-    template_name = f"{email_id}.pt" if email_id else None
-    if not template_name:
-        log.error(f"Error getting the template name from email ID {email_id}")
+    if not email_id or not VALID_EMAIL_ID.fullmatch(email_id):
+        log.error(f"Invalid email ID: {email_id!r}")
         return HTTPBadRequest("Invalid Email ID")
-
+    template_name = f"{email_id}.pt"
     try:
         template_path = get_local_template(
             request,
