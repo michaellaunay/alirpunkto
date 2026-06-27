@@ -17,6 +17,9 @@ from alirpunkto.constants_and_globals import (
     log,
     SSO_REFRESH,
     SSO_EXPIRES_AT,
+    DOMAIN_NAME,
+    SITE_NAME,
+    ORGANIZATION_DETAILS,
 )
 from alirpunkto.models.users import User
 from alirpunkto.utils import (
@@ -36,9 +39,9 @@ def login_view(request):
     Args:
         request (pyramid.request.Request): the request
     """
-    site_name = request.params.get('site_name', 'AlirPunkto')
-    domain_name = request.params.get('domain_name', 'alirpunkto.org')
-    organization_details = request.params.get('organization_details', 'AlirPunkto')
+    site_name = SITE_NAME
+    domain_name = DOMAIN_NAME
+    organization_details = ORGANIZATION_DETAILS
     username = request.params.get('username', "")
     user = request.session.get('user', None)
     if 'form.submitted' in request.params:

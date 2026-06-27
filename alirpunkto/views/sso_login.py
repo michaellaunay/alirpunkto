@@ -12,6 +12,9 @@ from alirpunkto.constants_and_globals import (
     KEYCLOAK_REDIRECT_PATH,
     SSO_REFRESH,
     SSO_EXPIRES_AT,
+    DOMAIN_NAME,
+    SITE_NAME,
+    ORGANIZATION_DETAILS,
 )
 from alirpunkto.utils import (
     update_member_from_ldap,
@@ -73,9 +76,9 @@ def callback_view(request):
         log.debug("Verified sso token payload: ", decoded_payload)
 
         logout(request) # Enforce logout before processing login
-        site_name = request.params.get('site_name', 'AlirPunkto')
-        domain_name = request.params.get('domain_name', 'alirpunkto.org')
-        organization_details = request.params.get('organization_details', 'AlirPunkto')
+        site_name = SITE_NAME
+        domain_name = DOMAIN_NAME
+        organization_details = ORGANIZATION_DETAILS
         oid = decoded_payload['employeeNumber']
         # The user is in the ldap directory
         member = update_member_from_ldap(oid, request) # force update of the user

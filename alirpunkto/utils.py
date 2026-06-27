@@ -110,6 +110,8 @@ def get_candidatures(request)->Members:
         Candidatures: the candidatures
     """
     conn = get_connection(request)
+    # TODO: Return a generator that filters candidatures from the member list.
+    # TODO: Use a cache to avoid fetching candidatures from the database every time.
     return Members.get_instance(connection=conn)
 
 def get_members(request)->Members:
