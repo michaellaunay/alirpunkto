@@ -711,25 +711,35 @@ def update_member_from_ldap(
         log.error(f"Unexpected error while processing LDAP data for {oid}: {e}")
         raise
 
-def get_candidature_from_request(request: Request)->Candidature:
+def get_candidature_from_request(request: Request) -> Optional[Candidature]:
     """Get the candidature from the request.
+
+    The candidature is identified by the encrypted ``oid`` URL parameter.
+
     Args:
         request (pyramid.request.Request): the request
     Returns:
-        Candidature: the candidature
+        Candidature | None: the candidature, or None if the oid is missing,
+        invalid, expired, unknown, or its seed does not match.
     """
     encrypted_oid = request.params.get("oid")
+    if not encrypted_oid:
+        return None
 
     decrypted_oid, seed = decrypt_oid(
         encrypted_oid,
         Candidature.SEED_SIZE,
         request.registry.settings['session.secret']
     )
+    if decrypted_oid is None:
+        return None
     candidature = get_candidature_by_oid(decrypted_oid, request)
-    if seed != candidature.seed:
-        raise Exception("Seed mismatch")
+    if candidature is None or seed != candidature.seed:
+        log.warning(
+            f"Invalid or obsolete candidature link for oid {decrypted_oid}"
+        )
+        return None
     return candidature
-
 
 def generate_key(secret:str)->bytes:
     """Generate a key from the secret.
