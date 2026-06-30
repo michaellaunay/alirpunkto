@@ -1105,13 +1105,7 @@ def update_member_password(request, member_oid, new_password):
 def update_ldap_member(
     request:Request,
     member:Member,
-    fields_to_update:List[str]=[
-        'email', 'sn', 'description', 'employeeType', 'gn', 'nationality',
-        'birthdate', 'preferredLanguage', 'secondLanguage', 'thirdLanguage',
-        'cooperativeBehaviourMark', 'cooperativeBehaviourMarkUpdate',
-        'numberSharesOwned', 'dateEndValidityYearlyContribution', 'IBAN',
-        'uniqueMemberOf', 'dateErasureAllData'
-    ]
+    fields_to_update:List[str]=None
     ):
     """
     Update a member in the LDAP directory.
@@ -1123,7 +1117,16 @@ def update_ldap_member(
     Returns:
         dict: a dictionary containing the result of the update.
     """
-
+    # Default to every updatable field, using the *model* field names that the
+    # body below tests (callers such as modify_member push model names too).
+    if fields_to_update is None:
+        fields_to_update = [
+            'email', 'fullsurname', 'description', 'type', 'fullname',
+            'nationality', 'birthdate', 'lang1', 'lang2', 'lang3', 'is_active',
+            'cooperative_behaviour_mark', 'cooperative_behaviour_mark_update',
+            'number_shares_owned', 'date_end_validity_yearly_contribution',
+            'iban', 'unique_member_of', 'date_erasure_all_data'
+        ]
     # Connect to the LDAP server
     with get_ldap_connection(ldap_user=LDAP_USER,
         ldap_password=get_secret(LDAP_PASSWORD)) as conn:
@@ -1137,7 +1140,7 @@ def update_ldap_member(
         attributes = {}
         if 'email' in fields_to_update:
             attributes['mail'] = [(MODIFY_REPLACE,[member.email])]
-        if 'data.fullsurname' in fields_to_update:
+        if 'fullsurname' in fields_to_update:
             attributes['sn'] = [(MODIFY_REPLACE,[member.data.fullsurname])]
         if 'description' in fields_to_update:
             attributes['description'] = [(MODIFY_REPLACE,[member.data.description])]
@@ -1155,16 +1158,16 @@ def update_ldap_member(
             if member.data.lang2 not in (None, ''):
                 attributes['secondLanguage'] = [(MODIFY_REPLACE,[member.data.lang2])]
             else:
-                attributes['secondLanguage'] = [(MODIFY_DELETE,[])]
+                attributes['secondLanguage'] = [(MODIFY_REPLACE,[])]
         if 'lang3' in fields_to_update:
             if member.data.lang3 not in (None, ''):
                 attributes['thirdLanguage'] = [(MODIFY_REPLACE,[member.data.lang3])]
             else:
-                attributes['thirdLanguage'] = [(MODIFY_DELETE,[])]
+                attributes['thirdLanguage'] = [(MODIFY_REPLACE,[])]
         if 'is_active' in fields_to_update:
             attributes['isActive'] = [(MODIFY_REPLACE, [member.data.is_active])]
         if 'cooperative_behaviour_mark' in fields_to_update:
-            attributes['cooperativeBehaviourMark'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark])]
+            attributes['cooperativeBehaviourMark'] = [(MODIFY_REPLACE, [str(member.data.cooperative_behaviour_mark)])]
         if 'cooperative_behaviour_mark_update' in fields_to_update:
             attributes['cooperativeBehaviourMarkUpdate'] = [(MODIFY_REPLACE, [member.data.cooperative_behaviour_mark_update.strftime(LDAP_TIME_FORMAT)])]
         if 'number_shares_owned' in fields_to_update:
@@ -1173,10 +1176,10 @@ def update_ldap_member(
             attributes['dateEndValidityYearlyContribution'] = [(MODIFY_REPLACE, [member.data.date_end_validity_yearly_contribution.strftime(LDAP_TIME_FORMAT)])]
         if 'iban' in fields_to_update:
             attributes['IBAN'] = [(MODIFY_REPLACE, [member.data.iban])]
-        if 'uniqueMemberOf' in fields_to_update:
-            attributes['uniqueMemberOf'] = [(MODIFY_REPLACE, [member.data.uniqueMemberOf])]
+        if 'unique_member_of' in fields_to_update:
+            attributes['uniqueMemberOf'] = [(MODIFY_REPLACE, [member.data.unique_member_of])]
         if 'date_erasure_all_data' in fields_to_update:
-            attributes['dateErasureAllData'] = [(MODIFY_REPLACE, [member.data.dateErasureAllData.strftime(LDAP_TIME_FORMAT)])]
+            attributes['dateErasureAllData'] = [(MODIFY_REPLACE, [member.data.date_erasure_all_data.strftime(LDAP_TIME_FORMAT)])]
         try:
             success = conn.modify(dn, attributes)
         except Exception as e:
