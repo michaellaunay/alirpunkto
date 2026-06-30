@@ -1,4 +1,4 @@
-# description: Login view
+# description: Vote view
 # author: Michaël Launay
 # date: 2023-10-27
 
@@ -21,11 +21,14 @@ from alirpunkto.utils import (
 
 from alirpunkto.constants_and_globals import (
     _,
-    log
+    log,
+    SITE_NAME,
+    DOMAIN_NAME,
+    ORGANIZATION_DETAILS,
 )
 
 @view_config(route_name='vote', renderer='alirpunkto:templates/vote.pt')
-def login_view(request):
+def vote_view(request):
     """Vote view.
 
     Args:
@@ -39,9 +42,11 @@ def login_view(request):
         request.session['redirect_url'] = request.current_route_url()
         return HTTPFound(location=request.route_url('login'))
     user = User.from_json(user)
-    site_name = request.session['site_name']
-    domain_name = request.session['domain_name']
-    organization_details = request.session['organization_details']
+    site_name = request.session.get('site_name', SITE_NAME)
+    domain_name = request.session.get('domain_name', DOMAIN_NAME)
+    organization_details = request.session.get(
+        'organization_details', ORGANIZATION_DETAILS
+    )
     username = user.name
     oid = request.params.get("oid") or request.session.get("oid", "")
     if oid and 'oid' not in request.session:
@@ -83,6 +88,10 @@ def login_view(request):
                 'organization_details': organization_details
             }       
         voter.vote = vote
+        # Voter is a plain dataclass nested in the candidature's voters list:
+        # mutating it does not mark the persistent candidature as changed, so
+        # ZODB must be told explicitly or the vote is silently dropped on commit.
+        candidature._p_changed = True
 
         transaction = request.tm
         # Save the vote
@@ -93,8 +102,31 @@ def login_view(request):
             count_yes = [v.vote for v in candidature.voters].count(VotingChoice.YES.name)
             count_no = [v.vote for v in candidature.voters].count(VotingChoice.NO.name)
             if count_yes > count_no:
+                # Only approve once the LDAP account is actually created.
+                # register_user_to_ldap returns {'status': 'success'|'error'}.
+                ldap_result = register_user_to_ldap(
+                    request, candidature, candidature.data.password
+                )
+                if not isinstance(ldap_result, dict) or \
+                        ldap_result.get('status') != 'success':
+                    log.error(
+                        f"LDAP registration failed for candidature "
+                        f"{candidature.oid}; not approving: {ldap_result}"
+                    )
+                    request.tm.abort()
+                    return {
+                        'error': _('registration_failed'),
+                        'logged_in': True if user else False,
+                        'site_name': site_name,
+                        'domain_name': domain_name,
+                        'organization_details': organization_details,
+                        'user': username,
+                        'candidature': candidature,
+                        'VotingChoice': VotingChoice,
+                        'vote': voter.vote,
+                        'registered_vote': True
+                    }
                 candidature.candidature_state = CandidatureStates.APPROVED
-                register_user_to_ldap(request, candidature, candidature.data.password)
                 candidature.add_email_send_status(
                     EmailSendStatus.IN_PREPARATION, 
                     "send_candidature_approuved_email"
