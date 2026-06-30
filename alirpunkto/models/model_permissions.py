@@ -1,6 +1,6 @@
 #
 
-from dataclasses import make_dataclass
+from dataclasses import make_dataclass, fields
 from typing import Type, Final
 from alirpunkto.models.permissions import Permissions
 from alirpunkto.models.member import MemberStates, MemberDatas, Member, MemberTypes
@@ -147,6 +147,19 @@ BASIC_CANDIDATURE_PERMISSIONS : Final = CandidaturePermissions(
     type=Permissions.ACCESS | Permissions.READ,
     pseudonym=Permissions.ACCESS | Permissions.READ,
     candidature_state=Permissions.ACCESS | Permissions.READ
+)
+
+# Full read-only visibility over a candidature, for administrators who must be
+# able to inspect candidatures in progress (oversight / understanding).
+# Member-level fields reuse the ADMIN_MEMBER_PERMISSIONS policy (e.g. IBAN
+# hidden, seed not readable); the candidature-specific fields are read-only.
+ADMIN_CANDIDATURE_PERMISSIONS : Final = CandidaturePermissions(
+    **{field.name: getattr(ADMIN_MEMBER_PERMISSIONS, field.name)
+        for field in fields(ADMIN_MEMBER_PERMISSIONS)},
+    candidature_state=Permissions.ACCESS | Permissions.READ,
+    challenge=Permissions.ACCESS | Permissions.READ,
+    voters=Permissions.ACCESS | Permissions.READ,
+    votes=Permissions.ACCESS | Permissions.READ,
 )
 
 # Create a mapping to store the permissions for each member state.
@@ -543,6 +556,14 @@ access = {
         MemberStates.DATA_MODIFIED: ADMIN_MEMBER_PERMISSIONS,
         MemberStates.EXCLUDED: ADMIN_MEMBER_PERMISSIONS,
         MemberStates.DELETED: ADMIN_MEMBER_PERMISSIONS,
+        # Administrators may inspect candidatures in progress (read-only).
+        CandidatureStates.DRAFT: ADMIN_CANDIDATURE_PERMISSIONS,
+        CandidatureStates.EMAIL_VALIDATION: ADMIN_CANDIDATURE_PERMISSIONS,
+        CandidatureStates.CONFIRMED_HUMAN: ADMIN_CANDIDATURE_PERMISSIONS,
+        CandidatureStates.UNIQUE_DATA: ADMIN_CANDIDATURE_PERMISSIONS,
+        CandidatureStates.PENDING: ADMIN_CANDIDATURE_PERMISSIONS,
+        CandidatureStates.APPROVED: ADMIN_CANDIDATURE_PERMISSIONS,
+        CandidatureStates.REFUSED: ADMIN_CANDIDATURE_PERMISSIONS,
     },
     'Ordinary' : {
         MemberStates.CREATED: NO_MEMBER_PERMISSIONS,
@@ -675,6 +696,23 @@ access = {
     }
 }
 
+def _resolve_permissions(outer_key, inner_key) -> MemberPermissionsType:
+    """Resolve one cell of the ``access`` matrix, failing closed.
+
+    Returns the configured permissions when ``(outer_key, inner_key)`` exists.
+    Otherwise logs a warning and returns ``NO_MEMBER_PERMISSIONS`` so an
+    uncovered (role, state) case denies access and is easy to spot in the logs.
+    """
+    bucket = access.get(outer_key)
+    if bucket is not None and inner_key in bucket:
+        return bucket[inner_key]
+    log.warning(
+        f"Access matrix has no entry for access[{outer_key!r}][{inner_key!r}]; "
+        f"denying access (NO_MEMBER_PERMISSIONS)."
+    )
+    return NO_MEMBER_PERMISSIONS
+
+
 def get_access_permissions(accessed: Member, accessor: Member) -> MemberPermissionsType:
     """Get the data access permissions for a member accessing another member's data.
     Selects the access rights based on the type and role of the members passed as parameters.
@@ -705,13 +743,13 @@ def get_access_permissions(accessed: Member, accessor: Member) -> MemberPermissi
                     f"Accessor is owner of candidature "
                     f"access['Owner'][({accessed.candidature_state}, {accessed.type})]"
                 )
-                permissions = access['Owner'][(accessed.candidature_state, accessed.type)]
+                permissions = _resolve_permissions('Owner', (accessed.candidature_state, accessed.type))
             else:
                 log.debug(
                     f"Accessor is owner of member "
                     f"access['Owner'][{accessed.member_state}]"
                 )
-                permissions = access['Owner'][accessed.member_state]
+                permissions = _resolve_permissions('Owner', accessed.member_state)
 
         # Else if accessed is a Candidature and the accessor is a voter
         case (False, Candidature(), _) if (
@@ -723,21 +761,21 @@ def get_access_permissions(accessed: Member, accessor: Member) -> MemberPermissi
                 f"Accessor is voter of candidature "
                 f"access['voter'][{accessed.candidature_state}]"
             )
-            permissions = access['voter'][accessed.candidature_state]
+            permissions = _resolve_permissions('voter', accessed.candidature_state)
 
         case (False, Candidature(), _):
             log.debug(
                 f"Accessor is not owner of candidature "
                 f"access['{accessor.type.name.capitalize()}'][{accessed.candidature_state}]"
             )
-            permissions = access[accessor.type.name.capitalize()][accessed.candidature_state]
+            permissions = _resolve_permissions(accessor.type.name.capitalize(), accessed.candidature_state)
 
         case (False, _, _):
             log.debug(
                 f"Accessor is not owner of member "
                 f"access['{accessor.type.name.capitalize()}'][{accessed.member_state}]"
             )
-            permissions = access[accessor.type.name.capitalize()][accessed.member_state]
+            permissions = _resolve_permissions(accessor.type.name.capitalize(), accessed.member_state)
 
     log.debug(f"Permissions: {permissions}")
     return permissions
