@@ -4,6 +4,7 @@
 
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
+from datetime import datetime, timezone
 from alirpunkto.models.users import User
 from alirpunkto.models.candidature import (
     VotingChoice,
@@ -73,8 +74,24 @@ def vote_view(request):
             'domain_name': domain_name,
             'organization_details': organization_details
         }
-    #@TODO check if the user can vote (if time is not passed )
-    pass
+    # Refuse voting once the verification deadline has passed. The deadline is
+    # set on the candidature during the verification phase (register.py); if it
+    # is missing we do not block (no deadline configured for this candidature).
+    deadline = getattr(candidature, "verification_deadline", None)
+    if deadline is not None:
+        if deadline.tzinfo is None:
+            deadline = deadline.replace(tzinfo=timezone.utc)
+        if datetime.now(timezone.utc) > deadline:
+            log.info(
+                f"Voting period closed for candidature {candidature.oid} "
+                f"(deadline {deadline.isoformat()}); voter {user.oid} cannot vote."
+            )
+            return {
+                'error': _('voting_period_ended'),
+                'site_name': site_name,
+                'domain_name': domain_name,
+                'organization_details': organization_details
+            }
 
     # Get the user's vote from the form
     if 'submit' in request.params:
