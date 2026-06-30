@@ -11,6 +11,7 @@ from alirpunkto.utils import (
     is_valid_email,
     update_member_from_ldap,
     update_ldap_member,
+    update_member_password,
     send_check_new_email,
     get_ldap_member_list,
 )
@@ -282,7 +283,7 @@ def modify_member(request):
                                 }
                         accessed_member.new_email = email
                         transaction.commit()
-                        email_template = "reset_password_email"
+                        email_template = "check_new_email"
                         accessed_member.add_email_send_status(
                             EmailSendStatus.IN_PREPARATION, 
                             email_template
@@ -306,7 +307,7 @@ def modify_member(request):
                             }
                         try:
                             transaction.commit()
-                            member.add_email_send_status(
+                            accessed_member.add_email_send_status(
                                 EmailSendStatus.SENT,
                                 email_template
                             )
@@ -315,7 +316,7 @@ def modify_member(request):
                             log.error(
                                 f"Error while reset password {member.oid} : {e}"
                             )
-                            member.add_email_send_status(
+                            accessed_member.add_email_send_status(
                                 EmailSendStatus.ERROR,
                                 email_template
                             )
@@ -344,6 +345,26 @@ def modify_member(request):
                             "error":_('password_required'),
                         }
                     err = is_valid_password(password)
+                    if err:
+                        request.session.flash(err['error'], 'error')
+                        return {
+                            "member": member,
+                            "accessed_members": {},
+                            "accessed_member": accessed_member.oid,
+                            "form": form.render(appstruct=appstruct) if form else None,
+                            "error": err['error'],
+                        }
+                    password_result = update_member_password(
+                        request, accessed_member.oid, password
+                    )
+                    if not password_result or password_result.get('status') != 'success':
+                        return {
+                            "member": member,
+                            "accessed_members": {},
+                            "accessed_member": accessed_member.oid,
+                            "form": form.render(appstruct=appstruct) if form else None,
+                            "error": _('password_update_failed'),
+                        }
                 else:
                     #@TODO cast the value to the right type
                     requested_value = request.POST[field] if field not in date_parameters else date_parameters[field]
@@ -358,7 +379,7 @@ def modify_member(request):
                     else:
                         log.error(f"Unknown field {field} to {requested_value}")
                         error = _('error_while_setting_field', mapping={'field': field})
-                        request.session.flash(_('error_while_setting_field'), error)
+                        request.session.flash(error, 'error')
                         return {
                             "member": member,
                             "accessed_members": members,
@@ -371,7 +392,7 @@ def modify_member(request):
         sending_success = None
         if fields_to_update:
             sending_success = update_ldap_member(request, accessed_member, fields_to_update=fields_to_update)
-        if not sending_success and fields_to_update:
+        if fields_to_update and sending_success.get('status') != 'success':
             return {
                 "member": member,
                 "accessed_members": members,

@@ -73,7 +73,7 @@ def check_new_email(request):
         decrypted_member.email = new_email
         decrypted_member.member_state = MemberStates.DATA_MODIFIED
         result = update_ldap_member(request, decrypted_member, fields_to_update=['email'])
-        if result is None:
+        if not result or result.get('status') != 'success':
             log.error(f"check_new_email: Error updating email for oid {decrypted_oid}")
             return {
                 'error': _('email_update_error'),
