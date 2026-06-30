@@ -1,79 +1,142 @@
-from alirpunkto.models.member import MemberStates, MemberTypes, Members, MemberDataEvent, MemberDataFunctions
-from alirpunkto.models.candidature import (Candidature, CandidatureStates,
-        VotingChoice)
+from __future__ import annotations
+
 from datetime import datetime
-from unittest.mock import Mock, patch
-from ZODB.Connection import Connection
-from itertools import cycle
-from ldap3 import Connection as LDAPConnection
-from unittest.mock import patch
 
-mocked_zodb = Mock(spec=Connection) # Mock the ZODB connection
-mocked_zodb.root.return_value = {} # Mock the root of the ZODB database
-mocked_ldap = Mock(spec=LDAPConnection) # Mock the LDAP connection
+import pytest
 
-# Mock the datetime function used in the Candidature class
-MemberDataFunctions.func_now = lambda: datetime(2023, 1, 1)
+from alirpunkto.models.candidature import Candidature, CandidatureStates, Voter, VotingChoice
+from alirpunkto.models.member import MemberDataFunctions, MemberStates, Members
 
-def test_candidatures_singleton():
-    candidatures = Members.get_instance(connection=mocked_zodb)
-    assert candidatures is Members.get_instance(connection=mocked_zodb)
-    assert candidatures is mocked_zodb.root()['members']
 
-def test_candidature_init():
-    Members.get_instance(connection=mocked_zodb)
+@pytest.mark.parametrize(
+    "state, name_id, value_id",
+    [
+        (CandidatureStates.DRAFT, "candidature_states_draft", "candidature_states_draft_value"),
+        (
+            CandidatureStates.EMAIL_VALIDATION,
+            "candidature_states_email_validation",
+            "candidature_states_email_validation_value",
+        ),
+        (
+            CandidatureStates.CONFIRMED_HUMAN,
+            "candidature_states_confirmed_human",
+            "candidature_states_confirmed_human_value",
+        ),
+        (
+            CandidatureStates.UNIQUE_DATA,
+            "candidature_states_unique_data",
+            "candidature_states_unique_data_value",
+        ),
+        (CandidatureStates.PENDING, "candidature_states_pending", "candidature_states_pending_value"),
+        (CandidatureStates.APPROVED, "candidature_states_approved", "candidature_states_approved_value"),
+        (CandidatureStates.REFUSED, "candidature_states_refused", "candidature_states_refused_value"),
+    ],
+)
+def test_candidature_state_i18n_ids(state, name_id, value_id):
+    assert CandidatureStates.get_i18n_id(state.name) == name_id
+    assert CandidatureStates.get_i18n_id(state.value) == value_id
+
+
+@pytest.mark.parametrize(
+    "choice, name_id, value_id",
+    [
+        (VotingChoice.YES, "vote_types_yes", "vote_types_yes_value"),
+        (VotingChoice.NO, "vote_types_no", "vote_types_no_value"),
+        (VotingChoice.ABSTAIN, "vote_types_abstain", "vote_types_abstain_value"),
+    ],
+)
+def test_voting_choice_i18n_ids(choice, name_id, value_id):
+    assert VotingChoice.get_i18n_id(choice.name) == name_id
+    assert VotingChoice.get_i18n_id(choice.value) == value_id
+
+
+def test_voter_defaults_to_no_vote():
+    voter = Voter(oid="voter-1", email="voter@example.com", pseudonym="voter")
+    assert voter.vote is None
+
+
+def test_candidature_initialization_records_member_and_candidature_events(
+    members_mapping,
+    monkeypatch,
+):
+    monkeypatch.setattr(MemberDataFunctions, "func_now", lambda: datetime(2026, 1, 1))
+    monkeypatch.setattr(MemberDataFunctions, "func_uuid", lambda: "candidate-1")
+    monkeypatch.setattr("alirpunkto.models.member.random_string", lambda length: "s" * length)
+
     candidature = Candidature()
-    assert candidature.candidature_state == CandidatureStates.DRAFT
-    seed = candidature.seed
-    assert seed is not None
-    assert isinstance(candidature.seed, str)
-    assert candidature.oid is not None
-    assert len(candidature.modifications) == 2
-    old_seed=candidature.modifications[0].seed
-    assert old_seed != seed != None
-    assert candidature.modifications[0] == MemberDataEvent(
-        datetime(2023, 1, 1), "__init__", None, MemberStates.DRAFT, old_seed)
-    assert candidature.modifications[1] == MemberDataEvent(
-        datetime(2023, 1, 1), "Candidature.__init__", None, CandidatureStates.DRAFT, seed)
 
-def test_candidature_state():
-    Members.get_instance(connection=mocked_zodb)
+    assert candidature.oid == "candidate-1"
+    assert candidature.member_state is MemberStates.DRAFT
+    assert candidature.candidature_state is CandidatureStates.DRAFT
+    assert [event.function_name for event in candidature.modifications] == [
+        "__init__",
+        "Candidature.__init__",
+    ]
+
+
+def test_approved_candidature_also_registers_member(members_mapping):
     candidature = Candidature()
-    initial_state = candidature.candidature_state
-    candidature.candidature_state = CandidatureStates.EMAIL_VALIDATION
-    assert candidature.candidature_state == CandidatureStates.EMAIL_VALIDATION
-    assert len(candidature.modifications) == 3
-    assert candidature.modifications[-1].function_name == "state"
-    assert candidature.modifications[-1].value_before == initial_state.name
-    assert candidature.modifications[-1].value_after == CandidatureStates.EMAIL_VALIDATION.name
-    assert candidature.modifications[-1].seed == candidature.seed
+
+    candidature.candidature_state = CandidatureStates.APPROVED
+
+    assert candidature.candidature_state is CandidatureStates.APPROVED
+    assert candidature.member_state is MemberStates.REGISTRED
+    assert [event.function_name for event in candidature.modifications[-2:]] == [
+        "member_state",
+        "state",
+    ]
 
 
-def test_candidature_uuid():
-    candidatures = Members.get_instance(connection=mocked_zodb)
-    tries = [0, 2, 0, 0, 3, 3, 2, 3, 2, 0, 0, 0, 5, 5, 2, 0, 0, 4, 1]  # A pseudo random list of integers between 0 and POPULATION
-    # Can be generated with the following code:
-    # POPULATION = 6
-    # references = set(range(0,POPULATION))
-    # # until the tries list contains one occurence of each references items
-    # while set(tries).intersection(references) != references:
-    #     tries.append(random.randint(0,POPULATION))
-    our_uuid = cycle(tries)
-    # Use patch to temporarily replace func_uuid
-    with patch(
-            'alirpunkto.models.member.MemberDataFunctions.func_uuid',
-            side_effect=lambda: f"test{next(our_uuid):0>5}"
-        ):
-        # Generate a set of unique UUIDs using the mocked func_uuid
-        unique_uuids = set([MemberDataFunctions.func_uuid() for _ in range(len(tries))])
+def test_candidature_mutable_properties_return_copies(members_mapping):
+    candidature = Candidature()
+    voter = Voter(oid="voter-1", email="voter@example.com", pseudonym="voter")
 
-        # Create candidatures using the simulated UUIDs
-        for _ in range(len(unique_uuids)):
-            candidature = Candidature()
-            candidatures[candidature.oid] = candidature
+    candidature.challenge = {"A": ("one plus one", 2)}
+    candidature.voters = [voter]
+    candidature.votes = {voter.oid: VotingChoice.YES}
 
-        # Check that each unique UUID is present in the candidatures
-        for uuid in unique_uuids:
-            assert uuid in candidatures
-    
-# @TODO: test candidature functions
+    returned_voters = candidature.voters
+    returned_votes = candidature.votes
+    returned_voters.clear()
+    returned_votes.clear()
+
+    assert candidature.challenge == {"A": ("one plus one", 2)}
+    assert candidature.voters == [voter]
+    assert candidature.votes == {voter.oid: VotingChoice.YES}
+
+
+@pytest.mark.parametrize(
+    "attribute, value, message",
+    [
+        ("candidature_state", "APPROVED", "state"),
+        ("challenge", ["not-a-dict"], "dictionary"),
+        ("voters", "not-a-list", "list or a tuple"),
+        ("votes", ["not-a-dict"], "dict"),
+    ],
+)
+def test_candidature_setters_validate_types(members_mapping, attribute, value, message):
+    candidature = Candidature()
+    with pytest.raises(TypeError, match=message):
+        setattr(candidature, attribute, value)
+
+
+def test_member_oid_generation_skips_existing_oids(members_mapping, monkeypatch):
+    members_mapping["duplicate"] = object()
+    sequence = iter(["duplicate", "unique"])
+    monkeypatch.setattr(MemberDataFunctions, "func_uuid", lambda: next(sequence))
+
+    assert Candidature.generate_unique_oid() == "unique"
+
+
+def test_candidature_field_names_include_member_and_candidature_properties():
+    assert set(Candidature.get_field_names()) >= {
+        "oid",
+        "seed",
+        "member_state",
+        "email",
+        "pseudonym",
+        "challenge",
+        "voters",
+        "votes",
+        "candidature_state",
+    }

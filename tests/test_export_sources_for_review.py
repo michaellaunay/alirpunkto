@@ -1,44 +1,44 @@
-"""Tests for the source export helper used for code review."""
-
 from __future__ import annotations
 
 import subprocess
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = REPO_ROOT / "tools" / "export_sources_for_review.sh"
+SCRIPT = "tools/export_sources_for_review.sh"
 
 
-def test_export_sources_for_review_script_exists() -> None:
-    assert SCRIPT.is_file()
+def test_export_sources_script_exists_and_is_valid_bash(repo_root: Path):
+    path = repo_root / SCRIPT
+    assert path.is_file(), f"Missing {SCRIPT}"
+    subprocess.run(["bash", "-n", str(path)], check=True)
 
 
-def test_export_sources_for_review_script_is_syntax_valid() -> None:
-    subprocess.run(["bash", "-n", str(SCRIPT)], check=True, cwd=REPO_ROOT)
+def test_export_sources_script_excludes_generated_and_sensitive_files(repo_root: Path):
+    script = (repo_root / SCRIPT).read_text(encoding="utf-8")
 
-
-def test_export_sources_for_review_excludes_local_or_sensitive_artifacts() -> None:
-    content = SCRIPT.read_text(encoding="utf-8")
-
-    expected_exclusions = [
+    for pattern in (
         ".env",
-        "docker/certs",
+        ".env.*",
         "docker/secrets",
-        "generated.ldif",
+        "docker/certs",
+        "*.pem",
+        "*.key",
+        "*.crt",
+        "*.generated.ldif",
         "test.ini",
         "__pycache__",
-        "eggs",
         "locale",
         "static",
-    ]
-
-    missing = [pattern for pattern in expected_exclusions if pattern not in content]
-
-    assert missing == []
+    ):
+        assert pattern in script
 
 
-def test_export_sources_for_review_numbers_output_lines() -> None:
-    content = SCRIPT.read_text(encoding="utf-8")
+def test_export_sources_script_outputs_numbered_sections(repo_root: Path):
+    script = (repo_root / SCRIPT).read_text(encoding="utf-8")
 
-    assert "nl -ba" in content or "cat -n" in content
+    assert "=== %s ===" in script
+    assert "nl -ba" in script
+    assert "/tmp/" in script
+    assert "alirpunkto" in script
+    assert "tests" in script
+    assert "docker" in script
