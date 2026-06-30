@@ -43,6 +43,9 @@ git ls-files \
   ':!:*/locale/*' \
   ':!:*/static/*' \
   ':!:docker/certs/*' \
+  ':!:*.pem' \
+  ':!:*.key' \
+  ':!:*.crt' \
   ':!:docker/secrets/*' \
   ':!:docker/.env*' \
   ':!:docker/*.generated.ldif' \
