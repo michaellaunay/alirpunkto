@@ -946,7 +946,10 @@ def register_user_to_ldap(request, candidature, password):
     pseudonym = candidature.pseudonym
     error = is_valid_unique_pseudonym(pseudonym)
     if error:
-        return error
+        # Normalise to the {'status': 'error', 'message': ...} contract the
+        # callers expect (register.py reads result['message']); keep the
+        # original error/error_details for callers that display them.
+        return {'status': 'error', 'message': error.get('error'), **error}
 
     # Continue to register the user to LDAP
     with get_ldap_connection(ldap_user=LDAP_USER,
@@ -1000,19 +1003,19 @@ def register_user_to_ldap(request, candidature, password):
 
                     #@TODO check language code
                     groups.append(
-                        f"cn=cooperatorsGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
+                        f"cn=cooperatorsGroup,{f'{LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
                 except Exception as e:
                     log.error(f"Error while preparing attributes for user {pseudonym}: {e}")
                     return {'status': 'error', 'message': _('registration_failed')}
             case MemberTypes.ORDINARY:
                 groups.append(
-                    f"cn=ordinaryMembersGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
+                    f"cn=ordinaryMembersGroup,{f'{LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
             case MemberTypes.ADMINISTRATOR:
                 # Admins are not stored in LDAP, so we skip this
                 log.debug(f"Admin {pseudonym} does not have a group in LDAP.")
             case MemberTypes.PROVIDER:
                 groups.append(
-                    f"cn=providerMembersGroup,{f'ou={LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
+                    f"cn=providersGroup,{f'{LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
             case _:
                 log.error(f"Unsupported member type {candidature.type}")
         # If there are groups the user belongs to, add them to the uniqueMemberOf attribute
@@ -1024,16 +1027,17 @@ def register_user_to_ldap(request, candidature, password):
         try:
             success = conn.add(dn, attributes=attributes)
             if success:
+                group_dn = None
                 match candidature.type:
                     case MemberTypes.COOPERATOR:
                         group_dn = ("cn=cooperatorsGroup,"
-                                    f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
+                                    f"{f'{LDAP_OU},' if LDAP_OU else ''}"
                                     f"{LDAP_BASE_DN}"
                         )
                         conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
                     case MemberTypes.ORDINARY:
                         group_dn = ("cn=ordinaryMembersGroup,"
-                                    f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
+                                    f"{f'{LDAP_OU},' if LDAP_OU else ''}"
                                     f"{LDAP_BASE_DN}"
                         )
                         conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
@@ -1042,7 +1046,7 @@ def register_user_to_ldap(request, candidature, password):
                         log.debug(f"Admin {pseudonym} does not have a group in LDAP.")
                     case MemberTypes.PROVIDER:
                         group_dn = ("cn=providersGroup,"
-                                    f"{f'ou={LDAP_OU},' if LDAP_OU else ''}"
+                                    f"{f'{LDAP_OU},' if LDAP_OU else ''}"
                                     f"{LDAP_BASE_DN}"
                         )
                         conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
@@ -1050,8 +1054,9 @@ def register_user_to_ldap(request, candidature, password):
                         log.error(f"Error while adding user {pseudonym} "
                                 f"to a LDAP group : group for {candidature.type} is not coded")
 
-                # Check if group addition was successful
-                if not conn.result['description'] == 'success':
+                # Check if group addition was successful (only when a group
+                # modify was attempted; ADMINISTRATOR has no LDAP group).
+                if group_dn is not None and conn.result['description'] != 'success':
                     log.error(f"Error while adding user {pseudonym} to group {group_dn}: {conn.result}")
 
         except Exception as e:
