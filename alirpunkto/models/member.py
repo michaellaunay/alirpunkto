@@ -5,6 +5,7 @@
 
 from typing import Type, Tuple, List, Any, Optional, Dict, Iterator
 from dataclasses import dataclass, fields, make_dataclass
+from unittest import case
 from persistent import Persistent
 from persistent.mapping import PersistentMapping
 from datetime import datetime
@@ -199,6 +200,8 @@ class MemberRoles(Enum) :
                 return "member_roles_board"
             case cls.MEDIATION_ARBITRATION_COUNCIL.name :
                 return "member_roles_mediation_arbitration_council"
+            case cls.NONE.value :
+                return "member_roles_none_value"
             case cls.ORDINARY.value :
                 return "member_roles_ordinary_value"
             case cls.COOPERATOR.value :
