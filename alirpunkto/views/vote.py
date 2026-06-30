@@ -15,6 +15,7 @@ from alirpunkto.models.member import (
 from alirpunkto.utils import (
     get_candidatures,
     send_confirm_validation_email,
+    send_email,
     send_candidature_state_change_email,
     register_user_to_ldap
 )
@@ -39,9 +40,9 @@ def login_view(request):
         request.session['redirect_url'] = request.current_route_url()
         return HTTPFound(location=request.route_url('login'))
     user = User.from_json(user)
-    site_name = request.session['site_name']
-    domain_name = request.session['domain_name']
-    organization_details = request.session['organization_details']
+    site_name = request.registry.settings.get('site_name')
+    domain_name = request.registry.settings.get('domain_name')
+    organization_details = request.registry.settings.get('organization_details')
     username = user.name
     oid = request.params.get("oid") or request.session.get("oid", "")
     if oid and 'oid' not in request.session:
@@ -92,7 +93,7 @@ def login_view(request):
             # send email to the candidature owner
             count_yes = [v.vote for v in candidature.voters].count(VotingChoice.YES.name)
             count_no = [v.vote for v in candidature.voters].count(VotingChoice.NO.name)
-            if count_yes > count_no:
+            if count_yes >= count_no:
                 candidature.candidature_state = CandidatureStates.APPROVED
                 register_user_to_ldap(request, candidature, candidature.data.password)
                 candidature.add_email_send_status(
@@ -102,6 +103,33 @@ def login_view(request):
                 transaction.commit()
                 # send email to the candidature owner
                 email_template = "send_candidature_approuved_email"
+                send_candidature_state_change_email(
+                request,
+                candidature)
+# ADDITIONS BY VIBE - START
+            # Send FINAL e-mail
+                template_path = "alirpunkto:templates/send_candidature_approuved_email.pt"
+                template_vars = {
+                   'candidature': candidature,
+                    'domain_name': domain_name,
+                    'organization_details': organization_details
+                    }
+                send_result = send_email(
+                    request,
+                    subject="",
+                    recipients=[candidature.email],
+                    template_path=template_path,
+                    template_vars=template_vars,
+                    derive_subject_from_title=True
+                    )
+                if send_result:
+                    candidature.add_email_send_status(EmailSendStatus.SENT, "send_candidature_approuved_email")
+                    transaction.commit()
+                else:
+                    candidature.add_email_send_status(EmailSendStatus.ERROR, "send_candidature_approuved_email")
+                    transaction.abort()
+# ADDITIONS BY VIBE - END
+            
             else:
                 candidature.candidature_state = CandidatureStates.REFUSED
                 candidature.add_email_send_status(
@@ -110,12 +138,32 @@ def login_view(request):
                 )
                 transaction.commit()
                 email_template = "send_candidature_rejected_email"
-            # send email to the candidature owner
-            send_candidature_state_change_email(
+                send_candidature_state_change_email(
                 request,
-                candidature,
-                email_template
-            )
+                candidature)
+# ADDITIONS BY VIBE - START
+            # Send FINAL e-mail
+                template_path = "alirpunkto:templates/send_candidature_rejected_email.pt"
+                template_vars = {
+                    'candidature': candidature,
+                    'domain_name': domain_name,
+                    'organization_details': organization_details
+                    }
+                send_result = send_email(
+                    request,
+                    subject="",
+                    recipients=[candidature.email],
+                    template_path=template_path,
+                    template_vars=template_vars,
+                    derive_subject_from_title=True
+                    )
+                if send_result:
+                    candidature.add_email_send_status(EmailSendStatus.SENT, "send_candidature_approuved_email")
+                    transaction.commit()
+                else:
+                    candidature.add_email_send_status(EmailSendStatus.ERROR, "send_candidature_approuved_email")
+                    transaction.abort()
+# ADDITIONS BY VIBE - END            
             try:
                 candidature.add_email_send_status(EmailSendStatus.SENT, email_template)
                 transaction.commit()
@@ -153,6 +201,7 @@ def login_view(request):
         #@TODO if date is passed, compute the result with the votes
 
         #@TODO send email to the candidature owner
+    
 
     return {
         'logged_in': True if user else False,

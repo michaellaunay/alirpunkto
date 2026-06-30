@@ -540,7 +540,7 @@ def handle_confirmed_human_state(request, candidature):
             parameters[field_name] = value
         # @TODO use permission than member type to manipulate the data
         if candidature.type == MemberTypes.COOPERATOR:
-            # Extract birthdate from request only for coopereator
+            # Extract birthdate from request only for cooperator
             # This is a bit convoluted because of the way deform handles nested forms
             start_birthdate = False
             birthdate = None
@@ -590,6 +590,29 @@ def handle_confirmed_human_state(request, candidature):
                 candidatures.monitored_members.pop(candidature.oid, None)
                 candidature.candidature_state = CandidatureStates.APPROVED
                 email_template = "send_candidature_approuved_email"
+# ADDITIONS BY VIBE - START
+            # Send FINAL e-mail
+                template_path = "alirpunkto:templates/send_candidature_approuved_email.pt"
+                template_vars = {
+                    'candidature': candidature,
+                    'domain_name': domain_name,
+                    'organization_details': organization_details                   
+                    }
+                send_result = send_email(
+                    request,
+                    subject="",
+                    recipients=[candidature.email],
+                    template_path=template_path,
+                    template_vars=template_vars,
+                    derive_subject_from_title=True
+                    )
+                if send_result:
+                    candidature.add_email_send_status(EmailSendStatus.SENT, "send_candidature_approuved_email")
+                    transaction.commit()
+                else:
+                    candidature.add_email_send_status(EmailSendStatus.ERROR, "send_candidature_approuved_email")
+                    transaction.abort()
+# ADDITIONS BY VIBE - END
             case MemberTypes.COOPERATOR:
                 candidature.candidature_state = CandidatureStates.UNIQUE_DATA
                 email_template = "send_candidature_pending_email"
@@ -929,6 +952,7 @@ def get_template_parameters_for_cooperator(
         "site_name":site_name,
         "organization_details":organization_details,
         "domain_name":domain_name,
+        "administrator": ADMIN_EMAIL,
     }
     email_copy_id_verification_body = _(
         "email_copy_id_verification_body",
