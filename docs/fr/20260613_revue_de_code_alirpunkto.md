@@ -7,6 +7,8 @@
 >
 > **Révision du 2026-06-30** : refonte complète de la suite de tests (97 tests verts ; correctif de cohérence `MemberRoles.get_i18n_id` au passage), puis correctifs **2.2** (`get_access_permissions` *fail-closed* + log des cas non couverts, et lecture des candidatures pour l'administrateur), **2.1** (réactivation de la branche `voter` via comparaison sur les `oid`) et **2.3** (persistance du vote via `_p_changed`, renommage `vote_view`, lecture session robuste, vérification du retour LDAP avant approbation, et contrôle de la *deadline* de vote).
 
+> **Révision du 2026-06-30 (suite)** : correctifs **2.9** (contrat de retour de `register_user_to_ldap` normalisé en `{'status':'error',…}`) et **2.10** (DN de groupes LDAP rendus cohérents avec la création des groupes, PROVIDER unifié sur `providersGroup`, garde anti-`NameError`).
+
 **Légende :** ✅ corrigé · ⚠️ partiel / mitigé · ❌ non corrigé · 🆕 régression introduite depuis le 2026-06-12
 
 ## Historique des corrections (dépôt git)
@@ -33,17 +35,18 @@ Correspondance entre les commits du dépôt et les corrections d'audit, par ordr
 | `d1e6d81` | 2026-06-30 | Réactivation de la branche `voter` dans `get_access_permissions` | §2.1 |
 | `72848b9` | 2026-06-30 | Persistance du vote + approbation après succès LDAP | §2.3 |
 | `9851714` | 2026-06-30 | Clôture du vote à l'échéance (*deadline*) | §2.3 |
+| _«hash»_ | 2026-06-30 | Contrat de retour LDAP normalisé + DN de groupes cohérents | §2.9, §2.10 |
 
 ---
 
 ## Synthèse
 
-Trois chantiers de sécurité avaient déjà été traités dans le dump du 2026-06-26 : le secret de session (1.1), les mots de passe dans les logs (1.2) et la protection CSRF (1.5). **Depuis, sept failles supplémentaires ont été corrigées** : injection de filtre LDAP (1.4), comparaison des identifiants admin (1.6), traversal de template dans `get_email` (1.7), énumération d'utilisateurs (1.8), expiration des liens (1.9), échec propre de `decrypt_oid` (1.10) et branding lu depuis les settings plutôt que `request.params` (1.11) — plus l'annotation de `get_member_by_email` (§4.14) et, côté bugs bloquants, le plantage d'`elections_view` (**2.5**, désormais corrigé mais la vue reste un *stub*). Un utilitaire `encrypt_secret_for_logs()` a été ajouté dans `secret_manager.py` et est utilisé partout où un mot de passe était auparavant journalisé en clair. **En section 1, il ne reste plus que 1.3** (mots de passe en clair LDAP/ZODB). Pour le reste — la plupart des bugs bloquants de la §2 (2.1, 2.2, 2.3 et 2.5 mis à part), problèmes transactionnels (§3), plupart des bugs mineurs (§4) et dette de qualité (§5) — rien n'a bougé. Côté §2, **2.5** (plantage d'`elections_view`, mais la vue reste un *stub*), **2.2** (`get_access_permissions` rendu *fail-closed* + lecture admin des candidatures), **2.1** (branche `voter` réactivée) puis **2.3** (persistance du vote + robustesse de `vote_view`) ont été traités. Au passage, une petite régression a été introduite dans `register.pt` et le bug 2.12 subsiste (cousin corrigé sur `MemberRoles`).
+Trois chantiers de sécurité avaient déjà été traités dans le dump du 2026-06-26 : le secret de session (1.1), les mots de passe dans les logs (1.2) et la protection CSRF (1.5). **Depuis, sept failles supplémentaires ont été corrigées** : injection de filtre LDAP (1.4), comparaison des identifiants admin (1.6), traversal de template dans `get_email` (1.7), énumération d'utilisateurs (1.8), expiration des liens (1.9), échec propre de `decrypt_oid` (1.10) et branding lu depuis les settings plutôt que `request.params` (1.11) — plus l'annotation de `get_member_by_email` (§4.14) et, côté bugs bloquants, le plantage d'`elections_view` (**2.5**, désormais corrigé mais la vue reste un *stub*). Un utilitaire `encrypt_secret_for_logs()` a été ajouté dans `secret_manager.py` et est utilisé partout où un mot de passe était auparavant journalisé en clair. **En section 1, il ne reste plus que 1.3** (mots de passe en clair LDAP/ZODB). Pour le reste — la plupart des bugs bloquants de la §2 (2.1, 2.2, 2.3, 2.5, 2.9 et 2.10 mis à part), problèmes transactionnels (§3), plupart des bugs mineurs (§4) et dette de qualité (§5) — rien n'a bougé. Côté §2, **2.5** (plantage d'`elections_view`, mais la vue reste un *stub*), **2.2** (`get_access_permissions` rendu *fail-closed* + lecture admin des candidatures), **2.1** (branche `voter` réactivée) **2.3** (persistance du vote + robustesse de `vote_view`) puis **2.9/2.10** (contrat de retour et DN de groupes LDAP) ont été traités. Au passage, une petite régression a été introduite dans `register.pt` et le bug 2.12 subsiste (cousin corrigé sur `MemberRoles`).
 
 | Section | Corrigé | Partiel | Non corrigé |
 |---|---|---|---|
 | 1. Sécurité critique | 1.1, 1.2, **1.4**, 1.5, **1.6**, **1.7**, **1.8**, **1.9**, **1.10**, **1.11** | — | 1.3 |
-| 2. Bugs bloquants | **2.1**, **2.2**, **2.3**, **2.5** | 2.15, 2.18 | 2.4, 2.6–2.14, 2.16, 2.17 |
+| 2. Bugs bloquants | **2.1**, **2.2**, **2.3**, **2.5**, **2.9**, **2.10** | 2.15, 2.18 | 2.4, 2.6–2.8, 2.11–2.14, 2.16, 2.17 |
 | 3. Transactions | — | — | tout |
 | 4. Bugs mineurs | **§4.14** | §4.18 | §4.1, §4.31, … (inchangés) |
 | 5. Qualité | — | — | typos, pkg_resources, pytz, types… |
@@ -140,12 +143,11 @@ l.374 : toujours `if not sending_success` alors que `update_ldap_member` renvoie
 ### 2.8 `logout` : `KeyError` sur `?username=` — ❌ **non corrigé**
 `utils.py` l.1548-1550 : toujours `del request.session['username']` (clé jamais posée). `pop('username', None)` non appliqué.
 
-### 2.9 `register_user_to_ldap` contrat de retour incohérent — ❌ **non corrigé**
-`is_valid_unique_pseudonym` renvoie toujours `{'error': …}` **sans clé `status`** (l.321/327/333/351) ; `register_user_to_ldap` le retourne tel quel (l.915). Les appelants faisant `result['status']` lèveront `KeyError`.
+### 2.9 `register_user_to_ldap` contrat de retour incohérent — ✅ **corrigé** (post-dump, 2026-06-30)
+Le chemin « pseudonyme invalide » retournait tel quel le `{'error': …}` de `is_valid_unique_pseudonym` (sans clé `status`), alors que les appelants lisent `result['status']` (et `register.py` lit aussi `result['message']`) → `KeyError`. Normalisé en `{'status': 'error', 'message': error.get('error'), **error}` : on respecte le contrat des autres retours de la fonction tout en conservant `error`/`error_details`. Vérifié en exécutant la fonction avec un pseudonyme invalide → `{'status':'error','message':…,'error_details':…}`.
 
-### 2.10 DN de groupes incohérents — ❌ **non corrigé**
-- `uniqueMemberOf` d'un PROVIDER pointe `providerMembersGroup` (l.981) alors que le groupe réellement modifié est `providersGroup` (l.1010).
-- Incohérence du préfixe `ou=` : le DN utilisateur l.921 suppose que `LDAP_OU` contient déjà `ou=…`, mais les DN de groupes l.969/975/981/996/1002/1011 re-préfixent `ou={LDAP_OU}` — contradiction interne dans la même fonction.
+### 2.10 DN de groupes incohérents — ✅ **corrigé** (post-dump, 2026-06-30)
+Trois points : (a) le `uniqueMemberOf` d'un PROVIDER pointait `providerMembersGroup` alors que le groupe créé/modifié est `providersGroup` → unifié sur `providersGroup` ; (b) les six DN de groupes re-préfixaient `ou={LDAP_OU}` alors que la création des groupes (`__init__.py` l.159-160) et le DN utilisateur emploient `{LDAP_OU}` directement → préfixe `ou=` retiré, les DN ciblent désormais l'endroit où les groupes existent réellement ; (c) `group_dn` n'était pas défini pour ADMINISTRATOR/`_` → `NameError` potentiel dans le log final, corrigé par `group_dn = None` + garde `if group_dn is not None`. Vérifié en exécutant `register_user_to_ldap` avec une connexion LDAP mockée : pour COOPERATOR/ORDINARY/PROVIDER le DN passé à `conn.modify` est **identique** à celui que crée `__init__.py`, et `uniqueMemberOf` pointe le même DN ; ADMINISTRATOR ne fait aucun `modify` et ne lève pas.
 
 ### 2.11 Validateur de mot de passe inversé — ❌ **non corrigé**
 `schemas/register_form.py` l.173 : toujours `validator = colander.Function(is_valid_password)` (logique inversée). Inoffensif uniquement parce que `form.validate` reste commenté.
@@ -218,6 +220,6 @@ Toujours abonné à `NewRequest` (`__init__.py` l.66). Mitigations ajoutées : c
 
 ## Reste prioritaire (ordre suggéré)
 1. **Faille de sécurité restante** : **1.3** seul subsiste en section 1 (hachage LDAP + purge `data.password`).
-2. **Bugs bloquants §2** : 2.1, 2.2, 2.3 et 2.5 faits — continuer par 2.9/2.10 (contrat et DN LDAP), 2.6/2.7 (mapping et retour `update_ldap_member`), 2.4 (`manage_provider`), 2.12 (+ test), 2.13 (SSO).
+2. **Bugs bloquants §2** : 2.1, 2.2, 2.3, 2.5, 2.9 et 2.10 faits — continuer par 2.6/2.7 (mapping et retour `update_ldap_member`), 2.4 (`manage_provider`), 2.11 (validateur de mot de passe), 2.12 (+ test), 2.13 (SSO).
 3. **Robustesse** : §3 stratégie transactionnelle, 2.14/2.15 singletons, 2.18 hors cycle requête.
 4. **Continu** : `ruff` + `mypy` + tests par vue ; corriger la régression `register.pt` et le test qui fige 2.12.
