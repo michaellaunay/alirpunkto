@@ -755,7 +755,7 @@ def get_access_permissions(accessed: Member, accessor: Member) -> MemberPermissi
         case (False, Candidature(), _) if (
             getattr(accessed, "voters", None)
             and accessed.voters
-            and accessor.oid in accessed.voters
+            and accessor.oid in {voter.oid for voter in accessed.voters}
         ):
             log.debug(
                 f"Accessor is voter of candidature "
