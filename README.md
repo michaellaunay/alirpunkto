@@ -1,144 +1,302 @@
-# alirpunkto
-Alirpunkto (Access Point in Esperanto) is a web application for centralizing authentication and account creation with moderation. It is written in Python3, Pyramid, Chameleon, LDAP, Tal/Metal, and Bootstrap 5.
+# AlirPunkto
 
-# Documentation
-All the documentation is in the docs folder.
-We use Obsidian notes, so if you see [[A Name]] in our notes, it's a link to the markdown file named "A Name.md".
-For an enhanced experience, you can use Obsidian or Markdown Memo in Visual Studio Code.
-`docs/fr` contains the French documentation
-`docs/en` contains the English documentation
+AlirPunkto ("Access Point" in Esperanto) is a Python/Pyramid web application for
+cooperative membership and account management.
 
-# Development
-Clone this repository
+It provides a moderated registration workflow, LDAP-backed member storage, voting
+and verification flows for candidatures, password reset and email-change flows,
+optional SSO/Keycloak integration, and Docker-based deployment helpers.
+
+## Main stack
+
+AlirPunkto is built with:
+
+- Python 3 and Pyramid;
+- Chameleon / TAL-METAL templates;
+- ZODB for application state;
+- OpenLDAP for member and group data;
+- Postfix for application e-mail delivery;
+- Apache as HTTPS reverse proxy;
+- Bootstrap 5 for the UI;
+- optional Keycloak / SSO integration.
+
+The application enables CSRF protection globally and uses secure session cookies.
+For local functional tests and local Docker runs, make sure requests are made over
+HTTPS-compatible URLs and that forms include their CSRF token.
+
+## Repository layout
+
+```text
+alirpunkto/                  Pyramid application package
+alirpunkto/models/           Persistent member, candidature and permission models
+alirpunkto/views/            Pyramid views
+alirpunkto/templates/        Chameleon templates
+alirpunkto/schemas/          Deform/Colander form schemas
+tests/                       Self-contained unit and functional regression tests
+docker/                      Production and local Docker stacks
+docker/README.md             Full Docker deployment documentation
+docker/README_TEST_LOCAL.md  Local/offline Docker test stack documentation
+tools/                       Developer helper scripts
+docs/                        Project documentation and design notes
+```
+
+The documentation in `docs/` is written as Markdown notes. Some files use
+Obsidian-style links such as `[[A Name]]`, which point to a Markdown file named
+`A Name.md`.
+
+## Quick start for development
+
+From a clean checkout:
+
 ```bash
-cd YourWorkingFolder
 git clone git@github.com:michaellaunay/alirpunkto.git
-python3 -m venv alirpunkto
 cd alirpunkto
 ```
 
-Activate this virtual environment
+Create and activate a virtual environment. The existing project convention uses
+a virtual environment directly at the repository root, which creates `bin/`,
+`lib/`, and related directories there:
+
 ```bash
+python3 -m venv .
 source bin/activate
 ```
 
-Update
-```bash
-bin/pip install --upgrade pip setuptools
-pip list --outdated --format=columns | tail -n +3 | awk '{print $1}' | xargs -n1 pip install -U
-```
-
-Install pyramid
-```bash
-pip install pyramid pyramid_chameleon python-dotenv ldap3 pyramid_beaker pyramid_mailer py3dns validate_email cryptography bcrypt python-keycloak pyjwt
-```
-
-We need ZODB to store vote and session informations.
-
-# Getting Started
-
-- Change directory into your newly created project if not already there. Your
-  current directory should be the same as this README.txt file and setup.py.
+Upgrade packaging tools and install the project with its test dependencies:
 
 ```bash
-cd alirpunkto
-```
-
-- Install the project in editable mode with its testing requirements.
-
-```bash
+bin/pip install --upgrade pip setuptools wheel
 bin/pip install -e ".[testing]"
 ```
 
-- Create de var folder
+Create the runtime directories used by the application:
 
 ```bash
 mkdir -p var/log var/datas var/filestorage var/sessions
 ```
 
-- Create the secret file containing your keys
+Create your local environment file:
 
 ```bash
 cp .env.example .env
-```
-
-Generate a secret whith 
-
-```bash
 python3 alirpunkto/generate_secret.py
 ```
 
-And change the SECRET_KEY inside the .env file.
+Copy the generated `SECRET_KEY` into `.env`, then review the other values such as
+LDAP, mail, site name, domain name and optional Keycloak settings.
 
-Here's the translated documentation in English for including in the `README.md` file of your AlirPunkto project, explaining how to add the `alirpunkto/alirpunkto_schema.ldif` schema to OpenLDAP on Ubuntu 22.04:
+Do not commit local `.env` files, generated secrets, certificates, LDIF files, or
+local `test.ini` files.
 
-Add alirpkunto_schema.ldif as describe bellow
+## Running the tests
 
-- Run your project's tests.
+The default pytest suite is self-contained. It mocks LDAP-facing startup side
+effects and does not start Docker unless explicitly requested.
+
+Run:
 
 ```bash
 bin/pytest
 ```
 
-You should have no error !
+To point the Pyramid functional tests to a specific INI file:
 
-- Run your project.
+```bash
+bin/pytest --ini testing.ini
+```
+
+If `testing.ini` is absent, the affected functional tests are skipped.
+
+Some regression tests validate the local Docker stack files themselves, but they
+do not start the Docker stack. To run tests against an externally started LDAP
+service, use the dedicated option only after starting that service:
+
+```bash
+bin/pytest --use-docker-ldap
+```
+
+## Running the application locally without Docker
+
+After installing the project and creating `.env`:
+
 ```bash
 bin/pserve development.ini
 ```
 
----
+This mode expects the services referenced in `.env` to be reachable, especially
+LDAP and mail.
 
-## Adding AlirPunkto Schema to OpenLDAP on Linux
+## Local Docker test stack
 
-This section guides you through the steps to integrate the custom `alirpunkto_schema.ldif` schema into an OpenLDAP server on Ubuntu 22.04.
+For day-to-day local integration testing, use the dedicated test stack:
 
-### Prerequisites
+```bash
+chmod +x docker/init_test.sh docker/start_test_*.sh docker/stop_clean_test.sh
+./docker/init_test.sh
+```
 
-- An OpenLDAP server installed on Ubuntu 22.04.
-- Administrative rights on the LDAP server.
-- The `alirpunkto_schema.ldif` file available in the `alirpunkto` directory of this project.
-- You can replace the PEN number with your own before proceeding with the installation.
+Add the local hostnames:
 
-### Installation Steps
+```bash
+grep alirpunkto.localhost /etc/hosts || \
+sudo sh -c 'printf "\n127.0.0.1 alirpunkto.localhost alirpunkto.local mail.alirpunkto.localhost\n" >> /etc/hosts'
+```
 
-1. **Server Connection**  
-   Log into your Ubuntu server where OpenLDAP is installed.
+Start the stack:
 
-2. **Stopping LDAP Service**  
-   Before making any configuration changes, stop the LDAP service to prevent data corruption.
-   ```bash
-   sudo systemctl stop slapd
-   ```
+```bash
+docker compose --env-file docker/.env.test -f docker/test-docker-compose.yaml up -d --build
+```
 
-3. **Locating the Schema File**  
-   Ensure that the `alirpunkto_schema.ldif` file is present on the server. If not, transfer it to an appropriate directory (e.g., `/tmp`).
+Open:
 
-4. **Adding the Schema to LDAP Server**  
-   Run the following command to add the schema to your LDAP directory:
-   ```bash
-   sudo apt install schema2ldif
-   ldap-schema-manager -i /path/to/alirpunkto_schema.ldif
-   ldap-schema-manager -m /path/to/alirpunkto_schema.ldif -n
-   ```
-   Replace `/path/to/alirpunkto_schema.ldif` with the actual path of the `alirpunkto_schema.ldif` file on your server.
+```text
+https://alirpunkto.localhost:8443/
+```
 
-5. **Restarting LDAP Service**  
-   After successfully adding the schema, restart the LDAP service:
-   ```bash
-   sudo systemctl start slapd
-   ```
+The certificate is self-signed; a browser warning is expected.
 
-6. **Verification**  
-   Verify that the schema has been added correctly. You can do this by checking the OpenLDAP logs or using an LDAP tool to explore the schema configuration.
+The local test stack is separate from the production stack. It uses dedicated
+container names, volumes and network, generates local credentials, runs Postfix
+as a sink that accepts mail without relaying it, and binds debug ports to
+`127.0.0.1` only.
 
-### Troubleshooting
+`docker/init_test.sh` generates local-only files including:
 
-If you encounter any issues while adding the schema, check the OpenLDAP logs for detailed error information. The logs can often provide useful clues about what might have gone wrong.
+```text
+docker/.env.test
+docker/secrets/ldap_password_test
+docker/initials_users.test.generated.ldif
+docker/certs/local-test/fullchain.pem
+docker/certs/local-test/privkey.pem
+test.ini
+```
 
-### Important Notes
+These files are generated artifacts and should not be committed.
 
-- Ensure you have a backup of the existing LDAP configuration before making changes.
-- Any modifications to the LDAP configuration should be carried out with caution, as errors can affect the stability and security of the service.
-- Test changes in a development environment before applying them on a production server.
+The generated `test.ini` must make Waitress listen on the Docker container
+network:
 
+```ini
+[server:main]
+use = egg:waitress#main
+listen = 0.0.0.0:6543
+url_scheme = https
+```
+
+Do not use `listen = localhost:6543` in the Docker test stack: from Apache,
+`localhost` would mean the Apache container itself, not the Pyramid container.
+
+For detailed troubleshooting, port mappings, generated test accounts and cleanup
+commands, see:
+
+```text
+docker/README_TEST_LOCAL.md
+```
+
+## Production Docker stack
+
+The production-oriented Docker stack is documented in:
+
+```text
+docker/README.md
+```
+
+Typical first-time setup:
+
+```bash
+chmod +x docker/init.sh
+./docker/init.sh
+```
+
+Then start the stack from the repository root:
+
+```bash
+docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
+```
+
+The production stack starts OpenLDAP, Postfix, Pyramid and Apache with dedicated
+healthchecks and named volumes.
+
+Generated production files such as `docker/.env`,
+`docker/secrets/ldap_password` and `docker/initials_users.generated.ldif` contain
+deployment-specific material and must not be committed.
+
+## OpenLDAP schema
+
+AlirPunkto uses the custom schema:
+
+```text
+alirpunkto/alirpunkto_schema.ldif
+```
+
+The Docker OpenLDAP image loads this schema automatically.
+
+For a manual OpenLDAP installation, install and load the schema on the LDAP
+server, then verify the resulting schema and group layout before pointing
+AlirPunkto at it. Always test schema changes in a development environment and
+back up the LDAP configuration before modifying a production directory.
+
+## Source export for review
+
+Developer review dumps can be generated with:
+
+```bash
+tools/export_sources_for_review.sh
+```
+
+The script exports selected source files to a numbered text file under `/tmp/`.
+It intentionally excludes generated, local, binary and sensitive artifacts such
+as `.env*`, certificates, private keys, generated LDIF files, caches, locale
+build artifacts, static assets and local `test.ini`.
+
+## Common commands
+
+```bash
+# Run tests
+bin/pytest
+
+# Run the development server
+bin/pserve development.ini
+
+# Start the production Docker stack
+docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
+
+# View production Docker logs
+docker compose --env-file docker/.env -f docker/docker-compose.yaml logs -f
+
+# Start the local Docker test stack
+docker compose --env-file docker/.env.test -f docker/test-docker-compose.yaml up -d --build
+
+# View local Docker test logs
+docker compose --env-file docker/.env.test -f docker/test-docker-compose.yaml logs -f
+
+# Stop and remove local Docker test containers and volumes
+./docker/stop_clean_test.sh
+```
+
+## Security notes
+
+- Keep `.env`, generated LDAP passwords, certificates and generated LDIF files
+  out of Git.
+- Use HTTPS in deployed environments.
+- Review `production.ini` and `docker/.env` before deployment.
+- Configure mail delivery intentionally; the local test stack never relays mail.
+- Configure Keycloak/SSO variables only when SSO is actually enabled.
+- Do not reuse local test credentials in production.
+
+## Documentation
+
+Main documentation lives in:
+
+```text
+docs/fr/
+docs/en/
+```
+
+Docker-specific documentation lives in:
+
+```text
+docker/README.md
+docker/README_TEST_LOCAL.md
+```

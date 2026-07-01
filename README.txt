@@ -1,30 +1,52 @@
 alirpunkto
 ==========
 
-Getting Started
----------------
+AlirPunkto is a Python/Pyramid web application for cooperative membership and
+account management, backed by LDAP, ZODB, Postfix and Apache.
 
-- Change directory into your newly created project if not already there. Your
-  current directory should be the same as this README.txt file and setup.py.
+The maintained documentation is now README.md. This legacy README.txt is kept as
+a short entry point for tools or packaging workflows that still display it.
 
+Quick start
+-----------
+
+    git clone git@github.com:michaellaunay/alirpunkto.git
     cd alirpunkto
+    python3 -m venv .
+    source bin/activate
+    bin/pip install --upgrade pip setuptools wheel
+    bin/pip install -e ".[testing]"
+    mkdir -p var/log var/datas var/filestorage var/sessions
+    cp .env.example .env
+    python3 alirpunkto/generate_secret.py
 
-- Create a Python virtual environment, if not already created.
+Copy the generated SECRET_KEY into .env, then review LDAP, mail, site and SSO
+settings.
 
-    python3 -m venv env
+Run tests
+---------
 
-- Upgrade packaging tools, if necessary.
+    bin/pytest
 
-    env/bin/pip install --upgrade pip setuptools
+Run the development server
+--------------------------
 
-- Install the project in editable mode with its testing requirements.
+    bin/pserve development.ini
 
-    env/bin/pip install -e ".[testing]"
+Docker
+------
 
-- Run your project's tests.
+Production stack:
 
-    env/bin/pytest
+    ./docker/init.sh
+    docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
 
-- Run your project.
+Local/offline test stack:
 
-    env/bin/pserve development.ini
+    ./docker/init_test.sh
+    docker compose --env-file docker/.env.test -f docker/test-docker-compose.yaml up -d --build
+
+More information
+----------------
+
+See README.md, docker/README.md and docker/README_TEST_LOCAL.md.
