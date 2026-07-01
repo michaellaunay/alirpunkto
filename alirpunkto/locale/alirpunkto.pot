@@ -587,7 +587,6 @@ msgstr ""
 "request of a judge. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection "
 "Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 "
 "April 2023 under the number SIREN 951 007 897.</p>\n"
-"<p><b>Important notice:</b> In rare cases, it may happen that the form below does not display properly: it will not show you where to provide your Pseudonym, your e-mail address will be editable... If this happens, just click on the \"Submit\" button below. This form that will appear will be correct, and you will be able to fill it easily.</p>\n"
 "</div>"
 
 msgid "human_verification_explanation"

@@ -346,37 +346,25 @@ def handle_email_validation_state(
         if challenge_error:
             return challenge_error
         
-        # User is a human, we update state and commit changes
+         # User is a human: move to CONFIRMED_HUMAN and notify by email. Do NOT
+        # commit here — pyramid_tm commits once at the end of the request.
+        # Committing mid-view rebinds the candidature to a finished transaction,
+        # so the section/form rendered below reads a stale state (this is the
+        # "refresh to make the pseudonym field appear/editable" symptom).
         candidature.candidature_state = CandidatureStates.CONFIRMED_HUMAN
         try:
-            request.tm.commit()
-            # Send confirmation email and handle status
             send_result = send_confirm_validation_email(request, candidature)
-            if send_result.get('error'):        
-                candidature.add_email_send_status(
-                    EmailSendStatus.ERROR, 
-                    'send_confirm_validation_email'
-                )
-            else:
-                return {
-                    'form': render_candidature_form(request, candidature),
-                    'candidature': candidature,
-                    'MemberTypes': MemberTypes
-                }
-        except Exception as e:
-            log.error(f"Error committing candidature {candidature.oid}: {e}")
-            # Explicitly abort the transaction to ensure consistency
-            request.tm.abort()
+        except Exception as exc:
+            log.error(f"Error sending confirmation email for {candidature.oid}: {exc}")
+            send_result = {'error': True}
+        if send_result.get('error'):
             candidature.add_email_send_status(
-                EmailSendStatus.ERROR, 
-                'send_confirm_validation_email'
-            )
-
-            return {
-                'candidature': candidature,
-                'MemberTypes': MemberTypes,
-                'error': _('error_committing_candidature')
-            }
+                EmailSendStatus.ERROR, 'send_confirm_validation_email')
+        return {
+            'form': render_candidature_form(request, candidature),
+            'candidature': candidature,
+            'MemberTypes': MemberTypes
+        }    
     return {
         'candidature': candidature,
         'MemberTypes': MemberTypes
