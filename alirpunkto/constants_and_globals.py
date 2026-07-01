@@ -84,6 +84,8 @@ log: Final = logging.getLogger('alirpunkto')
 # Default session timeout is getting from environment variable or set to 7 hours
 DEFAULT_SESSION_TIMEOUT: Final = int(os.getenv("DEFAULT_SESSION_TIMEOUT", 7*60*60))
 
+VERIFIER_REMINDER_MIN_INTERVAL_SECONDS: Final = int(os.getenv("VERIFIER_REMINDER_MIN_INTERVAL_SECONDS", 259200))  # 3 days in seconds
+
 EUROPEAN_ZONES: Final = [tz for tz in pytz.all_timezones if tz.startswith('Europe')]
 
 # LDAP Time Format

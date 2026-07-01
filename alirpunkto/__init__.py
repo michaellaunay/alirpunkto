@@ -42,11 +42,11 @@ from .constants_and_globals import (
     NOTICE_TIME_VERIFIERS,
     PYTEST_CURRENT_TEST,
     KEYCLOAK_REDIRECT_PATH,
+    VERIFIER_REMINDER_MIN_INTERVAL_SECONDS,
 )
 from .secret_manager import get_secret
 from dotenv import get_key
 
-_REMINDER_MIN_INTERVAL_SECONDS = 600
 _reminder_lock = threading.Lock()
 _reminder_last_run = 0.0
 
@@ -75,13 +75,18 @@ def remind_pending_verifiers(event):
     if PYTEST_CURRENT_TEST:
         return
     global _reminder_last_run
-    if time.monotonic() - _reminder_last_run < _REMINDER_MIN_INTERVAL_SECONDS:
-        return                              # cheap check, no lock
+    # production.ini setting takes precedence, else the env/.env constant.
+    interval = int(event.request.registry.settings.get(
+        "verifier_reminder_min_interval_seconds",
+        VERIFIER_REMINDER_MIN_INTERVAL_SECONDS,
+    ))
+    if time.monotonic() - _reminder_last_run < interval:
+        return
     if not _reminder_lock.acquire(blocking=False):
-        return                              # another thread is already running it
+        return
     try:
         now = time.monotonic()
-        if now - _reminder_last_run < _REMINDER_MIN_INTERVAL_SECONDS:
+        if now - _reminder_last_run < interval:
             return
         _reminder_last_run = now
         from .views.register import send_verifier_reminder_emails
