@@ -62,6 +62,7 @@ Correspondance entre les commits du dépôt et les corrections d'audit, par ordr
 | `14ca621` | 2026-07-01 | Retrait des 4 commits explicites de `modify_member.py` (mailer transactionnel) | §3 (modify_member) |
 | `6d43891` | 2026-07-01 | Retrait des 4 commits + 2 abort de `vote.py` (`_p_changed` conservé) | §3 (vote) |
 | _«hash»_ | 2026-07-01 | Retrait des 2 commits explicites de `manage_provider.py` (mailer transactionnel) | §3 (manage_provider) |
+| _«hash»_ | 2026-07-01 | Retrait du commit explicite de `check_new_email.py` (`get_instance` conservé) | §3 (check_new_email) |
 
 ---
 
@@ -73,7 +74,7 @@ Trois chantiers de sécurité avaient déjà été traités dans le dump du 2026
 |---|---|---|---|
 | 1. Sécurité critique | 1.1, 1.2, **1.4**, 1.5, **1.6**, **1.7**, **1.8**, **1.9**, **1.10**, **1.11** | — | 1.3 |
 | 2. Bugs bloquants | **2.1**–**2.18** (les 18) | — | — |
-| 3. Transactions | — | **register**, **forgot_password**, **modify_member**, **vote**, **manage_provider** (24 commits/abort retirés) | 2 fichiers restants (2 commits) |
+| 3. Transactions | **6 vues nettoyées (24 commits/abort retirés) + `get_instance` justifié** | — | — |
 | 4. Bugs mineurs | **§4.14** | §4.18 | §4.1, §4.31, … (inchangés) |
 | 5. Qualité | — | — | typos, pkg_resources, pytz, types… |
 
@@ -214,7 +215,7 @@ L'absence de tests couvrant les correctifs §2 avait laissé passer au moins une
 | `test_manage_provider.py` | 10 | §2.4, §3 | gardes d'accès, détection de doublon par e-mail, mise à jour e-mail/mot de passe, remontée d'échec LDAP ; §3 : création et mise à jour sans `request.tm.commit()` |
 | `test_get_i18n_id.py` | 8 | §2.12 | les quatre fallbacks interpolent, aucun ne renvoie le littéral, les noms connus résolvent |
 | `test_register_form.py` | 5 | §2.11 | adaptateur du validateur, comportement via `colander.Function`, validateur réel du champ `password` |
-| `test_check_new_email.py` | 3 | §2.7 | un échec LDAP (dict d'erreur **ou** `None`) n'est plus pris pour un succès, pas de commit |
+| `test_check_new_email.py` | 3 | §2.7, §3 | un échec LDAP (dict d'erreur **ou** `None`) n'est plus pris pour un succès ; §3 : succès sans `request.tm.commit()` |
 | `test_logout.py` | 4 | §2.8 | `/logout?username=X` ne lève plus, déconnexion effective, purge des clés SSO/oid |
 | `test_home_sso.py` | 4 | §2.13 | refresh qui échoue → logout **sans crash**, token d'accès stocké en session (pas de header), fenêtre expirée/absente → logout |
 | `test_members_get_instance.py` | 5 | §2.14 | instance liée à la connexion passée (`_p_jar`), deux connexions → deux objets distincts, repli cache/`TypeError` |
@@ -231,7 +232,7 @@ Ces tests s'appuient sur les *fixtures* existantes (`members_mapping`, `caplog`,
 
 ---
 
-## 3. Cohérence transactionnelle — ⚠️ **en cours** (`register`, `forgot_password`, `modify_member`, `vote`, `manage_provider` traités)
+## 3. Cohérence transactionnelle — ✅ **traité** (6 vues nettoyées ; `get_instance` conservé comme bootstrap justifié)
 
 **30 appels explicites** `transaction.commit()` / `request.tm.commit()` subsistent, combinés à `pyramid_tm`, répartis ainsi : `register.py` (7), `forgot_password.py` (7), `modify_member.py` (4), `vote.py` (4), `manage_provider.py` (2), `check_new_email.py` (1), `member.py` (1).
 
@@ -249,7 +250,11 @@ Ces tests s'appuient sur les *fixtures* existantes (`members_mapping`, `caplog`,
 
 **`manage_provider.py` — 2 *commits* retirés** (l.135 création : `register_user_to_ldap` + e-mail `provider_created` ; l.186 mise à jour : `member_state` → `DATA_MODIFIED`), redondants avec pyramid_tm (mailer transactionnel). Couvert par `tests/test_manage_provider.py` (2 tests §3 : création → `provider_created`, mise à jour → `DATA_MODIFIED` + `provider_updated`, chacun sans `request.tm.commit()`).
 
-**Reste** : `check_new_email.py` (1), `member.py` (1) — au cas par cas.
+**`check_new_email.py` — 1 *commit* retiré** (l.84) + variable `transaction`. Persistance des changements (nouvel e-mail confirmé, `member_state` → `DATA_MODIFIED`) après update LDAP, sans envoi d'e-mail — redondant avec pyramid_tm. Couvert par `tests/test_check_new_email.py` (le test de succès vérifie désormais l'absence de `request.tm.commit()`).
+
+**`member.py` — le *commit* de `Members.get_instance` est CONSERVÉ** (exception justifiée, non retiré). Ce n'est pas un *commit* de vue : il persiste la mapping singleton `members` **lors de sa création unique** (bootstrap, §2.14). Vérifié empiriquement : le retirer casse 3 tests §2.14 avec `ConnectionStateError: Cannot close a connection joined to a transaction` — la création **doit** être committée pour laisser la connexion dans un état propre (et pour que les autres connexions/requêtes voient la même mapping). Il ne s'exécute qu'une fois (jamais en régime établi), ne provoque aucun rendu périmé, et sécurise le bootstrap de la structure de données cœur. Conservé et documenté plutôt que retiré.
+
+**§3 terminé** : les **24 *commits*/abort explicites de vues** ont été retirés (register, forgot_password, modify_member, vote, manage_provider, check_new_email) au profit de pyramid_tm ; le seul *commit* de modèle (`get_instance`) est conservé comme bootstrap justifié.
 
 ---
 

@@ -73,7 +73,7 @@ def test_check_new_email_rejects_none_ldap_result(_decrypt):
 
 
 @patch.object(cne, "decrypt_oid", return_value=("member-1", "seed"))
-def test_check_new_email_commits_on_success(_decrypt):
+def test_check_new_email_updates_email_without_explicit_commit(_decrypt):
     member = _member_with_pending_email()
     tm = MagicMock()
     request = _Request(params={"oid": "encrypted"}, tm=tm)
@@ -84,4 +84,5 @@ def test_check_new_email_commits_on_success(_decrypt):
 
     assert result["success"] == _("email_updated")
     assert member.email == "new@example.com"
-    tm.commit.assert_called()
+    # pyramid_tm commits at the end of the request, not the view.
+    tm.commit.assert_not_called()

@@ -32,7 +32,6 @@ def check_new_email(request):
         request (pyramid.request.Request): the request
     """
     log.debug(f"check_new_email: {request.method} {request.url}")
-    transaction = request.tm
     decrypted_member = None
     if "oid" in request.params:
         encrypted_oid = request.params.get("oid", None)
@@ -81,7 +80,6 @@ def check_new_email(request):
                 'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
                 'organization_details': request.session.get('organization_details', 'AlirPunkto'),
             }
-        transaction.commit()
         return {
             'success': _('email_updated'),
             'site_name': request.session.get('site_name', 'AlirPunkto'),
@@ -96,3 +94,5 @@ def check_new_email(request):
         'organization_details': request.session.get('organization_details', 'AlirPunkto'),
         'admin_email': ADMIN_EMAIL,  
     }
+
+
