@@ -2518,3 +2518,51 @@ Cette dernière faille sera comblée dès que le niveau fonctionnel sera suffisa
 # 2026-07-01
 Tous les bugs bloquants de la section §2 de l'audit (2.1 à 2.12) sont désormais corrigés. Restait surtout le plus important : l'absence de tests — elle avait d'ailleurs laissé passer une régression silencieuse lors de l'application d'un correctif (le bloc `lang2`/`lang3` de §2.6, qui effaçait la deuxième langue d'un membre). Nous avons donc ajouté une suite de tests de non-régression couvrant chaque correctif §2 : un fichier par correctif, 63 tests, ce qui porte la suite de 97 à 160 tests verts. Pour chacun, nous avons vérifié que le test échouait bien sur le code d'avant-correctif, afin de s'assurer qu'il attrape réellement la régression.
 Restent, en dehors de §1.3 : quelques bugs non bloquants (§2.8, 2.13, 2.14, 2.16, 2.17), la cohérence transactionnelle (§3) et la dette de qualité (§5).
+# 2026-07-01 — Lancement de la refonte documentaire d'architecture
+
+La documentation de conception historique d'AlirPunkto ne reflète plus suffisamment l'architecture actuelle du projet.
+
+Les scénarios présents dans les anciens documents proviennent principalement du cahier des charges initial et des premières réflexions de conception. Ils restent importants pour comprendre l'origine du projet, les hypothèses initiales et les arbitrages envisagés en 2023-2024, mais ils ne doivent plus être utilisés comme documentation normative.
+
+La nouvelle organisation documentaire sépare donc explicitement :
+
+- les **spécifications historiques**, conservées pour mémoire et traçabilité ;
+- la **documentation d'architecture courante**, alignée sur le code actuel ;
+- les **spécifications fonctionnelles courantes**, qui décriront les flux réellement retenus ;
+- les **décisions d'architecture**, qui expliqueront les choix techniques et leurs raisons.
+
+Le nom retenu pour l'archive des anciens scénarios est :
+
+```text
+docs/fr/specifications_historiques/
+docs/en/historical_specifications/
+```
+
+Ce nom est préféré à `spec_initiales`, jugé trop court et ambigu. Il indique clairement que les documents conservent une valeur historique sans être la source de vérité fonctionnelle ou technique.
+
+Un plan d'action documentaire bilingue est ajouté :
+
+```text
+docs/fr/Plan de refonte documentaire.md
+docs/en/Documentation Refactoring Plan.md
+```
+
+La documentation d'architecture sera ensuite reconstruite progressivement autour des thèmes suivants :
+
+- vue d'ensemble du système ;
+- architecture runtime ;
+- modèle de domaine ;
+- persistance ZODB ;
+- intégration OpenLDAP ;
+- authentification ;
+- autorisations et permissions ;
+- messagerie ;
+- applications tierces ;
+- tâches périodiques ;
+- internationalisation ;
+- sécurité ;
+- tests ;
+- déploiement Docker ;
+- décisions d'architecture.
+
+La règle adoptée est la suivante : le code et les tests constituent la source de vérité technique ; la documentation d'architecture décrit l'état courant ; les anciens scénarios sont conservés pour l'histoire du projet et ne prévalent plus en cas de divergence.

@@ -204,3 +204,52 @@ This last flaw will be addressed as soon as the functional level is sufficient, 
 All blocking bugs from section §2 of the audit (2.1 to 2.12) are now fixed. The most important remaining issue was the lack of tests — it had indeed allowed a silent regression to slip through during the application of a fix (the `lang2`/`lang3` block of §2.6, which erased a member's second language). We therefore added a non-regression test suite covering every §2 fix: one file per fix, 63 tests, increasing the suite from 97 to 160 green tests. For each one, we verified that the test failed on the pre-fix code to ensure that it really catches the regression.
 
 Remaining, apart from §1.3: a few non-blocking bugs (§2.8, 2.13, 2.14, 2.16, 2.17), transaction consistency (§3), and quality debt (§5).
+
+# 2026-07-01 — Start of the architecture documentation refactoring
+
+The historical AlirPunkto design documentation no longer accurately reflects the current project architecture.
+
+The scenarios contained in the older documents mostly come from the initial project specifications and early design notes. They remain important for understanding the origin of the project, the initial assumptions and the design options considered in 2023-2024, but they must no longer be used as normative documentation.
+
+The new documentation structure therefore explicitly separates:
+
+- **historical specifications**, preserved for context and traceability;
+- **current architecture documentation**, aligned with the current code;
+- **current functional specifications**, describing the accepted business flows;
+- **architecture decisions**, explaining technical choices and their rationale.
+
+The selected name for the archive of old scenarios is:
+
+```text
+docs/fr/specifications_historiques/
+docs/en/historical_specifications/
+```
+
+This name is preferred over `spec_initiales`, which was considered too short and ambiguous. It clearly states that these documents have historical value without being the functional or technical source of truth.
+
+A bilingual documentation action plan is added:
+
+```text
+docs/fr/Plan de refonte documentaire.md
+docs/en/Documentation Refactoring Plan.md
+```
+
+The architecture documentation will then be progressively rebuilt around the following topics:
+
+- system overview;
+- runtime architecture;
+- domain model;
+- ZODB persistence;
+- OpenLDAP integration;
+- authentication;
+- authorization and permissions;
+- email;
+- third-party applications;
+- periodic tasks;
+- internationalization;
+- security;
+- tests;
+- Docker deployment;
+- architecture decisions.
+
+The adopted rule is: code and tests are the technical source of truth; architecture documentation describes the current state; older scenarios are preserved for project history and no longer take precedence when discrepancies exist.
