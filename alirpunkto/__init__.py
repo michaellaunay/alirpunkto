@@ -1,5 +1,5 @@
 from pyramid import config
-import os, pytz, hashlib
+import os, pytz, hashlib, threading, time
 from collections import defaultdict
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
@@ -46,7 +46,12 @@ from .constants_and_globals import (
 from .secret_manager import get_secret
 from dotenv import get_key
 
+_REMINDER_MIN_INTERVAL_SECONDS = 600
+_reminder_lock = threading.Lock()
+_reminder_last_run = 0.0
+
 get_secret(None) # force the initialization of the secrets
+
 
 @subscriber(NewRequest)
 def add_localizer(event):
@@ -63,16 +68,29 @@ def add_localizer(event):
     request.registry.localizer = localizer
     request.registry.translate = auto_translate
 
+
 @subscriber(NewRequest)
 def remind_pending_verifiers(event):
-    """Send reminder emails to verifiers when needed."""
+    """Send reminder emails to verifiers when needed (throttled)."""
     if PYTEST_CURRENT_TEST:
         return
+    global _reminder_last_run
+    if time.monotonic() - _reminder_last_run < _REMINDER_MIN_INTERVAL_SECONDS:
+        return                              # cheap check, no lock
+    if not _reminder_lock.acquire(blocking=False):
+        return                              # another thread is already running it
     try:
+        now = time.monotonic()
+        if now - _reminder_last_run < _REMINDER_MIN_INTERVAL_SECONDS:
+            return
+        _reminder_last_run = now
         from .views.register import send_verifier_reminder_emails
         send_verifier_reminder_emails(event.request)
     except Exception as exc:
         log.error("Error while sending verifier reminders: %s", exc)
+    finally:
+        _reminder_lock.release()
+
 
 def add_renderer_globals(event):
     """add_renderer_globals is used to add the localizer to the renderer globals
@@ -81,9 +99,11 @@ def add_renderer_globals(event):
     event['_'] = request.registry.translate # add the auto_translate function to the renderer globals
     event['localizer'] = request.localizer # add the localizer to the renderer globals
 
+
 def get_time_zone(request):
     #TODO get user timezone
     return pytz.timezone('Europe/Paris')
+
 
 def locale_negotiator(request):
     """locale_negotiator is used to get the locale from the request
@@ -100,6 +120,7 @@ def locale_negotiator(request):
 
     return locale
 
+
 def root_factory(request):
     """root_factory is used to create the root object of the ZODB database
     and to create the candidatures singletons.
@@ -108,6 +129,7 @@ def root_factory(request):
     root = appmaker(conn.root())
     Members.get_instance(connection=conn)
     return root
+
 
 def create_ldap_groups_if_not_exists():
     """
@@ -174,6 +196,7 @@ def create_ldap_groups_if_not_exists():
     # Closing the connection
     conn.unbind()
 
+
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
@@ -185,7 +208,7 @@ def main(global_config, **settings):
         session_factory = SignedCookieSessionFactory(derived_secret, timeout=DEFAULT_SESSION_TIMEOUT, httponly=True, secure=True, samesite='Lax')        
         config.set_session_factory(session_factory)
         config.set_default_csrf_options(require_csrf=True)
-        
+
         config.include('pyramid_chameleon')
         config.include('pyramid_tm')
         config.include('pyramid_retry')
