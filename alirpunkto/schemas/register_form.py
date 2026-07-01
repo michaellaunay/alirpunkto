@@ -32,6 +32,23 @@ def get_majority_date():
     """Return the date of majority."""
     return datetime.date.today() - datetime.timedelta(days=365*18)
 
+
+def _validate_password(value):
+    """Adapt :func:`is_valid_password` to ``colander.Function``'s contract.
+
+    ``colander.Function`` raises ``Invalid`` when the callback returns a falsy
+    value or a string (used as the error message), and considers a truthy
+    non-string result to be valid. ``is_valid_password`` does the opposite: it
+    returns ``None`` when the password is valid and an error mapping otherwise.
+    Return ``True`` when valid, and the error message (which colander turns into
+    an ``Invalid``) when not.
+    """
+    error = is_valid_password(value)
+    if error is None:
+        return True
+    return error.get('error', _('invalid_password'))
+
+
 class RegisterForm(schema.CSRFSchema):
     """Register form schema."""
     fullname = colander.SchemaNode(
@@ -170,7 +187,7 @@ class RegisterForm(schema.CSRFSchema):
                 "password_minimum_length":MIN_PASSWORD_LENGTH,
                 "password_maximum_length":MAX_PASSWORD_LENGTH}),
         widget = PasswordWidget(),
-        validator = colander.Function(is_valid_password),
+        validator = colander.Function(_validate_password),
         messages = {'required': _('password_required')},
         missing = ""
     )
