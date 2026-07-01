@@ -29,7 +29,7 @@ def get_secret(secret_name: str) -> str:
         # Using get_key() instead of os.getenv() as os.getenv() does not 
         # handle values containing `=` properly.
         SECRET_KEY_VALUE: Final = os.getenv(SECRET_KEY, None)
-        del os.environ[SECRET_KEY]
+        os.environ.pop(SECRET_KEY, None)
         # check if secret is not empty an make it accessible from the views
         if not SECRET_KEY_VALUE:
             raise ValueError("You must provide a base64 value for SECRET_KEY")
@@ -41,13 +41,13 @@ def get_secret(secret_name: str) -> str:
             KEYCLOAK_CLIENT_ID: os.getenv(KEYCLOAK_CLIENT_ID, None),
             KEYCLOAK_CLIENT_SECRET: os.getenv(KEYCLOAK_CLIENT_SECRET, None),
         }
-        del os.environ[LDAP_PASSWORD]
-        del os.environ[ADMIN_PASSWORD]
-        del os.environ[MAIL_PASSWORD]
+        os.environ.pop(LDAP_PASSWORD, None)
+        os.environ.pop(ADMIN_PASSWORD, None)
+        os.environ.pop(MAIL_PASSWORD, None)
         if get_secret.secrets[KEYCLOAK_CLIENT_ID] :
-            del os.environ[KEYCLOAK_CLIENT_ID]
+            os.environ.pop(KEYCLOAK_CLIENT_ID, None)
         if get_secret.secrets[KEYCLOAK_CLIENT_SECRET]:
-            del os.environ[KEYCLOAK_CLIENT_SECRET]
+            os.environ.pop(KEYCLOAK_CLIENT_SECRET, None)
     if not secret_name:
         # force the initialization of the secrets
         return None
