@@ -109,10 +109,10 @@ def vote_view(request):
         # mutating it does not mark the persistent candidature as changed, so
         # ZODB must be told explicitly or the vote is silently dropped on commit.
         candidature._p_changed = True
+        # The vote is persisted by pyramid_tm at the end of the request; the
+        # _p_changed flag above ensures the nested Voter mutation is written even
+        # if the approval/LDAP step below fails (no intermediate commit/abort).
 
-        transaction = request.tm
-        # Save the vote
-        transaction.commit()
         # check if all of the voter have voted
         if all([v.vote for v in candidature.voters]):
             # send email to the candidature owner
@@ -130,7 +130,6 @@ def vote_view(request):
                         f"LDAP registration failed for candidature "
                         f"{candidature.oid}; not approving: {ldap_result}"
                     )
-                    request.tm.abort()
                     return {
                         'error': _('registration_failed'),
                         'logged_in': True if user else False,
@@ -148,7 +147,6 @@ def vote_view(request):
                     EmailSendStatus.IN_PREPARATION, 
                     "send_candidature_approuved_email"
                 )
-                transaction.commit()
                 # send email to the candidature owner
                 email_template = "send_candidature_approuved_email"
             else:
@@ -157,7 +155,6 @@ def vote_view(request):
                     EmailSendStatus.IN_PREPARATION, 
                     "send_candidature_rejected_email"
                 )
-                transaction.commit()
                 email_template = "send_candidature_rejected_email"
             # send email to the candidature owner
             send_candidature_state_change_email(
@@ -167,11 +164,8 @@ def vote_view(request):
             )
             try:
                 candidature.add_email_send_status(EmailSendStatus.SENT, email_template)
-                transaction.commit()
             except Exception as e:
                 log.error(f"Error while sending email to the candidature owner: {e}")
-                # Explicitly abort the transaction to ensure consistency
-                request.tm.abort()
                 candidature.add_email_send_status(EmailSendStatus.ERROR, email_template)
                 # Return error message
                 return {
@@ -214,3 +208,5 @@ def vote_view(request):
         'vote': voter.vote if voter.vote else '',
         'registered_vote': False
     }
+
+

@@ -136,6 +136,9 @@ def test_vote_view_persists_vote_across_reopen(tmp_path, members_mapping):
         with _wire(candidature, oid, voter_oid="voter-1"):
             result = vote_view(request)
         assert result["registered_vote"] is True
+        # The view no longer commits; pyramid_tm would commit at the end of the
+        # request, so commit here to reproduce that before reopening the DB.
+        tm.commit()
         conn.close()
 
     # Phase 3: reopen a fresh DB from disk and check the vote was stored.
@@ -268,7 +271,11 @@ def test_vote_view_keeps_state_pending_when_ldap_registration_fails(members_mapp
 
     assert candidature.candidature_state is CandidatureStates.PENDING
     assert result["error"] == _("registration_failed")
-    tm.abort.assert_called()
+    # The vote is preserved (committed by pyramid_tm); the view no longer aborts
+    # or commits explicitly, so a failed approval does not drop the vote.
+    assert candidature.voters[0].vote == "YES"
+    tm.commit.assert_not_called()
+    tm.abort.assert_not_called()
 
 
 def test_vote_view_keeps_state_pending_when_ldap_returns_non_dict(members_mapping):
@@ -280,7 +287,9 @@ def test_vote_view_keeps_state_pending_when_ldap_returns_non_dict(members_mappin
         result = vote_view(request)
 
     assert candidature.candidature_state is CandidatureStates.PENDING
-    tm.abort.assert_called()
+    assert candidature.voters[0].vote == "YES"
+    tm.commit.assert_not_called()
+    tm.abort.assert_not_called()
 
 
 def test_vote_view_rejects_invalid_choice(members_mapping):
@@ -293,3 +302,44 @@ def test_vote_view_rejects_invalid_choice(members_mapping):
     assert result["error"] == _("Invalid voting choice!")
     # the bogus choice must not have been recorded
     assert all(v.vote is None for v in candidature.voters)
+
+
+def test_vote_view_preserves_vote_when_ldap_fails_across_reopen(tmp_path, members_mapping):
+    """Critical section-3 property: a failed LDAP approval must NOT drop the vote.
+
+    With the explicit commit removed, keeping the old request.tm.abort() would
+    roll the vote back on LDAP failure. The view now relies on pyramid_tm, so the
+    vote survives and the candidature stays PENDING for a later retry.
+    """
+    path = str(tmp_path / "Data.fs")
+
+    # Phase 1: a single voter, not yet voted.
+    with _zodb(path) as db:
+        tm = transaction.TransactionManager()
+        conn = db.open(transaction_manager=tm)
+        candidature = _in_memory_candidature(["voter-1"])
+        conn.root()["cand"] = candidature
+        oid = candidature.oid
+        tm.commit()
+        conn.close()
+
+    # Phase 2: voter-1 votes YES -> all voted -> LDAP registration fails.
+    with _zodb(path) as db:
+        tm = transaction.TransactionManager()
+        conn = db.open(transaction_manager=tm)
+        candidature = conn.root()["cand"]
+        request = _request(oid, submit=True, vote_value="YES", tm=tm)
+        with _wire(candidature, oid, voter_oid="voter-1",
+                   ldap_result={"status": "error"}):
+            result = vote_view(request)
+        assert result["error"] == _("registration_failed")
+        tm.commit()  # pyramid_tm would commit at the end of the request
+        conn.close()
+
+    # Phase 3: reopen -> the vote survived and the state stayed PENDING.
+    with _zodb(path) as db:
+        conn = db.open()
+        candidature = conn.root()["cand"]
+        assert candidature.voters[0].vote == "YES"
+        assert candidature.candidature_state is CandidatureStates.PENDING
+        conn.close()
