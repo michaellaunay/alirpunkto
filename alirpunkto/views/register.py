@@ -301,25 +301,11 @@ def commit_candidature_changes(request: Request,
     candidatures[candidature.oid] = candidature
     candidatures.monitored_members[candidature.oid] = candidature
 
-    try:
-        request.tm.commit()
-        candidature.add_email_send_status(
+    candidature.add_email_send_status(
             EmailSendStatus.SENT,
             "send_validation_email"
         )
-        return {'candidature': candidature, 'MemberTypes': MemberTypes}
-    except Exception as e:
-        log.error(
-            f"Error committing candidature {candidature.oid}: {e}"
-        )
-        # Explicitly abort the transaction to ensure consistency
-        request.tm.abort()
-        # Return error message
-        return {
-            'candidature': candidature,
-            'MemberTypes': MemberTypes,
-            'error': _('error_committing_candidature')
-        }
+    return {'candidature': candidature, 'MemberTypes': MemberTypes}
 
 def handle_email_validation_state(
         request: Request,
@@ -595,9 +581,7 @@ def handle_confirmed_human_state(request, candidature):
             candidature,
             email_template
         )
-        transaction = request.tm
         try:
-            transaction.commit()
             candidature.add_email_send_status(
                 EmailSendStatus.SENT,
                 email_template
@@ -635,34 +619,11 @@ def prepare_for_cooperator(
         Optional[dict]: the error dictionary or None
     """
     if not candidature.voters:
-        transaction = request.tm
-        try:
-            voters = random_voters(request)
-            candidature.voters = [
-                Voter(voter["uid"], voter["mail"], voter["cn"])
-                for voter in voters
-            ]
-            transaction.commit()
-        except Exception as e:
-            log.error(
-                f"Error while commiting candidature {candidature.oid} : {e}"
-            )
-            return {
-                'candidature': candidature,
-                'MemberTypes': MemberTypes,
-                'error': _('voters_not_selected'),
-                'voting_url': request.route_url(
-                    'vote',
-                    _query={'oid': candidature.oid}
-                ),
-                'signature': MAIL_SIGNATURE.format(
-                    site_name=request.registry.settings.get('site_name'),
-                    domain_name=request.registry.settings.get('domain_name'),
-                    organization_details=request.registry.settings.get('organization_details'),
-                    fullname = candidature.data.fullname,
-                    fullsurname = candidature.data.fullsurname,
-                )
-            }
+        voters = random_voters(request)
+        candidature.voters = [
+            Voter(voter["uid"], voter["mail"], voter["cn"])
+            for voter in voters
+        ]
     return None
 
 def _notify_verifiers_of_submission(
@@ -717,7 +678,6 @@ def _notify_verifiers_of_submission(
                     voter.email,
                     candidature.oid
                 )
-                request.tm.commit()
             else:
                 log.error(
                     "Unable to queue verification email for %s regarding candidature %s",
@@ -955,15 +915,12 @@ def handle_unique_data_state(request, candidature):
 
         candidatures = get_candidatures(request)
         candidature.candidature_state = CandidatureStates.PENDING
-        transaction = request.tm
         try:
-            transaction.commit()
             candidature.add_email_send_status(
                 EmailSendStatus.SENT,
                 "send_candidature_pending_email"
             )
             _notify_verifiers_of_submission(request, candidature)
-            transaction.commit()
             return {
                 'candidature': candidature,
                 'MemberTypes': MemberTypes,
