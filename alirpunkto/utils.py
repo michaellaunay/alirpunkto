@@ -1594,9 +1594,11 @@ def logout(request: Request):
     Args:
         request (Request): The request object.
     """
-    username = request.params.get('username', "")
-    if username:
-        del request.session['username']
+    # Defensively drop a legacy 'username' session key if it is ever present.
+    # It is never set today, and clearing it must not depend on (nor be driven
+    # by) a URL parameter — the previous `del request.session['username']`
+    # raised KeyError whenever `?username=` was supplied.
+    request.session.pop('username', None)
     user = request.session.get('user', None)
     if user is not None:
         # log the user is logging out
