@@ -2504,3 +2504,17 @@ postfix/postlog: warning: not owned by root: /var/spool/postfix/usr/lib/sasl2
 postfix/postlog: starting the Postfix mail system
 
 ```
+
+# 2026-06-13
+Suite à la sortie de Claude Fable, nous avons lancé un audit qui a trouvé près de 80 anomalies là où ChatGPT et Opus n'en avaient trouvé que 12. Nous avons décidé d'attendre la correction des bogues de sécurité avant d'ajouter cet audit au dépôt.
+
+# 2026-06-14
+Suite à la fermeture de Fable, nous utilisons Opus 4.8 Max et GPT 5.5 avancé pour corriger chacun des points de l'audit [20260613_revue_de_code_alirpunkto](/docs/fr/20260613_revue_de_code_alirpunkto.md).
+
+# 2026-06-30
+Il ne reste plus qu'un bogue de sécurité, qui n'est pas exploitable pour l'instant en dehors du réseau Docker : l'audit est donc publié.
+Cette dernière faille sera comblée dès que le niveau fonctionnel sera suffisant, car §1.3 (mots de passe stockés en clair — `userPassword` côté LDAP et `data.password` en ZODB) est le plus gros point de sécurité et demande de refondre l'intégration LDAP et la ZODB, et pour l'instant nous n'avons que 10 utilisateurs.
+
+# 2026-07-01
+Tous les bugs bloquants de la section §2 de l'audit (2.1 à 2.12) sont désormais corrigés. Restait surtout le plus important : l'absence de tests — elle avait d'ailleurs laissé passer une régression silencieuse lors de l'application d'un correctif (le bloc `lang2`/`lang3` de §2.6, qui effaçait la deuxième langue d'un membre). Nous avons donc ajouté une suite de tests de non-régression couvrant chaque correctif §2 : un fichier par correctif, 63 tests, ce qui porte la suite de 97 à 160 tests verts. Pour chacun, nous avons vérifié que le test échouait bien sur le code d'avant-correctif, afin de s'assurer qu'il attrape réellement la régression.
+Restent, en dehors de §1.3 : quelques bugs non bloquants (§2.8, 2.13, 2.14, 2.16, 2.17), la cohérence transactionnelle (§3) et la dette de qualité (§5).
