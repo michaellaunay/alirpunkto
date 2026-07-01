@@ -61,8 +61,8 @@ Correspondance entre les commits du dépôt et les corrections d'audit, par ordr
 | `5faf180` | 2026-07-01 | Retrait des 7 commits explicites de `forgot_password.py` (mailer transactionnel) | §3 (forgot_password) |
 | `14ca621` | 2026-07-01 | Retrait des 4 commits explicites de `modify_member.py` (mailer transactionnel) | §3 (modify_member) |
 | `6d43891` | 2026-07-01 | Retrait des 4 commits + 2 abort de `vote.py` (`_p_changed` conservé) | §3 (vote) |
-| _«hash»_ | 2026-07-01 | Retrait des 2 commits explicites de `manage_provider.py` (mailer transactionnel) | §3 (manage_provider) |
-| _«hash»_ | 2026-07-01 | Retrait du commit explicite de `check_new_email.py` (`get_instance` conservé) | §3 (check_new_email) |
+| `8cfbe99` | 2026-07-01 | Retrait des 2 commits explicites de `manage_provider.py` (mailer transactionnel) | §3 (manage_provider) |
+| `501e3e9` | 2026-07-01 | Retrait du commit explicite de `check_new_email.py` (`get_instance` conservé) | §3 (check_new_email) |
 
 ---
 
