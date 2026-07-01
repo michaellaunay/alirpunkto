@@ -398,7 +398,7 @@ def validate_challenge(
     """
     for key, attended_result in candidature.challenge.items():
         label = f"result_{key}"
-        if request.params[label].strip() != str(attended_result[1]):
+        if request.params.get(label, '').strip() != str(attended_result[1]):
             return {
                 'error': _('invalid_challenge'), 
                 'candidature': candidature, 
