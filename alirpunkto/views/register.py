@@ -619,11 +619,29 @@ def prepare_for_cooperator(
         Optional[dict]: the error dictionary or None
     """
     if not candidature.voters:
-        voters = random_voters(request)
-        candidature.voters = [
-            Voter(voter["uid"], voter["mail"], voter["cn"])
-            for voter in voters
-        ]
+        try:
+            voters = random_voters(request)
+            candidature.voters = [
+                Voter(voter["uid"], voter["mail"], voter["cn"])
+                for voter in voters
+            ]
+        except Exception as e:
+            log.error(
+                f"Error while selecting voters for candidature {candidature.oid} : {e}"
+            )
+            return {
+                'candidature': candidature,
+                'MemberTypes': MemberTypes,
+                'error': _('voters_not_selected'),
+                'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                'signature': MAIL_SIGNATURE.format(
+                    site_name=request.registry.settings.get('site_name'),
+                    domain_name=request.registry.settings.get('domain_name'),
+                    organization_details=request.registry.settings.get('organization_details'),
+                    fullname = candidature.data.fullname,
+                    fullsurname = candidature.data.fullsurname,
+                )
+            }
     return None
 
 def _notify_verifiers_of_submission(
