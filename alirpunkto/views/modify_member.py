@@ -43,6 +43,7 @@ from dataclasses import fields
 import json
 from typing import get_type_hints
 
+
 # Resolved declared types of the MemberDatas fields. The modify form submits
 # every value as a string, so these are used to coerce values to the model's
 # expected types (e.g. number_shares_owned -> int, cooperative_behaviour_mark
@@ -87,7 +88,6 @@ def modify_member(request):
     form = None
     appstruct = None
     schema = None
-    transaction = request.tm
     message = None
     error = None
     logged_in = request.session.get('logged_in', False)
@@ -179,7 +179,6 @@ def modify_member(request):
         if accessed_member.member_state != MemberStates.DATA_MODIFICATION_REQUESTED:
             request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
             accessed_member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
-            transaction.commit()
         elif ACCESSED_MEMBER_OID not in request.session:
             request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
         permissions = get_access_permissions(accessed_member, accessor_member)
@@ -311,7 +310,6 @@ def modify_member(request):
                                 "error":err,
                                 }
                         accessed_member.new_email = email
-                        transaction.commit()
                         email_template = "check_new_email"
                         accessed_member.add_email_send_status(
                             EmailSendStatus.IN_PREPARATION, 
@@ -335,7 +333,6 @@ def modify_member(request):
                                 "form": form.render(appstruct=appstruct) if form else None,
                             }
                         try:
-                            transaction.commit()
                             accessed_member.add_email_send_status(
                                 EmailSendStatus.SENT,
                                 email_template
@@ -452,7 +449,6 @@ def modify_member(request):
                 "error":_('error_while_updating_member'),
                 }
         accessed_member.member_state = MemberStates.DATA_MODIFIED
-        transaction.commit()
         #@TODO send a modification confirmation email
         return {
             "member": member,
@@ -464,3 +460,5 @@ def modify_member(request):
         
     else :
         return {"member": member, "form": None, "accessed_member":None,"accessed_members": members}
+
+

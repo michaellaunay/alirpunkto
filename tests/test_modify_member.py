@@ -274,3 +274,47 @@ def test_modify_member_rejects_invalid_numeric_value():
     assert str(result["error"]) == "invalid_field_value"
     assert accessed.data.number_shares_owned == 0  # unchanged
     update_ldap.assert_not_called()
+
+
+# --------------------------------------------------------------------------- #
+# section 3: no explicit commit (rely on pyramid_tm)
+# --------------------------------------------------------------------------- #
+def test_modify_member_does_not_commit_explicitly_on_success():
+    accessor = _accessor()
+    accessed = _accessed(description="old desc")
+    request = _Request(
+        post={"modify": "1", "description": "New desc"}, session=_session()
+    )
+
+    with _wire(
+        accessor,
+        accessed,
+        _perms(description=_WRITE),
+        update_ldap_member=MagicMock(return_value={"status": "success"}),
+    ):
+        result = modify_member(request)
+
+    assert accessed.member_state is MemberStates.DATA_MODIFIED
+    assert result["message"] == _("member_data_updated")
+    # pyramid_tm commits at the end of the request, not the view.
+    request.tm.commit.assert_not_called()
+
+
+def test_modify_member_does_not_commit_on_ldap_failure():
+    accessor = _accessor()
+    accessed = _accessed(description="old desc")
+    request = _Request(
+        post={"modify": "1", "description": "New desc"}, session=_session()
+    )
+
+    with _wire(
+        accessor,
+        accessed,
+        _perms(description=_WRITE),
+        update_ldap_member=MagicMock(return_value={"status": "error"}),
+    ):
+        result = modify_member(request)
+
+    assert result["error"] == _("error_while_updating_member")
+    assert accessed.member_state is MemberStates.DATA_MODIFICATION_REQUESTED
+    request.tm.commit.assert_not_called()
