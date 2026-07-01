@@ -7,9 +7,9 @@ from alirpunkto.utils import (
     is_valid_password,
     is_valid_email,
     update_member_from_ldap,
-    update_member_password,
     register_user_to_ldap,
     update_ldap_member,
+    update_member_password,
     send_member_state_change_email,
     send_check_new_email,
     get_ldap_member_list,
@@ -132,7 +132,6 @@ def manage_provider_view(request):
                     template_name='provider_created_email',
                     subject='provider_role_activated',
                     )
-                request.tm.commit()                
                 return {'member':user, 'form':None, 'providers': providers, 'success': _('provider_created')}
             except Exception as e:
                 log.error(f"Error creating provider: {e}")
@@ -183,9 +182,10 @@ def manage_provider_view(request):
                     return {'member': user, 'form': None, 'providers': providers,
                         'error': _('provider_update_failed')}
             member.member_state = MemberStates.DATA_MODIFIED
-            request.tm.commit()
             return {'member': user, 'form': None, 'providers': providers,
                 'success': _('provider_updated')}
     else:
         return {'member':user, 'form':None, 'providers': providers}
     return {'error': 'Invalid request method'}
+
+

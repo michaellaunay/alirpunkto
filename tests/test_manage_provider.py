@@ -237,3 +237,56 @@ def test_update_provider_missing_oid():
         result = manage_provider_view(request)
 
     assert result["error"] == _("accessed_member_oid_missing")
+
+
+# --------------------------------------------------------------------------- #
+# section 3: no explicit commit (rely on pyramid_tm)
+# --------------------------------------------------------------------------- #
+def test_add_provider_does_not_commit_explicitly(members_mapping):
+    register = MagicMock(return_value={"status": "success"})
+    request = _Request(
+        post={
+            "add_provider": "1",
+            "provider_email": "new@example.com",
+            "provider_pseudonym": "prov",
+            "provider_password": "Secret123",
+        }
+    )
+
+    with _wire(
+        _admin(),
+        providers=[],
+        is_valid_email=MagicMock(return_value=None),
+        is_valid_password=MagicMock(return_value=None),
+        register_user_to_ldap=register,
+    ):
+        result = manage_provider_view(request)
+
+    assert result["success"] == _("provider_created")
+    # pyramid_tm commits at the end of the request, not the view.
+    request.tm.commit.assert_not_called()
+
+
+def test_update_provider_does_not_commit_explicitly():
+    admin = _admin()
+    provider = _provider(email="old@example.com")
+    update_ldap = MagicMock(return_value={"status": "success"})
+    request = _Request(
+        post={
+            "update": "1",
+            ACCESSED_MEMBER_OID: "p1",
+            "provider_email": "new@example.com",
+        }
+    )
+
+    with _wire(
+        admin,
+        get_member=_dispatch(**{"admin-1": admin, "p1": provider}),
+        is_valid_email=MagicMock(return_value=None),
+        update_ldap_member=update_ldap,
+    ):
+        result = manage_provider_view(request)
+
+    assert provider.member_state is MemberStates.DATA_MODIFIED
+    assert result["success"] == _("provider_updated")
+    request.tm.commit.assert_not_called()
