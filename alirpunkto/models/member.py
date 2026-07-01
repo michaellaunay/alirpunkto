@@ -92,7 +92,7 @@ class MemberStates(Enum) :
             case _ :
                 # should never happen
                 log.error(f"Unknown member state: {name}")
-                return(f"name.lower()")
+                return(f"member_state_{name.lower()}")
 
     @staticmethod
     def get_names() -> List[str]:
@@ -155,7 +155,7 @@ class MemberTypes(Enum) :
             case _ :
                 # should never happen
                 log.error(f"Unknown member type: {name}")
-                return(f"name.lower()")
+                return(f"member_types_{name.lower()}")
 
     @staticmethod
     def get_names() -> List[str]:

@@ -109,7 +109,7 @@ class Permissions(IntFlag):
             case _ :
                 # should never happen
                 log.error(f"Unknown access permission: {name}")
-                return(f"name.lower()")
+                return(f"access_permissions_{name.lower()}")
     @staticmethod
     def get_names() -> List[str]:
         """Get the names of the access permissions.

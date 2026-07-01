@@ -83,7 +83,7 @@ class CandidatureStates(Enum) :
             case _ :
                 # should never happen
                 log.error(f"Unknown candidature state: {name}")
-                return(f"name.lower()")
+                return(f"candidature_states_{name.lower()}")
 
     @staticmethod
     def get_names() -> List[str]:
