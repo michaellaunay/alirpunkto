@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from pyramid.httpexceptions import HTTPFound
 
-from alirpunkto.constants_and_globals import SSO_EXPIRES_AT, SSO_REFRESH
+from alirpunkto.constants_and_globals import SSO_EXPIRES_AT, SSO_REFRESH, SSO_TOKEN
 from alirpunkto.views.default import my_view
 from alirpunkto.views.home import home_view, is_authenticated
 from alirpunkto.views.logout import logout_view
@@ -71,7 +71,7 @@ def test_home_view_refreshes_valid_sso_token(dummy_request):
 
     assert result["logged_in"] is True
     assert dummy_request.session[SSO_REFRESH] == "new-refresh-token"
-    assert "Authorization" in dummy_request.headers
+    assert dummy_request.session[SSO_TOKEN] == "new-access-token"
 
 
 def test_is_authenticated_uses_session_user(dummy_request):

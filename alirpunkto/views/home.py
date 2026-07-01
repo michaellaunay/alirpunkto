@@ -3,10 +3,12 @@
 # date: 2023-07-07
 
 from pyramid.view import view_config
+from requests import request
 from alirpunkto.constants_and_globals import (
     _,
     SSO_REFRESH,
     SSO_EXPIRES_AT,
+    SSO_TOKEN,
     KEYCLOAK_CLIENT_ID,
     KEYCLOAK_REALM,
     KEYCLOAK_SERVER_URL,
@@ -43,18 +45,26 @@ def home_view(request):
     user = loads(user) if user else {'name':'unknown'}
     if SSO_REFRESH in request.session:
         sso_refresh_token = request.session[SSO_REFRESH]
-        sso_expires_at = request.session.get(SSO_EXPIRES_AT, "2020-01-01T00:00:00")
-        expire = datetime.fromisoformat(sso_expires_at)
-        if expire > datetime.now():
-            # Refresh the token
+        sso_expires_at = request.session.get(SSO_EXPIRES_AT)
+        expire = datetime.fromisoformat(sso_expires_at) if sso_expires_at else None
+        if expire is not None and expire > datetime.now():
+            # The refresh token is still valid: obtain a fresh access token.
             sso_token = refresh_keycloak_token(sso_refresh_token)
-            access_token = sso_token['access_token']
-            refresh_at = datetime.now() + timedelta(seconds=int(sso_token['refresh_expires_in']))
-            request.session[SSO_REFRESH] = sso_token['refresh_token']
-            request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
-            request.headers['Authorization'] = f'Bearer {sso_token}'
+            if sso_token:
+                refresh_at = datetime.now() + timedelta(
+                    seconds=int(sso_token['refresh_expires_in']))
+                request.session[SSO_REFRESH] = sso_token['refresh_token']
+                request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
+                request.session[SSO_TOKEN] = sso_token['access_token']
+            else:
+                # Refresh failed (Keycloak error / revoked token): log out
+                # cleanly instead of dereferencing a None response.
+                logout(request)
+                logged_in = False
+                user = None
+                applications = []
         else:
-            # Session expired, causing the user to be logged out
+            # No usable refresh window (missing or past expiry): log out.
             logout(request)
             logged_in = False
             user = None

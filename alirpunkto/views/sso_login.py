@@ -12,6 +12,7 @@ from alirpunkto.constants_and_globals import (
     KEYCLOAK_REDIRECT_PATH,
     SSO_REFRESH,
     SSO_EXPIRES_AT,
+    SSO_TOKEN,
     DOMAIN_NAME,
     SITE_NAME,
     ORGANIZATION_DETAILS,
@@ -109,7 +110,7 @@ def callback_view(request):
         request.session[SSO_REFRESH] = sso_token['refresh_token']
         refresh_at = now + timedelta(seconds=int(sso_token['refresh_expires_in']))
         request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
-        request.headers['Authorization'] = f'Bearer {sso_token}'
+        request.session[SSO_TOKEN] = sso_token['access_token']    
         headers = remember(request, member.pseudonym)
         return HTTPFound(
             location=request.route_url('home'),

@@ -2,8 +2,9 @@
 # author: Michaël Launay
 # date: 2023-06-15
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Union
+from httpcore import request
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
@@ -17,6 +18,7 @@ from alirpunkto.constants_and_globals import (
     log,
     SSO_REFRESH,
     SSO_EXPIRES_AT,
+    SSO_TOKEN,
     DOMAIN_NAME,
     SITE_NAME,
     ORGANIZATION_DETAILS,
@@ -79,8 +81,10 @@ def login_view(request):
             if sso_token:
                 log.debug(f"Successfully obtained Keycloak token for {username}")
                 request.session[SSO_REFRESH] = sso_token['refresh_token']
-                request.session[SSO_EXPIRES_AT] = sso_token[SSO_EXPIRES_AT]
-                request.headers['Authorization'] = f'Bearer {sso_token}'
+                refresh_at = datetime.now() + timedelta(
+                    seconds=int(sso_token['refresh_expires_in']))
+                request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
+                request.session[SSO_TOKEN] = sso_token['access_token']
             else:
                 log.warning(f"Failed to obtain Keycloak token for {username}")
             # redirect to the page the user wanted to access before login
