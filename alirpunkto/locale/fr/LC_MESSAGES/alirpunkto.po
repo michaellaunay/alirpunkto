@@ -1118,3 +1118,6 @@ msgstr "Aide-nous à vérifier une nouvelle inscription sur la plateforme de ${d
 
 msgid "remind_verifier_subject"
 msgstr "Rappel - Aide-nous à vérifier une nouvelle inscription sur la plateforme de ${domain_name}. Date limite dans ${notice_time_verifiers} jours"
+
+msgid "invalid_field_value"
+msgstr "Valeur invalide pour le champ ${field}."

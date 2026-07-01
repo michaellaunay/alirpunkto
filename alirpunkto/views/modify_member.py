@@ -19,6 +19,7 @@ from alirpunkto.utils import (
 from alirpunkto.models.member import (
     MemberStates,
     EmailSendStatus,
+    MemberDatas,
 )
 from alirpunkto.constants_and_globals import (
     _,
@@ -40,6 +41,34 @@ from alirpunkto.models.model_permissions import (
 )
 from dataclasses import fields
 import json
+from typing import get_type_hints
+
+# Resolved declared types of the MemberDatas fields. The modify form submits
+# every value as a string, so these are used to coerce values to the model's
+# expected types (e.g. number_shares_owned -> int, cooperative_behaviour_mark
+# -> float, is_active -> bool) before they are stored.
+_MEMBER_DATA_FIELD_TYPES = get_type_hints(MemberDatas)
+
+
+def _coerce_member_data_value(field, raw):
+    """Cast a raw form value to the declared type of ``field``.
+
+    Only the scalar non-string types the form can submit as plain strings are
+    converted (bool, int, float). String fields are returned unchanged and date
+    fields are handled earlier via ``date_parameters``. Raises ValueError or
+    TypeError on an invalid value so the caller can report it to the user.
+    """
+    if not isinstance(raw, str):
+        return raw
+    target = _MEMBER_DATA_FIELD_TYPES.get(field)
+    if target is bool:
+        return raw.strip().lower() in ("true", "1", "yes", "on")
+    if target is int:
+        return int(raw)
+    if target is float:
+        return float(raw)
+    return raw
+
 
 @view_config(
     route_name='modify_member',
@@ -366,8 +395,30 @@ def modify_member(request):
                             "error": _('password_update_failed'),
                         }
                 else:
-                    #@TODO cast the value to the right type
                     requested_value = request.POST[field] if field not in date_parameters else date_parameters[field]
+                    # Coerce the form string to the field's declared type before
+                    # storing it (date fields already arrive typed via
+                    # date_parameters and are left untouched).
+                    if field not in date_parameters:
+                        try:
+                            requested_value = _coerce_member_data_value(
+                                field, requested_value
+                            )
+                        except (ValueError, TypeError):
+                            log.error(
+                                f"Invalid value {request.POST[field]!r} for "
+                                f"field {field}"
+                            )
+                            error = _('invalid_field_value',
+                                mapping={'field': field})
+                            request.session.flash(error, 'error')
+                            return {
+                                "member": member,
+                                "accessed_members": members,
+                                "accessed_member": accessed_member.oid,
+                                "form": form.render(appstruct=appstruct) if form else None,
+                                "error": error,
+                            }
                     if field in accessed_member.data.get_field_names():
                         if getattr(accessed_member.data, field) != requested_value:
                             setattr(accessed_member.data, field, requested_value)

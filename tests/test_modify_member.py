@@ -192,3 +192,85 @@ def test_modify_member_surfaces_password_update_failure():
         result = modify_member(request)
 
     assert result["error"] == _("password_update_failed")
+
+
+# --------------------------------------------------------------------------- #
+# value coercion (the "#@TODO cast the value to the right type")
+# --------------------------------------------------------------------------- #
+def test_modify_member_casts_number_shares_owned_to_int():
+    accessor = _accessor()
+    accessed = _accessed(number_shares_owned=0)
+    request = _Request(
+        post={"modify": "1", "number_shares_owned": "5"}, session=_session()
+    )
+    update_ldap = MagicMock(return_value={"status": "success"})
+
+    with _wire(
+        accessor,
+        accessed,
+        _perms(number_shares_owned=_WRITE),
+        update_ldap_member=update_ldap,
+    ):
+        result = modify_member(request)
+
+    assert accessed.data.number_shares_owned == 5
+    assert type(accessed.data.number_shares_owned) is int
+    assert result["message"] == _("member_data_updated")
+    update_ldap.assert_called_once()
+
+
+def test_modify_member_casts_cooperative_behaviour_mark_to_float():
+    accessor = _accessor()
+    accessed = _accessed(cooperative_behaviour_mark=0.0)
+    request = _Request(
+        post={"modify": "1", "cooperative_behaviour_mark": "12.5"},
+        session=_session(),
+    )
+
+    with _wire(
+        accessor,
+        accessed,
+        _perms(cooperative_behaviour_mark=_WRITE),
+        update_ldap_member=MagicMock(return_value={"status": "success"}),
+    ):
+        modify_member(request)
+
+    assert accessed.data.cooperative_behaviour_mark == 12.5
+    assert type(accessed.data.cooperative_behaviour_mark) is float
+
+
+def test_modify_member_casts_is_active_to_bool():
+    accessor = _accessor()
+    accessed = _accessed(is_active=True)
+    request = _Request(post={"modify": "1", "is_active": "false"}, session=_session())
+
+    with _wire(
+        accessor,
+        accessed,
+        _perms(is_active=_WRITE),
+        update_ldap_member=MagicMock(return_value={"status": "success"}),
+    ):
+        modify_member(request)
+
+    assert accessed.data.is_active is False
+
+
+def test_modify_member_rejects_invalid_numeric_value():
+    accessor = _accessor()
+    accessed = _accessed(number_shares_owned=0)
+    request = _Request(
+        post={"modify": "1", "number_shares_owned": "abc"}, session=_session()
+    )
+    update_ldap = MagicMock(return_value={"status": "success"})
+
+    with _wire(
+        accessor,
+        accessed,
+        _perms(number_shares_owned=_WRITE),
+        update_ldap_member=update_ldap,
+    ):
+        result = modify_member(request)
+
+    assert str(result["error"]) == "invalid_field_value"
+    assert accessed.data.number_shares_owned == 0  # unchanged
+    update_ldap.assert_not_called()

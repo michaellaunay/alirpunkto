@@ -1134,3 +1134,6 @@ msgstr "Please help us to verify a new registration on the platform of ${domain_
 
 msgid "remind_verifier_subject"
 msgstr "Reminder - Please contribute to verify a new registration on the ${domain_name} platform. Deadline in ${notice_time_verifiers} days"
+
+msgid "invalid_field_value"
+msgstr "Invalid value for field ${field}."
