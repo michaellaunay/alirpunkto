@@ -372,40 +372,53 @@ class Members(PersistentMapping):
 
     @staticmethod
     def get_instance(connection:Connection = None) -> Type['Members']:
-        """Get the singleton instance. Not thread safe !
-        Args:
-            connection: The ZODB connection, could be change for testing.
-        Returns:
-            The singleton instance.
-            This singleton instance is a mapping to store lists of MemberDatas
-            subtypes associated with one unique oid.
-        Raises:
-            TypeError: The connection argument must be an instance of
-                    ZODB.Connection.Connection
+        """Get the members mapping for a ZODB connection. Not thread safe!
+
+        When a ``connection`` is provided, the mapping is always read from
+        *that* connection's root and cached for connection-less callers. ZODB
+        binds a persistent object to the connection it was loaded from, so a
+        mapping cached from another (possibly closed) connection must never be
+        reused — doing so raises ConnectionStateError or returns stale data.
+        The root factory calls this with the current request's connection on
+        every request, so a subsequent connection-less call (e.g. from
+        ``generate_unique_oid``) sees the current connection's mapping.
+        ...
         """
-        if Members._instance is not None:
-            #check if the zodb connexion is still alive then return the instance
-            try:
-                'test' in Members._instance
-            except Exception as e:
-                log.error(f"Error while getting members instance: {e}")
-                raise e
+        if connection is not None:
+            if not isinstance(connection, Connection):
+                raise TypeError(
+                    "The connection argument must be an instance of "
+                    "ZODB.Connection.Connection"
+                )
+            root = connection.root()
+            if 'members' not in root:
+                root['members'] = Members()
+                transaction.commit()
+            # Always rebind to the current connection's object.
+            Members._instance = root['members']
             return Members._instance
 
-        # Check if a ZODB is provided
-        if not isinstance(connection, Connection):
+        # No connection: fall back to the cached instance (refreshed on every
+        # request by the root factory).
+        if Members._instance is None:
             raise TypeError(
                 "The connection argument must be an instance of "
                 "ZODB.Connection.Connection"
             )
-
-        # check if root exists
-        root = connection.root()
-        if 'members' not in root:
-            connection.root()['members'] = Members()
-            transaction.commit()
-        Members._instance = connection.root()['members']
-        return root['members']
+        try:
+            # Probe the connection the cached mapping is bound to.
+            'members' in Members._instance
+        except Exception as error:
+            # The cached mapping is bound to a closed connection: drop it so the
+            # next connection-bearing call rebinds it cleanly, and ask the caller
+            # to retry with a connection rather than re-raising a low-level error.
+            log.error(f"Cached members mapping is stale: {error}")
+            Members._instance = None
+            raise TypeError(
+                "The connection argument must be an instance of "
+                "ZODB.Connection.Connection"
+            )
+        return Members._instance
 
     def __init__(self):
         """Constructor.
