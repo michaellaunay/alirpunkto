@@ -1121,3 +1121,12 @@ msgstr "Rappel - Aide-nous à vérifier une nouvelle inscription sur la platefor
 
 msgid "invalid_field_value"
 msgstr "Valeur invalide pour le champ ${field}."
+
+msgid "provider_update_failed"
+msgstr "La mise à jour du fournisseur a échoué."
+
+msgid "provider_new_email_label"
+msgstr "Nouvel e-mail (facultatif)"
+
+msgid "provider_new_password_label"
+msgstr "Nouveau mot de passe (facultatif)"

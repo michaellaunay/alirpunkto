@@ -1135,3 +1135,12 @@ msgstr "Reminder - Please contribute to verify a new registration on the ${domai
 
 msgid "invalid_field_value"
 msgstr "Invalid value for field ${field}."
+
+msgid "provider_update_failed"
+msgstr "Provider update failed."
+
+msgid "provider_new_email_label"
+msgstr "New email (optional)"
+
+msgid "provider_new_password_label"
+msgstr "New password (optional)"

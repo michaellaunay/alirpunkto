@@ -7,6 +7,7 @@ from alirpunkto.utils import (
     is_valid_password,
     is_valid_email,
     update_member_from_ldap,
+    update_member_password,
     register_user_to_ldap,
     update_ldap_member,
     send_member_state_change_email,
@@ -106,15 +107,12 @@ def manage_provider_view(request):
                     'form':None,
                     'providers': providers})
                 return password_error
-            if provider_email in providers:
+            if any(existing.email == provider_email for existing in providers):
                 return {'member':user,
                     'form':None,
                     'providers': providers,
                     'error': _('provider_email_already_exists')}
             try:
-                provider = get_member_by_oid(provider_email, request, True)
-                if provider:
-                    return {'member':user, 'form':None, 'providers': providers, 'error': _('provider_already_exists')}
                 provider = Member(
                     data=MemberDatas(lang1="en", lang2="en", lang3="en"),
                     type=MemberTypes.PROVIDER,
@@ -156,21 +154,38 @@ def manage_provider_view(request):
                     "providers": providers,
                     'error': _('member_not_found')
                 }
-            form = RegisterForm(request, schema=manage_provider_schema, member=member)
-            if 'form.submitted' in request.params:
-                try:
-                    form.validate(request.params)
-                    data = form.get_data()
-                    if is_valid_email(data['email']):
-                        return {'member':user, 'form':None, 'providers': providers, 'error': _('invalid_email')}
-                    if is_valid_password(data.get('password', '')):
-                        return {'member':user, 'form':None, 'providers': providers, 'error': _('invalid_password')}
-                    update_ldap_member(request, member, data)
-                    send_member_state_change_email(member, MemberStates.ACTIVE, request)
-                    return {'member':user, 'form':None, 'providers': providers, 'success': _('provider_updated')}
-                except deform.ValidationFailure as e:
-                    log.error(f"Validation failed: {e}")
-                    return {'member':user, 'form':None, 'providers': providers, 'error': str(e)}
+            fields_to_update = []
+            new_email = request.params.get('provider_email', None)
+            if new_email and new_email != member.email:
+                email_error = is_valid_email(new_email, request)
+                if email_error is not None:
+                    email_error.update(
+                        {'member': user, 'form': None, 'providers': providers})
+                    return email_error
+                member.email = new_email
+                fields_to_update.append('email')
+            new_password = request.params.get('provider_password', None)
+            if new_password:
+                password_error = is_valid_password(new_password)
+                if password_error is not None:
+                    password_error.update(
+                        {'member': user, 'form': None, 'providers': providers})
+                    return password_error
+                password_result = update_member_password(
+                    request, member.oid, new_password)
+                if not password_result or password_result.get('status') != 'success':
+                    return {'member': user, 'form': None, 'providers': providers,
+                        'error': _('password_update_failed')}
+            if fields_to_update:
+                result = update_ldap_member(
+                    request, member, fields_to_update=fields_to_update)
+                if not result or result.get('status') != 'success':
+                    return {'member': user, 'form': None, 'providers': providers,
+                        'error': _('provider_update_failed')}
+            member.member_state = MemberStates.DATA_MODIFIED
+            request.tm.commit()
+            return {'member': user, 'form': None, 'providers': providers,
+                'success': _('provider_updated')}
     else:
         return {'member':user, 'form':None, 'providers': providers}
     return {'error': 'Invalid request method'}

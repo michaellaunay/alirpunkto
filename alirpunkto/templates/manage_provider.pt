@@ -53,7 +53,17 @@
                             <option tal:attributes="value provider.oid" tal:content="provider.name"></option>
                         </tal:block>
                     </select>
-                    <input type="submit" name="submit" value="Submit" i18n:attributes="value submit_button">
+                    <div>
+                        <label i18n:translate="provider_new_email_label">New email (optional)</label>
+                        <input class="email-input" type="email" name="provider_email"
+                            i18n:attributes="title email_title_input" />
+                    </div>
+                    <div>
+                        <label i18n:translate="provider_new_password_label">New password (optional)</label>
+                        <input class="form-control" type="password" name="provider_password"
+                            i18n:attributes="title password_title_input" />
+                    </div>
+                    <input type="submit" name="update" value="Submit" i18n:attributes="value submit_button">
                 </form>
             </div>
             <div tal:condition="exists:error" tal:omit-tag="">
