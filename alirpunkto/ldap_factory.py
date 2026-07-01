@@ -28,13 +28,12 @@ from ldap3 import (
 )
 
 _server = None
-_conn = None
 
 def get_ldap_server(
-        server_name=get_ldap_server_name(),
+        server_name=None,
         get_info=ALL,
         use_ssl=LDAP_USE_SSL,
-        port=get_ldap_server_port()
+        port=None
     ) -> Server:
     """Get an LDAP server
     Returns:
@@ -43,6 +42,11 @@ def get_ldap_server(
     global _server
     if _server is not None:
         return _server
+    # Resolve host/port at call time, not at import time.
+    if server_name is None:
+        server_name = get_ldap_server_name()
+    if port is None:
+        port = get_ldap_server_port()
     if PYTEST_CURRENT_TEST and not TEST_WITH_DOCKER_LDAP:
         # Use a mock server for testing /!\ Mock server has some issues with user define schema
         _server = Server(
@@ -62,15 +66,12 @@ def get_ldap_server(
     return _server
 
 def reset_ldap_connection():
-    """Reset the LDAP connection, forcing a new connection on next call"""
-    global _conn, _server
-    try:
-        if _conn is not None:
-            _conn.unbind()
-    except:
-        pass
-    
-    _conn = None
+    """Reset the cached LDAP server, forcing a new one on the next call.
+
+    Connections are no longer cached module-side (each call returns a fresh
+    connection), so only the cached ``Server`` needs to be dropped.
+    """
+    global _server
     _server = None
 
 def get_ldap_connection(
@@ -80,8 +81,8 @@ def get_ldap_connection(
         ldap_use_ssl=LDAP_USE_SSL,
         ldap_get_info=ALL,
         ldap_client_strategy=SYNC,
-        ldap_server=get_ldap_server_name(),  # LDAP_SERVER
-        ldap_port=get_ldap_server_port()  # LDAP_PORT
+        ldap_server=None,  # resolved at call time (LDAP_SERVER)
+        ldap_port=None  # resolved at call time (LDAP_PORT)
     ) -> Connection:
     """Get an LDAP connection secure or not depending of LDAP_USE_SSL global.
     Args:
@@ -96,9 +97,11 @@ def get_ldap_connection(
     Returns:
         Connection: the LDAP connection
     """
-    global _conn
-    # Always create a new connection when using client_strategy other than SYNC
-    # or when explicitly specifying a server or port
+    # Resolve host/port at call time, not at import time.
+    if ldap_server is None:
+        ldap_server = get_ldap_server_name()
+    if ldap_port is None:
+        ldap_port = get_ldap_server_port()
     server = get_ldap_server(
         server_name=ldap_server,
         use_ssl=ldap_use_ssl if not PYTEST_CURRENT_TEST else False,
@@ -117,7 +120,11 @@ def get_ldap_connection(
             conn.bind() # Force the binding of the connection because auto_bind seems not to be working
         return conn
 
-    if ldap_client_strategy != SYNC:
+    # Create a fresh connection per call. A single module-level connection is
+    # not thread-safe (ldap3 SYNC connections interleave requests/responses
+    # across threads) and would be unbound by a caller's `with` block, so it
+    # must not be shared.
+    try:
         conn = Connection(
             server,
             user=ldap_user,
@@ -125,26 +132,11 @@ def get_ldap_connection(
             auto_bind=ldap_auto_bind,
             client_strategy=ldap_client_strategy
         )
-        
         if ldap_auto_bind and ldap_client_strategy == MOCK_SYNC:
             conn.bind()  # Force bind for MOCK_SYNC as auto_bind might not work
-            
-        return conn
-    # Otherwise use/create the singleton connection
-    if _conn is None:
-        # For Docker LDAP container in tests
-        try :
-            _conn = Connection(
-                server,
-                user=ldap_user,
-                password=ldap_password,
-                auto_bind=ldap_auto_bind,
-                client_strategy=ldap_client_strategy
-            )
-            if ldap_auto_bind and ldap_client_strategy == MOCK_SYNC:
-                _conn.bind()  # Force bind for MOCK_SYNC as auto_bind might not work
-        except Exception as e:
-            log.error(f"Error creating LDAP connection: {e}")
-            raise
-    
-    return _conn
+    except Exception as e:
+        log.error(f"Error creating LDAP connection: {e}")
+        raise
+    return conn
+
+
