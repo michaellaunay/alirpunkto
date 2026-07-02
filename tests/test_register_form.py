@@ -62,3 +62,76 @@ def test_registerform_password_field_is_not_inverted():
     with patch.object(rf, "is_valid_password", return_value={"error": "bad"}):
         with pytest.raises(colander.Invalid):
             validator(password_node, "x")  # invalid -> must raise
+
+
+# --------------------------------------------------------------------------- #
+# widget isolation (the "pseudonym read-only after the e-mail challenge" bug)
+#
+# colander's clone()/bind() shallow-copies schema nodes: the ``widget``
+# attribute is the very same object as on the class-level definition, hence
+# shared by every RegisterForm instance in the process. apply_permissions()
+# used to mutate widget.readonly/hidden in place, so the permission profile of
+# one request leaked into every later render that did not re-apply
+# permissions - e.g. the form rendered right after the e-mail challenge.
+# --------------------------------------------------------------------------- #
+from pyramid.testing import DummyRequest
+
+from alirpunkto.models.candidature import CandidatureStates
+from alirpunkto.models.member import MemberTypes
+from alirpunkto.models.model_permissions import access
+
+
+@pytest.fixture(autouse=True)
+def _pristine_class_widgets():
+    """Snapshot/restore the class-level widget flags around each test.
+
+    Protects the rest of the suite from cross-test pollution if the
+    widget-sharing regression ever comes back (before the fix, a single
+    apply_permissions() call poisoned every subsequent RegisterForm render
+    in the process).
+    """
+    nodes = [
+        node for node in RegisterForm.__all_schema_nodes__
+        if getattr(node, "widget", None) is not None
+    ]
+    snapshot = [
+        (node.widget, dict(node.widget.__dict__)) for node in nodes
+    ]
+    yield
+    for widget, saved in snapshot:
+        widget.__dict__.clear()
+        widget.__dict__.update(saved)
+
+
+def _read_only_owner_profile():
+    # Any profile where pseudonym is READ-only does: a cooperator viewing
+    # their PENDING candidature is a realistic production request.
+    return access["Owner"][(CandidatureStates.PENDING, MemberTypes.COOPERATOR)]
+
+
+def test_apply_permissions_does_not_leak_into_other_instances():
+    profile = _read_only_owner_profile()
+
+    first = RegisterForm().bind(request=DummyRequest())
+    first.apply_permissions(profile.data)
+    first.apply_permissions(profile)
+    assert first.get("pseudonym").widget.readonly is True  # applied locally
+
+    fresh = RegisterForm().bind(request=DummyRequest())
+    assert not getattr(fresh.get("pseudonym").widget, "readonly", False), (
+        "apply_permissions() on one RegisterForm instance must not make the "
+        "pseudonym widget read-only on a fresh instance (shared-widget leak)"
+    )
+
+
+def test_apply_permissions_gives_each_instance_its_own_widgets():
+    profile = _read_only_owner_profile()
+
+    first = RegisterForm().bind(request=DummyRequest())
+    first.apply_permissions(profile.data)
+    first.apply_permissions(profile)
+
+    fresh = RegisterForm().bind(request=DummyRequest())
+    assert first.get("pseudonym").widget is not fresh.get("pseudonym").widget, (
+        "after apply_permissions() the instance must own a private widget copy"
+    )

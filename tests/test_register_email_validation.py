@@ -79,3 +79,108 @@ def test_email_validation_returns_challenge_error_on_wrong_answer(members_mappin
     assert candidature.candidature_state == CandidatureStates.EMAIL_VALIDATION
     assert result.get("error") is not None
     send.assert_not_called()
+
+
+# --------------------------------------------------------------------------- #
+# Regression: the pseudonym field must be editable right after the challenge
+# (no page refresh needed).
+#
+# Two stacked causes produced the "refresh to make the pseudonym editable"
+# symptom for ORDINARY candidates:
+#   1. RegisterForm widgets are shared across instances (colander clone/bind
+#      is shallow), and apply_permissions() mutated them in place - so any
+#      earlier request applying a read-only profile (cooperator viewing a
+#      PENDING candidature, admin, modify_member...) left pseudonym read-only
+#      process-wide;
+#   2. the post-challenge render (render_candidature_form) did not apply the
+#      (CONFIRMED_HUMAN, type) permissions at all, unlike the refresh path
+#      (handle_confirmed_human_state) - so it inherited the poisoned flags.
+# The test reproduces the realistic sequence end to end with real rendering.
+# --------------------------------------------------------------------------- #
+import re
+
+from pyramid.testing import DummyRequest, testConfig as pyramid_test_config
+
+from alirpunkto.models.member import MemberTypes
+from alirpunkto.models.model_permissions import access
+from alirpunkto.schemas.register_form import RegisterForm
+from alirpunkto.views.register import handle_confirmed_human_state
+
+
+@pytest.fixture(autouse=True)
+def _pristine_class_widgets():
+    """Snapshot/restore class-level widget flags (see test_register_form)."""
+    nodes = [
+        node for node in RegisterForm.__all_schema_nodes__
+        if getattr(node, "widget", None) is not None
+    ]
+    snapshot = [(node.widget, dict(node.widget.__dict__)) for node in nodes]
+    yield
+    for widget, saved in snapshot:
+        widget.__dict__.clear()
+        widget.__dict__.update(saved)
+
+
+def _pseudonym_input(html: str):
+    return re.search(r'<input[^>]*name="pseudonym"[^>]*>', html)
+
+
+def _challenge_request():
+    request = DummyRequest()
+    request.POST = {
+        "submit": "submit",
+        "result_A": "14", "result_B": "41", "result_C": "17", "result_D": "13",
+    }
+    request.params = request.POST
+    request.tm = MagicMock()
+    request.localizer = SimpleNamespace(translate=str)
+    return request
+
+
+def test_pseudonym_is_editable_right_after_challenge_without_refresh(
+    members_mapping,
+):
+    # [0] Another request in the same process applies a read-only profile
+    #     through the public API (this is what poisoned the shared widgets).
+    other = RegisterForm().bind(request=DummyRequest())
+    read_only = access["Owner"][
+        (CandidatureStates.PENDING, MemberTypes.COOPERATOR)
+    ]
+    other.apply_permissions(read_only.data)
+    other.apply_permissions(read_only)
+
+    # [1] An ORDINARY candidate submits the correct challenge answers.
+    candidature = _candidature()
+    candidature.type = MemberTypes.ORDINARY
+    candidature.challenge = {
+        "A": ("x", 14), "B": ("x", 41), "C": ("x", 17), "D": ("x", 13),
+    }
+    request = _challenge_request()
+    with patch.object(
+        register_mod, "send_confirm_validation_email", return_value={}
+    ), pyramid_test_config(request=request):
+        result = handle_email_validation_state(request, candidature)
+
+    assert candidature.candidature_state == CandidatureStates.CONFIRMED_HUMAN
+    post_input = _pseudonym_input(result["form"])
+    assert post_input is not None, (
+        "the post-challenge form must render an <input name='pseudonym'> "
+        "(deform switches to its read-only template when the shared widget "
+        "was poisoned, dropping the input entirely)"
+    )
+    assert 'readonly' not in post_input.group(0), (
+        "the pseudonym field must be editable right after the challenge"
+    )
+
+    # [2] The refresh (GET on the CONFIRMED_HUMAN state) and the post-challenge
+    #     render must agree: no more "refresh to unlock the field".
+    get_request = DummyRequest()
+    get_request.POST = {}
+    get_request.params = {}
+    get_request.tm = MagicMock()
+    get_request.localizer = SimpleNamespace(translate=str)
+    with pyramid_test_config(request=get_request):
+        refreshed = handle_confirmed_human_state(get_request, candidature)
+    refresh_input = _pseudonym_input(refreshed["form"])
+    assert refresh_input is not None
+    assert 'readonly' not in refresh_input.group(0)

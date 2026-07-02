@@ -2,6 +2,7 @@
 # Creation date: 2024-04-19
 # Author: Michaël Launay
 from typing import Union
+import copy
 import datetime
 import os
 import colander
@@ -307,6 +308,27 @@ class RegisterForm(schema.CSRFSchema):
         widget = DateInputWidget(hidden=True,readonly = True),
         missing = ""
     )
+    def _use_instance_widgets(self):
+        """Give this schema instance its own private widget copies.
+
+        colander's ``clone()``/``bind()`` shallow-copies schema nodes: the
+        ``widget`` attribute still points to the very object created at class
+        definition time, shared by every ``RegisterForm`` instance in the
+        process. Mutating ``widget.readonly``/``widget.hidden``/``widget.value``
+        without copying first therefore leaks the current request's permission
+        profile into every later render that does not re-apply permissions -
+        the "pseudonym field read-only right after the e-mail challenge until
+        a page refresh re-applies permissions" symptom.
+
+        Called before any widget mutation so the flags stay per-instance and
+        per-request. Idempotent (copying a copy is harmless) and thread-safe
+        for the shared class-level widgets, which are now never written to.
+        """
+        for child in self.children:
+            widget = getattr(child, 'widget', None)
+            if widget is not None:
+                child.widget = copy.copy(widget)
+
     def apply_permissions(
             self,
             permissions: Union[MemberPermissionsType, MemberDataPermissionsType],
@@ -350,6 +372,7 @@ class RegisterForm(schema.CSRFSchema):
                 - If the permission includes `Permissions.READ` but not `Permissions.WRITE`, the field is set to read-only and visible.
                 - If the permission includes neither `Permissions.READ` nor `Permissions.WRITE`, the field is hidden and read-only.
         """
+        self._use_instance_widgets()
         children = {child.name: child for child in self.children}
         for field in fields(permissions):
             name = field.name
@@ -401,6 +424,7 @@ class RegisterForm(schema.CSRFSchema):
 
     def prepare_for_modification(self, read_only_fields: dict, writable_field_values: dict):
         """Prepare the form for an ordinary user."""
+        self._use_instance_widgets()
         if 'pseudonym' in read_only_fields:
             self.get('pseudonym').widget.readonly = True
             self.get('pseudonym').widget.value = read_only_fields['pseudonym']
@@ -558,4 +582,3 @@ class RegisterForm(schema.CSRFSchema):
 
         self.get('cooperative_number').widget.readonly = True
         self.get('cooperative_number').widget.value = read_only_fields['cooperative_number']
-

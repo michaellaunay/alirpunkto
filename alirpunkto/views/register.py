@@ -380,39 +380,24 @@ def validate_challenge(
             }
     return None
 
-def render_candidature_form(request: Request, 
-                            candidature: Candidature) -> str:
-    """
-    Render the candidature form based on the candidature type.
+def _build_candidature_form(
+        request: Request,
+        candidature: Candidature
+    ):
+    """Build the personal-data form for the candidature's *current* state.
 
-    Args:
-        request (Request): The request object.
-        candidature (Candidature): The candidature object.
-
-    Returns:
-        str: The HTML rendering of the candidature form.
-    """
-    schema = RegisterForm().bind(request=request)
-    appstruct = {
-        'cooperative_number': candidature.oid,
-        'email': candidature.email,
-    }
-    if candidature.type == MemberTypes.ORDINARY:
-        schema.prepare_for_ordinary()
-    form = deform.Form(schema, buttons=('submit',), translator=Translator)
-    return form.render(appstruct=appstruct)
-
-def handle_confirmed_human_state(request, candidature):
-    """Handle the confirmed human state.
-
-    Args:
-        request (pyramid.request.Request): the request
-        candidature (Candidature): the candidature
+    Single source of truth shared by ``handle_confirmed_human_state`` (the
+    refresh/GET path) and ``render_candidature_form`` (the render right after
+    the e-mail challenge). Both paths must produce the same form: applying the
+    ``(candidature_state, type)`` permissions here guarantees the pseudonym
+    (and every other field) is editable right after the challenge exactly as
+    it is after a refresh - no more divergence between the two renders.
 
     Returns:
-        HTTPFound: the HTTP found response
+        tuple: ``(form, appstruct, error_response)`` where ``error_response``
+        is ``None`` on success, or the fail-closed response dict when the
+        permissions deny access (consistent with audit finding 2.2).
     """
-    log.debug(f"Handling confirmed human state for candidature id:{id(candidature)}, oid:{candidature.oid}")
     schema = RegisterForm().bind(request=request)
     permissions = get_access_permissions(candidature, candidature)
     if not permissions or permissions == Permissions.NONE:
@@ -420,7 +405,7 @@ def handle_confirmed_human_state(request, candidature):
             f'No permission to access member datas: {candidature.oid}'
         )
         request.session.flash(_('no_permission'), 'error')
-        return {
+        return None, None, {
             "error":_('no_permission'),
             "member": None,
             "form": None,
@@ -437,6 +422,47 @@ def handle_confirmed_human_state(request, candidature):
         schema.prepare_for_ordinary()
 
     form = deform.Form(schema, buttons=('submit',), translator=Translator)
+    return form, appstruct, None
+
+def render_candidature_form(request: Request,
+                            candidature: Candidature) -> str:
+    """
+    Render the candidature form based on the candidature type.
+
+    The form is built by ``_build_candidature_form`` with the permissions of
+    the candidature's current state, exactly like the refresh path
+    (``handle_confirmed_human_state``), so the render right after the e-mail
+    challenge matches the render after a page refresh.
+
+    Args:
+        request (Request): The request object.
+        candidature (Candidature): The candidature object.
+
+    Returns:
+        str: The HTML rendering of the candidature form (empty string when
+        the permissions deny access - fail-closed, logged).
+    """
+    form, appstruct, error = _build_candidature_form(request, candidature)
+    if error is not None:
+        return ""
+    return form.render(appstruct=appstruct)
+
+def handle_confirmed_human_state(request, candidature):
+    """Handle the confirmed human state.
+
+    Args:
+        request (pyramid.request.Request): the request
+        candidature (Candidature): the candidature
+
+    Returns:
+        HTTPFound: the HTTP found response
+    """
+    log.debug(f"Handling confirmed human state for candidature id:{id(candidature)}, oid:{candidature.oid}")
+    form, appstruct, error_response = _build_candidature_form(
+        request, candidature
+    )
+    if error_response is not None:
+        return error_response
     if 'submit' in request.POST:
         try:
             items = request.POST.items()
