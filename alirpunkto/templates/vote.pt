@@ -11,7 +11,8 @@
                 <div>
                     <p i18n:translate="welcome_voter" tal:condition="not registered_vote">
                         You are about to vote on whether to accept or reject the application of
-                        <span tal:replace="python:candidature.data.fullname" i18n:name="name">Candidate Name</span>.
+                        <span tal:replace="python:candidature.data.fullname" i18n:name="name">Candidate Name</span> 
+                        on the <tal:var i18n:name="site_name">${site_name}</tal:var> platfom.
                         Their admission to the portal depends on your decision.
                         Whether through documents received via email or during a video conference,
                         we hope you were able to verify the applicant's identity.
