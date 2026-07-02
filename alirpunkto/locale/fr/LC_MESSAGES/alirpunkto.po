@@ -823,9 +823,8 @@ msgstr ""
 "décisions. Le courriel est le médium le plus utilisé en Europe, il est universel et basé sur des normes ouvertes et libres, contrairement aux systèmes de messagerie propriétaires des géants du numérique (également "
 "appelés 'GAFAM').\n"
 "Cette adresse de courriel sera utilisée exclusivement pour garantir la communication entre l'infrastructure informatique de ${domain_name} et toi. Elle ne sera jamais affichée aux autres utilisateurs de la plateforme informatique de ${domain_name}, ni transmise ou vendue à qui que ce soit, sauf pour répondre aux exigences légales des autorités publiques chargées de "
-"l'application de la loi, à la demande d'un juge. Le "
-"\"responsable du traitement des données\" tel que défini par le Règlement Général sur la Protection des Données (RGPD) de l' "
-"Union Européenne est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le "
+"l'application de la loi, à la demande d'un juge. Le"
+" 'responsable du traitement des données' tel que défini par le Règlement Général sur la Protection des Données (RGPD) de l'Union Européenne est la Coopérative CosmoPolitique (CosmoPolitical Cooperative SCE), une Société Coopérative Européenne établie au 229 rue Solférino, 59000 Lille, France et enregistrée le 25 avril 2023 sous le "
 "numéro SIREN 951 007 897."
 
 #: alirpunkto/schemas/register_form.py:144
