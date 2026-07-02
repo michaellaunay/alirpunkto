@@ -9,7 +9,7 @@ tal:omit-tag="textual">
 <body>
 <h1>Potrzebujemy twojej pomocy w weryfikacji danych identyfikacyjnych kandydata do współpracy!</h1>
 
-<p>Szanowny <span tal:replace="verifier" tal:condition="exists:user">Imię i nazwisko weryfikatora</span>,</p>
+<p>Szanowny <span tal:replace="verifier" tal:condition="exists:verifier">Imię i nazwisko weryfikatora</span>,</p>
 
 <p>Zostałeś losowo wybrany przez platformę <span tal:replace="domain_name">Domain Name</span> do pełnienia funkcji weryfikatora, którego zadaniem jest weryfikacja tożsamości osoby, która właśnie zarejestrowała się online. Każdy nowy członek jest błogosławieństwem i szansą dla <span tal:replace="domain_name">Nazwa domeny</span>! Musimy być wdzięczni za wysiłek i odwagę każdej osoby, która do nas dołącza. Prosimy o wsparcie tych wysiłków i dobrej woli poprzez oddanie głosu pod następującym adresem URL: {subject_url}, w terminie do {date_end_vote}.</p>
 
