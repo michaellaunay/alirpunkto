@@ -9,7 +9,7 @@ tal:omit-tag="textual">
 <body>
 <h1>Potrzebujemy twojej pomocy w weryfikacji danych identyfikacyjnych kandydata do współpracy!</h1>
 
-<p>Szanowny <span tal:replace="verifier" tal:condition="exists:user">Pseudonym weryfikatora</span>,</p>
+<p>Szanowny <span tal:replace="verifier" tal:condition="exists:verifier">Pseudonym weryfikatora</span>,</p>
 
 <p>Jak zapewne pamiętasz, zostałeś losowo wybrany przez platformę <span tal:replace="domain_name">Domain Name</span> do pełnienia funkcji Weryfikatora, którego zadaniem jest weryfikacja tożsamości osoby, która właśnie zarejestrowała się online. Zgodnie z naszą wiedzą, nie oddałeś jeszcze głosu. Zrób to pod następującym adresem URL: {subject_url}, najpóźniej do dnia {date_end_vote}, czyli za {notice_time_verifiers} dni! Prosimy o szybką reakcję.</p>
 
