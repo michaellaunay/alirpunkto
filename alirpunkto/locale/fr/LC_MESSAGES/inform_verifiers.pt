@@ -9,7 +9,7 @@ tal:omit-tag="textual">
 <body>
 <h1>Nous avons besoin de ton aide pour vérifier les données d'identité d'un candidat coopérateur !</h1>
 
-<p>Cher.e <span tal:replace="verifier" tal:condition="exists:user">Nom du vérificateur</span>,</p>
+<p>Cher.e <span tal:replace="verifier" tal:condition="exists:verifier">Nom du vérificateur</span>,</p>
 
 
 
