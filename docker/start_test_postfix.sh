@@ -79,13 +79,18 @@ if [ "${POSTFIX_DISABLE_EXTERNAL_DELIVERY}" = "true" ]; then
     postconf -e "local_transport = discard:"
 fi
 
+# Auto-detect this container's own bridge subnet (self-adjusting, no hard-coded
+# IP). The test stack binds port 25 to 127.0.0.1 only, so there is no external
+# ingress; POSTFIX_MYNETWORKS may still override for an explicit perimeter.
 if [ -n "${POSTFIX_MYNETWORKS}" ]; then
     postconf -e "mynetworks = ${POSTFIX_MYNETWORKS}"
 else
-    # SAFE default: never trust the whole bridge subnet (open-relay risk).
-    # The test stack binds port 25 to 127.0.0.1 only, but keep the default safe
-    # for consistency with production.
-    postconf -e "mynetworks = 127.0.0.0/8 [::1]/128"
+    NETWORK="$(ip -o -f inet route show dev eth0 | awk '$1 != "default" {print $1; exit}' || true)"
+    if [ -n "${NETWORK}" ]; then
+        postconf -e "mynetworks = 127.0.0.0/8 [::1]/128 ${NETWORK}"
+    else
+        postconf -e "mynetworks = 127.0.0.0/8 [::1]/128"
+    fi
 fi
 
 # In Docker, Postfix chroot often causes DNS lookup issues. Keep the SMTP listener non-chrooted.

@@ -72,20 +72,22 @@ services:
     networks:
       - alirpunkto-net
     # No published port: Postfix is send-only and reachable by Pyramid over the
-    # internal alirpunkto-net (alirpunkto-postfix:25). Publishing 25 would expose
-    # the relay to the Internet (open-relay vector). If this host must be an
-    # inbound MX, bind explicitly ("<public-ip>:25:25"), add a host firewall and
-    # enable SASL authentication.
+    # internal alirpunkto-net (alirpunkto-postfix:25). Publishing 25 exposed the
+    # relay to the Internet (open-relay vector) — that was the root cause of the
+    # blacklisting. Only publish it if this host must be an inbound MX: then bind
+    # explicitly ("<public-ip>:25:25"), add a host firewall, set POSTFIX_MYNETWORKS
+    # to a tight range (or enable SASL).
     environment:
       DOMAIN: ${DOMAIN}
       POSTFIX_MYHOSTNAME: ${POSTFIX_MYHOSTNAME}
       POSTFIX_RELAYHOST: ${POSTFIX_RELAYHOST:-}
       POSTFIX_INET_PROTOCOLS: ${POSTFIX_INET_PROTOCOLS:-ipv4}
-      # Trust ONLY loopback + the Pyramid container's fixed IP (see the pyramid
-      # service and the alirpunkto-net subnet below). Never leave empty: the
-      # startup script would otherwise auto-detect and trust the whole bridge
-      # subnet (open-relay risk).
-      POSTFIX_MYNETWORKS: "127.0.0.0/8 [::1]/128 172.28.0.10/32"
+      # Relay perimeter. Left unset by default: start_postfix.sh then auto-detects
+      # this container's own bridge subnet (dynamic, no hard-coded IP), which is
+      # safe as long as port 25 stays unpublished. To pin an explicit perimeter,
+      # set it in docker/.env, e.g.:
+      #   POSTFIX_MYNETWORKS=127.0.0.0/8 [::1]/128 172.18.0.0/16
+      POSTFIX_MYNETWORKS: ${POSTFIX_MYNETWORKS:-}
     volumes:
       - alirpunkto_postfix_spool:/var/spool/postfix
       - alirpunkto_postfix_dkim:/etc/dkimkeys
@@ -110,9 +112,7 @@ services:
     container_name: alirpunkto-pyramid
     restart: unless-stopped
     networks:
-      # Fixed IP so Postfix can trust exactly this container in mynetworks.
-      alirpunkto-net:
-        ipv4_address: 172.28.0.10
+      - alirpunkto-net
     ports:
       - "6543:6543"
     environment:
@@ -179,9 +179,6 @@ networks:
   alirpunkto-net:
     name: alirpunkto-net
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.28.0.0/24
 
 # ── Secrets ───────────────────────────────────────────────────────────────────
 # Path is relative to the working directory (repo root) when launching

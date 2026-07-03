@@ -71,8 +71,8 @@ postconf -e "milter_default_action = accept"
 postconf -e "smtpd_milters = unix:/run/opendkim/opendkim.sock"
 postconf -e "non_smtpd_milters = unix:/run/opendkim/opendkim.sock"
 
-# Relay policy: only trusted networks (mynetworks, tightly bounded below) may
-# relay; everything else is rejected. If you switch to SASL auth, add
+# Relay policy: only trusted networks (mynetworks, see below) may relay;
+# everything else is rejected. If you switch to SASL auth, add
 # "permit_sasl_authenticated" to each list below.
 postconf -e "smtpd_relay_restrictions = permit_mynetworks, reject_unauth_destination"
 
@@ -98,13 +98,28 @@ if [ -n "${FAILOVER_IP}" ]; then
     postconf -e "smtp_bind_address = ${FAILOVER_IP}"
 fi
 
+# Networks allowed to relay.
+#   - If POSTFIX_MYNETWORKS is set (docker/.env), it wins — use this for an
+#     explicit, reviewed perimeter, or when SASL is not enabled and you want a
+#     fixed range.
+#   - Otherwise auto-detect this container's own bridge subnet. The Compose
+#     network already exists when the container starts, so eth0 is in the app
+#     subnet and detection is reliable and self-adjusting (no hard-coded IP).
+#
+# SAFE because port 25 is NOT published (see docker-compose.yaml): with no
+# external ingress, trusting the private app subnet cannot become an Internet
+# open relay. If you EVER publish port 25 (inbound MX), do NOT rely on this —
+# set POSTFIX_MYNETWORKS to a tight range or, better, enable SASL and drop
+# permit_mynetworks.
 if [ -n "${POSTFIX_MYNETWORKS}" ]; then
     postconf -e "mynetworks = ${POSTFIX_MYNETWORKS}"
 else
-    # SAFE default: never trust the whole bridge subnet (open-relay risk).
-    # Trust only loopback here; authorize the application container explicitly
-    # via POSTFIX_MYNETWORKS (see docker-compose.yaml) or via SASL.
-    postconf -e "mynetworks = 127.0.0.0/8 [::1]/128"
+    NETWORK="$(ip -o -f inet route show dev eth0 | awk '$1 != "default" {print $1; exit}' || true)"
+    if [ -n "${NETWORK}" ]; then
+        postconf -e "mynetworks = 127.0.0.0/8 [::1]/128 ${NETWORK}"
+    else
+        postconf -e "mynetworks = 127.0.0.0/8 [::1]/128"
+    fi
 fi
 
 # In Docker, Postfix chroot often causes DNS lookup issues.
