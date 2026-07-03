@@ -7,6 +7,7 @@
 #
 # The script includes:
 #   - application sources under alirpunkto/
+#   - the locale template and English message/template sources
 #   - tests under tests/
 #   - Dockerfiles, Compose files, shell scripts and Docker README files
 #
@@ -16,7 +17,7 @@
 #   - docker/certs/
 #   - generated LDIF files
 #   - local test.ini
-#   - caches, eggs, locale and static assets
+#   - caches, eggs, generated locale binaries and static assets
 #
 # Usage, from the repository root:
 #   chmod +x scripts/export_sources_for_review.sh
@@ -36,20 +37,26 @@ set -euo pipefail
 
 OUT="/tmp/$(date +%Y%m%d)_alirpunkto_sources.txt"
 
-git ls-files \
-  alirpunkto tests docker \
-  ':!:*/__pycache__/*' \
-  ':!:*/eggs/*' \
-  ':!:*/locale/*' \
-  ':!:*/static/*' \
-  ':!:docker/certs/*' \
-  ':!:*.pem' \
-  ':!:*.key' \
-  ':!:*.crt' \
-  ':!:docker/secrets/*' \
-  ':!:docker/.env*' \
-  ':!:docker/*.generated.ldif' \
-  ':!:test.ini' |
+{
+  git ls-files \
+    alirpunkto tests docker \
+    ':!:*/__pycache__/*' \
+    ':!:*/eggs/*' \
+    ':!:*/locale/*' \
+    ':!:*/static/*' \
+    ':!:docker/certs/*' \
+    ':!:*.pem' \
+    ':!:*.key' \
+    ':!:*.crt' \
+    ':!:docker/secrets/*' \
+    ':!:docker/.env*' \
+    ':!:docker/*.generated.ldif' \
+    ':!:test.ini'
+  git ls-files \
+    alirpunkto/locale/alirpunkto.pot \
+    alirpunkto/locale/en/LC_MESSAGES \
+    ':!:*.mo'
+} |
 while IFS= read -r file; do
   [ -f "$file" ] || continue
 

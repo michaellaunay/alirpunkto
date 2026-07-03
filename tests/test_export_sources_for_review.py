@@ -42,3 +42,11 @@ def test_export_sources_script_outputs_numbered_sections(repo_root: Path):
     assert "alirpunkto" in script
     assert "tests" in script
     assert "docker" in script
+
+
+def test_export_sources_script_includes_selected_locale_sources(repo_root: Path):
+    script = (repo_root / SCRIPT).read_text(encoding="utf-8")
+
+    assert "alirpunkto/locale/alirpunkto.pot" in script
+    assert "alirpunkto/locale/en/LC_MESSAGES" in script
+    assert "':!:*.mo'" in script
