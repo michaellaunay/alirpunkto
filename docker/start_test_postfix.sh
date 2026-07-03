@@ -82,12 +82,10 @@ fi
 if [ -n "${POSTFIX_MYNETWORKS}" ]; then
     postconf -e "mynetworks = ${POSTFIX_MYNETWORKS}"
 else
-    NETWORK="$(ip -o -f inet route show dev eth0 | awk '$1 != "default" {print $1; exit}' || true)"
-    if [ -n "${NETWORK}" ]; then
-        postconf -e "mynetworks = 127.0.0.0/8 ${NETWORK}"
-    else
-        postconf -e "mynetworks = 127.0.0.0/8"
-    fi
+    # SAFE default: never trust the whole bridge subnet (open-relay risk).
+    # The test stack binds port 25 to 127.0.0.1 only, but keep the default safe
+    # for consistency with production.
+    postconf -e "mynetworks = 127.0.0.0/8 [::1]/128"
 fi
 
 # In Docker, Postfix chroot often causes DNS lookup issues. Keep the SMTP listener non-chrooted.
@@ -121,3 +119,5 @@ postfix start-fg &
 POSTFIX_PID=$!
 
 wait -n "${OPENDKIM_PID}" "${POSTFIX_PID}"
+
+

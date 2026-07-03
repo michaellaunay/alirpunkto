@@ -275,3 +275,29 @@ Repris de 2.3/2.5, toujours d'actualité dans ce dump :
 5. **Fonctionnel vote** : dépouillement à l'échéance (point 3 ci-dessus) — sans lui, une candidature avec un votant silencieux reste en limbes.
 6. **§4** : liste blanche `vote.pt` (4.18), `relativedelta` (4.31, dans `register_form.py`), filtre `alirpunktoPerson` (4.1).
 7. **Continu** : `ruff` + `mypy` + CI ; nits (imports morts `manage_provider`, marque pytest `functional`, clé orpheline `forget_admin_user`, annotations `retrieve_candidature`/`get_keycloak_token`/`get_member_by_email`).
+
+---
+
+## Addendum (2026-07-02, après correctif « pseudonyme non éditable ») — passe exhaustive « état partagé mutable entre requêtes »
+
+Suite au bogue du pseudonyme (widgets deform partagés entre toutes les instances de `RegisterForm` par le `clone()` superficiel de colander, et mutés par `apply_permissions`), balayage systématique du projet à la recherche d'autres membres de la même famille : état de processus muté par des requêtes. Méthode : greps ciblés + deux scans AST (attributs de classe mutables ; défauts d'arguments mutables ; mutables au niveau module, y compris compréhensions/appels/concaténations) + revue manuelle de chaque global, singleton et cache, avec vérification de tous leurs sites de mutation.
+
+**Verdict : le cas `RegisterForm` était le seul bogue actif de cette famille.** Détail des points contrôlés :
+
+| Famille | Constat |
+|---|---|
+| Mutations de widgets deform | Toutes confinées à `register_form.py` (`apply_permissions` l.393-401, `prepare_for_modification` l.429-584), désormais protégées par la copie par instance (`_use_instance_widgets`). **Aucune** mutation de widget dans les vues. |
+| Instances de schéma au niveau module | Aucune. Chaque appelant construit `RegisterForm().bind(request=…)` par requête (`modify_member.py:196`, `forgot_password.py:60`, `register.py::_build_candidature_form`). |
+| Mutation d'attributs de nœud colander à l'exécution (`title`, `description`, `missing`, `validator`, `default`) | Aucune. |
+| Globals mutables au niveau module (`access`, `EUROPEAN_ZONES`, `EUROPEAN_LOCALES`, `LANGUAGES_TITLES`, `locales_as_choices`, `optional_locales_as_choices`, `manage_provider_schema`) | Zéro site de mutation sur tout le projet — lecture seule de fait. |
+| Matrice `access` | Immuable **par construction** : les trois dataclasses de permissions sont déjà `frozen=True` (`model_permissions.py:16, 41, 131`) — toute écriture accidentelle lèverait `FrozenInstanceError`. |
+| Attributs de classe mutables | Seulement les deux `__acl__` (`member.py:475`, `candidature.py:160`), jamais mutés. `Candidature.__init__` crée `_voters`/`_votes` frais par instance (aucun aliasing de global). |
+| Défauts d'arguments mutables | Un seul : `force_permissions={…}` dans `apply_permissions` — uniquement lu dans le corps (l.382-383). Sans danger aujourd'hui. |
+| `global` | `ldap_factory._server` (revu en 2.15) et `_reminder_last_run` (protégé par verrou, revu en 2.18). |
+| Caches | `extract_zpt_variables` (`get_email.py:24`, `lru_cache`) : clé = chemin de template statique, le `set` retourné n'est jamais muté par son unique appelant (l.94). `get_secret.secrets` : écrit une seule fois, initialisation forcée **à l'import** (`__init__.py:53`), donc avant tout thread de worker — la course théorique au premier appel est inatteignable. |
+| Config globale deform | Renderer posé une fois au démarrage (`__init__.py:306-314`) — volontaire et sain. |
+| Dicts d'erreur partagés (`error.update(...)` dans `manage_provider`) | Sûrs : `is_valid_email`/`is_valid_password` construisent un dict littéral neuf à chaque `return`. |
+
+**Deux nits de durcissement (aucun bogue actif) :**
+- `apply_permissions` : passer `force_permissions=None` par défaut et l'initialiser dans le corps (ou un `MappingProxyType` module) — supprime le piège classique du défaut mutable pour les évolutions futures.
+- `extract_zpt_variables` : un `FileNotFoundError` transitoire fait **cacher un set vide définitivement** (jusqu'au redémarrage) ; sortir la lecture du chemin caché ou vérifier l'existence avant, remplacer le `print` par `log.error`, et retourner un `frozenset`.

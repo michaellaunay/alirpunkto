@@ -71,7 +71,22 @@ postconf -e "milter_default_action = accept"
 postconf -e "smtpd_milters = unix:/run/opendkim/opendkim.sock"
 postconf -e "non_smtpd_milters = unix:/run/opendkim/opendkim.sock"
 
-postconf -e "smtpd_relay_restrictions = permit_mynetworks,reject_unauth_destination"
+# Relay policy: only trusted networks (mynetworks, tightly bounded below) may
+# relay; everything else is rejected. If you switch to SASL auth, add
+# "permit_sasl_authenticated" to each list below.
+postconf -e "smtpd_relay_restrictions = permit_mynetworks, reject_unauth_destination"
+
+# Defense in depth: explicit HELO / sender / recipient restrictions.
+postconf -e "smtpd_helo_required = yes"
+postconf -e "smtpd_helo_restrictions = permit_mynetworks, reject_invalid_helo_hostname, reject_non_fqdn_helo_hostname"
+postconf -e "smtpd_sender_restrictions = permit_mynetworks, reject_non_fqdn_sender, reject_unknown_sender_domain"
+postconf -e "smtpd_recipient_restrictions = permit_mynetworks, reject_non_fqdn_recipient, reject_unauth_destination"
+
+# Anti-abuse rate limiting (anvil): bounds abuse even if the relay were reachable.
+postconf -e "smtpd_client_connection_rate_limit = 30"
+postconf -e "smtpd_client_message_rate_limit = 100"
+postconf -e "anvil_rate_time_unit = 60s"
+
 postconf -e "smtp_host_lookup = dns"
 postconf -e "disable_dns_lookups = no"
 
@@ -86,12 +101,10 @@ fi
 if [ -n "${POSTFIX_MYNETWORKS}" ]; then
     postconf -e "mynetworks = ${POSTFIX_MYNETWORKS}"
 else
-    NETWORK="$(ip -o -f inet route show dev eth0 | awk '$1 != "default" {print $1; exit}' || true)"
-    if [ -n "${NETWORK}" ]; then
-        postconf -e "mynetworks = 127.0.0.0/8 ${NETWORK}"
-    else
-        postconf -e "mynetworks = 127.0.0.0/8"
-    fi
+    # SAFE default: never trust the whole bridge subnet (open-relay risk).
+    # Trust only loopback here; authorize the application container explicitly
+    # via POSTFIX_MYNETWORKS (see docker-compose.yaml) or via SASL.
+    postconf -e "mynetworks = 127.0.0.0/8 [::1]/128"
 fi
 
 # In Docker, Postfix chroot often causes DNS lookup issues.

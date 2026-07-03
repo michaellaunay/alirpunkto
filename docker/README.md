@@ -301,3 +301,73 @@ docker logs -f alirpunkto-apache2
 # Full stack via Compose
 docker compose --env-file docker/.env -f docker/docker-compose.yaml logs -f
 ```
+
+# Postfix — security notes
+
+## Do not publish port 25
+
+Postfix is **send-only** for AlirPunkto notifications and is reached by Pyramid
+over the internal `alirpunkto-net` (`alirpunkto-postfix:25`). It does **not** need
+a published port. The Compose stack no longer maps `9025:25`.
+
+If you use the manual `docker run` example, **remove** `-p 9025:25` (publishing 25
+on `0.0.0.0` exposes the relay to the Internet). Only publish it if this host must
+be an inbound MX — and then bind it explicitly to the public IP, add a host
+firewall, and enable SASL authentication:
+
+```bash
+# send-only (recommended): no port mapping
+docker run -d --name alirpunkto-postfix --network alirpunkto-net \
+  -e DOMAIN="<your-domain>" \
+  -e POSTFIX_MYHOSTNAME="<your-hostname>" \
+  -e POSTFIX_MYNETWORKS="127.0.0.0/8 [::1]/128 172.28.0.10/32" \
+  -v alirpunkto_postfix_spool:/var/spool/postfix \
+  -v alirpunkto_postfix_dkim:/etc/dkimkeys \
+  alirpunkto-postfix
+```
+
+`POSTFIX_MYNETWORKS` must **never** be left empty: the startup script would then
+auto-detect and trust the entire bridge subnet (a `/16` ≈ 65 000 addresses),
+which — combined with Docker NAT — opens the relay to the world.
+
+## Verify the relay is closed
+
+From an **external** host (open-relay test — expect a rejection):
+
+```bash
+swaks --server <public-ip>:25 --from spammer@evil.example --to target@gmail.com
+# Expected: 554 5.7.1 <target@gmail.com>: Relay access denied
+```
+
+From the host (effective settings):
+
+```bash
+docker exec alirpunkto-postfix postconf mynetworks smtpd_relay_restrictions inet_interfaces
+docker exec alirpunkto-postfix ss -ltnp | grep ':25'   # must NOT be exposed publicly
+```
+
+## DNS records to publish
+
+The container prints the DKIM public key on first start
+(`docker exec alirpunkto-postfix cat /etc/dkimkeys/dkim.txt`). To send mail
+without being flagged as spam and to limit spoofing, publish **all four** records
+for `<your-domain>`:
+
+| Type | Name | Value (example) | Purpose |
+|---|---|---|---|
+| TXT | `dkim._domainkey.<domain>` | `v=DKIM1; k=rsa; p=<public-key>` | DKIM signing key |
+| TXT | `<domain>` | `v=spf1 ip4:<sending-ip> -all` | SPF: authorize the sending IP, reject the rest |
+| TXT | `_dmarc.<domain>` | `v=DMARC1; p=quarantine; rua=mailto:postmaster@<domain>` | DMARC policy + reports |
+| PTR | reverse of `<sending-ip>` | `<your-hostname>` | rDNS/PTR matching `myhostname` (FCrDNS) |
+
+Notes:
+- **SPF**: list every IP that sends for the domain; `-all` (hard fail) is the
+  strong policy once the list is complete (use `~all` while validating).
+- **DMARC**: start with `p=none` to observe via `rua=` reports, then move to
+  `p=quarantine`/`p=reject`.
+- **rDNS/PTR** must match `POSTFIX_MYHOSTNAME`, and forward-confirmed reverse DNS
+  (PTR ↔ A) is often required by large providers (Gmail, Outlook…).
+- **OpenDKIM** signs `*@${DOMAIN}`. With the relay closed this is safe; if you
+  ever expose the MX, scope `InternalHosts`/`ExternalIgnoreList` in
+  `opendkim.conf` so only genuinely internal traffic is signed (otherwise a
+  spammer could get the domain to sign their spam).
