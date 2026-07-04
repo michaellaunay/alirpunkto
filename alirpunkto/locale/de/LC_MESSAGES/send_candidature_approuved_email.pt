@@ -4,7 +4,7 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual" >Deine Bewerbung für die <span tal:replace="domain_name">Site Name</span> wurde genehmigt</title>
+    <title tal:omit-tag="textual" >Deine Bewerbung an der Plattform von <span tal:replace="domain_name">Site Name</span> wurde genehmigt</title>
 </head>
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Glückwunsch zur Genehmigung deines Antrags!</h1>
