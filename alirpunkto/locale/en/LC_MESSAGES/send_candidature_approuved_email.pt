@@ -13,7 +13,7 @@
     
     <p tal:omit-tag="textual">We are pleased to inform you that your application to the <span tal:replace="domain_name">Domain name</span> platform for the role of <span tal:replace="python:candidature.type">Role</span> has been approved.</p>
 
-    <p tal:omit-tag="textual">Thank you for joining us! We are happy to welcome you in our Community./p>
+    <p tal:omit-tag="textual">Thank you for joining us! We are happy to welcome you in our Community.</p>
     
     <p tal:omit-tag="textual">Now that your application has been approved, you can log in to our platform using the pseudonym and password you provided during the application process. After having logged in, you will find:</p>
     <ul tal:omit-tag="textual">
