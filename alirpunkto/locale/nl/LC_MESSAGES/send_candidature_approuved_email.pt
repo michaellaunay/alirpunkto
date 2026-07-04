@@ -17,7 +17,7 @@
     
     <p tal:omit-tag="textual">Nu je aanmelding is goedgekeurd, kun je inloggen op ons platform met het pseudoniem en wachtwoord dat je tijdens de aanmeldprocedure hebt opgegeven. Nadat je bent ingelogd, vind je:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">de links naar alle softwaretoepassingen waartoe je direct toegang hebt. Je hoeft niet opnieuw in te loggen! Bezoek vooral onze <a href="https://workspace.<span tal:replace="domain_name">Domeinnaam</span>">werkruimte</a>, waar het grootste deel van onze activiteiten plaatsvindt;</li>
+        <li tal:omit-tag="textual">de links naar alle softwaretoepassingen waartoe je direct toegang hebt. Je hoeft niet opnieuw in te loggen! Bezoek vooral onze <a tal:attributes="href string:https://workspace.${domain_name}">werkruimte</a>, waar het grootste deel van onze activiteiten plaatsvindt;</li>
         <li tal:omit-tag="textual">een link naar het formulier waar je je eigen profiel kunt bekijken en bewerken. Op dit formulier moedigen we je aan om jezelf te presenteren aan de andere leden van onze Gemeenschap in een korte "profieltekst";</li>
         <li tal:omit-tag="textual">een link om uit te loggen.</li>
     </ul>
