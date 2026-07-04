@@ -17,7 +17,7 @@
     
     <p tal:omit-tag="textual">Teraz, gdy Twoja aplikacja została zatwierdzona, możesz zalogować się na naszej platformie przy użyciu pseudonimu i hasła podanych podczas procesu aplikacji. Po zalogowaniu znajdziesz:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">linki do wszystkich aplikacji, do których masz bezpośredni dostęp. Nie musisz logować się ponownie! Odwiedź przede wszystkim nasz <a href="https://workspace.<span tal:replace="domain_name„>nazwa domeny</span>">obszar roboczy</a>, gdzie toczy się większość naszej działalności;</li>.
+        <li tal:omit-tag="textual">linki do wszystkich aplikacji, do których masz bezpośredni dostęp. Nie musisz logować się ponownie! Odwiedź przede wszystkim nasz <a tal:attributes="href string:https://workspace.${domain_name}">obszar roboczy</a>, gdzie toczy się większość naszej działalności;</li>.
         <li tal:omit-tag="textual">link do formularza, w którym możesz przeglądać i edytować swój profil. W tym formularzu zachęcamy do zaprezentowania się innym członkom naszej społeczności w krótkim „tekście profilowym";</li>
         <li tal:omit-tag="textual"> link do wylogowania się.</li>
     </ul>
