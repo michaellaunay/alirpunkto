@@ -17,7 +17,7 @@
     
     <p tal:omit-tag="textual">Nachdem dein Antrag genehmigt wurde, kannst du dich mit dem Pseudonym und dem Passwort, das du während des Antragsverfahrens angegeben hast, auf unserer Plattform anmelden. Nach der Anmeldung findest du:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">die Links zu allen Softwareanwendungen, auf die du direkt zugreifen kannst. Du musst dich nicht erneut anmelden! Besuche vorrangig unseren <a href="https://workspace.<span tal:replace="domain_name„>Domainname</span>">Arbeitsbereich</a>, wo der Großteil unserer Aktivitäten stattfindet;</li>
+        <li tal:omit-tag="textual">die Links zu allen Softwareanwendungen, auf die du direkt zugreifen kannst. Du musst dich nicht erneut anmelden! Besuche vorrangig unseren <a tal:attributes="href string:https://workspace.${domain_name}">Arbeitsbereich</a>, wo der Großteil unserer Aktivitäten stattfindet;</li>
         <li tal:omit-tag="textual">ein Link zu dem Formular, in dem du dein eigenes Profil anzeigen und bearbeiten kannst. In diesem Formular kannst du dich den anderen Mitgliedern unserer Gemeinschaft in einem kurzen „Profiltext" vorstellen;</li>
         <li tal:omit-tag="textual">einen Link zum Abmelden.</li>
     </ul>
