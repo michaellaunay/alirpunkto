@@ -27,7 +27,7 @@
         <li tal:omit-tag="textual">Twój pseudonim: <span tal:replace="python:candidature.pseudonym">pseudonym</span>. Proszę starannie i bezpiecznie zapisać ten pseudonim: to identyfikator, którego będziesz używać podczas całej swojej aktywności na naszej platformie IT;</li>
         <li tal:omit-tag="textual">Twoje hasło: (hasło, które podałeś podczas rejestracji);</li>
         <li tal:omit-tag="textual">Twój adres e-mail: (adres e-mail, na który wysyłamy niniejszą wiadomość e-mail);</li>
-        <li tal:omit-tag="textual" tal:condition="python:candidature.type=MemberTypes.COOPERATOR">Twoje dane identyfikacyjne: (wszystkie imiona i nazwiska, data urodzenia, podane i zweryfikowane podczas procesu rejestracji);</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR">Twoje dane identyfikacyjne: (wszystkie imiona i nazwiska, data urodzenia, podane i zweryfikowane podczas procesu rejestracji);</li>
         <li tal:omit-tag="textual">Twój preferowany język, w którym chcemy się z Tobą komunikować: <span tal:replace="python:candidature.lang1">Language_1</span>;</li>
         <li tal:omit-tag="textual">drugi język, który akceptujesz, abyśmy używali go do interakcji z Tobą: <span tal:replace="python:candidature.lang2">Language_2</span>;</li>
         <li tal:omit-tag="textual">język, który akceptujesz, a którego używamy jako trzeciego do interakcji z Tobą: <span tal:replace="python:candidature.lang3">Language_3</span>.</li>
