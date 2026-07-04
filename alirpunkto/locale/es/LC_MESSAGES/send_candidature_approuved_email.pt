@@ -9,28 +9,28 @@
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">¡Felicidades por la aprobación de tu Solicitud!</h1>
     
-    <p tal:omit-tag="textual">Hola <span tal:replace="user" tal:condition="exists:user">Nombre del Solicitante</span>,</p>
+    <p tal:omit-tag="textual">Hola <span tal:replace="python:candidature.pseudonym">pseudonym</span>,</p>
     
-    <p tal:omit-tag="textual">Tenemos el placer de informarte de que tu solicitud a la <span tal:replace="domain_name">Site name</span> para el rol de <span tal:replace="python:candidature.type">Role</span> ha sido aprobada.</p>
+    <p tal:omit-tag="textual">Tenemos el placer de informarte de que tu solicitud a la plataforma de <span tal:replace="domain_name">Site name</span> para el rol de <span tal:replace="python:candidature.type">Role</span> ha sido aprobada.</p>
     
     <p tal:omit-tag="textual">¡Gracias por unirte a nosotros! Nos complace darte la bienvenida a nuestra Comunidad.</p>
     
     <p tal:omit-tag="textual">Ahora que tu solicitud ha sido aprobada, puedes iniciar sesión en nuestra plataforma utilizando el seudónimo y la contraseña que proporcionaste durante el proceso de solicitud. Después de haber iniciado sesión, encontrarás:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">los enlaces a todas las aplicaciones informáticas a las que tienes acceso directo. ¡No necesitas volver a conectarte!</li>
-        <li tal:omit-tag="textual">un enlace al formulario donde puedes ver y editar tu propio perfil. En este formulario, te animamos a presentarte a los demás miembros de nuestra Comunidad con un breve «texto de perfil» y a mostrar una pequeña foto que te represente (tu «avatar»);</li>
+        <li tal:omit-tag="textual">los enlaces a todas las aplicaciones informáticas a las que tienes acceso directo. ¡No necesitas volver a conectarte! Visita antes de nada nuestro <a href="https://workspace.<span tal:replace="domain_name«>nombre de dominio</span>»>espacio de trabajo</a>, donde se desarrolla la mayor parte de nuestra actividad;</li>
+        <li tal:omit-tag="textual">un enlace al formulario donde puedes ver y editar tu propio perfil. En este formulario, te animamos a presentarte a los demás miembros de nuestra Comunidad con un breve «texto de perfil»;</li>
         <li tal:omit-tag="textual">un enlace para cerrar la sesión.</li>
     </ul>
 
     <p tal:omit-tag="textual">Aquí tienes los principales elementos de tu perfil que registramos:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Tu seudónimo: ##PSEUDONYM. Por favor, guarda un REGISTRO CUIDADOSO Y SEGURO de este seudónimo: es el único identificador con el que puedes iniciar sesión en nuestra plataforma informática;</li>
+        <li tal:omit-tag="textual">Tu seudónimo: <span tal:replace="python:candidature.pseudonym">pseudonym</span>.Por favor, guarda bien este seudónimo: es el identificador que usarás durante toda tu actividad en nuestra plataforma informática;</li>
         <li tal:omit-tag="textual">tu contraseña: (la contraseña que proporcionaste al registrarte);</li>
         <li tal:omit-tag="textual">tu dirección de correo electrónico: (la dirección de correo electrónico a la que enviamos el presente correo electrónico);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">Tus datos de identidad: (todos tus nombres y apellidos, tu fecha de nacimiento, tal y como se facilitaron y verificaron durante el proceso de registro);</li>
-        <li tal:omit-tag="textual">tu idioma preferido para que interactuemos contigo: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">la segunda lengua que aceptas que utilicemos para interactuar contigo: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">la lengua que aceptas que utilicemos, como tercera opción, para interactuar contigo: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type=MemberTypes.COOPERATOR">Tus datos de identidad: (todos tus nombres y apellidos, tu fecha de nacimiento, tal y como se facilitaron y verificaron durante el proceso de registro);</li>
+        <li tal:omit-tag="textual">tu idioma preferido para que interactuemos contigo: <span tal:replace="python:candidature.lang1">Language_1</span>;</li>
+        <li tal:omit-tag="textual">la segunda lengua que aceptas que utilicemos para interactuar contigo: <span tal:replace="python:candidature.lang2">Language_2</span>;</li>
+        <li tal:omit-tag="textual">la lengua que aceptas que utilicemos, como tercera opción, para interactuar contigo: <span tal:replace="python:candidature.lang3">Language_3</span>.</li>
         </ul>
 
     <p tal:omit-tag="textual">Para tu información, aquí tienes los detalles de la finalización de tu proceso de registro:</p>
