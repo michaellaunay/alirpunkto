@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    
+tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag=‚textual‘>Dein Antrag für den <span tal:replace="domain_name">Domainnamen</span> wurde abgelehnt</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Wir müssen dir leider mitteilen, dass dein Antrag abgelehnt wurde</h1>
+    
+    <p tal:omit-tag=‚textual‘>Hallo <span tal:replace="python:candidature.pseudonym">Name des Antragstellers</span>,</p>
+        <p tal:omit-tag="textual">Wir müssen dir leider mitteilen, dass deine Bewerbung bei <span tal:replace=‚domain_name‘>Domainname</span> für die Rolle <span tal:replace=‚python:candidature.type‘>Rolle</span> abgelehnt wurde.
+ Der Grund dafür ist, dass eine Mehrheit der Prüfer der Ansicht war, dass die von dir angegebenen Identitätsdaten (Vorname und Nachname, Geburtsdatum) nicht mit denen deiner amtlichen Ausweisdokumente übereinstimmen oder dass dein aktuelles Selfie nicht ausreichend mit dem Foto auf deinem amtlichen Ausweisdokument übereinstimmt. Wenn du der Meinung bist, dass es sich hierbei um einen Fehler handelt, laden wir dich ein, deine Bewerbung erneut einzureichen, vielleicht mit klareren Kopien deiner amtlichen Ausweisdokumente oder einem besseren Selfie.</p>
+    <p tal:omit-tag="textual">Wir sind uns der Enttäuschung und Frustration bewusst, die diese Ablehnung bei dir auslösen kann, und entschuldigen uns dafür. Andererseits möchten wir dich bitten zu bedenken, dass die Strenge unseres Bewerbungsverfahrens notwendig ist, um sicherzustellen, dass das demokratische Prinzip "eine Person – eine Stimme" in unserer Genossenschaft gewahrt bleibt und dass nur Bürger der Europäischen Union, die älter als 18 Jahre sind, Genossenschafter werden dürfen. </p>
+
+<p tal:omit-tag="textual">Zu deiner Information findest du hier die Details zum Abschluss deiner Anmeldung:</p>
+    <ul tal:omit-tag=‚textual‘>
+        <li tal:omit-tag="textual">Bewerbungs-ID: <span tal:replace="python:candidature.oid">Antrags-ID</span></li>
+        <li tal:omit-tag=‚textual‘>Ablehnungsdatum: <span tal:replace="python:candidature.modifications[-1]">Letzter Statuswechsel</span></li>
+        <li tal:omit-tag="textual">Status: Abgelehnt</li>
+    
+</ul>
+
+    
+    <p tal:omit-tag="textual">Wir bedauern erneut aufrichtig die Enttäuschung, die wir dir möglicherweise bereitet haben, und senden dir unsere </p>
+
+    
+    <p tal:omit-tag="textual">Herzlichen Grüße.</p>
+    
+<p tal:omit-tag="textual">Das Team von <span tal:replace="domain_name">Domain Name</span>.</p>
+    <p tal:omit-tag=‚textual‘ tal:content="organization_details">Angaben zur Organisation</p>
+</body>
+</html>
