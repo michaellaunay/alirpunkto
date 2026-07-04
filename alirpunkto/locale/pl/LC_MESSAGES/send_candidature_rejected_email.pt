@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    
+tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag=»textual«>Twój wniosek dotyczący <span tal:replace="domain_name">nazwy domeny</span> został odrzucony</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Z przykrością informujemy o odrzuceniu Twojego wniosku</h1>
+    
+    <p tal:omit-tag=»textual«>Cześć <span tal:replace="python:candidature.pseudonym">Imię wnioskodawcy</span>,</p>
+        <p tal:omit-tag="textual">Z przykrością informujemy, że Twój wniosek złożony na stronie <span tal:replace=»domain_name«>Nazwa domeny</span> o objęcie stanowiska <span tal:replace="python:candidature.type">Stanowisko</span> został odrzucony. Powodem jest to, że większość weryfikatorów uznała, że podane przez ciebie dane osobowe (imię i nazwisko, data urodzenia) nie zgadzają się z danymi z twoich oficjalnych dokumentów tożsamości albo że twoje aktualne selfie nie jest wystarczająco podobne do zdjęcia w twoim oficjalnym dokumencie tożsamości. Jeśli uważasz, że to pomyłka, zapraszamy cię do ponownego złożenia podania, na przykład z wyraźniejszymi kopiami oficjalnych dokumentów tożsamości lub lepszym zdjęciem selfie.</p>
+    <p tal:omit-tag="textual">Zdajemy sobie sprawę z rozczarowania i frustracji, jakie może wywołać u ciebie ta odmowa, i przepraszamy za to. Z drugiej strony prosimy, abyś wziął pod uwagę, że rygorystyczny proces weryfikacji jest niezbędny, aby zapewnić przestrzeganie w naszej Spółdzielni demokratycznej zasady "jedna osoba – jeden głos" oraz aby tylko obywatele Unii Europejskiej w wieku powyżej 18 lat mogli zostać członkami Spółdzielni. </p>
+
+<p tal:omit-tag="textual">Dla Twojej wiadomości, oto szczegóły dotyczące zakończenia procesu rejestracji:</p>
+    <ul tal:omit-tag=»textual«>
+        <li tal:omit-tag="textual">Identyfikator kandydatury: <span tal:replace="python:candidature.oid">ID zgłoszenia</span></li>
+        <li tal:omit-tag=»textual«>Data odrzucenia: <span tal:replace="python:candidature.modifications[-1]">Ostatnia zmiana</span></li>
+        <li tal:omit-tag="textual">Status: Odrzucone</li>
+    
+</ul>
+
+    
+    <p tal:omit-tag="textual">Jeszcze raz szczerze przepraszamy za rozczarowanie, jakie mogliśmy Ci sprawić, i przesyłamy Ci nasze </p>
+
+    
+    <p tal:omit-tag="textual">Pozdrowienia.</p>
+    
+<p tal:omit-tag="textual">Zespół <span tal:replace="domain_name">Domain Name</span>.</p>
+    <p tal:omit-tag=»textual« tal:content="organization_details">Dane organizacji</p>
+</body>
+</html>
