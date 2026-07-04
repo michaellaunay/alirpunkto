@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:metal=“http://xml.zope.org/namespaces/metal”
+    xmlns:i18n=“http://xml.zope.org/namespaces/i18n”
+    xmlns:tal=“http://xml.zope.org/namespaces/tal”
+    
+tal:omit-tag=“textual”>
+<head tal:omit-tag=“textual”>
+    <title tal:omit-tag=‘textual’>La tua richiesta per il <span tal:replace=“domain_name”>nome di dominio</span> è stata respinta</title>
+</head>
+<body tal:omit-tag=“textual”>
+    <h1 tal:omit-tag=“textual”>Ci dispiace informarti che la tua candidatura è stata respinta</h1>
+    
+    <p tal:omit-tag=‘textual’>Ciao <span tal:replace=“python:candidature.pseudonym”>Nome del candidato</span>,</p>
+        <p tal:omit-tag=“textual”>Ci dispiace informarti che la tua candidatura al <span tal:replace=‘domain_name’>Nome di dominio</span> per il ruolo di <span tal:replace=“python:candidature.type”>Ruolo</span> è stata respinta. Il motivo è che la maggioranza dei verificatori ha ritenuto che le informazioni da te fornite sulla tua identità (nome e cognome, data di nascita) non corrispondessero a quelle dei tuoi documenti d’identità ufficiali, oppure che il tuo selfie recente non fosse sufficientemente simile alla foto presente sul tuo documento d’identità ufficiale. Se ritieni che si tratti di un errore, ti invitiamo a inviare nuovamente la tua candidatura, magari allegando copie più nitide dei tuoi documenti d’identità ufficiali o un selfie di qualità migliore.</p>
+    <p tal:omit-tag=“textual”>Siamo consapevoli della delusione e della frustrazione che questo rifiuto possa causarti, e ci scusiamo per questo. D’altra parte, ti invitiamo a considerare che il rigore del nostro processo di candidatura è necessario per garantire che il principio democratico “una persona, un voto” sia rispettato nella nostra Cooperativa, e che solo i cittadini dell’Unione Europea di età superiore ai 18 anni possano diventare Cooperatori. </p>
+
+<p tal:omit-tag=“textual”>Per tua informazione, ecco i dettagli relativi alla conclusione della tua procedura di registrazione:</p>
+    <ul tal:omit-tag=‘textual’>
+        <li tal:omit-tag=“textual”>ID candidatura: <span tal:replace=“python:candidature.oid”>ID della candidatura</span></li>
+        <li tal:omit-tag=‘textual’>Data di rifiuto: <span tal:replace=“python:candidature.modifications[-1]”>Ultima modifica</span></li>
+        <li tal:omit-tag=“textual”>Stato: Rifiutata</li>
+    
+</ul>
+
+    
+    <p tal:omit-tag=“textual”>Ci dispiace davvero tanto per la delusione che potremmo averti causato e ti inviamo i nostri </p>
+
+    
+    <p tal:omit-tag=“textual”>Cordiali saluti.</p>
+    
+<p tal:omit-tag=“textual”>Il team di <span tal:replace=“domain_name”>Nome dominio</span>.</p>
+    <p tal:omit-tag=‘textual’ tal:content=“organization_details”>Dettagli dell'organizzazione</p>
+</body>
+</html>
