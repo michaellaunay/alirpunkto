@@ -17,7 +17,7 @@
     
     <p tal:omit-tag="textual">Maintenant que ta candidature a été approuvée, tu peux te connecter à notre plateforme en utilisant le pseudonyme et le mot de passe que tu as fournis pendant le processus de candidature. Après t'être connecté.e, tu trouveras :</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">les liens vers toutes les applications logicielles auxquelles tu as directement accès. Tu n'as pas besoin de te reconnecter&nbsp;! Rends-toi en priorité sur notre <a href="https://workspace.<span tal:replace="domain_name">nom de domaine</span>">espace de travail</a>, où se déroule l'essentiel de notre activité&nbsp;;</li>
+        <li tal:omit-tag="textual">les liens vers toutes les applications logicielles auxquelles tu as directement accès. Tu n'as pas besoin de te reconnecter&nbsp;! Rends-toi en priorité sur notre <a tal:attributes="href string:https://workspace.${domain_name}">espace de travail</a>, où se déroule l'essentiel de notre activité&nbsp;;</li>
         <li:omit-tag="textual">un lien vers le formulaire où tu peux consulter et modifier ton propre profil. Sur ce formulaire, nous t'encourageons à te présenter aux autres membres de notre Communauté dans un court "texte de profil";</li>.
         <li tal:omit-tag="textual">un lien permettant de te déconnecter.</li>
     </ul>
