@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    
+tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag=‘textual’>Je aanvraag voor de <span tal:replace="domain_name">domeinnaam</span> is afgewezen</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Het spijt ons je te moeten meedelen dat je aanvraag is afgewezen</h1>
+    
+    <p tal:omit-tag=‘textual’>Hallo <span tal:replace="python:candidature.pseudonym">Naam van de aanvrager</span>,</p>
+        <p tal:omit-tag="textual">Helaas moeten we je laten weten dat je sollicitatie bij <span tal:replace=‘domain_name’>Domeinnaam</span> voor de functie van <span tal:replace="python:candidature.type">Functie</span> is afgewezen. De reden hiervoor is dat een meerderheid van de verificateurs van mening was dat de gegevens die je over je identiteit hebt verstrekt (voor- en achternaam, geboortedatum) niet overeenkwamen met die op je officiële identiteitsdocumenten, of dat je recente selfie niet voldoende overeenkwam met de foto op je officiële identiteitsdocument. Als je denkt dat dit een fout is, nodigen we je uit om je sollicitatie opnieuw in te dienen, eventueel met duidelijkere kopieën van je officiële identiteitsdocumenten of een betere selfie.</p>
+    <p tal:omit-tag="textual">We begrijpen dat deze afwijzing je teleurstelling en frustratie kan bezorgen, en bieden hiervoor onze excuses aan. Aan de andere kant vragen we je te bedenken dat de strenge aanpak van ons aanmeldingsproces nodig is om ervoor te zorgen dat het democratische principe ‘één persoon – één stem’ in onze Coöperatie wordt gerespecteerd, en dat alleen burgers van de Europese Unie die ouder zijn dan 18 jaar coöperanten mogen worden. </p>
+
+<p tal:omit-tag="textual">Ter informatie volgen hier de details van de afronding van je registratieproces:</p>
+    <ul tal:omit-tag=‘textual’>
+        <li tal:omit-tag="textual">Kandidatuur-ID: <span tal:replace="python:candidature.oid">Aanmeldings-ID</span></li>
+        <li tal:omit-tag=‘textual’>Datum afwijzing: <span tal:replace="python:candidature.modifications[-1]">Laatste wijziging</span></li>
+        <li tal:omit-tag="textual">Status: Afgewezen</li>
+    
+</ul>
+
+    
+    <p tal:omit-tag="textual">We vinden het nogmaals heel erg dat we je misschien teleurgesteld hebben, en sturen je onze </p>
+
+    
+    <p tal:omit-tag="textual">Vriendelijke groeten.</p>
+    
+<p tal:omit-tag="textual">Het team van <span tal:replace="domain_name">Domeinnaam</span>.</p>
+    <p tal:omit-tag=‘textual’ tal:content="organization_details">Organisatiegegevens</p>
+</body>
+</html>
