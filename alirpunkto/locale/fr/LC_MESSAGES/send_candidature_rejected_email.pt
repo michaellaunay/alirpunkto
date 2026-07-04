@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:metal=« http://xml.zope.org/namespaces/metal »
+    xmlns:i18n=« http://xml.zope.org/namespaces/i18n »
+    xmlns:tal=« http://xml.zope.org/namespaces/tal »
+    
+tal:omit-tag=« textual »>
+<head tal:omit-tag=« textual »>
+    <title tal:omit-tag=“textual”>Ta demande concernant le <span tal:replace=« domain_name »>nom de domaine</span> a été rejetée</title>
+</head>
+<body tal:omit-tag=« textual »>
+    <h1 tal:omit-tag=« textual »>Nous avons le regret de t'informer du rejet de ta candidature</h1>
+    
+    <p tal:omit-tag=« textual »>Bonjour <span tal:replace=« python:candidature.pseudonym »>Nom du candidat</span>,</p>
+        <p tal:omit-tag=« textual »>Nous avons le regret de t'informer que ta candidature auprès de <span tal:replace=« domain_name »>Nom de domaine</span> pour le statut de <span tal:replace=« python:candidature.type »>Statut</span> a été rejetée. La raison en est que la majorité des vérificateurs ont estimé que les informations que tu as fournies concernant ton identité (prénom et nom, date de naissance) ne correspondaient pas à celles figurant sur tes pièces d’identité officielles, ou que ton selfie récent ne correspondait pas suffisamment à la photo de ta pièce d’identité officielle. Si tu penses qu’il s’agit d’une erreur, nous t’invitons à soumettre à nouveau ta candidature, éventuellement avec des copies plus lisibles de tes pièces d’identité officielles ou un selfie de meilleure qualité.</p>
+    <p tal:omit-tag=« textual »>Nous sommes conscients de la déception et de la frustration que ce refus peut te causer, et nous t’en présentons nos excuses. D’un autre côté, nous t’invitons à considérer que la rigueur de notre processus de candidature est nécessaire pour garantir le respect du principe démocratique « une personne, une voix » au sein de notre coopérative, et que seuls les citoyens de l’Union européenne âgés de plus de 18 ans sont autorisés à devenir coopérateurs.
+ </p>
+
+<p tal:omit-tag=« textual »>Pour tes archives, voici les détails de la finalisation de ton processus d’inscription :</p>
+    <ul tal:omit-tag=“textual”>
+        <li tal:omit-tag=« textual »>ID de candidature : <span tal:replace=« python:candidature.oid »>ID de candidature</span></li>
+        <li tal:omit-tag=“textual”>Date de rejet : <span tal:replace=« python:candidature.modifications[-1] »>Dernière transition</span></li>
+        <li tal:omit-tag=« textual »>Statut : Rejeté</li>
+    
+</ul>
+
+    
+    <p tal:omit-tag=« textual »>Nous sommes encore une fois sincèrement désolés pour la déception que nous avons pu te causer, et nous t'adressons nos </p>
+
+    
+    <p tal:omit-tag=« textual »>Meilleures salutations,</p>
+    
+<p tal:omit-tag=« textual »>L'équipe de <span tal:replace=« domain_name »>Nom de domaine</span>.</p>
+    <p tal:omit-tag=“textual” tal:content=« organization_details »>Coordonnées de l'organisation</p>
+</body>
+</html>
