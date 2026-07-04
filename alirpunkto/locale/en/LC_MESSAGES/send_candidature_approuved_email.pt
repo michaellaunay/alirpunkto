@@ -27,7 +27,7 @@
         <li tal:omit-tag="textual">your pseudonym: <span tal:replace="python:candidature.pseudonym">Applicant's pseudonym</span>. Please keep a careful and secure record of this pseudonym: it is the identifier that you will use throughout your activity on our IT platform;</li>
         <li tal:omit-tag="textual">your password: (the password that you provided upon your registration);</li>
         <li tal:omit-tag="textual">your e-mail address: (the e-mail address to which we send the present e-mail);</li>
-        <li tal:omit-tag="textual" tal:condition="python:candidature.type=MemberTypes.COOPERATOR">your identity data: (all your given and family names, your date of birth, as provided and verified during your registration process);</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR">your identity data: (all your given and family names, your date of birth, as provided and verified during your registration process);</li>
         <li tal:omit-tag="textual">your preferred language for us to interact with you: <span tal:replace="python:candidature.lang1">Language_1</span>;</li>
         <li tal:omit-tag="textual">the second language that you accept that we use to interact with you: <span tal:replace="python:candidature.lang2">Language_2</span>;</li>
         <li tal:omit-tag="textual">the language that you accept that we use, as a third choice, to interact with you: <span tal:replace="python:candidature.lang3">Language_3</span>.</li>
