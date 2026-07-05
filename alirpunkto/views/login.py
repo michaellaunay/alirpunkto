@@ -47,8 +47,8 @@ def login_view(request):
     username = request.params.get('username', "")
     user = request.session.get('user', None)
     if 'form.submitted' in request.params:
-        username = request.params['username']
-        password = request.params['password']
+        username = request.params.get('username', "")
+        password = request.params.get('password', "")
         if is_admin(username, password):
             # The user is the ldap admin
             user = get_admin_user(request)

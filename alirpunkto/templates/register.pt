@@ -203,7 +203,7 @@
                         >${_("Proceed")}</button>
                         <form method="POST">
                             <div> <!-- CSRF Token Field -->
-                                <input type="d-none" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
+                                <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
                             </div>
                             <div i18n:translate="confirm_sent_emails_to_validators">Please confirm you
                                 have sent the emails to the validators.</div>

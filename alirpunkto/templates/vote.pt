@@ -27,7 +27,7 @@
                 <div>
                     <ul>
                         <tal:block tal:repeat="field python:candidature.data.iter_attributes()">
-                            <li tal:condition="python:field[0] not in ['password', 'password_confirm']">
+                            <li tal:condition="python:field[0] in ['fullname', 'fullsurname', 'nationality', 'birthdate', 'description', 'lang1', 'lang2', 'lang3']">
                                 <span tal:content="python:field[0]">Field Name</span>
                                 <span tal:content="python:field[1]">Field Value</span>
                             </li>

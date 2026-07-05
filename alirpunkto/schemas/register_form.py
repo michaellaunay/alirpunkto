@@ -30,8 +30,20 @@ optional_locales_as_choices = [
 ] + locales_as_choices
 
 def get_majority_date():
-    """Return the date of majority."""
-    return datetime.date.today() - datetime.timedelta(days=365*18)
+    """Return the date exactly 18 years ago (the latest birthdate of a major).
+
+    Using `today - timedelta(days=365*18)` ignores leap years and is off by the
+    4-5 leap days accumulated over 18 years, mis-classifying candidates born near
+    their 18th birthday. `replace(year=...)` gives the true calendar date; the
+    only edge case is a Feb 29 "today" whose target year is not a leap year, in
+    which case we fall back to Feb 28.
+    """
+    today = datetime.date.today()
+    try:
+        return today.replace(year=today.year - 18)
+    except ValueError:
+        # today is Feb 29 and (today.year - 18) is not a leap year
+        return today.replace(year=today.year - 18, day=28)
 
 
 def _validate_password(value):

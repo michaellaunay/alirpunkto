@@ -124,7 +124,7 @@ def get_members(request)->Members:
     conn = get_connection(request)
     return Members.get_instance(connection=conn)
 
-def get_member_by_email(email: str) -> Union[Dict[str, str], None]:
+def get_member_by_email(email: str) -> list:
     """Get the members from LDAP by their email.
     Args:
         email (str): the email of the member
@@ -156,7 +156,7 @@ def get_ldap_member_list(
         ldap_password=get_secret(LDAP_PASSWORD)) as conn:
         conn.search(
             LDAP_BASE_DN,
-            '(objectClass=*)',
+            '(objectClass=alirpunktoPerson)',
             search_scope=SUBTREE,
             attributes=['cn', 'uid', 'mail', 'isActive', 'employeeType']
         )
@@ -174,7 +174,7 @@ def get_ldap_member_list(
 
 def retrieve_candidature(
         request: Request
-    ) -> Union[Candidature, Dict]:
+    ) -> Tuple[Optional[Candidature], Dict]:
     """Retrieve an existing candidature from the session or URL and check if
     the OID in the URL is coherent with the OID in the session if it exists.
 
@@ -1621,7 +1621,7 @@ def logout(request: Request):
     if SSO_EXPIRES_AT in request.session:
         del request.session[SSO_EXPIRES_AT]
 
-def get_keycloak_token(user: User, password: str) -> Optional[str]:
+def get_keycloak_token(user: User, password: str) -> Optional[dict]:
     """Get the Keycloak token for the given user.
 
     This function sends a request to the Keycloak server to obtain an access token
