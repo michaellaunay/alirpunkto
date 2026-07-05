@@ -238,6 +238,7 @@ USER2_UUID="$(generate_uuid)"
 echo
 info "=== Apache / TLS settings ==="
 ask APACHE_SERVER_NAME "Public hostname for Apache" "$DOMAIN"
+ask_optional APACHE_SERVER_ALIASES "Extra Apache hostnames / ServerAlias (space-separated, e.g. www.${DOMAIN})"
 ask LETSENCRYPT_EMAIL  "Let's Encrypt e-mail" "$MAINTAINER_EMAIL"
 read -rp "$(echo -e "${BOLD}Enable Certbot (request TLS certificate now)? [y/N]${RESET}: ")" certbot_yn
 ENABLE_CERTBOT="false"
@@ -301,6 +302,7 @@ LDAP_PASSWORD_FILE=/run/secrets/ldap_password
 
 # ── Apache ────────────────────────────────────────────────────────────────────
 APACHE_SERVER_NAME="${APACHE_SERVER_NAME}"
+APACHE_SERVER_ALIASES="${APACHE_SERVER_ALIASES}"
 APACHE_BACKEND_HOST=alirpunkto-pyramid
 APACHE_BACKEND_PORT=6543
 ENABLE_CERTBOT=${ENABLE_CERTBOT}

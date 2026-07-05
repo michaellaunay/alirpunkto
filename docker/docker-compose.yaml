@@ -217,6 +217,7 @@ services:
       - "443:443"
     environment:
       APACHE_SERVER_NAME: ${APACHE_SERVER_NAME}
+      APACHE_SERVER_ALIASES: ${APACHE_SERVER_ALIASES:-}
       APACHE_BACKEND_HOST: alirpunkto-pyramid
       APACHE_BACKEND_PORT: 6543
       ENABLE_CERTBOT: ${ENABLE_CERTBOT:-false}
