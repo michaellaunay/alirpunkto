@@ -36,6 +36,22 @@ services:
     image: alirpunkto-ldap
     container_name: alirpunkto-ldap
     restart: unless-stopped
+    # Resource limits.
+    # Default containers are capped at 1 GB RAM.
+    # The Pyramid application is allowed up to 8 GB because it is the main
+    # application workload. These values can be adjusted later using `docker stats`.
+    #
+    # If a container runs away, it is OOM-killed on its own and restarted,
+    # instead of exhausting the host's 16 GB RAM and bringing down the whole stack.
+    mem_limit: 1g
+    cpus: 1.0
+    # Log rotation: caps disk usage (~50 MB/container),
+    # prevents an unbounded log from filling up the host disk.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
     networks:
       - alirpunkto-net
     ports:
@@ -69,6 +85,22 @@ services:
     image: alirpunkto-postfix
     container_name: alirpunkto-postfix
     restart: unless-stopped
+    # Resource limits.
+    # Default containers are capped at 1 GB RAM.
+    # The Pyramid application is allowed up to 8 GB because it is the main
+    # application workload. These values can be adjusted later using `docker stats`.
+    #
+    # If a container runs away, it is OOM-killed on its own and restarted,
+    # instead of exhausting the host's 16 GB RAM and bringing down the whole stack.
+    mem_limit: 1g
+    cpus: 1.0
+    # Log rotation: caps disk usage (~50 MB/container),
+    # prevents an unbounded log from filling up the host disk.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
     networks:
       - alirpunkto-net
     # No published port: Postfix is send-only and reachable by Pyramid over the
@@ -111,6 +143,22 @@ services:
     image: alirpunkto-pyramid
     container_name: alirpunkto-pyramid
     restart: unless-stopped
+    # Resource limits.
+    # Default containers are capped at 1 GB RAM.
+    # The Pyramid application is allowed up to 8 GB because it is the main
+    # application workload. These values can be adjusted later using `docker stats`.
+    #
+    # If a container runs away, it is OOM-killed on its own and restarted,
+    # instead of exhausting the host's 16 GB RAM and bringing down the whole stack.
+    mem_limit: 8g
+    cpus: 1.0
+    # Log rotation: caps disk usage (~50 MB/container),
+    # prevents an unbounded log from filling up the host disk.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
     networks:
       - alirpunkto-net
     ports:
@@ -146,6 +194,22 @@ services:
     image: alirpunkto-apache2
     container_name: alirpunkto-apache2
     restart: unless-stopped
+    # Resource limits.
+    # Default containers are capped at 1 GB RAM.
+    # The Pyramid application is allowed up to 8 GB because it is the main
+    # application workload. These values can be adjusted later using `docker stats`.
+    #
+    # If a container runs away, it is OOM-killed on its own and restarted,
+    # instead of exhausting the host's 16 GB RAM and bringing down the whole stack.
+    mem_limit: 1g
+    cpus: 1.0
+    # Log rotation: caps disk usage (~50 MB/container),
+    # prevents an unbounded log from filling up the host disk.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
     networks:
       - alirpunkto-net
     ports:

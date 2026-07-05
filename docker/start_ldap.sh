@@ -16,7 +16,6 @@ set -euo pipefail
 DEBUG_LDAP="${DEBUG_LDAP:-false}"
 DEBUG_PASSWORD_LDAP="${DEBUG_PASSWORD_LDAP:-false}"
 SKIP_INITIAL_LDAP="${SKIP_INITIAL_LDAP:-false}"
-
 LDIF_PATH="${INITIAL_USERS_LDIF:-/initials_users.ldif}"
 LDIF_SCHEMA="${LDAP_SCHEMA_LDIF:-/schema/alirpunkto_schema.ldif}"
 MARKER_PATH="${LDAP_INIT_MARKER:-/var/lib/ldap/.initials_users_loaded}"

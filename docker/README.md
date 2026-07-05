@@ -68,6 +68,17 @@ Compose starts services in dependency order using healthchecks:
 
 The `alirpunkto-net` network is created automatically.
 
+Each service ships with **resource limits** and **log rotation** (see
+`docker-compose.yaml`):
+
+- **Memory limits** (`mem_limit`) cap each container so a runaway process is
+  OOM-killed on its own (and restarted) instead of exhausting host RAM and
+  taking the whole stack down. Defaults: 1 GB per service, 8 GB for Pyramid
+  (the main workload). Tune to the host with `docker stats`.
+- **Log rotation** (`logging: json-file`, `max-size: 10m`, `max-file: 5`) caps
+  on-disk logs at ~50 MB per container, so an unbounded log cannot fill the
+  host disk.
+
 ### 3. Reset and reinitialise
 
 ```bash
@@ -105,6 +116,21 @@ docker build \
 
 You can also set `BUILD_WITH_DEBUG=1` in `docker/.env` so that
 `docker compose build` picks it up automatically.
+
+### Runtime LDAP logging
+
+The LDAP entrypoint (`start_ldap.sh`) has two independent **runtime** flags
+(set them in `docker/.env` or the service `environment:`):
+
+| Flag | Effect |
+|---|---|
+| `DEBUG_LDAP=true` | Verbose, **secret-safe** logs, and raises slapd to `-d 256` (stats). The admin password is shown as `<hidden>`. |
+| `DEBUG_PASSWORD_LDAP=true` | Enables shell `xtrace` and prints `LDAP_PASSWORD` **in cleartext** in the container logs. |
+
+> **Security:** never commit `DEBUG_PASSWORD_LDAP=true`. Use it only for a
+> one-off local diagnosis, then rotate the password and delete the logs that
+> captured it. At the default (`false`), no secret ever reaches the logs, and
+> slapd runs at `-d 0` (foreground, no verbose stats).
 
 ---
 
@@ -204,15 +230,18 @@ To request a TLS certificate automatically:
 
 ### Postfix
 
+> **Do not publish port 25.** Postfix is send-only and is reached by Pyramid
+> over `alirpunkto-net`; mapping `-p 9025:25` on `0.0.0.0` re-opens the relay to
+> the Internet. See "Postfix — security notes" below.
+
 ```bash
 docker build -f docker/DockerfilePostfix -t alirpunkto-postfix .
 
 docker volume create alirpunkto_postfix_spool
 docker volume create alirpunkto_postfix_dkim
 
-docker run --name alirpunkto-postfix \
+docker run -d --name alirpunkto-postfix \
   --network alirpunkto-net \
-  -p 9025:25 \
   -e DOMAIN="$DOMAIN" \
   -e POSTFIX_MYHOSTNAME="$POSTFIX_MYHOSTNAME" \
   -v alirpunkto_postfix_spool:/var/spool/postfix \
@@ -221,7 +250,7 @@ docker run --name alirpunkto-postfix \
 ```
 
 Optional variables: `POSTFIX_RELAYHOST`, `POSTFIX_INET_PROTOCOLS`,
-`POSTFIX_MESSAGE_SIZE_LIMIT`, `FAILOVER_IP`.
+`POSTFIX_MESSAGE_SIZE_LIMIT`, `POSTFIX_MYNETWORKS`, `FAILOVER_IP`.
 
 On first start, retrieve the DKIM DNS record with:
 
@@ -250,10 +279,13 @@ docker exec -it alirpunkto-apache2 bash
 ldapsearch -x \
   -H ldap://localhost \
   -D "cn=admin,$LDAP_BASE_DN" \
-  -w "$LDAP_PASSWORD" \
+  -W \
   -b "$LDAP_BASE_DN" \
   "(objectClass=inetOrgPerson)"
 ```
+
+> `-W` prompts for the password instead of passing it on the command line
+> (`-w …`), so it does not leak into the shell history or the process list.
 
 ### Python REPL with the full Pyramid environment
 
@@ -313,22 +345,34 @@ a published port. The Compose stack no longer maps `9025:25`.
 If you use the manual `docker run` example, **remove** `-p 9025:25` (publishing 25
 on `0.0.0.0` exposes the relay to the Internet). Only publish it if this host must
 be an inbound MX — and then bind it explicitly to the public IP, add a host
-firewall, and enable SASL authentication:
+firewall, and enable SASL authentication.
 
 ```bash
-# send-only (recommended): no port mapping
+# send-only (recommended): no port mapping, no POSTFIX_MYNETWORKS needed
 docker run -d --name alirpunkto-postfix --network alirpunkto-net \
   -e DOMAIN="<your-domain>" \
   -e POSTFIX_MYHOSTNAME="<your-hostname>" \
-  -e POSTFIX_MYNETWORKS="127.0.0.0/8 [::1]/128 172.28.0.10/32" \
   -v alirpunkto_postfix_spool:/var/spool/postfix \
   -v alirpunkto_postfix_dkim:/etc/dkimkeys \
   alirpunkto-postfix
 ```
 
-`POSTFIX_MYNETWORKS` must **never** be left empty: the startup script would then
-auto-detect and trust the entire bridge subnet (a `/16` ≈ 65 000 addresses),
-which — combined with Docker NAT — opens the relay to the world.
+### `POSTFIX_MYNETWORKS` and the relay perimeter
+
+Left unset (the default), `start_postfix.sh` auto-detects this container's own
+bridge subnet and trusts it. **This is safe precisely because port 25 is not
+published:** with no external ingress, only the stack's own containers on
+`alirpunkto-net` can reach Postfix, so trusting that private subnet cannot become
+an Internet-facing open relay.
+
+The danger only appears **if you publish port 25**: Docker NAT then makes external
+connections look like they come from the bridge gateway (inside the auto-detected
+subnet), so trusting a whole `/16` (≈ 65 000 addresses) opens the relay to the
+world. **If — and only if — you publish port 25**, do one of:
+
+- set `POSTFIX_MYNETWORKS` to a tight, explicit range (e.g. just the Pyramid
+  container's address), **or**
+- enable SASL authentication and drop `permit_mynetworks`.
 
 ## Verify the relay is closed
 
