@@ -33,11 +33,8 @@ RUN apt-get update && \
 # Nothing is placed here by the image itself; callers may bind-mount it.
 RUN mkdir -p /docker-entrypoint-initdb.d
 
-# Copy the initial users LDIF and the entrypoint script.
-# NOTE: userPassword values in initials_users.ldif must be pre-hashed with
-# `slappasswd` (e.g. {SSHA}…) before building this image. Storing plaintext
-# passwords in the image is a critical security risk.
-COPY ./initials_users.ldif /initials_users.ldif
+# Copy the entrypoint script.
+# Initial users LDIF is supplied at runtime by bind mount.
 COPY ./start_ldap.sh /start_ldap.sh
 RUN chmod +x /start_ldap.sh
 
