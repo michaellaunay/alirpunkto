@@ -17,10 +17,12 @@
     
     <p tal:omit-tag="textual">Ahora que tu solicitud ha sido aprobada, puedes iniciar sesión en nuestra plataforma utilizando el seudónimo y la contraseña que proporcionaste durante el proceso de solicitud. Después de haber iniciado sesión, encontrarás:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">los enlaces a todas las aplicaciones informáticas a las que tienes acceso directo. ¡No necesitas volver a conectarte! Visita antes de nada nuestro <a tal:attributes="href string:https://workspace.${domain_name}">espacio de trabajo</a>, donde se desarrolla la mayor parte de nuestra actividad;</li>
+        <li tal:omit-tag="textual">los enlaces a todas las aplicaciones informáticas a las que tienes acceso directo. ¡No necesitas volver a conectarte! Visita antes de nada nuestro <a href="https://workspace.cosmopolitical.coop/login">espacio de trabajo</a>, donde se desarrolla la mayor parte de nuestra actividad;</li>
         <li tal:omit-tag="textual">un enlace al formulario donde puedes ver y editar tu propio perfil. En este formulario, te animamos a presentarte a los demás miembros de nuestra Comunidad con un breve «texto de perfil»;</li>
         <li tal:omit-tag="textual">un enlace para cerrar la sesión.</li>
     </ul>
+
+ <p tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR"> <strong>¡No te olvides!</strong> Para disfrutar de todos tus derechos como cooperador, y sobre todo para poder votar, tienes que: (1) <a href="https://www.cosmopolitical.coop/Share">comprar al menos una participación en la Cooperativa</a> y (2) <a href="https://www.cosmopolitical.coop/YearContrib">pagar tu cuota anual</a>. ¡Hazlo lo antes posible!</p>
 
     <p tal:omit-tag="textual">Aquí tienes los principales elementos de tu perfil que registramos:</p>
     <ul tal:omit-tag="textual">
