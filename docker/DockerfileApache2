@@ -15,6 +15,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Enable the Apache modules required for TLS termination and reverse proxying.
 RUN a2enmod ssl rewrite proxy proxy_http headers remoteip
 
+# A6: global hardening that cannot live in a <VirtualHost> (server-config context):
+# hide the Apache/OS version banner and disable the TRACE method.
+RUN printf 'ServerTokens Prod\nServerSignature Off\nTraceEnable Off\n' \
+        > /etc/apache2/conf-available/hardening.conf \
+    && a2enconf hardening
+
 # Copy the generic site template used by the container entrypoint.
 # The client-specific file `alirpunkto.cosmopolitical.coop.conf` is kept in the
 # repository as a reference and is not enabled by default in this generic image.
