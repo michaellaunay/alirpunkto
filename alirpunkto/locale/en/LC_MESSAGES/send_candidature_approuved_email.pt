@@ -17,10 +17,11 @@
     
     <p tal:omit-tag="textual">Now that your application has been approved, you can log in to our platform using the pseudonym and password you provided during the application process. After having logged in, you will find:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">the links to all the software applications that you have directly access to. You don't need to log in again! Visit in priority our <a tal:attributes="href string:https://workspace.${domain_name}">workspace</a>, where the bulk of our activity takes place;</li>
+        <li tal:omit-tag="textual">the links to all the software applications that you have directly access to. You don't need to log in again! Visit in priority our <a href="https://workspace.cosmopolitical.coop/login">workspace</a>, where the bulk of our activity takes place;</li>
         <li tal:omit-tag="textual">a link to the form where you can view and edit your own profile. On this form, we encourage you to present yourself to the other members of our Community in a short "profile text";</li>
         <li tal:omit-tag="textual">a link to log out.</li>
     </ul>
+ <p tal:omit-tag= "textual" tal:condition= "python:candidature.type==MemberTypes.COOPERATOR"> <strong>Don’t forget!</strong> To enjoy all your rights as a Co-operator, and in particular to be entitled to vote, you must: (1) <a href="https://www.cosmopolitical.coop/Share">purchase at least one share in the Cooperative</a> and (2) <a href="https://www.cosmopolitical.coop/YearContrib">pay your annual contribution</a>. Do this as soon as possible!</p>
 
     <p tal:omit-tag="textual">Here are main elements of your profile that we recorded:</p>
     <ul tal:omit-tag="textual">
