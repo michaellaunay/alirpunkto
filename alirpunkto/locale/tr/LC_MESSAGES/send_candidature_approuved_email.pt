@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Kayıt ettiğimiz profilinizin ana unsurları şunlardır:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">takma adınız: ##PSEUDONYM. Bu takma adın KAYITLI VE GÜVENLİ BİR ŞEKİLDE KAYDEDİLMESİNE dikkat edin: bu, platformumuza giriş yapabilmeniz için tek tanımlayıcınızdır;</li>
+        <li tal:omit-tag="textual">takma adınız: <span tal:replace="user">pseudonym</span>. Bu takma adın KAYITLI VE GÜVENLİ BİR ŞEKİLDE KAYDEDİLMESİNE dikkat edin: bu, platformumuza giriş yapabilmeniz için tek tanımlayıcınızdır;</li>
         <li tal:omit-tag="textual">şifreniz: (kayıt sırasında sağladığınız şifre);</li>
         <li tal:omit-tag="textual">e-posta adresiniz: (bu e-postayı gönderdiğimiz e-posta adresi);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">kimlik verileriniz: (verdiğiniz tüm isimler, doğum tarihiniz, kayıt sürecinde sağlanan ve doğrulanan bilgiler);</li>
-        <li tal:omit-tag="textual">sizinle iletişim kurarken tercih ettiğimiz dil: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">sizinle iletişim kurmak için kabul ettiğiniz ikinci dil: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">sizinle iletişim kurmak için kabul ettiğiniz üçüncü dil: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">kimlik verileriniz: (verdiğiniz tüm isimler, doğum tarihiniz, kayıt sürecinde sağlanan ve doğrulanan bilgiler);</li>
+        <li tal:omit-tag="textual">sizinle iletişim kurarken tercih ettiğimiz dil: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">sizinle iletişim kurmak için kabul ettiğiniz ikinci dil: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">sizinle iletişim kurmak için kabul ettiğiniz üçüncü dil: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Kayıt sürecinizin tamamlanma detayları için işte bilgiler:</p>

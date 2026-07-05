@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Seo a leanas na príomhtháirgí de do phróifíl a taifeadadh againn:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">do ainm bréige: ##PSEUDONYM. Coinnigh taifead cúramach agus sábháilte den ainm bréige seo: is é an t-aon aithint atá agat le logáil isteach lenár n-ardán TF;</li>
+        <li tal:omit-tag="textual">do ainm bréige: <span tal:replace="user">pseudonym</span>. Coinnigh taifead cúramach agus sábháilte den ainm bréige seo: is é an t-aon aithint atá agat le logáil isteach lenár n-ardán TF;</li>
         <li tal:omit-tag="textual">do phasfhocal: (an pasfhocal a sholáthar tú le haghaidh do chlárúcháin);</li>
         <li tal:omit-tag="textual">do sheoladh ríomhphoist: (an seoladh ríomhphoist a chuirimid an ríomhphost seo chugat);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">do chuid sonraí aitheantais: (do na hainmneacha uile agus do ainm teaghlaigh, do dáta breithe, mar a sholáthraíodh agus a dheimhníodh le linn do phróisis cláraithe);</li>
-        <li tal:omit-tag="textual">do theanga is fearr leat dúinn chun comhoibriú leat: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">an dara teanga a cheadaíonn tú dúinn a úsáid chun comhoibriú leat: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">an teanga a cheadaíonn tú dúinn a úsáid, mar tríú rogha, chun comhoibriú leat: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">do chuid sonraí aitheantais: (do na hainmneacha uile agus do ainm teaghlaigh, do dáta breithe, mar a sholáthraíodh agus a dheimhníodh le linn do phróisis cláraithe);</li>
+        <li tal:omit-tag="textual">do theanga is fearr leat dúinn chun comhoibriú leat: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">an dara teanga a cheadaíonn tú dúinn a úsáid chun comhoibriú leat: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">an teanga a cheadaíonn tú dúinn a úsáid, mar tríú rogha, chun comhoibriú leat: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Chun do thaifid, seo na sonraí maidir le críochnú do phróisis cláraithe:</p>

@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Aqui estão os principais elementos do seu perfil que registramos:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">seu pseudônimo: ##PSEUDONYM. Por favor, mantenha um REGISTRO CUIDADOSO E SEGURO deste pseudônimo: é o único identificador com o qual você pode fazer login na nossa plataforma de TI;</li>
+        <li tal:omit-tag="textual">seu pseudônimo: <span tal:replace="user">pseudonym</span>. Por favor, mantenha um REGISTRO CUIDADOSO E SEGURO deste pseudônimo: é o único identificador com o qual você pode fazer login na nossa plataforma de TI;</li>
         <li tal:omit-tag="textual">sua senha: (a senha que você forneceu durante o seu registro);</li>
         <li tal:omit-tag="textual">seu endereço de e-mail: (o endereço de e-mail para o qual enviamos o presente e-mail);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">seus dados de identidade: (todos os seus nomes e sobrenomes, sua data de nascimento, conforme fornecido e verificado durante o seu processo de registro);</li>
-        <li tal:omit-tag="textual">sua língua preferida para que possamos interagir com você: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">a segunda língua que você aceita que usemos para interagir com você: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">a língua que você aceita que usemos, como terceira escolha, para interagir com você: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">seus dados de identidade: (todos os seus nomes e sobrenomes, sua data de nascimento, conforme fornecido e verificado durante o seu processo de registro);</li>
+        <li tal:omit-tag="textual">sua língua preferida para que possamos interagir com você: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">a segunda língua que você aceita que usemos para interagir com você: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">a língua que você aceita que usemos, como terceira escolha, para interagir com você: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Para seus registros, aqui estão os detalhes da finalização do seu processo de registro:</p>

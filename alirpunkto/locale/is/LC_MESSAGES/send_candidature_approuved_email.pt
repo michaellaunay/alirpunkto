@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Hér eru aðalþættirnir í prófílnum þínum sem við skráðum:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">dulnafn þitt: ##PSEUDONYM. Vinsamlegast varðveittu VANDAFELDA og ÖRUGGA SKRÁ yfir þetta dulnafn: það er eini auðkenni sem þú getur skráð þig inn á okkar IT-vettvang;</li>
+        <li tal:omit-tag="textual">dulnafn þitt: <span tal:replace="user">pseudonym</span>. Vinsamlegast varðveittu VANDAFELDA og ÖRUGGA SKRÁ yfir þetta dulnafn: það er eini auðkenni sem þú getur skráð þig inn á okkar IT-vettvang;</li>
         <li tal:omit-tag="textual">lykilorð þitt: (lykilorðið sem þú gafst þegar þú skráð þig inn);</li>
         <li tal:omit-tag="textual">netfangið þitt: (netfangið sem við sendum þetta tölvupóst);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">auðkennisgögnin þín: (öll nöfn þín bæði gefin og fjölskyldunöfn, fæðingardagur þinn, eins og gefið var upp og staðfest í gegnum skráninguna);</li>
-        <li tal:omit-tag="textual">valin tungumál fyrir samskipti við þig: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">annað tungumál sem þú samþykkir að við notum í samskiptum við þig: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">tungumál sem þú samþykkir að við notum, sem þriðja valkost, í samskiptum við þig: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">auðkennisgögnin þín: (öll nöfn þín bæði gefin og fjölskyldunöfn, fæðingardagur þinn, eins og gefið var upp og staðfest í gegnum skráninguna);</li>
+        <li tal:omit-tag="textual">valin tungumál fyrir samskipti við þig: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">annað tungumál sem þú samþykkir að við notum í samskiptum við þig: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">tungumál sem þú samþykkir að við notum, sem þriðja valkost, í samskiptum við þig: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Fyrir þína skráningu, hér eru upplýsingar um lokun skráningarferlisins þíns:</p>

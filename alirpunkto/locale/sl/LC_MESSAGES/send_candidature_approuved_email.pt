@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Tukaj so glavni elementi vašega profila, ki smo jih zabeležili:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">vaš psevdonim: ##PSEUDONYM. Prosim, shranite POZORNO IN VARNO to evidenco psevdonima: to je edini identifikator, s katerim se lahko prijavite na našo IT platformo;</li>
+        <li tal:omit-tag="textual">vaš psevdonim: <span tal:replace="user">pseudonym</span>. Prosim, shranite POZORNO IN VARNO to evidenco psevdonima: to je edini identifikator, s katerim se lahko prijavite na našo IT platformo;</li>
         <li tal:omit-tag="textual">vaše geslo: (geslo, ki ste ga navedli ob registraciji);</li>
         <li tal:omit-tag="textual">vaš e-poštni naslov: (e-poštni naslov, na katerega pošljemo to e-sporočilo);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">vaši identitetni podatki: (vsa vaša imena in priimki, vaša datum rojstva, kot je bilo navedeno in preverjeno med postopkom registracije);</li>
-        <li tal:omit-tag="textual">vaš želeni jezik za komunikacijo z nami: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">drugi jezik, ki ga sprejemate za komunikacijo z nami: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">jezik, ki ga sprejemate, kot tretjo izbiro, za komunikacijo z nami: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">vaši identitetni podatki: (vsa vaša imena in priimki, vaša datum rojstva, kot je bilo navedeno in preverjeno med postopkom registracije);</li>
+        <li tal:omit-tag="textual">vaš želeni jezik za komunikacijo z nami: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">drugi jezik, ki ga sprejemate za komunikacijo z nami: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">jezik, ki ga sprejemate, kot tretjo izbiro, za komunikacijo z nami: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Za vašo evidenco so tukaj podrobnosti o zaključku vašega postopka registracije:</p>

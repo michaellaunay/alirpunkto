@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Siin on teie profiili peamised elemendid, mille me registreerisime:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">teie pseudonüüm: ##PSEUDONYM. Palun hoidke selle pseudonüümi kohta HOOLEGA ja TURVALISELT KIRJENDUST: see on ainus identifikaator, millega saate meie IT-platvormile sisse logida;</li>
+        <li tal:omit-tag="textual">teie pseudonüüm: <span tal:replace="user">pseudonym</span>. Palun hoidke selle pseudonüümi kohta HOOLEGA ja TURVALISELT KIRJENDUST: see on ainus identifikaator, millega saate meie IT-platvormile sisse logida;</li>
         <li tal:omit-tag="textual">teie parool: (parool, mille esitasite registreerimise ajal);</li>
         <li tal:omit-tag="textual">teie e-posti aadress: (e-posti aadress, millele saadame selle e-kirja);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">teie isikuandmed: (kõik teie eesnimed ja perekonnanimi, teie sünnikuupäev, nagu on esitatud ja kinnitatud teie registreerimise käigus);</li>
-        <li tal:omit-tag="textual">teie eelistatud keel meiega suhtlemiseks: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">teine keel, mille kasutamiseks nõustute: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">keel, mille kasutamiseks nõustute kolmanda valikuna: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">teie isikuandmed: (kõik teie eesnimed ja perekonnanimi, teie sünnikuupäev, nagu on esitatud ja kinnitatud teie registreerimise käigus);</li>
+        <li tal:omit-tag="textual">teie eelistatud keel meiega suhtlemiseks: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">teine keel, mille kasutamiseks nõustute: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">keel, mille kasutamiseks nõustute kolmanda valikuna: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Teie arvestuseks on siin teie registreerimisprotsessi lõpetamise üksikasjad:</p>

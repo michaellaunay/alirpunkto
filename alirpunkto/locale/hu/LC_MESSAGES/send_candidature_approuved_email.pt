@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Itt vannak a profiljának fő elemei, amelyeket rögzítettünk:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">az Ön álneve: ##PSEUDONYM. Kérjük, őrizze meg ELOLVASOTT ÉS BIZTONSÁGOS KÉRÉSSEL ezt az álnevet: ez az egyetlen azonosító, amellyel be tud jelentkezni az IT platformunkra;</li>
+        <li tal:omit-tag="textual">az Ön álneve: <span tal:replace="user">pseudonym</span>. Kérjük, őrizze meg ELOLVASOTT ÉS BIZTONSÁGOS KÉRÉSSEL ezt az álnevet: ez az egyetlen azonosító, amellyel be tud jelentkezni az IT platformunkra;</li>
         <li tal:omit-tag="textual">az Ön jelszava: (a jelszó, amelyet a regisztráció során adott meg);</li>
         <li tal:omit-tag="textual">az Ön e-mail címe: (az e-mail cím, amelyre a jelen e-mailt küldtük);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">az Ön személyazonosító adatai: (az összes megadott és családi név, születési dátuma, ahogyan azt a regisztráció során megadták és ellenőrizték);</li>
-        <li tal:omit-tag="textual">az a nyelv, amelyet preferál, hogy kapcsolatba lépjünk Önnel: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">a második nyelv, amelyet elfogad, hogy kapcsolatba lépjünk Önnel: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">a harmadik választásként elfogadott nyelv, amelyet kapcsolatba lépjünk Önnel: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">az Ön személyazonosító adatai: (az összes megadott és családi név, születési dátuma, ahogyan azt a regisztráció során megadták és ellenőrizték);</li>
+        <li tal:omit-tag="textual">az a nyelv, amelyet preferál, hogy kapcsolatba lépjünk Önnel: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">a második nyelv, amelyet elfogad, hogy kapcsolatba lépjünk Önnel: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">a harmadik választásként elfogadott nyelv, amelyet kapcsolatba lépjünk Önnel: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">A dokumentálás céljából itt vannak a regisztrációs folyamat véglegesítésének részletei:</p>

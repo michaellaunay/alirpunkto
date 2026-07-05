@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Här är huvuduppgifterna i din profil som vi har registrerat:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">ditt pseudonym: ##PSEUDONYM. Vänligen håll en NOGGRANN OCH SÄKER REGISTER över detta pseudonym: det är den enda identifieraren med vilken du kan logga in på vår IT-plattform;</li>
+        <li tal:omit-tag="textual">ditt pseudonym: <span tal:replace="user">pseudonym</span>. Vänligen håll en NOGGRANN OCH SÄKER REGISTER över detta pseudonym: det är den enda identifieraren med vilken du kan logga in på vår IT-plattform;</li>
         <li tal:omit-tag="textual">ditt lösenord: (det lösenord som du angav vid registreringen);</li>
         <li tal:omit-tag="textual">din e-postadress: (den e-postadress till vilken vi skickar denna e-post);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">dina identitetsuppgifter: (alla dina förnamn och efternamn, ditt födelsedatum, som angavs och verifierades under din registreringsprocess);</li>
-        <li tal:omit-tag="textual">ditt föredragna språk för vår kommunikation med dig: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">det andra språket som du accepterar att vi använder för att kommunicera med dig: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">språket som du accepterar att vi använder, som ett tredje val, för att kommunicera med dig: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">dina identitetsuppgifter: (alla dina förnamn och efternamn, ditt födelsedatum, som angavs och verifierades under din registreringsprocess);</li>
+        <li tal:omit-tag="textual">ditt föredragna språk för vår kommunikation med dig: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">det andra språket som du accepterar att vi använder för att kommunicera med dig: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">språket som du accepterar att vi använder, som ett tredje val, för att kommunicera med dig: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">För din kännedom, här är detaljerna för slutförandet av din registreringsprocess:</p>

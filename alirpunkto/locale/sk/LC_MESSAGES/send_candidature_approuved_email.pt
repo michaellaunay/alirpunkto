@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Tu sú hlavné prvky vášho profilu, ktoré sme zaznamenali:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">váš pseudonym: ##PSEUDONYM. Prosím, uchovávajte si STAROSTLIVÝ A BEZPEČNÝ ZÁZNAM tohto pseudonymu: je to jediný identifikátor, s ktorým sa môžete prihlásiť na našu IT platformu;</li>
+        <li tal:omit-tag="textual">váš pseudonym: <span tal:replace="user">pseudonym</span>. Prosím, uchovávajte si STAROSTLIVÝ A BEZPEČNÝ ZÁZNAM tohto pseudonymu: je to jediný identifikátor, s ktorým sa môžete prihlásiť na našu IT platformu;</li>
         <li tal:omit-tag="textual">vaše heslo: (heslo, ktoré ste uviedli pri registrácii);</li>
         <li tal:omit-tag="textual">vaša e-mailová adresa: (e-mailová adresa, na ktorú posielame tento e-mail);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">vaše identifikačné údaje: (všetky vaše krstné a priezviská, dátum narodenia, ako ste uviedli a overili počas registračného procesu);</li>
-        <li tal:omit-tag="textual">vaša preferovaná jazyková verzia pre našu interakciu: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">druhý jazyk, ktorý akceptujete, že použijeme na interakciu s vami: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">jazyk, ktorý akceptujete, že použijeme ako tretiu voľbu na interakciu s vami: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">vaše identifikačné údaje: (všetky vaše krstné a priezviská, dátum narodenia, ako ste uviedli a overili počas registračného procesu);</li>
+        <li tal:omit-tag="textual">vaša preferovaná jazyková verzia pre našu interakciu: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">druhý jazyk, ktorý akceptujete, že použijeme na interakciu s vami: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">jazyk, ktorý akceptujete, že použijeme ako tretiu voľbu na interakciu s vami: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Pre vaše záznamy, tu sú podrobnosti o dokončení vášho registračného procesu:</p>

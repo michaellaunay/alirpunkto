@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Вось асноўныя элементы вашага профілю, якія мы запісалі:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">ваш псевдонім: ##PSEUDONYM. Калі ласка, захавайце ЎВАГЛІВЫ І БЯСПЕЧНЫ ЗАПІС гэтага псевдоніма: гэта адзіны ідэнтыфікатар, з якім вы можаце ўвайсці ў нашу ІТ-платформу;</li>
+        <li tal:omit-tag="textual">ваш псевдонім: <span tal:replace="user">pseudonym</span>. Калі ласка, захавайце ЎВАГЛІВЫ І БЯСПЕЧНЫ ЗАПІС гэтага псевдоніма: гэта адзіны ідэнтыфікатар, з якім вы можаце ўвайсці ў нашу ІТ-платформу;</li>
         <li tal:omit-tag="textual">ваш пароль: (пароль, які вы прадставілі падчас рэгістрацыі);</li>
         <li tal:omit-tag="textual">ваш адрас электроннай пошты: (адрас электроннай пошты, на які мы адпраўляем гэты электронны ліст);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">вашы асобыя дадзеныя: (усі вашыя імя і прозвішча, дата вашага нараджэння, як было пададзена і праверана падчас вашага працэсу рэгістрацыі);</li>
-        <li tal:omit-tag="textual">ваша пераважная мова для нашых узаемадзеянняў: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">другая мова, якую вы згаджаецеся, каб мы выкарыстоўвалі для ўзаемадзеяння з вамі: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">мова, якую вы згаджаецеся, каб мы выкарыстоўвалі, як трэцяй выбар, для ўзаемадзеяння з вамі: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">вашы асобыя дадзеныя: (усі вашыя імя і прозвішча, дата вашага нараджэння, як было пададзена і праверана падчас вашага працэсу рэгістрацыі);</li>
+        <li tal:omit-tag="textual">ваша пераважная мова для нашых узаемадзеянняў: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">другая мова, якую вы згаджаецеся, каб мы выкарыстоўвалі для ўзаемадзеяння з вамі: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">мова, якую вы згаджаецеся, каб мы выкарыстоўвалі, як трэцяй выбар, для ўзаемадзеяння з вамі: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Для вашых запісаў, вось падрабязнасці завяршэння працэсу рэгістрацыі:</p>
