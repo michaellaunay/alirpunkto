@@ -17,10 +17,12 @@
     
     <p tal:omit-tag="textual">Nu je aanmelding is goedgekeurd, kun je inloggen op ons platform met het pseudoniem en wachtwoord dat je tijdens de aanmeldprocedure hebt opgegeven. Nadat je bent ingelogd, vind je:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">de links naar alle softwaretoepassingen waartoe je direct toegang hebt. Je hoeft niet opnieuw in te loggen! Bezoek vooral onze <a tal:attributes="href string:https://workspace.${domain_name}">werkruimte</a>, waar het grootste deel van onze activiteiten plaatsvindt;</li>
+        <li tal:omit-tag="textual">de links naar alle softwaretoepassingen waartoe je direct toegang hebt. Je hoeft niet opnieuw in te loggen! Bezoek vooral onze <a href="https://workspace.cosmopolitical.coop/login">werkruimte</a>, waar het grootste deel van onze activiteiten plaatsvindt;</li>
         <li tal:omit-tag="textual">een link naar het formulier waar je je eigen profiel kunt bekijken en bewerken. Op dit formulier moedigen we je aan om jezelf te presenteren aan de andere leden van onze Gemeenschap in een korte "profieltekst";</li>
         <li tal:omit-tag="textual">een link om uit te loggen.</li>
     </ul>
+
+ <p tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR"> <strong>Vergeet het niet!</strong> Om van al je rechten als Coöperant te kunnen genieten, en met name om stemrecht te hebben, moet je: (1) <a href="https://www.cosmopolitical.coop/Share">minstens één aandeel in de Coöperatie kopen</a> en (2) <a href="https://www.cosmopolitical.coop/YearContrib">je jaarlijkse bijdrage betalen</a>. Doe dit zo snel mogelijk!</p>
 
     <p tal:omit-tag="textual">hier zijn de belangrijkste elementen van je profiel die we hebben vastgelegd:</p>
     <ul tal:omit-tag="textual">
