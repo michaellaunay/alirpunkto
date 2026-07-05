@@ -17,11 +17,11 @@
     
     <p tal:omit-tag="textual">Nachdem dein Antrag genehmigt wurde, kannst du dich mit dem Pseudonym und dem Passwort, das du während des Antragsverfahrens angegeben hast, auf unserer Plattform anmelden. Nach der Anmeldung findest du:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">die Links zu allen Softwareanwendungen, auf die du direkt zugreifen kannst. Du musst dich nicht erneut anmelden! Besuche vorrangig unseren <a tal:attributes="href string:https://workspace.${domain_name}">Arbeitsbereich</a>, wo der Großteil unserer Aktivitäten stattfindet;</li>
-        <li tal:omit-tag="textual">ein Link zu dem Formular, in dem du dein eigenes Profil anzeigen und bearbeiten kannst. In diesem Formular kannst du dich den anderen Mitgliedern unserer Gemeinschaft in einem kurzen „Profiltext" vorstellen;</li>
+        <li tal:omit-tag="textual">die Links zu allen Softwareanwendungen, auf die du direkt zugreifen kannst. Du musst dich nicht erneut anmelden! Besuche vorrangig unseren <a href="https://workspace.cosmopolitical.coop/login">Arbeitsbereich</a>, wo der Großteil unserer Aktivitäten stattfindet;</li>
+        <li tal:omit-tag="textual">ein Link zu dem Formular, in dem du dein eigenes Profil anzeigen und bearbeiten kannst. In diesem Formular kannst du dich den anderen Mitgliedern unserer Gemeinschaft in einem kurzen "Profiltext" vorstellen;</li>
         <li tal:omit-tag="textual">einen Link zum Abmelden.</li>
     </ul>
-
+     <p tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR"> <strong>Vergiss nicht!</strong> Um alle deine Rechte als Genossenschaftler wahrnehmen zu können – und insbesondere um stimmberechtigt zu sein – musst du: (1) <a href="https://www.cosmopolitical.coop/Share">mindestens einen Genossenschaftsanteil</a> erwerben und (2) <a href="https://www.cosmopolitical.coop/YearContrib">deinen Jahresbeitrag</a> bezahlen. Erledige das so schnell wie möglich!</p>
     <p tal:omit-tag="textual">Hier sind die wichtigsten Elemente deines Profils, die wir erfasst haben:</p>
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">dein Pseudonym: <span tal:replace="python:candidature.pseudonym">pseudonym</span>. Bitte bewahre dieses Pseudonym sorgfältig und sicher auf: Es ist die Kennung, die du während deiner gesamten Tätigkeit auf unserer IT-Plattform verwenden wirst;</li>
