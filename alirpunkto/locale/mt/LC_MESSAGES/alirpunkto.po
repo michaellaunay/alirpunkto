@@ -1129,3 +1129,23 @@ msgstr "Jekk jogħġbok għinna nivverifikaw reġistrazzjoni ġdida fuq il-pjatt
 
 msgid "remind_verifier_subject"
 msgstr "Tfakkirija – jekk jogħġbok għinna nivverifikaw reġistrazzjoni ġdida fuq il-pjattaforma ta' ${domain_name}. L-iskadenza hi fi ${notice_time_verifiers} ijiem."
+
+#, fuzzy
+msgid "provider_role_activated"
+msgstr "Your Provider Account Has Been Created"
+
+#, fuzzy
+msgid "invalid_field_value"
+msgstr "Invalid value for field ${field}."
+
+#, fuzzy
+msgid "provider_update_failed"
+msgstr "Provider update failed."
+
+#, fuzzy
+msgid "provider_new_email_label"
+msgstr "New email (optional)"
+
+#, fuzzy
+msgid "provider_new_password_label"
+msgstr "New password (optional)"

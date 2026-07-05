@@ -1144,3 +1144,23 @@ msgstr "Допоможіть нам перевірити нову реєстра
 
 msgid "remind_verifier_subject"
 msgstr "Нагадування - Допоможіть нам перевірити нову реєстрацію на платформі ${domain_name}. Термін - ${notice_time_verifiers} днів."
+
+#, fuzzy
+msgid "provider_role_activated"
+msgstr "Your Provider Account Has Been Created"
+
+#, fuzzy
+msgid "invalid_field_value"
+msgstr "Invalid value for field ${field}."
+
+#, fuzzy
+msgid "provider_update_failed"
+msgstr "Provider update failed."
+
+#, fuzzy
+msgid "provider_new_email_label"
+msgstr "New email (optional)"
+
+#, fuzzy
+msgid "provider_new_password_label"
+msgstr "New password (optional)"

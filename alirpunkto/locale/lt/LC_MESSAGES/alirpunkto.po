@@ -1138,3 +1138,23 @@ msgstr "Prašome padėti mums patvirtinti naują registraciją platformoje ${dom
 
 msgid "remind_verifier_subject"
 msgstr "Pranešimas – Prašome padėti mums patvirtinti naują registraciją platformoje ${domain_name}. Terminas – per ${notice_time_verifiers} dienų."
+
+#, fuzzy
+msgid "provider_role_activated"
+msgstr "Your Provider Account Has Been Created"
+
+#, fuzzy
+msgid "invalid_field_value"
+msgstr "Invalid value for field ${field}."
+
+#, fuzzy
+msgid "provider_update_failed"
+msgstr "Provider update failed."
+
+#, fuzzy
+msgid "provider_new_email_label"
+msgstr "New email (optional)"
+
+#, fuzzy
+msgid "provider_new_password_label"
+msgstr "New password (optional)"
