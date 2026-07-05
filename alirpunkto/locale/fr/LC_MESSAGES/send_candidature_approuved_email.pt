@@ -17,11 +17,11 @@
     
     <p tal:omit-tag="textual">Maintenant que ta candidature a été approuvée, tu peux te connecter à notre plateforme en utilisant le pseudonyme et le mot de passe que tu as fournis pendant le processus de candidature. Après t'être connecté.e, tu trouveras :</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">les liens vers toutes les applications logicielles auxquelles tu as directement accès. Tu n'as pas besoin de te reconnecter&nbsp;! Rends-toi en priorité sur notre <a tal:attributes="href string:https://workspace.${domain_name}">espace de travail</a>, où se déroule l'essentiel de notre activité&nbsp;;</li>
+        <li tal:omit-tag="textual">les liens vers toutes les applications logicielles auxquelles tu as directement accès. Tu n'as pas besoin de te reconnecter&nbsp;! Rends-toi en priorité sur notre <a href="https://workspace.cosmopolitical.coop/login">espace de travail</a>, où se déroule l'essentiel de notre activité&nbsp;;</li>
         <li:omit-tag="textual">un lien vers le formulaire où tu peux consulter et modifier ton propre profil. Sur ce formulaire, nous t'encourageons à te présenter aux autres membres de notre Communauté dans un court "texte de profil";</li>.
         <li tal:omit-tag="textual">un lien permettant de te déconnecter.</li>
     </ul>
-
+    <p tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR"> <strong>N'oublie pas&nbsp;!</strong> Pour bénéficier de tous tes droits en tant que Coopérateur, et en particulier pour avoir le droit de vote, tu dois&nbsp;: (1)&nbsp;<a href="https://www.cosmopolitical.coop/Share">acheter au moins une part sociale de la Coopérative</a> et (2)&nbsp;<a href="https://www.cosmopolitical.coop/YearContrib">payer ta contribution annuelle</a>. Fais-le au plus tôt&nbsp;!</p>
     <p tal:omit-tag="textual">Voici les principaux éléments de ton profil que nous avons enregistrés&nbsp;:</p>
     <ul tal:omit-tag="textual">
         <li tal:omit-tag="textual">ton pseudonyme&nbsp;: <span tal:replace="python:candidature.pseudonym">pseudonym</span>. Conserve soigneusement et en toute sécurité ce pseudonyme&nbsp;: c'est l'identifiant que tu utiliseras tout au long de ton activité sur notre plateforme informatique&nbsp;;</li>.
