@@ -53,7 +53,8 @@ EXPOSE 389 636
 
 ENTRYPOINT ["/start_ldap.sh"]
 
-# Default command passed to the entrypoint: start slapd with all three
-# listeners and a moderate debug level (256 = stats).
-# Override at `docker run` time to pass a different debug level or subcommand.
-CMD ["slapd", "-h", "ldap:/// ldapi:/// ldaps:///", "-g", "openldap", "-u", "openldap", "-d", "256"]
+# No default command: the entrypoint (start_ldap.sh) builds the slapd invocation
+# itself, choosing the debug level from DEBUG_LDAP / DEBUG_PASSWORD_LDAP
+# (0 in production, 256 when debugging). Pass an explicit `slapd …` command to
+# `docker run` only to override this.
+CMD []

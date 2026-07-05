@@ -137,7 +137,14 @@ fi
 
 args=("$@")
 if [ "${#args[@]}" -eq 0 ]; then
-  args=(slapd -h "ldap:/// ldapi:/// ldaps:///" -g openldap -u openldap -d 256)
+  SLAPD_DEBUG_LEVEL=0 #Production mode: foreground without verbose stats logs.
+
+  if [[ "$DEBUG_LDAP" = "true" || "$DEBUG_PASSWORD_LDAP" = "true" ]]; then
+    # Debug mode: keep slapd stats logs.
+    SLAPD_DEBUG_LEVEL=256
+  fi
+
+  args=(slapd -h "ldap:/// ldapi:/// ldaps:///" -g openldap -u openldap -d "$SLAPD_DEBUG_LEVEL")
 fi
 
 # Only run initialization when starting slapd.
