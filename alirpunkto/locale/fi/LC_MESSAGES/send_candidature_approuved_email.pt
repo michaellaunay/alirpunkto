@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Tässä ovat pääelementit profiilistasi, jotka olemme tallentaneet:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">nimimerkkisi: ##PSEUDONYM. Ole hyvä ja pidä tämä nimimerkki huolellisesti ja turvallisesti tallessa: se on ainoa tunniste, jolla voit kirjautua IT-alustallemme;</li>
+        <li tal:omit-tag="textual">nimimerkkisi: <span tal:replace="user">pseudonym</span>. Ole hyvä ja pidä tämä nimimerkki huolellisesti ja turvallisesti tallessa: se on ainoa tunniste, jolla voit kirjautua IT-alustallemme;</li>
         <li tal:omit-tag="textual">salasanasi: (salasana, jonka annoit rekisteröinnin yhteydessä);</li>
         <li tal:omit-tag="textual">sähköpostiosoitteesi: (sähköpostiosoite, johon lähetämme tämän sähköpostin);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">henkilöllisyystietosi: (kaikki antamasi etu- ja sukunimet, syntymäaikasi, kuten rekisteröintiprosessissa on annettu ja varmennettu);</li>
-        <li tal:omit-tag="textual">haluamasi kieli, jolla kanssamme käytetään kommunikointia: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">toinen kieli, jonka hyväksyt käytettäväksi kanssasi kommunikoinnissa: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">kieli, jonka hyväksyt kolmantena vaihtoehtona käytettäväksi kanssasi kommunikoinnissa: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">henkilöllisyystietosi: (kaikki antamasi etu- ja sukunimet, syntymäaikasi, kuten rekisteröintiprosessissa on annettu ja varmennettu);</li>
+        <li tal:omit-tag="textual">haluamasi kieli, jolla kanssamme käytetään kommunikointia: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">toinen kieli, jonka hyväksyt käytettäväksi kanssasi kommunikoinnissa: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">kieli, jonka hyväksyt kolmantena vaihtoehtona käytettäväksi kanssasi kommunikoinnissa: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Muistoesi vuoksi tässä ovat rekisteröintiprosessin loppuunsaattamisen tiedot:</p>

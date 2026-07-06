@@ -37,6 +37,6 @@ tal:omit-tag="textual">
 
 <p>Mit freundlichen Grüßen.</p>
 <p>Das Team von <span tal:replace="domain_name">Domain Name</span>.</p>
-<p tal:content="organisation_details">Organisationsdetails</p>
+<p tal:content="organization_details">Organisationsdetails</p>
 </body>
 </html>

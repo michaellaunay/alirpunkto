@@ -3,6 +3,9 @@
     ServerAlias ${APACHE_SERVER_ALIASES}
 
     RewriteEngine On
+    # A5: let ACME HTTP-01 (webroot) challenges through instead of redirecting.
+    # Harmless with certbot --standalone; required if you switch to --webroot.
+    RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/
     RewriteRule ^/(.*)$ https://${APACHE_SERVER_NAME}/$1 [R=301,L]
 </VirtualHost>
 
@@ -15,9 +18,22 @@
     SSLCertificateFile /etc/letsencrypt/live/${APACHE_SERVER_NAME}/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/${APACHE_SERVER_NAME}/privkey.pem
 
+    # A1: pin the TLS policy explicitly instead of relying on distro defaults.
+    # TLS 1.2/1.3 only, Mozilla "intermediate" ciphers.
+    SSLProtocol             -all +TLSv1.2 +TLSv1.3
+    SSLCipherSuite          ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305
+    SSLHonorCipherOrder     off
+    SSLSessionTickets       off
+
     ProxyPreserveHost On
+    ProxyRequests Off
     RequestHeader set X-Forwarded-Proto "https"
     RequestHeader set X-Forwarded-Port "${HTTPS_PORT}"
+    # A3: strip any client-supplied X-Forwarded-For so mod_proxy regenerates it
+    # from the real peer address. Apache is the edge here; the backend must still
+    # read the LAST (right-most) XFF entry. If you later put a CDN/LB in front,
+    # remove this and configure mod_remoteip (RemoteIPHeader + RemoteIPTrustedProxy).
+    RequestHeader unset X-Forwarded-For early
 
     ProxyPass / http://${APACHE_BACKEND_HOST}:${APACHE_BACKEND_PORT}/ retry=0 connectiontimeout=5 timeout=60
     ProxyPassReverse / http://${APACHE_BACKEND_HOST}:${APACHE_BACKEND_PORT}/
@@ -26,6 +42,22 @@
     Header always set X-Content-Type-Options "nosniff"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    # A6: do not relay a chatty framework header from the backend.
+    Header always unset X-Powered-By
+
+    # A2 — Content-Security-Policy (strongest XSS mitigation).
+    # Ships DISABLED because CSP must be tuned to the app's real assets; an
+    # untested policy will break the UI. Enable ONE line below AFTER testing in a
+    # browser (watch the console for blocked resources). Start from the strict
+    # variant and only loosen what actually breaks. 'frame-ancestors' supersedes
+    # X-Frame-Options on modern browsers (both are kept for old ones).
+    #
+    # Strict target (no inline JS/CSS, no external origins):
+    #Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+    #
+    # Pragmatic starter (allows inline styles that Bootstrap/deform often need;
+    # keep script-src WITHOUT 'unsafe-inline' if you can — prefer nonces/hashes):
+    #Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
 
     ErrorLog ${APACHE_LOG_DIR}/alirpunkto_error.log
     CustomLog ${APACHE_LOG_DIR}/alirpunkto_access.log combined

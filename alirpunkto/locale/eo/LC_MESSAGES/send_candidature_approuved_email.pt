@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Jen la ĉefaj elementoj de via profilo, kiujn ni registris:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">via pseŭdonimo: ##PSEUDONYM. Bonvolu zorgi pri aŭskultado kaj sekure konservi ĉi tiun pseŭdonimon: ĝi estas la sola identigilo per kiu vi povas ensaluti al nia IT-platformo;</li>
+        <li tal:omit-tag="textual">via pseŭdonimo: <span tal:replace="user">pseudonym</span>. Bonvolu zorgi pri aŭskultado kaj sekure konservi ĉi tiun pseŭdonimon: ĝi estas la sola identigilo per kiu vi povas ensaluti al nia IT-platformo;</li>
         <li tal:omit-tag="textual">via pasvorto: (la pasvorto, kiun vi provizis dum via registrado);</li>
         <li tal:omit-tag="textual">via retpoŝta adreso: (la retpoŝta adreso al kiu ni sendas ĉi tiun retpoŝton);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">via identeco datumoj: (ĉiuj viaj donitaj kaj familinomo, via naskiĝdato, kiel provizita kaj kontrolita dum via registrado);</li>
-        <li tal:omit-tag="textual">la preferata lingvo por ni interagi kun vi: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">la dua lingvo, kiun vi akceptas, ke ni uzas por interagi kun vi: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">la lingvo, kiun vi akceptas, ke ni uzas, kiel tria elekto, por interagi kun vi: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">via identeco datumoj: (ĉiuj viaj donitaj kaj familinomo, via naskiĝdato, kiel provizita kaj kontrolita dum via registrado);</li>
+        <li tal:omit-tag="textual">la preferata lingvo por ni interagi kun vi: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">la dua lingvo, kiun vi akceptas, ke ni uzas por interagi kun vi: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">la lingvo, kiun vi akceptas, ke ni uzas, kiel tria elekto, por interagi kun vi: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Por viaj rekordoj, jen la detaloj de la finaligo de via registrado:</p>

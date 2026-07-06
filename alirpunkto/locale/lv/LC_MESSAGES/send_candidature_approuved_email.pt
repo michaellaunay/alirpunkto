@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Šeit ir galvenie jūsu profila elementi, kurus mēs esam reģistrējuši:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">jūsu pseidonīms: ##PSEUDONYM. Lūdzu, saglabājiet ŠO PSEUDONĪMU DROŠI UN AR PAREIZĀM PLĀNOSIEM: tas ir vienīgais identifikators, ar kuru jūs varat pieteikties mūsu IT platformā;</li>
+        <li tal:omit-tag="textual">jūsu pseidonīms: <span tal:replace="user">pseudonym</span>. Lūdzu, saglabājiet ŠO PSEUDONĪMU DROŠI UN AR PAREIZĀM PLĀNOSIEM: tas ir vienīgais identifikators, ar kuru jūs varat pieteikties mūsu IT platformā;</li>
         <li tal:omit-tag="textual">jūsu parole: (parole, ko jūs sniedzāt reģistrācijas laikā);</li>
         <li tal:omit-tag="textual">jūsu e-pasta adrese: (e-pasta adrese, uz kuru mēs nosūtām šo e-pastu);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">jūsu identitātes dati: (visi jūsu vārdi un uzvārdi, jūsu dzimšanas datums, kā norādīts un pārbaudīts reģistrācijas procesā);</li>
-        <li tal:omit-tag="textual">jūsu vēlamā valoda saziņai ar jums: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">otrā valoda, ko jūs pieņemat, lai mēs ar jums sazinātos: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">valoda, ko jūs pieņemat kā trešo izvēli saziņai ar jums: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">jūsu identitātes dati: (visi jūsu vārdi un uzvārdi, jūsu dzimšanas datums, kā norādīts un pārbaudīts reģistrācijas procesā);</li>
+        <li tal:omit-tag="textual">jūsu vēlamā valoda saziņai ar jums: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">otrā valoda, ko jūs pieņemat, lai mēs ar jums sazinātos: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">valoda, ko jūs pieņemat kā trešo izvēli saziņai ar jums: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Jūsu ierakstiem, šeit ir jūsu reģistrācijas procesa pabeigšanas detaļas:</p>

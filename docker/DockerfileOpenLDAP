@@ -33,11 +33,8 @@ RUN apt-get update && \
 # Nothing is placed here by the image itself; callers may bind-mount it.
 RUN mkdir -p /docker-entrypoint-initdb.d
 
-# Copy the initial users LDIF and the entrypoint script.
-# NOTE: userPassword values in initials_users.ldif must be pre-hashed with
-# `slappasswd` (e.g. {SSHA}…) before building this image. Storing plaintext
-# passwords in the image is a critical security risk.
-COPY ./initials_users.ldif /initials_users.ldif
+# Copy the entrypoint script.
+# Initial users LDIF is supplied at runtime by bind mount.
 COPY ./start_ldap.sh /start_ldap.sh
 RUN chmod +x /start_ldap.sh
 
@@ -53,7 +50,8 @@ EXPOSE 389 636
 
 ENTRYPOINT ["/start_ldap.sh"]
 
-# Default command passed to the entrypoint: start slapd with all three
-# listeners and a moderate debug level (256 = stats).
-# Override at `docker run` time to pass a different debug level or subcommand.
-CMD ["slapd", "-h", "ldap:/// ldapi:/// ldaps:///", "-g", "openldap", "-u", "openldap", "-d", "256"]
+# No default command: the entrypoint (start_ldap.sh) builds the slapd invocation
+# itself, choosing the debug level from DEBUG_LDAP / DEBUG_PASSWORD_LDAP
+# (0 in production, 256 when debugging). Pass an explicit `slapd …` command to
+# `docker run` only to override this.
+CMD []

@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Ось основні елементи вашого профілю, які ми зафіксували:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">ваш псевдонім: ##PSEUDONYM. Будь ласка, зберігайте ОБЕРЕЖНИЙ І БЕЗПЕЧНИЙ ЗАПИС цього псевдоніма: він є єдиним ідентифікатором, з яким ви можете увійти на нашу IT платформу;</li>
+        <li tal:omit-tag="textual">ваш псевдонім: <span tal:replace="user">pseudonym</span>. Будь ласка, зберігайте ОБЕРЕЖНИЙ І БЕЗПЕЧНИЙ ЗАПИС цього псевдоніма: він є єдиним ідентифікатором, з яким ви можете увійти на нашу IT платформу;</li>
         <li tal:omit-tag="textual">ваш пароль: (пароль, який ви вказали під час реєстрації);</li>
         <li tal:omit-tag="textual">ваша електронна адреса: (електронна адреса, на яку ми відправляємо цей електронний лист);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">ваші особисті дані: (всі ваші ім'я та прізвище, дата народження, як було вказано і перевірено під час процесу реєстрації);</li>
-        <li tal:omit-tag="textual">ваша переважна мова для спілкування з нами: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">друга мова, яку ви приймаєте для спілкування з вами: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">мова, яку ви приймаєте для спілкування з вами, як третій варіант: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">ваші особисті дані: (всі ваші ім'я та прізвище, дата народження, як було вказано і перевірено під час процесу реєстрації);</li>
+        <li tal:omit-tag="textual">ваша переважна мова для спілкування з нами: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">друга мова, яку ви приймаєте для спілкування з вами: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">мова, яку ви приймаєте для спілкування з вами, як третій варіант: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Для вашого відома, ось деталі завершення процесу реєстрації:</p>

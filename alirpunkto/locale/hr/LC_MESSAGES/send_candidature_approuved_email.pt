@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Evo glavnih elemenata vašeg profila koje smo zabilježili:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">vaš nadimak: ##PSEUDONYM. Molimo vas da pažljivo i sigurno zabilježite ovaj nadimak: to je jedinstveni identifikator s kojim se možete prijaviti na našu IT platformu;</li>
+        <li tal:omit-tag="textual">vaš nadimak: <span tal:replace="user">pseudonym</span>. Molimo vas da pažljivo i sigurno zabilježite ovaj nadimak: to je jedinstveni identifikator s kojim se možete prijaviti na našu IT platformu;</li>
         <li tal:omit-tag="textual">vaša lozinka: (lozinka koju ste naveli prilikom registracije);</li>
         <li tal:omit-tag="textual">vaša e-mail adresa: (e-mail adresa na koju šaljemo ovaj e-mail);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">vaši identifikacijski podaci: (sva vaša imena i prezimena, datum rođenja, kao što su navedeni i potvrđeni tijekom vašeg postupka registracije);</li>
-        <li tal:omit-tag="textual">vaš preferirani jezik za komunikaciju s nama: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">drugi jezik koji prihvaćate da koristimo za komunikaciju s vama: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">jezik koji prihvaćate da koristimo, kao treći izbor, za komunikaciju s vama: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">vaši identifikacijski podaci: (sva vaša imena i prezimena, datum rođenja, kao što su navedeni i potvrđeni tijekom vašeg postupka registracije);</li>
+        <li tal:omit-tag="textual">vaš preferirani jezik za komunikaciju s nama: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">drugi jezik koji prihvaćate da koristimo za komunikaciju s vama: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">jezik koji prihvaćate da koristimo, kao treći izbor, za komunikaciju s vama: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Za vašu evidenciju, evo detalja o završetku vašeg postupka registracije:</p>

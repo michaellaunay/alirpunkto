@@ -8,45 +8,14 @@ POSTFIX_MESSAGE_SIZE_LIMIT="${POSTFIX_MESSAGE_SIZE_LIMIT:-26214400}"
 POSTFIX_MYNETWORKS="${POSTFIX_MYNETWORKS:-}"
 POSTFIX_DISABLE_EXTERNAL_DELIVERY="${POSTFIX_DISABLE_EXTERNAL_DELIVERY:-true}"
 
-cleanup() {
-    if [ -n "${POSTFIX_PID:-}" ] && kill -0 "${POSTFIX_PID}" 2>/dev/null; then
-        kill "${POSTFIX_PID}" 2>/dev/null || true
-        wait "${POSTFIX_PID}" 2>/dev/null || true
-    fi
-    if [ -n "${OPENDKIM_PID:-}" ] && kill -0 "${OPENDKIM_PID}" 2>/dev/null; then
-        kill "${OPENDKIM_PID}" 2>/dev/null || true
-        wait "${OPENDKIM_PID}" 2>/dev/null || true
-    fi
-}
-trap cleanup EXIT INT TERM
+# §3 correctif 4 — this sink accepts messages and discards them, so it does NOT
+# sign DKIM. OpenDKIM and the milter wiring have been removed: they added a
+# second long-running process that, combined with `wait -n`, could take the
+# whole container down for nothing. Postfix now runs as PID 1 (see `exec`
+# below), so there is no two-process supervision to get wrong.
 
 echo "[Postfix:test] Preparing directories"
-mkdir -p /etc/dkimkeys /run/opendkim /var/spool/postfix /etc/opendkim
-chown root:opendkim /etc/dkimkeys /run/opendkim
-chmod 775 /run/opendkim
-
-if [ ! -f "/etc/dkimkeys/dkim.private" ]; then
-    echo "[Postfix:test] Generating local DKIM key for ${DOMAIN}"
-    opendkim-genkey -D /etc/dkimkeys -d "${DOMAIN}" -s dkim
-fi
-
-chown root:opendkim /etc/dkimkeys/dkim.private
-chmod 640 /etc/dkimkeys/dkim.private
-
-cat > /etc/opendkim/KeyTable <<EOF
-dkim._domainkey.${DOMAIN} ${DOMAIN}:dkim:/etc/dkimkeys/dkim.private
-EOF
-
-cat > /etc/opendkim/SigningTable <<EOF
-*@${DOMAIN} dkim._domainkey.${DOMAIN}
-EOF
-
-cat > /etc/opendkim/TrustedHosts <<EOF
-127.0.0.1
-localhost
-${DOMAIN}
-${POSTFIX_MYHOSTNAME}
-EOF
+mkdir -p /var/spool/postfix
 
 echo "[Postfix:test] Configuring local SMTP sink"
 
@@ -60,10 +29,10 @@ postconf -e "inet_interfaces = all"
 postconf -e "inet_protocols = ${POSTFIX_INET_PROTOCOLS}"
 postconf -e "message_size_limit = ${POSTFIX_MESSAGE_SIZE_LIMIT}"
 postconf -e "smtpd_relay_restrictions = permit_mynetworks,reject_unauth_destination"
-postconf -e "milter_protocol = 6"
-postconf -e "milter_default_action = accept"
-postconf -e "smtpd_milters = unix:/run/opendkim/opendkim.sock"
-postconf -e "non_smtpd_milters = unix:/run/opendkim/opendkim.sock"
+
+# No milters: the sink does not sign or filter, it only accepts and discards.
+postconf -X "smtpd_milters" 2>/dev/null || true
+postconf -X "non_smtpd_milters" 2>/dev/null || true
 
 # Offline mode: do not perform DNS lookups and never relay outside the test stack.
 postconf -e "smtp_host_lookup = native"
@@ -112,17 +81,8 @@ chmod -R go-w /var/spool/postfix/lib /var/spool/postfix/usr 2>/dev/null || true
 postfix set-permissions || true
 postfix check || true
 
-echo "[Postfix:test] Starting OpenDKIM"
-/usr/sbin/opendkim -f -x /etc/opendkim.conf &
-OPENDKIM_PID=$!
-
-echo "[Postfix:test] Local DKIM record, not to publish publicly:"
-cat /etc/dkimkeys/dkim.txt || true
-
-echo "[Postfix:test] Starting Postfix in offline sink mode"
-postfix start-fg &
-POSTFIX_PID=$!
-
-wait -n "${OPENDKIM_PID}" "${POSTFIX_PID}"
-
-
+# §3 correctif 3/4 — run Postfix as PID 1. No background process, no `wait -n`,
+# no trap that could tear the container down when a secondary process exits.
+# Docker's restart policy handles the rare case where Postfix itself dies.
+echo "[Postfix:test] Starting Postfix in offline sink mode (no OpenDKIM)"
+exec postfix start-fg

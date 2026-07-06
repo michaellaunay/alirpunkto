@@ -148,17 +148,41 @@ chmod -R go-w /var/spool/postfix/lib /var/spool/postfix/usr 2>/dev/null || true
 postfix set-permissions || true
 postfix check || true
 
-echo "[Init] Starting OpenDKIM"
+start_opendkim() {
+    /usr/sbin/opendkim -f -x /etc/opendkim.conf &
+    OPENDKIM_PID=$!
+    echo "[Init] OpenDKIM started (pid ${OPENDKIM_PID})"
+}
 
-/usr/sbin/opendkim -f -x /etc/opendkim.conf &
-OPENDKIM_PID=$!
+start_postfix() {
+    postfix start-fg &
+    POSTFIX_PID=$!
+    echo "[Init] Postfix started (pid ${POSTFIX_PID})"
+}
+
+echo "[Init] Starting OpenDKIM"
+start_opendkim
 
 echo "[Init] DNS record to publish for DKIM:"
 cat /etc/dkimkeys/dkim.txt || true
 
 echo "[Init] Starting Postfix"
+start_postfix
 
-postfix start-fg &
-POSTFIX_PID=$!
-
-wait -n "${OPENDKIM_PID}" "${POSTFIX_PID}"
+# §3 correctif 3 — supervise both children instead of `wait -n`.
+# Previously `wait -n` returned as soon as EITHER process exited and the EXIT
+# trap then killed the other, so a single transient hiccup of OpenDKIM or
+# Postfix tore down the whole mail container. Here we restart whichever child
+# dies and keep running; the container stops only on an explicit signal
+# (INT/TERM), where the trap performs a clean shutdown.
+while true; do
+    if ! kill -0 "${OPENDKIM_PID}" 2>/dev/null; then
+        echo "[Init][WARN] OpenDKIM exited; restarting" >&2
+        start_opendkim
+    fi
+    if ! kill -0 "${POSTFIX_PID}" 2>/dev/null; then
+        echo "[Init][WARN] Postfix exited; restarting" >&2
+        start_postfix
+    fi
+    sleep 5
+done

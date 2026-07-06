@@ -34,7 +34,7 @@
 </ul>
 <p>La Verifika procezo devas esti kompletigita je aŭ antaŭ {date_end_vote}. Post ĉi tiu dato, la Verifika procezo estos fermita, kaj via decido ne estos konsiderata. Defaŭlte, se neniu Verifikanto voĉdonis ĝis ĉi tiu dato, la registrado estos rifuzita. Kiel dirite, ĉiu nova membro estas beno kaj ŝanco por <span tal:replace="domain_name">Domain Name</span>! Bonvolu subteni la penadon kaj bonvolon de ĉi tiu nova membro, rapide <strong>voĉdonante ĉe la jena <a href="{subject_url}">URL</a>, kaj ĉiuokaze ĝis aŭ antaŭ {date_end_vote}!</strong></p>
 
-<pNi tre dankas vin pro via helpo.</p>
+<p>Ni tre dankas vin pro via helpo.</p>
 
 <p>Kore.</p>
 <p>La teamo de <span tal:replace="domain_name">Domain Name</span>.</p>

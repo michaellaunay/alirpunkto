@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Ето основните елементи на вашия профил, които записахме:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">вашият псевдоним: ##PSEUDONYM. Моля, запазете внимателно и сигурно това псевдоним: то е единственият идентификатор, с който можете да влезете в нашата ИТ платформа;</li>
+        <li tal:omit-tag="textual">вашият псевдоним: <span tal:replace="user">pseudonym</span>. Моля, запазете внимателно и сигурно това псевдоним: то е единственият идентификатор, с който можете да влезете в нашата ИТ платформа;</li>
         <li tal:omit-tag="textual">вашата парола: (паролата, която предоставихте при регистрацията си);</li>
         <li tal:omit-tag="textual">вашият имейл адрес: (имейл адресът, на който изпращаме настоящия имейл);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">вашите лични данни: (всички ваши имена и фамилни имена, датата на раждане, както е предоставено и проверено по време на процеса на регистрация);</li>
-        <li tal:omit-tag="textual">вашият предпочитан език, на който да взаимодействаме с вас: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">вторият език, който приемате, че можем да използваме за взаимодействие с вас: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">езикът, който приемате, че можем да използваме, като трети избор, за взаимодействие с вас: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">вашите лични данни: (всички ваши имена и фамилни имена, датата на раждане, както е предоставено и проверено по време на процеса на регистрация);</li>
+        <li tal:omit-tag="textual">вашият предпочитан език, на който да взаимодействаме с вас: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">вторият език, който приемате, че можем да използваме за взаимодействие с вас: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">езикът, който приемате, че можем да използваме, като трети избор, за взаимодействие с вас: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">За вашата информация, ето детайлите за финализирането на процеса ви на регистрация:</p>

@@ -36,11 +36,47 @@ services:
     image: alirpunkto-ldap
     container_name: alirpunkto-ldap
     restart: unless-stopped
+    # Resource limits.
+    # Default containers are capped at 1 GB RAM.
+    # The Pyramid application is allowed up to 8 GB because it is the main
+    # application workload. These values can be adjusted later using `docker stats`.
+    #
+    # If a container runs away, it is OOM-killed on its own and restarted,
+    # instead of exhausting the host's 16 GB RAM and bringing down the whole stack.
+    mem_limit: 1g
+    cpus: 1.0
+    # Log rotation: caps disk usage (~50 MB/container),
+    # prevents an unbounded log from filling up the host disk.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    # S5: block privilege escalation via setuid/setgid binaries. Safe (no
+    # capability is removed) and the highest-value, lowest-risk hardening.
+    security_opt:
+      - no-new-privileges:true
+    # S5 (enable after testing): drop all Linux capabilities, then re-add
+    # only those ldap needs. Left commented because an over-tight set can
+    # prevent the service from starting; validate on your stack first.
+    # cap_drop:
+    #   - ALL
+    # cap_add:
+    #   - NET_BIND_SERVICE
+    #   - SETUID
+    #   - SETGID
+    #   - CHOWN
+    #   - DAC_OVERRIDE
+    #   - FOWNER
     networks:
-      - alirpunkto-net
+      - backend
     ports:
-      - "8389:389"
-      - "8636:636"
+      # S3: debug/admin from the host only. Bound to loopback so the member
+      # directory (identities, {SSHA} hashes) is never exposed on the host's
+      # external interfaces. The app reaches LDAP over alirpunkto-net
+      # (alirpunkto-ldap:389); remote debugging goes through an SSH tunnel.
+      - "127.0.0.1:8389:389"
+      - "127.0.0.1:8636:636"
     environment:
       LDAP_BASE_DN: ${LDAP_BASE_DN}
       LDAP_ORGANIZATION: ${LDAP_ORGANIZATION}
@@ -69,8 +105,41 @@ services:
     image: alirpunkto-postfix
     container_name: alirpunkto-postfix
     restart: unless-stopped
+    # Resource limits.
+    # Default containers are capped at 1 GB RAM.
+    # The Pyramid application is allowed up to 8 GB because it is the main
+    # application workload. These values can be adjusted later using `docker stats`.
+    #
+    # If a container runs away, it is OOM-killed on its own and restarted,
+    # instead of exhausting the host's 16 GB RAM and bringing down the whole stack.
+    mem_limit: 1g
+    cpus: 1.0
+    # Log rotation: caps disk usage (~50 MB/container),
+    # prevents an unbounded log from filling up the host disk.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    # S5: block privilege escalation via setuid/setgid binaries. Safe (no
+    # capability is removed) and the highest-value, lowest-risk hardening.
+    security_opt:
+      - no-new-privileges:true
+    # S5 (enable after testing): drop all Linux capabilities, then re-add
+    # only those postfix needs. Left commented because an over-tight set can
+    # prevent the service from starting; validate on your stack first.
+    # cap_drop:
+    #   - ALL
+    # cap_add:
+    #   - NET_BIND_SERVICE
+    #   - SETUID
+    #   - SETGID
+    #   - CHOWN
+    #   - DAC_OVERRIDE
+    #   - FOWNER
+    #   - DAC_READ_SEARCH
     networks:
-      - alirpunkto-net
+      - backend
     # No published port: Postfix is send-only and reachable by Pyramid over the
     # internal alirpunkto-net (alirpunkto-postfix:25). Publishing 25 exposed the
     # relay to the Internet (open-relay vector) — that was the root cause of the
@@ -94,7 +163,11 @@ services:
     healthcheck:
       # `postfix status` can return 0 even when master is not yet listening.
       # Checking for an open port 25 is more reliable.
-      test: ["CMD", "sh", "-c", "ss -ltn | grep -q ':25'"]
+      # R8: a bound port 25 does not prove smtpd answers. Open a real SMTP
+      # connection and require the 220 greeting, so depends_on:service_healthy
+      # only unblocks Pyramid once Postfix actually accepts connections.
+      # ($$ escapes $ from compose variable substitution.)
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/25 && read -t 3 r <&3 && case $$r in 220*) exit 0;; *) exit 1;; esac"]
       interval: 15s
       timeout: 5s
       retries: 5
@@ -111,10 +184,38 @@ services:
     image: alirpunkto-pyramid
     container_name: alirpunkto-pyramid
     restart: unless-stopped
+    # Resource limits.
+    # Default containers are capped at 1 GB RAM.
+    # The Pyramid application is allowed up to 8 GB because it is the main
+    # application workload. These values can be adjusted later using `docker stats`.
+    #
+    # If a container runs away, it is OOM-killed on its own and restarted,
+    # instead of exhausting the host's 16 GB RAM and bringing down the whole stack.
+    mem_limit: 8g
+    cpus: 1.0
+    # Log rotation: caps disk usage (~50 MB/container),
+    # prevents an unbounded log from filling up the host disk.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    # S5: block privilege escalation via setuid/setgid binaries. Safe (no
+    # capability is removed) and the highest-value, lowest-risk hardening.
+    security_opt:
+      - no-new-privileges:true
+    # S5: Pyramid runs non-root (USER alirpunkto) on a high port, so it needs
+    # no Linux capabilities at all.
+    cap_drop:
+      - ALL
     networks:
-      - alirpunkto-net
+      - frontend
+      - backend
     ports:
-      - "6543:6543"
+      # S3: loopback only. Public traffic must go through Apache (80/443) for
+      # TLS termination and its protections; reaching Waitress directly from
+      # another host now requires an SSH tunnel.
+      - "127.0.0.1:6543:6543"
     environment:
       LDAP_SERVER: alirpunkto-ldap
       LDAP_PORT: 389
@@ -146,13 +247,46 @@ services:
     image: alirpunkto-apache2
     container_name: alirpunkto-apache2
     restart: unless-stopped
+    # Resource limits.
+    # Default containers are capped at 1 GB RAM.
+    # The Pyramid application is allowed up to 8 GB because it is the main
+    # application workload. These values can be adjusted later using `docker stats`.
+    #
+    # If a container runs away, it is OOM-killed on its own and restarted,
+    # instead of exhausting the host's 16 GB RAM and bringing down the whole stack.
+    mem_limit: 1g
+    cpus: 1.0
+    # Log rotation: caps disk usage (~50 MB/container),
+    # prevents an unbounded log from filling up the host disk.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    # S5: block privilege escalation via setuid/setgid binaries. Safe (no
+    # capability is removed) and the highest-value, lowest-risk hardening.
+    security_opt:
+      - no-new-privileges:true
+    # S5 (enable after testing): drop all Linux capabilities, then re-add
+    # only those apache2 needs. Left commented because an over-tight set can
+    # prevent the service from starting; validate on your stack first.
+    # cap_drop:
+    #   - ALL
+    # cap_add:
+    #   - NET_BIND_SERVICE
+    #   - SETUID
+    #   - SETGID
+    #   - CHOWN
+    #   - DAC_OVERRIDE
+    #   - KILL
     networks:
-      - alirpunkto-net
+      - frontend
     ports:
       - "80:80"
       - "443:443"
     environment:
       APACHE_SERVER_NAME: ${APACHE_SERVER_NAME}
+      APACHE_SERVER_ALIASES: ${APACHE_SERVER_ALIASES:-}
       APACHE_BACKEND_HOST: alirpunkto-pyramid
       APACHE_BACKEND_PORT: 6543
       ENABLE_CERTBOT: ${ENABLE_CERTBOT:-false}
@@ -176,8 +310,15 @@ volumes:
 
 # ── Networks ──────────────────────────────────────────────────────────────────
 networks:
-  alirpunkto-net:
-    name: alirpunkto-net
+  # R6: split tiers. frontend carries Apache<->Pyramid; backend carries
+  # Pyramid<->LDAP and Pyramid<->Postfix. Apache cannot reach LDAP/Postfix
+  # and LDAP/Postfix cannot reach Apache, limiting lateral movement if one
+  # public-facing service is compromised.
+  frontend:
+    name: alirpunkto-frontend
+    driver: bridge
+  backend:
+    name: alirpunkto-backend
     driver: bridge
 
 # ── Secrets ───────────────────────────────────────────────────────────────────

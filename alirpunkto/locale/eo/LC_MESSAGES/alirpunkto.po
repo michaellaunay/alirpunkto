@@ -212,3 +212,1105 @@ msgstr "Bonvolu helpi nin konfirmi novan registriĝon sur la platformo de ${doma
 
 msgid "remind_verifier_subject"
 msgstr "Memorigo – Bonvolu helpi nin konfirmi novan registriĝon en la platformo de ${domain_name}. Limdato en ${notice_time_verifiers} tagoj."
+
+#, fuzzy
+msgid "welcome"
+msgstr "Welcome"
+
+#, fuzzy
+msgid "all_applications_msg"
+msgstr "All the applications you need to participate in the activities of ${domain_name} in one place."
+
+#, fuzzy
+msgid "register_or_login_msg"
+msgstr "Register or login now to get started."
+
+#, fuzzy
+msgid "logged_in_msg_title"
+msgstr "${site_name}, the centralized service for the applications used in the IT infrastructure of ${domain_name}"
+
+#, fuzzy
+msgid "logged_in_msg"
+msgstr "You are logged in as ${user}."
+
+#, fuzzy
+msgid "log_out_invitation_msg"
+msgstr "You can log out by clicking here"
+
+#, fuzzy
+msgid "logout_label"
+msgstr "Log out"
+
+#, fuzzy
+msgid "choose_application_msg"
+msgstr "Choose the application you want to join:"
+
+#, fuzzy
+msgid "password_confirm_label"
+msgstr "Confirm Password"
+
+#, fuzzy
+msgid "password_confirm_title"
+msgstr "Confirm your password"
+
+#, fuzzy
+msgid "times"
+msgstr "multiplied by"
+
+#, fuzzy
+msgid "plus"
+msgstr "plus"
+
+#, fuzzy
+msgid "plus_prefix"
+msgstr ", "
+
+#, fuzzy
+msgid "invalid_challenge"
+msgstr "Your answer is incorrect. Please enter a new one."
+
+#, fuzzy
+msgid "invalid_email"
+msgstr "There is an issue with your email address, please verify it."
+
+#, fuzzy
+msgid "invalid_choice"
+msgstr "Your choice is not valid, please enter it again."
+
+#, fuzzy
+msgid "challenge_instruction_text"
+msgstr "Please compute the results of the following four simple mathematical operations and fill in the corresponding fields to confirm your email address. If you have not received any e-mail in the next few minutes, please check your spam folder. It is possible that the e-mail that we sent you be there."
+
+#, fuzzy
+msgid "enter_result_label_A"
+msgstr "Please enter the result for mathematical operation A:"
+
+#, fuzzy
+msgid "result_label_title_A"
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation A."
+
+#, fuzzy
+msgid "result_input_title_A"
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation A that you received per e-mail."
+
+#, fuzzy
+msgid "enter_result_label_B"
+msgstr "Please enter the result for mathematical operation B:"
+
+#, fuzzy
+msgid "result_label_title_B"
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation B."
+
+#, fuzzy
+msgid "result_input_title_B"
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation B that you received per e-mail."
+
+#, fuzzy
+msgid "enter_result_label_C"
+msgstr "Please enter the result for mathematical operation C:"
+
+#, fuzzy
+msgid "result_label_title_C"
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation C."
+
+#, fuzzy
+msgid "result_input_title_C"
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation C that you received per e-mail."
+
+#, fuzzy
+msgid "enter_result_label_D"
+msgstr "Please enter the result for mathematical operation D:"
+
+#, fuzzy
+msgid "result_label_title_D"
+msgstr "Please enter the code you received per e-mail or the result of the mathematical operation D."
+
+#, fuzzy
+msgid "result_input_title_D"
+msgstr "In order for us to verify your e-mail address and that you are a human (not a robot), please enter the result of the operation D that you received per e-mail."
+
+#, fuzzy
+msgid "verify_button"
+msgstr "Submit"
+
+#, fuzzy
+msgid "submit_email_validation_title"
+msgstr "Click to verify the entered codes."
+
+#, fuzzy
+msgid "passwords_dont_match"
+msgstr "Passwords don't match."
+
+#, fuzzy
+msgid "password_too_short"
+msgstr "Password is too short."
+
+#, fuzzy
+msgid "password_minimum_length"
+msgstr "Password must be at least ${password_minimum_length} characters long."
+
+#, fuzzy
+msgid "password_too_long"
+msgstr "Password is too long."
+
+#, fuzzy
+msgid "password_maximum_length"
+msgstr "Password should not exceed ${password_maximum_length} characters."
+
+#, fuzzy
+msgid "password_must_contain_digit"
+msgstr "Password must contain at least one digit."
+
+#, fuzzy
+msgid "password_must_contain_uppercase"
+msgstr "Password must contain at least one uppercase letter."
+
+#, fuzzy
+msgid "password_must_contain_lowercase"
+msgstr "Password must contain at least one lowercase letter."
+
+#, fuzzy
+msgid "password_must_contain_special_char"
+msgstr "Password must contain at least one of the characters among the following: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#, fuzzy
+msgid "password_title_label"
+msgstr "Please enter your password here."
+
+#, fuzzy
+msgid "password_confirm_title_label"
+msgstr "Please confirm your password here."
+
+#, fuzzy
+msgid "password_confirm"
+msgstr "Confirm your password."
+
+#, fuzzy
+msgid "type_of_registration"
+msgstr "Type of Registration"
+
+#, fuzzy
+msgid "type_registration_label"
+msgstr "Select the type of registration that suits you."
+
+#, fuzzy
+msgid "type_registration_choice"
+msgstr "Each type of registration comes with a specific set of rights, benefits and obligations."
+
+#, fuzzy
+msgid "approved_heading"
+msgstr "Congratulations on Your Approval!"
+
+#, fuzzy
+msgid "approved_description"
+msgstr "Your application has been approved. You can now log in using the pseudonym and password you provided during the application process."
+
+msgid "invalid_pseudonym"
+msgstr ""
+"Invalid pseudonym. It should be between ${MIN_PSEUDONYM_LENGTH} and ${MAX_PSEUDONYM_LENGTH} characters long and can only contain letters (A-Z, a-z), numbers (0-9), underscores (_), dots "
+"(.), hyphens (-) and spaces ( ). It cannot contain letters with accents, umlauts, and other diacritical signs specific to some languages."
+
+#, fuzzy
+msgid "invalid_date"
+msgstr "Invalid date format."
+
+#, fuzzy
+msgid "pseudonym_too_short"
+msgstr "Pseudonym too short."
+
+#, fuzzy
+msgid "pseudonym_minimum_length"
+msgstr "Pseudonym must be at least ${MIN_PSEUDONYM_LENGTH} characters long."
+
+#, fuzzy
+msgid "pseudonym_too_long"
+msgstr "Pseudonym too long."
+
+#, fuzzy
+msgid "pseudonym_maximum_length"
+msgstr "Pseudonym must not exceed ${MAX_PSEUDONYM_LENGTH} characters."
+
+#, fuzzy
+msgid "pseudonym_allready_exists"
+msgstr "This pseudonym is already in use. Please choose a different one."
+
+#, fuzzy
+msgid "Select_a_country"
+msgstr "Select a Member State of the European Union"
+
+#, fuzzy
+msgid "Austria"
+msgstr "AT - Austria"
+
+#, fuzzy
+msgid "Belgium"
+msgstr "BE - Belgium"
+
+#, fuzzy
+msgid "Bulgaria"
+msgstr "BG - Bulgaria"
+
+#, fuzzy
+msgid "Cyprus"
+msgstr "CY - Cyprus"
+
+#, fuzzy
+msgid "Czech_Republic"
+msgstr "CZ - Czechia"
+
+#, fuzzy
+msgid "Germany"
+msgstr "DE - Germany"
+
+#, fuzzy
+msgid "Denmark"
+msgstr "DK - Denmark"
+
+#, fuzzy
+msgid "Estonia"
+msgstr "EE - Estonia"
+
+#, fuzzy
+msgid "Spain"
+msgstr "ES - Spain"
+
+#, fuzzy
+msgid "Finland"
+msgstr "FI - Finland"
+
+#, fuzzy
+msgid "France"
+msgstr "FR - France"
+
+#, fuzzy
+msgid "Greece"
+msgstr "GR - Greece"
+
+#, fuzzy
+msgid "Croatia"
+msgstr "HR - Croatia"
+
+#, fuzzy
+msgid "Hungary"
+msgstr "HU - Hungary"
+
+#, fuzzy
+msgid "Ireland"
+msgstr "IE - Ireland"
+
+#, fuzzy
+msgid "Italy"
+msgstr "IT - Italy"
+
+#, fuzzy
+msgid "Lithuania"
+msgstr "LT - Lithuania"
+
+#, fuzzy
+msgid "Luxembourg"
+msgstr "LU - Luxembourg"
+
+#, fuzzy
+msgid "Latvia"
+msgstr "LV - Latvia"
+
+#, fuzzy
+msgid "Malta"
+msgstr "MT - Malta"
+
+#, fuzzy
+msgid "Netherlands"
+msgstr "NL - Netherlands"
+
+#, fuzzy
+msgid "Poland"
+msgstr "PL - Poland"
+
+#, fuzzy
+msgid "Portugal"
+msgstr "PT - Portugal"
+
+#, fuzzy
+msgid "Romania"
+msgstr "RO - Romania"
+
+#, fuzzy
+msgid "Sweden"
+msgstr "SE - Sweden"
+
+#, fuzzy
+msgid "Slovenia"
+msgstr "SI - Slovenia"
+
+#, fuzzy
+msgid "Slovakia"
+msgstr "SK - Slovakia"
+
+#, fuzzy
+msgid "full_name_as_in_id_required"
+msgstr "Full Name(s) is(are) required."
+
+#, fuzzy
+msgid "full_surname_as_in_id_required"
+msgstr "Full Surname(s) is(are) required."
+
+#, fuzzy
+msgid "birthdate_required"
+msgstr "Birthdate is required."
+
+#, fuzzy
+msgid "nationality_required"
+msgstr "Nationality is required."
+
+#, fuzzy
+msgid "first_interaction_language_required"
+msgstr "The first interaction language is required."
+
+#, fuzzy
+msgid "pending_description"
+msgstr "Your application is being reviewed. You will be notified by email once it has been approved."
+
+#, fuzzy
+msgid "candidature_not_found"
+msgstr "Application not found."
+
+msgid "cosmopolitical_cooperative_description"
+msgstr ""
+"<div>\n"
+"<h2><b>Thank you for your interest in the activities of ${domain_name}! Here is the right place for you to register </b></h2>\n"
+"<p>The CosmoPolitical Cooperative supports individuals and transforms the existing economic, social and political system towards a deeply just, sustainable, democratic and happy "
+"society, the <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Society of Agreement</a>.</p>\n"
+"<p>Below you will find the start of the registration process to join us. We propose two levels of participation, with increasing obligations and rights:</p>\n"
+"<ul>\n"
+"<li>as an <b>Ordinary Member of our Community</b>, with a simple registration process, no financial commitments, but no voting rights; or </li>\n"
+"<li>as a <b>Cooperator</b>, a full member of our Cooperative, with a registration process ensuring that a given person can register once only (to heed the democratic principle \"one "
+"person = one vote\") and that only citizens of the European Union having reached their majority age are Cooperators, with the commitment to purchase at least one share and to pay a "
+"yearly contribution, and full voting rights. The European Union is the geographic scope of our work  (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">see why</a>)</li>\n"
+"</ul>\n"
+"<p>The registration process includes the following steps:</p>\n"
+"<ol>\n"
+"<li>we verify that the e-mail address was provided by you, a human (and not by a robot);</li>\n"
+"<li>we ask you for your pseudonym, password and preferred language(s) for interaction with you;</li>\n"
+"<li>in the case when you registered as an Ordinary Member of the Community, you have finished and enter our Community. In the case when you registered as a Cooperator, the process "
+"continues so that we can verify that you comply with the conditions set above to be a Cooperator.</li>\n"
+"</ol>\n"
+"<p>This verification is done as follows:</p>\n"
+"<ol>\n"
+"<li>we ask you for your <b>identity details</b>: your given name(s) and family name(s), your date of birth;</li>\n"
+"<li>we ask a few existing members of the Cooperative (your Verifiers) to verify, on the basis of a direct exchange of e-mails with you, "
+"that (1) the information on your official identiy document matches the one you provided in the previous step and "
+"(2) the photograph on your official identity document matches a recent selfie of you;</li>\n"
+"<li>once they have confirmed these matches, you will be welcomed as a Cooperator, with full rights - once you have purchased at least <a href=\"https://www.cosmopolitical.coop/share\">one "
+"share</a> and paid your <a href=\"https://www.cosmopolitical.coop/yearcontrib\">yearly contribution to our operations</a>.</li>\n"
+"</ol>\n"
+"<p>Please start your registration now! We look forward to welcoming you in our activities.</p>\n"
+"</div>"
+
+msgid "human_verification_description"
+msgstr ""
+"The first step in your registration process is to validate that you are a \n"
+"human being, and not a robot. For this, we verify that you can receive and \n"
+"understand an e-mail that we will send to you: what we request from you is \n"
+"simple for a human being, much more complex for a robot."
+
+#, fuzzy
+msgid "identity_verification_label"
+msgstr "Identity Verification"
+
+msgid "Send_id_copy_by_email"
+msgstr ""
+"Send a recent selfie and a scan of a part of your official identity document by email. \n"
+"In order to do so:\n"
+"1. Open your e-mail client (Thunderbird, Outlook, tab on your browser with your webmail open);\n"
+"2. Click on the \"Proceed\" button below. A draft e-mail pops up in your e-mail client. The addressees are your Verifiers. Do not change them;\n"
+"3. Add to the draft e-mail as attachments (a) your recent selfie and (b) the scan of a part of your official identity document. You may if you want amend the text of the e-mail, but it should not be necessary;\n"
+"4. Send the e-mail;\n"
+"5. Once done, click on the \"Confirm\" button below."
+
+#, fuzzy
+msgid "Send_video_conference_link"
+msgstr "DELETED."
+
+#, fuzzy
+msgid "Proceed"
+msgstr "Proceed"
+
+#, fuzzy
+msgid "confirm_sent_emails_to_validators"
+msgstr "Please confirm you have sent the emails to the Verifiers."
+
+#, fuzzy
+msgid "sent_confirmation_label"
+msgstr "Confirmation that the emails were sent to the Verifiers"
+
+#, fuzzy
+msgid "submit_email_confirmation_title"
+msgstr "Confirm you sent the emails."
+
+#, fuzzy
+msgid "confirm_email_send_button_label"
+msgstr "Confirm"
+
+#, fuzzy
+msgid "vote_success"
+msgstr "We thank you for having participated in the voting process. Your vote ${vote} has been successfully recorded. You can change your vote until its deadline by returning to this page."
+
+msgid "cooperator_data_explanation"
+msgstr ""
+"<div>\n"
+"<h2>Please provide the information that we need to register you as a Coopeator</h2>\n"
+"    <p>As a Cooperator, you will participate in all our decisions. These decisions are adopted along rigorous democratic procedures, and can have important consequences for the "
+"Cooperative and for the Cooperators. In addition, the Cooperative intends to represent the EU citizens, independently from their nationality - but EU citizens only. This is particularly "
+"important during public elections. We hence need to ensure three things: (1) that a given person can register no more than once, so as to ensure the democratic principle \"one person = "
+"one vote\"; (2) that all Cooperators are at least of legal age and (3) that only citizens of the European Union are Cooperators.</p>\n"
+"    <p>This is why we will verify from you some elements of your identity data, by comparing:\n"
+"    <ul>\n"
+"    <li>(1) the data that you will introduce on this form upon your registration with (2) the information present on your official identity document and ;</li>\n"
+"    <li>(3) the photograph on your official identity document with (4) a recent selfie of you (recent = taken on the day when you send the e-mail).</li>\n"
+"    </ul></p>\n"
+"    <p>This verification will be performed by a set of randomly-selected members of the Cooperative, the Verifiers of your application, "
+"and will be based upon (a) a recent selfie of you and (b) a partial scan of your official identity document that you will transmit to them directly by e-mail, with no transit through "
+"this online platform (for the sake of security and confidentiality).</p>\n"
+"    <p>The data that we request from you and that the Verifiers will check for conformity with the data on your official identity documents is:\n"
+"    <ul>\n"
+"    <li>your name(s) and surname(s);</li>\n"
+"    <li>your date of birth;</li>\n"
+"    <li>your citizenship.</li>\n"
+"    </ul></p>\n"
+"    <p>Only one person bears your name(s), your surname(s) and your date of birth: you. If you attempt to register again, you will need to provide the same data to our verification "
+"procedure, and we will reject your application, because you already are a Cooperator, and cannot have several accounts to vote more than once. We will be confident in doing so because "
+"we know that only one person has this combination of name(s), surname(s) and date of birth. Your date of birth enables us to verify that you are of legal age, and your citizenship "
+"enables us to ensure that you are indeed a citizen of the European Union.</p>\n"
+"    <p>This data will be used exclusively for us to verify your identity, your age and your citizenship, and to manage your account as a Cooperator. It will never be displayed to the "
+"other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the "
+"request of a judge. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection "
+"Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 "
+"April 2023 under the number SIREN 951 007 897.</p>\n"
+"<p><b>Important notice:</b> In rare cases, it may happen that the form below does not display properly: it will not show you where to provide your Pseudonym, your e-mail address will be editable... If this happens, just click on the \"Submit\" button below. This form that will appear will be correct, and you will be able to fill it easily.</p>\n"
+"</div>"
+
+msgid "ordinary_member_data_explanation"
+msgstr ""
+"<div>\n"
+"<h2>Please provide the information that we need to register you as an Ordinary Member of the Community</h2>\n"
+"<p>As an Ordinary Member of the ${domain_name} Community, you will interact with its other members and with our IT platform .</p>\n"
+"<p>For this to work in the most efficient and respectful way for you and for the other members of the Community, we would be grateful if you could provide the information requested in the form below.</p>\n"
+"<p>This data will be used exclusively for us to manage your account as an Ordinary Member of the ${domain_name} Community. It will never be displayed to the "
+"other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the "
+"request of a judge. The \"data controller\" as defined by the <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\"> General Data Protection "
+"Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 "
+"April 2023 under the number SIREN 951 007 897.</p>\n"
+"</div>"
+
+msgid "human_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>We sent you per e-mail a set of four simple arithmetic computations to perform, identified from A to D, all following the same pattern: (A FIRST NUMBER BETWEEN 1 AND 9) "
+"multiplied by (A SECOND NUMBER BETWEEN 1 AND 9), plus (A THIRD NUMBER BETWEEN 1 AND 9). In order to perform the computation, you should first multiply the FIRST NUMBER BETWEEN 1 AND 9 "
+"by the SECOND NUMBER BETWEEN 1 AND 9. Once you have the result of this multiplication, you should add to that result the THIRD NUMBER BETWEEN 1 AND 9. You should finally write down the "
+"result of this last addition in the box provided for the result of the arithmetic computation you are performing (among the four that we sent to you, identified from A to D). You should "
+"repeat the computation for all four computations sent to you by e-mail.</p>\n"
+"<p> If you have not received any e-mail in the next few minutes, please check your spam folder. It is possible that the e-mail that we sent you be there.</p>\n"
+"</div>"
+
+msgid "cooperator_data_choose_verification_explanation"
+msgstr ""
+"<div>\n"
+"    <p>>As part of the registration process as a Cooperator, we will verify your identity. This verification of your identity is needed to ensure: (1) "
+"that a given person does not register several times with different e-mail addresses (we hereby heed the democratic prinicple: \"one person - one vote\"); (2) that only citizen of the "
+"European Union having reached the age of majority are Cooperators (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >see why</a>).</p>\n"
+"<p>For this, you will securely send via e-mail (1) a recent selfie of you (recent = taken on the day when you send the e-mail) and (2) a partial copy of your identity documents directly to a small set of randomly-selected "
+"Cooperators, your Verifiers. When doing so, we advise you, for security reasons, that you hide, on your official identity document, your place of birth, your signature and the identity document number, before copying it.</p>\n"
+" <p>Your cooperation in this matter is greatly appreciated and is key to maintaining the high standards of trust and pan-European democracy within our Cooperative. Thank you for your "
+"understanding and active participation in this crucial step.</p>\n"
+"</div>"
+
+msgid "voters_not_selected"
+msgstr ""
+"The number of existing Cooperators is too low to select the adequate number of Verifiers of your identity. Please contact the system administrator, at the following address "
+"${administrator}, to solve the issue."
+
+#, fuzzy
+msgid "email_copy_id_verification_subject"
+msgstr "en - ${domain_name} - Please verify my identity as a new potential Cooperator"
+
+msgid "email_copy_id_verification_body"
+msgstr ""
+"Dear Verifiers,\n"
+" I am writing to you to complete the identity verification process for my application to become a Cooperator of ${domain_name}. Attached to this email, you will find:\n"
+"- a recent selfie of me (taken today); and\n"
+" -a partial copy of my official identity document.\n"
+" Please note that certain sensitive information (place of birth, signature,  number of the document) of my official identity document has been masked for security reasons. However, the document contain the information that you need to verify my identity according to the "
+"registration process of ${domain_name}.\n"
+" I kindly request that you review the attached documents if possible within the next 3 days, to vote on the adequation between:\n"
+"\n"
+" - the identity information that you received directly by e-mail from the IT platform of ${domain_name} (and that will be reminded to you on the voting interface) and \n"
+" - the identity information that you can read on the attached partial copy of my official identity document;\n"
+"and between:\n"
+"- the recent selfie of me and\n"
+"- the photograph on my official identity document.\n"
+" The link for you to vote on this adequation is the following: ${voting_url}.\n"
+" I thank you very warmly in advance for supporting the process of my registration as a Cooperator to ${domain_name}. Should you have any further questions or require additional "
+"information, please feel free to contact me directly in your own language.\n"
+" Best regards,\n"
+" ${signature}\n"
+" Attachments:\n"
+"- Partial copy of my ID document;\n"
+"- Recent selfie.\n"
+" This email has been generated with the assistance of ${domain_name}'s identity verification feature. If you are not the Verifier assigned to the application of ${signature} and have "
+"received this email in error, please inform the ${domain_name} administrator, at the following adress: ${administrator}."
+
+#, fuzzy
+msgid "email_video_id_verification_subject"
+msgstr "DELETED"
+
+#, fuzzy
+msgid "email_video_id_verification_body"
+msgstr "DELETED"
+
+#, fuzzy
+msgid "forget_email_in_member_list"
+msgstr "If the user exists, s/he will receive an email. If you have not received any e-mail in the next few minutes, please check your spam folder. It is possible that the e-mail that we sent you be there."
+
+#, fuzzy
+msgid "reset_password_email_subject"
+msgstr "Reset Your Password"
+
+#, fuzzy
+msgid "forget_email_send_error"
+msgstr "An error occurred when sending reset email, please contact the administrator, at ${administrator}"
+
+#, fuzzy
+msgid "member_state_created_name"
+msgstr "created"
+
+#, fuzzy
+msgid "member_state_created_value"
+msgstr "The member has been created"
+
+#, fuzzy
+msgid "member_state_draft_name"
+msgstr "draft"
+
+#, fuzzy
+msgid "member_state_draft_value"
+msgstr "The member's data is being edited"
+
+#, fuzzy
+msgid "member_state_registred_name"
+msgstr "registered"
+
+#, fuzzy
+msgid "member_state_registred_value"
+msgstr "The member's data has been saved"
+
+#, fuzzy
+msgid "member_data_modification_request_name"
+msgstr "being modified"
+
+#, fuzzy
+msgid "member_data_modification_request_value"
+msgstr "A data modification request has been submitted"
+
+#, fuzzy
+msgid "member_datas_modified_name"
+msgstr "modified"
+
+#, fuzzy
+msgid "member_datas_modified_value"
+msgstr "The member's data has been modified"
+
+#, fuzzy
+msgid "email_member_state_changed"
+msgstr "Change in your member profile"
+
+#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+#, fuzzy
+msgid "forget_no_mail"
+msgstr "Please provide a valid e-mail address"
+
+#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+#, fuzzy
+msgid "forget_admin_user"
+msgstr "The administrator is not allowed to reset his/her own password"
+
+#: alirpunkto/views/forgot_password.py:174
+#, fuzzy
+msgid "forget_email_sent"
+msgstr "If the user exists, an e-mail has been sent to his/her e-mail address with a link to reset his/her password. If you have not received any e-mail in the next few minutes, please check your spam folder. It is possible that the e-mail that we sent you be there."
+
+#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+#, fuzzy
+msgid "password_not_match"
+msgstr "The two versions of the password do not match. Please ensure that they do, and submit again"
+
+#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+#, fuzzy
+msgid "password_required"
+msgstr "Please provide a new password"
+
+#: alirpunkto/views/forgot_password.py:229
+#, fuzzy
+msgid "password_changed"
+msgstr "You have successfully changed your password"
+
+#: alirpunkto/views/forgot_password.py:234
+#, fuzzy
+msgid "forget_confirmation_email_send_error"
+msgstr "An error has occurred in the process of resetting your password"
+
+#: alirpunkto/views/forgot_password.py:239
+#, fuzzy
+msgid "password_not_changed"
+msgstr "An error has occurred in the process of resetting your password. Your password was not changed"
+
+#: alirpunkto/views/forgot_password.py:264
+#, fuzzy
+msgid "member_not_found"
+msgstr "The member was not found in the list of current members"
+
+#: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
+#, fuzzy
+msgid "url_is_obsolete"
+msgstr "The hyperlink that you used to reset your password is obsolete. Please use the latest one you received"
+
+#: alirpunkto/views/register.py:182
+#, fuzzy
+msgid "email_not_sent"
+msgstr "The e-mail containing the mathematical challenge verifying that the candidate is human (and not a robot) was not sent."
+
+#: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
+#, fuzzy
+msgid "error_committing_candidature"
+msgstr "Error when committing the candidature"
+
+#, fuzzy
+msgid "modification_to_profile_button_title"
+msgstr "Edit Your Profile"
+
+#, fuzzy
+msgid "modification_to_profile_button_label"
+msgstr "Edit Profile"
+
+#, fuzzy
+msgid "modification_to_profile_button_description"
+msgstr "Click here to receive by email a secure link to modify your profile."
+
+msgid "modification_to_profile_explanation_content"
+msgstr ""
+"To ensure the security of your data, a unique link to modify your profile will be sent to you via email. This process guarantees that only the person with access to your email address "
+"can make changes to your profile."
+"If you have not received any e-mail in the next few minutes, please check your spam folder. It is possible that the e-mail that we sent you be there."
+
+#, fuzzy
+msgid "modification_to_profile_email_subject"
+msgstr "Link to modify your profile on the IT infrastructure of ${domain_name}"
+
+#: alirpunkto/schemas/register_form.py:22
+msgid "full_name_as_in_id_description"
+msgstr ""
+"Please provide here all your given name(s), as written in your official ID documents, in their official transcription in Latin characters (if the original language uses an alphabet "
+"different from the Latin)"
+
+#: alirpunkto/schemas/register_form.py:29
+msgid "full_surname_as_in_id_description"
+msgstr ""
+"Please provide here all your family name(s) at birth (i.e. NOT your family name as a married person), as written in your official ID documents, in their official transcription in Latin "
+"characters (if the original language uses an alphabet different from the Latin)"
+
+#: alirpunkto/schemas/register_form.py:47
+#, fuzzy
+msgid "description_label"
+msgstr "Text describing you (your profile text)"
+
+#: alirpunkto/schemas/register_form.py:48
+msgid "description_description"
+msgstr ""
+"Please write here a text describing yourself, in your preferred langage, so that all other members of the Community can get to know you a little better. We suggest that you focus on: "
+"(1) Where you come from, (2) what you do, (3) what you want to do as a member of the Community, and (4) the resources (experience, knowledge, time) that you have available.\n"
+"We believe that this information is useful because introducing yourself to others with your own words gives a human face to your digital identity on our IT infrastructure.\n"
+"With this text, every member of the Community gets to know you a little better, and that makes interaction so much easier!"
+
+#: alirpunkto/schemas/register_form.py:55
+msgid "birthdate_description"
+msgstr ""
+"Please provide your birthdate in the following format: DD/MM/YYYY, i.e. (1) the day in the month, on 2 digits; (2) the number of the month, on 2 digits; (3) the year, on 4 digits. Only "
+"persons having reached their 18th birthday can be Cooperators. If you have not reached yet your 18th birthday, we invite you to register as an Ordinary Member of the Community - and to "
+"upgrade to Cooperator status as soon as you reach the age of majority."
+
+#: alirpunkto/schemas/register_form.py:67
+#, fuzzy
+msgid "nationality_description"
+msgstr "Please provide one Member State of the European Union of which you are a citizen. Only citizens of the European Union can be Cooperators"
+
+#: alirpunkto/schemas/register_form.py:70
+#, fuzzy
+msgid "select_a_country"
+msgstr "Please select a Member State of the European Union"
+
+#: alirpunkto/schemas/register_form.py:104
+#, fuzzy
+msgid "cooperator_number_description"
+msgstr "This is the unique number that identifies you in all processes taking place in the Community"
+
+#: alirpunkto/schemas/register_form.py:106
+msgid "cooperator_number_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:112
+msgid "pseudonym_description"
+msgstr ""
+"Please enter here the pseudonym that will identify you for the whole duration of your activity on our IT platform. We STRONGLY recommend that you select a pseudonym that makes tracking "
+"back to your real identity impossible (or extremely difficult). Thereby, you protect the confidentiality of your opinions (i.e. personal data that are the purpose of a specific "
+"protection under the General Data Protection Regulation - GDPR) against any form of external pressure in real life (e.g. by your employer or your customers). Be very careful! Once you "
+"have chosen it, you will NEVER be able to change this pseudonym afterwards. Choose it with care! \n"
+" Your pseudonym must be between ${MIN_PSEUDONYM_LENGTH} and ${MAX_PSEUDONYM_LENGTH} characters long and can only contain letters of the Latin alphabet (A-Z, a-z), numbers (0-9), "
+"underscores (_), dots (.), hyphens (-) and spaces ( ). It cannot contain letters with accents, umlauts, and other diacritical signs specific to some languages."
+
+#: alirpunkto/schemas/register_form.py:115
+#, fuzzy
+msgid "pseudonym_required"
+msgstr "Providing your pseudonym is required"
+
+#: alirpunkto/schemas/register_form.py:121
+msgid "password_description"
+msgstr ""
+"Please provide your password. Your password must be between ${password_minimum_length} and ${password_maximum_length} characters long, contain at least one digit, at least one lowercase "
+"letter, at least one uppercase letter and at least one of the characters among the following: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+
+#: alirpunkto/schemas/register_form.py:130
+#, fuzzy
+msgid "password_confirm_description"
+msgstr "Please confirm your passowrd"
+
+#: alirpunkto/schemas/register_form.py:132
+#, fuzzy
+msgid "confirm_password_required"
+msgstr "Confirming your password is required"
+
+#: alirpunkto/schemas/register_form.py:138
+msgid "email_description"
+msgstr ""
+"Please provide the e-mail address that the IT infrastructure of ${domain_name} will use to interact with you.\n"
+"We recommend that you choose an email address that you check often.\n"
+"We need this information because we need to interact with you, to keep you informed of developments at the Cooperative, to offer you the chance to take action or contribute to "
+"decisions. Email is the most widely used medium in Europe, it is universal and is based on open and free standards, unlike the proprietary messaging systems of the digital giants (also "
+"known as 'GAFAM').\n"
+"This e-mail address will used exclusively to ensure the communication between the IT infrastructure of ${domain_name} and you. It will never be displayed to the other users of the IT "
+"platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the request of a judge. The "
+"\"data controller\" as defined by the General Data Protection Regulation (GDPR) of the "
+"European Union is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the "
+"number SIREN 951 007 897."
+
+#: alirpunkto/schemas/register_form.py:144
+msgid "first_interaction_language_description"
+msgstr ""
+"Please provide the language with which you would prefer that the IT infrastructure of ${domain_name} interact with you. \n"
+" We recommend that you choose the language you know best, from among the official languages of the European Union or Esperanto. If it is available among those for which we have "
+"developed a user interface, we will use it to interact with you. \n"
+" We need this information because, for reasons of fairness and respect for democratic principles, we want to interact with you in a language that you understand as well as possible."
+
+#: alirpunkto/schemas/register_form.py:151
+msgid "second_interaction_language_description"
+msgstr ""
+"Please provide the language with which you would accept, as a second choice, that the IT infrastructure of ${domain_name} interact with you. \n"
+" We recommend that you choose another official language of the European Union or Esperanto, which you understand reasonably well. If it is available among those for which we have "
+"developed a user interface, and if your preferred language is unavailable, we will use it to interact with you. \n"
+" We need this information because, despite our efforts, it may happen that your preferred language be unavailable on the user interface of our software. This is why we are asking you if "
+"you can use another language."
+
+#: alirpunkto/schemas/register_form.py:156
+#, fuzzy
+msgid "third_interaction_language_label"
+msgstr "The language you accept as a third choice for us to interact with you"
+
+msgid "third_interaction_language_description"
+msgstr ""
+"Please provide the language with which you would accept, as a third choice, that the IT infrastructure of ${domain_name} interact with you. \n"
+" We recommend that you choose another official language of the European Union or Esperanto, which you still can understand. If it is available among those for which we have developed a "
+"user interface, and if neither your preferred language nor your second language is available, we will use it to interact with you. \n"
+" We need this information because, despite our efforts, it may happen that your preferred language and your second language be unavailable on the user interface of our software. This is "
+"why we are asking you if you can use a third language. We are aware that for you to interact with us using it is an unsatisfactory situation for you - as it is for us. We apologise for "
+"this."
+
+#: alirpunkto/schemas/register_form.py:163
+#, fuzzy
+msgid "cooperative_behaviour_mark_label"
+msgstr "Your Cooperative Behaviour Mark"
+
+msgid "cooperative_behaviour_mark_description"
+msgstr ""
+"As a Cooperator, your Cooperative Behaviour Mark results from the marks allocated to you by the other Active Participants in the Working Groups in which you have participated to define "
+"and adopt Action Proposals. Each Active Pariticpant can provide a mark equal to +1, 0 or -1, according to how cooperative your behaviour was during your active participation in that "
+"Working Group. This mark is then automatically 'forgotten' and decays over time: it is halved after ${forgetting_time_constant} days. The initial value of your Cooperative Behaviour "
+"Mark is zero."
+
+#: alirpunkto/schemas/register_form.py:169
+#, fuzzy
+msgid "cooperative_behaviour_mark_update_label"
+msgstr "Date at which your Cooperative Behaviour Mark was last updated"
+
+#: alirpunkto/schemas/register_form.py:170
+msgid "cooperative_behaviour_mark_update_description"
+msgstr ""
+"This is the latest date at which another Cooperator allocated to you a mark following the end of your active participation in a Working Group that was defining and adopting an Action "
+"Proposal. The initial value of that date is that of your registration as a Cooperator"
+
+#: alirpunkto/schemas/register_form.py:171
+msgid "cooperative_behaviour_mark_update_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:180
+#, fuzzy
+msgid "number_shares_owned_label"
+msgstr "Number of shares of the Cooperative that you own"
+
+#: alirpunkto/schemas/register_form.py:181
+msgid "number_shares_owned_description"
+msgstr ""
+"This is the total number of shares of the Cooperative that you own, after having purchased them on our web portal. Upon your registration, this number is equal to zero. We invite you to "
+"proceed as soon as possible to this URL: ${url_purchase_shares} to purchase your first share(s). You will enjoy your full decision-making rights as a Cooperator only after having "
+"purchased at least one share (and paid your yearly contribution). You are welcome to purchase more than one share, upon registration, but also anytime afterwards. It strengthens our "
+"Cooperative, and we all are grateful to you for this!"
+
+#: alirpunkto/schemas/register_form.py:183
+msgid "number_shares_owned_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:188
+#, fuzzy
+msgid "date_end_validity_yearly_contribution_label"
+msgstr "Date at which your current yearly contribution expires"
+
+#: alirpunkto/schemas/register_form.py:189
+msgid "date_end_validity_yearly_contribution_description"
+msgstr ""
+"Date at which your current yearly contribution expires, and before which you must pay it again to keep your full decision-making rights as a Cooperator. Upon your registration, this "
+"date is set at a time in the past, which means that you should pay it now. We invite you to proceed as soon as possible to this URL: ${url_pay_yearly_contrib} to pay your first yearly "
+"contribution, and participate thereby to the operations of our Cooperative. You will enjoy your full decision-making rights as a Cooperator only after having paid your yearly "
+"contribution (and purchased at least one share)."
+
+#: alirpunkto/schemas/register_form.py:190
+msgid "date_end_validity_yearly_contribution_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:199
+#, fuzzy
+msgid "iban_label"
+msgstr "International Bank Account Number (IBAN) of your bank account"
+
+#: alirpunkto/schemas/register_form.py:200
+msgid "iban_description"
+msgstr ""
+"If and when you decide to leave the Cooperative (which we would all regret), we need your IBAN to be able to transfer to you the proceeds of our back purchase of your shares of the "
+"Cooperative. For security reasons, we advise you to provide this information only if and when you anticipate to leave the Cooperative"
+
+#: alirpunkto/schemas/register_form.py:202
+msgid "iban_required"
+msgstr ""
+
+#: alirpunkto/schemas/register_form.py:207
+#, fuzzy
+msgid "date_erasure_all_data_title"
+msgstr "Date at which all your data will be erased from our IT infrastructure"
+
+#: alirpunkto/schemas/register_form.py:208
+msgid "date_erasure_all_data_description"
+msgstr ""
+"If and when you leave the Cooperative, your identity data will be kept for a duration of ${Quarantine} days, before being fully and irrevocably erased from our records. This is to "
+"ensure that a Cooperator quitting the Cooperative because his/her Cooperative Behaviour Mark is too bad cannot re-register again immediately with a virgin pseudonym and Cooperative "
+"Behaviour Mark. Upon your registration, this date is set in a very distant future"
+
+#, fuzzy
+msgid "avatar_label"
+msgstr "A picture to represent you (your avatar)"
+
+msgid "avatar_description"
+msgstr ""
+"Please provide a picture representing you as a member of the Community. For the sake of preserving you from any reprisals from your employer or clients, we recommend that this picture "
+"does not enable to track back to your identity in real life. It should hence in general not be a photograph of yourself (remember that face recognition software is massively used by "
+"search robots). The picture should be in JPEG format only (extension .JPG or .JPEG), and not larger than 5 MB. \n"
+"We believe that this information is useful because a picture make it easier for the other members of the Community to recognise you. Sometimes a picture speaks much louder than a long "
+"speech. With this image, you're expressing a lot about yourself, in a universal language. Make the most of it!"
+
+msgid "candidature_mixed"
+msgstr ""
+"The address (URL) you used to retrieve your application process from where you interrupted it does not match the one we registered for you. (The application identification number in the "
+"session and in the URL number do not match)\n"
+"Please use only the URL from the last email you received. If you have not received any e-mail in the next few minutes, please check your spam folder. It is possible that the e-mail that we sent you be there."
+
+#, fuzzy
+msgid "check_new_email"
+msgstr "You have asked to change your email address. In future, you would like to use: ${new_email}. As a result you will receive an email containing a link to validate this new address."
+
+#, fuzzy
+msgid "check_new_email_subject"
+msgstr "Verification of your new email address"
+
+#, fuzzy
+msgid "check_new_email_send_error"
+msgstr "The sending of the verification email for your new address has failed"
+
+#: alirpunkto/views/modify_member.py:228
+#, fuzzy
+msgid "check_new_email_send"
+msgstr "The verification email for your new address has been sent. If you have not received any e-mail in the next few minutes, please check your spam folder. It is possible that the e-mail that we sent you be there."
+
+#, fuzzy
+msgid "modify_member"
+msgstr "Consult or modify member"
+
+#: alirpunkto/utils.py:187
+#, fuzzy
+msgid "connection_error"
+msgstr "Connection error"
+
+#: alirpunkto/utils.py:208 alirpunkto/utils.py:213
+#, fuzzy
+msgid "email_allready_exist"
+msgstr "Email address already exists"
+
+#: alirpunkto/views/check_new_email.py:95
+#, fuzzy
+msgid "email_updated"
+msgstr "Email address updated"
+
+#: alirpunkto/views/check_new_email.py:89
+#, fuzzy
+msgid "email_update_error"
+msgstr "Error while updating email address"
+
+#: alirpunkto/views/modify_member.py:257 alirpunkto/views/modify_member.py:258
+#, fuzzy
+msgid "error_while_setting_field"
+msgstr "Error while setting field"
+
+#: alirpunkto/views/modify_member.py:276
+#, fuzzy
+msgid "error_while_updating_member"
+msgstr "Error while updating member"
+
+#: alirpunkto/views/vote.py:51 alirpunkto/views/check_new_email.py:62
+#, fuzzy
+msgid "invalid_oid"
+msgstr "Invalid OID"
+
+#: alirpunkto/views/check_new_email.py:100
+#, fuzzy
+msgid "invalid_request"
+msgstr "Invalid request"
+
+#: alirpunkto/utils.py:217
+#, fuzzy
+msgid "ldap_error"
+msgstr "LDAP error"
+
+#: alirpunkto/views/modify_member.py:288
+#, fuzzy
+msgid "member_data_updated"
+msgstr "Member data updated"
+
+#: alirpunkto/utils.py:932
+#, fuzzy
+msgid "member_update_failed"
+msgstr "Update of member data has failed"
+
+#: alirpunkto/utils.py:929
+#, fuzzy
+msgid "member_update_successful"
+msgstr "Update of member data is successful"
+
+#: alirpunkto/views/register.py:479 alirpunkto/views/register.py:563
+#, fuzzy
+msgid "missing_data"
+msgstr "Missing data"
+
+#: alirpunkto/views/check_new_email.py:78
+#, fuzzy
+msgid "no_new_email"
+msgstr "New email address is missing"
+
+#: alirpunkto/views/modify_member.py:136 alirpunkto/views/modify_member.py:137
+#, fuzzy
+msgid "no_permission"
+msgstr "No permission"
+
+#: alirpunkto/views/vote.py:64
+#, fuzzy
+msgid "not_voter"
+msgstr "Not a voter"
+
+#: alirpunkto/utils.py:870
+#, fuzzy
+msgid "password_update_failed"
+msgstr "Password update has failed"
+
+#: alirpunkto/utils.py:867
+#, fuzzy
+msgid "password_update_successful"
+msgstr "Password update is successful"
+
+#: alirpunkto/utils.py:771 alirpunkto/utils.py:790 alirpunkto/utils.py:833
+#, fuzzy
+msgid "registration_failed"
+msgstr "Registration has failed"
+
+#: alirpunkto/utils.py:830
+#, fuzzy
+msgid "registration_successful"
+msgstr "Registration is successful"
+
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+#, fuzzy
+msgid "unknown_accessed_member"
+msgstr "Unknown accessed member"
+
+#: alirpunkto/views/modify_member.py:82
+#, fuzzy
+msgid "unknown_member"
+msgstr "Unknown member"
+
+#, fuzzy
+msgid "modify_member_title"
+msgstr "Edit member profile"
+
+#, fuzzy
+msgid "select_member_oid_label"
+msgstr "Please select a member to edit his/her profile:"
+
+#, fuzzy
+msgid "select_member_placeholder"
+msgstr "Pseudonym of the member"
+
+#, fuzzy
+msgid "modify_profile"
+msgstr "You can change your profile by clicking here"
+
+#, fuzzy
+msgid "profile"
+msgstr "profile"
+
+msgid "check_new_email_confirmed_msg"
+msgstr ""
+"Your email address has been successfully updated. You will now use this new address for all future communications with ${domain_name}.If you did not request this change or if you have "
+"any questions, please do not hesitate to contact our support immediately at ${admin_email}.Thank you for being a part of the ${domain_name} community!"
+
+#, fuzzy
+msgid "provider_role_activated"
+msgstr "Your Provider Account Has Been Created"
+
+#, fuzzy
+msgid "invalid_field_value"
+msgstr "Invalid value for field ${field}."
+
+#, fuzzy
+msgid "provider_update_failed"
+msgstr "Provider update failed."
+
+#, fuzzy
+msgid "provider_new_email_label"
+msgstr "New email (optional)"
+
+#, fuzzy
+msgid "provider_new_password_label"
+msgstr "New password (optional)"

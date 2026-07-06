@@ -24,13 +24,13 @@
 
     <p tal:omit-tag="textual">Hawn taħt huma l-elementi prinċipali tal-profil tiegħek li rrackupajna:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">il-pseudonimu tiegħek: ##PSEUDONYM. Jekk jogħġbok żomm nota ATTENTA U SIGURI ta’ dan il-pseudonimu: huwa l-unika identifikatur bil-li tista’ tidħol fil-pjattaforma IT tagħna;</li>
+        <li tal:omit-tag="textual">il-pseudonimu tiegħek: <span tal:replace="user">pseudonym</span>. Jekk jogħġbok żomm nota ATTENTA U SIGURI ta’ dan il-pseudonimu: huwa l-unika identifikatur bil-li tista’ tidħol fil-pjattaforma IT tagħna;</li>
         <li tal:omit-tag="textual">il-password tiegħek: (il-password li ngħatajt waqt ir-reġistrazzjoni tiegħek);</li>
         <li tal:omit-tag="textual">l-indirizz elettroniku tiegħek: (l-indirizz elettroniku li biha nibagħtulek din l-email);</li>
-        <li tal:omit-tag="textual" tal:condition="##IS_COOPERATOR">id-dettalji tal-istorja tiegħek: (il-kull isimijiet u ismijiet tal-familja tiegħek, id-data tat-twelid tiegħek, kif dħalt u verifikat waqt il-proċess tar-reġistrazzjoni tiegħek);</li>
-        <li tal:omit-tag="textual">il-lingwa preferuta tiegħek biex ninteraġixxu miegħek: ##LANGUAGE_1;</li>
-        <li tal:omit-tag="textual">il-lingwa sekonda li taċċetta li nużaw biex ninteraġixxu miegħek: ##LANGUAGE_2;</li>
-        <li tal:omit-tag="textual">il-lingwa li taċċetta li nużaw, bħala t-tielet għażla, biex ninteraġixxu miegħek: ##LANGUAGE_3.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">id-dettalji tal-istorja tiegħek: (il-kull isimijiet u ismijiet tal-familja tiegħek, id-data tat-twelid tiegħek, kif dħalt u verifikat waqt il-proċess tar-reġistrazzjoni tiegħek);</li>
+        <li tal:omit-tag="textual">il-lingwa preferuta tiegħek biex ninteraġixxu miegħek: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
+        <li tal:omit-tag="textual">il-lingwa sekonda li taċċetta li nużaw biex ninteraġixxu miegħek: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
+        <li tal:omit-tag="textual">il-lingwa li taċċetta li nużaw, bħala t-tielet għażla, biex ninteraġixxu miegħek: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
     </ul>
 
     <p tal:omit-tag="textual">Għal tiegħek ir-rekords, hawn il-fajl tal-finalizzazzjoni tal-proċess ta’ reġistrazzjoni tiegħek:</p>

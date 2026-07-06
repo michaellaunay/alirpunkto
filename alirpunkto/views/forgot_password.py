@@ -184,8 +184,8 @@ def forgot_password(request):
         # 14) AlirPunkto checks that the password is valid and meets security constraints
         # 14.1) If the password is not valid, AlirPunkto displays an error message
         # 14.2) Return to 12
-        password = request.params['password']
-        password_confirm = request.params['password_confirm']
+        password = request.params.get('password', "")
+        password_confirm = request.params.get('password_confirm', "")
         if password != password_confirm:
             return {"error":_('password_not_match'),
                 "member": member,

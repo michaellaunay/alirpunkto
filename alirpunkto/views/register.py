@@ -193,8 +193,8 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
     """
     log.debug(f"Handling draft state for candidature id:{id(candidature)}, oid:{candidature.oid}")
     if 'submit' in request.POST:
-        email = request.params['email']
-        choice = request.params['choice']
+        email = request.params.get('email', "")
+        choice = request.params.get('choice', "")
 
         error = validate_candidature_choice_and_email(
             email, choice, request, candidature

@@ -35,7 +35,19 @@ if [ "${ENABLE_CERTBOT}" = "true" ] && [ ! -f "${CERT_PATH}" ]; then
 fi
 
 if [ "${ENABLE_CERTBOT}" = "true" ]; then
-    certbot renew --quiet || true
+    # R3 — renew periodically, not only at startup. A container running longer
+    # than a certificate's ~90-day lifetime without a restart would otherwise
+    # serve an expired certificate. certbot reloads Apache (graceful) via the
+    # deploy hook only when a certificate actually changes.
+    certbot renew --quiet --deploy-hook "apache2ctl graceful" || true
+    (
+        while true; do
+            # certbot's recommended cadence is twice a day; renewal is a no-op
+            # until the cert is within its renewal window.
+            sleep 12h
+            certbot renew --quiet --deploy-hook "apache2ctl graceful" || true
+        done
+    ) &
 fi
 
 apache2ctl configtest
