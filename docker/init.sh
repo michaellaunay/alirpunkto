@@ -340,6 +340,9 @@ MAIL_HOST=alirpunkto-postfix
 EOF
 success "docker/.env written."
 
+# S8: .env holds SECRET_KEY and MAIL_PASSWORD in clear text — restrict it.
+chmod 600 "${ENV_FILE}"
+
 # ── write docker/secrets/ldap_password ───────────────────────────────────────
 
 mkdir -p "${SECRETS_DIR}"

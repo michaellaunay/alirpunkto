@@ -55,8 +55,12 @@ services:
     networks:
       - alirpunkto-net
     ports:
-      - "8389:389"
-      - "8636:636"
+      # S3: debug/admin from the host only. Bound to loopback so the member
+      # directory (identities, {SSHA} hashes) is never exposed on the host's
+      # external interfaces. The app reaches LDAP over alirpunkto-net
+      # (alirpunkto-ldap:389); remote debugging goes through an SSH tunnel.
+      - "127.0.0.1:8389:389"
+      - "127.0.0.1:8636:636"
     environment:
       LDAP_BASE_DN: ${LDAP_BASE_DN}
       LDAP_ORGANIZATION: ${LDAP_ORGANIZATION}
@@ -126,7 +130,11 @@ services:
     healthcheck:
       # `postfix status` can return 0 even when master is not yet listening.
       # Checking for an open port 25 is more reliable.
-      test: ["CMD", "sh", "-c", "ss -ltn | grep -q ':25'"]
+      # R8: a bound port 25 does not prove smtpd answers. Open a real SMTP
+      # connection and require the 220 greeting, so depends_on:service_healthy
+      # only unblocks Pyramid once Postfix actually accepts connections.
+      # ($$ escapes $ from compose variable substitution.)
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/25 && read -t 3 r <&3 && case $$r in 220*) exit 0;; *) exit 1;; esac"]
       interval: 15s
       timeout: 5s
       retries: 5
@@ -162,7 +170,10 @@ services:
     networks:
       - alirpunkto-net
     ports:
-      - "6543:6543"
+      # S3: loopback only. Public traffic must go through Apache (80/443) for
+      # TLS termination and its protections; reaching Waitress directly from
+      # another host now requires an SSH tunnel.
+      - "127.0.0.1:6543:6543"
     environment:
       LDAP_SERVER: alirpunkto-ldap
       LDAP_PORT: 389
