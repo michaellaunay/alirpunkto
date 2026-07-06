@@ -30,7 +30,7 @@
         <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">datele dvs. de identitate: (toate numele și prenumele dvs. de familie, data nașterii, așa cum au fost furnizate și verificate în timpul procesului de înregistrare);</li>
         <li tal:omit-tag="textual">limba dvs. preferată pentru ca noi să interacționăm cu dvs: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
         <li tal:omit-tag="textual">cea de-a doua limbă pe care acceptați să o folosim pentru a interacționa cu dvs: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
-        <li tal:omit-tag="textual">limbajul pe care acceptați că îl folosim, ca o a treia alegere, pentru a interacționa cu dumneavoastră: ###LINGVISTIC>: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
+        <li tal:omit-tag="textual">limbajul pe care acceptați că îl folosim, ca o a treia alegere, pentru a interacționa cu dumneavoastră: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
         </ul>
 
     <p tal:omit-tag="textual">Pentru evidența dvs., iată detaliile privind finalizarea procesului de înregistrare:</p>

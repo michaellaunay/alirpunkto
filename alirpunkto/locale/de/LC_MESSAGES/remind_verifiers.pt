@@ -9,7 +9,7 @@ tal:omit-tag="textual">
 <body>
 <h1>Deine Hilfe wird benötigt, um die Identitätsdaten eines Kandidaten zu verifizieren!</h1>
 
-<p>Liebe*r <span tal:replace="Verifier" tal:condition="exists:user">Pseudonym des Überprüfers</span>,</p>
+<p>Liebe*r <span tal:replace="verifier" tal:condition="exists:user">Pseudonym des Überprüfers</span>,</p>
 
 <p>Wie du dich vielleicht erinnerst, wurdest du von der <span tal:replace="domain_name">Domain Name</span>-Plattform nach dem Zufallsprinzip ausgewählt, um als Verifizierer zu fungieren, dessen Aufgabe es ist, die Identität einer Person zu überprüfen, die sich gerade online registriert hat. Unseres Wissens nach hast du noch nicht gewählt. <strong>Bitte tue dies unter der folgenden <a href="{subject_url}">URL</a>, am oder vor {date_end_vote}, das heißt in {notice_time_verifiers} Tagen!</strong> Bitte handle schnell.</p>
 
@@ -37,6 +37,6 @@ tal:omit-tag="textual">
 
 <p>Mit freundlichen Grüßen.</p>
 <p>Das Team von <span tal:replace="domain_name">Domain Name</span>.</p>
-<p tal:content="organisation_details">Organisationsdetails</p>
+<p tal:content="organization_details">Organisationsdetails</p>
 </body>
 </html>
