@@ -66,7 +66,15 @@ Compose starts services in dependency order using healthchecks:
 2. `alirpunkto-pyramid` (waits for both)
 3. `alirpunkto-apache2` (waits for Pyramid)
 
-The `alirpunkto-net` network is created automatically.
+Two networks are created automatically (**R6 — tier segmentation**):
+`alirpunkto-frontend` (Apache ↔ Pyramid) and `alirpunkto-backend`
+(Pyramid ↔ LDAP/Postfix). Apache cannot reach LDAP or Postfix, and vice-versa,
+which limits lateral movement if a public-facing service is compromised.
+
+Internal services are published on **loopback only** (**S3**): `127.0.0.1:8389`/`8636` for LDAP and `127.0.0.1:6543` for Waitress, so the
+member directory and the TLS-less backend are never exposed on the host's
+external interfaces. Only Apache (`80`/`443`) is public; reach a loopback-bound
+service from another host through an SSH tunnel.
 
 Each service ships with **resource limits** and **log rotation** (see
 `docker-compose.yaml`):
@@ -78,6 +86,13 @@ Each service ships with **resource limits** and **log rotation** (see
 - **Log rotation** (`logging: json-file`, `max-size: 10m`, `max-file: 5`) caps
   on-disk logs at ~50 MB per container, so an unbounded log cannot fill the
   host disk.
+- **Hardening** (**S5**): every service sets
+  `security_opt: no-new-privileges:true` (blocks privilege escalation via
+  setuid/setgid binaries). The non-root Pyramid service also drops all Linux
+  capabilities (`cap_drop: ALL`). LDAP, Postfix and Apache ship a *commented*
+  `cap_drop`/`cap_add` block in `docker-compose.yaml`; enable it after checking
+  the service still starts on your host (an over-tight capability set can
+  prevent startup).
 
 ### 3. Reset and reinitialise
 
@@ -92,6 +107,11 @@ docker compose --env-file docker/.env -f docker/docker-compose.yaml up -d
 > ```bash
 > docker volume rm alirpunkto_pyramid_var
 > ```
+
+> The helper `docker/stop_clean_delete.sh` tears down the **whole** stack via
+> `docker compose down` (the previous version only removed LDAP). Pass
+> `--volumes` to also delete the named volumes — this destroys the LDAP
+> directory and the ZODB, so back up first (see **Backups** below).
 
 ---
 
@@ -139,6 +159,14 @@ The LDAP entrypoint (`start_ldap.sh`) has two independent **runtime** flags
 Useful for troubleshooting or rebuilding a single service. Source the env file
 first:
 
+> **Networks:** the Compose stack now creates `alirpunkto-frontend` and
+> `alirpunkto-backend` (not the old single `alirpunkto-backend`). The examples below
+> use `alirpunkto-backend` for LDAP/Postfix/Pyramid and `alirpunkto-frontend`
+> for Apache; a fully manual stack needs Pyramid on **both** networks (add a
+> second `--network alirpunkto-frontend`). Create a missing network with
+> `docker network create <name>`. Bind internal services to `127.0.0.1` as the
+> Compose stack does.
+
 ```bash
 set -a && source docker/.env && set +a
 ```
@@ -155,9 +183,9 @@ docker volume create alirpunkto_ldap_var
 
 # Run
 docker run --name alirpunkto-ldap \
-  --network alirpunkto-net \
-  -p 8389:389 \
-  -p 8636:636 \
+  --network alirpunkto-backend \
+  -p 127.0.0.1:8389:389 \
+  -p 127.0.0.1:8636:636 \
   -e LDAP_BASE_DN="$LDAP_BASE_DN" \
   -e LDAP_ORGANIZATION="$LDAP_ORGANIZATION" \
   -e LDAP_PASSWORD_FILE=/run/secrets/ldap_password \
@@ -184,8 +212,8 @@ docker build -f docker/DockerfilePyramid -t alirpunkto-pyramid .
 docker volume create alirpunkto_pyramid_var
 
 docker run --name alirpunkto-pyramid \
-  --network alirpunkto-net \
-  -p 6543:6543 \
+  --network alirpunkto-backend \
+  -p 127.0.0.1:6543:6543 \
   -e LDAP_SERVER=alirpunkto-ldap \
   -e LDAP_PORT=389 \
   -e MAIL_HOST=alirpunkto-postfix \
@@ -209,7 +237,7 @@ docker volume create alirpunkto_apache_letsencrypt
 docker volume create alirpunkto_apache_letsencrypt_lib
 
 docker run --name alirpunkto-apache2 \
-  --network alirpunkto-net \
+  --network alirpunkto-frontend \
   -p 8080:80 \
   -p 8443:443 \
   -e APACHE_SERVER_NAME="$APACHE_SERVER_NAME" \
@@ -228,10 +256,15 @@ To request a TLS certificate automatically:
   -e LETSENCRYPT_EMAIL="$LETSENCRYPT_EMAIL"
 ```
 
+With `ENABLE_CERTBOT=true`, `start_apache2.sh` also renews the certificate
+**periodically** (**R3**): a background `certbot renew` runs every 12 h and
+reloads Apache gracefully only when the certificate actually changes, so a
+long-running container never ends up serving an expired certificate.
+
 ### Postfix
 
 > **Do not publish port 25.** Postfix is send-only and is reached by Pyramid
-> over `alirpunkto-net`; mapping `-p 9025:25` on `0.0.0.0` re-opens the relay to
+> over `alirpunkto-backend`; mapping `-p 9025:25` on `0.0.0.0` re-opens the relay to
 > the Internet. See "Postfix — security notes" below.
 
 ```bash
@@ -241,7 +274,7 @@ docker volume create alirpunkto_postfix_spool
 docker volume create alirpunkto_postfix_dkim
 
 docker run -d --name alirpunkto-postfix \
-  --network alirpunkto-net \
+  --network alirpunkto-backend \
   -e DOMAIN="$DOMAIN" \
   -e POSTFIX_MYHOSTNAME="$POSTFIX_MYHOSTNAME" \
   -v alirpunkto_postfix_spool:/var/spool/postfix \
@@ -334,12 +367,38 @@ docker logs -f alirpunkto-apache2
 docker compose --env-file docker/.env -f docker/docker-compose.yaml logs -f
 ```
 
+---
+
+## Backups
+
+`docker/backup.sh` (**R4**) dumps the two stateful stores and rotates old
+archives:
+
+- **LDAP** → `slapcat` of the config (`-n 0`) and data (`-n 1`) databases (LDIF);
+- **ZODB** → a hot copy of `Data.fs` (append-only, so copying a live file is safe).
+
+Run it from the host (it drives the containers via `docker`), e.g. daily from
+cron:
+
+```bash
+0 3 * * *  /path/to/repo/docker/backup.sh >> /var/log/alirpunkto-backup.log 2>&1
+```
+
+Overrides: `BACKUP_DIR` (default `/var/backups/alirpunkto`), `KEEP_DAYS`
+(default 14), `LDAP_CONTAINER`, `PYRAMID_CONTAINER`, `ZODB_PATH`. Each run writes
+a timestamped `*.tar.gz` and prunes archives older than `KEEP_DAYS`. **Copy the
+archives off-host and test a restore periodically** — restore notes (slapadd /
+replacing `Data.fs`, plus `repozo` for point-in-time ZODB snapshots) are at the
+bottom of `backup.sh`.
+
+---
+
 # Postfix — security notes
 
 ## Do not publish port 25
 
 Postfix is **send-only** for AlirPunkto notifications and is reached by Pyramid
-over the internal `alirpunkto-net` (`alirpunkto-postfix:25`). It does **not** need
+over the internal `alirpunkto-backend` (`alirpunkto-postfix:25`). It does **not** need
 a published port. The Compose stack no longer maps `9025:25`.
 
 If you use the manual `docker run` example, **remove** `-p 9025:25` (publishing 25
@@ -349,7 +408,7 @@ firewall, and enable SASL authentication.
 
 ```bash
 # send-only (recommended): no port mapping, no POSTFIX_MYNETWORKS needed
-docker run -d --name alirpunkto-postfix --network alirpunkto-net \
+docker run -d --name alirpunkto-postfix --network alirpunkto-backend \
   -e DOMAIN="<your-domain>" \
   -e POSTFIX_MYHOSTNAME="<your-hostname>" \
   -v alirpunkto_postfix_spool:/var/spool/postfix \
@@ -362,7 +421,7 @@ docker run -d --name alirpunkto-postfix --network alirpunkto-net \
 Left unset (the default), `start_postfix.sh` auto-detects this container's own
 bridge subnet and trusts it. **This is safe precisely because port 25 is not
 published:** with no external ingress, only the stack's own containers on
-`alirpunkto-net` can reach Postfix, so trusting that private subnet cannot become
+`alirpunkto-backend` can reach Postfix, so trusting that private subnet cannot become
 an Internet-facing open relay.
 
 The danger only appears **if you publish port 25**: Docker NAT then makes external
