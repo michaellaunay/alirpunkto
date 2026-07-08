@@ -395,6 +395,57 @@ bottom of `backup.sh`.
 
 # Postfix — security notes
 
+## Migrating a legacy LDAP directory
+
+`docker/migrate_ldap_legacy.py` adapts an export of a pre-2026 AlirPunkto
+directory to the current schema: `employeeType` values are normalised to the
+`MemberTypes` names (including the historic `coperator` typo and value-form
+variants), the `coperatorsGroup`/`communityGroup` groups are renamed and their
+references rewritten, `gn` becomes `givenName`, `isActive` is canonicalised,
+operational attributes are stripped and referential consistency is checked.
+
+Since finding 1.3 was fixed, the script also **hashes every cleartext
+`userPassword` to `{SSHA}`** (values already hashed are kept verbatim), so the
+adapted LDIF can be loaded without ever storing a cleartext password. Logins
+are unaffected: authentication is an LDAP *bind*, and slapd verifies `{SSHA}`
+natively. Pass `--keep-cleartext-passwords` only if you need a verbatim copy
+of the export (for inspection — do not load it in production).
+
+```bash
+# 1. export and adapt the legacy directory (pick one input mode)
+python3 docker/migrate_ldap_legacy.py --slapcat-container old-ldap \
+    --output adapted.ldif --report report.txt
+python3 docker/migrate_ldap_legacy.py --input old.ldif \
+    --output adapted.ldif --report report.txt
+
+# 2. read report.txt, then load into the current stack
+docker cp adapted.ldif alirpunkto-ldap:/tmp/adapted.ldif
+docker exec alirpunkto-ldap ldapadd -Y EXTERNAL -H ldapi:/// \
+    -f /tmp/adapted.ldif
+```
+
+`--strict` makes the script exit non-zero on any unknown `employeeType` or
+unresolved reference instead of warning.
+
+## Purging cleartext passwords from the ZODB
+
+Candidatures created before the 1.3 fix persisted the applicant's password
+(and its `password_confirm` copy) in cleartext inside `Data.fs`.
+`tools/purge_zodb_cleartext_passwords.py` cleans this up: entries whose LDAP
+account already exists — or never will (APPROVED/REFUSED, plain members) — get
+their password cleared, while still-pending candidatures are hashed in place
+so their approval can still create the LDAP account.
+
+Stop the Pyramid container first (FileStorage is single-writer) and take a
+backup (`docker/backup.sh`), then:
+
+```bash
+python tools/purge_zodb_cleartext_passwords.py \
+    --data-fs var/filestorage/Data.fs --dry-run   # review the plan
+python tools/purge_zodb_cleartext_passwords.py \
+    --data-fs var/filestorage/Data.fs             # apply
+```
+
 ## Do not publish port 25
 
 Postfix is **send-only** for AlirPunkto notifications and is reached by Pyramid

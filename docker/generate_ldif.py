@@ -22,6 +22,9 @@ Fixes produced by this rewrite vs the previous sed/perl approach:
 - No double "# Users" section in the output.
 """
 
+import base64
+import hashlib
+import os
 import re
 import sys
 
@@ -60,6 +63,17 @@ DEMO_UUIDS = {
 ADMIN_PLACEHOLDER = "00000000-0000-0000-0000-000000000000"
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _ensure_ssha(pw: str) -> str:
+    """init.sh normally hashes with slappasswd before calling this script, but
+    its fallback path passes the password through in cleartext; guarantee here
+    that no cleartext ever lands in the generated LDIF (finding 1.3)."""
+    if pw.startswith("{"):  # already an RFC-2307 scheme ({SSHA}, {CRYPT}, ...)
+        return pw
+    salt = os.urandom(8)
+    digest = hashlib.sha1(pw.encode("utf-8") + salt).digest()
+    return "{SSHA}" + base64.b64encode(digest + salt).decode("ascii")
+
 
 def role_to_groups(role: str) -> list[str]:
     groups = ["communityMembersGroup"]
@@ -106,7 +120,7 @@ def user_entry(uuid, pseudonym, first, last, lang, nat, email, pw, role, base_dn
         lines.append(f"birthdate: {birthdate}")
     lines += [
         f"mail: {email}",
-        f"userPassword: {pw}",
+        f"userPassword: {_ensure_ssha(pw)}",
         "numberSharesOwned: 1",
         f"dateEndValidityYearlyContribution: {today}",
     ]
@@ -131,7 +145,7 @@ def admin_entry(uuid, login, pseudonym, email, pw, base_dn, today):
         "preferredLanguage: fr",
         f"givenName: {login}",
         f"mail: {email}",
-        f"userPassword: {pw}",
+        f"userPassword: {_ensure_ssha(pw)}",
         "numberSharesOwned: 0",
         f"dateEndValidityYearlyContribution: {today}",
     ]

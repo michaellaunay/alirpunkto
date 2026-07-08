@@ -85,7 +85,7 @@ import base64
 from .models.users import User
 import html
 import json
-from .secret_manager import get_secret, encrypt_secret_for_logs
+from .secret_manager import get_secret, encrypt_secret_for_logs, make_ldap_password
 import requests
 import re
 
@@ -583,7 +583,7 @@ def update_member_from_ldap(
                 LDAP_BASE_DN,
                 f'(uid={escape_filter_chars(oid)})',
                 attributes=[
-                    'cn', 'mail', 'employeeType', 'sn', 'uid', 'userPassword',
+                    'cn', 'mail', 'employeeType', 'sn', 'uid',
                     'employeeNumber', 'isActive', 'givenName', 'nationality',
                     'birthdate', 'preferredLanguage', 'secondLanguage',
                     'thirdLanguage','cooperativeBehaviourMark',
@@ -930,6 +930,20 @@ def get_oid_from_pseudonym(
         member_entry = conn.entries[0]
         return member_entry.employeeNumber.value
 
+def secure_password_fields(parameters: dict) -> dict:
+    """Hash the ``password`` field and drop ``password_confirm`` before the dict
+    is persisted (finding 1.3): the ZODB must never hold a cleartext password.
+
+    ``make_ldap_password`` is idempotent, so already-hashed values pass through
+    unchanged. The returned dict is the same object, mutated in place.
+    """
+    if parameters.get('password'):
+        parameters['password'] = make_ldap_password(parameters['password'])
+    if 'password_confirm' in parameters:
+        parameters['password_confirm'] = None
+    return parameters
+
+
 def register_user_to_ldap(request, candidature, password):
     """
     Register a user to the LDAP directory.
@@ -965,7 +979,7 @@ def register_user_to_ldap(request, candidature, password):
                 'objectClass': ['top', 'inetOrgPerson', 'alirpunktoPerson'],
                 'uid': candidature.oid,
                 'mail': candidature.email,
-                'userPassword': password,
+                'userPassword': make_ldap_password(password),  # 1.3: hash, never cleartext
                 'sn': (
                     candidature.data.fullsurname
                         if candidature.type == MemberTypes.COOPERATOR
@@ -1063,6 +1077,21 @@ def register_user_to_ldap(request, candidature, password):
             log.error(f"Error while adding user {pseudonym} to LDAP: {e}")
             success = False
         if success:
+            # 1.3: the LDAP account now stores a hash; drop the (hashed)
+            # password kept in ZODB so nothing credential-shaped survives in
+            # the object store once the account exists.
+            try:
+                if getattr(candidature, "data", None) is not None:
+                    if getattr(candidature.data, "password", None):
+                        candidature.data.password = None
+                    if getattr(candidature.data, "password_confirm", None):
+                        candidature.data.password_confirm = None
+                    candidature._p_changed = True
+            except Exception as e:
+                log.warning(
+                    f"Could not purge password fields from ZODB for "
+                    f"{getattr(candidature, 'oid', '?')}: {e}"
+                )
             return {'status': 'success', 'message': _('registration_successful')}
         else:
             log.error(f"Error while adding user {pseudonym} to LDAP : {conn.result}")
@@ -1091,7 +1120,8 @@ def update_member_password(request, member_oid, new_password):
 
         # Update the member's password
         try:
-            success = conn.modify(dn, {'userPassword': [(MODIFY_REPLACE, [new_password])]})
+            hashed = make_ldap_password(new_password)  # 1.3: hash, never cleartext
+            success = conn.modify(dn, {'userPassword': [(MODIFY_REPLACE, [hashed])]})
         except Exception as e:
             log.error(f"Error while updating password for user {member_oid} in LDAP: {e}")
             success = False

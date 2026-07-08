@@ -21,15 +21,19 @@ WHAT THIS SCRIPT DOES (first migration step)
    duplicate DNs.
 4. Writes an adapted LDIF ready for `slapadd`/`ldapadd` into the current stack,
    and prints a human-readable report.
+5. Hashes cleartext `userPassword` values to `{SSHA}` (finding 1.3), so the
+   loaded directory holds no cleartext password. Existing hashes are kept as-is.
+   Login is unaffected: authentication is an LDAP bind and slapd verifies
+   `{SSHA}` natively. Use --keep-cleartext-passwords to opt out (e.g. to inspect
+   the raw export first).
 
-OUT OF SCOPE HERE (done in a later step)
-----------------------------------------
-The LDAP 1.3 migration and the conversion of *cleartext* `userPassword` values
-to hashed ones. This script does NOT modify passwords. It only INVENTORIES them
-(cleartext vs hashed) so the next step knows exactly what to convert.
-
-The transformation rules live in the TRANSFORM CONFIG section below and are meant
-to be extended in the next step.
+PAIRED APP-SIDE CHANGE (finding 1.3)
+------------------------------------
+Migrating existing data is only half of finding 1.3. For NEW accounts not to
+reintroduce cleartext, the application must also hash on write
+(`register_user_to_ldap`, `update_member_password`) and purge the cleartext
+`data.password` from ZODB after the LDAP account is created. That change ships
+as a separate patch alongside this script.
 
 Usage examples
 --------------
@@ -267,6 +271,25 @@ def write_ldif(entries: list[Entry], header: str = "") -> str:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Password hashing
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def make_ssha(cleartext: str, salt_len: int = 8) -> str:
+    """Return a `{SSHA}` (salted SHA-1) userPassword value.
+
+    This is exactly what `slappasswd -h {SSHA}` produces; OpenLDAP verifies it
+    natively at bind time, so no server-side module or reconfiguration is needed
+    and the existing bind-based login keeps working unchanged.
+    """
+    import hashlib
+    import os
+    salt = os.urandom(salt_len)
+    digest = hashlib.sha1(cleartext.encode("utf-8") + salt).digest()
+    return "{SSHA}" + base64.b64encode(digest + salt).decode("ascii")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Transformations
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -362,10 +385,11 @@ def password_scheme(value: str) -> str:
 
 
 def transform(entries: list[Entry], rep: Report, strict: bool,
-              keep_operational: bool) -> list[Entry]:
+              keep_operational: bool, hash_cleartext: bool) -> list[Entry]:
     kept: list[Entry] = []
     cleartext_dns: list[str] = []
     hashed = 0
+    converted = 0
 
     for e in entries:
         low_dn = e.dn.lower()
@@ -419,11 +443,18 @@ def transform(entries: list[Entry], rep: Report, strict: bool,
                     continue
                 seen_dn_values.add(dedup_key)
 
-            # password inventory (never modified here)
+            # password: inventory, and by default hash cleartext to {SSHA}
             elif low == "userpassword":
                 scheme = password_scheme(value)
                 if scheme == "CLEARTEXT":
                     cleartext_dns.append(e.dn)
+                    if hash_cleartext:
+                        clear = value
+                        if clear.startswith(MARK_B64):
+                            clear = base64.b64decode(
+                                clear[len(MARK_B64):]).decode("utf-8", "replace")
+                        value = make_ssha(clear)
+                        converted += 1
                 else:
                     hashed += 1
 
@@ -452,14 +483,18 @@ def transform(entries: list[Entry], rep: Report, strict: bool,
             order.append(key)
     result = [merged[k] for k in order]
 
-    # password inventory summary
+    # password inventory + conversion summary
     rep.info("")
-    rep.info(f"userPassword inventory: {hashed} hashed, {len(cleartext_dns)} cleartext")
-    if cleartext_dns:
-        rep.warn(
-            f"{len(cleartext_dns)} account(s) store a CLEARTEXT password "
-            f"(to be converted in the password-migration step):"
-        )
+    rep.info(f"userPassword inventory: {hashed} already hashed, "
+             f"{len(cleartext_dns)} cleartext")
+    if cleartext_dns and hash_cleartext:
+        rep.info(f"hashed {converted} cleartext password(s) to {{SSHA}} in the output "
+                 f"(login unchanged: slapd verifies {{SSHA}} at bind). Accounts:")
+        for dn in cleartext_dns:
+            rep.lines.append(f"          - {dn}")
+    elif cleartext_dns:
+        rep.warn(f"{len(cleartext_dns)} account(s) keep a CLEARTEXT password "
+                 f"(--keep-cleartext-passwords given):")
         for dn in cleartext_dns:
             rep.lines.append(f"          - {dn}")
     return result
@@ -546,6 +581,9 @@ def main(argv: list[str] | None = None) -> int:
                    help="treat unrecognised employeeType / issues as errors (non-zero exit)")
     p.add_argument("--keep-operational", action="store_true",
                    help="keep server-generated operational attributes")
+    p.add_argument("--keep-cleartext-passwords", action="store_true",
+                   help="do NOT hash cleartext userPassword values (keep them verbatim); "
+                        "by default cleartext passwords are hashed to {SSHA}")
     args = p.parse_args(argv)
 
     if args.input:
@@ -561,15 +599,21 @@ def main(argv: list[str] | None = None) -> int:
     rep.info(f"parsed {len(entries)} entries from source")
 
     entries = transform(entries, rep, strict=args.strict,
-                        keep_operational=args.keep_operational)
+                        keep_operational=args.keep_operational,
+                        hash_cleartext=not args.keep_cleartext_passwords)
     check_consistency(entries, rep)
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    pw_note = (
+        "kept verbatim (--keep-cleartext-passwords)"
+        if args.keep_cleartext_passwords
+        else "cleartext values hashed to {SSHA}; existing hashes kept as-is"
+    )
     header = (
         f"# Adapted from a legacy AlirPunkto LDAP export by migrate_ldap_legacy.py\n"
         f"# Generated: {now}\n"
-        f"# NOTE: userPassword values are preserved verbatim (password migration is a\n"
-        f"#       separate step). Review the report before loading with slapadd/ldapadd.\n"
+        f"# userPassword: {pw_note}.\n"
+        f"# Review the report before loading with slapadd/ldapadd.\n"
     )
     out = write_ldif(entries, header=header)
 

@@ -44,6 +44,7 @@ INFORM_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/inform_verifiers.pt'
 REMIND_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/remind_verifiers.pt'
 VERIFIER_TEMPLATE_RESOLVER = AssetResolver('alirpunkto')
 from ..utils import (
+    secure_password_fields,
     get_candidatures,
     get_member_by_oid,
     is_valid_email,
@@ -573,6 +574,10 @@ def handle_confirmed_human_state(request, candidature):
                     'candidature': candidature,
                     'MemberTypes': MemberTypes
                 }
+        # 1.3: never persist a cleartext password in ZODB — store the {SSHA}
+        # hash (register_user_to_ldap will pass it through unchanged) and drop
+        # the confirmation copy entirely.
+        parameters = secure_password_fields(parameters)
         data = MemberDatas(**parameters)
         candidature.data = data
 
