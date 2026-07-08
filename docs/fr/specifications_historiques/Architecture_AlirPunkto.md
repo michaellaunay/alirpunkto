@@ -1,3 +1,7 @@
+> **Document historique — non normatif.** Conservé pour mémoire ;
+> l'architecture courante est décrite dans
+> [`../architecture/`](../architecture/00_vue_d_ensemble.md).
+
 # Objectif
 Tout d'abord, nous commencerons par définir l'architecture globale du système. Nous opterons pour une architecture modulaire en couches qui sera composée principalement de trois parties : l'interface utilisateur, la logique métier et la couche de données. 
 

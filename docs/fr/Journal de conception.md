@@ -2566,3 +2566,25 @@ La documentation d'architecture sera ensuite reconstruite progressivement autour
 - décisions d'architecture.
 
 La règle adoptée est la suivante : le code et les tests constituent la source de vérité technique ; la documentation d'architecture décrit l'état courant ; les anciens scénarios sont conservés pour l'histoire du projet et ne prévalent plus en cas de divergence.
+
+# 2026-07-08
+
+Exécution des phases 2 et 3 (début) du [[Plan de refonte documentaire]].
+
+Créés dans `docs/fr/architecture/` : les quatorze documents d'architecture
+(00 à 13), `decisions_architecture.md` (onze décisions, dont ADR-011 sur les
+jetons SSO en session, issue de l'incident du jour) et `glossaire.md`.
+Créées dans `docs/fr/specifications_fonctionnelles/` : `candidature.md`,
+`connexion.md`, `reinitialisation_mot_de_passe.md` — les quatre autres
+spécifications (profil, listes, applications tierces, désactivation) restent
+à écrire. Créé `docs/README.md` (bilingue).
+
+Déplacés conformément au tableau de substitution :
+`Architecture_AlirPunkto.md` vers `specifications_historiques/` (avec
+bandeau non normatif) et `docs/en/UseCases/` vers
+`docs/en/historical_specifications/UseCases/`.
+
+Règle appliquée : chaque affirmation de ces documents a été vérifiée dans le
+code au moment de la rédaction (modules cités) ; les limites connues et les
+cibles (ACL, session serveur, ordonnanceur) sont distinguées de l'existant.
+La traduction anglaise de `architecture/` reste à produire.

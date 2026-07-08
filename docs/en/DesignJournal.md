@@ -253,3 +253,18 @@ The architecture documentation will then be progressively rebuilt around the fol
 - architecture decisions.
 
 The adopted rule is: code and tests are the technical source of truth; architecture documentation describes the current state; older scenarios are preserved for project history and no longer take precedence when discrepancies exist.
+
+# 2026-07-08
+
+Executed phases 2 and (partially) 3 of the Documentation Refactoring Plan —
+in French first, as the authoritative language: fourteen architecture
+documents, `decisions_architecture.md` (eleven ADRs, including ADR-011 on
+SSO tokens in the session, born from today's field incident), a glossary,
+and the first three current functional specifications (candidature, login,
+password reset) under `docs/fr/`. `Architecture_AlirPunkto.md` moved to the
+historical folder with a non-normative banner; `docs/en/UseCases/` moved
+under `historical_specifications/`. A bilingual `docs/README.md` now maps
+the documentation. Every statement was checked against the code while
+writing. The English translation of the `architecture/` tree is the next
+documentation task.
+
