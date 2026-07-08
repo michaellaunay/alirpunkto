@@ -403,6 +403,22 @@ directory to the current schema: `employeeType` values are normalised to the
 variants), the `coperatorsGroup`/`communityGroup` groups are renamed and their
 references rewritten, `gn` becomes `givenName`, `isActive` is canonicalised,
 operational attributes are stripped and referential consistency is checked.
+The 2026-07 field runs added three data repairs: dangling
+`providerMembersGroup` references are renamed to `providersGroup`, group
+members wrongly parented under `cn=admin` are re-parented to their actual
+entry (the all-zero placeholder is the one intentional `cn=admin` member and
+is left alone), and literal `None` descriptions are dropped.
+
+The pipeline can be fed from three sources. `docker/migrate_ldap_legacy.py`
+itself reads a file (`--input`) or runs `slapcat` (in a container with
+`--slapcat-container`, or locally with `--slapcat-local`) — both need
+filesystem access to the directory. When the legacy server is a **bare-metal
+host you can only reach over the network**, use
+`tools/migrate_ldap_legacy_remote.py` instead: it binds with the
+administrator credentials of the project `.env` (`LDAP_SERVER`, `LDAP_LOGIN`,
+`LDAP_BASE_DN`, `LDAP_PASSWORD`…), extracts the whole subtree with a paged
+search, then hands the entries to this very same pipeline, so both paths
+produce the same adapted LDIF.
 
 Since finding 1.3 was fixed, the script also **hashes every cleartext
 `userPassword` to `{SSHA}`** (values already hashed are kept verbatim), so the
@@ -426,6 +442,66 @@ docker exec alirpunkto-ldap ldapadd -Y EXTERNAL -H ldapi:/// \
 
 `--strict` makes the script exit non-zero on any unknown `employeeType` or
 unresolved reference instead of warning.
+
+## One-shot provisioning: extract, seed file, schema, users, ZODB
+
+`tools/ldap_provision.py` chains the whole journey for an administrator who
+wants to (re)provision an installation from a live directory. It always
+extracts over the network with the `.env` admin credentials and adapts with
+the pipeline above (`{SSHA}` hashing included), then acts on demand:
+
+```bash
+# Bare-metal host, end to end: seed file + schema + users
+python tools/ldap_provision.py --install-type host --sudo \
+    --update-schema --load --report provision.txt
+
+# Docker: refresh the seed file for the next container initialisation
+python tools/ldap_provision.py --install-into-docker
+
+# Docker: also (re)create the users in the RUNNING container
+python tools/ldap_provision.py --install-type docker --load
+
+# Legacy directory kept in place: just hash its cleartext passwords
+python tools/ldap_provision.py --update-passwords-in-place
+```
+
+**Interchangeable seed file.** The output (default
+`./initials_users.generated.ldif`) is interchangeable with the file
+`docker/init.sh` generates: copy it to
+`docker/initials_users.generated.ldif` (or pass `--install-into-docker`) and
+the compose stack seeds the container with your real users at the next
+initialisation — `start_ldap.sh` loads it with `ldapadd -c`, so the groups it
+shares with the template are simply reported as already existing.
+
+**The admin chooses the installation type.** `--update-schema` and `--load`
+require `--install-type {docker,host}`: commands run through `ldapi:///` +
+SASL EXTERNAL inside the container (`--container`, default `alirpunkto-ldap`)
+or on the host (usually with `--sudo`, since `cn=config` needs root).
+
+**Forcing the schema.** `--update-schema` discovers the
+`cn={N}alirpunktoperson,cn=schema,cn=config` entry and *replaces* its
+attribute/objectClass definitions with the repo's current
+`alirpunkto/alirpunkto_schema.ldif` (idempotent — safe to run twice; the
+entry is added wholesale if absent), then verifies through a fresh bind that
+the modern attributes (`cooperativeBehaviourMarkUpdate`, `IBAN`,
+`dateErasureAllData`) are known. This is the definitive fix for the
+`invalid attribute type cooperativeBehaviourMarkUpdate` login error on
+legacy servers.
+
+**Hashing passwords in place.** `--update-passwords-in-place` closes finding
+1.3 on a directory you keep as-is: every account whose stored `userPassword`
+is still cleartext gets a `MODIFY_REPLACE` with the `{SSHA}` value computed
+by the pipeline, over the same authenticated connection. Hashed values are
+skipped, so this too is idempotent.
+
+**Repopulating the ZODB.** Once the directory is provisioned, the
+application rebuilds its object store by itself: stop AlirPunkto, move the
+old store away (`mv var var.bak`, then `mkdir -p var/filestorage var/blobs
+var/log` on a bare-metal host) and start again. At each user's first login,
+`update_member_from_ldap` recreates the member from the LDAP entry — type
+and profile included, `password`/`password_confirm` kept to `None` (finding
+1.3). This lazy repopulation is locked by
+`tests/test_zodb_repopulation_from_ldap.py`.
 
 ## Purging cleartext passwords from the ZODB
 

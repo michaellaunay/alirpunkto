@@ -55,6 +55,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import re
 import subprocess
 import sys
 from dataclasses import dataclass, field
@@ -110,6 +111,9 @@ EMPLOYEE_TYPE_FALLBACK = "ORDINARY"
 GROUP_RENAMES = {
     "coperatorsGroup": "cooperatorsGroup",   # 2026-05-01 typo fix
     "communityGroup": "communityMembersGroup",  # superseded name
+    # never existed as a group entry; found in the wild as a dangling
+    # uniqueMemberOf reference on provider accounts (2026-07-07 export)
+    "providerMembersGroup": "providersGroup",
 }
 
 # Attributes whose *values* are DNs and must follow group renames.
@@ -434,6 +438,11 @@ def transform(entries: list[Entry], rep: Report, strict: bool,
                     rep.info(f"isActive normalised on {e.dn}: {value!r} -> {canon}")
                     value = canon
 
+            # legacy junk: literal "None" descriptions from an old exporter
+            elif low == "description" and value.strip() == "None":
+                rep.info(f"drop literal 'None' description on {e.dn}")
+                continue
+
             # DN-valued attributes follow group renames (+ dedupe)
             elif low in DN_VALUED_ATTRS:
                 value = _rewrite_group_dn(value, rep, name)
@@ -483,6 +492,9 @@ def transform(entries: list[Entry], rep: Report, strict: bool,
             order.append(key)
     result = [merged[k] for k in order]
 
+    # data repairs that need the full entry set (target-existence checks)
+    fix_misparented_member_refs(result, rep)
+
     # password inventory + conversion summary
     rep.info("")
     rep.info(f"userPassword inventory: {hashed} already hashed, "
@@ -504,6 +516,51 @@ def transform(entries: list[Entry], rep: Report, strict: bool,
 # Consistency checks
 # ─────────────────────────────────────────────────────────────────────────────
 
+
+
+_ZERO_UUID = "00000000-0000-0000-0000-000000000000"
+
+
+def fix_misparented_member_refs(entries: list[Entry], rep: Report) -> None:
+    """Re-parent group member references wrongly placed under cn=admin.
+
+    Legacy data carries values like ``uid=X,cn=admin,<base>`` for real members
+    whose entry actually lives at ``uid=X,<base>`` (seen in the wild on
+    mediationArbitrationCouncilGroup). The all-zero placeholder DN is the one
+    *intentional* cn=admin member (groupOfUniqueNames needs at least one
+    uniqueMember) and is left alone; any other such reference is re-parented
+    when the target entry exists in the export, and reported otherwise.
+    Duplicates possibly created by the rewrite are dropped.
+    """
+    dns = {e.dn.lower() for e in entries}
+    for e in entries:
+        if not (e.has_objectclass("groupofuniquenames")
+                or e.has_objectclass("groupofnames")):
+            continue
+        new_attrs: list[tuple[str, str]] = []
+        seen_members: set[str] = set()
+        for name, value in e.attrs:
+            if name.lower() in ("uniquemember", "member"):
+                low = value.lower()
+                if (low.startswith("uid=") and ",cn=admin," in low
+                        and _ZERO_UUID not in low):
+                    candidate = re.sub(r",\s*cn=admin", "", value, count=1,
+                                       flags=re.IGNORECASE)
+                    if candidate.lower() in dns:
+                        rep.info(f"group {e.dn}: re-parent member "
+                                 f"{value} -> {candidate}")
+                        value = candidate
+                    else:
+                        rep.warn(f"group {e.dn}: member {value} is parented "
+                                 f"under cn=admin but no entry "
+                                 f"{candidate} exists; kept as-is")
+                key = value.lower()
+                if key in seen_members:
+                    rep.info(f"drop duplicate {name} on {e.dn}: {value}")
+                    continue
+                seen_members.add(key)
+            new_attrs.append((name, value))
+        e.attrs = new_attrs
 
 def check_consistency(entries: list[Entry], rep: Report) -> None:
     dns = {e.dn.lower() for e in entries}

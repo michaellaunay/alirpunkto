@@ -675,6 +675,7 @@ def update_member_from_ldap(
                 email=new_email,
                 pseudonym=new_pseudonym,
                 oid=oid,
+                type=new_type,
                 data=datas
             )
             append_member(member, request)

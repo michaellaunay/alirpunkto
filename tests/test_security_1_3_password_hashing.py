@@ -321,3 +321,70 @@ def test_migration_script_can_keep_cleartext_on_request(migration_tool):
     )
     values = dict((a.lower(), v) for a, v in adapted[0].attrs)
     assert values["userpassword"] == "legacy-clear-pw"
+
+
+MESSY_LEGACY_LDIF = """dn: dc=t,dc=org
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: t
+dc: t
+
+dn: cn=mediationArbitrationCouncilGroup,dc=t,dc=org
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: mediationArbitrationCouncilGroup
+uniqueMember: uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=t,dc=org
+uniqueMember: uid=real-1,cn=admin,dc=t,dc=org
+uniqueMember: uid=ghost-9,cn=admin,dc=t,dc=org
+
+dn: uid=real-1,dc=t,dc=org
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: alirpunktoPerson
+uid: real-1
+cn: RealOne
+sn: One
+mail: one@t.org
+employeeType: PROVIDER
+isActive: TRUE
+description: None
+uniqueMemberOf: cn=providerMembersGroup,dc=t,dc=org
+userPassword: {SSHA}already+hashed+value000000000000
+"""
+
+
+def _messy_adapted(migration_tool):
+    entries = migration_tool.parse_ldif(MESSY_LEGACY_LDIF)
+    report = migration_tool.Report()
+    adapted = migration_tool.transform(
+        entries, report, strict=False, keep_operational=False,
+        hash_cleartext=True)
+    return adapted, report
+
+
+def test_pipeline_reparents_cn_admin_member_refs(migration_tool):
+    adapted, report = _messy_adapted(migration_tool)
+    group = next(e for e in adapted if "mediationArbitration" in e.dn)
+    members = group.get("uniqueMember")
+    # the intentional all-zero placeholder stays under cn=admin
+    assert "uid=00000000-0000-0000-0000-000000000000,cn=admin,dc=t,dc=org" in members
+    # the real member is re-parented to its actual entry
+    assert "uid=real-1,dc=t,dc=org" in members
+    assert "uid=real-1,cn=admin,dc=t,dc=org" not in members
+    # the ghost has no target entry: kept, but loudly reported
+    assert "uid=ghost-9,cn=admin,dc=t,dc=org" in members
+    assert "ghost-9" in report.text() and "kept as-is" in report.text()
+
+
+def test_pipeline_drops_literal_none_descriptions(migration_tool):
+    adapted, report = _messy_adapted(migration_tool)
+    person = next(e for e in adapted if e.dn.startswith("uid=real-1"))
+    assert person.get("description") == []
+    assert "drop literal 'None' description" in report.text()
+
+
+def test_pipeline_renames_provider_members_group_refs(migration_tool):
+    adapted, _ = _messy_adapted(migration_tool)
+    person = next(e for e in adapted if e.dn.startswith("uid=real-1"))
+    assert person.get("uniqueMemberOf") == ["cn=providersGroup,dc=t,dc=org"]
