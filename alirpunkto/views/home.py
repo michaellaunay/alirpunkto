@@ -8,14 +8,13 @@ from alirpunkto.constants_and_globals import (
     _,
     SSO_REFRESH,
     SSO_EXPIRES_AT,
-    SSO_TOKEN,
     KEYCLOAK_CLIENT_ID,
     KEYCLOAK_REALM,
     KEYCLOAK_SERVER_URL,
     KEYCLOAK_CLIENT_SECRET,
 )
 from json import loads
-from alirpunkto.utils import refresh_keycloak_token, logout
+from alirpunkto.utils import refresh_keycloak_token, logout, store_sso_tokens
 from datetime import datetime, timedelta
 import urllib.parse
 from alirpunkto.secret_manager import get_secret
@@ -51,11 +50,8 @@ def home_view(request):
             # The refresh token is still valid: obtain a fresh access token.
             sso_token = refresh_keycloak_token(sso_refresh_token)
             if sso_token:
-                refresh_at = datetime.now() + timedelta(
-                    seconds=int(sso_token['refresh_expires_in']))
-                request.session[SSO_REFRESH] = sso_token['refresh_token']
-                request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
-                request.session[SSO_TOKEN] = sso_token['access_token']
+                # refresh token + expiry only (see utils.store_sso_tokens)
+                store_sso_tokens(request, sso_token)
             else:
                 # Refresh failed (Keycloak error / revoked token): log out
                 # cleanly instead of dereferencing a None response.

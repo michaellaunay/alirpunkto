@@ -13,6 +13,9 @@ from alirpunkto.models.member import (
     MemberStates,
 )
 from alirpunkto.constants_and_globals import (
+    SITE_NAME,
+    DOMAIN_NAME,
+    ORGANIZATION_DETAILS,
     _,
     log,
     SEED_LENGTH,
@@ -43,9 +46,9 @@ def check_new_email(request):
             log.error(f"check_new_email: Error decrypting oid {encrypted_oid}")
             return {
                 'error': _('invalid_oid'),
-                'site_name': request.session.get('site_name', 'AlirPunkto'),
-                'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
-                'organization_details': request.session.get('organization_details', 'AlirPunkto'),
+                'site_name': SITE_NAME,
+                'domain_name': DOMAIN_NAME,
+                'organization_details': ORGANIZATION_DETAILS,
                 'admin_email': ADMIN_EMAIL,  
             }
         decrypted_member = get_member_by_oid(decrypted_oid, request)
@@ -53,9 +56,9 @@ def check_new_email(request):
             log.error(f"check_new_email: Candidature not found for oid {decrypted_oid}")
             return {
                 'error': _('candidature_not_found'),
-                'site_name': request.session.get('site_name', 'AlirPunkto'),
-                'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
-                'organization_details': request.session.get('organization_details', 'AlirPunkto'),
+                'site_name': SITE_NAME,
+                'domain_name': DOMAIN_NAME,
+                'organization_details': ORGANIZATION_DETAILS,
                 'admin_email': ADMIN_EMAIL,  
             }
         new_email = decrypted_member.new_email
@@ -63,9 +66,9 @@ def check_new_email(request):
             log.error(f"check_new_email: Candidature {decrypted_oid} has no new email")
             return {
                 'error': _('no_new_email'),
-                'site_name': request.session.get('site_name', 'AlirPunkto'),
-                'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
-                'organization_details': request.session.get('organization_details', 'AlirPunkto'),
+                'site_name': SITE_NAME,
+                'domain_name': DOMAIN_NAME,
+                'organization_details': ORGANIZATION_DETAILS,
                 'admin_email': ADMIN_EMAIL,  
             }
         decrypted_member.new_email = None
@@ -76,22 +79,22 @@ def check_new_email(request):
             log.error(f"check_new_email: Error updating email for oid {decrypted_oid}")
             return {
                 'error': _('email_update_error'),
-                'site_name': request.session.get('site_name', 'AlirPunkto'),
-                'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
-                'organization_details': request.session.get('organization_details', 'AlirPunkto'),
+                'site_name': SITE_NAME,
+                'domain_name': DOMAIN_NAME,
+                'organization_details': ORGANIZATION_DETAILS,
             }
         return {
             'success': _('email_updated'),
-            'site_name': request.session.get('site_name', 'AlirPunkto'),
-            'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
-            'organization_details': request.session.get('organization_details', 'AlirPunkto'),
+            'site_name': SITE_NAME,
+            'domain_name': DOMAIN_NAME,
+            'organization_details': ORGANIZATION_DETAILS,
             'admin_email': ADMIN_EMAIL,  
         }
     return {
         'error': _('invalid_request'),
-        'site_name': request.session.get('site_name', 'AlirPunkto'),
-        'domain_name': request.session.get('domain_name', 'alirpunkto.org'),
-        'organization_details': request.session.get('organization_details', 'AlirPunkto'),
+        'site_name': SITE_NAME,
+        'domain_name': DOMAIN_NAME,
+        'organization_details': ORGANIZATION_DETAILS,
         'admin_email': ADMIN_EMAIL,  
     }
 

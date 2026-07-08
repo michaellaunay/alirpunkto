@@ -43,11 +43,9 @@ def vote_view(request):
         request.session['redirect_url'] = request.current_route_url()
         return HTTPFound(location=request.route_url('login'))
     user = User.from_json(user)
-    site_name = request.session.get('site_name', SITE_NAME)
-    domain_name = request.session.get('domain_name', DOMAIN_NAME)
-    organization_details = request.session.get(
-        'organization_details', ORGANIZATION_DETAILS
-    )
+    site_name = SITE_NAME
+    domain_name = DOMAIN_NAME
+    organization_details = ORGANIZATION_DETAILS
     username = user.name
     oid = request.params.get("oid") or request.session.get("oid", "")
     if oid and 'oid' not in request.session:

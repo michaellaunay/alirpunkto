@@ -1618,6 +1618,24 @@ def send_check_new_email(
         success = False
     return success
 
+
+def store_sso_tokens(request, sso_token: dict) -> None:
+    """Store the Keycloak tokens the session actually needs.
+
+    Only the *refresh* token and its expiry go into the (cookie-backed)
+    session: they are what ``home_view`` needs to keep the SSO session alive.
+    The *access* token is deliberately NOT stored — nothing in the
+    application ever reads it back, and Keycloak access tokens carry the
+    user's group/role claims, so for a member of several groups the two JWTs
+    together overflow Pyramid's 4093-byte cookie limit ("ValueError: Cookie
+    value is too long to store", field incident of 2026-07-08).
+    """
+    request.session[SSO_REFRESH] = sso_token['refresh_token']
+    refresh_at = datetime.now() + timedelta(
+        seconds=int(sso_token['refresh_expires_in']))
+    request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
+
+
 def logout(request: Request):
     """
     Log out the user by removing the user's OID from the session.

@@ -10,15 +10,13 @@ from alirpunkto.constants_and_globals import (
     KEYCLOAK_SERVER_URL,
     KEYCLOAK_CLIENT_SECRET,
     KEYCLOAK_REDIRECT_PATH,
-    SSO_REFRESH,
-    SSO_EXPIRES_AT,
-    SSO_TOKEN,
     DOMAIN_NAME,
     SITE_NAME,
     ORGANIZATION_DETAILS,
 )
 from alirpunkto.utils import (
     update_member_from_ldap,
+    store_sso_tokens,
     get_keycloak_token,
     logout,
 )
@@ -99,18 +97,12 @@ def callback_view(request):
             member.data.is_active,
             member.type.name
         )
-        request.session['site_name'] = site_name
-        request.session['domain_name'] = domain_name
-        request.session['organization_details'] = organization_details
         request.session['logged_in'] = True
         request.session['user'] = user.to_json()
-        now = datetime.now()
-        current_time = now.isoformat()
-        request.session['created_at'] = current_time
-        request.session[SSO_REFRESH] = sso_token['refresh_token']
-        refresh_at = now + timedelta(seconds=int(sso_token['refresh_expires_in']))
-        request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
-        request.session[SSO_TOKEN] = sso_token['access_token']    
+        request.session['created_at'] = datetime.now().isoformat()
+        # refresh token + expiry only: the access token is never read back
+        # and would overflow the 4093-byte session cookie (2026-07-08).
+        store_sso_tokens(request, sso_token)
         headers = remember(request, member.pseudonym)
         return HTTPFound(
             location=request.route_url('home'),

@@ -59,7 +59,7 @@ def test_home_refresh_failure_logs_out_without_crashing():
     assert result["logged_in"] is False
 
 
-def test_home_refresh_success_stores_access_token_in_session():
+def test_home_refresh_success_stores_refresh_token_only():
     session = _authenticated_session(**{SSO_REFRESH: "RT", SSO_EXPIRES_AT: _future()})
     request = _request(session)
     token = {
@@ -71,8 +71,11 @@ def test_home_refresh_success_stores_access_token_in_session():
     with patch.object(home, "refresh_keycloak_token", return_value=token):
         result = home_view(request)
 
-    assert session[SSO_TOKEN] == "AT"          # the string, not the dict
+    # the access token is deliberately NOT stored: nothing reads it back and
+    # it overflows the 4093-byte session cookie (field incident 2026-07-08)
+    assert SSO_TOKEN not in session
     assert session[SSO_REFRESH] == "RT2"
+    assert SSO_EXPIRES_AT in session
     assert "Authorization" not in request.headers  # no bogus header write
     assert result["logged_in"] is True
 

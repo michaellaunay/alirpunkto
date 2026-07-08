@@ -71,7 +71,9 @@ def test_home_view_refreshes_valid_sso_token(dummy_request):
 
     assert result["logged_in"] is True
     assert dummy_request.session[SSO_REFRESH] == "new-refresh-token"
-    assert dummy_request.session[SSO_TOKEN] == "new-access-token"
+    # the access token is deliberately NOT stored (cookie budget, 2026-07-08)
+    assert SSO_TOKEN not in dummy_request.session
+    assert SSO_EXPIRES_AT in dummy_request.session
 
 
 def test_is_authenticated_uses_session_user(dummy_request):

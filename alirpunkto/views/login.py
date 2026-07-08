@@ -16,9 +16,6 @@ from alirpunkto.constants_and_globals import (
     LDAP_OU,
     LDAP_BASE_DN,
     log,
-    SSO_REFRESH,
-    SSO_EXPIRES_AT,
-    SSO_TOKEN,
     DOMAIN_NAME,
     SITE_NAME,
     ORGANIZATION_DETAILS,
@@ -29,6 +26,7 @@ from alirpunkto.utils import (
     get_admin_user,
     get_oid_from_pseudonym,
     update_member_from_ldap,
+    store_sso_tokens,
     logout,
     get_keycloak_token,
 )
@@ -71,20 +69,13 @@ def login_view(request):
             headers = remember(request, username)
             request.session['logged_in'] = True
             request.session['user'] = user.to_json()
-            current_time = datetime.now().isoformat()
-            request.session['created_at'] = current_time
-            request.session['site_name'] = site_name
-            request.session['domain_name'] = domain_name
-            request.session['organization_details'] = organization_details
+            request.session['created_at'] = datetime.now().isoformat()
                         # Request Keycloak token
             sso_token = get_keycloak_token(user, password)
             if sso_token:
                 log.debug(f"Successfully obtained Keycloak token for {username}")
-                request.session[SSO_REFRESH] = sso_token['refresh_token']
-                refresh_at = datetime.now() + timedelta(
-                    seconds=int(sso_token['refresh_expires_in']))
-                request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
-                request.session[SSO_TOKEN] = sso_token['access_token']
+                # refresh token + expiry only (see utils.store_sso_tokens)
+                store_sso_tokens(request, sso_token)
             else:
                 log.warning(f"Failed to obtain Keycloak token for {username}")
             # redirect to the page the user wanted to access before login
