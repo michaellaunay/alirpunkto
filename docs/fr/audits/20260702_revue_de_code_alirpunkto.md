@@ -16,13 +16,15 @@ Le tableau de bord a radicalement changé depuis l'audit d'origine (2026-06-12).
 
 **Il ne reste qu'une seule faille de sécurité : la 1.3** (mots de passe stockés en clair, côté LDAP *et* côté ZODB). C'est désormais, de loin, le chantier prioritaire.
 
+> **MàJ 2026-07-06 — 1.3 corrigée.** Hachage `{SSHA}` à toutes les écritures LDAP, plus aucun mot de passe en clair dans la ZODB (hachage avant persistance, purge à l'acceptation), outillage de migration des données existantes livré, 18 tests dédiés (détail en §1.3). **La section 1 est intégralement soldée.**
+
 Cette passe ajoute par ailleurs quatre lots d'observations nouvelles : **(N1)** la régression cosmétique `register.pt` (`type="d-none"`) toujours présente ; **(N2)** un petit cluster d'indexations `request.params[...]` non gardées (KeyError → 500 sur POST malformé) ; **(N3)** **13 clés i18n utilisées par le code mais absentes du `.pot`** — dont `voting_period_ended`, pourtant identifiée dès le correctif 2.3 ; **(N4)** trois nuances transactionnelles résiduelles (commits partiels sur retour d'erreur, rejeu `pyramid_retry` × effets LDAP non idempotents, absence d'atomicité ZODB/LDAP) qui méritent d'être actées comme limites documentées.
 
 Enfin, deux **corrections d'erreurs de l'audit précédent** lui-même : §4.31 pointait le mauvais fichier, et §4.1 surestimait le nombre d'occurrences réellement problématiques.
 
 | Section | Corrigé (vérifié) | Réserve / partiel | Non corrigé |
 |---|---|---|---|
-| 1. Sécurité critique | 1.1, 1.2, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11 | — | **1.3** |
+| 1. Sécurité critique | 1.1, 1.2, **1.3** *(2026-07-06)*, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11 | — | — |
 | 2. Bugs bloquants | **2.1 → 2.18 (les 18)** | nits résiduels (imports morts 2.4, stub 2.5) | — |
 | 3. Transactions | 6 vues nettoyées, 1 seul `commit` restant (bootstrap justifié) | 🆕 3 nuances documentées (N4) | — |
 | 4. Bugs mineurs | 4.14 | 4.1 (1 occurrence réelle sur 2), 4.18 | 4.31, autres §4 non retouchés |
@@ -54,7 +56,18 @@ La fabrique de session dérive le secret de la **valeur** de `SECRET_KEY` (via `
 ### 1.2 Mots de passe en clair dans les logs — ✅ corrigé
 `encrypt_secret_for_logs()` (`secret_manager.py:59-92`, RSA-OAEP/SHA-256 sur clé publique d'environnement, marqueurs explicites `<disabled>`/`<no-public-key>`/`<encryption-error>`) est appliqué partout où un mot de passe était journalisé (`login.py`, `forgot_password.py`, `utils.py::register_user_to_ldap` — qui retire en plus `userPassword` du dict loggé via `safe_attributes`).
 
-### 1.3 Mots de passe stockés en clair — ❌ **non corrigé — SEULE FAILLE RESTANTE**
+### 1.3 Mots de passe stockés en clair — ✅ **corrigé le 2026-07-06** *(initialement ❌ — seule faille restante)*
+
+> **✅ Résolu le 2026-07-06** — approche retenue : **hachage au stockage** (*hash-at-store*), qui va plus loin que les deux options du plan d'origine (conservé ci-dessous pour traçabilité) :
+>
+> - **LDAP** : `make_ldap_password()` (`secret_manager.py`, format `{SSHA}` compatible `slappasswd`, idempotent) appliqué aux deux points d'écriture — `register_user_to_ldap` et `update_member_password` (`utils.py`) : l'annuaire ne reçoit plus jamais de clair. Le login est inchangé — l'authentification est un *bind* et slapd vérifie `{SSHA}` nativement.
+> - **ZODB** : `register.py` hache le mot de passe **avant** de construire `MemberDatas` (`secure_password_fields`) et ne persiste plus `password_confirm` (qui doublait le clair) : le clair n'entre **jamais** dans la ZODB. À la création LDAP réussie (approbation), le hachage résiduel et `password_confirm` sont purgés — l'option (a) Fernet (secret réversible) et la refonte (b) deviennent inutiles.
+> - **Hygiène** : `update_member_from_ldap` ne rapatrie plus `userPassword` (jamais utilisé côté application) ; `generate_ldif.py` garantit `{SSHA}` même si le fallback d'`init.sh` (absence de `slappasswd`) transmet du clair.
+> - **Données existantes** : `docker/migrate_ldap_legacy.py` hache les `userPassword` en clair d'un export legacy (`--keep-cleartext-passwords` pour l'inspection seulement) ; `tools/purge_zodb_cleartext_passwords.py` purge les entrées réglées et hache en place les candidatures en attente (dry-run supporté). Voir `docker/README.md`.
+> - **Tests** : 18 tests (`tests/test_security_1_3_password_hashing.py`) — helpers, écritures LDAP (le hash valide le mot de passe d'origine), purge ZODB à l'acceptation, échec LDAP = valeur conservée pour retry, outils de migration. Suite : 393 verts.
+>
+> *Terminologie : il s'agit de **hachage** salé irréversible, non de « chiffrement ». `{SSHA}` (SHA-1 salé) est le schéma portable vérifié nativement par slapd ; pour `{PBKDF2}`/`{ARGON2}`, charger le module contrib slapd correspondant puis changer le schéma dans `make_ldap_password` (point unique). La vérification du bind réel sur un compte migré relève du runbook post-migration.*
+
 Toujours vrai sur les deux plans, vérifié dans ce dump :
 
 - **LDAP** — `utils.py:968` : `register_user_to_ldap` envoie `'userPassword': password` **en clair** à la création ; `utils.py:1094` : `update_member_password` fait `MODIFY_REPLACE` avec le mot de passe **brut**. Aucun appel à `ldap3...hashed()` ni à `conn.extend.standard.modify_password()` dans le code. Seuls les comptes bootstrap du LDIF sont pré-hachés `{SSHA}`. Si OpenLDAP n'est pas configuré avec une politique de hachage à l'écriture (`ppolicy`/`pw-sha2` + `olcPasswordHash`), tout mot de passe applicatif est stocké en clair dans l'annuaire.
@@ -268,7 +281,7 @@ Repris de 2.3/2.5, toujours d'actualité dans ce dump :
 
 ## Reste prioritaire (ordre suggéré)
 
-1. **1.3 — mots de passe en clair** (LDAP `hashed()` + purge/chiffrement ZODB + migration + test) : seule faille de sécurité restante, tout le reste de la section 1 est soldé.
+1. ~~**1.3 — mots de passe en clair** (LDAP `hashed()` + purge/chiffrement ZODB + migration + test) : seule faille de sécurité restante, tout le reste de la section 1 est soldé.~~ ✅ **Corrigé le 2026-07-06** (voir §1.3) — la section 1 est intégralement soldée.
 2. **N3 — régénérer le `.pot`** et ajouter les 13 clés manquantes (dont `voting_period_ended`) + `msgmerge` des `.po` : visible par tout utilisateur dès qu'un chemin d'erreur s'affiche.
 3. **N2 — garder les 6 indexations `request.params`** (patron 2.17) et **N1 — `type="hidden"`** dans `register.pt:206` : deux correctifs de dix minutes.
 4. **N4.b — idempotence LDAP sous `pyramid_retry`** (traiter `entryAlreadyExists` comme succès dans `register_user_to_ldap`) et **N4.a — `request.tm.doom()`** sur les chemins d'erreur de `modify_member` : ferme les derniers angles transactionnels.

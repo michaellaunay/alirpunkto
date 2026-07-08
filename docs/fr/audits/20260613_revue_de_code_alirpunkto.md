@@ -92,6 +92,9 @@ Nouvel utilitaire `encrypt_secret_for_logs()` (`secret_manager.py` l.59). Appliq
 - `utils.py::register_user_to_ldap` l.987-988 : `safe_attributes` retire `userPassword` du dict avant log, et le mot de passe explicite est chiffré.
 
 ### 1.3 Mots de passe stockés en clair — ❌ **non corrigé**
+
+> ✅ **Résolu le 2026-07-06** — hachage `{SSHA}` à l'écriture (LDAP et ZODB), purge à l'acceptation, outils de migration livrés ; voir `docs/fr/audits/20260702_revue_de_code_alirpunkto.md` §1.3.
+
 - **LDAP** : `register_user_to_ldap` l.931 envoie toujours `'userPassword': password` en clair ; `update_member_password` l.1055 fait `MODIFY_REPLACE` avec le mot de passe brut. Aucun `hashed()` ni `modify_password` dans le code (seuls les comptes bootstrap du LDIF sont pré-hachés `{SSHA}`).
 - **ZODB** : `register.py` l.534-535 recopie toujours tous les champs de `request.params` correspondant à `MemberDatas.__dataclass_fields__` (dont `password`/`password_confirm`), et aucun `del data.password` n'a été ajouté après création LDAP. Le mot de passe du candidat reste en clair dans la base.
 

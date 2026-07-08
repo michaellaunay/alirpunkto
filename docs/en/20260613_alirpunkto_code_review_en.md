@@ -92,6 +92,9 @@ New utility `encrypt_secret_for_logs()` (`secret_manager.py` l.59). Applied:
 - `utils.py::register_user_to_ldap` l.987-988: `safe_attributes` removes `userPassword` from the dict before logging, and the explicit password is encrypted.
 
 ### 1.3 Passwords stored in cleartext — ❌ **not fixed**
+
+> ✅ **Fixed on 2026-07-06** — passwords are now hashed (`{SSHA}`) at every LDAP write and before ZODB persistence, then purged on approval; migration tooling shipped. See `docs/fr/audits/20260702_revue_de_code_alirpunkto.md` §1.3.
+
 - **LDAP**: `register_user_to_ldap` l.931 still sends `'userPassword': password` in cleartext; `update_member_password` l.1055 does a `MODIFY_REPLACE` with the raw password. No `hashed()` or `modify_password` in the code (only the LDIF bootstrap accounts are pre-hashed `{SSHA}`).
 - **ZODB**: `register.py` l.534-535 still copies every `request.params` field matching `MemberDatas.__dataclass_fields__` (including `password`/`password_confirm`), and no `del data.password` was added after LDAP creation. The candidate's password stays in cleartext in the database.
 

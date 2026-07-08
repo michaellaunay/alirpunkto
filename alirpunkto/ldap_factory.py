@@ -3,7 +3,9 @@
 # author: Michaël Launay
 # date: 2024-10-17
 
+from collections.abc import Mapping
 from .constants_and_globals import (
+    log,
     LDAP_SERVER,
     LDAP_USE_SSL,
     LDAP_USER,
@@ -140,3 +142,34 @@ def get_ldap_connection(
     return conn
 
 
+def schema_safe_attributes(connection, attributes):
+    """Drop requested attributes the connected server's schema does not define.
+
+    ldap3 validates requested attribute names client-side (``check_names``,
+    default True) against the schema loaded at bind time (``get_info=ALL``);
+    asking a legacy directory for an attribute it does not know (e.g.
+    ``cooperativeBehaviourMarkUpdate`` on a pre-2024 alirpunkto schema) raises
+    ``LDAPAttributeError`` before the request is even sent — which turned every
+    login into a 500 on the 2026-07-07 field test. Servers must ignore unknown
+    names in the requested list anyway (RFC 4511 §4.5.1.8) and every caller
+    already tolerates absent values, so filtering is strictly safer. Dropped
+    names are logged so the operator knows the directory schema is lagging
+    (update it with ``alirpunkto/alirpunkto_schema.ldif``).
+
+    When no real schema is available (``get_info=NONE``, mocked connections in
+    tests), the list is returned unchanged.
+    """
+    schema = getattr(getattr(connection, "server", None), "schema", None)
+    attribute_types = getattr(schema, "attribute_types", None)
+    if not isinstance(attribute_types, Mapping):
+        return list(attributes)
+    kept, dropped = [], []
+    for name in attributes:
+        # ldap3's schema mapping is case-insensitive and alias-aware.
+        (kept if name in attribute_types else dropped).append(name)
+    if dropped:
+        log.warning(
+            "LDAP server schema does not define %s; requesting without them "
+            "(legacy directory? update its schema with "
+            "alirpunkto/alirpunkto_schema.ldif)", ", ".join(dropped))
+    return kept

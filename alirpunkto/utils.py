@@ -74,7 +74,7 @@ from ldap3 import (
 )
 from ldap3.core.exceptions import LDAPException
 from ldap3.utils.conv import escape_filter_chars
-from .ldap_factory import get_ldap_connection
+from .ldap_factory import get_ldap_connection, schema_safe_attributes
 from validate_email import validate_email
 from pyramid.renderers import render_to_response
 import random
@@ -582,7 +582,7 @@ def update_member_from_ldap(
             conn.search(
                 LDAP_BASE_DN,
                 f'(uid={escape_filter_chars(oid)})',
-                attributes=[
+                attributes=schema_safe_attributes(conn, [
                     'cn', 'mail', 'employeeType', 'sn', 'uid',
                     'employeeNumber', 'isActive', 'givenName', 'nationality',
                     'birthdate', 'preferredLanguage', 'secondLanguage',
@@ -590,7 +590,7 @@ def update_member_from_ldap(
                     'cooperativeBehaviourMarkUpdate', 'numberSharesOwned',
                     'dateEndValidityYearlyContribution', 'uniqueMemberOf',
                     'iban', 'dateErasureAllData'
-                ]
+                ])
             )
             if len(conn.entries) == 0:
                 if oid == LDAP_ADMIN_OID:
