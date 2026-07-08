@@ -32,8 +32,20 @@ Le plan directeur de cette organisation est
 
 # AlirPunkto documentation (English)
 
-Documentation is bilingual; **the French version is authoritative**. The
-English `architecture/` tree mirrors the French one as translations land;
-see `en/Documentation Refactoring Plan.md` for the roadmap. Historical
-specifications live in `en/historical_specifications/` and are not
-normative.
+Documentation is bilingual; **the French version is authoritative** — in
+case of divergence, `docs/fr/` prevails.
+
+## Where to find what
+
+| Need | Go to |
+|---|---|
+| Understand the current architecture | `en/architecture/00_overview.md` |
+| Current business flows | `en/functional_specifications/` |
+| Decisions and their rationale | `en/architecture/architecture_decisions.md` |
+| Running design journal | `en/DesignJournal.md` |
+| Security audits and code reviews | `fr/audits/` (French) |
+| Deploy (Docker or bare metal) | `../docker/README.md` |
+| Initial intent of the project (non-normative) | `en/historical_specifications/`, `fr/specifications_historiques/` |
+
+The master plan of this layout is `en/Documentation Refactoring Plan.md`
+(original: `fr/Plan de refonte documentaire.md`).

@@ -191,7 +191,7 @@ After Claude Fable was released, we launched an audit that found nearly 80 anoma
 
 # 2026-06-14
 
-Following the closure of Fable, we are using Opus 4.8 Max and GPT 5.5 Advanced to fix each item in the audit [20260613_alirpunkto_code_review_en](docs/en/20260613_alirpunkto_code_review_en.md).
+Following the closure of Fable, we are using Opus 4.8 Max and GPT 5.5 Advanced to fix each item in the audit [20260613_alirpunkto_code_review_en](20260613_alirpunkto_code_review_en.md).
 
 # 2026-06-30
 
@@ -267,4 +267,15 @@ under `historical_specifications/`. A bilingual `docs/README.md` now maps
 the documentation. Every statement was checked against the code while
 writing. The English translation of the `architecture/` tree is the next
 documentation task.
+
+# 2026-07-08 (follow-up)
+
+English translation of the refactoring: `docs/en/architecture/` (sixteen
+documents, file names from §5 of the plan) and
+`docs/en/functional_specifications/` (`candidature.md`, `login.md`,
+`password_reset.md`). Cross-links use the English names; references to the
+untranslated historical scenarios point explicitly to
+`docs/fr/specifications_historiques/`. The English section of
+`docs/README.md` now carries its own orientation table. French remains the
+authoritative version.
 

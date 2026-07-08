@@ -2509,7 +2509,7 @@ postfix/postlog: starting the Postfix mail system
 Suite à la sortie de Claude Fable, nous avons lancé un audit qui a trouvé près de 80 anomalies là où ChatGPT et Opus n'en avaient trouvé que 12. Nous avons décidé d'attendre la correction des bogues de sécurité avant d'ajouter cet audit au dépôt.
 
 # 2026-06-14
-Suite à la fermeture de Fable, nous utilisons Opus 4.8 Max et GPT 5.5 avancé pour corriger chacun des points de l'audit [20260613_revue_de_code_alirpunkto](/docs/fr/20260613_revue_de_code_alirpunkto.md).
+Suite à la fermeture de Fable, nous utilisons Opus 4.8 Max et GPT 5.5 avancé pour corriger chacun des points de l'audit [20260613_revue_de_code_alirpunkto](20260613_revue_de_code_alirpunkto.md).
 
 # 2026-06-30
 Il ne reste plus qu'un bogue de sécurité, qui n'est pas exploitable pour l'instant en dehors du réseau Docker : l'audit est donc publié.
@@ -2588,3 +2588,16 @@ Règle appliquée : chaque affirmation de ces documents a été vérifiée dans 
 code au moment de la rédaction (modules cités) ; les limites connues et les
 cibles (ACL, session serveur, ordonnanceur) sont distinguées de l'existant.
 La traduction anglaise de `architecture/` reste à produire.
+
+# 2026-07-08 (suite)
+
+Traduction anglaise de la refonte : `docs/en/architecture/` (seize
+documents, noms du plan §5 : `00_overview.md` … `13_docker_deployment.md`,
+`architecture_decisions.md`, `glossary.md`) et
+`docs/en/functional_specifications/` (`candidature.md`, `login.md`,
+`password_reset.md`). Les liens croisés pointent vers les noms anglais ;
+les renvois aux scénarios historiques, non traduits, pointent explicitement
+vers `docs/fr/specifications_historiques/`. La section anglaise de
+`docs/README.md` présente désormais sa propre table d'orientation. Le
+français reste la version de référence.
+
