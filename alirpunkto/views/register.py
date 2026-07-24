@@ -13,7 +13,8 @@ import deform
 from deform import ValidationFailure
 from pyramid.view import view_config
 from pyramid.request import Request
-from pyramid.i18n import get_localizer
+from pyramid.i18n import get_localizer, make_localizer
+from pyramid.interfaces import ITranslationDirectories
 from alirpunkto.schemas.register_form import RegisterForm
 from alirpunkto.models.candidature import (
     Candidature, CandidatureStates, 
@@ -38,6 +39,7 @@ from alirpunkto.constants_and_globals import (
     DEFAULT_NUMBER_OF_VOTERS,
     DOMAIN_NAME,
     URL_SCHEME,
+    AVAILABLE_LANGUAGES,
 )
 from pyramid.i18n import Translator
 from pyramid.path import AssetResolver
@@ -689,6 +691,30 @@ def prepare_for_cooperator(
             }
     return None
 
+def _translate_for_language(
+        request: Request,
+        language: Optional[str],
+        translation_string
+    ) -> str:
+    """Translate a TranslationString into an explicit language.
+
+    request.localizer is bound to the language negotiated for the current
+    request (the Candidate's, since verifier e-mails are triggered while the
+    Candidate acts). The subject of a verifier e-mail must instead be in the
+    Verifier's own language, like its body (issue #238). Build a localizer for
+    that language from the registry's translation directories; fall back to the
+    request localizer when the language is unknown or unavailable.
+    """
+    fallback = getattr(request, 'localizer', None) or get_localizer(request)
+    if not language or (AVAILABLE_LANGUAGES and language not in AVAILABLE_LANGUAGES):
+        return fallback.translate(translation_string)
+    tdirs = request.registry.queryUtility(ITranslationDirectories) or []
+    if not tdirs:
+        return fallback.translate(translation_string)
+    localizer = make_localizer(language, tdirs)
+    return localizer.translate(translation_string)
+
+
 def _notify_verifiers_of_submission(
         request: Request,
         candidature: Candidature
@@ -715,11 +741,10 @@ def _notify_verifiers_of_submission(
     for voter in candidature.voters:
         if not voter.email:
             continue
-        template_path = _resolve_inform_verifier_template(
-            _get_voter_language(request, voter)
-        )
+        voter_language = _get_voter_language(request, voter)
+        template_path = _resolve_inform_verifier_template(voter_language)
         subject_ts = _("inform_verifier_subject", {'domain_name': domain_name})
-        subject_text = request.localizer.translate(subject_ts)
+        subject_text = _translate_for_language(request, voter_language, subject_ts)
         template_vars = {
             'domain_name': domain_name,
             'organization_details': organization_details,
@@ -855,9 +880,8 @@ def send_verifier_reminder_emails(request: Request) -> None:
         for voter in pending_voters:
             if not voter.email:
                 continue
-            template_path = _resolve_remind_verifier_template(
-                _get_voter_language(request, voter)
-            )
+            voter_language = _get_voter_language(request, voter)
+            template_path = _resolve_remind_verifier_template(voter_language)
             subject_ts = _(
                 "remind_verifier_subject",
                 {
@@ -865,7 +889,7 @@ def send_verifier_reminder_emails(request: Request) -> None:
                     'notice_time_verifiers': notice_time_verifiers
                 }
             )
-            subject_text = localizer.translate(subject_ts)
+            subject_text = _translate_for_language(request, voter_language, subject_ts)
             template_vars = {
                 'domain_name': domain_name,
                 'organization_details': organization_details,
