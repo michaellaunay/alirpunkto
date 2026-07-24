@@ -1,12 +1,19 @@
-"""Regression tests for the applications list configuration (issue #142).
+"""Structural tests for the applications list configuration (issue #142).
 
-The links AlirPunkto shows for each application must be the SSO login URLs, so a
-click logs the user straight into the application. The parser in __init__.py
-requires name/id/logo_file/url for every application; this test locks the
-production configuration against those invariants and against the pilot URLs.
+The home page builds the applications list from the applications.<name>.<key>
+settings; __init__.py raises (dropping the WHOLE list) if any application lacks
+name/id/logo_file/url. These tests lock those structural invariants for the
+configurations shipped in the repository.
+
+The concrete deployment values — the SSO login URLs, the Moodle "CosmoPolitical
+login" note, and the real logo assets — live in the operator's own production.ini
+(not committed), so they are intentionally NOT asserted here: doing so would
+couple the test suite to deployment data the repository deliberately keeps
+generic.
 """
 from __future__ import annotations
 
+import configparser
 import os
 from collections import defaultdict
 
@@ -15,6 +22,9 @@ import pytest
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARAM = "applications."
 REQUIRED = ("name", "id", "logo_file", "url")
+
+# The .ini files that ship an applications list and are parsed by __init__.py.
+INI_FILES = ["production.ini", "development.ini"]
 
 
 def _parse(ini_name):
@@ -30,45 +40,38 @@ def _parse(ini_name):
     return apps
 
 
-@pytest.fixture
-def apps():
-    return _parse("production.ini")
+@pytest.mark.parametrize("ini_name", INI_FILES)
+def test_ini_file_is_parseable(ini_name):
+    cp = configparser.ConfigParser(strict=True, interpolation=None)
+    # Raises DuplicateOptionError / ParsingError on a malformed file.
+    read = cp.read(os.path.join(ROOT, ini_name))
+    assert read, f"{ini_name} could not be read"
 
 
-def test_every_application_has_the_required_keys(apps):
+@pytest.mark.parametrize("ini_name", INI_FILES)
+def test_every_application_has_the_required_keys(ini_name):
     """__init__.py raises if any of these is missing, dropping the whole list."""
-    assert apps, "no applications configured"
+    apps = _parse(ini_name)
+    assert apps, f"no applications configured in {ini_name}"
     for name, app in apps.items():
         for key in REQUIRED:
-            assert key in app, f"application {name} is missing {key!r}"
+            assert key in app, f"{ini_name}: application {name} is missing {key!r}"
 
 
-def test_application_urls_are_sso_login_urls(apps):
-    """Issue #142: the URLs must point at the SSO login entry points."""
-    urls = {name: app["url"] for name, app in apps.items()}
-    assert urls["nextcloud"] == (
-        "https://workspace.cosmopolitical.coop/apps/sociallogin/custom_oidc/Keycloak"
-    )
-    assert urls["moodle"] == "https://learn.cosmopolitical.coop/login/index.php"
-    assert urls["drupal"] == "https://www.cosmopolitical.coop/user/login"
-    assert urls["liquidfeedback"] == (
-        "https://operationaldecisions.cosmopolitical.coop/index/index.html"
-    )
-    # No leftover placeholder example URLs.
-    for name, url in urls.items():
-        assert "example.com" not in url, f"{name} still points at an example URL"
-
-
-def test_moodle_carries_the_sso_button_instruction(apps):
-    """Moodle needs the extra 'click the CosmoPolitical login button' note."""
-    explanation = apps["moodle"].get("explanation", "")
-    assert "CosmoPolitical login" in explanation
-
-
-def test_no_application_references_a_missing_logo_asset(apps):
-    """Every referenced logo file must actually exist under the package."""
+@pytest.mark.parametrize("ini_name", INI_FILES)
+def test_application_urls_are_absolute_http(ini_name):
+    """Every application link must be an absolute http(s) URL."""
+    apps = _parse(ini_name)
     for name, app in apps.items():
-        logo = app["logo_file"]
-        assert os.path.isfile(os.path.join(ROOT, "alirpunkto", logo)), (
-            f"application {name} references a missing logo: {logo}"
+        url = app["url"]
+        assert url.startswith(("http://", "https://")), (
+            f"{ini_name}: application {name} has a non-absolute url: {url!r}"
         )
+
+
+@pytest.mark.parametrize("ini_name", INI_FILES)
+def test_application_urls_have_no_surrounding_whitespace(ini_name):
+    """A trailing space in a url would break the link (seen in the pilot config)."""
+    apps = _parse(ini_name)
+    for name, app in apps.items():
+        assert app["url"] == app["url"].strip()

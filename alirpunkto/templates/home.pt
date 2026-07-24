@@ -42,7 +42,7 @@
                         <img tal:attributes="src applications[app_id]['logo_file']" alt="" />
                         
                         <!-- Display the application name and link -->
-                        <a tal:attributes="href applications[app_id]['url']" tal:content="applications[app_id]['name']">Application Link</a> : 
+                        <a tal:attributes="href applications[app_id]['url']" target="_blank" rel="noopener noreferrer" tal:content="applications[app_id]['name']">Application Link</a> : 
                         <span tal:condition="applications[app_id].get('description', '')" tal:content="applications[app_id]['description']" i18n:translate="">Application Description</span>
                         <!-- Extra instructions (e.g. which SSO button to click), shown as text, not a tooltip (issue #142) -->
                         <p class="explanation" tal:condition="applications[app_id].get('explanation', '')" tal:content="_(applications[app_id]['explanation'])" i18n:translate="">Application instructions</p>
