@@ -84,10 +84,6 @@
                             <div> <!-- CSRF Token Field -->
                                 <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
                             </div>
-                            <!-- Instructions -->
-                            <p i18n:translate="challenge_instruction_text" class="explanation">Please enter the results of
-                                the challenges you received in your email to verify your address.</p>
-
                             <!-- Challenge A Field -->
                             <div class="challenge-item">
                                 <label i18n:translate="enter_result_label_A"
