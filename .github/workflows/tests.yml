@@ -1,0 +1,76 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+# Least privilege: the workflow only needs to read the repository.
+permissions:
+  contents: read
+
+# A new push on the same branch cancels the previous, still-running job.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    name: pytest (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          if [ -f setup.py ] || [ -f pyproject.toml ]; then
+            # Pyramid layout: prefer the "testing" extra, fall back to the plain
+            # editable install when that extra does not exist.
+            pip install -e ".[testing]" || pip install -e .
+          elif [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            echo "::error::No setup.py, pyproject.toml or requirements.txt found"
+            exit 1
+          fi
+          pip install pytest
+
+      - name: Generate a throwaway Fernet key for the test session
+        run: |
+          echo "SECRET_KEY=$(python -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())')" >> "$GITHUB_ENV"
+
+      - name: Run the test suite
+        env:
+          # Throwaway values for the test session only. These are NOT real
+          # credentials and must NOT be stored as GitHub secrets: the suite
+          # mocks LDAP and email, so any non-empty value works. get_secret()
+          # pops them from the environment at startup.
+          LDAP_PASSWORD: test-ldap-password
+          ADMIN_PASSWORD: test-admin-password
+          MAIL_PASSWORD: test-mail-password
+          DOMAIN_NAME: example.com
+          SITE_NAME: AlirPunkto CI
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          python -m pytest -p no:cacheprovider -q --junitxml=pytest-report.xml
+
+      - name: Publish the test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-report-${{ matrix.python-version }}
+          path: pytest-report.xml
+          if-no-files-found: ignore

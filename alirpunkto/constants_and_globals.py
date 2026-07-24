@@ -60,6 +60,11 @@ MAIL_TLS: Final = os.getenv("MAIL_TLS")
 MAIL_SSL: Final = os.getenv("MAIL_SSL")
 MAIL_SIGNATURE: Final = os.getenv("MAIL_SIGNATURE", "{fullsurname} {fullname} on {site_name} for {domain_name}")
 DOMAIN_NAME: Final = os.getenv("DOMAIN_NAME", "alirpunkto.org")
+# Scheme of the public URLs put in outgoing e-mails. E-mail links must not
+# be derived from the incoming request (behind the reverse proxy the app is
+# reached on http://localhost:6543), so they are built from the configured
+# domain and this scheme.
+URL_SCHEME: Final = os.getenv("URL_SCHEME", "https")
 SITE_NAME: Final = os.getenv("SITE_NAME", "AlirPunkto")
 ORGANIZATION_DETAILS: Final = os.getenv("ORGANIZATION_DETAILS", "AlirPunkto is an open source project for managing cooperative memberships.")
 VERIFIER_VOTE_DEADLINE_DAYS: Final = int(os.getenv("VERIFIER_VOTE_DEADLINE_DAYS", 7))

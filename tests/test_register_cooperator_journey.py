@@ -39,6 +39,9 @@ def _request(pairs):
             }
         ),
         route_url=lambda *a, **k: "http://example/vote",
+        # e-mail links are built from the configured domain (issue #237),
+        # so the view now asks for the path, not the absolute URL.
+        route_path=lambda *a, **k: "/vote",
         localizer=SimpleNamespace(translate=lambda s: str(s)),
     )
 

@@ -36,6 +36,8 @@ from alirpunkto.constants_and_globals import (
     VERIFIER_VOTE_DEADLINE_DAYS,
     NOTICE_TIME_VERIFIERS,
     DEFAULT_NUMBER_OF_VOTERS,
+    DOMAIN_NAME,
+    URL_SCHEME,
 )
 from pyramid.i18n import Translator
 from pyramid.path import AssetResolver
@@ -128,10 +130,22 @@ def _handle_candidature_state(
     return result
 
 def _get_voting_url(request: Request, candidature: Candidature) -> str:
-    voting_url = request.route_url('vote', _query={'oid': candidature.oid})
-    if isinstance(voting_url, tuple):
-        voting_url = voting_url[0]
-    return voting_url
+    """Build the absolute vote URL from the configured domain.
+
+    request.route_url() derives the host from the incoming request. That is
+    wrong for e-mails: the verifier reminders are sent from a NewRequest
+    subscriber, so the link would inherit the host of whatever request happened
+    to trigger the scan — behind the reverse proxy that is localhost:6543. The
+    URL is therefore built from the trusted domain_name setting, consistently
+    with the other e-mail variables (and with audit finding 1.11).
+    """
+    settings = getattr(request.registry, 'settings', None) or {}
+    domain = str(settings.get('domain_name') or DOMAIN_NAME).strip().strip('/')
+    scheme = str(settings.get('url_scheme') or URL_SCHEME).strip().rstrip(':/')
+    path = request.route_path('vote', _query={'oid': candidature.oid})
+    if isinstance(path, tuple):
+        path = path[0]
+    return f"{scheme}://{domain}{path}"
 
 def _get_notice_time_verifiers(request: Request) -> int:
     try:
@@ -664,7 +678,7 @@ def prepare_for_cooperator(
                 'candidature': candidature,
                 'MemberTypes': MemberTypes,
                 'error': _('voters_not_selected'),
-                'voting_url': request.route_url('vote', _query={'oid': candidature.oid}),
+                'voting_url': _get_voting_url(request, candidature),
                 'signature': MAIL_SIGNATURE.format(
                     site_name=request.registry.settings.get('site_name'),
                     domain_name=request.registry.settings.get('domain_name'),
@@ -903,9 +917,7 @@ def get_template_parameters_for_cooperator(
     Returns:
         dict: the template parameters
     """
-    voting_url = request.route_url('vote', _query={'oid': candidature.oid}),
-    if(isinstance(voting_url, tuple)):
-        voting_url = voting_url[0]
+    voting_url = _get_voting_url(request, candidature)
     site_name=request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
     organization_details = request.registry.settings.get('organization_details')

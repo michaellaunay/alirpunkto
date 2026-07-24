@@ -88,6 +88,9 @@ def test_prepare_for_cooperator_returns_error_when_voter_selection_fails(
     candidature.data = MemberDatas(fullname="Ada", fullsurname="Lovelace")
     request = SimpleNamespace(
         route_url=lambda *a, **k: "http://example/vote",
+        # e-mail links are built from the configured domain (issue #237),
+        # so the view now asks for the path, not the absolute URL.
+        route_path=lambda *a, **k: "/vote",
         registry=SimpleNamespace(
             settings={
                 "site_name": "S",
