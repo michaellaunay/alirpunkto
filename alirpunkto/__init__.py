@@ -20,6 +20,7 @@ from pkg_resources import resource_filename
 from pyramid.threadlocal import get_current_request
 
 from .constants_and_globals import (
+    SITE_INFORMATION_MAPPING,
     _,
     log,
     SECRET_KEY,
@@ -60,8 +61,22 @@ def add_localizer(event):
     request = event.request
     localizer = get_localizer(request)
     
-    def auto_translate(string):
-        return localizer.translate(_(string))
+    def auto_translate(string, mapping=None):
+        """Translate a message id, interpolating the site-wide variables.
+
+        Templates call this as _('some_msgid'). Many messages carry ${...}
+        placeholders (domain_name, site_name, the URLs of issue #236, ...); the
+        localizer only substitutes them when the TranslationString it receives
+        carries a mapping. Default to SITE_INFORMATION_MAPPING so those
+        placeholders are interpolated everywhere instead of being rendered as
+        literal ${name} text (issues #223, #208-#210). A caller may pass extra
+        keys, which take precedence.
+        """
+        if mapping is None:
+            full_mapping = SITE_INFORMATION_MAPPING
+        else:
+            full_mapping = {**SITE_INFORMATION_MAPPING, **mapping}
+        return localizer.translate(_(string, mapping=full_mapping))
     
     request.localizer = localizer
     # add the localizer and auto_translate to the registry

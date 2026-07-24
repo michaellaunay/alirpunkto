@@ -161,11 +161,11 @@
                             <tal:ordinary
                                 tal:condition="python:getattr(candidature, 'type', None) == MemberTypes.ORDINARY"
                                 >
-                                <div i18n:translate="ordinary_member_data_explanation">
+                                <div tal:replace="structure _('ordinary_member_data_explanation')">
                                 <h2>Please provide the information that we need to register you as an Ordinary Member of the Community</h2>
-                                <p>As an Ordinary Member of the <tal:var i18n:name="domain_name">${domain_name}</tal:var> Community, you will interact with its other members and with our IT platform.</p>
+                                <p>As an Ordinary Member of the ${domain_name} Community, you will interact with its other members and with our IT platform.</p>
                                 <p>For this to work in the most efficient and respectful way for you and for the other members of the Community, we would be grateful if you could provide the information requested in the form below.</p>
-                                <p>This data will be used exclusively for us to manage your account as an Ordinary Member of the ${domain_name} Community. It will never be displayed to the other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the request of a judge. The "data controller" as defined by the <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504"> General Data Protection Regulation (GDPR) of the European Union</a> is the CosmoPolitical Cooperative SCE, a European Cooperative Society established 229 rue Solférino, 59000 Lille, France and registered on 25 April 2023 under the number SIREN 951 007 897.</p>
+                                <p>This data will be used exclusively for us to manage your account as an Ordinary Member of the ${domain_name} Community. It will never be displayed to the other users of the IT platform of ${domain_name}, nor will it be transmitted or sold to anyone, except to fulfill legal requirements by public law enforcement authorities under the request of a judge.</p>
                                 </div>
                             </tal:ordinary>
                         </div>
