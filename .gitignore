@@ -43,3 +43,9 @@ docker/certs/
 test.ini
 docker/initials_users.test.generated.ldif
 docker/secrets/
+
+# Patches and diffs exchanged during code review (never committed)
+*.patch
+*.diff
+*.rej
+*.orig

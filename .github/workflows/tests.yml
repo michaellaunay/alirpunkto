@@ -52,6 +52,11 @@ jobs:
         run: |
           echo "SECRET_KEY=$(python -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())')" >> "$GITHUB_ENV"
 
+      - name: Create the ZODB working directory
+        # var/ is in .gitignore, so a fresh clone does not have it and ZODB
+        # cannot create its lock file (testing.ini points at var/Data.testing.fs).
+        run: mkdir -p var
+
       - name: Run the test suite
         env:
           # Throwaway values for the test session only. These are NOT real
@@ -65,7 +70,8 @@ jobs:
           SITE_NAME: AlirPunkto CI
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          python -m pytest -p no:cacheprovider -q --junitxml=pytest-report.xml
+          # pytest.ini enables log_cli at DEBUG; keep the Actions log readable.
+          python -m pytest -p no:cacheprovider -q --log-cli-level=WARNING --junitxml=pytest-report.xml
 
       - name: Publish the test report
         if: always()

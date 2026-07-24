@@ -3,6 +3,7 @@
 
 # Description: Constants for the alirpunkto app
 from typing import Final
+from types import MappingProxyType
 import os, sys, pytz
 from dotenv import load_dotenv, get_key, find_dotenv
 from pyramid.i18n import (
@@ -67,6 +68,19 @@ DOMAIN_NAME: Final = os.getenv("DOMAIN_NAME", "alirpunkto.org")
 URL_SCHEME: Final = os.getenv("URL_SCHEME", "https")
 SITE_NAME: Final = os.getenv("SITE_NAME", "AlirPunkto")
 ORGANIZATION_DETAILS: Final = os.getenv("ORGANIZATION_DETAILS", "AlirPunkto is an open source project for managing cooperative memberships.")
+
+# --- Site-specific information (issue #236) -------------------------------
+# These four values differ from one deployment to another and are interpolated
+# into the ${...} placeholders of the i18n messages. Override them through the
+# environment (or docker/.env) for a given cooperative.
+#: URL of the website hosting the organisation's workspace.
+URL_WORKSPACE: Final = os.getenv("URL_WORKSPACE", "")
+#: URL where a Cooperator pays the yearly contribution.
+URL_PAY_YEARLY_CONTRIB: Final = os.getenv("URL_PAY_YEARLY_CONTRIB", "")
+#: URL where a Cooperator purchases shares of the Cooperative.
+URL_PURCHASE_SHARES: Final = os.getenv("URL_PURCHASE_SHARES", "")
+#: Number of days after which a Cooperative Behaviour Mark is halved.
+FORGETTING_TIME_CONSTANT: Final = int(os.getenv("FORGETTING_TIME_CONSTANT", 365))
 VERIFIER_VOTE_DEADLINE_DAYS: Final = int(os.getenv("VERIFIER_VOTE_DEADLINE_DAYS", 7))
 NOTICE_TIME_VERIFIERS: Final = int(os.getenv("NOTICE_TIME_VERIFIERS", 2))
 KEYCLOAK_SERVER_URL:Final = get_key(dotenv_path, "KEYCLOAK_SERVER_URL",None) # The keycloak server
@@ -219,3 +233,18 @@ DEFAULT_COOPERATIVE_BEHAVIOUR_MARK: Final = 0
 
 ALIRPUNKTO_LOG_SECRETS_PUBLIC_KEY_B64: Final = os.getenv("ALIRPUNKTO_LOG_SECRETS_PUBLIC_KEY_B64", None)
 ALIRPUNKTO_LOG_ENCRYPTED_SECRETS: Final = os.getenv("ALIRPUNKTO_LOG_ENCRYPTED_SECRETS", "true") == "true"
+
+
+# Values interpolated into the ${...} placeholders of the site-wide i18n
+# messages. Shared by every schema description so a new site-specific variable
+# only has to be declared once. Read-only: it is handed to many
+# TranslationStrings, which must not be able to mutate each other's mapping.
+SITE_INFORMATION_MAPPING: Final = MappingProxyType({
+    'domain_name': DOMAIN_NAME,
+    'site_name': SITE_NAME,
+    'organization_details': ORGANIZATION_DETAILS,
+    'url_workspace': URL_WORKSPACE,
+    'url_pay_yearly_contrib': URL_PAY_YEARLY_CONTRIB,
+    'url_purchase_shares': URL_PURCHASE_SHARES,
+    'forgetting_time_constant': FORGETTING_TIME_CONSTANT,
+})
