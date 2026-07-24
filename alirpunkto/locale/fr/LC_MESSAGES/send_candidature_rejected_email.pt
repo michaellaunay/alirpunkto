@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Votre candidature auprès de <span tal:replace="domain_name">Domain Name</span> n'a pas été approuvée</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Au sujet de votre candidature</h1>
+
+    <p tal:omit-tag="textual">Bonjour <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Nom du candidat</span>,</p>
+
+    <p tal:omit-tag="textual">Merci de l'intérêt que vous portez à la communauté <span tal:replace="domain_name">Domain name</span> et du temps que vous avez consacré à votre candidature pour le rôle de <span tal:replace="python:candidature.type">Rôle</span>.</p>
+
+    <p tal:omit-tag="textual">Après examen par les Vérificateurs, nous sommes au regret de vous informer que votre candidature n'a pas été approuvée pour le moment.</p>
+
+    <p tal:omit-tag="textual">Cette décision ne remet pas en cause qui vous êtes : le processus de vérification peut aboutir à un refus pour de nombreuses raisons, notamment des informations manquantes ou incohérentes que nous n'avons pas pu confirmer. Vous êtes bien sûr libre de soumettre une nouvelle candidature ultérieurement.</p>
+
+    <p tal:omit-tag="textual">Pour mémoire, voici les éléments de votre candidature :</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Identifiant de candidature : <span tal:replace="python:candidature.oid">Identifiant</span></li>
+        <li tal:omit-tag="textual">Date de la décision : <span tal:replace="python:candidature.modifications[-1]">Dernière transition</span></li>
+        <li tal:omit-tag="textual">Statut : Non approuvée</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Si vous pensez que cette décision est une erreur, ou si vous souhaitez mieux la comprendre, n'hésitez pas à nous contacter : nous ferons de notre mieux pour vous aider.</p>
+
+    <p tal:omit-tag="textual">Bien cordialement,</p>
+    <p tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Domain Name</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Coordonnées de l'organisation</p>
+</body>
+</html>

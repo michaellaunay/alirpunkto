@@ -626,7 +626,8 @@ def handle_confirmed_human_state(request, candidature):
         send_candidature_state_change_email(
             request,
             candidature,
-            email_template
+            sending_function_name='register',
+            template_name=email_template
         )
         try:
             candidature.add_email_send_status(

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Your Application to the <span tal:replace="domain_name">Domain Name</span> has not been approved</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">About your Application</h1>
+
+    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p>
+
+    <p tal:omit-tag="textual">Thank you for your interest in the <span tal:replace="domain_name">Domain name</span> Community and for the time you spent on your application for the role of <span tal:replace="python:candidature.type">Role</span>.</p>
+
+    <p tal:omit-tag="textual">After review by the Verifiers, we are sorry to inform you that your application has not been approved at this time.</p>
+
+    <p tal:omit-tag="textual">This decision does not question who you are: the verification process can conclude negatively for many reasons, including missing or inconsistent information that we were not able to confirm. You are welcome to apply again later.</p>
+
+    <p tal:omit-tag="textual">For your records, here are the details of your application:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Candidature ID: <span tal:replace="python:candidature.oid">Application ID</span></li>
+        <li tal:omit-tag="textual">Decision date: <span tal:replace="python:candidature.modifications[-1]">Last transition</span></li>
+        <li tal:omit-tag="textual">Status: Not approved</li>
+    </ul>
+
+    <p tal:omit-tag="textual">If you believe this decision is a mistake, or if you would like to understand it better, please contact us and we will do our best to help.</p>
+
+    <p tal:omit-tag="textual">Best regards,</p>
+    <p tal:omit-tag="textual">The team of <span tal:replace="domain_name">Domain Name</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organization details</p>
+</body>
+</html>

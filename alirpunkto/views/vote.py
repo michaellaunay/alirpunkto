@@ -158,7 +158,8 @@ def vote_view(request):
             send_candidature_state_change_email(
                 request,
                 candidature,
-                email_template
+                sending_function_name='vote_view',
+                template_name=email_template
             )
             try:
                 candidature.add_email_send_status(EmailSendStatus.SENT, email_template)
