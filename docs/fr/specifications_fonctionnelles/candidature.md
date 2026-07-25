@@ -43,7 +43,9 @@ stateDiagram-v2
    les vérificateurs (nombre fixé par le paramètre `number_of_voters`),
    chacun est invité par courriel à instruire le dossier.
 6. **Vote** (`/elections`, `/vote`) — chaque vérificateur vote oui, non ou
-   abstention (`VotingChoice`). Selon le décompte, la vue `vote` bascule la
+   abstention (`VotingChoice`), avant la date limite de vérification. Quand
+   tous ont voté, le refus exige une majorité **stricte** de non :
+   l'égalité approuve (PR #232). Selon le décompte, la vue `vote` bascule la
    candidature en **APPROVED** ou **REFUSED**.
 7. **APPROVED** — le compte LDAP est créé (`register_user_to_ldap`, mot de
    passe haché `{SSHA}`), le mot de passe en clair est purgé de la ZODB, le

@@ -68,6 +68,11 @@ dans `modifications` : l'objet garde son propre historique.
 - `voters` et `votes` : les vérificateurs tirés au sort et leur choix
   (`VotingChoice` : `YES`, `NO`, `ABSTAIN`).
 
+**Dépouillement** : quand tous les vérificateurs ont voté, le refus exige
+une **majorité stricte de NON** — l'égalité approuve, y compris le 0-0
+d'un scrutin tout-abstention (règle adoptée de la PR #232 ; l'abstention
+rend l'égalité atteignable même à trois votants).
+
 Le détail du flux est décrit dans
 [../specifications_fonctionnelles/candidature.md](../specifications_fonctionnelles/candidature.md).
 

@@ -28,11 +28,38 @@ non-réceptions sans fouiller les journaux Postfix.
 
 ## Localisation
 
-Les courriels sont rendus dans la langue préférée du destinataire
-(`preferredLanguage`), avec repli ; les gabarits et chaînes traduits sont
-couverts par la suite i18n (voir
-[10_internationalisation](10_internationalisation.md) et
-`tests` de rendu des courriels dans toutes les locales).
+Les courriels sont rendus dans la **langue déclarée du destinataire** :
+`get_preferred_language(request, member)` retourne `data.lang1` (alias LDAP
+`preferredLanguage`) quand elle est supportée, sinon l'`Accept-Language` de
+la requête, et `get_local_template` résout le gabarit correspondant avec
+repli anglais. Les quatre fonctions d'envoi passent leur destinataire : un
+candidat qui a choisi l'allemand reçoit ses courriels en allemand, même si
+l'envoi est déclenché depuis un navigateur français (#204).
+
+Cas particuliers :
+
+- les **sujets** des courriels aux vérificateurs sont traduits dans la
+  langue de **chaque** vérificateur via `_translate_for_language`
+  (`views/register.py`, #238) ;
+- les courriels de **résultat** (approbation, refus) existent dans les sept
+  langues principales (de, en, es, fr, it, nl, pl) et le courriel d'attente
+  de vérification (`send_candidature_pending_email`) en anglais et en
+  français ; les autres locales retombent sur l'anglais ;
+- le nom du gabarit est passé explicitement par mot-clé
+  (`template_name=...`) par les appelants — un positionnel mal placé rendait
+  jadis le courriel d'accueil muet (#213).
+
+Voir [10_internationalisation](10_internationalisation.md) ; le rendu de
+chaque gabarit de résultat dans les deux modes (`textual` texte/HTML) est
+verrouillé par la suite de tests.
+
+## Coordonnées de l'expéditeur
+
+Le pied des courriels porte l'adresse postale `organization_details`, lue
+du réglage `.ini` avec repli sur la constante d'environnement
+`ORGANIZATION_DETAILS` — la valeur n'est jamais vide, et son absence était
+un facteur de classement en pourriel (#169). Les messages qui référencent
+`${administrator}` reçoivent `ADMIN_EMAIL` dans leur *mapping* (#81).
 
 ## Limites connues
 

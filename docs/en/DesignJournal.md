@@ -279,3 +279,35 @@ untranslated historical scenarios point explicitly to
 `docs/README.md` now carries its own orientation table. French remains the
 authoritative version.
 
+# 2026-07-25
+
+Campaign clearing the customer's priority list and the eight community pull
+requests (#228 to #235), in twenty-one fixes delivered as patches and merged
+along the way. Highlights:
+
+- **i18n**: site variables interpolated everywhere
+  (`auto_translate` + `SITE_INFORMATION_MAPPING`, #223/#236); verifier
+  e-mail subjects in each verifier's language (#238); recipient declared
+  language for all e-mails and session-driven locale negotiator (#204);
+  result e-mails in the seven main languages and a new pending e-mail
+  (#213/#214, PR #235) — real rendering surfaced localized typographic
+  quotes in TAL attributes, a translated Python attribute in Italian and
+  eaten tags, now locked by tests.
+- **Business rule**: tallying — a tie approves, rejection requires a strict
+  majority of no (PR #232).
+- **Forms and pages**: password-reset page limited to the password (#97);
+  application links as SSO URLs, opened in a new tab, explanation under the
+  link (#142/#147); final button to `sso_login` (#194); challenge and
+  e-mail explanations fixed (#225/#224); verifier voting-page layout
+  (#207).
+- **E-mails**: postal address from the settings with a constant fallback
+  (#169); `${administrator}` interpolated (#81); verifier greeting fixed in
+  the forty inform/remind templates (#217).
+- **Tooling**: GitHub Actions CI repaired (pip cache keyed on `setup.py`,
+  3.11/3.12 matrix); test suite grown from about 420 to 580+.
+
+Every pull-request adoption is credited `Co-authored-by`; the branches,
+based on an older master, are closed without merging so as not to revert
+the fixes that landed in between. The `architecture/` documentation
+(e-mail, i18n, testing, third-party applications, domain model) and the
+`candidature` specification are updated accordingly.

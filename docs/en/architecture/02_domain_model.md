@@ -69,6 +69,11 @@ application file:
 - `voters` and `votes`: the randomly drawn verifiers and their choice
   (`VotingChoice`: `YES`, `NO`, `ABSTAIN`).
 
+**Tallying**: once every verifier has voted, rejection requires a **strict
+majority of NO** — a tie approves, including the 0-0 of an all-abstain
+ballot (rule adopted from PR #232; abstention makes a tie reachable even
+with three voters).
+
 The full flow is described in
 [../functional_specifications/candidature.md](../functional_specifications/candidature.md).
 

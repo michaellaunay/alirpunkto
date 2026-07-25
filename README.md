@@ -90,6 +90,9 @@ local `test.ini` files.
 
 ## Running the tests
 
+Every push and pull request runs the suite on GitHub Actions
+(`.github/workflows/tests.yml`, Python 3.11 and 3.12).
+
 The default pytest suite is self-contained. It mocks LDAP-facing startup side
 effects and does not start Docker unless explicitly requested.
 

@@ -44,7 +44,9 @@ stateDiagram-v2
    verifiers (their number set by the `number_of_voters` setting), each
    invited by e-mail to review the file.
 6. **Vote** (`/elections`, `/vote`) — each verifier votes yes, no or
-   abstain (`VotingChoice`). Depending on the tally, the `vote` view moves
+   abstain (`VotingChoice`), before the verification deadline. Once all
+   have voted, rejection requires a **strict** majority of no: a tie
+   approves (PR #232). Depending on the tally, the `vote` view moves
    the candidature to **APPROVED** or **REFUSED**.
 7. **APPROVED** — the LDAP account is created (`register_user_to_ldap`,
    `{SSHA}`-hashed password), the cleartext password is purged from the

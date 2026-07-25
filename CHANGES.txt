@@ -1,3 +1,17 @@
+Unreleased (2026-07-25)
+-----------------------
+
+- Site-wide i18n interpolation, recipient-language e-mails, verifier-language
+  subjects, seven-language result e-mails and a new pending e-mail
+  (#223, #236, #238, #204, #213, #214, PR #235).
+- Tally rule: a tie of the verifier votes approves the application (PR #232).
+- Password-reset page limited to the password fields (#97); SSO application
+  links opening in a new tab with inline explanations (#142, #147, #194).
+- Postal address and administrator e-mail interpolated in outgoing e-mails
+  (#169, #81); verifier greeting fixed in forty templates (#217).
+- GitHub Actions CI repaired (pip cache keyed on setup.py, 3.11/3.12 matrix);
+  test suite grown from ~420 to 580+.
+
 0.0
 ---
 

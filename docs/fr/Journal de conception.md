@@ -2601,3 +2601,37 @@ vers `docs/fr/specifications_historiques/`. La section anglaise de
 `docs/README.md` présente désormais sa propre table d'orientation. Le
 français reste la version de référence.
 
+# 2026-07-25
+
+Campagne de résorption de la liste de priorités du client et des huit
+*pull requests* communautaires (#228 à #235), en vingt-et-un correctifs
+livrés en patchs et fusionnés au fil de l'eau. Points saillants :
+
+- **i18n** : interpolation des variables de site partout
+  (`auto_translate` + `SITE_INFORMATION_MAPPING`, #223/#236) ; sujets des
+  courriels vérificateurs dans la langue de chaque vérificateur (#238) ;
+  langue déclarée du destinataire pour tous les courriels et négociateur de
+  locale piloté par la session (#204) ; courriels de résultat dans les sept
+  langues principales et courriel d'attente créé (#213/#214, PR #235) —
+  le rendu réel a révélé guillemets typographiques localisés dans les
+  attributs TAL, attribut Python traduit en italien et balises mangées,
+  désormais verrouillés par test.
+- **Métier** : dépouillement — l'égalité approuve, le refus exige une
+  majorité stricte de non (PR #232).
+- **Formulaires et pages** : page de réinitialisation limitée au mot de
+  passe (#97) ; liens d'applications en URL SSO, ouverts dans un nouvel
+  onglet, explication sous le lien (#142/#147) ; bouton final vers
+  `sso_login` (#194) ; explications du défi et du courriel corrigées
+  (#225/#224) ; mise en page de l'accueil du vérificateur (#207).
+- **Courriels** : adresse postale depuis les réglages avec repli constante
+  (#169) ; `${administrator}` interpolé (#81) ; pseudonyme du vérificateur
+  dans les quarante gabarits d'information/relance (#217).
+- **Outillage** : CI GitHub Actions réparée (cache pip indexé sur
+  `setup.py`, matrice 3.11/3.12) ; suite passée d'environ 420 à plus de
+  580 tests.
+
+Chaque reprise de *pull request* est créditée `Co-authored-by` ; les
+branches, basées sur un master ancien, sont fermées sans fusion pour ne pas
+annuler les correctifs intermédiaires. Documentation `architecture/`
+(messagerie, i18n, tests, applications tierces, modèle de domaine) et
+spécification `candidature` mises à jour en conséquence.
