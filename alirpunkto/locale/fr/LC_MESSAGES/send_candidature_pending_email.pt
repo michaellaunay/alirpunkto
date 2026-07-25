@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Ta candidature sur la plateforme <span tal:replace="domain_name">Nom de domaine</span> est en cours de vérification</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Ta candidature est en cours de vérification</h1>
+
+    <p tal:omit-tag="textual">Bonjour <span tal:replace="python:candidature.pseudonym">Nom du candidat</span>,</p>
+
+    <p tal:omit-tag="textual">Merci d'avoir soumis ta candidature sur la plateforme <span tal:replace="domain_name">Nom de domaine</span> pour le rôle de <span tal:replace="python:candidature.type">Rôle</span>.</p>
+
+    <p tal:omit-tag="textual">Ta candidature est maintenant en cours de vérification : un petit groupe de membres de la Communauté, les Vérificateurs, va contrôler les informations d'identité que tu as fournies. Tu recevras un courriel avec leur décision.</p>
+
+    <p tal:omit-tag="textual">Pour mémoire, voici les détails de ta candidature :</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">Identifiant de candidature : <span tal:replace="python:candidature.oid">Identifiant</span></li>
+        <li tal:omit-tag="textual">Statut : En attente de vérification</li>
+    </ul>
+
+    <p tal:omit-tag="textual">Bien cordialement,</p>
+    <p tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Nom de domaine</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Coordonnées de l'organisation</p>
+</body>
+</html>

@@ -51,7 +51,7 @@ def _template_for(name):
     with patch.object(utils, 'send_email', fake_send_email), \
          patch.object(utils, 'get_localizer', lambda r: SimpleNamespace(translate=lambda s: 'subject')), \
          patch.object(utils, 'encrypt_oid', lambda *a, **k: 'token'), \
-         patch.object(utils, 'get_preferred_language', lambda r: 'en'):
+         patch.object(utils, 'get_preferred_language', lambda r, member=None: 'en'):
         utils.send_candidature_state_change_email(
             request, member,
             sending_function_name='test',

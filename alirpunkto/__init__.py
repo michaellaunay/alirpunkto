@@ -135,6 +135,15 @@ def locale_negotiator(request):
         str: the locale
     """
     locale = default_locale_negotiator(request)
+    if locale is None:
+        # The language the member declared in their profile, put in the
+        # session at login / registration / profile modification, drives the
+        # interface (issue #204). An explicit _LOCALE_ param/cookie still wins.
+        session = getattr(request, 'session', None)
+        if session is not None:
+            preferred = session.get('preferred_language')
+            if preferred in AVAILABLE_LANGUAGES:
+                locale = preferred
     if locale is None and getattr(request, 'accept_language', None):
         locale = request.accept_language.best_match(AVAILABLE_LANGUAGES)
 

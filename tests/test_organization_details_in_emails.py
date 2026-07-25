@@ -69,7 +69,7 @@ def _captured_vars(request):
          patch.object(utils, 'get_localizer',
                       lambda r: SimpleNamespace(translate=lambda s: 'subject')), \
          patch.object(utils, 'encrypt_oid', lambda *a, **k: 'token'), \
-         patch.object(utils, 'get_preferred_language', lambda r: 'en'):
+         patch.object(utils, 'get_preferred_language', lambda r, member=None: 'en'):
         utils.send_email_to_member(
             request, _member(), 'test', 'reset_password_email',
             'reset_password_email_subject', 'forgot_password',

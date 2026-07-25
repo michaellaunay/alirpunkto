@@ -451,6 +451,13 @@ def modify_member(request):
                 "error":_('error_while_updating_member'),
                 }
         accessed_member.member_state = MemberStates.DATA_MODIFIED
+        # When the member changed their own preferred language, the interface
+        # must follow immediately (issue #204).
+        if 'lang1' in fields_to_update and \
+                getattr(member, 'oid', None) == accessed_member.oid:
+            new_language = getattr(accessed_member.data, 'lang1', None)
+            if new_language:
+                request.session['preferred_language'] = new_language
         #@TODO send a modification confirmation email
         return {
             "member": member,

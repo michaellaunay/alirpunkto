@@ -89,14 +89,25 @@ from .secret_manager import get_secret, encrypt_secret_for_logs, make_ldap_passw
 import requests
 import re
 
-def get_preferred_language(request: Request)->str:
-    """Get the preferred language from the request.
+def get_preferred_language(request: Request, member=None)->str:
+    """Get the preferred language for an interaction.
+
+    The language the member declared in their profile (data.lang1) wins when
+    it is one of the supported locales, so e-mails reach the member in the
+    language they chose rather than in the browser language of whoever
+    triggered the sending (issue #204). Without a member (or without a
+    declared language) fall back to the request's Accept-Language.
+
     Args:
         request (pyramid.request.Request): the request
+        member: optional Member/Candidature whose declared language wins
     Returns:
         str: the preferred language
     """
-    # Get the preferred language from the request
+    declared = getattr(getattr(member, "data", None), "lang1", None)         if member is not None else None
+    if declared and declared in EUROPEAN_LOCALES:
+        return declared
+    # Fall back to the browser preference of the current request
     preferred_language = request.accept_language.best_match(EUROPEAN_LOCALES)
     if preferred_language is None:
         preferred_language = "en"
@@ -1248,7 +1259,7 @@ def is_admin(username:str, password:str)-> bool:
     )
     return username_matches and password_matches
 
-def get_local_template(request, pattern_path):
+def get_local_template(request, pattern_path, member=None):
     """
     Return the local template for the given pattern path according to the user's language preference.
 
@@ -1266,7 +1277,7 @@ def get_local_template(request, pattern_path):
         (No explicit exceptions are raised, but errors are logged)
     """
 
-    lang = get_preferred_language(request)
+    lang = get_preferred_language(request, member)
     ar = AssetResolver("alirpunkto")
     try:
         resolver = ar.resolve(pattern_path.format(lang=lang))
@@ -1316,7 +1327,7 @@ def send_member_state_change_email(request: Request,
     # The string for the template path is concatenated because the 'lang' variable
     # will be replaced during formatting by the resource resolution
     template_path = LOCALE_LANG_MESSAGES+template_name+ZPT_EXTENSION
-    template_resolver = get_local_template(request, template_path).abspath()
+    template_resolver = get_local_template(request, template_path, member=member).abspath()
     localizer = get_localizer(request)
     subject = (subject if subject
         else localizer.translate(_('email_member_state_changed'))
@@ -1442,7 +1453,7 @@ def send_email_to_member(request: Request,
         dict: the result of the email sending
     """
     template_path = LOCALE_LANG_MESSAGES+template_name+ZPT_EXTENSION
-    template_resolver = get_local_template(request, template_path).abspath()
+    template_resolver = get_local_template(request, template_path, member=member).abspath()
     localizer = get_localizer(request)
     subject = localizer.translate(_(subject_msgid))
     email = member.email
@@ -1521,7 +1532,8 @@ def send_validation_email(
         template_path = LOCALE_LANG_MESSAGES + "check_email" + ZPT_EXTENSION
         template_path = get_local_template(
             request,
-            template_path
+            template_path,
+            member=candidature
         ).abspath()
     except Exception as e:
         log.error(f"Error while getting template '{template_path}' for email validation: {e}")
@@ -1594,7 +1606,8 @@ def send_check_new_email(
     """
     template_path = get_local_template(
         request,
-        LOCALE_LANG_MESSAGES + "check_new_email" + ZPT_EXTENSION
+        LOCALE_LANG_MESSAGES + "check_new_email" + ZPT_EXTENSION,
+        member=member
     ).abspath()
 
     email = member.email # The email to send to.

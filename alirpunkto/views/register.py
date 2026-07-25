@@ -541,6 +541,10 @@ def handle_confirmed_human_state(request, candidature):
             appstruct['nationality'] = request.params['nationality']
         if 'lang1' in request.params:
             appstruct['lang1'] = request.params['lang1']
+            # Use the chosen language immediately for the rest of the
+            # registration (interface and e-mails, issue #204).
+            if request.params['lang1'] in AVAILABLE_LANGUAGES:
+                request.session['preferred_language'] = request.params['lang1']
         if 'lang2' in request.params:
             appstruct['lang2'] = request.params['lang2']
         if 'lang3' in request.params:

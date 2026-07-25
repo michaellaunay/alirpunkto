@@ -65,9 +65,14 @@ def login_view(request):
             user = check_password(username, oid, password)
         if user is not None:
             # The user is in the ldap directory
-            update_member_from_ldap(oid, request) # force update of the user
+            member = update_member_from_ldap(oid, request) # force update of the user
             headers = remember(request, username)
             request.session['logged_in'] = True
+            # Drive the interface with the member's declared language (issue #204)
+            declared_language = getattr(
+                getattr(member, 'data', None), 'lang1', None)
+            if declared_language:
+                request.session['preferred_language'] = declared_language
             request.session['user'] = user.to_json()
             request.session['created_at'] = datetime.now().isoformat()
                         # Request Keycloak token
