@@ -9,7 +9,7 @@
 <body>
     <h1>Via helpo estas bezonata por kontroli la Identecajn Datumojn de kandidata Kooperativano!</h1>
     
-    <p>Kara <span tal:replace="verifier" tal:condition="exists:user">Pseudonimo de Verifikanto</span>,</p>
+    <p>Kara <span tal:replace="verifier" tal:condition="exists:verifier">Pseudonimo de Verifikanto</span>,</p>
 
 
 

@@ -9,7 +9,7 @@ tal:omit-tag="textual">
 <body>
 <h1>Deine Hilfe wird benötigt, um die Identitätsdaten eines Kandidaten zu verifizieren!</h1>
 
-<p>Liebe*r <span tal:replace="verifier" tal:condition="exists:user">Name des Verifiers</span>,</p>
+<p>Liebe*r <span tal:replace="verifier" tal:condition="exists:verifier">Name des Verifiers</span>,</p>
 
 <p>Du wurdest von der <span tal:replace="domain_name">Domain Name</span> Plattform zufällig ausgewählt, um als Überprüfer zu fungieren, dessen Aufgabe es ist, die Identität einer Person zu überprüfen, die sich gerade online registriert hat. Jedes neue Mitglied ist ein Segen und eine Chance für <span tal:replace="domain_name">Domain Name</span>! Wir müssen dankbar sein für die Mühe und den Mut jeder Person, die sich uns anschließt. Bitte unterstütze diese Bemühungen und den guten Willen auf seiner/ihrer Seite, indem du <strong>unter der folgenden <a href="{subject_url}">URL</a> abstimmst, am oder vor {date_end_vote}</strong>.</p>
 

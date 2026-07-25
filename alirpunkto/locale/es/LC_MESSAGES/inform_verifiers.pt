@@ -9,7 +9,7 @@ tal:omit-tag="textual">
 <body>
 <h1>¡Se necesita tu ayuda para verificar los Datos de Identidad de un candidato a Cooperador!</h1>
 
-<p>Estimado <span tal:replace="verifier" tal:condition="exists:user">Nombre del Verificador</span>,</p>
+<p>Estimado <span tal:replace="verifier" tal:condition="exists:verifier">Nombre del Verificador</span>,</p>
 
 
 <p>Has sido seleccionado al azar por la plataforma <span tal:replace="domain_name">domain_name</span> para actuar como Verificador, cuya tarea consiste en verificar la identidad de una persona que acaba de registrarse en línea. ¡Cada nuevo miembro es una bendición y una oportunidad para <span tal:replace="domain_name">domain_name</span>! Debemos agradecer el esfuerzo y el valor de cada persona que se une a nosotros. Por favor, apoya ese esfuerzo y la buena voluntad de su parte <strong>votando en la siguiente <a href="{subject_url}">URL</a>, en o antes de {date_end_vote}</strong>.</p>
