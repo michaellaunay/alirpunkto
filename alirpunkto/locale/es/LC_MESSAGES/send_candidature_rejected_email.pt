@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    
+tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Tu solicitud para el <span tal:replace="domain_name">nombre de dominio</span> ha sido rechazada</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Lamentamos informarte de que tu solicitud ha sido rechazada</h1>
+    
+    <p tal:omit-tag="textual">Hola, <span tal:replace="python:candidature.pseudonym">Nombre del solicitante</span>,</p>
+        <p tal:omit-tag="textual">Lamentamos informarte de que tu solicitud para el <span tal:replace="domain_name">nombre de dominio</span> para el papel de <span tal:replace="python:candidature.type">papel</span> ha sido rechazada.
+ El motivo es que la mayoría de los verificadores consideraron que la información que proporcionaste sobre tu identidad (nombre y apellidos, fecha de nacimiento) no coincidía con la de tus documentos de identidad oficiales, o que tu selfie reciente no se correspondía lo suficiente con la fotografía de tu documento de identidad oficial. Si crees que se trata de un error, te invitamos a volver a enviar tu solicitud, quizá con copias más nítidas de tus documentos de identidad oficiales o una selfie de mejor calidad.</p>
+    <p tal:omit-tag="textual">Somos conscientes de la decepción y la frustración que este rechazo puede causarte, y te pedimos disculpas por ello. Por otro lado, te invitamos a tener en cuenta que el rigor de nuestro proceso de solicitud es necesario para garantizar que se respete el principio democrático de "una persona, un voto" en nuestra Cooperativa, y que solo los ciudadanos de la Unión Europea mayores de 18 años puedan ser cooperadores. </p>
+
+<p tal:omit-tag="textual">Para que lo tengas en cuenta, aquí tienes los detalles de la finalización de tu proceso de registro:</p>
+    <ul tal:omit-tag="textual">
+        <li tal:omit-tag="textual">ID de candidatura: <span tal:replace="python:candidature.oid">ID de la solicitud</span></li>
+        <li tal:omit-tag="textual">Fecha de rechazo: <span tal:replace="python:candidature.modifications[-1]">Última transición</span></li>
+        <li tal:omit-tag="textual">Estado: Rechazado</li>
+    
+</ul>
+
+    
+    <p tal:omit-tag="textual">Una vez más, lamentamos de todo corazón la decepción que te hayamos podido causar.</p>
+
+    
+    <p tal:omit-tag="textual">Un saludo cordial.</p>
+    
+<p tal:omit-tag="textual">El equipo de <span tal:replace="domain_name">Nombre de dominio</span>.</p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Datos de la organización</p>
+</body>
+</html>

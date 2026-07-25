@@ -4,12 +4,12 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Twoje zgłoszenie do witryny <span tal:replace="domain_name">Nazwa witryny</span> zostało zatwierdzone</title>
+    <title tal:omit-tag="textual">Twoje zgłoszenie do witryny na platformie <span tal:replace="domain_name">Nazwa witryny</span> zostało zatwierdzone</title>
 </head>
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Gratulujemy zatwierdzenia Twojego wniosku! </h1>
     
-    <p tal:omit-tag="textual">Witaj <span tal:replace="user" tal:condition="exists:user">Imię i nazwisko wnioskodawcy</span>,</p>
+    <p tal:omit-tag="textual">Witaj <span tal:replace="python:candidature.pseudonym">pseudonym</span>,</p>
     
     <p tal:omit-tag="textual">Z przyjemnością informujemy, że Twoja aplikacja na stanowisko <span tal:replace="domain_name">Nazwa witryny</span> dla roli <span tal:replace="python:candidature.type">Rola</span> została zatwierdzona.</p>
     
@@ -17,20 +17,22 @@
     
     <p tal:omit-tag="textual">Teraz, gdy Twoja aplikacja została zatwierdzona, możesz zalogować się na naszej platformie przy użyciu pseudonimu i hasła podanych podczas procesu aplikacji. Po zalogowaniu znajdziesz:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">linki do wszystkich aplikacji, do których masz bezpośredni dostęp. Nie musisz logować się ponownie! </li>.
-        <li tal:omit-tag="textual">link do formularza, w którym możesz przeglądać i edytować swój profil. W tym formularzu zachęcamy do zaprezentowania się innym członkom naszej społeczności w krótkim „tekście profilowym” i wyświetlenia małego zdjęcia, które Cię reprezentuje („awatar”);</li>
+        <li tal:omit-tag="textual">linki do wszystkich aplikacji, do których masz bezpośredni dostęp. Nie musisz logować się ponownie! Odwiedź przede wszystkim nasz <a href="https://workspace.cosmopolitical.coop/apps/sociallogin/custom_oidc/Keycloak">obszar roboczy</a>, gdzie toczy się większość naszej działalności;</li>
+        <li tal:omit-tag="textual">link do formularza, w którym możesz przeglądać i edytować swój profil. W tym formularzu zachęcamy do zaprezentowania się innym członkom naszej społeczności w krótkim "tekście profilowym";</li>
         <li tal:omit-tag="textual"> link do wylogowania się.</li>
     </ul>
 
+ <p tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR"> <strong>Nie zapomnij!</strong> Żeby móc korzystać ze wszystkich praw jako członek spółdzielni, a zwłaszcza żeby mieć prawo do głosowania, musisz: (1) <a href="https://www.cosmopolitical.coop/Share">kupić co najmniej jeden udział w Spółdzielni</a> oraz (2) <a href="https://www.cosmopolitical.coop/YearContrib">opłacić roczną składkę</a>. Zrób to jak najszybciej!</p>
+
     <p tal:omit-tag="textual">Oto główne elementy Twojego profilu, które zarejestrowaliśmy:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">Twój pseudonim: <span tal:replace="user">pseudonym</span>. Prosimy o UWAŻNE I BEZPIECZNE ZAPISANIE tego pseudonimu: jest to jedyny identyfikator, za pomocą którego możesz zalogować się do naszej platformy informatycznej;</li>
+        <li tal:omit-tag="textual">Twój pseudonim: <span tal:replace="python:candidature.pseudonym">pseudonym</span>. Proszę starannie i bezpiecznie zapisać ten pseudonim: to identyfikator, którego będziesz używać podczas całej swojej aktywności na naszej platformie IT;</li>
         <li tal:omit-tag="textual">Twoje hasło: (hasło, które podałeś podczas rejestracji);</li>
         <li tal:omit-tag="textual">Twój adres e-mail: (adres e-mail, na który wysyłamy niniejszą wiadomość e-mail);</li>
-        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">Twoje dane identyfikacyjne: (wszystkie imiona i nazwiska, data urodzenia, podane i zweryfikowane podczas procesu rejestracji);</li>
-        <li tal:omit-tag="textual">Twój preferowany język, w którym chcemy się z Tobą komunikować: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
-        <li tal:omit-tag="textual">drugi język, który akceptujesz, abyśmy używali go do interakcji z Tobą: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
-        <li tal:omit-tag="textual">język, który akceptujesz, a którego używamy jako trzeciego do interakcji z Tobą: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR">Twoje dane identyfikacyjne: (wszystkie imiona i nazwiska, data urodzenia, podane i zweryfikowane podczas procesu rejestracji);</li>
+        <li tal:omit-tag="textual">Twój preferowany język, w którym chcemy się z Tobą komunikować: <span tal:replace="python:candidature.data.lang1">Language_1</span>;</li>
+        <li tal:omit-tag="textual">drugi język, który akceptujesz, abyśmy używali go do interakcji z Tobą: <span tal:replace="python:candidature.data.lang2">Language_2</span>;</li>
+        <li tal:omit-tag="textual">język, który akceptujesz, a którego używamy jako trzeciego do interakcji z Tobą: <span tal:replace="python:candidature.data.lang3">Language_3</span>.</li>
         </ul>
 
     <p tal:omit-tag="textual">Dla Twojej wiadomości, oto szczegóły finalizacji procesu rejestracji:</p>

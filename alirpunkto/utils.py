@@ -1412,6 +1412,8 @@ def send_candidature_state_change_email(request: Request,
     template_vars = {
         'candidature': candidature,
         'CandidatureStates': CandidatureStates,
+        # The approval e-mail template conditions on the member type.
+        'MemberTypes': MemberTypes,
     }
     return send_member_state_change_email(
         request,

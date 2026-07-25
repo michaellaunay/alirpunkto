@@ -71,29 +71,58 @@ def test_result_email_uses_the_friendly_template(name):
     assert 'candidature_state_change.pt' not in captured['template']
 
 
-def test_rejection_template_exists_in_english_and_french():
-    """#214: the rejection template must exist (English is the fallback)."""
-    for lang in ('en', 'fr'):
-        path = os.path.join(LOCALE, lang, 'LC_MESSAGES',
-                            'send_candidature_rejected_email.pt')
-        assert os.path.isfile(path), f"missing rejection template for {lang}"
+RESULT_LANGUAGES = ('de', 'en', 'es', 'fr', 'it', 'nl', 'pl')
 
 
-def test_rejection_template_renders_without_leftover_placeholder():
-    from chameleon import PageTemplateFile
-    path = os.path.join(LOCALE, 'en', 'LC_MESSAGES',
+@pytest.mark.parametrize("lang", RESULT_LANGUAGES)
+def test_rejection_template_exists(lang):
+    """#214 / PR #235: the rejection template exists in the seven languages."""
+    path = os.path.join(LOCALE, lang, 'LC_MESSAGES',
                         'send_candidature_rejected_email.pt')
-    cand = SimpleNamespace(oid='oid-1', type=SimpleNamespace(name='ORDINARY'),
-                           modifications=['2026-01-01'])
-    # send_email renders e-mail templates with `textual` in scope (True for the
-    # text part, False for HTML); provide it as the real sender does.
-    html = PageTemplateFile(path)(domain_name='alirpunkto.org', user='cand',
-                                  candidature=cand,
-                                  organization_details='Org details',
-                                  textual=False)
-    assert 'not been approved' in html
+    assert os.path.isfile(path), f"missing rejection template for {lang}"
+
+
+def _result_render_vars():
+    from alirpunkto.models.member import MemberTypes, MemberStates
+    from alirpunkto.models.candidature import CandidatureStates
+    cand = SimpleNamespace(
+        pseudonym='jdoe', type=MemberTypes.COOPERATOR, oid='oid-1',
+        modifications=['2026-01-01'],
+        data=SimpleNamespace(lang1='fr', lang2='en', lang3='de',
+                             fullname='Jean'),
+    )
+    return dict(
+        page_register_with_oid='http://x/r', site_url='http://x/',
+        site_name='AlirPunkto', domain_name='alirpunkto.org',
+        organization_details='Org details', member=cand,
+        MemberStates=MemberStates, user='jdoe', candidature=cand,
+        CandidatureStates=CandidatureStates, MemberTypes=MemberTypes,
+    )
+
+
+@pytest.mark.parametrize("lang", RESULT_LANGUAGES)
+@pytest.mark.parametrize("name", ['send_candidature_approuved_email',
+                                  'send_candidature_rejected_email'])
+@pytest.mark.parametrize("textual", [False, True])
+def test_result_templates_render_cleanly(lang, name, textual):
+    """PR #235: every result template renders with the real sender's variables,
+    with no ## placeholder, no ${...} leftover, and no typographic-quote TAL
+    attribute (the localized quotes broke Chameleon in five languages)."""
+    from chameleon import PageTemplateFile
+    path = os.path.join(LOCALE, lang, 'LC_MESSAGES', f'{name}.pt')
+    html = PageTemplateFile(path)(**_result_render_vars(), textual=textual)
+    assert '##' not in html
     assert '${' not in html
-    assert 'alirpunkto.org' in html
+    assert 'jdoe' in html  # the pseudonym is actually rendered
+
+
+def test_state_change_email_provides_member_types():
+    """The approval template conditions on candidature.type == MemberTypes.X,
+    so the sender must put MemberTypes in the template variables."""
+    import inspect
+    import alirpunkto.utils as utils
+    src = inspect.getsource(utils.send_candidature_state_change_email)
+    assert "'MemberTypes': MemberTypes" in src
 
 
 def test_callers_pass_the_template_as_template_name():

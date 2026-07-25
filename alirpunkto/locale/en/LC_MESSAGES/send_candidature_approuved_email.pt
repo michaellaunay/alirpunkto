@@ -4,33 +4,34 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     tal:omit-tag="textual">
 <head tal:omit-tag="textual">
-    <title tal:omit-tag="textual">Your Application to the <span tal:replace="domain_name">Domain Name</span> has been approved</title>
+    <title tal:omit-tag="textual">Your Application to the <span tal:replace="domain_name">Domain Name</span> platform has been approved</title>
 </head>
 <body tal:omit-tag="textual">
     <h1 tal:omit-tag="textual">Congratulations on the approval of your Application!</h1>
     
-    <p tal:omit-tag="textual">Hello <span tal:replace="user" tal:condition="exists:user" tal:omit-tag="textual">Applicant's Name</span>,</p>
+    <p tal:omit-tag="textual">Hello <span tal:replace="python:candidature.pseudonym">Applicant's Name</span>,</p>
     
-    <p tal:omit-tag="textual">We are pleased to inform you that your application to the <span tal:replace="domain_name">Domain name</span> for the role of <span tal:replace="python:candidature.type">Role</span> has been approved.</p>
+    <p tal:omit-tag="textual">We are pleased to inform you that your application to the <span tal:replace="domain_name">Domain name</span> platform for the role of <span tal:replace="python:candidature.type">Role</span> has been approved.</p>
 
     <p tal:omit-tag="textual">Thank you for joining us! We are happy to welcome you in our Community.</p>
     
     <p tal:omit-tag="textual">Now that your application has been approved, you can log in to our platform using the pseudonym and password you provided during the application process. After having logged in, you will find:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">the links to all the software applications that you have directly access to. You don't need to log in again!</li>
-        <li tal:omit-tag="textual">a link to the form where you can view and edit your own profile. On this form, we encourage you to present yourself to the other members of our Community in a short "profile text" and to display a small picture that represents you (your "avatar");</li>
+        <li tal:omit-tag="textual">the links to all the software applications that you have directly access to. You don't need to log in again! Visit in priority our <a href="https://workspace.cosmopolitical.coop/apps/sociallogin/custom_oidc/Keycloak">workspace</a>, where the bulk of our activity takes place;</li>
+        <li tal:omit-tag="textual">a link to the form where you can view and edit your own profile. On this form, we encourage you to present yourself to the other members of our Community in a short "profile text";</li>
         <li tal:omit-tag="textual">a link to log out.</li>
     </ul>
+ <p tal:omit-tag= "textual" tal:condition= "python:candidature.type==MemberTypes.COOPERATOR"> <strong>Don’t forget!</strong> To enjoy all your rights as a Co-operator, and in particular to be entitled to vote, you must: (1) <a href="https://www.cosmopolitical.coop/Share">purchase at least one share in the Cooperative</a> and (2) <a href="https://www.cosmopolitical.coop/YearContrib">pay your annual contribution</a>. Do this as soon as possible!</p>
 
     <p tal:omit-tag="textual">Here are main elements of your profile that we recorded:</p>
     <ul tal:omit-tag="textual">
-        <li tal:omit-tag="textual">your pseudonym: <span tal:replace="user">pseudonym</span>. Please keep a CAREFUL AND SECURE RECORD of this pseudonym: it is the only identifier with which you can log in to our IT platform;</li>
+        <li tal:omit-tag="textual">your pseudonym: <span tal:replace="python:candidature.pseudonym">Applicant's pseudonym</span>. Please keep a careful and secure record of this pseudonym: it is the identifier that you will use throughout your activity on our IT platform;</li>
         <li tal:omit-tag="textual">your password: (the password that you provided upon your registration);</li>
         <li tal:omit-tag="textual">your e-mail address: (the e-mail address to which we send the present e-mail);</li>
-        <li tal:omit-tag="textual" tal:condition="python:candidature.type is not None and candidature.type.name == 'COOPERATOR'">your identity data: (all your given and family names, your date of birth, as provided and verified during your registration process);</li>
-        <li tal:omit-tag="textual">your preferred language for us to interact with you: <span tal:replace="python:candidature.data.lang1">language 1</span>;</li>
-        <li tal:omit-tag="textual">the second language that you accept that we use to interact with you: <span tal:replace="python:candidature.data.lang2">language 2</span>;</li>
-        <li tal:omit-tag="textual">the language that you accept that we use, as a third choice, to interact with you: <span tal:replace="python:candidature.data.lang3">language 3</span>.</li>
+        <li tal:omit-tag="textual" tal:condition="python:candidature.type==MemberTypes.COOPERATOR">your identity data: (all your given and family names, your date of birth, as provided and verified during your registration process);</li>
+        <li tal:omit-tag="textual">your preferred language for us to interact with you: <span tal:replace="python:candidature.data.lang1">Language_1</span>;</li>
+        <li tal:omit-tag="textual">the second language that you accept that we use to interact with you: <span tal:replace="python:candidature.data.lang2">Language_2</span>;</li>
+        <li tal:omit-tag="textual">the language that you accept that we use, as a third choice, to interact with you: <span tal:replace="python:candidature.data.lang3">Language_3</span>.</li>
         </ul>
 
     <p tal:omit-tag="textual">For your records, here are the details of the finalisation of your registration process:</p>
