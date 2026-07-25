@@ -32,6 +32,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
+          # The dependencies are declared in setup.py; without this, setup-python
+          # looks for requirements.txt, finds none, and FAILS the job before any
+          # test runs ("No file matched to [**/requirements.txt ...]").
+          cache-dependency-path: setup.py
 
       - name: Install dependencies
         run: |
