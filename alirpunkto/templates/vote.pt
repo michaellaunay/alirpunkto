@@ -9,14 +9,15 @@
             <div tal:condition="not: exists:error"
                 tal:define="localizer request.localizer">
                 <div>
-                    <p i18n:translate="welcome_voter" tal:condition="not registered_vote">
+                    <!-- welcome_voter carries structured HTML (paragraphs and an
+                         ordered list, issue #207), so it is rendered as structure
+                         through _() which also interpolates ${name} and, via
+                         SITE_INFORMATION_MAPPING, ${site_name}. -->
+                    <div tal:condition="not registered_vote"
+                         tal:replace="structure _('welcome_voter', {'name': candidature.data.fullname})">
                         You are about to vote on whether to accept or reject the application of
-                        <span tal:replace="python:candidature.data.fullname" i18n:name="name">Candidate Name</span>.
-                        Their admission to the portal depends on your decision.
-                        Whether through documents received via email or during a video conference,
-                        we hope you were able to verify the applicant's identity.
-                        We kindly ask you to proceed with this validation diligently, as the integrity of our site depends on it.
-                    </p>
+                        a candidate. Their admission to the portal depends on your decision.
+                    </div>
                     <p tal:condition="registered_vote" i18n:translate="vote_success">
                         <span i18n:name="vote"
                             tal:content="python:localizer.translate(_(VotingChoice[vote].value))">
