@@ -116,7 +116,12 @@ def vote_view(request):
             # send email to the candidature owner
             count_yes = [v.vote for v in candidature.voters].count(VotingChoice.YES.name)
             count_no = [v.vote for v in candidature.voters].count(VotingChoice.NO.name)
-            if count_yes > count_no:
+            # A tie approves the application (business rule adopted from
+            # PR #232): rejection requires a strict majority of NO votes.
+            # ABSTAIN makes a tie reachable even with an odd number of voters
+            # (e.g. 1 YES / 1 NO / 1 ABSTAIN), and an all-abstain ballot
+            # (0-0) approves as well.
+            if count_yes >= count_no:
                 # Only approve once the LDAP account is actually created.
                 # register_user_to_ldap returns {'status': 'success'|'error'}.
                 ldap_result = register_user_to_ldap(

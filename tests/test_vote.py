@@ -343,3 +343,44 @@ def test_vote_view_preserves_vote_when_ldap_fails_across_reopen(tmp_path, member
         assert candidature.voters[0].vote == "YES"
         assert candidature.candidature_state is CandidatureStates.PENDING
         conn.close()
+
+
+# --------------------------------------------------------------------------- #
+# tallying rule: a tie approves (issue: PR #232)
+# --------------------------------------------------------------------------- #
+def test_vote_view_approves_on_a_tie(members_mapping):
+    """1 YES / 1 NO / 1 ABSTAIN is a tie: the application must be approved."""
+    candidature = _in_memory_candidature(["voter-1", "voter-2", "voter-3"])
+    candidature.voters[1].vote = VotingChoice.NO.name
+    candidature.voters[2].vote = VotingChoice.ABSTAIN.name
+    request = _request(candidature.oid, submit=True, vote_value="YES")
+
+    with _wire(candidature, candidature.oid, ldap_result={"status": "success"}):
+        vote_view(request)
+
+    assert candidature.candidature_state is CandidatureStates.APPROVED
+
+
+def test_vote_view_still_refuses_on_a_strict_no_majority(members_mapping):
+    candidature = _in_memory_candidature(["voter-1", "voter-2", "voter-3"])
+    candidature.voters[1].vote = VotingChoice.NO.name
+    candidature.voters[2].vote = VotingChoice.NO.name
+    request = _request(candidature.oid, submit=True, vote_value="YES")
+
+    with _wire(candidature, candidature.oid):
+        vote_view(request)
+
+    assert candidature.candidature_state is CandidatureStates.REFUSED
+
+
+def test_vote_view_approves_when_everyone_abstains(members_mapping):
+    """0 YES / 0 NO is also a tie: documented consequence of the >= rule."""
+    candidature = _in_memory_candidature(["voter-1", "voter-2", "voter-3"])
+    candidature.voters[1].vote = VotingChoice.ABSTAIN.name
+    candidature.voters[2].vote = VotingChoice.ABSTAIN.name
+    request = _request(candidature.oid, submit=True, vote_value="ABSTAIN")
+
+    with _wire(candidature, candidature.oid, ldap_result={"status": "success"}):
+        vote_view(request)
+
+    assert candidature.candidature_state is CandidatureStates.APPROVED
