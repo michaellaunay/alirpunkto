@@ -680,7 +680,8 @@ def prepare_for_cooperator(
             return {
                 'candidature': candidature,
                 'MemberTypes': MemberTypes,
-                'error': _('voters_not_selected'),
+                'error': _('voters_not_selected',
+                            {'administrator': ADMIN_EMAIL}),
                 'voting_url': _get_voting_url(request, candidature),
                 'signature': MAIL_SIGNATURE.format(
                     site_name=request.registry.settings.get('site_name'),
@@ -963,6 +964,8 @@ def get_template_parameters_for_cooperator(
         "site_name":site_name,
         "organization_details":organization_details,
         "domain_name":domain_name,
+        # The catalogs reference ${administrator} (issue #81, PR #230).
+        "administrator": ADMIN_EMAIL,
     }
     email_copy_id_verification_body = _(
         "email_copy_id_verification_body",

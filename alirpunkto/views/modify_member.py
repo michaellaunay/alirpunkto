@@ -24,6 +24,7 @@ from alirpunkto.models.member import (
 from alirpunkto.constants_and_globals import (
     _,
     log,
+    ADMIN_EMAIL,
     CANDIDATURE_OID,
     MEMBER_OID,
     ACCESSED_MEMBER_OID,
@@ -348,7 +349,8 @@ def modify_member(request):
                             )
                             # message is left with error because we can't
                             # use the error message as it could be overridden
-                            message = _('forget_email_send_error')
+                            message = _('forget_email_send_error',
+                                         {'administrator': ADMIN_EMAIL})
                 elif "password" in request.POST and "password" in writable_fields:
                     password = request.params['password'] if 'password' in request.params else None
                     password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None
