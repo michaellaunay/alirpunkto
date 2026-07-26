@@ -21,6 +21,7 @@ from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection
 from pyramid.path import AssetResolver
 from .constants_and_globals import (
+    URL_SCHEME,
     AVAILABLE_LANGUAGES,
     _,
     PYTEST_CURRENT_TEST,
@@ -115,6 +116,24 @@ def get_preferred_language(request: Request, member=None)->str:
     if preferred_language is None:
         preferred_language = "en"
     return preferred_language
+
+def get_site_url(request: Request) -> str:
+    """Return the public base URL of the platform, without a trailing slash.
+
+    The site_url setting is the source of truth (issue #242):
+    https://access.cosmopolitical.coop in production. Fall back to the
+    URL_SCHEME/DOMAIN_NAME environment constants — never to the domain_name
+    setting, whose semantics is the display name of the platform in the
+    texts, nor to request.route_url, which yields the proxied localhost when
+    e-mails are sent from a subscriber (the verifier reminders).
+    """
+    settings = getattr(request.registry, 'settings', None) or {}
+    configured = str(settings.get('site_url') or '').strip().rstrip('/')
+    if configured:
+        return configured
+    scheme = str(settings.get('url_scheme') or URL_SCHEME).strip().rstrip(':/')
+    return f"{scheme}://{DOMAIN_NAME}"
+
 
 def _translate_for_language(
         request: Request,
@@ -1372,7 +1391,7 @@ def send_member_state_change_email(request: Request,
     )
 
     url = request.route_url('register', _query={'oid': parameter})
-    site_url = request.route_url('home')
+    site_url = get_site_url(request)
     site_name = request.registry.settings.get('site_name')
     # Prefer the deployment setting, as site_name/domain_name above; fall
     # back to the environment constant so the address is never None when
@@ -1498,7 +1517,7 @@ def send_email_to_member(request: Request,
     )
 
     url = request.route_url(view_name, _query={'oid': parameter})
-    site_url = request.route_url('home')
+    site_url = get_site_url(request)
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
     # Prefer the deployment setting, as site_name/domain_name above; fall
@@ -1581,7 +1600,7 @@ def send_validation_email(
     )
 
     url = request.route_url('register', _query={'oid': parameter})
-    site_url = request.route_url('home')
+    site_url = get_site_url(request)
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
     # Prefer the deployment setting, as site_name/domain_name above; fall
@@ -1652,7 +1671,7 @@ def send_check_new_email(
     )
 
     url = request.route_url('check_new_email', _query={'oid': parameter})
-    site_url = request.route_url('home')
+    site_url = get_site_url(request)
     site_name = request.registry.settings.get('site_name')
     domain_name = request.registry.settings.get('domain_name')
     # Prefer the deployment setting, as site_name/domain_name above; fall

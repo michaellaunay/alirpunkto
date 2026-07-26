@@ -3,6 +3,7 @@
 
 # Description: Constants for the alirpunkto app
 from typing import Final
+from collections.abc import Mapping
 from types import MappingProxyType
 import os, sys, pytz
 from dotenv import load_dotenv, get_key, find_dotenv
@@ -239,12 +240,52 @@ ALIRPUNKTO_LOG_ENCRYPTED_SECRETS: Final = os.getenv("ALIRPUNKTO_LOG_ENCRYPTED_SE
 # messages. Shared by every schema description so a new site-specific variable
 # only has to be declared once. Read-only: it is handed to many
 # TranslationStrings, which must not be able to mutate each other's mapping.
-SITE_INFORMATION_MAPPING: Final = MappingProxyType({
+_SITE_INFORMATION_DEFAULTS: Final = MappingProxyType({
     'domain_name': DOMAIN_NAME,
     'site_name': SITE_NAME,
+    'site_url': f"{URL_SCHEME}://{DOMAIN_NAME}",
     'organization_details': ORGANIZATION_DETAILS,
     'url_workspace': URL_WORKSPACE,
     'url_pay_yearly_contrib': URL_PAY_YEARLY_CONTRIB,
     'url_purchase_shares': URL_PURCHASE_SHARES,
     'forgetting_time_constant': FORGETTING_TIME_CONSTANT,
 })
+
+
+class _SiteInformationMapping(Mapping):
+    """Site variables resolved at rendering time from the deployment settings.
+
+    The .ini settings are the source of truth (site_name, domain_name — the
+    display name of the platform in the texts, not a URL —, site_url,
+    organization_details, ...); the environment constants above are only
+    compatibility fallbacks. Resolution happens on each key access through the
+    thread-local registry, so the TranslationStrings that captured this mapping
+    at import time (the deform field descriptions of register_form) and the
+    template translations (auto_translate) all follow the configuration of the
+    running deployment (issues #223 reopened, #242).
+    """
+
+    def __init__(self, defaults):
+        self._defaults = defaults
+
+    def _settings(self):
+        try:
+            from pyramid.threadlocal import get_current_registry
+            return getattr(get_current_registry(), 'settings', None) or {}
+        except Exception:
+            return {}
+
+    def __getitem__(self, key):
+        default = self._defaults[key]
+        value = self._settings().get(key)
+        return value if value not in (None, '') else default
+
+    def __iter__(self):
+        return iter(self._defaults)
+
+    def __len__(self):
+        return len(self._defaults)
+
+
+SITE_INFORMATION_MAPPING: Final = _SiteInformationMapping(
+    _SITE_INFORMATION_DEFAULTS)

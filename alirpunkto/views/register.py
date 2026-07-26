@@ -36,8 +36,6 @@ from alirpunkto.constants_and_globals import (
     VERIFIER_VOTE_DEADLINE_DAYS,
     NOTICE_TIME_VERIFIERS,
     DEFAULT_NUMBER_OF_VOTERS,
-    DOMAIN_NAME,
-    URL_SCHEME,
     AVAILABLE_LANGUAGES,
 )
 from pyramid.i18n import Translator
@@ -47,6 +45,7 @@ INFORM_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/inform_verifiers.pt'
 REMIND_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/remind_verifiers.pt'
 VERIFIER_TEMPLATE_RESOLVER = AssetResolver('alirpunkto')
 from ..utils import (
+    get_site_url,
     _translate_for_language,
     secure_password_fields,
     get_candidatures,
@@ -141,13 +140,12 @@ def _get_voting_url(request: Request, candidature: Candidature) -> str:
     URL is therefore built from the trusted domain_name setting, consistently
     with the other e-mail variables (and with audit finding 1.11).
     """
-    settings = getattr(request.registry, 'settings', None) or {}
-    domain = str(settings.get('domain_name') or DOMAIN_NAME).strip().strip('/')
-    scheme = str(settings.get('url_scheme') or URL_SCHEME).strip().rstrip(':/')
     path = request.route_path('vote', _query={'oid': candidature.oid})
     if isinstance(path, tuple):
         path = path[0]
-    return f"{scheme}://{domain}{path}"
+    # site_url is the configured public base URL (issue #242): the domain_name
+    # setting is the display name of the platform, not a host.
+    return f"{get_site_url(request)}{path}"
 
 def _get_notice_time_verifiers(request: Request) -> int:
     try:
