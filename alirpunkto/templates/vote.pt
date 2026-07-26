@@ -11,8 +11,11 @@
                 <div>
                     <!-- welcome_voter carries structured HTML (paragraphs and an
                          ordered list, issue #207), so it is rendered as structure
-                         through _() which also interpolates ${name} and, via
-                         SITE_INFORMATION_MAPPING, ${site_name}. -->
+                         through _(), which also interpolates the candidate name
+                         and, via SITE_INFORMATION_MAPPING, the site variables.
+                         Chameleon evaluates dollar-brace expressions even inside
+                         HTML comments, so never write one literally here
+                         (issue #243). -->
                     <div tal:condition="not registered_vote"
                          tal:replace="structure _('welcome_voter', {'name': candidature.data.fullname})">
                         You are about to vote on whether to accept or reject the application of
