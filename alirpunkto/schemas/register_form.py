@@ -550,6 +550,15 @@ class RegisterForm(schema.CSRFSchema):
         else:
             self.children.remove(self.get('date_erasure_all_data'))
 
+        if 'email' in read_only_fields:
+            self.get('email').widget.readonly = True
+            self.get('email').widget.value = read_only_fields['email']
+        elif 'email' in writable_field_values:
+            self.get('email').widget.readonly = False
+            self.get('email').widget.value = writable_field_values['email']
+        else:
+            self.children.remove(self.get('email'))
+
         if 'password' in read_only_fields:
             self.get('password').widget.readonly = True
             password = read_only_fields['password']

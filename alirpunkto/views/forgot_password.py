@@ -58,8 +58,10 @@ def forgot_password(request):
         return error
     if member:
         schema = RegisterForm().bind(request=request)
+        # Only what the user needs to reset the password (issue #97, PR #234):
+        # who they are, read-only, and the two password fields. The e-mail
+        # field is removed from the form entirely.
         read_only_fields = {
-            "email": member.email,
             "pseudonym": member.pseudonym,
             "cooperative_number": member.oid
         }
@@ -69,7 +71,6 @@ def forgot_password(request):
             writable_field_values)
         appstruct = {
             'cooperative_number': member.oid,
-            'email': member.email,
             'pseudonym': member.pseudonym,
         }
         form = deform.Form(schema,
