@@ -34,7 +34,7 @@
                                     title="Enter your email address here."
                                     i18n:attributes="title email_title_label">Email</label>
                                 <input class="email-input" type="email" name="email" />
-                                <p class="explanation" i18n:translate="email_description">Your email address will be used for account verification and communication.</p>
+                                <p class="explanation" tal:content="_('email_description')">Your email address will be used for account verification and communication.</p>
                             </div>
 
                             <!-- Type of Registration -->
