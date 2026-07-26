@@ -28,7 +28,7 @@ def _request(accept='en', session=None, params=None):
         session=session if session is not None else {},
         params=params or {},
         cookies={},
-        registry=SimpleNamespace(settings={
+        registry=SimpleNamespace(queryUtility=lambda *a, **k: None, settings={
             'domain_name': 'alirpunkto.org', 'site_name': 'AlirPunkto',
             'session.secret': 'x' * 32,
         }),

@@ -40,7 +40,7 @@ def _template_for(name):
     )
 
     request = SimpleNamespace(
-        registry=SimpleNamespace(settings={
+        registry=SimpleNamespace(queryUtility=lambda *a, **k: None, settings={
             'domain_name': 'alirpunkto.org',
             'site_name': 'AlirPunkto',
             'session.secret': 'x' * 32,

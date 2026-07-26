@@ -130,7 +130,7 @@ def manage_provider_view(request):
                     member=provider,
                     sending_function_name = 'manage_provider_view',
                     template_name='provider_created_email',
-                    subject='provider_role_activated',
+                    subject=_('provider_role_activated'),
                     )
                 return {'member':user, 'form':None, 'providers': providers, 'success': _('provider_created')}
             except Exception as e:

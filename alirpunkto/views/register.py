@@ -13,8 +13,7 @@ import deform
 from deform import ValidationFailure
 from pyramid.view import view_config
 from pyramid.request import Request
-from pyramid.i18n import get_localizer, make_localizer
-from pyramid.interfaces import ITranslationDirectories
+from pyramid.i18n import get_localizer
 from alirpunkto.schemas.register_form import RegisterForm
 from alirpunkto.models.candidature import (
     Candidature, CandidatureStates, 
@@ -48,6 +47,7 @@ INFORM_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/inform_verifiers.pt'
 REMIND_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/remind_verifiers.pt'
 VERIFIER_TEMPLATE_RESOLVER = AssetResolver('alirpunkto')
 from ..utils import (
+    _translate_for_language,
     secure_password_fields,
     get_candidatures,
     get_member_by_oid,
@@ -696,30 +696,6 @@ def prepare_for_cooperator(
                 )
             }
     return None
-
-def _translate_for_language(
-        request: Request,
-        language: Optional[str],
-        translation_string
-    ) -> str:
-    """Translate a TranslationString into an explicit language.
-
-    request.localizer is bound to the language negotiated for the current
-    request (the Candidate's, since verifier e-mails are triggered while the
-    Candidate acts). The subject of a verifier e-mail must instead be in the
-    Verifier's own language, like its body (issue #238). Build a localizer for
-    that language from the registry's translation directories; fall back to the
-    request localizer when the language is unknown or unavailable.
-    """
-    fallback = getattr(request, 'localizer', None) or get_localizer(request)
-    if not language or (AVAILABLE_LANGUAGES and language not in AVAILABLE_LANGUAGES):
-        return fallback.translate(translation_string)
-    tdirs = request.registry.queryUtility(ITranslationDirectories) or []
-    if not tdirs:
-        return fallback.translate(translation_string)
-    localizer = make_localizer(language, tdirs)
-    return localizer.translate(translation_string)
-
 
 def _notify_verifiers_of_submission(
         request: Request,

@@ -21,6 +21,7 @@ from pyramid_mailer.message import Message
 from pyramid_zodbconn import get_connection
 from pyramid.path import AssetResolver
 from .constants_and_globals import (
+    AVAILABLE_LANGUAGES,
     _,
     PYTEST_CURRENT_TEST,
     ADMIN_LOGIN,
@@ -64,7 +65,9 @@ from .constants_and_globals import (
     DISABLE_EMAIL_MX_CHECKS,
     OID_LINK_TTL_SECONDS,
 )
-from pyramid.i18n import get_localizer
+from pyramid.i18n import get_localizer, make_localizer
+from pyramid.interfaces import ITranslationDirectories
+from translationstring import TranslationString
 from ldap3 import (
     Connection,
     MODIFY_ADD,
@@ -112,6 +115,29 @@ def get_preferred_language(request: Request, member=None)->str:
     if preferred_language is None:
         preferred_language = "en"
     return preferred_language
+
+def _translate_for_language(
+        request: Request,
+        language,
+        translation_string
+    ) -> str:
+    """Translate a TranslationString into an explicit language.
+
+    request.localizer is bound to the language negotiated for the current
+    request; e-mail subjects must instead be translated in the language of
+    their recipient (issues #238, #239). Build a localizer for that language
+    from the registry's translation directories; fall back to the request
+    localizer when the language is unknown or unavailable.
+    """
+    fallback = getattr(request, 'localizer', None) or get_localizer(request)
+    if not language or (AVAILABLE_LANGUAGES and language not in AVAILABLE_LANGUAGES):
+        return fallback.translate(translation_string)
+    tdirs = request.registry.queryUtility(ITranslationDirectories) or []
+    if not tdirs:
+        return fallback.translate(translation_string)
+    localizer = make_localizer(language, tdirs)
+    return localizer.translate(translation_string)
+
 
 def get_candidatures(request)->Members:
     """Get the candidatures from the request.
@@ -1328,10 +1354,13 @@ def send_member_state_change_email(request: Request,
     # will be replaced during formatting by the resource resolution
     template_path = LOCALE_LANG_MESSAGES+template_name+ZPT_EXTENSION
     template_resolver = get_local_template(request, template_path, member=member).abspath()
-    localizer = get_localizer(request)
-    subject = (subject if subject
-        else localizer.translate(_('email_member_state_changed'))
-    )
+    if subject is None:
+        subject = _('email_member_state_changed')
+    if isinstance(subject, TranslationString):
+        # Subjects are translated in the recipient's language (issue #239);
+        # an already-translated plain string is respected as-is.
+        subject = _translate_for_language(
+            request, get_preferred_language(request, member), subject)
     email = member.email
     seed = member.email_send_status_history[-1].seed
 
@@ -1415,10 +1444,10 @@ def send_candidature_state_change_email(request: Request,
     )
 
     log.debug(f"template_name={template_name}")
-    localizer = get_localizer(request)
-    subject = (subject if subject
-        else localizer.translate(_('email_candidature_state_changed'))
-    )
+    # The subject is translated by send_member_state_change_email in the
+    # recipient's language (issue #239); pass the TranslationString through.
+    if subject is None:
+        subject = _('email_candidature_state_changed')
 
     template_vars = {
         'candidature': candidature,
@@ -1454,8 +1483,8 @@ def send_email_to_member(request: Request,
     """
     template_path = LOCALE_LANG_MESSAGES+template_name+ZPT_EXTENSION
     template_resolver = get_local_template(request, template_path, member=member).abspath()
-    localizer = get_localizer(request)
-    subject = localizer.translate(_(subject_msgid))
+    subject = _translate_for_language(
+        request, get_preferred_language(request, member), _(subject_msgid))
     email = member.email
     # Retrieve the seed from the last email event which must be
     # EmailSendStatus.IN_PREPARATION
@@ -1541,8 +1570,9 @@ def send_validation_email(
 
     email = candidature.email # The email to send to.
     challenge = candidature.challenge # The math challenge for email validation.
-    localizer = get_localizer(request)
-    subject = localizer.translate(_('email_validation_subject'))
+    subject = _translate_for_language(
+        request, get_preferred_language(request, candidature),
+        _('email_validation_subject'))
     seed = candidature.email_send_status_history[-1].seed
     parameter = encrypt_oid(
         candidature.oid,
@@ -1611,8 +1641,9 @@ def send_check_new_email(
     ).abspath()
 
     email = member.email # The email to send to.
-    localizer = get_localizer(request)
-    subject = localizer.translate(_('check_new_email_subject'))
+    subject = _translate_for_language(
+        request, get_preferred_language(request, member),
+        _('check_new_email_subject'))
     seed = member.email_send_status_history[-1].seed
     parameter = encrypt_oid(
         member.oid,

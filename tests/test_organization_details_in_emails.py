@@ -41,7 +41,7 @@ def _request(settings_extra=None):
     }
     settings.update(settings_extra or {})
     return SimpleNamespace(
-        registry=SimpleNamespace(settings=settings),
+        registry=SimpleNamespace(queryUtility=lambda *a, **k: None, settings=settings),
         route_url=lambda *a, **k: 'http://example/view',
     )
 
