@@ -36,6 +36,14 @@ repli anglais. Les quatre fonctions d'envoi passent leur destinataire : un
 candidat qui a choisi l'allemand reçoit ses courriels en allemand, même si
 l'envoi est déclenché depuis un navigateur français (#204).
 
+Les liens absolus des courriels (vote, réinitialisation, pages avec oid)
+sont construits sur `get_site_url(request)` : le réglage `site_url`
+(l'URL de base publique, p. ex. `https://access.cosmopolitical.coop`,
+ticket #242) avec repli sur les constantes d'environnement — jamais sur
+`domain_name`, qui est le **nom d'affichage** de la plateforme dans les
+textes, ni sur `route_url`, qui donnerait l'hôte du mandataire local pour
+les rappels envoyés hors requête utilisateur.
+
 Cas particuliers :
 
 - les **sujets** des courriels aux vérificateurs sont traduits dans la

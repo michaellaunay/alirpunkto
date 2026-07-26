@@ -39,6 +39,12 @@ In Chameleon templates, `_` is `auto_translate`
 purchase and yearly-contribution URLs, `forgetting_time_constant`) with the
 call's local mapping — the `${...}` of the catalogues are substituted
 everywhere without repeating the site variables at every call (#223, #236).
+Values are resolved **at rendering time** from the `.ini` settings
+(`site_name`, `domain_name` — the display name of the platform —,
+`site_url`, `organization_details`, …), the environment constants being
+only fallbacks: the form field descriptions, which capture the mapping at
+import time, also follow the running deployment's configuration
+(#223 reopened, #242).
 A `structure` rendering is required when the catalogue carries HTML (lists,
 paragraphs).
 

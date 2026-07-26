@@ -40,7 +40,13 @@ Dans les gabarits Chameleon, `_` est `auto_translate`
 les URL d'espace de travail, de souscription de parts et de cotisation,
 `forgetting_time_constant`) avec le *mapping* local de l'appel — les
 `${...}` des catalogues sont donc substitués partout sans répéter les
-variables de site à chaque appel (#223, #236). Un rendu en `structure`
+variables de site à chaque appel (#223, #236). Les valeurs sont résolues
+**au moment du rendu** depuis les réglages `.ini` (`site_name`,
+`domain_name` — le nom d'affichage de la plateforme —, `site_url`,
+`organization_details`, …), les constantes d'environnement ne servant que
+de repli : les descriptions de champs du formulaire, qui capturent le
+mapping à l'import, suivent elles aussi la configuration du déploiement
+(#223 rouvert, #242). Un rendu en `structure`
 est requis quand le catalogue porte du HTML (listes, paragraphes).
 
 ## Chaîne de traduction

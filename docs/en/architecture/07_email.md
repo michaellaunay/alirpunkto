@@ -35,6 +35,14 @@ with an English fallback. The four sending helpers pass their recipient: a
 candidate who chose German receives German e-mails even when the sending is
 triggered from a French browser (#204).
 
+The absolute links of the e-mails (vote, reset, oid-carrying pages) are
+built on `get_site_url(request)`: the `site_url` setting (the public base
+URL, e.g. `https://access.cosmopolitical.coop`, issue #242) with a fallback
+on the environment constants — never on `domain_name`, which is the
+**display name** of the platform in the texts, nor on `route_url`, which
+would yield the local proxy host for the reminders sent outside a user
+request.
+
 Special cases:
 
 - the **subjects** of the verifier e-mails are translated in the language of
