@@ -31,7 +31,9 @@
                 <div>
                     <ul>
                         <tal:block tal:repeat="field python:candidature.data.iter_attributes()">
-                            <li tal:condition="python:field[0] in ['fullname', 'fullsurname', 'nationality', 'birthdate', 'description', 'lang1', 'lang2', 'lang3']">
+                            <!-- Only the identity data the verifiers compare with the ID document
+                                 is displayed (issue #206, GDPR data minimisation). -->
+                            <li tal:condition="python:field[0] in ['fullname', 'fullsurname', 'nationality', 'birthdate']">
                                 <span tal:content="python:field[0]">Field Name</span>
                                 <span tal:content="python:field[1]">Field Value</span>
                             </li>
