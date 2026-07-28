@@ -118,17 +118,29 @@ def modify_member(request):
     if not oid:
         oid = user_data.get("oid")
     if oid:
-        member = get_member_by_oid(oid, request, True)
-        if not member:
-            member = update_member_from_ldap(oid, request)
+        # Any LDAP hiccup here used to escape as a bare 500 (issue #202);
+        # answer with the same retryable error as the selection path below.
+        try:
+            member = get_member_by_oid(oid, request, True)
             if not member:
-                return {
-                    "form": None,
-                    "member": None,
-                    "accessed_member": None,
-                    "accessed_members": {},
-                    "error": _('unknown_member'),
-                }
+                member = update_member_from_ldap(oid, request)
+        except Exception as e:
+            log.error(f"modify_member: failed to resolve the accessor {oid}: {e}")
+            return {
+                "form": None,
+                "member": None,
+                "accessed_member": None,
+                "accessed_members": {},
+                "error": _('ldap_error_retry'),
+            }
+        if not member:
+            return {
+                "form": None,
+                "member": None,
+                "accessed_member": None,
+                "accessed_members": {},
+                "error": _('unknown_member'),
+            }
     else:
         return {
             "form": None,
@@ -138,7 +150,17 @@ def modify_member(request):
             "error": _('unknown_member'),
         }
     # The member is known and will be recognized as the accessor.
-    ldap_members= get_ldap_member_list()
+    try:
+        ldap_members = get_ldap_member_list()
+    except Exception as e:
+        log.error(f"modify_member: failed to list the members from LDAP: {e}")
+        return {
+            "form": None,
+            "member": member,
+            "accessed_member": None,
+            "accessed_members": {},
+            "error": _('ldap_error_retry'),
+        }
     members = {user.oid:user.name for user in ldap_members}
     accessor_member = member
     if "submit" in request.POST or 'modify' in request.POST:

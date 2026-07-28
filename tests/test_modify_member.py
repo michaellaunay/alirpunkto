@@ -318,3 +318,32 @@ def test_modify_member_does_not_commit_on_ldap_failure():
     assert result["error"] == _("error_while_updating_member")
     assert accessed.member_state is MemberStates.DATA_MODIFICATION_REQUESTED
     request.tm.commit.assert_not_called()
+
+
+# --------------------------------------------------------------------------- #
+# LDAP resilience of the view (issue #202)
+# --------------------------------------------------------------------------- #
+def test_a_failing_accessor_resolution_returns_a_retryable_error():
+    """Resolving the logged-in member used to escape as a bare 500."""
+    session = _session()
+    request = _Request(post={}, session=session)
+
+    with patch.object(mm, "get_member_by_oid", side_effect=RuntimeError("down")):
+        result = modify_member(request)
+
+    assert result["error"] == _('ldap_error_retry')
+    assert result["accessed_members"] == {}
+
+
+def test_a_failing_member_list_returns_a_retryable_error():
+    session = _session()
+    request = _Request(post={}, session=session)
+    accessor = MagicMock()
+
+    with patch.object(mm, "get_member_by_oid", return_value=accessor), \
+         patch.object(mm, "get_ldap_member_list",
+                      side_effect=RuntimeError("down")):
+        result = modify_member(request)
+
+    assert result["error"] == _('ldap_error_retry')
+    assert result["member"] is accessor
