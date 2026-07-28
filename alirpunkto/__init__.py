@@ -83,7 +83,15 @@ def add_localizer(event):
         return current.translate(_(string, mapping=full_mapping))
     
     request.localizer = localizer
-    # add the localizer and auto_translate to the registry
+    # The translator is a per-request object (issue #244): the registry is
+    # shared by every concurrent request, so publishing auto_translate there
+    # meant the *last* request to enter — the Accept-Language-less docker
+    # healthcheck, most of the time — dictated the language of the _() blocks
+    # rendered by slower requests, while the i18n:translate parts, resolved
+    # per request, stayed in the visitor's language.
+    request.translate = auto_translate
+    # Legacy mirrors, last-request-wins: kept for compatibility, never used
+    # for rendering.
     request.registry.localizer = localizer
     request.registry.translate = auto_translate
 
@@ -120,7 +128,9 @@ def add_renderer_globals(event):
     """add_renderer_globals is used to add the localizer to the renderer globals
     """
     request = event['request'] # get the request from the event
-    event['_'] = request.registry.translate # add the auto_translate function to the renderer globals
+    # Per-request translator (issue #244); the registry fallback only serves
+    # exotic renders that never went through add_localizer.
+    event['_'] = getattr(request, 'translate', None) or request.registry.translate
     event['localizer'] = request.localizer # add the localizer to the renderer globals
 
 
