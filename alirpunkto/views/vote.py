@@ -76,6 +76,23 @@ def vote_view(request):
             'domain_name': domain_name,
             'organization_details': organization_details
         }
+    # Issue #219 (option 2 of the ticket): once every verifier has voted, the
+    # tally runs and the candidature leaves PENDING — from that moment the
+    # vote is closed and no ballot may change. Without this guard a re-vote
+    # re-ran the tally, re-registered the member in LDAP, sent the state
+    # change e-mail again, and could even flip an approved candidature.
+    if candidature.candidature_state != CandidatureStates.PENDING:
+        log.info(
+            f"Vote received for candidature {candidature.oid} after closure "
+            f"(state {candidature.candidature_state}); ignoring."
+        )
+        return {
+            'error': _('voting_period_ended'),
+            'site_name': site_name,
+            'domain_name': domain_name,
+            'organization_details': organization_details
+        }
+
     # Refuse voting once the verification deadline has passed. The deadline is
     # set on the candidature during the verification phase (register.py); if it
     # is missing we do not block (no deadline configured for this candidature).
