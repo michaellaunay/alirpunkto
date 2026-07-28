@@ -1437,6 +1437,7 @@ def send_member_state_change_email(request: Request,
         'domain_name': domain_name,
         'organization_details': organization_details,
         'member': member,
+        'pseudonym': member.pseudonym,
         'MemberStates': MemberStates,
         'user': user
     }
@@ -1559,6 +1560,9 @@ def send_email_to_member(request: Request,
         'domain_name': domain_name,
         'organization_details': organization_details,
         'member': member.data,
+        # The greeting of the e-mail templates (issue #226): the pseudonym
+        # lives on the Member, not in MemberDatas.
+        'pseudonym': member.pseudonym,
     }
     if extra_template_parameters:
         template_vars.update(extra_template_parameters)
