@@ -117,6 +117,30 @@ def get_preferred_language(request: Request, member=None)->str:
         preferred_language = "en"
     return preferred_language
 
+def switch_request_language(request: Request, language) -> bool:
+    """Apply a freshly chosen language to the current request (issue #247).
+
+    Storing the preference in the session only affects the *next* request:
+    the response of the very request that carried the choice — the identity
+    document page and the verifier e-mail templates it embeds — was still
+    rendered with the language negotiated at NewRequest time. Persist the
+    preference, make the explicit _LOCALE_ win for any renegotiation, and
+    rebuild request.localizer so auto_translate and the Chameleon renderer,
+    which resolve it at call time, follow immediately.
+    """
+    if not language or language not in AVAILABLE_LANGUAGES:
+        return False
+    request.session['preferred_language'] = language
+    request._LOCALE_ = language
+    tdirs = request.registry.queryUtility(ITranslationDirectories) or []
+    if tdirs:
+        request.localizer = make_localizer(language, tdirs)
+        # Legacy mirror kept by add_localizer.
+        request.registry.localizer = request.localizer
+    request.__dict__.pop('locale_name', None)
+    return True
+
+
 def get_site_url(request: Request) -> str:
     """Return the public base URL of the platform, without a trailing slash.
 

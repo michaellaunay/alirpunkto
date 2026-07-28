@@ -6,6 +6,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 import datetime
 from alirpunkto.utils import (
+    switch_request_language,
     get_member_by_oid,
     is_valid_password,
     is_valid_email,
@@ -455,9 +456,9 @@ def modify_member(request):
         # must follow immediately (issue #204).
         if 'lang1' in fields_to_update and \
                 getattr(member, 'oid', None) == accessed_member.oid:
-            new_language = getattr(accessed_member.data, 'lang1', None)
-            if new_language:
-                request.session['preferred_language'] = new_language
+            # Also applies to the response of this request (issue #247).
+            switch_request_language(
+                request, getattr(accessed_member.data, 'lang1', None))
         #@TODO send a modification confirmation email
         return {
             "member": member,

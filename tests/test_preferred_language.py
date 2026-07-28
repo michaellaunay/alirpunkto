@@ -111,9 +111,12 @@ def test_negotiator_ignores_an_invalid_session_language():
 
 # ---------------- the session is populated at the three entry points -------
 @pytest.mark.parametrize("module_path, needle", [
-    ('alirpunkto.views.login', "request.session['preferred_language'] = declared_language"),
-    ('alirpunkto.views.register', "request.session['preferred_language'] = request.params['lang1']"),
-    ('alirpunkto.views.modify_member', "request.session['preferred_language'] = new_language"),
+    # Since issue #247 the three entry points go through
+    # switch_request_language, which persists the session AND rebuilds the
+    # request localizer so the current response follows too.
+    ('alirpunkto.views.login', "switch_request_language("),
+    ('alirpunkto.views.register', "switch_request_language(request, request.params['lang1'])"),
+    ('alirpunkto.views.modify_member', "switch_request_language("),
 ])
 def test_entry_points_store_the_language_in_the_session(module_path, needle):
     import importlib

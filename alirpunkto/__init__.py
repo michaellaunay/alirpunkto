@@ -76,7 +76,11 @@ def add_localizer(event):
             full_mapping = SITE_INFORMATION_MAPPING
         else:
             full_mapping = {**SITE_INFORMATION_MAPPING, **mapping}
-        return localizer.translate(_(string, mapping=full_mapping))
+        # Resolve the localizer at call time, not from the closure: a
+        # language switched in the middle of the request (issue #247) must
+        # apply to everything rendered in the response of that very request.
+        current = getattr(request, 'localizer', None) or localizer
+        return current.translate(_(string, mapping=full_mapping))
     
     request.localizer = localizer
     # add the localizer and auto_translate to the registry

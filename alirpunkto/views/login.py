@@ -22,6 +22,7 @@ from alirpunkto.constants_and_globals import (
 )
 from alirpunkto.models.users import User
 from alirpunkto.utils import (
+    switch_request_language,
     is_admin,
     get_admin_user,
     get_oid_from_pseudonym,
@@ -69,10 +70,9 @@ def login_view(request):
             headers = remember(request, username)
             request.session['logged_in'] = True
             # Drive the interface with the member's declared language (issue #204)
-            declared_language = getattr(
-                getattr(member, 'data', None), 'lang1', None)
-            if declared_language:
-                request.session['preferred_language'] = declared_language
+            switch_request_language(
+                request,
+                getattr(getattr(member, 'data', None), 'lang1', None))
             request.session['user'] = user.to_json()
             request.session['created_at'] = datetime.now().isoformat()
                         # Request Keycloak token

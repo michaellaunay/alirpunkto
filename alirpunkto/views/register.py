@@ -45,6 +45,7 @@ INFORM_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/inform_verifiers.pt'
 REMIND_VERIFIER_TEMPLATE = 'locale/{lang}/LC_MESSAGES/remind_verifiers.pt'
 VERIFIER_TEMPLATE_RESOLVER = AssetResolver('alirpunkto')
 from ..utils import (
+    switch_request_language,
     get_site_url,
     _translate_for_language,
     secure_password_fields,
@@ -539,10 +540,10 @@ def handle_confirmed_human_state(request, candidature):
             appstruct['nationality'] = request.params['nationality']
         if 'lang1' in request.params:
             appstruct['lang1'] = request.params['lang1']
-            # Use the chosen language immediately for the rest of the
-            # registration (interface and e-mails, issue #204).
-            if request.params['lang1'] in AVAILABLE_LANGUAGES:
-                request.session['preferred_language'] = request.params['lang1']
+            # Use the chosen language immediately — including for the
+            # response of this very request: the identity-document page and
+            # the verifier e-mail templates (issues #204, #247).
+            switch_request_language(request, request.params['lang1'])
         if 'lang2' in request.params:
             appstruct['lang2'] = request.params['lang2']
         if 'lang3' in request.params:
