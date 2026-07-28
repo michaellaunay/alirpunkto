@@ -1126,7 +1126,7 @@ msgstr ""
 "ndonjë pyetje, ju lutemi mos hezitoni të kontaktoni mbështetje tonë menjëherë në ${admin_email}. Faleminderit që jeni pjesë e komunitetit ${domain_name}!"
 
 msgid "vote_msg"
-msgstr "Mirë se erdhët në Alirpunkto, ${site_name}."
+msgstr "Mirë se erdhët në Alirpunkto, ${domain_name}."
 
 msgid "welcome_voter"
 msgstr "Jeni gati të votoni nëse do ta pranoni apo do ta refuzoni aplikimin e ${name}. Qasja e tij/saj në portal varet nga vendimi juaj. Qoftë përmes dokumenteve të marra me email apo gjatë një videokonference, shpresojmë që keni mundur të verifikoni identitetin e aplikantit. Ju lutemi kryeni këtë verifikim me kujdes, sepse nga ai varet integriteti i faqes sonë."

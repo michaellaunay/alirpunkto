@@ -1126,7 +1126,7 @@ msgstr ""
 "noen spørsmål, vennligst ikke nøl med å kontakte vår support umiddelbart på ${admin_email}. Takk for at du er en del av ${domain_name}-samfunnet!"
 
 msgid "vote_msg"
-msgstr "Velkommen til Alirpunkto, ${site_name}."
+msgstr "Velkommen til Alirpunkto, ${domain_name}."
 
 msgid "welcome_voter"
 msgstr "Du skal nå stemme over om søknaden fra ${name} skal godkjennes eller avvises. Tilgangen hans/hennes til portalen avhenger av ditt valg. Enten gjennom dokumenter mottatt på e-post eller under en videokonferanse håper vi at du har kunnet bekrefte søkerens identitet. Vi ber deg fullføre denne verifiseringen nøye, siden integriteten til nettstedet vårt avhenger av den."

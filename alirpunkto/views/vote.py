@@ -43,8 +43,12 @@ def vote_view(request):
         request.session['redirect_url'] = request.current_route_url()
         return HTTPFound(location=request.route_url('login'))
     user = User.from_json(user)
-    site_name = SITE_NAME
-    domain_name = DOMAIN_NAME
+    # The deployment settings are the source of truth for the site
+    # variables (issues #242, #246); the environment constants are only
+    # fallbacks — vote_msg and welcome_voter must show the same value.
+    settings = getattr(request.registry, 'settings', None) or {}
+    site_name = settings.get('site_name') or SITE_NAME
+    domain_name = settings.get('domain_name') or DOMAIN_NAME
     organization_details = ORGANIZATION_DETAILS
     username = user.name
     oid = request.params.get("oid") or request.session.get("oid", "")

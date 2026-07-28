@@ -1111,7 +1111,7 @@ msgstr ""
 "bilo kakvih pitanja, slobodno kontaktirajte našu podršku odmah na ${admin_email}. Hvala što ste deo zajednice ${domain_name}!"
 
 msgid "vote_msg"
-msgstr "Dobrodošli na Alirpunkto, ${site_name}."
+msgstr "Dobrodošli na Alirpunkto, ${domain_name}."
 
 msgid "welcome_voter"
 msgstr "Upravo ćete glasati da li da prihvatite ili odbijete prijavu korisnika ${name}. Njegov/njen pristup portalu zavisi od vaše odluke. Bilo putem dokumenata primljenih e-poštom ili tokom video-konferencije, nadamo se da ste mogli da proverite identitet kandidata. Molimo vas da ovu proveru sprovedete pažljivo, jer integritet našeg sajta zavisi od toga."

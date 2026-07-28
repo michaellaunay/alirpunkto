@@ -42,11 +42,12 @@ from alirpunkto.views.vote import vote_view
 class _Request:
     """Minimal stand-in for the pieces of the request vote_view touches."""
 
-    def __init__(self, session, params, post, tm):
+    def __init__(self, session, params, post, tm, registry_settings=None):
         self.session = session
         self.params = params
         self.POST = post
         self.tm = tm
+        self.registry = SimpleNamespace(settings=registry_settings or {})
 
     def route_url(self, name, **kw):
         return f"http://example.com/{name}"
@@ -55,7 +56,8 @@ class _Request:
         return "http://example.com/vote"
 
 
-def _request(oid, *, submit=False, vote_value=None, tm=None, session_extra=None):
+def _request(oid, *, submit=False, vote_value=None, tm=None, session_extra=None,
+             registry_settings=None):
     session = {"logged_in": True, "user": "{}", "oid": oid}
     if session_extra:
         session.update(session_extra)
@@ -65,7 +67,8 @@ def _request(oid, *, submit=False, vote_value=None, tm=None, session_extra=None)
         params["submit"] = "1"
         params["vote"] = vote_value
         post["vote"] = vote_value
-    return _Request(session, params, post, tm if tm is not None else MagicMock())
+    return _Request(session, params, post, tm if tm is not None else MagicMock(),
+                    registry_settings=registry_settings)
 
 
 _UNSET = object()

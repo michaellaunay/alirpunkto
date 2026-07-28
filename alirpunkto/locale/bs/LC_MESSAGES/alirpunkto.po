@@ -1124,7 +1124,7 @@ msgstr ""
 "bilo kakvih pitanja, molimo vas da odmah kontaktirate našu podršku na ${admin_email}. Hvala što ste dio zajednice ${domain_name}!"
 
 msgid "vote_msg"
-msgstr "Dobrodošli na Alirpunkto, ${site_name}."
+msgstr "Dobrodošli na Alirpunkto, ${domain_name}."
 
 msgid "welcome_voter"
 msgstr "Upravo ćete glasati o tome hoćete li prihvatiti ili odbiti prijavu korisnika ${name}. Njegov/njen pristup portalu zavisi od vaše odluke. Bez obzira na to da li ste dokumente primili e-poštom ili tokom videokonferencije, nadamo se da ste mogli provjeriti identitet kandidata. Molimo vas da ovu provjeru obavite pažljivo, jer integritet naše stranice zavisi od toga."

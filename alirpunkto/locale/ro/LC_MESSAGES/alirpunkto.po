@@ -1662,7 +1662,7 @@ msgstr ""
 #~ "ulterior acest pseudonim. Alegeți-l cu grijă!"
 
 msgid "vote_msg"
-msgstr "Bine ați venit pe Alirpunkto, ${site_name}."
+msgstr "Bine ați venit pe Alirpunkto, ${domain_name}."
 
 msgid "welcome_voter"
 msgstr "Sunteți pe cale să votați dacă acceptați sau respingeți cererea lui ${name}. Accesul său la portal depinde de decizia dumneavoastră. Indiferent dacă ați primit documentele prin e-mail sau în timpul unei videoconferințe, sperăm că ați putut verifica identitatea solicitantului. Vă rugăm să efectuați această verificare cu atenție, deoarece integritatea site-ului nostru depinde de ea."
