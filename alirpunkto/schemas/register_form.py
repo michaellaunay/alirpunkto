@@ -30,6 +30,22 @@ optional_locales_as_choices = [
     ('', _('language_none_option')),
 ] + locales_as_choices
 
+@colander.deferred
+def deferred_preferred_language_default(node, kw):
+    """Preselect the language negotiated for the request (issue #171).
+
+    The selection list used to preselect its first entry — whatever locale
+    the directory scan yielded first, "Esperanto" on the reporting
+    deployment. The best guess at this stage of the registration is the
+    browser language: the locale negotiator resolves Accept-Language when no
+    explicit choice was made yet. Falls back to no preselection when the
+    negotiated locale is not among the choices.
+    """
+    request = kw.get('request') if kw else None
+    locale = getattr(request, 'locale_name', None) if request else None
+    return locale if locale in EUROPEAN_LOCALES else colander.null
+
+
 def get_majority_date():
     """Return the date exactly 18 years ago (the latest birthdate of a major).
 
@@ -216,6 +232,7 @@ class RegisterForm(schema.CSRFSchema):
         description = _('first_interaction_language_description',
             mapping=SITE_INFORMATION_MAPPING),
         widget = SelectWidget(values=locales_as_choices),
+        default = deferred_preferred_language_default,
         messages = {'required': _('first_interaction_language_required')},
     )
     lang2 = colander.SchemaNode(
