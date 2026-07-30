@@ -217,7 +217,7 @@ def modify_member(request):
                 "accessed_members": members,
                 "error":_('no_permission'),
             }
-        schema = RegisterForm().bind(request=request)
+        schema = RegisterForm().bind(request=request, password_optional=True)
         # The permissions don't have the same structure as the schema,
         # so we need to apply permissions.data and permissions to the schema.
         schema.apply_permissions(permissions.data)

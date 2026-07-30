@@ -1185,3 +1185,6 @@ msgstr "Our democratic control platform"
 
 msgid "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."
 msgstr "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."
+
+msgid "An asterisk (*) indicates a mandatory field."
+msgstr "An asterisk (*) indicates a mandatory field."

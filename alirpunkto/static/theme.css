@@ -116,6 +116,13 @@ form.deform label {
   color: #1f3659;
   margin-bottom: 0.35rem;
 }
+/* Mandatory fields carry an asterisk (issue #107); the deform template puts
+   the "required" class on the label whenever colander requires the field. */
+.member-form label.required::after,
+form.deform label.required::after {
+  content: " *";
+  color: #b30000;
+}
 .member-form .field,
 .member-form .form-group,
 .member-form .deformRequired,

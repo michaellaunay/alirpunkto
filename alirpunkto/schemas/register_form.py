@@ -31,6 +31,20 @@ optional_locales_as_choices = [
 ] + locales_as_choices
 
 @colander.deferred
+def deferred_password_missing(node, kw):
+    """The password fields are mandatory except on profile modification.
+
+    The schema also serves the profile-modification form, where an empty
+    password means "unchanged": the fields are therefore required by default
+    (registration, password reset) and optional only when the caller binds
+    with password_optional=True — which also drives the mandatory-field
+    asterisk, since deform derives it from the colander requirement
+    (issue #107).
+    """
+    return '' if (kw or {}).get('password_optional') else colander.required
+
+
+@colander.deferred
 def deferred_preferred_language_default(node, kw):
     """Preselect the language negotiated for the request (issue #171).
 
@@ -211,7 +225,7 @@ class RegisterForm(schema.CSRFSchema):
         widget = PasswordWidget(),
         validator = colander.Function(_validate_password),
         messages = {'required': _('password_required')},
-        missing = ""
+        missing = deferred_password_missing
     )
     # @TODO replace by the use of CheckedPasswordWidget
     password_confirm = colander.SchemaNode(
@@ -221,7 +235,7 @@ class RegisterForm(schema.CSRFSchema):
             mapping=SITE_INFORMATION_MAPPING),
         widget = PasswordWidget(),
         messages = {'required': _('confirm_password_required')},
-        missing = ""
+        missing = deferred_password_missing
     )
     email = colander.SchemaNode(
         colander.String(),

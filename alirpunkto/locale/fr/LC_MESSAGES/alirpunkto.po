@@ -1173,3 +1173,6 @@ msgstr "Notre plateforme de contrôle démocratique"
 
 msgid "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."
 msgstr "Là où toi et tous les Coopérateurs contrôlez démocratiquement, a priori, les décisions opérationnelles les plus importantes du Conseil d'administration et du Conseil de Médiation et d'Arbitrage."
+
+msgid "An asterisk (*) indicates a mandatory field."
+msgstr "Un astérisque (*) signale un champ obligatoire."
