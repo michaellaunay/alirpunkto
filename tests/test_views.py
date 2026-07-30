@@ -35,12 +35,14 @@ def test_home_view_for_anonymous_user(dummy_request):
 
 def test_home_view_for_logged_in_user(dummy_request):
     dummy_request.session["user"] = json.dumps({"name": "Alice"})
-    dummy_request.registry.settings["applications"] = {"app": {"name": "App"}}
+    dummy_request.registry.settings["applications"] = {
+        "app": {"name": "App", "url": "https://app.example.com/"}}
 
     result = home_view(dummy_request)
 
     assert result["logged_in"] is True
-    assert result["applications"] == {"app": {"name": "App"}}
+    assert result["applications"] == {
+        "app": {"name": "App", "url": "https://app.example.com/"}}
     assert result["user"] == {"name": "Alice"}
 
 

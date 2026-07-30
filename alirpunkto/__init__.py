@@ -310,6 +310,12 @@ def main(global_config, **settings):
                     raise Exception(f"Application {app_name} has no logo")
                 if not 'url' in app:
                     raise Exception(f"Application {app_name} has no url")
+                # audience (issue #35): all (default), ordinary or cooperator.
+                if app.setdefault('audience', 'all') not in (
+                        'all', 'ordinary', 'cooperator'):
+                    raise Exception(
+                        f"Application {app_name} has an invalid audience "
+                        f"{app['audience']!r} (all, ordinary or cooperator)")
             
             # I didn't find a way to pass the applications dictionary to the views...
             # So I store it in the registry

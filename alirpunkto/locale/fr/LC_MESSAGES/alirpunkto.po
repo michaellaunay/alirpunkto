@@ -1131,3 +1131,45 @@ msgstr "Nouvel e-mail (facultatif)"
 
 msgid "provider_new_password_label"
 msgstr "Nouveau mot de passe (facultatif)"
+
+msgid "Our collaborative workspace"
+msgstr "Notre espace de travail collaboratif"
+
+msgid "Where you and all members of the Community can interact, share information and work on shared documents in a completely trusted and confidential environment."
+msgstr "Là où toi et tous les membres de la Communauté pouvez interagir, partager des informations et travailler sur des documents partagés dans un environnement de confiance totalement confidentiel."
+
+msgid "Our on-line trainings"
+msgstr "Nos formations en ligne"
+
+msgid "Where you can follow trainings provided by members of the Community, or start developing your own, in collaboration with other members of the Community if you wish."
+msgstr "Là où tu peux suivre les formations proposées par des membres de la Communauté, ou commencer à développer les tiennes, en collaboration avec d'autres membres de la Communauté si tu le souhaites."
+
+msgid "Once on the training platform, click on the \"CosmoPolitical login\" button to enter with your account."
+msgstr "Une fois sur la plateforme de formation, clique sur le bouton « CosmoPolitical login » pour entrer avec ton compte."
+
+msgid "Our presentation portal"
+msgstr "Notre portail de présentation"
+
+msgid "Where you can make donations or purchase training materials, and track your account."
+msgstr "Là où tu peux faire des dons ou acheter des supports de formation, et suivre ton compte."
+
+msgid "Where you can purchase your share(s) of the Cooperative, pay your yearly contribution, make donations, purchase training material and democratically define the quantitative parameters affecting internal processes."
+msgstr "Là où tu peux acheter ta ou tes parts de la Coopérative, payer ta cotisation annuelle, faire des dons, acheter des supports de formation et définir démocratiquement les paramètres quantitatifs des processus internes."
+
+msgid "Our mailing lists"
+msgstr "Nos listes de diffusion"
+
+msgid "Where you can freely subscribe or unsubscribe to any of the mailing lists of the Cooperative open to the Community."
+msgstr "Là où tu peux librement t'abonner ou te désabonner à chacune des listes de diffusion de la Coopérative ouvertes à la Communauté."
+
+msgid "Our deliberative democracy platform"
+msgstr "Notre plateforme de démocratie délibérative"
+
+msgid "Where you and all Cooperators democratically define the Public Policies we want to implement, once elected to positions of political responsibility."
+msgstr "Là où toi et tous les Coopérateurs définissez démocratiquement les Politiques Publiques que nous voulons mettre en œuvre, une fois élus à des postes de responsabilité politique."
+
+msgid "Our democratic control platform"
+msgstr "Notre plateforme de contrôle démocratique"
+
+msgid "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."
+msgstr "Là où toi et tous les Coopérateurs contrôlez démocratiquement, a priori, les décisions opérationnelles les plus importantes du Conseil d'administration et du Conseil de Médiation et d'Arbitrage."

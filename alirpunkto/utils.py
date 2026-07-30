@@ -89,6 +89,7 @@ import base64
 from .models.users import User
 import html
 import json
+from collections.abc import Mapping
 from .secret_manager import get_secret, encrypt_secret_for_logs, make_ldap_password
 import requests
 import re
@@ -139,6 +140,44 @@ def switch_request_language(request: Request, language) -> bool:
         request.registry.localizer = request.localizer
     request.__dict__.pop('locale_name', None)
     return True
+
+
+def filter_applications_for_member(request: Request, applications) -> dict:
+    """Applications listed on the home page for the logged-in member.
+
+    Each application may declare an ``audience`` — ``all`` (default),
+    ``ordinary`` or ``cooperator`` — so the presentation portal can carry a
+    different description per membership type and the democratic platforms
+    only show to Cooperators (issue #35). An application without a
+    configured URL is hidden — e.g. a platform whose SSO connection is not
+    implemented yet (issue #142). Administrators get the Cooperator view;
+    unknown or provider members get the Ordinary one.
+    """
+    if not isinstance(applications, Mapping):
+        # Test harnesses (and defensive callers) may hand a bare list.
+        return applications
+    member_type = None
+    user = request.session.get('user')
+    if isinstance(user, str):
+        try:
+            user = json.loads(user)
+        except (TypeError, ValueError):
+            user = None
+    oid = user.get('oid') if isinstance(user, dict) else None
+    if oid:
+        try:
+            member = get_member_by_oid(oid, request)
+            member_type = getattr(member, 'type', None)
+        except Exception as e:
+            log.warning(f"filter_applications: cannot resolve member {oid}: {e}")
+    is_cooperator = member_type in (
+        MemberTypes.COOPERATOR, MemberTypes.ADMINISTRATOR)
+    wanted = {'all', 'cooperator' if is_cooperator else 'ordinary'}
+    return {
+        app_id: app for app_id, app in applications.items()
+        if str(app.get('url') or '').strip()
+        and app.get('audience', 'all') in wanted
+    }
 
 
 def get_site_url(request: Request) -> str:

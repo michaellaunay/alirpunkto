@@ -64,6 +64,10 @@ def test_application_urls_are_absolute_http(ini_name):
     apps = _parse(ini_name)
     for name, app in apps.items():
         url = app["url"]
+        if not url:
+            # An empty URL hides the application until its SSO connection is
+            # implemented (issues #142, #35) — legitimate.
+            continue
         assert url.startswith(("http://", "https://")), (
             f"{ini_name}: application {name} has a non-absolute url: {url!r}"
         )

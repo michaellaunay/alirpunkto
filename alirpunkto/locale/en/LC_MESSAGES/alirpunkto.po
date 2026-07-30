@@ -1143,3 +1143,45 @@ msgstr "New email (optional)"
 
 msgid "provider_new_password_label"
 msgstr "New password (optional)"
+
+msgid "Our collaborative workspace"
+msgstr "Our collaborative workspace"
+
+msgid "Where you and all members of the Community can interact, share information and work on shared documents in a completely trusted and confidential environment."
+msgstr "Where you and all members of the Community can interact, share information and work on shared documents in a completely trusted and confidential environment."
+
+msgid "Our on-line trainings"
+msgstr "Our on-line trainings"
+
+msgid "Where you can follow trainings provided by members of the Community, or start developing your own, in collaboration with other members of the Community if you wish."
+msgstr "Where you can follow trainings provided by members of the Community, or start developing your own, in collaboration with other members of the Community if you wish."
+
+msgid "Once on the training platform, click on the \"CosmoPolitical login\" button to enter with your account."
+msgstr "Once on the training platform, click on the \"CosmoPolitical login\" button to enter with your account."
+
+msgid "Our presentation portal"
+msgstr "Our presentation portal"
+
+msgid "Where you can make donations or purchase training materials, and track your account."
+msgstr "Where you can make donations or purchase training materials, and track your account."
+
+msgid "Where you can purchase your share(s) of the Cooperative, pay your yearly contribution, make donations, purchase training material and democratically define the quantitative parameters affecting internal processes."
+msgstr "Where you can purchase your share(s) of the Cooperative, pay your yearly contribution, make donations, purchase training material and democratically define the quantitative parameters affecting internal processes."
+
+msgid "Our mailing lists"
+msgstr "Our mailing lists"
+
+msgid "Where you can freely subscribe or unsubscribe to any of the mailing lists of the Cooperative open to the Community."
+msgstr "Where you can freely subscribe or unsubscribe to any of the mailing lists of the Cooperative open to the Community."
+
+msgid "Our deliberative democracy platform"
+msgstr "Our deliberative democracy platform"
+
+msgid "Where you and all Cooperators democratically define the Public Policies we want to implement, once elected to positions of political responsibility."
+msgstr "Where you and all Cooperators democratically define the Public Policies we want to implement, once elected to positions of political responsibility."
+
+msgid "Our democratic control platform"
+msgstr "Our democratic control platform"
+
+msgid "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."
+msgstr "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."

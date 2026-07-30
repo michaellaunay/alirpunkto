@@ -14,7 +14,7 @@ from alirpunkto.constants_and_globals import (
     KEYCLOAK_CLIENT_SECRET,
 )
 from json import loads
-from alirpunkto.utils import refresh_keycloak_token, logout, store_sso_tokens
+from alirpunkto.utils import filter_applications_for_member, refresh_keycloak_token, logout, store_sso_tokens
 from datetime import datetime, timedelta
 import urllib.parse
 from alirpunkto.secret_manager import get_secret
@@ -34,7 +34,8 @@ def home_view(request):
     applications = []
     if is_authenticated(request):
         logged_in = request.session['logged_in'] = True
-        applications = request.registry.settings["applications"]
+        applications = filter_applications_for_member(
+            request, request.registry.settings["applications"])
     else:
         logged_in = request.session['logged_in'] = False
     site_name = request.registry.settings.get('site_name', 'AlirPunkto')
