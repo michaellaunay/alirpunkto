@@ -1191,3 +1191,48 @@ msgstr "Ton pseudonyme :"
 
 msgid "Only Ordinary Members can upgrade to Cooperator."
 msgstr "Seuls les membres Ordinaires peuvent devenir Coopérateur·rice."
+
+msgid "Deactivate my account"
+msgstr "Désactiver mon compte"
+
+msgid "You are about to ask the deactivation of your account. Please read the implications below before confirming."
+msgstr "Tu es sur le point de demander la désactivation de ton compte. Lis les implications ci-dessous avant de confirmer."
+
+msgid "You will not be able to log in to this platform nor to the connected applications any more."
+msgstr "Tu ne pourras plus te connecter à cette plateforme ni aux applications qui y sont reliées."
+
+msgid "Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained."
+msgstr "Tes données personnelles seront conservées pendant la période de Quarantaine prévue par les règles de la Coopérative, puis supprimées ; seuls ton pseudonyme, la date et le motif de ton départ seront conservés."
+
+msgid "Nothing happens until you follow the confirmation link that will be sent to your e-mail address."
+msgstr "Rien ne se passe tant que tu n'as pas suivi le lien de confirmation qui sera envoyé à ton adresse e-mail."
+
+msgid "Ask the deactivation of my account"
+msgstr "Demander la désactivation de mon compte"
+
+msgid "Your deactivation request is pending: follow the link sent to your e-mail address to confirm it, or cancel it below."
+msgstr "Ta demande de désactivation est en attente : suis le lien envoyé à ton adresse e-mail pour la confirmer, ou annule-la ci-dessous."
+
+msgid "Cancel my deactivation request"
+msgstr "Annuler ma demande de désactivation"
+
+msgid "A confirmation link has been sent to your e-mail address. Your account stays active until you follow it."
+msgstr "Un lien de confirmation a été envoyé à ton adresse e-mail. Ton compte reste actif tant que tu ne l'as pas suivi."
+
+msgid "Your deactivation request has been cancelled."
+msgstr "Ta demande de désactivation a été annulée."
+
+msgid "This deactivation link has expired. Your account stays active; you can start again from your profile page."
+msgstr "Ce lien de désactivation a expiré. Ton compte reste actif ; tu peux recommencer depuis ta page de profil."
+
+msgid "Your account is deactivated."
+msgstr "Ton compte est désactivé."
+
+msgid "This account has been deactivated."
+msgstr "Ce compte a été désactivé."
+
+msgid "unsubscribe_email_subject"
+msgstr "Confirme la désactivation de ton compte"
+
+msgid "unsubscribed_email_subject"
+msgstr "Ton compte a été désactivé"

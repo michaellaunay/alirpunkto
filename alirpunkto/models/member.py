@@ -41,6 +41,13 @@ class MemberStates(Enum) :
     # Data modified: The member data set is in modified mode.
     DATA_MODIFIED = "member_datas_modified_value"
     # Exclude: The member data set is in exclude mode.
+    # Resignation flow (specification "Démissionner"): the member asked to
+    # deactivate the account and must confirm through the e-mailed link.
+    PENDING_UNSUBSCRIPTION = "member_pending_unsubscription_value"
+    # The member confirmed: the account is deactivated, personal data kept
+    # during the Quarantine period, then purged (only the pseudonym, the
+    # departure date and the reason are retained).
+    UNSUBSCRIBED = "member_unsubscribed_value"
     EXCLUDED = "member_datas_exclude_value"
     # Deleted: The member data set is in deleted mode.
     DELETED = "member_datas_deleted_value"

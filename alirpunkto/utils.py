@@ -1064,6 +1064,82 @@ def secure_password_fields(parameters: dict) -> dict:
     return parameters
 
 
+def deactivate_member_in_ldap(request, member, erasure_date):
+    """Deactivate the LDAP entry of a resigning member (spec "Démissionner").
+
+    The entry is kept — the pseudonym and the identity data must stay
+    reserved during the Quarantine period for the uniqueness checks of new
+    applications — but isActive turns False so no login is possible, and
+    dateErasureAllData records when the purge is due.
+    """
+    dn = (f"uid={member.oid},{LDAP_OU},{LDAP_BASE_DN}"
+          if LDAP_OU else f"uid={member.oid},{LDAP_BASE_DN}")
+    changes = {
+        'isActive': [(MODIFY_REPLACE, ["False"])],
+        'dateErasureAllData': [(MODIFY_REPLACE, [
+            erasure_date.strftime(LDAP_TIME_FORMAT)])],
+    }
+    with get_ldap_connection(ldap_user=LDAP_USER,
+            ldap_password=get_secret(LDAP_PASSWORD)) as conn:
+        try:
+            if not conn.modify(dn, changes):
+                log.error(f"deactivate_member_in_ldap: modify failed for "
+                          f"{dn}: {conn.result}")
+                return {'status': 'error',
+                        'message': _('unsubscription_failed')}
+        except Exception as e:
+            log.error(f"deactivate_member_in_ldap: {e}")
+            return {'status': 'error', 'message': _('unsubscription_failed')}
+    log.info(f"Member {member.oid} deactivated in LDAP; erasure due "
+             f"{erasure_date.isoformat()}")
+    return {'status': 'success'}
+
+
+def purge_unsubscribed_members(request, now=None):
+    """Purge unsubscribed members whose Quarantine period has expired.
+
+    Per the specification, everything is deleted except the pseudonym, the
+    departure date and the reason: the LDAP entry is removed, the ZODB
+    member keeps only those three facts and moves to DELETED. Meant to be
+    called periodically (cron / console script); returns the purged oids.
+    """
+    now = now or datetime.now()
+    members = get_members(request)
+    purged = []
+    for oid, member in list(members.items()):
+        if getattr(member, 'member_state', None) != MemberStates.UNSUBSCRIBED:
+            continue
+        due = getattr(getattr(member, 'data', None),
+                      'date_erasure_all_data', None)
+        if due is None or _as_datetime(due) > now:
+            continue
+        dn = (f"uid={oid},{LDAP_OU},{LDAP_BASE_DN}"
+              if LDAP_OU else f"uid={oid},{LDAP_BASE_DN}")
+        try:
+            with get_ldap_connection(ldap_user=LDAP_USER,
+                    ldap_password=get_secret(LDAP_PASSWORD)) as conn:
+                conn.delete(dn)
+        except Exception as e:
+            log.error(f"purge_unsubscribed_members: LDAP delete failed for "
+                      f"{oid}: {e}")
+            continue
+        pseudonym = member.pseudonym
+        member.data = MemberDatas(password='')
+        member.member_state = MemberStates.DELETED
+        member.departure_reason = getattr(
+            member, 'departure_reason', 'resignation')
+        log.info(f"purge_unsubscribed_members: {oid} ({pseudonym}) purged")
+        purged.append(oid)
+    return purged
+
+
+def _as_datetime(value):
+    """Accept date or datetime for the erasure due date."""
+    if isinstance(value, datetime):
+        return value
+    return datetime(value.year, value.month, value.day)
+
+
 def upgrade_member_in_ldap(request, candidature, member_oid):
     """Turn an existing Ordinary Member into a Cooperator in LDAP (issue #7).
 

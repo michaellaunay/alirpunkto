@@ -48,6 +48,8 @@ def test_member_state_names_are_complete():
         "REGISTRED",
         "DATA_MODIFICATION_REQUESTED",
         "DATA_MODIFIED",
+        "PENDING_UNSUBSCRIPTION",
+        "UNSUBSCRIBED",
         "EXCLUDED",
         "DELETED",
     }

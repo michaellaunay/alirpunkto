@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Confirme la désactivation de ton compte</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Confirme la désactivation de ton compte</h1>
+
+    <p tal:omit-tag="textual">Bonjour <span tal:define="recipient_name pseudonym | member/pseudonym | nothing " tal:replace="recipient_name">User's Name</span>,</p>
+
+    <p tal:omit-tag="textual">Nous avons reçu sur la plateforme <span tal:replace="site_name">Site Name</span> de <span tal:replace="domain_name">Domain Name</span> une demande de désactivation de ton compte. Rien ne se passera tant que tu ne l'auras pas confirmée : pour continuer, suis ce lien <a href="${page_with_oid}" tal:attributes="href page_with_oid">Confirmer la désactivation</a>.</p>
+
+    <p tal:omit-tag="textual">Après confirmation, tu ne pourras plus te connecter. Tes données personnelles seront conservées pendant la période de Quarantaine prévue par les règles de la Coopérative, puis supprimées ; seuls ton pseudonyme, la date et le motif de ton départ seront conservés.</p>
+
+    <p tal:omit-tag="textual">Si tu n'es pas à l'origine de cette demande, ignore simplement ce message : la demande expirera et ton compte restera actif. Tu peux aussi l'annuler depuis ta page de profil.</p>
+
+    <p tal:omit-tag="textual">Cordialement,</p>
+    <p tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Domain Name</span></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organization details</p>
+</body>
+</html>

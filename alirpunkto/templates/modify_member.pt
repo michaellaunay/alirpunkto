@@ -1,6 +1,11 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <h1 i18n:translate="modify_member_title">Consult or modify the member datas ?</h1>
+        <!-- Resignation entry point (spec "Démissionner"): only on one's own profile. -->
+        <div class="container deactivate-account" i18n:domain="alirpunkto"
+             tal:condition="python: member is not None and accessed_member is not None and getattr(member, 'oid', None) == getattr(accessed_member, 'oid', None)">
+            <a tal:attributes="href request.route_url('unsubscribe')" tal:content="_('Deactivate my account')">Deactivate my account</a>
+        </div>
         <div class="container" i18n:domain="alirpunkto" tal:condition="not accessed_member">
             <form method="POST">
                 <div> <!-- CSRF Token Field -->

@@ -90,6 +90,17 @@ def callback_view(request):
                 'domain_name': domain_name,
                 'organization_details': organization_details
             }
+        # A resigned (or otherwise deactivated) member cannot log in
+        # (spec "Démissionner"): the LDAP entry stays during the
+        # Quarantine period but isActive is False.
+        if not member.data.is_active:
+            return {
+                'error': _('This account has been deactivated.'),
+                'site_name': site_name,
+                'domain_name': domain_name,
+                'organization_details': organization_details,
+            }
+
         user = User(
             member.pseudonym,
             member.email,

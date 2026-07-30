@@ -1203,3 +1203,48 @@ msgstr "Your pseudonym:"
 
 msgid "Only Ordinary Members can upgrade to Cooperator."
 msgstr "Only Ordinary Members can upgrade to Cooperator."
+
+msgid "Deactivate my account"
+msgstr "Deactivate my account"
+
+msgid "You are about to ask the deactivation of your account. Please read the implications below before confirming."
+msgstr "You are about to ask the deactivation of your account. Please read the implications below before confirming."
+
+msgid "You will not be able to log in to this platform nor to the connected applications any more."
+msgstr "You will not be able to log in to this platform nor to the connected applications any more."
+
+msgid "Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained."
+msgstr "Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained."
+
+msgid "Nothing happens until you follow the confirmation link that will be sent to your e-mail address."
+msgstr "Nothing happens until you follow the confirmation link that will be sent to your e-mail address."
+
+msgid "Ask the deactivation of my account"
+msgstr "Ask the deactivation of my account"
+
+msgid "Your deactivation request is pending: follow the link sent to your e-mail address to confirm it, or cancel it below."
+msgstr "Your deactivation request is pending: follow the link sent to your e-mail address to confirm it, or cancel it below."
+
+msgid "Cancel my deactivation request"
+msgstr "Cancel my deactivation request"
+
+msgid "A confirmation link has been sent to your e-mail address. Your account stays active until you follow it."
+msgstr "A confirmation link has been sent to your e-mail address. Your account stays active until you follow it."
+
+msgid "Your deactivation request has been cancelled."
+msgstr "Your deactivation request has been cancelled."
+
+msgid "This deactivation link has expired. Your account stays active; you can start again from your profile page."
+msgstr "This deactivation link has expired. Your account stays active; you can start again from your profile page."
+
+msgid "Your account is deactivated."
+msgstr "Your account is deactivated."
+
+msgid "This account has been deactivated."
+msgstr "This account has been deactivated."
+
+msgid "unsubscribe_email_subject"
+msgstr "Confirm the deactivation of your account"
+
+msgid "unsubscribed_email_subject"
+msgstr "Your account has been deactivated"

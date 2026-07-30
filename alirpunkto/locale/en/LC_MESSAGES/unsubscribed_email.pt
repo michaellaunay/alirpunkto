@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Your account has been deactivated</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Your account has been deactivated</h1>
+
+    <p tal:omit-tag="textual">Hello <span tal:define="recipient_name pseudonym | member/pseudonym | nothing " tal:replace="recipient_name">User's Name</span>,</p>
+
+    <p tal:omit-tag="textual">Your account on the <span tal:replace="site_name">Site Name</span> platform of <span tal:replace="domain_name">Domain Name</span> has been deactivated, as you asked.</p>
+
+    <p tal:omit-tag="textual">Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained. Thank you for the time spent with the Community — you will always be welcome back.</p>
+
+    <p tal:omit-tag="textual">Best regards,</p>
+    <p tal:omit-tag="textual">The team of <span tal:replace="domain_name">Domain Name</span></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organization details</p>
+</body>
+</html>
