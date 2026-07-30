@@ -7,7 +7,7 @@ import datetime
 import os
 import colander
 from deform import schema
-from deform.widget import SelectWidget, TextInputWidget, DateInputWidget, FileUploadWidget, PasswordWidget
+from deform.widget import SelectWidget, TextAreaWidget, TextInputWidget, DateInputWidget, FileUploadWidget, PasswordWidget
 from alirpunkto.constants_and_globals import (
     _,
     EUROPEAN_LOCALES,
@@ -118,7 +118,11 @@ class RegisterForm(schema.CSRFSchema):
         title = _('description_label'),
         description = _('description_description',
             mapping=SITE_INFORMATION_MAPPING),
-        widget = TextInputWidget(maxlength=5000),
+        # A single-line input for a 5000-character profile text was
+        # unusable (issue #165): a resizable 10-row textarea, with the
+        # 5000-character limit now enforced server-side as well.
+        widget = TextAreaWidget(rows=10, attributes={'maxlength': '5000'}),
+        validator = colander.Length(max=5000),
         missing = ""
     )
     birthdate = colander.SchemaNode(
