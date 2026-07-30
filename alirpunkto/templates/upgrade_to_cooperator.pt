@@ -1,11 +1,11 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
-        <h1 tal:content="_('Become a Cooperator')">Become a Cooperator</h1>
+        <h1 tal:content="_('become_cooperator_button')">Become a Cooperator</h1>
         <div class="container" i18n:domain="alirpunkto">
             <div class="explanation" tal:condition="member">
-                <p tal:content="_('Provide the identity data below exactly as it appears on your identity document: verifiers of the Cooperative will compare them during the verification vote. Your pseudonym stays unchanged.')">Explanation</p>
+                <p tal:content="_('upgrade_identity_intro')">Explanation</p>
                 <p>
-                    <span tal:content="_('Your pseudonym:')">Your pseudonym:</span>
+                    <span tal:content="_('your_pseudonym_label')">Your pseudonym:</span>
                     <strong tal:content="member/pseudonym">pseudonym</strong>
                 </p>
             </div>

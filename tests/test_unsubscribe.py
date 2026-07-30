@@ -128,7 +128,7 @@ def test_the_link_confirms_the_resignation(config):
     ldap.assert_called_once()
     assert sender.call_args[0][3] == 'unsubscribed_email'
     assert 'user' not in request.session          # session ended
-    assert result['success'] == _('Your account is deactivated.')
+    assert result['success'] == _('account_deactivated_message')
 
 
 def test_a_stale_link_expires_and_restores_the_state(config):
@@ -176,7 +176,7 @@ def test_an_already_unsubscribed_link_is_idempotent(config):
 
     ldap.assert_not_called()
     sender.assert_not_called()
-    assert result['success'] == _('Your account is deactivated.')
+    assert result['success'] == _('account_deactivated_message')
 
 
 # ------------------------------- LDAP layer -------------------------------- #

@@ -99,7 +99,7 @@ def upgrade_to_cooperator(request):
     if member.type != MemberTypes.ORDINARY:
         return _base_context(
             request, member=member,
-            error=_('Only Ordinary Members can upgrade to Cooperator.'))
+            error=_('upgrade_only_ordinary_error'))
 
     candidatures = get_candidatures(request)
     for candidature in candidatures.values():

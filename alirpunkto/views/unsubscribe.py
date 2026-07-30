@@ -156,7 +156,7 @@ def unsubscribe_confirm(request):
 
     if member.member_state == MemberStates.UNSUBSCRIBED:
         return _context(request, unsubscribed=True,
-                        success=_('Your account is deactivated.'))
+                        success=_('account_deactivated_message'))
     if expire_stale_unsubscription(member) or \
             member.member_state != MemberStates.PENDING_UNSUBSCRIPTION:
         return _context(request, error=_(
@@ -184,4 +184,4 @@ def unsubscribe_confirm(request):
     log.info(f"Member {member.oid} UNSUBSCRIBED; erasure due "
              f"{erasure_due.date().isoformat()}")
     return _context(request, unsubscribed=True,
-                    success=_('Your account is deactivated.'))
+                    success=_('account_deactivated_message'))

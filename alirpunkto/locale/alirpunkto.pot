@@ -1142,3 +1142,114 @@ msgstr "New email (optional)"
 
 msgid "provider_new_password_label"
 msgstr "New password (optional)"
+
+msgid "application_workspace_name"
+msgstr ""
+
+msgid "application_workspace_description"
+msgstr ""
+
+msgid "application_trainings_name"
+msgstr ""
+
+msgid "application_trainings_description"
+msgstr ""
+
+msgid "application_trainings_note"
+msgstr ""
+
+msgid "application_mailing_lists_name"
+msgstr ""
+
+msgid "application_mailing_lists_description"
+msgstr ""
+
+msgid "application_portal_name"
+msgstr ""
+
+msgid "application_portal_ordinary_description"
+msgstr ""
+
+msgid "application_portal_cooperator_description"
+msgstr ""
+
+msgid "application_deliberative_name"
+msgstr ""
+
+msgid "application_deliberative_description"
+msgstr ""
+
+msgid "application_democratic_control_name"
+msgstr ""
+
+msgid "application_democratic_control_description"
+msgstr ""
+
+msgid "mandatory_fields_legend"
+msgstr ""
+
+msgid "become_cooperator_button"
+msgstr ""
+
+msgid "become_cooperator_invite"
+msgstr ""
+
+msgid "upgrade_identity_intro"
+msgstr ""
+
+msgid "your_pseudonym_label"
+msgstr ""
+
+msgid "upgrade_only_ordinary_error"
+msgstr ""
+
+msgid "deactivate_account_link"
+msgstr ""
+
+msgid "unsubscribe_intro"
+msgstr ""
+
+msgid "unsubscribe_implication_no_login"
+msgstr ""
+
+msgid "unsubscribe_implication_quarantine"
+msgstr ""
+
+msgid "unsubscribe_implication_confirmation_link"
+msgstr ""
+
+msgid "unsubscribe_request_button"
+msgstr ""
+
+msgid "unsubscribe_pending_message"
+msgstr ""
+
+msgid "unsubscribe_cancel_button"
+msgstr ""
+
+msgid "unsubscribe_link_sent_message"
+msgstr ""
+
+msgid "unsubscribe_cancelled_message"
+msgstr ""
+
+msgid "unsubscribe_link_expired_error"
+msgstr ""
+
+msgid "account_deactivated_message"
+msgstr ""
+
+msgid "account_deactivated_login_error"
+msgstr ""
+
+msgid "identity_already_registered_error"
+msgstr ""
+
+msgid "unsubscribe_email_subject"
+msgstr ""
+
+msgid "unsubscribed_email_subject"
+msgstr ""
+
+msgid "erasure_confirmation_email_subject"
+msgstr ""

@@ -4,7 +4,7 @@
         <!-- Resignation entry point (spec "Démissionner"): only on one's own profile. -->
         <div class="container deactivate-account" i18n:domain="alirpunkto"
              tal:condition="python: member is not None and accessed_member is not None and getattr(member, 'oid', None) == getattr(accessed_member, 'oid', None)">
-            <a tal:attributes="href request.route_url('unsubscribe')" tal:content="_('Deactivate my account')">Deactivate my account</a>
+            <a tal:attributes="href request.route_url('unsubscribe')" tal:content="_('deactivate_account_link')">Deactivate my account</a>
         </div>
         <div class="container" i18n:domain="alirpunkto" tal:condition="not accessed_member">
             <form method="POST">

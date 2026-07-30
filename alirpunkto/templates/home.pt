@@ -38,8 +38,8 @@
                 <!-- Upgrade path for Ordinary Members (issue #7) -->
                 <div class="upgrade-invitation" tal:condition="python:user and user.get('type') == 'ORDINARY'">
                     <p>
-                        <span tal:content="_('Convinced by the Community? Take the next step and co-own the Cooperative.')">Invite</span>
-                        <a class="button" tal:attributes="href request.route_url('upgrade_to_cooperator')" tal:content="_('Become a Cooperator')">Become a Cooperator</a>
+                        <span tal:content="_('become_cooperator_invite')">Invite</span>
+                        <a class="button" tal:attributes="href request.route_url('upgrade_to_cooperator')" tal:content="_('become_cooperator_button')">Become a Cooperator</a>
                     </p>
                 </div>
                 <ul>

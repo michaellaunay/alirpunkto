@@ -32,20 +32,20 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 CATALOG = {
     'workspace': {'url': 'https://w/sso', 'audience': 'all',
-                  'name': 'Our collaborative workspace', 'logo_file': 'x'},
+                  'name': 'application_workspace_name', 'logo_file': 'x'},
     'trainings': {'url': 'https://t/login', 'audience': 'all',
-                  'name': 'Our on-line trainings', 'logo_file': 'x'},
+                  'name': 'application_trainings_name', 'logo_file': 'x'},
     'portal_ordinary': {'url': 'https://p/login', 'audience': 'ordinary',
-                        'name': 'Our presentation portal', 'logo_file': 'x'},
+                        'name': 'application_portal_name', 'logo_file': 'x'},
     'portal_cooperator': {'url': 'https://p/login', 'audience': 'cooperator',
-                          'name': 'Our presentation portal', 'logo_file': 'x'},
+                          'name': 'application_portal_name', 'logo_file': 'x'},
     'mailing_lists': {'url': 'https://l/', 'audience': 'all',
-                      'name': 'Our mailing lists', 'logo_file': 'x'},
+                      'name': 'application_mailing_lists_name', 'logo_file': 'x'},
     'deliberative': {'url': '', 'audience': 'cooperator',
-                     'name': 'Our deliberative democracy platform',
+                     'name': 'application_deliberative_name',
                      'logo_file': 'x'},
     'democratic_control': {'url': 'https://d/', 'audience': 'cooperator',
-                           'name': 'Our democratic control platform',
+                           'name': 'application_democratic_control_name',
                            'logo_file': 'x'},
 }
 
@@ -134,13 +134,16 @@ def localizer_for():
 
 
 def test_the_names_are_translated_in_french(localizer_for):
-    assert localizer_for('fr').translate(_('Our collaborative workspace')) \
+    assert localizer_for('fr').translate(_('application_workspace_name')) \
         == "Notre espace de travail collaboratif"
 
 
 def test_untranslated_languages_fall_back_to_english(localizer_for):
-    assert localizer_for('de').translate(_('Our collaborative workspace')) \
-        == "Our collaborative workspace"
+    # With symbolic msgids, the English fallback lives as an explicit entry
+    # in every catalogue (msgstr = the English text) instead of being the
+    # msgid itself — the observable behaviour is unchanged.
+    assert localizer_for('de').translate(_('application_workspace_name')) \
+        == 'Our collaborative workspace'
 
 
 # ------------------------------ real rendering ----------------------------- #
@@ -169,7 +172,7 @@ def test_the_home_page_renders_the_filtered_catalog():
             'organization_details': 'Org', 'user': {'name': 'Jean', 'oid': 'm-1', 'type': 'ORDINARY'},
             'applications': {
                 'workspace': {'url': 'https://w/apps/sso/x',
-                              'name': 'Our collaborative workspace',
+                              'name': 'application_workspace_name',
                               'logo_file': 'static/alirpunkto.png'},
             },
         }, request=request)

@@ -1417,3 +1417,114 @@ msgstr "New email (optional)"
 #, fuzzy
 msgid "provider_new_password_label"
 msgstr "New password (optional)"
+
+msgid "application_workspace_name"
+msgstr "Our collaborative workspace"
+
+msgid "application_workspace_description"
+msgstr "Where you and all members of the Community can interact, share information and work on shared documents in a completely trusted and confidential environment."
+
+msgid "application_trainings_name"
+msgstr "Our on-line trainings"
+
+msgid "application_trainings_description"
+msgstr "Where you can follow trainings provided by members of the Community, or start developing your own, in collaboration with other members of the Community if you wish."
+
+msgid "application_trainings_note"
+msgstr "Once on the training platform, click on the \"CosmoPolitical login\" button to enter with your account."
+
+msgid "application_mailing_lists_name"
+msgstr "Our mailing lists"
+
+msgid "application_mailing_lists_description"
+msgstr "Where you can freely subscribe or unsubscribe to any of the mailing lists of the Cooperative open to the Community."
+
+msgid "application_portal_name"
+msgstr "Our presentation portal"
+
+msgid "application_portal_ordinary_description"
+msgstr "Where you can make donations or purchase training materials, and track your account."
+
+msgid "application_portal_cooperator_description"
+msgstr "Where you can purchase your share(s) of the Cooperative, pay your yearly contribution, make donations, purchase training material and democratically define the quantitative parameters affecting internal processes."
+
+msgid "application_deliberative_name"
+msgstr "Our deliberative democracy platform"
+
+msgid "application_deliberative_description"
+msgstr "Where you and all Cooperators democratically define the Public Policies we want to implement, once elected to positions of political responsibility."
+
+msgid "application_democratic_control_name"
+msgstr "Our democratic control platform"
+
+msgid "application_democratic_control_description"
+msgstr "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."
+
+msgid "mandatory_fields_legend"
+msgstr "An asterisk (*) indicates a mandatory field."
+
+msgid "become_cooperator_button"
+msgstr "Become a Cooperator"
+
+msgid "become_cooperator_invite"
+msgstr "Convinced by the Community? Take the next step and co-own the Cooperative."
+
+msgid "upgrade_identity_intro"
+msgstr "Provide the identity data below exactly as it appears on your identity document: verifiers of the Cooperative will compare them during the verification vote. Your pseudonym stays unchanged."
+
+msgid "your_pseudonym_label"
+msgstr "Your pseudonym:"
+
+msgid "upgrade_only_ordinary_error"
+msgstr "Only Ordinary Members can upgrade to Cooperator."
+
+msgid "deactivate_account_link"
+msgstr "Deactivate my account"
+
+msgid "unsubscribe_intro"
+msgstr "You are about to ask the deactivation of your account. Please read the implications below before confirming."
+
+msgid "unsubscribe_implication_no_login"
+msgstr "You will not be able to log in to this platform nor to the connected applications any more."
+
+msgid "unsubscribe_implication_quarantine"
+msgstr "Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained."
+
+msgid "unsubscribe_implication_confirmation_link"
+msgstr "Nothing happens until you follow the confirmation link that will be sent to your e-mail address."
+
+msgid "unsubscribe_request_button"
+msgstr "Ask the deactivation of my account"
+
+msgid "unsubscribe_pending_message"
+msgstr "Your deactivation request is pending: follow the link sent to your e-mail address to confirm it, or cancel it below."
+
+msgid "unsubscribe_cancel_button"
+msgstr "Cancel my deactivation request"
+
+msgid "unsubscribe_link_sent_message"
+msgstr "A confirmation link has been sent to your e-mail address. Your account stays active until you follow it."
+
+msgid "unsubscribe_cancelled_message"
+msgstr "Your deactivation request has been cancelled."
+
+msgid "unsubscribe_link_expired_error"
+msgstr "This deactivation link has expired. Your account stays active; you can start again from your profile page."
+
+msgid "account_deactivated_message"
+msgstr "Your account is deactivated."
+
+msgid "account_deactivated_login_error"
+msgstr "This account has been deactivated."
+
+msgid "identity_already_registered_error"
+msgstr "This identity (names and date of birth) is already registered — possibly by a member who resigned or was excluded less than the Quarantine period ago."
+
+msgid "unsubscribe_email_subject"
+msgstr "Confirm the deactivation of your account"
+
+msgid "unsubscribed_email_subject"
+msgstr "Your account has been deactivated"
+
+msgid "erasure_confirmation_email_subject"
+msgstr "Your identity data has been erased"

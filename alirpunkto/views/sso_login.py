@@ -95,7 +95,7 @@ def callback_view(request):
         # Quarantine period but isActive is False.
         if not member.data.is_active:
             return {
-                'error': _('This account has been deactivated.'),
+                'error': _('account_deactivated_login_error'),
                 'site_name': site_name,
                 'domain_name': domain_name,
                 'organization_details': organization_details,

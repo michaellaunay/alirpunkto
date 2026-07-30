@@ -14,6 +14,7 @@ import os
 import re
 
 import deform
+from alirpunkto.constants_and_globals import _
 import pytest
 from pkg_resources import resource_filename
 from pyramid.events import NewRequest
@@ -88,6 +89,5 @@ def test_the_legend_is_present_and_translated(bind):
     request = DummyRequest()
     request._LOCALE_ = 'fr'
     alirpunkto.add_localizer(NewRequest(request))
-    rendered = request.registry.translate(
-        'An asterisk (*) indicates a mandatory field.')
+    rendered = request.registry.translate(_('mandatory_fields_legend'))
     assert rendered == "Un astérisque (*) signale un champ obligatoire."

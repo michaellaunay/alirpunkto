@@ -164,7 +164,7 @@
                                 </div>
                             </tal:ordinary>
                         </div>
-                        <p class="explanation mandatory-legend" tal:content="_('An asterisk (*) indicates a mandatory field.')">An asterisk (*) indicates a mandatory field.</p>
+                        <p class="explanation mandatory-legend" tal:content="_('mandatory_fields_legend')">An asterisk (*) indicates a mandatory field.</p>
                         <span tal:replace="structure form">Form Content</span>
                     </div>
                 </div>

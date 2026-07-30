@@ -86,7 +86,7 @@ def test_cooperators_cannot_upgrade_again(config):
     with patch.object(upgrade_module, 'get_member_by_oid',
                       return_value=_member(MemberTypes.COOPERATOR)):
         result = upgrade_to_cooperator(request)
-    assert result['error'] == _('Only Ordinary Members can upgrade to Cooperator.')
+    assert result['error'] == _('upgrade_only_ordinary_error')
 
 
 def test_the_identity_form_is_shown_to_ordinary_members(config):

@@ -1,28 +1,28 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
-        <h1 tal:content="_('Deactivate my account')">Deactivate my account</h1>
+        <h1 tal:content="_('deactivate_account_link')">Deactivate my account</h1>
         <div class="container" i18n:domain="alirpunkto">
             <div tal:condition="error" class="error-message" tal:content="error">Error</div>
             <div tal:condition="success" class="success-message" tal:content="success">Success</div>
             <tal:member condition="python: member is not None and not pending and not error">
                 <div class="explanation">
-                    <p tal:content="_('You are about to ask the deactivation of your account. Please read the implications below before confirming.')">Intro</p>
+                    <p tal:content="_('unsubscribe_intro')">Intro</p>
                     <ul>
-                        <li tal:content="_('You will not be able to log in to this platform nor to the connected applications any more.')">i1</li>
-                        <li tal:content="_('Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained.')">i2</li>
-                        <li tal:content="_('Nothing happens until you follow the confirmation link that will be sent to your e-mail address.')">i3</li>
+                        <li tal:content="_('unsubscribe_implication_no_login')">i1</li>
+                        <li tal:content="_('unsubscribe_implication_quarantine')">i2</li>
+                        <li tal:content="_('unsubscribe_implication_confirmation_link')">i3</li>
                     </ul>
                 </div>
                 <form method="POST">
                     <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
-                    <input type="submit" name="confirm" tal:attributes="value _('Ask the deactivation of my account')" />
+                    <input type="submit" name="confirm" tal:attributes="value _('unsubscribe_request_button')" />
                 </form>
             </tal:member>
             <tal:pending condition="pending">
-                <p tal:content="_('Your deactivation request is pending: follow the link sent to your e-mail address to confirm it, or cancel it below.')">Pending</p>
+                <p tal:content="_('unsubscribe_pending_message')">Pending</p>
                 <form method="POST" tal:attributes="action request.route_url('unsubscribe_cancel')">
                     <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
-                    <input type="submit" name="cancel" tal:attributes="value _('Cancel my deactivation request')" />
+                    <input type="submit" name="cancel" tal:attributes="value _('unsubscribe_cancel_button')" />
                 </form>
             </tal:pending>
         </div>
