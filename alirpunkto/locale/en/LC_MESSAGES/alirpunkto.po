@@ -1254,3 +1254,27 @@ msgstr "Your identity data has been erased"
 
 msgid "identity_already_registered_error"
 msgstr "This identity (names and date of birth) is already registered — possibly by a member who resigned or was excluded less than the Quarantine period ago."
+
+msgid "avatar_format_description"
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+
+msgid "avatar_format_error"
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+
+msgid "avatar_too_large_error"
+msgstr "Your avatar picture is too large."
+
+msgid "avatar_update_failed_error"
+msgstr "Your avatar could not be updated. Please try again later."
+
+msgid "avatar_updated_message"
+msgstr "Your avatar has been updated."
+
+msgid "avatar_removed_message"
+msgstr "Your avatar has been removed."
+
+msgid "avatar_upload_button"
+msgstr "Upload my avatar"
+
+msgid "avatar_remove_button"
+msgstr "Remove my avatar"

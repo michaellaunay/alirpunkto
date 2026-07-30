@@ -1,6 +1,24 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
         <h1 i18n:translate="modify_member_title">Consult or modify the member datas ?</h1>
+        <!-- Member avatar (issue #150): visible on any consulted profile;
+             upload and removal only on one's own. -->
+        <div class="container member-avatar" i18n:domain="alirpunkto"
+             tal:condition="accessed_member"
+             tal:define="is_self python: member is not None and getattr(member, 'oid', None) == getattr(accessed_member, 'oid', None)">
+            <img tal:attributes="src python: request.route_url('member_avatar') + '?oid=' + str(getattr(accessed_member, 'oid', ''))"
+                 tal:condition="python: getattr(accessed_member, 'oid', None)"
+                 alt="Avatar" class="avatar" width="128" onerror="this.style.display='none'" />
+            <form method="POST" enctype="multipart/form-data"
+                  tal:condition="is_self"
+                  tal:attributes="action request.route_url('avatar_upload')">
+                <input type="hidden" name="csrf_token" tal:attributes="value request.session.get_csrf_token()" />
+                <p class="explanation" tal:content="_('avatar_format_description')">JPEG only</p>
+                <input type="file" name="avatar" accept=".jpg,.jpeg" />
+                <input type="submit" name="upload" tal:attributes="value _('avatar_upload_button')" />
+                <input type="submit" name="remove" tal:attributes="value _('avatar_remove_button')" />
+            </form>
+        </div>
         <!-- Resignation entry point (spec "Démissionner"): only on one's own profile. -->
         <div class="container deactivate-account" i18n:domain="alirpunkto"
              tal:condition="python: member is not None and accessed_member is not None and getattr(member, 'oid', None) == getattr(accessed_member, 'oid', None)">

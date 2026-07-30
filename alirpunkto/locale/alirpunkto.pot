@@ -1253,3 +1253,27 @@ msgstr ""
 
 msgid "erasure_confirmation_email_subject"
 msgstr ""
+
+msgid "avatar_format_description"
+msgstr ""
+
+msgid "avatar_format_error"
+msgstr ""
+
+msgid "avatar_too_large_error"
+msgstr ""
+
+msgid "avatar_update_failed_error"
+msgstr ""
+
+msgid "avatar_updated_message"
+msgstr ""
+
+msgid "avatar_removed_message"
+msgstr ""
+
+msgid "avatar_upload_button"
+msgstr ""
+
+msgid "avatar_remove_button"
+msgstr ""

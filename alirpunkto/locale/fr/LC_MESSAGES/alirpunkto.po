@@ -1242,3 +1242,27 @@ msgstr "Tes données d'identité ont été effacées"
 
 msgid "identity_already_registered_error"
 msgstr "Cette identité (noms et date de naissance) est déjà enregistrée — peut-être par un membre ayant démissionné ou été exclu il y a moins que la période de Quarantaine."
+
+msgid "avatar_format_description"
+msgstr "Ton image d'avatar doit être au format JPEG uniquement (extension .JPG ou .JPEG)."
+
+msgid "avatar_format_error"
+msgstr "Ton image d'avatar doit être au format JPEG uniquement (extension .JPG ou .JPEG)."
+
+msgid "avatar_too_large_error"
+msgstr "Ton image d'avatar est trop volumineuse."
+
+msgid "avatar_update_failed_error"
+msgstr "Ton avatar n'a pas pu être mis à jour. Réessaie plus tard."
+
+msgid "avatar_updated_message"
+msgstr "Ton avatar a été mis à jour."
+
+msgid "avatar_removed_message"
+msgstr "Ton avatar a été retiré."
+
+msgid "avatar_upload_button"
+msgstr "Téléverser mon avatar"
+
+msgid "avatar_remove_button"
+msgstr "Retirer mon avatar"

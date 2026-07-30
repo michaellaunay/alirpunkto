@@ -115,18 +115,10 @@ class RegisterForm(schema.CSRFSchema):
         widget = TextInputWidget(maxlength=125),
         missing = ""
     )
-    """ WIP
-    @TODO define tempstore
-    avatar = colander.SchemaNode(
-        tmpstore=tmpstore, #@TODO create an IOCharSteam in temporary directory
-        colander.String(),  # Use colander.String as the base field type.
-        widget=FileUploadWidget(size=40,  # Define the input field size.
-                                max_file_size=4096*1024,  # Limit the file size.
-                                template='custom_file_upload_template'),  # Use a custom template if needed.
-        missing = colander.drop,  # Use colander.drop to ignore the field if missing.
-        title = _('Avatar')  # The field title for display.
-    )
-    """
+    # The avatar lives outside this deform schema (issue #150):
+    # uploaded as multipart to the avatar_upload view and stored as the
+    # jpegPhoto LDAP attribute — no deform tmpstore needed.
+
     description = colander.SchemaNode(
         colander.String(),
         title = _('description_label'),

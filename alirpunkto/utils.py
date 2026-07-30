@@ -1233,6 +1233,59 @@ def upgrade_member_in_ldap(request, candidature, member_oid):
     return {'status': 'success'}
 
 
+def get_member_avatar(request, member_oid):
+    """Return the jpegPhoto bytes of a member, or None (issue #150)."""
+    with get_ldap_connection(ldap_user=LDAP_USER,
+            ldap_password=get_secret(LDAP_PASSWORD)) as conn:
+        conn.search(LDAP_BASE_DN,
+                    f'(uid={escape_filter_chars(member_oid)})',
+                    attributes=['jpegPhoto'])
+        if not conn.entries:
+            return None
+        entry = conn.entries[0]
+        if 'jpegPhoto' not in entry or not entry.jpegPhoto.value:
+            return None
+        value = entry.jpegPhoto.value
+        return value[0] if isinstance(value, list) else value
+
+
+def set_member_avatar(request, member_oid, jpeg_bytes):
+    """Store the avatar of a member as jpegPhoto (issue #150)."""
+    dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
+          if LDAP_OU else f"uid={member_oid},{LDAP_BASE_DN}")
+    with get_ldap_connection(ldap_user=LDAP_USER,
+            ldap_password=get_secret(LDAP_PASSWORD)) as conn:
+        try:
+            if not conn.modify(dn, {'jpegPhoto': [
+                    (MODIFY_REPLACE, [jpeg_bytes])]}):
+                log.error(f"set_member_avatar: modify failed for {dn}: "
+                          f"{conn.result}")
+                return {'status': 'error',
+                        'message': _('avatar_update_failed_error')}
+        except Exception as e:
+            log.error(f"set_member_avatar: {e}")
+            return {'status': 'error',
+                    'message': _('avatar_update_failed_error')}
+    log.info(f"Avatar updated for {member_oid} "
+             f"({len(jpeg_bytes)} bytes)")
+    return {'status': 'success'}
+
+
+def delete_member_avatar(request, member_oid):
+    """Remove the avatar of a member (issue #150)."""
+    dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
+          if LDAP_OU else f"uid={member_oid},{LDAP_BASE_DN}")
+    with get_ldap_connection(ldap_user=LDAP_USER,
+            ldap_password=get_secret(LDAP_PASSWORD)) as conn:
+        try:
+            conn.modify(dn, {'jpegPhoto': [(MODIFY_REPLACE, [])]})
+        except Exception as e:
+            log.error(f"delete_member_avatar: {e}")
+            return {'status': 'error',
+                    'message': _('avatar_update_failed_error')}
+    return {'status': 'success'}
+
+
 def is_valid_unique_identity(fullname, fullsurname, birthdate):
     """Check that the identity data is not already used (issue #54).
 

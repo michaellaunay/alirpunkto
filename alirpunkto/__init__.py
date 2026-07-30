@@ -336,6 +336,8 @@ def main(global_config, **settings):
         config.add_route('unsubscribe', '/unsubscribe')
         config.add_route('unsubscribe_cancel', '/unsubscribe_cancel')
         config.add_route('unsubscribe_confirm', '/unsubscribe_confirm')
+        config.add_route('member_avatar', '/member_avatar')
+        config.add_route('avatar_upload', '/avatar_upload')
         config.add_route('manage_provider', '/manage_provider')
         config.add_route('elections', '/elections')
         config.add_route('vote', '/vote')

@@ -75,6 +75,8 @@ ORGANIZATION_DETAILS: Final = os.getenv("ORGANIZATION_DETAILS", "AlirPunkto is a
 # Quarantine period, a Quantitative Parameter Affecting Internal Processes
 # defined by §3.4 of the Cooperative's statutes, 180 days by default — and
 # how long the e-mailed confirmation link stays valid.
+#: Maximum size of the member avatar (issue #150) — jpegPhoto in LDAP.
+AVATAR_MAX_BYTES: Final = int(os.getenv("AVATAR_MAX_BYTES", str(4096 * 1024)))
 QUARANTINE_PERIOD_DAYS: Final = int(os.getenv("QUARANTINE_PERIOD_DAYS", "180"))
 UNSUBSCRIBE_LINK_VALIDITY_DAYS: Final = int(
     os.getenv("UNSUBSCRIBE_LINK_VALIDITY_DAYS", "7"))
