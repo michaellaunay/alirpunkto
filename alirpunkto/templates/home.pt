@@ -35,6 +35,13 @@
                 </div>
                 <p i18n:translate="all_applications_msg">All the applications you need to participate in the activities of <tal:var i18n:name="site_name">${site_name}</tal:var><tal:var i18n:name="domain_name">${domain_name}</tal:var> in one place.</p>
                 <p i18n:translate="choose_application_msg">Choose the application you want to join:</p>
+                <!-- Upgrade path for Ordinary Members (issue #7) -->
+                <div class="upgrade-invitation" tal:condition="python:user and user.get('type') == 'ORDINARY'">
+                    <p>
+                        <span tal:content="_('Convinced by the Community? Take the next step and co-own the Cooperative.')">Invite</span>
+                        <a class="button" tal:attributes="href request.route_url('upgrade_to_cooperator')" tal:content="_('Become a Cooperator')">Become a Cooperator</a>
+                    </p>
+                </div>
                 <ul>
 
                     <li tal:repeat="app_id applications">

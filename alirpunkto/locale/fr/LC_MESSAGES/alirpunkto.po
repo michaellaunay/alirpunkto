@@ -1176,3 +1176,18 @@ msgstr "Là où toi et tous les Coopérateurs contrôlez démocratiquement, a pr
 
 msgid "An asterisk (*) indicates a mandatory field."
 msgstr "Un astérisque (*) signale un champ obligatoire."
+
+msgid "Become a Cooperator"
+msgstr "Devenir Coopérateur·rice"
+
+msgid "Convinced by the Community? Take the next step and co-own the Cooperative."
+msgstr "Convaincu·e par la Communauté ? Franchis le pas et deviens copropriétaire de la Coopérative."
+
+msgid "Provide the identity data below exactly as it appears on your identity document: verifiers of the Cooperative will compare them during the verification vote. Your pseudonym stays unchanged."
+msgstr "Renseigne ci-dessous tes données d'identité exactement telles qu'elles figurent sur ta pièce d'identité : des vérificateurs de la Coopérative les compareront lors du vote de vérification. Ton pseudonyme reste inchangé."
+
+msgid "Your pseudonym:"
+msgstr "Ton pseudonyme :"
+
+msgid "Only Ordinary Members can upgrade to Cooperator."
+msgstr "Seuls les membres Ordinaires peuvent devenir Coopérateur·rice."

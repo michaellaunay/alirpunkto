@@ -1,0 +1,18 @@
+<div metal:use-macro="load: layout.pt">
+    <div metal:fill-slot="content">
+        <h1 tal:content="_('Become a Cooperator')">Become a Cooperator</h1>
+        <div class="container" i18n:domain="alirpunkto">
+            <div class="explanation" tal:condition="member">
+                <p tal:content="_('Provide the identity data below exactly as it appears on your identity document: verifiers of the Cooperative will compare them during the verification vote. Your pseudonym stays unchanged.')">Explanation</p>
+                <p>
+                    <span tal:content="_('Your pseudonym:')">Your pseudonym:</span>
+                    <strong tal:content="member/pseudonym">pseudonym</strong>
+                </p>
+            </div>
+            <div tal:condition="error" class="error-message" tal:content="error">Error</div>
+            <div tal:condition="form">
+                <span tal:replace="structure form">Form Content</span>
+            </div>
+        </div>
+    </div>
+</div>

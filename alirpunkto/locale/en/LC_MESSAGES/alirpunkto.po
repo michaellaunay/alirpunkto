@@ -1188,3 +1188,18 @@ msgstr "Where you and all Cooperators democratically control, a priori, the most
 
 msgid "An asterisk (*) indicates a mandatory field."
 msgstr "An asterisk (*) indicates a mandatory field."
+
+msgid "Become a Cooperator"
+msgstr "Become a Cooperator"
+
+msgid "Convinced by the Community? Take the next step and co-own the Cooperative."
+msgstr "Convinced by the Community? Take the next step and co-own the Cooperative."
+
+msgid "Provide the identity data below exactly as it appears on your identity document: verifiers of the Cooperative will compare them during the verification vote. Your pseudonym stays unchanged."
+msgstr "Provide the identity data below exactly as it appears on your identity document: verifiers of the Cooperative will compare them during the verification vote. Your pseudonym stays unchanged."
+
+msgid "Your pseudonym:"
+msgstr "Your pseudonym:"
+
+msgid "Only Ordinary Members can upgrade to Cooperator."
+msgstr "Only Ordinary Members can upgrade to Cooperator."

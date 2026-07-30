@@ -1064,6 +1064,55 @@ def secure_password_fields(parameters: dict) -> dict:
     return parameters
 
 
+def upgrade_member_in_ldap(request, candidature, member_oid):
+    """Turn an existing Ordinary Member into a Cooperator in LDAP (issue #7).
+
+    The entry keeps its uid, cn (pseudonym), mail and userPassword; only the
+    membership type, the identity attributes gathered by the upgrade
+    candidature and the group memberships change. On success the ZODB member
+    is refreshed from LDAP so both stores agree.
+    """
+    dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
+          if LDAP_OU else f"uid={member_oid},{LDAP_BASE_DN}")
+    group_dn = (f"cn=cooperatorsGroup,{f'{LDAP_OU},' if LDAP_OU else ''}"
+                f"{LDAP_BASE_DN}")
+    try:
+        changes = {
+            'employeeType': [(MODIFY_REPLACE, [MemberTypes.COOPERATOR.name])],
+            'sn': [(MODIFY_REPLACE, [candidature.data.fullsurname])],
+            'gn': [(MODIFY_REPLACE, [candidature.data.fullname])],
+            'nationality': [(MODIFY_REPLACE, [candidature.data.nationality])],
+            'birthdate': [(MODIFY_REPLACE, [
+                candidature.data.birthdate.strftime(LDAP_TIME_FORMAT)])],
+            'uniqueMemberOf': [(MODIFY_ADD, [group_dn])],
+        }
+    except Exception as e:
+        log.error(f"upgrade_member_in_ldap: cannot prepare changes for "
+                  f"{member_oid}: {e}")
+        return {'status': 'error', 'message': _('registration_failed')}
+    with get_ldap_connection(ldap_user=LDAP_USER,
+            ldap_password=get_secret(LDAP_PASSWORD)) as conn:
+        try:
+            success = conn.modify(dn, changes)
+            if not success:
+                log.error(f"upgrade_member_in_ldap: modify failed for {dn}: "
+                          f"{conn.result}")
+                return {'status': 'error',
+                        'message': _('registration_failed')}
+            conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
+        except Exception as e:
+            log.error(f"upgrade_member_in_ldap: {e}")
+            return {'status': 'error', 'message': _('registration_failed')}
+    try:
+        # Refresh the ZODB member from the updated LDAP entry.
+        update_member_from_ldap(member_oid, request)
+    except Exception as e:
+        log.warning(f"upgrade_member_in_ldap: ZODB refresh failed for "
+                    f"{member_oid}: {e}")
+    log.info(f"Member {member_oid} upgraded to Cooperator in LDAP")
+    return {'status': 'success'}
+
+
 def register_user_to_ldap(request, candidature, password):
     """
     Register a user to the LDAP directory.
@@ -1075,6 +1124,15 @@ def register_user_to_ldap(request, candidature, password):
     Returns:
         dict: a dictionary containing the result of the registration.
     """
+
+    # Upgrade of an existing member (issue #7): the LDAP entry already
+    # exists under the member's own uid and the pseudonym is legitimately
+    # "taken" by that very member — update the entry in place instead of
+    # adding a duplicate.
+    existing_member_oid = getattr(candidature, 'existing_member_oid', None)
+    if existing_member_oid:
+        return upgrade_member_in_ldap(request, candidature,
+                                      existing_member_oid)
 
     # First, check if the pseudonym is unique
     pseudonym = candidature.pseudonym

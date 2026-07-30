@@ -156,7 +156,7 @@ def test_the_home_page_renders_the_filtered_catalog():
     config.add_translation_dirs('alirpunkto:locale/')
     config.add_subscriber(add_renderer_globals, 'pyramid.events.BeforeRender')
     for route in ('home', 'sso_login', 'register', 'logout',
-                  'modify_member', 'vote'):
+                  'modify_member', 'vote', 'upgrade_to_cooperator'):
         config.add_route(route, '/' + route)
     config.add_static_view('static', 'alirpunkto:static')
     request = DummyRequest()

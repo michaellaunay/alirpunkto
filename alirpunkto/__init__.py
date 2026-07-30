@@ -332,6 +332,7 @@ def main(global_config, **settings):
         config.add_route('login', '/login')
         config.add_route('logout', '/logout')
         config.add_route('register', '/register')
+        config.add_route('upgrade_to_cooperator', '/upgrade_to_cooperator')
         config.add_route('manage_provider', '/manage_provider')
         config.add_route('elections', '/elections')
         config.add_route('vote', '/vote')
