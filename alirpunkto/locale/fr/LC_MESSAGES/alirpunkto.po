@@ -1281,3 +1281,12 @@ msgstr "Date de démission ou d'exclusion"
 
 msgid "departure_reason_label"
 msgstr "Motif du départ"
+
+msgid "your_profile_title"
+msgstr "Ton profil"
+
+msgid "your_profile_introduction"
+msgstr "Sur cette page, tu peux consulter ton profil et en modifier certains éléments. Pour modifier un élément, remplace simplement le contenu actuel du champ par le nouveau contenu de ton choix."
+
+msgid "cancel_button"
+msgstr "Annuler"

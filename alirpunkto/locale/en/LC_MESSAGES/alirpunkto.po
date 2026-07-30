@@ -1293,3 +1293,12 @@ msgstr "Date of resignation or exclusion"
 
 msgid "departure_reason_label"
 msgstr "Reason of departure"
+
+msgid "your_profile_title"
+msgstr "Your profile"
+
+msgid "your_profile_introduction"
+msgstr "On this page, you can view your own profile, and modify some of its elements. In order to modify an item, simply replace the existing content of the field with the new content of your choosing."
+
+msgid "cancel_button"
+msgstr "Cancel"

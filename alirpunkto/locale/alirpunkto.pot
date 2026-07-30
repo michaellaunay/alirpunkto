@@ -1292,3 +1292,12 @@ msgstr ""
 
 msgid "departure_reason_label"
 msgstr ""
+
+msgid "your_profile_title"
+msgstr ""
+
+msgid "your_profile_introduction"
+msgstr ""
+
+msgid "cancel_button"
+msgstr ""

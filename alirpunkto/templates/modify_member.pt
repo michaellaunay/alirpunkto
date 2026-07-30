@@ -1,6 +1,8 @@
 <div metal:use-macro="load: layout.pt">
     <div metal:fill-slot="content">
-        <h1 i18n:translate="modify_member_title">Consult or modify the member datas ?</h1>
+        <h1 tal:define="is_own_profile python: member is not None and accessed_member is not None and (getattr(member, 'oid', None) == getattr(accessed_member, 'oid', accessed_member))"
+            tal:content="python: _('your_profile_title') if is_own_profile else _('modify_member_title')"
+            i18n:domain="alirpunkto">Your profile</h1>
         <!-- Member avatar (issue #150): visible on any consulted profile;
              upload and removal only on one's own. -->
         <div class="container member-avatar" i18n:domain="alirpunkto"
@@ -71,7 +73,8 @@
             </form>
         </div>
         <div tal:condition="form" class="member-form">
-            <p i18n:translate="modify_member_fill_form">Please fill the fields</p>
+            <!-- Issue #123: the introduction of the specification. -->
+            <p i18n:translate="your_profile_introduction">On this page, you can view your own profile, and modify some of its elements. In order to modify an item, simply replace the existing content of the field with the new content of your choosing.</p>
             <span tal:replace="structure form">Form Content</span>
         </div>
         <div tal:condition="exists:message" tal:omit-tag="">

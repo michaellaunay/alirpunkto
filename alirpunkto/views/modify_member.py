@@ -119,6 +119,10 @@ def modify_member(request):
         request (pyramid.request.Request): the request
     """
     log.debug(f"modify_member: {request.method} {request.url}")
+    if 'cancel' in request.POST:
+        # Issue #123 / #116: abandon the edits — redirect to a fresh GET of
+        # one's profile (post/redirect/get), before any LDAP work.
+        return HTTPFound(location=request.route_url('modify_member'))
     member = None
     accessed_member_oid = None
     form = None
@@ -309,8 +313,14 @@ def modify_member(request):
             'iban': accessed_member.data.iban,
             #'date_erasure_all_data': accessed_member.data.date_erasure_all_data #TODO
         }
+        # Issue #123: a translated Submit and a Cancel button (issue #116)
+        # — the submit keeps its historical name 'modify' so the POST
+        # branch below is untouched.
         form = deform.Form(schema,
-            buttons=('modify',),
+            buttons=(
+                deform.Button('modify', title=_('submit_button')),
+                deform.Button('cancel', title=_('cancel_button')),
+            ),
             translator=Translator
         )
         return {
