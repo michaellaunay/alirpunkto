@@ -60,10 +60,16 @@ def _secrets_env(monkeypatch):
         (MAIL_PASSWORD, "test-mail-pw"),
     ):
         monkeypatch.setenv(name, value)
+    saved = getattr(sm.get_secret, "secrets", None)
     if hasattr(sm.get_secret, "secrets"):
         delattr(sm.get_secret, "secrets")
     yield
-    if hasattr(sm.get_secret, "secrets"):
+    # Restore the memoized secrets: the first initialization popped
+    # SECRET_KEY from the environment, so leaving the cache destroyed makes
+    # every later real get_secret() call in the suite blow up.
+    if saved is not None:
+        sm.get_secret.secrets = saved
+    elif hasattr(sm.get_secret, "secrets"):
         delattr(sm.get_secret, "secrets")
 
 

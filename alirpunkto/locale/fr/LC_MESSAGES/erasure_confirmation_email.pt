@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    tal:omit-tag="textual">
+<head tal:omit-tag="textual">
+    <title tal:omit-tag="textual">Tes données d'identité ont été effacées</title>
+</head>
+<body tal:omit-tag="textual">
+    <h1 tal:omit-tag="textual">Tes données d'identité ont été effacées</h1>
+
+    <p tal:omit-tag="textual">Bonjour <span tal:replace="pseudonym | nothing">Pseudonym</span>,</p>
+
+    <p tal:omit-tag="textual">La période de Quarantaine qui a suivi la désactivation de ton compte sur la plateforme <span tal:replace="site_name">Site Name</span> de <span tal:replace="domain_name">Domain Name</span> est terminée : conformément aux règles de la Coopérative, tes données d'identité viennent d'être effacées de notre annuaire et de notre base de données.</p>
+
+    <p tal:omit-tag="textual">Seuls ton pseudonyme, la date et le motif de ton départ sont conservés.</p>
+
+    <p tal:omit-tag="textual">Cordialement,</p>
+    <p tal:omit-tag="textual">L'équipe de <span tal:replace="domain_name">Domain Name</span></p>
+    <p tal:omit-tag="textual" tal:content="organization_details">Organization details</p>
+</body>
+</html>

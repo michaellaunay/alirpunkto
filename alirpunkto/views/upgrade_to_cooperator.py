@@ -30,6 +30,7 @@ from alirpunkto.schemas.register_form import RegisterForm
 from alirpunkto.utils import (
     get_candidatures,
     get_member_by_oid,
+    is_valid_unique_identity,
 )
 
 IDENTITY_FIELDS = ('fullname', 'fullsurname', 'birthdate', 'nationality')
@@ -116,6 +117,16 @@ def upgrade_to_cooperator(request):
             appstruct = form.validate(list(request.POST.items()))
         except ValidationFailure as e:
             return _base_context(request, member=member, form=e.render())
+
+        # Same Quarantine-aware identity check as the registration flow
+        # (issue #54).
+        identity_error = is_valid_unique_identity(
+            appstruct['fullname'], appstruct['fullsurname'],
+            appstruct['birthdate'])
+        if identity_error:
+            return _base_context(request, member=member,
+                                 form=form.render(appstruct=appstruct),
+                                 error=identity_error['error'])
 
         candidature = Candidature()
         candidature.type = MemberTypes.COOPERATOR

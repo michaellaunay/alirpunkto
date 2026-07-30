@@ -1248,3 +1248,9 @@ msgstr "Confirm the deactivation of your account"
 
 msgid "unsubscribed_email_subject"
 msgstr "Your account has been deactivated"
+
+msgid "erasure_confirmation_email_subject"
+msgstr "Your identity data has been erased"
+
+msgid "This identity (names and date of birth) is already registered — possibly by a member who resigned or was excluded less than the Quarantine period ago."
+msgstr "This identity (names and date of birth) is already registered — possibly by a member who resigned or was excluded less than the Quarantine period ago."

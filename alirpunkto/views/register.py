@@ -53,7 +53,7 @@ from ..utils import (
     get_member_by_oid,
     is_valid_email,
     register_user_to_ldap,
-    is_valid_password, is_valid_unique_pseudonym, random_voters,
+    is_valid_password, is_valid_unique_identity, is_valid_unique_pseudonym, random_voters,
     send_validation_email,
     send_confirm_validation_email,
     send_candidature_state_change_email,
@@ -593,6 +593,21 @@ def handle_confirmed_human_state(request, candidature):
                     'candidature': candidature,
                     'MemberTypes': MemberTypes
                 }
+            # The identity data of any Applicant is compared to every LDAP
+            # entry, resigned or excluded Cooperators in Quarantine included
+            # (issue #54): same names and date of birth cannot register
+            # again with a virgin reputation.
+            identity_error = is_valid_unique_identity(
+                request.params.get('fullname', ''),
+                request.params.get('fullsurname', ''),
+                parameters['birthdate'])
+            if identity_error:
+                identity_error.update({
+                    'form': form.render(appstruct=appstruct),
+                    'candidature': candidature,
+                    'MemberTypes': MemberTypes
+                })
+                return identity_error
         # 1.3: never persist a cleartext password in ZODB — store the {SSHA}
         # hash (register_user_to_ldap will pass it through unchanged) and drop
         # the confirmation copy entirely.

@@ -70,11 +70,12 @@ URL_SCHEME: Final = os.getenv("URL_SCHEME", "https")
 SITE_NAME: Final = os.getenv("SITE_NAME", "AlirPunkto")
 ORGANIZATION_DETAILS: Final = os.getenv("ORGANIZATION_DETAILS", "AlirPunkto is an open source project for managing cooperative memberships.")
 
-# Resignation (specification "Démissionner"): how long the personal data of
-# an unsubscribed member is kept before the purge — the Quarantine period, a
-# Quantitative Parameter Affecting Internal Processes — and how long the
-# e-mailed confirmation link stays valid.
-QUARANTINE_PERIOD_DAYS: Final = int(os.getenv("QUARANTINE_PERIOD_DAYS", "365"))
+# Resignation (specification "Démissionner", issue #54): how long the
+# personal data of an unsubscribed member is kept before the purge — the
+# Quarantine period, a Quantitative Parameter Affecting Internal Processes
+# defined by §3.4 of the Cooperative's statutes, 180 days by default — and
+# how long the e-mailed confirmation link stays valid.
+QUARANTINE_PERIOD_DAYS: Final = int(os.getenv("QUARANTINE_PERIOD_DAYS", "180"))
 UNSUBSCRIBE_LINK_VALIDITY_DAYS: Final = int(
     os.getenv("UNSUBSCRIBE_LINK_VALIDITY_DAYS", "7"))
 

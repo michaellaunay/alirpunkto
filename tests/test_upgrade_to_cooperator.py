@@ -127,6 +127,8 @@ def test_submitting_opens_the_upgrade_candidature(config):
                       return_value=_member()), \
          patch.object(upgrade_module, 'get_candidatures',
                       return_value=candidatures), \
+         patch.object(upgrade_module, 'is_valid_unique_identity',
+                      return_value=None), \
          patch.object(member_module.Members, 'get_instance',
                       return_value={'members': {}, 'candidatures': {}}):
         result = upgrade_to_cooperator(request)

@@ -3,7 +3,8 @@
 # date: 2023-09-30
 
 from typing import Union, Tuple, Dict, List, Optional, Any
-from datetime import datetime, timedelta
+import os
+from datetime import date, datetime, timedelta
 from pyramid.request import Request
 from alirpunkto.models.member import (
     Members,
@@ -1090,6 +1091,10 @@ def deactivate_member_in_ldap(request, member, erasure_date):
         except Exception as e:
             log.error(f"deactivate_member_in_ldap: {e}")
             return {'status': 'error', 'message': _('unsubscription_failed')}
+    # ``=> None`` in issue #148: a resigned member leaves every dynamic
+    # group (the entry itself stays during the Quarantine period).
+    from alirpunkto.dynamic_groups import sync_member_groups
+    sync_member_groups(request, member.oid)
     log.info(f"Member {member.oid} deactivated in LDAP; erasure due "
              f"{erasure_date.isoformat()}")
     return {'status': 'success'}
@@ -1124,13 +1129,51 @@ def purge_unsubscribed_members(request, now=None):
                       f"{oid}: {e}")
             continue
         pseudonym = member.pseudonym
+        # Capture what the farewell message needs before erasing (issue
+        # #54): the ticket wants the member informed that the identity
+        # data was indeed erased — and after the purge, the address is
+        # gone from our stores.
+        recipient = getattr(member, 'email', None)
+        language = getattr(getattr(member, 'data', None), 'lang1', None)
         member.data = MemberDatas(password='')
         member.member_state = MemberStates.DELETED
         member.departure_reason = getattr(
             member, 'departure_reason', 'resignation')
+        member.email = None
+        _send_erasure_confirmation(request, recipient, language, pseudonym)
         log.info(f"purge_unsubscribed_members: {oid} ({pseudonym}) purged")
         purged.append(oid)
     return purged
+
+
+def _send_erasure_confirmation(request, recipient, language, pseudonym):
+    '''Tell the former member their identity data was erased (issue #54).
+
+    Best effort: the purge itself must not fail on a mail hiccup. And
+    deliberately content-minimal: the pseudonym is the only retained fact,
+    so it is the only personal thing the message carries.
+    '''
+    if not recipient:
+        return
+    try:
+        language = language if language in ('en', 'fr') else 'en'
+        template = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), 'locale', language,
+            'LC_MESSAGES', 'erasure_confirmation_email.pt')
+        if not os.path.exists(template):
+            template = template.replace(f"/{language}/", "/en/")
+        subject = _translate_for_language(
+            request, language, _('erasure_confirmation_email_subject'))
+        send_email(request, subject, [recipient], template, {
+            'pseudonym': pseudonym,
+            'site_name': SITE_NAME,
+            'domain_name': DOMAIN_NAME,
+            'organization_details': ORGANIZATION_DETAILS,
+            'textual': False,
+        })
+    except Exception as e:
+        log.warning(f"_send_erasure_confirmation: could not inform "
+                    f"{recipient}: {e}")
 
 
 def _as_datetime(value):
@@ -1150,8 +1193,6 @@ def upgrade_member_in_ldap(request, candidature, member_oid):
     """
     dn = (f"uid={member_oid},{LDAP_OU},{LDAP_BASE_DN}"
           if LDAP_OU else f"uid={member_oid},{LDAP_BASE_DN}")
-    group_dn = (f"cn=cooperatorsGroup,{f'{LDAP_OU},' if LDAP_OU else ''}"
-                f"{LDAP_BASE_DN}")
     try:
         changes = {
             'employeeType': [(MODIFY_REPLACE, [MemberTypes.COOPERATOR.name])],
@@ -1160,7 +1201,6 @@ def upgrade_member_in_ldap(request, candidature, member_oid):
             'nationality': [(MODIFY_REPLACE, [candidature.data.nationality])],
             'birthdate': [(MODIFY_REPLACE, [
                 candidature.data.birthdate.strftime(LDAP_TIME_FORMAT)])],
-            'uniqueMemberOf': [(MODIFY_ADD, [group_dn])],
         }
     except Exception as e:
         log.error(f"upgrade_member_in_ldap: cannot prepare changes for "
@@ -1175,10 +1215,14 @@ def upgrade_member_in_ldap(request, candidature, member_oid):
                           f"{conn.result}")
                 return {'status': 'error',
                         'message': _('registration_failed')}
-            conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
         except Exception as e:
             log.error(f"upgrade_member_in_ldap: {e}")
             return {'status': 'error', 'message': _('registration_failed')}
+    # Place the upgraded member in the dynamic groups of issue #148: with
+    # no share and no yearly contribution yet, that is
+    # candidatesMissingShareYearContribGroup — not cooperatorsGroup.
+    from alirpunkto.dynamic_groups import sync_member_groups
+    sync_member_groups(request, member_oid)
     try:
         # Refresh the ZODB member from the updated LDAP entry.
         update_member_from_ldap(member_oid, request)
@@ -1187,6 +1231,45 @@ def upgrade_member_in_ldap(request, candidature, member_oid):
                     f"{member_oid}: {e}")
     log.info(f"Member {member_oid} upgraded to Cooperator in LDAP")
     return {'status': 'success'}
+
+
+def is_valid_unique_identity(fullname, fullsurname, birthdate):
+    """Check that the identity data is not already used (issue #54).
+
+    The given name(s) + family name(s) + date of birth combination is
+    compared against every LDAP entry — deliberately including inactive
+    ones: a resigned or excluded Cooperator keeps their entry during the
+    Quarantine period precisely so they cannot register again with a
+    virgin reputation.
+
+    Returns None when the identity is free, an error mapping otherwise.
+    """
+    if isinstance(birthdate, str):
+        try:
+            birthdate = datetime.strptime(birthdate, '%Y-%m-%d')
+        except ValueError:
+            try:
+                birthdate = datetime.strptime(birthdate, LDAP_TIME_FORMAT)
+            except ValueError:
+                return {'error': _('invalid_date')}
+    if isinstance(birthdate, date) and not isinstance(birthdate, datetime):
+        birthdate = datetime(birthdate.year, birthdate.month, birthdate.day)
+    birthdate_str = birthdate.strftime(LDAP_TIME_FORMAT)
+    query = (f"(&(gn={escape_filter_chars(fullname)})"
+             f"(sn={escape_filter_chars(fullsurname)})"
+             f"(birthdate={escape_filter_chars(birthdate_str)}))")
+    with get_ldap_connection(ldap_user=LDAP_USER,
+            ldap_password=get_secret(LDAP_PASSWORD)) as conn:
+        conn.search(LDAP_BASE_DN, query, attributes=['uid'])
+        if conn.entries:
+            log.warning(
+                f"is_valid_unique_identity: identity already used by "
+                f"{[str(e.uid) for e in conn.entries]}")
+            return {'error': _(
+                'This identity (names and date of birth) is already '
+                'registered — possibly by a member who resigned or was '
+                'excluded less than the Quarantine period ago.')}
+    return None
 
 
 def register_user_to_ldap(request, candidature, password):
@@ -1270,20 +1353,19 @@ def register_user_to_ldap(request, candidature, password):
                     attributes["dateEndValidityYearlyContribution"] = candidature.data.date_end_validity_yearly_contribution.strftime(LDAP_TIME_FORMAT) if candidature.data.date_end_validity_yearly_contribution else "2023-04-25T12:00:00"
 
                     #@TODO check language code
-                    groups.append(
-                        f"cn=cooperatorsGroup,{f'{LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
                 except Exception as e:
                     log.error(f"Error while preparing attributes for user {pseudonym}: {e}")
                     return {'status': 'error', 'message': _('registration_failed')}
             case MemberTypes.ORDINARY:
-                groups.append(
-                    f"cn=ordinaryMembersGroup,{f'{LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
+                pass  # groups are handled by sync_member_groups (issue #148)
             case MemberTypes.ADMINISTRATOR:
                 # Admins are not stored in LDAP, so we skip this
                 log.debug(f"Admin {pseudonym} does not have a group in LDAP.")
             case MemberTypes.PROVIDER:
                 groups.append(
                     f"cn=providersGroup,{f'{LDAP_OU},' if LDAP_OU else ''}{LDAP_BASE_DN}")
+                # Providers stay on the historical group model: out of the
+                # scope of the dynamic groups of issue #148.
             case _:
                 log.error(f"Unsupported member type {candidature.type}")
         # If there are groups the user belongs to, add them to the uniqueMemberOf attribute
@@ -1297,30 +1379,21 @@ def register_user_to_ldap(request, candidature, password):
             if success:
                 group_dn = None
                 match candidature.type:
-                    case MemberTypes.COOPERATOR:
-                        group_dn = ("cn=cooperatorsGroup,"
-                                    f"{f'{LDAP_OU},' if LDAP_OU else ''}"
-                                    f"{LDAP_BASE_DN}"
-                        )
-                        conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
-                    case MemberTypes.ORDINARY:
-                        group_dn = ("cn=ordinaryMembersGroup,"
-                                    f"{f'{LDAP_OU},' if LDAP_OU else ''}"
-                                    f"{LDAP_BASE_DN}"
-                        )
-                        conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
                     case MemberTypes.ADMINISTRATOR:
                         # Admins are not stored in LDAP, so we skip this
                         log.debug(f"Admin {pseudonym} does not have a group in LDAP.")
                     case MemberTypes.PROVIDER:
+                        # Providers stay on the historical group model.
                         group_dn = ("cn=providersGroup,"
                                     f"{f'{LDAP_OU},' if LDAP_OU else ''}"
                                     f"{LDAP_BASE_DN}"
                         )
                         conn.modify(group_dn, {'uniqueMember': [(MODIFY_ADD, [dn])]})
                     case _:
-                        log.error(f"Error while adding user {pseudonym} "
-                                f"to a LDAP group : group for {candidature.type} is not coded")
+                        # ORDINARY and COOPERATOR: the dynamic groups of
+                        # issue #148 are applied by sync_member_groups just
+                        # before the success return.
+                        pass
 
                 # Check if group addition was successful (only when a group
                 # modify was attempted; ADMINISTRATOR has no LDAP group).
@@ -1346,6 +1419,12 @@ def register_user_to_ldap(request, candidature, password):
                     f"Could not purge password fields from ZODB for "
                     f"{getattr(candidature, 'oid', '?')}: {e}"
                 )
+            # Place the new member in the dynamic groups of issue #148: an
+            # Ordinary Member joins communityMembersGroup; a new Cooperator
+            # lands in the candidates group matching their shares and
+            # yearly-contribution facts.
+            from alirpunkto.dynamic_groups import sync_member_groups
+            sync_member_groups(request, candidature.oid)
             return {'status': 'success', 'message': _('registration_successful')}
         else:
             log.error(f"Error while adding user {pseudonym} to LDAP : {conn.result}")
@@ -1471,6 +1550,10 @@ def update_ldap_member(
             success = False
 
         if success:
+            # Shares or yearly-contribution changes move the member between
+            # the dynamic groups of issue #148.
+            from alirpunkto.dynamic_groups import sync_member_groups
+            sync_member_groups(request, member.oid)
             return {'status': 'success', 'message': _('member_update_successful')}
         else:
             log.error(f"Error while updating user {member.oid} in LDAP : {conn.result}")

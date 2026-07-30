@@ -89,6 +89,8 @@ def test_cooperator_full_journey(members_mapping):
         ("__end__", "birthdate:mapping"),
     ])
     with patch.object(reg, "is_valid_unique_pseudonym", return_value=None), \
+ patch.object(reg, 'is_valid_unique_identity',
+              return_value=None), \
          patch.object(reg, "send_candidature_state_change_email", return_value=None), \
          patch.object(reg, "random_voters", return_value=fake_voters), \
          patch.object(reg, "get_candidatures", return_value=members_mapping), \
