@@ -54,3 +54,18 @@ Tout correctif issu d'un audit ou d'un incident de terrain est **verrouillé
 par des tests dédiés**, datés dans leur docstring : la suite raconte
 l'histoire des constats et empêche leur retour. Un correctif sans test
 n'est pas considéré comme clos.
+
+## Campagne 2026-07-30
+
+La suite est passée d'environ 580 à **plus de 800** tests. Leçons de
+harnais durables, encodées dans les tests eux-mêmes : l'annuaire **mock
+`ldap3`** (`client_strategy=MOCK_SYNC`) se lie **anonymement** (pas
+d'utilisateur fictif) et rend les dates en chaînes — les adaptateurs les
+parsent ; le rendu de gabarits sous `pytest` exige le **threadlocal**
+poussé (`pyramid.threadlocal.manager.push({'request': …, 'registry': …})`) ;
+un test qui rend un formulaire `deform` épingle
+`deform.form.Form.default_renderer` pour rester hermétique au renderer
+global qu'un autre test installe ; le widget de date soumet une structure
+**peppercorn** (`__start__`/`date`/`__end__`), comme un navigateur ; et la
+table de vérité des groupes dynamiques est verrouillée **cas par cas**
+contre le ticket #148 par des tests paramétrés.

@@ -71,3 +71,16 @@ est verrouillée par des tests qui passent par le vrai *localizer* (#207).
   guillemets lors de traductions assistées, ce qui casse la compilation ;
   le rendu réel de chaque gabarit de résultat est testé pour l'empêcher
   (#235).
+
+## Identifiants symboliques et maintenance du `.pot` (2026-07-30)
+
+Les chaînes introduites par les campagnes récentes utilisaient
+transitoirement le texte anglais comme `msgid` ; elles ont été renommées en
+**identifiants symboliques** (`upgrade_to_cooperator_button`, etc.),
+propagés aux **33 catalogues** avec repli anglais explicite, et le
+`alirpunkto.pot` a été remis à niveau. La règle de maintenance : toute
+nouvelle chaîne naît avec un `msgid` symbolique, une entrée dans le `.pot`,
+sa traduction anglaise et française, et les `.mo` versionnés sont
+recompilés (`msgfmt`) dans le même commit. Les libellés du catalogue
+d'applications (`applications.ini`) sont eux aussi des `msgid` résolus au
+rendu.

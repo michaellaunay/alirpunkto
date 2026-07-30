@@ -57,3 +57,11 @@ session (utilisateur, jetons) ; `/logout` la clôt côté interface.
   lisible par son porteur (sans gravité) mais exposé en cas de vol de
   cookie. La cible saine est une session côté serveur (voir
   [decisions_architecture](decisions_architecture.md)).
+
+## Comptes désactivés (2026-07-30)
+
+`sso_login` refuse la connexion d'un membre dont `data.is_active` est faux
+(compte démissionnaire ou désactivé) : la garde est placée après la
+resynchronisation depuis LDAP et avant la construction du `User` de
+session. L'entrée LDAP, conservée pendant la Quarantaine, ne rouvre donc
+aucun accès.

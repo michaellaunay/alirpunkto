@@ -70,3 +70,15 @@ sensitive messages is locked by tests going through the real localizer
   assisted translations tend to "localize" the attribute quotes of each
   language, which breaks compilation; the real rendering of every result
   template is tested to prevent it (#235).
+
+## Symbolic msgids and `.pot` maintenance (2026-07-30)
+
+Strings introduced by the recent campaigns transiently used the English
+text as their `msgid`; they were renamed to **symbolic identifiers**
+(`upgrade_to_cooperator_button`, …), propagated to the **33 catalogues**
+with an explicit English fallback, and `alirpunkto.pot` was brought back
+in line. The maintenance rule: every new string is born with a symbolic
+`msgid`, a `.pot` entry, its English and French translations, and the
+versioned `.mo` files recompiled (`msgfmt`) in the same commit. The
+application-catalogue labels (`applications.ini`) are `msgid`s as well,
+resolved at render time.

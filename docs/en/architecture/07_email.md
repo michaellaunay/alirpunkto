@@ -72,3 +72,15 @@ spam-flagging factor (#169). Messages referencing `${administrator}` get
 
 - No persistent queue on the application side: if Postfix refuses
   durably, the `ERROR` event is journaled but no automatic retry exists.
+
+## Resignation e-mails (2026-07-30)
+
+Three e-mails accompany the cycle: the **request** (the confirmation link
+is the real trigger; the state rolls back if sending fails), the
+**farewell** at confirmation, and the **erasure** notice once the purge
+has run (#54) — for the latter, the address and language are **captured
+before erasure** (afterwards they no longer exist anywhere) and the
+content is deliberately minimal: the pseudonym, the only retained fact, is
+the only personal thing the message carries. The erasure notice is
+best-effort: an SMTP hiccup never fails the purge. Templates in English
+and French, English fallback for the other locales.

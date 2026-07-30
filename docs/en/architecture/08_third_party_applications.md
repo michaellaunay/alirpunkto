@@ -55,3 +55,13 @@ The initial scenarios "Liste des Applications" and "Configuration de la
 liste des applications" are archived (in French) under
 `../../fr/specifications_historiques/Scénarios/`; this document and the
 upcoming functional specification replace them.
+
+## Per-status catalogue (#142/#35, 2026-07-30)
+
+The home page lists applications from an **`.ini` catalogue** (one section
+per application: `msgid` name, description, direct SSO login URL,
+**audience**). The audience filters by status: `ordinary`, `cooperator`
+or both — `filter_applications_for_member` resolves the session member's
+type and the view only shows the relevant entries. Labels are `msgid`s
+translated at render time
+(see [10_internationalization](10_internationalization.md)).

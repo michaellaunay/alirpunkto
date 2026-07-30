@@ -67,3 +67,40 @@ The detailed procedures are in `docker/README.md`.
   outside the application can desynchronise it;
 - the placeholder member `uid=00000000-…` must be ignored by any group
   processing.
+
+## Dynamic groups (#148, 2026-07-30)
+
+The eleven groups of issue #148 (created at startup alongside the three
+historical ones) now get their **transitions**
+(`alirpunkto/dynamic_groups.py`). The ticket's event algebra reduces to a
+**pure function**, `compute_target_groups`, over four facts — shares
+owned, yearly-contribution validity
+(`dateEndValidityYearlyContribution`), sanction, Board/MAC role — the
+groups themselves being the persistent state (sanction and role are read
+from current memberships). The applier `sync_member_groups` is
+**idempotent** and maintains **both sides** of the relation
+(the member's `uniqueMemberOf`, the group's `uniqueMember`); it is
+**best-effort by design**: a failure never breaks the calling operation,
+the daily scan catches up. It is wired to the four event sources:
+registration (an Ordinary Member joins `communityMembersGroup`; the legacy
+`ordinaryMembersGroup` **drains progressively**), upgrade approval
+(landing in `candidatesMissingShareYearContribGroup`), resignation (no
+group left, the entry staying through the Quarantine) and any profile
+update. Sanction and promotion events (#56/#57) keep a ready hook
+(`force_sanctioned`) for the future admin views.
+
+## Identity uniqueness and Quarantine (#54)
+
+`is_valid_unique_identity(given names, family names, date of birth)`
+compares every Applicant's identity against **all** LDAP entries —
+deliberately **without an `isActive` filter**: a resigned or excluded
+Cooperator's entry is kept through the Quarantine precisely so they cannot
+register again with a virgin reputation. The check is wired to both
+Cooperator entry points: the registration form and the upgrade (#7).
+
+## Avatar (`jpegPhoto`, #150)
+
+The avatar lives **only** in the LDAP `jpegPhoto` attribute — no ZODB, no
+`deform` form: two dedicated views (`member_avatar` serves it,
+`avatar_upload` writes it), a triple check (extension, magic number, size
+≤ 4 MB), and writing restricted to the session owner.

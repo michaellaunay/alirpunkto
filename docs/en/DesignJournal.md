@@ -311,3 +311,22 @@ based on an older master, are closed without merging so as not to revert
 the fixes that landed in between. The `architecture/` documentation
 (e-mail, i18n, testing, third-party applications, domain model) and the
 `candidature` specification are updated accordingly.
+
+## 2026-07-30 — From sequential to client-sorted: the big membership works
+
+The campaign switched from chronological ticket order to a thirty-item
+list sorted by the client. Four structuring works came out of it: the
+Ordinary→Cooperator **upgrade** (#7), grafted onto the existing
+registration flow rather than duplicated (candidature pre-set to
+`UNIQUE_DATA`, in-place LDAP update); the **resignation** per the
+historical specification, with its double confirmation by link, its
+statutory 180-day **Quarantine** (§3.4) and its deferred purge retaining
+only pseudonym, date and reason; the **dynamic groups** (#148), whose
+event algebra reduced to a pure truth table over four facts, the groups
+being the state — idempotent best-effort synchroniser, daily scan for
+calendar time; and **identity uniqueness** (#54), which did not exist and
+deliberately includes resigned Cooperators in Quarantine. On top of that:
+the LDAP avatar (#150), the i18n clean-up (symbolic msgids, maintained
+`.pot`) and the suite passing 800 tests. Two periodic functions await
+their `cron`: the purge and the scan (see
+[architecture/09_periodic_tasks](architecture/09_periodic_tasks.md)).

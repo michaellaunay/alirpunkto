@@ -57,3 +57,10 @@ out cleanly otherwise. `utils.logout` purges the session (user, tokens);
   by its bearer (harmless) but exposed if the cookie is stolen. The sound
   target is a server-side session (see
   [architecture_decisions](architecture_decisions.md)).
+
+## Deactivated accounts (2026-07-30)
+
+`sso_login` refuses a member whose `data.is_active` is false (a resigned
+or deactivated account): the guard sits after the resynchronisation from
+LDAP and before the session `User` is built. The LDAP entry, kept through
+the Quarantine, therefore reopens no access.

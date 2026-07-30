@@ -60,3 +60,18 @@ vérificateurs) reçoivent un courriel localisé.
 - Aucune péremption automatique : une candidature en attente le reste
   jusqu'à action humaine (voir
   [../architecture/09_taches_periodiques.md](../architecture/09_taches_periodiques.md)).
+
+## Montée en grade Ordinaire → Coopérateur (#7)
+
+Depuis la page d'accueil, un membre Ordinaire connecté voit le bouton
+« Devenir Coopérateur·rice ». Il saisit uniquement les quatre données
+d'identité (prénoms, noms, date de naissance, nationalité) — le pseudonyme
+et le courriel sont repris de son compte et ne sont ni redemandés ni
+modifiables. La candidature entre directement dans le processus de
+vérification : tirage des vérificateurs, convocations, vote. L'unicité de
+l'identité est contrôlée comme pour toute candidature Coopérateur,
+démissionnaires en quarantaine inclus (#54). En cas d'approbation, le
+compte existant devient Coopérateur (l'identifiant, le pseudonyme, le
+courriel et le mot de passe ne changent pas) ; en cas de refus, le membre
+reste Ordinaire. Une montée en grade en cours est reprise, jamais
+dupliquée.

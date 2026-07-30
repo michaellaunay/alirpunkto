@@ -74,3 +74,15 @@ un facteur de classement en pourriel (#169). Les messages qui référencent
 - Pas de file d'attente persistante côté application : si Postfix refuse
   durablement, l'événement `ERROR` est journalisé mais aucune relance
   automatique n'existe.
+
+## Courriels de la démission (2026-07-30)
+
+Trois courriels accompagnent le cycle : la **demande** (le lien de
+confirmation est le vrai déclencheur ; rollback de l'état si l'envoi
+échoue), l'**adieu** à la confirmation, et l'**effacement** une fois la
+purge passée (#54) — pour celui-ci, l'adresse et la langue sont **capturées
+avant l'effacement** (après, elles n'existent plus nulle part) et le
+contenu est volontairement minimal : le pseudonyme, seul fait conservé, est
+la seule donnée personnelle du message. L'envoi d'effacement est
+best-effort : un incident SMTP ne fait pas échouer la purge. Gabarits en
+anglais et français, repli anglais pour les autres locales.

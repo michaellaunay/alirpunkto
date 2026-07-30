@@ -2635,3 +2635,23 @@ branches, basées sur un master ancien, sont fermées sans fusion pour ne pas
 annuler les correctifs intermédiaires. Documentation `architecture/`
 (messagerie, i18n, tests, applications tierces, modèle de domaine) et
 spécification `candidature` mises à jour en conséquence.
+
+## 2026-07-30 — Du séquentiel au tri client : les grands chantiers membres
+
+La campagne a basculé de l'ordre chronologique des tickets à une liste de
+trente priorités triées par le client. Quatre chantiers structurants en
+sont sortis : la **montée en grade** Ordinaire→Coopérateur (#7), greffée
+sur le flux d'inscription existant plutôt que dupliquée (candidature
+pré-remplie à `UNIQUE_DATA`, mise à jour LDAP en place) ; la **démission**
+selon la spécification historique, avec sa double confirmation par lien,
+sa **Quarantaine** statutaire de 180 jours (§3.4) et sa purge différée qui
+ne retient que pseudonyme, date et motif ; les **groupes dynamiques**
+(#148), dont l'algèbre événementielle s'est réduite à une table de vérité
+pure sur quatre faits, les groupes étant l'état — synchroniseur idempotent
+et best-effort, scan quotidien pour le temps calendaire ; et
+l'**unicité d'identité** (#54), qui n'existait pas et inclut délibérément
+les démissionnaires en quarantaine. S'y ajoutent l'avatar LDAP (#150),
+l'assainissement i18n (msgid symboliques, `.pot` maintenu) et le passage
+de la suite à plus de 800 tests. Deux fonctions périodiques attendent leur
+`cron` : la purge et le scan (voir
+[architecture/09_taches_periodiques](architecture/09_taches_periodiques.md)).

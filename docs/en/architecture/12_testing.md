@@ -53,3 +53,17 @@ Every fix born from an audit or a field incident is **locked by dedicated
 tests**, dated in their docstring: the suite tells the story of the
 findings and forbids their return. A fix without a test is not considered
 closed.
+
+## 2026-07-30 campaign
+
+The suite grew from about 580 to **more than 800** tests. Durable harness
+lessons, encoded in the tests themselves: the **mock `ldap3`** directory
+(`client_strategy=MOCK_SYNC`) binds **anonymously** (no fictitious admin)
+and returns dates as strings — adapters parse them; rendering templates
+under `pytest` requires the **threadlocal** pushed
+(`pyramid.threadlocal.manager.push({'request': …, 'registry': …})`); a
+test rendering a `deform` form pins `deform.form.Form.default_renderer`
+to stay hermetic to the global renderer another test installs; the date
+widget submits a **peppercorn** structure (`__start__`/`date`/`__end__`),
+exactly as a browser does; and the dynamic-group truth table is locked
+**case by case** against ticket #148 by parametrized tests.

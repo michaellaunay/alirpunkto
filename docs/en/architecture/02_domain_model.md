@@ -90,3 +90,36 @@ current request's ZODB connection (see
 (name, e-mail, oid, active flag, type) serialised as JSON into the session
 after login. Do not confuse it with `Member`: it is a mere reflection for
 the user interface.
+
+## Resignation and Quarantine (2026-07-30)
+
+The historical "Démissionner" scenario is implemented
+(`views/unsubscribe.py`). Two states join `MemberStates`:
+**`PENDING_UNSUBSCRIPTION`** (the request is placed, the confirmation
+e-mail is out, the previous state is remembered in
+`previous_member_state`) and **`UNSUBSCRIBED`** (the link was followed;
+`departure_date` and `departure_reason` are set). An unconfirmed request
+**expires lazily** after `UNSUBSCRIBE_LINK_VALIDITY_DAYS` (7 days) — there
+is no scheduler: staleness is checked on the profile page and when the
+link is clicked, and the previous state is restored.
+
+Upon confirmation the LDAP entry is **deactivated but kept**
+(`isActive=False`): the pseudonym and the identity stay reserved during
+the **Quarantine** — `QUARANTINE_PERIOD_DAYS`, a Quantitative Parameter of
+§3.4 of the statutes, **180 days** by default (#54) — and
+`data.date_erasure_all_data` records the erasure due date. The deferred
+purge (see [09_periodic_tasks](09_periodic_tasks.md)) then erases
+everything **except the pseudonym, the departure date and the reason**,
+moving the member to `DELETED`.
+
+## Upgrade candidature (#7)
+
+An Ordinary Member can become a Cooperator
+(`views/upgrade_to_cooperator.py`): a form reduced to the four identity
+fields (cloned from `RegisterForm`) opens a `COOPERATOR` `Candidature`
+carrying **`existing_member_oid`**, pseudonym and e-mail copied from the
+member — never asked again — pre-set to **`UNIQUE_DATA`** so the existing
+flow (verifiers, vote) takes over. On approval, `register_user_to_ldap`
+branches into an **in-place update** of the LDAP entry (type, identity
+attributes) keeping `uid`, `cn`, `mail` and `userPassword` untouched. A
+running upgrade candidature is **resumed**, never duplicated.

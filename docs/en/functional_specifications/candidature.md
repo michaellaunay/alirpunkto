@@ -61,3 +61,16 @@ receive a localised e-mail.
 - No automatic expiry: a pending candidature stays pending until a human
   acts (see
   [../architecture/09_periodic_tasks.md](../architecture/09_periodic_tasks.md)).
+
+## Ordinary → Cooperator upgrade (#7)
+
+From the home page, a logged-in Ordinary Member sees the "Become a
+Cooperator" button. They enter only the four identity fields (given
+names, family names, date of birth, nationality) — the pseudonym and the
+e-mail are taken from their account, never asked again nor editable. The
+candidature enters the verification process directly: verifiers drawn,
+convocations, vote. Identity uniqueness is checked as for any Cooperator
+application, resigned members in Quarantine included (#54). On approval
+the existing account becomes Cooperator (identifier, pseudonym, e-mail
+and password unchanged); on refusal the member stays Ordinary. A running
+upgrade is resumed, never duplicated.

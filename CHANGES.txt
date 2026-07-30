@@ -1,3 +1,29 @@
+Unreleased (2026-07-30)
+-----------------------
+
+- Ordinary Members can upgrade to Cooperator: identity-only form, existing
+  registration flow (verifiers, vote), in-place LDAP update (#7).
+- Member resignation per the historical specification: double confirmation
+  by e-mailed link, LDAP entry deactivated but kept through the Quarantine
+  (180 days, §3.4), lazy expiry, cancellation, login guard, deferred purge
+  retaining only pseudonym, date and reason, with an erasure notice (#54).
+- Dynamic-group transitions: one pure truth table over shares,
+  yearly-contribution validity, sanction and Board/MAC role; idempotent
+  best-effort synchroniser wired to registration, upgrade, resignation and
+  profile updates; daily scan for calendar-driven moves; legacy
+  ordinaryMembersGroup drained progressively (#148, superseding #58, #65,
+  #74, #76, #146).
+- Identity uniqueness enforced for every Applicant against all LDAP
+  entries, resigned Cooperators in Quarantine included (#54).
+- Member avatar stored in LDAP jpegPhoto with dedicated upload/serve views
+  and strict validation (#150).
+- Home-page application catalogue filtered by member status, with direct
+  SSO links (#142, #35); browser-language default (#171); profile
+  description as textarea (#165); mandatory-field asterisks (#107).
+- All campaign strings renamed to symbolic msgids across the 33 catalogues;
+  alirpunkto.pot brought back in line.
+- Test suite grown from ~580 to 800+.
+
 Unreleased (2026-07-25)
 -----------------------
 

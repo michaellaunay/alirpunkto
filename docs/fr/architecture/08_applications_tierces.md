@@ -56,3 +56,13 @@ Les scénarios initiaux « Liste des Applications » et « Configuration de la
 liste des applications » sont archivés dans
 `../specifications_historiques/Scénarios/` ; le présent document et la
 spécification fonctionnelle courante les remplacent.
+
+## Catalogue par statut de membre (#142/#35, 2026-07-30)
+
+La page d'accueil liste les applications depuis un **catalogue `.ini`**
+(section par application : nom-`msgid`, description, URL de connexion SSO
+directe, **audience**). L'audience filtre par statut : `ordinary`,
+`cooperator` ou les deux — `filter_applications_for_member` résout le type
+du membre de la session et la vue ne montre que les entrées pertinentes.
+Les libellés sont des `msgid` traduits au rendu
+(voir [10_internationalisation](10_internationalisation.md)).

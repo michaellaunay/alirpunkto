@@ -67,3 +67,42 @@ Le mode d'emploi détaillé est dans `docker/README.md`.
   faite hors application peut le désynchroniser ;
 - le membre de remplissage `uid=00000000-…` doit être ignoré par tout
   traitement des groupes.
+
+## Groupes dynamiques (#148, 2026-07-30)
+
+Les onze groupes du ticket #148 (créés au démarrage avec les trois groupes
+historiques) reçoivent désormais leurs **transitions**
+(`alirpunkto/dynamic_groups.py`). L'algèbre événementielle du ticket se
+réduit à une **fonction pure**, `compute_target_groups`, sur quatre faits —
+parts détenues, validité de la cotisation annuelle
+(`dateEndValidityYearlyContribution`), sanction, rôle Board/CMA — les
+groupes eux-mêmes étant l'état persistant (la sanction et le rôle se lisent
+des appartenances courantes). L'applicateur `sync_member_groups` est
+**idempotent** et maintient les **deux côtés** de la relation
+(`uniqueMemberOf` du membre, `uniqueMember` du groupe) ; il est **best-effort
+par construction** : un échec ne casse jamais l'opération appelante, le
+scan quotidien rattrape. Il est branché aux quatre sources d'événements :
+inscription (l'Ordinaire rejoint `communityMembersGroup` ; le
+`ordinaryMembersGroup` **légué se vide progressivement**), approbation
+d'une montée en grade (arrivée dans
+`candidatesMissingShareYearContribGroup`), démission (plus aucun groupe,
+l'entrée restant en quarantaine) et toute modification de profil. Les
+événements de sanction et de promotion (#56/#57) ont leur crochet prêt
+(`force_sanctioned`) pour les futures vues d'administration.
+
+## Unicité d'identité et quarantaine (#54)
+
+`is_valid_unique_identity(prénoms, noms, date de naissance)` compare
+l'identité de tout candidat à **toutes** les entrées LDAP — volontairement
+**sans filtre `isActive`** : l'entrée d'un démissionnaire ou exclu est
+conservée pendant la Quarantaine précisément pour qu'il ne puisse pas se
+réinscrire avec une réputation vierge. Le contrôle est branché aux deux
+portes d'entrée Coopérateur : le formulaire d'inscription et la montée en
+grade (#7).
+
+## Avatar (`jpegPhoto`, #150)
+
+L'avatar vit **uniquement** dans l'attribut LDAP `jpegPhoto` — ni ZODB ni
+formulaire `deform` : deux vues dédiées (`member_avatar` le sert,
+`avatar_upload` l'écrit), un triple contrôle (extension, nombre magique,
+taille ≤ 4 Mo) et l'écriture réservée au propriétaire de la session.

@@ -25,10 +25,51 @@ La pile Docker assure les travaux récurrents :
 
 ## Limites connues et évolutions envisagées
 
-Faute d'ordonnanceur applicatif, il n'existe ni purge des candidatures
-périmées, ni relance automatique des courriels en erreur, ni traitement de
-`dateErasureAllData` (droit à l'effacement) : ces opérations sont
-manuelles. L'intégration d'un ordonnanceur (ou de commandes `cron` dédiées
-appelant des scripts `tools/`) reste l'évolution cible ; la décision sera
-consignée dans [decisions_architecture](decisions_architecture.md) lorsque
-tranchée.
+Deux traitements périodiques existent désormais comme **fonctions
+utilitaires appelables** — le dépôt reste sans ordonnanceur applicatif, et
+c'est un choix : la planification appartient à l'exploitation
+(2026-07-30).
+
+## Purge post-quarantaine
+
+`utils.purge_unsubscribed_members(request, now=None)` parcourt les membres
+`UNSUBSCRIBED` dont `data.date_erasure_all_data` est échue : l'entrée LDAP
+est supprimée, les données personnelles effacées (seuls **le pseudonyme, la
+date et le motif du départ** subsistent), le membre passe à `DELETED`, et
+l'ancien membre est informé par courriel (#54). Idempotente ; retourne les
+oid purgés.
+
+## Scan quotidien des groupes dynamiques
+
+`dynamic_groups.daily_group_scan(request, today=None)` re-synchronise tous
+les membres des groupes gérés : c'est lui qui transforme le **temps
+calendaire** (cotisation annuelle échue ou renouvelée) en transitions
+(#148). Idempotent ; retourne les oid dont les groupes ont changé.
+
+## Branchement
+
+Les deux s'appellent ensemble, une fois par jour, depuis un `cron` (ou un
+timer systemd) via un petit script utilisant `pyramid.paster.bootstrap`
+avec le `production.ini` de l'instance — par exemple :
+
+```python
+from pyramid.paster import bootstrap
+from alirpunkto.utils import purge_unsubscribed_members
+from alirpunkto.dynamic_groups import daily_group_scan
+
+with bootstrap("production.ini") as env:
+    request = env["request"]
+    purge_unsubscribed_members(request)
+    daily_group_scan(request)
+```
+
+L'expiration des demandes de démission non confirmées n'a pas besoin de
+tâche : elle est **paresseuse** (vérifiée au profil et au clic du lien).
+
+## Limites connues et évolutions envisagées
+
+Ni purge des candidatures périmées ni relance automatique des courriels en
+erreur : ces opérations restent manuelles. Un point d'entrée console
+(`console_scripts`) empaquetant le script ci-dessus est l'évolution
+naturelle ; la décision sera consignée dans
+[decisions_architecture](decisions_architecture.md) lorsque tranchée.
