@@ -19,6 +19,7 @@ from alirpunkto.utils import (
 
 from alirpunkto.models.member import (
     MemberStates,
+    MemberTypes,
     EmailSendStatus,
     MemberDatas,
 )
@@ -150,21 +151,32 @@ def modify_member(request):
             "error": _('unknown_member'),
         }
     # The member is known and will be recognized as the accessor.
-    try:
-        ldap_members = get_ldap_member_list()
-    except Exception as e:
-        log.error(f"modify_member: failed to list the members from LDAP: {e}")
-        return {
-            "form": None,
-            "member": member,
-            "accessed_member": None,
-            "accessed_members": {},
-            "error": _('ldap_error_retry'),
-        }
-    members = {user.oid:user.name for user in ldap_members}
+    # Issue #201: only administrators may browse other members — the member
+    # list is neither fetched nor exposed for anyone else.
+    is_admin = member.type == MemberTypes.ADMINISTRATOR
+    if is_admin:
+        try:
+            ldap_members = get_ldap_member_list()
+        except Exception as e:
+            log.error(f"modify_member: failed to list the members from LDAP: {e}")
+            return {
+                "form": None,
+                "member": member,
+                "accessed_member": None,
+                "accessed_members": {},
+                "error": _('ldap_error_retry'),
+            }
+        members = {user.oid:user.name for user in ldap_members}
+    else:
+        members = {}
     accessor_member = member
-    if "submit" in request.POST or 'modify' in request.POST:
-        if "submit" in request.POST:
+    if "submit" in request.POST or 'modify' in request.POST or not is_admin:
+        if not is_admin:
+            # Issue #201: whatever oid was posted or left in the session, a
+            # non-admin only ever accesses their own profile — and a plain
+            # GET lands straight on it.
+            accessed_member_oid = member.oid
+        elif "submit" in request.POST:
             accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)
         elif 'modify' in request.POST:
             accessed_member_oid = (request.session[ACCESSED_MEMBER_OID]
@@ -199,8 +211,16 @@ def modify_member(request):
                 "accessed_members": members,
                 "error": _('unknown_accessed_member')
             }
-        # Memorize the moddification request
-        if accessed_member.member_state != MemberStates.DATA_MODIFICATION_REQUESTED:
+        # Memorize the moddification request — but never clobber a running
+        # resignation (issue #201 made plain GETs land here, and the
+        # unsubscription flow relies on PENDING_UNSUBSCRIPTION surviving a
+        # profile visit).
+        if accessed_member.member_state in (
+                MemberStates.PENDING_UNSUBSCRIPTION,
+                MemberStates.UNSUBSCRIBED):
+            if ACCESSED_MEMBER_OID not in request.session:
+                request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
+        elif accessed_member.member_state != MemberStates.DATA_MODIFICATION_REQUESTED:
             request.session[ACCESSED_MEMBER_OID] = accessed_member.oid
             accessed_member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
         elif ACCESSED_MEMBER_OID not in request.session:
@@ -222,7 +242,8 @@ def modify_member(request):
         # so we need to apply permissions.data and permissions to the schema.
         schema.apply_permissions(permissions.data)
         schema.apply_permissions(permissions)
-    if "submit" in request.POST:
+    if "submit" in request.POST or (not is_admin
+                                    and 'modify' not in request.POST):
         appstruct = {
             'accessed_member': accessed_member,
             'cooperative_number': accessed_member.oid,
