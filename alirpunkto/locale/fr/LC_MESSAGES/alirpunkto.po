@@ -1266,3 +1266,18 @@ msgstr "Téléverser mon avatar"
 
 msgid "avatar_remove_button"
 msgstr "Retirer mon avatar"
+
+msgid "member_admin_card_title"
+msgstr "Fiche du membre (lecture seule)"
+
+msgid "user_number_label"
+msgstr "Numéro d'utilisateur·rice"
+
+msgid "role_label"
+msgstr "Rôle dans la Coopérative"
+
+msgid "departure_date_label"
+msgstr "Date de démission ou d'exclusion"
+
+msgid "departure_reason_label"
+msgstr "Motif du départ"

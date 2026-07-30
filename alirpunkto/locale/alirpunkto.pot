@@ -1277,3 +1277,18 @@ msgstr ""
 
 msgid "avatar_remove_button"
 msgstr ""
+
+msgid "member_admin_card_title"
+msgstr ""
+
+msgid "user_number_label"
+msgstr ""
+
+msgid "role_label"
+msgstr ""
+
+msgid "departure_date_label"
+msgstr ""
+
+msgid "departure_reason_label"
+msgstr ""

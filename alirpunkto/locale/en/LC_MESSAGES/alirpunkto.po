@@ -1278,3 +1278,18 @@ msgstr "Upload my avatar"
 
 msgid "avatar_remove_button"
 msgstr "Remove my avatar"
+
+msgid "member_admin_card_title"
+msgstr "Member card (read-only)"
+
+msgid "user_number_label"
+msgstr "User number"
+
+msgid "role_label"
+msgstr "Role in the Cooperative"
+
+msgid "departure_date_label"
+msgstr "Date of resignation or exclusion"
+
+msgid "departure_reason_label"
+msgstr "Reason of departure"

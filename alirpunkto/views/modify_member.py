@@ -78,6 +78,39 @@ def _coerce_member_data_value(field, raw):
     route_name='modify_member',
     renderer='alirpunkto:templates/modify_member.pt'
 )
+def _admin_member_card(request, accessed_member):
+    """The fixed, read-only card administrators see (issue #149): exactly
+    the eight fields the ticket lists — nothing else, and no form."""
+    from alirpunkto.models.member import MemberRoles
+    from alirpunkto.views.avatar import get_member_avatar
+    data = getattr(accessed_member, 'data', None)
+    role = getattr(data, 'role', None)
+    role_name = getattr(role, 'name', role) or MemberRoles.NONE.name
+    try:
+        role_i18n = MemberRoles.get_i18n_id(role_name) or \
+            "member_roles_none"
+    except Exception:
+        role_i18n = "member_roles_none"
+    try:
+        has_avatar = bool(get_member_avatar(request, accessed_member.oid))
+    except Exception:
+        has_avatar = False
+    return {
+        'oid': accessed_member.oid,
+        'pseudonym': getattr(accessed_member, 'pseudonym', None),
+        'description': getattr(data, 'description', None),
+        'role_i18n': role_i18n,
+        'cooperative_behaviour_mark':
+            getattr(data, 'cooperative_behaviour_mark', None),
+        'cooperative_behaviour_mark_update':
+            getattr(data, 'cooperative_behaviour_mark_update', None),
+        'departure_date': getattr(accessed_member, 'departure_date', None),
+        'departure_reason': getattr(accessed_member, 'departure_reason',
+                                    None),
+        'has_avatar': has_avatar,
+    }
+
+
 def modify_member(request):
     """Modify member view.
     get the accessed member oid and show form to modify accessed member datas.
@@ -210,6 +243,18 @@ def modify_member(request):
                 "accessed_member": None,
                 "accessed_members": members,
                 "error": _('unknown_accessed_member')
+            }
+        if is_admin and accessed_member.oid != member.oid:
+            # Issue #149: administrators view a fixed read-only card of the
+            # eight listed fields — never the modification form, and the
+            # visit neither flips the member's state nor arms the session
+            # for a later 'modify' POST.
+            return {
+                "form": None,
+                "member": member,
+                "accessed_member": accessed_member.oid,
+                "accessed_members": members,
+                "admin_view": _admin_member_card(request, accessed_member),
             }
         # Memorize the moddification request — but never clobber a running
         # resignation (issue #201 made plain GETs land here, and the
