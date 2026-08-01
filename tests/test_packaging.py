@@ -66,7 +66,8 @@ def test_the_ci_installs_from_the_lock():
     ci = open(os.path.join(ROOT, ".github", "workflows", "tests.yml"),
               encoding="utf-8").read()
     assert "setup.py" not in ci
-    assert "requirements.lock" in ci
+    # Fourth audit pass (P1): the test lane installs its own hashed lock.
+    assert "requirements-test.lock" in ci
     assert "pyproject.toml" in ci
 
 def test_the_docker_builds_install_from_the_lock():
@@ -78,7 +79,8 @@ def test_the_docker_builds_install_from_the_lock():
     assert "--no-deps" in dockerfile
     script = open(os.path.join(ROOT, "docker", "start_test_pyramid.sh"),
                   encoding="utf-8").read()
-    assert "requirements.lock" in script
+    # Fourth audit pass (P1): the test stack installs the hashed test lock.
+    assert "requirements-test.lock" in script
 
 
 def test_waitress_options_live_in_the_server_section():

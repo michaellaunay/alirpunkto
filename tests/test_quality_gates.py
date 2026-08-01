@@ -22,7 +22,9 @@ def test_the_quality_workflow_runs_the_three_gates():
     workflow = _read(".github", "workflows", "quality.yml")
     assert "ruff check alirpunkto tests tools" in workflow
     assert "bandit -r alirpunkto tools -ll" in workflow
-    assert "pip-audit -r requirements.lock" in workflow
+    # Fourth audit pass (P1): pip-audit now sweeps the three hashed
+    # locks (see tests/test_supply_chain.py for the per-lock assertions).
+    assert "pip-audit --no-deps" in workflow
     assert "continue-on-error: true" in workflow        # mypy informative
 
 

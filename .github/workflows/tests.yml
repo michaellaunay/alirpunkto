@@ -37,14 +37,14 @@ jobs:
           # test runs ("No file matched to [**/requirements.txt ...]").
           cache-dependency-path: |
             pyproject.toml
-            requirements.lock
+            requirements-test.lock
 
       - name: Install dependencies
         run: |
           if [ -f pyproject.toml ]; then
-            # Pyramid layout: prefer the "testing" extra, fall back to the plain
-            # editable install when that extra does not exist.
-            pip install -r requirements.lock
+            # Fourth audit pass (P1): the test lane installs the hashed
+            # test lock (runtime + testing extra), not the runtime lock.
+            pip install --require-hashes -r requirements-test.lock
             pip install -e . --no-deps
           elif [ -f requirements.txt ]; then
             pip install -r requirements.txt

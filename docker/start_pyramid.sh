@@ -37,7 +37,9 @@ fi
 cd "${APP_DIR}"
 
 if [ "${INSTALL_EXTRAS_TESTING:-false}" = "true" ]; then
-    pip install --no-cache-dir -e ".[testing]"
+    # Fourth audit pass (P1): install the hashed test lock, never the
+    # unpinned extra — the image already carries the editable install.
+    pip install --no-cache-dir --require-hashes -r requirements-test.lock
 fi
 
 # Fourth audit pass (2026-08-01): inside the compose stack Waitress must

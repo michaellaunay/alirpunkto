@@ -2,9 +2,20 @@
 # to be unbounded in a legacy setup.py with version='0.0' and no lock —
 # two installs at different dates produced different environments.
 # Bounds below are measured against the tested environment; the exact
-# pinned set lives in requirements.lock (regenerate with:
-#   pip install pip-tools && pip-compile --extra testing -o requirements.lock pyproject.toml
-# ) and is what the CI installs.
+# pinned sets live in three hashed locks (fourth audit pass, P1 — the
+# production image used to ship ruff, mypy and pytest because a single
+# lock carried every extra):
+#   requirements.lock          runtime only — what the Docker image installs
+#   requirements-test.lock     runtime + testing — what tests.yml installs
+#   requirements-quality.lock  runtime + quality — what quality.yml installs
+# Regenerate with pip-tools (same seed keeps the pinned versions):
+#   pip install pip-tools
+#   pip-compile --allow-unsafe --generate-hashes --strip-extras \
+#       -o requirements.lock pyproject.toml
+#   pip-compile --allow-unsafe --generate-hashes --strip-extras \
+#       --extra testing -o requirements-test.lock pyproject.toml
+#   pip-compile --allow-unsafe --generate-hashes --strip-extras \
+#       --extra quality -o requirements-quality.lock pyproject.toml
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
@@ -27,7 +38,6 @@ dependencies = [
     "plaster_pastedeploy>=1.0.1,<2",
     "pyramid>=2.1,<3",
     "pyramid_chameleon>=0.3,<0.4",
-    "pyramid_debugtoolbar>=4.12.1,<5",
     "waitress>=3.0.2,<4",
     "pyramid_retry>=2.1.1,<3",
     "pyramid_tm>=2.6,<3",
@@ -62,6 +72,12 @@ quality = [
     "bandit>=1.8,<2",
     "pip-audit>=2.9,<3",
     "mypy>=1.14,<2",
+]
+dev = [
+    # Fourth audit pass (P1): the debug toolbar was a runtime dependency,
+    # so every production image shipped it. Only development.ini includes
+    # it — install with `pip install -e ".[dev]"` when working locally.
+    "pyramid_debugtoolbar>=4.12.1,<5",
 ]
 
 [project.entry-points."paste.app_factory"]

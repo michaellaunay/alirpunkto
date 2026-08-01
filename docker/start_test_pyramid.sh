@@ -38,7 +38,9 @@ fi
 cd "${APP_DIR}"
 
 if [ "${INSTALL_EXTRAS_TESTING:-false}" = "true" ]; then
-    pip install --no-cache-dir -r requirements.lock
+    # Fourth audit pass (P1): the test stack installs the hashed test
+    # lock (runtime + testing), not the runtime lock alone.
+    pip install --no-cache-dir --require-hashes -r requirements-test.lock
     pip install --no-cache-dir -e . --no-deps
 fi
 

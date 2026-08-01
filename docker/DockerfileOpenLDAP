@@ -1,4 +1,6 @@
-FROM ubuntu:24.04
+# Fourth audit pass (2026-08-01, P1): base pinned by digest — a
+# mutable tag is a supply-chain risk (multi-arch manifest list).
+FROM ubuntu:24.04@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90
 
 LABEL maintainer="michaellaunay+alirpunkto@logikascium.com" \
       description="OpenLDAP server for AlirPunkto"
