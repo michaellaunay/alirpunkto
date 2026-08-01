@@ -25,7 +25,6 @@ import threading
 import time
 from collections import defaultdict, deque
 
-from alirpunkto.constants_and_globals import log
 
 #: A single address: at most 10 attempts over 5 minutes.
 IP_MAX_ATTEMPTS = 10

@@ -3,21 +3,13 @@
 # date: 2023-07-07
 
 from pyramid.view import view_config
-from requests import request
 from alirpunkto.constants_and_globals import (
-    _,
     SSO_REFRESH,
     SSO_EXPIRES_AT,
-    KEYCLOAK_CLIENT_ID,
-    KEYCLOAK_REALM,
-    KEYCLOAK_SERVER_URL,
-    KEYCLOAK_CLIENT_SECRET,
 )
 from json import loads
 from alirpunkto.utils import filter_applications_for_member, refresh_keycloak_token, logout, store_sso_tokens
-from datetime import datetime, timedelta
-import urllib.parse
-from alirpunkto.secret_manager import get_secret
+from datetime import datetime
 
 def is_authenticated(request):
     # Check if the user is authenticated

@@ -5,7 +5,7 @@ from datetime import datetime
 import pytest
 
 from alirpunkto.models.candidature import Candidature, CandidatureStates, Voter, VotingChoice
-from alirpunkto.models.member import MemberDataFunctions, MemberStates, Members
+from alirpunkto.models.member import MemberDataFunctions, MemberStates
 
 
 @pytest.mark.parametrize(

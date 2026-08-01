@@ -15,7 +15,6 @@ import time
 from types import SimpleNamespace
 from unittest.mock import MagicMock
 
-import pytest
 
 import alirpunkto as app
 from alirpunkto.constants_and_globals import VERIFIER_REMINDER_MIN_INTERVAL_SECONDS

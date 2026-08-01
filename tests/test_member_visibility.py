@@ -15,7 +15,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 from pyramid.events import NewRequest
-from pyramid.httpexceptions import HTTPFound
 from pyramid.testing import DummyRequest, setUp, tearDown
 
 import alirpunkto

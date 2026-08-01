@@ -20,7 +20,6 @@ from pyramid.view import view_config
 from alirpunkto.constants_and_globals import (
     _,
     AVATAR_MAX_BYTES,
-    log,
 )
 from alirpunkto.utils import (
     delete_member_avatar,

@@ -13,7 +13,7 @@ import os
 import re
 from datetime import date, datetime, timedelta
 from types import SimpleNamespace
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 from pyramid.events import NewRequest

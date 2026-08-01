@@ -3,14 +3,13 @@
 # Creation date: 2024-02-06
 # Author: Michaël Launay
 
-from typing import Type, Tuple, List, Any, Optional, Dict, Iterator
-from dataclasses import dataclass, fields, make_dataclass
-from unittest import case
+from typing import Type, Tuple, List, Any, Optional, Iterator
+from dataclasses import dataclass, fields
 from persistent import Persistent
 from persistent.mapping import PersistentMapping
 from datetime import datetime
 from pyramid.authorization import Allow, ALL_PERMISSIONS
-from enum import Enum, unique, IntFlag
+from enum import Enum, unique
 from uuid import uuid4
 from ZODB.Connection import Connection
 import transaction
@@ -20,7 +19,6 @@ from datetime import date
 
 # Constants
 from alirpunkto.constants_and_globals import (
-    _,
     log,
     SEED_LENGTH,
     DEFAULT_COOPERATIVE_BEHAVIOUR_MARK,

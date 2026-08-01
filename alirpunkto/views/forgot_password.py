@@ -23,8 +23,7 @@ from BTrees import OOBTree
 from alirpunkto.models.member import (
     MemberStates,
     EmailSendStatus,
-    MemberDatas,
-    MemberTypes
+    MemberDatas
 )
 from alirpunkto.constants_and_globals import (
     _,
@@ -37,7 +36,6 @@ from alirpunkto.constants_and_globals import (
 from alirpunkto.schemas.register_form import RegisterForm
 from pyramid.i18n import Translator
 import deform
-import colander
 from alirpunkto.secret_manager import encrypt_secret_for_logs
 
 @view_config(

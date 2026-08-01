@@ -6,12 +6,10 @@ from alirpunkto.utils import (
     get_member_by_oid,
     is_valid_password,
     is_valid_email,
-    update_member_from_ldap,
     register_user_to_ldap,
     update_ldap_member,
     update_member_password,
     send_member_state_change_email,
-    send_check_new_email,
     get_ldap_member_list,
 )
 
@@ -25,22 +23,9 @@ from alirpunkto.models.member import (
 from alirpunkto.constants_and_globals import (
     _,
     log,
-    CANDIDATURE_OID,
-    MEMBER_OID,
-    ACCESSED_MEMBER_OID,
-    LDAP_ADMIN_OID
+    ACCESSED_MEMBER_OID
 )
-from alirpunkto.schemas.register_form import RegisterForm
-from pyramid.i18n import Translator
-import deform
 from alirpunkto.models.users import User
-from alirpunkto.models.permissions import Permissions
-from alirpunkto.models.model_permissions import (
-    MemberDataPermissions,
-    get_access_permissions
-)
-from dataclasses import fields
-import json
 
 manage_provider_schema = {
     'name': {'type': 'string', 'required': True, 'empty': False},

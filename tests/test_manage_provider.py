@@ -13,7 +13,6 @@ from contextlib import ExitStack, contextmanager
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
-import pytest
 
 from alirpunkto.constants_and_globals import ACCESSED_MEMBER_OID, _
 from alirpunkto.models.member import Member, MemberDatas, MemberStates, MemberTypes

@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import glob
 import re
-from types import SimpleNamespace
 
 import pytest
 from pyramid.events import NewRequest

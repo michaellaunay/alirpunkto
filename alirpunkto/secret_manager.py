@@ -122,5 +122,5 @@ def make_ldap_password(cleartext: str, salt_len: int = 8) -> str:
     if is_hashed_password(cleartext):
         return cleartext
     salt = os.urandom(salt_len)
-    digest = hashlib.sha1(cleartext.encode("utf-8") + salt).digest()
+    digest = hashlib.sha1(cleartext.encode("utf-8") + salt).digest()  # nosec B324 — {SSHA} is the format slapd consumes (accepted risk, see docs/*/audits/)
     return "{SSHA}" + base64.b64encode(digest + salt).decode("ascii")

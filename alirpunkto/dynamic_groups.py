@@ -21,7 +21,6 @@ from __future__ import annotations
 from datetime import date, datetime
 
 from alirpunkto.constants_and_globals import (
-    _,
     LDAP_BASE_DN,
     LDAP_OU,
     LDAP_PASSWORD,
@@ -31,7 +30,7 @@ from alirpunkto.constants_and_globals import (
 from alirpunkto.ldap_factory import get_ldap_connection
 from alirpunkto.models.member import MemberTypes
 from alirpunkto.utils import get_secret
-from ldap3 import MODIFY_ADD, MODIFY_DELETE, MODIFY_REPLACE
+from ldap3 import MODIFY_ADD, MODIFY_DELETE
 from ldap3.utils.conv import escape_filter_chars
 
 COMMUNITY = 'communityMembersGroup'

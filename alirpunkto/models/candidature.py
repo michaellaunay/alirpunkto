@@ -3,15 +3,13 @@
 # Creation date: 2023-07-22
 # Author: Michaël Launay
 
-from typing import Type, Tuple, List, Dict, Iterator
+from typing import Tuple, List, Dict, Iterator
 from dataclasses import dataclass
-from persistent.mapping import PersistentMapping
 from pyramid.authorization import Allow, ALL_PERMISSIONS
 from enum import Enum, unique
 
 # Constants
 from alirpunkto.constants_and_globals import (
-    _,
     log,
 )
 

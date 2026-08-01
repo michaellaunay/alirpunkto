@@ -13,7 +13,6 @@ from __future__ import annotations
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
-import pytest
 from webob.multidict import MultiDict
 
 from alirpunkto.models.candidature import Candidature, CandidatureStates

@@ -18,7 +18,7 @@ from pyramid.events import NewRequest
 from pyramid.testing import DummyRequest, setUp, tearDown
 
 import alirpunkto
-from alirpunkto import add_localizer, add_renderer_globals
+from alirpunkto import add_renderer_globals
 
 FRENCH_FRAGMENT = "Nous t'avons envoyé"
 ENGLISH_FRAGMENT = "We sent you"

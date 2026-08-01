@@ -10,7 +10,6 @@ import re
 from dotenv import load_dotenv
 import argparse
 from typing import Tuple, List
-import json
 
 MAX_TOKENS = 12000
 MAX_CONTENT_SIZE = 9999

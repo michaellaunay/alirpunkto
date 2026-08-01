@@ -74,7 +74,6 @@ from ldap3 import (
     Connection,
     MODIFY_ADD,
     MODIFY_REPLACE,
-    MODIFY_DELETE,
     SUBTREE,
 )
 from ldap3.core.exceptions import LDAPException

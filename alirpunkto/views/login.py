@@ -2,7 +2,7 @@
 # author: Michaël Launay
 # date: 2023-06-15
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Union
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound

@@ -10,7 +10,6 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-import pytest
 
 from alirpunkto.constants_and_globals import (
     ACCESSED_MEMBER_OID,

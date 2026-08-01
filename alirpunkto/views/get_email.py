@@ -5,7 +5,6 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound, HTTPBadRequest
 from alirpunkto.constants_and_globals import (
-    _,
     log
 )
 from alirpunkto.models.users import User

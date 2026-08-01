@@ -10,7 +10,6 @@ everywhere.
 """
 from __future__ import annotations
 
-import os
 from types import SimpleNamespace
 from unittest.mock import patch
 

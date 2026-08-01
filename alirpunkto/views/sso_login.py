@@ -1,5 +1,4 @@
 from pyramid.view import view_config
-from pyramid.response import Response
 from keycloak import KeycloakOpenID
 from pyramid.httpexceptions import HTTPFound
 from alirpunkto.constants_and_globals import (
@@ -17,14 +16,12 @@ from alirpunkto.constants_and_globals import (
 from alirpunkto.utils import (
     update_member_from_ldap,
     store_sso_tokens,
-    get_keycloak_token,
     logout,
 )
 from alirpunkto.secret_manager import get_secret
 import jwt
 from alirpunkto.models.users import User
-from alirpunkto.models.member import Member
-from datetime import datetime, timedelta
+from datetime import datetime
 from pyramid.security import remember
 
 @view_config(route_name='sso_login')
@@ -119,7 +116,7 @@ def callback_view(request):
             location=request.route_url('home'),
             headers=headers
         )
-    except jwt.ExpiredSignatureError as err:
+    except jwt.ExpiredSignatureError:
         log.debug("The sso token has expired")
         logout(request)
     except jwt.InvalidAudienceError as err:

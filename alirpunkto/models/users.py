@@ -1,7 +1,7 @@
 """_summary_
 Define the user model which is used to store users in the zodb database.
 """
-from dataclasses import dataclass, asdict, field
+from dataclasses import dataclass, asdict
 from typing import Union
 import json
 from persistent import Persistent

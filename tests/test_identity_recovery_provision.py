@@ -15,7 +15,6 @@ import os
 import re
 from unittest.mock import MagicMock, patch
 
-import pytest
 
 from alirpunkto import identity_recovery as ir
 

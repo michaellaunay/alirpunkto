@@ -60,7 +60,7 @@ def is_hashed(value: str | None) -> bool:
 def make_ssha(cleartext: str, salt_len: int = 8) -> str:
     """`slappasswd -h {SSHA}`-compatible hash (verified natively by slapd)."""
     salt = os.urandom(salt_len)
-    digest = hashlib.sha1(cleartext.encode("utf-8") + salt).digest()
+    digest = hashlib.sha1(cleartext.encode("utf-8") + salt).digest()  # nosec B324 — {SSHA} is the format slapd consumes (accepted risk, see docs/*/audits/)
     return "{SSHA}" + base64.b64encode(digest + salt).decode("ascii")
 
 

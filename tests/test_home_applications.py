@@ -10,7 +10,6 @@ fall back to English instead of a bare key.
 """
 from __future__ import annotations
 
-import configparser
 import os
 import re
 from types import SimpleNamespace

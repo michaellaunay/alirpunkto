@@ -6,7 +6,6 @@ button pointed at the deprecated /login form through empty i18n variables
 SSO login route (/sso_login) instead.
 """
 import os
-import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REGISTER_PT = os.path.join(ROOT, "alirpunkto", "templates", "register.pt")

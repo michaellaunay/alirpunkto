@@ -7,7 +7,6 @@ a developer explicitly runs the dedicated helper script.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch

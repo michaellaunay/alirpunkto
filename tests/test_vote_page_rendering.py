@@ -18,7 +18,6 @@ from pyramid.events import NewRequest
 from pyramid.renderers import render
 from pyramid.testing import DummyRequest, setUp, tearDown
 
-import alirpunkto
 from alirpunkto import add_localizer, add_renderer_globals
 from alirpunkto.models import member as member_module
 from alirpunkto.models.member import MemberDatas

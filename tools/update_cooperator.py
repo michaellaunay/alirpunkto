@@ -146,7 +146,8 @@ def main() -> None:
     args = parse_args()
 
     load_env_file(args.env)
-    DOMAINE = args.base_url or os.getenv("base_url") or DOMAINE
+    global DOMAINE          # ruff F823: the fallback read the global,
+    DOMAINE = args.base_url or os.getenv("base_url") or DOMAINE  # noqa: E501
     global LOGIN_URL
     LOGIN_URL = f"{DOMAINE}/{LOGIN_PATH}"
     global MODIFY_URL

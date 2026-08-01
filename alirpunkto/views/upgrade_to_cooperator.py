@@ -11,7 +11,6 @@ it is copied from the member and never asked again.
 """
 from __future__ import annotations
 
-import logging
 
 import colander
 import deform

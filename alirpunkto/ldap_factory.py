@@ -5,20 +5,14 @@
 
 from collections.abc import Mapping
 from .constants_and_globals import (
-    log,
-    LDAP_SERVER,
     LDAP_USE_SSL,
     LDAP_USER,
-    LDAP_PORT,
     PYTEST_CURRENT_TEST,
     TEST_WITH_DOCKER_LDAP,
-    TEST_WITH_DOCKER_LDAP_SERVER,
-    TEST_WITH_DOCKER_LDAP_PORT,
     get_ldap_server_name,
     get_ldap_server_port,
     log
 )
-import os
 
 from ldap3 import (
     Server,

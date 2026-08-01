@@ -13,11 +13,10 @@ from datetime import date, datetime, timedelta
 from types import SimpleNamespace
 from unittest.mock import patch
 
-import pytest
 
 import alirpunkto.utils as utils
 from alirpunkto.constants_and_globals import (
-    _, LDAP_BASE_DN, LDAP_OU, LDAP_TIME_FORMAT, QUARANTINE_PERIOD_DAYS)
+    LDAP_BASE_DN, LDAP_OU, LDAP_TIME_FORMAT, QUARANTINE_PERIOD_DAYS)
 from alirpunkto.models.member import MemberDatas, MemberStates
 from alirpunkto.utils import is_valid_unique_identity
 

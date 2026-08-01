@@ -18,7 +18,7 @@ from pyramid.events import NewRequest
 from pyramid.testing import DummyRequest, setUp, tearDown
 
 import alirpunkto
-from alirpunkto.constants_and_globals import ACCESSED_MEMBER_OID, _
+from alirpunkto.constants_and_globals import ACCESSED_MEMBER_OID
 from alirpunkto.models.member import MemberRoles, MemberStates, MemberTypes
 from alirpunkto.views import modify_member as mm
 from alirpunkto.views.modify_member import modify_member

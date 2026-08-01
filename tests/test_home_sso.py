@@ -14,7 +14,6 @@ from datetime import datetime, timedelta
 from types import SimpleNamespace
 from unittest.mock import patch
 
-import pytest
 
 from alirpunkto.constants_and_globals import SSO_EXPIRES_AT, SSO_REFRESH, SSO_TOKEN
 from alirpunkto.views import home

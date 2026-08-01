@@ -4,16 +4,12 @@
 from typing import Union
 import copy
 import datetime
-import os
 import colander
 from deform import schema
-from deform.widget import SelectWidget, TextAreaWidget, TextInputWidget, DateInputWidget, FileUploadWidget, PasswordWidget
+from deform.widget import SelectWidget, TextAreaWidget, TextInputWidget, DateInputWidget, PasswordWidget
 from alirpunkto.constants_and_globals import (
     _,
     EUROPEAN_LOCALES,
-    DOMAIN_NAME,
-    SITE_NAME,
-    ORGANIZATION_DETAILS,
     MIN_PSEUDONYM_LENGTH,
     MAX_PSEUDONYM_LENGTH,
     SITE_INFORMATION_MAPPING,

@@ -19,7 +19,6 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
-import pytest
 import transaction
 from ZODB import DB
 from ZODB.FileStorage import FileStorage

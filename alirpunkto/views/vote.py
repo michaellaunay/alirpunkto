@@ -15,7 +15,6 @@ from alirpunkto.models.member import (
 )
 from alirpunkto.utils import (
     get_candidatures,
-    send_confirm_validation_email,
     send_candidature_state_change_email,
     register_user_to_ldap
 )

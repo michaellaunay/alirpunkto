@@ -16,7 +16,6 @@ import base64
 from alirpunkto.utils import get_ldap_member_list
 from alirpunkto.constants_and_globals import (
     LDAP_BASE_DN,
-    LDAP_SERVER,
     LDAP_OU,
 )
 

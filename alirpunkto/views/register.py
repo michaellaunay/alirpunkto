@@ -8,7 +8,7 @@
 # date: 2023-06-15
 
 import datetime
-from typing import Dict, Optional, Union
+from typing import Dict, Optional
 import deform
 from deform import ValidationFailure
 from pyramid.view import view_config
@@ -36,7 +36,6 @@ from alirpunkto.constants_and_globals import (
     VERIFIER_VOTE_DEADLINE_DAYS,
     NOTICE_TIME_VERIFIERS,
     DEFAULT_NUMBER_OF_VOTERS,
-    AVAILABLE_LANGUAGES,
 )
 from pyramid.i18n import Translator
 from pyramid.path import AssetResolver
@@ -222,7 +221,7 @@ def handle_draft_state(request: Request, candidature: Candidature) -> dict:
         candidature.challenge = generate_math_challenges(request)
 
         if not attempt_send_validation_email(request, candidature):
-            log.debug(f"Handling draft state for candidature email_not_sent")
+            log.debug("Handling draft state for candidature email_not_sent")
             return {
                 'candidature': candidature,
                 'MemberTypes': MemberTypes,
@@ -484,7 +483,7 @@ def handle_confirmed_human_state(request, candidature):
             items = request.POST.items()
             appstruct.update(dict(items))
             #form.validate(items) #@TODO resolve the error 
-        except ValidationFailure as e:
+        except ValidationFailure:
             return {
                 'form': form.render(appstruct=appstruct),
                 'candidature': candidature,

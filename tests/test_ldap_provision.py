@@ -23,7 +23,6 @@ import hashlib
 import importlib.util
 import sys
 from types import SimpleNamespace
-from unittest.mock import MagicMock
 
 import pytest
 

@@ -1,15 +1,12 @@
-from pyramid import config
 import os, pytz, hashlib, threading, time
 from collections import defaultdict
 from pyramid.config import Configurator
 from pyramid_zodbconn import get_connection
 from pyramid.i18n import (
-    get_localizer,
     default_locale_negotiator,
     get_localizer
 )
 from pyramid.events import NewRequest, subscriber
-from pyramid.config import Configurator
 from pyramid_mailer.mailer import Mailer
 
 from .models import appmaker
@@ -263,10 +260,10 @@ def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
     with Configurator(settings=settings) as config:
-        # set session factory
         hash_object = hashlib.sha256()
         hash_object.update(get_secret(SECRET_KEY).encode('utf-8'))
         derived_secret = hash_object.hexdigest()
+        # set session factory
         session_factory = SignedCookieSessionFactory(derived_secret, timeout=DEFAULT_SESSION_TIMEOUT, httponly=True, secure=True, samesite='Lax')        
         config.set_session_factory(session_factory)
         config.set_default_csrf_options(require_csrf=True)
