@@ -1343,3 +1343,9 @@ msgstr ""
 
 msgid "forgot_password_fill_form"
 msgstr ""
+
+msgid "check_new_email_success_title"
+msgstr ""
+
+msgid "check_new_email_title"
+msgstr ""

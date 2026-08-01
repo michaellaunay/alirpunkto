@@ -1196,3 +1196,9 @@ msgstr "Remove my avatar"
 
 msgid "forgot_password_fill_form"
 msgstr "Choose your new password below."
+
+msgid "check_new_email_success_title"
+msgstr "Well done! You have updated your e-mail address"
+
+msgid "check_new_email_title"
+msgstr "Change of e-mail address"

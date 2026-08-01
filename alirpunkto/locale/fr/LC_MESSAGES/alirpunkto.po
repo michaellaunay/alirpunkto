@@ -1332,3 +1332,9 @@ msgstr "Communauté (groupe hérité)"
 
 msgid "forgot_password_fill_form"
 msgstr "Choisis ton nouveau mot de passe ci-dessous."
+
+msgid "check_new_email_success_title"
+msgstr "Bravo ! Tu as mis à jour ton adresse de courriel"
+
+msgid "check_new_email_title"
+msgstr "Changement d'adresse de courriel"
