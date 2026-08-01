@@ -2674,3 +2674,20 @@ remonté à la racine du seul gabarit troué, l'interpolation des variables
 par `_()` plutôt que par le pipeline natif, et un doublon fermé sur
 preuve rejouée. Cinquante-six tickets fermés, zéro en souffrance ; il
 reste au client le branchement `cron` de la page 09.
+
+## 2026-08-01 (suite) — Les provisions et l'âge : le tri est soldé
+
+Les trois derniers tickets du tri sont tombés, et avec eux la liste
+entière. Les deux **provisions long terme** ont rejoint le schéma sans
+rien exposer : l'Annuaire Partagé du §5.3.1 — où la contrainte des 512
+caractères s'est révélée intenable naïvement (les douze noms de groupes
+la dépassent à eux seuls) et tenue par des codes à deux lettres, 440
+caractères mesurés sur le membre maximal — et le code de récupération
+d'identité, dont les 64 caractères du champ sont le SHA-256 du code,
+jamais le secret. L'**âge minimum** (#80), lui, existait aux trois
+quarts ; restaient le message du ticket et un bogue de fond : la borne
+de majorité, construite à l'import, se figeait au démarrage du process
+et refusait les tout-juste-majeurs — un `deferred` la recalcule
+désormais à chaque requête. Cinquante-neuf tickets traités, 894 tests ;
+le `cron` du chapitre 09 demeure le seul geste d'exploitation en
+attente.

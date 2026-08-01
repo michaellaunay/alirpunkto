@@ -104,3 +104,33 @@ The avatar lives **only** in the LDAP `jpegPhoto` attribute — no ZODB, no
 `deform` form: two dedicated views (`member_avatar` serves it,
 `avatar_upload` writes it), a triple check (extension, magic number, size
 ≤ 4 MB), and writing restricted to the session owner.
+
+## Long-term provisions (#110, #127, 2026-08-01)
+
+Seven attributes join the reference schema while no feature exposes
+them yet — **invisibility by construction**: no `MemberDatas` field, no
+form node, no view, and a test locks that these names never reach the
+application surface. `tools/ldap_provision.py` deploys them in one
+resynchronisation (the modernity probes include the new names).
+
+**The Shared Directory of Cooperators** (#110, statutes §5.3.1): five
+slots `eMailDestinationCooperator1`…`5` — the written list is **the
+whole state**, unused slots are cleared, no stale address survives —
+and `cipheredPersonalData`, a single block bounded by the statutes to
+**fewer than 512 characters**. The `shared_directory.py` module ships
+the whole chain: compact JSON, **two-letter codes** for groups and role
+(the twelve group names alone outweigh the entire bound), `zlib`, then
+Fernet on the session secret — a maximal member measures **440
+characters**, proving the future version can rely on the bound; an
+oversized block is refused rather than written truncated. Noted for the
+real feature: a purged Cooperator's address may survive in other
+members' slots.
+
+**The Identity Recovery Code** (#127): the `identityRecoveryCode`
+attribute contains "a string of 64 characters" — which is, a design
+choice documented in `identity_recovery.py`, the **SHA-256 hex digest**
+of the code's canonical form: the secret itself is **never** stored.
+The code handed to the member — five groups of five characters from an
+alphabet without ambiguous glyphs (~122 bits) — copies reliably by
+hand; canonicalisation forgives case, spaces and hyphens, and
+verification is constant-time.

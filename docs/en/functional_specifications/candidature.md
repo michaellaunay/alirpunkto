@@ -74,3 +74,15 @@ application, resigned members in Quarantine included (#54). On approval
 the existing account becomes Cooperator (identifier, pseudonym, e-mail
 and password unchanged); on refusal the member stays Ordinary. A running
 upgrade is resumed, never duplicated.
+
+## Minimum age of Cooperators (#80)
+
+Cooperator status is reserved to persons **of age** (18th birthday
+reached, civil calendar — leap years included). The "Date of birth"
+field explains it below the input, and the rule is checked on
+submission **at both doors**: Cooperator registration and the upgrade.
+An underage candidate is refused with the ticket's message, inviting
+them to register as an Ordinary Member of the Community and to upgrade
+as soon as they come of age — the Ordinary form asks no date of birth
+at all: the minors' path stays open. The majority bound is recomputed
+**at every request**.

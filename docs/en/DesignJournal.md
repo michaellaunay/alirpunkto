@@ -348,3 +348,18 @@ language, the i18n domain lifted to the root of the only holed template,
 variable interpolation through `_()` rather than the native pipeline,
 and a duplicate closed on replayed proof. Fifty-six tickets closed, none
 pending; the `cron` wiring of chapter 09 remains on the client's side.
+
+## 2026-08-01 (continued) — Provisions and age: the list is settled
+
+The last three tickets of the sorted list fell, and the whole list with
+them. The two **long-term provisions** joined the schema exposing
+nothing: the §5.3.1 Shared Directory — where the 512-character bound
+proved unattainable naively (the twelve group names alone exceed it)
+and was met with two-letter codes, 440 characters measured on the
+maximal member — and the Identity Recovery Code, whose 64 field
+characters are the SHA-256 of the code, never the secret. The **minimum
+age** (#80) already existed three-quarters; what remained was the
+ticket's message and a deep bug: the majority bound, built at import,
+froze at process start and refused the newly-of-age — a `deferred` now
+recomputes it at every request. Fifty-nine tickets handled, 894 tests;
+the chapter-09 `cron` remains the only pending operations step.

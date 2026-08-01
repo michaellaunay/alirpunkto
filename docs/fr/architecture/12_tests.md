@@ -83,3 +83,16 @@ matrice de l'issue #55 est verrouillée **cas par cas** par une table
 paramétrée calquée sur le ticket (dix-neuf régimes), et les rendus de
 gabarits s'assertent sur les **msgstr des catalogues**, jamais sur les
 textes de repli inline.
+
+## Campagne 2026-08-01, suite : 894 tests
+
+Deux leçons de plus. **Un validateur construit à la définition de classe
+se fige à l'import** : la borne d'âge du champ date de naissance
+(`get_majority_date()`) datait du démarrage du process — après quelques
+semaines, le formulaire refusait des candidats devenus majeurs
+entre-temps. Le remède est le **`colander.deferred`**, résolu à chaque
+`bind` donc à chaque requête, verrouillé par un test qui déplace la
+majorité de soixante jours et vérifie que le bind la suit. Et côté
+harnais : un clone de vérification a besoin de son `var/` — sans lui, la
+ZODB échoue en `zc.lockfile` et six tests fonctionnels passent en erreur
+fantôme.

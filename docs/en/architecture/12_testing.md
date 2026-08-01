@@ -80,3 +80,14 @@ reattaches the decorator and adds a **structural lock**
 issue #55 matrix is locked **case by case** by a parametrized table
 mirroring the ticket (nineteen regimes), and template renderings assert
 against the **catalogue msgstr**, never the inline fallback texts.
+
+## 2026-08-01 campaign, continued: 894 tests
+
+Two more lessons. **A validator built at class definition freezes at
+import**: the birthdate age bound (`get_majority_date()`) dated from
+process start — after a few weeks the form refused candidates who had
+since come of age. The cure is **`colander.deferred`**, resolved at
+every `bind` hence at every request, locked by a test that shifts the
+majority by sixty days and checks the bind follows. And on the harness
+side: a verification clone needs its `var/` — without it the ZODB fails
+in `zc.lockfile` and six functional tests error out as ghosts.

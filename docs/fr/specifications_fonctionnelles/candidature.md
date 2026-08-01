@@ -75,3 +75,16 @@ compte existant devient Coopérateur (l'identifiant, le pseudonyme, le
 courriel et le mot de passe ne changent pas) ; en cas de refus, le membre
 reste Ordinaire. Une montée en grade en cours est reprise, jamais
 dupliquée.
+
+## Âge minimum des Coopérateur·rice·s (#80)
+
+Le statut de Coopérateur·rice est réservé aux personnes **majeures**
+(18ᵉ anniversaire atteint, au calendrier civil — années bissextiles
+comprises). Le champ « Date de naissance » l'explique sous sa saisie,
+et la règle est contrôlée à la soumission **aux deux portes** :
+l'inscription Coopérateur et la montée en grade. Un·e candidat·e
+mineur·e est refusé·e avec le message du ticket, qui l'invite à
+s'inscrire comme membre Ordinaire de la Communauté et à passer
+Coopérateur·rice dès sa majorité — le formulaire Ordinaire, lui, ne
+demande pas de date de naissance : la voie des mineurs reste ouverte.
+La borne de majorité est recalculée **à chaque requête**.

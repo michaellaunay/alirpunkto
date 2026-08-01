@@ -106,3 +106,35 @@ L'avatar vit **uniquement** dans l'attribut LDAP `jpegPhoto` — ni ZODB ni
 formulaire `deform` : deux vues dédiées (`member_avatar` le sert,
 `avatar_upload` l'écrit), un triple contrôle (extension, nombre magique,
 taille ≤ 4 Mo) et l'écriture réservée au propriétaire de la session.
+
+## Provisions long terme (#110, #127, 2026-08-01)
+
+Sept attributs rejoignent le schéma de référence sans qu'aucune
+fonctionnalité ne les expose encore — l'**invisibilité par
+construction** : ni champ `MemberDatas`, ni nœud de formulaire, ni vue,
+et un test verrouille que ces noms n'atteignent jamais la surface
+applicative. `tools/ldap_provision.py` les déploie en une
+resynchronisation (les sondes de modernité incluent les nouveaux noms).
+
+**L'Annuaire Partagé des Coopérateurs** (#110, §5.3.1 des statuts) :
+cinq emplacements `eMailDestinationCooperator1`…`5` — la liste écrite
+est **l'état entier**, les emplacements inutilisés sont vidés, aucune
+adresse périmée ne survit — et `cipheredPersonalData`, un bloc unique
+borné à **moins de 512 caractères** par les statuts. Le module
+`shared_directory.py` fournit la chaîne complète : JSON compact, **codes
+à deux lettres** pour les groupes et le rôle (les douze noms de groupes
+pèsent à eux seuls plus que toute la borne), `zlib`, puis Fernet sur le
+secret de session — un membre maximal mesure **440 caractères**, la
+preuve que la version future peut compter sur la borne ; un bloc trop
+long est refusé plutôt qu'écrit tronqué. Point noté pour la vraie
+version : l'adresse d'un Coopérateur purgé peut survivre dans les
+emplacements des autres.
+
+**Le code de récupération d'identité** (#127) : l'attribut
+`identityRecoveryCode` contient « une chaîne de 64 caractères » — qui
+est, choix de conception documenté dans `identity_recovery.py`, le
+**SHA-256 hexadécimal** de la forme canonique du code : le secret
+lui-même n'est **jamais** stocké. Le code remis au membre — cinq groupes
+de cinq caractères d'un alphabet sans glyphes ambigus (~122 bits) — se
+recopie à la main ; la canonicalisation pardonne casse, espaces et
+tirets, et la vérification est en temps constant.

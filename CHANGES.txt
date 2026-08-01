@@ -23,6 +23,17 @@ Unreleased (2026-08-01)
 - Repairs a production-only routing defect: a helper had slid between
   @view_config and the modify_member definition, structurally locked
   against recurrence.
+- Long-term LDAP provisions: the Shared Directory fields of statutes
+  5.3.1 — five destination-address slots and a ciphered personal-data
+  block proven to fit its 512-character bound (440 for a maximal member,
+  thanks to two-letter group/role codes) — and the Identity Recovery
+  Code field, whose 64 characters are the SHA-256 of the code's
+  canonical form, the secret itself never stored; all invisible by
+  construction and deployable through tools/ldap_provision.py
+  (#110, #127).
+- The Cooperator minimum age is enforced at both doors with the
+  ticket's own refusal message; the age bound is now recomputed at
+  every request instead of freezing at process start (#80).
 
 Unreleased (2026-07-30)
 -----------------------
