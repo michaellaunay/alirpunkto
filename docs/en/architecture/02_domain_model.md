@@ -123,3 +123,30 @@ flow (verifiers, vote) takes over. On approval, `register_user_to_ldap`
 branches into an **in-place update** of the LDAP entry (type, identity
 attributes) keeping `uid`, `cn`, `mail` and `userPassword` untouched. A
 running upgrade candidature is **resumed**, never duplicated.
+
+## Profile visibility (2026-08-01)
+
+Three regimes now govern the `modify_member` view. **A member only ever
+sees their own profile** (#201): the member list is neither fetched nor
+exposed for them, any crafted `oid` (POST field, stale session) resolves
+to their own at a single point, and a plain GET lands straight on their
+page. **The administrator views without modifying** (#149): a read-only
+card of the ticket's eight fields — pseudonym, profile text, avatar,
+user number, translated role, Cooperative Behaviour Mark with its date,
+departure — built before any side effect; a crafted `modify` POST ends
+on the card, never in a write, and nothing sensitive (e-mail, IBAN,
+civil identity) reaches the context. **One's own profile follows the
+matrix of issue #55**: everyone views and edits their presentation,
+avatar, e-mail and languages; a Cooperator or assimilated additionally
+edits the IBAN and views — never edits — identity, nationality, CBM,
+shares, contribution and role; pseudonym and user number are read-only
+for all; the groups one belongs to show, translated, above the form; the
+erasure date (#54) is visible to no one. The `Owner` matrix being keyed
+by state only, a per-type post-processing
+(`_restrict_owner_permissions_by_type`) strips the ten Cooperator-only
+fields to `NONE` for everyone else, and the `PENDING_UNSUBSCRIPTION`
+entry guarantees a resigning member still opens their profile — the
+cancel button lives there. The view finally carries the specification
+frame (#123): "Your profile" title, introduction, translated Submit and
+Cancel buttons, cancellation being a Post/Redirect/Get handled before
+any LDAP work.

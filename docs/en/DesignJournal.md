@@ -330,3 +330,21 @@ the LDAP avatar (#150), the i18n clean-up (symbolic msgids, maintained
 `.pot`) and the suite passing 800 tests. Two periodic functions await
 their `cron`: the purge and the scan (see
 [architecture/09_periodic_tasks](architecture/09_periodic_tasks.md)).
+
+## 2026-08-01 — Profile visibility and language consistency
+
+Two groups of the client's list fell. The **visibility group**
+(#201, #149, #123, #55): other members' profiles close to non-admins,
+the administrator gains a structurally harmless read-only card — no
+form, no side effect, nothing sensitive — and the issue #55 matrix
+finally governs one's own profile, regime by regime, with a per-type
+post-processing over a state-keyed matrix. Two discoveries on the way:
+the `PENDING_UNSUBSCRIPTION` entry was missing from the matrix (a
+resigning member could no longer cancel), and a previous fix had slid a
+helper between `@view_config` and its view — a production-only 500
+invisible to direct-call tests, now structurally locked. The
+**inconsistencies group** (#248, #175, #160, #86): the link bearer's
+language, the i18n domain lifted to the root of the only holed template,
+variable interpolation through `_()` rather than the native pipeline,
+and a duplicate closed on replayed proof. Fifty-six tickets closed, none
+pending; the `cron` wiring of chapter 09 remains on the client's side.

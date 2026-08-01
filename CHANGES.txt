@@ -1,3 +1,29 @@
+Unreleased (2026-08-01)
+-----------------------
+
+- Profile visibility: non-admin members are restricted to their own
+  profile — no member list, crafted oids neutralised, plain GET lands on
+  one's page (#201); administrators get a fixed read-only card of eight
+  fields and can never modify anyone (#149).
+- One's own profile follows the issue #55 matrix: presentation, avatar,
+  e-mail and languages editable by all; IBAN editable by Cooperators or
+  assimilated, who also view — never edit — identity, nationality, CBM,
+  shares, contribution validity and role; groups shown translated above
+  the form; the erasure date visible to no one; a resigning member can
+  still open their profile to cancel (#55).
+- The profile view carries its specified frame: translated title,
+  introduction, Submit and Cancel buttons (#123, reviving #116).
+- The change-password screen displays in the member's preferred
+  language for the link bearer, never for the anonymous leg (#248), and
+  the forgot-password view is fully translated — the i18n domain now
+  covers the whole template and the instruction msgid exists in the 33
+  catalogues (#175, closing duplicate #86).
+- The e-mail confirmation page carries its own title and interpolated
+  variables instead of literal ${...} (#160).
+- Repairs a production-only routing defect: a helper had slid between
+  @view_config and the modify_member definition, structurally locked
+  against recurrence.
+
 Unreleased (2026-07-30)
 -----------------------
 

@@ -69,3 +69,17 @@ global qu'un autre test installe ; le widget de date soumet une structure
 **peppercorn** (`__start__`/`date`/`__end__`), comme un navigateur ; et la
 table de vérité des groupes dynamiques est verrouillée **cas par cas**
 contre le ticket #148 par des tests paramétrés.
+
+## Campagne 2026-08-01
+
+La suite atteint **867 tests**. La leçon qui restera : `@view_config`
+est un *veneer* — il retourne la fonction inchangée et marque pour
+`config.scan`. Une fonction glissée **entre** le décorateur et la `def`
+devient silencieusement LA vue de la route : les tests qui appellent la
+vue directement restent verts, la production sert un 500. Le correctif
+du groupe 4 recolle le décorateur et pose un **verrou structurel**
+(`test_the_view_config_decorates_the_view_itself`). Autres acquis : la
+matrice de l'issue #55 est verrouillée **cas par cas** par une table
+paramétrée calquée sur le ticket (dix-neuf régimes), et les rendus de
+gabarits s'assertent sur les **msgstr des catalogues**, jamais sur les
+textes de repli inline.

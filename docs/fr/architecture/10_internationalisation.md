@@ -84,3 +84,26 @@ sa traduction anglaise et française, et les `.mo` versionnés sont
 recompilés (`msgfmt`) dans le même commit. Les libellés du catalogue
 d'applications (`applications.ini`) sont eux aussi des `msgid` résolus au
 rendu.
+
+## Trois leçons du groupe « incohérences » (2026-08-01)
+
+**Le domaine couvre tout le gabarit** (#175, #86) : `forgot_password.pt`
+portait `i18n:domain="alirpunkto"` sur un div intérieur — le titre et
+l'instruction, hors de sa portée, étaient cherchés dans le domaine par
+défaut et retombaient sur l'anglais inline dans toutes les langues,
+traductions présentes ou non. Le domaine se pose sur la racine du slot ;
+c'était le seul gabarit troué du dépôt (balayage fait).
+
+**Les variables passent par `_()`** (#160) : le pipeline natif
+`i18n:translate`/`i18n:name` de Chameleon n'interpole pas les `${...}`
+des msgstr — `check_new_email.pt` affichait `${domain_name}` littéral.
+Les messages à variables se rendent par
+`tal:content="python:_('msgid', {'clé': valeur})"` : `auto_translate`
+fusionne le mapping du site et les clés passées (l'`admin_email` n'est
+pas dans `SITE_INFORMATION_MAPPING`).
+
+**La langue du porteur de lien** (#248) : l'écran de changement de mot
+de passe, atteint par le lien e-mail sans session, s'affiche dans la
+langue préférée du membre — `switch_request_language` (#247) dès que le
+token a validé le seed. Jamais sur la jambe anonyme : une bascule y
+trahirait l'existence du compte.

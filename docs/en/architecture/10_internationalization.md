@@ -82,3 +82,26 @@ in line. The maintenance rule: every new string is born with a symbolic
 versioned `.mo` files recompiled (`msgfmt`) in the same commit. The
 application-catalogue labels (`applications.ini`) are `msgid`s as well,
 resolved at render time.
+
+## Three lessons from the "inconsistencies" group (2026-08-01)
+
+**The domain covers the whole template** (#175, #86):
+`forgot_password.pt` carried `i18n:domain="alirpunkto"` on an inner div —
+the title and the instruction, outside its scope, were looked up in the
+default domain and fell back to the inline English in every language,
+translations present or not. The domain sits on the slot root; it was
+the only template in the repository with that hole (scan done).
+
+**Variables go through `_()`** (#160): Chameleon's native
+`i18n:translate`/`i18n:name` pipeline does not interpolate the `${...}`
+placeholders of the msgstr — `check_new_email.pt` displayed a literal
+`${domain_name}`. Messages with variables render through
+`tal:content="python:_('msgid', {'key': value})"`: `auto_translate`
+merges the site mapping and the passed keys (`admin_email` is not in
+`SITE_INFORMATION_MAPPING`).
+
+**The link bearer's language** (#248): the change-password screen,
+reached through the e-mailed link without a session, displays in the
+member's preferred language — `switch_request_language` (#247) as soon
+as the token has validated the seed. Never on the anonymous leg: a
+switch there would betray that the account exists.

@@ -67,3 +67,16 @@ to stay hermetic to the global renderer another test installs; the date
 widget submits a **peppercorn** structure (`__start__`/`date`/`__end__`),
 exactly as a browser does; and the dynamic-group truth table is locked
 **case by case** against ticket #148 by parametrized tests.
+
+## 2026-08-01 campaign
+
+The suite reaches **867 tests**. The lesson that will stick:
+`@view_config` is a *veneer* — it returns the function unchanged and
+marks it for `config.scan`. A function slid **between** the decorator
+and the `def` silently becomes THE view of the route: tests calling the
+view directly stay green, production serves a 500. The group-4 fix
+reattaches the decorator and adds a **structural lock**
+(`test_the_view_config_decorates_the_view_itself`). Also gained: the
+issue #55 matrix is locked **case by case** by a parametrized table
+mirroring the ticket (nineteen regimes), and template renderings assert
+against the **catalogue msgstr**, never the inline fallback texts.

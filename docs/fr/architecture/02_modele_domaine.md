@@ -123,3 +123,31 @@ l'approbation, `register_user_to_ldap` bifurque vers une **mise à jour en
 place** de l'entrée LDAP (type, attributs d'identité) sans toucher `uid`,
 `cn`, `mail` ni `userPassword`. Une candidature de montée en grade en cours
 est **reprise**, jamais dupliquée.
+
+## Visibilité des profils (2026-08-01)
+
+Trois régimes gouvernent désormais la vue `modify_member`. **Un membre ne
+voit que son propre profil** (#201) : la liste des membres n'est ni
+chargée ni exposée pour lui, tout `oid` forgé (champ POST, session
+résiduelle) est rabattu sur le sien en un point unique, et un GET nu
+atterrit directement sur sa page. **L'administrateur consulte sans
+modifier** (#149) : une fiche en lecture seule des huit champs du ticket
+— pseudonyme, texte de profil, avatar, numéro, rôle traduit, Cooperative
+Behaviour Mark et sa date, départ — construite avant tout effet de bord ;
+un POST `modify` forgé aboutit à la fiche, jamais à une écriture, et rien
+de sensible (courriel, IBAN, identité civile) n'atteint le contexte.
+**Son propre profil suit la matrice de l'issue #55** : chacun voit et
+modifie sa présentation, son avatar, son courriel et ses langues ; le
+Coopérateur ou assimilé modifie en plus son IBAN et voit — sans les
+modifier — son identité, sa nationalité, sa CBM, ses parts, sa cotisation
+et son rôle ; pseudonyme et numéro sont en lecture seule pour tous ; les
+groupes d'appartenance s'affichent, traduits, au-dessus du formulaire ;
+la date d'effacement (#54) n'est visible de personne. La matrice `Owner`
+étant indexée par état seul, un post-traitement par type
+(`_restrict_owner_permissions_by_type`) rabat les dix champs coopérateurs
+à `NONE` pour les autres, et l'entrée `PENDING_UNSUBSCRIPTION` garantit
+qu'un démissionnaire en attente ouvre encore son profil — le bouton
+d'annulation y vit. La vue porte enfin le cadre de la spécification
+(#123) : titre « Ton profil », introduction, boutons Soumettre et
+Annuler traduits, l'annulation étant un Post/Redirect/Get traité avant
+tout accès LDAP.

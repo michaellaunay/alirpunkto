@@ -2655,3 +2655,22 @@ l'assainissement i18n (msgid symboliques, `.pot` maintenu) et le passage
 de la suite à plus de 800 tests. Deux fonctions périodiques attendent leur
 `cron` : la purge et le scan (voir
 [architecture/09_taches_periodiques](architecture/09_taches_periodiques.md)).
+
+## 2026-08-01 — Visibilité des profils et cohérence des langues
+
+Deux groupes du tri client sont tombés. Le **groupe visibilité**
+(#201, #149, #123, #55) : le profil des autres se ferme aux non-admins,
+l'administrateur gagne une fiche en lecture seule structurellement
+inoffensive — pas de formulaire, pas d'effet de bord, rien de sensible —
+et la matrice de l'issue #55 gouverne enfin son propre profil, régime
+par régime, avec un post-traitement par type sur une matrice indexée par
+état. Deux découvertes en route : l'entrée `PENDING_UNSUBSCRIPTION`
+manquait à la matrice (le démissionnaire ne pouvait plus annuler), et un
+correctif précédent avait glissé un helper entre `@view_config` et sa
+vue — un 500 de production invisible aux tests directs, désormais
+verrouillé structurellement. Le **groupe des incohérences**
+(#248, #175, #160, #86) : la langue du porteur de lien, le domaine i18n
+remonté à la racine du seul gabarit troué, l'interpolation des variables
+par `_()` plutôt que par le pipeline natif, et un doublon fermé sur
+preuve rejouée. Cinquante-six tickets fermés, zéro en souffrance ; il
+reste au client le branchement `cron` de la page 09.
