@@ -1364,3 +1364,6 @@ msgstr ""
 
 msgid "cooperator_underage_error"
 msgstr ""
+
+msgid "too_many_login_attempts"
+msgstr ""

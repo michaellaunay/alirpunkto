@@ -20,6 +20,11 @@ from alirpunkto.constants_and_globals import (
     ORGANIZATION_DETAILS,
 )
 from alirpunkto.models.users import User
+from alirpunkto.login_throttle import (
+    is_throttled,
+    record_failure,
+    record_success,
+)
 from alirpunkto.utils import (
     safe_local_redirect,
     switch_request_language,
@@ -48,6 +53,17 @@ def login_view(request):
     if 'form.submitted' in request.params:
         username = request.params.get('username', "")
         password = request.params.get('password', "")
+        client_ip = getattr(request, 'client_addr', None) or 'unknown'
+        if is_throttled(client_ip, username):
+            # Refused before any LDAP work; never log the password.
+            log.warning(f"login throttled for ip={client_ip} "
+                        f"username={username!r}")
+            return {
+                'error': _('too_many_login_attempts'),
+                'site_name': site_name,
+                'domain_name': domain_name,
+                'organization_details': organization_details
+            }
         if is_admin(username, password):
             # The user is the ldap admin
             user = get_admin_user(request)
@@ -57,6 +73,7 @@ def login_view(request):
             if not oid:
                 # The user is not in the ldap directory
                 # return an error message
+                record_failure(client_ip, username)
                 return {
                     'error': _('invalid_username_or_password'),
                     'site_name': site_name,
@@ -65,6 +82,7 @@ def login_view(request):
                 }
             user = check_password(username, oid, password)
         if user is not None:
+            record_success(client_ip, username)
             # The user is in the ldap directory
             member = update_member_from_ldap(oid, request) # force update of the user
             headers = remember(request, username)
@@ -96,6 +114,7 @@ def login_view(request):
                 headers=headers
             )
         else:
+            record_failure(client_ip, username)
             request.session['logged_in'] = False
             return {
                 'error': _('invalid_username_or_password'),
