@@ -1349,3 +1349,12 @@ msgstr ""
 
 msgid "check_new_email_title"
 msgstr ""
+
+msgid "too_many_destination_emails"
+msgstr ""
+
+msgid "ciphered_block_too_long"
+msgstr ""
+
+msgid "ldap_error_retry"
+msgstr ""

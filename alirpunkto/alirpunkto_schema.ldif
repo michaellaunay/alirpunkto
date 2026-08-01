@@ -71,6 +71,47 @@ olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.12
   SUBSTR caseExactSubstringsMatch
   SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
   SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.13
+  NAME 'eMailDestinationCooperator1'
+  DESC 'E-mail address of destination Cooperator 1 of the focal Cooperator (Shared Directory provision, statutes 5.3.1, issue #110)'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.14
+  NAME 'eMailDestinationCooperator2'
+  DESC 'E-mail address of destination Cooperator 2 of the focal Cooperator (Shared Directory provision, statutes 5.3.1, issue #110)'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.15
+  NAME 'eMailDestinationCooperator3'
+  DESC 'E-mail address of destination Cooperator 3 of the focal Cooperator (Shared Directory provision, statutes 5.3.1, issue #110)'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.16
+  NAME 'eMailDestinationCooperator4'
+  DESC 'E-mail address of destination Cooperator 4 of the focal Cooperator (Shared Directory provision, statutes 5.3.1, issue #110)'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.17
+  NAME 'eMailDestinationCooperator5'
+  DESC 'E-mail address of destination Cooperator 5 of the focal Cooperator (Shared Directory provision, statutes 5.3.1, issue #110)'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.3.6.1.4.1.61000.1.18
+  NAME 'cipheredPersonalData'
+  DESC 'Ciphered block (< 512 characters) of the focal Cooperator personal data for the Shared Directory (statutes 5.3.1, issue #110)'
+  EQUALITY caseExactMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{512}
+  SINGLE-VALUE )
 olcObjectClasses: ( 1.3.6.1.4.1.61000.2.2.1
   NAME 'alirpunktoPerson'
     DESC 'AlirPunkto specific person object class' 
@@ -80,5 +121,8 @@ olcObjectClasses: ( 1.3.6.1.4.1.61000.2.2.1
     MAY ( nationality $ birthdate $ secondLanguage $ thirdLanguage $ 
         cooperativeBehaviourMark $ cooperativeBehaviourMarkUpdate $ 
         numberSharesOwned $ dateEndValidityYearlyContribution $ IBAN $
-        uniqueMemberOf $ dateErasureAllData )
+        uniqueMemberOf $ dateErasureAllData $
+        eMailDestinationCooperator1 $ eMailDestinationCooperator2 $
+        eMailDestinationCooperator3 $ eMailDestinationCooperator4 $
+        eMailDestinationCooperator5 $ cipheredPersonalData )
   )

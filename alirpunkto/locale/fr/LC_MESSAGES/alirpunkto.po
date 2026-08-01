@@ -1338,3 +1338,12 @@ msgstr "Bravo ! Tu as mis à jour ton adresse de courriel"
 
 msgid "check_new_email_title"
 msgstr "Changement d'adresse de courriel"
+
+msgid "too_many_destination_emails"
+msgstr "Au plus cinq adresses de destination peuvent être enregistrées."
+
+msgid "ciphered_block_too_long"
+msgstr "Le bloc chiffré de données personnelles dépasse la limite de 512 caractères."
+
+msgid "ldap_error_retry"
+msgstr "L'annuaire n'a pas pu être joint. Réessaie."

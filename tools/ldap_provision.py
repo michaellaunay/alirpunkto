@@ -102,7 +102,9 @@ DOCKER_SEED_PATH = REPO_ROOT / "docker" / SEED_FILE_NAME
 DEFAULT_CONTAINER = "alirpunkto-ldap"
 # presence of these proves the schema is current (post-2024 additions)
 MODERN_SCHEMA_PROBES = ("cooperativeBehaviourMarkUpdate", "IBAN",
-                        "dateErasureAllData")
+                        "dateErasureAllData",
+    "cipheredPersonalData",
+)
 _HASH_PREFIXES = (
     "{SSHA}", "{SHA}", "{SSHA256}", "{SHA256}", "{SSHA512}", "{SHA512}",
     "{SMD5}", "{MD5}", "{CRYPT}", "{ARGON2}", "{PBKDF2}", "{PBKDF2-SHA1}",

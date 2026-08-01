@@ -1283,3 +1283,12 @@ msgstr "Well done! You have updated your e-mail address"
 
 msgid "check_new_email_title"
 msgstr "Change of e-mail address"
+
+msgid "too_many_destination_emails"
+msgstr "At most five destination addresses can be stored."
+
+msgid "ciphered_block_too_long"
+msgstr "The ciphered personal data block exceeds the 512-character bound."
+
+msgid "ldap_error_retry"
+msgstr "The directory could not be reached. Please try again."
