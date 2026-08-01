@@ -34,6 +34,7 @@ from .constants_and_globals import (
     MAIL_USERNAME,
     MAIL_PASSWORD,
     MAIL_SENDER,
+    DOMAIN_NAME,
     MAIL_HOST,
     MAIL_PORT,
     MAIL_TLS,
@@ -240,6 +241,25 @@ def create_ldap_groups_if_not_exists():
     conn.unbind()
 
 
+def resolve_mail_sender(settings) -> str:
+    """The From address of every outgoing e-mail (issue #69).
+
+    The sender must never be a person: it binds the platform to an
+    individual and discloses a real name. Resolution order — the
+    ``MAIL_SENDER`` environment variable, then a non-empty
+    ``mail.default_sender`` of the ``.ini`` (which the old code always
+    overwrote, down to the literal string ``default_sender`` used as a
+    From), then the generic ``welcome@<domain>`` the ticket asks for —
+    always a plausible address, never a placeholder.
+    """
+    sender = MAIL_SENDER or os.environ.get('MAIL_SENDER')
+    if not sender:
+        sender = (settings.get('mail.default_sender') or '').strip() or None
+    if not sender or sender in ('default_sender', 'None'):
+        sender = f"welcome@{DOMAIN_NAME}"
+    return sender
+
+
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
@@ -263,7 +283,7 @@ def main(global_config, **settings):
         settings['mail.password'] = get_secret(MAIL_PASSWORD)
         if settings['mail.password'] == "None":
             settings['mail.password'] = None
-        settings['mail.default_sender'] = MAIL_SENDER if MAIL_SENDER else os.environ.get('MAIL_SENDER', 'default_sender')
+        settings['mail.default_sender'] = resolve_mail_sender(settings)
         settings['mail.host'] = MAIL_HOST if MAIL_HOST else os.environ.get('MAIL_HOST', 'localhost')
         settings['mail.port'] = MAIL_PORT if MAIL_PORT else os.environ.get('MAIL_PORT', '25')
         settings['mail.tls'] = MAIL_TLS if MAIL_TLS else os.environ.get('MAIL_TLS', 'false')
