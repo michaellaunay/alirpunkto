@@ -56,3 +56,19 @@ jobs:
       - run: pip install -r requirements.lock
       - run: pip install -e . --no-deps
       - run: mypy alirpunkto
+
+  secrets:
+    name: gitleaks (secret scanning)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          # Scan the whole history, not just the tip: a secret committed
+          # then deleted is still in every clone.
+          fetch-depth: 0
+      # Fourth audit pass (2026-08-01, §6): scan for committed secrets.
+      # Free for personal repositories; organisations need a
+      # GITLEAKS_LICENSE secret (see the gitleaks-action README).
+      - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7  # v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

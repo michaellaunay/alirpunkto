@@ -9,7 +9,10 @@ if [ "${BUILD_WITH_DEBUG:-0}" = "1" ]; then
     echo "[Pyramid:test] Debug image enabled."
 fi
 
-if [ ! -f "${APP_DIR}/setup.py" ] || [ ! -d "${APP_DIR}/alirpunkto" ]; then
+# Fourth audit pass (2026-08-01): the packaging patch retired setup.py
+# for pyproject.toml — checking for the removed file stopped the
+# container before pserve ever ran.
+if [ ! -f "${APP_DIR}/pyproject.toml" ] || [ ! -d "${APP_DIR}/alirpunkto" ]; then
     echo "[Pyramid:test] Application sources are missing in ${APP_DIR}" >&2
     exit 1
 fi
@@ -37,6 +40,16 @@ cd "${APP_DIR}"
 if [ "${INSTALL_EXTRAS_TESTING:-false}" = "true" ]; then
     pip install --no-cache-dir -r requirements.lock
     pip install --no-cache-dir -e . --no-deps
+fi
+
+# Fourth audit pass (2026-08-01): same Docker override as the production
+# start script — bind 0.0.0.0 inside the stack and trust the Apache
+# container's address, through a derived copy of the config file.
+if [ -n "${PYRAMID_LISTEN:-}" ] || [ -n "${PYRAMID_TRUSTED_PROXY:-}" ]; then
+    GENERATED_CONFIG="${CONFIG_FILE%.ini}.generated.ini"
+    python3 "${APP_DIR}/docker/apply_server_overrides.py" \
+        "${APP_DIR}/${CONFIG_FILE}" "${APP_DIR}/${GENERATED_CONFIG}"
+    CONFIG_FILE="${GENERATED_CONFIG}"
 fi
 
 echo "[Pyramid:test] Starting AlirPunkto with ${CONFIG_FILE}"

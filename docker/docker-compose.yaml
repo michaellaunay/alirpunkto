@@ -221,6 +221,16 @@ services:
       LDAP_PORT: 389
       MAIL_HOST: alirpunkto-postfix
       MAIL_PORT: 25
+      # Fourth audit pass (2026-08-01, P0): inside the stack Waitress must
+      # bind all interfaces — Apache lives in another container, so the
+      # loopback that production.ini binds for the bare host is
+      # unreachable from it — and trust the Apache container's fixed
+      # address (127.0.0.1 would fold the whole login throttle onto one
+      # window). start_pyramid.sh turns these two variables into a
+      # derived config copy via docker/apply_server_overrides.py; the
+      # bare-host values in production.ini stay untouched.
+      PYRAMID_LISTEN: "0.0.0.0:6543"
+      PYRAMID_TRUSTED_PROXY: ${ALIRPUNKTO_APACHE_IP:-172.28.10.10}
     volumes:
       - alirpunkto_pyramid_var:/home/alirpunkto/app/var
       - ./.env:/home/alirpunkto/app/.env:ro
@@ -280,7 +290,14 @@ services:
     #   - DAC_OVERRIDE
     #   - KILL
     networks:
-      - frontend
+      frontend:
+        # Fourth audit pass (P0): Waitress trusted_proxy compares the
+        # literal peer address — a service name would never match, so
+        # Apache must hold a fixed IP that PYRAMID_TRUSTED_PROXY (see
+        # the pyramid service) can point at. Override with
+        # ALIRPUNKTO_APACHE_IP (and ALIRPUNKTO_FRONTEND_SUBNET below)
+        # in docker/.env if the default subnet collides on your host.
+        ipv4_address: ${ALIRPUNKTO_APACHE_IP:-172.28.10.10}
     ports:
       - "80:80"
       - "443:443"
@@ -317,6 +334,12 @@ networks:
   frontend:
     name: alirpunkto-frontend
     driver: bridge
+    # Fourth audit pass (P0): pinned subnet so apache2 can hold the fixed
+    # address that PYRAMID_TRUSTED_PROXY points at. Both defaults live in
+    # the same /24; override the pair in docker/.env on subnet collision.
+    ipam:
+      config:
+        - subnet: ${ALIRPUNKTO_FRONTEND_SUBNET:-172.28.10.0/24}
   backend:
     name: alirpunkto-backend
     driver: bridge

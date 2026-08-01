@@ -87,7 +87,9 @@ def test_waitress_options_live_in_the_server_section():
     import configparser
     config = configparser.ConfigParser()
     config.read(os.path.join(ROOT, "production.ini"))
+    # Fourth audit pass: use_forwarded_proto left the tuple — it is not
+    # a Waitress option at all (see tests/test_docker_startup.py).
     for option in ("trusted_proxy", "trusted_proxy_headers",
-                   "clear_untrusted_proxy_headers", "use_forwarded_proto"):
+                   "clear_untrusted_proxy_headers"):
         assert config.has_option("server:main", option), option
         assert not config.has_option("app:main", option), option

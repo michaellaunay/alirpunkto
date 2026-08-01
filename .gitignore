@@ -38,6 +38,9 @@ docker/etc/ldap/*
 docker/var/*
 !docker/var/.gitkeep
 initials_users.generated.ldif
+# Container-derived server config (docker/apply_server_overrides.py);
+# written inside the image, listed here as a safety net.
+*.generated.ini
 docker/.env.test
 docker/certs/
 test.ini

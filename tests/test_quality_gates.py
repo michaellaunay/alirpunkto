@@ -32,7 +32,7 @@ def test_the_coverage_ratchet_is_armed():
 
 
 def test_every_action_is_pinned_by_commit_sha():
-    for name in ("tests.yml", "quality.yml"):
+    for name in ("tests.yml", "quality.yml", "smoke.yml"):
         workflow = _read(".github", "workflows", name)
         for line in workflow.splitlines():
             if "uses:" in line:
@@ -58,3 +58,10 @@ def test_cryptography_carries_the_cve_floor():
     lock = _read("requirements.lock")
     match = re.search(r"^cryptography==([\d.]+)", lock, re.M)
     assert match and tuple(map(int, match.group(1).split(".")[:2])) >= (48, 0)
+
+def test_the_secret_scanner_is_wired():
+    """Fourth audit pass (§6): scan the history for committed secrets —
+    a leak deleted from the tip is still in every clone."""
+    workflow = _read(".github", "workflows", "quality.yml")
+    assert "gitleaks/gitleaks-action@" in workflow
+    assert "fetch-depth: 0" in workflow
