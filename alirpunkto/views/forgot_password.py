@@ -86,8 +86,10 @@ def forgot_password(request):
             'cooperative_number': member.oid,
             'pseudonym': member.pseudonym,
         }
+        # Issue #175: the button label is a translated msgid — the name
+        # stays 'modify' so the POST branch is untouched (pattern of #123).
         form = deform.Form(schema,
-            buttons=('modify',),
+            buttons=(deform.Button('modify', title=_('submit_button')),),
             translator=Translator
         )
 

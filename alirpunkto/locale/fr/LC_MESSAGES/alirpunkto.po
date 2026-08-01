@@ -1329,3 +1329,6 @@ msgstr "Conseil de médiation et d'arbitrage (suspendu·e)"
 
 msgid "group_label_legacy_ordinary"
 msgstr "Communauté (groupe hérité)"
+
+msgid "forgot_password_fill_form"
+msgstr "Choisis ton nouveau mot de passe ci-dessous."

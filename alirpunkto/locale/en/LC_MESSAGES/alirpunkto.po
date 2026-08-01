@@ -1341,3 +1341,6 @@ msgstr "Mediation and Arbitration Council (suspended)"
 
 msgid "group_label_legacy_ordinary"
 msgstr "Community (legacy group)"
+
+msgid "forgot_password_fill_form"
+msgstr "Choose your new password below."

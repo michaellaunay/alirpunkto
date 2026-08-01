@@ -1292,3 +1292,6 @@ msgstr "Upload my avatar"
 
 msgid "avatar_remove_button"
 msgstr "Remove my avatar"
+
+msgid "forgot_password_fill_form"
+msgstr "Choose your new password below."

@@ -1340,3 +1340,6 @@ msgstr ""
 
 msgid "group_label_legacy_ordinary"
 msgstr ""
+
+msgid "forgot_password_fill_form"
+msgstr ""
