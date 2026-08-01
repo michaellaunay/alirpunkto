@@ -11,6 +11,7 @@ from alirpunkto.utils import (
     get_member_by_oid,
     send_email_to_member,
     decrypt_oid,
+    switch_request_language,
     is_valid_password,
     update_member_password,
     send_member_state_change_email
@@ -43,6 +44,17 @@ from alirpunkto.secret_manager import encrypt_secret_for_logs
     route_name='forgot_password',
     renderer='alirpunkto:templates/forgot_password.pt'
 )
+def _display_in_member_language(request, member):
+    """Issue #248: the bearer of the reset link IS the member — the
+    "Change password" view speaks their preferred language, not the
+    browser's. Deliberately never applied to the anonymous request leg:
+    switching the language there would betray whether the e-mail exists.
+    """
+    language = getattr(getattr(member, 'data', None), 'lang1', None)
+    if language:
+        switch_request_language(request, language)
+
+
 def forgot_password(request):
     """Forgot password view.
     Send an email to the user with a link to reset his password
@@ -57,6 +69,7 @@ def forgot_password(request):
     if error:
         return error
     if member:
+        _display_in_member_language(request, member)
         schema = RegisterForm().bind(request=request)
         # Only what the user needs to reset the password (issue #97, PR #234):
         # who they are, read-only, and the two password fields. The e-mail
@@ -92,6 +105,8 @@ def forgot_password(request):
     oid = request.session.get(MEMBER_OID, None)
     if oid:
         member = get_member_by_oid(oid, request, True)
+        if member:
+            _display_in_member_language(request, member)
     # 1) AlirPunkto displays the forgot_password.pt zpt to enter the mail
     if 'submit' in request.POST:
         # 2) The user has entered his mail and validated
