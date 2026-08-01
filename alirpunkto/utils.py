@@ -2161,7 +2161,14 @@ def get_keycloak_token(user: User, password: str) -> Optional[dict]:
     }
 
     now = datetime.now()
-    response = requests.post(token_url, data=payload, headers=headers)
+    try:
+        # Revised audit: a hung Keycloak must never pin a Waitress thread.
+        response = requests.post(token_url, data=payload, headers=headers,
+                                 timeout=(3.0, 10.0))
+    except requests.RequestException as exc:
+        log.warning(f"Keycloak unavailable while getting the SSO token: "
+                    f"{exc.__class__.__name__}")
+        return None
 
     if response.status_code == 200:
         json_response = response.json()
@@ -2170,7 +2177,8 @@ def get_keycloak_token(user: User, password: str) -> Optional[dict]:
             json_response[SSO_EXPIRES_AT] = expires_at
         return json_response
     else:
-        log.error(f"Failed to get SSO token: {response.status_code} - {response.text}")
+        log.error(f"Failed to get SSO token: {response.status_code} "
+                  f"({len(response.text or '')} bytes of body withheld)")
         return None
 
 def refresh_keycloak_token(refresh_token: str) -> Optional[dict]:
@@ -2196,10 +2204,17 @@ def refresh_keycloak_token(refresh_token: str) -> Optional[dict]:
         'Content-Type': 'application/x-www-form-urlencoded'
     }
 
-    response = requests.post(token_url, data=payload, headers=headers)
+    try:
+        response = requests.post(token_url, data=payload, headers=headers,
+                                 timeout=(3.0, 10.0))
+    except requests.RequestException as exc:
+        log.warning(f"Keycloak unavailable while refreshing the SSO token: "
+                    f"{exc.__class__.__name__}")
+        return None
 
     if response.status_code == 200:
         return response.json()
     else:
-        log.error(f"Failed to refresh SSO token: {response.status_code} - {response.text}")
+        log.error(f"Failed to refresh SSO token: {response.status_code} "
+                  f"({len(response.text or '')} bytes of body withheld)")
         return None

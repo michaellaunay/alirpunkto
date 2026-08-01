@@ -68,3 +68,26 @@ def test_the_ci_installs_from_the_lock():
     assert "setup.py" not in ci
     assert "requirements.lock" in ci
     assert "pyproject.toml" in ci
+
+def test_the_docker_builds_install_from_the_lock():
+    """Revised audit: the production image resolved from the pyproject
+    ranges — two images built at different dates could diverge."""
+    dockerfile = open(os.path.join(ROOT, "docker", "DockerfilePyramid"),
+                      encoding="utf-8").read()
+    assert "requirements.lock" in dockerfile
+    assert "--no-deps" in dockerfile
+    script = open(os.path.join(ROOT, "docker", "start_test_pyramid.sh"),
+                  encoding="utf-8").read()
+    assert "requirements.lock" in script
+
+
+def test_waitress_options_live_in_the_server_section():
+    """Revised audit: trusted_proxy sat in [app:main], where Waitress
+    never reads — the whole proxy trust was inert."""
+    import configparser
+    config = configparser.ConfigParser()
+    config.read(os.path.join(ROOT, "production.ini"))
+    for option in ("trusted_proxy", "trusted_proxy_headers",
+                   "clear_untrusted_proxy_headers", "use_forwarded_proto"):
+        assert config.has_option("server:main", option), option
+        assert not config.has_option("app:main", option), option

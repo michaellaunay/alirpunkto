@@ -35,7 +35,8 @@ fi
 cd "${APP_DIR}"
 
 if [ "${INSTALL_EXTRAS_TESTING:-false}" = "true" ]; then
-    pip install --no-cache-dir -e ".[testing]"
+    pip install --no-cache-dir -r requirements.lock
+    pip install --no-cache-dir -e . --no-deps
 fi
 
 echo "[Pyramid:test] Starting AlirPunkto with ${CONFIG_FILE}"

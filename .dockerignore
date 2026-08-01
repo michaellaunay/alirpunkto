@@ -35,7 +35,7 @@ secrets/
 
 # Documentation
 docs/
-# README.txt, CHANGES.txt et MANIFEST.in sont référencés par setup.py — ne pas exclure
+# README.txt, CHANGES.txt et MANIFEST.in sont référencés par pyproject.toml — ne pas exclure
 *.md
 *.rst
 

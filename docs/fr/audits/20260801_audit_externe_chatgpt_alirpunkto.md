@@ -37,7 +37,9 @@ cible.
 ## Décisions actées
 
 1. **Les journaux de mots de passe chiffrés sont conservés.** Le
-   chiffrement Fernet en niveau DEBUG est un outil de diagnostic de la
+   chiffrement en niveau DEBUG — RSA-OAEP/SHA-256 vers une clé
+   publique fournie par l'environnement, la clé privée restant hors du
+   serveur — est un outil de diagnostic de la
    chaîne complète, assumé sous la responsabilité de l'administrateur :
    son déclenchement exige une intention précise (niveau de log, lecture
    du code et de la documentation), et un administrateur malveillant

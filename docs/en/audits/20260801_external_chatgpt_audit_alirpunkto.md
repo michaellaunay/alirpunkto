@@ -35,8 +35,9 @@ it to `cron` was already the target.
 
 ## Recorded decisions
 
-1. **The ciphered password logs stay.** Fernet-ciphering at DEBUG level
-   is a full-chain diagnostic tool, assumed under the administrator's
+1. **The ciphered password logs stay.** DEBUG-level ciphering — RSA-OAEP/SHA-256 towards an
+   environment-supplied public key, the private key never on the
+   server — is a full-chain diagnostic tool, assumed under the administrator's
    responsibility: triggering it requires precise intent (log level,
    reading the code and the documentation), and a malicious
    administrator could just as silently modify the code. The removal

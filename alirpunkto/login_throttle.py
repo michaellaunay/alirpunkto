@@ -71,9 +71,15 @@ def record_failure(client_ip: str, username: str) -> None:
 
 
 def record_success(client_ip: str, username: str) -> None:
-    """A legitimate login clears both counters."""
+    """A legitimate login clears the *username* counter only.
+
+    Revised audit, 2026-08-01: clearing the IP counter too let an
+    attacker holding one valid account reset the address window at will
+    — probe several usernames, log into their own account, repeat. The
+    legitimate user regains access through their username counter; the
+    address keeps its history until the window expires on its own.
+    """
     with _lock:
-        _attempts.pop(('ip', client_ip), None)
         _attempts.pop(('name', username.strip().lower()), None)
 
 

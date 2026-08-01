@@ -46,8 +46,12 @@ COPY . ${APP_HOME}
 COPY docker/start_pyramid.sh /usr/local/bin/start_pyramid.sh
 
 # Install the application into the virtualenv and prepare writable runtime directories.
+# Revised audit, 2026-08-01: the production image must install the exact
+# pinned set of requirements.lock — resolving from the pyproject ranges
+# made two images built at different dates diverge.
 RUN "${VENV_DIR}/bin/pip" install --no-cache-dir --upgrade pip setuptools wheel \
-    && "${VENV_DIR}/bin/pip" install --no-cache-dir -e . \
+    && "${VENV_DIR}/bin/pip" install --no-cache-dir -r requirements.lock \
+    && "${VENV_DIR}/bin/pip" install --no-cache-dir -e . --no-deps \
     && chmod +x /usr/local/bin/start_pyramid.sh \
     && mkdir -p ${APP_HOME}/var/log ${APP_HOME}/var/datas ${APP_HOME}/var/filestorage ${APP_HOME}/var/sessions \
     && chown -R alirpunkto:alirpunkto /home/alirpunkto /usr/local/bin/start_pyramid.sh

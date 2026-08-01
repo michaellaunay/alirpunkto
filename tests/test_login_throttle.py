@@ -47,12 +47,22 @@ def test_the_username_window_blocks_across_addresses():
     assert not lt.is_throttled('99.99.99.99', 'bob')
 
 
-def test_a_success_clears_both_counters():
+def test_a_success_clears_the_username_counter_only():
     for _ in range(lt.USERNAME_MAX_ATTEMPTS):
         lt.record_failure('1.2.3.4', 'alice')
     assert lt.is_throttled('1.2.3.4', 'alice')
     lt.record_success('1.2.3.4', 'alice')
     assert not lt.is_throttled('1.2.3.4', 'alice')
+
+
+def test_an_authenticated_attacker_cannot_reset_the_ip_window():
+    """Revised audit: probing usernames then logging into one's own
+    valid account must not wipe the address history."""
+    for i in range(lt.IP_MAX_ATTEMPTS):
+        lt.record_failure('6.6.6.6', f'victim{i}')
+    assert lt.is_throttled('6.6.6.6', 'victim0')
+    lt.record_success('6.6.6.6', 'attacker-own-account')   # own login
+    assert lt.is_throttled('6.6.6.6', 'victim0')           # still blocked
 
 
 def test_the_window_expires_on_its_own():
