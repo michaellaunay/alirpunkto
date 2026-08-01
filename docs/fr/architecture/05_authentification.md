@@ -87,6 +87,16 @@ Waitress) ; pour que la fenêtre par adresse voie les vraies IP derrière
 Apache, Waitress fait désormais confiance au proxy
 (`trusted_proxy` dans `production.ini`).
 
+**La connexion ne lit que le POST.** Le formulaire n'est traité que si
+la méthode est `POST`, et les identifiants ne sont lus que de
+`request.POST` : une URL forgée `/login?form.submitted=1&username=…`
+ne déclenche plus rien — un test vérifie que ni la résolution du
+pseudonyme ni `is_admin` ne sont appelés sur un GET (les identifiants
+sortent ainsi des journaux d'accès et de l'historique du navigateur).
+Les appels Keycloak portent par ailleurs des délais (connexion 3 s,
+lecture 10 s), échouent proprement en `None`, et ne journalisent
+jamais un corps de réponse brut.
+
 **Décision d'architecture** : Keycloak ne deviendra pas l'unique point
 d'entrée de l'authentification. Le serveur de test n'est pas relié à
 Keycloak et n'héberge qu'AlirPunkto ; l'authentification LDAP directe

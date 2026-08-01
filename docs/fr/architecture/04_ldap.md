@@ -81,7 +81,13 @@ des appartenances courantes). L'applicateur `sync_member_groups` est
 **idempotent** et maintient les **deux côtés** de la relation
 (`uniqueMemberOf` du membre, `uniqueMember` du groupe) ; il est **best-effort
 par construction** : un échec ne casse jamais l'opération appelante, le
-scan quotidien rattrape. Il est branché aux quatre sources d'événements :
+scan quotidien rattrape. Depuis l'audit externe, chaque écriture passe
+par `_checked_modify` — exception interceptée, retour vérifié,
+`conn.result` journalisé avec membre, groupe, opération et côté — mais
+les deux côtés restent écrits indépendamment : un échec unilatéral
+peut laisser une divergence que le scan, qui lit `uniqueMemberOf`
+seul, ne voit pas (cible P2 : un côté autoritatif et un scan qui
+compare les deux). Il est branché aux quatre sources d'événements :
 inscription (l'Ordinaire rejoint `communityMembersGroup` ; le
 `ordinaryMembersGroup` **légué se vide progressivement**), approbation
 d'une montée en grade (arrivée dans

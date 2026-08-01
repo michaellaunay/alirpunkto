@@ -380,3 +380,26 @@ have hit everyone together), and modern packaging — measured bounds, a
 77-package lock, `setup.py` retired. The audit document, preceded by
 the counter-review and the decisions, is filed bilingually under
 `docs/*/audits/`.
+
+## 2026-08-01 (ter) — Four passes, and quality enforced
+
+The audit came back three times on our heels — on package A, on the
+immediate priorities, then on the quality gates — and the grade
+followed the work: 6.5, 6.9, 6.7, 7.1 (the auditor's scale wobbles
+from pass to pass; the slope does not lie). The fourth pass says the
+thing that matters: the project's quality "is no longer merely
+declarative, it is partially enforced by the CI". Ruff and Bandit
+block, pip-audit watches the lock, coverage has its floor, the actions
+their SHAs. And it says the other thing that matters: all of that
+controls Python in isolation, not the delivered product. The Docker
+stack still stops before `pserve`, over three one-line defects — a
+required but removed `setup.py`, an option Waitress rejects (verified:
+`ValueError: Unknown adjustment`), a listen on the container's
+loopback — that no unit test will ever see and that one Compose smoke
+test would have caught, all three. That is the next train: make the
+stack start without touching the bare-host deployment (whose values
+are, for their part, correct), and give it the test that will keep it
+from breaking again. Behind it: split the locks — today's production
+image ships ruff, mypy and pytest —, then the remaining security, then
+the ratchets. The three first-day decisions, for their part, were no
+longer discussed: the auditor has absorbed them.

@@ -35,6 +35,26 @@ Data live in named volumes (`alirpunkto_ldap_*`, `alirpunkto_pyramid_var`,
 `alirpunkto_postfix_*`, Apache certificates). `docker/backup.sh` saves
 configuration and data; procedure and restore in `docker/README.md`.
 
+## Known blockers (external audit, fourth pass — 2026-08-01)
+
+The stack described above **does not start as it stands**: three
+simple defects, invisible to unit tests, stop it before `pserve`. The
+`start_pyramid.sh`/`start_test_pyramid.sh` scripts require a
+`setup.py` removed in favour of `pyproject.toml`; `production.ini`
+carries the `use_forwarded_proto` option, unknown to Waitress 3
+(rejection verified as a `ValueError`); and `listen = localhost:6543`
+is unreachable from the Apache container — which, as seen by Waitress,
+is not `127.0.0.1` either (`trusted_proxy`), which would fold the
+login limiter onto a single address. The internal healthcheck, which
+queries the loopback, can stay green all the while. These values
+remain the right ones for the bare-host deployment below; the fix (P0
+patch) gives the stack its own server configuration and adds the
+Compose smoke test that would have caught all three. The image, for
+its part, installs the full lock — test and quality tools included —
+after an out-of-lock upgrade: the lock split and the multi-stage image
+are P1. Detail, counter-review and plan:
+`docs/en/audits/20260801_external_chatgpt_audit_alirpunkto_4th_pass.md`.
+
 ## Containerless deployment
 
 Bare-metal deployment (single host) is supported by the same tooling:

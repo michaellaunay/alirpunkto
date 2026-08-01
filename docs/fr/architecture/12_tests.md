@@ -112,3 +112,29 @@ provenance commentée), et la CI installe ce verrou — sa clé de cache,
 jadis dérivée de `setup.py`, suit `pyproject.toml` et le verrou. Six
 tests d'empaquetage verrouillent l'ensemble, `setup.py` compris dans
 son absence.
+
+## Portes de qualité (2026-08-01) : 957 tests
+
+La CI ne se contente plus d'exécuter la suite : un second workflow
+(`quality.yml`) rend **Ruff bloquant** (famille Pyflakes ; `F841` en
+exception documentée, prochain cran du cliquet), **Bandit bloquant**
+dès la sévérité moyenne (les deux SHA-1 du format `{SSHA}` portent
+leur `# nosec` motivé — c'est le format que consomme slapd), et
+**pip-audit sur le verrou** (une seule exception, documentée dans le
+workflow même : `PYSEC-2026-3447`, un setuptools transitif retenu par
+la chaîne deform). Les mesures ont précédé les portes : 137 constats
+Ruff ramenés à zéro, dont deux vrais défauts — un `global DOMAINE`
+manquant qui cassait le repli d'un outil, et un `from requests import
+request` qui masquait le paramètre des vues (et fabriquait au passage
+cinq faux positifs Bandit). La couverture, mesurée à ~70 %, reçoit un
+plancher `--cov-fail-under=68` — un cliquet, pas une cible. Toutes les
+actions GitHub sont épinglées par SHA de commit (le tag lisible en
+commentaire), plus aucune installation hors verrou ne subsiste dans
+les workflows (`--allow-unsafe` épingle pip/setuptools/wheel dans le
+verrou), et mypy entre en observateur (`continue-on-error`, 124
+erreurs à l'adoption). `tests/test_quality_gates.py` verrouille le
+câblage lui-même : gates invoquées, plancher armé, chaque `uses:` en
+SHA de 40, zéro installation hors verrou, plancher `cryptography`
+conservé. Leçon de harnais : ne jamais « restaurer » une démonstration
+rouge par `git checkout --` — il ramène HEAD et détruit les correctifs
+non commis ; seule la copie de côté est sûre.

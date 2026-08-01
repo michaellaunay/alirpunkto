@@ -81,7 +81,13 @@ from current memberships). The applier `sync_member_groups` is
 **idempotent** and maintains **both sides** of the relation
 (the member's `uniqueMemberOf`, the group's `uniqueMember`); it is
 **best-effort by design**: a failure never breaks the calling operation,
-the daily scan catches up. It is wired to the four event sources:
+the daily scan catches up. Since the external audit, every write goes
+through `_checked_modify` — exception intercepted, return value
+checked, `conn.result` logged with member, group, operation and
+side — but both sides are still written independently: a one-sided
+failure can leave a divergence the scan, which reads `uniqueMemberOf`
+alone, does not see (P2 target: one authoritative side and a scan that
+compares both). It is wired to the four event sources:
 registration (an Ordinary Member joins `communityMembersGroup`; the legacy
 `ordinaryMembersGroup` **drains progressively**), upgrade approval
 (landing in `candidatesMissingShareYearContribGroup`), resignation (no

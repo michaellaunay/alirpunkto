@@ -49,6 +49,28 @@ Unreleased (2026-08-01)
   retired. Three decisions recorded: the ciphered DEBUG password logs
   stay, the constants_and_globals module is a deliberate choice, and
   Keycloak will not become the single authentication entry point.
+- Login reads POST only — credentials in a crafted GET query string
+  no longer reach authentication; .env is loaded exactly once at
+  startup and the process environment takes precedence (get_key
+  retired); the bootstrap LDIF is born 0600 with passwords readable
+  from dedicated environment variables; every LDAP group write is
+  checked and logged with member, group, operation and side; Keycloak
+  calls carry timeouts and never log raw response bodies; the
+  Waitress proxy options moved to [server:main], where they act.
+- Quality gates in CI: ruff (Pyflakes) and bandit (medium+) block,
+  pip-audit runs on the lock with one documented exception, a
+  coverage floor at 68 (measured ~70), every GitHub action pinned by
+  commit SHA, no out-of-lock installs left, mypy informative (124
+  errors at adoption). The sweep fixed two real defects: a missing
+  global broke a tool's fallback, and a stray requests import
+  shadowed the view parameter.
+- Fourth external-audit pass (7.1/10) filed bilingually with its
+  counter-review and execution plan: the documented Docker stack
+  still cannot start (setup.py checks in both start scripts, an
+  unknown Waitress option verified to raise ValueError, a loopback
+  listen, a wrong trusted_proxy for compose); a P0 patch with a
+  Compose smoke test is the next train, then split hashed locks and
+  a multi-stage image.
 
 Unreleased (2026-07-30)
 -----------------------

@@ -2708,3 +2708,26 @@ sans quoi la fenêtre par adresse aurait frappé tout le monde ensemble),
 et l'empaquetage moderne — bornes mesurées, verrou de 77 paquets,
 `setup.py` retiré. Le document d'audit, précédé de la contre-expertise
 et des décisions, est versé bilingue sous `docs/*/audits/`.
+
+## 2026-08-01 (ter) — Quatre passages, et la qualité imposée
+
+L'audit est revenu trois fois sur nos talons — sur le paquet A, sur
+les priorités immédiates, puis sur les portes de qualité — et la note
+a suivi le travail : 6,5, 6,9, 6,7, 7,1 (l'échelle de l'auditeur bouge
+d'un passage à l'autre ; la pente, elle, ne ment pas). Le quatrième
+passage dit la chose qui compte : la qualité du projet « n'est plus
+seulement déclarative, elle est partiellement imposée par la CI ».
+Ruff et Bandit bloquent, pip-audit veille sur le verrou, la couverture
+a son plancher, les actions leurs SHA. Et il dit l'autre chose qui
+compte : tout cela contrôle du Python isolé, pas le produit livré. La
+pile Docker s'arrête toujours avant `pserve`, pour trois défauts d'une
+ligne — un `setup.py` exigé mais retiré, une option que Waitress
+rejette (vérifié : `ValueError: Unknown adjustment`), une écoute sur
+la boucle locale du conteneur — qu'aucun test unitaire ne verra jamais
+et qu'un smoke test Compose aurait vus tous les trois. C'est le
+prochain train : rendre la pile démarrable sans toucher au déploiement
+nu (dont les valeurs sont, elles, correctes), et lui donner le test
+qui l'empêchera de recasser. Derrière : séparer les verrous — l'image
+de production embarque aujourd'hui ruff, mypy et pytest —, puis la
+sécurité restante, puis les cliquets. Les trois décisions du premier
+jour, elles, n'ont plus été discutées : l'auditeur les a intégrées.

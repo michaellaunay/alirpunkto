@@ -84,6 +84,15 @@ choice is documented in `login_throttle.py` and matches the deployment
 IPs behind Apache, Waitress now trusts the proxy (`trusted_proxy` in
 `production.ini`).
 
+**Login reads POST only.** The form is processed only when the method
+is `POST`, and the credentials are read from `request.POST` alone: a
+crafted `/login?form.submitted=1&username=…` URL no longer triggers
+anything — a test checks that neither the pseudonym lookup nor
+`is_admin` is called on a GET (credentials thereby leave the access
+logs and the browser history). The Keycloak calls furthermore carry
+timeouts (3 s connect, 10 s read), fail cleanly to `None`, and never
+log a raw response body.
+
 **Architecture decision**: Keycloak will not become the single
 authentication entry point. The test server is not connected to
 Keycloak and hosts only AlirPunkto; direct LDAP authentication is an

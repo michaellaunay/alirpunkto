@@ -106,3 +106,29 @@ commented provenance), and the CI installs that lock — its cache key,
 once derived from `setup.py`, follows `pyproject.toml` and the lock.
 Six packaging tests guard the whole arrangement, `setup.py` included in
 its absence.
+
+## Quality gates (2026-08-01): 957 tests
+
+The CI no longer merely runs the suite: a second workflow
+(`quality.yml`) makes **Ruff blocking** (the Pyflakes family; `F841`
+as a documented exception, the ratchet's next notch), **Bandit
+blocking** from medium severity up (the two SHA-1 uses of the `{SSHA}`
+format carry their reasoned `# nosec` — it is the format slapd
+consumes), and **pip-audit on the lock** (a single exception,
+documented in the workflow itself: `PYSEC-2026-3447`, a transitive
+setuptools held back by the deform chain). Measurements preceded the
+gates: 137 Ruff findings brought to zero, among them two real
+defects — a missing `global DOMAINE` that broke a tool's fallback, and
+a stray `from requests import request` that shadowed the view
+parameter (and manufactured five Bandit false positives along the
+way). Coverage, measured at ~70 %, receives a `--cov-fail-under=68`
+floor — a ratchet, not a target. Every GitHub action is pinned by
+commit SHA (the readable tag kept in a comment), no out-of-lock
+install remains in the workflows (`--allow-unsafe` pins
+pip/setuptools/wheel into the lock), and mypy enters as an observer
+(`continue-on-error`, 124 errors at adoption).
+`tests/test_quality_gates.py` locks the wiring itself: gates invoked,
+floor armed, every `uses:` a 40-char SHA, zero out-of-lock installs,
+the `cryptography` floor kept. A harness lesson: never "restore" a red
+demonstration with `git checkout --` — it brings HEAD back and
+destroys uncommitted fixes; only a side copy is safe.
