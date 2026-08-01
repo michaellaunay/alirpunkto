@@ -71,7 +71,7 @@ def test_seed_file_is_interchangeable_with_the_generated_one(provision):
 # --------------------------------------------------------------------------- #
 def test_parse_schema_file_unfolds_the_reference_schema(provision):
     attribute_types, objectclass = provision.parse_schema_file()
-    assert len(attribute_types) == 18   # +6: Shared Directory provision (#110)
+    assert len(attribute_types) == 19   # +6 (#110) +1 (#127) provisions
     joined = " ".join(attribute_types)
     for probe in provision.MODERN_SCHEMA_PROBES:
         assert f"NAME '{probe}'" in joined

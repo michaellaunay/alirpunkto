@@ -104,6 +104,7 @@ DEFAULT_CONTAINER = "alirpunkto-ldap"
 MODERN_SCHEMA_PROBES = ("cooperativeBehaviourMarkUpdate", "IBAN",
                         "dateErasureAllData",
     "cipheredPersonalData",
+    "identityRecoveryCode",
 )
 _HASH_PREFIXES = (
     "{SSHA}", "{SHA}", "{SSHA256}", "{SHA256}", "{SSHA512}", "{SHA512}",

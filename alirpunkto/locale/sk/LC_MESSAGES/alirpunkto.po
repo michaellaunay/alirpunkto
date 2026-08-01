@@ -1259,3 +1259,6 @@ msgstr "The ciphered personal data block exceeds the 512-character bound."
 
 msgid "ldap_error_retry"
 msgstr "The directory could not be reached. Please try again."
+
+msgid "recovery_code_too_short"
+msgstr "The identity recovery code is too short."

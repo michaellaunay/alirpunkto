@@ -1358,3 +1358,6 @@ msgstr ""
 
 msgid "ldap_error_retry"
 msgstr ""
+
+msgid "recovery_code_too_short"
+msgstr ""

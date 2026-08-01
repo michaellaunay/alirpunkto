@@ -1347,3 +1347,6 @@ msgstr "Le bloc chiffré de données personnelles dépasse la limite de 512 cara
 
 msgid "ldap_error_retry"
 msgstr "L'annuaire n'a pas pu être joint. Réessaie."
+
+msgid "recovery_code_too_short"
+msgstr "Le code de récupération d'identité est trop court."
