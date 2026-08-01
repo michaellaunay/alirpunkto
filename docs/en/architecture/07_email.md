@@ -84,3 +84,14 @@ content is deliberately minimal: the pseudonym, the only retained fact, is
 the only personal thing the message carries. The erasure notice is
 best-effort: an SMTP hiccup never fails the purge. Templates in English
 and French, English fallback for the other locales.
+
+## The message sender (#69, 2026-08-01)
+
+The sender is never a person. `resolve_mail_sender` applies the honest
+cascade the old resolution pretended to offer — the `MAIL_SENDER`
+environment variable, then a non-empty `mail.default_sender` from the
+`.ini` (which the old code always overwrote, down to the literal string
+`default_sender` used as a From), then the generic `welcome@<domain>`
+fallback. Residues (`default_sender`, `None`) count as empty; the
+single sending path reads the resolved value, the whole application
+follows.

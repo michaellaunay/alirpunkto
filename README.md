@@ -58,8 +58,8 @@ a virtual environment directly at the repository root, which creates `bin/`,
 `lib/`, and related directories there:
 
 ```bash
-python3 -m venv .
-source bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 Upgrade packaging tools and install the project with its test dependencies:

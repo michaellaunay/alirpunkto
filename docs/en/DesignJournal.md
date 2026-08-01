@@ -363,3 +363,20 @@ ticket's message and a deep bug: the majority bound, built at import,
 froze at process start and refused the newly-of-age — a `deferred` now
 recomputes it at every request. Fifty-nine tickets handled, 894 tests;
 the chapter-09 `cron` remains the only pending operations step.
+
+## 2026-08-01 (bis) — The external audit, counter-reviewed and engaged
+
+An external static audit (ChatGPT, 6.5/10) arrived and was
+counter-reviewed on code the same day: nearly everything confirmed,
+down to the line — the post-login open redirect, the absence of attempt
+limiting, the unbounded, unlocked dependencies. Three decisions
+recorded in response: the DEBUG-level ciphered password logs stay (an
+assumed diagnostic tool), the `constants_and_globals` globals are a
+choice, and Keycloak will not become the single entry point — the test
+server is not connected to it. Package A is under way: the redirect
+bound to the site, the login limiter before any LDAP work (and Waitress
+learning to trust the proxy, without which the address window would
+have hit everyone together), and modern packaging — measured bounds, a
+77-package lock, `setup.py` retired. The audit document, preceded by
+the counter-review and the decisions, is filed bilingually under
+`docs/*/audits/`.

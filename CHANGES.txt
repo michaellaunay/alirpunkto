@@ -34,6 +34,21 @@ Unreleased (2026-08-01)
 - The Cooperator minimum age is enforced at both doors with the
   ticket's own refusal message; the age bound is now recomputed at
   every request instead of freezing at process start (#80).
+- The e-mail sender is never a person: an honest cascade (environment,
+  then a respected .ini value, then welcome@<domain>) replaces a
+  resolution that always overwrote the .ini down to a literal
+  'default_sender' From (#69).
+- pytest live logging becomes opt-in: green runs are silent, failing
+  tests keep their captured logs.
+- External audit (2026-08-01), counter-reviewed on code and filed
+  bilingually under docs/*/audits/: the post-login redirect only
+  follows same-site targets; login attempts are rate-limited before
+  any LDAP work (with Waitress now trusting the Apache proxy);
+  dependencies are bounded in pyproject.toml, pinned in
+  requirements.lock and installed as such by the CI — setup.py is
+  retired. Three decisions recorded: the ciphered DEBUG password logs
+  stay, the constants_and_globals module is a deliberate choice, and
+  Keycloak will not become the single authentication entry point.
 
 Unreleased (2026-07-30)
 -----------------------

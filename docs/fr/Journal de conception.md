@@ -2691,3 +2691,20 @@ et refusait les tout-juste-majeurs — un `deferred` la recalcule
 désormais à chaque requête. Cinquante-neuf tickets traités, 894 tests ;
 le `cron` du chapitre 09 demeure le seul geste d'exploitation en
 attente.
+
+## 2026-08-01 (bis) — L'audit externe, contre-expertisé et engagé
+
+Un audit statique externe (ChatGPT, 6,5/10) est arrivé et a été
+contre-expertisé sur pièces le jour même : quasi tout confirmé, jusqu'à
+la ligne — la redirection ouverte d'après-connexion, l'absence de
+limitation des tentatives, les dépendances sans bornes ni verrou.
+Trois décisions actées en réponse : les journaux de mots de passe
+chiffrés en DEBUG restent (outil de diagnostic assumé), les globales de
+`constants_and_globals` sont un choix, et Keycloak ne sera pas l'unique
+point d'entrée — le serveur de test n'y est pas relié. Le paquet A est
+en cours : la redirection bornée au site, le limiteur de connexions
+avant tout LDAP (et Waitress qui apprend à faire confiance au proxy,
+sans quoi la fenêtre par adresse aurait frappé tout le monde ensemble),
+et l'empaquetage moderne — bornes mesurées, verrou de 77 paquets,
+`setup.py` retiré. Le document d'audit, précédé de la contre-expertise
+et des décisions, est versé bilingue sous `docs/*/audits/`.

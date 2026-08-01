@@ -86,3 +86,14 @@ contenu est volontairement minimal : le pseudonyme, seul fait conservé, est
 la seule donnée personnelle du message. L'envoi d'effacement est
 best-effort : un incident SMTP ne fait pas échouer la purge. Gabarits en
 anglais et français, repli anglais pour les autres locales.
+
+## L'expéditeur des messages (#69, 2026-08-01)
+
+L'expéditeur n'est jamais une personne. `resolve_mail_sender` applique
+la cascade honnête que l'ancienne résolution prétendait offrir — la
+variable d'environnement `MAIL_SENDER`, puis un `mail.default_sender`
+non vide du `.ini` (que l'ancien code écrasait systématiquement,
+jusqu'à la chaîne littérale `default_sender` employée comme expéditeur),
+puis le repli générique `welcome@<domaine>`. Les résidus
+(`default_sender`, `None`) valent vide ; l'unique point d'envoi lit la
+valeur résolue, toute l'application suit.

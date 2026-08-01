@@ -96,3 +96,19 @@ majorité de soixante jours et vérifie que le bind la suit. Et côté
 harnais : un clone de vérification a besoin de son `var/` — sans lui, la
 ZODB échoue en `zc.lockfile` et six tests fonctionnels passent en erreur
 fantôme.
+
+## Campagne de l'audit externe (2026-08-01) : 931 tests
+
+Le journal en direct de pytest devient **opt-in** (`log_cli = false`) :
+la suite exerce volontairement les branches d'échec — LDAP injoignable,
+valeurs d'énumération inconnues, envois refusés — dont les `log.error`
+sont le comportement vérifié ; un passage vert criait des dizaines de
+lignes `[ERROR]`. Les tests en échec conservent leurs journaux capturés
+dans leur propre rapport, et le direct revient à la demande
+(`pytest -o log_cli=true`). Côté chaîne de construction : les
+dépendances sont bornées dans `pyproject.toml` (versions mesurées sur
+l'environnement testé), épinglées dans `requirements.lock` (77 paquets,
+provenance commentée), et la CI installe ce verrou — sa clé de cache,
+jadis dérivée de `setup.py`, suit `pyproject.toml` et le verrou. Six
+tests d'empaquetage verrouillent l'ensemble, `setup.py` compris dans
+son absence.

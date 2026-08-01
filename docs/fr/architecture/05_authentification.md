@@ -65,3 +65,30 @@ session (utilisateur, jetons) ; `/logout` la clôt côté interface.
 resynchronisation depuis LDAP et avant la construction du `User` de
 session. L'entrée LDAP, conservée pendant la Quarantaine, ne rouvre donc
 aucun accès.
+
+## Durcissements de l'audit externe (2026-08-01)
+
+**La redirection d'après-connexion est bornée au site.** La vue de
+connexion honorait aveuglément `session['redirect_url']` ;
+`safe_local_redirect` n'accepte plus qu'une cible du site — une URL
+absolue dont l'autorité est exactement l'hôte de la requête (le cas
+légitime des vues qui mémorisent `current_route_url()`), ou un chemin
+local `/…` (jamais `//…`) ; schémas exotiques, antislashs et pièges
+`user@hôte` retombent sur l'accueil, et la clé de session est purgée
+dans tous les cas.
+
+**Les tentatives de connexion sont limitées avant tout accès LDAP** :
+deux fenêtres glissantes (10 par adresse sur 5 minutes ; 5 par
+identifiant sur 15 minutes, toutes adresses confondues), remises à zéro
+au succès, réponse uniforme traduite, journal sans mot de passe. L'état
+vit en mémoire du processus — le choix est documenté dans
+`login_throttle.py` et correspond au déploiement (un processus
+Waitress) ; pour que la fenêtre par adresse voie les vraies IP derrière
+Apache, Waitress fait désormais confiance au proxy
+(`trusted_proxy` dans `production.ini`).
+
+**Décision d'architecture** : Keycloak ne deviendra pas l'unique point
+d'entrée de l'authentification. Le serveur de test n'est pas relié à
+Keycloak et n'héberge qu'AlirPunkto ; l'authentification LDAP directe
+est une voie assumée, l'intégration Keycloak restant l'obtention d'un
+jeton SSO après l'authentification locale.

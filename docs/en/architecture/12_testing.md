@@ -91,3 +91,18 @@ every `bind` hence at every request, locked by a test that shifts the
 majority by sixty days and checks the bind follows. And on the harness
 side: a verification clone needs its `var/` — without it the ZODB fails
 in `zc.lockfile` and six functional tests error out as ghosts.
+
+## External-audit campaign (2026-08-01): 931 tests
+
+pytest's live logging becomes **opt-in** (`log_cli = false`): the suite
+deliberately exercises failure branches — unreachable LDAP, unknown
+enum values, refused e-mails — whose `log.error` lines are the verified
+behaviour; a green run used to shout dozens of `[ERROR]` lines. Failing
+tests keep their captured logs in their own report, and the live stream
+returns on demand (`pytest -o log_cli=true`). On the build chain:
+dependencies are bounded in `pyproject.toml` (versions measured on the
+tested environment), pinned in `requirements.lock` (77 packages,
+commented provenance), and the CI installs that lock — its cache key,
+once derived from `setup.py`, follows `pyproject.toml` and the lock.
+Six packaging tests guard the whole arrangement, `setup.py` included in
+its absence.

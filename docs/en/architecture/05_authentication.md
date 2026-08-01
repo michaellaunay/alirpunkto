@@ -64,3 +64,28 @@ out cleanly otherwise. `utils.logout` purges the session (user, tokens);
 or deactivated account): the guard sits after the resynchronisation from
 LDAP and before the session `User` is built. The LDAP entry, kept through
 the Quarantine, therefore reopens no access.
+
+## External-audit hardenings (2026-08-01)
+
+**The post-login redirect is bound to the site.** The login view
+honoured `session['redirect_url']` blindly; `safe_local_redirect` now
+only accepts a same-site target — an absolute URL whose authority is
+exactly the request's host (the legitimate case of views storing
+`current_route_url()`), or a local `/…` path (never `//…`); exotic
+schemes, backslashes and `user@host` tricks fall back to home, and the
+session key is purged either way.
+
+**Login attempts are limited before any LDAP work**: two sliding
+windows (10 per address over 5 minutes; 5 per username over 15 minutes
+across addresses), cleared on success, a uniform translated answer, and
+a password-free log line. The state lives in process memory — the
+choice is documented in `login_throttle.py` and matches the deployment
+(a single Waitress process); for the address window to see real client
+IPs behind Apache, Waitress now trusts the proxy (`trusted_proxy` in
+`production.ini`).
+
+**Architecture decision**: Keycloak will not become the single
+authentication entry point. The test server is not connected to
+Keycloak and hosts only AlirPunkto; direct LDAP authentication is an
+assumed path, the Keycloak integration remaining the acquisition of an
+SSO token after the local authentication.
