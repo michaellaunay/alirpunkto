@@ -1350,3 +1350,6 @@ msgstr "L'annuaire n'a pas pu être joint. Réessaie."
 
 msgid "recovery_code_too_short"
 msgstr "Le code de récupération d'identité est trop court."
+
+msgid "cooperator_underage_error"
+msgstr "Tu n'as pas encore atteint ton 18e anniversaire : tu ne peux malheureusement pas encore devenir Coopérateur·rice. Nous t'invitons à t'inscrire comme membre Ordinaire de la Communauté — et à passer Coopérateur·rice dès ton 18e anniversaire."

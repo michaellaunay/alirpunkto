@@ -60,6 +60,24 @@ def deferred_preferred_language_default(node, kw):
     return locale if locale in EUROPEAN_LOCALES else colander.null
 
 
+@colander.deferred
+def deferred_birthdate_validator(node, kw):
+    """Issue #80: resolved at bind time, request by request.
+
+    The Range used to be built once at class definition — so
+    ``get_majority_date()`` froze at process start, and after a few weeks
+    of uptime the form refused candidates who had since come of age. A
+    deferred validator recomputes the bound on every bind, and carries
+    the ticket's own refusal message instead of colander's generic one.
+    """
+    return colander.Range(
+        min=datetime.date(1900, 1, 1),
+        max=get_majority_date(),
+        max_err=_('cooperator_underage_error',
+                  mapping=SITE_INFORMATION_MAPPING),
+    )
+
+
 def get_majority_date():
     """Return the date exactly 18 years ago (the latest birthdate of a major).
 
@@ -139,10 +157,7 @@ class RegisterForm(schema.CSRFSchema):
         messages = {'required': _('birthdate_required',
             mapping=SITE_INFORMATION_MAPPING)},
         widget = DateInputWidget(),
-        validator = colander.Range(
-            min = datetime.date(1900, 1, 1),
-            max = get_majority_date()
-        ),
+        validator = deferred_birthdate_validator,
         missing = ""
     )
     nationality = colander.SchemaNode(

@@ -1269,3 +1269,6 @@ msgstr "The directory could not be reached. Please try again."
 
 msgid "recovery_code_too_short"
 msgstr "The identity recovery code is too short."
+
+msgid "cooperator_underage_error"
+msgstr "You have not yet reached your 18th birthday. You are hence unfortunately not allowed to become a Cooperator. We invite you to register as an Ordinary Member of the Community — and to upgrade to Cooperator as soon as you have had your 18th birthday."
