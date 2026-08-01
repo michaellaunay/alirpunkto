@@ -53,6 +53,19 @@ if len(sys.argv) < 28:
  U2_SECOND_LANG, U2_THIRD_LANG, U2_BIRTHDATE, U2_DESCRIPTION,
  ) = (sys.argv[1:] + [""] * 8)[:35]
 
+# Revised audit: a cleartext password must never travel through argv
+# (visible in the process table). The caller may pass "-" for any of the
+# three password slots and provide the value through a dedicated
+# environment variable instead — read once and scrubbed immediately.
+def _password_from_env(value, env_name):
+    if value == "-":
+        return os.environ.pop(env_name, "")
+    return value
+
+ADMIN_PW = _password_from_env(ADMIN_PW, "GENERATE_LDIF_ADMIN_PW")
+U1_PW = _password_from_env(U1_PW, "GENERATE_LDIF_U1_PW")
+U2_PW = _password_from_env(U2_PW, "GENERATE_LDIF_U2_PW")
+
 # UUIDs of demo / placeholder users present in the template — strip them
 DEMO_UUIDS = {
     "123a456a-bb78-9012-3456-7f890abc1d2e",
@@ -276,7 +289,14 @@ for (uuid, pseudonym, first, last, lang, nat, email, pw, role,
                                 birthdate=birthdate or None,
                                 description=description or None))
 
-with open(OUT, "w") as f:
-    f.write("\n\n".join(out_parts) + "\n")
+# Revised audit: the LDIF carries identities and password hashes — it is
+# born unreadable to anyone but its owner.
+_previous_umask = os.umask(0o077)
+try:
+    with open(OUT, "w") as f:
+        f.write("\n\n".join(out_parts) + "\n")
 
+finally:
+    os.umask(_previous_umask)
+os.chmod(OUT, 0o600)
 print(f"[generate_ldif] Written {OUT}")

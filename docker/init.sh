@@ -123,8 +123,11 @@ hash_password() {
     if command -v slappasswd &>/dev/null; then
         slappasswd -s "$1"
     else
-        error "slappasswd not found — password stored in cleartext." \
-              "Install package 'slapd' locally to fix this."
+        # generate_ldif.py re-hashes any cleartext value to {SSHA} before
+        # it reaches the LDIF (revised audit: the old message wrongly
+        # claimed cleartext storage); slappasswd is merely preferred.
+        error "slappasswd not found — generate_ldif.py will hash the password itself." \
+              "Install package 'slapd' locally to use slappasswd instead."
         echo "$1"
     fi
 }

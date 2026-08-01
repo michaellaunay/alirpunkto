@@ -6,7 +6,10 @@ from typing import Final
 from collections.abc import Mapping
 from types import MappingProxyType
 import os, sys, pytz
-from dotenv import load_dotenv, get_key, find_dotenv
+# Revised audit: the .env file is loaded exactly once; every global then
+# reads os.getenv(), so real environment variables keep their normal
+# priority and the file is never re-read through get_key().
+from dotenv import load_dotenv, find_dotenv
 from pyramid.i18n import (
     TranslationStringFactory,
 )
@@ -38,20 +41,20 @@ DISABLE_EMAIL_MX_CHECKS: Final = env_bool("DISABLE_EMAIL_MX_CHECKS", PYTEST_CURR
 SECRET_KEY: Final = "SECRET_KEY"
 LDAP_SERVER: Final = os.getenv("LDAP_SERVER")
 LDAP_PORT: Final = int(os.getenv("LDAP_PORT", 389))
-LDAP_BASE_DN: Final = get_key(dotenv_path, "LDAP_BASE_DN") if not PYTEST_CURRENT_TEST else "dc=example,dc=com"
-LDAP_OU: Final = get_key(dotenv_path, "LDAP_OU")
+LDAP_BASE_DN: Final = os.getenv("LDAP_BASE_DN") if not PYTEST_CURRENT_TEST else "dc=example,dc=com"
+LDAP_OU: Final = os.getenv("LDAP_OU")
 LDAP_USE_SSL: Final = (
-    (get_key(dotenv_path, "LDAP_USE_SSL") or "False").lower()
+    (os.getenv("LDAP_USE_SSL") or "False").lower()
     in ['true', '1', "yes", "y"]
 )
 LDAP_PASSWORD: Final = "LDAP_PASSWORD" # use get_secret to get the password
-LDAP_LOGIN: Final = get_key(dotenv_path, "LDAP_LOGIN")
+LDAP_LOGIN: Final = os.getenv("LDAP_LOGIN")
 LDAP_USER: Final = (f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"
     if LDAP_OU else f"{LDAP_LOGIN},{LDAP_BASE_DN}"
 )
-ADMIN_LOGIN: Final = get_key(dotenv_path, "ADMIN_LOGIN")
+ADMIN_LOGIN: Final = os.getenv("ADMIN_LOGIN")
 ADMIN_PASSWORD: Final = "ADMIN_PASSWORD" # use get_secret to get the password
-ADMIN_EMAIL: Final = get_key(dotenv_path, "ADMIN_EMAIL")
+ADMIN_EMAIL: Final = os.getenv("ADMIN_EMAIL")
 MAIL_USERNAME: Final = os.getenv("MAIL_USERNAME")
 MAIL_SENDER: Final = os.getenv("MAIL_SENDER")
 MAIL_SERVER: Final = os.getenv("MAIL_SERVER")
@@ -95,8 +98,8 @@ URL_PURCHASE_SHARES: Final = os.getenv("URL_PURCHASE_SHARES", "")
 FORGETTING_TIME_CONSTANT: Final = int(os.getenv("FORGETTING_TIME_CONSTANT", 365))
 VERIFIER_VOTE_DEADLINE_DAYS: Final = int(os.getenv("VERIFIER_VOTE_DEADLINE_DAYS", 7))
 NOTICE_TIME_VERIFIERS: Final = int(os.getenv("NOTICE_TIME_VERIFIERS", 2))
-KEYCLOAK_SERVER_URL:Final = get_key(dotenv_path, "KEYCLOAK_SERVER_URL",None) # The keycloak server
-KEYCLOAK_REALM:Final = get_key(dotenv_path, "KEYCLOAK_REALM",None) # The realm
+KEYCLOAK_SERVER_URL:Final = os.getenv("KEYCLOAK_SERVER_URL") # The keycloak server
+KEYCLOAK_REALM:Final = os.getenv("KEYCLOAK_REALM") # The realm
 # The client id of this application for keycloak
 KEYCLOAK_CLIENT_ID:Final = "KEYCLOAK_CLIENT_ID" # use get_secret to get the password
 # The client secret of this application

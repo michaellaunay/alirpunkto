@@ -67,9 +67,10 @@ def config():
 
 
 def _login_post(session):
-    request = DummyRequest(params={'form.submitted': '1',
-                                   'username': 'alice',
-                                   'password': 'pw'})
+    request = DummyRequest(post={'form.submitted': '1',
+                                 'username': 'alice',
+                                 'password': 'pw'})
+    request.method = 'POST'
     request.session = session
     request.host = 'site.test'
     return request

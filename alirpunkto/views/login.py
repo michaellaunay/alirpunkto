@@ -48,11 +48,15 @@ def login_view(request):
     site_name = SITE_NAME
     domain_name = DOMAIN_NAME
     organization_details = ORGANIZATION_DETAILS
-    username = request.params.get('username', "")
+    username = request.POST.get('username', "")
     user = request.session.get('user', None)
-    if 'form.submitted' in request.params:
-        username = request.params.get('username', "")
-        password = request.params.get('password', "")
+    # Revised audit: credentials are only ever read from the POST body —
+    # a crafted GET (/login?form.submitted=1&username=…&password=…) used
+    # to be processed, leaking the password into browser history and
+    # HTTP logs and sidestepping the unsafe-method CSRF check.
+    if request.method == 'POST' and 'form.submitted' in request.POST:
+        username = request.POST.get('username', "")
+        password = request.POST.get('password', "")
         client_ip = getattr(request, 'client_addr', None) or 'unknown'
         if is_throttled(client_ip, username):
             # Refused before any LDAP work; never log the password.

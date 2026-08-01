@@ -86,9 +86,10 @@ def config():
 
 
 def _post(username='alice'):
-    request = DummyRequest(params={'form.submitted': '1',
-                                   'username': username,
-                                   'password': 'wrong'})
+    request = DummyRequest(post={'form.submitted': '1',
+                                 'username': username,
+                                 'password': 'wrong'})
+    request.method = 'POST'
     request.session = {}
     request.client_addr = '1.2.3.4'
     return request

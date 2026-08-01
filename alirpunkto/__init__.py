@@ -47,7 +47,6 @@ from .constants_and_globals import (
     VERIFIER_REMINDER_MIN_INTERVAL_SECONDS,
 )
 from .secret_manager import get_secret
-from dotenv import get_key
 
 _reminder_lock = threading.Lock()
 _reminder_last_run = 0.0

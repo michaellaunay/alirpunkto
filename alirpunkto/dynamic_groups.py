@@ -197,16 +197,37 @@ def sync_member_groups(request, member_oid, *, today=None,
 
             to_add = target - current
             to_remove = (current & set(MANAGED_GROUPS)) - target
+
+            def _checked_modify(target_dn, changes, op_id):
+                # Revised audit: half-applied membership used to fail
+                # silently — one side of the group/memberOf pair could
+                # succeed while the other did not. Best-effort remains
+                # (the caller's operation never breaks), but every
+                # failure is now logged with an operation identifier.
+                try:
+                    ok = conn.modify(target_dn, changes)
+                except Exception as exc:
+                    log.error(f"sync_member_groups {op_id}: {exc}")
+                    return False
+                if not ok:
+                    log.error(f"sync_member_groups {op_id}: "
+                              f"{getattr(conn, 'result', None)}")
+                return bool(ok)
+
             for name in sorted(to_add):
-                conn.modify(group_dn(name),
-                            {'uniqueMember': [(MODIFY_ADD, [dn])]})
-                conn.modify(dn, {'uniqueMemberOf': [
-                    (MODIFY_ADD, [group_dn(name)])]})
+                _checked_modify(group_dn(name),
+                                {'uniqueMember': [(MODIFY_ADD, [dn])]},
+                                f"{member_oid} +{name} (group side)")
+                _checked_modify(dn, {'uniqueMemberOf': [
+                    (MODIFY_ADD, [group_dn(name)])]},
+                    f"{member_oid} +{name} (member side)")
             for name in sorted(to_remove):
-                conn.modify(group_dn(name),
-                            {'uniqueMember': [(MODIFY_DELETE, [dn])]})
-                conn.modify(dn, {'uniqueMemberOf': [
-                    (MODIFY_DELETE, [group_dn(name)])]})
+                _checked_modify(group_dn(name),
+                                {'uniqueMember': [(MODIFY_DELETE, [dn])]},
+                                f"{member_oid} -{name} (group side)")
+                _checked_modify(dn, {'uniqueMemberOf': [
+                    (MODIFY_DELETE, [group_dn(name)])]},
+                    f"{member_oid} -{name} (member side)")
             if to_add or to_remove:
                 log.info(f"sync_member_groups: {member_oid} "
                          f"+{sorted(to_add)} -{sorted(to_remove)}")
