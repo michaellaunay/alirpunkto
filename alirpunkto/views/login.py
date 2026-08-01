@@ -4,7 +4,6 @@
 
 from datetime import datetime, timedelta
 from typing import Union
-from httpcore import request
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember
@@ -22,6 +21,7 @@ from alirpunkto.constants_and_globals import (
 )
 from alirpunkto.models.users import User
 from alirpunkto.utils import (
+    safe_local_redirect,
     switch_request_language,
     is_admin,
     get_admin_user,
@@ -85,9 +85,12 @@ def login_view(request):
                 log.warning(f"Failed to obtain Keycloak token for {username}")
             # redirect to the page the user wanted to access before login
             if 'redirect_url' in request.session:
-                redirect_url = request.session['redirect_url']
+                # Only same-site targets are followed (open-redirect fix).
+                redirect_url = safe_local_redirect(
+                    request.session['redirect_url'], request)
                 del request.session['redirect_url']
-                return HTTPFound(location=redirect_url, headers=headers)
+                if redirect_url:
+                    return HTTPFound(location=redirect_url, headers=headers)
             return HTTPFound(
                 location=request.route_url('home'),
                 headers=headers

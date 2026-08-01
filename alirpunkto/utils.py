@@ -85,6 +85,7 @@ from pyramid.renderers import render_to_response
 import random
 import hmac
 import hashlib
+from urllib.parse import urlparse
 from cryptography.fernet import Fernet, InvalidToken
 import base64
 from .models.users import User
@@ -380,6 +381,36 @@ def retrieve_candidature(
             'error': _('candidature_not_found'),
         }
     return candidature, None
+
+def safe_local_redirect(url, request):
+    """Validate a stored redirect target against open-redirect abuse.
+
+    ``login_view`` honours ``session['redirect_url']`` after a successful
+    authentication (external audit, 2026-08-01: the value used to be
+    followed blindly). Legitimate writers (``vote``, ``get_email``) store
+    ``request.current_route_url()`` — an *absolute* URL of this very site —
+    so the rule is: an absolute ``http(s)`` URL is followed only when its
+    authority is exactly this request's host (user-info tricks like
+    ``https://host@evil`` fail that equality); a relative target must be a
+    local absolute path (``/…`` but not the protocol-relative ``//…``);
+    backslashes and every other scheme are refused. Anything unsafe
+    returns ``None`` and the caller falls back to home.
+    """
+    if not url or not isinstance(url, str):
+        return None
+    url = url.strip()
+    if '\\' in url:
+        return None
+    parts = urlparse(url)
+    if parts.scheme and parts.scheme not in ('http', 'https'):
+        return None
+    if parts.netloc:
+        if parts.netloc != request.host:
+            return None
+    elif not parts.path.startswith('/') or parts.path.startswith('//'):
+        return None
+    return url
+
 
 def is_not_a_valid_email_address(
         email:str,
