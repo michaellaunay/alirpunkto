@@ -1290,3 +1290,42 @@ msgstr "Sur cette page, tu peux consulter ton profil et en modifier certains él
 
 msgid "cancel_button"
 msgstr "Annuler"
+
+msgid "your_groups_label"
+msgstr "Tes groupes"
+
+msgid "group_label_community"
+msgstr "Communauté"
+
+msgid "group_label_missing_share_year"
+msgstr "Coopérateur·rice en devenir (part et cotisation annuelle en attente)"
+
+msgid "group_label_missing_share"
+msgstr "Coopérateur·rice en devenir (part en attente)"
+
+msgid "group_label_missing_year"
+msgstr "Coopérateur·rice en devenir (cotisation annuelle en attente)"
+
+msgid "group_label_cooperators"
+msgstr "Coopérateur·rice·s"
+
+msgid "group_label_sanctioned"
+msgstr "Sanctionné·e·s"
+
+msgid "group_label_sanctioned_missing_year"
+msgstr "Sanctionné·e·s (cotisation annuelle en attente)"
+
+msgid "group_label_board"
+msgstr "Conseil d'administration"
+
+msgid "group_label_mac"
+msgstr "Conseil de médiation et d'arbitrage"
+
+msgid "group_label_suspended_board"
+msgstr "Conseil d'administration (suspendu·e)"
+
+msgid "group_label_suspended_mac"
+msgstr "Conseil de médiation et d'arbitrage (suspendu·e)"
+
+msgid "group_label_legacy_ordinary"
+msgstr "Communauté (groupe hérité)"

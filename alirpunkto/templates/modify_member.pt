@@ -72,6 +72,24 @@
                 <input type="submit" name="submit" value="Submit" i18n:attributes="value submit_button">
             </form>
         </div>
+        <!-- Issue #55: the read-only facts outside the form — the groups
+             one belongs to, and the role for a Cooperator. -->
+        <div class="container own-member-panel" i18n:domain="alirpunkto"
+             tal:define="own_view own_view | nothing"
+             tal:condition="own_view">
+            <dl>
+                <dt tal:content="_('your_groups_label')">Your groups</dt>
+                <dd>
+                    <span tal:repeat="entry own_view/groups"
+                          class="member-group"
+                          tal:content="python: _(entry[1]) if entry[1] else entry[0]">group</span>
+                </dd>
+                <tal:role condition="own_view/role_i18n">
+                    <dt tal:content="_('role_label')">Role</dt>
+                    <dd tal:content="python:_(own_view['role_i18n'])">role</dd>
+                </tal:role>
+            </dl>
+        </div>
         <div tal:condition="form" class="member-form">
             <!-- Issue #123: the introduction of the specification. -->
             <p i18n:translate="your_profile_introduction">On this page, you can view your own profile, and modify some of its elements. In order to modify an item, simply replace the existing content of the field with the new content of your choosing.</p>

@@ -196,3 +196,17 @@ def test_has_avatar_follows_the_directory(config):
             post={'submit': '1', ACCESSED_MEMBER_OID: 'other-2'},
             resolved={'adm-1': admin, 'other-2': other}, avatar=avatar)
         assert result['admin_view']['has_avatar'] is expected
+
+
+def test_the_view_config_decorates_the_view_itself():
+    """Regression lock: patch 0050 once slid _admin_member_card between
+    @view_config and def modify_member — the veneer then registered the
+    helper as the route's view, a production-only 500. The decorator must
+    be immediately followed by the view definition."""
+    import os, re
+    src = open(os.path.join(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__))), 'alirpunkto', 'views',
+        'modify_member.py'), encoding='utf-8').read()
+    m = re.search(r"@view_config\(\n.*?\n\)\n(def \w+)", src, re.S)
+    assert m and m.group(1) == "def modify_member"
+

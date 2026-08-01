@@ -74,10 +74,52 @@ def _coerce_member_data_value(field, raw):
     return raw
 
 
-@view_config(
-    route_name='modify_member',
-    renderer='alirpunkto:templates/modify_member.pt'
-)
+#: Translated labels of the dynamic groups (issue #55); unknown group
+#: names fall back to their raw cn in the template.
+GROUP_LABEL_MSGIDS = {
+    'communityMembersGroup': 'group_label_community',
+    'candidatesMissingShareYearContribGroup':
+        'group_label_missing_share_year',
+    'candidatesMissingShareGroup': 'group_label_missing_share',
+    'candidatesMissingYearContribGroup': 'group_label_missing_year',
+    'cooperatorsGroup': 'group_label_cooperators',
+    'sanctionedGroup': 'group_label_sanctioned',
+    'sanctionedMissingYearContribGroup':
+        'group_label_sanctioned_missing_year',
+    'boardMembersGroup': 'group_label_board',
+    'mediationArbitrationCouncilGroup': 'group_label_mac',
+    'suspendedBoardMembersGroup': 'group_label_suspended_board',
+    'suspendedMediationArbitrationCouncilGroup':
+        'group_label_suspended_mac',
+    'ordinaryMembersGroup': 'group_label_legacy_ordinary',
+}
+
+
+def _own_member_panel(request, member):
+    """The read-only facts of one's own profile that live outside the form
+    (issue #55): the groups the member belongs to, and — for a Cooperator
+    or assimilated — the role in the Cooperative."""
+    from alirpunkto.dynamic_groups import get_member_groups
+    from alirpunkto.models.member import MemberRoles
+    try:
+        groups = sorted(get_member_groups(member.oid))
+    except Exception:
+        groups = []
+    panel = {
+        'groups': [(name, GROUP_LABEL_MSGIDS.get(name)) for name in groups],
+        'role_i18n': None,
+    }
+    if member.type == MemberTypes.COOPERATOR:
+        role = getattr(getattr(member, 'data', None), 'role', None)
+        role_name = getattr(role, 'name', role) or MemberRoles.NONE.name
+        try:
+            panel['role_i18n'] = MemberRoles.get_i18n_id(role_name) or \
+                "member_roles_none"
+        except Exception:
+            panel['role_i18n'] = "member_roles_none"
+    return panel
+
+
 def _admin_member_card(request, accessed_member):
     """The fixed, read-only card administrators see (issue #149): exactly
     the eight fields the ticket lists — nothing else, and no form."""
@@ -111,6 +153,10 @@ def _admin_member_card(request, accessed_member):
     }
 
 
+@view_config(
+    route_name='modify_member',
+    renderer='alirpunkto:templates/modify_member.pt'
+)
 def modify_member(request):
     """Modify member view.
     get the accessed member oid and show form to modify accessed member datas.
@@ -328,6 +374,8 @@ def modify_member(request):
             "member": member,
             "accessed_members": {},
             "accessed_member": accessed_member.oid,
+            "own_view": _own_member_panel(request, member)
+                if accessed_member.oid == member.oid else None,
         }
     elif 'modify' in request.POST and oid and member:
         # check if the member data field is writable before assignement

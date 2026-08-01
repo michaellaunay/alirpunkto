@@ -258,6 +258,12 @@ def _collect_group_members(conn, seen):
             if value.startswith('uid='):
                 seen.add(value[4:].split(',', 1)[0])
 
+def get_member_groups(member_oid):
+    """The managed dynamic groups a member belongs to (issue #55: shown,
+    read-only, on one's own profile). Best effort: empty set on failure."""
+    return _current_groups(member_oid)
+
+
 def _current_groups(member_oid):
     try:
         with get_ldap_connection(ldap_user=LDAP_USER,

@@ -1301,3 +1301,42 @@ msgstr ""
 
 msgid "cancel_button"
 msgstr ""
+
+msgid "your_groups_label"
+msgstr ""
+
+msgid "group_label_community"
+msgstr ""
+
+msgid "group_label_missing_share_year"
+msgstr ""
+
+msgid "group_label_missing_share"
+msgstr ""
+
+msgid "group_label_missing_year"
+msgstr ""
+
+msgid "group_label_cooperators"
+msgstr ""
+
+msgid "group_label_sanctioned"
+msgstr ""
+
+msgid "group_label_sanctioned_missing_year"
+msgstr ""
+
+msgid "group_label_board"
+msgstr ""
+
+msgid "group_label_mac"
+msgstr ""
+
+msgid "group_label_suspended_board"
+msgstr ""
+
+msgid "group_label_suspended_mac"
+msgstr ""
+
+msgid "group_label_legacy_ordinary"
+msgstr ""

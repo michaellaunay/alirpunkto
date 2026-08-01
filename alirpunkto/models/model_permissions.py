@@ -396,7 +396,7 @@ access = {
                 cooperative_behaviour_mark_update=Permissions.READ,
                 number_shares_owned=Permissions.READ,
                 date_end_validity_yearly_contribution=Permissions.READ,
-                iban=Permissions.READ,
+                iban=Permissions.ACCESS | Permissions.READ,
                 role=Permissions.READ,
             ),
             oid=Permissions.ACCESS | Permissions.READ,
@@ -413,7 +413,8 @@ access = {
                 fullname=Permissions.ACCESS | Permissions.READ,
                 fullsurname=Permissions.ACCESS | Permissions.READ,
                 description=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
-                nationality=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
+                # Issue #55: the nationality is identity data — view only.
+                nationality=Permissions.ACCESS | Permissions.READ,
                 birthdate=Permissions.ACCESS | Permissions.READ,
                 password=Permissions.NONE | Permissions.WRITE,
                 password_confirm=Permissions.NONE | Permissions.WRITE,
@@ -424,7 +425,7 @@ access = {
                 cooperative_behaviour_mark_update=Permissions.ACCESS | Permissions.READ,
                 number_shares_owned=Permissions.ACCESS | Permissions.READ,
                 date_end_validity_yearly_contribution=Permissions.ACCESS | Permissions.READ,
-                iban=Permissions.READ | Permissions.WRITE,
+                iban=Permissions.ACCESS | Permissions.READ | Permissions.WRITE,
                 role=Permissions.ACCESS | Permissions.READ,
             ),
             oid=Permissions.ACCESS | Permissions.READ,
@@ -696,6 +697,35 @@ access = {
     }
 }
 
+# A member whose resignation is pending must still open their own profile —
+# the cancel button lives there (issues #55, #201 x resignation flow).
+access['Owner'][MemberStates.PENDING_UNSUBSCRIPTION] = \
+    access['Owner'][MemberStates.DATA_MODIFICATION_REQUESTED]
+
+#: The profile fields only a Cooperator or assimilated has (issue #55): an
+#: Ordinary Member neither sees nor edits them.
+_COOPERATOR_ONLY_DATA_FIELDS = (
+    'fullname', 'fullsurname', 'birthdate', 'nationality', 'iban',
+    'cooperative_behaviour_mark', 'cooperative_behaviour_mark_update',
+    'number_shares_owned', 'date_end_validity_yearly_contribution', 'role',
+)
+
+
+def _restrict_owner_permissions_by_type(permissions, member_type):
+    """Issue #55: the Owner matrix is keyed by member state only, while the
+    specification distinguishes Ordinary Members from Cooperators or
+    assimilated. Post-process the resolved cell: anyone who is not a
+    Cooperator loses the Cooperator-only fields entirely."""
+    from alirpunkto.models.member import MemberTypes
+    if member_type == MemberTypes.COOPERATOR or \
+            permissions is NO_MEMBER_PERMISSIONS:
+        return permissions
+    from dataclasses import replace
+    data = replace(permissions.data, **{
+        field: Permissions.NONE for field in _COOPERATOR_ONLY_DATA_FIELDS})
+    return replace(permissions, data=data)
+
+
 def _resolve_permissions(outer_key, inner_key) -> MemberPermissionsType:
     """Resolve one cell of the ``access`` matrix, failing closed.
 
@@ -749,7 +779,9 @@ def get_access_permissions(accessed: Member, accessor: Member) -> MemberPermissi
                     f"Accessor is owner of member "
                     f"access['Owner'][{accessed.member_state}]"
                 )
-                permissions = _resolve_permissions('Owner', accessed.member_state)
+                permissions = _restrict_owner_permissions_by_type(
+                    _resolve_permissions('Owner', accessed.member_state),
+                    accessed.type)
 
         # Else if accessed is a Candidature and the accessor is a voter
         case (False, Candidature(), _) if (
