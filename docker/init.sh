@@ -353,44 +353,54 @@ if [ ! -f "${LDIF_TEMPLATE}" ]; then
     exit 1
 fi
 
-# Sixth audit pass (§12.4): a command line is world-readable in
-# /proc/<pid>/cmdline, so nothing personal or secret goes through argv.
-# Every such slot is passed as the literal "-" and the real value is
-# handed to generate_ldif.py through its own process environment below
-# (single-use variables, read once and scrubbed by the generator).
-# Passwords travel in clear there and are hashed to {SSHA} by
-# generate_ldif.py itself — init.sh no longer pre-hashes anything, so
-# the old external hashing dependency and its cleartext-on-argv
-# fallback are gone. The bash array only prevents word-splitting of the remaining
-# non-sensitive arguments.
-GENERATE_LDIF_ARGS=(
-    "${LDIF_TEMPLATE}"
-    "${LDIF_OUT}"
-    "${LDAP_BASE_DN}"
-    "${LDAP_ADMIN_OID}" "${ADMIN_LOGIN}" "${ADMIN_PSEUDONYM}" "-" "-"
-    "${USER1_UUID}" "${USER1_ROLE}" "${USER1_PSEUDONYM}" "-" "-"
-    "${USER1_LANG}" "${USER1_NATIONALITY}" "-" "-"
-    "${USER2_UUID}" "${USER2_ROLE}" "${USER2_PSEUDONYM}" "-" "-"
-    "${USER2_LANG}" "${USER2_NATIONALITY}" "-" "-"
-    "${TODAY}"
-    "${USER1_SECOND_LANG}" "${USER1_THIRD_LANG}" "-" "-"
-    "${USER2_SECOND_LANG}" "${USER2_THIRD_LANG}" "-" "-"
-)
-GENERATE_LDIF_ADMIN_PW="${ADMIN_PASSWORD}" \
-GENERATE_LDIF_U1_PW="${USER1_PASSWORD}" \
-GENERATE_LDIF_U2_PW="${USER2_PASSWORD}" \
-GENERATE_LDIF_ADMIN_EMAIL="${ADMIN_EMAIL}" \
-GENERATE_LDIF_U1_FIRST="${USER1_FIRSTNAME}" \
-GENERATE_LDIF_U1_LAST="${USER1_LASTNAME}" \
-GENERATE_LDIF_U1_EMAIL="${USER1_EMAIL}" \
-GENERATE_LDIF_U1_BIRTHDATE="${USER1_BIRTHDATE}" \
-GENERATE_LDIF_U1_DESCRIPTION="${USER1_DESCRIPTION}" \
-GENERATE_LDIF_U2_FIRST="${USER2_FIRSTNAME}" \
-GENERATE_LDIF_U2_LAST="${USER2_LASTNAME}" \
-GENERATE_LDIF_U2_EMAIL="${USER2_EMAIL}" \
-GENERATE_LDIF_U2_BIRTHDATE="${USER2_BIRTHDATE}" \
-GENERATE_LDIF_U2_DESCRIPTION="${USER2_DESCRIPTION}" \
-python3 "${DOCKER_DIR}/generate_ldif.py" "${GENERATE_LDIF_ARGS[@]}"
+# Eighth audit pass (2026-08-02, §4/§5): the previous scheme still put
+# logins, pseudonyms, UUIDs, roles, languages and NATIONALITIES on the
+# command line — all personal data, some of it sensitive. Nothing
+# user-provided rides argv any more: the command line carries the two
+# file paths only, and every value crosses as NUL-delimited NAME=VALUE
+# records on the generator's standard input — a pipe is visible to no
+# one, touches no disk, and handles any byte a shell variable can
+# hold. The generator refuses to run if a required field (a password
+# above all) is missing or empty, and hashes the passwords itself.
+generate_ldif_records() {
+    emit() { printf '%s=%s\0' "$1" "$2"; }
+    emit LDAP_BASE_DN     "${LDAP_BASE_DN}"
+    emit ADMIN_UUID       "${LDAP_ADMIN_OID}"
+    emit ADMIN_LOGIN      "${ADMIN_LOGIN}"
+    emit ADMIN_PSEUDONYM  "${ADMIN_PSEUDONYM}"
+    emit ADMIN_EMAIL      "${ADMIN_EMAIL}"
+    emit ADMIN_PW         "${ADMIN_PASSWORD}"
+    emit U1_UUID          "${USER1_UUID}"
+    emit U1_ROLE          "${USER1_ROLE}"
+    emit U1_PSEUDONYM     "${USER1_PSEUDONYM}"
+    emit U1_FIRST         "${USER1_FIRSTNAME}"
+    emit U1_LAST          "${USER1_LASTNAME}"
+    emit U1_LANG          "${USER1_LANG}"
+    emit U1_NAT           "${USER1_NATIONALITY}"
+    emit U1_EMAIL         "${USER1_EMAIL}"
+    emit U1_PW            "${USER1_PASSWORD}"
+    emit U2_UUID          "${USER2_UUID}"
+    emit U2_ROLE          "${USER2_ROLE}"
+    emit U2_PSEUDONYM     "${USER2_PSEUDONYM}"
+    emit U2_FIRST         "${USER2_FIRSTNAME}"
+    emit U2_LAST          "${USER2_LASTNAME}"
+    emit U2_LANG          "${USER2_LANG}"
+    emit U2_NAT           "${USER2_NATIONALITY}"
+    emit U2_EMAIL         "${USER2_EMAIL}"
+    emit U2_PW            "${USER2_PASSWORD}"
+    emit TODAY            "${TODAY}"
+    [ -n "${USER1_SECOND_LANG}" ] && emit U1_SECOND_LANG "${USER1_SECOND_LANG}"
+    [ -n "${USER1_THIRD_LANG}" ]  && emit U1_THIRD_LANG  "${USER1_THIRD_LANG}"
+    [ -n "${USER1_BIRTHDATE}" ]   && emit U1_BIRTHDATE   "${USER1_BIRTHDATE}"
+    [ -n "${USER1_DESCRIPTION}" ] && emit U1_DESCRIPTION "${USER1_DESCRIPTION}"
+    [ -n "${USER2_SECOND_LANG}" ] && emit U2_SECOND_LANG "${USER2_SECOND_LANG}"
+    [ -n "${USER2_THIRD_LANG}" ]  && emit U2_THIRD_LANG  "${USER2_THIRD_LANG}"
+    [ -n "${USER2_BIRTHDATE}" ]   && emit U2_BIRTHDATE   "${USER2_BIRTHDATE}"
+    [ -n "${USER2_DESCRIPTION}" ] && emit U2_DESCRIPTION "${USER2_DESCRIPTION}"
+    true
+}
+generate_ldif_records | python3 "${DOCKER_DIR}/generate_ldif.py" \
+    "${LDIF_TEMPLATE}" "${LDIF_OUT}"
 
 success "docker/initials_users.generated.ldif written."
 

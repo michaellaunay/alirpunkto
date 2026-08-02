@@ -1,101 +1,126 @@
-"""Sixth audit pass (2026-08-01, §12.4).
+"""Eighth audit pass (2026-08-02, §4/§5) — the LDIF transport, closed.
 
-A command line is world-readable in /proc/<pid>/cmdline, yet
-``docker/init.sh`` used to push passwords (or, without slappasswd, the
-CLEARTEXT password), e-mail addresses, names, birthdates and
-descriptions through ``generate_ldif.py``'s argv — under a comment
-claiming they travelled as "NUL-separated env vars". The "-" slot
-mechanism of the revised audit now covers every personal field, the
-values ride the generator's own single-use environment (scrubbed on
-read), and init.sh no longer pre-hashes anything: the slappasswd
-dependency and its cleartext fallback are gone.
+The sixth-audit rework still put logins, pseudonyms, UUIDs, roles,
+languages and NATIONALITIES on generate_ldif.py's argv — personal data,
+some of it sensitive — and an absent password variable silently became
+the valid {SSHA} hash of the empty string. The command line now carries
+the two file paths only; every value crosses as NUL-delimited
+NAME=VALUE records on stdin; required fields (passwords above all)
+abort when missing OR empty; unknown names abort too.
 """
 from __future__ import annotations
 
+import contextlib
 import importlib.util
+import io
 import os
-import re
 import sys
+from types import SimpleNamespace
 from unittest.mock import patch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PERSONAL_ENV = {
-    "GENERATE_LDIF_ADMIN_PW": "admin-env-pw",
-    "GENERATE_LDIF_U1_PW": "u1-env-pw",
-    "GENERATE_LDIF_U2_PW": "u2-env-pw",
-    "GENERATE_LDIF_ADMIN_EMAIL": "admin-env@x.org",
-    "GENERATE_LDIF_U1_FIRST": "EnvFirst",
-    "GENERATE_LDIF_U1_LAST": "EnvLast",
-    "GENERATE_LDIF_U1_EMAIL": "u1-env@x.org",
-    "GENERATE_LDIF_U1_BIRTHDATE": "1990-01-01T12:00:00",
-    "GENERATE_LDIF_U1_DESCRIPTION": "Env bio",
-    "GENERATE_LDIF_U2_FIRST": "EnvFirst2",
-    "GENERATE_LDIF_U2_LAST": "EnvLast2",
-    "GENERATE_LDIF_U2_EMAIL": "u2-env@x.org",
-    "GENERATE_LDIF_U2_BIRTHDATE": "1991-02-02T12:00:00",
-    "GENERATE_LDIF_U2_DESCRIPTION": "Env bio 2",
+VALID_FIELDS = {
+    "LDAP_BASE_DN": "dc=example,dc=com",
+    "ADMIN_UUID": "uuid-a", "ADMIN_LOGIN": "admin",
+    "ADMIN_PSEUDONYM": "AdminPseudo", "ADMIN_EMAIL": "admin@x.org",
+    "ADMIN_PW": "admin-pw",
+    "U1_UUID": "u1-uuid", "U1_ROLE": "COOPERATOR",
+    "U1_PSEUDONYM": "pseudo1", "U1_FIRST": "First", "U1_LAST": "Last",
+    "U1_LANG": "en", "U1_NAT": "FR", "U1_EMAIL": "u1@x.org",
+    "U1_PW": "u1-pw",
+    "U2_UUID": "u2-uuid", "U2_ROLE": "COOPERATOR",
+    "U2_PSEUDONYM": "pseudo2", "U2_FIRST": "First2", "U2_LAST": "Last2",
+    "U2_LANG": "fr", "U2_NAT": "DE", "U2_EMAIL": "u2@x.org",
+    "U2_PW": "u2-pw",
+    "TODAY": "2026-08-02",
+    "U1_BIRTHDATE": "1990-01-01T12:00:00",
+    "U1_DESCRIPTION": "Bio one",
 }
 
-# argv exactly as the reworked init.sh builds it: "-" for every
-# personal or secret slot, literal values for the rest.
-DASH_ARGV_TAIL = (
-    ["uuid-a", "admin", "AdminPseudo", "-", "-"]
-    + ["u1-uuid", "COOPERATOR", "pseudo1", "-", "-", "en", "FR", "-", "-"]
-    + ["u2-uuid", "COOPERATOR", "pseudo2", "-", "-", "fr", "DE", "-", "-"]
-    + ["2026-08-01"]
-    + ["", "", "-", "-"]
-    + ["", "", "-", "-"])
+
+def _records(fields):
+    return b"".join(f"{name}={value}".encode("utf-8") + b"\0"
+                    for name, value in fields.items())
 
 
-def _run_generator(tmp_path, env):
-    """Execute docker/generate_ldif.py with dash slots and ``env``;
-    return the output text and, for each provided variable, whether it
-    was still in the environment right after the run (scrub check must
-    happen INSIDE the patched context — patch.dict restores on exit)."""
+def _run_generator(tmp_path, fields):
+    """Execute docker/generate_ldif.py with only the two paths on argv
+    and ``fields`` as NUL records on stdin. Returns (exit_code, output
+    text or None, stderr text)."""
     template = tmp_path / "template.ldif"
     template.write_text("dn: dc=alirpunkto,dc=org\n", encoding="utf-8")
     out = tmp_path / "out.ldif"
-    argv = [str(template), str(out), "dc=example,dc=com"] + DASH_ARGV_TAIL
     spec = importlib.util.spec_from_file_location(
-        "generate_ldif_transport_under_test",
+        "generate_ldif_stdin_under_test",
         os.path.join(ROOT, "docker", "generate_ldif.py"))
     module = importlib.util.module_from_spec(spec)
-    with patch.object(sys, 'argv', ["generate_ldif.py"] + argv), \
-         patch.dict(os.environ, env, clear=False):
+    fake_stdin = SimpleNamespace(buffer=io.BytesIO(_records(fields)))
+    stderr = io.StringIO()
+    code = 0
+    with patch.object(sys, 'argv',
+                      ["generate_ldif.py", str(template), str(out)]), \
+         patch.object(sys, 'stdin', fake_stdin), \
+         contextlib.redirect_stderr(stderr):
         try:
             spec.loader.exec_module(module)
         except SystemExit as exc:
-            raise AssertionError(f"generator refused argv: {exc}")
-        left_over = {name: name in os.environ for name in env}
-    return out.read_text(encoding="utf-8"), left_over
+            code = exc.code or 0
+    text = out.read_text(encoding="utf-8") if out.exists() else None
+    return code, text, stderr.getvalue()
 
 
-def test_every_personal_slot_is_read_from_the_environment(tmp_path):
-    content, _ = _run_generator(tmp_path, dict(PERSONAL_ENV))
-    assert "mail: admin-env@x.org" in content
-    assert "mail: u1-env@x.org" in content
-    assert "mail: u2-env@x.org" in content
-    assert "givenName: EnvFirst" in content
-    assert "sn: EnvLast" in content
+def test_every_value_travels_on_stdin_and_lands_in_the_ldif(tmp_path):
+    code, content, stderr = _run_generator(tmp_path, dict(VALID_FIELDS))
+    assert code == 0, stderr
+    assert "mail: admin@x.org" in content
+    assert "givenName: First" in content
+    assert "sn: Last2" in content
+    assert "nationality: DE" in content
     assert "birthdate: 1990-01-01T12:00:00" in content
-    assert "description: Env bio" in content
-    # No slot may leak through as its literal placeholder.
-    assert not re.search(r"(?m)^[A-Za-z]+: -$", content)
+    assert "description: Bio one" in content
 
 
-def test_passwords_are_hashed_and_every_variable_is_scrubbed(tmp_path):
-    content, left_over = _run_generator(tmp_path, dict(PERSONAL_ENV))
+def test_passwords_are_hashed_and_never_clear(tmp_path):
+    code, content, _ = _run_generator(tmp_path, dict(VALID_FIELDS))
+    assert code == 0
     assert "{SSHA}" in content
-    for cleartext in ("admin-env-pw", "u1-env-pw", "u2-env-pw"):
+    for cleartext in ("admin-pw", "u1-pw", "u2-pw"):
         assert cleartext not in content
-    assert left_over == {name: False for name in PERSONAL_ENV}
 
 
-def test_a_dash_slot_without_its_variable_stays_empty(tmp_path):
-    env = {name: value for name, value in PERSONAL_ENV.items()
-           if "BIRTHDATE" not in name and "DESCRIPTION" not in name}
-    content, _ = _run_generator(tmp_path, env)
+def test_a_missing_password_aborts_instead_of_hashing_nothing(tmp_path):
+    """§5: an absent variable used to become the valid {SSHA} hash of
+    the empty string — a silently created empty-password account."""
+    fields = {name: value for name, value in VALID_FIELDS.items()
+              if name != "U1_PW"}
+    code, content, stderr = _run_generator(tmp_path, fields)
+    assert code != 0
+    assert content is None          # no LDIF was written
+    assert "U1_PW" in stderr
+
+
+def test_an_empty_password_aborts_too(tmp_path):
+    fields = dict(VALID_FIELDS, ADMIN_PW="")
+    code, content, stderr = _run_generator(tmp_path, fields)
+    assert code != 0
+    assert content is None
+    assert "ADMIN_PW" in stderr
+
+
+def test_an_unknown_record_name_aborts(tmp_path):
+    fields = dict(VALID_FIELDS, TYPO_FIELD="x")
+    code, content, stderr = _run_generator(tmp_path, fields)
+    assert code != 0
+    assert content is None
+    assert "TYPO_FIELD" in stderr
+
+
+def test_absent_optional_fields_stay_absent(tmp_path):
+    fields = {name: value for name, value in VALID_FIELDS.items()
+              if name not in ("U1_BIRTHDATE", "U1_DESCRIPTION")}
+    code, content, _ = _run_generator(tmp_path, fields)
+    assert code == 0
     assert "birthdate:" not in content
     assert "description:" not in content
 
@@ -106,27 +131,21 @@ def _init_script():
         return handle.read()
 
 
-def test_the_args_array_carries_no_personal_value():
+def test_the_command_line_carries_only_the_two_paths():
+    """§4: pseudonyms, logins, roles and nationalities are personal
+    data too — nothing user-provided may reach argv."""
     script = _init_script()
-    block = script.split("GENERATE_LDIF_ARGS=(", 1)[1].split(")", 1)[0]
-    assert block.count('"-"') == 14
-    for variable in ("ADMIN_EMAIL", "ADMIN_PASSWORD", "HASHED",
-                     "USER1_FIRSTNAME", "USER1_LASTNAME", "USER1_EMAIL",
-                     "USER1_PASSWORD", "USER1_BIRTHDATE",
-                     "USER1_DESCRIPTION", "USER2_FIRSTNAME",
-                     "USER2_LASTNAME", "USER2_EMAIL", "USER2_PASSWORD",
-                     "USER2_BIRTHDATE", "USER2_DESCRIPTION"):
-        assert variable not in block, variable
+    assert "GENERATE_LDIF_ARGS" not in script
+    assert "GENERATE_LDIF_" not in script     # the env slots are gone too
+    call = script.rsplit("generate_ldif.py", 1)[1].split("\n\n", 1)[0]
+    assert '"${LDIF_TEMPLATE}"' in call
+    assert '"${LDIF_OUT}"' in call
+    for variable in ("ADMIN", "USER1", "USER2", "NATIONALITY",
+                     "PSEUDONYM", "PASSWORD"):
+        assert variable not in call, variable
 
 
-def test_the_invocation_provides_every_environment_slot():
+def test_the_records_pipeline_feeds_stdin():
     script = _init_script()
-    for name in PERSONAL_ENV:
-        assert f"{name}=" in script, name
-
-
-def test_the_script_no_longer_hashes_nor_lies_about_the_transport():
-    script = _init_script()
-    assert "hash_password" not in script
-    assert "slappasswd" not in script
-    assert "NUL-separated" not in script
+    assert "printf '%s=%s\\0'" in script
+    assert "generate_ldif_records | python3" in script

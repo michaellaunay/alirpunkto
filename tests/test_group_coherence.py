@@ -21,8 +21,9 @@ from ldap3 import MODIFY_ADD
 
 import alirpunkto.dynamic_groups as dg
 from alirpunkto.dynamic_groups import (
-    COMMUNITY, COOPERATORS, LEGACY_ORDINARY, MISSING_YEAR,
-    daily_group_scan, group_dn, member_dn, sync_member_groups)
+    BOARD, COMMUNITY, COOPERATORS, LEGACY_ORDINARY, MISSING_YEAR,
+    SANCTIONED, daily_group_scan, group_dn, member_dn,
+    sync_member_groups)
 from tests.test_dynamic_groups import (
     EXPIRED, TODAY, VALID, _add_member, _directory, _group_has, _groups_of)
 
@@ -127,3 +128,100 @@ def test_grants_land_on_the_member_side_last_and_leave_it_first():
         (group_dn(COOPERATORS), 'uniqueMember', 'MODIFY_DELETE'))
     assert grant_group < grant_member
     assert revoke_member < revoke_group
+
+
+def _veto_modify(conn, veto):
+    """Make exactly one (dn, attribute, operation) modify fail."""
+    original = conn.modify
+
+    def wrapped(target_dn, changes):
+        attribute = next(iter(changes))
+        operation = changes[attribute][0][0]
+        if (target_dn, attribute, operation) == veto:
+            return False
+        return original(target_dn, changes)
+
+    conn.modify = wrapped
+
+
+def test_a_failed_group_grant_blocks_the_member_side():
+    """Eighth audit pass (§7): ordering alone was not fail-closed — a
+    failed group-side ADD used to be followed by the member-side ADD
+    anyway, and the application saw the permission immediately."""
+    conn = _directory()
+    _add_member_side_only(conn, 'grant-f', member_of=())
+    _veto_modify(conn, (group_dn(COOPERATORS), 'uniqueMember',
+                        'MODIFY_ADD'))
+    with patch.object(dg, 'get_ldap_connection', return_value=conn):
+        sync_member_groups(SimpleNamespace(), 'grant-f', today=TODAY)
+
+    # COMMUNITY went through normally; COOPERATORS must be on NEITHER
+    # side — the member side (what the application reads) above all.
+    assert _groups_of(conn, 'grant-f') == {COMMUNITY}
+    assert not _group_has(conn, COOPERATORS, 'grant-f')
+
+
+def test_a_failed_member_revocation_keeps_the_group_side():
+    """Eighth audit pass (§7): a failed member-side DELETE used to be
+    followed by the group-side DELETE anyway — the member kept the
+    privilege while the group forgot it."""
+    conn = _directory()
+    _add_member(conn, 'revoke-f', shares=2, end=EXPIRED,
+                groups=(COMMUNITY, COOPERATORS))
+    _veto_modify(conn, (member_dn('revoke-f'), 'uniqueMemberOf',
+                        'MODIFY_DELETE'))
+    with patch.object(dg, 'get_ldap_connection', return_value=conn):
+        sync_member_groups(SimpleNamespace(), 'revoke-f', today=TODAY)
+
+    # The revocation could not clear the member side, so the group
+    # side must NOT have been touched: both sides still agree.
+    assert COOPERATORS in _groups_of(conn, 'revoke-f')
+    assert _group_has(conn, COOPERATORS, 'revoke-f')
+
+
+def test_a_half_revoked_board_latch_is_not_resurrected():
+    """Eighth audit pass (§8): feeding the truth table the UNION of
+    both sides resurrected a half-revoked latch — member side cleared,
+    stale group record left, next scan granted the role back. The
+    member side is authoritative: the stale group record converges
+    DOWN instead."""
+    conn = _directory()
+    _add_member_side_only(conn, 'ex-board',
+                          member_of=(COMMUNITY, COOPERATORS))
+    conn.modify(group_dn(COMMUNITY),
+                {'uniqueMember': [(MODIFY_ADD, [member_dn('ex-board')])]})
+    conn.modify(group_dn(COOPERATORS),
+                {'uniqueMember': [(MODIFY_ADD, [member_dn('ex-board')])]})
+    # The half-revoked latch: the member side no longer names BOARD,
+    # but the group-side DELETE failed back then.
+    conn.modify(group_dn(BOARD),
+                {'uniqueMember': [(MODIFY_ADD, [member_dn('ex-board')])]})
+
+    with patch.object(dg, 'get_ldap_connection', return_value=conn):
+        target = sync_member_groups(SimpleNamespace(), 'ex-board',
+                                    today=TODAY)
+
+    assert target == {COMMUNITY, COOPERATORS}
+    assert _groups_of(conn, 'ex-board') == {COMMUNITY, COOPERATORS}
+    assert not _group_has(conn, BOARD, 'ex-board')
+
+
+def test_a_half_lifted_sanction_is_not_resurrected():
+    conn = _directory()
+    _add_member_side_only(conn, 'ex-sanction', member_of=(COMMUNITY,))
+    conn.modify(group_dn(COMMUNITY),
+                {'uniqueMember': [(MODIFY_ADD,
+                                   [member_dn('ex-sanction')])]})
+    # The lifted sanction: gone from the member side, stale on the
+    # group side.
+    conn.modify(group_dn(SANCTIONED),
+                {'uniqueMember': [(MODIFY_ADD,
+                                   [member_dn('ex-sanction')])]})
+
+    with patch.object(dg, 'get_ldap_connection', return_value=conn):
+        target = sync_member_groups(SimpleNamespace(), 'ex-sanction',
+                                    today=TODAY)
+
+    assert target == {COMMUNITY, COOPERATORS}
+    assert SANCTIONED not in _groups_of(conn, 'ex-sanction')
+    assert not _group_has(conn, SANCTIONED, 'ex-sanction')

@@ -159,15 +159,23 @@ def sync_member_groups(request, member_oid, *, today=None,
     Sixth audit pass (2026-08-01, §12.3): the two sides — the member's
     ``uniqueMemberOf`` and each group's ``uniqueMember`` — used to
     receive one shared diff computed from the member side alone, so a
-    half-applied write (one side updated, the other not) persisted
-    forever: the missing half was invisible to the next run. Each side
-    now gets its own diff toward the same target, which makes any
-    divergence self-heal on the next pass, whichever side lagged; a
-    detected divergence is logged before being repaired. Grants touch
-    the group side first and the member side last, revocations the
-    member side first — the application reads the member side, so a
-    permission only appears once both sides carry it, and disappears
-    immediately (fail closed). Idempotent; returns the target set, or
+    half-applied write persisted forever. Each side now gets its own
+    diff toward the same target; a detected divergence is logged
+    before being repaired.
+
+    Eighth audit pass (2026-08-02, §7/§8): the MEMBER side is the
+    authoritative current state — it is what the application reads,
+    and feeding the truth table the union of both sides let a stale
+    group-side record resurrect a half-revoked Board/MAC/sanction
+    latch ("repaired in the wrong direction"). And fail-closed is now
+    enforced, not just ordered: the second write of every pair is
+    conditional on the first — a grant touches the member side only
+    once the group side carries it, a revocation touches the group
+    side only once the member side is clean. The asymmetry is
+    deliberate: a grant whose member-side write failed is rolled back
+    by the next pass (losing a grant is safe and re-runnable), while a
+    revocation converges until both sides are clean (resurrecting a
+    revoked privilege is not). Idempotent; returns the target set, or
     None if out of scope or on failure."""
     dn = member_dn(member_oid)
     try:
@@ -203,9 +211,12 @@ def sync_member_groups(request, member_oid, *, today=None,
                     f"(member side {sorted(member_side & set(MANAGED_GROUPS))}, "
                     f"group side {sorted(group_side)}); repairing both")
 
-            # The truth table sees the union: a membership recorded on
-            # either side counts as current for transition purposes.
-            current = member_side | group_side
+            # Eighth audit pass (§8): the truth table sees the MEMBER
+            # side only. The union used to resurrect half-revoked
+            # latches: with the member side cleared but a stale group
+            # record left behind, `current` still carried the role and
+            # the table granted it back.
+            current = member_side
             target = compute_target_groups(
                 employee_type, is_active, shares, end,
                 current & set(MANAGED_GROUPS), today,
@@ -236,22 +247,29 @@ def sync_member_groups(request, member_oid, *, today=None,
                               f"{getattr(conn, 'result', None)}")
                 return bool(ok)
 
-            for name in sorted(group_add):
-                _checked_modify(group_dn(name),
-                                {'uniqueMember': [(MODIFY_ADD, [dn])]},
-                                f"{member_oid} +{name} (group side)")
-            for name in sorted(member_add):
-                _checked_modify(dn, {'uniqueMemberOf': [
-                    (MODIFY_ADD, [group_dn(name)])]},
-                    f"{member_oid} +{name} (member side)")
-            for name in sorted(member_del):
-                _checked_modify(dn, {'uniqueMemberOf': [
-                    (MODIFY_DELETE, [group_dn(name)])]},
+            # Eighth audit pass (§7): the second write of each pair is
+            # CONDITIONAL on the first — ordering alone was not fail
+            # closed, a failed first write used to be followed by the
+            # second anyway.
+            for name in sorted(group_add | member_add):
+                on_group = (name not in group_add) or _checked_modify(
+                    group_dn(name),
+                    {'uniqueMember': [(MODIFY_ADD, [dn])]},
+                    f"{member_oid} +{name} (group side)")
+                if on_group and name in member_add:
+                    _checked_modify(dn, {'uniqueMemberOf': [
+                        (MODIFY_ADD, [group_dn(name)])]},
+                        f"{member_oid} +{name} (member side)")
+            for name in sorted(member_del | group_del):
+                off_member = (name not in member_del) or _checked_modify(
+                    dn, {'uniqueMemberOf': [
+                        (MODIFY_DELETE, [group_dn(name)])]},
                     f"{member_oid} -{name} (member side)")
-            for name in sorted(group_del):
-                _checked_modify(group_dn(name),
-                                {'uniqueMember': [(MODIFY_DELETE, [dn])]},
-                                f"{member_oid} -{name} (group side)")
+                if off_member and name in group_del:
+                    _checked_modify(
+                        group_dn(name),
+                        {'uniqueMember': [(MODIFY_DELETE, [dn])]},
+                        f"{member_oid} -{name} (group side)")
             if group_add or group_del or member_add or member_del:
                 log.info(
                     f"sync_member_groups: {member_oid} "

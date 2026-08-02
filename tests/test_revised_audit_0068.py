@@ -8,10 +8,8 @@ checked and logged on failure while staying best-effort.
 """
 from __future__ import annotations
 
-import importlib.util
 import os
 import stat
-import sys
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -72,56 +70,41 @@ def test_the_env_file_is_never_reread_through_get_key():
 
 
 # ------------------------ C. LDIF permissions/argv ------------------------- #
-def _load_generate_ldif_argv(tmp_path, admin_pw, env=None):
-    template = tmp_path / "template.ldif"
-    template.write_text("dn: {LDAP_BASE_DN}\nuserPassword: {ADMIN_PW}\n",
-                        encoding="utf-8")
-    out = tmp_path / "out.ldif"
-    argv = ([str(template), str(out), "dc=example,dc=com",
-             "uuid-a", "admin", "Admin", "a@x.org", admin_pw]
-            + ["u1-uuid", "role", "ps", "First", "Last", "en", "FR",
-               "u1@x.org", "pw1"]
-            + ["u2-uuid", "role", "ps2", "First2", "Last2", "fr", "DE",
-               "u2@x.org", "pw2"]
-            + ["2026-08-01"] + [""] * 8)
-    spec = importlib.util.spec_from_file_location(
-        "generate_ldif_under_test",
-        os.path.join(ROOT, "docker", "generate_ldif.py"))
-    module = importlib.util.module_from_spec(spec)
-    with patch.object(sys, 'argv', ["generate_ldif.py"] + argv), \
-         patch.dict(os.environ, env or {}, clear=False):
-        try:
-            spec.loader.exec_module(module)
-        except SystemExit as exc:               # argument-count guard
-            raise AssertionError(f"generator refused argv: {exc}")
-    return out
+# The transport itself moved twice since this file was written: "-"
+# slots + environment variables (sixth audit pass), then NUL-delimited
+# records on stdin with required-field enforcement (eighth audit pass,
+# tests/test_ldif_transport.py). These locks keep the 0068 guarantees
+# alive on the current interface.
+from tests.test_ldif_transport import VALID_FIELDS, _run_generator
 
 
 def test_the_ldif_is_born_0600(tmp_path):
-    out = _load_generate_ldif_argv(tmp_path, "secret-pw")
-    mode = stat.S_IMODE(os.stat(out).st_mode)
+    code, _, stderr = _run_generator(tmp_path, dict(VALID_FIELDS))
+    assert code == 0, stderr
+    mode = stat.S_IMODE(os.stat(tmp_path / "out.ldif").st_mode)
     assert mode == 0o600, oct(mode)
 
 
-def test_a_dash_slot_reads_and_scrubs_the_environment(tmp_path):
-    env = {"GENERATE_LDIF_ADMIN_PW": "from-env-pw"}
-    out = _load_generate_ldif_argv(tmp_path, "-", env=env)
-    content = out.read_text(encoding="utf-8")
-    assert "from-env-pw" in content or "{SSHA}" in content
-    assert "GENERATE_LDIF_ADMIN_PW" not in os.environ       # scrubbed
+def test_passwords_cross_on_stdin_and_come_out_hashed(tmp_path):
+    code, content, _ = _run_generator(
+        tmp_path, dict(VALID_FIELDS, ADMIN_PW="from-stdin-pw"))
+    assert code == 0
+    assert "{SSHA}" in content
+    assert "from-stdin-pw" not in content
 
 
 def test_the_init_script_no_longer_touches_passwords_at_all():
     # Sixth audit pass (§12.4): init.sh used to pre-hash with slappasswd
-    # and, without it, pushed the CLEARTEXT password onto argv. Hashing
-    # now lives in generate_ldif.py only; the passwords reach it through
-    # single-use environment variables (see tests/test_ldif_transport.py).
+    # and, without it, pushed the CLEARTEXT password onto argv. Eighth
+    # audit pass (§4): the environment slots are gone too — every value
+    # crosses the stdin pipe, and the invocation line carries only the
+    # two file paths.
     script = open(os.path.join(ROOT, "docker", "init.sh"),
                   encoding="utf-8").read()
     assert "password stored in cleartext" not in script
     assert "hash_password" not in script
     assert "slappasswd" not in script
-    assert "GENERATE_LDIF_ADMIN_PW=" in script
+    assert "generate_ldif_records | python3" in script
 
 
 # ----------------------- D. checked group modifies ------------------------- #

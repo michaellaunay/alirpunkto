@@ -2,33 +2,39 @@
 """
 docker/generate_ldif.py — Generate initials_users.generated.ldif
 
-Called by docker/init.sh with positional arguments (mandatory):
-  template ldif_out base_dn
-  admin_uuid admin_login admin_pseudonym admin_email admin_pw
-  user1_uuid user1_role user1_pseudonym user1_first user1_last user1_lang user1_nat user1_email user1_pw
-  user2_uuid user2_role user2_pseudonym user2_first user2_last user2_lang user2_nat user2_email user2_pw
-  today
+Interface (eighth audit pass, 2026-08-02, §4/§5): the command line
+carries ONLY the two file paths —
 
-Optional positional arguments (appended after today, empty string if absent):
-  u1_second_lang u1_third_lang u1_birthdate u1_description
-  u2_second_lang u2_third_lang u2_birthdate u2_description
+    generate_ldif.py TEMPLATE OUT
 
-Environment slots (sixth audit pass, 2026-08-01, §12.4): a command line
-is world-readable in /proc/<pid>/cmdline for the whole life of the
-process, so nothing personal or secret may travel through argv. For any
-of the slots below the caller passes the literal "-" as the positional
-argument and provides the real value through the matching environment
-variable of THIS process only — read once and scrubbed immediately:
+Every user-provided value — credentials, identities, roles, languages,
+nationalities, everything — arrives on standard input as NUL-delimited
+``NAME=VALUE`` records, because a command line is world-readable in
+/proc/<pid>/cmdline for the whole life of the process, and pseudonyms,
+logins, roles and nationalities are personal data just as much as
+names and e-mail addresses. A pipe is visible to no one, touches no
+disk, and handles any byte a shell variable can hold.
 
-  slot                variable
-  admin_pw            GENERATE_LDIF_ADMIN_PW      (cleartext; hashed here)
-  u1_pw / u2_pw       GENERATE_LDIF_U1_PW / _U2_PW
-  admin_email         GENERATE_LDIF_ADMIN_EMAIL
-  u1_first / u2_first GENERATE_LDIF_U1_FIRST / _U2_FIRST
-  u1_last / u2_last   GENERATE_LDIF_U1_LAST / _U2_LAST
-  u1_email / u2_email GENERATE_LDIF_U1_EMAIL / _U2_EMAIL
-  u1_birthdate / u2_… GENERATE_LDIF_U1_BIRTHDATE / _U2_BIRTHDATE
-  u1_description / …  GENERATE_LDIF_U1_DESCRIPTION / _U2_DESCRIPTION
+Required record names (missing OR EMPTY aborts with the list of what
+is missing — a forgotten password must never silently become the
+{SSHA} hash of the empty string):
+
+  LDAP_BASE_DN
+  ADMIN_UUID ADMIN_LOGIN ADMIN_PSEUDONYM ADMIN_EMAIL ADMIN_PW
+  U1_UUID U1_ROLE U1_PSEUDONYM U1_FIRST U1_LAST U1_LANG U1_NAT
+  U1_EMAIL U1_PW
+  U2_UUID U2_ROLE U2_PSEUDONYM U2_FIRST U2_LAST U2_LANG U2_NAT
+  U2_EMAIL U2_PW
+  TODAY
+
+Optional record names (absent means "not provided"):
+
+  U1_SECOND_LANG U1_THIRD_LANG U1_BIRTHDATE U1_DESCRIPTION
+  U2_SECOND_LANG U2_THIRD_LANG U2_BIRTHDATE U2_DESCRIPTION
+
+Unknown record names abort too: a typo must fail loudly, not silently
+drop a value. Passwords arrive in clear and are hashed to {SSHA} here;
+no cleartext ever lands in the generated LDIF.
 
 Fixes produced by this rewrite vs the previous sed/perl approach:
 - Demo users (hardcoded UUIDs) are stripped from the template entirely.
@@ -45,56 +51,73 @@ import os
 import re
 import sys
 
-# ── Arguments ────────────────────────────────────────────────────────────────
+# ── Input ────────────────────────────────────────────────────────────────────
 
-# 27 mandatory args + script name = 28 minimum; up to 35 with optional attrs
-if len(sys.argv) < 28:
-    print(f"Usage: {sys.argv[0]} template out base_dn "
-          "admin_uuid admin_login admin_pseudonym admin_email admin_pw "
-          "u1_uuid u1_role u1_pseudonym u1_first u1_last u1_lang u1_nat u1_email u1_pw "
-          "u2_uuid u2_role u2_pseudonym u2_first u2_last u2_lang u2_nat u2_email u2_pw "
-          "today "
-          "[u1_second_lang u1_third_lang u1_birthdate u1_description "
-          "u2_second_lang u2_third_lang u2_birthdate u2_description]", file=sys.stderr)
-    print(f"Received {len(sys.argv) - 1} arguments:", file=sys.stderr)
-    for i, a in enumerate(sys.argv[1:], 1):
-        print(f"  [{i:02d}] {repr(a)}", file=sys.stderr)
+REQUIRED_FIELDS = (
+    "LDAP_BASE_DN",
+    "ADMIN_UUID", "ADMIN_LOGIN", "ADMIN_PSEUDONYM", "ADMIN_EMAIL",
+    "ADMIN_PW",
+    "U1_UUID", "U1_ROLE", "U1_PSEUDONYM", "U1_FIRST", "U1_LAST",
+    "U1_LANG", "U1_NAT", "U1_EMAIL", "U1_PW",
+    "U2_UUID", "U2_ROLE", "U2_PSEUDONYM", "U2_FIRST", "U2_LAST",
+    "U2_LANG", "U2_NAT", "U2_EMAIL", "U2_PW",
+    "TODAY",
+)
+
+OPTIONAL_FIELDS = (
+    "U1_SECOND_LANG", "U1_THIRD_LANG", "U1_BIRTHDATE", "U1_DESCRIPTION",
+    "U2_SECOND_LANG", "U2_THIRD_LANG", "U2_BIRTHDATE", "U2_DESCRIPTION",
+)
+
+
+def _fail(*lines):
+    for line in lines:
+        print(line, file=sys.stderr)
     sys.exit(1)
 
-(TEMPLATE, OUT, LDAP_BASE_DN,
+
+if len(sys.argv) != 3:
+    _fail(f"Usage: {sys.argv[0]} TEMPLATE OUT",
+          "Every user value is read from stdin as NUL-delimited",
+          "NAME=VALUE records — see the module docstring. Nothing",
+          "personal belongs on this command line.")
+
+TEMPLATE, OUT = sys.argv[1], sys.argv[2]
+
+_fields = {}
+for _record in sys.stdin.buffer.read().split(b"\0"):
+    if not _record:
+        continue
+    _name, _sep, _value = _record.partition(b"=")
+    if not _sep:
+        _fail("Malformed stdin record (no '='): field name "
+              f"{_name.decode('utf-8', 'replace')!r}")
+    _fields[_name.decode("utf-8")] = _value.decode("utf-8")
+
+_unknown = sorted(set(_fields) - set(REQUIRED_FIELDS) - set(OPTIONAL_FIELDS))
+if _unknown:
+    _fail("Unknown stdin record name(s): " + ", ".join(_unknown),
+          "A typo must fail loudly, not silently drop a value.")
+
+# Eighth audit pass §5: empty counts as missing — a forgotten password
+# variable used to become the valid {SSHA} hash of the empty string.
+_missing = sorted(name for name in REQUIRED_FIELDS if not _fields.get(name))
+if _missing:
+    _fail("Missing or empty required field(s) on stdin: "
+          + ", ".join(_missing))
+
+(LDAP_BASE_DN,
  ADMIN_UUID, ADMIN_LOGIN, ADMIN_PSEUDONYM, ADMIN_EMAIL, ADMIN_PW,
- U1_UUID, U1_ROLE, U1_PSEUDONYM, U1_FIRST, U1_LAST, U1_LANG, U1_NAT, U1_EMAIL, U1_PW,
- U2_UUID, U2_ROLE, U2_PSEUDONYM, U2_FIRST, U2_LAST, U2_LANG, U2_NAT, U2_EMAIL, U2_PW,
+ U1_UUID, U1_ROLE, U1_PSEUDONYM, U1_FIRST, U1_LAST, U1_LANG, U1_NAT,
+ U1_EMAIL, U1_PW,
+ U2_UUID, U2_ROLE, U2_PSEUDONYM, U2_FIRST, U2_LAST, U2_LANG, U2_NAT,
+ U2_EMAIL, U2_PW,
  TODAY,
- U1_SECOND_LANG, U1_THIRD_LANG, U1_BIRTHDATE, U1_DESCRIPTION,
+ ) = (_fields[name] for name in REQUIRED_FIELDS)
+
+(U1_SECOND_LANG, U1_THIRD_LANG, U1_BIRTHDATE, U1_DESCRIPTION,
  U2_SECOND_LANG, U2_THIRD_LANG, U2_BIRTHDATE, U2_DESCRIPTION,
- ) = (sys.argv[1:] + [""] * 8)[:35]
-
-# Sixth audit pass (2026-08-01, §12.4): nothing personal or secret may
-# travel through argv (world-readable in /proc/<pid>/cmdline). The
-# caller passes "-" in a slot and provides the value through the
-# matching environment variable of this process — read once and
-# scrubbed immediately. An absent variable yields the empty string,
-# which optional slots already treat as "not provided".
-def _slot_from_env(value, env_name):
-    if value == "-":
-        return os.environ.pop(env_name, "")
-    return value
-
-ADMIN_PW = _slot_from_env(ADMIN_PW, "GENERATE_LDIF_ADMIN_PW")
-U1_PW = _slot_from_env(U1_PW, "GENERATE_LDIF_U1_PW")
-U2_PW = _slot_from_env(U2_PW, "GENERATE_LDIF_U2_PW")
-ADMIN_EMAIL = _slot_from_env(ADMIN_EMAIL, "GENERATE_LDIF_ADMIN_EMAIL")
-U1_FIRST = _slot_from_env(U1_FIRST, "GENERATE_LDIF_U1_FIRST")
-U1_LAST = _slot_from_env(U1_LAST, "GENERATE_LDIF_U1_LAST")
-U1_EMAIL = _slot_from_env(U1_EMAIL, "GENERATE_LDIF_U1_EMAIL")
-U1_BIRTHDATE = _slot_from_env(U1_BIRTHDATE, "GENERATE_LDIF_U1_BIRTHDATE")
-U1_DESCRIPTION = _slot_from_env(U1_DESCRIPTION, "GENERATE_LDIF_U1_DESCRIPTION")
-U2_FIRST = _slot_from_env(U2_FIRST, "GENERATE_LDIF_U2_FIRST")
-U2_LAST = _slot_from_env(U2_LAST, "GENERATE_LDIF_U2_LAST")
-U2_EMAIL = _slot_from_env(U2_EMAIL, "GENERATE_LDIF_U2_EMAIL")
-U2_BIRTHDATE = _slot_from_env(U2_BIRTHDATE, "GENERATE_LDIF_U2_BIRTHDATE")
-U2_DESCRIPTION = _slot_from_env(U2_DESCRIPTION, "GENERATE_LDIF_U2_DESCRIPTION")
+ ) = (_fields.get(name, "") for name in OPTIONAL_FIELDS)
 
 # UUIDs of demo / placeholder users present in the template — strip them
 DEMO_UUIDS = {
