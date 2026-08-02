@@ -172,9 +172,14 @@ jobs:
         # reports the proxy's address for every visitor. Eleven failed
         # logins trip the throttle, whose warning logs client_addr —
         # that address must be neither Apache's nor the loopback.
+        # Pyramid's default CSRF protection also checks the Origin or
+        # Referer header on https requests; a browser always sends one
+        # on a form POST, curl sends none — without it every POST dies
+        # as a 400 before the view runs and the throttle never fires,
+        # which is exactly how the first observable run failed here.
         run: |
           set -euo pipefail
-          fetch=(curl -sk --resolve "${SERVER_NAME}:443:127.0.0.1" -b /tmp/jar -c /tmp/jar)
+          fetch=(curl -sk --resolve "${SERVER_NAME}:443:127.0.0.1" -b /tmp/jar -c /tmp/jar -e "https://${SERVER_NAME}/login")
           "${fetch[@]}" -o /tmp/login.html "https://${SERVER_NAME}/login"
           token="$(grep -o 'name="csrf_token" value="[^"]*"' /tmp/login.html | head -1 | sed 's/.*value="//;s/"$//')"
           test -n "${token}"

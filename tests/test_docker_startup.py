@@ -148,6 +148,10 @@ def test_the_compose_smoke_workflow_guards_the_stack():
     assert "up -d --wait" in smoke
     assert "https://" in smoke
     assert "login throttled for ip=" in smoke
+    # First observable smoke run: Pyramid's default CSRF also checks
+    # Origin/Referer on https POSTs — curl must send a Referer or every
+    # attempt 400s before the throttle can fire.
+    assert '-e "https://${SERVER_NAME}/login"' in smoke
     assert "if: always()" in smoke
     assert "down -v" in smoke
 
