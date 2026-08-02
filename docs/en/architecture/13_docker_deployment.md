@@ -35,25 +35,30 @@ Data live in named volumes (`alirpunkto_ldap_*`, `alirpunkto_pyramid_var`,
 `alirpunkto_postfix_*`, Apache certificates). `docker/backup.sh` saves
 configuration and data; procedure and restore in `docker/README.md`.
 
-## Known blockers (external audit, fourth pass — 2026-08-01)
+## Blockers lifted (external audits, fourth → eighth passes)
 
-The stack described above **does not start as it stands**: three
-simple defects, invisible to unit tests, stop it before `pserve`. The
-`start_pyramid.sh`/`start_test_pyramid.sh` scripts require a
-`setup.py` removed in favour of `pyproject.toml`; `production.ini`
-carries the `use_forwarded_proto` option, unknown to Waitress 3
-(rejection verified as a `ValueError`); and `listen = localhost:6543`
-is unreachable from the Apache container — which, as seen by Waitress,
-is not `127.0.0.1` either (`trusted_proxy`), which would fold the
-login limiter onto a single address. The internal healthcheck, which
-queries the loopback, can stay green all the while. These values
-remain the right ones for the bare-host deployment below; the fix (P0
-patch) gives the stack its own server configuration and adds the
-Compose smoke test that would have caught all three. The image, for
-its part, installs the full lock — test and quality tools included —
-after an out-of-lock upgrade: the lock split and the multi-stage image
-are P1. Detail, counter-review and plan:
-`docs/en/audits/20260801_external_chatgpt_audit_alirpunkto_4th_pass.md`.
+The three defects that stopped the stack before `pserve` (a check on
+the removed `setup.py`, the unknown Waitress option
+`use_forwarded_proto`, a loopback listen with a `trusted_proxy`
+unsuited to the compose network) are **fixed and locked**: the stack
+has its own server configuration, derived at runtime by
+`docker/apply_server_overrides.py` whenever `PYRAMID_LISTEN` /
+`PYRAMID_TRUSTED_PROXY` are set (compose sets them by default), and an
+end-to-end **Compose smoke test** proves the Apache → Waitress path
+down to the real client address seen by the login limiter. The image
+is **multi-stage**: the venv installs the runtime lock alone in
+hash-checking mode with `--only-binary=:all:` (three named pure sdists
+excepted — any future sdist fails the build explicitly), the
+application is installed **as a wheel** (file-for-file parity proven),
+and the final stage ships neither compiler nor source tree — an
+**explicit copy allowlist** replaces `COPY .`, which incidentally
+repaired a latent break: the override helper, excluded by
+`.dockerignore`, never reached the image. The four bases are pinned by
+digest, with an **opt-in APT snapshot** (`ALIRPUNKTO_UBUNTU_SNAPSHOT`)
+for strict reproducibility; the test stack bind-mounts its lock
+(`requirements-test.lock`) and `test.ini` read-only. Full chronicle:
+`docs/en/audits/20260801_external_chatgpt_audit_alirpunkto_4th_pass.md`,
+`…_6th_pass.md` and `20260802_…_8th_pass.md`.
 
 ## Containerless deployment
 

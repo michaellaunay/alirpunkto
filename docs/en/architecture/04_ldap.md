@@ -63,10 +63,15 @@ The detailed procedures are in `docker/README.md`.
 
 ## Known limits
 
-- `uniqueMemberOf` is maintained by the application: a group change made
-  outside the application can desynchronise it;
+- `uniqueMemberOf` is maintained by the application: a group change
+  made outside the application can desynchronise it — the daily scan,
+  which now reads both sides of the relation, detects and repairs the
+  divergence on its next pass;
 - the placeholder member `uid=00000000-…` must be ignored by any group
-  processing.
+  processing;
+- the scan queries every managed group for every member
+  (members × groups): acceptable today, targeted by the eighth pass as
+  a P3 optimisation (groups loaded once, inverse table, paged search).
 
 ## Dynamic groups (#148, 2026-07-30)
 
@@ -80,14 +85,26 @@ groups themselves being the persistent state (sanction and role are read
 from current memberships). The applier `sync_member_groups` is
 **idempotent** and maintains **both sides** of the relation
 (the member's `uniqueMemberOf`, the group's `uniqueMember`); it is
-**best-effort by design**: a failure never breaks the calling operation,
-the daily scan catches up. Since the external audit, every write goes
-through `_checked_modify` — exception intercepted, return value
-checked, `conn.result` logged with member, group, operation and
-side — but both sides are still written independently: a one-sided
-failure can leave a divergence the scan, which reads `uniqueMemberOf`
-alone, does not see (P2 target: one authoritative side and a scan that
-compares both). It is wired to the four event sources:
+**best-effort by design**: a failure never breaks the calling
+operation, the daily scan catches up, and every write goes through
+`_checked_modify` (exception intercepted, return value checked,
+`conn.result` logged with member, group, operation and side). Since
+the sixth and eighth passes of the external audit, the relation is
+**reconciled for good**: both sides are read separately (any
+divergence is logged before repair), each side gets **its own
+differential** toward the same target — a half-applied state
+self-heals on the next pass, whichever side lagged — and the **member
+side is the authoritative current state** (it is what the application
+reads): a lagging group-side record converges down instead of
+resurrecting a half-lifted role or sanction. Writes go in pairs that
+are **actually fail-closed**: the second one only runs if the first
+succeeds — a grant touches the member side only once the group side
+is served, a revocation touches the group side only once the member
+side is clean. The asymmetry is deliberate and documented: a
+half-failed grant is rolled back on the next pass (losing a grant is
+safe and re-runnable), a revocation converges until both sides are
+clean. The scan discovers members **from both sides** of the
+relation. It is wired to the four event sources:
 registration (an Ordinary Member joins `communityMembersGroup`; the legacy
 `ordinaryMembersGroup` **drains progressively**), upgrade approval
 (landing in `candidatesMissingShareYearContribGroup`), resignation (no

@@ -63,10 +63,16 @@ Le mode d'emploi détaillé est dans `docker/README.md`.
 
 ## Limites connues
 
-- `uniqueMemberOf` est maintenu applicativement : une modification de groupe
-  faite hors application peut le désynchroniser ;
+- `uniqueMemberOf` est maintenu applicativement : une modification de
+  groupe faite hors application peut le désynchroniser — le scan
+  quotidien, qui lit désormais les deux côtés de la relation, détecte
+  et répare la divergence au passage suivant ;
 - le membre de remplissage `uid=00000000-…` doit être ignoré par tout
-  traitement des groupes.
+  traitement des groupes ;
+- le scan interroge chaque groupe géré pour chaque membre
+  (membres × groupes) : acceptable aujourd'hui, optimisation cible P3
+  du huitième passage (groupes chargés une fois, table inverse,
+  recherche paginée).
 
 ## Groupes dynamiques (#148, 2026-07-30)
 
@@ -81,13 +87,26 @@ des appartenances courantes). L'applicateur `sync_member_groups` est
 **idempotent** et maintient les **deux côtés** de la relation
 (`uniqueMemberOf` du membre, `uniqueMember` du groupe) ; il est **best-effort
 par construction** : un échec ne casse jamais l'opération appelante, le
-scan quotidien rattrape. Depuis l'audit externe, chaque écriture passe
-par `_checked_modify` — exception interceptée, retour vérifié,
-`conn.result` journalisé avec membre, groupe, opération et côté — mais
-les deux côtés restent écrits indépendamment : un échec unilatéral
-peut laisser une divergence que le scan, qui lit `uniqueMemberOf`
-seul, ne voit pas (cible P2 : un côté autoritatif et un scan qui
-compare les deux). Il est branché aux quatre sources d'événements :
+scan quotidien rattrape, et chaque écriture passe par
+`_checked_modify` (exception interceptée, retour vérifié,
+`conn.result` journalisé avec membre, groupe, opération et côté).
+Depuis les sixième et huitième passages de l'audit externe, la
+relation est **réconciliée pour de bon** : les deux côtés sont lus
+séparément (toute divergence est journalisée avant réparation), chaque
+côté reçoit **son propre différentiel** vers la même cible — un état à
+moitié appliqué s'auto-répare au passage suivant, quel que soit le
+côté en retard — et le **côté membre est l'état courant autoritatif**
+(c'est ce que lit l'application) : un enregistrement de groupe en
+retard converge vers le bas au lieu de ressusciter un rôle ou une
+sanction à moitié levés. Les écritures vont par paires **réellement
+fail-closed** : la seconde n'est exécutée que si la première réussit —
+un octroi ne touche le côté membre qu'une fois le côté groupe servi,
+une révocation ne touche le côté groupe qu'une fois le côté membre
+propre. L'asymétrie est voulue et documentée : un octroi à moitié
+échoué est roulé en arrière au passage suivant (perdre un octroi est
+sûr et rejouable), une révocation converge jusqu'à la propreté des
+deux côtés. Le scan découvre les membres **par les deux côtés** de la
+relation. Il est branché aux quatre sources d'événements :
 inscription (l'Ordinaire rejoint `communityMembersGroup` ; le
 `ordinaryMembersGroup` **légué se vide progressivement**), approbation
 d'une montée en grade (arrivée dans

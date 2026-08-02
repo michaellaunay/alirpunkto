@@ -1,3 +1,41 @@
+Unreleased (2026-08-02)
+-----------------------
+
+- The documented Docker stack now starts and proves it: compose-provided
+  server overrides (bind address, trusted proxy) derived at runtime, and
+  an end-to-end smoke workflow driving Apache → Waitress through a real
+  signup round-trip.
+- Supply chain hardened: three hashed dependency locks (runtime, test,
+  quality) installed with --require-hashes, a multi-stage production
+  image without tooling, digest-pinned bases, and the debug toolbar
+  moved to a development extra.
+- LDAP connections over SSL now validate certificates (system CAs or
+  LDAP_CA_CERT_FILE) and the server cache is keyed by connection
+  parameters — one process can talk to several directories safely.
+- The Keycloak refresh token is sealed (compressed then encrypted) in
+  the session cookie with a seamless migration for older sessions, and
+  every token-endpoint response is strictly validated (required fields,
+  types, bounded lifetimes) before use.
+- Bootstrap LDIF generation exposes nothing personal any more: the
+  command line carries the two file paths only, every value crosses as
+  NUL-delimited records on stdin, required fields (passwords above all)
+  abort when missing or empty, and the generator hashes the passwords
+  itself — no slappasswd, no cleartext fallback.
+- The LDAP group relation is reconciled for good: both sides read and
+  converged separately, the member side authoritative (a half-revoked
+  role or sanction no longer resurrects), and every write pair actually
+  fail-closed — the second write only runs if the first succeeds.
+- Image finishing: the application installs as a wheel (file-for-file
+  parity locked by test), wheels are enforced for every dependency with
+  three named pure-python exceptions, the runtime stage copies an
+  explicit allowlist (repairing a latent first-start crash: the
+  override helper never reached the image), and an opt-in Ubuntu
+  snapshot pin covers strict reproducibility.
+- The sixth and eighth external audit passes (8.2 then 8.6/10) are
+  filed bilingually with their counter-reviews, and the architecture
+  chapters (LDAP, authentication, security, tests, Docker deployment)
+  now describe the delivered state.
+
 Unreleased (2026-08-01)
 -----------------------
 

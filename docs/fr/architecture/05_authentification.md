@@ -53,9 +53,10 @@ session (utilisateur, jetons) ; `/logout` la clôt côté interface.
 
 ## Limites connues
 
-- Le jeton de rafraîchissement vit dans un cookie signé **non chiffré** :
-  lisible par son porteur (sans gravité) mais exposé en cas de vol de
-  cookie. La cible saine est une session côté serveur (voir
+- Le jeton de rafraîchissement vit dans le cookie de session, désormais
+  **scellé** (compressé puis chiffré — voir la section des
+  durcissements) : le porteur du cookie ne peut plus le lire. La cible
+  de long terme reste une session côté serveur (voir
   [decisions_architecture](decisions_architecture.md)).
 
 ## Comptes désactivés (2026-07-30)
@@ -96,6 +97,21 @@ sortent ainsi des journaux d'accès et de l'historique du navigateur).
 Les appels Keycloak portent par ailleurs des délais (connexion 3 s,
 lecture 10 s), échouent proprement en `None`, et ne journalisent
 jamais un corps de réponse brut.
+
+**Le jeton de rafraîchissement est scellé et les réponses Keycloak
+validées** (sixième passage, 2026-08-01). Le cookie de session est
+signé, pas chiffré : le jeton y voyage désormais **compressé puis
+chiffré** (`seal_sso_refresh_token` — zlib niveau 9 puis Fernet sur
+`SECRET_KEY` ; la compression d'abord, car le chiffré est
+incompressible et le pire cas aurait recroisé la limite de cookie de
+4093 octets de l'incident du 2026-07-08 ; le jeton étant seul dans le
+flux compressé, aucun oracle ne s'ouvre). Tout ce qui ne se déchiffre
+pas — valeur altérée, session antérieure en clair — se lit comme une
+session SSO expirée : déconnexion propre, reconnexion, migration
+douce. Et chaque réponse 200 du point de jetons passe par
+`_validated_token_payload` : JSON parsé sous garde, `access_token` et
+`refresh_token` exigés non vides, durées entières strictes bornées à
+90 jours, échec journalisé sans le corps.
 
 **Décision d'architecture** : Keycloak ne deviendra pas l'unique point
 d'entrée de l'authentification. Le serveur de test n'est pas relié à

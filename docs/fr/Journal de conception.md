@@ -2731,3 +2731,31 @@ qui l'empêchera de recasser. Derrière : séparer les verrous — l'image
 de production embarque aujourd'hui ruff, mypy et pytest —, puis la
 sécurité restante, puis les cliquets. Les trois décisions du premier
 jour, elles, n'ont plus été discutées : l'auditeur les a intégrées.
+
+## 2026-08-02 — De 7,1 à 8,6 : six trains, deux audits
+
+Six trains en deux jours, et l'auditeur qui repasse deux fois. Le P0
+d'abord : la pile qui ne démarrait pas démarre, et un smoke test de
+bout en bout — Apache, Waitress, la vraie adresse cliente vue par le
+limiteur — remplace la conviction par la preuve. Le P1 ensuite : trois
+verrous hachés, l'image en deux étapes, plus un outil de test en
+production. Le P2 en deux fois : TLS validant, cache indexé, jeton
+scellé (compresser d'abord, chiffrer ensuite — l'incident du cookie de
+juillet nous aura au moins appris l'ordre), réponses Keycloak bornées ;
+puis le transport LDIF et les groupes. Sur ces derniers, le huitième
+passage m'a repris deux fois, et deux fois à raison : mon message de
+commit clamait « P2 clos » quand les nationalités voyageaient encore
+dans `argv`, et mon union des deux côtés savait ressusciter un rôle à
+moitié révoqué. Dont acte, par écrit : la ligne de commande ne porte
+plus que deux chemins, tout le reste passe en enregistrements NUL sur
+l'entrée standard — le vieux commentaire mensonger est devenu le vrai
+design —, le côté membre fait autorité, et chaque paire d'écritures
+est conditionnelle. Perdre un octroi se rejoue ; ressusciter une
+révocation, jamais. Les découvertes en chemin valaient le voyage : le
+« tout en wheels » qui n'était qu'une illusion du cache pip (trois
+sdists purs, désormais nommés en exception), et cette casse latente —
+le helper d'overrides que `.dockerignore` n'a jamais laissé entrer
+dans l'image, invisible tant qu'aucun `compose up` réel n'avait
+tourné. LDAPS attend sa décision ; le scan, son optimisation. 8,6, dit
+l'auditeur, 8,9 en vue. Les chiffres passent ; les tests qui les
+gardent restent.

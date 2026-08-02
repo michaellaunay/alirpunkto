@@ -45,28 +45,35 @@ segmentation of the compose stack, backups, TLS.
 
 ## Known limits and target work
 
-- The **documented Docker stack does not start**: the `setup.py` check
-  in both scripts points at a removed file, the unknown Waitress
-  option `use_forwarded_proto` (rejection verified as a `ValueError`),
-  a listen on the container's loopback — and `trusted_proxy =
-  127.0.0.1` which, behind the compose proxy, would fold the login
-  limiter onto a single address. Detail and plan in the fourth-pass
-  audit
-  (`docs/en/audits/20260801_external_chatgpt_audit_alirpunkto_4th_pass.md`);
-  P0 fix with the Compose smoke test that would have caught them.
-- `init.sh` still passes passwords and personal data through `argv`:
-  the `GENERATE_LDIF_*_PW` mechanism awaits its wiring, and the
-  personal data their `0600` temporary file (P2).
-- The **single lock** ships the test and quality tools into the
-  production image; the split into three hashed locks and the
-  multi-stage image are P1.
-- The group synchronisation writes **both sides independently**: a
-  one-sided failure can leave a divergence the scan, which reads
-  `uniqueMemberOf` alone, does not see (P2: authoritative group side,
-  a scan comparing both sides).
-- The SSO **refresh token** lives in the signed but unencrypted session
-  cookie; the target is a server-side session — and, until then,
-  encryption of the value (P2).
+- The big worksites of the first four passes are **closed**: the
+  Docker stack starts and proves itself with an end-to-end smoke test
+  (P0); the three hashed locks, the multi-stage image with an
+  application wheel and the digest-pinned bases hold the supply chain
+  (P1, finished by 0075); validating LDAP TLS, parameter-keyed server
+  cache, sealed refresh token, validated Keycloak responses, LDIF
+  transport entirely off `argv` (NUL records on standard input,
+  required fields enforced) and a reconciled group relation — member
+  side authoritative, fail-closed write pairs (P2, trains 0073→0076).
+  Details in the fourth-, sixth- and eighth-pass filings
+  (`docs/en/audits/2026080*_external_chatgpt_audit_*`).
+- **LDAPS is not enabled** in the shipped compose stack
+  (`LDAP_USE_SSL=false`, port 389 on the internal network): the
+  validating mechanism is ready (`Tls` + `LDAP_CA_CERT_FILE`);
+  enabling it, and the certificate tooling of the LDAP container, is
+  an operations decision.
+- The **verifier reminder** still lives in the `NewRequest` event:
+  execution not guaranteed without traffic, fragile in multi-process —
+  P3 target, moved to cron (chapter
+  [09](09_periodic_tasks.md)).
+- `.env.example` documents `MAIL_USE_TLS`/`MAIL_USE_SSL` where the
+  code reads `MAIL_TLS`/`MAIL_SSL`, presents `LDAP_SERVER` as a URL
+  and ignores `LDAP_CA_CERT_FILE` — P3 target.
+- The **daily group scan** costs members × groups in LDAP searches —
+  P3 optimisation target (groups loaded once, inverse table, paged
+  search).
+- The **quality debt** is an assumed ratchet: mypy observing (124
+  errors at adoption), Ruff limited to Pyflakes (`F841` excepted),
+  coverage floor at 68%, Certbot and CSP untested.
 - The **Pyramid ACLs** remain minimal; the class-hierarchy overhaul is the
   target (see
   [06_authorization_permissions](06_authorization_permissions.md)).

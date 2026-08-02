@@ -45,27 +45,36 @@ réseau du `compose`, sauvegardes, TLS.
 
 ## Limites connues et travaux cibles
 
-- La **pile Docker documentée ne démarre pas** : contrôle `setup.py`
-  disparu dans les deux scripts, option Waitress inconnue
-  `use_forwarded_proto` (rejet vérifié en `ValueError`), écoute sur la
-  boucle locale du conteneur — et `trusted_proxy = 127.0.0.1` qui,
-  derrière le proxy compose, rabattrait le limiteur de connexions sur
-  une seule adresse. Détail et plan dans l'audit du quatrième passage
-  (`docs/fr/audits/20260801_audit_externe_chatgpt_alirpunkto_4e_passage.md`) ;
-  correction P0 avec le smoke test Compose qui les aurait vus.
-- `init.sh` transmet encore mots de passe et données personnelles par
-  `argv` : le mécanisme `GENERATE_LDIF_*_PW` attend son branchement, et
-  les données personnelles leur fichier temporaire `0600` (P2).
-- Le **verrou unique** embarque les outils de test et de qualité dans
-  l'image de production ; la séparation en trois verrous avec
-  empreintes et l'image multiétape sont le P1.
-- La synchronisation des groupes écrit les **deux côtés
-  indépendamment** : un échec unilatéral peut laisser une divergence
-  que le scan, qui lit `uniqueMemberOf` seul, ne voit pas (P2 : côté
-  groupe autoritatif, scan comparant les deux côtés).
-- Le **jeton de rafraîchissement** SSO réside dans le cookie de session
-  signé mais non chiffré ; la cible est une session côté serveur — et,
-  d'ici là, le chiffrement de la valeur (P2).
+- Les grands chantiers des quatre premiers passages sont **fermés** :
+  la pile Docker démarre et se prouve par un smoke test de bout en
+  bout (P0) ; les trois verrous hachés, l'image multiétape en wheel
+  applicative et les bases épinglées par digest tiennent la chaîne
+  d'approvisionnement (P1, finition 0075) ; TLS LDAP validant, cache
+  serveur indexé, jeton de rafraîchissement scellé, réponses Keycloak
+  validées, transport LDIF intégralement hors `argv` (enregistrements
+  NUL sur l'entrée standard, champs requis obligatoires) et relation
+  de groupes réconciliée — côté membre autoritatif, paires d'écritures
+  fail-closed (P2, trains 0073→0076). Détail dans les versements des
+  quatrième, sixième et huitième passages
+  (`docs/fr/audits/2026080*_audit_externe_chatgpt_*`).
+- **LDAPS n'est pas activé** dans la pile compose fournie
+  (`LDAP_USE_SSL=false`, port 389 sur le réseau interne) : le
+  mécanisme validant est prêt (`Tls` + `LDAP_CA_CERT_FILE`),
+  l'activation et l'outillage certificats du conteneur LDAP sont une
+  décision d'exploitation.
+- Le **rappel des vérificateurs** vit encore dans l'événement
+  `NewRequest` : exécution non garantie sans trafic, fragile en
+  multi-processus — cible P3, sortie vers le cron (chapitre
+  [09](09_taches_periodiques.md)).
+- `.env.example` documente `MAIL_USE_TLS`/`MAIL_USE_SSL` là où le code
+  lit `MAIL_TLS`/`MAIL_SSL`, présente `LDAP_SERVER` en URL et ignore
+  `LDAP_CA_CERT_FILE` — cible P3.
+- Le **scan quotidien des groupes** coûte membres × groupes en
+  recherches LDAP — optimisation cible P3 (groupes chargés une fois,
+  table inverse, recherche paginée).
+- La **dette qualité** est un cliquet assumé : mypy observateur (124
+  erreurs à l'adoption), Ruff limité à Pyflakes (`F841` en exception),
+  plancher de couverture à 68 %, Certbot et CSP non testés.
 - Les **ACL Pyramid** restent minimales ; la refonte par hiérarchie de
   classes est la cible (voir
   [06_autorisations_permissions](06_autorisations_permissions.md)).

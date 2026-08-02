@@ -34,26 +34,32 @@ Les données vivent dans des volumes nommés (`alirpunkto_ldap_*`,
 `docker/backup.sh` sauvegarde configuration et données ; procédure et
 restauration dans `docker/README.md`.
 
-## Blocages connus (audit externe, quatrième passage — 2026-08-01)
+## Blocages levés (audits externes, quatrième → huitième passages)
 
-La pile décrite ci-dessus **ne démarre pas en l'état** : trois défauts
-simples, invisibles des tests unitaires, l'arrêtent avant `pserve`.
-Les scripts `start_pyramid.sh`/`start_test_pyramid.sh` exigent un
-`setup.py` supprimé au profit de `pyproject.toml` ; `production.ini`
-porte l'option `use_forwarded_proto`, inconnue de Waitress 3 (rejet
-vérifié en `ValueError`) ; et `listen = localhost:6543` est
-inatteignable depuis le conteneur Apache — lequel, vu de Waitress,
-n'est pas non plus `127.0.0.1` (`trusted_proxy`), ce qui rabattrait le
-limiteur de connexions sur une seule adresse. Le healthcheck interne,
-qui interroge la boucle locale, peut rester vert pendant ce temps. Ces
-valeurs restent les bonnes pour le déploiement nu ci-dessous ; la
-correction (patch P0) donne à la pile sa propre configuration serveur
-et ajoute le smoke test Compose qui aurait détecté les trois. L'image,
-elle, installe le verrou complet — outils de test et de qualité
-compris — après une mise à niveau hors verrou : la séparation des
-verrous et l'image multiétape sont le P1. Détail, contre-expertise et
-plan :
-`docs/fr/audits/20260801_audit_externe_chatgpt_alirpunkto_4e_passage.md`.
+Les trois défauts qui arrêtaient la pile avant `pserve` (contrôle
+`setup.py` disparu, option Waitress inconnue `use_forwarded_proto`,
+écoute sur la boucle locale avec `trusted_proxy` inadapté au réseau
+compose) sont **corrigés et verrouillés** : la pile a sa propre
+configuration serveur, dérivée à l'exécution par
+`docker/apply_server_overrides.py` quand `PYRAMID_LISTEN` /
+`PYRAMID_TRUSTED_PROXY` sont posées (le compose les pose par défaut),
+et un **smoke test Compose** de bout en bout prouve le trajet
+Apache → Waitress jusqu'à la vraie adresse cliente vue par le limiteur
+de connexions. L'image est **multiétape** : le venv installe le seul
+verrou runtime en mode empreintes avec `--only-binary=:all:` (trois
+sdists purs nommés en exception — tout futur sdist casse le build
+explicitement), l'application y est installée **en wheel** (parité
+prouvée fichier à fichier), et l'étape finale n'embarque ni
+compilateur ni arborescence source — une **liste de copie explicite**
+remplace `COPY .`, ce qui a réparé au passage une casse latente : le
+helper d'overrides, exclu par `.dockerignore`, n'atteignait jamais
+l'image. Les quatre bases sont épinglées par digest, avec un
+**snapshot APT opt-in** (`ALIRPUNKTO_UBUNTU_SNAPSHOT`) pour la
+reproductibilité stricte ; la pile de test monte son verrou
+(`requirements-test.lock`) et `test.ini` en lecture seule. Chronique
+complète :
+`docs/fr/audits/20260801_audit_externe_chatgpt_alirpunkto_4e_passage.md`,
+`…_6e_passage.md` et `20260802_…_8e_passage.md`.
 
 ## Déploiement sans conteneurs
 

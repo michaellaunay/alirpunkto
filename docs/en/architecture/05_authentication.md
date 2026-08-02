@@ -53,9 +53,10 @@ out cleanly otherwise. `utils.logout` purges the session (user, tokens);
 
 ## Known limits
 
-- The refresh token lives in a signed but **unencrypted** cookie: readable
-  by its bearer (harmless) but exposed if the cookie is stolen. The sound
-  target is a server-side session (see
+- The refresh token lives in the session cookie, now **sealed**
+  (compressed then encrypted — see the hardening section): the cookie
+  bearer can no longer read it. The long-term target remains a
+  server-side session (see
   [architecture_decisions](architecture_decisions.md)).
 
 ## Deactivated accounts (2026-07-30)
@@ -92,6 +93,21 @@ anything — a test checks that neither the pseudonym lookup nor
 logs and the browser history). The Keycloak calls furthermore carry
 timeouts (3 s connect, 10 s read), fail cleanly to `None`, and never
 log a raw response body.
+
+**The refresh token is sealed and the Keycloak responses validated**
+(sixth pass, 2026-08-01). The session cookie is signed, not encrypted:
+the token now travels **compressed then encrypted**
+(`seal_sso_refresh_token` — zlib level 9 then Fernet on `SECRET_KEY`;
+compression first, because ciphertext is incompressible and the worst
+case would have crossed the 4093-byte cookie limit of the 2026-07-08
+incident again; the token being alone in the compressed stream, no
+compression oracle opens). Anything that does not decrypt — a tampered
+value, a pre-change clear-text session — reads as an expired SSO
+session: clean logout, fresh login, seamless migration. And every 200
+response of the token endpoint goes through
+`_validated_token_payload`: JSON parsed under guard, `access_token`
+and `refresh_token` required non-empty, strict integer lifetimes
+bounded to 90 days, failures logged without the body.
 
 **Architecture decision**: Keycloak will not become the single
 authentication entry point. The test server is not connected to

@@ -403,3 +403,28 @@ from breaking again. Behind it: split the locks — today's production
 image ships ruff, mypy and pytest —, then the remaining security, then
 the ratchets. The three first-day decisions, for their part, were no
 longer discussed: the auditor has absorbed them.
+
+## 2026-08-02 — From 7.1 to 8.6: six trains, two audits
+
+Six trains in two days, and the auditor coming back twice. P0 first:
+the stack that would not start now starts, and an end-to-end smoke
+test — Apache, Waitress, the real client address as seen by the login
+limiter — replaces conviction with proof. P1 next: three hashed locks,
+a two-stage image, not one test tool left in production. P2 in two
+sittings: validating TLS, a keyed cache, a sealed token (compress
+first, encrypt second — July's cookie incident taught us the order at
+least), bounded Keycloak responses; then the LDIF transport and the
+groups. On those, the eighth pass caught me twice, and rightly both
+times: my commit message claimed "P2 closed" while nationalities still
+rode `argv`, and my union of the two sides knew how to resurrect a
+half-revoked role. Owned, in writing: the command line now carries two
+paths and nothing else, everything crosses as NUL records on standard
+input — the old lying comment became the actual design —, the member
+side is authoritative, and every write pair is conditional. Losing a
+grant replays; resurrecting a revocation, never. The discoveries along
+the way were worth the trip: the "all wheels" that was only a
+pip-cache illusion (three pure sdists, now named exceptions), and that
+latent break — the override helper `.dockerignore` never let into the
+image, invisible as long as no real `compose up` had run. LDAPS awaits
+its decision; the scan, its optimisation. 8.6, says the auditor, 8.9
+in sight. The figures pass; the tests that guard them stay.
