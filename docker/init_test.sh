@@ -45,16 +45,6 @@ success() { printf '\033[0;32m[OK]\033[0m %s\n' "$*"; }
 warn() { printf '\033[0;33m[WARN]\033[0m %s\n' "$*" >&2; }
 error() { printf '\033[0;31m[ERROR]\033[0m %s\n' "$*" >&2; }
 
-hash_ssha() {
-    python3 - "$1" <<'PY'
-import base64, hashlib, os, sys
-password = sys.argv[1].encode("utf-8")
-salt = os.urandom(8)
-digest = hashlib.sha1(password + salt).digest()
-print("{SSHA}" + base64.b64encode(digest + salt).decode("ascii"))
-PY
-}
-
 generate_secret_key() {
     local generator="${REPO_ROOT}/alirpunkto/generate_secret.py"
     local secret=""
@@ -285,22 +275,40 @@ generate_test_ldif() {
         exit 1
     fi
 
-    local admin_hash user1_hash user2_hash today
-    admin_hash="$(hash_ssha "${ADMIN_PASSWORD}")"
-    user1_hash="$(hash_ssha "${USER1_PASSWORD}")"
-    user2_hash="$(hash_ssha "${USER2_PASSWORD}")"
-    today="$(date -u +"%Y-%m-%dT%H:%M:%S")"
-
-    python3 "${DOCKER_DIR}/generate_ldif.py" \
+    # Tenth audit pass (2026-08-02, §10): the old block hashed the
+    # passwords in shell — pushing each one through a python argv! —
+    # and spoke the retired positional interface, so the documented
+    # ./docker/init_test.sh could no longer produce the seeded LDIF.
+    # The shared emitter speaks the NUL-record stdin contract; the
+    # generator hashes the passwords itself and enforces the required
+    # fields.
+    ADMIN_LOGIN="admin"
+    ADMIN_PSEUDONYM="admin.test"
+    ADMIN_EMAIL="admin@${DOMAIN}"
+    USER1_ROLE="ADMINISTRATOR"
+    USER1_PSEUDONYM="alice.test"
+    USER1_FIRSTNAME="Alice"
+    USER1_LASTNAME="Test"
+    USER1_LANG="fr"
+    USER1_NATIONALITY="FR"
+    USER1_EMAIL="alice@${DOMAIN}"
+    USER1_SECOND_LANG="en"
+    USER1_BIRTHDATE="1990-01-01T12:00:00"
+    USER1_DESCRIPTION="Local test administrator account"
+    USER2_ROLE="ORDINARY_MEMBER"
+    USER2_PSEUDONYM="bob.test"
+    USER2_FIRSTNAME="Bob"
+    USER2_LASTNAME="Test"
+    USER2_LANG="fr"
+    USER2_NATIONALITY="FR"
+    USER2_EMAIL="bob@${DOMAIN}"
+    USER2_BIRTHDATE="1991-01-01T12:00:00"
+    USER2_DESCRIPTION="Local test ordinary member account"
+    TODAY="$(date -u +"%Y-%m-%dT%H:%M:%S")"
+    . "${DOCKER_DIR}/ldif_records.sh"
+    generate_ldif_records | python3 "${DOCKER_DIR}/generate_ldif.py" \
         "${LDIF_TEMPLATE}" \
-        "${LDIF_OUT}" \
-        "${LDAP_BASE_DN}" \
-        "${ADMIN_UUID}" "admin" "admin.test" "admin@${DOMAIN}" "${admin_hash}" \
-        "${USER1_UUID}" "ADMINISTRATOR" "alice.test" "Alice" "Test" "fr" "FR" "alice@${DOMAIN}" "${user1_hash}" \
-        "${USER2_UUID}" "ORDINARY_MEMBER" "bob.test" "Bob" "Test" "fr" "FR" "bob@${DOMAIN}" "${user2_hash}" \
-        "${today}" \
-        "en" "" "1990-01-01T12:00:00" "Local test administrator account" \
-        "" "" "1991-01-01T12:00:00" "Local test ordinary member account"
+        "${LDIF_OUT}"
 
     success "Written docker/initials_users.test.generated.ldif"
 }

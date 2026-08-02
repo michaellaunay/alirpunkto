@@ -42,17 +42,18 @@ jobs:
 
       - name: Generate a throwaway stack configuration
         # Non-interactive mirror of docker/init.sh: docker/.env,
-        # docker/secrets/ldap_password and the seeded LDIF. The three
-        # user passwords go through the GENERATE_LDIF_*_PW environment
-        # slots ("-" placeholders), never through argv.
-        env:
-          GENERATE_LDIF_ADMIN_PW: smoke-admin-password
-          GENERATE_LDIF_U1_PW: smoke-user-one-password
-          GENERATE_LDIF_U2_PW: smoke-user-two-password
+        # docker/secrets/ldap_password and the seeded LDIF. Tenth
+        # audit pass (§9): the generator speaks the NUL-record stdin
+        # contract — the shared emitter docker/ldif_records.sh is the
+        # one copy of it, and the command line carries the two file
+        # paths only. Throwaway values, never real secrets.
         run: |
           set -euo pipefail
           LDAP_PASSWORD="smoke-ldap-$(python3 -c 'import secrets; print(secrets.token_hex(12))')"
           SECRET_KEY="$(python3 -c 'import secrets, base64; print(base64.urlsafe_b64encode(secrets.token_bytes(32)).decode())')"
+          ADMIN_PASSWORD="smoke-admin-password"
+          USER1_PASSWORD="smoke-user-one-password"
+          USER2_PASSWORD="smoke-user-two-password"
           mkdir -p docker/secrets
           chmod 700 docker/secrets
           (umask 077; printf '%s' "${LDAP_PASSWORD}" > docker/secrets/ldap_password)
@@ -89,7 +90,7 @@ jobs:
           MAIL_SSL=false
           ADMIN_LOGIN="admin"
           ADMIN_EMAIL="ci@alirpunkto.test"
-          ADMIN_PASSWORD="${GENERATE_LDIF_ADMIN_PW}"
+          ADMIN_PASSWORD="${ADMIN_PASSWORD}"
           LDAP_ADMIN_OID="00000000-0000-0000-0000-000000000000"
           KEYCLOAK_SERVER_URL=""
           KEYCLOAK_REALM=""
@@ -97,19 +98,42 @@ jobs:
           KEYCLOAK_CLIENT_SECRET=""
           EOF
           chmod 600 docker/.env
-          python3 docker/generate_ldif.py \
+          # The canonical variables the shared emitter reads.
+          LDAP_BASE_DN="dc=alirpunkto,dc=test"
+          ADMIN_UUID="00000000-0000-0000-0000-000000000000"
+          ADMIN_LOGIN="admin"
+          ADMIN_PSEUDONYM="smoke-admin"
+          ADMIN_EMAIL="ci@alirpunkto.test"
+          USER1_UUID="$(python3 -c 'import uuid; print(uuid.uuid4())')"
+          USER1_ROLE="COOPERATOR"
+          USER1_PSEUDONYM="smoke-user-one"
+          USER1_FIRSTNAME="Smoke"
+          USER1_LASTNAME="UserOne"
+          USER1_LANG="en"
+          USER1_NATIONALITY="US"
+          USER1_EMAIL="user-one@alirpunkto.test"
+          USER2_UUID="$(python3 -c 'import uuid; print(uuid.uuid4())')"
+          USER2_ROLE="ORDINARY_MEMBER"
+          USER2_PSEUDONYM="smoke-user-two"
+          USER2_FIRSTNAME="Smoke"
+          USER2_LASTNAME="UserTwo"
+          USER2_LANG="en"
+          USER2_NATIONALITY="US"
+          USER2_EMAIL="user-two@alirpunkto.test"
+          TODAY="$(date -u +%Y-%m-%dT%H:%M:%S)"
+          source docker/ldif_records.sh
+          generate_ldif_records | python3 docker/generate_ldif.py \
             docker/initials_users.ldif \
-            docker/initials_users.generated.ldif \
-            "dc=alirpunkto,dc=test" \
-            "00000000-0000-0000-0000-000000000000" \
-            "admin" "smoke-admin" "ci@alirpunkto.test" "-" \
-            "$(python3 -c 'import uuid; print(uuid.uuid4())')" \
-            "COOPERATOR" "smoke-user-one" "Smoke" "UserOne" \
-            "en" "US" "user-one@alirpunkto.test" "-" \
-            "$(python3 -c 'import uuid; print(uuid.uuid4())')" \
-            "ORDINARY_MEMBER" "smoke-user-two" "Smoke" "UserTwo" \
-            "en" "US" "user-two@alirpunkto.test" "-" \
-            "$(date -u +%Y-%m-%dT%H:%M:%S)"
+            docker/initials_users.generated.ldif
+
+      - name: Validate the compose files with a strict parser
+        # Tenth audit pass (§8): a duplicate args: key slipped into the
+        # LDAP service and PyYAML's permissive loader hid it — compose
+        # itself refuses duplicate mapping keys, so this gate fails
+        # before any image is built.
+        run: |
+          ${COMPOSE_CMD} config --quiet
+          docker compose --env-file docker/.env -f docker/test-docker-compose.yaml config --quiet
 
       - name: Build the images
         run: ${COMPOSE_CMD} build

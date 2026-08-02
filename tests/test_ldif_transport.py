@@ -146,6 +146,12 @@ def test_the_command_line_carries_only_the_two_paths():
 
 
 def test_the_records_pipeline_feeds_stdin():
+    # Tenth audit pass (§10/§11): the emitter moved to the shared
+    # docker/ldif_records.sh, sourced by every caller.
     script = _init_script()
-    assert "printf '%s=%s\\0'" in script
+    assert "ldif_records.sh" in script
     assert "generate_ldif_records | python3" in script
+    with open(os.path.join(ROOT, "docker", "ldif_records.sh"),
+              encoding="utf-8") as handle:
+        emitter = handle.read()
+    assert "printf '%s=%s\\0'" in emitter

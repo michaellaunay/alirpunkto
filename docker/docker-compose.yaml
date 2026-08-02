@@ -32,9 +32,8 @@ services:
       context: .
       dockerfile: DockerfileOpenLDAP
       args:
-        UBUNTU_SNAPSHOT: ${ALIRPUNKTO_UBUNTU_SNAPSHOT:-}
-      args:
         BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-0}
+        UBUNTU_SNAPSHOT: ${ALIRPUNKTO_UBUNTU_SNAPSHOT:-}
     image: alirpunkto-ldap
     container_name: alirpunkto-ldap
     restart: unless-stopped
