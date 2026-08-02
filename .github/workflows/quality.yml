@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install --require-hashes -r requirements-quality.lock
-      - run: ruff check alirpunkto tests tools
+      - run: ruff check alirpunkto tests tools docker/apply_server_overrides.py docker/generate_ldif.py
 
   security:
     name: bandit + pip-audit (blocking)

@@ -55,3 +55,5 @@ docker/secrets/
 
 # Claude Code personal overrides stay local
 .claude/settings.local.json
+# Kimi Code CLI personal state stays local (shared .kimi-code/ files may be tracked later)
+.kimi-code/local.toml

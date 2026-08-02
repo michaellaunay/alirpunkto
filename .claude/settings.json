@@ -25,9 +25,11 @@
     "deny": [
       "Read(./.env)",
       "Read(.env)",
-      "Read(./.env.*)",
-      "Read(./docker/secrets/**)",
       "Read(./docker/.env)",
+      "Read(./docker/.env.test)",
+      "Read(./docker/.env.local)",
+      "Read(./docker/.env.production)",
+      "Read(./docker/secrets/**)",
       "Bash(git push:*)",
       "Bash(rm -rf:*)",
       "Edit(./requirements.lock)",

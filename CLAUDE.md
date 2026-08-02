@@ -11,9 +11,11 @@
   `git push`; the maintainer merges.
 - Run the full suite before proposing a patch and quote the exact
   green count and coverage figure.
-- The permission policy in `.claude/settings.json` blocks pushes,
-  lock-file edits and `.env` reads **by design** — do not work around
-  it; ask the maintainer instead.
+- The permission policy in `.claude/settings.json` provides
+  **guardrails** against direct pushes, lock-file edits and
+  secret-file reads — it gates matching tool calls, it is not an
+  absolute sandbox. Do not bypass those guardrails through shell
+  commands; ask the maintainer instead.
 - When a change answers an external-audit finding, cite the pass and
   section (`Refs: audit section N`) and check whether the finding's
   filing under `docs/*/audits/` needs a follow-up note.

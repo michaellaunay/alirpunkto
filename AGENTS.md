@@ -1,9 +1,10 @@
 # AGENTS.md — working agreement for coding agents on AlirPunkto
 
 Read this file in full before touching anything. `CLAUDE.md` imports it
-for Claude Code; point any other agent (Codex, Kimi, …) here first —
-most modern coding CLIs pick this file up automatically, and a single
-"read AGENTS.md" instruction covers the rest.
+for Claude Code. Codex and Kimi Code CLI load this file natively. For
+other clients (a bare model API, a web UI, another IDE or
+orchestrator), explicitly provide AGENTS.md as project instructions —
+nothing guarantees automatic injection there.
 
 ## What this project is
 
@@ -21,9 +22,15 @@ filed under `docs/*/audits/`.
 ```
 python3 -m venv .venv
 .venv/bin/pip install --require-hashes -r requirements-test.lock
+.venv/bin/pip install --require-hashes -r requirements-quality.lock
 mkdir -p var    # ZODB lock file lives here; a missing var/ causes
                 # phantom zc.lockfile errors in otherwise green tests
 ```
+
+Both locks are needed: the test lock carries pytest and the
+application's dependencies, the quality lock carries ruff, bandit and
+pip-audit. Always call the tools through `.venv/bin/…` — never rely on
+globally installed copies.
 
 Never `pip install` anything ad hoc: the three `requirements*.lock`
 files are the only sources of packages (runtime, test, quality), each
@@ -44,12 +51,21 @@ SECRET_KEY="$(.venv/bin/python -c 'from cryptography.fernet import Fernet; print
 
 Single file: same environment, `… -m pytest tests/test_x.py -q`.
 
-Lint and security (both blocking in CI):
+## Exact CI commands
+
+These are the quality gates, verbatim from
+`.github/workflows/quality.yml` (the CI runs them from its own
+environment; locally, prefix them with `.venv/bin/`). All are
+blocking:
 
 ```
 ruff check alirpunkto tests tools docker/apply_server_overrides.py docker/generate_ldif.py
-bandit -q -ll -r alirpunkto
+bandit -r alirpunkto tools -ll -q
+pip-audit --no-deps --ignore-vuln PYSEC-2026-3447 -r requirements.lock -r requirements-test.lock -r requirements-quality.lock
 ```
+
+`tests/test_agent_harness.py` checks this section against the
+workflow, so a CI change must update it (and vice versa).
 
 Compose sanity (PyYAML alone is NOT a validation — see hard rules):
 
@@ -60,9 +76,13 @@ docker compose --env-file docker/.env -f docker/test-docker-compose.yaml config 
 
 ## Delivery conventions — non-negotiable
 
-- Work is delivered as **numbered patch files** (`git diff >
-  NNNN-slug.patch`, gitignored) that apply cleanly with `git apply` on
-  a **pristine clone of master**. Never push; the maintainer merges.
+- For local agents, the default deliverable is a **numbered patch
+  file** (`git diff > NNNN-slug.patch`, gitignored) that applies
+  cleanly with `git apply` on a **pristine clone of master**. When
+  running in a managed PR or cloud workspace, modify the tracked
+  working tree and present the resulting diff — but never push unless
+  the maintainer explicitly requested that workflow. Either way, the
+  maintainer merges.
 - **Conventional Commits, in English, with an expanded body**:
   problem → fix → evidence. Add the trailer
   `Refs: audit section N` when the change answers an external-audit
