@@ -52,3 +52,6 @@ docker/secrets/
 *.diff
 *.rej
 *.orig
+
+# Claude Code personal overrides stay local
+.claude/settings.local.json

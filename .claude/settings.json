@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "defaultMode": "default",
+    "allow": [
+      "Read(./**)",
+      "Bash(git status)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git apply --check:*)",
+      "Bash(ruff check:*)",
+      "Bash(bandit:*)",
+      "Bash(python -m pytest:*)",
+      "Bash(.venv/bin/python -m pytest:*)",
+      "Bash(mkdir -p var)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git apply:*)",
+      "Bash(pip install:*)",
+      "Bash(.venv/bin/pip install:*)",
+      "Bash(docker:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(.env)",
+      "Read(./.env.*)",
+      "Read(./docker/secrets/**)",
+      "Read(./docker/.env)",
+      "Bash(git push:*)",
+      "Bash(rm -rf:*)",
+      "Edit(./requirements.lock)",
+      "Edit(./requirements-test.lock)",
+      "Edit(./requirements-quality.lock)"
+    ]
+  }
+}
