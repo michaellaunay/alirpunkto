@@ -47,6 +47,12 @@ LDAP_USE_SSL: Final = (
     (os.getenv("LDAP_USE_SSL") or "False").lower()
     in ['true', '1', "yes", "y"]
 )
+# Sixth audit pass (2026-08-01, §12.1): optional CA bundle used to
+# validate the LDAP server certificate when LDAP_USE_SSL is true.
+# Left unset, ldap3 loads the system CA store (SSLContext
+# load_default_certs) — validation itself is enforced by the Tls
+# object built in ldap_factory, never skipped.
+LDAP_CA_CERT_FILE: Final = os.getenv("LDAP_CA_CERT_FILE") or None
 LDAP_PASSWORD: Final = "LDAP_PASSWORD" # use get_secret to get the password
 LDAP_LOGIN: Final = os.getenv("LDAP_LOGIN")
 LDAP_USER: Final = (f"{LDAP_LOGIN},{LDAP_OU},{LDAP_BASE_DN}"

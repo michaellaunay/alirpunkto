@@ -3,8 +3,10 @@
 # author: Michaël Launay
 # date: 2024-10-17
 
+import ssl
 from collections.abc import Mapping
 from .constants_and_globals import (
+    LDAP_CA_CERT_FILE,
     LDAP_USE_SSL,
     LDAP_USER,
     PYTEST_CURRENT_TEST,
@@ -20,10 +22,31 @@ from ldap3 import (
     ALL,
     SYNC,
     MOCK_SYNC,
-    OFFLINE_SLAPD_2_4
+    OFFLINE_SLAPD_2_4,
+    Tls
 )
 
-_server = None
+# Sixth audit pass (2026-08-01, §12.2): the cache used to be a single
+# module-level Server returned regardless of the parameters, so the
+# first call imposed its host, port and SSL mode on every later one.
+# It is now keyed by the effective parameters.
+_servers = {}
+
+
+def _tls_configuration() -> Tls:
+    """Certificate-validating TLS settings for LDAPS connections.
+
+    Sixth audit pass (§12.1): ``Server(..., use_ssl=True)`` without a
+    ``Tls`` object performs NO certificate validation — ldap3 defaults
+    to ``ssl.CERT_NONE``. With ``CERT_REQUIRED`` ldap3 validates the
+    chain and matches the hostname itself (``check_hostname`` in
+    ldap3.core.tls). When LDAP_CA_CERT_FILE is unset, ldap3 loads the
+    system CA store (``SSLContext.load_default_certs``).
+    """
+    return Tls(
+        validate=ssl.CERT_REQUIRED,
+        ca_certs_file=LDAP_CA_CERT_FILE,
+    )
 
 def get_ldap_server(
         server_name=None,
@@ -31,44 +54,56 @@ def get_ldap_server(
         use_ssl=LDAP_USE_SSL,
         port=None
     ) -> Server:
-    """Get an LDAP server
+    """Get an LDAP server for the requested parameters.
+
+    Servers are cached per (host, port, SSL mode, info level): two calls
+    with the same parameters share one ``Server``, two calls with
+    different parameters no longer collide (sixth audit pass, §12.2).
+    LDAPS servers always carry certificate-validating TLS settings
+    (§12.1 — see ``_tls_configuration``).
+
     Returns:
         Server: An LDAP server
     """
-    global _server
-    if _server is not None:
-        return _server
     # Resolve host/port at call time, not at import time.
     if server_name is None:
         server_name = get_ldap_server_name()
     if port is None:
         port = get_ldap_server_port()
-    if PYTEST_CURRENT_TEST and not TEST_WITH_DOCKER_LDAP:
+    mock = bool(PYTEST_CURRENT_TEST and not TEST_WITH_DOCKER_LDAP)
+    if mock:
+        use_ssl = False
+        get_info = OFFLINE_SLAPD_2_4
+    key = (server_name, port, bool(use_ssl), str(get_info), mock)
+    server = _servers.get(key)
+    if server is not None:
+        return server
+    if mock:
         # Use a mock server for testing /!\ Mock server has some issues with user define schema
-        _server = Server(
+        server = Server(
             server_name,
             get_info=OFFLINE_SLAPD_2_4,
             port=port
         )
-    else:           
+    else:
         # define LDAP server, requesting info on DSE and schema
-        _server = Server(
+        server = Server(
             server_name,
             use_ssl=use_ssl,
             get_info=get_info,
-            port=port
+            port=port,
+            tls=_tls_configuration() if use_ssl else None
         )
-    
-    return _server
+    _servers[key] = server
+    return server
 
 def reset_ldap_connection():
-    """Reset the cached LDAP server, forcing a new one on the next call.
+    """Reset the cached LDAP servers, forcing new ones on the next call.
 
     Connections are no longer cached module-side (each call returns a fresh
-    connection), so only the cached ``Server`` needs to be dropped.
+    connection), so only the cached ``Server`` objects need to be dropped.
     """
-    global _server
-    _server = None
+    _servers.clear()
 
 def get_ldap_connection(
         ldap_user=LDAP_USER,  # LDAP_USER

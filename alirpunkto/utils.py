@@ -58,6 +58,7 @@ from .constants_and_globals import (
     KEYCLOAK_CLIENT_SECRET,
     SSO_TOKEN,
     SSO_REFRESH,
+    SECRET_KEY,
     SSO_EXPIRES_AT,
     SITE_NAME,
     DOMAIN_NAME,
@@ -84,6 +85,7 @@ from pyramid.renderers import render_to_response
 import random
 import hmac
 import hashlib
+import zlib
 from urllib.parse import urlparse
 from cryptography.fernet import Fernet, InvalidToken
 import base64
@@ -2075,6 +2077,48 @@ def send_check_new_email(
     return success
 
 
+def _sso_refresh_fernet() -> Fernet:
+    """Fernet keyed on SECRET_KEY, the same convention as encrypt_oid."""
+    return Fernet(get_secret(SECRET_KEY))
+
+
+def seal_sso_refresh_token(refresh_token: str) -> str:
+    """Compress then encrypt a refresh token for session storage.
+
+    Sixth audit pass (2026-08-01, §12.5): the cookie session is signed,
+    not encrypted — its content is readable by whoever holds the cookie
+    bytes. Compression comes FIRST because ciphertext is incompressible
+    and the 4093-byte cookie limit is a hard wall (field incident of
+    2026-07-08): a worst-case 2000-character refresh JWT encrypts to
+    ~2.8 KB raw but ~2.2 KB once deflated, keeping the whole session
+    under the limit. Only the token is compressed — no attacker-chosen
+    data shares the stream, so this opens no compression oracle.
+    """
+    return _sso_refresh_fernet().encrypt(
+        zlib.compress(refresh_token.encode("utf-8"), 9)).decode("ascii")
+
+
+def load_sso_refresh_token(request) -> Optional[str]:
+    """Return the decrypted SSO refresh token from the session, or None.
+
+    Inverse of ``seal_sso_refresh_token``. Anything that does not
+    decrypt and inflate (a tampered value, or a clear-text token from a
+    session created before the sixth audit pass) is treated as an
+    expired SSO session: the caller logs the user out and a fresh login
+    rebuilds the session.
+    """
+    stored = request.session.get(SSO_REFRESH)
+    if stored is None:
+        return None
+    try:
+        return zlib.decompress(_sso_refresh_fernet().decrypt(
+            stored.encode("ascii"))).decode("utf-8")
+    except (InvalidToken, AttributeError, UnicodeError, zlib.error):
+        log.warning("Stored SSO refresh token is not a valid encrypted "
+                    "token; treating the SSO session as expired.")
+        return None
+
+
 def store_sso_tokens(request, sso_token: dict) -> None:
     """Store the Keycloak tokens the session actually needs.
 
@@ -2085,8 +2129,13 @@ def store_sso_tokens(request, sso_token: dict) -> None:
     user's group/role claims, so for a member of several groups the two JWTs
     together overflow Pyramid's 4093-byte cookie limit ("ValueError: Cookie
     value is too long to store", field incident of 2026-07-08).
+
+    Sixth audit pass (§12.5): the refresh token is encrypted before it
+    enters the session — the signed cookie protects integrity, not
+    confidentiality. Read it back with ``load_sso_refresh_token``.
     """
-    request.session[SSO_REFRESH] = sso_token['refresh_token']
+    request.session[SSO_REFRESH] = seal_sso_refresh_token(
+        sso_token['refresh_token'])
     refresh_at = datetime.now() + timedelta(
         seconds=int(sso_token['refresh_expires_in']))
     request.session[SSO_EXPIRES_AT] = refresh_at.isoformat()
@@ -2125,6 +2174,49 @@ def logout(request: Request):
         del request.session[SSO_REFRESH]
     if SSO_EXPIRES_AT in request.session:
         del request.session[SSO_EXPIRES_AT]
+
+# Sixth audit pass (2026-08-01, §12.6): a token endpoint answer is
+# untrusted input — parse and validate it before use. 90 days bounds
+# any realistic Keycloak token lifetime and rejects absurd values.
+_MAX_TOKEN_LIFETIME_SECONDS = 90 * 24 * 3600
+
+
+def _validated_token_payload(response, context: str) -> Optional[dict]:
+    """Parse a Keycloak token response and validate the fields used.
+
+    Sixth audit pass (§12.6): ``response.json()`` could raise on a
+    non-JSON body, required fields could be missing, types were never
+    checked and expiry values were unbounded. Every field this
+    application dereferences (``refresh_token``, ``access_token``,
+    ``expires_in``, ``refresh_expires_in``) is now required, typed and
+    bounded; anything else is a failure, logged WITHOUT the body
+    (the response may contain tokens) and returned as ``None``.
+    """
+    try:
+        payload = response.json()
+    except ValueError:
+        log.error(f"Keycloak token response is not JSON while {context} "
+                  f"({len(response.text or '')} bytes of body withheld)")
+        return None
+    if not isinstance(payload, dict):
+        log.error(f"Keycloak token response is not an object while "
+                  f"{context}")
+        return None
+    for field in ("access_token", "refresh_token"):
+        value = payload.get(field)
+        if not isinstance(value, str) or not value:
+            log.error(f"Keycloak token response misses a usable "
+                      f"'{field}' while {context}")
+            return None
+    for field in ("expires_in", "refresh_expires_in"):
+        value = payload.get(field)
+        if (isinstance(value, bool) or not isinstance(value, int)
+                or not 0 < value <= _MAX_TOKEN_LIFETIME_SECONDS):
+            log.error(f"Keycloak token response carries an invalid "
+                      f"'{field}' while {context}")
+            return None
+    return payload
+
 
 def get_keycloak_token(user: User, password: str) -> Optional[dict]:
     """Get the Keycloak token for the given user.
@@ -2170,10 +2262,13 @@ def get_keycloak_token(user: User, password: str) -> Optional[dict]:
         return None
 
     if response.status_code == 200:
-        json_response = response.json()
-        if 'expires_in' in json_response:
-            expires_at = (now + timedelta(seconds=json_response['expires_in'])).isoformat()
-            json_response[SSO_EXPIRES_AT] = expires_at
+        json_response = _validated_token_payload(
+            response, "getting the SSO token")
+        if json_response is None:
+            return None
+        expires_at = (now + timedelta(
+            seconds=json_response['expires_in'])).isoformat()
+        json_response[SSO_EXPIRES_AT] = expires_at
         return json_response
     else:
         log.error(f"Failed to get SSO token: {response.status_code} "
@@ -2212,7 +2307,8 @@ def refresh_keycloak_token(refresh_token: str) -> Optional[dict]:
         return None
 
     if response.status_code == 200:
-        return response.json()
+        return _validated_token_payload(
+            response, "refreshing the SSO token")
     else:
         log.error(f"Failed to refresh SSO token: {response.status_code} "
                   f"({len(response.text or '')} bytes of body withheld)")

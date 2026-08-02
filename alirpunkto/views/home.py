@@ -8,7 +8,13 @@ from alirpunkto.constants_and_globals import (
     SSO_EXPIRES_AT,
 )
 from json import loads
-from alirpunkto.utils import filter_applications_for_member, refresh_keycloak_token, logout, store_sso_tokens
+from alirpunkto.utils import (
+    filter_applications_for_member,
+    load_sso_refresh_token,
+    logout,
+    refresh_keycloak_token,
+    store_sso_tokens,
+)
 from datetime import datetime
 
 def is_authenticated(request):
@@ -36,10 +42,14 @@ def home_view(request):
     user = request.session.get('user', None)
     user = loads(user) if user else {'name':'unknown'}
     if SSO_REFRESH in request.session:
-        sso_refresh_token = request.session[SSO_REFRESH]
+        # Sixth audit pass (§12.5): the session stores the refresh token
+        # encrypted; an undecryptable value reads as None and falls into
+        # the logout branch below, like a missing refresh window.
+        sso_refresh_token = load_sso_refresh_token(request)
         sso_expires_at = request.session.get(SSO_EXPIRES_AT)
         expire = datetime.fromisoformat(sso_expires_at) if sso_expires_at else None
-        if expire is not None and expire > datetime.now():
+        if (sso_refresh_token is not None
+                and expire is not None and expire > datetime.now()):
             # The refresh token is still valid: obtain a fresh access token.
             sso_token = refresh_keycloak_token(sso_refresh_token)
             if sso_token:

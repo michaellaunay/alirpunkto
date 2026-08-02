@@ -15,9 +15,16 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 
+from alirpunkto import utils as alirpunkto_utils
 from alirpunkto.constants_and_globals import SSO_EXPIRES_AT, SSO_REFRESH, SSO_TOKEN
 from alirpunkto.views import home
 from alirpunkto.views.home import home_view
+
+
+def _sealed(token: str) -> str:
+    """What store_sso_tokens writes since the sixth audit pass (§12.5):
+    the sealed (deflated + encrypted) refresh token, never the clear value."""
+    return alirpunkto_utils.seal_sso_refresh_token(token)
 
 
 def _request(session, settings=None):
@@ -47,19 +54,24 @@ def _past():
 
 def test_home_refresh_failure_logs_out_without_crashing():
     # Regression: a None refresh result used to raise TypeError on ['access_token'].
-    session = _authenticated_session(**{SSO_REFRESH: "RT", SSO_EXPIRES_AT: _future()})
+    session = _authenticated_session(
+        **{SSO_REFRESH: _sealed("RT"), SSO_EXPIRES_AT: _future()})
     request = _request(session)
 
-    with patch.object(home, "refresh_keycloak_token", return_value=None), \
+    with patch.object(home, "refresh_keycloak_token", return_value=None) \
+            as mock_refresh, \
          patch.object(home, "logout") as mock_logout:
         result = home_view(request)  # must not raise
 
+    # §12.5: the view decrypts before use — Keycloak sees the clear token.
+    mock_refresh.assert_called_once_with("RT")
     mock_logout.assert_called_once_with(request)
     assert result["logged_in"] is False
 
 
 def test_home_refresh_success_stores_refresh_token_only():
-    session = _authenticated_session(**{SSO_REFRESH: "RT", SSO_EXPIRES_AT: _future()})
+    session = _authenticated_session(
+        **{SSO_REFRESH: _sealed("RT"), SSO_EXPIRES_AT: _future()})
     request = _request(session)
     token = {
         "access_token": "AT",
@@ -73,14 +85,17 @@ def test_home_refresh_success_stores_refresh_token_only():
     # the access token is deliberately NOT stored: nothing reads it back and
     # it overflows the 4093-byte session cookie (field incident 2026-07-08)
     assert SSO_TOKEN not in session
-    assert session[SSO_REFRESH] == "RT2"
+    # §12.5: the stored value is encrypted at rest and decrypts to RT2.
+    assert session[SSO_REFRESH] != "RT2"
+    assert home.load_sso_refresh_token(request) == "RT2"
     assert SSO_EXPIRES_AT in session
     assert "Authorization" not in request.headers  # no bogus header write
     assert result["logged_in"] is True
 
 
 def test_home_expired_refresh_window_logs_out_without_refreshing():
-    session = _authenticated_session(**{SSO_REFRESH: "RT", SSO_EXPIRES_AT: _past()})
+    session = _authenticated_session(
+        **{SSO_REFRESH: _sealed("RT"), SSO_EXPIRES_AT: _past()})
     request = _request(session)
 
     with patch.object(home, "refresh_keycloak_token") as mock_refresh, \
@@ -93,7 +108,8 @@ def test_home_expired_refresh_window_logs_out_without_refreshing():
 
 
 def test_home_missing_expiry_logs_out_instead_of_using_a_past_default():
-    session = _authenticated_session(**{SSO_REFRESH: "RT"})  # no SSO_EXPIRES_AT
+    session = _authenticated_session(
+        **{SSO_REFRESH: _sealed("RT")})  # no SSO_EXPIRES_AT
     request = _request(session)
 
     with patch.object(home, "refresh_keycloak_token") as mock_refresh, \

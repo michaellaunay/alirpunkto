@@ -8,6 +8,7 @@ from pyramid.httpexceptions import HTTPFound
 
 from alirpunkto.constants_and_globals import SSO_EXPIRES_AT, SSO_REFRESH, SSO_TOKEN
 from alirpunkto.views.default import my_view
+from alirpunkto import utils as alirpunkto_utils
 from alirpunkto.views.home import home_view, is_authenticated
 from alirpunkto.views.logout import logout_view
 from alirpunkto.views.notfound import notfound_view
@@ -48,7 +49,8 @@ def test_home_view_for_logged_in_user(dummy_request):
 
 def test_home_view_logs_out_when_sso_refresh_is_expired(dummy_request):
     dummy_request.session["user"] = json.dumps({"name": "Alice"})
-    dummy_request.session[SSO_REFRESH] = "refresh-token"
+    dummy_request.session[SSO_REFRESH] = \
+        alirpunkto_utils.seal_sso_refresh_token("refresh-token")
     dummy_request.session[SSO_EXPIRES_AT] = "2000-01-01T00:00:00"
 
     result = home_view(dummy_request)
@@ -60,7 +62,8 @@ def test_home_view_logs_out_when_sso_refresh_is_expired(dummy_request):
 
 def test_home_view_refreshes_valid_sso_token(dummy_request):
     dummy_request.session["user"] = json.dumps({"name": "Alice"})
-    dummy_request.session[SSO_REFRESH] = "refresh-token"
+    dummy_request.session[SSO_REFRESH] = \
+        alirpunkto_utils.seal_sso_refresh_token("refresh-token")
     dummy_request.session[SSO_EXPIRES_AT] = (datetime.now() + timedelta(minutes=5)).isoformat()
 
     with patch("alirpunkto.views.home.refresh_keycloak_token") as refresh:
@@ -72,7 +75,10 @@ def test_home_view_refreshes_valid_sso_token(dummy_request):
         result = home_view(dummy_request)
 
     assert result["logged_in"] is True
-    assert dummy_request.session[SSO_REFRESH] == "new-refresh-token"
+    # §12.5 (sixth audit): sealed at rest, decrypts to the new token.
+    assert dummy_request.session[SSO_REFRESH] != "new-refresh-token"
+    assert alirpunkto_utils.load_sso_refresh_token(
+        dummy_request) == "new-refresh-token"
     # the access token is deliberately NOT stored (cookie budget, 2026-07-08)
     assert SSO_TOKEN not in dummy_request.session
     assert SSO_EXPIRES_AT in dummy_request.session

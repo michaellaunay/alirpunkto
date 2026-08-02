@@ -8,10 +8,16 @@ a 500. These tests lock the diet: ``store_sso_tokens`` keeps only the refresh
 token and its expiry (the access token is never read back by the application),
 and a fully populated post-login session serialises well under the limit even
 with realistically large tokens.
+
+Sixth audit pass (2026-08-01, §12.5): the refresh token is now sealed
+(deflated then Fernet-encrypted) before entering the session, so the
+worst-case model below must be INCOMPRESSIBLE like a real JWT — a run
+of identical characters would deflate to nothing and fake-pass.
 """
 from __future__ import annotations
 
 import base64
+import hashlib
 import pickle
 from datetime import datetime, timedelta
 from types import SimpleNamespace
@@ -33,25 +39,46 @@ from alirpunkto.models.users import User
 
 # realistic worst-case JWT sizes for a member of several groups
 FAKE_ACCESS_TOKEN = "a" * 2600
-FAKE_REFRESH_TOKEN = "r" * 2000
+
+
+def _incompressible_token(length: int) -> str:
+    """Deterministic base64 text with real-JWT entropy (~6 bits/char)."""
+    chunks, seed = [], b"alirpunkto-cookie-budget"
+    while sum(len(c) for c in chunks) * 4 // 3 < length + 4:
+        seed = hashlib.sha256(seed + bytes([len(chunks) % 256])).digest()
+        chunks.append(seed)
+    return base64.urlsafe_b64encode(b"".join(chunks)).decode()[:length]
+
+
+FAKE_REFRESH_TOKEN = _incompressible_token(2000)
 COOKIE_LIMIT = 4093
 SIGNATURE_MARGIN = 100          # HMAC + serializer framing overhead
 
 
 @pytest.fixture(autouse=True)
 def _secrets_env(monkeypatch):
+    # get_secret pops SECRET_KEY from the environment on first use, so the
+    # suite-wide value survives only inside its cache. Preserve that cache
+    # and put it back, or any test running after this module would find
+    # neither cache nor environment (order-dependent ValueError surfaced
+    # by the sixth-audit train, whose new tests initialise it earlier).
+    saved = getattr(sm.get_secret, "secrets", None)
     for name, value in (
-        (SECRET_KEY, "dGVzdF9zZXNzaW9uX2J1ZGdldA=="),
+        # A valid Fernet key (32 url-safe base64 bytes): the refresh
+        # token is now encrypted with Fernet(SECRET_KEY) on storage.
+        (SECRET_KEY, "dGVzdF9zZXNzaW9uX2J1ZGdldF9fX19fX19fX19fX18="),
         (LDAP_PASSWORD, "test-ldap-pw"),
         (ADMIN_PASSWORD, "test-admin-pw"),
         (MAIL_PASSWORD, "test-mail-pw"),
     ):
         monkeypatch.setenv(name, value)
-    if hasattr(sm.get_secret, "secrets"):
+    if saved is not None:
         delattr(sm.get_secret, "secrets")
     yield
     if hasattr(sm.get_secret, "secrets"):
         delattr(sm.get_secret, "secrets")
+    if saved is not None:
+        sm.get_secret.secrets = saved
 
 
 def _sso_token():
@@ -67,7 +94,9 @@ def test_store_sso_tokens_keeps_the_access_token_out():
     request = SimpleNamespace(session={})
     before = datetime.now()
     utils.store_sso_tokens(request, _sso_token())
-    assert request.session[SSO_REFRESH] == FAKE_REFRESH_TOKEN
+    # §12.5: sealed at rest — never the clear token — and readable back.
+    assert request.session[SSO_REFRESH] != FAKE_REFRESH_TOKEN
+    assert utils.load_sso_refresh_token(request) == FAKE_REFRESH_TOKEN
     assert SSO_TOKEN not in request.session
     expires_at = datetime.fromisoformat(request.session[SSO_EXPIRES_AT])
     assert timedelta(minutes=29) < (expires_at - before) < timedelta(minutes=31)
