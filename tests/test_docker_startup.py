@@ -150,3 +150,21 @@ def test_the_compose_smoke_workflow_guards_the_stack():
     assert "login throttled for ip=" in smoke
     assert "if: always()" in smoke
     assert "down -v" in smoke
+
+
+def test_the_dotenv_lookup_survives_the_wheel_layout():
+    """Eleventh-audit follow-up (2026-08-02, first observable smoke run):
+    find_dotenv() frame-walks up from the CALLING FILE, so it only ever
+    found .env because constants_and_globals lived inside the repository.
+    The 0075 wheel moved it into the venv's site-packages — under pserve
+    (a script, so dotenv's interactive cwd fallback does not apply) the
+    walk climbs venv/ and never meets the mounted app/.env: SECRET_KEY
+    stays unset and the import dies before the socket binds, while the
+    ``python -c`` start-script guard PASSES (interactive fallback reads
+    the cwd), hiding the break. The lookup must try the current
+    directory first, then fall back to the historical frame walk so
+    bare-metal launches from outside the repository keep working."""
+    path = os.path.join(ROOT, "alirpunkto", "constants_and_globals.py")
+    with open(path, encoding="utf-8") as handle:
+        source = handle.read()
+    assert "find_dotenv(usecwd=True) or find_dotenv()" in source

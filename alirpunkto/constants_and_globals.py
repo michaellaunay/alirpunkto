@@ -30,7 +30,16 @@ PYTEST_CURRENT_TEST: Final = 'PYTEST_CURRENT_TEST' in os.environ or 'pytest' in 
 PYTEST_SSO_TEST: Final = not PYTEST_CURRENT_TEST or env_bool("PYTEST_USE_SSO", False)
 
 # Load environment variables from .env.
-dotenv_path: Final = find_dotenv()
+# Eleventh-audit follow-up (2026-08-02, smoke run): find_dotenv() walks up
+# from the CALLING FILE, so it only ever worked because this module lived
+# inside the repository next to .env. The 0075 wheel moved it into the
+# venv's site-packages: under pserve (a script, so dotenv's interactive
+# cwd fallback does not apply) the walk climbs venv/ and never meets the
+# mounted app/.env — SECRET_KEY stays unset and the import dies before
+# the socket binds. Look in the current directory first (the container
+# WORKDIR carries .env), then fall back to the historical frame walk so
+# bare-metal launches from outside the repo keep working.
+dotenv_path: Final = find_dotenv(usecwd=True) or find_dotenv()
 load_dotenv(dotenv_path)
 
 # Disable MX DNS checks in pytest and local/offline Docker test stacks.
