@@ -1,12 +1,21 @@
-# Fourth audit pass (2026-08-01, P1) — multi-stage build:
-# - the base image is pinned by digest (a mutable tag is a supply-chain
-#   risk; this is the multi-arch manifest-list digest of ubuntu:24.04);
-# - the builder stage owns the compilers and dev headers, the runtime
-#   stage ships neither;
-# - the venv installs the RUNTIME lock only, in hash-checking mode —
-#   the old single lock put ruff, mypy and pytest in every production
-#   image — and nothing is upgraded outside the lock any more (pip
-#   stays as ensurepip provides it; setuptools is pinned in-lock).
+# Fourth audit pass (2026-08-01, P1) — multi-stage build pinned by
+# digest, runtime lock installed in hash-checking mode, no tooling and
+# no out-of-lock upgrade in any stage.
+# Sixth audit pass (2026-08-01, §11) — image finishing:
+# - §11.1 the application is installed as a WHEEL (non-editable), so
+#   the runtime stage needs no source tree at all;
+# - §11.2 wheels are enforced (--only-binary=:all:) with three NAMED
+#   exceptions — pyramid-chameleon, pyramid-handlers and validate-email
+#   are sdist-only on PyPI but PURE python (they build py3-none-any
+#   wheels, verified), so nothing ever compiles against a builder-only
+#   system library; any future sdist outside this list fails the build
+#   explicitly. The builder therefore ships no compiler and no dev
+#   headers any more;
+# - §11.3 opt-in strict reproducibility: UBUNTU_SNAPSHOT pins apt on
+#   snapshot.ubuntu.com (deb822 `Snapshot:` field, verified on noble's
+#   apt 2.8.3);
+# - §11.4 the runtime stage copies an explicit allowlist instead of the
+#   whole context.
 FROM ubuntu:24.04@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90 AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -16,23 +25,23 @@ ENV LC_ALL=C.UTF-8
 ENV APP_HOME=/home/alirpunkto/app
 ENV VENV_DIR=/home/alirpunkto/venv
 
-# Compilers and headers live here only: today every locked dependency
-# ships a wheel, but a future lock bump may bring an sdist back.
+# §11.3 — when set (e.g. 20260801T000000Z), every apt operation in this
+# stage resolves against snapshot.ubuntu.com at that instant instead of
+# the moving archive. Off by default so first builds work everywhere;
+# pass ALIRPUNKTO_UBUNTU_SNAPSHOT through compose to enable it.
+ARG UBUNTU_SNAPSHOT=""
+RUN if [ -n "${UBUNTU_SNAPSHOT}" ]; then \
+        sed -i "s|^Types:|Snapshot: ${UBUNTU_SNAPSHOT}\nTypes:|" /etc/apt/sources.list.d/ubuntu.sources \
+        && grep -q "^Snapshot: ${UBUNTU_SNAPSHOT}$" /etc/apt/sources.list.d/ubuntu.sources; \
+    fi
+
+# §11.2 — no compiler, no dev headers even here: every locked
+# dependency is either a wheel or one of the three named pure-python
+# sdists, so nothing native is ever built in this image.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
     ca-certificates \
     python3 \
-    python3-dev \
     python3-venv \
-    libjpeg-dev \
-    libldap2-dev \
-    libsasl2-dev \
-    libssl-dev \
-    libxml2-dev \
-    libxslt1-dev \
-    libz-dev \
-    libfreetype6-dev \
-    libtiff-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m venv "${VENV_DIR}"
@@ -42,13 +51,19 @@ WORKDIR ${APP_HOME}
 # Lock first, sources after: dependency layers are rebuilt only when
 # the lock changes.
 COPY requirements.lock ${APP_HOME}/requirements.lock
-RUN "${VENV_DIR}/bin/pip" install --no-cache-dir --require-hashes -r requirements.lock
+RUN "${VENV_DIR}/bin/pip" install --no-cache-dir --require-hashes \
+    --only-binary=:all: \
+    --no-binary=pyramid-chameleon,pyramid-handlers,validate-email \
+    -r requirements.lock
 
 COPY . ${APP_HOME}
-# --no-build-isolation: the editable build uses the venv's pinned
-# setuptools (>=70.1, so no separate wheel package) instead of
-# downloading an unpinned toolchain during the build.
-RUN "${VENV_DIR}/bin/pip" install --no-cache-dir --no-build-isolation --no-deps -e .
+# §11.1 — non-editable: pip builds the application wheel and installs
+# it into the venv (--no-build-isolation: the pinned in-lock setuptools
+# does the build, nothing unpinned is downloaded). Package data
+# completeness is governed by MANIFEST.in and locked by
+# tests/test_image_finishing.py — 449/449 tracked package files land in
+# the wheel, so the runtime stage needs no source tree.
+RUN "${VENV_DIR}/bin/pip" install --no-cache-dir --no-build-isolation --no-deps .
 
 # ── Runtime stage ─────────────────────────────────────────────────────
 FROM ubuntu:24.04@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90
@@ -64,8 +79,15 @@ ENV BUILD_WITH_DEBUG=${BUILD_WITH_DEBUG}
 ENV APP_HOME=/home/alirpunkto/app
 ENV VENV_DIR=/home/alirpunkto/venv
 
-# No compiler, no dev headers: the locked set installs from wheels,
-# which bundle their native libraries.
+# §11.3 — same opt-in snapshot pin as the builder stage.
+ARG UBUNTU_SNAPSHOT=""
+RUN if [ -n "${UBUNTU_SNAPSHOT}" ]; then \
+        sed -i "s|^Types:|Snapshot: ${UBUNTU_SNAPSHOT}\nTypes:|" /etc/apt/sources.list.d/ubuntu.sources \
+        && grep -q "^Snapshot: ${UBUNTU_SNAPSHOT}$" /etc/apt/sources.list.d/ubuntu.sources; \
+    fi
+
+# No compiler, no dev headers: the locked set installs from wheels
+# (plus the three named pure-python sdists), which link nothing.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     python3 \
@@ -81,12 +103,20 @@ COPY --from=builder --chown=1001:1001 ${VENV_DIR} ${VENV_DIR}
 
 WORKDIR ${APP_HOME}
 
-COPY --chown=1001:1001 . ${APP_HOME}
+# §11.4 — explicit allowlist instead of COPY .: the application lives
+# in the venv as an installed wheel; the runtime tree only carries the
+# deployment config, its example env, and the override helper the
+# entrypoint calls when PYRAMID_LISTEN/PYRAMID_TRUSTED_PROXY are set
+# (compose sets them by default — the old COPY . never shipped this
+# helper because .dockerignore excludes docker/, a latent first-start
+# crash fixed here).
+COPY --chown=1001:1001 production.ini .env.example ${APP_HOME}/
+COPY --chown=1001:1001 docker/apply_server_overrides.py ${APP_HOME}/docker/apply_server_overrides.py
 COPY docker/start_pyramid.sh /usr/local/bin/start_pyramid.sh
 
 RUN chmod +x /usr/local/bin/start_pyramid.sh \
     && mkdir -p ${APP_HOME}/var/log ${APP_HOME}/var/datas ${APP_HOME}/var/filestorage ${APP_HOME}/var/sessions \
-    && chown -R alirpunkto:alirpunkto ${APP_HOME}/var /usr/local/bin/start_pyramid.sh
+    && chown -R alirpunkto:alirpunkto ${APP_HOME} /usr/local/bin/start_pyramid.sh
 
 # Persist application state and uploaded/generated files.
 VOLUME ["/home/alirpunkto/app/var"]

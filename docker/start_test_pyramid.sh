@@ -9,11 +9,11 @@ if [ "${BUILD_WITH_DEBUG:-0}" = "1" ]; then
     echo "[Pyramid:test] Debug image enabled."
 fi
 
-# Fourth audit pass (2026-08-01): the packaging patch retired setup.py
-# for pyproject.toml — checking for the removed file stopped the
-# container before pserve ever ran.
-if [ ! -f "${APP_DIR}/pyproject.toml" ] || [ ! -d "${APP_DIR}/alirpunkto" ]; then
-    echo "[Pyramid:test] Application sources are missing in ${APP_DIR}" >&2
+# Sixth audit pass (2026-08-01, §11.1/§11.4): the application is an
+# installed wheel — the image ships no source tree, so the sanity check
+# probes the venv instead of the old source-tree file checks.
+if ! "${VENV_DIR}/bin/python" -c "import alirpunkto" 2>/dev/null; then
+    echo "[Pyramid:test] The alirpunkto package is not installed in ${VENV_DIR}" >&2
     exit 1
 fi
 
@@ -38,10 +38,19 @@ fi
 cd "${APP_DIR}"
 
 if [ "${INSTALL_EXTRAS_TESTING:-false}" = "true" ]; then
-    # Fourth audit pass (P1): the test stack installs the hashed test
-    # lock (runtime + testing), not the runtime lock alone.
-    pip install --no-cache-dir --require-hashes -r requirements-test.lock
-    pip install --no-cache-dir -e . --no-deps
+    # Sixth audit pass (§11.4): the test lock left the image; the test
+    # compose bind-mounts it read-only next to test.ini. The wheel
+    # policy of the image applies here too, and the old editable
+    # reinstall is gone — the image already carries the application.
+    if [ ! -f "${APP_DIR}/requirements-test.lock" ]; then
+        echo "[Pyramid:test] requirements-test.lock is missing: it is no longer baked into the image;" >&2
+        echo "[Pyramid:test] test-docker-compose.yaml must bind-mount it (see its pyramid volumes)." >&2
+        exit 1
+    fi
+    pip install --no-cache-dir --require-hashes \
+        --only-binary=:all: \
+        --no-binary=pyramid-chameleon,pyramid-handlers,validate-email \
+        -r requirements-test.lock
 fi
 
 # Fourth audit pass (2026-08-01): same Docker override as the production

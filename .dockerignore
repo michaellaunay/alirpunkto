@@ -8,9 +8,15 @@
 .git
 .gitignore
 
-# Docker itself — on exclut tout sauf start_pyramid.sh dont DockerfilePyramid a besoin
+# Docker itself — on exclut tout sauf les deux fichiers dont
+# DockerfilePyramid a besoin. Sixième passage d'audit (§11.4) :
+# apply_server_overrides.py est appelé par start_pyramid.sh depuis le
+# train P0 (compose pose PYRAMID_LISTEN par défaut), mais docker/ étant
+# exclu il n'atteignait JAMAIS l'image — le conteneur mourait au premier
+# démarrage réel. La ré-inclusion ci-dessous répare cette casse latente.
 docker/
 !docker/start_pyramid.sh
+!docker/apply_server_overrides.py
 
 # Environnements virtuels Python
 bin/
@@ -43,6 +49,15 @@ docs/
 tests/
 pytest.ini
 testing.ini
+
+# Sixième passage d'audit (§11.4) : la CI et les verrous des voies test
+# et qualité ne concernent aucune image — les exclure rend aussi le
+# cache de COPY insensible à leurs changements. development.ini n'est
+# lu que hors conteneur.
+.github/
+requirements-test.lock
+requirements-quality.lock
+development.ini
 
 # Outils de développement
 tools/

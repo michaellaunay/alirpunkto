@@ -2,6 +2,17 @@
 # mutable tag is a supply-chain risk (multi-arch manifest list).
 FROM ubuntu:24.04@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90
 
+# Sixth audit pass (2026-08-01, §11.3) — opt-in strict reproducibility:
+# when set (e.g. 20260801T000000Z), every apt operation resolves against
+# snapshot.ubuntu.com at that instant instead of the moving archive
+# (deb822 `Snapshot:` field, verified on noble's apt 2.8.3). Off by
+# default; pass ALIRPUNKTO_UBUNTU_SNAPSHOT through compose to enable.
+ARG UBUNTU_SNAPSHOT=""
+RUN if [ -n "${UBUNTU_SNAPSHOT}" ]; then \
+        sed -i "s|^Types:|Snapshot: ${UBUNTU_SNAPSHOT}\nTypes:|" /etc/apt/sources.list.d/ubuntu.sources \
+        && grep -q "^Snapshot: ${UBUNTU_SNAPSHOT}$" /etc/apt/sources.list.d/ubuntu.sources; \
+    fi
+
 # Avoid interactive apt prompts during image build.
 ENV DEBIAN_FRONTEND=noninteractive
 

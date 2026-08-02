@@ -155,10 +155,14 @@ def test_the_ci_lanes_install_their_own_lock():
         assert f"-r {name}" in quality_ci, name
 
 
-def test_the_start_scripts_install_the_test_lock():
+def test_only_the_test_entrypoint_installs_and_only_the_test_lock():
     """The optional in-container extras install must stay inside a
-    hashed lock — never the unpinned `.[testing]` extra."""
-    for name in ("start_pyramid.sh", "start_test_pyramid.sh"):
-        script = _read("docker", name)
-        assert "requirements-test.lock" in script, name
-        assert '.[testing]' not in script, name
+    hashed lock — never the unpinned `.[testing]` extra. Sixth audit
+    pass (§11.4): the PRODUCTION entrypoint no longer installs anything
+    at runtime at all; the test entrypoint reads the lock from the
+    compose bind-mount."""
+    prod = _read("docker", "start_pyramid.sh")
+    assert "pip install" not in prod
+    test = _read("docker", "start_test_pyramid.sh")
+    assert "requirements-test.lock" in test
+    assert '.[testing]' not in test

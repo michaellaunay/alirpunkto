@@ -21,14 +21,16 @@ def _read(*parts):
         return handle.read()
 
 
-def test_the_start_scripts_check_for_pyproject_not_setup_py():
-    """5.1: the packaging patch removed setup.py; the guard in both
-    start scripts kept demanding it and stopped the container before
-    pserve ever ran."""
+def test_the_start_scripts_probe_the_installed_package_not_setup_py():
+    """Fourth audit pass: the old scripts checked for the retired
+    setup.py and stopped the container before pserve ever ran. Sixth
+    audit pass (§11.1): the image ships no source tree any more, so the
+    sanity check probes the installed wheel instead of pyproject.toml."""
     for name in ("start_pyramid.sh", "start_test_pyramid.sh"):
         script = _read("docker", name)
-        assert '-f "${APP_DIR}/pyproject.toml"' in script, name
-        assert '-f "${APP_DIR}/setup.py"' not in script, name
+        assert "setup.py" not in script, name
+        assert 'pyproject.toml' not in script, name
+        assert '-c "import alirpunkto"' in script, name
 
 
 def test_use_forwarded_proto_is_gone_from_every_ini():

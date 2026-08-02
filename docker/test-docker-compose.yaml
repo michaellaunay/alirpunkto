@@ -27,6 +27,7 @@ services:
       dockerfile: DockerfileOpenLDAP
       args:
         BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-1}
+        UBUNTU_SNAPSHOT: ${ALIRPUNKTO_UBUNTU_SNAPSHOT:-}
     image: alirpunkto-test-ldap
     container_name: alirpunkto-test-ldap
     restart: unless-stopped
@@ -99,6 +100,7 @@ services:
       dockerfile: docker/DockerfilePyramid
       args:
         BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-1}
+        UBUNTU_SNAPSHOT: ${ALIRPUNKTO_UBUNTU_SNAPSHOT:-}
     image: alirpunkto-test-pyramid
     container_name: alirpunkto-test-pyramid
     restart: unless-stopped
@@ -125,6 +127,9 @@ services:
       - alirpunkto_test_pyramid_var:/home/alirpunkto/app/var
       - ./.env.test:/home/alirpunkto/app/.env:ro
       - ../test.ini:/home/alirpunkto/app/test.ini:ro
+      # Sixième passage (§11.4) : le verrou de test n'est plus dans
+      # l'image — INSTALL_EXTRAS_TESTING le lit via ce montage.
+      - ../requirements-test.lock:/home/alirpunkto/app/requirements-test.lock:ro
       - ./start_test_pyramid.sh:/usr/local/bin/start_test_pyramid.sh:ro
     entrypoint: ["/bin/bash", "/usr/local/bin/start_test_pyramid.sh"]
     command: ["test.ini"]

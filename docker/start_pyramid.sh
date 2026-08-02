@@ -9,11 +9,11 @@ if [ "$BUILD_WITH_DEBUG" = "1" ]; then
     echo "Debug image enabled."
 fi
 
-# Fourth audit pass (2026-08-01): the packaging patch retired setup.py
-# for pyproject.toml — checking for the removed file stopped the
-# container before pserve ever ran.
-if [ ! -f "${APP_DIR}/pyproject.toml" ] || [ ! -d "${APP_DIR}/alirpunkto" ]; then
-    echo "Application sources are missing in ${APP_DIR}" >&2
+# Sixth audit pass (2026-08-01, §11.1/§11.4): the application is an
+# installed wheel — the image ships no source tree, so the sanity check
+# probes the venv instead of the old source-tree file checks.
+if ! "${VENV_DIR}/bin/python" -c "import alirpunkto" 2>/dev/null; then
+    echo "The alirpunkto package is not installed in ${VENV_DIR}" >&2
     exit 1
 fi
 
@@ -35,12 +35,6 @@ fi
 
 . "${VENV_DIR}/bin/activate"
 cd "${APP_DIR}"
-
-if [ "${INSTALL_EXTRAS_TESTING:-false}" = "true" ]; then
-    # Fourth audit pass (P1): install the hashed test lock, never the
-    # unpinned extra — the image already carries the editable install.
-    pip install --no-cache-dir --require-hashes -r requirements-test.lock
-fi
 
 # Fourth audit pass (2026-08-01): inside the compose stack Waitress must
 # bind 0.0.0.0 (Apache lives in another container — this loopback is

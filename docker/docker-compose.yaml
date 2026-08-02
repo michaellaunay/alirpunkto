@@ -32,6 +32,8 @@ services:
       context: .
       dockerfile: DockerfileOpenLDAP
       args:
+        UBUNTU_SNAPSHOT: ${ALIRPUNKTO_UBUNTU_SNAPSHOT:-}
+      args:
         BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-0}
     image: alirpunkto-ldap
     container_name: alirpunkto-ldap
@@ -102,6 +104,8 @@ services:
     build:
       context: .
       dockerfile: DockerfilePostfix
+      args:
+        UBUNTU_SNAPSHOT: ${ALIRPUNKTO_UBUNTU_SNAPSHOT:-}
     image: alirpunkto-postfix
     container_name: alirpunkto-postfix
     restart: unless-stopped
@@ -181,6 +185,10 @@ services:
       dockerfile: docker/DockerfilePyramid
       args:
         BUILD_WITH_DEBUG: ${BUILD_WITH_DEBUG:-0}
+        # Sixième passage (§11.3) : reproductibilité stricte opt-in —
+        # poser ALIRPUNKTO_UBUNTU_SNAPSHOT (ex. 20260801T000000Z) fige
+        # apt sur snapshot.ubuntu.com pour les quatre images.
+        UBUNTU_SNAPSHOT: ${ALIRPUNKTO_UBUNTU_SNAPSHOT:-}
     image: alirpunkto-pyramid
     container_name: alirpunkto-pyramid
     restart: unless-stopped
@@ -254,6 +262,8 @@ services:
     build:
       context: .
       dockerfile: DockerfileApache2
+      args:
+        UBUNTU_SNAPSHOT: ${ALIRPUNKTO_UBUNTU_SNAPSHOT:-}
     image: alirpunkto-apache2
     container_name: alirpunkto-apache2
     restart: unless-stopped
