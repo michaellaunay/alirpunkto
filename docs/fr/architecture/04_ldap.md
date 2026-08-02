@@ -115,6 +115,13 @@ l'entrée restant en quarantaine) et toute modification de profil. Les
 événements de sanction et de promotion (#56/#57) ont leur crochet prêt
 (`force_sanctioned`) pour les futures vues d'administration.
 
+**Limite connue** (11ᵉ passage) : cette asymétrie traite la sanction
+comme un octroi — une *nouvelle* sanction dont l'écriture côté membre
+échoue après le côté groupe est perdue au passage suivant au lieu
+d'être rejouée. La persistance des sanctions attend une décision de
+design : attribut LDAP dédié, file de reprise, ou octroi membre-d'abord
+pour les groupes de restriction (`SANCTIONED*`).
+
 ## Unicité d'identité et quarantaine (#54)
 
 `is_valid_unique_identity(prénoms, noms, date de naissance)` compare

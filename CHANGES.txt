@@ -35,6 +35,17 @@ Unreleased (2026-08-02)
   filed bilingually with their counter-reviews, and the architecture
   chapters (LDAP, authentication, security, tests, Docker deployment)
   now describe the delivered state.
+- The three P0 breaks found by the tenth audit pass (duplicate compose
+  args key, smoke workflow and local test setup left on the retired
+  LDIF interface) are repaired: one shared record emitter
+  (docker/ldif_records.sh) sourced by every caller, transversal caller
+  tests with a duplicate-key-rejecting YAML reader, and a compose
+  config --quiet gate before any image build.
+- The five remaining audit passes (5th, 7th, 9th, 10th, 11th — the
+  last at 8.8/10, the series' highest) are filed bilingually with
+  their counter-reviews, and the chapters (LDAP, security, tests,
+  Docker deployment) describe the 8.8 state, including the open
+  sanction-persistence design decision and the LDIF serialiser target.
 
 Unreleased (2026-08-01)
 -----------------------

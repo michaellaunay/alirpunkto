@@ -428,3 +428,40 @@ latent break — the override helper `.dockerignore` never let into the
 image, invisible as long as no real `compose up` had run. LDAPS awaits
 its decision; the scan, its optimisation. 8.6, says the auditor, 8.9
 in sight. The figures pass; the tests that guard them stay.
+
+## 2026-08-02 (continued) — The three breaks repaired, and 8.8
+
+The tenth pass dropped to 8.3, and the drop was deserved: the three
+P0s it named were of our own making. The duplicate `args:` key on the
+LDAP service came from inserting the snapshot in front of a block the
+inspection never displayed — and the "YAML OK" check was a false
+green, PyYAML swallowing duplicate keys where compose refuses the
+file. `smoke.yml` had stayed on the generator's old interface because
+the migration grep stopped at `tests/ docker/` without `.github/`. And
+`init_test.sh` had never been migrated at all — its shell hashing even
+pushed each password through a python's argv. The lesson fits in one
+of the auditor's sentences: we were testing *one* caller, not *the*
+callers.
+
+Train 0078 repaired by making recurrence structurally hard: the record
+emitter now lives in `docker/ldif_records.sh`, the single copy of the
+contract, sourced by all three callers — changing the generator's
+interface changes everyone together; seven transversal tests lock the
+whole, including a home-grown duplicate-key YAML detector and
+emitter↔generator parity via `ast`; and the smoke workflow validates
+both compose files before building anything.
+
+The eleventh pass climbed back to **8.8 — the series' highest** — and
+underlined what matters as much as the grade: "the quality of the
+reaction", mistakes owned in writing rather than hidden. The five
+audits missing from the archive (5th, 7th, 9th — where the duplicate
+key had in fact been reported first, text untransmitted at the time —,
+10th and 11th) are now filed bilingually: the documentary series of
+passes four through eleven is complete.
+
+The ceiling toward 9/10 is named: an *observable*, successful smoke
+run — the triggers exist, it is an Actions visibility setting then a
+first green run. On the books remain the sanction-persistence design
+decision (dedicated attribute, retry queue, or member-first grants for
+restriction groups), the functional emitter test and the LDIF
+serialiser.

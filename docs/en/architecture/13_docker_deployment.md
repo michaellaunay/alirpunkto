@@ -35,7 +35,7 @@ Data live in named volumes (`alirpunkto_ldap_*`, `alirpunkto_pyramid_var`,
 `alirpunkto_postfix_*`, Apache certificates). `docker/backup.sh` saves
 configuration and data; procedure and restore in `docker/README.md`.
 
-## Blockers lifted (external audits, fourth → eighth passes)
+## Blockers lifted (external audits, fourth → eleventh passes)
 
 The three defects that stopped the stack before `pserve` (a check on
 the removed `setup.py`, the unknown Waitress option
@@ -56,9 +56,18 @@ repaired a latent break: the override helper, excluded by
 `.dockerignore`, never reached the image. The four bases are pinned by
 digest, with an **opt-in APT snapshot** (`ALIRPUNKTO_UBUNTU_SNAPSHOT`)
 for strict reproducibility; the test stack bind-mounts its lock
-(`requirements-test.lock`) and `test.ini` read-only. Full chronicle:
+(`requirements-test.lock`) and `test.ini` read-only. The tenth pass
+reopened the P0 — a duplicate `args:` key on the LDAP service
+(introduced by the image-finishing train itself) and two LDIF
+generator callers left on the old contract — closed again by train
+0078: a **shared emitter** `docker/ldif_records.sh` sourced by
+`init.sh`, `init_test.sh` and the smoke workflow, and a **validation
+gate** `compose config --quiet` on both files before any build. Full
+chronicle:
 `docs/en/audits/20260801_external_chatgpt_audit_alirpunkto_4th_pass.md`,
-`…_6th_pass.md` and `20260802_…_8th_pass.md`.
+`…_6th_pass.md`, `20260802_…_8th_pass.md`, `…_10th_pass.md` and
+`…_11th_pass.md` — the 5th, 7th and 9th, transmitted after the fact,
+are filed there too.
 
 ## Containerless deployment
 

@@ -2759,3 +2759,41 @@ dans l'image, invisible tant qu'aucun `compose up` réel n'avait
 tourné. LDAPS attend sa décision ; le scan, son optimisation. 8,6, dit
 l'auditeur, 8,9 en vue. Les chiffres passent ; les tests qui les
 gardent restent.
+
+## 2026-08-02 (suite) — Les trois casses réparées, et 8,8
+
+Le dixième passage est descendu à 8,3, et la baisse était méritée :
+les trois P0 qu'il pointait étaient de notre fait. La double clé
+`args:` du service LDAP venait de l'insertion du snapshot devant un
+bloc que l'inspection n'affichait pas — et le « YAML OK » de la
+vérification était un faux vert, PyYAML avalant les clés dupliquées là
+où compose refuse le fichier. `smoke.yml` était resté sur l'ancienne
+interface du générateur parce que le grep de migration s'était arrêté
+à `tests/ docker/` sans `.github/`. Et `init_test.sh` n'avait jamais
+été migré du tout — son hachage shell poussait même chaque mot de
+passe dans l'argv d'un python. La leçon tient en une phrase de
+l'auditeur : on testait *un* appelant, pas *les* appelants.
+
+Le train 0078 a réparé en rendant la récidive structurellement
+difficile : l'émetteur d'enregistrements vit désormais dans
+`docker/ldif_records.sh`, la copie unique du contrat, sourcée par les
+trois appelants — changer l'interface du générateur change tout le
+monde ensemble ; sept tests transversaux verrouillent l'ensemble, dont
+un détecteur maison de clés YAML dupliquées et la parité
+émetteur↔générateur par `ast` ; et le workflow smoke valide les deux
+fichiers compose avant de construire quoi que ce soit.
+
+Le onzième passage est remonté à **8,8 — le plus haut de la série** —
+et a souligné ce qui compte autant que la note : « la qualité de la
+réaction », les erreurs assumées par écrit plutôt que masquées. Les
+cinq audits qui manquaient à l'archive (5ᵉ, 7ᵉ, 9ᵉ — où la double clé
+avait en fait été signalée en premier, texte non transmis à l'époque —,
+10ᵉ et 11ᵉ) sont maintenant versés en bilingue : la série documentaire
+des passages quatre à onze est complète.
+
+Le plafond vers 9/10 est nommé : une exécution smoke *observable* et
+réussie — les déclencheurs existent, c'est un réglage de visibilité
+des Actions puis un premier run vert. Restent au carnet la décision de
+design sur la persistance des sanctions (attribut dédié, file de
+reprise, ou octroi membre-d'abord pour les groupes de restriction), le
+test fonctionnel de l'émetteur et le sérialiseur LDIF.

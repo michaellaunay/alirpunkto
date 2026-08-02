@@ -112,6 +112,13 @@ group left, the entry staying through the Quarantine) and any profile
 update. Sanction and promotion events (#56/#57) keep a ready hook
 (`force_sanctioned`) for the future admin views.
 
+**Known limit** (11th pass): this asymmetry treats a sanction like a
+grant — a *new* sanction whose member-side write fails after the group
+side is lost on the next pass instead of being replayed. Sanction
+persistence awaits a design decision: a dedicated LDAP attribute, a
+retry queue, or member-first grants for the restriction groups
+(`SANCTIONED*`).
+
 ## Identity uniqueness and Quarantine (#54)
 
 `is_valid_unique_identity(given names, family names, date of birth)`

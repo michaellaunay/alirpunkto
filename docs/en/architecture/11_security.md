@@ -54,8 +54,28 @@ segmentation of the compose stack, backups, TLS.
   transport entirely off `argv` (NUL records on standard input,
   required fields enforced) and a reconciled group relation — member
   side authoritative, fail-closed write pairs (P2, trains 0073→0076).
-  Details in the fourth-, sixth- and eighth-pass filings
+  Details in the fourth- → eleventh-pass filings
   (`docs/en/audits/2026080*_external_chatgpt_audit_*`).
+- The tenth pass showed the dark side of an interface migration:
+  **three P0 breaks of our own making** — a duplicate compose `args:`
+  key (hidden by PyYAML's permissive loader), `smoke.yml` and
+  `init_test.sh` left on the old LDIF contract, the latter's shell
+  hashing even pushing each password through a python's argv. Repaired
+  by train 0078: a **shared emitter** `docker/ldif_records.sh` sourced
+  by all three callers, transversal caller tests, a home-grown strict
+  YAML parser and a `compose config --quiet` gate before any build.
+  Eleventh pass: 8.8/10.
+- The **persistence of a new sanction** is not guaranteed when the
+  authoritative (member-side) write fails after the group side: the
+  next pass treats it as a leftover and removes it instead of
+  replaying it (11th pass, §11) — a sanction is a *restriction*, and
+  the "losing a grant is safe" asymmetry does not fit it. Design
+  decision in progress: dedicated LDAP attribute, retry queue, or
+  member-first grants for restriction groups.
+- **LDIF serialisation** still interpolates values through f-strings:
+  a newline inside a field would alter the document's structure — a
+  validating serialiser (refusing `\0`, `\r`, `\n`, LDIF base64,
+  UUID/role/language/e-mail/date validation) is the P2 target.
 - **LDAPS is not enabled** in the shipped compose stack
   (`LDAP_USE_SSL=false`, port 389 on the internal network): the
   validating mechanism is ready (`Tls` + `LDAP_CA_CERT_FILE`);

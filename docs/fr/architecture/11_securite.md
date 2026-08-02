@@ -55,8 +55,29 @@ réseau du `compose`, sauvegardes, TLS.
   NUL sur l'entrée standard, champs requis obligatoires) et relation
   de groupes réconciliée — côté membre autoritatif, paires d'écritures
   fail-closed (P2, trains 0073→0076). Détail dans les versements des
-  quatrième, sixième et huitième passages
+  quatrième → onzième passages
   (`docs/fr/audits/2026080*_audit_externe_chatgpt_*`).
+- Le dixième passage a montré la face sombre d'une migration
+  d'interface : **trois casses P0 de notre fait** — double clé `args:`
+  du compose (cachée par le chargeur permissif de PyYAML), `smoke.yml`
+  et `init_test.sh` restés sur l'ancien contrat LDIF, le hachage shell
+  de ce dernier poussant même chaque mot de passe dans l'argv d'un
+  python. Réparées par le train 0078 : **émetteur commun**
+  `docker/ldif_records.sh` sourcé par les trois appelants, tests
+  transversaux des appelants, parseur YAML strict maison et porte
+  `compose config --quiet` avant tout build. Onzième passage : 8,8/10.
+- La **persistance d'une nouvelle sanction** n'est pas garantie si
+  l'écriture autoritative (côté membre) échoue après le côté groupe :
+  le passage suivant la traite en résidu et la retire au lieu de la
+  rejouer (11ᵉ passage, §11) — une sanction est une *restriction*,
+  l'asymétrie « perdre un octroi est sûr » ne lui convient pas.
+  Décision de design en cours : attribut LDAP dédié, file de reprise,
+  ou octroi membre-d'abord pour les groupes de restriction.
+- La **sérialisation LDIF** interpole encore les valeurs en
+  f-strings : un retour à la ligne dans un champ altérerait la
+  structure du document — sérialiseur validant (refus de `\0`, `\r`,
+  `\n`, base64 LDIF, validation UUID/rôles/langues/emails/dates),
+  cible P2.
 - **LDAPS n'est pas activé** dans la pile compose fournie
   (`LDAP_USE_SSL=false`, port 389 sur le réseau interne) : le
   mécanisme validant est prêt (`Tls` + `LDAP_CA_CERT_FILE`),

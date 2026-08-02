@@ -113,7 +113,7 @@ jadis dérivée de `setup.py`, suit `pyproject.toml` et le verrou. Six
 tests d'empaquetage verrouillent l'ensemble, `setup.py` compris dans
 son absence.
 
-## Portes de qualité (2026-08-02) : 1015 tests
+## Portes de qualité (2026-08-02) : 1022 tests
 
 La CI ne se contente plus d'exécuter la suite : un second workflow
 (`quality.yml`) rend **Ruff bloquant** (famille Pyflakes ; `F841` en
@@ -139,7 +139,7 @@ conservé. Leçon de harnais : ne jamais « restaurer » une démonstration
 rouge par `git checkout --` — il ramène HEAD et détruit les correctifs
 non commis ; seule la copie de côté est sûre.
 
-Les trains 0071→0076 ont porté la suite de 957 à **1015 tests**, en
+Les trains 0071→0078 ont porté la suite de 957 à **1022 tests**, en
 verrouillant chaque acquis par une **démonstration rouge** sur l'état
 antérieur : démarrage Docker et overrides serveur
 (`test_docker_startup.py`) ; chaîne d'approvisionnement — trois verrous
@@ -147,7 +147,11 @@ hachés, extension identique, voies CI (`test_supply_chain.py`) ;
 finition d'image jusqu'à la **parité réelle de la wheel** — le test
 reconstruit la wheel applicative et exige les 449 fichiers suivis
 (`test_image_finishing.py`) ; transport LDIF sur l'entrée standard
-avec champs requis obligatoires (`test_ldif_transport.py`) ;
+avec champs requis obligatoires (`test_ldif_transport.py`) ; contrat
+des **appelants** du générateur — les trois appelants sourcent
+l'émetteur commun, parité émetteur↔générateur par `ast`, YAML compose
+sans clé dupliquée, porte `config --quiet` avant tout build
+(`test_ldif_callers.py`) ;
 scellement du jeton SSO et budget cookie mesuré sur jeton
 incompressible ; validation des réponses Keycloak ; et cohérence des
 groupes jusqu'aux **vetos d'écriture injectés** et aux latchs à moitié

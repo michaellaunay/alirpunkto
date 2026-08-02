@@ -34,7 +34,7 @@ Les données vivent dans des volumes nommés (`alirpunkto_ldap_*`,
 `docker/backup.sh` sauvegarde configuration et données ; procédure et
 restauration dans `docker/README.md`.
 
-## Blocages levés (audits externes, quatrième → huitième passages)
+## Blocages levés (audits externes, quatrième → onzième passages)
 
 Les trois défauts qui arrêtaient la pile avant `pserve` (contrôle
 `setup.py` disparu, option Waitress inconnue `use_forwarded_proto`,
@@ -56,10 +56,18 @@ helper d'overrides, exclu par `.dockerignore`, n'atteignait jamais
 l'image. Les quatre bases sont épinglées par digest, avec un
 **snapshot APT opt-in** (`ALIRPUNKTO_UBUNTU_SNAPSHOT`) pour la
 reproductibilité stricte ; la pile de test monte son verrou
-(`requirements-test.lock`) et `test.ini` en lecture seule. Chronique
-complète :
+(`requirements-test.lock`) et `test.ini` en lecture seule. Le dixième
+passage a rouvert le P0 — double clé `args:` du service LDAP
+(introduite par la finition d'image elle-même) et deux appelants du
+générateur LDIF restés sur l'ancien contrat — refermé par le train
+0078 : **émetteur commun** `docker/ldif_records.sh` sourcé par
+`init.sh`, `init_test.sh` et le smoke, et **porte de validation**
+`compose config --quiet` sur les deux fichiers avant tout build.
+Chronique complète :
 `docs/fr/audits/20260801_audit_externe_chatgpt_alirpunkto_4e_passage.md`,
-`…_6e_passage.md` et `20260802_…_8e_passage.md`.
+`…_6e_passage.md`, `20260802_…_8e_passage.md`, `…_10e_passage.md` et
+`…_11e_passage.md` — les 5ᵉ, 7ᵉ et 9ᵉ, transmis a posteriori, y sont
+également versés.
 
 ## Déploiement sans conteneurs
 

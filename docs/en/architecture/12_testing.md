@@ -107,7 +107,7 @@ once derived from `setup.py`, follows `pyproject.toml` and the lock.
 Six packaging tests guard the whole arrangement, `setup.py` included in
 its absence.
 
-## Quality gates (2026-08-02): 1015 tests
+## Quality gates (2026-08-02): 1022 tests
 
 The CI no longer merely runs the suite: a second workflow
 (`quality.yml`) makes **Ruff blocking** (the Pyflakes family; `F841`
@@ -133,7 +133,7 @@ the `cryptography` floor kept. A harness lesson: never "restore" a red
 demonstration with `git checkout --` — it brings HEAD back and
 destroys uncommitted fixes; only a side copy is safe.
 
-The 0071→0076 trains brought the suite from 957 to **1015 tests**,
+The 0071→0078 trains brought the suite from 957 to **1022 tests**,
 locking every gain with a **red demonstration** against the previous
 state: Docker startup and server overrides
 (`test_docker_startup.py`); the supply chain — three hashed locks,
@@ -141,7 +141,11 @@ identical extension, one CI lane each (`test_supply_chain.py`); image
 finishing down to **real wheel parity** — the test rebuilds the
 application wheel and requires all 449 tracked files
 (`test_image_finishing.py`); the LDIF transport on standard input
-with enforced required fields (`test_ldif_transport.py`); the sealed
+with enforced required fields (`test_ldif_transport.py`); the generator's **caller**
+contract — all three callers source the shared emitter,
+emitter↔generator parity via `ast`, compose YAML free of duplicate
+keys, the `config --quiet` gate before any build
+(`test_ldif_callers.py`); the sealed
 SSO token and the cookie budget measured on an incompressible token;
 the Keycloak response validation; and group coherence down to
 **injected write vetoes** and half-lifted latches that do not
