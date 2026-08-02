@@ -1,6 +1,24 @@
 Unreleased (2026-08-02)
 -----------------------
 
+- The first observable smoke runs found and fixed two container-only
+  breaks: .env is now looked up from the working directory first (the
+  wheel had moved the module away from the frame-walking lookup's
+  reach), and the smoke login dance sends a Referer so Pyramid's
+  https CSRF origin check accepts curl's POSTs like a browser's. The
+  stack builds, becomes healthy and serves through Apache in CI.
+- A multi-agent harness ships at the root: AGENTS.md as the contract
+  shared by Claude Code, Codex and Kimi Code CLI, CLAUDE.md importing
+  it, and a versioned Claude permission policy. The twelfth audit
+  pass (8.8/10, new harness domain at 7.6) reviewed it; its P0/P1
+  findings are fixed — precise sensitive-path denies (.env.example
+  readable again), both hashed locks installed by the documented
+  setup, CI-verbatim commands with the CI's ruff widened to the two
+  docker scripts, and seven structural harness locks.
+- The twelfth audit pass is filed bilingually, and a new bilingual
+  chapter 14 explains installing and configuring Claude Code, Codex
+  and Kimi Code CLI with AlirPunkto-centred examples.
+
 - The documented Docker stack now starts and proves it: compose-provided
   server overrides (bind address, trusted proxy) derived at runtime, and
   an end-to-end smoke workflow driving Apache → Waitress through a real

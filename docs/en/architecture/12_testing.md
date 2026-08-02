@@ -107,7 +107,7 @@ once derived from `setup.py`, follows `pyproject.toml` and the lock.
 Six packaging tests guard the whole arrangement, `setup.py` included in
 its absence.
 
-## Quality gates (2026-08-02): 1022 tests
+## Quality gates (2026-08-02): 1030 tests
 
 The CI no longer merely runs the suite: a second workflow
 (`quality.yml`) makes **Ruff blocking** (the Pyflakes family; `F841`
@@ -133,7 +133,11 @@ the `cryptography` floor kept. A harness lesson: never "restore" a red
 demonstration with `git checkout --` — it brings HEAD back and
 destroys uncommitted fixes; only a side copy is safe.
 
-The 0071→0078 trains brought the suite from 957 to **1022 tests**,
+The 0071→0083 trains brought the suite from 957 to **1030 tests** —
+including the seven multi-agent-harness locks
+(`test_agent_harness.py`: documented-command parity with the
+workflows, `.env.example` never blocked) and the wheel-layout `.env`
+lookup lock —,
 locking every gain with a **red demonstration** against the previous
 state: Docker startup and server overrides
 (`test_docker_startup.py`); the supply chain — three hashed locks,

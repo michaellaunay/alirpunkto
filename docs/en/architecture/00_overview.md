@@ -58,5 +58,6 @@ the converse is not true: LDAP is authoritative for identities.
 | Security | [11_security](11_security.md) |
 | Testing | [12_testing](12_testing.md) |
 | Docker deployment | [13_docker_deployment](13_docker_deployment.md) |
+| Developing with AI agents | [14_ai_agents](14_ai_agents.md) |
 | Decisions | [architecture_decisions](architecture_decisions.md) |
 | Glossary | [glossary](glossary.md) |

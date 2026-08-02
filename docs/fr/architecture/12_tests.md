@@ -113,7 +113,7 @@ jadis dérivée de `setup.py`, suit `pyproject.toml` et le verrou. Six
 tests d'empaquetage verrouillent l'ensemble, `setup.py` compris dans
 son absence.
 
-## Portes de qualité (2026-08-02) : 1022 tests
+## Portes de qualité (2026-08-02) : 1030 tests
 
 La CI ne se contente plus d'exécuter la suite : un second workflow
 (`quality.yml`) rend **Ruff bloquant** (famille Pyflakes ; `F841` en
@@ -139,7 +139,11 @@ conservé. Leçon de harnais : ne jamais « restaurer » une démonstration
 rouge par `git checkout --` — il ramène HEAD et détruit les correctifs
 non commis ; seule la copie de côté est sûre.
 
-Les trains 0071→0078 ont porté la suite de 957 à **1022 tests**, en
+Les trains 0071→0083 ont porté la suite de 957 à **1030 tests** —
+dont les sept verrous du harnais multi-agents
+(`test_agent_harness.py` : parité des commandes documentées avec les
+workflows, `.env.example` jamais bloqué) et le verrou du chargement
+`.env` sous la wheel — en
 verrouillant chaque acquis par une **démonstration rouge** sur l'état
 antérieur : démarrage Docker et overrides serveur
 (`test_docker_startup.py`) ; chaîne d'approvisionnement — trois verrous

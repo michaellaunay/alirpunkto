@@ -57,5 +57,6 @@ l'inverse n'est pas vrai : LDAP fait foi pour les identités.
 | Sécurité | [11_securite](11_securite.md) |
 | Tests | [12_tests](12_tests.md) |
 | Déploiement Docker | [13_deploiement_docker](13_deploiement_docker.md) |
+| Développer avec des agents IA | [14_agents_ia](14_agents_ia.md) |
 | Décisions | [decisions_architecture](decisions_architecture.md) |
 | Glossaire | [glossaire](glossaire.md) |

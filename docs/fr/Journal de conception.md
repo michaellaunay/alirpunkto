@@ -2797,3 +2797,28 @@ des Actions puis un premier run vert. Restent au carnet la décision de
 design sur la persistance des sanctions (attribut dédié, file de
 reprise, ou octroi membre-d'abord pour les groupes de restriction), le
 test fonctionnel de l'émetteur et le sérialiseur LDIF.
+
+## 2026-08-02 (soir) — Le harnais audité à son tour
+
+La CI activée le matin a rendu son premier verdict complet dans la
+journée : les casses réservées aux conteneurs — le `.env` que la
+wheel avait mis hors de portée de la remontée de `find_dotenv`, puis
+le contrôle d'origine CSRF que les POST de curl ne satisfaisaient pas
+— ont été reproduites au banc, corrigées d'une ligne chacune, et la
+pile construit, guérit et sert à travers Apache en CI.
+
+Le douzième passage a ensuite fait au harnais multi-agents ce que la
+série fait au reste du dépôt depuis le début : l'architecture validée
+(`AGENTS.md` lu nativement par Codex et Kimi Code CLI, importé par
+Claude Code), la configuration prise en défaut — six constats fondés,
+dont un motif `Read(./.env.*)` qui bloquait `.env.example`, la classe
+d'erreur exacte que nous traquons ailleurs, reproduite chez nous. Les
+corrections tiennent la ligne habituelle : chemins précis, les deux
+verrous installés, commandes copiées littéralement des workflows
+(la CI ruff élargie plutôt que la doc rabaissée), et sept verrous
+structurels pour que le harnais soit testé comme le reste du code.
+Un chapitre 14 bilingue explique désormais l'installation et la
+configuration des trois agents, exemples à l'appui sur ce dépôt.
+
+Reste la dernière marche nommée par l'auditeur : un smoke vert
+*observable* — ni son connecteur ni le nôtre ne l'ont encore vu.

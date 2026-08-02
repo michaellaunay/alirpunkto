@@ -465,3 +465,28 @@ first green run. On the books remain the sanction-persistence design
 decision (dedicated attribute, retry queue, or member-first grants for
 restriction groups), the functional emitter test and the LDIF
 serialiser.
+
+## 2026-08-02 (evening) — The harness audited in its turn
+
+The CI enabled in the morning delivered its first full verdict within
+the day: the container-only breaks — the `.env` the wheel had moved
+out of `find_dotenv`'s walking reach, then the CSRF origin check that
+curl's POSTs did not satisfy — were reproduced on the bench, fixed
+one line each, and the stack builds, heals and serves through Apache
+in CI.
+
+The twelfth pass then did to the multi-agent harness what the series
+has done to the rest of the repository from the start: architecture
+validated (`AGENTS.md` read natively by Codex and Kimi Code CLI,
+imported by Claude Code), configuration caught out — six founded
+findings, including a `Read(./.env.*)` pattern blocking
+`.env.example`, the exact class of mistake we hunt elsewhere,
+reproduced at home. The fixes hold the usual line: precise paths,
+both locks installed, commands copied verbatim from the workflows
+(the CI's ruff widened rather than the doc lowered), and seven
+structural locks so the harness is tested like the rest of the code.
+A bilingual chapter 14 now explains installing and configuring the
+three agents, with examples on this repository.
+
+The last step the auditor names remains: an *observable* green smoke
+— neither his connector nor ours has seen it yet.
