@@ -111,11 +111,17 @@ def test_a_dash_slot_reads_and_scrubs_the_environment(tmp_path):
     assert "GENERATE_LDIF_ADMIN_PW" not in os.environ       # scrubbed
 
 
-def test_the_init_message_no_longer_claims_cleartext_storage():
+def test_the_init_script_no_longer_touches_passwords_at_all():
+    # Sixth audit pass (§12.4): init.sh used to pre-hash with slappasswd
+    # and, without it, pushed the CLEARTEXT password onto argv. Hashing
+    # now lives in generate_ldif.py only; the passwords reach it through
+    # single-use environment variables (see tests/test_ldif_transport.py).
     script = open(os.path.join(ROOT, "docker", "init.sh"),
                   encoding="utf-8").read()
     assert "password stored in cleartext" not in script
-    assert "generate_ldif.py will hash the password itself" in script
+    assert "hash_password" not in script
+    assert "slappasswd" not in script
+    assert "GENERATE_LDIF_ADMIN_PW=" in script
 
 
 # ----------------------- D. checked group modifies ------------------------- #

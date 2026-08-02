@@ -13,6 +13,23 @@ Optional positional arguments (appended after today, empty string if absent):
   u1_second_lang u1_third_lang u1_birthdate u1_description
   u2_second_lang u2_third_lang u2_birthdate u2_description
 
+Environment slots (sixth audit pass, 2026-08-01, §12.4): a command line
+is world-readable in /proc/<pid>/cmdline for the whole life of the
+process, so nothing personal or secret may travel through argv. For any
+of the slots below the caller passes the literal "-" as the positional
+argument and provides the real value through the matching environment
+variable of THIS process only — read once and scrubbed immediately:
+
+  slot                variable
+  admin_pw            GENERATE_LDIF_ADMIN_PW      (cleartext; hashed here)
+  u1_pw / u2_pw       GENERATE_LDIF_U1_PW / _U2_PW
+  admin_email         GENERATE_LDIF_ADMIN_EMAIL
+  u1_first / u2_first GENERATE_LDIF_U1_FIRST / _U2_FIRST
+  u1_last / u2_last   GENERATE_LDIF_U1_LAST / _U2_LAST
+  u1_email / u2_email GENERATE_LDIF_U1_EMAIL / _U2_EMAIL
+  u1_birthdate / u2_… GENERATE_LDIF_U1_BIRTHDATE / _U2_BIRTHDATE
+  u1_description / …  GENERATE_LDIF_U1_DESCRIPTION / _U2_DESCRIPTION
+
 Fixes produced by this rewrite vs the previous sed/perl approach:
 - Demo users (hardcoded UUIDs) are stripped from the template entirely.
 - uniqueMember references to demo users are removed from all groups.
@@ -53,18 +70,31 @@ if len(sys.argv) < 28:
  U2_SECOND_LANG, U2_THIRD_LANG, U2_BIRTHDATE, U2_DESCRIPTION,
  ) = (sys.argv[1:] + [""] * 8)[:35]
 
-# Revised audit: a cleartext password must never travel through argv
-# (visible in the process table). The caller may pass "-" for any of the
-# three password slots and provide the value through a dedicated
-# environment variable instead — read once and scrubbed immediately.
-def _password_from_env(value, env_name):
+# Sixth audit pass (2026-08-01, §12.4): nothing personal or secret may
+# travel through argv (world-readable in /proc/<pid>/cmdline). The
+# caller passes "-" in a slot and provides the value through the
+# matching environment variable of this process — read once and
+# scrubbed immediately. An absent variable yields the empty string,
+# which optional slots already treat as "not provided".
+def _slot_from_env(value, env_name):
     if value == "-":
         return os.environ.pop(env_name, "")
     return value
 
-ADMIN_PW = _password_from_env(ADMIN_PW, "GENERATE_LDIF_ADMIN_PW")
-U1_PW = _password_from_env(U1_PW, "GENERATE_LDIF_U1_PW")
-U2_PW = _password_from_env(U2_PW, "GENERATE_LDIF_U2_PW")
+ADMIN_PW = _slot_from_env(ADMIN_PW, "GENERATE_LDIF_ADMIN_PW")
+U1_PW = _slot_from_env(U1_PW, "GENERATE_LDIF_U1_PW")
+U2_PW = _slot_from_env(U2_PW, "GENERATE_LDIF_U2_PW")
+ADMIN_EMAIL = _slot_from_env(ADMIN_EMAIL, "GENERATE_LDIF_ADMIN_EMAIL")
+U1_FIRST = _slot_from_env(U1_FIRST, "GENERATE_LDIF_U1_FIRST")
+U1_LAST = _slot_from_env(U1_LAST, "GENERATE_LDIF_U1_LAST")
+U1_EMAIL = _slot_from_env(U1_EMAIL, "GENERATE_LDIF_U1_EMAIL")
+U1_BIRTHDATE = _slot_from_env(U1_BIRTHDATE, "GENERATE_LDIF_U1_BIRTHDATE")
+U1_DESCRIPTION = _slot_from_env(U1_DESCRIPTION, "GENERATE_LDIF_U1_DESCRIPTION")
+U2_FIRST = _slot_from_env(U2_FIRST, "GENERATE_LDIF_U2_FIRST")
+U2_LAST = _slot_from_env(U2_LAST, "GENERATE_LDIF_U2_LAST")
+U2_EMAIL = _slot_from_env(U2_EMAIL, "GENERATE_LDIF_U2_EMAIL")
+U2_BIRTHDATE = _slot_from_env(U2_BIRTHDATE, "GENERATE_LDIF_U2_BIRTHDATE")
+U2_DESCRIPTION = _slot_from_env(U2_DESCRIPTION, "GENERATE_LDIF_U2_DESCRIPTION")
 
 # UUIDs of demo / placeholder users present in the template — strip them
 DEMO_UUIDS = {
@@ -78,13 +108,18 @@ ADMIN_PLACEHOLDER = "00000000-0000-0000-0000-000000000000"
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _ensure_ssha(pw: str) -> str:
-    """init.sh normally hashes with slappasswd before calling this script, but
-    its fallback path passes the password through in cleartext; guarantee here
-    that no cleartext ever lands in the generated LDIF (finding 1.3)."""
+    """Passwords reach this script in clear, through the single-use
+    environment slots (sixth audit pass: init.sh no longer pre-hashes —
+    its slappasswd fallback used to push the cleartext onto argv). They
+    are always hashed here, so no cleartext ever lands in the generated
+    LDIF (finding 1.3); an already-hashed {SCHEME} value is kept as-is."""
     if pw.startswith("{"):  # already an RFC-2307 scheme ({SSHA}, {CRYPT}, ...)
         return pw
     salt = os.urandom(8)
-    digest = hashlib.sha1(pw.encode("utf-8") + salt).digest()
+    # {SSHA} is SHA-1 by definition (OpenLDAP scheme) — same rationale
+    # as the annotated make_ldap_password in secret_manager.py.
+    digest = hashlib.sha1(
+        pw.encode("utf-8") + salt).digest()  # nosec B324
     return "{SSHA}" + base64.b64encode(digest + salt).decode("ascii")
 
 

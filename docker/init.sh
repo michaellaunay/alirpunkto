@@ -119,19 +119,6 @@ generate_uuid() {
     fi
 }
 
-hash_password() {
-    if command -v slappasswd &>/dev/null; then
-        slappasswd -s "$1"
-    else
-        # generate_ldif.py re-hashes any cleartext value to {SSHA} before
-        # it reaches the LDIF (revised audit: the old message wrongly
-        # claimed cleartext storage); slappasswd is merely preferred.
-        error "slappasswd not found — generate_ldif.py will hash the password itself." \
-              "Install package 'slapd' locally to use slappasswd instead."
-        echo "$1"
-    fi
-}
-
 # ── guard: already initialised ───────────────────────────────────────────────
 
 if [ -f "${ENV_FILE}" ]; then
@@ -196,7 +183,6 @@ ask_secret ADMIN_PASSWORD "Admin password"
 ask LDAP_ADMIN_OID "Admin OID (leave empty to use null uid)" "00000000-0000-0000-0000-000000000000"
 info "Admin UID will be: ${LDAP_ADMIN_OID}"
 ask_pseudonym ADMIN_PSEUDONYM "${ADMIN_LOGIN}"
-ADMIN_HASHED_PW="$(hash_password "${ADMIN_PASSWORD}")"
 
 # ── first user ────────────────────────────────────────────────────────────────
 
@@ -353,10 +339,6 @@ chmod 700 "${SECRETS_DIR}"
 (umask 077; printf '%s' "${LDAP_PASSWORD}" > "${SECRETS_DIR}/ldap_password")
 success "docker/secrets/ldap_password written."
 
-# ── hash passwords ────────────────────────────────────────────────────────────
-
-USER1_HASHED_PW="$(hash_password "${USER1_PASSWORD}")"
-USER2_HASHED_PW="$(hash_password "${USER2_PASSWORD}")"
 TODAY="$(date -u +"%Y-%m-%dT%H:%M:%S")"
 
 # ── generate initials_users.generated.ldif ────────────────────────────────────
@@ -371,21 +353,43 @@ if [ ! -f "${LDIF_TEMPLATE}" ]; then
     exit 1
 fi
 
-# Pass all arguments as a NUL-separated env vars to avoid word-splitting
-# on values that may contain spaces (names, passwords, etc.)
+# Sixth audit pass (§12.4): a command line is world-readable in
+# /proc/<pid>/cmdline, so nothing personal or secret goes through argv.
+# Every such slot is passed as the literal "-" and the real value is
+# handed to generate_ldif.py through its own process environment below
+# (single-use variables, read once and scrubbed by the generator).
+# Passwords travel in clear there and are hashed to {SSHA} by
+# generate_ldif.py itself — init.sh no longer pre-hashes anything, so
+# the old external hashing dependency and its cleartext-on-argv
+# fallback are gone. The bash array only prevents word-splitting of the remaining
+# non-sensitive arguments.
 GENERATE_LDIF_ARGS=(
     "${LDIF_TEMPLATE}"
     "${LDIF_OUT}"
     "${LDAP_BASE_DN}"
-    "${LDAP_ADMIN_OID}" "${ADMIN_LOGIN}" "${ADMIN_PSEUDONYM}" "${ADMIN_EMAIL}" "${ADMIN_HASHED_PW}"
-    "${USER1_UUID}" "${USER1_ROLE}" "${USER1_PSEUDONYM}" "${USER1_FIRSTNAME}" "${USER1_LASTNAME}"
-    "${USER1_LANG}" "${USER1_NATIONALITY}" "${USER1_EMAIL}" "${USER1_HASHED_PW}"
-    "${USER2_UUID}" "${USER2_ROLE}" "${USER2_PSEUDONYM}" "${USER2_FIRSTNAME}" "${USER2_LASTNAME}"
-    "${USER2_LANG}" "${USER2_NATIONALITY}" "${USER2_EMAIL}" "${USER2_HASHED_PW}"
+    "${LDAP_ADMIN_OID}" "${ADMIN_LOGIN}" "${ADMIN_PSEUDONYM}" "-" "-"
+    "${USER1_UUID}" "${USER1_ROLE}" "${USER1_PSEUDONYM}" "-" "-"
+    "${USER1_LANG}" "${USER1_NATIONALITY}" "-" "-"
+    "${USER2_UUID}" "${USER2_ROLE}" "${USER2_PSEUDONYM}" "-" "-"
+    "${USER2_LANG}" "${USER2_NATIONALITY}" "-" "-"
     "${TODAY}"
-    "${USER1_SECOND_LANG}" "${USER1_THIRD_LANG}" "${USER1_BIRTHDATE}" "${USER1_DESCRIPTION}"
-    "${USER2_SECOND_LANG}" "${USER2_THIRD_LANG}" "${USER2_BIRTHDATE}" "${USER2_DESCRIPTION}"
+    "${USER1_SECOND_LANG}" "${USER1_THIRD_LANG}" "-" "-"
+    "${USER2_SECOND_LANG}" "${USER2_THIRD_LANG}" "-" "-"
 )
+GENERATE_LDIF_ADMIN_PW="${ADMIN_PASSWORD}" \
+GENERATE_LDIF_U1_PW="${USER1_PASSWORD}" \
+GENERATE_LDIF_U2_PW="${USER2_PASSWORD}" \
+GENERATE_LDIF_ADMIN_EMAIL="${ADMIN_EMAIL}" \
+GENERATE_LDIF_U1_FIRST="${USER1_FIRSTNAME}" \
+GENERATE_LDIF_U1_LAST="${USER1_LASTNAME}" \
+GENERATE_LDIF_U1_EMAIL="${USER1_EMAIL}" \
+GENERATE_LDIF_U1_BIRTHDATE="${USER1_BIRTHDATE}" \
+GENERATE_LDIF_U1_DESCRIPTION="${USER1_DESCRIPTION}" \
+GENERATE_LDIF_U2_FIRST="${USER2_FIRSTNAME}" \
+GENERATE_LDIF_U2_LAST="${USER2_LASTNAME}" \
+GENERATE_LDIF_U2_EMAIL="${USER2_EMAIL}" \
+GENERATE_LDIF_U2_BIRTHDATE="${USER2_BIRTHDATE}" \
+GENERATE_LDIF_U2_DESCRIPTION="${USER2_DESCRIPTION}" \
 python3 "${DOCKER_DIR}/generate_ldif.py" "${GENERATE_LDIF_ARGS[@]}"
 
 success "docker/initials_users.generated.ldif written."

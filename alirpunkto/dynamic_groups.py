@@ -153,11 +153,22 @@ def compute_target_groups(
 
 def sync_member_groups(request, member_oid, *, today=None,
                        force_sanctioned=None):
-    """Read the member's LDAP entry, compute the target groups and apply
-    the difference on both sides of the relation (the ``uniqueMemberOf``
-    attribute of the member and the ``uniqueMember`` attribute of each
-    group entry). Idempotent; returns the target set, or None if out of
-    scope or on failure."""
+    """Read BOTH sides of the relation, compute the target groups and
+    converge each side onto them independently.
+
+    Sixth audit pass (2026-08-01, §12.3): the two sides — the member's
+    ``uniqueMemberOf`` and each group's ``uniqueMember`` — used to
+    receive one shared diff computed from the member side alone, so a
+    half-applied write (one side updated, the other not) persisted
+    forever: the missing half was invisible to the next run. Each side
+    now gets its own diff toward the same target, which makes any
+    divergence self-heal on the next pass, whichever side lagged; a
+    detected divergence is logged before being repaired. Grants touch
+    the group side first and the member side last, revocations the
+    member side first — the application reads the member side, so a
+    permission only appears once both sides carry it, and disappears
+    immediately (fail closed). Idempotent; returns the target set, or
+    None if out of scope or on failure."""
     dn = member_dn(member_oid)
     try:
         with get_ldap_connection(ldap_user=LDAP_USER,
@@ -182,10 +193,19 @@ def sync_member_groups(request, member_oid, *, today=None,
             end = _parse_ldap_date(
                 entry.dateEndValidityYearlyContribution.value
                 if 'dateEndValidityYearlyContribution' in entry else None)
-            current = _names_from_dns(
+            member_side = _names_from_dns(
                 entry.uniqueMemberOf.values
                 if 'uniqueMemberOf' in entry else ())
+            group_side = _group_side_groups(conn, dn)
+            if (member_side & set(MANAGED_GROUPS)) != group_side:
+                log.warning(
+                    f"sync_member_groups: {member_oid} sides diverged "
+                    f"(member side {sorted(member_side & set(MANAGED_GROUPS))}, "
+                    f"group side {sorted(group_side)}); repairing both")
 
+            # The truth table sees the union: a membership recorded on
+            # either side counts as current for transition purposes.
+            current = member_side | group_side
             target = compute_target_groups(
                 employee_type, is_active, shares, end,
                 current & set(MANAGED_GROUPS), today,
@@ -194,8 +214,11 @@ def sync_member_groups(request, member_oid, *, today=None,
                 return None
             target &= set(MANAGED_GROUPS) - {LEGACY_ORDINARY}
 
-            to_add = target - current
-            to_remove = (current & set(MANAGED_GROUPS)) - target
+            # Per-side convergence (§12.3): each side gets its own diff.
+            group_add = target - group_side
+            group_del = group_side - target
+            member_add = target - member_side
+            member_del = (member_side & set(MANAGED_GROUPS)) - target
 
             def _checked_modify(target_dn, changes, op_id):
                 # Revised audit: half-applied membership used to fail
@@ -213,23 +236,28 @@ def sync_member_groups(request, member_oid, *, today=None,
                               f"{getattr(conn, 'result', None)}")
                 return bool(ok)
 
-            for name in sorted(to_add):
+            for name in sorted(group_add):
                 _checked_modify(group_dn(name),
                                 {'uniqueMember': [(MODIFY_ADD, [dn])]},
                                 f"{member_oid} +{name} (group side)")
+            for name in sorted(member_add):
                 _checked_modify(dn, {'uniqueMemberOf': [
                     (MODIFY_ADD, [group_dn(name)])]},
                     f"{member_oid} +{name} (member side)")
-            for name in sorted(to_remove):
-                _checked_modify(group_dn(name),
-                                {'uniqueMember': [(MODIFY_DELETE, [dn])]},
-                                f"{member_oid} -{name} (group side)")
+            for name in sorted(member_del):
                 _checked_modify(dn, {'uniqueMemberOf': [
                     (MODIFY_DELETE, [group_dn(name)])]},
                     f"{member_oid} -{name} (member side)")
-            if to_add or to_remove:
-                log.info(f"sync_member_groups: {member_oid} "
-                         f"+{sorted(to_add)} -{sorted(to_remove)}")
+            for name in sorted(group_del):
+                _checked_modify(group_dn(name),
+                                {'uniqueMember': [(MODIFY_DELETE, [dn])]},
+                                f"{member_oid} -{name} (group side)")
+            if group_add or group_del or member_add or member_del:
+                log.info(
+                    f"sync_member_groups: {member_oid} "
+                    f"group side +{sorted(group_add)} -{sorted(group_del)}, "
+                    f"member side +{sorted(member_add)} "
+                    f"-{sorted(member_del)}")
             return target
     except Exception as e:
         # Best effort by design: the group synchronisation must never break
@@ -238,18 +266,46 @@ def sync_member_groups(request, member_oid, *, today=None,
         return None
 
 
+def _group_side_groups(conn, dn):
+    """The managed groups whose ``uniqueMember`` lists ``dn`` — the group
+    side of the relation, read independently of the member side
+    (sixth audit pass, §12.3)."""
+    names = set()
+    for name in MANAGED_GROUPS:
+        try:
+            conn.search(group_dn(name), '(objectClass=*)',
+                        search_scope='BASE',
+                        attributes=['uniqueMember'])
+        except Exception as exc:
+            log.warning(
+                f"sync_member_groups: cannot read the group side of "
+                f"{name}: {exc}")
+            continue
+        if not conn.entries:
+            continue
+        values = (conn.entries[0].uniqueMember.values
+                  if 'uniqueMember' in conn.entries[0] else ())
+        if dn in {str(value) for value in values}:
+            names.add(name)
+    return names
+
+
 def daily_group_scan(request, today=None):
     """The daily scan of the ticket: calendar time (an expired or renewed
-    yearly contribution) becomes transitions. Scans every member of the
-    managed groups and re-synchronises them; meant for a periodic caller
-    (cron / console script), alongside purge_unsubscribed_members. Returns
-    the oids whose groups changed."""
+    yearly contribution) becomes transitions. Scans every member found on
+    EITHER side of the managed relations — a member recorded only in a
+    group's ``uniqueMember``, or only in their own ``uniqueMemberOf``
+    (a half-applied write), is discovered and repaired too (sixth audit
+    pass, §12.3). Re-synchronises each of them; meant for a periodic
+    caller (cron / console script), alongside purge_unsubscribed_members.
+    Returns the oids whose groups changed."""
     changed = []
     seen = set()
     try:
         with get_ldap_connection(ldap_user=LDAP_USER,
                 ldap_password=get_secret(LDAP_PASSWORD)) as conn:
             _collect_group_members(conn, seen)
+            _collect_member_side_members(conn, seen)
     except Exception as e:
         log.error(f"daily_group_scan: cannot read the groups: {e}")
         return changed
@@ -277,6 +333,27 @@ def _collect_group_members(conn, seen):
             value = str(value)
             if value.startswith('uid='):
                 seen.add(value[4:].split(',', 1)[0])
+
+def _collect_member_side_members(conn, seen):
+    """Members whose own ``uniqueMemberOf`` names a managed group — the
+    member side of the relation. Filtering is done client-side so the
+    scan works against directories (and the test mock) regardless of
+    their support for extensible matching on DN-valued attributes."""
+    try:
+        conn.search(LDAP_BASE_DN, '(objectClass=*)',
+                    attributes=['uid', 'uniqueMemberOf'])
+    except Exception as e:
+        log.warning(f"daily_group_scan: cannot read the member side: {e}")
+        return
+    managed_dns = {group_dn(name) for name in MANAGED_GROUPS}
+    for entry in conn.entries:
+        values = (entry.uniqueMemberOf.values
+                  if 'uniqueMemberOf' in entry else ())
+        if not managed_dns & {str(value) for value in values}:
+            continue
+        if 'uid' in entry and entry.uid.value:
+            seen.add(str(entry.uid.value))
+
 
 def get_member_groups(member_oid):
     """The managed dynamic groups a member belongs to (issue #55: shown,
