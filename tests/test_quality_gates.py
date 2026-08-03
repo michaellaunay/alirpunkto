@@ -34,7 +34,7 @@ def test_the_coverage_ratchet_is_armed():
 
 
 def test_every_action_is_pinned_by_commit_sha():
-    for name in ("tests.yml", "quality.yml", "smoke.yml"):
+    for name in ("tests.yml", "quality.yml", "smoke.yml", "test-stack.yml"):
         workflow = _read(".github", "workflows", name)
         for line in workflow.splitlines():
             if "uses:" in line:

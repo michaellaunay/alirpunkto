@@ -1,0 +1,3 @@
+# End-to-end browser checks against the local test stack.
+# Regenerate: pip-compile --generate-hashes --allow-unsafe --strip-extras -o requirements-e2e.lock requirements-e2e.in
+playwright

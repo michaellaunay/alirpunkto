@@ -1,0 +1,84 @@
+# Build and boot the LOCAL TEST stack exactly the way a developer
+# does — docker/init_test.sh untouched — then validate it through a
+# real browser and publish the screenshots as artifacts.
+#
+# Eleventh pass P1 items 3-4 (run init_test.sh in a clean
+# environment, actually start the test stack) and twelfth pass P2:
+# this is the foundation of the illustrated user manual — every green
+# run leaves reproducible screenshots of the validated journeys.
+name: test-stack
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: test-stack-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-stack:
+    name: test stack + browser validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      COMPOSE_CMD: docker compose --env-file docker/.env.test -f docker/test-docker-compose.yaml
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+
+      # Dogfood: the very script a developer runs, no flags, all
+      # defaults (alirpunkto.localhost, alice.test / bob.test).
+      - name: Prepare the test stack configuration with init_test.sh
+        run: bash docker/init_test.sh
+
+      - name: Validate the compose file with the real parser
+        run: ${{ env.COMPOSE_CMD }} config --quiet
+
+      - name: Build the test images
+        run: ${{ env.COMPOSE_CMD }} build
+
+      - name: Start the test stack and wait for the healthchecks
+        run: ${{ env.COMPOSE_CMD }} up -d --wait --wait-timeout 300
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the browser harness from the hashed lock
+        run: |
+          set -euo pipefail
+          python -m venv /tmp/e2e-venv
+          /tmp/e2e-venv/bin/pip install --require-hashes -r requirements-e2e.lock
+          /tmp/e2e-venv/bin/playwright install --with-deps chromium
+
+      - name: Log in through the browser and capture the screens
+        env:
+          E2E_SHOT_DIR: /tmp/e2e-shots
+        run: |
+          set -euo pipefail
+          # *.localhost resolves to loopback in Chromium, but pin it
+          # for every resolver on the runner as well.
+          echo "127.0.0.1 alirpunkto.localhost" | sudo tee -a /etc/hosts
+          /tmp/e2e-venv/bin/python tools/e2e_login_capture.py
+
+      - name: Publish the screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        with:
+          name: e2e-screenshots
+          path: /tmp/e2e-shots/
+          if-no-files-found: ignore
+
+      - name: Compose diagnostics
+        if: failure()
+        run: |
+          ${{ env.COMPOSE_CMD }} ps || true
+          for service in ldap postfix pyramid apache2; do
+            echo "=== logs: ${service} ==="
+            ${{ env.COMPOSE_CMD }} logs --tail 200 "${service}" || true
+          done
+
+      - name: Tear down
+        if: always()
+        run: ${{ env.COMPOSE_CMD }} down -v --remove-orphans || true
