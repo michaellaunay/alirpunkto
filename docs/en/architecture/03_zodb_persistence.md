@@ -50,3 +50,36 @@ is described in `docker/README.md` ("Repopulating the ZODB").
   time.
 - Refused or stale candidatures stay in the store; no automatic purge
   exists (see [09_periodic_tasks](09_periodic_tasks.md)).
+
+## Schema versioning and upgrade steps (2026-08-04)
+
+The LDAP directory is the source of truth for members; the ZODB
+carries the application state around it (candidatures, workflows,
+member data). Since train 0087 the database is **versioned**:
+`app_root.schema_version` (0 for a pre-versioning database) against
+the code's `SCHEMA_VERSION`, and every persisted-structure change
+travels as an explicit **upgrade step** in `alirpunkto/upgrades.py`
+— idempotent (replayable after a conflict), one per change, in the
+spirit of GenericSetup's upgrade steps reduced to the essentials.
+
+Two runners share the registry: the **lazy** one in `root_factory`
+(an integer comparison per request; the first request after an
+upgrade migrates inside its own transaction, replayed by
+pyramid_retry on conflict) and the **explicit**
+`tools/run_upgrades.py` to migrate with the application stopped —
+recommended in production. The ZODB file lock guarantees
+exclusivity.
+
+The production deployment pinned at `e6603d22` needs **no data
+step** to reach version 1: the changes since (the resignation flow)
+extend the vocabulary without touching stored objects; step 1 only
+stamps the database.
+
+**The strong path** — maintainer's decision of 2026-08-04: wipe the
+ZODB and rebuild it from LDAP, accepting the loss of pending
+candidatures (overwhelmingly spam that never solved the registration
+challenge). `tools/rebuild_zodb_from_ldap.py` implements it by
+reusing the application's own factory (`update_member_from_ldap`,
+which creates or refreshes): idempotent, it resynchronises a live
+database or rebuilds a fresh one; the full wipe procedure heads the
+script.

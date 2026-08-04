@@ -10,6 +10,7 @@ from pyramid.events import NewRequest, subscriber
 from pyramid_mailer.mailer import Mailer
 
 from .models import appmaker
+from .upgrades import SCHEMA_VERSION, run_pending_upgrades
 from .models.member import Members
 from pyramid.session import SignedCookieSessionFactory
 import deform
@@ -168,6 +169,12 @@ def root_factory(request):
     conn = get_connection(request)
     root = appmaker(conn.root())
     Members.get_instance(connection=conn)
+    # Lazy data-schema migration (alirpunkto/upgrades.py): an int
+    # comparison per request; the first request after an upgrade runs
+    # the pending steps inside its own transaction (pyramid_retry
+    # replays on conflict — steps are idempotent by contract).
+    if getattr(root, "schema_version", 0) < SCHEMA_VERSION:
+        run_pending_upgrades(root)
     return root
 
 

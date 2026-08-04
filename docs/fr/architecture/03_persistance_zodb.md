@@ -51,3 +51,37 @@ est décrite dans `docker/README.md` (« Repopulating the ZODB »).
   temps.
 - Les candidatures refusées ou périmées restent en base ; aucune purge
   automatique n'existe (voir [09_taches_periodiques](09_taches_periodiques.md)).
+
+## Versionnage du schéma et étapes de migration (2026-08-04)
+
+L'annuaire LDAP est la source de vérité des membres ; la ZODB porte
+l'état applicatif autour (candidatures, workflows, données membres).
+Depuis le train 0087, la base est **versionnée** :
+`app_root.schema_version` (0 pour une base d'avant le versionnage)
+face à `SCHEMA_VERSION` attendu par le code, et chaque changement de
+structure persistée voyage comme une **étape de migration**
+explicite dans `alirpunkto/upgrades.py` — idempotente (rejouable
+après un conflit), une par changement, dans l'esprit des upgrade
+steps de GenericSetup ramené à l'essentiel.
+
+Deux exécuteurs partagent le registre : le **paresseux** de
+`root_factory` (une comparaison d'entiers par requête ; la première
+requête après une mise à jour migre dans sa propre transaction,
+rejouée par pyramid_retry en cas de conflit) et l'**explicite**
+`tools/run_upgrades.py` pour migrer application arrêtée — recommandé
+en production. Le verrou de fichier ZODB garantit l'exclusivité.
+
+La production épinglée à `e6603d22` n'exige **aucune étape de
+données** pour atteindre la version 1 : les évolutions depuis (flux
+de démission) étendent le vocabulaire sans toucher aux objets
+stockés ; l'étape 1 ne fait qu'estampiller.
+
+**La voie forte** — décision du mainteneur du 2026-08-04 :
+suppression de la ZODB et reconstruction depuis le LDAP, en
+acceptant la perte des candidatures en attente (à l'écrasante
+majorité des spams n'ayant jamais résolu le défi d'inscription).
+`tools/rebuild_zodb_from_ldap.py` outille cette voie en réutilisant
+la fabrique de l'application (`update_member_from_ldap`, qui crée ou
+rafraîchit) : idempotent, il resynchronise une base vivante ou
+reconstruit une base neuve ; la procédure de wipe complète est en
+tête du script.
