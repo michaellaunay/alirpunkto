@@ -6,7 +6,7 @@
                 <p tal:content="_('upgrade_identity_intro')">Explanation</p>
                 <p>
                     <span tal:content="_('your_pseudonym_label')">Your pseudonym:</span>
-                    <strong tal:content="member/pseudonym">pseudonym</strong>
+                    <strong tal:content="python: member.pseudonym">pseudonym</strong>
                 </p>
             </div>
             <div tal:condition="error" class="error-message" tal:content="error">Error</div>

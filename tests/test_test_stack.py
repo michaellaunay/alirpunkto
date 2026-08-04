@@ -62,6 +62,11 @@ def test_the_e2e_lock_pins_playwright_with_hashes():
 
 def test_the_capture_script_is_wired_and_compiles():
     assert "tools/e2e_login_capture.py" in _workflow()
+    script = _read("tools", "e2e_login_capture.py")
+    # The journey must cover the member profile — the page whose
+    # panels shipped broken and were first caught by the client.
+    assert "/modify_member" in script
+    assert "04_modify_member.png" in script
     py_compile.compile(
         os.path.join(ROOT, "tools", "e2e_login_capture.py"), doraise=True
     )
