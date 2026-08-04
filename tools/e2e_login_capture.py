@@ -72,6 +72,19 @@ def main() -> int:
             shot(page, "99_failure.png")
             return 1
         shot(page, "03_logged_in_home.png")
+
+        # The member profile — the page whose issue-#55/#149 panels
+        # shipped with Zope-path expressions this engine cannot run
+        # (NameError: groups, first found by the client on the live
+        # test server). A real visit keeps it renderable.
+        page.goto(f"{BASE_URL}/modify_member", wait_until="load")
+        content = page.content()
+        if "Internal Server Error" in content or USERNAME not in content:
+            print(f"[e2e] FAIL: /modify_member did not render (url={page.url})")
+            shot(page, "99_failure.png")
+            return 1
+        shot(page, "04_modify_member.png")
+
         print(f"[e2e] PASS: authenticated as {USERNAME} at {page.url}")
         browser.close()
     return 0
