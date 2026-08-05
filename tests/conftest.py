@@ -11,6 +11,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
+import os
 import pytest
 import transaction
 import webtest
@@ -199,3 +200,17 @@ def dummy_config(dummy_request):
 @pytest.fixture
 def anonymous_user():
     return SimpleNamespace(name="anonymous", email="anonymous@example.com", oid="anonymous")
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _ensure_var_directory():
+    """The functional tests boot the app through testing.ini, whose
+    ZODB URI lives under var/ (Data.testing.fs) — zc.lockfile dies
+    with FileNotFoundError when the directory is missing. On a
+    pristine clone var/ does not exist: the suite must provide its
+    own prerequisites instead of relying on a documented manual
+    ``mkdir -p var`` (the six phantom errors of 2026-08-04 were
+    exactly this, striking whenever the directory had been cleaned
+    between runs)."""
+    os.makedirs(os.path.join(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__))), "var"), exist_ok=True)

@@ -17,13 +17,19 @@ def _request():
 
 
 def test_store_sso_tokens_encrypts_the_refresh_token_at_rest():
+    # The plaintext witness must be IMPROBABLE inside random base64:
+    # the original 2-char witness ("RT") appeared by chance in ~2.7%
+    # of ciphertexts (8/300 measured) and finally tripped the CI on
+    # 2026-08-04 (Python 3.12 job, matrix twin green — pure dice).
+    # 32 distinctive characters cannot occur fortuitously.
+    token = "refresh-token-plaintext-sentinel"
     request = _request()
     utils.store_sso_tokens(
-        request, {"refresh_token": "RT", "refresh_expires_in": 300})
+        request, {"refresh_token": token, "refresh_expires_in": 300})
     stored = request.session[SSO_REFRESH]
-    assert stored != "RT"
-    assert "RT" not in stored
-    assert utils.load_sso_refresh_token(request) == "RT"
+    assert stored != token
+    assert token not in stored
+    assert utils.load_sso_refresh_token(request) == token
     assert SSO_EXPIRES_AT in request.session
 
 
