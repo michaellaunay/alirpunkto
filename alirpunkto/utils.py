@@ -1412,8 +1412,16 @@ def register_user_to_ldap(request, candidature, password):
                 'employeeType': candidature.type.name, # Use the type as employeeType,
                 # Use the fullsurname as sn
                 "isActive": "True",
-                "preferredLanguage" : candidature.data.lang1,
             }
+            # preferredLanguage is optional in the schema and must be
+            # guarded like lang2/lang3 below: an ORDINARY candidature
+            # never sets lang1, and ldap3 refuses a None attribute
+            # ("Unable to convert type NoneType to unicode") — the
+            # whole add failed and no ordinary member could ever be
+            # created through the registration flow (found by the
+            # manual-producing scenarios, run 84826165979).
+            if getattr(candidature.data, 'lang1', None) not in (None, ''):
+                attributes['preferredLanguage'] = candidature.data.lang1
             if hasattr(candidature.data, 'lang2') and candidature.data.lang2 not in (None, ''):
                 attributes['secondLanguage'] = candidature.data.lang2
             if hasattr(candidature.data, 'lang3') and candidature.data.lang3 not in (None, ''):
@@ -1458,7 +1466,11 @@ def register_user_to_ldap(request, candidature, password):
             attributes['uniqueMemberOf'] = groups
         safe_attributes = {k: v for k, v in attributes.items() if k != 'userPassword'}
         log.debug(f"LDAP Add {dn=}, {safe_attributes=}, userPassword={encrypt_secret_for_logs(password)}")
-        # Add the new user to LDAP
+        # Add the new user to LDAP. Belt over the guards above: ldap3
+        # dies on any None value, so strip empty attributes whatever
+        # future field forgets its guard.
+        attributes = {k: v for k, v in attributes.items()
+                      if v is not None and v != ""}
         try:
             success = conn.add(dn, attributes=attributes)
             if success:

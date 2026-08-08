@@ -92,6 +92,14 @@ def run_ordinary(browser):
     page.fill('input[name="password"]', "DoraTest123!")
     page.fill('input[name="password_confirm"]', "DoraTest123!")
     _submit(page)
+    if page.locator('input[name="password"]').count():
+        # The identity form is still on screen: the submission was
+        # refused (this is how the lang1 LDAP bug surfaced) — fail
+        # loudly with the evidence.
+        scenario.step(page, "identity_submit_failed",
+                      "ÉCHEC : la création du compte a été refusée.",
+                      "FAILURE: the account creation was refused.")
+        raise AssertionError("identity submission refused")
     scenario.step(page, "approved",
                   "Le compte de membre ordinaire est créé et approuvé "
                   "immédiatement.",

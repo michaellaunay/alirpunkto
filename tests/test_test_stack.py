@@ -148,3 +148,17 @@ def test_the_identity_screen_is_driven_by_its_real_widgets():
     assert "nationality" not in scenario.replace(
         "nationality is NOT on this", "").replace(
         "later profile steps", "")
+
+
+def test_the_ldap_add_strips_empty_attributes():
+    """Run 84826165979: an ORDINARY candidature carries lang1=None
+    and ldap3 refuses None values — no ordinary member could ever be
+    created. preferredLanguage is guarded like its siblings and a
+    belt strips empty attributes right before conn.add."""
+    utils = _read("alirpunkto", "utils.py")
+    assert "if getattr(candidature.data, 'lang1', None) not in (None, '')" in utils
+    belt = "attributes = {k: v for k, v in attributes.items()"
+    assert belt in utils
+    assert utils.index(belt) < utils.index("success = conn.add(dn, attributes=attributes)")
+    scenario = _read("tools", "e2e_scenarios", "scenario_registration.py")
+    assert "identity submission refused" in scenario
