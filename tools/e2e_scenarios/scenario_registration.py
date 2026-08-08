@@ -33,6 +33,14 @@ def _begin(page, scenario, email, member_type, type_fr, type_en):
                   "Form filled — the application is about to be created.")
     page.click('input[type="submit"]')
     page.wait_for_load_state("load")
+    if page.locator('input[name="result_A"]').count() != 1:
+        # The page did NOT reach the challenge state (e.g. the
+        # e-mail could not be sent) — fail loudly with the evidence
+        # instead of captioning an error screen as a success.
+        scenario.step(page, "draft_submit_failed",
+                      "ÉCHEC : l'écran du défi ne s'est pas affiché.",
+                      "FAILURE: the challenge screen did not appear.")
+        raise AssertionError("challenge form not shown after the draft submit")
     scenario.step(page, "challenge_sent",
                   "Un e-mail contenant quatre défis mathématiques écrits "
                   "en toutes lettres vous a été envoyé.",

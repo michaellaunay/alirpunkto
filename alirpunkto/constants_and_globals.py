@@ -177,7 +177,7 @@ def get_locales():
     """
     dir_ = os.listdir(os.path.join(os.path.dirname(__file__),
                                    '.', 'locale'))
-    return list(filter(lambda x: not x.endswith('.pot'), dir_)) + ['en']
+    return list(filter(lambda x: not x.endswith('.pot'), dir_)) or ['en']
 
 AVAILABLE_LANGUAGES: Final = get_locales()
 

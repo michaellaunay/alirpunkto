@@ -61,19 +61,6 @@ postconf -e "myhostname = ${POSTFIX_MYHOSTNAME}"
 postconf -e "mydomain = ${DOMAIN}"
 postconf -e "myorigin = ${DOMAIN}"
 postconf -e "mydestination = localhost"
-
-# Test-stack capture mode (POSTFIX_LOCAL_CAPTURE=1, set only by
-# docker/test-docker-compose.yaml): deliver every message addressed
-# to ${DOMAIN} into the local mailbox of the "catchall" user instead
-# of relaying it — the e2e scenarios read the challenge e-mails from
-# /var/mail/catchall. Unknown local users all land there too
-# (luser_relay with an empty local_recipient_maps).
-if [ "${POSTFIX_LOCAL_CAPTURE:-0}" = "1" ]; then
-    id catchall >/dev/null 2>&1 || useradd -m catchall
-    postconf -e "mydestination = localhost, ${DOMAIN}"
-    postconf -e "luser_relay = catchall"
-    postconf -e "local_recipient_maps ="
-fi
 postconf -e "relay_domains = ${DOMAIN}"
 postconf -e "inet_interfaces = all"
 postconf -e "inet_protocols = ${POSTFIX_INET_PROTOCOLS}"

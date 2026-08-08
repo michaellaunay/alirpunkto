@@ -16,7 +16,12 @@ import sys
 
 
 def build(shot_dir: str, out_dir: str) -> list:
-    with open(os.path.join(shot_dir, "manifest.json"),
+    manifest_path = os.path.join(shot_dir, "manifest.json")
+    if not os.path.exists(manifest_path):
+        print("[manual] no manifest.json — no scenario completed, "
+              "nothing to build")
+        return []
+    with open(manifest_path,
               encoding="utf-8") as handle:
         manifest = json.load(handle)
     written = []

@@ -85,18 +85,26 @@ def fetch_email(recipient: str, timeout: int = 60) -> str:
     The transport is pluggable through E2E_MAIL_CMD (a shell command
     printing the raw mailbox); the default reads the test stack's
     postfix container mailboxes. Retries until ``timeout``."""
+    root = os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__))))
     command = os.environ.get(
         "E2E_MAIL_CMD",
-        "docker compose --env-file docker/.env.test "
-        "-f docker/test-docker-compose.yaml exec -T postfix "
+        f"docker compose --env-file {root}/docker/.env.test "
+        f"-f {root}/docker/test-docker-compose.yaml exec -T postfix "
         "sh -c 'cat /var/mail/catchall 2>/dev/null'",
     )
     deadline = time.time() + timeout
     last = ""
+    attempts = 0
     while time.time() < deadline:
-        raw = subprocess.run(  # nosec B602 — operator-provided command
+        result = subprocess.run(  # nosec B602 — operator-provided command
             command, shell=True, capture_output=True, text=True
-        ).stdout
+        )
+        if result.returncode != 0 and attempts == 0:
+            print(f"[fetch_email] command failed (rc={result.returncode}): "
+                  f"{result.stderr.strip()[:200]}")
+        attempts += 1
+        raw = result.stdout
         if recipient.split("@")[0] in raw:
             import email as email_lib
             import email.policy

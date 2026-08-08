@@ -101,10 +101,18 @@ def test_the_test_postfix_captures_mail_locally():
     start script implements it (catchall mailbox, luser_relay)."""
     compose = _read("docker", "test-docker-compose.yaml")
     assert 'POSTFIX_LOCAL_CAPTURE: "1"' in compose
-    script = _read("docker", "start_postfix.sh")
+    # The capture lives in the TEST entrypoint (the container runs
+    # start_test_postfix.sh, not the production script — the 0091
+    # block sat in the wrong file and was never executed).
+    script = _read("docker", "start_test_postfix.sh")
     assert "POSTFIX_LOCAL_CAPTURE" in script
     assert "luser_relay = catchall" in script
     assert "local_recipient_maps =" in script
+    assert "maillog_file = /dev/stdout" in script
+    # Outbound mail stays discarded even in capture mode.
+    assert script.count('"default_transport = discard:"') == 2
+    prod = _read("docker", "start_postfix.sh")
+    assert "POSTFIX_LOCAL_CAPTURE" not in prod
     framework = _read("tools", "e2e_scenarios", "framework.py")
     assert "/var/mail/catchall" in framework
 
@@ -115,3 +123,12 @@ def test_the_scenarios_drive_the_choice_select():
     scenario = _read("tools", "e2e_scenarios", "scenario_registration.py")
     assert "select_option" in scenario
     assert "page.check(" not in scenario
+
+
+def test_the_draft_submit_is_verified_before_captioning():
+    """Run 84781541914: the 'challenge_sent' caption immortalised an
+    e-mail-send failure. The scenario now asserts the challenge form
+    is on screen before captioning success."""
+    scenario = _read("tools", "e2e_scenarios", "scenario_registration.py")
+    assert "challenge form not shown" in scenario
+    assert "draft_submit_failed" in scenario

@@ -39,7 +39,23 @@ postconf -e "smtp_host_lookup = native"
 postconf -e "disable_dns_lookups = yes"
 postconf -e "ignore_mx_lookup_error = yes"
 
-if [ "${POSTFIX_DISABLE_EXTERNAL_DELIVERY}" = "true" ]; then
+# Mail log on stdout so `docker logs` shows deliveries (postfix >= 3.4).
+postconf -e "maillog_file = /dev/stdout"
+
+if [ "${POSTFIX_LOCAL_CAPTURE:-0}" = "1" ]; then
+    # Capture mode (set by docker/test-docker-compose.yaml): KEEP the
+    # test domain's mail in the local catchall mailbox — the e2e
+    # scenarios read the challenge e-mails from /var/mail/catchall —
+    # while everything addressed outside the stack is still
+    # discarded. Local recipients all resolve to catchall
+    # (luser_relay with an empty local_recipient_maps).
+    id catchall >/dev/null 2>&1 || useradd -m catchall
+    postconf -M "discard/unix=discard   unix  -       -       n       -       -       discard"
+    postconf -e "default_transport = discard:"
+    postconf -e "relay_transport = discard:"
+    postconf -e "luser_relay = catchall"
+    postconf -e "local_recipient_maps ="
+elif [ "${POSTFIX_DISABLE_EXTERNAL_DELIVERY}" = "true" ]; then
     # Accept messages from Pyramid, then discard them locally.
     # This validates the SMTP path without sending anything to the Internet.
     postconf -M "discard/unix=discard   unix  -       -       n       -       -       discard"
