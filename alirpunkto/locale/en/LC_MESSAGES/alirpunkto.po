@@ -1208,7 +1208,7 @@ msgid "deactivate_account_link"
 msgstr "Deactivate my account"
 
 msgid "unsubscribe_intro"
-msgstr "You are about to ask the deactivation of your account. Please read the implications below before confirming."
+msgstr "You are about to request the deactivation of your account. Please read the implications below before confirming."
 
 msgid "unsubscribe_implication_no_login"
 msgstr "You will not be able to log in to this platform nor to the connected applications any more."
@@ -1220,7 +1220,7 @@ msgid "unsubscribe_implication_confirmation_link"
 msgstr "Nothing happens until you follow the confirmation link that will be sent to your e-mail address."
 
 msgid "unsubscribe_request_button"
-msgstr "Ask the deactivation of my account"
+msgstr "Request the deactivation of my account"
 
 msgid "unsubscribe_pending_message"
 msgstr "Your deactivation request is pending: follow the link sent to your e-mail address to confirm it, or cancel it below."
