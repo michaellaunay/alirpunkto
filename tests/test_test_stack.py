@@ -136,3 +136,15 @@ def test_the_draft_submit_is_verified_before_captioning():
     scenario = _read("tools", "e2e_scenarios", "scenario_registration.py")
     assert "challenge form not shown" in scenario
     assert "draft_submit_failed" in scenario
+
+
+def test_the_identity_screen_is_driven_by_its_real_widgets():
+    """Run 84789315715: the identity screen is a deform form — its
+    submit is <button id=deformsubmit>, its birth-date field is named
+    "date", and nationality is not on it."""
+    scenario = _read("tools", "e2e_scenarios", "scenario_registration.py")
+    assert 'button[type="submit"], input[type="submit"]' in scenario
+    assert 'input[name="date"]' in scenario
+    assert "nationality" not in scenario.replace(
+        "nationality is NOT on this", "").replace(
+        "later profile steps", "")

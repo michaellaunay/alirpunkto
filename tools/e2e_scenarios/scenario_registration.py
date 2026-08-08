@@ -15,6 +15,17 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from framework import Scenario, fetch_email, solve_all_challenges  # noqa: E402
 
+SUBMIT = 'button[type="submit"], input[type="submit"]'
+
+
+def _submit(page):
+    """Click the screen's single submit — the register template uses
+    <input type=submit>, the deform identity form renders
+    <button id=deformsubmit type=submit> (run 84789315715)."""
+    page.click(SUBMIT)
+    page.wait_for_load_state("load")
+
+
 BASE_URL = os.environ.get("E2E_BASE_URL", "https://alirpunkto.localhost:8443")
 LANG = os.environ.get("E2E_LANG", "en")
 
@@ -31,8 +42,7 @@ def _begin(page, scenario, email, member_type, type_fr, type_en):
     scenario.step(page, "register_filled",
                   "Formulaire rempli — la candidature va être créée.",
                   "Form filled — the application is about to be created.")
-    page.click('input[type="submit"]')
-    page.wait_for_load_state("load")
+    _submit(page)
     if page.locator('input[name="result_A"]').count() != 1:
         # The page did NOT reach the challenge state (e.g. the
         # e-mail could not be sent) — fail loudly with the evidence
@@ -58,8 +68,7 @@ def _solve_challenges(page, scenario, email):
                   "c'est la preuve d'humanité.",
                   "The four answers computed from the received e-mail — "
                   "this is the humanity proof.")
-    page.click('input[type="submit"]')
-    page.wait_for_load_state("load")
+    _submit(page)
 
 
 def run_ordinary(browser):
@@ -82,8 +91,7 @@ def run_ordinary(browser):
     page.fill('input[name="pseudonym"]', "dora.test")
     page.fill('input[name="password"]', "DoraTest123!")
     page.fill('input[name="password_confirm"]', "DoraTest123!")
-    page.click('input[type="submit"]')
-    page.wait_for_load_state("load")
+    _submit(page)
     scenario.step(page, "approved",
                   "Le compte de membre ordinaire est créé et approuvé "
                   "immédiatement.",
@@ -92,8 +100,7 @@ def run_ordinary(browser):
     page.goto(f"{BASE_URL}/login", wait_until="load")
     page.fill('input[name="username"]', "dora.test")
     page.fill('input[name="password"]', "DoraTest123!")
-    page.click('input[type="submit"]')
-    page.wait_for_load_state("load")
+    _submit(page)
     scenario.step(page, "first_login",
                   "Première connexion du nouveau membre ordinaire.",
                   "First login of the new ordinary member.")
@@ -114,22 +121,25 @@ def run_cooperator(browser):
            "Cooperator")
     _solve_challenges(page, scenario, email)
     scenario.step(page, "identity_form",
-                  "Le Coopérateur fournit son identité complète : elle "
-                  "sera vérifiée par des membres tirés au sort.",
-                  "The Cooperator provides their full identity: it will "
-                  "be checked by randomly drawn members.")
+                  "Le Coopérateur fournit son identité (nom, prénom, date "
+                  "de naissance) : elle sera vérifiée par des membres "
+                  "tirés au sort.",
+                  "The Cooperator provides their identity (name, "
+                  "surname, birth date): it will be checked by randomly "
+                  "drawn members.")
     page.fill('input[name="fullname"]', "Carl")
     page.fill('input[name="fullsurname"]', "Cooperator")
-    page.fill('input[name="birthdate"]', "1990-01-15")
-    page.fill('input[name="nationality"]', "FR")
+    # The deform date widget's field is named "date" (wrapped in
+    # __start__/__end__ mapping markers); nationality is NOT on this
+    # screen — it belongs to later profile steps.
+    page.fill('input[name="date"]', "1990-01-15")
     page.fill('input[name="pseudonym"]', "carl.test")
     page.fill('input[name="password"]', "CarlTest123!")
     page.fill('input[name="password_confirm"]', "CarlTest123!")
     scenario.step(page, "identity_filled",
                   "Identité complète saisie — prête pour la vérification.",
                   "Full identity entered — ready for verification.")
-    page.click('input[type="submit"]')
-    page.wait_for_load_state("load")
+    _submit(page)
     scenario.step(page, "pending_verification",
                   "La candidature est soumise : des vérificateurs tirés "
                   "au sort vont confirmer l'identité (suite au scénario "
