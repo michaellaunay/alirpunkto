@@ -162,3 +162,22 @@ def test_the_ldap_add_strips_empty_attributes():
     assert utils.index(belt) < utils.index("success = conn.add(dn, attributes=attributes)")
     scenario = _read("tools", "e2e_scenarios", "scenario_registration.py")
     assert "identity submission refused" in scenario
+
+
+def test_the_scenario_passwords_satisfy_the_real_policy():
+    """Run 84831745789: "!" is not in SPECIAL_CHARACTERS, so the
+    scenario passwords were refused by is_valid_password — and only
+    the ordinary flow validates at identity submission (the
+    cooperator branch stores and waits for the vote), which is why
+    carl passed while dora was refused. The scenario credentials now
+    go through the application's own validator."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "scenario_registration",
+        os.path.join(ROOT, "tools", "e2e_scenarios",
+                     "scenario_registration.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    from alirpunkto.utils import is_valid_password
+    assert is_valid_password(module.ORDINARY_PASSWORD) is None
+    assert is_valid_password(module.COOPERATOR_PASSWORD) is None

@@ -26,6 +26,15 @@ def _submit(page):
     page.wait_for_load_state("load")
 
 
+# Scenario credentials. The passwords must satisfy the REAL policy
+# (tests/test_test_stack.py validates them through is_valid_password
+# itself): run 84831745789 failed because "!" is not in
+# SPECIAL_CHARACTERS — "#" is.
+ORDINARY_PSEUDONYM = "dora.test"
+ORDINARY_PASSWORD = "DoraTest123#"
+COOPERATOR_PSEUDONYM = "carl.test"
+COOPERATOR_PASSWORD = "CarlTest123#"
+
 BASE_URL = os.environ.get("E2E_BASE_URL", "https://alirpunkto.localhost:8443")
 LANG = os.environ.get("E2E_LANG", "en")
 
@@ -88,9 +97,9 @@ def run_ordinary(browser):
                   "pseudonyme et votre mot de passe.",
                   "Your humanity is confirmed: choose your pseudonym "
                   "and your password.")
-    page.fill('input[name="pseudonym"]', "dora.test")
-    page.fill('input[name="password"]', "DoraTest123!")
-    page.fill('input[name="password_confirm"]', "DoraTest123!")
+    page.fill('input[name="pseudonym"]', ORDINARY_PSEUDONYM)
+    page.fill('input[name="password"]', ORDINARY_PASSWORD)
+    page.fill('input[name="password_confirm"]', ORDINARY_PASSWORD)
     _submit(page)
     if page.locator('input[name="password"]').count():
         # The identity form is still on screen: the submission was
@@ -106,14 +115,14 @@ def run_ordinary(browser):
                   "The ordinary member account is created and approved "
                   "immediately.")
     page.goto(f"{BASE_URL}/login", wait_until="load")
-    page.fill('input[name="username"]', "dora.test")
-    page.fill('input[name="password"]', "DoraTest123!")
+    page.fill('input[name="username"]', ORDINARY_PSEUDONYM)
+    page.fill('input[name="password"]', ORDINARY_PASSWORD)
     _submit(page)
     scenario.step(page, "first_login",
                   "Première connexion du nouveau membre ordinaire.",
                   "First login of the new ordinary member.")
     scenario.close()
-    return "dora.test" in page.content()
+    return ORDINARY_PSEUDONYM in page.content()
 
 
 def run_cooperator(browser):
@@ -141,9 +150,9 @@ def run_cooperator(browser):
     # __start__/__end__ mapping markers); nationality is NOT on this
     # screen — it belongs to later profile steps.
     page.fill('input[name="date"]', "1990-01-15")
-    page.fill('input[name="pseudonym"]', "carl.test")
-    page.fill('input[name="password"]', "CarlTest123!")
-    page.fill('input[name="password_confirm"]', "CarlTest123!")
+    page.fill('input[name="pseudonym"]', COOPERATOR_PSEUDONYM)
+    page.fill('input[name="password"]', COOPERATOR_PASSWORD)
+    page.fill('input[name="password_confirm"]', COOPERATOR_PASSWORD)
     scenario.step(page, "identity_filled",
                   "Identité complète saisie — prête pour la vérification.",
                   "Full identity entered — ready for verification.")
