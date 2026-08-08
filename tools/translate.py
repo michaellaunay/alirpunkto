@@ -18,7 +18,7 @@
 #
 # Environment:
 #   OPENAI_API_KEY=...
-#   OPENAI_TRANSLATION_MODEL=gpt-4o-mini   # optional
+#   OPENAI_TRANSLATION_MODEL=gpt-5.6-luna  # optional
 # =============================================================================
 
 from __future__ import annotations
@@ -29,6 +29,7 @@ import os
 import re
 import sys
 import time
+from collections import Counter
 from pathlib import Path
 from typing import Iterable, Optional
 
@@ -43,7 +44,7 @@ try:
 except ImportError:  # pragma: no cover - runtime dependency guard
     polib = None
 
-DEFAULT_MODEL = os.getenv("OPENAI_TRANSLATION_MODEL", "gpt-4o-mini")
+DEFAULT_MODEL = os.getenv("OPENAI_TRANSLATION_MODEL", "gpt-5.6-luna")
 DEFAULT_MAX_CHARS = int(os.getenv("OPENAI_TRANSLATION_MAX_CHARS", "9000"))
 DEFAULT_MAX_OUTPUT_TOKENS = int(os.getenv("OPENAI_TRANSLATION_MAX_OUTPUT_TOKENS", "12000"))
 DEFAULT_RETRIES = int(os.getenv("OPENAI_TRANSLATION_RETRIES", "4"))
@@ -62,10 +63,10 @@ def require_polib() -> None:
 
 
 def strip_json_fence(text: str) -> str:
-    """Return raw JSON if the model wrapped it in a Markdown fence."""
+    """Remove an optional Markdown code fence from model output."""
     text = text.strip()
     if text.startswith("```"):
-        text = re.sub(r"^```(?:json)?\s*", "", text)
+        text = re.sub(r"^```[A-Za-z0-9_-]*\s*", "", text)
         text = re.sub(r"\s*```$", "", text)
     return text.strip()
 
@@ -114,8 +115,9 @@ def call_openai(
     input_text: str,
     max_output_tokens: int,
     retries: int,
+    response_schema: Optional[dict] = None,
 ) -> str:
-    """Call the OpenAI Responses API with simple exponential backoff."""
+    """Call the OpenAI Responses API with retries and optional strict JSON."""
     try:
         from openai import (
             APIConnectionError,
@@ -132,12 +134,29 @@ def call_openai(
     client = OpenAI()
     for attempt in range(retries + 1):
         try:
-            response = client.responses.create(
-                model=model,
-                instructions=instructions,
-                input=input_text,
-                max_output_tokens=max_output_tokens,
-            )
+            request = {
+                "model": model,
+                "instructions": instructions,
+                "input": input_text,
+                "max_output_tokens": max_output_tokens,
+            }
+            if model.startswith("gpt-5.6"):
+                request["reasoning"] = {
+                    "effort": os.getenv(
+                        "OPENAI_TRANSLATION_REASONING_EFFORT", "none"
+                    )
+                }
+            if response_schema is not None:
+                request["text"] = {
+                    "format": {
+                        "type": "json_schema",
+                        "name": "gettext_translation",
+                        "strict": True,
+                        "schema": response_schema,
+                    }
+                }
+
+            response = client.responses.create(**request)
             output = getattr(response, "output_text", None)
             if not output:
                 raise RuntimeError("OpenAI response did not contain output_text")
@@ -264,6 +283,60 @@ def translate_file(args: argparse.Namespace) -> None:
 # Template synchronization
 # -----------------------------------------------------------------------------
 
+_PLACEHOLDER_RE = re.compile(
+    r"\$\{[A-Za-z_][A-Za-z0-9_]*\}"
+    r"|%\([A-Za-z_][A-Za-z0-9_]*\)[#0\-+]?(?:\d+|\*)?(?:\.\d+)?[diouxXeEfFgGcrsa]"
+    r"|(?<!%)%(?:[#0\-+]?(?:\d+|\*)?(?:\.\d+)?)[diouxXeEfFgGcrsa]"
+)
+_TEMPLATE_DIRECTIVE_RE = re.compile(
+    r"((?:tal|metal|i18n):[A-Za-z_-]+)\s*=\s*([\"'])(.*?)\2",
+    re.S,
+)
+
+
+def placeholder_signature(text: str) -> Counter:
+    """Return the multiset of interpolation placeholders used by *text*."""
+    return Counter(_PLACEHOLDER_RE.findall(text or ""))
+
+
+def template_directive_signature(text: str) -> Counter:
+    """Return TAL/METAL/i18n attributes that must survive translation."""
+    return Counter(
+        f"{match.group(1)}={match.group(3)}"
+        for match in _TEMPLATE_DIRECTIVE_RE.finditer(text or "")
+    )
+
+
+def assert_same_placeholders(source: str, translated: str, *, label: str) -> None:
+    expected = placeholder_signature(source)
+    actual = placeholder_signature(translated)
+    if actual != expected:
+        raise RuntimeError(
+            f"Placeholder mismatch for {label}: expected {dict(expected)}, "
+            f"got {dict(actual)}"
+        )
+
+
+def assert_template_invariants(source: str, translated: str, *, label: str) -> None:
+    assert_same_placeholders(source, translated, label=label)
+    expected = template_directive_signature(source)
+    actual = template_directive_signature(translated)
+    if actual != expected:
+        missing = expected - actual
+        extra = actual - expected
+        raise RuntimeError(
+            f"Template directives changed for {label}: "
+            f"missing={dict(missing)}, extra={dict(extra)}"
+        )
+
+
+def atomic_write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(text, encoding="utf-8")
+    os.replace(temporary, path)
+
+
 def sync_template(args: argparse.Namespace) -> None:
     source_path = Path(args.source_file)
     output_path = Path(args.output_file)
@@ -273,7 +346,12 @@ def sync_template(args: argparse.Namespace) -> None:
     if not source_path.is_file():
         raise FileNotFoundError(f"Source template does not exist: {source_path}")
 
-    if output_path.exists() and not args.force and not args.revise_existing:
+    if (
+        output_path.exists()
+        and args.skip_existing
+        and not args.force
+        and not args.revise_existing
+    ):
         print(f"[translate] skip existing template: {output_path}", file=sys.stderr)
         return
 
@@ -295,11 +373,13 @@ Rules:
   requires a natural language difference;
 - add any text or block that exists in English but is missing in the target;
 - remove any target text or block that no longer exists in English;
-- preserve all TAL/METAL/i18n attributes, expressions, placeholders, ids,
-  classes, href/src bindings and indentation as much as possible;
-- translate visible human-readable text and human-readable attribute values;
-- keep existing {args.target_lang} wording when it is correct, and edit it only
-  when it is missing, obsolete, inconsistent or less accurate.
+- preserve every TAL/METAL/i18n directive and every interpolation placeholder
+  exactly; never translate identifiers such as msgids, variable names or routes;
+- preserve ids, classes, href/src bindings and form field names;
+- translate every user-visible English sentence that belongs to the template;
+- use the existing target wording for terminology and tone when it is correct;
+- use the French version only as semantic context, never as structural source;
+- do not return Markdown fences or explanations.
 """
 
     input_payload = {
@@ -317,8 +397,13 @@ Rules:
         max_output_tokens=args.max_output_tokens,
         retries=args.retries,
     )
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(output.rstrip() + "\n", encoding="utf-8")
+    translated_text = strip_json_fence(output).rstrip() + "\n"
+    assert_template_invariants(
+        source_text,
+        translated_text,
+        label=f"{args.target_lang}:{source_path.name}",
+    )
+    atomic_write_text(output_path, translated_text)
     print(f"[translate] wrote template {output_path}", file=sys.stderr)
 
 
@@ -342,12 +427,42 @@ def entry_has_translation(entry) -> bool:
     if entry.obsolete:
         return False
     if entry.msgid_plural:
-        return any(bool(value.strip()) for value in entry.msgstr_plural.values())
+        return bool(entry.msgstr_plural) and all(
+            bool(value.strip()) for value in entry.msgstr_plural.values()
+        )
     return bool(entry.msgstr.strip())
 
 
 def entry_is_fuzzy(entry) -> bool:
     return bool(entry and "fuzzy" in entry.flags)
+
+
+def entry_texts(entry) -> list[str]:
+    if entry is None:
+        return []
+    if entry.msgid_plural:
+        return [
+            str(value)
+            for _, value in sorted(
+                entry.msgstr_plural.items(), key=lambda item: int(item[0])
+            )
+        ]
+    return [entry.msgstr]
+
+
+def entry_matches_english(entry, english_entry) -> bool:
+    """Detect explicit English fallbacks copied into a non-English catalog."""
+    if entry is None or english_entry is None:
+        return False
+    target = [value.strip() for value in entry_texts(entry)]
+    english = [value.strip() for value in entry_texts(english_entry)]
+    if not target or target != english or not any(target):
+        return False
+    # Avoid re-translating short words/acronyms that are legitimately identical
+    # in several languages. The problematic fallbacks in this repository are
+    # sentences/labels with at least two alphabetic words.
+    words = re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ]{2,}", " ".join(target))
+    return len(words) >= 2
 
 
 def copy_entry_shell(template_entry):
@@ -369,11 +484,19 @@ def copy_entry_shell(template_entry):
     return new_entry
 
 
-def plural_keys(existing_entry, template_entry) -> list[str]:
+def plural_keys(existing_entry, template_entry, catalog=None) -> list[str]:
     if existing_entry and existing_entry.msgstr_plural:
-        return [str(key) for key in sorted(existing_entry.msgstr_plural.keys(), key=lambda item: int(item))]
+        return [
+            str(key)
+            for key in sorted(
+                existing_entry.msgstr_plural.keys(), key=lambda item: int(item)
+            )
+        ]
     if template_entry.msgid_plural:
-        return ["0", "1"]
+        plural_forms = (catalog.metadata.get("Plural-Forms", "") if catalog else "")
+        match = re.search(r"nplurals\s*=\s*(\d+)", plural_forms)
+        count = int(match.group(1)) if match else 2
+        return [str(index) for index in range(count)]
     return []
 
 
@@ -384,6 +507,39 @@ def use_existing_translation(new_entry, existing_entry) -> None:
         new_entry.msgstr = existing_entry.msgstr
 
 
+def reference_text_for_key(english_entry, template_entry, key=None) -> str:
+    if english_entry is not None:
+        if template_entry.msgid_plural:
+            value = english_entry.msgstr_plural.get(int(key), "")
+            if value:
+                return value
+        elif english_entry.msgstr:
+            return english_entry.msgstr
+    return template_entry.msgid_plural if key is not None else template_entry.msgid
+
+
+def validate_po_translation(new_entry, english_entry, template_entry) -> None:
+    if template_entry.msgid_plural:
+        for key, value in new_entry.msgstr_plural.items():
+            source = reference_text_for_key(
+                english_entry, template_entry, key=str(key)
+            )
+            assert_same_placeholders(
+                source,
+                value,
+                label=f"{template_entry.msgid}[{key}]",
+            )
+            if not value.strip():
+                raise RuntimeError(
+                    f"Empty plural translation for {template_entry.msgid}[{key}]"
+                )
+    else:
+        source = reference_text_for_key(english_entry, template_entry)
+        assert_same_placeholders(source, new_entry.msgstr, label=template_entry.msgid)
+        if not new_entry.msgstr.strip():
+            raise RuntimeError(f"Empty translation for {template_entry.msgid}")
+
+
 def translate_po_entry(
     *,
     template_entry,
@@ -391,14 +547,13 @@ def translate_po_entry(
     french_entry,
     existing_entry,
     target_lang: str,
+    plural_keys_expected: list[str],
     model: str,
     max_output_tokens: int,
     retries: int,
 ):
-    expected_plural_keys = plural_keys(existing_entry, template_entry)
-
     instructions = f"""
-You update one gettext entry for the AlirPunkto project in {target_lang}.
+Translate one gettext entry for the AlirPunkto project into {target_lang}.
 
 Return JSON only. Do not wrap it in Markdown.
 
@@ -409,24 +564,25 @@ If the entry has plural forms, return:
 {{"msgstr_plural": {{"0": "...", "1": "..."}}}}
 using exactly the plural keys provided in the input.
 
-Rules:
-- msgid is the canonical source identifier and must not be changed;
-- use the English msgstr and French msgstr as semantic context;
-- use the existing {target_lang} translation as the preferred wording when it is
-  correct;
-- edit the existing wording when it is obsolete, incomplete, inconsistent or
-  less accurate;
-- preserve placeholders exactly: {{name}}, %(name)s, %s, %d, ${{name}}, HTML
-  tags, TAL/i18n placeholders and escaped characters;
-- do not translate variables, identifiers or markup;
-- produce natural UI/documentation text in {target_lang}.
+Quality rules:
+- msgid is a symbolic identifier and must never be translated;
+- English is the semantic source; French is additional context;
+- use the existing {target_lang} wording as terminology/style guidance when it
+  is genuinely in {target_lang};
+- if the existing target is English, translate it instead of preserving it;
+- translate every user-visible sentence naturally, not word-for-word;
+- keep AlirPunkto, CosmoPolitical, LDAP, IBAN, URLs and technical identifiers
+  unchanged unless ordinary grammar requires surrounding inflection;
+- preserve every placeholder exactly and with the same multiplicity;
+- preserve HTML/XML tags and escaped characters;
+- never invent, delete or rename variables.
 """
 
     payload = {
         "msgctxt": template_entry.msgctxt,
         "msgid": template_entry.msgid,
         "msgid_plural": template_entry.msgid_plural,
-        "expected_plural_keys": expected_plural_keys,
+        "expected_plural_keys": plural_keys_expected,
         "english_msgstr": english_entry.msgstr if english_entry else "",
         "english_msgstr_plural": dict(english_entry.msgstr_plural) if english_entry and english_entry.msgstr_plural else {},
         "french_msgstr": french_entry.msgstr if french_entry else "",
@@ -435,20 +591,51 @@ Rules:
         "existing_target_msgstr_plural": dict(existing_entry.msgstr_plural) if existing_entry and existing_entry.msgstr_plural else {},
     }
 
+    if template_entry.msgid_plural:
+        response_schema = {
+            "type": "object",
+            "properties": {
+                "msgstr_plural": {
+                    "type": "object",
+                    "properties": {
+                        str(key): {"type": "string"}
+                        for key in plural_keys_expected
+                    },
+                    "required": [str(key) for key in plural_keys_expected],
+                    "additionalProperties": False,
+                }
+            },
+            "required": ["msgstr_plural"],
+            "additionalProperties": False,
+        }
+    else:
+        response_schema = {
+            "type": "object",
+            "properties": {"msgstr": {"type": "string"}},
+            "required": ["msgstr"],
+            "additionalProperties": False,
+        }
+
     raw = call_openai(
         model=model,
         instructions=instructions,
         input_text=json.dumps(payload, ensure_ascii=False, indent=2),
         max_output_tokens=max_output_tokens,
         retries=retries,
+        response_schema=response_schema,
     )
     try:
         data = json.loads(strip_json_fence(raw))
     except json.JSONDecodeError as exc:
         raise RuntimeError(
-            f"Model did not return valid JSON for msgid {template_entry.msgid!r}: {raw[:500]}"
+            f"Model did not return valid JSON for msgid "
+            f"{template_entry.msgid!r}: {raw[:500]}"
         ) from exc
 
+    if not isinstance(data, dict):
+        raise RuntimeError(
+            f"Model returned a non-object JSON value for {template_entry.msgid!r}"
+        )
     return data
 
 
@@ -473,60 +660,192 @@ def sync_po(args: argparse.Namespace) -> None:
     output.metadata.setdefault("Content-Type", "text/plain; charset=UTF-8")
     output.metadata.setdefault("Content-Transfer-Encoding", "8bit")
     output.metadata["Language"] = args.target_code or output.metadata.get("Language", "")
+    output.metadata["X-Generator"] = "AlirPunkto tools/translate.py + OpenAI API"
+    output.metadata["X-Translation-Model"] = args.model
 
     if args.revise_existing:
-        mode = "revise existing, translate missing/fuzzy"
+        mode = "revise every entry"
+    elif args.keep_english_fallbacks:
+        mode = "translate missing/fuzzy; keep explicit English fallbacks"
     else:
-        mode = "keep existing non-fuzzy translations, translate missing/fuzzy"
+        mode = "translate missing/fuzzy and explicit English fallbacks"
     print(f"[translate] sync-po {target_po_path} ({mode})", file=sys.stderr)
 
+    stats = Counter()
     pot_entries = [entry for entry in pot if not entry.obsolete]
     for index, template_entry in enumerate(pot_entries, start=1):
         new_entry = copy_entry_shell(template_entry)
         old_entry = find_entry(existing, template_entry)
         english_entry = find_entry(english, template_entry)
         french_entry = find_entry(french, template_entry)
+        english_fallback = (
+            args.target_code != "en"
+            and not args.keep_english_fallbacks
+            and entry_matches_english(old_entry, english_entry)
+        )
 
         should_keep = (
             old_entry is not None
             and entry_has_translation(old_entry)
             and not entry_is_fuzzy(old_entry)
+            and not english_fallback
             and not args.revise_existing
             and not args.force
         )
 
         if should_keep:
             use_existing_translation(new_entry, old_entry)
+            stats["kept"] += 1
         else:
+            if old_entry is None:
+                reason = "missing"
+            elif entry_is_fuzzy(old_entry):
+                reason = "fuzzy"
+            elif not entry_has_translation(old_entry):
+                reason = "empty"
+            elif english_fallback:
+                reason = "english-fallback"
+            elif args.revise_existing or args.force:
+                reason = "revision"
+            else:
+                reason = "translation"
+
             print(
-                f"[translate] {target_po_path.name}: entry {index}/{len(pot_entries)} "
-                f"-> {args.target_lang}: {template_entry.msgid[:60]!r}",
+                f"[translate] {args.target_code}:{index}/{len(pot_entries)} "
+                f"{reason}: {template_entry.msgid[:70]!r}",
                 file=sys.stderr,
             )
+            keys = plural_keys(old_entry, template_entry, existing)
             translated = translate_po_entry(
                 template_entry=template_entry,
                 english_entry=english_entry,
                 french_entry=french_entry,
                 existing_entry=old_entry,
                 target_lang=args.target_lang,
+                plural_keys_expected=keys,
                 model=args.model,
                 max_output_tokens=args.max_output_tokens,
                 retries=args.retries,
             )
             if template_entry.msgid_plural:
                 values = translated.get("msgstr_plural", {})
-                keys = plural_keys(old_entry, template_entry)
-                if not keys:
-                    keys = sorted(values.keys()) or ["0", "1"]
-                new_entry.msgstr_plural = {int(key): str(values.get(str(key), "")) for key in keys}
+                if not isinstance(values, dict):
+                    raise RuntimeError(
+                        f"Invalid msgstr_plural for {template_entry.msgid!r}"
+                    )
+                new_entry.msgstr_plural = {
+                    int(key): str(values.get(str(key), "")) for key in keys
+                }
             else:
                 new_entry.msgstr = str(translated.get("msgstr", ""))
+
+            validate_po_translation(new_entry, english_entry, template_entry)
+            stats[reason] += 1
 
         output.append(new_entry)
 
     target_po_path.parent.mkdir(parents=True, exist_ok=True)
-    output.save(str(target_po_path))
-    print(f"[translate] wrote po {target_po_path}", file=sys.stderr)
+    temporary = target_po_path.with_name(target_po_path.name + ".tmp")
+    output.save(str(temporary))
+    os.replace(temporary, target_po_path)
+    print(
+        f"[translate] wrote po {target_po_path}; "
+        + ", ".join(f"{key}={value}" for key, value in sorted(stats.items())),
+        file=sys.stderr,
+    )
+
+
+def audit_locale(args: argparse.Namespace) -> int:
+    """Report catalog/template debt without calling the OpenAI API."""
+    require_polib()
+
+    pot_path = Path(args.pot)
+    target_path = Path(args.target_po)
+    english_path = Path(args.english_po)
+    if not pot_path.is_file():
+        raise FileNotFoundError(f"POT file does not exist: {pot_path}")
+
+    pot = polib.pofile(str(pot_path))
+    target = polib.pofile(str(target_path)) if target_path.is_file() else None
+    english = polib.pofile(str(english_path)) if english_path.is_file() else None
+
+    stats = Counter()
+    pot_entries = [entry for entry in pot if not entry.obsolete]
+    pot_keys = {entry_key(entry) for entry in pot_entries}
+
+    for template_entry in pot_entries:
+        target_entry = find_entry(target, template_entry)
+        english_entry = find_entry(english, template_entry)
+        if target_entry is None:
+            stats["missing"] += 1
+        elif entry_is_fuzzy(target_entry):
+            stats["fuzzy"] += 1
+        elif not entry_has_translation(target_entry):
+            stats["empty"] += 1
+        elif args.target_code != "en" and entry_matches_english(
+            target_entry, english_entry
+        ):
+            stats["english_fallback"] += 1
+        else:
+            stats["translated"] += 1
+
+    if target is not None:
+        stats["obsolete"] = sum(
+            1
+            for entry in target
+            if entry.obsolete or entry_key(entry) not in pot_keys
+        )
+
+    english_template_dir = Path(args.english_template_dir)
+    target_template_dir = Path(args.target_template_dir)
+    expected_templates = {
+        path.name for path in english_template_dir.glob("*.pt")
+    } if english_template_dir.is_dir() else set()
+    actual_templates = {
+        path.name for path in target_template_dir.glob("*.pt")
+    } if target_template_dir.is_dir() else set()
+
+    missing_templates = sorted(expected_templates - actual_templates)
+    extra_templates = sorted(actual_templates - expected_templates)
+    english_copies = []
+    if args.target_code != "en" and target_template_dir.is_dir():
+        for name in sorted(expected_templates & actual_templates):
+            if (
+                (english_template_dir / name).read_text(encoding="utf-8")
+                == (target_template_dir / name).read_text(encoding="utf-8")
+            ):
+                english_copies.append(name)
+
+    report = {
+        "locale": args.target_code,
+        "catalog": {
+            "total": len(pot_entries),
+            **{name: stats[name] for name in (
+                "translated",
+                "english_fallback",
+                "fuzzy",
+                "empty",
+                "missing",
+                "obsolete",
+            )},
+        },
+        "templates": {
+            "expected": len(expected_templates),
+            "present": len(actual_templates),
+            "missing": missing_templates,
+            "extra": extra_templates,
+            "exact_english_copies": english_copies,
+        },
+    }
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+
+    structural_issues = (
+        stats["missing"]
+        + stats["fuzzy"]
+        + stats["empty"]
+        + len(missing_templates)
+    )
+    return 1 if args.fail_on_structural and structural_issues else 0
 
 
 # -----------------------------------------------------------------------------
@@ -570,6 +889,11 @@ def build_parser() -> argparse.ArgumentParser:
     template_parser.add_argument("--existing-file")
     template_parser.add_argument("--force", action="store_true")
     template_parser.add_argument("--revise-existing", action="store_true")
+    template_parser.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help="Keep the historical behavior and only create missing templates.",
+    )
     add_common_model_args(template_parser)
 
     po_parser = sub.add_parser("sync-po", help="Synchronize a target .po from .pot + en/fr context.")
@@ -581,7 +905,24 @@ def build_parser() -> argparse.ArgumentParser:
     po_parser.add_argument("--target-code", default="")
     po_parser.add_argument("--force", action="store_true")
     po_parser.add_argument("--revise-existing", action="store_true")
+    po_parser.add_argument(
+        "--keep-english-fallbacks",
+        action="store_true",
+        help="Do not retranslate non-fuzzy msgstr values identical to English.",
+    )
     add_common_model_args(po_parser)
+
+    audit_parser = sub.add_parser(
+        "audit-locale",
+        help="Report gettext/template completeness without using the OpenAI API.",
+    )
+    audit_parser.add_argument("--pot", required=True)
+    audit_parser.add_argument("--english-po", required=True)
+    audit_parser.add_argument("--target-po", required=True)
+    audit_parser.add_argument("--target-code", required=True)
+    audit_parser.add_argument("--english-template-dir", required=True)
+    audit_parser.add_argument("--target-template-dir", required=True)
+    audit_parser.add_argument("--fail-on-structural", action="store_true")
 
     return parser
 
@@ -592,7 +933,15 @@ def main(argv: Optional[Iterable[str]] = None) -> int:
     # Backward-compatible mode with the previous positional API:
     #   translate.py input output --source_lang english --target_lang French
     raw_args = list(argv if argv is not None else sys.argv[1:])
-    if raw_args and raw_args[0] not in {"translate-file", "sync-template", "sync-po", "-h", "--help"}:
+    commands = {
+        "translate-file",
+        "sync-template",
+        "sync-po",
+        "audit-locale",
+        "-h",
+        "--help",
+    }
+    if raw_args and raw_args[0] not in commands:
         normalized: list[str] = ["translate-file"]
         for arg in raw_args:
             normalized.append(arg.replace("--source_lang", "--source-lang").replace("--target_lang", "--target-lang"))
@@ -605,7 +954,7 @@ def main(argv: Optional[Iterable[str]] = None) -> int:
         parser.print_help(sys.stderr)
         return 2
 
-    if not os.getenv("OPENAI_API_KEY"):
+    if args.command != "audit-locale" and not os.getenv("OPENAI_API_KEY"):
         print("ERROR: OPENAI_API_KEY is not set. Export it or define it in .env.", file=sys.stderr)
         return 2
 
@@ -615,6 +964,8 @@ def main(argv: Optional[Iterable[str]] = None) -> int:
         sync_template(args)
     elif args.command == "sync-po":
         sync_po(args)
+    elif args.command == "audit-locale":
+        return audit_locale(args)
     else:  # pragma: no cover
         parser.error(f"Unknown command: {args.command}")
     return 0
