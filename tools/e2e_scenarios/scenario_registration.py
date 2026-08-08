@@ -1,0 +1,133 @@
+"""Registration journeys: ordinary member, then cooperator.
+
+Both journeys live the real anti-spam flow: submit the e-mail and
+membership choice, receive the four word-written math challenges by
+e-mail, solve them like a human would, then enter the personal data.
+The ordinary member is approved immediately (register.py routes
+ORDINARY straight to APPROVED) and the journey closes with a real
+login; the cooperator's application lands in PENDING, awaiting the
+verifiers — the voting act is the next scenario of this series.
+"""
+
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from framework import Scenario, fetch_email, solve_all_challenges  # noqa: E402
+
+BASE_URL = os.environ.get("E2E_BASE_URL", "https://alirpunkto.localhost:8443")
+LANG = os.environ.get("E2E_LANG", "en")
+
+
+def _begin(page, scenario, email, member_type, type_fr, type_en):
+    page.goto(f"{BASE_URL}/register", wait_until="load")
+    scenario.step(page, "register_form",
+                  "La page d'inscription : votre adresse e-mail et le "
+                  f"type d'adhésion ({type_fr}).",
+                  "The registration page: your e-mail address and the "
+                  f"membership type ({type_en}).")
+    page.fill('input[name="email"]', email)
+    page.check(f'input[value="{member_type}"]')
+    scenario.step(page, "register_filled",
+                  "Formulaire rempli — la candidature va être créée.",
+                  "Form filled — the application is about to be created.")
+    page.click('input[type="submit"]')
+    page.wait_for_load_state("load")
+    scenario.step(page, "challenge_sent",
+                  "Un e-mail contenant quatre défis mathématiques écrits "
+                  "en toutes lettres vous a été envoyé.",
+                  "An e-mail with four math challenges written out in "
+                  "words has been sent to you.")
+
+
+def _solve_challenges(page, scenario, email):
+    body = fetch_email(email)
+    solutions = solve_all_challenges(body, LANG)
+    for label, value in solutions.items():
+        page.fill(f'input[name="result_{label}"]', str(value))
+    scenario.step(page, "challenge_answered",
+                  "Les quatre réponses calculées depuis l'e-mail reçu — "
+                  "c'est la preuve d'humanité.",
+                  "The four answers computed from the received e-mail — "
+                  "this is the humanity proof.")
+    page.click('input[type="submit"]')
+    page.wait_for_load_state("load")
+
+
+def run_ordinary(browser):
+    email = os.environ.get("E2E_ORDINARY_EMAIL",
+                           "dora.test@alirpunkto.localhost")
+    scenario = Scenario("register_ordinary",
+                        "Créer un compte de membre ordinaire",
+                        "Create an ordinary member account")
+    page = browser.new_context(ignore_https_errors=True,
+                               viewport={"width": 1280, "height": 800},
+                               locale=LANG).new_page()
+    _begin(page, scenario, email, "ORDINARY", "membre ordinaire",
+           "ordinary member")
+    _solve_challenges(page, scenario, email)
+    scenario.step(page, "identity_form",
+                  "Votre humanité est confirmée : choisissez votre "
+                  "pseudonyme et votre mot de passe.",
+                  "Your humanity is confirmed: choose your pseudonym "
+                  "and your password.")
+    page.fill('input[name="pseudonym"]', "dora.test")
+    page.fill('input[name="password"]', "DoraTest123!")
+    page.fill('input[name="password_confirm"]', "DoraTest123!")
+    page.click('input[type="submit"]')
+    page.wait_for_load_state("load")
+    scenario.step(page, "approved",
+                  "Le compte de membre ordinaire est créé et approuvé "
+                  "immédiatement.",
+                  "The ordinary member account is created and approved "
+                  "immediately.")
+    page.goto(f"{BASE_URL}/login", wait_until="load")
+    page.fill('input[name="username"]', "dora.test")
+    page.fill('input[name="password"]', "DoraTest123!")
+    page.click('input[type="submit"]')
+    page.wait_for_load_state("load")
+    scenario.step(page, "first_login",
+                  "Première connexion du nouveau membre ordinaire.",
+                  "First login of the new ordinary member.")
+    scenario.close()
+    return "dora.test" in page.content()
+
+
+def run_cooperator(browser):
+    email = os.environ.get("E2E_COOPERATOR_EMAIL",
+                           "carl.test@alirpunkto.localhost")
+    scenario = Scenario("register_cooperator",
+                        "Devenir Coopérateur ou Coopératrice",
+                        "Become a Cooperator")
+    page = browser.new_context(ignore_https_errors=True,
+                               viewport={"width": 1280, "height": 800},
+                               locale=LANG).new_page()
+    _begin(page, scenario, email, "COOPERATOR", "Coopérateur",
+           "Cooperator")
+    _solve_challenges(page, scenario, email)
+    scenario.step(page, "identity_form",
+                  "Le Coopérateur fournit son identité complète : elle "
+                  "sera vérifiée par des membres tirés au sort.",
+                  "The Cooperator provides their full identity: it will "
+                  "be checked by randomly drawn members.")
+    page.fill('input[name="fullname"]', "Carl")
+    page.fill('input[name="fullsurname"]', "Cooperator")
+    page.fill('input[name="birthdate"]', "1990-01-15")
+    page.fill('input[name="nationality"]', "FR")
+    page.fill('input[name="pseudonym"]', "carl.test")
+    page.fill('input[name="password"]', "CarlTest123!")
+    page.fill('input[name="password_confirm"]', "CarlTest123!")
+    scenario.step(page, "identity_filled",
+                  "Identité complète saisie — prête pour la vérification.",
+                  "Full identity entered — ready for verification.")
+    page.click('input[type="submit"]')
+    page.wait_for_load_state("load")
+    scenario.step(page, "pending_verification",
+                  "La candidature est soumise : des vérificateurs tirés "
+                  "au sort vont confirmer l'identité (suite au scénario "
+                  "du vote).",
+                  "The application is submitted: randomly drawn "
+                  "verifiers will confirm the identity (continued in "
+                  "the voting scenario).")
+    scenario.close()
+    return "carl" in page.content().lower() or "pending" in page.url
