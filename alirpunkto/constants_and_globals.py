@@ -170,19 +170,64 @@ def get_ldap_server_port():
         return TEST_WITH_DOCKER_LDAP_PORT
     return LDAP_PORT
 
+# Single language registry (i18n audit 2026-08-08, P0.1): the one
+# source of truth every other list derives from. To add a language:
+# add its entry here AND create alirpunkto/locale/<code>/ — the
+# test_locale_completeness locks verify the registry and the disk
+# stay a bijection, and that every catalog covers the full POT.
+# 'selectable' controls whether the registration/profile forms offer
+# the language (audit §22, option 2: the eight on-disk locales the
+# form never offered are now EXPLICITLY not selectable — flipping
+# the boolean is the whole decision). 'tier' records the audit's
+# support levels (§20): 1 full, 2 functional, 3 experimental —
+# informative for now, ready for CI policies.
+SUPPORTED_LOCALES: Final = {
+    # Selectable, in the exact order the form has always offered:
+    'eo': {'name': 'Esperanto', 'selectable': True, 'tier': 3},
+    'bg': {'name': 'български', 'selectable': True, 'tier': 3},
+    'cs': {'name': 'čeština', 'selectable': True, 'tier': 3},
+    'da': {'name': 'dansk', 'selectable': True, 'tier': 3},
+    'de': {'name': 'Deutsch', 'selectable': True, 'tier': 2},
+    'et': {'name': 'Eesti', 'selectable': True, 'tier': 3},
+    'el': {'name': 'ελληνικά', 'selectable': True, 'tier': 3},
+    'en': {'name': 'English', 'selectable': True, 'tier': 1},
+    'es': {'name': 'Español', 'selectable': True, 'tier': 2},
+    'fr': {'name': 'Français', 'selectable': True, 'tier': 1},
+    'ga': {'name': 'Gaeilge', 'selectable': True, 'tier': 3},
+    'hr': {'name': 'Hrvatski', 'selectable': True, 'tier': 3},
+    'it': {'name': 'Italiano', 'selectable': True, 'tier': 2},
+    'lv': {'name': 'Latviešu', 'selectable': True, 'tier': 3},
+    'lt': {'name': 'Lietuvių', 'selectable': True, 'tier': 3},
+    'hu': {'name': 'Magyar', 'selectable': True, 'tier': 3},
+    'mt': {'name': 'Malti', 'selectable': True, 'tier': 3},
+    'nl': {'name': 'Nederlands', 'selectable': True, 'tier': 2},
+    'pl': {'name': 'Polski', 'selectable': True, 'tier': 2},
+    'pt': {'name': 'Português', 'selectable': True, 'tier': 3},
+    'ro': {'name': 'Română', 'selectable': True, 'tier': 3},
+    'sk': {'name': 'Slovenčina', 'selectable': True, 'tier': 3},
+    'sl': {'name': 'Slovenščina', 'selectable': True, 'tier': 3},
+    'fi': {'name': 'Suomi', 'selectable': True, 'tier': 3},
+    'sv': {'name': 'Svenska', 'selectable': True, 'tier': 3},
+    # On-disk catalogs the form does not offer (audit §22):
+    'be': {'name': 'беларуская', 'selectable': False, 'tier': 3},
+    'bs': {'name': 'bosanski', 'selectable': False, 'tier': 3},
+    'is': {'name': 'íslenska', 'selectable': False, 'tier': 3},
+    'no': {'name': 'norsk', 'selectable': False, 'tier': 3},
+    'sq': {'name': 'shqip', 'selectable': False, 'tier': 3},
+    'sr': {'name': 'српски', 'selectable': False, 'tier': 3},
+    'tr': {'name': 'Türkçe', 'selectable': False, 'tier': 3},
+    'uk': {'name': 'українська', 'selectable': False, 'tier': 3},
+}
+
 def get_locales():
     """Return the list of available locales.
     Returns:
         list: The list of available locales.
     """
-    base = os.path.join(os.path.dirname(__file__), 'locale')
-    # Only real directories count as locales: a stray file under
-    # locale/ must not become a phantom language (i18n audit
-    # 2026-08-08, section 4).
-    return sorted(
-        entry for entry in os.listdir(base)
-        if os.path.isdir(os.path.join(base, entry))
-    ) or ['en']
+    # The registry is the source of truth (i18n audit 2026-08-08,
+    # P0.1); the completeness locks keep it a bijection with the
+    # locale/ directories on disk.
+    return sorted(SUPPORTED_LOCALES)
 
 AVAILABLE_LANGUAGES: Final = get_locales()
 
@@ -194,32 +239,13 @@ DEFAULT_NUMBER_OF_VOTERS: Final = 3
 
 # TranslationStringFactory is used to translate strings
 _: Final = TranslationStringFactory('alirpunkto')
+
+# Derived: the form's choices — same keys, same order, same
+# TranslationString values as the historical dict.
 EUROPEAN_LOCALES: Final = {
-    'eo': _('Esperanto'),
-    'bg': _('български'),
-    'cs': _('čeština'),
-    'da': _('dansk'),
-    'de': _('Deutsch'),
-    'et': _('Eesti'),
-    'el': _('ελληνικά'),
-    'en': _('English'),
-    'es': _('Español'),
-    'fr': _('Français'),
-    'ga': _('Gaeilge'),
-    'hr': _('Hrvatski'),
-    'it': _('Italiano'),
-    'lv': _('Latviešu'),
-    'lt': _('Lietuvių'),
-    'hu': _('Magyar'),
-    'mt': _('Malti'),
-    'nl': _('Nederlands'),
-    'pl': _('Polski'),
-    'pt': _('Português'),
-    'ro': _('Română'),
-    'sk': _('Slovenčina'),
-    'sl': _('Slovenščina'),
-    'fi': _('Suomi'),
-    'sv': _('Svenska'),
+    code: _(spec['name'])
+    for code, spec in SUPPORTED_LOCALES.items()
+    if spec['selectable']
 }
 
 CANDIDATURE_OID: Final = 'candidature_oid'

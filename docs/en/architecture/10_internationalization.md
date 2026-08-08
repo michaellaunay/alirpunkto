@@ -130,3 +130,18 @@ language registry everything would derive from, the fate of the
 eight locales the form does not offer (`be bs is no sq sr tr uk`),
 support tiers, the mail-template coverage matrix, POT cleanup, and
 the real translation campaign — Esperanto first.
+
+## Single language registry (2026-08-08, train 0099)
+
+`SUPPORTED_LOCALES` (in `constants_and_globals.py`) is now **the**
+source of truth: 33 languages, each with its native name, its
+`selectable` flag (the form offers exactly the selectable slice —
+the eight never-offered locales are now **explicitly** not
+selectable: flipping the boolean is the whole decision) and its
+`tier` (the audit's levels: 1 full — `en`, `fr` —, 2 functional —
+`de es it nl pl` —, 3 experimental). `EUROPEAN_LOCALES` and
+`get_locales()`/`AVAILABLE_LANGUAGES` are **derivations** —
+neutrality proven byte for byte at migration. Adding a language =
+one registry entry **and** its `locale/<code>/` directory: the
+completeness lock enforces the registry↔disk bijection and the new
+catalog's POT coverage. Never again four independent lists.

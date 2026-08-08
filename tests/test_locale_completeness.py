@@ -105,3 +105,28 @@ def test_the_translation_debt_only_shrinks():
         "or use explicit English fallbacks, never fuzzy")
     assert empty <= EMPTY_BASELINE, (
         f"empty msgstr grew: {empty} > {EMPTY_BASELINE}")
+
+
+def test_the_registry_is_the_single_source_of_truth():
+    """P0.1 (train 0099): SUPPORTED_LOCALES is the one registry —
+    it must be a bijection with the locale/ directories on disk,
+    and the form's choices must be exactly its selectable slice,
+    in the same order."""
+    from alirpunkto.constants_and_globals import (
+        EUROPEAN_LOCALES, SUPPORTED_LOCALES, get_locales)
+    on_disk = sorted(
+        entry for entry in os.listdir(LOCALE_DIR)
+        if os.path.isdir(os.path.join(LOCALE_DIR, entry)))
+    assert sorted(SUPPORTED_LOCALES) == on_disk, (
+        "registry and locale/ directories diverged — add the "
+        "language to BOTH, or to neither")
+    assert get_locales() == on_disk
+    selectable = [code for code, spec in SUPPORTED_LOCALES.items()
+                  if spec["selectable"]]
+    assert list(EUROPEAN_LOCALES.keys()) == selectable, (
+        "the form's choices must derive from the registry")
+    assert SUPPORTED_LOCALES["en"]["selectable"]
+    assert SUPPORTED_LOCALES["en"]["tier"] == 1
+    assert SUPPORTED_LOCALES["fr"]["tier"] == 1
+    for code, spec in SUPPORTED_LOCALES.items():
+        assert spec["tier"] in (1, 2, 3), code

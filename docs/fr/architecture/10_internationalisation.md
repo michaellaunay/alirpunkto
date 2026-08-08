@@ -133,3 +133,19 @@ locales non proposées par le formulaire (`be bs is no sq sr tr
 uk`), les niveaux de support (Tier 1/2/3), la matrice des templates
 de mails, l'assainissement du POT, et la campagne de traduction
 réelle — l'espéranto en premier.
+
+## Registre unique des langues (2026-08-08, train 0099)
+
+`SUPPORTED_LOCALES` (dans `constants_and_globals.py`) est désormais
+**la** source de vérité : 33 langues, chacune avec son nom natif,
+son drapeau `selectable` (le formulaire propose exactement la
+tranche sélectionnable — les huit locales jamais offertes le sont
+maintenant **explicitement** : inverser le booléen est toute la
+décision) et son `tier` (niveaux de l'audit : 1 complet — `en`,
+`fr` —, 2 fonctionnel — `de es it nl pl` —, 3 expérimental).
+`EUROPEAN_LOCALES` et `get_locales()`/`AVAILABLE_LANGUAGES` en sont
+des **dérivations** — neutralité prouvée octet pour octet à la
+migration. Ajouter une langue = une entrée au registre **et** son
+répertoire `locale/<code>/` : le verrou de complétude impose la
+bijection registre↔disque et la couverture POT du nouveau
+catalogue. Plus jamais quatre listes indépendantes.
