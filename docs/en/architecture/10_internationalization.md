@@ -145,3 +145,13 @@ neutrality proven byte for byte at migration. Adding a language =
 one registry entry **and** its `locale/<code>/` directory: the
 completeness lock enforces the registry↔disk bijection and the new
 catalog's POT coverage. Never again four independent lists.
+
+### Update (2026-08-08, train 0100): the eight orphans are offered
+
+Maintainer decision (audit §22, option 1): `be bs is no sq sr tr
+uk` flip to `selectable: True`. The form now offers all **33
+languages** — the eight join at the end of the list, the historical
+order of the 25 untouched. The move is safe since train 0098: full
+POT coverage and fresh `.mo` are lock-guaranteed; the worst case is
+an English fallback, as for any tier-3 language. A lock records the
+decision: un-offering a language is again an explicit registry act.

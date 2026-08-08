@@ -208,15 +208,19 @@ SUPPORTED_LOCALES: Final = {
     'sl': {'name': 'Slovenščina', 'selectable': True, 'tier': 3},
     'fi': {'name': 'Suomi', 'selectable': True, 'tier': 3},
     'sv': {'name': 'Svenska', 'selectable': True, 'tier': 3},
-    # On-disk catalogs the form does not offer (audit §22):
-    'be': {'name': 'беларуская', 'selectable': False, 'tier': 3},
-    'bs': {'name': 'bosanski', 'selectable': False, 'tier': 3},
-    'is': {'name': 'íslenska', 'selectable': False, 'tier': 3},
-    'no': {'name': 'norsk', 'selectable': False, 'tier': 3},
-    'sq': {'name': 'shqip', 'selectable': False, 'tier': 3},
-    'sr': {'name': 'српски', 'selectable': False, 'tier': 3},
-    'tr': {'name': 'Türkçe', 'selectable': False, 'tier': 3},
-    'uk': {'name': 'українська', 'selectable': False, 'tier': 3},
+    # Offered since 2026-08-08 (maintainer decision, audit §22
+    # option 1): full POT coverage is guaranteed by the 0098
+    # sync, so the worst case is English fallback — same deal
+    # as every tier-3 language. They keep their historical
+    # position, so the form lists them after the original 25:
+    'be': {'name': 'беларуская', 'selectable': True, 'tier': 3},
+    'bs': {'name': 'bosanski', 'selectable': True, 'tier': 3},
+    'is': {'name': 'íslenska', 'selectable': True, 'tier': 3},
+    'no': {'name': 'norsk', 'selectable': True, 'tier': 3},
+    'sq': {'name': 'shqip', 'selectable': True, 'tier': 3},
+    'sr': {'name': 'српски', 'selectable': True, 'tier': 3},
+    'tr': {'name': 'Türkçe', 'selectable': True, 'tier': 3},
+    'uk': {'name': 'українська', 'selectable': True, 'tier': 3},
 }
 
 def get_locales():

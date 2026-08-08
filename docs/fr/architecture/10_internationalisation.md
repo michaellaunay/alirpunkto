@@ -149,3 +149,14 @@ migration. Ajouter une langue = une entrée au registre **et** son
 répertoire `locale/<code>/` : le verrou de complétude impose la
 bijection registre↔disque et la couverture POT du nouveau
 catalogue. Plus jamais quatre listes indépendantes.
+
+### Mise à jour (2026-08-08, train 0100) : les huit orphelines sont proposées
+
+Décision du mainteneur (option 1 de l'audit §22) : `be bs is no sq
+sr tr uk` passent `selectable: True`. Le formulaire propose donc les
+**33 langues** — les huit rejoignent la fin de la liste, l'ordre
+historique des 25 est intact. Le geste est sûr depuis le train
+0098 : couverture POT complète et `.mo` frais garantis par les
+verrous ; le pire cas est un fallback anglais, comme pour toute
+langue de tier 3. Un verrou grave la décision : retirer une langue
+du sélecteur redevient un acte explicite du registre.

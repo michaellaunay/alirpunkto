@@ -125,6 +125,11 @@ def test_the_registry_is_the_single_source_of_truth():
                   if spec["selectable"]]
     assert list(EUROPEAN_LOCALES.keys()) == selectable, (
         "the form's choices must derive from the registry")
+    # Maintainer decision 2026-08-08 (audit §22, option 1): every
+    # registry language is offered by the form — the eight former
+    # orphans included. Un-offering one is a deliberate registry
+    # edit, never an accident.
+    assert all(spec["selectable"] for spec in SUPPORTED_LOCALES.values())
     assert SUPPORTED_LOCALES["en"]["selectable"]
     assert SUPPORTED_LOCALES["en"]["tier"] == 1
     assert SUPPORTED_LOCALES["fr"]["tier"] == 1
