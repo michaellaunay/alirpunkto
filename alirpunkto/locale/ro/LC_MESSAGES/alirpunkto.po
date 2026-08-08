@@ -1845,3 +1845,90 @@ msgstr "You have not yet reached your 18th birthday. You are hence unfortunately
 
 msgid "too_many_login_attempts"
 msgstr "Too many login attempts. Please wait a few minutes and try again."
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "cancel_button"
+msgstr "Cancel"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "departure_date_label"
+msgstr "Date of resignation or exclusion"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "departure_reason_label"
+msgstr "Reason of departure"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_board"
+msgstr "Board"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_community"
+msgstr "Community"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_cooperators"
+msgstr "Cooperators"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_legacy_ordinary"
+msgstr "Community (legacy group)"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_mac"
+msgstr "Mediation and Arbitration Council"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_missing_share"
+msgstr "Candidate Cooperator (share pending)"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_missing_share_year"
+msgstr "Candidate Cooperator (share and yearly contribution pending)"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_missing_year"
+msgstr "Candidate Cooperator (yearly contribution pending)"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_sanctioned"
+msgstr "Sanctioned"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_sanctioned_missing_year"
+msgstr "Sanctioned (yearly contribution pending)"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_suspended_board"
+msgstr "Board (suspended)"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "group_label_suspended_mac"
+msgstr "Mediation and Arbitration Council (suspended)"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "member_admin_card_title"
+msgstr "Member card (read-only)"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "role_label"
+msgstr "Role in the Cooperative"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "user_number_label"
+msgstr "User number"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "your_groups_label"
+msgstr "Your groups"
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "your_profile_introduction"
+msgstr ""
+"On this page, you can view your own profile, and modify some of its "
+"elements. In order to modify an item, simply replace the existing content of"
+" the field with the new content of your choosing."
+
+#. English fallback pending translation (i18n audit 2026-08-08)
+msgid "your_profile_title"
+msgstr "Your profile"

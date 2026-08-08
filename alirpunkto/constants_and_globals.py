@@ -175,9 +175,14 @@ def get_locales():
     Returns:
         list: The list of available locales.
     """
-    dir_ = os.listdir(os.path.join(os.path.dirname(__file__),
-                                   '.', 'locale'))
-    return list(filter(lambda x: not x.endswith('.pot'), dir_)) or ['en']
+    base = os.path.join(os.path.dirname(__file__), 'locale')
+    # Only real directories count as locales: a stray file under
+    # locale/ must not become a phantom language (i18n audit
+    # 2026-08-08, section 4).
+    return sorted(
+        entry for entry in os.listdir(base)
+        if os.path.isdir(os.path.join(base, entry))
+    ) or ['en']
 
 AVAILABLE_LANGUAGES: Final = get_locales()
 

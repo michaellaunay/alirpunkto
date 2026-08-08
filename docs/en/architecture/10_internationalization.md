@@ -105,3 +105,28 @@ reached through the e-mailed link without a session, displays in the
 member's preferred language — `switch_request_language` (#247) as soon
 as the token has validated the seed. Never on the anonymous leg: a
 switch there would betray that the account exists.
+
+## i18n audit and structural repair (2026-08-08, train 0098)
+
+An external audit of the locale subsystem (deposited at
+`docs/fr/audits/20260808_audit_externe_chatgpt_i18n_locale.md` —
+infrastructure 8/10, translations 5/10) established that 21 recent
+msgids were missing from 31 of the 33 catalogs: raw symbolic keys
+could reach users' screens. Train 0098 executed the structural
+repair: **651 explicit non-fuzzy English fallback entries**
+synchronised (commented "English fallback pending translation"),
+all **33 `.mo` recompiled** under `msgfmt --check-format`, locale
+discovery restricted to real directories, and the
+`tests/test_locale_completeness.py` lock pinning the state: full
+POT coverage in every catalog, the audit keys present in every
+compiled `.mo`, and **ratchets** on the debts (747 fuzzy, 136
+empty — they may only shrink: translate for real, or explicit
+English, never fuzzy). The `tools/translate.py`/`translate.sh`
+tooling was hardened separately (msgfmt validation, reports,
+atomic writes).
+
+Open to the maintainer (audit recommendations): the single
+language registry everything would derive from, the fate of the
+eight locales the form does not offer (`be bs is no sq sr tr uk`),
+support tiers, the mail-template coverage matrix, POT cleanup, and
+the real translation campaign — Esperanto first.

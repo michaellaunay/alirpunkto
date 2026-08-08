@@ -107,3 +107,29 @@ de passe, atteint par le lien e-mail sans session, s'affiche dans la
 langue préférée du membre — `switch_request_language` (#247) dès que le
 token a validé le seed. Jamais sur la jambe anonyme : une bascule y
 trahirait l'existence du compte.
+
+## Audit i18n et remise en état (2026-08-08, train 0098)
+
+Un audit externe thématique du sous-système locale
+(`docs/fr/audits/20260808_audit_externe_chatgpt_i18n_locale.md` —
+infrastructure 8/10, traductions 5/10) a établi que 21 msgid
+récents manquaient dans 31 des 33 catalogues : des clés symboliques
+brutes pouvaient atteindre l'écran. Le train 0098 a exécuté la
+remise en état structurelle : **651 entrées de fallback anglais
+explicite non-fuzzy** synchronisées (commentées « English fallback
+pending translation »), les **33 `.mo` recompilés** sous
+`msgfmt --check-format`, la découverte de locales restreinte aux
+répertoires réels, et le verrou `tests/test_locale_completeness.py`
+qui grave l'état : couverture POT complète de chaque catalogue,
+clés de l'audit présentes dans chaque `.mo` compilé, et **cliquets**
+sur les dettes (747 fuzzy, 136 vides — elles ne peuvent que
+décroître : traduire réellement, ou anglais explicite, jamais
+fuzzy). L'outillage `tools/translate.py`/`translate.sh` a été durci
+séparément (validation msgfmt, rapports, écriture atomique).
+
+Restent ouverts au mainteneur (recommandations de l'audit) : le
+registre unique des langues dont tout dériverait, le sort des huit
+locales non proposées par le formulaire (`be bs is no sq sr tr
+uk`), les niveaux de support (Tier 1/2/3), la matrice des templates
+de mails, l'assainissement du POT, et la campagne de traduction
+réelle — l'espéranto en premier.
