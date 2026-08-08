@@ -288,6 +288,14 @@ docker compose --env-file docker/.env.test -f docker/test-docker-compose.yaml lo
 - Configure Keycloak/SSO variables only when SSO is actually enabled.
 - Do not reuse local test credentials in production.
 
+## User manual
+
+The user manual generates itself from browser-driven validation
+scenarios: every green `test-stack` CI run publishes a
+`user-manual` artifact with illustrated French and English pages.
+See `docs/en/architecture/15_user_manual_scenarios.md` (FR:
+`docs/fr/architecture/15_scenarios_manuel_utilisateur.md`).
+
 ## Documentation
 
 Main documentation lives in:
