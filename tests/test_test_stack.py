@@ -114,7 +114,11 @@ def test_the_test_postfix_captures_mail_locally():
     prod = _read("docker", "start_postfix.sh")
     assert "POSTFIX_LOCAL_CAPTURE" not in prod
     framework = _read("tools", "e2e_scenarios", "framework.py")
-    assert "/var/mail/catchall" in framework
+    # The Debian main.cf sets home_mailbox = Maildir/: deliveries land
+    # in one-file-per-message under the catchall home (run 84784429694
+    # proved it: "delivered to maildir"), not in /var/mail.
+    assert "/home/catchall/Maildir/new/" in framework
+    assert "/home/catchall/Maildir/cur/" in framework
 
 
 def test_the_scenarios_drive_the_choice_select():

@@ -91,7 +91,13 @@ def fetch_email(recipient: str, timeout: int = 60) -> str:
         "E2E_MAIL_CMD",
         f"docker compose --env-file {root}/docker/.env.test "
         f"-f {root}/docker/test-docker-compose.yaml exec -T postfix "
-        "sh -c 'cat /var/mail/catchall 2>/dev/null'",
+        # home_mailbox = Maildir/: one file per message under the
+        # catchall home. Emit a pseudo-mbox (From_ separators) so the
+        # mbox parser below works unchanged.
+        "sh -c 'for f in /home/catchall/Maildir/new/* "
+        "/home/catchall/Maildir/cur/*; do "
+        '[ -f "$f" ] && { echo "From MAILDIR"; cat "$f"; }; '
+        "done 2>/dev/null; true'",
     )
     deadline = time.time() + timeout
     last = ""
