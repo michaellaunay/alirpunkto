@@ -5,6 +5,7 @@
 *~
 .coverage
 .env
+.venv
 .vscode
 coverage.xml
 build/

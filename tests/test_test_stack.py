@@ -93,3 +93,25 @@ def test_the_capture_script_carries_no_secret_beyond_public_test_values():
     assert "AliceTest123!" in script  # the documented public default
     for forbidden in ("BEGIN RSA", "BEGIN OPENSSH", "ghp_", "AKIA"):
         assert forbidden not in script
+
+
+def test_the_test_postfix_captures_mail_locally():
+    """The scenarios read the challenge e-mails from the postfix
+    container: the test compose enables the capture mode and the
+    start script implements it (catchall mailbox, luser_relay)."""
+    compose = _read("docker", "test-docker-compose.yaml")
+    assert 'POSTFIX_LOCAL_CAPTURE: "1"' in compose
+    script = _read("docker", "start_postfix.sh")
+    assert "POSTFIX_LOCAL_CAPTURE" in script
+    assert "luser_relay = catchall" in script
+    assert "local_recipient_maps =" in script
+    framework = _read("tools", "e2e_scenarios", "framework.py")
+    assert "/var/mail/catchall" in framework
+
+
+def test_the_scenarios_drive_the_choice_select():
+    """register.pt's membership choice is a <select>, not radios —
+    the first CI run timed out on page.check (run 84778749823)."""
+    scenario = _read("tools", "e2e_scenarios", "scenario_registration.py")
+    assert "select_option" in scenario
+    assert "page.check(" not in scenario

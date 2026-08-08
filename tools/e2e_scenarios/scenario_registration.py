@@ -27,7 +27,7 @@ def _begin(page, scenario, email, member_type, type_fr, type_en):
                   "The registration page: your e-mail address and the "
                   f"membership type ({type_en}).")
     page.fill('input[name="email"]', email)
-    page.check(f'input[value="{member_type}"]')
+    page.select_option('select[name="choice"]', member_type)
     scenario.step(page, "register_filled",
                   "Formulaire rempli — la candidature va être créée.",
                   "Form filled — the application is about to be created.")

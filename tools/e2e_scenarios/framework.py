@@ -18,44 +18,64 @@ import time
 SHOT_DIR = os.environ.get(
     "E2E_SHOT_DIR", os.path.join(tempfile.gettempdir(), "e2e-shots"))
 
-#: words the challenge generator emits, per language
+#: words the challenge generator emits, per language (the e-mail
+#: template's own language may differ from the operand language —
+#: the bench showed an Esperanto template carrying English words)
 _NUMBER_WORDS = {
     "en": ["zero", "one", "two", "three", "four", "five", "six",
            "seven", "eight", "nine"],
     "fr": ["zéro", "un", "deux", "trois", "quatre", "cinq", "six",
            "sept", "huit", "neuf"],
+    "eo": ["nulo", "unu", "du", "tri", "kvar", "kvin", "ses",
+           "sep", "ok", "naŭ"],
 }
-_OPERATORS = {"en": ("times", "plus"), "fr": ("fois", "plus")}
+_WORD_TO_NUMBER = {
+    word: value
+    for words in _NUMBER_WORDS.values()
+    for value, word in enumerate(words)
+}
 
 
-def solve_math_challenge(text: str, lang: str = "en") -> int:
-    """Solve one 'X times Y plus Z' challenge written in words.
+def solve_math_challenge(text: str, lang: str = None) -> int:
+    """Solve one challenge line: num1 * num2 + num3.
 
-    The anti-spam design writes operands as translated words — a
-    scripted candidate must do what a human does: read, translate,
-    compute. num1 * num2 + num3, per generate_math_challenges."""
-    words = {w: i for i, w in enumerate(_NUMBER_WORDS[lang])}
-    times, plus = _OPERATORS[lang]
-    pattern = (r"(\w+)\s+" + times + r"\s+(\w+)\s*[,;]?\s*" + plus +
-               r"\s+(\w+)")
-    match = re.search(pattern, text, re.IGNORECASE | re.UNICODE)
-    if not match:
-        raise ValueError(f"no challenge found in: {text!r}")
-    a, b, c = (words[w.lower()] for w in match.groups())
+    The structure is fixed by generate_math_challenges; only the
+    words vary with the candidate's language, and the surrounding
+    operator words vary with the catalog ("times" is rendered
+    "multiplied by" in the real English template). So the parser
+    does not match operators at all: it extracts the first three
+    number words of the line, whatever the language."""
+    numbers = [
+        _WORD_TO_NUMBER[token]
+        for token in re.findall(r"[\w\u00c0-\u017f]+", text.lower())
+        if token in _WORD_TO_NUMBER
+    ]
+    if len(numbers) < 3:
+        raise ValueError(f"fewer than three number words in: {text!r}")
+    a, b, c = numbers[:3]
     return a * b + c
 
 
-def solve_all_challenges(body: str, lang: str = "en") -> dict:
+def solve_all_challenges(body: str, lang: str = None) -> dict:
     """Extract and solve the four labelled challenges of the e-mail.
 
+    A challenge line is any line naming the label (A-D) as a lone
+    word and carrying at least three number words — this survives
+    template languages ("A: ..." as much as "Operacio A estas ...").
     Returns {'A': int, 'B': int, 'C': int, 'D': int}."""
     solutions = {}
-    for label in ("A", "B", "C", "D"):
-        section = re.search(
-            label + r"\s*[:=]\s*(.+)", body)
-        if not section:
-            raise ValueError(f"challenge {label} not found in the e-mail")
-        solutions[label] = solve_math_challenge(section.group(1), lang)
+    for line in body.splitlines():
+        for label in ("A", "B", "C", "D"):
+            if label in solutions:
+                continue
+            if re.search(r"\b" + label + r"\b", line):
+                try:
+                    solutions[label] = solve_math_challenge(line)
+                except ValueError:
+                    continue
+    missing = [l for l in ("A", "B", "C", "D") if l not in solutions]
+    if missing:
+        raise ValueError(f"challenges not found in the e-mail: {missing}")
     return solutions
 
 
@@ -69,7 +89,7 @@ def fetch_email(recipient: str, timeout: int = 60) -> str:
         "E2E_MAIL_CMD",
         "docker compose --env-file docker/.env.test "
         "-f docker/test-docker-compose.yaml exec -T postfix "
-        "sh -c 'cat /var/mail/* /var/spool/mail/* 2>/dev/null'",
+        "sh -c 'cat /var/mail/catchall 2>/dev/null'",
     )
     deadline = time.time() + timeout
     last = ""

@@ -71,6 +71,7 @@ services:
       # Optional debug SMTP endpoint from the host.
       - "127.0.0.1:19025:25"
     environment:
+      POSTFIX_LOCAL_CAPTURE: "1"
       DOMAIN: ${DOMAIN}
       POSTFIX_MYHOSTNAME: ${POSTFIX_MYHOSTNAME}
       POSTFIX_INET_PROTOCOLS: ${POSTFIX_INET_PROTOCOLS:-ipv4}

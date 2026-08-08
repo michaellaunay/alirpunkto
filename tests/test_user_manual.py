@@ -22,13 +22,21 @@ def _read(*parts):
         return handle.read()
 
 
-def test_the_challenge_solver_reads_both_languages():
+def test_the_challenge_solver_reads_every_observed_shape():
+    """Operator-free by design: the real English catalog renders
+    "times" as "multiplied by", and the bench captured an Esperanto
+    template carrying English number words — the solver extracts the
+    three number words and ignores the operators entirely."""
     from framework import solve_all_challenges, solve_math_challenge
     assert solve_math_challenge("three times seven plus two") == 23
-    assert solve_math_challenge("sept fois neuf, plus un", "fr") == 64
-    body = ("A: two times two plus one\nB: nine times one plus zero\n"
-            "C: five times three plus four\nD: one times one plus one\n")
-    assert solve_all_challenges(body) == {"A": 5, "B": 9, "C": 19, "D": 2}
+    assert solve_math_challenge("sept fois neuf, plus un") == 64
+    assert solve_math_challenge("one multiplied by seven, plus nine") == 16
+    real = ("Operacio A estas one multiplied by seven, plus nine\n"
+            "Operacio B estas four multiplied by eight, plus five\n"
+            "Operacio C estas two multiplied by four, plus three\n"
+            "Operacio D estas two multiplied by one, plus two\n")
+    assert solve_all_challenges(real) == {"A": 16, "B": 37, "C": 11,
+                                          "D": 4}
 
 
 def test_the_scenarios_and_tools_compile():
