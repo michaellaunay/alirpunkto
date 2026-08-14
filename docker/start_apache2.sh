@@ -39,13 +39,20 @@ if [ "${ENABLE_CERTBOT}" = "true" ]; then
     # than a certificate's ~90-day lifetime without a restart would otherwise
     # serve an expired certificate. certbot reloads Apache (graceful) via the
     # deploy hook only when a certificate actually changes.
-    certbot renew --quiet --deploy-hook "apache2ctl graceful" || true
+    # The initial issuance used --standalone, so renewal replays that
+    # authenticator — which needs port 80 while Apache holds it. The
+    # pre/post hooks fold Apache away for the seconds the challenge
+    # needs; the deploy hook is then redundant but harmless when the
+    # renewal is a no-op.
+    RENEW_CMD='certbot renew --quiet \
+        --pre-hook "apache2ctl stop" --post-hook "apache2ctl start"'
+    eval "$RENEW_CMD" || true
     (
         while true; do
             # certbot's recommended cadence is twice a day; renewal is a no-op
             # until the cert is within its renewal window.
             sleep 12h
-            certbot renew --quiet --deploy-hook "apache2ctl graceful" || true
+            eval "$RENEW_CMD" || true
         done
     ) &
 fi
