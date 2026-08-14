@@ -19,7 +19,6 @@ from alirpunkto.models.member import MemberTypes
 from alirpunkto.views import modify_member as mm
 
 import os
-import pytest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
