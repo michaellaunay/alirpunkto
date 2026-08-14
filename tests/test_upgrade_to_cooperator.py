@@ -257,6 +257,10 @@ def _render_home(config, user_type):
             'logged_in': True, 'site_name': 'A', 'domain_name': 'D',
             'organization_details': 'Org',
             'user': {'name': 'Jean', 'oid': 'member-1', 'type': user_type},
+            # Issues #255/#257: the invite is now a view-computed
+            # flag from the member's REAL type — the tests keep
+            # their intent through the new contract.
+            'show_upgrade_invite': user_type == 'ORDINARY',
             'applications': {},
         }, request=request)
     finally:

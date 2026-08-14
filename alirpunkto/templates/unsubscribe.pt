@@ -9,7 +9,8 @@
                     <p tal:content="_('unsubscribe_intro')">Intro</p>
                     <ul>
                         <li tal:content="_('unsubscribe_implication_no_login')">i1</li>
-                        <li tal:content="_('unsubscribe_implication_quarantine')">i2</li>
+                        <li tal:condition="show_quarantine | python: True"
+                            tal:content="_('unsubscribe_implication_quarantine')">i2</li>
                         <li tal:content="_('unsubscribe_implication_confirmation_link')">i3</li>
                     </ul>
                 </div>

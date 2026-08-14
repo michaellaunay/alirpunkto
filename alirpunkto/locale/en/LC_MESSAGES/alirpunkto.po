@@ -1368,3 +1368,75 @@ msgstr "You have not yet reached your 18th birthday. You are hence unfortunately
 
 msgid "too_many_login_attempts"
 msgstr "Too many login attempts. Please wait a few minutes and try again."
+
+msgid "accessed_member_oid_missing"
+msgstr "Accessed member oid missing."
+
+msgid "add_provider_title"
+msgstr "Add provider title"
+
+msgid "election_intro_msg"
+msgstr "Election intro msg"
+
+msgid "elections_msg"
+msgstr "Elections msg"
+
+msgid "error_sending_voting_result_email"
+msgstr "Error sending voting result email."
+
+msgid "invalid_date_format"
+msgstr "Invalid date format."
+
+msgid "invalid_password"
+msgstr "Invalid password."
+
+msgid "modify_provider_title"
+msgstr "Modify provider title"
+
+msgid "must_be_administrator"
+msgstr "Must be administrator."
+
+msgid "no_elections_msg"
+msgstr "No elections msg"
+
+msgid "provider_created"
+msgstr "Provider created."
+
+msgid "provider_creation_failed"
+msgstr "Provider creation failed."
+
+msgid "provider_email_already_exists"
+msgstr "Provider email already exists."
+
+msgid "provider_email_fullname_password_missing"
+msgstr "Provider email fullname password missing."
+
+msgid "provider_password_label"
+msgstr "Provider password label"
+
+msgid "provider_updated"
+msgstr "Provider updated."
+
+msgid "pseudonym"
+msgstr "Pseudonym."
+
+msgid "some_msgid"
+msgstr "Some msgid."
+
+msgid "unsubscription_failed"
+msgstr "Unsubscription failed."
+
+msgid "user_not_logged_in"
+msgstr "User not logged in."
+
+msgid "vote_now_btn_label"
+msgstr "Vote now btn label"
+
+msgid "votes"
+msgstr "Votes."
+
+msgid "votes_view"
+msgstr "Votes view."
+
+msgid "voting_period_ended"
+msgstr "Voting period ended."

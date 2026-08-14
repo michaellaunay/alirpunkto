@@ -299,3 +299,30 @@ footer a:hover {
   text-align: right;
   border: none;
 }
+
+
+/* Issue #255: make the upgrade invitation prominent. */
+.upgrade-invitation {
+    border: 2px solid #2c7a4b;
+    border-radius: 8px;
+    background: #eaf7f0;
+    padding: 1em 1.2em;
+    margin: 1em 0;
+    font-size: 1.05em;
+}
+.upgrade-invitation .button {
+    display: inline-block;
+    background: #2c7a4b;
+    color: #fff;
+    padding: 0.5em 1.1em;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 0.6em;
+}
+
+/* Issue #251: flash messages must be visible. */
+.flash-messages { margin: 0.8em 0; }
+.flash { padding: 0.6em 1em; border-radius: 6px; margin: 0.3em 0; }
+.flash-error { background: #fdecea; border: 1px solid #c0392b; color: #7b241c; }
+.flash-success { background: #eaf7f0; border: 1px solid #2c7a4b; color: #1e5631; }

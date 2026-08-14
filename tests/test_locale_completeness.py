@@ -135,3 +135,33 @@ def test_the_registry_is_the_single_source_of_truth():
     assert SUPPORTED_LOCALES["fr"]["tier"] == 1
     for code, spec in SUPPORTED_LOCALES.items():
         assert spec["tier"] in (1, 2, 3), code
+
+
+def test_every_used_msgid_is_in_the_pot():
+    """Client ticket #252: 24 msgids used by the code and templates
+    were absent from the POT — and therefore from 31 catalogs, so
+    users outside en/fr saw raw symbolic keys. This lock extracts
+    every used msgid and requires POT membership: the sync chain
+    (POT -> every PO -> every MO) then guarantees no raw key can
+    reach a screen again."""
+    import glob as glob_
+    import re as re_
+    used = set()
+    for path in glob_.glob(os.path.join(ROOT, "alirpunkto", "**", "*.py"),
+                           recursive=True):
+        if os.sep + "locale" + os.sep in path:
+            continue
+        text = open(path, encoding="utf-8", errors="replace").read()
+        used |= set(re_.findall(r"_\('([a-z0-9_]+)'", text))
+    for path in (glob_.glob(os.path.join(
+            ROOT, "alirpunkto", "templates", "**", "*.pt"), recursive=True)
+            + glob_.glob(os.path.join(
+                ROOT, "alirpunkto", "locale", "*", "LC_MESSAGES", "*.pt"))):
+        text = open(path, encoding="utf-8", errors="replace").read()
+        used |= set(re_.findall(r'i18n:translate="([a-z0-9_]+)"', text))
+        used |= set(re_.findall(r"_\('([a-z0-9_]+)'", text))
+    pot_ids = _po_msgids(os.path.join(LOCALE_DIR, "alirpunkto.pot"))
+    missing = sorted(used - pot_ids)
+    assert not missing, (
+        f"msgids used but absent from the POT (raw keys on screen "
+        f"outside en/fr): {missing}")

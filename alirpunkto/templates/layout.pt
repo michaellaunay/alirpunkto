@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="${request.locale_name}" xmlns:metal="http://xml.zope.org/namespaces/metal">
 <div metal:define-macro="layout">
+    <!-- Flash messages (issue #251): without this block every
+         session.flash — avatar rejections included — was invisible. -->
+    <div class="flash-messages" i18n:domain="alirpunkto"
+         tal:define="fsession python: getattr(request, 'session', None);
+                     can_flash python: fsession is not None and hasattr(fsession, 'pop_flash');
+                     errs python: fsession.pop_flash('error') if can_flash else [];
+                     oks python: fsession.pop_flash('success') if can_flash else [];
+                     infos python: fsession.pop_flash() if can_flash else []"
+         tal:condition="python: errs or oks or infos">
+        <p class="flash flash-error" tal:repeat="message errs"
+           tal:content="message">error</p>
+        <p class="flash flash-success" tal:repeat="message oks"
+           tal:content="message">success</p>
+        <p class="flash" tal:repeat="message infos"
+           tal:content="message">info</p>
+    </div>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

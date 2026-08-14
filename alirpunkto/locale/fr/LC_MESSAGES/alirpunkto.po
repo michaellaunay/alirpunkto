@@ -1356,3 +1356,89 @@ msgstr "Tu n'as pas encore atteint ton 18e anniversaire : tu ne peux malheureuse
 
 msgid "too_many_login_attempts"
 msgstr "Trop de tentatives de connexion. Attends quelques minutes avant de réessayer."
+
+msgid "accessed_member_oid_missing"
+msgstr "L'identifiant du membre consulté est manquant."
+
+msgid "add_provider_title"
+msgstr "Ajouter un prestataire"
+
+msgid "election_intro_msg"
+msgstr "Bienvenue sur la page des élections."
+
+msgid "elections_msg"
+msgstr "Élections"
+
+msgid "error_sending_voting_result_email"
+msgstr "Erreur lors de l'envoi du courriel de résultat du vote."
+
+msgid "invalid_date_format"
+msgstr "Format de date invalide."
+
+msgid "invalid_password"
+msgstr "Mot de passe invalide."
+
+msgid "modify_provider_title"
+msgstr "Modifier un prestataire"
+
+msgid "must_be_administrator"
+msgstr "Vous devez être administrateur."
+
+msgid "no_elections_msg"
+msgstr "Aucune élection en cours."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "provider_created"
+msgstr "Provider created."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "provider_creation_failed"
+msgstr "Provider creation failed."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "provider_email_already_exists"
+msgstr "Provider email already exists."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "provider_email_fullname_password_missing"
+msgstr "Provider email fullname password missing."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "provider_password_label"
+msgstr "Provider password label"
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "provider_updated"
+msgstr "Provider updated."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "pseudonym"
+msgstr "Pseudonym."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "some_msgid"
+msgstr "Some msgid."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "unsubscription_failed"
+msgstr "Unsubscription failed."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "user_not_logged_in"
+msgstr "User not logged in."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "vote_now_btn_label"
+msgstr "Vote now btn label"
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "votes"
+msgstr "Votes."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "votes_view"
+msgstr "Votes view."
+
+#. English fallback pending translation (client ticket #252, 2026-08-14)
+msgid "voting_period_ended"
+msgstr "Voting period ended."

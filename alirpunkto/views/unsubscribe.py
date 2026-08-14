@@ -24,7 +24,7 @@ from alirpunkto.constants_and_globals import (
     UNSUBSCRIBE_LINK_VALIDITY_DAYS,
     log,
 )
-from alirpunkto.models.member import MemberStates
+from alirpunkto.models.member import MemberTypes, MemberStates
 from alirpunkto.utils import (
     deactivate_member_in_ldap,
     decrypt_oid,
@@ -33,6 +33,22 @@ from alirpunkto.utils import (
 )
 
 
+
+def _show_quarantine(request):
+    """Issue #253: the Quarantine consequence only exists for
+    Cooperators — never mention it to an Ordinary Member."""
+    try:
+        import json as _json
+        user = request.session.get('user')
+        user = _json.loads(user) if isinstance(user, str) else user
+        oid = (user or {}).get('oid')
+        if not oid:
+            return True
+        member = get_member_by_oid(oid, request)
+        return member is None or member.type != MemberTypes.ORDINARY
+    except Exception:
+        return True
+
 def _context(request, **extra):
     settings = getattr(request.registry, 'settings', {}) or {}
     context = {
@@ -40,7 +56,9 @@ def _context(request, **extra):
         'site_name': settings.get('site_name'),
         'domain_name': settings.get('domain_name'),
         'organization_details': settings.get('organization_details'),
-        'member': None, 'error': None, 'success': None, 'pending': False,
+        'member': None,
+        'show_quarantine': _show_quarantine(request),
+        'error': None, 'success': None, 'pending': False,
     }
     context.update(extra)
     return context

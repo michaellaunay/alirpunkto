@@ -7,9 +7,10 @@
              upload and removal only on one's own. -->
         <div class="container member-avatar" i18n:domain="alirpunkto"
              tal:condition="accessed_member"
-             tal:define="is_self python: member is not None and getattr(member, 'oid', None) == getattr(accessed_member, 'oid', None)">
-            <img tal:attributes="src python: request.route_url('member_avatar') + '?oid=' + str(getattr(accessed_member, 'oid', ''))"
-                 tal:condition="python: getattr(accessed_member, 'oid', None)"
+             tal:define="am_oid python: getattr(accessed_member, 'oid', accessed_member);
+                         is_self python: member is not None and str(getattr(member, 'oid', '')) == str(am_oid)">
+            <img tal:attributes="src python: request.route_url('member_avatar') + '?oid=' + str(am_oid)"
+                 tal:condition="python: am_oid"
                  alt="Avatar" class="avatar" width="128" onerror="this.style.display='none'" />
             <form method="POST" enctype="multipart/form-data"
                   tal:condition="is_self"

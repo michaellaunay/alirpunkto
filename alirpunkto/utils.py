@@ -348,6 +348,17 @@ def retrieve_candidature(
             log.error(f"User oid not in user json session parameter: {user_oid}")
             raise ValueError("User oid not in user json session parameter")
 
+    # Legitimate upgrade case (issue #256): a logged-in member opening
+    # an upgrade candidature carries session_oid != user_oid by design
+    # — the candidature itself proves the link via existing_member_oid.
+    if session_oid and user_oid and session_oid != user_oid:
+        session_candidature = get_candidature_by_oid(session_oid, request)
+        if (session_candidature is not None
+                and getattr(session_candidature, 'existing_member_oid',
+                            None) == user_oid):
+            candidature = session_candidature
+            user_oid = session_oid
+
     # Check if the candidature OID in the session and user and URL match
     if ((session_oid and decrypted_oid
         and session_oid != decrypted_oid)
@@ -1703,10 +1714,16 @@ def get_local_template(request, pattern_path, member=None):
     ar = AssetResolver("alirpunkto")
     try:
         resolver = ar.resolve(pattern_path.format(lang=lang))
-    except:
+        # AssetResolver.resolve never raises on a missing file — the
+        # old bare except therefore caught nothing and the German
+        # confirmation e-mail died at render time (issue #254). The
+        # existence test is what makes the English fallback real.
+        if not resolver.exists():
+            raise FileNotFoundError(pattern_path.format(lang=lang))
+    except Exception:
         log.error(
-            f"Error while resolving locale file for {lang} for {pattern_path}"
-            f", fallback to en."
+            f"Locale template missing for {lang} at {pattern_path}"
+            f", falling back to en."
         )
         resolver = ar.resolve(pattern_path.format(lang="en"))
     return resolver

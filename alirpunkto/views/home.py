@@ -3,12 +3,14 @@
 # date: 2023-07-07
 
 from pyramid.view import view_config
+from alirpunkto.models.member import MemberTypes
 from alirpunkto.constants_and_globals import (
     SSO_REFRESH,
     SSO_EXPIRES_AT,
 )
 from json import loads
 from alirpunkto.utils import (
+    get_member_by_oid,
     filter_applications_for_member,
     load_sso_refresh_token,
     logout,
@@ -16,6 +18,18 @@ from alirpunkto.utils import (
     store_sso_tokens,
 )
 from datetime import datetime
+
+
+def _show_upgrade_invite(request, user):
+    """True only for a logged-in ORDINARY member (issues #255/#257)."""
+    try:
+        oid = (user or {}).get('oid')
+        if not oid:
+            return False
+        member = get_member_by_oid(oid, request)
+        return member is not None and member.type == MemberTypes.ORDINARY
+    except Exception:
+        return False
 
 def is_authenticated(request):
     # Check if the user is authenticated
@@ -75,5 +89,8 @@ def home_view(request):
         'domain_name': domain_name,
         'organization_details': organization_details,
         'user': user,
+        # Issues #255/#257: the invite is computed from the member's
+        # REAL type — the session json never carried a reliable one.
+        'show_upgrade_invite': _show_upgrade_invite(request, user),
         'applications': applications
     }
