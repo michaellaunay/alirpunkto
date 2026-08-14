@@ -68,30 +68,30 @@ def avatar_upload(request):
     if 'remove' in request.POST:
         delete_member_avatar(request, oid)
         request.session.flash(_('avatar_removed_message'), 'success')
-        return HTTPFound(location=request.route_url('modify_member'))
+        return HTTPFound(location=request.route_url('modify_member', _query={'self': '1'}))
 
     field = request.POST.get('avatar')
     filename = getattr(field, 'filename', None)
     if not filename:
         request.session.flash(_('avatar_format_error'), 'error')
-        return HTTPFound(location=request.route_url('modify_member'))
+        return HTTPFound(location=request.route_url('modify_member', _query={'self': '1'}))
     if not filename.lower().endswith(JPEG_EXTENSIONS):
         # The exact requirement of issue #150: JPEG only, .JPG or .JPEG.
         request.session.flash(_('avatar_format_error'), 'error')
-        return HTTPFound(location=request.route_url('modify_member'))
+        return HTTPFound(location=request.route_url('modify_member', _query={'self': '1'}))
 
     jpeg = field.file.read(AVATAR_MAX_BYTES + 1)
     if len(jpeg) > AVATAR_MAX_BYTES:
         request.session.flash(_('avatar_too_large_error'), 'error')
-        return HTTPFound(location=request.route_url('modify_member'))
+        return HTTPFound(location=request.route_url('modify_member', _query={'self': '1'}))
     if not jpeg.startswith(JPEG_MAGIC):
         # The extension alone proves nothing: the content must be JPEG too.
         request.session.flash(_('avatar_format_error'), 'error')
-        return HTTPFound(location=request.route_url('modify_member'))
+        return HTTPFound(location=request.route_url('modify_member', _query={'self': '1'}))
 
     result = set_member_avatar(request, oid, jpeg)
     if result.get('status') == 'success':
         request.session.flash(_('avatar_updated_message'), 'success')
     else:
         request.session.flash(result.get('message'), 'error')
-    return HTTPFound(location=request.route_url('modify_member'))
+    return HTTPFound(location=request.route_url('modify_member', _query={'self': '1'}))

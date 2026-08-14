@@ -266,8 +266,14 @@ def modify_member(request):
         }
     members = {user.oid:user.name for user in ldap_members}
     accessor_member = member
-    if "submit" in request.POST or 'modify' in request.POST:
-        if "submit" in request.POST:
+    # Issue #258: redirects (e.g. after an avatar upload rejection) need
+    # a GET route straight to one's own edit form — ?self=1 provides it,
+    # so the flash lands on the profile page, not on the directory.
+    wants_self = request.method == 'GET' and 'self' in request.params
+    if "submit" in request.POST or 'modify' in request.POST or wants_self:
+        if wants_self:
+            accessed_member_oid = member.oid
+        elif "submit" in request.POST:
             accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)
         elif 'modify' in request.POST:
             # Issue #249: without an armed session, the 'modify' POST is
@@ -353,7 +359,7 @@ def modify_member(request):
     # selection landed on oneself ("submit"); a plain GET now falls
     # through to the directory below, and the 'modify' POST keeps its
     # own saving branch.
-    if "submit" in request.POST:
+    if "submit" in request.POST or wants_self:
         appstruct = {
             'accessed_member': accessed_member,
             'cooperative_number': accessed_member.oid,

@@ -135,3 +135,40 @@ def test_the_wording_is_neutral():
     assert "member_card_email_label" in template
     assert "_('pseudonym_label')" not in template, (
         "the card must not borrow the edit form's labels")
+
+
+def test_the_self_query_opens_ones_own_edit_form():
+    """Issue #258: a GET with ?self=1 goes straight to one's own edit
+    path (so post-upload flashes land on the profile page, never on
+    the directory)."""
+    accessor = _member("acc-1", MemberTypes.ORDINARY)
+    other = _member("mem-2", MemberTypes.COOPERATOR)
+    listed = [SimpleNamespace(oid=m.oid, name=m.pseudonym)
+              for m in (accessor, other)]
+    by_oid = {m.oid: m for m in (accessor, other)}
+    with patch.object(mm, "get_member_by_oid",
+                      side_effect=lambda oid, *a, **k: by_oid.get(oid)), \
+         patch.object(mm, "update_member_from_ldap",
+                      side_effect=lambda oid, *a, **k: by_oid.get(oid)), \
+         patch.object(mm, "get_ldap_member_list", return_value=listed), \
+         patch.object(mm, "get_access_permissions", return_value=None):
+        config = setUp()
+        try:
+            request = _request(accessor_oid="acc-1")
+            request.params = {"self": "1"}
+            request.method = "GET"
+            context = mm.modify_member(request)
+        finally:
+            tearDown()
+    assert not (isinstance(context, dict) and context.get("admin_view"))
+    # The edit path was taken (its permission gate answered), not the
+    # directory (which would return member=<object> with the list).
+    assert context["member"] is None
+
+
+def test_the_avatar_redirects_target_ones_own_profile():
+    source = open(os.path.join(ROOT, "alirpunkto", "views",
+                               "avatar.py"), encoding="utf-8").read()
+    assert "request.route_url('modify_member')" not in source, (
+        "a bare modify_member redirect lands on the directory (#258)")
+    assert source.count("_query={'self': '1'}") == 6
