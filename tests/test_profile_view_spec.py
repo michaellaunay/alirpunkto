@@ -72,10 +72,15 @@ def test_the_form_carries_translated_submit_and_cancel_buttons(config):
     it (issue #116)."""
     import deform
     me = _member()
-    request = _request(config)
+    # Issue #249: a plain GET now shows the directory; one's own edit
+    # form is reached by selecting oneself.
+    request = _request(config, post={'submit': 'submit',
+                                     'accessed_member_oid': 'me-1',
+                                     'csrf_token': 'csrf-token'})
     with patch.object(mm, 'get_member_by_oid', return_value=me), \
          patch.object(mm, 'update_member_from_ldap',
                       side_effect=lambda o, r: me), \
+         patch.object(mm, 'get_ldap_member_list', return_value=[]), \
          patch.object(mm, 'get_access_permissions',
                       return_value=MagicMock()), \
          patch.object(mm.RegisterForm, 'apply_permissions',
@@ -137,12 +142,12 @@ def test_ones_own_profile_shows_the_specified_title_and_introduction(config):
                             'form': '<form>f</form>'})
     assert 'Your profile' in html
     assert 'view your own profile, and modify some of its elements' in html
-    assert 'Edit member profile' not in html
+    assert 'Member profile' not in html
     assert 'Please fill the fields' not in html
 
 
 def test_the_admin_selection_page_keeps_its_title(config):
     admin = _member('adm-1', MemberTypes.ADMINISTRATOR)
     html = _render(config, {'member': admin})
-    assert 'Edit member profile' in html          # modify_member_title (en)
+    assert 'Member profile' in html          # modify_member_title (en)
     assert 'Your profile' not in html

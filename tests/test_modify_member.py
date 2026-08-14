@@ -15,6 +15,8 @@ focus only on the corrected branches.
 
 from __future__ import annotations
 
+import pytest
+
 from contextlib import ExitStack, contextmanager
 from unittest.mock import MagicMock, patch
 
@@ -28,6 +30,14 @@ from alirpunkto.models.model_permissions import (
 from alirpunkto.models.permissions import Permissions
 from alirpunkto.views import modify_member as mm
 from alirpunkto.views.modify_member import modify_member
+
+
+@pytest.fixture(autouse=True)
+def _empty_directory(monkeypatch):
+    """Issue #249: the directory is fetched for every logged-in member;
+    keep these unit tests off the real LDAP."""
+    monkeypatch.setattr(mm, 'get_ldap_member_list', lambda: [])
+
 
 
 _WRITE = Permissions.WRITE | Permissions.ACCESS
@@ -63,7 +73,10 @@ def _session():
 
 
 def _accessor():
-    member = Member(oid="accessor-1")
+    # Issue #249: another member's profile is now a read-only card, so
+    # the save-branch tests exercise what they always meant to — saving
+    # ONE'S OWN form. The accessor therefore carries the accessed oid.
+    member = Member(oid="accessed-1")
     member.type = MemberTypes.ORDINARY
     return member
 

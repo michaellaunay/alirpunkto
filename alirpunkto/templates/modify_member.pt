@@ -36,19 +36,23 @@
                  tal:attributes="src python: request.route_url('member_avatar') + '?oid=' + str(admin_view['oid'])"
                  alt="avatar" width="96" height="96" />
             <dl>
-                <dt tal:content="_('pseudonym_label')">Pseudonym</dt>
+                <dt tal:content="_('member_card_pseudonym_label')">Pseudonym</dt>
                 <dd tal:content="python: admin_view['pseudonym']">pseudonym</dd>
-                <dt tal:content="_('description_label')">Profile text</dt>
-                <dd tal:content="python: admin_view['description'] or default">—</dd>
-                <dt tal:content="_('user_number_label')">User number</dt>
-                <dd tal:content="python: admin_view['oid']">oid</dd>
-                <dt tal:content="_('role_label')">Role</dt>
-                <dd tal:content="python:_(admin_view['role_i18n'])">role</dd>
-                <dt tal:content="_('cooperative_behaviour_mark_label')">Cooperative Behaviour Mark</dt>
+                <tal:full condition="python: 'description' in admin_view">
+                    <dt tal:content="_('member_card_description_label')">Profile text</dt>
+                    <dd tal:content="python: admin_view['description'] or default">—</dd>
+                    <dt tal:content="_('member_card_user_number_label')">User number</dt>
+                    <dd tal:content="python: admin_view['oid']">oid</dd>
+                    <dt tal:content="_('member_card_role_label')">Role</dt>
+                    <dd tal:content="python:_(admin_view['role_i18n'])">role</dd>
+                    <dt tal:content="_('member_card_email_label')">E-mail address</dt>
+                    <dd tal:content="python: admin_view['email'] or default">—</dd>
+                </tal:full>
+                <dt tal:content="_('member_card_mark_label')">Cooperative Behaviour Mark</dt>
                 <dd tal:content="python: default if admin_view['cooperative_behaviour_mark'] is None else admin_view['cooperative_behaviour_mark']">—</dd>
-                <dt tal:content="_('cooperative_behaviour_mark_update_label')">Last CBM update</dt>
+                <dt tal:content="_('member_card_mark_update_label')">Last update of the Mark</dt>
                 <dd tal:content="python: default if admin_view['cooperative_behaviour_mark_update'] is None else admin_view['cooperative_behaviour_mark_update']">—</dd>
-                <tal:departure condition="python: admin_view['departure_date']">
+                <tal:departure condition="python: admin_view.get('departure_date')">
                     <dt tal:content="_('departure_date_label')">Departure date</dt>
                     <dd tal:content="python: admin_view['departure_date']">date</dd>
                     <dt tal:content="_('departure_reason_label')">Departure reason</dt>

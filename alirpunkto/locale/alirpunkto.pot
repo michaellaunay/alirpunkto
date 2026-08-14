@@ -1551,3 +1551,35 @@ msgstr ""
 #. Added by client-ticket #252 sync (2026-08-14)
 msgid "voting_period_ended"
 msgstr ""
+
+#. Neutral member-card wording (issue #249, 2026-08-14)
+msgid "member_card_pseudonym_label"
+msgstr ""
+
+#. Neutral member-card wording (issue #249, 2026-08-14)
+msgid "member_card_description_label"
+msgstr ""
+
+#. Neutral member-card wording (issue #249, 2026-08-14)
+msgid "member_card_user_number_label"
+msgstr ""
+
+#. Neutral member-card wording (issue #249, 2026-08-14)
+msgid "member_card_role_label"
+msgstr ""
+
+#. Neutral member-card wording (issue #249, 2026-08-14)
+msgid "member_card_email_label"
+msgstr ""
+
+#. Neutral member-card wording (issue #249, 2026-08-14)
+msgid "member_card_mark_label"
+msgstr ""
+
+#. Neutral member-card wording (issue #249, 2026-08-14)
+msgid "member_card_mark_update_label"
+msgstr ""
+
+#. Neutral member-card wording (issue #249, 2026-08-14)
+msgid "modify_member_intro"
+msgstr ""

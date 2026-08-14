@@ -1,168 +1,117 @@
-"""Non-admin members only ever see their own profile (issue #201).
+"""Member visibility under issue #249 (supersedes the #201 locks).
 
-The modify_member view used to expose the full member list to every
-logged-in member and let them open anyone's profile. Now: administrators
-keep the selection flow; everyone else lands straight on their own
-profile — the member list is never fetched for them, and any crafted POST
-or stale session oid targeting someone else is neutralised. A profile
-visit no longer clobbers a running resignation state either.
+Every logged-in member browses the directory; another member's
+profile is only ever a read-only card scoped by the accessor's role
+— never the edit form, and never the sensitive fields for
+non-administrators. A profile visit still never clobbers a running
+resignation.
 """
-from __future__ import annotations
 
 import json
 from types import SimpleNamespace
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
-import pytest
-from pyramid.events import NewRequest
 from pyramid.testing import DummyRequest, setUp, tearDown
 
-import alirpunkto
 from alirpunkto.constants_and_globals import ACCESSED_MEMBER_OID
 from alirpunkto.models.member import MemberStates, MemberTypes
 from alirpunkto.views import modify_member as mm
-from alirpunkto.views.modify_member import modify_member
 
 
 class _Session(dict):
     def get_csrf_token(self):
         return "csrf-token"
 
-    def flash(self, message, queue=""):
-        self.setdefault('_flash', []).append((queue, message))
-
-
-def _member(oid='me-1', mtype=MemberTypes.ORDINARY,
-            state=MemberStates.REGISTRED):
-    data = SimpleNamespace(
-        fullname='Jean', fullsurname='Doe', description='d',
-        birthdate=None, nationality='FR', lang1='en', lang2=None,
-        lang3=None, cooperative_behaviour_mark=None,
-        cooperative_behaviour_mark_update=None, number_shares_owned=0,
-        date_end_validity_yearly_contribution=None, iban=None)
-    return SimpleNamespace(oid=oid, pseudonym=f'p-{oid}',
-                           email=f'{oid}@example.com', type=mtype,
-                           member_state=state, data=data)
-
-
-class _StubSchema:
-    def apply_permissions(self, *_):
-        return None
-
-
-class _StubForm:
-    def __init__(self, *a, **k):
+    def flash(self, *args, **kwargs):
         pass
 
-    def render(self, appstruct=None):
-        return "<form>profile</form>"
+
+def _member(oid, type_=MemberTypes.ORDINARY, state=None):
+    return SimpleNamespace(
+        oid=oid, pseudonym=f"p-{oid}", email=f"{oid}@example.com",
+        type=type_,
+        data=SimpleNamespace(
+            description="hello", role=None,
+            cooperative_behaviour_mark=1.0,
+            cooperative_behaviour_mark_update=None),
+        member_state=state,
+        departure_date=None, departure_reason=None)
 
 
-@pytest.fixture
-def config():
-    config = setUp(settings={'pyramid.default_locale_name': 'en',
-                             'session.secret': 'x' * 32})
-    config.add_translation_dirs('alirpunkto:locale/')
-    for route in ('home', 'modify_member'):
-        config.add_route(route, '/' + route)
-    yield config
-    tearDown()
-
-
-def _request(config, *, post=None, session_extra=None, oid='me-1'):
+def _request(post=None, oid="me-1", session_extra=None):
     request = DummyRequest(post=post or {})
     request.session = _Session()
-    request.session['logged_in'] = True
-    request.session['user'] = json.dumps({'oid': oid, 'name': f'p-{oid}'})
+    request.session["logged_in"] = True
+    request.session["user"] = json.dumps({"oid": oid, "name": oid})
     if session_extra:
         request.session.update(session_extra)
-    request.accept_language = SimpleNamespace(best_match=lambda langs: 'en')
-    alirpunkto.add_localizer(NewRequest(request))
     return request
 
 
-def _run(config, accessor, *, post=None, session_extra=None,
-         resolved=None):
-    """Run the view with the harness stubs; `resolved` maps oid → member
-    for update_member_from_ldap."""
-    resolved = resolved or {accessor.oid: accessor}
-    permissions = MagicMock()
-    request = _request(config, post=post, session_extra=session_extra,
-                       oid=accessor.oid)
-    with patch.object(mm, 'get_member_by_oid', return_value=accessor), \
-         patch.object(mm, 'update_member_from_ldap',
-                      side_effect=lambda o, r: resolved.get(o)), \
-         patch.object(mm, 'get_ldap_member_list') as lister, \
-         patch.object(mm, 'get_access_permissions',
-                      return_value=permissions), \
-         patch.object(mm, 'RegisterForm',
-                      return_value=SimpleNamespace(
-                          bind=lambda **k: _StubSchema())), \
-         patch.object(mm.deform, 'Form', _StubForm):
-        lister.return_value = [
-            SimpleNamespace(oid='me-1', name='p-me-1'),
-            SimpleNamespace(oid='other-2', name='p-other-2')]
-        result = modify_member(request)
-    return result, request, lister
+def _call(accessor, others, post=None, session_extra=None,
+          expose_list=True):
+    listed = ([SimpleNamespace(oid=m.oid, name=m.pseudonym)
+               for m in [accessor] + others] if expose_list else [])
+    by_oid = {m.oid: m for m in [accessor] + others}
+    with patch.object(mm, "get_member_by_oid",
+                      side_effect=lambda oid, *a, **k: by_oid.get(oid)), \
+         patch.object(mm, "update_member_from_ldap",
+                      side_effect=lambda oid, *a, **k: by_oid.get(oid)), \
+         patch.object(mm, "get_ldap_member_list",
+                      return_value=listed) as lister:
+        setUp()
+        try:
+            result = mm.modify_member(
+                _request(post=post, oid=accessor.oid,
+                         session_extra=session_extra))
+        finally:
+            tearDown()
+    return result, lister
 
 
-def test_a_plain_get_lands_on_ones_own_profile(config):
-    me = _member()
-    result, request, lister = _run(config, me)
-    assert result['accessed_member'] == 'me-1'
-    assert result['form'] == "<form>profile</form>"
-    assert result['accessed_members'] == {}
+def test_a_plain_get_shows_the_directory():
+    accessor = _member("me-1")
+    other = _member("other-2", MemberTypes.COOPERATOR)
+    context, _ = _call(accessor, [other])
+    assert context["form"] is None
+    assert "other-2" in context["accessed_members"]
 
 
-def test_the_member_list_is_never_fetched_for_non_admins(config):
-    me = _member()
-    result, request, lister = _run(config, me)
-    lister.assert_not_called()
-
-
-def test_a_crafted_post_targeting_another_member_is_neutralised(config):
-    """The heart of the ticket: whatever oid the POST carries, a non-admin
-    only ever opens their own profile."""
-    me = _member()
-    other = _member('other-2')
-    result, request, lister = _run(
-        config, me,
-        post={'submit': '1', ACCESSED_MEMBER_OID: 'other-2'},
-        resolved={'me-1': me, 'other-2': other})
-    assert result['accessed_member'] == 'me-1'
-
-
-def test_a_stale_session_oid_of_another_member_is_neutralised(config):
-    me = _member()
-    other = _member('other-2')
-    result, request, lister = _run(
-        config, me,
-        session_extra={ACCESSED_MEMBER_OID: 'other-2'},
-        resolved={'me-1': me, 'other-2': other})
-    assert result['accessed_member'] == 'me-1'
-    assert request.session[ACCESSED_MEMBER_OID] == 'me-1'
-
-
-def test_admins_keep_the_selection_flow(config):
-    admin = _member('adm-1', MemberTypes.ADMINISTRATOR)
-    result, request, lister = _run(config, admin)
+def test_the_directory_is_fetched_for_every_member():
+    accessor = _member("me-1")
+    _, lister = _call(accessor, [])
     lister.assert_called_once()
-    assert result['accessed_member'] is None          # the selection page
-    assert 'other-2' in result['accessed_members']
 
 
-def test_admins_still_open_other_profiles(config):
-    admin = _member('adm-1', MemberTypes.ADMINISTRATOR)
-    other = _member('other-2')
-    result, request, lister = _run(
-        config, admin,
-        post={'submit': '1', ACCESSED_MEMBER_OID: 'other-2'},
-        resolved={'adm-1': admin, 'other-2': other})
-    assert result['accessed_member'] == 'other-2'
+def test_targeting_another_member_yields_the_public_card_only():
+    """A crafted POST at someone else's oid never reaches the edit
+    form nor the sensitive fields — it lands on the reduced card."""
+    accessor = _member("me-1")
+    other = _member("other-2", MemberTypes.COOPERATOR)
+    context, _ = _call(accessor, [other],
+                       post={"submit": "submit",
+                             "accessed_member_oid": "other-2"})
+    assert context["form"] is None
+    card = context["admin_view"]
+    assert "email" not in card and "description" not in card
+    assert card["pseudonym"] == "p-other-2"
 
 
-def test_a_profile_visit_does_not_clobber_a_running_resignation(config):
-    me = _member(state=MemberStates.PENDING_UNSUBSCRIPTION)
-    result, request, lister = _run(config, me)
-    assert me.member_state == MemberStates.PENDING_UNSUBSCRIPTION
-    assert result['accessed_member'] == 'me-1'
+def test_a_stale_session_oid_yields_the_card_not_the_form():
+    accessor = _member("me-1")
+    other = _member("other-2", MemberTypes.COOPERATOR)
+    context, _ = _call(accessor, [other],
+                       post={"modify": "modify"},
+                       session_extra={ACCESSED_MEMBER_OID: "other-2"})
+    assert context["form"] is None
+    assert context.get("admin_view", {}).get("pseudonym") == "p-other-2"
+
+
+def test_a_profile_visit_does_not_clobber_a_running_resignation():
+    accessor = _member(
+        "me-1", state=MemberStates.PENDING_UNSUBSCRIPTION)
+    with patch.object(mm, "get_access_permissions", return_value=None):
+        context, _ = _call(accessor, [],
+                           post={"submit": "submit",
+                                 "accessed_member_oid": "me-1"})
+    assert accessor.member_state == MemberStates.PENDING_UNSUBSCRIPTION

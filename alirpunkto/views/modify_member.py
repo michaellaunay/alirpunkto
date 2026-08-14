@@ -120,9 +120,13 @@ def _own_member_panel(request, member):
     return panel
 
 
-def _admin_member_card(request, accessed_member):
-    """The fixed, read-only card administrators see (issue #149): exactly
-    the eight fields the ticket lists — nothing else, and no form."""
+def _admin_member_card(request, accessed_member, full=True):
+    """The fixed, read-only member card (issues #149/#249).
+
+    full=True (administrators): the eight #149 fields plus the e-mail
+    address. full=False (any member, issue #249): the public fields
+    only — pseudonym, Cooperative Behaviour Mark and its update date.
+    """
     from alirpunkto.models.member import MemberRoles
     from alirpunkto.views.avatar import get_member_avatar
     data = getattr(accessed_member, 'data', None)
@@ -137,7 +141,18 @@ def _admin_member_card(request, accessed_member):
         has_avatar = bool(get_member_avatar(request, accessed_member.oid))
     except Exception:
         has_avatar = False
+    if not full:
+        return {
+            'oid': accessed_member.oid,
+            'pseudonym': getattr(accessed_member, 'pseudonym', None),
+            'cooperative_behaviour_mark':
+                getattr(data, 'cooperative_behaviour_mark', None),
+            'cooperative_behaviour_mark_update':
+                getattr(data, 'cooperative_behaviour_mark_update', None),
+            'has_avatar': has_avatar,
+        }
     return {
+        'email': getattr(accessed_member, 'email', None),
         'oid': accessed_member.oid,
         'pseudonym': getattr(accessed_member, 'pseudonym', None),
         'description': getattr(data, 'description', None),
@@ -234,37 +249,32 @@ def modify_member(request):
             "error": _('unknown_member'),
         }
     # The member is known and will be recognized as the accessor.
-    # Issue #201: only administrators may browse other members — the member
-    # list is neither fetched nor exposed for anyone else.
+    # Issue #249 supersedes the #201 restriction: every logged-in member
+    # may browse the directory and open another member's card — the card
+    # content, not the list, is what the accessor's role scopes.
     is_admin = member.type == MemberTypes.ADMINISTRATOR
-    if is_admin:
-        try:
-            ldap_members = get_ldap_member_list()
-        except Exception as e:
-            log.error(f"modify_member: failed to list the members from LDAP: {e}")
-            return {
-                "form": None,
-                "member": member,
-                "accessed_member": None,
-                "accessed_members": {},
-                "error": _('ldap_error_retry'),
-            }
-        members = {user.oid:user.name for user in ldap_members}
-    else:
-        members = {}
+    try:
+        ldap_members = get_ldap_member_list()
+    except Exception as e:
+        log.error(f"modify_member: failed to list the members from LDAP: {e}")
+        return {
+            "form": None,
+            "member": member,
+            "accessed_member": None,
+            "accessed_members": {},
+            "error": _('ldap_error_retry'),
+        }
+    members = {user.oid:user.name for user in ldap_members}
     accessor_member = member
-    if "submit" in request.POST or 'modify' in request.POST or not is_admin:
-        if not is_admin:
-            # Issue #201: whatever oid was posted or left in the session, a
-            # non-admin only ever accesses their own profile — and a plain
-            # GET lands straight on it.
-            accessed_member_oid = member.oid
-        elif "submit" in request.POST:
+    if "submit" in request.POST or 'modify' in request.POST:
+        if "submit" in request.POST:
             accessed_member_oid = request.POST.get(ACCESSED_MEMBER_OID, None)
         elif 'modify' in request.POST:
+            # Issue #249: without an armed session, the 'modify' POST is
+            # the save of one's OWN form — never someone else's.
             accessed_member_oid = (request.session[ACCESSED_MEMBER_OID]
-                if ACCESSED_MEMBER_OID in request.session else None
-                )
+                if ACCESSED_MEMBER_OID in request.session
+                else member.oid)
         if not accessed_member_oid:
             return {
                 "form": None,
@@ -294,17 +304,19 @@ def modify_member(request):
                 "accessed_members": members,
                 "error": _('unknown_accessed_member')
             }
-        if is_admin and accessed_member.oid != member.oid:
-            # Issue #149: administrators view a fixed read-only card of the
-            # eight listed fields — never the modification form, and the
-            # visit neither flips the member's state nor arms the session
-            # for a later 'modify' POST.
+        if accessed_member.oid != member.oid:
+            # Issues #149/#249: someone else's profile is a fixed read-only
+            # card — never the modification form, and the visit neither
+            # flips the member's state nor arms the session for a later
+            # 'modify' POST. The accessor's role scopes the card: members
+            # see the public fields, administrators the full card.
             return {
                 "form": None,
                 "member": member,
                 "accessed_member": accessed_member.oid,
                 "accessed_members": members,
-                "admin_view": _admin_member_card(request, accessed_member),
+                "admin_view": _admin_member_card(
+                    request, accessed_member, full=is_admin),
             }
         # Memorize the moddification request — but never clobber a running
         # resignation (issue #201 made plain GETs land here, and the
@@ -337,8 +349,11 @@ def modify_member(request):
         # so we need to apply permissions.data and permissions to the schema.
         schema.apply_permissions(permissions.data)
         schema.apply_permissions(permissions)
-    if "submit" in request.POST or (not is_admin
-                                    and 'modify' not in request.POST):
+    # Issue #249: the pre-filled edit form only makes sense right after a
+    # selection landed on oneself ("submit"); a plain GET now falls
+    # through to the directory below, and the 'modify' POST keeps its
+    # own saving branch.
+    if "submit" in request.POST:
         appstruct = {
             'accessed_member': accessed_member,
             'cooperative_number': accessed_member.oid,

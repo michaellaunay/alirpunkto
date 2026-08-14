@@ -31,16 +31,22 @@ msgid "login_label"
 msgstr "Entrar"
 
 msgid "welcome_msg"
-msgstr "Bem-vindo ao ${site_name}, o serviço centralizado para as aplicações usadas na infraestrutura de TI de ${domain_name}."
+msgstr ""
+"Bem-vindo ao ${site_name}, o serviço centralizado para as aplicações usadas "
+"na infraestrutura de TI de ${domain_name}."
 
 msgid "all_applications_msg"
-msgstr "Todas as aplicações de que você precisa para participar das atividades de ${domain_name} em um só lugar."
+msgstr ""
+"Todas as aplicações de que você precisa para participar das atividades de "
+"${domain_name} em um só lugar."
 
 msgid "register_or_login_msg"
 msgstr "Registre-se ou faça login agora para começar."
 
 msgid "logged_in_msg_title"
-msgstr "${site_name}, o serviço centralizado para as aplicações usadas na infraestrutura de TI de ${domain_name}"
+msgstr ""
+"${site_name}, o serviço centralizado para as aplicações usadas na "
+"infraestrutura de TI de ${domain_name}"
 
 msgid "logged_in_msg"
 msgstr "Você está logado como ${user}."
@@ -74,7 +80,8 @@ msgid "full_name_as_in_id_label"
 msgstr "Nome completo conforme nos seus documentos oficiais de identidade"
 
 msgid "full_surname_as_in_id_label"
-msgstr "Sobrenome completo conforme nos seus documentos oficiais de identidade"
+msgstr ""
+"Sobrenome completo conforme nos seus documentos oficiais de identidade"
 
 msgid "birthdate_label"
 msgstr "Data de nascimento"
@@ -119,16 +126,25 @@ msgid "candidature_states_draft_value"
 msgstr "Rascunho: A candidatura está em modo de rascunho."
 
 msgid "candidature_states_email_validation_value"
-msgstr "Validação de E-mail: O estado em que o endereço de e-mail do candidato está aguardando validação."
+msgstr ""
+"Validação de E-mail: O estado em que o endereço de e-mail do candidato está "
+"aguardando validação."
 
 msgid "candidature_states_confirmed_human_value"
-msgstr "Humano Confirmado: O endereço de e-mail do candidato está verificado, e a prova de humanidade é fornecida (verificamos que você não é um robô)."
+msgstr ""
+"Humano Confirmado: O endereço de e-mail do candidato está verificado, e a "
+"prova de humanidade é fornecida (verificamos que você não é um robô)."
 
 msgid "candidature_states_unique_data_value"
-msgstr "Dados Únicos: O candidato inseriu seus dados pessoais de identificação, e verificamos que nenhum Cooperador ou Membro Ordinário atual ou recente da Comunidade possui os mesmos dados."
+msgstr ""
+"Dados Únicos: O candidato inseriu seus dados pessoais de identificação, e "
+"verificamos que nenhum Cooperador ou Membro Ordinário atual ou recente da "
+"Comunidade possui os mesmos dados."
 
 msgid "candidature_states_pending_value"
-msgstr "Pendente: A candidatura foi enviada. Os dados pessoais de identificação foram transmitidos aos Verificadores, mas ainda não forneceram seu feedback."
+msgstr ""
+"Pendente: A candidatura foi enviada. Os dados pessoais de identificação "
+"foram transmitidos aos Verificadores, mas ainda não forneceram seu feedback."
 
 msgid "candidature_states_approved_value"
 msgstr "Aprovado: A candidatura foi aceita."
@@ -158,10 +174,18 @@ msgid "candidature_states_refused"
 msgstr "recusado"
 
 msgid "user_types_ordinary_value"
-msgstr "Ordinário: Uma candidatura para se tornar um Membro Ordinário da Comunidade = com um processo de registro simplificado, sem dever financeiro, mas sem direitos de decisão."
+msgstr ""
+"Ordinário: Uma candidatura para se tornar um Membro Ordinário da Comunidade "
+"= com um processo de registro simplificado, sem dever financeiro, mas sem "
+"direitos de decisão."
 
 msgid "user_types_cooperator_value"
-msgstr "Cooperador: Uma candidatura para se tornar um membro pleno da Cooperativa, um Cooperador = com um processo de registro completo assegurando o princípio de 'uma pessoa = um voto' e que o candidato é um cidadão da União Europeia, o dever de comprar pelo menos uma cota e pagar uma contribuição anual, e plenos direitos de decisão."
+msgstr ""
+"Cooperador: Uma candidatura para se tornar um membro pleno da Cooperativa, "
+"um Cooperador = com um processo de registro completo assegurando o princípio"
+" de 'uma pessoa = um voto' e que o candidato é um cidadão da União Europeia,"
+" o dever de comprar pelo menos uma cota e pagar uma contribuição anual, e "
+"plenos direitos de decisão."
 
 msgid "user_types_ordinary"
 msgstr "Membro Ordinário da Comunidade"
@@ -227,7 +251,9 @@ msgid "plus_prefix"
 msgstr ", "
 
 msgid "email_validation_subject"
-msgstr "Verificando que você é um humano. Calcule os resultados de operações matemáticas simples e insira esses resultados no portal"
+msgstr ""
+"Verificando que você é um humano. Calcule os resultados de operações "
+"matemáticas simples e insira esses resultados no portal"
 
 msgid "email_candidature_state_changed"
 msgstr "Mudança no status da sua candidatura para o portal"
@@ -242,43 +268,66 @@ msgid "invalid_choice"
 msgstr "Sua escolha não é válida, por favor insira-a novamente."
 
 msgid "challenge_instruction_text"
-msgstr "Por favor, calcule os resultados das quatro operações matemáticas simples a seguir e preencha os campos correspondentes para confirmar seu endereço de e-mail."
+msgstr ""
+"Por favor, calcule os resultados das quatro operações matemáticas simples a "
+"seguir e preencha os campos correspondentes para confirmar seu endereço de "
+"e-mail."
 
 msgid "enter_result_label_A"
 msgstr "Por favor, insira o resultado para a operação matemática A:"
 
 msgid "result_label_title_A"
-msgstr "Por favor, insira o código que você recebeu por e-mail ou o resultado da operação matemática A."
+msgstr ""
+"Por favor, insira o código que você recebeu por e-mail ou o resultado da "
+"operação matemática A."
 
 msgid "result_input_title_A"
-msgstr "Para que possamos verificar seu endereço de e-mail e que você é um humano (não um robô), por favor, insira o resultado da operação A que você recebeu por e-mail."
+msgstr ""
+"Para que possamos verificar seu endereço de e-mail e que você é um humano "
+"(não um robô), por favor, insira o resultado da operação A que você recebeu "
+"por e-mail."
 
 msgid "enter_result_label_B"
 msgstr "Por favor, insira o resultado para a operação matemática B:"
 
 msgid "result_label_title_B"
-msgstr "Por favor, insira o código que você recebeu por e-mail ou o resultado da operação matemática B."
+msgstr ""
+"Por favor, insira o código que você recebeu por e-mail ou o resultado da "
+"operação matemática B."
 
 msgid "result_input_title_B"
-msgstr "Para que possamos verificar seu endereço de e-mail e que você é um humano (não um robô), por favor, insira o resultado da operação B que você recebeu por e-mail."
+msgstr ""
+"Para que possamos verificar seu endereço de e-mail e que você é um humano "
+"(não um robô), por favor, insira o resultado da operação B que você recebeu "
+"por e-mail."
 
 msgid "enter_result_label_C"
 msgstr "Por favor, insira o resultado para a operação matemática C:"
 
 msgid "result_label_title_C"
-msgstr "Por favor, insira o código que você recebeu por e-mail ou o resultado da operação matemática C."
+msgstr ""
+"Por favor, insira o código que você recebeu por e-mail ou o resultado da "
+"operação matemática C."
 
 msgid "result_input_title_C"
-msgstr "Para que possamos verificar seu endereço de e-mail e que você é um humano (não um robô), por favor, insira o resultado da operação C que você recebeu por e-mail."
+msgstr ""
+"Para que possamos verificar seu endereço de e-mail e que você é um humano "
+"(não um robô), por favor, insira o resultado da operação C que você recebeu "
+"por e-mail."
 
 msgid "enter_result_label_D"
 msgstr "Por favor, insira o resultado para a operação matemática D:"
 
 msgid "result_label_title_D"
-msgstr "Por favor, insira o código que você recebeu por e-mail ou o resultado da operação matemática D."
+msgstr ""
+"Por favor, insira o código que você recebeu por e-mail ou o resultado da "
+"operação matemática D."
 
 msgid "result_input_title_D"
-msgstr "Para que possamos verificar seu endereço de e-mail e que você é um humano (não um robô), por favor, insira o resultado da operação D que você recebeu por e-mail."
+msgstr ""
+"Para que possamos verificar seu endereço de e-mail e que você é um humano "
+"(não um robô), por favor, insira o resultado da operação D que você recebeu "
+"por e-mail."
 
 msgid "verify_button"
 msgstr "Enviar"
@@ -311,7 +360,9 @@ msgid "password_must_contain_lowercase"
 msgstr "A senha deve conter pelo menos uma letra minúscula."
 
 msgid "password_must_contain_special_char"
-msgstr "A senha deve conter pelo menos um dos seguintes caracteres: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+msgstr ""
+"A senha deve conter pelo menos um dos seguintes caracteres: '@', '#', '%', "
+"'&', '*', '(', ')', '-', '_', '+', '='."
 
 msgid "password_title_label"
 msgstr "Por favor, insira sua senha aqui."
@@ -329,16 +380,25 @@ msgid "type_registration_label"
 msgstr "Selecione o tipo de registro que mais lhe convém."
 
 msgid "type_registration_choice"
-msgstr "Cada tipo de registro vem com um conjunto específico de direitos, benefícios e obrigações."
+msgstr ""
+"Cada tipo de registro vem com um conjunto específico de direitos, benefícios"
+" e obrigações."
 
 msgid "approved_heading"
 msgstr "Parabéns pela sua Aprovação!"
 
 msgid "approved_description"
-msgstr "Sua candidatura foi aprovada. Você pode agora fazer login usando o pseudônimo e a senha fornecidos durante o processo de candidatura."
+msgstr ""
+"Sua candidatura foi aprovada. Você pode agora fazer login usando o "
+"pseudônimo e a senha fornecidos durante o processo de candidatura."
 
 msgid "invalid_pseudonym"
-msgstr "Pseudônimo inválido. Deve ter entre ${MIN_PSEUDONYM_LENGTH} e ${MAX_PSEUDONYM_LENGTH} caracteres e pode conter apenas letras (A-Z, a-z), números (0-9), sublinhados (_), pontos (.), hífens (-) e espaços ( ). Não pode conter letras com acentos, trema ou outros sinais diacríticos específicos de alguns idiomas."
+msgstr ""
+"Pseudônimo inválido. Deve ter entre ${MIN_PSEUDONYM_LENGTH} e "
+"${MAX_PSEUDONYM_LENGTH} caracteres e pode conter apenas letras (A-Z, a-z), "
+"números (0-9), sublinhados (_), pontos (.), hífens (-) e espaços ( ). Não "
+"pode conter letras com acentos, trema ou outros sinais diacríticos "
+"específicos de alguns idiomas."
 
 msgid "invalid_date"
 msgstr "Formato de data inválido."
@@ -458,13 +518,16 @@ msgid "first_interaction_language_required"
 msgstr "A primeira língua de interação é obrigatória."
 
 msgid "pending_description"
-msgstr "Sua candidatura está sendo analisada. Você será notificado por e-mail assim que for aprovada."
+msgstr ""
+"Sua candidatura está sendo analisada. Você será notificado por e-mail assim "
+"que for aprovada."
 
 msgid "candidature_not_found"
 msgstr "Candidatura não encontrada."
 
 msgid "cosmopolitical_cooperative_description"
-msgstr "<div>\n"
+msgstr ""
+"<div>\n"
 "<h2><b>Obrigado pelo seu interesse nas atividades do ${domain_name}! Aqui é o lugar certo para você se registrar </b></h2>\n"
 "<p>A Cooperativa CosmoPolitical apoia indivíduos e transforma o sistema econômico, social e político existente em direção a uma sociedade radicalmente justa, sustentável, democrática e feliz, a <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Sociedade do Acordo</a>.</p>\n"
 "<p>Abaixo você encontrará o início do processo de registro para se juntar a nós. Propomos dois níveis de participação, com obrigações e direitos crescentes:</p>\n"
@@ -519,11 +582,27 @@ msgid "confirm_email_send_button_label"
 msgstr "Confirmar"
 
 msgid "vote_success"
-msgstr "Agradecemos por participar do processo de votação. Seu voto ${vote} foi registrado com sucesso. Você pode mudar seu voto até o prazo final retornando a esta página."
+msgstr ""
+"Agradecemos por participar do processo de votação. Seu voto ${vote} foi "
+"registrado com sucesso. Você pode mudar seu voto até o prazo final "
+"retornando a esta página."
 
 msgid "cooperator_data_explanation"
 msgstr ""
-"<div>\n<h2>Forneça, por favor, a informação de que precisamos para o registar como Cooperador</h2>\n    <p>Como Cooperador, você participará de todas as nossas decisões. Essas decisões são adotadas seguindo procedimentos democráticos rigorosos e podem ter consequências importantes para a Cooperativa e para os Cooperadores. Além disso, a Cooperativa pretende representar os cidadãos da UE, independentemente de sua nacionalidade - mas apenas cidadãos da UE. Isso é particularmente importante durante as eleições públicas. Por isso, precisamos garantir três coisas: (1) que uma pessoa não se registre mais de uma vez, garantindo o princípio democrático 'uma pessoa = um voto'; (2) que todos os Cooperadores tenham pelo menos a idade legal e (3) que apenas cidadãos da União Europeia sejam Cooperadores.</p>\n    <p>É por isso que verificaremos alguns elementos dos seus dados de identidade, comparando (1) os dados que você introduzir neste formulário ao se registrar com (2) as informações presentes nos seus documentos oficiais de identidade. Essa verificação será realizada por um conjunto de membros da Cooperativa selecionados aleatoriamente, os Verificadores da sua candidatura, e será baseada nas informações sobre seus documentos oficiais de identidade que você transmitirá diretamente a eles, por e-mail ou durante uma videoconferência, sem transitar por esta plataforma online (para garantir a segurança e a confidencialidade).</p>\n    <p>Os dados que solicitamos de você e que os Verificadores verificarão a conformidade com os dados nos seus documentos oficiais de identidade são:\n    <ul>\n    <li>seu(s) nome(s) e sobrenome(s);</li>\n    <li>sua data de nascimento;</li>\n    <li>sua cidadania.</li>\n    </ul></p>\n    <p>Apenas uma pessoa tem seu(s) nome(s), sobrenome(s) e data de nascimento: você. Se tentar se registrar novamente, precisará fornecer os mesmos dados ao nosso procedimento de verificação, e rejeitaremos sua candidatura, pois você já é um Cooperador e não pode ter várias contas para votar mais de uma vez. Teremos confiança em fazer isso porque sabemos que apenas uma pessoa tem essa combinação de nome(s), sobrenome(s) e data de nascimento. Sua data de nascimento nos permite verificar se você atingiu a idade legal e sua cidadania nos permite garantir que você é, de fato, um cidadão da União Europeia.</p>\n    <p>Esses dados serão usados exclusivamente para verificarmos sua identidade, idade e cidadania, e para gerenciar sua conta como Cooperador. Eles nunca serão exibidos para os outros usuários da plataforma de TI do ${domain_name}, nem serão transmitidos ou vendidos a ninguém, exceto para cumprir requisitos legais por autoridades públicas de aplicação da lei sob solicitação de um juiz. O 'controlador de dados' conforme definido pelo <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\">Regulamento Geral de Proteção de Dados (GDPR) da União Europeia</a> é ${organization_details}.</p>\n<p><b>Aviso importante:</b> Em casos raros, o formulário abaixo pode não ser apresentado corretamente: não mostrará onde indicar o seu pseudónimo e o seu endereço de e-mail poderá ser editável... Se isso acontecer, basta clicar no botão \"Submeter\" abaixo. O formulário que aparecerá em seguida estará correto e poderá preenchê-lo facilmente.</p>\n</div>"
+"<div>\n"
+"<h2>Forneça, por favor, a informação de que precisamos para o registar como Cooperador</h2>\n"
+"    <p>Como Cooperador, você participará de todas as nossas decisões. Essas decisões são adotadas seguindo procedimentos democráticos rigorosos e podem ter consequências importantes para a Cooperativa e para os Cooperadores. Além disso, a Cooperativa pretende representar os cidadãos da UE, independentemente de sua nacionalidade - mas apenas cidadãos da UE. Isso é particularmente importante durante as eleições públicas. Por isso, precisamos garantir três coisas: (1) que uma pessoa não se registre mais de uma vez, garantindo o princípio democrático 'uma pessoa = um voto'; (2) que todos os Cooperadores tenham pelo menos a idade legal e (3) que apenas cidadãos da União Europeia sejam Cooperadores.</p>\n"
+"    <p>É por isso que verificaremos alguns elementos dos seus dados de identidade, comparando (1) os dados que você introduzir neste formulário ao se registrar com (2) as informações presentes nos seus documentos oficiais de identidade. Essa verificação será realizada por um conjunto de membros da Cooperativa selecionados aleatoriamente, os Verificadores da sua candidatura, e será baseada nas informações sobre seus documentos oficiais de identidade que você transmitirá diretamente a eles, por e-mail ou durante uma videoconferência, sem transitar por esta plataforma online (para garantir a segurança e a confidencialidade).</p>\n"
+"    <p>Os dados que solicitamos de você e que os Verificadores verificarão a conformidade com os dados nos seus documentos oficiais de identidade são:\n"
+"    <ul>\n"
+"    <li>seu(s) nome(s) e sobrenome(s);</li>\n"
+"    <li>sua data de nascimento;</li>\n"
+"    <li>sua cidadania.</li>\n"
+"    </ul></p>\n"
+"    <p>Apenas uma pessoa tem seu(s) nome(s), sobrenome(s) e data de nascimento: você. Se tentar se registrar novamente, precisará fornecer os mesmos dados ao nosso procedimento de verificação, e rejeitaremos sua candidatura, pois você já é um Cooperador e não pode ter várias contas para votar mais de uma vez. Teremos confiança em fazer isso porque sabemos que apenas uma pessoa tem essa combinação de nome(s), sobrenome(s) e data de nascimento. Sua data de nascimento nos permite verificar se você atingiu a idade legal e sua cidadania nos permite garantir que você é, de fato, um cidadão da União Europeia.</p>\n"
+"    <p>Esses dados serão usados exclusivamente para verificarmos sua identidade, idade e cidadania, e para gerenciar sua conta como Cooperador. Eles nunca serão exibidos para os outros usuários da plataforma de TI do ${domain_name}, nem serão transmitidos ou vendidos a ninguém, exceto para cumprir requisitos legais por autoridades públicas de aplicação da lei sob solicitação de um juiz. O 'controlador de dados' conforme definido pelo <a href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02016R0679-20160504\">Regulamento Geral de Proteção de Dados (GDPR) da União Europeia</a> é ${organization_details}.</p>\n"
+"<p><b>Aviso importante:</b> Em casos raros, o formulário abaixo pode não ser apresentado corretamente: não mostrará onde indicar o seu pseudónimo e o seu endereço de e-mail poderá ser editável... Se isso acontecer, basta clicar no botão \"Submeter\" abaixo. O formulário que aparecerá em seguida estará correto e poderá preenchê-lo facilmente.</p>\n"
+"</div>"
 
 msgid "ordinary_member_data_explanation"
 msgstr ""
@@ -557,10 +636,15 @@ msgstr ""
 
 msgid "voters_not_selected"
 msgstr ""
-"O número de Cooperadores existentes é muito baixo para selecionar o número adequado de Verificadores de sua identidade. Por favor, contate o administrador do sistema, no seguinte endereço ${administrator}, para resolver o problema."
+"O número de Cooperadores existentes é muito baixo para selecionar o número "
+"adequado de Verificadores de sua identidade. Por favor, contate o "
+"administrador do sistema, no seguinte endereço ${administrator}, para "
+"resolver o problema."
 
 msgid "email_copy_id_verification_subject"
-msgstr "pt - ${domain_name} - Por favor, verifique minha identidade como um novo potencial Cooperador"
+msgstr ""
+"pt - ${domain_name} - Por favor, verifique minha identidade como um novo "
+"potencial Cooperador"
 
 msgid "email_copy_id_verification_body"
 msgstr ""
@@ -580,7 +664,9 @@ msgstr ""
 " Este e-mail foi gerado com a assistência do recurso de verificação de identidade do ${domain_name}. Se você não for o Verificador atribuído à candidatura de ${signature} e recebeu este e-mail por engano, por favor, informe o administrador do ${domain_name} no seguinte endereço: ${administrator}."
 
 msgid "email_video_id_verification_subject"
-msgstr "pt - ${domain_name} - Por favor, verifique minha identidade por videoconferência como um novo potencial Cooperador"
+msgstr ""
+"pt - ${domain_name} - Por favor, verifique minha identidade por "
+"videoconferência como um novo potencial Cooperador"
 
 msgid "email_video_id_verification_body"
 msgstr ""
@@ -622,7 +708,9 @@ msgid "reset_password_email_subject"
 msgstr "Redefinir Sua Senha"
 
 msgid "forget_email_send_error"
-msgstr "Ocorreu um erro ao enviar o e-mail de redefinição, por favor contate o administrador no ${administrator}"
+msgstr ""
+"Ocorreu um erro ao enviar o e-mail de redefinição, por favor contate o "
+"administrador no ${administrator}"
 
 msgid "member_state_created_name"
 msgstr "criado"
@@ -657,23 +745,32 @@ msgstr "Os dados do membro foram modificados"
 msgid "email_member_state_changed"
 msgstr "Mudança no perfil do seu membro"
 
-#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+#: alirpunkto/views/forgot_password.py:100
+#: alirpunkto/views/forgot_password.py:101
 msgid "forget_no_mail"
 msgstr "Por favor, forneça um endereço de e-mail válido"
 
-#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+#: alirpunkto/views/forgot_password.py:128
+#: alirpunkto/views/forgot_password.py:129
 msgid "forget_admin_user"
 msgstr "O administrador não tem permissão para redefinir sua própria senha"
 
 #: alirpunkto/views/forgot_password.py:174
 msgid "forget_email_sent"
-msgstr "Se o usuário existir, um e-mail foi enviado para o endereço de e-mail dele(a) com um link para redefinir a senha"
+msgstr ""
+"Se o usuário existir, um e-mail foi enviado para o endereço de e-mail "
+"dele(a) com um link para redefinir a senha"
 
-#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+#: alirpunkto/views/forgot_password.py:197
+#: alirpunkto/views/forgot_password.py:198
 msgid "password_not_match"
-msgstr "As duas versões da senha não coincidem. Por favor, certifique-se de que coincidem e envie novamente"
+msgstr ""
+"As duas versões da senha não coincidem. Por favor, certifique-se de que "
+"coincidem e envie novamente"
 
-#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+#: alirpunkto/views/forgot_password.py:202
+#: alirpunkto/views/forgot_password.py:203
+#: alirpunkto/views/forgot_password.py:209
 msgid "password_required"
 msgstr "Por favor, forneça uma nova senha"
 
@@ -687,7 +784,9 @@ msgstr "Ocorreu um erro no processo de redefinição da sua senha"
 
 #: alirpunkto/views/forgot_password.py:239
 msgid "password_not_changed"
-msgstr "Ocorreu um erro no processo de redefinição da sua senha. Sua senha não foi alterada"
+msgstr ""
+"Ocorreu um erro no processo de redefinição da sua senha. Sua senha não foi "
+"alterada"
 
 #: alirpunkto/views/forgot_password.py:264
 msgid "member_not_found"
@@ -695,10 +794,14 @@ msgstr "O membro não foi encontrado na lista de membros atuais"
 
 #: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
 msgid "url_is_obsolete"
-msgstr "O hiperlink que você usou para redefinir sua senha está obsoleto. Por favor, use o mais recente que você recebeu"
+msgstr ""
+"O hiperlink que você usou para redefinir sua senha está obsoleto. Por favor,"
+" use o mais recente que você recebeu"
 
 msgid "email_not_sent"
-msgstr "O e-mail contendo o desafio matemático para verificar se o candidato é humano (e não um robô) não foi enviado."
+msgstr ""
+"O e-mail contendo o desafio matemático para verificar se o candidato é "
+"humano (e não um robô) não foi enviado."
 
 #: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
 msgid "error_committing_candidature"
@@ -711,24 +814,35 @@ msgid "modification_to_profile_button_label"
 msgstr "Editar Perfil"
 
 msgid "modification_to_profile_button_description"
-msgstr "Clique aqui para receber por e-mail um link seguro para modificar seu perfil."
+msgstr ""
+"Clique aqui para receber por e-mail um link seguro para modificar seu "
+"perfil."
 
 msgid "modification_to_profile_explanation_content"
 msgstr ""
-"Para garantir a segurança dos seus dados, um link único para modificar seu perfil será enviado por e-mail. Este processo garante que apenas a pessoa com acesso ao seu endereço de e-mail possa fazer alterações no seu perfil."
+"Para garantir a segurança dos seus dados, um link único para modificar seu "
+"perfil será enviado por e-mail. Este processo garante que apenas a pessoa "
+"com acesso ao seu endereço de e-mail possa fazer alterações no seu perfil."
 
 msgid "modification_to_profile_email_subject"
-msgstr "Link para modificar seu perfil na infraestrutura de TI do ${domain_name}"
+msgstr ""
+"Link para modificar seu perfil na infraestrutura de TI do ${domain_name}"
 
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Por favor, forneça aqui todos os seus nomes próprios, conforme escritos nos seus documentos oficiais de identidade, na sua transcrição oficial em caracteres latinos (se a língua original usar um alfabeto diferente do latino)."
+"Por favor, forneça aqui todos os seus nomes próprios, conforme escritos nos "
+"seus documentos oficiais de identidade, na sua transcrição oficial em "
+"caracteres latinos (se a língua original usar um alfabeto diferente do "
+"latino)."
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Por favor, forneça aqui todos os seus sobrenomes de nascimento (ou seja, NÃO seu sobrenome de casado), conforme escritos nos seus documentos oficiais de identidade, na sua transcrição oficial em caracteres latinos (se a língua original usar um alfabeto diferente do latino)."
+"Por favor, forneça aqui todos os seus sobrenomes de nascimento (ou seja, NÃO"
+" seu sobrenome de casado), conforme escritos nos seus documentos oficiais de"
+" identidade, na sua transcrição oficial em caracteres latinos (se a língua "
+"original usar um alfabeto diferente do latino)."
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
@@ -743,11 +857,19 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:55
 msgid "birthdate_description"
 msgstr ""
-"Por favor, forneça sua data de nascimento no seguinte formato: DD/MM/AAAA, ou seja, (1) o dia do mês, com 2 dígitos; (2) o número do mês, com 2 dígitos; (3) o ano, com 4 dígitos. Apenas pessoas que atingiram o aniversário de 18 anos podem ser Cooperadores. Se você ainda não atingiu seu 18º aniversário, convidamos você a se registrar como Membro Ordinário da Comunidade - e a mudar para o status de Cooperador assim que atingir a maioridade."
+"Por favor, forneça sua data de nascimento no seguinte formato: DD/MM/AAAA, "
+"ou seja, (1) o dia do mês, com 2 dígitos; (2) o número do mês, com 2 "
+"dígitos; (3) o ano, com 4 dígitos. Apenas pessoas que atingiram o "
+"aniversário de 18 anos podem ser Cooperadores. Se você ainda não atingiu seu"
+" 18º aniversário, convidamos você a se registrar como Membro Ordinário da "
+"Comunidade - e a mudar para o status de Cooperador assim que atingir a "
+"maioridade."
 
 #: alirpunkto/schemas/register_form.py:67
 msgid "nationality_description"
-msgstr "Por favor, forneça um Estado-Membro da União Europeia do qual você é cidadão. Apenas cidadãos da União Europeia podem ser Cooperadores."
+msgstr ""
+"Por favor, forneça um Estado-Membro da União Europeia do qual você é "
+"cidadão. Apenas cidadãos da União Europeia podem ser Cooperadores."
 
 #: alirpunkto/schemas/register_form.py:70
 msgid "select_a_country"
@@ -755,7 +877,9 @@ msgstr "Por favor, selecione um Estado-Membro da União Europeia"
 
 #: alirpunkto/schemas/register_form.py:104
 msgid "cooperator_number_description"
-msgstr "Este é o número único que o identifica em todos os processos que ocorrem na Comunidade"
+msgstr ""
+"Este é o número único que o identifica em todos os processos que ocorrem na "
+"Comunidade"
 
 #: alirpunkto/schemas/register_form.py:106
 msgid "cooperator_number_required"
@@ -774,7 +898,11 @@ msgstr "Fornecer seu pseudônimo é obrigatório"
 #: alirpunkto/schemas/register_form.py:121
 msgid "password_description"
 msgstr ""
-"Por favor, forneça sua senha. Sua senha deve ter entre ${password_minimum_length} e ${password_maximum_length} caracteres, conter pelo menos um dígito, pelo menos uma letra minúscula, pelo menos uma letra maiúscula e pelo menos um dos seguintes caracteres: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+"Por favor, forneça sua senha. Sua senha deve ter entre "
+"${password_minimum_length} e ${password_maximum_length} caracteres, conter "
+"pelo menos um dígito, pelo menos uma letra minúscula, pelo menos uma letra "
+"maiúscula e pelo menos um dos seguintes caracteres: '@', '#', '%', '&', '*',"
+" '(', ')', '-', '_', '+', '='."
 
 #: alirpunkto/schemas/register_form.py:130
 msgid "password_confirm_description"
@@ -787,7 +915,10 @@ msgstr "Confirmar sua senha é obrigatório"
 #: alirpunkto/schemas/register_form.py:138
 msgid "email_description"
 msgstr ""
-"Por favor, forneça o endereço de e-mail que a infraestrutura de TI do ${domain_name} usará para interagir com você.\nRecomendamos que você escolha um endereço de e-mail que você verifique frequentemente.\nPrecisamos dessas informações porque precisamos interagir com você, para mantê-lo(a) informado(a) sobre os desenvolvimentos na Cooperativa, para oferecer a você a oportunidade de tomar medidas ou contribuir para decisões. O e-mail é o meio mais amplamente utilizado na Europa, é universal e baseado em padrões abertos e gratuitos, ao contrário dos sistemas de mensagens proprietários dos gigantes digitais (também conhecidos como 'GAFAM').\nEste endereço de e-mail será usado exclusivamente para garantir a comunicação entre a infraestrutura de TI do ${domain_name} e você. Ele nunca será exibido para outros usuários da plataforma de TI do ${domain_name}, nem será transmitido ou vendido a ninguém, exceto para cumprir requisitos legais por autoridades públicas de aplicação da lei sob solicitação de um juiz. O 'controlador de dados' conforme definido pelo Regulamento Geral de Proteção de Dados (GDPR) da União Europeia é ${organization_details}."
+"Por favor, forneça o endereço de e-mail que a infraestrutura de TI do ${domain_name} usará para interagir com você.\n"
+"Recomendamos que você escolha um endereço de e-mail que você verifique frequentemente.\n"
+"Precisamos dessas informações porque precisamos interagir com você, para mantê-lo(a) informado(a) sobre os desenvolvimentos na Cooperativa, para oferecer a você a oportunidade de tomar medidas ou contribuir para decisões. O e-mail é o meio mais amplamente utilizado na Europa, é universal e baseado em padrões abertos e gratuitos, ao contrário dos sistemas de mensagens proprietários dos gigantes digitais (também conhecidos como 'GAFAM').\n"
+"Este endereço de e-mail será usado exclusivamente para garantir a comunicação entre a infraestrutura de TI do ${domain_name} e você. Ele nunca será exibido para outros usuários da plataforma de TI do ${domain_name}, nem será transmitido ou vendido a ninguém, exceto para cumprir requisitos legais por autoridades públicas de aplicação da lei sob solicitação de um juiz. O 'controlador de dados' conforme definido pelo Regulamento Geral de Proteção de Dados (GDPR) da União Europeia é ${organization_details}."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
@@ -819,7 +950,14 @@ msgstr "Sua Nota de Comportamento Cooperativo"
 
 msgid "cooperative_behaviour_mark_description"
 msgstr ""
-"Como Cooperador, sua Nota de Comportamento Cooperativo resulta das notas atribuídas a você pelos outros Participantes Ativos nos Grupos de Trabalho nos quais você participou para definir e adotar Propostas de Ação. Cada Participante Ativo pode atribuir uma nota igual a +1, 0 ou -1, de acordo com quão cooperativo foi seu comportamento durante sua participação ativa nesse Grupo de Trabalho. Esta nota é então automaticamente 'esquecida' e decai ao longo do tempo: ela é reduzida pela metade após ${forgetting_time_constant} dias. O valor inicial da sua Nota de Comportamento Cooperativo é zero."
+"Como Cooperador, sua Nota de Comportamento Cooperativo resulta das notas "
+"atribuídas a você pelos outros Participantes Ativos nos Grupos de Trabalho "
+"nos quais você participou para definir e adotar Propostas de Ação. Cada "
+"Participante Ativo pode atribuir uma nota igual a +1, 0 ou -1, de acordo com"
+" quão cooperativo foi seu comportamento durante sua participação ativa nesse"
+" Grupo de Trabalho. Esta nota é então automaticamente 'esquecida' e decai ao"
+" longo do tempo: ela é reduzida pela metade após ${forgetting_time_constant}"
+" dias. O valor inicial da sua Nota de Comportamento Cooperativo é zero."
 
 #: alirpunkto/schemas/register_form.py:169
 msgid "cooperative_behaviour_mark_update_label"
@@ -828,7 +966,10 @@ msgstr "Data da última atualização da sua Nota de Comportamento Cooperativo"
 #: alirpunkto/schemas/register_form.py:170
 msgid "cooperative_behaviour_mark_update_description"
 msgstr ""
-"Esta é a data mais recente em que outro Cooperador atribuiu a você uma nota após o fim da sua participação ativa em um Grupo de Trabalho que estava definindo e adotando uma Proposta de Ação. O valor inicial dessa data é o do seu registro como Cooperador."
+"Esta é a data mais recente em que outro Cooperador atribuiu a você uma nota "
+"após o fim da sua participação ativa em um Grupo de Trabalho que estava "
+"definindo e adotando uma Proposta de Ação. O valor inicial dessa data é o do"
+" seu registro como Cooperador."
 
 #: alirpunkto/schemas/register_form.py:171
 msgid "cooperative_behaviour_mark_update_required"
@@ -841,7 +982,15 @@ msgstr "Número de cotas da Cooperativa que você possui"
 #: alirpunkto/schemas/register_form.py:181
 msgid "number_shares_owned_description"
 msgstr ""
-"Este é o número total de cotas da Cooperativa que você possui, após tê-las adquirido em nosso portal web. Após seu registro, esse número é igual a zero. Convidamos você a proceder o mais rápido possível para este URL: ${url_purchase_shares} para adquirir sua(s) primeira(s) cota(s). Você desfrutará de seus plenos direitos de tomada de decisão como Cooperador somente após ter adquirido pelo menos uma cota (e pago sua contribuição anual). Você é bem-vindo(a) para adquirir mais de uma cota, ao se registrar, mas também a qualquer momento depois disso. Isso fortalece nossa Cooperativa, e todos somos gratos a você por isso!"
+"Este é o número total de cotas da Cooperativa que você possui, após tê-las "
+"adquirido em nosso portal web. Após seu registro, esse número é igual a "
+"zero. Convidamos você a proceder o mais rápido possível para este URL: "
+"${url_purchase_shares} para adquirir sua(s) primeira(s) cota(s). Você "
+"desfrutará de seus plenos direitos de tomada de decisão como Cooperador "
+"somente após ter adquirido pelo menos uma cota (e pago sua contribuição "
+"anual). Você é bem-vindo(a) para adquirir mais de uma cota, ao se registrar,"
+" mas também a qualquer momento depois disso. Isso fortalece nossa "
+"Cooperativa, e todos somos gratos a você por isso!"
 
 #: alirpunkto/schemas/register_form.py:183
 msgid "number_shares_owned_required"
@@ -854,7 +1003,15 @@ msgstr "Data de expiração da sua contribuição anual atual"
 #: alirpunkto/schemas/register_form.py:189
 msgid "date_end_validity_yearly_contribution_description"
 msgstr ""
-"Data de expiração da sua contribuição anual atual, e antes da qual você deve pagá-la novamente para manter seus plenos direitos de tomada de decisão como Cooperador. Após seu registro, esta data é definida em um momento no passado, o que significa que você deve pagá-la agora. Convidamos você a proceder o mais rápido possível para este URL: ${url_pay_yearly_contrib} para pagar sua primeira contribuição anual e participar assim das operações da nossa Cooperativa. Você desfrutará de seus plenos direitos de tomada de decisão como Cooperador somente após ter pago sua contribuição anual (e adquirido pelo menos uma cota)."
+"Data de expiração da sua contribuição anual atual, e antes da qual você deve"
+" pagá-la novamente para manter seus plenos direitos de tomada de decisão "
+"como Cooperador. Após seu registro, esta data é definida em um momento no "
+"passado, o que significa que você deve pagá-la agora. Convidamos você a "
+"proceder o mais rápido possível para este URL: ${url_pay_yearly_contrib} "
+"para pagar sua primeira contribuição anual e participar assim das operações "
+"da nossa Cooperativa. Você desfrutará de seus plenos direitos de tomada de "
+"decisão como Cooperador somente após ter pago sua contribuição anual (e "
+"adquirido pelo menos uma cota)."
 
 #: alirpunkto/schemas/register_form.py:190
 msgid "date_end_validity_yearly_contribution_required"
@@ -867,7 +1024,11 @@ msgstr "Número Internacional de Conta Bancária (IBAN) da sua conta bancária"
 #: alirpunkto/schemas/register_form.py:200
 msgid "iban_description"
 msgstr ""
-"Se e quando você decidir deixar a Cooperativa (o que todos lamentaríamos), precisamos do seu IBAN para poder transferir para você os proventos da recompra das suas cotas da Cooperativa. Por motivos de segurança, aconselhamos que você forneça essas informações apenas se e quando você antecipar deixar a Cooperativa."
+"Se e quando você decidir deixar a Cooperativa (o que todos lamentaríamos), "
+"precisamos do seu IBAN para poder transferir para você os proventos da "
+"recompra das suas cotas da Cooperativa. Por motivos de segurança, "
+"aconselhamos que você forneça essas informações apenas se e quando você "
+"antecipar deixar a Cooperativa."
 
 #: alirpunkto/schemas/register_form.py:202
 msgid "iban_required"
@@ -875,12 +1036,19 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:207
 msgid "date_erasure_all_data_title"
-msgstr "Data em que todos os seus dados serão apagados da nossa infraestrutura de TI"
+msgstr ""
+"Data em que todos os seus dados serão apagados da nossa infraestrutura de TI"
 
 #: alirpunkto/schemas/register_form.py:208
 msgid "date_erasure_all_data_description"
 msgstr ""
-"Se e quando você deixar a Cooperativa, seus dados de identidade serão mantidos por um período de ${Quarantine} dias, antes de serem totalmente e irrevogavelmente apagados dos nossos registros. Isso é para garantir que um Cooperador que saia da Cooperativa porque sua Nota de Comportamento Cooperativo é muito baixa não possa se registrar novamente imediatamente com um pseudônimo novo e uma Nota de Comportamento Cooperativo virgem. Após seu registro, esta data é definida para um futuro muito distante."
+"Se e quando você deixar a Cooperativa, seus dados de identidade serão "
+"mantidos por um período de ${Quarantine} dias, antes de serem totalmente e "
+"irrevogavelmente apagados dos nossos registros. Isso é para garantir que um "
+"Cooperador que saia da Cooperativa porque sua Nota de Comportamento "
+"Cooperativo é muito baixa não possa se registrar novamente imediatamente com"
+" um pseudônimo novo e uma Nota de Comportamento Cooperativo virgem. Após seu"
+" registro, esta data é definida para um futuro muito distante."
 
 msgid "avatar_label"
 msgstr "Uma imagem para representá-lo (seu avatar)"
@@ -896,7 +1064,10 @@ msgstr ""
 "Por favor, use apenas o URL do último e-mail que você recebeu."
 
 msgid "check_new_email"
-msgstr "Você pediu para alterar seu endereço de e-mail. No futuro, você gostaria de usar: ${new_email}. Como resultado, você receberá um e-mail contendo um link para validar este novo endereço."
+msgstr ""
+"Você pediu para alterar seu endereço de e-mail. No futuro, você gostaria de "
+"usar: ${new_email}. Como resultado, você receberá um e-mail contendo um link"
+" para validar este novo endereço."
 
 msgid "check_new_email_subject"
 msgstr "Verificação do seu novo endereço de e-mail"
@@ -908,8 +1079,9 @@ msgstr "O envio do e-mail de verificação para seu novo endereço falhou"
 msgid "check_new_email_send"
 msgstr "O e-mail de verificação para seu novo endereço foi enviado"
 
+#. Neutral member-card wording (issue #249, 2026-08-14)
 msgid "modify_member"
-msgstr "Consultar ou modificar membro"
+msgstr "Browse the members"
 
 #: alirpunkto/utils.py:187
 msgid "connection_error"
@@ -991,7 +1163,8 @@ msgstr "Registro falhou"
 msgid "registration_successful"
 msgstr "Registro bem-sucedido"
 
-#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
 msgid "unknown_accessed_member"
 msgstr "Membro acessado desconhecido"
 
@@ -999,8 +1172,9 @@ msgstr "Membro acessado desconhecido"
 msgid "unknown_member"
 msgstr "Membro desconhecido"
 
+#. Neutral member-card wording (issue #249, 2026-08-14)
 msgid "modify_member_title"
-msgstr "Editar perfil do membro"
+msgstr "Member profile"
 
 msgid "select_member_oid_label"
 msgstr "Por favor, selecione um membro para editar seu perfil:"
@@ -1016,13 +1190,23 @@ msgstr "perfil"
 
 msgid "check_new_email_confirmed_msg"
 msgstr ""
-"Seu endereço de e-mail foi atualizado com sucesso. Você usará este novo endereço para todas as comunicações futuras com ${domain_name}. Se você não solicitou esta alteração ou se tiver dúvidas, entre em contato com nosso suporte imediatamente no ${admin_email}. Obrigado por fazer parte da comunidade ${domain_name}!"
+"Seu endereço de e-mail foi atualizado com sucesso. Você usará este novo "
+"endereço para todas as comunicações futuras com ${domain_name}. Se você não "
+"solicitou esta alteração ou se tiver dúvidas, entre em contato com nosso "
+"suporte imediatamente no ${admin_email}. Obrigado por fazer parte da "
+"comunidade ${domain_name}!"
 
 msgid "vote_msg"
 msgstr "Bem-vindo ao Alirpunkto, ${domain_name}."
 
 msgid "welcome_voter"
-msgstr "Está prestes a votar se deve aceitar ou rejeitar a candidatura de ${name}. O acesso da pessoa candidata ao portal depende da sua decisão. Quer através dos documentos recebidos por e-mail, quer durante uma videoconferência, esperamos que tenha conseguido verificar a identidade do candidato. Pedimos que realize esta validação com cuidado, pois a integridade do nosso site depende disso."
+msgstr ""
+"Está prestes a votar se deve aceitar ou rejeitar a candidatura de ${name}. O"
+" acesso da pessoa candidata ao portal depende da sua decisão. Quer através "
+"dos documentos recebidos por e-mail, quer durante uma videoconferência, "
+"esperamos que tenha conseguido verificar a identidade do candidato. Pedimos "
+"que realize esta validação com cuidado, pois a integridade do nosso site "
+"depende disso."
 
 msgid "vote_legend"
 msgstr "Escolha o seu voto:"
@@ -1034,10 +1218,14 @@ msgid "submit_vote_title"
 msgstr "Clique para enviar o seu voto."
 
 msgid "inform_verifier_subject"
-msgstr "Por favor, ajuda-nos a verificar um novo registo na plataforma de ${domain_name}"
+msgstr ""
+"Por favor, ajuda-nos a verificar um novo registo na plataforma de "
+"${domain_name}"
 
 msgid "remind_verifier_subject"
-msgstr "Lembrete - Por favor, ajude-nos a verificar um novo registo na plataforma de ${domain_name}. Prazo em ${notice_time_verifiers} dias"
+msgstr ""
+"Lembrete - Por favor, ajude-nos a verificar um novo registo na plataforma de"
+" ${domain_name}. Prazo em ${notice_time_verifiers} dias"
 
 #, fuzzy
 msgid "provider_role_activated"
@@ -1063,43 +1251,63 @@ msgid "application_workspace_name"
 msgstr "Our collaborative workspace"
 
 msgid "application_workspace_description"
-msgstr "Where you and all members of the Community can interact, share information and work on shared documents in a completely trusted and confidential environment."
+msgstr ""
+"Where you and all members of the Community can interact, share information "
+"and work on shared documents in a completely trusted and confidential "
+"environment."
 
 msgid "application_trainings_name"
 msgstr "Our on-line trainings"
 
 msgid "application_trainings_description"
-msgstr "Where you can follow trainings provided by members of the Community, or start developing your own, in collaboration with other members of the Community if you wish."
+msgstr ""
+"Where you can follow trainings provided by members of the Community, or "
+"start developing your own, in collaboration with other members of the "
+"Community if you wish."
 
 msgid "application_trainings_note"
-msgstr "Once on the training platform, click on the \"CosmoPolitical login\" button to enter with your account."
+msgstr ""
+"Once on the training platform, click on the \"CosmoPolitical login\" button "
+"to enter with your account."
 
 msgid "application_mailing_lists_name"
 msgstr "Our mailing lists"
 
 msgid "application_mailing_lists_description"
-msgstr "Where you can freely subscribe or unsubscribe to any of the mailing lists of the Cooperative open to the Community."
+msgstr ""
+"Where you can freely subscribe or unsubscribe to any of the mailing lists of"
+" the Cooperative open to the Community."
 
 msgid "application_portal_name"
 msgstr "Our presentation portal"
 
 msgid "application_portal_ordinary_description"
-msgstr "Where you can make donations or purchase training materials, and track your account."
+msgstr ""
+"Where you can make donations or purchase training materials, and track your "
+"account."
 
 msgid "application_portal_cooperator_description"
-msgstr "Where you can purchase your share(s) of the Cooperative, pay your yearly contribution, make donations, purchase training material and democratically define the quantitative parameters affecting internal processes."
+msgstr ""
+"Where you can purchase your share(s) of the Cooperative, pay your yearly "
+"contribution, make donations, purchase training material and democratically "
+"define the quantitative parameters affecting internal processes."
 
 msgid "application_deliberative_name"
 msgstr "Our deliberative democracy platform"
 
 msgid "application_deliberative_description"
-msgstr "Where you and all Cooperators democratically define the Public Policies we want to implement, once elected to positions of political responsibility."
+msgstr ""
+"Where you and all Cooperators democratically define the Public Policies we "
+"want to implement, once elected to positions of political responsibility."
 
 msgid "application_democratic_control_name"
 msgstr "Our democratic control platform"
 
 msgid "application_democratic_control_description"
-msgstr "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."
+msgstr ""
+"Where you and all Cooperators democratically control, a priori, the most "
+"important operational decisions of the Board and of the Mediation & "
+"Arbitration Council."
 
 msgid "mandatory_fields_legend"
 msgstr "An asterisk (*) indicates a mandatory field."
@@ -1108,10 +1316,14 @@ msgid "become_cooperator_button"
 msgstr "Become a Cooperator"
 
 msgid "become_cooperator_invite"
-msgstr "Convinced by the Community? Take the next step and co-own the Cooperative."
+msgstr ""
+"Convinced by the Community? Take the next step and co-own the Cooperative."
 
 msgid "upgrade_identity_intro"
-msgstr "Provide the identity data below exactly as it appears on your identity document: verifiers of the Cooperative will compare them during the verification vote. Your pseudonym stays unchanged."
+msgstr ""
+"Provide the identity data below exactly as it appears on your identity "
+"document: verifiers of the Cooperative will compare them during the "
+"verification vote. Your pseudonym stays unchanged."
 
 msgid "your_pseudonym_label"
 msgstr "Your pseudonym:"
@@ -1123,34 +1335,49 @@ msgid "deactivate_account_link"
 msgstr "Deactivate my account"
 
 msgid "unsubscribe_intro"
-msgstr "You are about to ask the deactivation of your account. Please read the implications below before confirming."
+msgstr ""
+"You are about to ask the deactivation of your account. Please read the "
+"implications below before confirming."
 
 msgid "unsubscribe_implication_no_login"
-msgstr "You will not be able to log in to this platform nor to the connected applications any more."
+msgstr ""
+"You will not be able to log in to this platform nor to the connected "
+"applications any more."
 
 msgid "unsubscribe_implication_quarantine"
-msgstr "Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained."
+msgstr ""
+"Your personal data will be kept during the Quarantine period required by the"
+" rules of the Cooperative, then deleted; only your pseudonym, the date and "
+"the reason of your departure will be retained."
 
 msgid "unsubscribe_implication_confirmation_link"
-msgstr "Nothing happens until you follow the confirmation link that will be sent to your e-mail address."
+msgstr ""
+"Nothing happens until you follow the confirmation link that will be sent to "
+"your e-mail address."
 
 msgid "unsubscribe_request_button"
 msgstr "Ask the deactivation of my account"
 
 msgid "unsubscribe_pending_message"
-msgstr "Your deactivation request is pending: follow the link sent to your e-mail address to confirm it, or cancel it below."
+msgstr ""
+"Your deactivation request is pending: follow the link sent to your e-mail "
+"address to confirm it, or cancel it below."
 
 msgid "unsubscribe_cancel_button"
 msgstr "Cancel my deactivation request"
 
 msgid "unsubscribe_link_sent_message"
-msgstr "A confirmation link has been sent to your e-mail address. Your account stays active until you follow it."
+msgstr ""
+"A confirmation link has been sent to your e-mail address. Your account stays"
+" active until you follow it."
 
 msgid "unsubscribe_cancelled_message"
 msgstr "Your deactivation request has been cancelled."
 
 msgid "unsubscribe_link_expired_error"
-msgstr "This deactivation link has expired. Your account stays active; you can start again from your profile page."
+msgstr ""
+"This deactivation link has expired. Your account stays active; you can start"
+" again from your profile page."
 
 msgid "account_deactivated_message"
 msgstr "Your account is deactivated."
@@ -1159,7 +1386,9 @@ msgid "account_deactivated_login_error"
 msgstr "This account has been deactivated."
 
 msgid "identity_already_registered_error"
-msgstr "This identity (names and date of birth) is already registered — possibly by a member who resigned or was excluded less than the Quarantine period ago."
+msgstr ""
+"This identity (names and date of birth) is already registered — possibly by "
+"a member who resigned or was excluded less than the Quarantine period ago."
 
 msgid "unsubscribe_email_subject"
 msgstr "Confirm the deactivation of your account"
@@ -1171,10 +1400,12 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr ""
+"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_format_error"
-msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr ""
+"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
 msgstr "Your avatar picture is too large."
@@ -1216,7 +1447,11 @@ msgid "recovery_code_too_short"
 msgstr "The identity recovery code is too short."
 
 msgid "cooperator_underage_error"
-msgstr "You have not yet reached your 18th birthday. You are hence unfortunately not allowed to become a Cooperator. We invite you to register as an Ordinary Member of the Community — and to upgrade to Cooperator as soon as you have had your 18th birthday."
+msgstr ""
+"You have not yet reached your 18th birthday. You are hence unfortunately not"
+" allowed to become a Cooperator. We invite you to register as an Ordinary "
+"Member of the Community — and to upgrade to Cooperator as soon as you have "
+"had your 18th birthday."
 
 msgid "too_many_login_attempts"
 msgstr "Too many login attempts. Please wait a few minutes and try again."
@@ -1281,9 +1516,9 @@ msgstr "Board (suspended)"
 msgid "group_label_suspended_mac"
 msgstr "Mediation and Arbitration Council (suspended)"
 
-#. English fallback pending translation (i18n audit 2026-08-08)
+#. Neutral member-card wording (issue #249, 2026-08-14)
 msgid "member_admin_card_title"
-msgstr "Member card (read-only)"
+msgstr "Member profile card"
 
 #. English fallback pending translation (i18n audit 2026-08-08)
 msgid "role_label"
@@ -1403,3 +1638,35 @@ msgstr "Votes view."
 #. English fallback pending translation (client ticket #252, 2026-08-14)
 msgid "voting_period_ended"
 msgstr "Voting period ended."
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_pseudonym_label"
+msgstr "Pseudonym"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_description_label"
+msgstr "Profile text"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_user_number_label"
+msgstr "User number"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_role_label"
+msgstr "Role in the Cooperative"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_email_label"
+msgstr "E-mail address"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_mark_label"
+msgstr "Cooperative Behaviour Mark"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_mark_update_label"
+msgstr "Last update of the Mark"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "modify_member_intro"
+msgstr "You can consult the profiles of the other members:"

@@ -27,7 +27,7 @@
                         </form>
                     </p>
                     <p>
-                        <span i18n:translate="modify_member">You can consult other member profile by clicking</span> <a class="btn btn-link" href="${request.route_url('modify_member')}" i18n:translate="modify_member">Modify member</a><br />
+                        <span i18n:translate="modify_member_intro">You can consult the profiles of the other members:</span> <a class="btn btn-link" href="${request.route_url('modify_member')}" i18n:translate="modify_member">Modify member</a><br />
                     </p>
                     <p tal:condition="user['type'] == 'COOPERATOR'">
                         <span i18n:translate="votes">You can access the votes pannel menu by clicking</span> <a class="btn btn-link" href="${request.route_url('vote')}" i18n:translate="votes_view">Votes</a>

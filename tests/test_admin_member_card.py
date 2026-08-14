@@ -24,6 +24,14 @@ from alirpunkto.views import modify_member as mm
 from alirpunkto.views.modify_member import modify_member
 
 
+@pytest.fixture(autouse=True)
+def _empty_directory(monkeypatch):
+    """Issue #249: the directory is fetched for every logged-in member;
+    keep these unit tests off the real LDAP."""
+    monkeypatch.setattr(mm, 'get_ldap_member_list', lambda: [])
+
+
+
 class _StubSchema:
     def apply_permissions(self, *_):
         return None
@@ -119,7 +127,7 @@ def test_the_admin_sees_the_card_and_no_form(config):
 
     assert result['form'] is None                     # view, never modify
     card = result['admin_view']
-    assert set(card) == EIGHT_FIELDS
+    assert set(card) == EIGHT_FIELDS | {'email'}  # issue #249
     assert card['pseudonym'] == 'p-other-2'
     assert card['description'] == 'hello world'
     assert card['oid'] == 'other-2'
@@ -137,7 +145,7 @@ def test_nothing_sensitive_leaks_into_the_card(config):
         resolved={'adm-1': admin, 'other-2': other})
     blob = repr(result['admin_view'])
     assert 'FR76-SECRET' not in blob                  # no IBAN
-    assert 'other-2@example.com' not in blob          # no e-mail
+    assert 'other-2@example.com' in blob     # issue #249: admins see it
     assert 'Doe' not in blob                          # no identity data
 
 

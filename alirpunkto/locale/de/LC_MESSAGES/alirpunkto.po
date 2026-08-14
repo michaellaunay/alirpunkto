@@ -31,16 +31,22 @@ msgid "login_label"
 msgstr "Anmelden"
 
 msgid "welcome_msg"
-msgstr "Willkommen bei ${site_name}, dem zentralen Dienst für die in der IT-Infrastruktur von ${domain_name} verwendeten Anwendungen."
+msgstr ""
+"Willkommen bei ${site_name}, dem zentralen Dienst für die in der IT-"
+"Infrastruktur von ${domain_name} verwendeten Anwendungen."
 
 msgid "all_applications_msg"
-msgstr "Alle Anwendungen, die Sie benötigen, um an den Aktivitäten von ${domain_name} an einem Ort teilzunehmen."
+msgstr ""
+"Alle Anwendungen, die Sie benötigen, um an den Aktivitäten von "
+"${domain_name} an einem Ort teilzunehmen."
 
 msgid "register_or_login_msg"
 msgstr "Registrieren oder jetzt anmelden, um loszulegen."
 
 msgid "logged_in_msg_title"
-msgstr "${site_name}, der zentrale Dienst für die in der IT-Infrastruktur von ${domain_name} verwendeten Anwendungen"
+msgstr ""
+"${site_name}, der zentrale Dienst für die in der IT-Infrastruktur von "
+"${domain_name} verwendeten Anwendungen"
 
 msgid "logged_in_msg"
 msgstr "Sie sind als ${user} angemeldet."
@@ -74,13 +80,15 @@ msgid "full_name_as_in_id_label"
 msgstr "Vollständige(r) Vorname(n) wie in Ihren offiziellen Ausweisdokumenten"
 
 msgid "full_surname_as_in_id_label"
-msgstr "Vollständige(r) Nachname(n) wie in Ihren offiziellen Ausweisdokumenten"
+msgstr ""
+"Vollständige(r) Nachname(n) wie in Ihren offiziellen Ausweisdokumenten"
 
 msgid "birthdate_label"
 msgstr "Geburtsdatum"
 
 msgid "nationality_label"
-msgstr "Staatsangehörigkeit (unter den Mitgliedstaaten der Europäischen Union)"
+msgstr ""
+"Staatsangehörigkeit (unter den Mitgliedstaaten der Europäischen Union)"
 
 msgid "cooperator_number_label"
 msgstr "Genossenschaftlernummer"
@@ -95,7 +103,9 @@ msgid "first_interaction_language_label"
 msgstr "Die Sprache, die Sie bevorzugen, damit wir mit Ihnen kommunizieren"
 
 msgid "second_interaction_language_label"
-msgstr "Die Sprache, die Sie als zweite Wahl akzeptieren, damit wir mit Ihnen kommunizieren"
+msgstr ""
+"Die Sprache, die Sie als zweite Wahl akzeptieren, damit wir mit Ihnen "
+"kommunizieren"
 
 msgid "language_none_option"
 msgstr "Keine"
@@ -119,18 +129,28 @@ msgid "candidature_states_draft_value"
 msgstr "Entwurf: Der Antrag befindet sich im Entwurfsmodus."
 
 msgid "candidature_states_email_validation_value"
-msgstr "E-Mail-Bestätigung: Der Zustand, in dem die E-Mail-Adresse des Antragstellers auf Bestätigung wartet."
+msgstr ""
+"E-Mail-Bestätigung: Der Zustand, in dem die E-Mail-Adresse des "
+"Antragstellers auf Bestätigung wartet."
 
 msgid "candidature_states_confirmed_human_value"
-msgstr "BestätigtMensch: Die E-Mail-Adresse des Antragstellers ist verifiziert, und der Nachweis der Menschlichkeit wurde erbracht (wir haben überprüft, dass Sie kein Roboter sind)."
+msgstr ""
+"BestätigtMensch: Die E-Mail-Adresse des Antragstellers ist verifiziert, und "
+"der Nachweis der Menschlichkeit wurde erbracht (wir haben überprüft, dass "
+"Sie kein Roboter sind)."
 
 msgid "candidature_states_unique_data_value"
 msgstr ""
-"EindeutigeDaten: Der Antragsteller hat seine persönlichen Identifikationsdaten eingegeben, und wir haben überprüft, dass kein aktueller oder kürzlich abgemeldeter Genossenschaftler oder ordentlicher Mitglied der Gemeinschaft dieselben "
-"Daten hat."
+"EindeutigeDaten: Der Antragsteller hat seine persönlichen "
+"Identifikationsdaten eingegeben, und wir haben überprüft, dass kein "
+"aktueller oder kürzlich abgemeldeter Genossenschaftler oder ordentlicher "
+"Mitglied der Gemeinschaft dieselben Daten hat."
 
 msgid "candidature_states_pending_value"
-msgstr "Ausstehend: Der Antrag wurde eingereicht. Die persönlichen Identifikationsdaten wurden an die Prüfer übermittelt, aber sie haben ihre Rückmeldung noch nicht gegeben."
+msgstr ""
+"Ausstehend: Der Antrag wurde eingereicht. Die persönlichen "
+"Identifikationsdaten wurden an die Prüfer übermittelt, aber sie haben ihre "
+"Rückmeldung noch nicht gegeben."
 
 msgid "candidature_states_approved_value"
 msgstr "Genehmigt: Der Antrag wurde akzeptiert."
@@ -160,12 +180,19 @@ msgid "candidature_states_refused"
 msgstr "abgelehnt"
 
 msgid "user_types_ordinary_value"
-msgstr "Ordentlich: Ein Antrag, um ein ordentliches Mitglied der Gemeinschaft zu werden = mit vereinfachtem Registrierungsprozess, ohne finanzielle Verpflichtung, aber ohne Mitspracherecht."
+msgstr ""
+"Ordentlich: Ein Antrag, um ein ordentliches Mitglied der Gemeinschaft zu "
+"werden = mit vereinfachtem Registrierungsprozess, ohne finanzielle "
+"Verpflichtung, aber ohne Mitspracherecht."
 
 msgid "user_types_cooperator_value"
 msgstr ""
-"Genossenschaftler: Ein Antrag, um vollwertiges Mitglied der Genossenschaft, ein Genossenschaftler = mit einem vollständigen Registrierungsprozess, der das Prinzip 'eine Person = eine Stimme' sicherstellt und dass der "
-"Antragsteller ein volljähriger Bürger der Europäischen Union ist, die Pflicht, mindestens eine Aktie zu erwerben und einen jährlichen Beitrag zu zahlen, sowie volle Mitspracherechte."
+"Genossenschaftler: Ein Antrag, um vollwertiges Mitglied der Genossenschaft, "
+"ein Genossenschaftler = mit einem vollständigen Registrierungsprozess, der "
+"das Prinzip 'eine Person = eine Stimme' sicherstellt und dass der "
+"Antragsteller ein volljähriger Bürger der Europäischen Union ist, die "
+"Pflicht, mindestens eine Aktie zu erwerben und einen jährlichen Beitrag zu "
+"zahlen, sowie volle Mitspracherechte."
 
 msgid "user_types_ordinary"
 msgstr "Ordentliches Mitglied der Gemeinschaft"
@@ -231,7 +258,10 @@ msgid "plus_prefix"
 msgstr ", "
 
 msgid "email_validation_subject"
-msgstr "Überprüfung, dass Sie ein Mensch sind. Berechnen Sie die Ergebnisse einfacher mathematischer Operationen und geben Sie diese Ergebnisse im Portal ein."
+msgstr ""
+"Überprüfung, dass Sie ein Mensch sind. Berechnen Sie die Ergebnisse "
+"einfacher mathematischer Operationen und geben Sie diese Ergebnisse im "
+"Portal ein."
 
 msgid "email_candidature_state_changed"
 msgstr "Änderung des Status Ihres Antrags im Portal"
@@ -240,49 +270,75 @@ msgid "invalid_challenge"
 msgstr "Ihre Antwort ist nicht korrekt. Bitte geben Sie eine neue ein."
 
 msgid "invalid_email"
-msgstr "Es gibt ein Problem mit Ihrer E-Mail-Adresse, bitte überprüfen Sie diese."
+msgstr ""
+"Es gibt ein Problem mit Ihrer E-Mail-Adresse, bitte überprüfen Sie diese."
 
 msgid "invalid_choice"
 msgstr "Ihre Wahl ist ungültig, bitte geben Sie sie erneut ein."
 
 msgid "challenge_instruction_text"
-msgstr "Bitte berechnen Sie die Ergebnisse der folgenden vier einfachen mathematischen Operationen und füllen Sie die entsprechenden Felder aus, um Ihre E-Mail-Adresse zu bestätigen. Wenn Sie keine E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen gesendet haben, dort ist."
+msgstr ""
+"Bitte berechnen Sie die Ergebnisse der folgenden vier einfachen "
+"mathematischen Operationen und füllen Sie die entsprechenden Felder aus, um "
+"Ihre E-Mail-Adresse zu bestätigen. Wenn Sie keine E-Mail in den nächsten "
+"wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es "
+"ist möglich, dass die E-Mail, die wir Ihnen gesendet haben, dort ist."
 
 msgid "enter_result_label_A"
 msgstr "Bitte geben Sie das Ergebnis für die mathematische Operation A ein:"
 
 msgid "result_label_title_A"
-msgstr "Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das Ergebnis der mathematischen Operation A."
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der mathematischen Operation A."
 
 msgid "result_input_title_A"
-msgstr "Um Ihre E-Mail-Adresse und dass Sie ein Mensch (kein Roboter) sind, zu überprüfen, geben Sie bitte das Ergebnis der Operation A ein, das Sie per E-Mail erhalten haben."
+msgstr ""
+"Um Ihre E-Mail-Adresse und dass Sie ein Mensch (kein Roboter) sind, zu "
+"überprüfen, geben Sie bitte das Ergebnis der Operation A ein, das Sie per "
+"E-Mail erhalten haben."
 
 msgid "enter_result_label_B"
 msgstr "Bitte geben Sie das Ergebnis für die mathematische Operation B ein:"
 
 msgid "result_label_title_B"
-msgstr "Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das Ergebnis der mathematischen Operation B."
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der mathematischen Operation B."
 
 msgid "result_input_title_B"
-msgstr "Um Ihre E-Mail-Adresse und dass Sie ein Mensch (kein Roboter) sind, zu überprüfen, geben Sie bitte das Ergebnis der Operation B ein, das Sie per E-Mail erhalten haben."
+msgstr ""
+"Um Ihre E-Mail-Adresse und dass Sie ein Mensch (kein Roboter) sind, zu "
+"überprüfen, geben Sie bitte das Ergebnis der Operation B ein, das Sie per "
+"E-Mail erhalten haben."
 
 msgid "enter_result_label_C"
 msgstr "Bitte geben Sie das Ergebnis für die mathematische Operation C ein:"
 
 msgid "result_label_title_C"
-msgstr "Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das Ergebnis der mathematischen Operation C."
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der mathematischen Operation C."
 
 msgid "result_input_title_C"
-msgstr "Um Ihre E-Mail-Adresse und dass Sie ein Mensch (kein Roboter) sind, zu überprüfen, geben Sie bitte das Ergebnis der Operation C ein, das Sie per E-Mail erhalten haben."
+msgstr ""
+"Um Ihre E-Mail-Adresse und dass Sie ein Mensch (kein Roboter) sind, zu "
+"überprüfen, geben Sie bitte das Ergebnis der Operation C ein, das Sie per "
+"E-Mail erhalten haben."
 
 msgid "enter_result_label_D"
 msgstr "Bitte geben Sie das Ergebnis für die mathematische Operation D ein:"
 
 msgid "result_label_title_D"
-msgstr "Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das Ergebnis der mathematischen Operation D."
+msgstr ""
+"Bitte geben Sie den Code ein, den Sie per E-Mail erhalten haben, oder das "
+"Ergebnis der mathematischen Operation D."
 
 msgid "result_input_title_D"
-msgstr "Um Ihre E-Mail-Adresse und dass Sie ein Mensch (kein Roboter) sind, zu überprüfen, geben Sie bitte das Ergebnis der Operation D ein, das Sie per E-Mail erhalten haben."
+msgstr ""
+"Um Ihre E-Mail-Adresse und dass Sie ein Mensch (kein Roboter) sind, zu "
+"überprüfen, geben Sie bitte das Ergebnis der Operation D ein, das Sie per "
+"E-Mail erhalten haben."
 
 msgid "verify_button"
 msgstr "Absenden"
@@ -297,13 +353,15 @@ msgid "password_too_short"
 msgstr "Passwort ist zu kurz."
 
 msgid "password_minimum_length"
-msgstr "Das Passwort muss mindestens ${password_minimum_length} Zeichen lang sein."
+msgstr ""
+"Das Passwort muss mindestens ${password_minimum_length} Zeichen lang sein."
 
 msgid "password_too_long"
 msgstr "Passwort ist zu lang."
 
 msgid "password_maximum_length"
-msgstr "Das Passwort darf ${password_maximum_length} Zeichen nicht überschreiten."
+msgstr ""
+"Das Passwort darf ${password_maximum_length} Zeichen nicht überschreiten."
 
 msgid "password_must_contain_digit"
 msgstr "Das Passwort muss mindestens eine Ziffer enthalten."
@@ -315,7 +373,9 @@ msgid "password_must_contain_lowercase"
 msgstr "Das Passwort muss mindestens einen Kleinbuchstaben enthalten."
 
 msgid "password_must_contain_special_char"
-msgstr "Das Passwort muss mindestens eines der folgenden Zeichen enthalten: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+msgstr ""
+"Das Passwort muss mindestens eines der folgenden Zeichen enthalten: '@', "
+"'#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
 msgid "password_title_label"
 msgstr "Bitte geben Sie hier Ihr Passwort ein."
@@ -333,18 +393,27 @@ msgid "type_registration_label"
 msgstr "Wählen Sie die Art der Registrierung, die zu Ihnen passt."
 
 msgid "type_registration_choice"
-msgstr "Jede Art der Registrierung bringt ein spezifisches Set von Rechten, Vorteilen und Verpflichtungen mit sich."
+msgstr ""
+"Jede Art der Registrierung bringt ein spezifisches Set von Rechten, "
+"Vorteilen und Verpflichtungen mit sich."
 
 msgid "approved_heading"
 msgstr "Herzlichen Glückwunsch zur Genehmigung!"
 
 msgid "approved_description"
-msgstr "Ihre Bewerbung wurde genehmigt. Sie können sich jetzt mit dem Pseudonym und Passwort, die Sie während des Bewerbungsprozesses angegeben haben, einloggen."
+msgstr ""
+"Ihre Bewerbung wurde genehmigt. Sie können sich jetzt mit dem Pseudonym und "
+"Passwort, die Sie während des Bewerbungsprozesses angegeben haben, "
+"einloggen."
 
 msgid "invalid_pseudonym"
 msgstr ""
-"Ungültiges Pseudonym. Es sollte zwischen ${MIN_PSEUDONYM_LENGTH} und ${MAX_PSEUDONYM_LENGTH} Zeichen lang sein und darf nur Buchstaben (A-Z, a-z), Zahlen (0-9), Unterstriche (_), Punkte "
-"(.), Bindestriche (-) und Leerzeichen ( ) enthalten. Es dürfen keine Buchstaben mit Akzenten, Umlaute oder andere diakritische Zeichen, die für einige Sprachen spezifisch sind, enthalten sein."
+"Ungültiges Pseudonym. Es sollte zwischen ${MIN_PSEUDONYM_LENGTH} und "
+"${MAX_PSEUDONYM_LENGTH} Zeichen lang sein und darf nur Buchstaben (A-Z, "
+"a-z), Zahlen (0-9), Unterstriche (_), Punkte (.), Bindestriche (-) und "
+"Leerzeichen ( ) enthalten. Es dürfen keine Buchstaben mit Akzenten, Umlaute "
+"oder andere diakritische Zeichen, die für einige Sprachen spezifisch sind, "
+"enthalten sein."
 
 msgid "invalid_date"
 msgstr "Ungültiges Datumsformat."
@@ -353,16 +422,19 @@ msgid "pseudonym_too_short"
 msgstr "Pseudonym zu kurz."
 
 msgid "pseudonym_minimum_length"
-msgstr "Das Pseudonym muss mindestens ${MIN_PSEUDONYM_LENGTH} Zeichen lang sein."
+msgstr ""
+"Das Pseudonym muss mindestens ${MIN_PSEUDONYM_LENGTH} Zeichen lang sein."
 
 msgid "pseudonym_too_long"
 msgstr "Pseudonym zu lang."
 
 msgid "pseudonym_maximum_length"
-msgstr "Das Pseudonym darf ${MAX_PSEUDONYM_LENGTH} Zeichen nicht überschreiten."
+msgstr ""
+"Das Pseudonym darf ${MAX_PSEUDONYM_LENGTH} Zeichen nicht überschreiten."
 
 msgid "pseudonym_allready_exists"
-msgstr "Dieses Pseudonym ist bereits in Verwendung. Bitte wählen Sie ein anderes."
+msgstr ""
+"Dieses Pseudonym ist bereits in Verwendung. Bitte wählen Sie ein anderes."
 
 msgid "Select_a_country"
 msgstr "Wählen Sie einen Mitgliedstaat der Europäischen Union"
@@ -464,7 +536,9 @@ msgid "first_interaction_language_required"
 msgstr "Die erste Interaktionssprache ist erforderlich."
 
 msgid "pending_description"
-msgstr "Ihre Bewerbung wird derzeit geprüft. Sie werden per E-Mail benachrichtigt, sobald sie genehmigt wurde."
+msgstr ""
+"Ihre Bewerbung wird derzeit geprüft. Sie werden per E-Mail benachrichtigt, "
+"sobald sie genehmigt wurde."
 
 msgid "candidature_not_found"
 msgstr "Bewerbung nicht gefunden."
@@ -473,28 +547,23 @@ msgid "cosmopolitical_cooperative_description"
 msgstr ""
 "<div>\n"
 "<h2><b>Vielen Dank für Ihr Interesse an den Aktivitäten von ${domain_name}! Hier ist der richtige Ort für Ihre Registrierung </b></h2>\n"
-"<p>Die CosmoPolitische Genossenschaft unterstützt Einzelpersonen und transformiert das bestehende wirtschaftliche, soziale und politische System hin zu einer tiefgreifend gerechten, nachhaltigen, demokratischen und glücklichen "
-"Gesellschaft, der <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Gesellschaft der Vereinbarung</a>.</p>\n"
+"<p>Die CosmoPolitische Genossenschaft unterstützt Einzelpersonen und transformiert das bestehende wirtschaftliche, soziale und politische System hin zu einer tiefgreifend gerechten, nachhaltigen, demokratischen und glücklichen Gesellschaft, der <a href=\"https://www.cosmopolitical.coop/SocietyAgreement\">Gesellschaft der Vereinbarung</a>.</p>\n"
 "<p>Im Folgenden finden Sie den Beginn des Registrierungsprozesses, um uns beizutreten. Wir schlagen zwei Teilnahmeebenen vor, mit steigenden Verpflichtungen und Rechten:</p>\n"
 "<ul>\n"
 "<li>als <b>ordentliches Mitglied unserer Gemeinschaft</b>, mit einem einfachen Registrierungsprozess, ohne finanzielle Verpflichtungen, aber ohne Stimmrecht; oder </li>\n"
-"<li>als <b>Genossenschaftler</b>, ein vollwertiges Mitglied unserer Genossenschaft, mit einem Registrierungsprozess, der sicherstellt, dass eine bestimmte Person sich nur einmal registrieren kann (um das demokratische Prinzip \"eine "
-"Person = eine Stimme\" zu beachten) und dass nur EU-Bürger, die das Volljährigkeitsalter erreicht haben, Genossenschaftler sind, mit der Verpflichtung, mindestens eine Aktie zu kaufen und einen "
-"jährlichen Beitrag zu zahlen, sowie vollem Stimmrecht. Die Europäische Union ist der geografische Rahmen unserer Arbeit  (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">sehen Sie warum</a>)</li>\n"
+"<li>als <b>Genossenschaftler</b>, ein vollwertiges Mitglied unserer Genossenschaft, mit einem Registrierungsprozess, der sicherstellt, dass eine bestimmte Person sich nur einmal registrieren kann (um das demokratische Prinzip \"eine Person = eine Stimme\" zu beachten) und dass nur EU-Bürger, die das Volljährigkeitsalter erreicht haben, Genossenschaftler sind, mit der Verpflichtung, mindestens eine Aktie zu kaufen und einen jährlichen Beitrag zu zahlen, sowie vollem Stimmrecht. Die Europäische Union ist der geografische Rahmen unserer Arbeit  (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\">sehen Sie warum</a>)</li>\n"
 "</ul>\n"
 "<p>Der Registrierungsprozess umfasst die folgenden Schritte:</p>\n"
 "<ol>\n"
 "<li>wir überprüfen, dass die E-Mail-Adresse von Ihnen, einem Menschen (und nicht von einem Roboter) angegeben wurde;</li>\n"
 "<li>wir fragen Sie nach Ihrem Pseudonym, Passwort und den bevorzugten Sprache(n) für die Interaktion mit Ihnen;</li>\n"
-"<li>im Falle, dass Sie sich als ordentliches Mitglied der Gemeinschaft registriert haben, haben Sie den Prozess abgeschlossen und betreten unsere Gemeinschaft. Im Falle, dass Sie sich als Genossenschaftler registriert haben, "
-"geht der Prozess weiter, damit wir überprüfen können, ob Sie die oben genannten Bedingungen erfüllen, um Genossenschaftler zu sein.</li>\n"
+"<li>im Falle, dass Sie sich als ordentliches Mitglied der Gemeinschaft registriert haben, haben Sie den Prozess abgeschlossen und betreten unsere Gemeinschaft. Im Falle, dass Sie sich als Genossenschaftler registriert haben, geht der Prozess weiter, damit wir überprüfen können, ob Sie die oben genannten Bedingungen erfüllen, um Genossenschaftler zu sein.</li>\n"
 "</ol>\n"
 "<p>Diese Überprüfung erfolgt wie folgt:</p>\n"
 "<ol>\n"
 "<li>wir fragen nach Ihren <b>Identitätsdaten</b>: Ihre(n) Vornamen(n) und Nachname(n), Ihr Geburtsdatum;</li>\n"
 "<li>wir bitten einige derzeitige Mitglieder der Genossenschaft (Ihre Prüfer), auf der Grundlage eines direkten E-Mail-Austauschs mit Ihnen zu überprüfen, ob (1) die Angaben auf Ihrem amtlichen Ausweis mit den Angaben übereinstimmen, die Sie im vorherigen Schritt gemacht haben, und ob (2) das Foto auf Ihrem amtlichen Ausweis mit einem aktuellen Selfie von Ihnen übereinstimmt;</li>\n"
-"<li>sofern sie diese Übereinstimmung bestätigt haben, werden Sie als Genossenschaftler mit vollen Rechten willkommen geheißen - sobald Sie mindestens <a href=\"https://www.cosmopolitical.coop/share\">eine "
-"Aktie</a> gekauft und Ihren <a href=\"https://www.cosmopolitical.coop/yearcontrib\">jährlichen Beitrag zu unseren Aktivitäten</a> bezahlt haben.</li>\n"
+"<li>sofern sie diese Übereinstimmung bestätigt haben, werden Sie als Genossenschaftler mit vollen Rechten willkommen geheißen - sobald Sie mindestens <a href=\"https://www.cosmopolitical.coop/share\">eine Aktie</a> gekauft und Ihren <a href=\"https://www.cosmopolitical.coop/yearcontrib\">jährlichen Beitrag zu unseren Aktivitäten</a> bezahlt haben.</li>\n"
 "</ol>\n"
 "<p>Bitte beginnen Sie jetzt mit Ihrer Registrierung! Wir freuen uns darauf, Sie in unseren Aktivitäten willkommen zu heißen.</p>\n"
 "</div>"
@@ -526,7 +595,8 @@ msgid "Proceed"
 msgstr "Fortfahren"
 
 msgid "confirm_sent_emails_to_validators"
-msgstr "Bitte bestätigen Sie, dass Sie die E-Mails an die Prüfer gesendet haben."
+msgstr ""
+"Bitte bestätigen Sie, dass Sie die E-Mails an die Prüfer gesendet haben."
 
 msgid "sent_confirmation_label"
 msgstr "Bestätigung, dass die E-Mails an die Prüfer gesendet wurden"
@@ -538,45 +608,64 @@ msgid "confirm_email_send_button_label"
 msgstr "Bestätigen"
 
 msgid "vote_success"
-msgstr "Wir bedanken uns bei dir für deine Teilnahme an der Abstimmung. Deine Stimme ${vote} wurde erfolgreich aufgezeichnet. Du kannst deine Stimme bis zur Frist ändern, indem du zu dieser Seite zurückkehrst."
+msgstr ""
+"Wir bedanken uns bei dir für deine Teilnahme an der Abstimmung. Deine Stimme"
+" ${vote} wurde erfolgreich aufgezeichnet. Du kannst deine Stimme bis zur "
+"Frist ändern, indem du zu dieser Seite zurückkehrst."
 
 msgid "cooperator_data_explanation"
 msgstr ""
-"<div>\n<h2>Bitte geben Sie die Informationen an, die wir benötigen, um Sie als Genossenschaftler zu registrieren</h2>\n    <p>Als Genossenschaftler werden Sie an all unseren Entscheidungen teilnehmen. Diese Entscheidungen werden nach strengen demokratischen Verfahren getroffen und können wichtige Konsequenzen für die Genossenschaft und die Genossenschaftler haben. Darüber hinaus beabsichtigt die Genossenschaft, die EU-Bürger unabhängig von ihrer Staatsangehörigkeit zu vertreten - aber nur EU-Bürger. Dies ist besonders während öffentlicher Wahlen wichtig. Daher müssen wir drei Dinge sicherstellen: (1) dass eine bestimmte Person sich nicht mehr als einmal registrieren kann, um das demokratische Prinzip \"eine Person = eine Stimme\" zu gewährleisten; (2) dass alle Genossenschaftler mindestens das Volljährigkeitsalter erreicht haben und (3) dass nur Bürger der Europäischen Union Genossenschaftler sind.</p>\n    <p>Deshalb werden wir einige Elemente Ihrer Identitätsdaten von Ihnen überprüfen, indem wir (1) die Daten, die Sie bei Ihrer Registrierung in dieses Formular eintragen, mit (2) den Informationen aus Ihrem amtlichen Ausweis und (3) das Foto aus Ihrem amtlichen Ausweis zusammen mit (4) einem aktuellen Selfie von Ihnen (aktuell = am Tag des E-Mail-Versands). Diese Überprüfung wird von einer Gruppe zufällig ausgewählter Mitglieder der Genossenschaft, den Prüfern Ihres Antrags, durchgeführt und basiert auf (a) einem aktuellen Selfie von Ihnen und (b) einem Teil-Scan Ihres amtlichen Ausweises, den Sie ihnen direkt per E-Mail zusenden, ohne diese Online-Plattform zu nutzen (aus Sicherheits- und Datenschutzgründen).</p>\n    <p>Die Daten, die wir von Ihnen anfordern und die die Prüfer auf Übereinstimmung mit den Daten auf Ihren offiziellen Identitätsdokumenten überprüfen werden, sind:\n    <ul>\n    <li>Ihr(e) Vorname(n) und Nachname(n);</li>\n    <li>Ihr Geburtsdatum;</li>\n    <li>Ihre Staatsangehörigkeit.</li>\n    </ul></p>\n    <p>Nur eine Person trägt Ihren Vorname(n), Ihren Nachname(n) und Ihr Geburtsdatum: Sie. Wenn Sie versuchen, sich erneut zu registrieren, müssen Sie die gleichen Daten in unser Überprüfungsverfahren bereitstellen, und wir werden Ihre Bewerbung ablehnen, da Sie bereits ein Genossenschaftler sind und nicht mehrere Konten haben können, um mehr als einmal zu wählen. Wir sind zuversichtlich, dies zu tun, weil wir wissen, dass nur eine Person diese Kombination aus Vorname(n), Nachname(n) und Geburtsdatum hat. Ihr Geburtsdatum ermöglicht es uns zu überprüfen, dass Sie das Volljährigkeitsalter erreichen, und Ihre Staatsangehörigkeit erlaubt es uns sicherzustellen, dass Sie tatsächlich ein Bürger der Europäischen Union sind.</p>\n    <p>Diese Daten werden ausschließlich verwendet, um Ihre Identität, Ihr Alter und Ihre Staatsangehörigkeit zu überprüfen und um Ihr Konto als Genossenschaftler zu verwalten. Sie werden niemals anderen Benutzern der IT-Plattform von ${domain_name} angezeigt, noch werden sie an irgendjemanden übermittelt oder verkauft, außer um gesetzliche Anforderungen der öffentlichen Strafverfolgungsbehörden auf Anordnung eines Richters zu erfüllen. Der \"Datenverantwortliche\" im Sinne der <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A02016R0679-20160504\">Allgemeinen Datenschutzverordnung (GDPR) der Europäischen Union</a> ist ${organization_details}.</p>\n<p><b>Wichtiger Hinweis:</b> In seltenen Fällen kann es vorkommen, dass das unten stehende Formular nicht richtig angezeigt wird: Es zeigt Ihnen nicht an, wo Sie Ihr Pseudonym eingeben können, Ihre E-Mail-Adresse ist editierbar... Sollte dies der Fall sein, klicken Sie einfach auf die Schaltfläche \"Absenden\" unten. Das dann erscheinende Formular wird korrekt sein und Sie können es problemlos ausfüllen.</p>\n</div>"
+"<div>\n"
+"<h2>Bitte geben Sie die Informationen an, die wir benötigen, um Sie als Genossenschaftler zu registrieren</h2>\n"
+"    <p>Als Genossenschaftler werden Sie an all unseren Entscheidungen teilnehmen. Diese Entscheidungen werden nach strengen demokratischen Verfahren getroffen und können wichtige Konsequenzen für die Genossenschaft und die Genossenschaftler haben. Darüber hinaus beabsichtigt die Genossenschaft, die EU-Bürger unabhängig von ihrer Staatsangehörigkeit zu vertreten - aber nur EU-Bürger. Dies ist besonders während öffentlicher Wahlen wichtig. Daher müssen wir drei Dinge sicherstellen: (1) dass eine bestimmte Person sich nicht mehr als einmal registrieren kann, um das demokratische Prinzip \"eine Person = eine Stimme\" zu gewährleisten; (2) dass alle Genossenschaftler mindestens das Volljährigkeitsalter erreicht haben und (3) dass nur Bürger der Europäischen Union Genossenschaftler sind.</p>\n"
+"    <p>Deshalb werden wir einige Elemente Ihrer Identitätsdaten von Ihnen überprüfen, indem wir (1) die Daten, die Sie bei Ihrer Registrierung in dieses Formular eintragen, mit (2) den Informationen aus Ihrem amtlichen Ausweis und (3) das Foto aus Ihrem amtlichen Ausweis zusammen mit (4) einem aktuellen Selfie von Ihnen (aktuell = am Tag des E-Mail-Versands). Diese Überprüfung wird von einer Gruppe zufällig ausgewählter Mitglieder der Genossenschaft, den Prüfern Ihres Antrags, durchgeführt und basiert auf (a) einem aktuellen Selfie von Ihnen und (b) einem Teil-Scan Ihres amtlichen Ausweises, den Sie ihnen direkt per E-Mail zusenden, ohne diese Online-Plattform zu nutzen (aus Sicherheits- und Datenschutzgründen).</p>\n"
+"    <p>Die Daten, die wir von Ihnen anfordern und die die Prüfer auf Übereinstimmung mit den Daten auf Ihren offiziellen Identitätsdokumenten überprüfen werden, sind:\n"
+"    <ul>\n"
+"    <li>Ihr(e) Vorname(n) und Nachname(n);</li>\n"
+"    <li>Ihr Geburtsdatum;</li>\n"
+"    <li>Ihre Staatsangehörigkeit.</li>\n"
+"    </ul></p>\n"
+"    <p>Nur eine Person trägt Ihren Vorname(n), Ihren Nachname(n) und Ihr Geburtsdatum: Sie. Wenn Sie versuchen, sich erneut zu registrieren, müssen Sie die gleichen Daten in unser Überprüfungsverfahren bereitstellen, und wir werden Ihre Bewerbung ablehnen, da Sie bereits ein Genossenschaftler sind und nicht mehrere Konten haben können, um mehr als einmal zu wählen. Wir sind zuversichtlich, dies zu tun, weil wir wissen, dass nur eine Person diese Kombination aus Vorname(n), Nachname(n) und Geburtsdatum hat. Ihr Geburtsdatum ermöglicht es uns zu überprüfen, dass Sie das Volljährigkeitsalter erreichen, und Ihre Staatsangehörigkeit erlaubt es uns sicherzustellen, dass Sie tatsächlich ein Bürger der Europäischen Union sind.</p>\n"
+"    <p>Diese Daten werden ausschließlich verwendet, um Ihre Identität, Ihr Alter und Ihre Staatsangehörigkeit zu überprüfen und um Ihr Konto als Genossenschaftler zu verwalten. Sie werden niemals anderen Benutzern der IT-Plattform von ${domain_name} angezeigt, noch werden sie an irgendjemanden übermittelt oder verkauft, außer um gesetzliche Anforderungen der öffentlichen Strafverfolgungsbehörden auf Anordnung eines Richters zu erfüllen. Der \"Datenverantwortliche\" im Sinne der <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A02016R0679-20160504\">Allgemeinen Datenschutzverordnung (GDPR) der Europäischen Union</a> ist ${organization_details}.</p>\n"
+"<p><b>Wichtiger Hinweis:</b> In seltenen Fällen kann es vorkommen, dass das unten stehende Formular nicht richtig angezeigt wird: Es zeigt Ihnen nicht an, wo Sie Ihr Pseudonym eingeben können, Ihre E-Mail-Adresse ist editierbar... Sollte dies der Fall sein, klicken Sie einfach auf die Schaltfläche \"Absenden\" unten. Das dann erscheinende Formular wird korrekt sein und Sie können es problemlos ausfüllen.</p>\n"
+"</div>"
 
 msgid "ordinary_member_data_explanation"
 msgstr ""
-"<div>\n<h2>Bitte geben Sie die Informationen an, die wir benötigen, um Sie als ordentliches Mitglied der Gemeinschaft zu registrieren</h2>\n<p>Als ordentliches Mitglied der ${domain_name} Community werden Sie mit den anderen Mitgliedern und unserer IT-Plattform interagieren.</p>\n<p>Damit dies für Sie und die anderen Mitglieder der Community so effizient und respektvoll wie möglich abläuft, wären wir Ihnen dankbar, wenn Sie die im folgenden Formular angeforderten Informationen bereitstellen könnten.</p>\n<p>Diese Daten werden ausschließlich verwendet, um Ihr Konto als ordentliches Mitglied der Community zu verwalten. Sie werden niemals anderen Benutzern der IT-Plattform von ${domain_name} angezeigt, noch werden sie an irgendjemanden übermittelt oder verkauft, außer um gesetzliche Anforderungen der öffentlichen Strafverfolgungsbehörden auf Anordnung eines Richters zu erfüllen. Der \"Datenverantwortliche\" im Sinne der <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A02016R0679-20160504\">Allgemeinen Datenschutzverordnung (GDPR) der Europäischen Union</a> ist ${organization_details}.</p>\n<p><b>Wichtiger Hinweis:</b> In seltenen Fällen kann es vorkommen, dass das unten stehende Formular nicht richtig angezeigt wird: Es zeigt Ihnen nicht an, wo Sie Ihr Pseudonym eingeben können, Ihre E-Mail-Adresse ist editierbar... Sollte dies der Fall sein, klicken Sie einfach auf die Schaltfläche \"Absenden\" unten. Das dann erscheinende Formular wird korrekt sein und Sie können es problemlos ausfüllen.</p>\n</div>"
+"<div>\n"
+"<h2>Bitte geben Sie die Informationen an, die wir benötigen, um Sie als ordentliches Mitglied der Gemeinschaft zu registrieren</h2>\n"
+"<p>Als ordentliches Mitglied der ${domain_name} Community werden Sie mit den anderen Mitgliedern und unserer IT-Plattform interagieren.</p>\n"
+"<p>Damit dies für Sie und die anderen Mitglieder der Community so effizient und respektvoll wie möglich abläuft, wären wir Ihnen dankbar, wenn Sie die im folgenden Formular angeforderten Informationen bereitstellen könnten.</p>\n"
+"<p>Diese Daten werden ausschließlich verwendet, um Ihr Konto als ordentliches Mitglied der Community zu verwalten. Sie werden niemals anderen Benutzern der IT-Plattform von ${domain_name} angezeigt, noch werden sie an irgendjemanden übermittelt oder verkauft, außer um gesetzliche Anforderungen der öffentlichen Strafverfolgungsbehörden auf Anordnung eines Richters zu erfüllen. Der \"Datenverantwortliche\" im Sinne der <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A02016R0679-20160504\">Allgemeinen Datenschutzverordnung (GDPR) der Europäischen Union</a> ist ${organization_details}.</p>\n"
+"<p><b>Wichtiger Hinweis:</b> In seltenen Fällen kann es vorkommen, dass das unten stehende Formular nicht richtig angezeigt wird: Es zeigt Ihnen nicht an, wo Sie Ihr Pseudonym eingeben können, Ihre E-Mail-Adresse ist editierbar... Sollte dies der Fall sein, klicken Sie einfach auf die Schaltfläche \"Absenden\" unten. Das dann erscheinende Formular wird korrekt sein und Sie können es problemlos ausfüllen.</p>\n"
+"</div>"
 
 msgid "human_verification_explanation"
 msgstr ""
 "<div>\n"
-"    <p>Wir haben Ihnen per E-Mail eine Reihe von vier einfachen Rechenaufgaben geschickt, die von A bis D identifiziert sind und alle demselben Muster folgen: (EINE ERSTE ZAHL ZWISCHEN 1 UND 9) "
-"multipliziert mit (EINER ZWEITEN ZAHL ZWISCHEN 1 UND 9), plus (EINER DRITTEN ZAHL ZWISCHEN 1 UND 9). Um die Berechnung durchzuführen, sollten Sie zuerst die ERSTE ZAHL ZWISCHEN 1 UND 9 "
-"mit der ZWEITEN ZAHL ZWISCHEN 1 UND 9 multiplizieren. Sobald Sie das Ergebnis dieser Multiplikation haben, sollten Sie zu diesem Ergebnis die DRITTE ZAHL ZWISCHEN 1 UND 9 addieren. Schließlich "
-"sollten Sie das Ergebnis dieser letzten Addition in das dafür vorgesehene Feld für das Ergebnis der arithmetischen Berechnung, die Sie durchführen, schreiben (unter den vier, die wir Ihnen "
-"geschickt haben, identifiziert von A bis D). Sie sollten die Berechnung für alle vier Berechnungen wiederholen, die wir Ihnen per E-Mail geschickt haben.</p>\n"
+"    <p>Wir haben Ihnen per E-Mail eine Reihe von vier einfachen Rechenaufgaben geschickt, die von A bis D identifiziert sind und alle demselben Muster folgen: (EINE ERSTE ZAHL ZWISCHEN 1 UND 9) multipliziert mit (EINER ZWEITEN ZAHL ZWISCHEN 1 UND 9), plus (EINER DRITTEN ZAHL ZWISCHEN 1 UND 9). Um die Berechnung durchzuführen, sollten Sie zuerst die ERSTE ZAHL ZWISCHEN 1 UND 9 mit der ZWEITEN ZAHL ZWISCHEN 1 UND 9 multiplizieren. Sobald Sie das Ergebnis dieser Multiplikation haben, sollten Sie zu diesem Ergebnis die DRITTE ZAHL ZWISCHEN 1 UND 9 addieren. Schließlich sollten Sie das Ergebnis dieser letzten Addition in das dafür vorgesehene Feld für das Ergebnis der arithmetischen Berechnung, die Sie durchführen, schreiben (unter den vier, die wir Ihnen geschickt haben, identifiziert von A bis D). Sie sollten die Berechnung für alle vier Berechnungen wiederholen, die wir Ihnen per E-Mail geschickt haben.</p>\n"
 "<p> Wenn Sie keine E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen geschickt haben, dort ist.</p>\n"
 "</div>"
 
 msgid "cooperator_data_choose_verification_explanation"
 msgstr ""
 "<div>\n"
-"    <p>Im Rahmen des Registrierungsprozesses als Genossenschaftler werden wir Ihre Identität überprüfen. Diese Identitätsüberprüfung ist notwendig, um sicherzustellen: (1) "
-"dass eine bestimmte Person sich nicht mehrfach mit unterschiedlichen E-Mail-Adressen registriert (wir halten uns hier an das demokratische Prinzip: \"eine Person - eine Stimme\"); (2) dass nur Bürger der "
-"Europäischen Union, die das Volljährigkeitsalter erreicht haben, Genossenschaftler sind (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >sehen Sie warum</a>).</p>\n"
+"    <p>Im Rahmen des Registrierungsprozesses als Genossenschaftler werden wir Ihre Identität überprüfen. Diese Identitätsüberprüfung ist notwendig, um sicherzustellen: (1) dass eine bestimmte Person sich nicht mehrfach mit unterschiedlichen E-Mail-Adressen registriert (wir halten uns hier an das demokratische Prinzip: \"eine Person - eine Stimme\"); (2) dass nur Bürger der Europäischen Union, die das Volljährigkeitsalter erreicht haben, Genossenschaftler sind (<a href=\"https://www.cosmopolitical.coop/FAQ_EUscale\" >sehen Sie warum</a>).</p>\n"
 "<p>Zu diesem Zweck bitten wir Sie, per sicherer E-Mail (1) ein aktuelles Selfie von Ihnen (aktuell = am Tag des E-Mail-Versands) und (2) eine Teilkopie Ihrer Ausweisdokumente direkt an eine kleine Gruppe von Genossenschaftlern, Ihre Prüfer, zu senden. Aus Sicherheitsgründen empfehlen wir Ihnen, Ihren Geburtsort, Ihre Unterschrift und die Nummer Ihres amtlichen Ausweises vor dem Kopieren zu verdecken.</p>\n"
-" <p>Ihre Mitarbeit in dieser Angelegenheit wird sehr geschätzt und ist entscheidend für die Aufrechterhaltung der hohen Standards des Vertrauens und der pan-europäischen Demokratie innerhalb unserer Genossenschaft. "
-"Vielen Dank für Ihr Verständnis und Ihre aktive Teilnahme an diesem wichtigen Schritt.</p>\n"
+" <p>Ihre Mitarbeit in dieser Angelegenheit wird sehr geschätzt und ist entscheidend für die Aufrechterhaltung der hohen Standards des Vertrauens und der pan-europäischen Demokratie innerhalb unserer Genossenschaft. Vielen Dank für Ihr Verständnis und Ihre aktive Teilnahme an diesem wichtigen Schritt.</p>\n"
 "</div>"
 
 msgid "voters_not_selected"
 msgstr ""
-"Die Anzahl der existierenden Genossenschaftler ist zu niedrig, um die angemessene Anzahl von Prüfern Ihrer Identität auszuwählen. Bitte kontaktieren Sie den Systemadministrator unter der "
-"folgenden Adresse ${administrator}, um das Problem zu lösen."
+"Die Anzahl der existierenden Genossenschaftler ist zu niedrig, um die "
+"angemessene Anzahl von Prüfern Ihrer Identität auszuwählen. Bitte "
+"kontaktieren Sie den Systemadministrator unter der folgenden Adresse "
+"${administrator}, um das Problem zu lösen."
 
 msgid "email_copy_id_verification_subject"
-msgstr "de - ${domain_name} - Bitte überprüfen Sie meine Identität als neuer potenzieller Genossenschaftler"
+msgstr ""
+"de - ${domain_name} - Bitte überprüfen Sie meine Identität als neuer "
+"potenzieller Genossenschaftler"
 
 msgid "email_copy_id_verification_body"
 msgstr ""
@@ -594,15 +683,13 @@ msgstr ""
 " - dem Foto auf meinem amtlichen Ausweis.\n"
 "\n"
 " Der Link für Sie, um über diese Angemessenheit abzustimmen, ist folgender: ${voting_url}.\n"
-" Ich danke Ihnen im Voraus herzlich für die Unterstützung des Prozesses meiner Registrierung als Genossenschaftler bei ${domain_name}. Sollten Sie weitere Fragen haben oder zusätzliche "
-"Informationen benötigen, zögern Sie bitte nicht, mich direkt in Ihrer eigenen Sprache zu kontaktieren.\n"
+" Ich danke Ihnen im Voraus herzlich für die Unterstützung des Prozesses meiner Registrierung als Genossenschaftler bei ${domain_name}. Sollten Sie weitere Fragen haben oder zusätzliche Informationen benötigen, zögern Sie bitte nicht, mich direkt in Ihrer eigenen Sprache zu kontaktieren.\n"
 " Mit freundlichen Grüßen,\n"
 " ${signature}\n"
 " Anhänge:\n"
 "- Teilkopie meines Identitätsdokuments;\n"
 "- Aktuelles Selfie.\n"
-" Diese E-Mail wurde mit Hilfe der Identitätsverifizierungsfunktion von ${domain_name} erstellt. Wenn Sie nicht der Prüfer sind, der dem Antrag von ${signature} zugewiesen wurde und diese E-Mail "
-"fälschlicherweise erhalten haben, informieren Sie bitte den Administrator von ${domain_name} unter folgender Adresse: ${administrator}."
+" Diese E-Mail wurde mit Hilfe der Identitätsverifizierungsfunktion von ${domain_name} erstellt. Wenn Sie nicht der Prüfer sind, der dem Antrag von ${signature} zugewiesen wurde und diese E-Mail fälschlicherweise erhalten haben, informieren Sie bitte den Administrator von ${domain_name} unter folgender Adresse: ${administrator}."
 
 msgid "email_video_id_verification_subject"
 msgstr "DELETED"
@@ -611,13 +698,19 @@ msgid "email_video_id_verification_body"
 msgstr "DELETED"
 
 msgid "forget_email_in_member_list"
-msgstr "Wenn der Benutzer existiert, erhält er eine E-Mail. Wenn Sie keine E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen geschickt haben, dort ist."
+msgstr ""
+"Wenn der Benutzer existiert, erhält er eine E-Mail. Wenn Sie keine E-Mail in"
+" den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren "
+"Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen geschickt haben,"
+" dort ist."
 
 msgid "reset_password_email_subject"
 msgstr "Setzen Sie Ihr Passwort zurück"
 
 msgid "forget_email_send_error"
-msgstr "Beim Senden der Zurücksetz-E-Mail ist ein Fehler aufgetreten, bitte kontaktieren Sie den Administrator unter ${administrator}"
+msgstr ""
+"Beim Senden der Zurücksetz-E-Mail ist ein Fehler aufgetreten, bitte "
+"kontaktieren Sie den Administrator unter ${administrator}"
 
 msgid "member_state_created_name"
 msgstr "erstellt"
@@ -652,23 +745,35 @@ msgstr "Die Daten des Mitglieds wurden geändert"
 msgid "email_member_state_changed"
 msgstr "Änderung in Ihrem Mitgliederprofil"
 
-#: alirpunkto/views/forgot_password.py:100 alirpunkto/views/forgot_password.py:101
+#: alirpunkto/views/forgot_password.py:100
+#: alirpunkto/views/forgot_password.py:101
 msgid "forget_no_mail"
 msgstr "Bitte geben Sie eine gültige E-Mail-Adresse an"
 
-#: alirpunkto/views/forgot_password.py:128 alirpunkto/views/forgot_password.py:129
+#: alirpunkto/views/forgot_password.py:128
+#: alirpunkto/views/forgot_password.py:129
 msgid "forget_admin_user"
 msgstr "Der Administrator darf sein/ihr eigenes Passwort nicht zurücksetzen"
 
 #: alirpunkto/views/forgot_password.py:174
 msgid "forget_email_sent"
-msgstr "Wenn der Benutzer existiert, wurde eine E-Mail an seine/ihre E-Mail-Adresse mit einem Link zum Zurücksetzen des Passworts gesendet. Wenn Sie keine E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen gesendet haben, dort ist."
+msgstr ""
+"Wenn der Benutzer existiert, wurde eine E-Mail an seine/ihre E-Mail-Adresse "
+"mit einem Link zum Zurücksetzen des Passworts gesendet. Wenn Sie keine "
+"E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie "
+"Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen gesendet "
+"haben, dort ist."
 
-#: alirpunkto/views/forgot_password.py:197 alirpunkto/views/forgot_password.py:198
+#: alirpunkto/views/forgot_password.py:197
+#: alirpunkto/views/forgot_password.py:198
 msgid "password_not_match"
-msgstr "Die beiden Versionen des Passworts stimmen nicht überein. Bitte stellen Sie sicher, dass sie übereinstimmen, und reichen Sie erneut ein"
+msgstr ""
+"Die beiden Versionen des Passworts stimmen nicht überein. Bitte stellen Sie "
+"sicher, dass sie übereinstimmen, und reichen Sie erneut ein"
 
-#: alirpunkto/views/forgot_password.py:202 alirpunkto/views/forgot_password.py:203 alirpunkto/views/forgot_password.py:209
+#: alirpunkto/views/forgot_password.py:202
+#: alirpunkto/views/forgot_password.py:203
+#: alirpunkto/views/forgot_password.py:209
 msgid "password_required"
 msgstr "Bitte geben Sie ein neues Passwort an"
 
@@ -682,19 +787,26 @@ msgstr "Ein Fehler ist beim Zurücksetzen Ihres Passworts aufgetreten"
 
 #: alirpunkto/views/forgot_password.py:239
 msgid "password_not_changed"
-msgstr "Ein Fehler ist beim Zurücksetzen Ihres Passworts aufgetreten. Ihr Passwort wurde nicht geändert"
+msgstr ""
+"Ein Fehler ist beim Zurücksetzen Ihres Passworts aufgetreten. Ihr Passwort "
+"wurde nicht geändert"
 
 #: alirpunkto/views/forgot_password.py:264
 msgid "member_not_found"
-msgstr "Das Mitglied wurde in der Liste der aktuellen Mitglieder nicht gefunden"
+msgstr ""
+"Das Mitglied wurde in der Liste der aktuellen Mitglieder nicht gefunden"
 
 #: alirpunkto/views/forgot_password.py:268 alirpunkto/views/register.py:103
 msgid "url_is_obsolete"
-msgstr "Der Hyperlink, den Sie zum Zurücksetzen Ihres Passworts verwendet haben, ist nicht mehr gültig. Bitte verwenden Sie den neuesten, den Sie erhalten haben"
+msgstr ""
+"Der Hyperlink, den Sie zum Zurücksetzen Ihres Passworts verwendet haben, ist"
+" nicht mehr gültig. Bitte verwenden Sie den neuesten, den Sie erhalten haben"
 
 #: alirpunkto/views/register.py:182
 msgid "email_not_sent"
-msgstr "Die E-Mail, die die mathematische Herausforderung enthält, die bestätigt, dass der Kandidat ein Mensch (und kein Roboter) ist, wurde nicht gesendet."
+msgstr ""
+"Die E-Mail, die die mathematische Herausforderung enthält, die bestätigt, "
+"dass der Kandidat ein Mensch (und kein Roboter) ist, wurde nicht gesendet."
 
 #: alirpunkto/views/register.py:286 alirpunkto/views/register.py:340
 msgid "error_committing_candidature"
@@ -707,28 +819,40 @@ msgid "modification_to_profile_button_label"
 msgstr "Profil bearbeiten"
 
 msgid "modification_to_profile_button_description"
-msgstr "Klicken Sie hier, um per E-Mail einen sicheren Link zu erhalten, um Ihr Profil zu ändern."
+msgstr ""
+"Klicken Sie hier, um per E-Mail einen sicheren Link zu erhalten, um Ihr "
+"Profil zu ändern."
 
 msgid "modification_to_profile_explanation_content"
 msgstr ""
-"Um die Sicherheit Ihrer Daten zu gewährleisten, wird Ihnen ein einzigartiger Link zum Bearbeiten Ihres Profils per E-Mail zugesendet. Dieser Prozess garantiert, dass nur die Person mit Zugriff auf Ihre E-Mail-Adresse "
-"Änderungen an Ihrem Profil vornehmen kann."
-"Wenn Sie keine E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen gesendet haben, dort ist."
+"Um die Sicherheit Ihrer Daten zu gewährleisten, wird Ihnen ein einzigartiger"
+" Link zum Bearbeiten Ihres Profils per E-Mail zugesendet. Dieser Prozess "
+"garantiert, dass nur die Person mit Zugriff auf Ihre E-Mail-Adresse "
+"Änderungen an Ihrem Profil vornehmen kann.Wenn Sie keine E-Mail in den "
+"nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-"
+"Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen gesendet haben, dort "
+"ist."
 
 msgid "modification_to_profile_email_subject"
-msgstr "Link zur Änderung Ihres Profils auf der IT-Infrastruktur von ${domain_name}"
+msgstr ""
+"Link zur Änderung Ihres Profils auf der IT-Infrastruktur von ${domain_name}"
 
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
 msgstr ""
-"Bitte geben Sie hier alle Ihre Vornamen an, wie sie in Ihren offiziellen Ausweisdokumenten geschrieben sind, in ihrer offiziellen Transkription in lateinischen Zeichen (falls die Originalsprache ein anderes Alphabet "
-"als das Lateinische verwendet)"
+"Bitte geben Sie hier alle Ihre Vornamen an, wie sie in Ihren offiziellen "
+"Ausweisdokumenten geschrieben sind, in ihrer offiziellen Transkription in "
+"lateinischen Zeichen (falls die Originalsprache ein anderes Alphabet als das"
+" Lateinische verwendet)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
 msgstr ""
-"Bitte geben Sie hier alle Ihre Familiennamen bei der Geburt an (d.h. NICHT Ihren Familiennamen als verheiratete Person), wie sie in Ihren offiziellen Ausweisdokumenten geschrieben sind, in ihrer offiziellen Transkription in lateinischen "
-"Zeichen (falls die Originalsprache ein anderes Alphabet als das Lateinische verwendet)"
+"Bitte geben Sie hier alle Ihre Familiennamen bei der Geburt an (d.h. NICHT "
+"Ihren Familiennamen als verheiratete Person), wie sie in Ihren offiziellen "
+"Ausweisdokumenten geschrieben sind, in ihrer offiziellen Transkription in "
+"lateinischen Zeichen (falls die Originalsprache ein anderes Alphabet als das"
+" Lateinische verwendet)"
 
 #: alirpunkto/schemas/register_form.py:47
 msgid "description_label"
@@ -737,20 +861,28 @@ msgstr "Text, der Sie beschreibt (Ihr Profiltext)"
 #: alirpunkto/schemas/register_form.py:48
 msgid "description_description"
 msgstr ""
-"Bitte schreiben Sie hier einen Text, der Sie beschreibt, in Ihrer bevorzugten Sprache, damit alle anderen Mitglieder der Gemeinschaft Sie ein wenig besser kennenlernen können. Wir schlagen vor, dass Sie sich auf Folgendes konzentrieren: "
-"(1) Woher Sie kommen, (2) was Sie tun, (3) was Sie als Mitglied der Gemeinschaft tun möchten, und (4) die Ressourcen (Erfahrung, Wissen, Zeit), die Sie zur Verfügung haben.\n"
+"Bitte schreiben Sie hier einen Text, der Sie beschreibt, in Ihrer bevorzugten Sprache, damit alle anderen Mitglieder der Gemeinschaft Sie ein wenig besser kennenlernen können. Wir schlagen vor, dass Sie sich auf Folgendes konzentrieren: (1) Woher Sie kommen, (2) was Sie tun, (3) was Sie als Mitglied der Gemeinschaft tun möchten, und (4) die Ressourcen (Erfahrung, Wissen, Zeit), die Sie zur Verfügung haben.\n"
 "Wir glauben, dass diese Informationen nützlich sind, weil das Vorstellen Ihrer selbst mit eigenen Worten Ihrer digitalen Identität auf unserer IT-Infrastruktur ein menschliches Gesicht verleiht.\n"
 "Mit diesem Text lernt jedes Mitglied der Gemeinschaft Sie ein wenig besser kennen, und das erleichtert die Interaktion erheblich!"
 
 #: alirpunkto/schemas/register_form.py:55
 msgid "birthdate_description"
 msgstr ""
-"Bitte geben Sie Ihr Geburtsdatum im folgenden Format an: TT/MM/JJJJ, d.h. (1) der Tag im Monat, mit 2 Ziffern; (2) die Nummer des Monats, mit 2 Ziffern; (3) das Jahr, mit 4 Ziffern. Nur "
-"Personen, die ihren 18. Geburtstag erreicht haben, können Genossenschaftler werden. Wenn Sie Ihren 18. Geburtstag noch nicht erreicht haben, laden wir Sie ein, sich als ordentliches Mitglied der Gemeinschaft zu registrieren - und auf den Status des Genossenschaftlers aufzusteigen, sobald Sie das Alter der Volljährigkeit erreichen."
+"Bitte geben Sie Ihr Geburtsdatum im folgenden Format an: TT/MM/JJJJ, d.h. "
+"(1) der Tag im Monat, mit 2 Ziffern; (2) die Nummer des Monats, mit 2 "
+"Ziffern; (3) das Jahr, mit 4 Ziffern. Nur Personen, die ihren 18. Geburtstag"
+" erreicht haben, können Genossenschaftler werden. Wenn Sie Ihren 18. "
+"Geburtstag noch nicht erreicht haben, laden wir Sie ein, sich als "
+"ordentliches Mitglied der Gemeinschaft zu registrieren - und auf den Status "
+"des Genossenschaftlers aufzusteigen, sobald Sie das Alter der Volljährigkeit"
+" erreichen."
 
 #: alirpunkto/schemas/register_form.py:67
 msgid "nationality_description"
-msgstr "Bitte geben Sie einen Mitgliedstaat der Europäischen Union an, von dem Sie Bürger*in sind. Nur Bürger*innen der Europäischen Union können Genossenschaftler werden"
+msgstr ""
+"Bitte geben Sie einen Mitgliedstaat der Europäischen Union an, von dem Sie "
+"Bürger*in sind. Nur Bürger*innen der Europäischen Union können "
+"Genossenschaftler werden"
 
 #: alirpunkto/schemas/register_form.py:70
 msgid "select_a_country"
@@ -758,7 +890,9 @@ msgstr "Bitte wählen Sie einen Mitgliedstaat der Europäischen Union aus"
 
 #: alirpunkto/schemas/register_form.py:104
 msgid "cooperator_number_description"
-msgstr "Dies ist die eindeutige Nummer, die Sie in allen Prozessen identifiziert, die in der Gemeinschaft stattfinden"
+msgstr ""
+"Dies ist die eindeutige Nummer, die Sie in allen Prozessen identifiziert, "
+"die in der Gemeinschaft stattfinden"
 
 #: alirpunkto/schemas/register_form.py:106
 msgid "cooperator_number_required"
@@ -767,12 +901,8 @@ msgstr ""
 #: alirpunkto/schemas/register_form.py:112
 msgid "pseudonym_description"
 msgstr ""
-"Bitte geben Sie hier das Pseudonym ein, das Sie für die gesamte Dauer Ihrer Aktivität auf unserer IT-Plattform identifiziert. Wir empfehlen DRINGEND, dass Sie ein Pseudonym wählen, das eine Rückverfolgung "
-"zu Ihrer echten Identität unmöglich (oder extrem schwierig) macht. So schützen Sie die Vertraulichkeit Ihrer Meinungen (d.h. personenbezogene Daten, die den Zweck eines spezifischen "
-"Schutzes gemäß der Datenschutz-Grundverordnung - DSGVO) gegen jegliche Form von externem Druck im echten Leben (z.B. durch Ihren Arbeitgeber oder Ihre Kunden). Seien Sie sehr vorsichtig! Einmal gewählt, können Sie dieses Pseudonym NIE wieder "
-"ändern. Wählen Sie es mit Bedacht! \n"
-"Ihr Pseudonym muss zwischen ${MIN_PSEUDONYM_LENGTH} und ${MAX_PSEUDONYM_LENGTH} Zeichen lang sein und kann nur Buchstaben des lateinischen Alphabets (A-Z, a-z), Zahlen (0-9), "
-"Unterstriche (_), Punkte (.), Bindestriche (-) und Leerzeichen ( ) enthalten. Es darf keine Buchstaben mit Akzentzeichen, Umlauten und anderen diakritischen Zeichen enthalten, die für einige Sprachen spezifisch sind."
+"Bitte geben Sie hier das Pseudonym ein, das Sie für die gesamte Dauer Ihrer Aktivität auf unserer IT-Plattform identifiziert. Wir empfehlen DRINGEND, dass Sie ein Pseudonym wählen, das eine Rückverfolgung zu Ihrer echten Identität unmöglich (oder extrem schwierig) macht. So schützen Sie die Vertraulichkeit Ihrer Meinungen (d.h. personenbezogene Daten, die den Zweck eines spezifischen Schutzes gemäß der Datenschutz-Grundverordnung - DSGVO) gegen jegliche Form von externem Druck im echten Leben (z.B. durch Ihren Arbeitgeber oder Ihre Kunden). Seien Sie sehr vorsichtig! Einmal gewählt, können Sie dieses Pseudonym NIE wieder ändern. Wählen Sie es mit Bedacht! \n"
+"Ihr Pseudonym muss zwischen ${MIN_PSEUDONYM_LENGTH} und ${MAX_PSEUDONYM_LENGTH} Zeichen lang sein und kann nur Buchstaben des lateinischen Alphabets (A-Z, a-z), Zahlen (0-9), Unterstriche (_), Punkte (.), Bindestriche (-) und Leerzeichen ( ) enthalten. Es darf keine Buchstaben mit Akzentzeichen, Umlauten und anderen diakritischen Zeichen enthalten, die für einige Sprachen spezifisch sind."
 
 #: alirpunkto/schemas/register_form.py:115
 msgid "pseudonym_required"
@@ -781,8 +911,11 @@ msgstr "Die Angabe Ihres Pseudonyms ist erforderlich"
 #: alirpunkto/schemas/register_form.py:121
 msgid "password_description"
 msgstr ""
-"Bitte geben Sie Ihr Passwort an. Ihr Passwort muss zwischen ${password_minimum_length} und ${password_maximum_length} Zeichen lang sein, mindestens eine Ziffer, mindestens einen Kleinbuchstaben "
-"und mindestens einen Großbuchstaben sowie mindestens eines der folgenden Zeichen enthalten: '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
+"Bitte geben Sie Ihr Passwort an. Ihr Passwort muss zwischen "
+"${password_minimum_length} und ${password_maximum_length} Zeichen lang sein,"
+" mindestens eine Ziffer, mindestens einen Kleinbuchstaben und mindestens "
+"einen Großbuchstaben sowie mindestens eines der folgenden Zeichen enthalten:"
+" '@', '#', '%', '&', '*', '(', ')', '-', '_', '+', '='."
 
 #: alirpunkto/schemas/register_form.py:130
 msgid "password_confirm_description"
@@ -797,11 +930,8 @@ msgid "email_description"
 msgstr ""
 "Bitte geben Sie die E-Mail-Adresse an, die die IT-Infrastruktur von ${domain_name} verwenden wird, um mit Ihnen zu kommunizieren.\n"
 "Wir empfehlen, eine E-Mail-Adresse zu wählen, die Sie häufig überprüfen.\n"
-"Wir benötigen diese Informationen, um mit Ihnen zu interagieren, um Sie über Entwicklungen in der Genossenschaft auf dem Laufenden zu halten, Ihnen die Möglichkeit zu geben, Maßnahmen zu ergreifen oder "
-"bei Entscheidungen mitzuwirken. E-Mail ist das am weitesten verbreitete Medium in Europa, es ist universell und basiert auf offenen und freien Standards, im Gegensatz zu den proprietären Messaging-Systemen der digitalen Riesen (auch "
-"als 'GAFAM' bekannt).\n"
-"Diese E-Mail-Adresse wird ausschließlich verwendet, um die Kommunikation zwischen der IT-Infrastruktur von ${domain_name} und Ihnen sicherzustellen. Sie wird niemals den anderen Benutzern der IT-Plattform von ${domain_name} angezeigt, noch wird sie an irgendjemanden weitergegeben oder verkauft, es sei denn, um gesetzlichen Anforderungen von Behörden nachzukommen, wenn ein Richter darum bittet. Der 'Datenverantwortliche' im Sinne der Datenschutz-Grundverordnung (DSGVO) der "
-"Europäischen Union ist ${organization_details} registriert wurde."
+"Wir benötigen diese Informationen, um mit Ihnen zu interagieren, um Sie über Entwicklungen in der Genossenschaft auf dem Laufenden zu halten, Ihnen die Möglichkeit zu geben, Maßnahmen zu ergreifen oder bei Entscheidungen mitzuwirken. E-Mail ist das am weitesten verbreitete Medium in Europa, es ist universell und basiert auf offenen und freien Standards, im Gegensatz zu den proprietären Messaging-Systemen der digitalen Riesen (auch als 'GAFAM' bekannt).\n"
+"Diese E-Mail-Adresse wird ausschließlich verwendet, um die Kommunikation zwischen der IT-Infrastruktur von ${domain_name} und Ihnen sicherzustellen. Sie wird niemals den anderen Benutzern der IT-Plattform von ${domain_name} angezeigt, noch wird sie an irgendjemanden weitergegeben oder verkauft, es sei denn, um gesetzlichen Anforderungen von Behörden nachzukommen, wenn ein Richter darum bittet. Der 'Datenverantwortliche' im Sinne der Datenschutz-Grundverordnung (DSGVO) der Europäischen Union ist ${organization_details} registriert wurde."
 
 #: alirpunkto/schemas/register_form.py:144
 msgid "first_interaction_language_description"
@@ -814,23 +944,20 @@ msgstr ""
 msgid "second_interaction_language_description"
 msgstr ""
 "Bitte geben Sie die Sprache an, mit der Sie als zweite Wahl akzeptieren würden, dass die IT-Infrastruktur von ${domain_name} mit Ihnen interagiert. \n"
-" Wir empfehlen, eine andere Amtssprache der Europäischen Union oder Esperanto zu wählen, die Sie einigermaßen gut verstehen. Wenn diese unter den Sprachen verfügbar ist, für "
-"die wir eine Benutzeroberfläche entwickelt haben, und wenn Ihre bevorzugte Sprache nicht verfügbar ist, werden wir sie verwenden, um mit Ihnen zu interagieren. \n"
-" Wir benötigen diese Information, da es trotz unserer Bemühungen passieren kann, dass Ihre bevorzugte Sprache in der Benutzeroberfläche unserer Software nicht verfügbar ist. Daher fragen "
-"wir Sie, ob Sie eine andere Sprache verwenden können."
+" Wir empfehlen, eine andere Amtssprache der Europäischen Union oder Esperanto zu wählen, die Sie einigermaßen gut verstehen. Wenn diese unter den Sprachen verfügbar ist, für die wir eine Benutzeroberfläche entwickelt haben, und wenn Ihre bevorzugte Sprache nicht verfügbar ist, werden wir sie verwenden, um mit Ihnen zu interagieren. \n"
+" Wir benötigen diese Information, da es trotz unserer Bemühungen passieren kann, dass Ihre bevorzugte Sprache in der Benutzeroberfläche unserer Software nicht verfügbar ist. Daher fragen wir Sie, ob Sie eine andere Sprache verwenden können."
 
 #: alirpunkto/schemas/register_form.py:156
 msgid "third_interaction_language_label"
-msgstr "Die Sprache, die Sie als dritte Wahl akzeptieren, damit wir mit Ihnen interagieren"
+msgstr ""
+"Die Sprache, die Sie als dritte Wahl akzeptieren, damit wir mit Ihnen "
+"interagieren"
 
 msgid "third_interaction_language_description"
 msgstr ""
 "Bitte geben Sie die Sprache an, mit der Sie als dritte Wahl akzeptieren würden, dass die IT-Infrastruktur von ${domain_name} mit Ihnen interagiert. \n"
-" Wir empfehlen, eine andere Amtssprache der Europäischen Union oder Esperanto zu wählen, die Sie noch verstehen können. Wenn diese unter den Sprachen verfügbar ist, für die wir "
-"eine Benutzeroberfläche entwickelt haben, und wenn weder Ihre bevorzugte Sprache noch Ihre zweite Sprache verfügbar sind, werden wir sie verwenden, um mit Ihnen zu interagieren. \n"
-" Wir benötigen diese Information, da es trotz unserer Bemühungen passieren kann, dass Ihre bevorzugte Sprache und Ihre zweite Sprache in der Benutzeroberfläche unserer Software "
-"nicht verfügbar sind. Deshalb fragen wir Sie, ob Sie eine dritte Sprache verwenden können. Wir sind uns bewusst, dass es für Sie eine unbefriedigende Situation ist, sich mit uns in "
-"ihr zu verständigen - ebenso wie für uns. Wir bitten Sie dafür um Entschuldigung."
+" Wir empfehlen, eine andere Amtssprache der Europäischen Union oder Esperanto zu wählen, die Sie noch verstehen können. Wenn diese unter den Sprachen verfügbar ist, für die wir eine Benutzeroberfläche entwickelt haben, und wenn weder Ihre bevorzugte Sprache noch Ihre zweite Sprache verfügbar sind, werden wir sie verwenden, um mit Ihnen zu interagieren. \n"
+" Wir benötigen diese Information, da es trotz unserer Bemühungen passieren kann, dass Ihre bevorzugte Sprache und Ihre zweite Sprache in der Benutzeroberfläche unserer Software nicht verfügbar sind. Deshalb fragen wir Sie, ob Sie eine dritte Sprache verwenden können. Wir sind uns bewusst, dass es für Sie eine unbefriedigende Situation ist, sich mit uns in ihr zu verständigen - ebenso wie für uns. Wir bitten Sie dafür um Entschuldigung."
 
 #: alirpunkto/schemas/register_form.py:163
 msgid "cooperative_behaviour_mark_label"
@@ -838,20 +965,28 @@ msgstr "Ihr Kooperatives Verhaltenszeichen"
 
 msgid "cooperative_behaviour_mark_description"
 msgstr ""
-"Als Genossenschaftler ergibt sich Ihr Kooperatives Verhaltenszeichen aus den Punkten, die Ihnen von den anderen aktiven Teilnehmern in den Arbeitsgruppen, an denen Sie zur "
-"Definition und Annahme von Aktionsvorschlägen teilgenommen haben, zugeteilt wurden. Jeder aktive Teilnehmer kann einen Punkt von +1, 0 oder -1 vergeben, je nachdem, wie kooperativ "
-"Ihr Verhalten während Ihrer aktiven Teilnahme an dieser Arbeitsgruppe war. Dieser Punkt wird dann automatisch 'vergessen' und verfällt im Laufe der Zeit: nach ${forgetting_time_constant} "
-"Tagen halbiert. Der anfängliche Wert Ihres Kooperativen Verhaltenszeichens beträgt null."
+"Als Genossenschaftler ergibt sich Ihr Kooperatives Verhaltenszeichen aus den"
+" Punkten, die Ihnen von den anderen aktiven Teilnehmern in den "
+"Arbeitsgruppen, an denen Sie zur Definition und Annahme von "
+"Aktionsvorschlägen teilgenommen haben, zugeteilt wurden. Jeder aktive "
+"Teilnehmer kann einen Punkt von +1, 0 oder -1 vergeben, je nachdem, wie "
+"kooperativ Ihr Verhalten während Ihrer aktiven Teilnahme an dieser "
+"Arbeitsgruppe war. Dieser Punkt wird dann automatisch 'vergessen' und "
+"verfällt im Laufe der Zeit: nach ${forgetting_time_constant} Tagen halbiert."
+" Der anfängliche Wert Ihres Kooperativen Verhaltenszeichens beträgt null."
 
 #: alirpunkto/schemas/register_form.py:169
 msgid "cooperative_behaviour_mark_update_label"
-msgstr "Datum, an dem Ihr Kooperatives Verhaltenszeichen zuletzt aktualisiert wurde"
+msgstr ""
+"Datum, an dem Ihr Kooperatives Verhaltenszeichen zuletzt aktualisiert wurde"
 
 #: alirpunkto/schemas/register_form.py:170
 msgid "cooperative_behaviour_mark_update_description"
 msgstr ""
-"Dies ist das letzte Datum, an dem ein anderer Genossenschaftler Ihnen einen Punkt nach dem Ende Ihrer aktiven Teilnahme an einer Arbeitsgruppe zugeteilt hat, die einen Aktionsvorschlag "
-"definierte und annahm. Der anfängliche Wert dieses Datums entspricht dem Ihrer Registrierung als Genossenschaftler."
+"Dies ist das letzte Datum, an dem ein anderer Genossenschaftler Ihnen einen "
+"Punkt nach dem Ende Ihrer aktiven Teilnahme an einer Arbeitsgruppe zugeteilt"
+" hat, die einen Aktionsvorschlag definierte und annahm. Der anfängliche Wert"
+" dieses Datums entspricht dem Ihrer Registrierung als Genossenschaftler."
 
 #: alirpunkto/schemas/register_form.py:171
 msgid "cooperative_behaviour_mark_update_required"
@@ -864,10 +999,15 @@ msgstr "Anzahl der Anteile an der Genossenschaft, die Sie besitzen"
 #: alirpunkto/schemas/register_form.py:181
 msgid "number_shares_owned_description"
 msgstr ""
-"Dies ist die Gesamtzahl der Anteile an der Genossenschaft, die Sie besitzen, nachdem Sie sie über unser Webportal gekauft haben. Bei Ihrer Registrierung beträgt diese Zahl null. "
-"Wir laden Sie ein, so schnell wie möglich zu dieser URL zu gehen: ${url_purchase_shares}, um Ihre ersten Anteile zu kaufen. Sie genießen Ihre vollen Entscheidungsrechte als "
-"Genossenschaftler erst, nachdem Sie mindestens einen Anteil (und Ihren jährlichen Beitrag bezahlt) haben. Sie sind herzlich eingeladen, mehr als einen Anteil bei der Registrierung "
-"zu kaufen, aber auch jederzeit danach. Es stärkt unsere Genossenschaft, und wir sind Ihnen dafür alle dankbar!"
+"Dies ist die Gesamtzahl der Anteile an der Genossenschaft, die Sie besitzen,"
+" nachdem Sie sie über unser Webportal gekauft haben. Bei Ihrer Registrierung"
+" beträgt diese Zahl null. Wir laden Sie ein, so schnell wie möglich zu "
+"dieser URL zu gehen: ${url_purchase_shares}, um Ihre ersten Anteile zu "
+"kaufen. Sie genießen Ihre vollen Entscheidungsrechte als Genossenschaftler "
+"erst, nachdem Sie mindestens einen Anteil (und Ihren jährlichen Beitrag "
+"bezahlt) haben. Sie sind herzlich eingeladen, mehr als einen Anteil bei der "
+"Registrierung zu kaufen, aber auch jederzeit danach. Es stärkt unsere "
+"Genossenschaft, und wir sind Ihnen dafür alle dankbar!"
 
 #: alirpunkto/schemas/register_form.py:183
 msgid "number_shares_owned_required"
@@ -880,10 +1020,16 @@ msgstr "Datum, an dem Ihr aktueller jährlicher Beitrag abläuft"
 #: alirpunkto/schemas/register_form.py:189
 msgid "date_end_validity_yearly_contribution_description"
 msgstr ""
-"Datum, an dem Ihr aktueller jährlicher Beitrag abläuft und bevor Sie ihn erneut zahlen müssen, um Ihre vollen Entscheidungsrechte als Genossenschaftler zu behalten. Bei "
-"Ihrer Registrierung ist dieses Datum auf einen Zeitpunkt in der Vergangenheit eingestellt, was bedeutet, dass Sie ihn jetzt zahlen sollten. Wir laden Sie ein, so schnell wie "
-"möglich zu dieser URL zu gehen: ${url_pay_yearly_contrib}, um Ihren ersten jährlichen Beitrag zu zahlen und so an den Aktivitäten unserer Genossenschaft teilzunehmen. Sie "
-"werden Ihre vollen Entscheidungsrechte als Genossenschaftler erst genießen, nachdem Sie Ihren jährlichen Beitrag (und mindestens einen Anteil gekauft) haben."
+"Datum, an dem Ihr aktueller jährlicher Beitrag abläuft und bevor Sie ihn "
+"erneut zahlen müssen, um Ihre vollen Entscheidungsrechte als "
+"Genossenschaftler zu behalten. Bei Ihrer Registrierung ist dieses Datum auf "
+"einen Zeitpunkt in der Vergangenheit eingestellt, was bedeutet, dass Sie ihn"
+" jetzt zahlen sollten. Wir laden Sie ein, so schnell wie möglich zu dieser "
+"URL zu gehen: ${url_pay_yearly_contrib}, um Ihren ersten jährlichen Beitrag "
+"zu zahlen und so an den Aktivitäten unserer Genossenschaft teilzunehmen. Sie"
+" werden Ihre vollen Entscheidungsrechte als Genossenschaftler erst genießen,"
+" nachdem Sie Ihren jährlichen Beitrag (und mindestens einen Anteil gekauft) "
+"haben."
 
 #: alirpunkto/schemas/register_form.py:190
 msgid "date_end_validity_yearly_contribution_required"
@@ -896,9 +1042,11 @@ msgstr "Internationale Kontonummer (IBAN) Ihres Bankkontos"
 #: alirpunkto/schemas/register_form.py:200
 msgid "iban_description"
 msgstr ""
-"Falls Sie sich entscheiden sollten, die Genossenschaft zu verlassen (was wir alle bedauern würden), benötigen wir Ihre IBAN, um Ihnen die Erträge aus unserem Rückkauf "
-"Ihrer Anteile an der Genossenschaft überweisen zu können. Aus Sicherheitsgründen raten wir Ihnen, diese Information nur dann bereitzustellen, wenn Sie damit rechnen, die "
-"Genossenschaft zu verlassen."
+"Falls Sie sich entscheiden sollten, die Genossenschaft zu verlassen (was wir"
+" alle bedauern würden), benötigen wir Ihre IBAN, um Ihnen die Erträge aus "
+"unserem Rückkauf Ihrer Anteile an der Genossenschaft überweisen zu können. "
+"Aus Sicherheitsgründen raten wir Ihnen, diese Information nur dann "
+"bereitzustellen, wenn Sie damit rechnen, die Genossenschaft zu verlassen."
 
 #: alirpunkto/schemas/register_form.py:202
 msgid "iban_required"
@@ -906,51 +1054,58 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:207
 msgid "date_erasure_all_data_title"
-msgstr "Datum, an dem alle Ihre Daten aus unserer IT-Infrastruktur gelöscht werden"
+msgstr ""
+"Datum, an dem alle Ihre Daten aus unserer IT-Infrastruktur gelöscht werden"
 
 #: alirpunkto/schemas/register_form.py:208
 msgid "date_erasure_all_data_description"
 msgstr ""
-"Falls Sie die Genossenschaft verlassen, werden Ihre Identitätsdaten für eine Dauer von ${Quarantine} Tagen aufbewahrt, bevor sie vollständig und unwiderruflich aus unseren "
-"Unterlagen gelöscht werden. Dies dient dazu sicherzustellen, dass ein Genossenschaftler, der die Genossenschaft verlässt, weil sein/ihr kooperatives Verhaltenszeichen zu schlecht "
-"ist, sich nicht sofort unter einem neuen Pseudonym und mit einem neuen kooperativen Verhaltenszeichen erneut registrieren kann. Bei Ihrer Registrierung ist dieses Datum auf "
-"eine sehr ferne Zukunft eingestellt."
+"Falls Sie die Genossenschaft verlassen, werden Ihre Identitätsdaten für eine"
+" Dauer von ${Quarantine} Tagen aufbewahrt, bevor sie vollständig und "
+"unwiderruflich aus unseren Unterlagen gelöscht werden. Dies dient dazu "
+"sicherzustellen, dass ein Genossenschaftler, der die Genossenschaft "
+"verlässt, weil sein/ihr kooperatives Verhaltenszeichen zu schlecht ist, sich"
+" nicht sofort unter einem neuen Pseudonym und mit einem neuen kooperativen "
+"Verhaltenszeichen erneut registrieren kann. Bei Ihrer Registrierung ist "
+"dieses Datum auf eine sehr ferne Zukunft eingestellt."
 
 msgid "avatar_label"
 msgstr "Ein Bild, das Sie repräsentiert (Ihr Avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Bitte stellen Sie ein Bild zur Verfügung, das Sie als Mitglied der Gemeinschaft darstellt. Um Sie vor Repressalien durch Ihren Arbeitgeber oder Ihre Kunden zu schützen, empfehlen "
-"wir, dass dieses Bild nicht ermöglicht, dass Ihre Identität im echten Leben zurückverfolgt werden kann. Es sollte daher allgemein kein Foto von Ihnen selbst sein (denken Sie daran, "
-"dass Gesichtserkennungssoftware massiv von Suchrobotern verwendet wird). Das Bild sollte ausschließlich im JPEG-Format vorliegen (Erweiterung .JPG oder .JPEG) und nicht größer "
-"als 5 MB sein. \n"
-"Wir glauben, dass diese Information nützlich ist, da ein Bild es den anderen Mitgliedern der Gemeinschaft erleichtert, Sie zu erkennen. Manchmal spricht ein Bild viel lauter als "
-"ein langer Vortrag. Mit diesem Bild drücken Sie viel über sich selbst in einer universellen Sprache aus. Nutzen Sie es bestmöglich!"
+"Bitte stellen Sie ein Bild zur Verfügung, das Sie als Mitglied der Gemeinschaft darstellt. Um Sie vor Repressalien durch Ihren Arbeitgeber oder Ihre Kunden zu schützen, empfehlen wir, dass dieses Bild nicht ermöglicht, dass Ihre Identität im echten Leben zurückverfolgt werden kann. Es sollte daher allgemein kein Foto von Ihnen selbst sein (denken Sie daran, dass Gesichtserkennungssoftware massiv von Suchrobotern verwendet wird). Das Bild sollte ausschließlich im JPEG-Format vorliegen (Erweiterung .JPG oder .JPEG) und nicht größer als 5 MB sein. \n"
+"Wir glauben, dass diese Information nützlich ist, da ein Bild es den anderen Mitgliedern der Gemeinschaft erleichtert, Sie zu erkennen. Manchmal spricht ein Bild viel lauter als ein langer Vortrag. Mit diesem Bild drücken Sie viel über sich selbst in einer universellen Sprache aus. Nutzen Sie es bestmöglich!"
 
 msgid "candidature_mixed"
 msgstr ""
-"Die Adresse (URL), die Sie verwendet haben, um Ihren Antragsprozess abzurufen, von dem Sie ihn unterbrochen haben, stimmt nicht mit der überein, die wir für Sie registriert "
-"haben. (Die Antragsidentifikationsnummer in der Sitzung und die URL-Nummer stimmen nicht überein)\n"
-"Bitte verwenden Sie nur die URL aus der letzten E-Mail, die Sie erhalten haben. Wenn Sie keine E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen "
-"gesendet haben, dort ist."
+"Die Adresse (URL), die Sie verwendet haben, um Ihren Antragsprozess abzurufen, von dem Sie ihn unterbrochen haben, stimmt nicht mit der überein, die wir für Sie registriert haben. (Die Antragsidentifikationsnummer in der Sitzung und die URL-Nummer stimmen nicht überein)\n"
+"Bitte verwenden Sie nur die URL aus der letzten E-Mail, die Sie erhalten haben. Wenn Sie keine E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen gesendet haben, dort ist."
 
 msgid "check_new_email"
-msgstr "Sie haben darum gebeten, Ihre E-Mail-Adresse zu ändern. In Zukunft möchten Sie: ${new_email} verwenden. Infolgedessen erhalten Sie eine E-Mail mit einem Link, um "
-"diese neue Adresse zu validieren."
+msgstr ""
+"Sie haben darum gebeten, Ihre E-Mail-Adresse zu ändern. In Zukunft möchten "
+"Sie: ${new_email} verwenden. Infolgedessen erhalten Sie eine E-Mail mit "
+"einem Link, um diese neue Adresse zu validieren."
 
 msgid "check_new_email_subject"
 msgstr "Überprüfung Ihrer neuen E-Mail-Adresse"
 
 msgid "check_new_email_send_error"
-msgstr "Das Senden der Bestätigungs-E-Mail für Ihre neue Adresse ist fehlgeschlagen."
+msgstr ""
+"Das Senden der Bestätigungs-E-Mail für Ihre neue Adresse ist fehlgeschlagen."
 
 #: alirpunkto/views/modify_member.py:228
 msgid "check_new_email_send"
-msgstr "Die Bestätigungs-E-Mail für Ihre neue Adresse wurde gesendet. Wenn Sie keine E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen gesendet haben, dort ist."
+msgstr ""
+"Die Bestätigungs-E-Mail für Ihre neue Adresse wurde gesendet. Wenn Sie keine"
+" E-Mail in den nächsten wenigen Minuten bekommen haben, bitte überprüfen Sie"
+" Ihren Spam-Ordner. Es ist möglich, dass die E-Mail, die wir Ihnen gesendet "
+"haben, dort ist."
 
+#. Neutral member-card wording (issue #249, 2026-08-14)
 msgid "modify_member"
-msgstr "Mitglied konsultieren oder ändern"
+msgstr "Browse the members"
 
 #: alirpunkto/utils.py:187
 msgid "connection_error"
@@ -1032,7 +1187,8 @@ msgstr "Registrierung ist fehlgeschlagen"
 msgid "registration_successful"
 msgstr "Registrierung war erfolgreich"
 
-#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118 alirpunkto/views/modify_member.py:127
+#: alirpunkto/views/modify_member.py:100 alirpunkto/views/modify_member.py:118
+#: alirpunkto/views/modify_member.py:127
 msgid "unknown_accessed_member"
 msgstr "Unbekannter zugänglicher Mitglied"
 
@@ -1040,8 +1196,9 @@ msgstr "Unbekannter zugänglicher Mitglied"
 msgid "unknown_member"
 msgstr "Unbekanntes Mitglied"
 
+#. Neutral member-card wording (issue #249, 2026-08-14)
 msgid "modify_member_title"
-msgstr "Mitgliedsprofil bearbeiten"
+msgstr "Member profile"
 
 msgid "select_member_oid_label"
 msgstr "Bitte wählen Sie ein Mitglied aus, um sein/ihr Profil zu bearbeiten:"
@@ -1057,12 +1214,17 @@ msgstr "Profil"
 
 msgid "check_new_email_confirmed_msg"
 msgstr ""
-"Ihre E-Mail-Adresse wurde erfolgreich aktualisiert. Sie werden ab sofort diese neue Adresse für alle zukünftigen Kommunikationen mit ${domain_name} verwenden. "
-"Falls Sie diese Änderung nicht angefordert haben oder Fragen haben, zögern Sie bitte nicht, sich sofort an unseren Support unter ${admin_email} zu wenden. "
-"Vielen Dank, dass Sie Teil der ${domain_name}-Community sind!"
+"Ihre E-Mail-Adresse wurde erfolgreich aktualisiert. Sie werden ab sofort "
+"diese neue Adresse für alle zukünftigen Kommunikationen mit ${domain_name} "
+"verwenden. Falls Sie diese Änderung nicht angefordert haben oder Fragen "
+"haben, zögern Sie bitte nicht, sich sofort an unseren Support unter "
+"${admin_email} zu wenden. Vielen Dank, dass Sie Teil der "
+"${domain_name}-Community sind!"
 
 msgid "vote_msg"
-msgstr "Willkommen bei der Identitätsprüfung für die Registrierung eines Kandidaten als Genossenschaftler bei ${domain_name}."
+msgstr ""
+"Willkommen bei der Identitätsprüfung für die Registrierung eines Kandidaten "
+"als Genossenschaftler bei ${domain_name}."
 
 msgid "welcome_voter"
 msgstr ""
@@ -1076,8 +1238,7 @@ msgstr ""
 "</ol>\n"
 "<p>Sei sehr vorsichtig! Damit du die Registrierung akzeptieren kannst, müssen ALLE Elemente der bei der Registrierung angegebenen Identitätsdaten mit denen auf dem offiziellen Ausweisdokument streng IDENTISCH sein. In allen anderen Fällen, selbst bei einem einzigen, geringfügigen Unterschied oder wenn du Zweifel an der Echtheit des amtlichen Ausweises hast, musst du die Registrierung ablehnen. </p>\n"
 "<p>Bei der Übereinstimmung zwischen dem Foto und dem Selfie kannst du weniger streng sein: Bitte berücksichtige die Auswirkungen des Alters und der Unterschiede in Bezug auf Beleuchtung, Hintergrund usw. Wenn du weißt, wie das geht, bitten wir dich außerdem zu überprüfen, ob das Datum, an dem das Selfie aufgenommen wurde, mit dem Datum der E-Mail übereinstimmt oder zumindest nahe daran liegt. </p>\n"
-"<p>Wir bitten dich, diese Überprüfung sorgfältig durchzuführen, da die Integrität unserer demokratischen Prozesse davon abhängt, aber auch zügig, da ${name} auf deine Entscheidung wartet, um an unseren Aktivitäten teilnehmen zu können.</p>"
-"</div>"
+"<p>Wir bitten dich, diese Überprüfung sorgfältig durchzuführen, da die Integrität unserer demokratischen Prozesse davon abhängt, aber auch zügig, da ${name} auf deine Entscheidung wartet, um an unseren Aktivitäten teilnehmen zu können.</p></div>"
 
 msgid "vote_legend"
 msgstr "Wähle deine Stimme:"
@@ -1089,10 +1250,14 @@ msgid "submit_vote_title"
 msgstr "Klicke, um deine Stimme abzugeben."
 
 msgid "inform_verifier_subject"
-msgstr "Bitte hilf uns, eine neue Registrierung auf der Plattform von ${domain_name} zu verifizieren"
+msgstr ""
+"Bitte hilf uns, eine neue Registrierung auf der Plattform von ${domain_name}"
+" zu verifizieren"
 
 msgid "remind_verifier_subject"
-msgstr "Erinnerung - Bitte hilf uns, eine neue Registrierung auf der Plattform von ${domain_name} zu verifizieren. Frist in ${notice_time_verifiers} Tagen"
+msgstr ""
+"Erinnerung - Bitte hilf uns, eine neue Registrierung auf der Plattform von "
+"${domain_name} zu verifizieren. Frist in ${notice_time_verifiers} Tagen"
 
 #, fuzzy
 msgid "provider_role_activated"
@@ -1118,43 +1283,63 @@ msgid "application_workspace_name"
 msgstr "Our collaborative workspace"
 
 msgid "application_workspace_description"
-msgstr "Where you and all members of the Community can interact, share information and work on shared documents in a completely trusted and confidential environment."
+msgstr ""
+"Where you and all members of the Community can interact, share information "
+"and work on shared documents in a completely trusted and confidential "
+"environment."
 
 msgid "application_trainings_name"
 msgstr "Our on-line trainings"
 
 msgid "application_trainings_description"
-msgstr "Where you can follow trainings provided by members of the Community, or start developing your own, in collaboration with other members of the Community if you wish."
+msgstr ""
+"Where you can follow trainings provided by members of the Community, or "
+"start developing your own, in collaboration with other members of the "
+"Community if you wish."
 
 msgid "application_trainings_note"
-msgstr "Once on the training platform, click on the \"CosmoPolitical login\" button to enter with your account."
+msgstr ""
+"Once on the training platform, click on the \"CosmoPolitical login\" button "
+"to enter with your account."
 
 msgid "application_mailing_lists_name"
 msgstr "Our mailing lists"
 
 msgid "application_mailing_lists_description"
-msgstr "Where you can freely subscribe or unsubscribe to any of the mailing lists of the Cooperative open to the Community."
+msgstr ""
+"Where you can freely subscribe or unsubscribe to any of the mailing lists of"
+" the Cooperative open to the Community."
 
 msgid "application_portal_name"
 msgstr "Our presentation portal"
 
 msgid "application_portal_ordinary_description"
-msgstr "Where you can make donations or purchase training materials, and track your account."
+msgstr ""
+"Where you can make donations or purchase training materials, and track your "
+"account."
 
 msgid "application_portal_cooperator_description"
-msgstr "Where you can purchase your share(s) of the Cooperative, pay your yearly contribution, make donations, purchase training material and democratically define the quantitative parameters affecting internal processes."
+msgstr ""
+"Where you can purchase your share(s) of the Cooperative, pay your yearly "
+"contribution, make donations, purchase training material and democratically "
+"define the quantitative parameters affecting internal processes."
 
 msgid "application_deliberative_name"
 msgstr "Our deliberative democracy platform"
 
 msgid "application_deliberative_description"
-msgstr "Where you and all Cooperators democratically define the Public Policies we want to implement, once elected to positions of political responsibility."
+msgstr ""
+"Where you and all Cooperators democratically define the Public Policies we "
+"want to implement, once elected to positions of political responsibility."
 
 msgid "application_democratic_control_name"
 msgstr "Our democratic control platform"
 
 msgid "application_democratic_control_description"
-msgstr "Where you and all Cooperators democratically control, a priori, the most important operational decisions of the Board and of the Mediation & Arbitration Council."
+msgstr ""
+"Where you and all Cooperators democratically control, a priori, the most "
+"important operational decisions of the Board and of the Mediation & "
+"Arbitration Council."
 
 msgid "mandatory_fields_legend"
 msgstr "An asterisk (*) indicates a mandatory field."
@@ -1163,10 +1348,14 @@ msgid "become_cooperator_button"
 msgstr "Become a Cooperator"
 
 msgid "become_cooperator_invite"
-msgstr "Convinced by the Community? Take the next step and co-own the Cooperative."
+msgstr ""
+"Convinced by the Community? Take the next step and co-own the Cooperative."
 
 msgid "upgrade_identity_intro"
-msgstr "Provide the identity data below exactly as it appears on your identity document: verifiers of the Cooperative will compare them during the verification vote. Your pseudonym stays unchanged."
+msgstr ""
+"Provide the identity data below exactly as it appears on your identity "
+"document: verifiers of the Cooperative will compare them during the "
+"verification vote. Your pseudonym stays unchanged."
 
 msgid "your_pseudonym_label"
 msgstr "Your pseudonym:"
@@ -1178,34 +1367,49 @@ msgid "deactivate_account_link"
 msgstr "Deactivate my account"
 
 msgid "unsubscribe_intro"
-msgstr "You are about to ask the deactivation of your account. Please read the implications below before confirming."
+msgstr ""
+"You are about to ask the deactivation of your account. Please read the "
+"implications below before confirming."
 
 msgid "unsubscribe_implication_no_login"
-msgstr "You will not be able to log in to this platform nor to the connected applications any more."
+msgstr ""
+"You will not be able to log in to this platform nor to the connected "
+"applications any more."
 
 msgid "unsubscribe_implication_quarantine"
-msgstr "Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained."
+msgstr ""
+"Your personal data will be kept during the Quarantine period required by the"
+" rules of the Cooperative, then deleted; only your pseudonym, the date and "
+"the reason of your departure will be retained."
 
 msgid "unsubscribe_implication_confirmation_link"
-msgstr "Nothing happens until you follow the confirmation link that will be sent to your e-mail address."
+msgstr ""
+"Nothing happens until you follow the confirmation link that will be sent to "
+"your e-mail address."
 
 msgid "unsubscribe_request_button"
 msgstr "Ask the deactivation of my account"
 
 msgid "unsubscribe_pending_message"
-msgstr "Your deactivation request is pending: follow the link sent to your e-mail address to confirm it, or cancel it below."
+msgstr ""
+"Your deactivation request is pending: follow the link sent to your e-mail "
+"address to confirm it, or cancel it below."
 
 msgid "unsubscribe_cancel_button"
 msgstr "Cancel my deactivation request"
 
 msgid "unsubscribe_link_sent_message"
-msgstr "A confirmation link has been sent to your e-mail address. Your account stays active until you follow it."
+msgstr ""
+"A confirmation link has been sent to your e-mail address. Your account stays"
+" active until you follow it."
 
 msgid "unsubscribe_cancelled_message"
 msgstr "Your deactivation request has been cancelled."
 
 msgid "unsubscribe_link_expired_error"
-msgstr "This deactivation link has expired. Your account stays active; you can start again from your profile page."
+msgstr ""
+"This deactivation link has expired. Your account stays active; you can start"
+" again from your profile page."
 
 msgid "account_deactivated_message"
 msgstr "Your account is deactivated."
@@ -1214,7 +1418,9 @@ msgid "account_deactivated_login_error"
 msgstr "This account has been deactivated."
 
 msgid "identity_already_registered_error"
-msgstr "This identity (names and date of birth) is already registered — possibly by a member who resigned or was excluded less than the Quarantine period ago."
+msgstr ""
+"This identity (names and date of birth) is already registered — possibly by "
+"a member who resigned or was excluded less than the Quarantine period ago."
 
 msgid "unsubscribe_email_subject"
 msgstr "Confirm the deactivation of your account"
@@ -1226,10 +1432,12 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr ""
+"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_format_error"
-msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr ""
+"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
 msgstr "Your avatar picture is too large."
@@ -1271,7 +1479,11 @@ msgid "recovery_code_too_short"
 msgstr "The identity recovery code is too short."
 
 msgid "cooperator_underage_error"
-msgstr "You have not yet reached your 18th birthday. You are hence unfortunately not allowed to become a Cooperator. We invite you to register as an Ordinary Member of the Community — and to upgrade to Cooperator as soon as you have had your 18th birthday."
+msgstr ""
+"You have not yet reached your 18th birthday. You are hence unfortunately not"
+" allowed to become a Cooperator. We invite you to register as an Ordinary "
+"Member of the Community — and to upgrade to Cooperator as soon as you have "
+"had your 18th birthday."
 
 msgid "too_many_login_attempts"
 msgstr "Too many login attempts. Please wait a few minutes and try again."
@@ -1336,9 +1548,9 @@ msgstr "Board (suspended)"
 msgid "group_label_suspended_mac"
 msgstr "Mediation and Arbitration Council (suspended)"
 
-#. English fallback pending translation (i18n audit 2026-08-08)
+#. Neutral member-card wording (issue #249, 2026-08-14)
 msgid "member_admin_card_title"
-msgstr "Member card (read-only)"
+msgstr "Member profile card"
 
 #. English fallback pending translation (i18n audit 2026-08-08)
 msgid "role_label"
@@ -1458,3 +1670,35 @@ msgstr "Votes view."
 #. English fallback pending translation (client ticket #252, 2026-08-14)
 msgid "voting_period_ended"
 msgstr "Voting period ended."
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_pseudonym_label"
+msgstr "Pseudonym"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_description_label"
+msgstr "Profile text"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_user_number_label"
+msgstr "User number"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_role_label"
+msgstr "Role in the Cooperative"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_email_label"
+msgstr "E-mail address"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_mark_label"
+msgstr "Cooperative Behaviour Mark"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "member_card_mark_update_label"
+msgstr "Last update of the Mark"
+
+#. English fallback pending translation (issue #249, 2026-08-14)
+msgid "modify_member_intro"
+msgstr "You can consult the profiles of the other members:"
