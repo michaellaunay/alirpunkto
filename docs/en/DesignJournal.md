@@ -490,3 +490,7 @@ three agents, with examples on this repository.
 
 The last step the auditor names remains: an *observable* green smoke
 — neither his connector nor ours has seen it yet.
+
+## 2026-08-14 — The client-ticket volley
+
+Nine tickets from Laurent on the 8th, five more on the 14th: the 0101-0107 campaign settles them all, felling three deep causes on the way — flash messages never rendered anywhere, a locale fallback that never triggered (resolve never raises), and 24 msgids missing from the POT. #249 becomes the opening of the member directory to every member, cards scoped by role. Meanwhile the kuneagi02 certificate expired and revealed three nested causes; renewal now goes through the apache plugin, in place, hook-free. Two 2024 antiques (#124, #89) are settled by code evolution. First fully green CI run: the manual regenerates on every pass.

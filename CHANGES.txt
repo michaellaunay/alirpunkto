@@ -1,3 +1,40 @@
+Unreleased (2026-08-14)
+-----------------------
+
+- Client ticket campaign #250-#263 (trains 0101 to 0107). The three
+  deepest causes: no template ever rendered the flash queues, so
+  every rejection was invisible (#251, fixed in the shared layout);
+  AssetResolver.resolve never raises on a missing file, so the
+  locale fallback never triggered and the German disactivation
+  e-mail died at render time (#254, a real exists() test now makes
+  the English fallback effective); and 24 msgids used by code and
+  templates were absent from the POT, hence raw on screen outside
+  en/fr (#252, synchronised across all 34 catalogs with a lock that
+  extracts every used msgid).
+- Issue #249 grew beyond wording: the member directory is now open
+  to every logged-in member; another member's profile is a
+  read-only card scoped by the accessor's role (public fields for
+  members, the full card plus the e-mail address for
+  administrators), with neutral card labels reworded across all 34
+  catalogs. Follow-ups: the post-upload flash lands on one's own
+  profile via ?self=1 (#258), avatar URLs carry a CRC32 version
+  token so a fresh upload shows immediately without losing the
+  five-minute cache (#259), every save return carries the complete
+  pre-filled form (#260), the upgrade invitation leaves the
+  applications list (#261), the deactivate link survives both view
+  shapes (#262), and the member's status shows on every card
+  (#263).
+- The kuneagi02 certificate incident (expired 2026-08-11) closed
+  with three nested causes: a pre-R3 image that never renewed, a
+  standalone authenticator needing port 80 while Apache holds it,
+  and an apache2ctl stop that kills the container's PID 1. Renewal
+  now goes through the certbot apache plugin, in place, hook-free;
+  existing volumes are migrated on boot.
+- Two 2024 issues settled by evolution: #124's decision (e-mail
+  change confirmed from the OLD address) recorded as design, #89's
+  password check confirmed at first submission and its orphan
+  string queued for the POT cleanup.
+
 Unreleased (2026-08-02)
 -----------------------
 

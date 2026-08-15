@@ -2822,3 +2822,7 @@ configuration des trois agents, exemples à l'appui sur ce dépôt.
 
 Reste la dernière marche nommée par l'auditeur : un smoke vert
 *observable* — ni son connecteur ni le nôtre ne l'ont encore vu.
+
+## 2026-08-14 — La rafale des tickets client
+
+Neuf tickets de Laurent le 8, cinq de plus le 14 : la campagne 0101-0107 les solde tous, et trois causes profondes tombent au passage — les flash jamais rendus nulle part, le repli de locale qui n'attrapait rien (resolve ne lève jamais), et 24 msgid hors du POT. Le #249 devient l'ouverture de l'annuaire à tous les membres, fiches cadrées par rôle. En parallèle, le certificat de kuneagi02 expire et révèle trois causes gigognes ; le renouvellement passe au plugin apache, sans arrêt, sans hooks. Deux antiquités de 2024 (#124, #89) sont soldées par l'évolution du code. Premier run de la CI intégralement vert : le manuel se régénère à chaque passage.

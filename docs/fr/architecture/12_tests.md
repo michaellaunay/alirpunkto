@@ -161,3 +161,7 @@ incompressible ; validation des réponses Keycloak ; et cohérence des
 groupes jusqu'aux **vetos d'écriture injectés** et aux latchs à moitié
 levés non ressuscités (`test_group_coherence.py`). La couverture
 atteint 72,10 % au-dessus du plancher de 68.
+
+### Campagne tickets client (trains 0101-0107)
+
+La campagne d'août 2026 ajoute quatre familles de verrous : `tests/test_client_tickets.py` (les mécanismes des huit tickets #250-#257), `tests/test_member_directory.py` (le contrat de l'annuaire #249 et ses suites #258/#260-#263), `tests/test_avatar_cache_busting.py` (les URL d'avatar versionnées, #259), et la réécriture de `tests/test_member_visibility.py` au contrat #249 — l'esprit sécurité survit : jamais le formulaire d'autrui, jamais les champs sensibles pour un non-administrateur. La suite dépasse les 1080 tests verts.

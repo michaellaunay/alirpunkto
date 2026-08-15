@@ -155,3 +155,7 @@ the Keycloak response validation; and group coherence down to
 **injected write vetoes** and half-lifted latches that do not
 resurrect (`test_group_coherence.py`). Coverage reaches 72.10% over
 the 68 floor.
+
+### Client ticket campaign (trains 0101-0107)
+
+The August 2026 campaign adds four lock families: `tests/test_client_tickets.py` (the mechanisms behind tickets #250-#257), `tests/test_member_directory.py` (the #249 directory contract and its #258/#260-#263 follow-ups), `tests/test_avatar_cache_busting.py` (versioned avatar URLs, #259), and `tests/test_member_visibility.py` rewritten to the #249 contract — the security spirit survives: never another member's form, never the sensitive fields for non-admins. The suite now exceeds 1080 green tests.
