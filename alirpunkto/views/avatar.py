@@ -12,6 +12,7 @@ the owner can change or remove theirs.
 from __future__ import annotations
 
 import json
+import zlib
 
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 from pyramid.response import Response
@@ -26,6 +27,21 @@ from alirpunkto.utils import (
     get_member_avatar,
     set_member_avatar,
 )
+
+def avatar_url(request, oid):
+    """Versioned avatar URL (issue #259): the v token is the CRC32 of
+    the image bytes, so the URL changes the instant the avatar does —
+    browsers refetch immediately after an upload, while the 5-minute
+    cache keeps serving unchanged avatars. Any storage hiccup degrades
+    to a stable v=0 URL (the pre-#259 behaviour)."""
+    try:
+        jpeg = get_member_avatar(request, oid)
+    except Exception:
+        jpeg = None
+    version = format(zlib.crc32(jpeg) & 0xffffffff, 'x') if jpeg else '0'
+    return request.route_url('member_avatar',
+                             _query={'oid': str(oid), 'v': version})
+
 
 JPEG_MAGIC = b'\xff\xd8\xff'
 JPEG_EXTENSIONS = ('.jpg', '.jpeg')

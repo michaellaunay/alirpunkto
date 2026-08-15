@@ -126,6 +126,13 @@ def add_renderer_globals(event):
     """add_renderer_globals is used to add the localizer to the renderer globals
     """
     request = event['request'] # get the request from the event
+    # Issue #259: versioned avatar URLs, available to every
+    # template without threading the helper through each view.
+    from alirpunkto.views.avatar import avatar_url
+    request = event.get('request')
+    if request is not None:
+        event['avatar_url'] = (
+            lambda oid: avatar_url(request, oid))
     # Per-request translator (issue #244); the registry fallback only serves
     # exotic renders that never went through add_localizer.
     event['_'] = getattr(request, 'translate', None) or request.registry.translate

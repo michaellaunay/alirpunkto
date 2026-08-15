@@ -9,7 +9,7 @@
              tal:condition="accessed_member"
              tal:define="am_oid python: getattr(accessed_member, 'oid', accessed_member);
                          is_self python: member is not None and str(getattr(member, 'oid', '')) == str(am_oid)">
-            <img tal:attributes="src python: request.route_url('member_avatar') + '?oid=' + str(am_oid)"
+            <img tal:attributes="src python: avatar_url(am_oid)"
                  tal:condition="python: am_oid"
                  alt="Avatar" class="avatar" width="128" onerror="this.style.display='none'" />
             <form method="POST" enctype="multipart/form-data"
@@ -33,7 +33,7 @@
              tal:condition="admin_view">
             <h2 tal:content="_('member_admin_card_title')">Member card</h2>
             <img tal:condition="python: admin_view['has_avatar']"
-                 tal:attributes="src python: request.route_url('member_avatar') + '?oid=' + str(admin_view['oid'])"
+                 tal:attributes="src python: avatar_url(admin_view['oid'])"
                  alt="avatar" width="96" height="96" />
             <dl>
                 <dt tal:content="_('member_card_pseudonym_label')">Pseudonym</dt>
