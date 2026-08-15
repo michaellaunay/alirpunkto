@@ -88,7 +88,8 @@ def test_a_member_opens_a_reduced_public_card():
                           "accessed_member_oid": "mem-2"})
     card = context.get("admin_view")
     assert card, "another member's profile must be a read-only card"
-    assert set(card) == {"oid", "pseudonym", "cooperative_behaviour_mark",
+    assert set(card) == {"oid", "pseudonym", "role_i18n",
+                         "cooperative_behaviour_mark",
                          "cooperative_behaviour_mark_update", "has_avatar"}
     assert card["pseudonym"] == "zorro"
 
@@ -172,3 +173,32 @@ def test_the_avatar_redirects_target_ones_own_profile():
     assert "request.route_url('modify_member')" not in source, (
         "a bare modify_member redirect lands on the directory (#258)")
     assert source.count("_query={'self': '1'}") == 6
+
+
+def test_263_the_status_shows_on_the_public_card():
+    accessor = _member("acc-1", MemberTypes.ORDINARY)
+    other = _member("mem-2", MemberTypes.COOPERATOR, pseudonym="zorro")
+    context = _call(accessor, [other],
+                    post={"submit": "submit",
+                          "accessed_member_oid": "mem-2"})
+    assert "role_i18n" in context["admin_view"]
+
+
+def test_260_every_save_return_carries_the_full_form():
+    source = open(os.path.join(ROOT, "alirpunkto", "views",
+                               "modify_member.py"), encoding="utf-8").read()
+    assert "form.render(appstruct=appstruct) if form else None" not in source
+    assert source.count("_edit_form_html(request, schema, accessed_member)") >= 12
+
+
+def test_261_the_invitation_sits_after_the_applications_list():
+    home = open(os.path.join(ROOT, "alirpunkto", "templates",
+                             "home.pt"), encoding="utf-8").read()
+    assert home.index("</ul>") < home.index("upgrade-invitation")
+
+
+def test_262_the_deactivate_link_survives_object_or_oid():
+    template = open(os.path.join(ROOT, "alirpunkto", "templates",
+                                 "modify_member.pt"), encoding="utf-8").read()
+    assert "getattr(accessed_member, 'oid', accessed_member)" in template.split(
+        "deactivate-account")[1].split("</div>")[0]

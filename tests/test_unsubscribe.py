@@ -257,4 +257,4 @@ def test_the_profile_page_links_to_the_resignation_flow():
     m = re.search(r'deactivate-account.*?route_url\(\'unsubscribe\'\)',
                   tpl, re.S)
     assert m
-    assert "getattr(member, 'oid', None) == getattr(accessed_member, 'oid', None)" in tpl
+    assert "getattr(member, 'oid', None) == getattr(accessed_member, 'oid', accessed_member)" in tpl

@@ -145,6 +145,8 @@ def _admin_member_card(request, accessed_member, full=True):
         return {
             'oid': accessed_member.oid,
             'pseudonym': getattr(accessed_member, 'pseudonym', None),
+            # Issue #263: the member's status shows on every card.
+            'role_i18n': role_i18n,
             'cooperative_behaviour_mark':
                 getattr(data, 'cooperative_behaviour_mark', None),
             'cooperative_behaviour_mark_update':
@@ -166,6 +168,50 @@ def _admin_member_card(request, accessed_member, full=True):
                                     None),
         'has_avatar': has_avatar,
     }
+
+
+def _edit_form_html(request, schema, accessed_member):
+    """Render the complete pre-filled edit form (issue #260).
+
+    The save branch used to reference a form that only existed on the
+    submit path, so every one of its returns produced a page without
+    the form — the "truncated form" of the ticket. Building it here,
+    from the member's CURRENT data, gives every return the full form
+    with fresh values."""
+    appstruct = {
+        'accessed_member': accessed_member,
+        'cooperative_number': accessed_member.oid,
+        'email': accessed_member.email,
+        'pseudonym': accessed_member.pseudonym,
+        'fullname': accessed_member.data.fullname,
+        'fullsurname': accessed_member.data.fullsurname,
+        'description': accessed_member.data.description,
+        'birthdate': accessed_member.data.birthdate,
+        'nationality': accessed_member.data.nationality,
+        'lang1': accessed_member.data.lang1,
+        'lang2': accessed_member.data.lang2,
+        'lang3': accessed_member.data.lang3,
+        'cooperative_behaviour_mark':
+            accessed_member.data.cooperative_behaviour_mark,
+        'cooperative_behaviour_mark_update':
+            accessed_member.data.cooperative_behaviour_mark_update,
+        'number_shares_owned': accessed_member.data.number_shares_owned,
+        'date_end_validity_yearly_contribution':
+            accessed_member.data.date_end_validity_yearly_contribution,
+        'iban': accessed_member.data.iban,
+    }
+    # Issue #123: a translated Submit and a Cancel button (issue #116)
+    # — the submit keeps its historical name 'modify' so the POST
+    # branch stays untouched.
+    form = deform.Form(schema,
+        buttons=(
+            deform.Button('modify', title=_('submit_button')),
+            deform.Button('cancel', title=_('cancel_button')),
+        ),
+        translator=Translator
+    )
+    return form.render(appstruct=appstruct)
+
 
 
 @view_config(
@@ -360,38 +406,8 @@ def modify_member(request):
     # through to the directory below, and the 'modify' POST keeps its
     # own saving branch.
     if "submit" in request.POST or wants_self:
-        appstruct = {
-            'accessed_member': accessed_member,
-            'cooperative_number': accessed_member.oid,
-            'email': accessed_member.email,
-            'pseudonym': accessed_member.pseudonym,
-            'fullname': accessed_member.data.fullname,
-            'fullsurname': accessed_member.data.fullsurname,
-            'description': accessed_member.data.description,
-            'birthdate': accessed_member.data.birthdate,
-            'nationality': accessed_member.data.nationality,
-            'lang1': accessed_member.data.lang1,
-            'lang2': accessed_member.data.lang2,
-            'lang3': accessed_member.data.lang3,
-            'cooperative_behaviour_mark': accessed_member.data.cooperative_behaviour_mark,
-            'cooperative_behaviour_mark_update': accessed_member.data.cooperative_behaviour_mark_update,
-            'number_shares_owned': accessed_member.data.number_shares_owned,
-            'date_end_validity_yearly_contribution': accessed_member.data.date_end_validity_yearly_contribution,
-            'iban': accessed_member.data.iban,
-            #'date_erasure_all_data': accessed_member.data.date_erasure_all_data #TODO
-        }
-        # Issue #123: a translated Submit and a Cancel button (issue #116)
-        # — the submit keeps its historical name 'modify' so the POST
-        # branch below is untouched.
-        form = deform.Form(schema,
-            buttons=(
-                deform.Button('modify', title=_('submit_button')),
-                deform.Button('cancel', title=_('cancel_button')),
-            ),
-            translator=Translator
-        )
         return {
-            "form": form.render(appstruct=appstruct) if form else None,
+            "form": _edit_form_html(request, schema, accessed_member),
             "member": member,
             "accessed_members": {},
             "accessed_member": accessed_member.oid,
@@ -444,7 +460,7 @@ def modify_member(request):
                                 "member": member,
                                 "accessed_members": {},
                                 "accessed_member": accessed_member.oid,
-                                "form": form.render(appstruct=appstruct) if form else None,
+                                "form": _edit_form_html(request, schema, accessed_member),
                                 "error": _('invalid_date'),
                             }
                     elif k == '__end__':
@@ -475,7 +491,7 @@ def modify_member(request):
                                 "member": member,
                                 "accessed_members": {},
                                 "accessed_member": accessed_member.oid,
-                                "form": form.render(appstruct=appstruct) if form else None,
+                                "form": _edit_form_html(request, schema, accessed_member),
                                 "error":err,
                                 }
                         accessed_member.new_email = email
@@ -499,7 +515,7 @@ def modify_member(request):
                                 "member": member,
                                 "accessed_member": accessed_member,
                                 "accessed_members": {},
-                                "form": form.render(appstruct=appstruct) if form else None,
+                                "form": _edit_form_html(request, schema, accessed_member),
                             }
                         try:
                             accessed_member.add_email_send_status(
@@ -528,7 +544,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render(appstruct=appstruct) if form else None,
+                            "form": _edit_form_html(request, schema, accessed_member),
                             "error":_('password_not_match'),
                         }
                     if password == "":
@@ -537,7 +553,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render(appstruct=appstruct) if form else None,
+                            "form": _edit_form_html(request, schema, accessed_member),
                             "error":_('password_required'),
                         }
                     err = is_valid_password(password)
@@ -547,7 +563,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render(appstruct=appstruct) if form else None,
+                            "form": _edit_form_html(request, schema, accessed_member),
                             "error": err['error'],
                         }
                     password_result = update_member_password(
@@ -558,7 +574,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": {},
                             "accessed_member": accessed_member.oid,
-                            "form": form.render(appstruct=appstruct) if form else None,
+                            "form": _edit_form_html(request, schema, accessed_member),
                             "error": _('password_update_failed'),
                         }
                 else:
@@ -583,7 +599,7 @@ def modify_member(request):
                                 "member": member,
                                 "accessed_members": members,
                                 "accessed_member": accessed_member.oid,
-                                "form": form.render(appstruct=appstruct) if form else None,
+                                "form": _edit_form_html(request, schema, accessed_member),
                                 "error": error,
                             }
                     if field in accessed_member.data.get_field_names():
@@ -602,7 +618,7 @@ def modify_member(request):
                             "member": member,
                             "accessed_members": members,
                             "accessed_member": accessed_member.oid,
-                            "form": form.render(appstruct=appstruct) if form else None,
+                            "form": _edit_form_html(request, schema, accessed_member),
                             "error": error,
                         }
         # write modifications in ldap
@@ -615,7 +631,7 @@ def modify_member(request):
                 "member": member,
                 "accessed_members": members,
                 "accessed_member": accessed_member.oid,
-                "form": form.render(appstruct=appstruct) if form else None,
+                "form": _edit_form_html(request, schema, accessed_member),
                 "error":_('error_while_updating_member'),
                 }
         accessed_member.member_state = MemberStates.DATA_MODIFIED
@@ -629,7 +645,7 @@ def modify_member(request):
         #@TODO send a modification confirmation email
         return {
             "member": member,
-            "form": None,
+            "form": _edit_form_html(request, schema, accessed_member),
             "accessed_member":accessed_member,
             "accessed_members": {},
             "message": message if message else _('member_data_updated'),
