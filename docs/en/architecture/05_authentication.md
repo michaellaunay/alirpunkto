@@ -114,3 +114,7 @@ authentication entry point. The test server is not connected to
 Keycloak and hosts only AlirPunkto; direct LDAP authentication is an
 assumed path, the Keycloak integration remaining the acquisition of an
 SSO token after the local authentication.
+
+### Departure-state guard (issue #265)
+
+Since train 0109 the login view consults `member_state` right after the LDAP authentication: an account in `UNSUBSCRIBED`, `EXCLUDED` or `DELETED` state is refused with the translated `login_account_disabled` message, even while the directory still authenticates its credentials. Living states pass unchanged; both directions are locked by `tests/test_departure_tickets.py`.

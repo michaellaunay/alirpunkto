@@ -118,3 +118,7 @@ d'entrée de l'authentification. Le serveur de test n'est pas relié à
 Keycloak et n'héberge qu'AlirPunkto ; l'authentification LDAP directe
 est une voie assumée, l'intégration Keycloak restant l'obtention d'un
 jeton SSO après l'authentification locale.
+
+### Garde des états de départ (issue #265)
+
+Depuis le train 0109, la vue de connexion consulte `member_state` juste après l'authentification LDAP : un compte en état `UNSUBSCRIBED`, `EXCLUDED` ou `DELETED` est refusé avec le message traduit `login_account_disabled`, même si l'annuaire authentifie encore ses identifiants. Les états vivants passent inchangés ; les deux sens sont verrouillés par `tests/test_departure_tickets.py`.

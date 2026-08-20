@@ -2826,3 +2826,7 @@ Reste la dernière marche nommée par l'auditeur : un smoke vert
 ## 2026-08-14 — La rafale des tickets client
 
 Neuf tickets de Laurent le 8, cinq de plus le 14 : la campagne 0101-0107 les solde tous, et trois causes profondes tombent au passage — les flash jamais rendus nulle part, le repli de locale qui n'attrapait rien (resolve ne lève jamais), et 24 msgid hors du POT. Le #249 devient l'ouverture de l'annuaire à tous les membres, fiches cadrées par rôle. En parallèle, le certificat de kuneagi02 expire et révèle trois causes gigognes ; le renouvellement passe au plugin apache, sans arrêt, sans hooks. Deux antiquités de 2024 (#124, #89) sont soldées par l'évolution du code. Premier run de la CI intégralement vert : le manuel se régénère à chaque passage.
+
+## 2026-08-15 — Le train des départs
+
+Trois tickets, dont une vraie faille : un compte désactivé pouvait encore se connecter — le login ne regardait jamais `member_state`. La garde est posée, traduite partout. Au passage, la cause racine des rôles fantômes tombe : le champ role recevait le mauvais enum depuis toujours (mypy le criait), le rôle dérive désormais du type. Et la quarantaine ne sera plus jamais annoncée à un membre ordinaire — ni à l'écran, ni dans l'email de confirmation.

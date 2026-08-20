@@ -1,6 +1,17 @@
 Unreleased (2026-08-14)
 -----------------------
 
+- Departure tickets (train 0109). #265, the security one: the
+  login view never checked member_state, so a confirmed departure
+  could still authenticate; a guard now refuses UNSUBSCRIBED,
+  EXCLUDED and DELETED accounts with a translated message
+  (login_account_disabled, all 34 catalogs). #264, the root cause
+  mypy had flagged: member construction assigned the TYPE enum to
+  the ROLE field, so registered members showed member_roles_none —
+  the role now derives from the type, healing every card without
+  migration. #253 reopened: the quarantine default flips to
+  omit-when-in-doubt and the confirmation E-MAIL's Quarantine
+  paragraph becomes conditional on the member's type.
 - Client ticket campaign #250-#263 (trains 0101 to 0107). The three
   deepest causes: no template ever rendered the flash queues, so
   every rejection was invisible (#251, fixed in the shared layout);
