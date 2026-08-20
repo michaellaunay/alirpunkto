@@ -1853,21 +1853,6 @@ msgstr "Votes view."
 msgid "voting_period_ended"
 msgstr "Voting period ended."
 
-#, fuzzy
-#~ msgid "pseudonym_title_label"
-#~ msgstr ""
-#~ "Vă rugăm să introduceți aici pseudonimul care vă va identifica pe întreaga "
-#~ "durată a activității dumneavoastră pe platforma noastră IT. Vă recomandăm "
-#~ "ÎNGREJORĂTOR să selectați un pseudonim care să facă imposibilă (sau extrem "
-#~ "de dificilă) urmărirea identității dvs. reale. Astfel, vă protejați "
-#~ "confidențialitatea opiniilor dumneavoastră (adică datele cu caracter "
-#~ "personal care fac obiectul unei protecții specifice în conformitate cu "
-#~ "Regulamentul general privind protecția datelor - GDPR) împotriva oricărei "
-#~ "forme de presiune externă în viața reală (de exemplu, din partea "
-#~ "angajatorului sau a clienților dumneavoastră). Fiți foarte atenți! Odată ce "
-#~ "l-ați ales, nu veți putea NICIODATĂ să schimbați ulterior acest pseudonim. "
-#~ "Alegeți-l cu grijă!"
-
 #. English fallback pending translation (issue #249, 2026-08-14)
 msgid "member_card_pseudonym_label"
 msgstr "Pseudonym"
@@ -1899,3 +1884,24 @@ msgstr "Last update of the Mark"
 #. English fallback pending translation (issue #249, 2026-08-14)
 msgid "modify_member_intro"
 msgstr "You can consult the profiles of the other members:"
+
+#. English fallback pending translation (issue #265)
+msgid "login_account_disabled"
+msgstr ""
+"This account has been deactivated following the cancellation of the "
+"membership; logging in is no longer possible."
+
+#, fuzzy
+#~ msgid "pseudonym_title_label"
+#~ msgstr ""
+#~ "Vă rugăm să introduceți aici pseudonimul care vă va identifica pe întreaga "
+#~ "durată a activității dumneavoastră pe platforma noastră IT. Vă recomandăm "
+#~ "ÎNGREJORĂTOR să selectați un pseudonim care să facă imposibilă (sau extrem "
+#~ "de dificilă) urmărirea identității dvs. reale. Astfel, vă protejați "
+#~ "confidențialitatea opiniilor dumneavoastră (adică datele cu caracter "
+#~ "personal care fac obiectul unei protecții specifice în conformitate cu "
+#~ "Regulamentul general privind protecția datelor - GDPR) împotriva oricărei "
+#~ "forme de presiune externă în viața reală (de exemplu, din partea "
+#~ "angajatorului sau a clienților dumneavoastră). Fiți foarte atenți! Odată ce "
+#~ "l-ați ales, nu veți putea NICIODATĂ să schimbați ulterior acest pseudonim. "
+#~ "Alegeți-l cu grijă!"

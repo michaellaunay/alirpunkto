@@ -13,7 +13,7 @@
 
     <p tal:omit-tag="textual">We have received on the <span tal:replace="site_name">Site Name</span> platform of <span tal:replace="domain_name">Domain Name</span> a request to deactivate your account. Nothing will happen until you confirm it: to proceed, follow this link <a href="${page_with_oid}" tal:attributes="href page_with_oid">Confirm the deactivation</a>.</p>
 
-    <p tal:omit-tag="textual">After confirmation you will not be able to log in any more. Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained.</p>
+    <p tal:condition="show_quarantine | nothing" tal:omit-tag="textual">After confirmation you will not be able to log in any more. Your personal data will be kept during the Quarantine period required by the rules of the Cooperative, then deleted; only your pseudonym, the date and the reason of your departure will be retained.</p>
 
     <p tal:omit-tag="textual">If you did not ask for this, simply ignore this e-mail: the request will expire and your account will stay active. You can also cancel it from your profile page.</p>
 

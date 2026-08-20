@@ -1652,3 +1652,8 @@ msgstr "Date de dernière mise à jour de la Note"
 
 msgid "modify_member_intro"
 msgstr "Vous pouvez consulter les profils des autres membres :"
+
+msgid "login_account_disabled"
+msgstr ""
+"Ce compte a été désactivé à la suite de l'annulation de l'adhésion ; la "
+"connexion n'est plus possible."

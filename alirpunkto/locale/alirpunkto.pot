@@ -1583,3 +1583,7 @@ msgstr ""
 #. Neutral member-card wording (issue #249, 2026-08-14)
 msgid "modify_member_intro"
 msgstr ""
+
+#. Issue #265: departure states refused at login
+msgid "login_account_disabled"
+msgstr ""

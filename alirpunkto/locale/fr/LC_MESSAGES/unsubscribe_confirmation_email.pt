@@ -13,7 +13,7 @@
 
     <p tal:omit-tag="textual">Nous avons reçu sur la plateforme <span tal:replace="site_name">Site Name</span> de <span tal:replace="domain_name">Domain Name</span> une demande de désactivation de ton compte. Rien ne se passera tant que tu ne l'auras pas confirmée : pour continuer, suis ce lien <a href="${page_with_oid}" tal:attributes="href page_with_oid">Confirmer la désactivation</a>.</p>
 
-    <p tal:omit-tag="textual">Après confirmation, tu ne pourras plus te connecter. Tes données personnelles seront conservées pendant la période de Quarantaine prévue par les règles de la Coopérative, puis supprimées ; seuls ton pseudonyme, la date et le motif de ton départ seront conservés.</p>
+    <p tal:condition="show_quarantine | nothing" tal:omit-tag="textual">Après confirmation, tu ne pourras plus te connecter. Tes données personnelles seront conservées pendant la période de Quarantaine prévue par les règles de la Coopérative, puis supprimées ; seuls ton pseudonyme, la date et le motif de ton départ seront conservés.</p>
 
     <p tal:omit-tag="textual">Si tu n'es pas à l'origine de cette demande, ignore simplement ce message : la demande expirera et ton compte restera actif. Tu peux aussi l'annuler depuis ta page de profil.</p>
 

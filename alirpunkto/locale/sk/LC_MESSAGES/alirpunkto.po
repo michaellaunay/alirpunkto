@@ -1643,3 +1643,9 @@ msgstr "Last update of the Mark"
 #. English fallback pending translation (issue #249, 2026-08-14)
 msgid "modify_member_intro"
 msgstr "You can consult the profiles of the other members:"
+
+#. English fallback pending translation (issue #265)
+msgid "login_account_disabled"
+msgstr ""
+"This account has been deactivated following the cancellation of the "
+"membership; logging in is no longer possible."

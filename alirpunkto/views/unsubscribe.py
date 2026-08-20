@@ -43,11 +43,14 @@ def _show_quarantine(request):
         user = _json.loads(user) if isinstance(user, str) else user
         oid = (user or {}).get('oid')
         if not oid:
-            return True
+            return False
         member = get_member_by_oid(oid, request)
-        return member is None or member.type != MemberTypes.ORDINARY
+        return member is not None and member.type != MemberTypes.ORDINARY
     except Exception:
-        return True
+        # Issue #253 (reopened): when in doubt, omit — not mentioning
+        # the Quarantine to a Cooperator is benign; announcing it to
+        # an Ordinary Member is the ticket.
+        return False
 
 def _context(request, **extra):
     settings = getattr(request.registry, 'settings', {}) or {}
@@ -118,7 +121,11 @@ def unsubscribe(request):
         result = send_email_to_member(
             request, member, 'unsubscribe',
             'unsubscribe_confirmation_email',
-            'unsubscribe_email_subject', 'unsubscribe_confirm')
+            'unsubscribe_email_subject', 'unsubscribe_confirm',
+            extra_template_parameter={
+                # Issue #253 (reopened): the confirmation e-mail must
+                # not mention the Quarantine to an Ordinary Member.
+                'show_quarantine': _show_quarantine(request)})
         if not result or result.get('error'):
             # Sending failed: do not strand the member in pending.
             member.member_state = member.previous_member_state

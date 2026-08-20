@@ -1604,3 +1604,8 @@ msgstr "Last update of the Mark"
 
 msgid "modify_member_intro"
 msgstr "You can consult the profiles of the other members:"
+
+msgid "login_account_disabled"
+msgstr ""
+"This account has been deactivated following the cancellation of the "
+"membership; logging in is no longer possible."

@@ -7,6 +7,7 @@ import os
 from datetime import date, datetime, timedelta
 from pyramid.request import Request
 from alirpunkto.models.member import (
+    MemberRoles,
     Members,
     MemberDatas,
     EmailSendStatus,
@@ -815,7 +816,15 @@ def update_member_from_ldap(
         log.debug(f"Update Member {oid} with ldap informations")
         if not member:
             log.debug(f"Create Member {oid} with informations found in LDAP with {new_email=}, {new_pseudonym=}, {new_type=}, {new_fullname=}, {new_nationality=}, {new_birthdate=}, {new_preferred_language=}, {new_second_language=}")
+            # Issue #264: LDAP carries no role attribute, so every member
+            # registered through AlirPunkto showed member_roles_none.
+            # The role derives from the member type at construction.
+            derived_role = {
+                MemberTypes.ORDINARY: MemberRoles.ORDINARY,
+                MemberTypes.COOPERATOR: MemberRoles.COOPERATOR,
+            }.get(new_type, MemberRoles.NONE)
             datas = MemberDatas(
+                role=derived_role,
                 fullname=new_fullname,
                 fullsurname = new_fullname,
                 nationality = new_nationality,
@@ -825,7 +834,6 @@ def update_member_from_ldap(
                 lang1 = new_preferred_language,
                 lang2 = new_second_language,
                 lang3 = new_third_language,
-                role = new_type,
                 cooperative_behaviour_mark = cooperative_behaviour_mark,
                 cooperative_behaviour_mark_update = cooperative_behaviour_mark_update,
                 number_shares_owned = number_shares_owned,

@@ -1817,19 +1817,6 @@ msgstr "Votes view."
 msgid "voting_period_ended"
 msgstr "Voting period ended."
 
-#, fuzzy
-#~ msgid "pseudonym_title_label"
-#~ msgstr ""
-#~ "Wpisz tutaj pseudonim, który będzie Cię identyfikował przez cały czas Twojej"
-#~ " aktywności na naszej platformie IT. Zdecydowanie zalecamy wybranie "
-#~ "pseudonimu, który uniemożliwi (lub bardzo utrudni) ustalenie prawdziwej "
-#~ "tożsamości użytkownika. W ten sposób chronisz poufność swoich opinii (tj. "
-#~ "danych osobowych, które podlegają szczególnej ochronie na mocy ogólnego "
-#~ "rozporządzenia o ochronie danych - RODO) przed wszelkimi formami presji "
-#~ "zewnętrznej w prawdziwym życiu (np. ze strony pracodawcy lub klientów). Bądź"
-#~ " bardzo ostrożny! Raz wybranego pseudonimu NIGDY nie będzie można później "
-#~ "zmienić. Wybierz go ostrożnie! "
-
 #. English fallback pending translation (issue #249, 2026-08-14)
 msgid "member_card_pseudonym_label"
 msgstr "Pseudonym"
@@ -1861,3 +1848,22 @@ msgstr "Last update of the Mark"
 #. English fallback pending translation (issue #249, 2026-08-14)
 msgid "modify_member_intro"
 msgstr "You can consult the profiles of the other members:"
+
+#. English fallback pending translation (issue #265)
+msgid "login_account_disabled"
+msgstr ""
+"This account has been deactivated following the cancellation of the "
+"membership; logging in is no longer possible."
+
+#, fuzzy
+#~ msgid "pseudonym_title_label"
+#~ msgstr ""
+#~ "Wpisz tutaj pseudonim, który będzie Cię identyfikował przez cały czas Twojej"
+#~ " aktywności na naszej platformie IT. Zdecydowanie zalecamy wybranie "
+#~ "pseudonimu, który uniemożliwi (lub bardzo utrudni) ustalenie prawdziwej "
+#~ "tożsamości użytkownika. W ten sposób chronisz poufność swoich opinii (tj. "
+#~ "danych osobowych, które podlegają szczególnej ochronie na mocy ogólnego "
+#~ "rozporządzenia o ochronie danych - RODO) przed wszelkimi formami presji "
+#~ "zewnętrznej w prawdziwym życiu (np. ze strony pracodawcy lub klientów). Bądź"
+#~ " bardzo ostrożny! Raz wybranego pseudonimu NIGDY nie będzie można później "
+#~ "zmienić. Wybierz go ostrożnie! "

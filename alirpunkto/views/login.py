@@ -89,6 +89,21 @@ def login_view(request):
             record_success(client_ip, username)
             # The user is in the ldap directory
             member = update_member_from_ldap(oid, request) # force update of the user
+            # Issue #265: a confirmed departure closes the door — an
+            # unsubscribed, excluded or deleted account must never log
+            # in again, whatever the directory still authenticates.
+            from alirpunkto.models.member import MemberStates
+            if member is not None and member.member_state in (
+                    MemberStates.UNSUBSCRIBED,
+                    MemberStates.EXCLUDED,
+                    MemberStates.DELETED):
+                record_failure(client_ip, username)
+                return {
+                    'error': _('login_account_disabled'),
+                    'site_name': site_name,
+                    'domain_name': domain_name,
+                    'organization_details': organization_details
+                }
             headers = remember(request, username)
             request.session['logged_in'] = True
             # Drive the interface with the member's declared language (issue #204)
