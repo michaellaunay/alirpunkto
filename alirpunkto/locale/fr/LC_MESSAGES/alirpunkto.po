@@ -77,12 +77,12 @@ msgid "forgot_password_label"
 msgstr "Mot de passe oublié ?"
 
 msgid "full_name_as_in_id_label"
-msgstr ""
+msgstr "Prénom(s), tel(s) qu'écrit(s) sur tes documents d'identité officiels"
 "Prénom(s) complet(s) qu'il(s) figure(nt) sur tes documents d'identité "
 "officiels"
 
 msgid "full_surname_as_in_id_label"
-msgstr ""
+msgstr "Nom(s) de famille, tel(s) qu'écrit(s) sur tes documents d'identité officiels"
 "Nom(s) de famille complet(s) qu'il(s) figure(nt) sur tes documents "
 "d'identité officiels"
 
@@ -829,14 +829,14 @@ msgstr ""
 
 #: alirpunkto/schemas/register_form.py:22
 msgid "full_name_as_in_id_description"
-msgstr ""
+msgstr "Indique tous tes prénoms, dans l'ordre et l'orthographe de tes papiers d'identité."
 "Entre ici tous tes prénom(s), tel(s) qu'écrit(s) dans tes documents "
 "d'identité officiels, dans leur transcription officielle en caractères "
 "latins (si la langue d'origine utilise un alphabet different du latin)"
 
 #: alirpunkto/schemas/register_form.py:29
 msgid "full_surname_as_in_id_description"
-msgstr ""
+msgstr "Indique ton ou tes noms de famille, dans l'orthographe exacte de tes papiers d'identité."
 "Entre ici tous tes nom(s) de famille à la naissance (c'est-à-dire PAS ton "
 "nom de famille en tant que personne mariée), tel(s) qu'écrit(s) dans tes "
 "documents d'identité officiels, dans leur transcription officielle en "

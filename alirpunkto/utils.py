@@ -774,6 +774,10 @@ def update_member_from_ldap(
             else:
                 new_type = None
             new_fullname = member_entry.givenName.value if hasattr(member_entry, 'givenName') else None
+            # sn (the family name) was never read: a member created from the
+            # directory got their given name as surname (bug seen on the
+            # rebuilt production ZODB, 2026-09-01).
+            new_fullsurname = member_entry.sn.value if hasattr(member_entry, 'sn') else None
             new_nationality = member_entry.nationality.value if hasattr(member_entry, 'nationality') else None
             new_birthdate = member_entry.birthdate.value if hasattr(member_entry, 'birthdate') else None
             def get_date(date_str: str, oid: str) -> Optional[datetime]:
@@ -815,7 +819,7 @@ def update_member_from_ldap(
 
         log.debug(f"Update Member {oid} with ldap informations")
         if not member:
-            log.debug(f"Create Member {oid} with informations found in LDAP with {new_email=}, {new_pseudonym=}, {new_type=}, {new_fullname=}, {new_nationality=}, {new_birthdate=}, {new_preferred_language=}, {new_second_language=}")
+            log.debug(f"Create Member {oid} with informations found in LDAP with {new_email=}, {new_pseudonym=}, {new_type=}, {new_fullname=}, {new_fullsurname=}, {new_nationality=}, {new_birthdate=}, {new_preferred_language=}, {new_second_language=}")
             # Issue #264: LDAP carries no role attribute, so every member
             # registered through AlirPunkto showed member_roles_none.
             # The role derives from the member type at construction.
@@ -826,7 +830,7 @@ def update_member_from_ldap(
             datas = MemberDatas(
                 role=derived_role,
                 fullname=new_fullname,
-                fullsurname = new_fullname,
+                fullsurname=new_fullsurname,
                 nationality = new_nationality,
                 birthdate = new_birthdate,
                 password = None,
@@ -865,6 +869,9 @@ def update_member_from_ldap(
             if new_fullname and member.data.fullname != new_fullname:
                 log.debug(f"Update Member {oid} with new fullname {new_fullname}")
                 member.data.fullname = new_fullname
+            if new_fullsurname and member.data.fullsurname != new_fullsurname:
+                log.debug(f"Update Member {oid} with new fullsurname {new_fullsurname}")
+                member.data.fullsurname = new_fullsurname
             if new_nationality and member.data.nationality != new_nationality:
                 log.debug(f"Update Member {oid} with new nationality {new_nationality}")
                 member.data.nationality = new_nationality
