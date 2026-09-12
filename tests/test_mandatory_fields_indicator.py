@@ -16,7 +16,7 @@ import re
 import deform
 from alirpunkto.constants_and_globals import _
 import pytest
-from pkg_resources import resource_filename
+from importlib.resources import files
 from pyramid.events import NewRequest
 from pyramid.testing import DummyRequest, setUp, tearDown
 
@@ -63,8 +63,8 @@ def test_the_required_labels_carry_the_class_in_the_project_renderer(bind):
     """Rendered with the project's own deform templates — the ones that put
     the 'required' class on the label the CSS turns into an asterisk."""
     renderer = deform.ZPTRendererFactory([
-        resource_filename('alirpunkto', 'templates/deform/'),
-        resource_filename('deform', 'templates/'),
+        str(files('alirpunkto') / 'templates' / 'deform') + '/',
+        str(files('deform') / 'templates') + '/',
     ])
     html = deform.Form(bind(), renderer=renderer).render()
     item = re.search(r'<div[^>]*class="[^"]*item-password[^"]*".*?</label>',

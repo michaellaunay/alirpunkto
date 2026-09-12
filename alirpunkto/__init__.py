@@ -14,7 +14,7 @@ from .upgrades import SCHEMA_VERSION, run_pending_upgrades
 from .models.member import Members
 from pyramid.session import SignedCookieSessionFactory
 import deform
-from pkg_resources import resource_filename
+from importlib.resources import files as _package_files
 from pyramid.threadlocal import get_current_request
 
 from .constants_and_globals import (
@@ -383,8 +383,14 @@ def main(global_config, **settings):
         config.add_request_method(get_time_zone, 'tz', reify=True) # add tz to the request
         config.add_subscriber(add_renderer_globals, 'pyramid.events.BeforeRender')
 
-    deform_template_dir = resource_filename('deform', 'templates/')
-    custom_deform_template_dir = resource_filename('alirpunkto', 'templates/deform/')
+    # Train 0113: importlib.resources instead of the setuptools resource API (deprecated,
+    # removal announced). Both packages install as
+    # plain directories (the wheel of the Pyramid image included), so
+    # str(files(...)/'templates') is a real filesystem path; deform's
+    # renderer wants a directory, not a Traversable. Trailing slash kept:
+    # deform joins the template name onto it as-is.
+    deform_template_dir = str(_package_files('deform') / 'templates') + '/'
+    custom_deform_template_dir = str(_package_files('alirpunkto') / 'templates' / 'deform') + '/'
     def translator(term):
         return get_localizer(get_current_request()).translate(term)
     zpt_renderer = deform.ZPTRendererFactory(

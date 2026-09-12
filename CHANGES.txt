@@ -13,6 +13,24 @@ Unreleased (2026-09-12)
   reproducers against the library — 5 red on 1.8.10 — and
   safe_local_redirect from train 0063, which already refused these
   payloads) plus a >= 1.8.11 floor in each lock.
+- Dependency refresh, September 2026 (train 0113, commits B and C,
+  Python 3.12 kept — the 3.14 qualification is deferred by decision of
+  2026-09-12). The four hashed locks move 30 pins with pip-compile
+  --upgrade: the Zope train of 2026-08-20 (zope.interface 8.6,
+  zope.proxy 7.3, persistent 6.8, BTrees 6.5, zodbpickle 4.5),
+  cryptography 50.0.1, PyJWT 2.14.0, jwcrypto 1.6.0, python-dotenv
+  1.2.3, coverage 7.16.0, ruff 0.16.7 and the usual transitive tail.
+  Three pins stay on purpose: mypy 1.20.2 (the <2 bound — mypy 2
+  tightens defaults and the job is informative at 132), pyee 13.0.1
+  (playwright 1.62.0 requires <14), setuptools 80.10.2 (deform <81,
+  pyramid <82; the PYSEC-2026-3447 ignore in quality.yml is now
+  dated with its next review). A Data.fs written by the previous Zope
+  stack was read, written, packed and reopened by the new one, then
+  reread by the old one. The application's own pkg_resources import
+  (deform template directories) moves to importlib.resources, verified
+  from a non-editable wheel like the Pyramid image; pyramid and deform
+  still import pkg_resources themselves, so this changes nothing for
+  the setuptools pin.
 
 Unreleased (2026-08-14)
 -----------------------

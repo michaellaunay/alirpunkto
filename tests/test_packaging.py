@@ -95,3 +95,27 @@ def test_waitress_options_live_in_the_server_section():
                    "clear_untrusted_proxy_headers"):
         assert config.has_option("server:main", option), option
         assert not config.has_option("app:main", option), option
+
+
+def test_the_project_no_longer_imports_pkg_resources():
+    """Train 0113: pkg_resources is a deprecated setuptools API (removal
+    announced); the template directories come from importlib.resources.
+    pyramid and deform still import it themselves, which is exactly why
+    setuptools stays pinned by their metadata — this lock only covers
+    our own code."""
+    import subprocess
+    out = subprocess.run(
+        ["grep", "-rln", "pkg_resources", "alirpunkto", "tools",
+         "docker/apply_server_overrides.py", "docker/generate_ldif.py"],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    assert out.stdout.strip() == "", out.stdout
+
+
+def test_the_deform_template_directories_exist_and_carry_templates():
+    from importlib.resources import files
+    ours = str(files('alirpunkto') / 'templates' / 'deform') + '/'
+    theirs = str(files('deform') / 'templates') + '/'
+    assert os.path.isdir(ours) and os.path.isdir(theirs)
+    assert os.path.exists(os.path.join(theirs, 'form.pt'))
+    assert any(name.endswith('.pt') for name in os.listdir(ours))
