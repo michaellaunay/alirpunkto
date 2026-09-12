@@ -1,3 +1,19 @@
+Unreleased (2026-09-12)
+-----------------------
+
+- WebOb 1.8.11 (train 0113, commit A). PYSEC-2026-3943 /
+  CVE-2026-54770: up to 1.8.10 a Location value starting with a space
+  or a C0 control byte slipped past WebOb's scheme and ``//`` guards,
+  because urllib.parse.urljoin() strips those bytes before parsing —
+  an open redirect below the application layer; HTTPFound and its
+  siblings never went through that guard at all. The quality workflow
+  (pip-audit, blocking) was red on the three locks. The three hashed
+  locks move webob alone, 1.8.10 -> 1.8.11, nothing else changes;
+  tests/test_webob_redirect_lock.py pins both layers (the advisory's
+  reproducers against the library — 5 red on 1.8.10 — and
+  safe_local_redirect from train 0063, which already refused these
+  payloads) plus a >= 1.8.11 floor in each lock.
+
 Unreleased (2026-08-14)
 -----------------------
 
