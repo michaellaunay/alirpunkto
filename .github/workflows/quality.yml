@@ -42,6 +42,10 @@ jobs:
         # transitive setuptools below the fixed release; the CVE
         # concerns package-installation paths, not runtime. Documented
         # accepted risk — drop the ignore when the chain lifts.
+        # Reviewed 2026-09-12 (train 0113): deform 3.0.1 pins
+        # setuptools<81, pyramid 2.1 pins <82, both import pkg_resources
+        # at runtime; the fix is 83.0.0. Next review: deform 3.1 or
+        # pyramid 2.2, whichever ships first.
         # Fourth audit pass (P1): audit all three hashed locks — the
         # runtime lock is what ships; the other two are what the CI runs.
         run: >-
