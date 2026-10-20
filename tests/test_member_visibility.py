@@ -93,7 +93,9 @@ def test_targeting_another_member_yields_the_public_card_only():
                              "accessed_member_oid": "other-2"})
     assert context["form"] is None
     card = context["admin_view"]
-    assert "email" not in card and "description" not in card
+    # Issue #270 added the profile text to the public card; the e-mail
+    # address stays the administrators' privilege.
+    assert "email" not in card
     assert card["pseudonym"] == "p-other-2"
 
 

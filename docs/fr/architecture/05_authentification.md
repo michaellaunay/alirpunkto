@@ -119,6 +119,49 @@ Keycloak et n'héberge qu'AlirPunkto ; l'authentification LDAP directe
 est une voie assumée, l'intégration Keycloak restant l'obtention d'un
 jeton SSO après l'authentification locale.
 
+### Propagation des changements de l'annuaire vers Keycloak (issues #266, #269)
+
+Keycloak reflète l'annuaire par sa *fédération d'utilisateurs*, mais
+paresseusement : une entrée nouvelle n'est importée qu'à la première
+recherche de Keycloak, une entrée existante n'est rafraîchie que lorsque
+le membre s'authentifie à nouveau par Keycloak. D'ici là, les listes de
+diffusion et l'espace de travail, qui lisent leurs utilisateurs et leurs
+groupes dans Keycloak, ignorent le nouvel inscrit (#266) comme le membre
+dont le groupe dynamique vient de changer (#269). Le module
+`alirpunkto/keycloak_sync.py` comble cet écart par deux mécanismes, tous
+deux **au mieux** — une panne de Keycloak ne casse jamais l'opération
+qui les a déclenchés, comme pour le synchroniseur de groupes :
+
+- `propagate_ldap_changes_to_keycloak` demande à Keycloak, par son API
+  d'administration, une synchronisation *des utilisateurs modifiés* de
+  chaque fournisseur de stockage LDAP du domaine (`realm`) : Keycloak
+  ré-importe les entrées dont le `modifyTimestamp` a bougé depuis son
+  dernier passage, et ses *mappers* de groupes suivent. L'appel est fait
+  par `utils.notify_keycloak_of_directory_change` à la fin de **chaque
+  écriture qui change ce que le SSO reflète** : création d'une entrée
+  (`register_user_to_ldap`), passage Coopérateur (`upgrade_member_in_ldap`),
+  mise à jour du profil ou de la situation financière
+  (`update_ldap_member`), désactivation (`deactivate_member_in_ldap`), et
+  par le scan quotidien quand au moins un membre a changé de groupe
+  ([09_taches_periodiques](09_taches_periodiques.md)).
+  **Configuration Keycloak requise** : le client `KEYCLOAK_CLIENT_ID`
+  doit avoir les *service accounts* activés et porter les rôles
+  `view-realm` (lister les composants) et `manage-users` (déclencher la
+  synchronisation) du client `realm-management`. Sans ces rôles, l'appel
+  est refusé et journalisé en avertissement, le reste de l'application
+  n'en souffre pas ;
+- `import_member_into_keycloak` exécute, juste après une inscription
+  réussie de membre ordinaire, l'octroi par mot de passe que la vue de
+  connexion utilise déjà : Keycloak cherche le nouveau membre dans
+  l'annuaire et l'importe. Aucun privilège supplémentaire, seulement le
+  mot de passe que le membre vient de choisir — d'où sa réservation au
+  chemin d'inscription (les Coopérateurs approuvés par vote, dont le mot
+  de passe n'est plus en clair, sont couverts par la propagation).
+
+Les deux respectent la garde `PYTEST_CURRENT_TEST` de
+`get_keycloak_token` ; `tests/test_keycloak_sync.py` verrouille les
+appels et les sources d'événements.
+
 ### Garde des états de départ (issue #265)
 
 Depuis le train 0109, la vue de connexion consulte `member_state` juste après l'authentification LDAP : un compte en état `UNSUBSCRIBED`, `EXCLUDED` ou `DELETED` est refusé avec le message traduit `login_account_disabled`, même si l'annuaire authentifie encore ses identifiants. Les états vivants passent inchangés ; les deux sens sont verrouillés par `tests/test_departure_tickets.py`.

@@ -76,3 +76,17 @@ rafraîchissement et son échéance (`utils.store_sso_tokens`) ; l'*access
 token*, jamais relu et gonflé par les revendications de groupes, en est
 exclu. Cible complémentaire (proposée) : session côté serveur, qui lèverait
 la contrainte de taille et sortirait le jeton du poste client.
+
+## ADR-012 — Maintenance quotidienne dans le processus de l'application (adopté, 2026-10-20)
+
+Le scan quotidien des groupes dynamiques (#148) et la purge
+post-quarantaine (#54) étaient des fonctions sans appelant : leur
+planification avait été laissée à l'exploitation (2026-07-30), mais le
+`FileStorage` mono-écrivain (ADR-002) interdit à un `cron` externe
+d'ouvrir la ZODB pendant que l'application tourne. Décision : un fil
+d'exécution démon dans Waitress (`alirpunkto/maintenance.py`), activé par
+`daily_maintenance.enabled`, exécute les deux traitements puis propage les
+changements à Keycloak (#269). Conséquences : la cadence se règle dans le
+`.ini` ; le fil travaille sur sa propre connexion ZODB sans toucher au
+singleton `Members` ; une instance adossée à ZEO pourrait, elle, revenir à
+une planification externe en désactivant le fil.

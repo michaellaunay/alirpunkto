@@ -147,6 +147,9 @@ def _admin_member_card(request, accessed_member, full=True):
             'pseudonym': getattr(accessed_member, 'pseudonym', None),
             # Issue #263: the member's status shows on every card.
             'role_i18n': role_i18n,
+            # Issue #270: the profile text and the avatar say who the
+            # person is — both are self-declared for that very purpose.
+            'description': getattr(data, 'description', None),
             'cooperative_behaviour_mark':
                 getattr(data, 'cooperative_behaviour_mark', None),
             'cooperative_behaviour_mark_update':

@@ -88,7 +88,7 @@ def test_a_member_opens_a_reduced_public_card():
                           "accessed_member_oid": "mem-2"})
     card = context.get("admin_view")
     assert card, "another member's profile must be a read-only card"
-    assert set(card) == {"oid", "pseudonym", "role_i18n",
+    assert set(card) == {"oid", "pseudonym", "role_i18n", "description",
                          "cooperative_behaviour_mark",
                          "cooperative_behaviour_mark_update", "has_avatar"}
     assert card["pseudonym"] == "zorro"

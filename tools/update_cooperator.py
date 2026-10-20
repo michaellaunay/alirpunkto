@@ -5,15 +5,24 @@ Script to update LDAP contributor data via the AlirPunkto portal.
 Author: Michaël Launay
 Date: 2025-06-29
 Email: michaellaunay@logikascium.com
-Version: 0.1
+Version: 0.2
 
-This script allows updating contributor data such as the number of shares 
+This script allows updating contributor data such as the number of shares
 or membership validity date by interacting with the AlirPunkto platform.
+It is the "Python script of the online commercial site" of issue #75: the
+shop calls it as soon as a Cooperator pays, and the portal moves the
+member between the Dynamic Groups and tells the SSO infrastructure at
+once (issues #267 and #269).
+
+Since issue #149 another member's profile is a read-only card for
+everyone, administrators included, so the script no longer drives the
+profile form: it posts to the dedicated ``/update_contribution`` endpoint
+(administrator session and CSRF token required) and reads its JSON answer.
 
 Raises:
     FileNotFoundError: If the specified .env file is not found.
     ValueError: If login credentials are invalid or input data is incorrect.
-    RuntimeError: If member selection or data modification fails.
+    RuntimeError: If the portal refuses or does not confirm the update.
 
 Returns:
     None
@@ -22,6 +31,7 @@ Returns:
 from typing import Final
 import argparse
 import os
+from datetime import datetime
 from pathlib import Path
 from dotenv import load_dotenv
 import requests
@@ -33,12 +43,11 @@ LOGIN_PATH= "login"
 LOGIN_URL = f"{DOMAINE}/{LOGIN_PATH}"
 MODIFY_PATH = "modify_member"
 MODIFY_URL = f"{DOMAINE}/{MODIFY_PATH}"
+CONTRIBUTION_PATH = "update_contribution"
+CONTRIBUTION_URL = f"{DOMAINE}/{CONTRIBUTION_PATH}"
 
-# Success messages in multiple languages
-SUCCESS_MESSAGES: Final[list[str]] = [
-    "Member data updated",               # anglais
-    "Données du membre mises à jour",   # français
-]
+#: The hidden field every page of a logged-in session carries.
+CSRF_MARKER: Final[str] = 'name="csrf_token" value="'
 
 # Functions
 def load_env_file(env_path: Path) -> None:
@@ -68,18 +77,29 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--base_url", type=str, default=DOMAINE,)
     return parser.parse_args()
 
-def login(session: requests.Session, username: str, password: str) -> None:
+def extract_csrf_token(html: str) -> str:
+    """The CSRF token of the session, read from a rendered page."""
+    try:
+        return html.split(CSRF_MARKER)[1].split('"')[0]
+    except IndexError:
+        raise RuntimeError("Unable to extract the CSRF token.")
+
+def login(session: requests.Session, username: str, password: str) -> str:
     """
-    Logs into the Alirpunkto portal and initializes the session.
+    Logs into the Alirpunkto portal, initializes the session and returns
+    the CSRF token of that session.
     """
-    result = session.post(LOGIN_URL, data={
+    session.post(LOGIN_URL, data={
         "username": username,
         "password": password,
         "form.submitted": "True"
     })
-
-    if not all(keyword in result.text for keyword in [username, "profile", "modify_member"]):
+    # A logged-in session renders the member directory with its CSRF
+    # field; an anonymous one is sent back to the home page without it.
+    page = session.get(MODIFY_URL)
+    if CSRF_MARKER not in page.text:
         raise ValueError("Login failed: invalid credentials.")
+    return extract_csrf_token(page.text)
 
 def save_cookies(session: requests.Session, path: Path) -> None:
     """
@@ -89,57 +109,54 @@ def save_cookies(session: requests.Session, path: Path) -> None:
         for cookie in session.cookies:
             f.write(f"{cookie.name}={cookie.value}\n")
 
-def modify_member(session: requests.Session, oid: str, shares: str | None, validity_date: str | None) -> None:
+def modify_member(session: requests.Session, oid: str, shares: str | None,
+                  validity_date: str | None, csrf_token: str) -> dict:
     """
-    Selects a member and sends modifications (shares / membership validity date).
+    Sends the modifications (shares / membership validity date) of one
+    member to the portal and returns the portal's JSON answer.
     """
-    # Step 1: Select the member
-    select_res = session.post(MODIFY_URL, data={"accessed_member_oid": oid,"submit": "Submit"})
-    if oid not in select_res.text:
-        raise RuntimeError("Member selection error (wrong OID?)")
-
     # If no modifications are requested, stop here
     if not shares and not validity_date:
         print("No modifications requested.")
-        return
+        return {}
 
-    # Step 2: Retrieve the CSRF token
-    try:
-        csrf_token = select_res.text.split('name="csrf_token" value="')[1].split('"')[0]
-    except IndexError:
-        raise RuntimeError("Unable to extract the CSRF token.")
-    
-    # Step 3: Modify member data
     post_data = {
-        "accessed_member_oid": oid,
-        "modify": "modify",
-        "__formid__": "deform",
-        "charset": "UTF-8",
-
+        "oid": oid,
+        "csrf_token": csrf_token,
     }
 
     if shares:
-        post_data["number_shares_owned"] = shares
+        if not shares.strip().isdigit():
+            raise ValueError("The number of shares must be a non-negative integer.")
+        post_data["number_shares_owned"] = shares.strip()
 
     if validity_date:
-        # Vérification du format de la date
+        # Check the date format before sending it
         try:
-            from datetime import datetime
             datetime.strptime(validity_date, "%Y-%m-%d")
         except ValueError:
             raise ValueError("The validity date must be in the format YYYY-MM-DD.")
-        post_data["__start__"] = "date_end_validity_yearly_contribution:mapping"
-        post_data["date"] = validity_date
-        post_data["__end__"] = "date_end_validity_yearly_contribution:mapping"
+        post_data["date_end_validity_yearly_contribution"] = validity_date
 
-    # Step 4: Send the modifications
-    update_res = session.post(MODIFY_URL, data=post_data)
+    update_res = session.post(CONTRIBUTION_URL, data=post_data)
+    try:
+        answer = update_res.json()
+    except ValueError:
+        raise RuntimeError(
+            f"The portal did not answer JSON (HTTP {update_res.status_code}); "
+            "is the base URL right?")
 
-    # Response verification: multi-language
-    if any(success_msg in update_res.text for success_msg in SUCCESS_MESSAGES):
+    if update_res.status_code == 200 and answer.get("status") == "success":
         print("✅ Data successfully updated.")
+        print(f"   shares: {answer.get('number_shares_owned')}, "
+              f"validity: {answer.get('date_end_validity_yearly_contribution')}, "
+              f"groups: {', '.join(answer.get('groups', [])) or '-'}")
     else:
-        print("⚠️ The update was not confirmed. Please check manually.")
+        raise RuntimeError(
+            f"⚠️ The update was refused (HTTP {update_res.status_code}): "
+            f"{answer.get('error', 'unknown error')} "
+            f"{answer.get('fields', '')}".strip())
+    return answer
 
 # Entry point
 def main() -> None:
@@ -152,6 +169,8 @@ def main() -> None:
     LOGIN_URL = f"{DOMAINE}/{LOGIN_PATH}"
     global MODIFY_URL
     MODIFY_URL = f"{DOMAINE}/{MODIFY_PATH}"
+    global CONTRIBUTION_URL
+    CONTRIBUTION_URL = f"{DOMAINE}/{CONTRIBUTION_PATH}"
 
     login_val = args.login or os.getenv("login")
     password_val = args.password or os.getenv("password")
@@ -160,7 +179,7 @@ def main() -> None:
         raise ValueError("Login and password must be defined in the .env file or provided as parameters.")
 
     with requests.Session() as session:
-        login(session, login_val, password_val)
+        csrf_token = login(session, login_val, password_val)
 
         if args.cookie:
             save_cookies(session, args.cookie)
@@ -169,7 +188,8 @@ def main() -> None:
             session=session,
             oid=args.oid,
             shares=args.number_shares,
-            validity_date=args.validity_date
+            validity_date=args.validity_date,
+            csrf_token=csrf_token,
         )
 
 if __name__ == "__main__":

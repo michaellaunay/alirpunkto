@@ -1,7 +1,8 @@
 # The member profile
 
 Covers issues #55 (field matrix), #123 (view frame), #149
-(administrator card) and #201 (visibility).
+(administrator card), #201 and #249 (visibility), #263 and #270 (public
+card content).
 
 ## One's own page
 
@@ -36,13 +37,22 @@ request" lives.
 
 An administrator opening another member's profile gets a **read-only
 card** — never the form: pseudonym, presentation text, avatar, user
-number, role, CBM with its date, departure date and reason. Nothing
-else is transmitted (no e-mail, no IBAN, no civil identity), viewing
-does not change the member's state, and no submission can end in a
-write.
+number, e-mail (#249), role, CBM with its date, departure date and
+reason. Nothing else is transmitted (no IBAN, no civil identity),
+viewing does not change the member's state, and no submission on this
+page can end in a write.
 
-## What others never see (issue #201)
+The **financial facts** of a Cooperator (shares owned, yearly
+contribution end date — #75) are not changed through this card: they
+have their own administrative write path, described in
+[financial_status](financial_status.md) (#267).
 
-A non-administrator member has **no access** to another member's
-profile: no member list, no consultation — member-to-member
-interactions happen on the shared workspace.
+## What other members see (issues #249, #263, #270)
+
+Every logged-in member browses the member directory and can open
+another member's **public card** — never their form: pseudonym,
+**presentation text** and **avatar** (#270, to get an idea of who the
+person is), role in the Cooperative (#263), CBM and its update date. No
+e-mail, no user number, no IBAN, no civil identity: those stay on the
+administrator's card. Member-to-member interactions happen on the shared
+workspace.

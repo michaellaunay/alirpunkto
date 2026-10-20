@@ -115,6 +115,45 @@ Keycloak and hosts only AlirPunkto; direct LDAP authentication is an
 assumed path, the Keycloak integration remaining the acquisition of an
 SSO token after the local authentication.
 
+### Propagation of directory changes to Keycloak (issues #266, #269)
+
+Keycloak mirrors the directory through its *user federation*, but
+lazily: a new entry is imported the first time Keycloak looks it up, an
+existing one is refreshed only when the member authenticates through
+Keycloak again. Until then the mailing lists and the workspace, which
+read their users and groups from Keycloak, know nothing of the fresh
+registration (#266) nor of the member whose Dynamic Group just changed
+(#269). The module `alirpunkto/keycloak_sync.py` closes that gap with
+two mechanisms, both **best effort** — a Keycloak outage never breaks
+the operation that triggered them, exactly like the group synchroniser:
+
+- `propagate_ldap_changes_to_keycloak` asks Keycloak, through its admin
+  API, for a *changed users* synchronisation of every LDAP user-storage
+  provider of the realm: Keycloak re-imports the entries whose
+  `modifyTimestamp` moved since its last pass, and its group mappers
+  follow. The call is made by `utils.notify_keycloak_of_directory_change`
+  at the end of **every write that changes what the SSO side mirrors**:
+  entry creation (`register_user_to_ldap`), upgrade to Cooperator
+  (`upgrade_member_in_ldap`), profile or financial update
+  (`update_ldap_member`), deactivation (`deactivate_member_in_ldap`), and
+  by the daily scan when at least one member changed group
+  ([09_periodic_tasks](09_periodic_tasks.md)).
+  **Required Keycloak configuration**: the `KEYCLOAK_CLIENT_ID` client
+  must have *service accounts* enabled and carry the `view-realm` (list
+  the components) and `manage-users` (trigger the synchronisation) roles
+  of the `realm-management` client. Without them the call is refused and
+  logged as a warning; the rest of the application is unaffected;
+- `import_member_into_keycloak` performs, right after a successful
+  ordinary-member registration, the password grant the login view
+  already uses: Keycloak looks the new member up in the directory and
+  imports the entry. No extra privilege, only the password the member
+  just chose — hence its reservation to the registration path (the
+  Cooperators approved by vote, whose password is no longer in clear,
+  are covered by the propagation).
+
+Both honour the `PYTEST_CURRENT_TEST` guard of `get_keycloak_token`;
+`tests/test_keycloak_sync.py` locks the calls and the event sources.
+
 ### Departure-state guard (issue #265)
 
 Since train 0109 the login view consults `member_state` right after the LDAP authentication: an account in `UNSUBSCRIBED`, `EXCLUDED` or `DELETED` state is refused with the translated `login_account_disabled` message, even while the directory still authenticates its credentials. Living states pass unchanged; both directions are locked by `tests/test_departure_tickets.py`.

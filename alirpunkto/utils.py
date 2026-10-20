@@ -1153,21 +1153,44 @@ def deactivate_member_in_ldap(request, member, erasure_date):
     # group (the entry itself stays during the Quarantine period).
     from alirpunkto.dynamic_groups import sync_member_groups
     sync_member_groups(request, member.oid)
+    notify_keycloak_of_directory_change(f"deactivation of {member.oid}")
     log.info(f"Member {member.oid} deactivated in LDAP; erasure due "
              f"{erasure_date.isoformat()}")
     return {'status': 'success'}
 
 
-def purge_unsubscribed_members(request, now=None):
+def notify_keycloak_of_directory_change(reason: str) -> bool:
+    """Issues #266/#269: every write that changes what the SSO side
+    mirrors — a new entry, a group move, a renewed contribution, a
+    deactivation — ends by asking Keycloak to re-import the changed
+    entries. Best effort, never raises; see ``alirpunkto.keycloak_sync``.
+    """
+    try:
+        from alirpunkto.keycloak_sync import (
+            propagate_ldap_changes_to_keycloak,
+        )
+        return propagate_ldap_changes_to_keycloak(reason)
+    except Exception as exc:
+        log.warning(f"Keycloak propagation of {reason} failed: "
+                    f"{exc.__class__.__name__}")
+        return False
+
+
+def purge_unsubscribed_members(request, now=None, members=None):
     """Purge unsubscribed members whose Quarantine period has expired.
 
     Per the specification, everything is deleted except the pseudonym, the
     departure date and the reason: the LDAP entry is removed, the ZODB
     member keeps only those three facts and moves to DELETED. Meant to be
-    called periodically (cron / console script); returns the purged oids.
+    called periodically (the daily maintenance thread of
+    ``alirpunkto.maintenance``, or a console script); returns the purged
+    oids. ``members`` lets a caller outside the request cycle hand the
+    mapping of its own ZODB connection instead of rebinding the
+    ``Members`` singleton (not thread safe) from a background thread.
     """
     now = now or datetime.now()
-    members = get_members(request)
+    if members is None:
+        members = get_members(request)
     purged = []
     for oid, member in list(members.items()):
         if getattr(member, 'member_state', None) != MemberStates.UNSUBSCRIBED:
@@ -1281,6 +1304,7 @@ def upgrade_member_in_ldap(request, candidature, member_oid):
     # candidatesMissingShareYearContribGroup — not cooperatorsGroup.
     from alirpunkto.dynamic_groups import sync_member_groups
     sync_member_groups(request, member_oid)
+    notify_keycloak_of_directory_change(f"upgrade of {member_oid}")
     try:
         # Refresh the ZODB member from the updated LDAP entry.
         update_member_from_ldap(member_oid, request)
@@ -1548,6 +1572,10 @@ def register_user_to_ldap(request, candidature, password):
             # yearly-contribution facts.
             from alirpunkto.dynamic_groups import sync_member_groups
             sync_member_groups(request, candidature.oid)
+            # Issue #266: the SSO side learns of the new entry now, not
+            # at the member's first (and maybe never) Keycloak login.
+            notify_keycloak_of_directory_change(
+                f"registration of {candidature.oid}")
             return {'status': 'success', 'message': _('registration_successful')}
         else:
             log.error(f"Error while adding user {pseudonym} to LDAP : {conn.result}")
@@ -1677,6 +1705,11 @@ def update_ldap_member(
             # the dynamic groups of issue #148.
             from alirpunkto.dynamic_groups import sync_member_groups
             sync_member_groups(request, member.oid)
+            # Issues #267/#269: the new status reaches the SSO side at
+            # once — a renewed contribution restores the Cooperator's
+            # rights everywhere, immediately.
+            notify_keycloak_of_directory_change(
+                f"update of {member.oid} ({', '.join(fields_to_update)})")
             return {'status': 'success', 'message': _('member_update_successful')}
         else:
             log.error(f"Error while updating user {member.oid} in LDAP : {conn.result}")

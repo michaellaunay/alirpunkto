@@ -32,7 +32,11 @@ The script asks for:
 - Apache / Let's Encrypt settings
 - Postfix relay host (optional)
 - LDAP server hostname and port as seen by the Pyramid container
-- Keycloak / SSO settings (optional)
+- Keycloak / SSO settings (optional). For the directory changes to reach
+  Keycloak at once (issues #266/#269), enable *service accounts* on the
+  `KEYCLOAK_CLIENT_ID` client and grant it the `view-realm` and
+  `manage-users` roles of `realm-management`; see
+  `docs/en/architecture/05_authentication.md`
 
 It generates:
 

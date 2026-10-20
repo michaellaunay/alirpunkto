@@ -38,10 +38,6 @@ from pyramid.i18n import Translator
 import deform
 from alirpunkto.secret_manager import encrypt_secret_for_logs
 
-@view_config(
-    route_name='forgot_password',
-    renderer='alirpunkto:templates/forgot_password.pt'
-)
 def _display_in_member_language(request, member):
     """Issue #248: the bearer of the reset link IS the member — the
     "Change password" view speaks their preferred language, not the
@@ -53,6 +49,16 @@ def _display_in_member_language(request, member):
         switch_request_language(request, language)
 
 
+# Issue #268: the decorator must sit right above the view. The #248
+# helper above once slid between the two, so the route registered the
+# helper — Pyramid called it as a (context, request) view, it returned
+# None, and the renderer answered "Internal Server Error" to every
+# visitor of the "Forgot password" link. Locked by
+# tests/test_view_registration.py.
+@view_config(
+    route_name='forgot_password',
+    renderer='alirpunkto:templates/forgot_password.pt'
+)
 def forgot_password(request):
     """Forgot password view.
     Send an email to the user with a link to reset his password

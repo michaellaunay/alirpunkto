@@ -1,7 +1,8 @@
 # Le profil du membre
 
 Couvre les issues #55 (matrice des champs), #123 (cadre de la vue),
-#149 (fiche administrateur) et #201 (visibilité).
+#149 (fiche administrateur), #201 et #249 (visibilité), #263 et #270
+(contenu de la fiche publique).
 
 ## Sa propre page
 
@@ -36,13 +37,22 @@ demande de désactivation ».
 
 L'administrateur qui ouvre le profil d'un autre membre obtient une
 **fiche en lecture seule** — jamais le formulaire : pseudonyme, texte de
-présentation, avatar, numéro, rôle, CBM et sa date, date et motif du
-départ. Rien d'autre n'est transmis (ni courriel, ni IBAN, ni identité
+présentation, avatar, numéro, courriel (#249), rôle, CBM et sa date, date
+et motif du départ. Rien d'autre n'est transmis (ni IBAN, ni identité
 civile), la consultation ne change pas l'état du membre, et aucune
-soumission ne peut aboutir à une écriture.
+soumission sur cette page ne peut aboutir à une écriture.
 
-## Ce que les autres ne voient pas (issue #201)
+Les **faits financiers** d'un Coopérateur (parts détenues, échéance de la
+cotisation annuelle — #75) ne se modifient pas par cette fiche : ils ont
+leur propre chemin d'écriture administratif, décrit dans
+[situation_financiere](situation_financiere.md) (#267).
 
-Un membre non administrateur n'a **aucun accès** au profil d'un autre :
-ni liste des membres, ni consultation — les interactions entre membres
-ont lieu sur l'espace de travail partagé.
+## Ce que les autres membres voient (issues #249, #263, #270)
+
+Tout membre connecté parcourt l'annuaire des membres et peut ouvrir la
+**fiche publique** d'un autre membre — jamais son formulaire : pseudonyme,
+**texte de présentation** et **avatar** (#270, pour se faire une idée de
+la personne), rôle dans la Coopérative (#263), CBM et sa date de mise à
+jour. Ni courriel, ni numéro, ni IBAN, ni identité civile : ces éléments
+restent réservés à la fiche administrateur. Les interactions entre
+membres ont lieu sur l'espace de travail partagé.

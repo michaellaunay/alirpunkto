@@ -332,6 +332,15 @@ def daily_group_scan(request, today=None):
         after = sync_member_groups(request, oid, today=today)
         if after is not None and before != after:
             changed.append(oid)
+    if changed:
+        # Issue #269, step 2 of the ticket: the members whose Dynamic
+        # Group changed reach the SSO infrastructure the same day, not
+        # at their next AlirPunkto login. One propagation covers them
+        # all: Keycloak re-imports every entry changed since its last
+        # pass.
+        from alirpunkto.utils import notify_keycloak_of_directory_change
+        notify_keycloak_of_directory_change(
+            f"daily group scan ({len(changed)} member(s) moved)")
     return changed
 
 

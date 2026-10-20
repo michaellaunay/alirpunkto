@@ -373,6 +373,9 @@ def main(global_config, **settings):
         config.add_route('vote', '/vote')
         config.add_route('forgot_password', '/forgot_password')
         config.add_route('modify_member', '/modify_member')
+        # Issue #267: the administrative write path of a Cooperator's
+        # financial facts (shares, yearly-contribution validity).
+        config.add_route('update_contribution', '/update_contribution')
         config.add_route('get_email', '/get_email')
         config.add_route('check_new_email', '/check_new_email')
         config.add_route('sso_login', '/sso_login')
@@ -404,4 +407,10 @@ def main(global_config, **settings):
     from .utils import get_ldap_member_list
     get_ldap_member_list() #Initialize the member objects
 
-    return config.make_wsgi_app()
+    app = config.make_wsgi_app()
+    # Issue #269: the daily scan of issue #148 (and the post-quarantine
+    # purge) run inside the application — the ZODB FileStorage lock
+    # forbids an external process — when the configuration asks for it.
+    from .maintenance import start_daily_maintenance
+    start_daily_maintenance(config.registry, settings)
+    return app

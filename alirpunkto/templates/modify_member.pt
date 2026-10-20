@@ -40,9 +40,10 @@
                 <dd tal:content="python: admin_view['pseudonym']">pseudonym</dd>
                 <dt tal:content="_('member_card_role_label')">Role</dt>
                 <dd tal:content="python:_(admin_view['role_i18n'])">role</dd>
-                <tal:full condition="python: 'description' in admin_view">
-                    <dt tal:content="_('member_card_description_label')">Profile text</dt>
-                    <dd tal:content="python: admin_view['description'] or default">—</dd>
+                <!-- Issue #270: the profile text is on every card. -->
+                <dt tal:content="_('member_card_description_label')">Profile text</dt>
+                <dd class="member-card-description" tal:content="python: admin_view.get('description') or default">—</dd>
+                <tal:full condition="python: 'email' in admin_view">
                     <dt tal:content="_('member_card_user_number_label')">User number</dt>
                     <dd tal:content="python: admin_view['oid']">oid</dd>
                     <dt tal:content="_('member_card_email_label')">E-mail address</dt>

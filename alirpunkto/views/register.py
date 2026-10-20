@@ -59,6 +59,7 @@ from ..utils import (
     send_email,
     retrieve_candidature,
 )
+from alirpunkto.keycloak_sync import import_member_into_keycloak
 from alirpunkto.models.model_permissions import get_access_permissions
 from alirpunkto.models.permissions import Permissions
 
@@ -625,6 +626,10 @@ def handle_confirmed_human_state(request, candidature):
                         'candidature': candidature,
                         'MemberTypes': MemberTypes
                     }
+                # Issue #266: the account exists in the directory; make
+                # the SSO side import it now, with the password the
+                # member just chose — the only moment it is at hand.
+                import_member_into_keycloak(candidature.oid, password)
                 candidatures.monitored_members.pop(candidature.oid, None)
                 candidature.candidature_state = CandidatureStates.APPROVED
                 email_template = "send_candidature_approuved_email"

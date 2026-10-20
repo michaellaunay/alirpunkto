@@ -76,3 +76,17 @@ expiry (`utils.store_sso_tokens`); the *access token*, never read back and
 inflated by group claims, is excluded. Complementary target (proposed): a
 server-side session, which would lift the size constraint and keep the
 token off the client machine.
+
+## ADR-012 — Daily maintenance inside the application process (adopted, 2026-10-20)
+
+The daily scan of the Dynamic Groups (#148) and the post-quarantine purge
+(#54) were functions without a caller: their scheduling had been left to
+operations (2026-07-30), but the single-writer `FileStorage` (ADR-002)
+forbids an external `cron` from opening the ZODB while the application
+runs. Decision: a daemon thread inside Waitress
+(`alirpunkto/maintenance.py`), enabled by `daily_maintenance.enabled`,
+runs both treatments then propagates the changes to Keycloak (#269).
+Consequences: the cadence is set in the `.ini`; the thread works on its
+own ZODB connection without touching the `Members` singleton; an
+instance backed by ZEO could return to external scheduling by disabling
+the thread.
