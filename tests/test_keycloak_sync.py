@@ -136,6 +136,31 @@ def test_import_reports_a_refusal_without_raising():
     assert ks.import_member_into_keycloak('oid-1', '') is False
 
 
+def test_import_is_a_keycloak_login_of_the_new_member_on_the_wire():
+    """Nothing patched between the import and the HTTP client: the call
+    is the very password grant ``login_view`` performs, so Keycloak's
+    user federation imports the entry exactly as a manual first login
+    would (the client's observation behind issue #266)."""
+    response = MagicMock(status_code=200, text='')
+    response.json.return_value = {
+        'access_token': 'a', 'refresh_token': 'r',
+        'expires_in': 60, 'refresh_expires_in': 1800}
+    with patch.object(utils, 'PYTEST_CURRENT_TEST', None), \
+         patch.object(utils, 'KEYCLOAK_SERVER_URL', 'https://kc.test'), \
+         patch.object(utils, 'KEYCLOAK_REALM', 'realm'), \
+         patch.object(utils, 'get_secret', side_effect=lambda k: f'<{k}>'), \
+         patch.object(utils.requests, 'post', return_value=response) as post:
+        assert ks.import_member_into_keycloak('oid-1', 'pw') is True
+    post.assert_called_once()
+    url = post.call_args.args[0]
+    payload = post.call_args.kwargs['data']
+    assert url == 'https://kc.test/realms/realm/protocol/openid-connect/token'
+    assert payload['grant_type'] == 'password'
+    assert payload['username'] == 'oid-1'
+    assert payload['password'] == 'pw'
+    assert payload['client_id'] == '<KEYCLOAK_CLIENT_ID>'
+
+
 # ------------------------------ the event sources -------------------------- #
 def test_a_successful_profile_update_notifies_keycloak():
     from tests.test_ldap_utils import _fully_populated_member, _run_update
