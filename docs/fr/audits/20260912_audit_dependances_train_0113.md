@@ -83,3 +83,4 @@ kuneagi02 : `cd ~/alirpunkto/docker && git pull && docker compose build alirpunk
 ## Journal
 
 - 2026-09-12 : première version de l'audit (Claude), contre-expertise ChatGPT v2 (Python 3.14 qualifié à part, `pkg_resources` importé par l'application, `legacy-cgi` conditionnel, décompte 106), décision Python 3.12, contre-expertise v3, exécution du train 0113 en trois commits et versement de cet audit.
+- 2026-10-23 : suivi — six avis publiés depuis (PyJWT, urllib3, certifi) ont remis la CI qualité au rouge ; trois épingles relevées, voir [train 0116](20261023_audit_dependances_train_0116.md).

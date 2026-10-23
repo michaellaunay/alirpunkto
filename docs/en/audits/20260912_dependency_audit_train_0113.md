@@ -83,3 +83,4 @@ kuneagi02: `cd ~/alirpunkto/docker && git pull && docker compose build alirpunkt
 ## Log
 
 - 2026-09-12: first version of the audit (Claude), ChatGPT counter-review v2 (Python 3.14 qualified separately, `pkg_resources` imported by the application, conditional `legacy-cgi`, count 106), Python 3.12 decision, counter-review v3, execution of train 0113 in three commits and filing of this audit.
+- 2026-10-23: follow-up — six advisories published since (PyJWT, urllib3, certifi) turned the quality CI red again; three pins raised, see [train 0116](20261023_dependency_audit_train_0116.md).
