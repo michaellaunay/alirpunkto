@@ -204,6 +204,42 @@ def test_a_raising_write_is_a_failed_sync_too():
     assert _groups_of(conn, 'raise-f') == {COMMUNITY}
 
 
+def _veto_group_read(conn, name):
+    """Make the read of one group's ``uniqueMember`` raise."""
+    original = conn.search
+
+    def wrapped(base, *args, **kwargs):
+        if base == group_dn(name):
+            raise OSError("group side unreadable")
+        return original(base, *args, **kwargs)
+
+    conn.search = wrapped
+
+
+def test_an_unreadable_group_side_is_a_failed_sync_and_writes_nothing():
+    """Third audit pass (P12): a failed read of a group's ``uniqueMember``
+    used to be logged and the group treated as empty — a stale
+    membership to revoke went unseen and the sync reported convergence.
+    Now the diff is not computed at all: nothing is written, the call
+    answers None, /update_contribution says ``groups_sync: error``."""
+    conn = _directory()
+    _add_member(conn, 'read-f', shares=2, end=EXPIRED,
+                groups=(COMMUNITY, COOPERATORS))
+    _veto_group_read(conn, COOPERATORS)
+    writes = []
+    original_modify = conn.modify
+    conn.modify = lambda dn, changes: writes.append(dn) or original_modify(
+        dn, changes)
+    with patch.object(dg, 'get_ldap_connection', return_value=conn):
+        target = sync_member_groups(SimpleNamespace(), 'read-f',
+                                    today=TODAY)
+    assert target is None
+    assert writes == []
+    # Both sides untouched: the stale COOPERATORS membership is still
+    # there for the next, successful, pass to revoke.
+    assert COOPERATORS in _groups_of(conn, 'read-f')
+
+
 def test_a_clean_convergence_still_answers_the_target():
     """The counterpart: no write refused, the target comes back, and a
     second run (nothing to write) answers it again."""

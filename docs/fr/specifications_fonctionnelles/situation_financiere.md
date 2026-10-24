@@ -31,7 +31,7 @@ d'entrée dédié `POST /update_contribution` :
 | Paramètre | Rôle |
 |---|---|
 | `oid` | le numéro du Coopérateur (obligatoire) |
-| `number_shares_owned` | nouveau nombre de parts (entier ≥ 0 — `0` est une valeur) |
+| `number_shares_owned` | nouveau nombre de parts (entier de 0 à 1 000 000 — `0` est une valeur, le plafond est un garde-fou contre les débordements et les montants mal placés, appliqué par le serveur comme par les clients) |
 | `date_end_validity_yearly_contribution` | nouvelle échéance, `AAAA-MM-JJ` |
 | `csrf_token` | le jeton de la session (garde CSRF globale) |
 
@@ -92,15 +92,19 @@ Ce que le fil exige, et ce que fait le script :
 4. `POST /update_contribution` avec les faits, le jeton et les mêmes
    en-têtes ; chaque appel a un délai de connexion et de lecture.
 
-**Le code de sortie 0 signifie, et signifie seulement** : les faits sont
-dans l'annuaire avec les valeurs demandées (OID et valeurs vérifiés dans
-la réponse), les groupes dynamiques sont convergés et le changement a
-atteint Keycloak — le client exige que `financial_update`, `groups_sync`
+**Le code de sortie 0 signifie, et signifie seulement** : le portail a
+confirmé que les faits sont dans l'annuaire avec les valeurs demandées
+(OID et valeurs vérifiés dans la réponse), que les groupes dynamiques
+ont convergé et que la synchronisation Keycloak s'est déroulée sans
+échec signalé — le client exige que `financial_update`, `groups_sync`
 et `keycloak_sync` le disent et que `groups` soit une liste ; un simple
-`success` n'est pas cru. Côté serveur, ces indicateurs sont honnêtes
-depuis le train 0119 : une écriture d'appartenance refusée fait répondre
-le synchroniseur de groupes en échec, et un `SynchronizationResult`
-Keycloak avec `failed > 0` n'est pas une propagation. Tout refus, écart ou réponse `partial` sort en 1 avec
+`success` n'est pas cru. Cela ne prouve pas que chaque application
+cliente a déjà rafraîchi ses propres autorisations. Côté serveur, ces
+indicateurs sont honnêtes depuis les trains 0119 et 0120 : une écriture
+d'appartenance refusée, ou un côté groupe illisible, fait répondre le
+synchroniseur de groupes en échec sans rien écrire, et seul un
+`SynchronizationResult` Keycloak de forme connue avec `failed = 0` est
+une propagation. Tout refus, écart ou réponse `partial` sort en 1 avec
 le motif du portail — un encaissement qui n'a pas restauré les droits ne
 doit jamais passer inaperçu. Un appel qui ne demande aucun changement
 est aussi une erreur, jamais une sortie 0 silencieuse ; `--base_url`

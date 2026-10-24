@@ -156,12 +156,16 @@ def propagate_ldap_changes_to_keycloak(reason: str = '') -> bool:
 
 
 def sync_failed(result) -> bool:
-    """True when a Keycloak SynchronizationResult reports trouble: a
-    non-zero ``failed`` counter, or a ``status`` that says so. A body
-    that is not an object (older Keycloak answering nothing) counts as
-    clean — the call itself did not raise."""
+    """True when a Keycloak SynchronizationResult reports trouble, or
+    when the answer is not one we can read. Only a JSON object carrying
+    the ``failed`` counter or a ``status`` string is a recognised
+    result (third audit pass): a body of another shape — nothing, a
+    bare string, an object without those keys — is NOT taken as clean
+    just because the call did not raise."""
     if not isinstance(result, dict):
-        return False
+        return True
+    if 'failed' not in result and 'status' not in result:
+        return True
     try:
         if int(result.get('failed') or 0) > 0:
             return True

@@ -123,12 +123,22 @@ def test_every_provider_is_still_synchronised_when_one_fails():
     ({'status': 'FAILED: LDAP unreachable'}, True),
     ({'status': 'error'}, True),
     ({'status': '2 imported users, 0 updated users'}, False),
-    ({}, False),
-    (None, False),
-    ('done', False),
+    # Third audit pass: an answer of unknown shape is not a clean one.
+    ({}, True),
+    ({'added': 1}, True),
+    (None, True),
+    ('done', True),
+    ([], True),
 ])
 def test_sync_failed_reads_the_keycloak_counters(result, failed):
     assert ks.sync_failed(result) is failed
+
+
+def test_an_unreadable_keycloak_answer_is_not_a_propagation():
+    admin, guards = _wire(sync_result='')
+    admin.sync_users.return_value = None
+    with guards[0], guards[1], guards[2], guards[3]:
+        assert ks.propagate_ldap_changes_to_keycloak('payment') is False
 
 
 def test_a_refused_or_unreachable_keycloak_never_raises_and_forgets_the_cache():

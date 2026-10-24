@@ -39,7 +39,24 @@ L'auditeur valide la syntaxe du PHP 0.4 (PHP 8.4.24), l'architecture, le parcour
 
 Limite rappelée par l'auditeur et maintenue : une propagation réussie prouve que le mécanisme a tourné, pas que chaque application a déjà rafraîchi ses droits.
 
+## Troisième passage (même jour) — PHP 0.4.1 et train 0119 relus
+
+L'auditeur confirme P1 à P6 corrigés (syntaxe PHP 8.4 vérifiée, P5 et P6 relus sur `master`) et relève six points nouveaux.
+
+| Réf. | Constat | Priorité | Disposition |
+|---|---|---|---|
+| P7 | `getopt()` ignore silencieusement une option inconnue, mal orthographiée ou sans valeur : `--validitydate` laissait passer un paiement à moitié appliqué avec sortie 0 | P0 | **Corrigé** (PHP 0.4.2) : parseur `argv` strict maison — options inconnues, valeurs manquantes, doublons et arguments positionnels refusés |
+| P8 | `--allow-http` acceptait n'importe quel hôte distant | Élevée | **Corrigé** (PHP 0.4.2) : réservé à `localhost`, `127.0.0.1` et `::1` |
+| P9 | Plafond d'un million de parts présent dans les clients, absent du contrat serveur | Élevée | **Corrigé** (train 0120) : `MAX_SHARES` dans `update_contribution.py`, `400 invalid_value` au-delà ; un test vérifie l'égalité client/serveur. Le chiffre reste à valider par les règles de la coopérative |
+| P10 | `trim` des valeurs `.env` non citées ; mot de passe visible dans la liste des processus via `--password` ; `--cookie` persistant sans contrôle de permissions | Moyenne | **Partiellement** (PHP 0.4.2) : l'aide documente les guillemets et recommande `.env` plutôt que `--password` ; un `--cookie` existant lisible par d'autres est refusé, un nouveau est créé en 0600. Le parseur `.env` reste minimal |
+| P11 | `--help` exigeait les extensions `curl` et `dom` | Mineure | **Corrigé** (PHP 0.4.2) : analyse des arguments avant la vérification des extensions |
+| P12 | `_group_side_groups` continuait sur une exception de lecture, groupe tenu pour vide : une appartenance à révoquer pouvait passer inaperçue et la convergence être annoncée | Élevée | **Corrigé** (train 0120) : la lecture illisible lève `GroupSideUnreadable`, `sync_member_groups` répond `None` sans rien écrire ; test sur une révocation avec côté groupe illisible |
+| — | `sync_failed` tenait une réponse Keycloak de forme inconnue pour propre | Moyenne | **Corrigé** (train 0120) : seul un objet portant `failed` ou `status` est reconnu, tout le reste est un échec |
+| — | Date `0000-01-01` acceptée par PHP, refusée par Python | Mineure | **Corrigé** dans les deux clients : année entre 1900 et 2199 |
+| — | Formulation du code de sortie 0 : « confirmation des opérations de synchronisation », pas « droits restaurés partout » | Précision | **Reprise** dans l'en-tête des deux clients et dans la spécification |
+
 ## Journal
 
 - 2026-10-24 : réception de l'audit, vérification de A2 dans `utils.py`, `dynamic_groups.py` et `views/update_contribution.py` (confirmé), exécution du train 0117 et de la version 0.4 du script PHP, versement de cette note.
 - 2026-10-24 (second passage) : P5 et P6 confirmés à la lecture, train 0119 et PHP 0.4.1.
+- 2026-10-24 (troisième passage) : P7 à P12, train 0120 et PHP 0.4.2.

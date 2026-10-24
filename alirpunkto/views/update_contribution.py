@@ -49,6 +49,11 @@ WRITABLE_FIELDS = (SHARES_FIELD, VALIDITY_FIELD)
 #: Accepted date format of the validity field (the script's contract).
 DATE_FORMAT = '%Y-%m-%d'
 
+#: Business ceiling on one member's shares — the same figure the
+#: clients enforce (external audit of 2026-10-24, third pass, P9): a
+#: higher value is an overflow or a misplaced amount, never a payment.
+MAX_SHARES = 1_000_000
+
 
 def _session_user(request):
     if not request.session.get('logged_in'):
@@ -70,10 +75,12 @@ def _refuse(request, status, error, **extra):
 
 
 def parse_shares(raw):
-    """A non-negative integer, or ValueError."""
+    """An integer between 0 and MAX_SHARES, or ValueError."""
     value = int(str(raw).strip())
     if value < 0:
         raise ValueError('negative')
+    if value > MAX_SHARES:
+        raise ValueError('above the ceiling')
     return value
 
 
@@ -114,7 +121,7 @@ def update_contribution(request):
         try:
             updates[SHARES_FIELD] = parse_shares(request.POST[SHARES_FIELD])
         except ValueError:
-            errors[SHARES_FIELD] = 'expected a non-negative integer'
+            errors[SHARES_FIELD] = f'expected an integer between 0 and {MAX_SHARES}'
     if request.POST.get(VALIDITY_FIELD, '') != '':
         try:
             updates[VALIDITY_FIELD] = parse_validity_date(

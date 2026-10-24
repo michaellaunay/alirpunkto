@@ -121,6 +121,23 @@ def test_invalid_values_are_named():
                                    'date_end_validity_yearly_contribution'}
 
 
+def test_the_share_ceiling_is_the_same_on_the_server(monkeypatch):
+    """Third audit pass (P9): the clients' ceiling must exist in the
+    contract too, not only in their own code."""
+    script = _load_script()
+    assert uc.MAX_SHARES == script.MAX_SHARES
+    body, status, ldap = _call(_request({
+        'oid': 'coop-1', 'number_shares_owned': str(uc.MAX_SHARES + 1)}),
+        target=_cooperator())
+    assert (status, body['error']) == (400, 'invalid_value')
+    assert str(uc.MAX_SHARES) in body['fields']['number_shares_owned']
+    ldap.assert_not_called()
+    body, status, _ = _call(_request({
+        'oid': 'coop-1', 'number_shares_owned': str(uc.MAX_SHARES)}),
+        target=_cooperator())
+    assert status == 200 and body['number_shares_owned'] == uc.MAX_SHARES
+
+
 def test_an_unknown_member_is_a_404():
     body, status, _ = _call(_request({'oid': 'ghost',
                                       'number_shares_owned': '1'}),
@@ -476,6 +493,16 @@ def test_the_script_refuses_an_absurd_number_of_shares():
         script.check_requested_changes('99999999999999999999999999999', None)
     assert script.check_requested_changes(str(script.MAX_SHARES), None) == {
         'number_shares_owned': str(script.MAX_SHARES)}
+
+
+def test_the_script_refuses_an_implausible_validity_year():
+    """Third audit pass: ``0000-01-01`` and its cousins are typos."""
+    script = _load_script()
+    for bad in ('0000-01-01', '1899-12-31', '2200-01-01', '2027-02-30'):
+        with pytest.raises(ValueError):
+            script.check_requested_changes(None, bad)
+    assert script.check_requested_changes(None, '2027-06-30') == {
+        'date_end_validity_yearly_contribution': '2027-06-30'}
 
 
 def test_the_script_refuses_a_non_json_or_non_object_answer():

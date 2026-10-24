@@ -39,7 +39,24 @@ The auditor validates the syntax of PHP 0.4 (PHP 8.4.24), the architecture, the 
 
 Limit recalled by the auditor and kept: a successful propagation proves the mechanism ran, not that every application has already refreshed its rights.
 
+## Third pass (same day) — PHP 0.4.1 and train 0119 re-read
+
+The auditor confirms P1 to P6 fixed (PHP 8.4 syntax checked, P5 and P6 re-read on `master`) and raises six new points.
+
+| Ref. | Finding | Priority | Disposition |
+|---|---|---|---|
+| P7 | `getopt()` silently ignores an unknown, misspelt or valueless option: `--validitydate` let a half-applied payment through with exit 0 | P0 | **Fixed** (PHP 0.4.2): strict home-made `argv` parser — unknown options, missing values, duplicates and positional arguments refused |
+| P8 | `--allow-http` accepted any remote host | High | **Fixed** (PHP 0.4.2): restricted to `localhost`, `127.0.0.1` and `::1` |
+| P9 | One-million share ceiling in the clients, absent from the server contract | High | **Fixed** (train 0120): `MAX_SHARES` in `update_contribution.py`, `400 invalid_value` above it; a test checks client/server equality. The figure remains to be validated by the cooperative's rules |
+| P10 | `trim` of unquoted `.env` values; password visible in the process list through `--password`; persistent `--cookie` without a permission check | Medium | **Partly** (PHP 0.4.2): the help documents quoting and recommends `.env` over `--password`; an existing `--cookie` readable by others is refused, a new one is created at 0600. The `.env` parser stays minimal |
+| P11 | `--help` required the `curl` and `dom` extensions | Minor | **Fixed** (PHP 0.4.2): arguments parsed before the extension check |
+| P12 | `_group_side_groups` continued on a read exception, the group taken as empty: a membership to revoke could go unseen and convergence be reported | High | **Fixed** (train 0120): an unreadable read raises `GroupSideUnreadable`, `sync_member_groups` answers `None` without writing; test on a revocation with an unreadable group side |
+| — | `sync_failed` took a Keycloak answer of unknown shape as clean | Medium | **Fixed** (train 0120): only an object carrying `failed` or `status` is recognised, anything else is a failure |
+| — | Date `0000-01-01` accepted by PHP, refused by Python | Minor | **Fixed** in both clients: year between 1900 and 2199 |
+| — | Wording of exit code 0: "confirmation of the synchronisation operations", not "rights restored everywhere" | Precision | **Reworded** in both clients' headers and in the specification |
+
 ## Log
 
 - 2026-10-24: audit received, A2 verified in `utils.py`, `dynamic_groups.py` and `views/update_contribution.py` (confirmed), train 0117 and PHP script version 0.4 executed, this note filed.
 - 2026-10-24 (second pass): P5 and P6 confirmed by reading, train 0119 and PHP 0.4.1.
+- 2026-10-24 (third pass): P7 to P12, train 0120 and PHP 0.4.2.

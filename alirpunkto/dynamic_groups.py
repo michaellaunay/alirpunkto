@@ -299,10 +299,18 @@ def sync_member_groups(request, member_oid, *, today=None,
         return None
 
 
+class GroupSideUnreadable(RuntimeError):
+    """A managed group's ``uniqueMember`` could not be read: the diff
+    cannot be computed, so the sync must not write anything and must
+    report failure (external audit of 2026-10-24, third pass, P12)."""
+
+
 def _group_side_groups(conn, dn):
     """The managed groups whose ``uniqueMember`` lists ``dn`` — the group
     side of the relation, read independently of the member side
-    (sixth audit pass, §12.3)."""
+    (sixth audit pass, §12.3). A read failure used to be logged and the
+    group treated as empty, which could hide a membership to revoke
+    and still report convergence; it now raises (P12)."""
     names = set()
     for name in MANAGED_GROUPS:
         try:
@@ -310,10 +318,10 @@ def _group_side_groups(conn, dn):
                         search_scope='BASE',
                         attributes=['uniqueMember'])
         except Exception as exc:
-            log.warning(
+            log.error(
                 f"sync_member_groups: cannot read the group side of "
                 f"{name}: {exc}")
-            continue
+            raise GroupSideUnreadable(name) from exc
         if not conn.entries:
             continue
         values = (conn.entries[0].uniqueMember.values

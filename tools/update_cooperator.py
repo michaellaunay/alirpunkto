@@ -31,9 +31,12 @@ Version 0.4 (external audit of 2026-10-24) — what the wire really wants:
   groups or SSO lagging — is reported as a failure to retry (A2);
 * every HTTP call carries a timeout (A4), tokens are never printed.
 
-Exit code 0 means, and only means: the facts are in the directory with
-the values requested, the member's Dynamic Groups are converged and the
-change reached Keycloak. Anything else exits 1 with the portal's reason.
+Exit code 0 means, and only means: the portal confirmed that the facts
+are in the directory with the values requested, that the member's
+Dynamic Groups converged and that the Keycloak synchronisation ran
+without reported failure. It does not prove that every client
+application has already refreshed its own authorisations. Anything
+else exits 1 with the portal's reason.
 
 Raises:
     FileNotFoundError: If the specified .env file is not found.
@@ -77,6 +80,11 @@ TIMEOUT: Final[tuple[int, int]] = (10, 30)
 #: bug (an overflow, a misplaced amount), refused before it reaches the
 #: directory (second audit pass, P4).
 MAX_SHARES: Final[int] = 1_000_000
+
+#: A validity date outside this window is a typo, not a contribution
+#: (third audit pass: ``0000-01-01`` must not travel).
+MIN_YEAR: Final[int] = 1900
+MAX_YEAR: Final[int] = 2199
 
 
 # Functions
@@ -197,9 +205,12 @@ def check_requested_changes(shares: str | None, validity_date: str | None) -> di
         post_data[SHARES_FIELD] = str(value)
     if validity_date is not None and validity_date.strip() != "":
         try:
-            datetime.strptime(validity_date.strip(), DATE_FORMAT)
+            day = datetime.strptime(validity_date.strip(), DATE_FORMAT)
         except ValueError:
             raise ValueError("The validity date must be in the format YYYY-MM-DD.")
+        if not MIN_YEAR <= day.year <= MAX_YEAR:
+            raise ValueError(
+                f"The validity date must fall between {MIN_YEAR} and {MAX_YEAR}.")
         post_data[VALIDITY_FIELD] = validity_date.strip()
     if not post_data:
         raise ValueError(
