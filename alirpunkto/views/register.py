@@ -463,6 +463,32 @@ def render_candidature_form(request: Request,
         return ""
     return form.render(appstruct=appstruct)
 
+#: The MemberDatas fields an Applicant may fill on the public form. The
+#: others — is_active, the Cooperative Behaviour Mark and its date, the
+#: shares, the contribution validity, the groups, the IBAN, the erasure
+#: date, the role — are facts of the Cooperative, set by the system or by
+#: the commercial site, never by the person registering (audit A03).
+PUBLIC_REGISTRATION_FIELDS = (
+    'fullname', 'fullsurname', 'description', 'nationality',
+    'password', 'password_confirm', 'lang1', 'lang2', 'lang3',
+)
+
+
+def public_registration_parameters(params):
+    """The MemberDatas keyword arguments a registration POST may provide:
+    only PUBLIC_REGISTRATION_FIELDS, an empty lang2/lang3 dropped; the
+    birth date is parsed separately by the caller."""
+    parameters = {}
+    for field_name in PUBLIC_REGISTRATION_FIELDS:
+        if field_name not in params:
+            continue
+        value = params[field_name]
+        if field_name in ('lang2', 'lang3') and not value:
+            continue
+        parameters[field_name] = value
+    return parameters
+
+
 def handle_confirmed_human_state(request, candidature):
     """Handle the confirmed human state.
 
@@ -550,14 +576,11 @@ def handle_confirmed_human_state(request, candidature):
             appstruct['lang3'] = request.params['lang3']
         if 'description' in request.params:
             appstruct['description'] = request.params['description']
-        parameters = {}
-        for field_name in MemberDatas.__dataclass_fields__.keys():
-            if field_name not in request.params:
-                continue
-            value = request.params[field_name]
-            if field_name in ('lang2', 'lang3') and not value:
-                continue
-            parameters[field_name] = value
+        # Transversal audit of 2026-10-24 (A03): the public form fills a
+        # CLOSED list of fields. The loop used to walk every MemberDatas
+        # field, so a crafted POST could seed number_shares_owned,
+        # cooperative_behaviour_mark, is_active or the role.
+        parameters = public_registration_parameters(request.params)
         # @TODO use permission than member type to manipulate the data
         if candidature.type == MemberTypes.COOPERATOR:
             # Extract birthdate from request only for coopereator

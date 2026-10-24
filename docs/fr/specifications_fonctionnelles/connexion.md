@@ -40,3 +40,18 @@ la session.
   compris.
 - L'administrateur LDAP (`is_admin`) dispose d'un chemin dédié sans compte
   membre.
+
+## Comptes clos (#265, audit transversal du 24 octobre 2026, A01)
+
+Un compte est **clos** quand le membre est dans un état de départ
+(démissionnaire, exclu, supprimé) ou quand le drapeau `isActive` de
+l'annuaire est baissé. Un compte clos est refusé à toutes les portes,
+quoi que l'annuaire accepte encore comme bind : la connexion LDAP, le
+retour SSO, une demande de réinitialisation de mot de passe (même
+réponse neutre qu'une adresse inconnue, sans changement d'état ni
+courriel), un ancien lien de réinitialisation (répondu comme obsolète)
+et une session de réinitialisation armée avant le départ. Le chargeur
+lit `isActive` dans l'annuaire à chaque rafraîchissement, le refus ne
+dépend donc pas du cache ZODB ; et la page d'accueil ne tient une session
+pour authentifiée que si la vue de connexion a posé le drapeau et la
+charge utilisateur — une clé `user` orpheline ne réarme plus une session.

@@ -55,6 +55,16 @@ stateDiagram-v2
 À chaque changement d'état, le candidat (et, en phase de vote, les
 vérificateurs) reçoivent un courriel localisé.
 
+## Champs du formulaire public (audit transversal du 24 octobre 2026, A03)
+
+Le formulaire d'inscription remplit une **liste fermée** de champs :
+prénoms, noms, texte de présentation, nationalité, date de naissance,
+langues et mot de passe. Les faits de la coopérative — parts détenues,
+validité de la cotisation, note de comportement coopératif et sa date,
+drapeau d'activité, groupes, IBAN, date d'effacement, rôle — sont posés
+par le système ou par le site commercial et ne sont jamais lus dans le
+POST d'inscription, quoi qu'il porte.
+
 ## Limites connues
 
 - Aucune péremption automatique : une candidature en attente le reste

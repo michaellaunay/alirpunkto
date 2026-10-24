@@ -56,6 +56,15 @@ stateDiagram-v2
 At every state change, the applicant (and, during the vote, the verifiers)
 receive a localised e-mail.
 
+## Fields of the public form (transversal audit of 2026-10-24, A03)
+
+The registration form fills a **closed list** of fields: given names,
+family names, presentation text, nationality, birth date, languages and
+the password. The facts of the Cooperative — shares owned, contribution
+validity, Cooperative Behaviour Mark and its date, activity flag, groups,
+IBAN, erasure date, role — are set by the system or by the commercial
+site and are never read from the registration POST, whatever it carries.
+
 ## Known limits
 
 - No automatic expiry: a pending candidature stays pending until a human

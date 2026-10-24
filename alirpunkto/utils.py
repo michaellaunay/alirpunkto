@@ -711,9 +711,70 @@ def get_member_by_oid(
     members = get_members(request)
     member = members[oid] if oid in members else None
     if update and not isinstance(member, Member):
-        update_member_from_ldap(oid, request)
-        member = None
-    return member
+        # Transversal audit of 2026-10-24 (A02): the loader used to be
+        # called and its result thrown away — "update=True" answered None
+        # for a member the directory knows but the cache does not.
+        member = update_member_from_ldap(oid, request)
+    return member if isinstance(member, Member) else None
+
+
+#: The states after which an account must never authenticate again
+#: (issue #265), whatever the directory still accepts as a bind.
+CLOSED_MEMBER_STATES = (
+    MemberStates.UNSUBSCRIBED,
+    MemberStates.EXCLUDED,
+    MemberStates.DELETED,
+)
+
+
+def is_account_closed(member) -> bool:
+    """True when ``member`` must be refused at every door — login, SSO,
+    password reset, reset link (transversal audit of 2026-10-24, A01):
+    a departure state, or the directory's ``isActive`` flag down. A
+    member whose data is unknown is NOT closed; an unknown member is
+    handled by the caller."""
+    if member is None:
+        return False
+    if getattr(member, 'member_state', None) in CLOSED_MEMBER_STATES:
+        return True
+    return getattr(getattr(member, 'data', None), 'is_active', True) is False
+
+
+_ABSENT = object()
+
+
+def _ldap_attribute(entry, name):
+    """The value of ``name`` on an ldap3 entry, or ``_ABSENT`` when the
+    attribute is not there — never confused with an empty value."""
+    # ldap3 materialises EVERY requested attribute on the entry, with an
+    # empty value list when the entry lacks it: "name in entry" and
+    # hasattr() are both true for an absent attribute. The value list is
+    # the only honest witness.
+    try:
+        attribute = getattr(entry, name)
+    except AttributeError:                  # a plain object, as in tests
+        return _ABSENT
+    values = getattr(attribute, 'values', None)
+    if isinstance(values, list):
+        return attribute.value if values else _ABSENT
+    return getattr(attribute, 'value', attribute)
+
+
+def _ldap_bool(value, default=True) -> bool:
+    if value is _ABSENT or value is None:
+        return default
+    return str(value).strip() in ("True", "true", "TRUE", "Y", "y", "YES",
+                                  "yes", "1")
+
+
+def _ldap_int(value, oid, name):
+    if value is _ABSENT or value in (None, ''):
+        return None
+    try:
+        return int(str(value).strip())
+    except (TypeError, ValueError):
+        log.error(f"Invalid integer {value!r} for {name} of {oid}")
+        return None
 
 def append_member(
         member: Member,
@@ -753,7 +814,7 @@ def update_member_from_ldap(
                     'thirdLanguage','cooperativeBehaviourMark',
                     'cooperativeBehaviourMarkUpdate', 'numberSharesOwned',
                     'dateEndValidityYearlyContribution', 'uniqueMemberOf',
-                    'iban', 'dateErasureAllData'
+                    'iban', 'dateErasureAllData', 'description'
                 ])
             )
             if len(conn.entries) == 0:
@@ -799,23 +860,58 @@ def update_member_from_ldap(
             new_second_language = member_entry.secondLanguage.value if hasattr(member_entry, 'secondLanguage') else None
             new_third_language = member_entry.thirdLanguage.value if hasattr(member_entry, 'thirdLanguage') else None
             member = get_member_by_oid(oid, request, False)
-            cooperative_behaviour_mark = (
-                float(member_entry.cooperativeBehaviourMark.value
-                    or DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
-                if hasattr(member_entry, 'cooperativeBehaviourMark')
-                else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
-            cooperative_behaviour_mark_update = member_entry.cooperativeBehaviourMarkUpdate.value if hasattr(member_entry, 'cooperativeBehaviourMarkUpdate') else None
-            if cooperative_behaviour_mark_update:
-                cooperative_behaviour_mark_update = cooperative_behaviour_mark_update[:LDAP_TIME_LENGTH]
-                cooperative_behaviour_mark_update = get_date(cooperative_behaviour_mark_update, oid)
-            number_shares_owned = member_entry.numberSharesOwned.value if hasattr(member_entry, 'numberSharesOwned') else None
-            date_end_validity_yearly_contribution = member_entry.dateEndValidityYearlyContribution.value if hasattr(member_entry, 'dateEndValidityYearlyContribution') else None
-            if date_end_validity_yearly_contribution:
-                date_end_validity_yearly_contribution = date_end_validity_yearly_contribution[:LDAP_TIME_LENGTH]
-                date_end_validity_yearly_contribution = get_date(date_end_validity_yearly_contribution, oid)
-            unique_member_of = member_entry.uniqueMemberOf.value if hasattr(member_entry, 'uniqueMemberOf') else None
-            iban = member_entry.iban.value if hasattr(member_entry, 'iban') else None
-            date_erasure_all_data = member_entry.dateErasureAllData.value if hasattr(member_entry, 'dateErasureAllData') else None
+            # Transversal audit of 2026-10-24 (A02): every attribute the
+            # directory owns is read TYPED, and "absent" is kept apart
+            # from "empty" — the refresh below applies all of them to a
+            # cached member, financial facts and isActive included.
+            raw_mark = _ldap_attribute(member_entry, 'cooperativeBehaviourMark')
+            try:
+                cooperative_behaviour_mark = (
+                    float(raw_mark) if raw_mark not in (_ABSENT, None, '')
+                    else DEFAULT_COOPERATIVE_BEHAVIOUR_MARK)
+            except (TypeError, ValueError):
+                log.error(f"Invalid cooperativeBehaviourMark {raw_mark!r} for {oid}")
+                cooperative_behaviour_mark = DEFAULT_COOPERATIVE_BEHAVIOUR_MARK
+            cooperative_behaviour_mark_update = _ldap_attribute(
+                member_entry, 'cooperativeBehaviourMarkUpdate')
+            if cooperative_behaviour_mark_update not in (_ABSENT, None, ''):
+                cooperative_behaviour_mark_update = get_date(
+                    str(cooperative_behaviour_mark_update)[:LDAP_TIME_LENGTH], oid)
+            else:
+                cooperative_behaviour_mark_update = None
+            number_shares_owned = _ldap_int(
+                _ldap_attribute(member_entry, 'numberSharesOwned'), oid,
+                'numberSharesOwned')
+            date_end_validity_yearly_contribution = _ldap_attribute(
+                member_entry, 'dateEndValidityYearlyContribution')
+            if date_end_validity_yearly_contribution not in (_ABSENT, None, ''):
+                date_end_validity_yearly_contribution = get_date(
+                    str(date_end_validity_yearly_contribution)[:LDAP_TIME_LENGTH], oid)
+            else:
+                date_end_validity_yearly_contribution = None
+            is_active = _ldap_bool(_ldap_attribute(member_entry, 'isActive'))
+            unique_member_of = _ldap_attribute(member_entry, 'uniqueMemberOf')
+            unique_member_of = None if unique_member_of is _ABSENT else unique_member_of
+            iban = _ldap_attribute(member_entry, 'iban')
+            iban = None if iban is _ABSENT else iban
+            date_erasure_all_data = _ldap_attribute(member_entry, 'dateErasureAllData')
+            date_erasure_all_data = (None if date_erasure_all_data is _ABSENT
+                                     else date_erasure_all_data)
+            new_description = _ldap_attribute(member_entry, 'description')
+            new_description = None if new_description is _ABSENT else new_description
+            # Identity attributes the entry does NOT carry are unknown,
+            # not erased (sn is mandatory in inetOrgPerson: its absence
+            # is a broken entry, seen on 2026-09-01) — they leave the
+            # cached value alone. The facts of the Cooperative above
+            # are different: absent means the directory holds no value.
+            absent_identity = {
+                field for field, attribute in (
+                    ('fullname', 'givenName'), ('fullsurname', 'sn'),
+                    ('description', 'description'),
+                    ('nationality', 'nationality'), ('birthdate', 'birthdate'),
+                    ('lang1', 'preferredLanguage'),
+                    ('lang2', 'secondLanguage'), ('lang3', 'thirdLanguage'))
+                if _ldap_attribute(member_entry, attribute) is _ABSENT}
 
         log.debug(f"Update Member {oid} with ldap informations")
         if not member:
@@ -831,6 +927,7 @@ def update_member_from_ldap(
                 role=derived_role,
                 fullname=new_fullname,
                 fullsurname=new_fullsurname,
+                description=new_description,
                 nationality = new_nationality,
                 birthdate = new_birthdate,
                 password = None,
@@ -838,6 +935,7 @@ def update_member_from_ldap(
                 lang1 = new_preferred_language,
                 lang2 = new_second_language,
                 lang3 = new_third_language,
+                is_active = is_active,
                 cooperative_behaviour_mark = cooperative_behaviour_mark,
                 cooperative_behaviour_mark_update = cooperative_behaviour_mark_update,
                 number_shares_owned = number_shares_owned,
@@ -855,35 +953,49 @@ def update_member_from_ldap(
             )
             append_member(member, request)
         else :
-            # Update the member object with the data retrieved from LDAP
+            # Refresh the cached member from the directory, which owns
+            # these attributes. The identity of the entry (mail, cn,
+            # employeeType) keeps its old value when the entry lacks it —
+            # a broken entry, logged — but EVERY other attribute follows
+            # the directory, empty or absent values included (A02).
             if new_email and member.email != new_email:
                 log.debug(f"Update Member {oid} with new email {new_email}")
                 member.email = new_email
+            elif not new_email:
+                log.warning(f"Member {oid} has no mail in the directory")
             if new_pseudonym and member.pseudonym != new_pseudonym:
                 log.debug(f"Update Member {oid} with new pseudonym {new_pseudonym}")
                 member.pseudonym = new_pseudonym
             if new_type and member.type != new_type:
                 log.debug(f"Update Member {oid} with new type {new_type}")
                 member.type = new_type
-            # Add additional fields for cooperators
-            if new_fullname and member.data.fullname != new_fullname:
-                log.debug(f"Update Member {oid} with new fullname {new_fullname}")
-                member.data.fullname = new_fullname
-            if new_fullsurname and member.data.fullsurname != new_fullsurname:
-                log.debug(f"Update Member {oid} with new fullsurname {new_fullsurname}")
-                member.data.fullsurname = new_fullsurname
-            if new_nationality and member.data.nationality != new_nationality:
-                log.debug(f"Update Member {oid} with new nationality {new_nationality}")
-                member.data.nationality = new_nationality
-            if new_birthdate and member.data.birthdate != new_birthdate:
-                log.debug(f"Update Member {oid} with new birthdate {new_birthdate}")
-                member.data.birthdate = new_birthdate
-            if new_preferred_language and member.data.lang1 != new_preferred_language:
-                log.debug(f"Update Member {oid} with new preferred language {new_preferred_language}")
-                member.data.lang1 = new_preferred_language
-            if new_second_language and member.data.lang2 != new_second_language:
-                log.debug(f"Update Member {oid} with new second language {new_second_language}")
-                member.data.lang2 = new_second_language
+            refreshed = {
+                'fullname': new_fullname,
+                'fullsurname': new_fullsurname,
+                'description': new_description,
+                'nationality': new_nationality,
+                'birthdate': new_birthdate,
+                'lang1': new_preferred_language,
+                'lang2': new_second_language,
+                'lang3': new_third_language,
+                'is_active': is_active,
+                'cooperative_behaviour_mark': cooperative_behaviour_mark,
+                'cooperative_behaviour_mark_update':
+                    cooperative_behaviour_mark_update,
+                'number_shares_owned': number_shares_owned,
+                'date_end_validity_yearly_contribution':
+                    date_end_validity_yearly_contribution,
+                'unique_member_of': unique_member_of,
+                'iban': iban,
+                'date_erasure_all_data': date_erasure_all_data,
+            }
+            for field, value in refreshed.items():
+                if field in absent_identity:
+                    continue
+                if getattr(member.data, field, None) != value:
+                    log.debug(f"Update Member {oid}: {field} follows the directory")
+                    setattr(member.data, field, value)
+            member._p_changed = True
         return member
     except LDAPException as e:
         log.error(f"LDAP connection/query error for user {oid}: {e}")

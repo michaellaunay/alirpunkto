@@ -32,8 +32,13 @@ def _show_upgrade_invite(request, user):
         return False
 
 def is_authenticated(request):
-    # Check if the user is authenticated
-    return 'user' in request.session
+    """A session is authenticated when the login views said so — both
+    the ``logged_in`` flag AND the user payload. Transversal audit of
+    2026-10-24 (A01): the home page used to re-arm ``logged_in`` from
+    the mere presence of a ``user`` key, turning a half-cleared session
+    back into an authenticated one."""
+    return request.session.get('logged_in') is True \
+        and bool(request.session.get('user'))
 
 @view_config(route_name='home', renderer='alirpunkto:templates/home.pt')
 def home_view(request):
@@ -45,7 +50,7 @@ def home_view(request):
     """
     applications = []
     if is_authenticated(request):
-        logged_in = request.session['logged_in'] = True
+        logged_in = True
         applications = filter_applications_for_member(
             request, request.registry.settings["applications"])
     else:

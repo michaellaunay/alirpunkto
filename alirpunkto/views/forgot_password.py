@@ -9,6 +9,7 @@ from alirpunkto.utils import (
     get_member_by_email,
     update_member_from_ldap,
     get_member_by_oid,
+    is_account_closed,
     send_email_to_member,
     decrypt_oid,
     switch_request_language,
@@ -111,6 +112,12 @@ def forgot_password(request):
     oid = request.session.get(MEMBER_OID, None)
     if oid:
         member = get_member_by_oid(oid, request, True)
+        if member and is_account_closed(member):
+            # A01: an armed reset session does not survive the closure
+            # of the account.
+            log.warning(f'Reset session refused for closed account {oid}')
+            request.session.pop(MEMBER_OID, None)
+            oid, member = None, None
         if member:
             _display_in_member_language(request, member)
     # 1) AlirPunkto displays the forgot_password.pt zpt to enter the mail
@@ -153,7 +160,15 @@ def forgot_password(request):
         member = update_member_from_ldap(uid, request)
         if not member:
             log.error(f'Could not load member from LDAP for uid {uid}')
-            return {"message":_('forget_email_sent'), "member": None, "form": None}       
+            return {"message":_('forget_email_sent'), "member": None, "form": None}
+        if is_account_closed(member):
+            # Transversal audit of 2026-10-24 (A01): a reset request used
+            # to overwrite a departure state with
+            # DATA_MODIFICATION_REQUESTED — the recovery workflow must
+            # never reopen a closed account. Same neutral answer, no
+            # state change, no e-mail.
+            log.warning(f'Password reset refused for closed account {uid}')
+            return {"message":_('forget_email_sent'), "member": None, "form": None}
         # 5.1) AlirPunkto checks if there is a user being modified
         # get the list of users being modified
         root = get_connection(request).root()
@@ -274,6 +289,13 @@ def _retrieve_member(
             error = _('member_not_found')
             return None, {'member': None,
                 'error': error}
+        if is_account_closed(member):
+            # A01: the bearer of an old reset link cannot reopen a closed
+            # account; answered like an obsolete link, nothing armed.
+            log.warning(f'Reset link refused for closed account {decrypted_oid}')
+            return None, {'member': None,
+                'error': _('url_is_obsolete'),
+                'url_obsolete': True}
         if seed != member.email_send_status_history[-1].seed:
             error = _('url_is_obsolete')
             return None, {'member': member,

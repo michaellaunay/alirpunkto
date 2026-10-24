@@ -14,6 +14,7 @@ from alirpunkto.constants_and_globals import (
     ORGANIZATION_DETAILS,
 )
 from alirpunkto.utils import (
+    is_account_closed,
     update_member_from_ldap,
     store_sso_tokens,
     logout,
@@ -89,7 +90,15 @@ def callback_view(request):
             }
         # A resigned (or otherwise deactivated) member cannot log in
         # (spec "Démissionner"): the LDAP entry stays during the
-        # Quarantine period but isActive is False.
+        # Quarantine period but isActive is False. Transversal audit of
+        # 2026-10-24 (A01): the departure states close the SSO door too.
+        if is_account_closed(member):
+            return {
+                'error': _('account_deactivated_login_error'),
+                'site_name': site_name,
+                'domain_name': domain_name,
+                'organization_details': organization_details,
+            }
         if not member.data.is_active:
             return {
                 'error': _('account_deactivated_login_error'),

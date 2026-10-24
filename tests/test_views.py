@@ -35,6 +35,9 @@ def test_home_view_for_anonymous_user(dummy_request):
 
 
 def test_home_view_for_logged_in_user(dummy_request):
+    # Transversal audit of 2026-10-24 (A01): a session is authenticated
+    # when the login view said so — the flag AND the user payload.
+    dummy_request.session["logged_in"] = True
     dummy_request.session["user"] = json.dumps({"name": "Alice"})
     dummy_request.registry.settings["applications"] = {
         "app": {"name": "App", "url": "https://app.example.com/"}}
@@ -61,6 +64,7 @@ def test_home_view_logs_out_when_sso_refresh_is_expired(dummy_request):
 
 
 def test_home_view_refreshes_valid_sso_token(dummy_request):
+    dummy_request.session["logged_in"] = True
     dummy_request.session["user"] = json.dumps({"name": "Alice"})
     dummy_request.session[SSO_REFRESH] = \
         alirpunkto_utils.seal_sso_refresh_token("refresh-token")
@@ -84,10 +88,16 @@ def test_home_view_refreshes_valid_sso_token(dummy_request):
     assert SSO_EXPIRES_AT in dummy_request.session
 
 
-def test_is_authenticated_uses_session_user(dummy_request):
+def test_is_authenticated_needs_the_flag_and_the_user(dummy_request):
+    """Transversal audit of 2026-10-24 (A01): a stray ``user`` key alone
+    used to count as authenticated and re-armed ``logged_in``."""
     assert is_authenticated(dummy_request) is False
     dummy_request.session["user"] = json.dumps({"name": "Alice"})
+    assert is_authenticated(dummy_request) is False
+    dummy_request.session["logged_in"] = True
     assert is_authenticated(dummy_request) is True
+    dummy_request.session.pop("user")
+    assert is_authenticated(dummy_request) is False
 
 
 def test_logout_view_redirects_home(dummy_request):

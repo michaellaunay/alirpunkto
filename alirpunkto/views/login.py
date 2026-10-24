@@ -31,6 +31,7 @@ from alirpunkto.utils import (
     is_admin,
     get_admin_user,
     get_oid_from_pseudonym,
+    is_account_closed,
     update_member_from_ldap,
     store_sso_tokens,
     logout,
@@ -92,11 +93,9 @@ def login_view(request):
             # Issue #265: a confirmed departure closes the door — an
             # unsubscribed, excluded or deleted account must never log
             # in again, whatever the directory still authenticates.
-            from alirpunkto.models.member import MemberStates
-            if member is not None and member.member_state in (
-                    MemberStates.UNSUBSCRIBED,
-                    MemberStates.EXCLUDED,
-                    MemberStates.DELETED):
+            # Transversal audit of 2026-10-24 (A01): the directory's
+            # isActive flag closes it too, now that the loader reads it.
+            if member is not None and is_account_closed(member):
                 record_failure(client_ip, username)
                 return {
                     'error': _('login_account_disabled'),

@@ -40,3 +40,17 @@ valid, and logs out cleanly otherwise. `/logout` purges the session.
   included.
 - The LDAP administrator (`is_admin`) has a dedicated path without a
   member account.
+
+## Closed accounts (#265, transversal audit of 2026-10-24, A01)
+
+An account is **closed** when the member is in a departure state
+(unsubscribed, excluded, deleted) or when the directory's `isActive`
+flag is down. A closed account is refused at every door, whatever the
+directory still accepts as a bind: the LDAP login, the SSO callback, a
+password-reset request (same neutral answer as an unknown address, no
+state change, no e-mail), an old reset link (answered as obsolete) and
+a reset session armed before the departure. The loader reads `isActive`
+from the directory on every refresh, so the refusal does not depend on
+the ZODB cache; and the home page treats a session as authenticated
+only when the login view set both the flag and the user payload — a
+stray `user` key no longer re-arms a session.
