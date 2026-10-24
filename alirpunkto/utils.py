@@ -743,6 +743,28 @@ def is_account_closed(member) -> bool:
     return getattr(getattr(member, 'data', None), 'is_active', True) is False
 
 
+def link_matches_pending_action(member, seed, purposes) -> bool:
+    """Transversal audit of 2026-10-24 (A05): an e-mailed action link is a
+    capability for ONE purpose and ONE emission. The link carries the
+    seed of the e-mail event that minted it; the member's last e-mail
+    event must still hold that seed (a newer emission or a consumption
+    moved it) AND have been recorded for one of ``purposes``."""
+    history = getattr(member, 'email_send_status_history', None) or []
+    if not history:
+        return False
+    last = history[-1]
+    return getattr(last, 'seed', None) == seed \
+        and getattr(last, 'function_name', None) in purposes
+
+
+def consume_action_link(member, purpose: str) -> None:
+    """Burn the current action link of ``member`` (A05): a new e-mail
+    event with a fresh seed and a purpose no view accepts, so the link
+    that was just used — and any older one — no longer matches."""
+    member.add_email_send_status(EmailSendStatus.IN_PREPARATION,
+                                 f"{purpose}_consumed")
+
+
 _ABSENT = object()
 
 

@@ -42,7 +42,10 @@ def _member(lang1='fr'):
     return SimpleNamespace(
         oid='m-1', pseudonym='p-m-1', email='m@example.com',
         member_state=MemberStates.DATA_MODIFICATION_REQUESTED,
-        email_send_status_history=[SimpleNamespace(seed='seed')],
+        # Audit A05: the link is a capability for ONE purpose — the
+        # stand-in's e-mail event carries it like the real Member's.
+        email_send_status_history=[SimpleNamespace(
+            seed='seed', function_name='forgot_password')],
         data=SimpleNamespace(lang1=lang1, lang2=None, lang3=None))
 
 

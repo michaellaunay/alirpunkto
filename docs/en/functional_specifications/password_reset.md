@@ -27,6 +27,17 @@
 - the secret only travels encrypted in the URL and is never stored in
   cleartext.
 
+## The link as a capability (transversal audit of 2026-10-24, A05)
+
+A reset link is a capability for one purpose and one emission. Opening
+it requires that the member's last e-mail event still carries its seed
+**and** was recorded for a password reset — an address-change or
+resignation link of the same member opens nothing. Opening it binds the
+session to that seed; a newer reset request moves the seed and kills the
+older armed session; the password change consumes the link, so a second
+POST with a copy of the armed cookie is refused. A closed account is
+refused at every one of these steps (A01).
+
 ## Known limits
 
 - The link has no expiry of its own in time: it is only invalidated by a

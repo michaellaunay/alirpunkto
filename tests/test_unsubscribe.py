@@ -40,10 +40,16 @@ class _Session(dict):
 
 
 def _member(state=MemberStates.REGISTRED):
+    # Transversal audit of 2026-10-24 (A05): the confirmation link is the
+    # one minted by THIS resignation request — the stand-in carries the
+    # e-mail event the real Member would.
     return SimpleNamespace(
         oid='member-1', email='m@example.com', pseudonym='jdoe',
         member_state=state, previous_member_state=None,
         unsubscription_requested_at=None,
+        email_send_status_history=[
+            SimpleNamespace(seed='seed', function_name='unsubscribe')],
+        add_email_send_status=lambda *a, **k: None,
         data=SimpleNamespace(is_active=True, date_erasure_all_data=None))
 
 

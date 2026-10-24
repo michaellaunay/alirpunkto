@@ -14,7 +14,7 @@ from unittest.mock import MagicMock, patch
 
 
 from alirpunkto.constants_and_globals import _
-from alirpunkto.models.member import Member
+from alirpunkto.models.member import EmailSendStatus, Member
 from alirpunkto.views import check_new_email as cne
 from alirpunkto.views.check_new_email import check_new_email
 
@@ -40,6 +40,12 @@ def _member_with_pending_email():
     member = Member(oid="member-1")
     member.email = "old@example.com"
     member.new_email = "new@example.com"  # set when the change was requested
+    # Transversal audit of 2026-10-24 (A05): the link carries the seed of
+    # the e-mail event minted for THIS change; the tests' decrypt_oid
+    # answers "seed", so the pending event must hold it.
+    member.add_email_send_status(EmailSendStatus.IN_PREPARATION,
+                                 "check_new_email")
+    member._email_send_status_history[-1].seed = "seed"
     return member
 
 

@@ -24,8 +24,9 @@ from alirpunkto.constants_and_globals import (
     UNSUBSCRIBE_LINK_VALIDITY_DAYS,
     log,
 )
-from alirpunkto.models.member import MemberTypes, MemberStates
+from alirpunkto.models.member import EmailSendStatus, MemberTypes, MemberStates
 from alirpunkto.utils import (
+    link_matches_pending_action,
     deactivate_member_in_ldap,
     decrypt_oid,
     get_member_by_oid,
@@ -118,6 +119,11 @@ def unsubscribe(request):
         member.previous_member_state = member.member_state
         member.member_state = MemberStates.PENDING_UNSUBSCRIPTION
         member.unsubscription_requested_at = datetime.now()
+        # A05: mint a fresh seed for THIS request's link — the e-mail
+        # helper reads the last event's seed, which used to be whatever
+        # the previous e-mail (a reset, a registration) had left.
+        member.add_email_send_status(EmailSendStatus.IN_PREPARATION,
+                                     'unsubscribe')
         result = send_email_to_member(
             request, member, 'unsubscribe',
             'unsubscribe_confirmation_email',
@@ -187,19 +193,33 @@ def unsubscribe_confirm(request):
         return _context(request, error=_(
             'This deactivation link has expired. Your account stays '
             'active; you can start again from your profile page.'))
+    if not link_matches_pending_action(member, seed, ('unsubscribe',)):
+        # Transversal audit of 2026-10-24 (A05): the link must be THE
+        # one minted by this resignation request — not an older
+        # emission, not a link of another purpose for the same member.
+        log.warning(f"unsubscribe_confirm: stale or foreign link for "
+                    f"{member.oid}")
+        return _context(request, error=_('invalid_oid'))
 
+    # Transversal audit of 2026-10-24 (A08): the external write comes
+    # FIRST. The state used to flip to UNSUBSCRIBED before the directory
+    # was asked, and an LDAP refusal left a member resigned locally,
+    # active in the directory, with a link that would answer "already
+    # resigned" ever after.
+    departure = datetime.now()
+    erasure_due = departure + timedelta(days=QUARANTINE_PERIOD_DAYS)
+    result = deactivate_member_in_ldap(request, member, erasure_due)
+    if result.get('status') != 'success':
+        log.error(f"unsubscribe_confirm: directory refused the deactivation "
+                  f"of {member.oid}; the request stays pending")
+        return _context(request, error=result.get('message'))
     member.member_state = MemberStates.UNSUBSCRIBED
     member.previous_member_state = None
-    member.departure_date = datetime.now()
+    member.departure_date = departure
     member.departure_reason = 'resignation'
-    erasure_due = member.departure_date + timedelta(
-        days=QUARANTINE_PERIOD_DAYS)
     if getattr(member, 'data', None) is not None:
         member.data.date_erasure_all_data = erasure_due.date()
         member.data.is_active = False
-    result = deactivate_member_in_ldap(request, member, erasure_due)
-    if result.get('status') != 'success':
-        return _context(request, error=result.get('message'))
     send_email_to_member(
         request, member, 'unsubscribe_confirm', 'unsubscribed_email',
         'unsubscribed_email_subject', 'home')

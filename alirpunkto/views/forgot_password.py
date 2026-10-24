@@ -10,6 +10,8 @@ from alirpunkto.utils import (
     update_member_from_ldap,
     get_member_by_oid,
     is_account_closed,
+    link_matches_pending_action,
+    consume_action_link,
     send_email_to_member,
     decrypt_oid,
     switch_request_language,
@@ -39,6 +41,11 @@ from pyramid.i18n import Translator
 import deform
 from alirpunkto.secret_manager import encrypt_secret_for_logs
 
+#: Session key binding an armed reset session to the link's seed (A05).
+RESET_LINK_SEED = 'reset_link_seed'
+#: The e-mail event names a reset link is minted and sent under.
+RESET_PURPOSES = ('forgot_password', 'reset_password_email')
+
 def _display_in_member_language(request, member):
     """Issue #248: the bearer of the reset link IS the member — the
     "Change password" view speaks their preferred language, not the
@@ -63,7 +70,7 @@ def _display_in_member_language(request, member):
 def forgot_password(request):
     """Forgot password view.
     Send an email to the user with a link to reset his password
-    
+
     Args:
         request (pyramid.request.Request): the request
     """
@@ -99,12 +106,12 @@ def forgot_password(request):
         )
 
     if member and not "modify" in request.POST:
-        # If we get here it's because the user used the link received in his 
+        # If we get here it's because the user used the link received in his
         # email and it's valid @TODO check the validity period
         # 11) The user receives the email and clicks on the link
         # 12) AlirPunkto displays the forgot_password.pt zpt to enter the new
         # password
-        if member.member_state == MemberStates.DATA_MODIFICATION_REQUESTED: 
+        if member.member_state == MemberStates.DATA_MODIFICATION_REQUESTED:
             request.session[MEMBER_OID] = member.oid
             return {"form": form.render(appstruct=appstruct),
                 "member": member
@@ -185,17 +192,17 @@ def forgot_password(request):
         member.member_state = MemberStates.DATA_MODIFICATION_REQUESTED
         email_template = "reset_password_email"
         member.add_email_send_status(
-            EmailSendStatus.IN_PREPARATION, 
+            EmailSendStatus.IN_PREPARATION,
             "forgot_password"
         )
         send_email_to_member(
             request,
-            member, 
+            member,
             'forgot_password',
             email_template,
             'reset_password_email_subject',
             'forgot_password',
-        )       
+        )
         try:
             member.add_email_send_status(
                 EmailSendStatus.SENT,
@@ -215,6 +222,17 @@ def forgot_password(request):
             # 11.2) Return to 1
             return {"message":_('forget_email_sent'), "member": None, "form": None}
     elif 'modify' in request.POST and oid and member:
+        # A05: the armed session must still match the member's current
+        # reset emission — a newer reset request, or a link already
+        # consumed, moved the seed and this session is dead.
+        if not link_matches_pending_action(
+                member, request.session.get(RESET_LINK_SEED), RESET_PURPOSES):
+            log.warning(f'Reset session of {member.oid} no longer matches '
+                        f'the current reset link')
+            request.session.pop(MEMBER_OID, None)
+            request.session.pop(RESET_LINK_SEED, None)
+            return {"error": _('url_is_obsolete'), "member": None,
+                    "form": None, "url_obsolete": True}
             # 11.1) If the link is invalid or expired, AlirPunkto displays an error message
         # 12) AlirPunkto displays the forgot_password.pt zpt to enter the new password
         # 13) The user enters his new password and validates
@@ -248,6 +266,12 @@ def forgot_password(request):
                 member,
                 "forgot_password",
             )
+            # A05: one change per link. Burn the capability and disarm
+            # the session; the notification above went out with the
+            # old seed, the link it may carry is dead as well.
+            consume_action_link(member, 'forgot_password')
+            request.session.pop(MEMBER_OID, None)
+            request.session.pop(RESET_LINK_SEED, None)
             log.debug(f"Password changed for {member.oid} to {encrypt_secret_for_logs(password)}")
             log.info(f"Password changed for {member.oid}")
             if 'success' in result and result['success']:
@@ -296,11 +320,16 @@ def _retrieve_member(
             return None, {'member': None,
                 'error': _('url_is_obsolete'),
                 'url_obsolete': True}
-        if seed != member.email_send_status_history[-1].seed:
+        # A05: the link must be the reset link of the LAST reset request
+        # — not an address-change or resignation link of the same member.
+        if not link_matches_pending_action(member, seed, RESET_PURPOSES):
             error = _('url_is_obsolete')
             return None, {'member': member,
                 'error': error,
                 'url_obsolete': True}
+        # The armed session is bound to this emission: a newer request or
+        # a consumed link invalidates it (A05).
+        request.session[RESET_LINK_SEED] = seed
         return member, None
     else:
         return None, None

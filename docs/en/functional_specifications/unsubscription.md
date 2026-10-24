@@ -38,6 +38,18 @@ Implements the historical scenario
 - **Link re-clicked**: idempotent — the page simply confirms the account
   is deactivated.
 
+## Write order (transversal audit of 2026-10-24, A08)
+
+The confirmation link writes the directory **first** (`isActive`,
+erasure date), and only then records the resignation locally. A
+directory refusal leaves the request pending with its link valid, so
+the same link succeeds once the directory answers; nothing local
+pretends the write happened. The link itself is minted for this very
+request (A05): an older emission, or a link of another purpose, is
+refused. The same order holds for the address change: the directory is
+written before the pending address is consumed, and a refusal restores
+the old address and keeps the request retryable.
+
 ## Guarantees
 
 - A deactivated account can no longer log in (authentication guard).

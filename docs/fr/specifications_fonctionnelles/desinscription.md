@@ -39,6 +39,19 @@ Implémente le scénario historique
 - **Lien re-cliqué** : idempotent — la page confirme simplement que le
   compte est désactivé.
 
+## Ordre des écritures (audit transversal du 24 octobre 2026, A08)
+
+Le lien de confirmation écrit l'annuaire **d'abord** (`isActive`, date
+d'effacement), et seulement ensuite enregistre la démission localement.
+Un refus de l'annuaire laisse la demande en attente avec son lien
+valide, si bien que le même lien aboutit quand l'annuaire répond ; rien
+en local ne fait semblant que l'écriture a eu lieu. Le lien lui-même est
+frappé pour cette demande précise (A05) : une émission plus ancienne, ou
+un lien d'un autre usage, est refusé. Le même ordre vaut pour le
+changement d'adresse : l'annuaire est écrit avant que l'adresse en
+attente soit consommée, et un refus rétablit l'ancienne adresse et garde
+la demande rejouable.
+
 ## Garanties
 
 - Un compte désactivé ne peut plus se connecter (garde à

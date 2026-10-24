@@ -26,6 +26,18 @@
 - le secret ne transite que chiffré dans l'URL et n'est jamais stocké en
   clair.
 
+## Le lien comme capacité (audit transversal du 24 octobre 2026, A05)
+
+Un lien de réinitialisation est une capacité pour un usage et une
+émission. L'ouvrir exige que le dernier événement de courriel du membre
+porte encore sa graine **et** ait été enregistré pour une
+réinitialisation — un lien de changement d'adresse ou de démission du
+même membre n'ouvre rien. L'ouvrir lie la session à cette graine ; une
+nouvelle demande déplace la graine et tue l'ancienne session armée ; le
+changement de mot de passe consomme le lien, si bien qu'un second POST
+avec une copie du cookie armé est refusé. Un compte clos est refusé à
+chacune de ces étapes (A01).
+
 ## Limites connues
 
 - Le lien n'a pas d'expiration temporelle propre : il n'est invalidé que

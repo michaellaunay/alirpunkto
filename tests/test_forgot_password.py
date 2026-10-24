@@ -58,10 +58,14 @@ def test_submit_requests_reset_without_explicit_commit(members_mapping):
 def test_modify_changes_password_without_explicit_commit(members_mapping):
     member = MagicMock()
     member.oid = "oid-1"
+    # Transversal audit of 2026-10-24 (A05): the armed session is bound to
+    # the reset link's seed, which must still be the member's current one.
+    member.email_send_status_history = [
+        SimpleNamespace(seed="seed", function_name="reset_password_email")]
     request = _request(
         [("modify", "1"), ("password", "ValidPass123@"),
          ("password_confirm", "ValidPass123@")],
-        session={MEMBER_OID: "oid-1"},
+        session={MEMBER_OID: "oid-1", fp.RESET_LINK_SEED: "seed"},
     )
 
     with patch.object(fp, "_retrieve_member", return_value=(None, None)), \

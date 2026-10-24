@@ -54,3 +54,15 @@ from the directory on every refresh, so the refusal does not depend on
 the ZODB cache; and the home page treats a session as authenticated
 only when the login view set both the flag and the user payload — a
 stray `user` key no longer re-arms a session.
+
+## SSO round trip (transversal audit of 2026-10-24, A04)
+
+The departure to Keycloak arms the browser session with a one-time
+`state` and a PKCE verifier (S256), both time-stamped. The callback
+consumes them once: a `code` that comes back without the matching,
+unexpired `state` is not exchanged at all, and the exchange carries the
+verifier. The access token is then verified against a fixed algorithm
+list (`KEYCLOAK_JWT_ALGORITHMS`, `RS256` by default) and the realm's
+issuer (`KEYCLOAK_ISSUER`, else `<server>/realms/<realm>`) — never
+against the algorithm announced in the token's own header. The direct
+LDAP login stays available: Keycloak is never the only door.

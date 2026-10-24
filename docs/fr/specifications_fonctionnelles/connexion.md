@@ -55,3 +55,16 @@ lit `isActive` dans l'annuaire à chaque rafraîchissement, le refus ne
 dépend donc pas du cache ZODB ; et la page d'accueil ne tient une session
 pour authentifiée que si la vue de connexion a posé le drapeau et la
 charge utilisateur — une clé `user` orpheline ne réarme plus une session.
+
+## Aller-retour SSO (audit transversal du 24 octobre 2026, A04)
+
+Le départ vers Keycloak arme la session du navigateur avec un `state` à
+usage unique et un vérificateur PKCE (S256), tous deux horodatés. Le
+retour les consomme une fois : un `code` revenu sans le `state`
+correspondant et non expiré n'est pas échangé du tout, et l'échange
+porte le vérificateur. Le jeton d'accès est ensuite vérifié contre une
+liste d'algorithmes fixe (`KEYCLOAK_JWT_ALGORITHMS`, `RS256` par défaut)
+et l'émetteur du royaume (`KEYCLOAK_ISSUER`, sinon
+`<serveur>/realms/<royaume>`) — jamais contre l'algorithme annoncé dans
+l'en-tête du jeton. La connexion LDAP directe reste disponible :
+Keycloak n'est jamais la seule porte.
