@@ -33,6 +33,18 @@ Actual exposure: `views/sso_login.py` calls `jwt.decode` with signature verifica
 - setuptools 80.10.2 / PYSEC-2026-3447: still blocked by deform 3.0.1 and pyramid 2.1 (§2.2 of the 0113 file), ignore kept.
 - The Docker images vendor certifi through the runtime lock: rebuild `alirpunkto-pyramid` on kuneagi02 at deployment (the certifi advisory asks for it explicitly).
 
+## 5. Follow-up of 24 October — train 0118
+
+The `quality` workflow went red again on `34a224f7` and `38dedcf7`: two new advisories published after the 0116 locks were computed.
+
+| Package | Pin | Advisory | Fix | Decision |
+|---|---|---|---|---|
+| filelock | 3.32.6 (quality lock only, via cachecontrol under pip-audit) | CVE-2026-112907 / 112913 / 112940 (SQLite-backed and soft locks abused by another local account) | 4.2.1 | **4.2.4** (19/10), `pip-compile --upgrade-package filelock` on the quality lock alone; `>= 4.2.1` floor in `tests/test_october_2026_cve_floors.py` |
+| setuptools | 80.10.2 | GHSA-xmj3-9gf7-h52w (installation path `Wheel.install_as_egg`, Windows, hostile wheel's `namespace_packages.txt`) | 84.1.0 | **dated ignore** in `quality.yml`, same chain and same class as PYSEC-2026-3447: deform 3.0.1 (`setuptools<81`) and pyramid 2.1 (`<82`) are still the latest PyPI releases on 24/10; both ignores lift together |
+
+`AGENTS.md` quotes the new command verbatim (`tests/test_agent_harness.py` requires it) and a test checks that each ignore carries its review date.
+
 ## Log
 
 - 2026-10-23: diagnosis of the two red runs, three pins raised, lock test, filing of this note.
+- 2026-10-24: follow-up (§5) — filelock raised in the quality lock, second dated setuptools ignore, train 0118.

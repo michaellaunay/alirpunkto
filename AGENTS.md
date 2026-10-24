@@ -61,7 +61,7 @@ blocking:
 ```
 ruff check alirpunkto tests tools docker/apply_server_overrides.py docker/generate_ldif.py
 bandit -r alirpunkto tools -ll -q
-pip-audit --no-deps --ignore-vuln PYSEC-2026-3447 -r requirements.lock -r requirements-test.lock -r requirements-quality.lock
+pip-audit --no-deps --ignore-vuln PYSEC-2026-3447 --ignore-vuln GHSA-xmj3-9gf7-h52w -r requirements.lock -r requirements-test.lock -r requirements-quality.lock
 ```
 
 `tests/test_agent_harness.py` checks this section against the

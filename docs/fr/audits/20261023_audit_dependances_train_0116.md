@@ -33,6 +33,18 @@ Exposition réelle : `views/sso_login.py` appelle `jwt.decode` avec vérificatio
 - setuptools 80.10.2 / PYSEC-2026-3447 : toujours bloqué par deform 3.0.1 et pyramid 2.1 (§2.2 du dossier 0113), ignore conservé.
 - Les images Docker embarquent certifi via le verrou runtime : reconstruire `alirpunkto-pyramid` sur kuneagi02 au déploiement (l'avis certifi le demande explicitement).
 
+## 5. Suivi du 24 octobre — train 0118
+
+Le workflow `quality` est retombé au rouge sur `34a224f7` et `38dedcf7` : deux nouveaux avis publiés après le calcul des verrous du 0116.
+
+| Paquet | Épingle | Avis | Correctif | Décision |
+|---|---|---|---|---|
+| filelock | 3.32.6 (verrou qualité seul, via cachecontrol sous pip-audit) | CVE-2026-112907 / 112913 / 112940 (verrous SQLite et verrous souples détournables par un autre compte local) | 4.2.1 | **4.2.4** (19/10), `pip-compile --upgrade-package filelock` sur le seul verrou qualité ; plancher `>= 4.2.1` dans `tests/test_october_2026_cve_floors.py` |
+| setuptools | 80.10.2 | GHSA-xmj3-9gf7-h52w (chemin d'installation `Wheel.install_as_egg`, Windows, `namespace_packages.txt` d'une wheel hostile) | 84.1.0 | **ignore daté** dans `quality.yml`, même chaîne et même classe que PYSEC-2026-3447 : deform 3.0.1 (`setuptools<81`) et pyramid 2.1 (`<82`) sont toujours les dernières versions sur PyPI au 24/10 ; les deux ignores se lèveront ensemble |
+
+`AGENTS.md` cite la nouvelle commande verbatim (`tests/test_agent_harness.py` l'exige) et un test vérifie que chaque ignore porte sa date de revue.
+
 ## Journal
 
 - 2026-10-23 : diagnostic des deux runs rouges, relevé des trois épingles, test de verrouillage, versement de cette note.
+- 2026-10-24 : suivi (§5) — filelock relevé dans le verrou qualité, second ignore setuptools daté, train 0118.

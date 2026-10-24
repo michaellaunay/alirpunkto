@@ -1,4 +1,4 @@
-"""October 2026 advisories — pyjwt, urllib3 and certifi floors (0116).
+"""October 2026 advisories — pyjwt, urllib3, certifi (0116), filelock (0118).
 
 The quality CI went red on 20 October 2026 on ``pip-audit`` alone, for
 advisories published after the September train (0113) had computed the
@@ -71,11 +71,36 @@ def test_the_compromised_emsign_root_is_out_of_the_bundle():
 
 
 # ------------------------------ the locks --------------------------------- #
-@pytest.mark.parametrize("lock", LOCKS)
-@pytest.mark.parametrize("package", sorted(FLOORS))
-def test_the_lock_carries_the_advisory_floor(lock, package):
+def _pinned(lock, package):
     text = open(os.path.join(ROOT, lock), encoding="utf-8").read()
     match = re.search(rf"^{package}==([\d.]+)", text, re.M)
     assert match, (lock, package)
-    pinned = tuple(int(part) for part in match.group(1).split("."))
-    assert pinned >= FLOORS[package], (lock, package, match.group(1))
+    return tuple(int(part) for part in match.group(1).split("."))
+
+
+@pytest.mark.parametrize("lock", LOCKS)
+@pytest.mark.parametrize("package", sorted(FLOORS))
+def test_the_lock_carries_the_advisory_floor(lock, package):
+    pinned = _pinned(lock, package)
+    assert pinned >= FLOORS[package], (lock, package, pinned)
+
+
+def test_the_quality_lock_carries_the_filelock_floor():
+    """Train 0118: filelock 3.32.6 — CVE-2026-112907/112913/112940
+    (SQLite-backed and soft locks abused by another local account),
+    fixed in 4.2.1. Only the quality lane carries it (via
+    cachecontrol, under pip-audit)."""
+    assert _pinned("requirements-quality.lock", "filelock") >= (4, 2, 1)
+
+
+def test_the_setuptools_ignores_are_both_dated_in_the_workflow():
+    """The two accepted setuptools advisories share one blocker (deform
+    3.0.1 / pyramid 2.1 pin setuptools below the fix) and one class
+    (installation paths, never runtime); each carries its review date
+    so the next reader knows when to look again."""
+    workflow = open(os.path.join(ROOT, ".github", "workflows", "quality.yml"),
+                    encoding="utf-8").read()
+    for advisory, reviewed in (("PYSEC-2026-3447", "2026-09-12"),
+                               ("GHSA-xmj3-9gf7-h52w", "2026-10-24")):
+        assert f"--ignore-vuln {advisory}" in workflow, advisory
+        assert f"Reviewed {reviewed}" in workflow, advisory

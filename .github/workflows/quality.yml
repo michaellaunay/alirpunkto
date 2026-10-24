@@ -46,10 +46,16 @@ jobs:
         # setuptools<81, pyramid 2.1 pins <82, both import pkg_resources
         # at runtime; the fix is 83.0.0. Next review: deform 3.1 or
         # pyramid 2.2, whichever ships first.
+        # GHSA-xmj3-9gf7-h52w (setuptools, fix 84.1.0): same chain, same
+        # class — the legacy egg-install path (Wheel.install_as_egg) on
+        # Windows, never exercised at runtime nor in the Linux images.
+        # Reviewed 2026-10-24 (train 0118): deform 3.0.1 and pyramid 2.1
+        # are still the latest releases; both ignores lift together.
         # Fourth audit pass (P1): audit all three hashed locks — the
         # runtime lock is what ships; the other two are what the CI runs.
         run: >-
           pip-audit --no-deps --ignore-vuln PYSEC-2026-3447
+          --ignore-vuln GHSA-xmj3-9gf7-h52w
           -r requirements.lock
           -r requirements-test.lock
           -r requirements-quality.lock
