@@ -7,6 +7,12 @@ the script's POST on the profile form wrote nothing and a Cooperator who
 had just paid kept losing their rights. ``/update_contribution`` is the
 dedicated write path: administrator session, CSRF, the two fields of
 #75 and nothing else, JSON in and out.
+
+External audit of 2026-10-24 (train 0117): the answer now tells the
+three outcomes apart — facts recorded, groups converged, SSO told — and
+is ``partial`` when the last two lag; ``groups`` is ``null`` when the
+directory could not be read back; the script checks what comes back and
+treats ``0`` shares as a value and "nothing to send" as an error.
 """
 from __future__ import annotations
 
@@ -24,6 +30,9 @@ from alirpunkto.models.member import MemberDatas, MemberStates, MemberTypes
 from alirpunkto.views import update_contribution as uc
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+ALL_GREEN = {'status': 'success', 'groups_sync': 'success',
+             'keycloak_sync': 'success'}
 
 
 class _Session(dict):
@@ -56,14 +65,18 @@ def _cooperator(**data):
 
 
 def _call(request, *, accessor=_admin(), target=None, ldap=None,
-          groups=('communityMembersGroup', 'cooperatorsGroup')):
-    ldap = ldap if ldap is not None else MagicMock(
-        return_value={'status': 'success'})
+          groups=('communityMembersGroup', 'cooperatorsGroup'),
+          repropagate=None):
+    ldap = ldap if ldap is not None else MagicMock(return_value=dict(ALL_GREEN))
+    repropagate = repropagate if repropagate is not None else MagicMock(
+        return_value={'groups_sync': 'success', 'keycloak_sync': 'success'})
+    read = MagicMock(return_value=set(groups)) if groups is not None \
+        else MagicMock(side_effect=OSError("directory down"))
     with patch.object(uc, 'get_member_by_oid', return_value=accessor), \
          patch.object(uc, 'update_member_from_ldap', return_value=target), \
          patch.object(uc, 'update_ldap_member', ldap), \
-         patch('alirpunkto.dynamic_groups.get_member_groups',
-               return_value=set(groups)):
+         patch.object(uc, 'propagate_member_change', repropagate), \
+         patch('alirpunkto.dynamic_groups.read_member_groups', read):
         return uc.update_contribution(request), request.response.status_code, ldap
 
 
@@ -151,6 +164,15 @@ def test_the_payment_updates_both_facts_and_answers_the_new_groups():
     assert target.member_state == MemberStates.DATA_MODIFIED
 
 
+def test_zero_shares_is_a_value_the_endpoint_records():
+    target = _cooperator(number_shares_owned=3)
+    body, status, ldap = _call(_request({'oid': 'coop-1',
+                                         'number_shares_owned': '0'}),
+                               target=target)
+    assert status == 200 and body['number_shares_owned'] == 0
+    assert ldap.call_args.kwargs['fields_to_update'] == ['number_shares_owned']
+
+
 def test_only_the_changed_fact_is_written():
     target = _cooperator(number_shares_owned=1)
     body, status, ldap = _call(_request({
@@ -170,6 +192,7 @@ def test_an_unchanged_payload_writes_nothing_but_still_answers():
     assert status == 200 and body['updated_fields'] == []
     ldap.assert_not_called()
     assert target.member_state == MemberStates.REGISTRED
+    assert body['financial_update'] == 'unchanged'
 
 
 def test_a_failed_directory_write_is_reported():
@@ -182,9 +205,103 @@ def test_a_failed_directory_write_is_reported():
     assert target.member_state == MemberStates.REGISTRED
 
 
-def test_the_directory_write_triggers_the_group_move_and_keycloak():
-    """End to end through the real ``update_ldap_member``: the write,
-    then the group synchroniser, then the Keycloak propagation."""
+# ------------------- the three outcomes (audit 2026-10-24, A2) ------------ #
+def test_a_full_success_names_its_three_steps():
+    body, status, _ = _call(_request({'oid': 'coop-1',
+                                      'number_shares_owned': '2'}),
+                            target=_cooperator())
+    assert status == 200
+    assert (body['status'], body['financial_update'], body['groups_sync'],
+            body['keycloak_sync']) == ('success', 'success', 'success',
+                                       'success')
+
+
+@pytest.mark.parametrize("lagging", ['groups_sync', 'keycloak_sync'])
+def test_a_lagging_propagation_is_a_partial_answer_not_a_success(lagging):
+    """The facts ARE in the directory (HTTP 200, member DATA_MODIFIED),
+    but a client testing for ``success`` must fail loudly and retry."""
+    result = dict(ALL_GREEN, **{lagging: 'error'})
+    target = _cooperator()
+    body, status, _ = _call(_request({'oid': 'coop-1',
+                                      'number_shares_owned': '2'}),
+                            target=target,
+                            ldap=MagicMock(return_value=result))
+    assert status == 200
+    assert body['status'] == 'partial'
+    assert body[lagging] == 'error'
+    assert body['financial_update'] == 'success'
+    assert body['number_shares_owned'] == 2
+    assert target.member_state == MemberStates.DATA_MODIFIED
+
+
+def test_a_legacy_write_result_without_sub_statuses_reads_as_partial():
+    """Defensive: a ``{'status': 'success'}`` with no propagation report
+    must not be promoted to a full success."""
+    body, status, _ = _call(_request({'oid': 'coop-1',
+                                      'number_shares_owned': '2'}),
+                            target=_cooperator(),
+                            ldap=MagicMock(return_value={'status': 'success'}))
+    assert (status, body['status']) == (200, 'partial')
+
+
+def test_an_unreadable_directory_answers_null_groups_not_an_empty_list():
+    body, status, _ = _call(_request({'oid': 'coop-1',
+                                      'number_shares_owned': '2'}),
+                            target=_cooperator(), groups=None)
+    assert status == 200
+    assert body['groups'] is None
+    assert body['status'] == 'partial'
+
+
+def test_a_retry_with_unchanged_facts_re_propagates_so_it_can_repair():
+    """After a partial answer the shop runs the same command again: the
+    facts are already there, so the groups and Keycloak must be driven
+    again — otherwise the retry could never converge."""
+    repropagate = MagicMock(return_value={'groups_sync': 'success',
+                                          'keycloak_sync': 'success'})
+    target = _cooperator(number_shares_owned=1)
+    body, status, ldap = _call(_request({'oid': 'coop-1',
+                                         'number_shares_owned': '1'}),
+                               target=target, repropagate=repropagate)
+    ldap.assert_not_called()
+    repropagate.assert_called_once()
+    assert repropagate.call_args.args[1] == 'coop-1'
+    assert (status, body['status'], body['financial_update']) == (
+        200, 'success', 'unchanged')
+
+
+def test_a_retry_whose_propagation_still_fails_stays_partial():
+    repropagate = MagicMock(return_value={'groups_sync': 'error',
+                                          'keycloak_sync': 'success'})
+    body, status, _ = _call(_request({'oid': 'coop-1',
+                                      'number_shares_owned': '1'}),
+                            target=_cooperator(number_shares_owned=1),
+                            repropagate=repropagate)
+    assert (status, body['status'], body['groups_sync']) == (
+        200, 'partial', 'error')
+
+
+def test_propagate_member_change_reports_each_step():
+    from alirpunkto import utils
+    cases = [
+        ({'cooperatorsGroup'}, True, ('success', 'success')),
+        (None, True, ('error', 'success')),
+        ({'cooperatorsGroup'}, False, ('success', 'error')),
+        (None, False, ('error', 'error')),
+    ]
+    for target, propagated, expected in cases:
+        with patch('alirpunkto.dynamic_groups.sync_member_groups',
+                   return_value=target), \
+             patch.object(utils, 'notify_keycloak_of_directory_change',
+                          return_value=propagated):
+            report = utils.propagate_member_change(None, 'coop-1', 'why')
+        assert (report['groups_sync'], report['keycloak_sync']) == expected
+
+
+def test_update_ldap_member_reports_the_propagation_it_triggers():
+    """Through the real ``update_ldap_member``: the write, then the group
+    synchroniser, then the Keycloak propagation — and their outcome in
+    the returned dict."""
     from alirpunkto import utils
     from contextlib import contextmanager
 
@@ -197,8 +314,10 @@ def test_the_directory_write_triggers_the_group_move_and_keycloak():
     target = _cooperator()
     with patch.object(utils, 'get_ldap_connection', connection), \
          patch.object(utils, 'get_secret', lambda *_: 's'), \
-         patch('alirpunkto.dynamic_groups.sync_member_groups') as sync, \
-         patch.object(utils, 'notify_keycloak_of_directory_change') as notify:
+         patch('alirpunkto.dynamic_groups.sync_member_groups',
+               return_value=None) as sync, \
+         patch.object(utils, 'notify_keycloak_of_directory_change',
+                      return_value=True) as notify:
         body, status, _ = _call(_request({
             'oid': 'coop-1',
             'date_end_validity_yearly_contribution': '2027-06-30'}),
@@ -207,6 +326,8 @@ def test_the_directory_write_triggers_the_group_move_and_keycloak():
     sync.assert_called_once()
     assert sync.call_args.args[1] == 'coop-1'
     notify.assert_called_once()
+    assert (body['status'], body['groups_sync'], body['keycloak_sync']) == (
+        'partial', 'error', 'success')
 
 
 # ------------------------------- the route -------------------------------- #
@@ -234,15 +355,25 @@ def _load_script():
     return module
 
 
+def _answer(status_code=200, **body):
+    answer = MagicMock(status_code=status_code)
+    answer.json.return_value = body
+    return answer
+
+
+def _success(oid='coop-1', shares=1, validity='2027-06-30', **extra):
+    body = {'status': 'success', 'oid': oid, 'number_shares_owned': shares,
+            'date_end_validity_yearly_contribution': validity,
+            'financial_update': 'success', 'groups_sync': 'success',
+            'keycloak_sync': 'success', 'groups': ['cooperatorsGroup']}
+    body.update(extra)
+    return body
+
+
 def test_the_script_posts_to_the_dedicated_endpoint_with_the_csrf_token():
     script = _load_script()
     session = MagicMock()
-    answer = MagicMock(status_code=200)
-    answer.json.return_value = {'status': 'success', 'number_shares_owned': 1,
-                                'date_end_validity_yearly_contribution':
-                                    '2027-06-30',
-                                'groups': ['cooperatorsGroup']}
-    session.post.return_value = answer
+    session.post.return_value = _answer(**_success())
     script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
     url, = session.post.call_args.args
     data = session.post.call_args.kwargs['data']
@@ -250,25 +381,133 @@ def test_the_script_posts_to_the_dedicated_endpoint_with_the_csrf_token():
     assert data == {'oid': 'coop-1', 'csrf_token': 'tok',
                     'number_shares_owned': '1',
                     'date_end_validity_yearly_contribution': '2027-06-30'}
+    # The CSRF guard's origin check and a bounded wait (audit A4).
+    headers = session.post.call_args.kwargs['headers']
+    assert headers['Origin'] == 'https://alirpunkto.cosmopolitical.coop'
+    assert headers['Referer'].startswith(headers['Origin'])
+    assert session.post.call_args.kwargs['timeout'] == script.TIMEOUT
 
 
 def test_the_script_raises_on_a_refusal_instead_of_printing_a_warning():
     script = _load_script()
     session = MagicMock()
-    answer = MagicMock(status_code=403)
-    answer.json.return_value = {'status': 'error',
-                                'error': 'administrator_required'}
-    session.post.return_value = answer
+    session.post.return_value = _answer(
+        403, status='error', error='administrator_required')
     with pytest.raises(RuntimeError, match='administrator_required'):
         script.modify_member(session, 'coop-1', '1', None, 'tok')
 
 
-def test_the_script_login_reads_the_csrf_token_from_the_directory_page():
+def test_the_script_sends_zero_shares_and_refuses_an_empty_request():
+    """Audit A1: ``0`` is a value; no fact at all is an error, never a
+    silent exit 0."""
     script = _load_script()
     session = MagicMock()
-    page = MagicMock(text='<input name="csrf_token" value="abc123" />')
-    session.get.return_value = page
-    assert script.login(session, 'admin', 'pw') == 'abc123'
-    session.get.return_value = MagicMock(text='<html>home</html>')
+    session.post.return_value = _answer(**_success(shares=0, validity=None))
+    script.modify_member(session, 'coop-1', '0', None, 'tok')
+    assert session.post.call_args.kwargs['data']['number_shares_owned'] == '0'
+    for shares, validity in ((None, None), ('', ''), ('  ', None)):
+        with pytest.raises(ValueError, match='At least one financial fact'):
+            script.check_requested_changes(shares, validity)
+    session.post.reset_mock()
     with pytest.raises(ValueError):
+        script.modify_member(session, 'coop-1', None, None, 'tok')
+    session.post.assert_not_called()
+
+
+def test_the_script_checks_the_member_and_the_values_that_come_back():
+    """Audit A3: a 200/success for another member, or with other values,
+    is not a confirmation."""
+    script = _load_script()
+    session = MagicMock()
+    session.post.return_value = _answer(**_success(oid='someone-else'))
+    with pytest.raises(RuntimeError, match='someone-else'):
+        script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
+    session.post.return_value = _answer(**_success(shares=3))
+    with pytest.raises(RuntimeError, match='number_shares_owned'):
+        script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
+    session.post.return_value = _answer(**_success(validity='2026-06-30'))
+    with pytest.raises(RuntimeError,
+                       match='date_end_validity_yearly_contribution'):
+        script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
+    # Only the facts actually sent are compared.
+    session.post.return_value = _answer(**_success(shares=7))
+    assert script.modify_member(session, 'coop-1', None, '2027-06-30', 'tok')
+
+
+def test_the_script_treats_a_partial_answer_as_a_failure_to_retry():
+    """Audit A2: facts recorded but rights not restored is exit 1, with
+    the two lagging steps named."""
+    script = _load_script()
+    session = MagicMock()
+    session.post.return_value = _answer(**_success(
+        status='partial', groups_sync='error', keycloak_sync='success',
+        groups=None))
+    with pytest.raises(RuntimeError, match='groups_sync=error'):
+        script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
+
+
+def test_the_script_refuses_a_non_json_or_non_object_answer():
+    script = _load_script()
+    session = MagicMock()
+    bad = MagicMock(status_code=200)
+    bad.json.side_effect = ValueError
+    session.post.return_value = bad
+    with pytest.raises(RuntimeError, match='did not answer JSON'):
+        script.modify_member(session, 'coop-1', '1', None, 'tok')
+    session.post.return_value = MagicMock(
+        status_code=200, json=MagicMock(return_value=['not', 'an', 'object']))
+    with pytest.raises(RuntimeError, match='not an object'):
+        script.modify_member(session, 'coop-1', '1', None, 'tok')
+
+
+def test_the_script_login_posts_the_login_page_token_with_the_origin():
+    """The CSRF guard refuses a bare login POST: the script reads the
+    login page first, posts its token with the Origin header, then reads
+    the session token from the member directory page."""
+    script = _load_script()
+    session = MagicMock()
+    login_page = MagicMock(status_code=200,
+                           text='<input name="csrf_token" value="login-tok" />')
+    directory = MagicMock(status_code=200,
+                          text='<input name="csrf_token" value="abc123" />')
+    session.get.side_effect = [login_page, directory]
+    session.post.return_value = MagicMock(status_code=302)
+    assert script.login(session, 'admin', 'pw') == 'abc123'
+    data = session.post.call_args.kwargs['data']
+    assert data['csrf_token'] == 'login-tok'
+    assert data['form.submitted'] == 'True'
+    assert session.post.call_args.kwargs['headers']['Origin'] == \
+        'https://alirpunkto.cosmopolitical.coop'
+    assert session.get.call_args_list[0].args[0].endswith('/login')
+    assert session.get.call_args_list[1].args[0].endswith('/modify_member')
+
+
+def test_the_script_login_tells_a_csrf_refusal_from_bad_credentials():
+    """Audit A7: a 400 on the login POST is the guard, not the password."""
+    script = _load_script()
+    session = MagicMock()
+    login_page = MagicMock(status_code=200,
+                           text='<input name="csrf_token" value="t" />')
+    session.get.side_effect = [login_page, MagicMock(text='<html>home</html>')]
+    session.post.return_value = MagicMock(status_code=400)
+    with pytest.raises(RuntimeError, match='CSRF token or Origin'):
         script.login(session, 'admin', 'pw')
+    session.get.side_effect = [login_page, MagicMock(text='<html>home</html>')]
+    session.post.return_value = MagicMock(status_code=302)
+    with pytest.raises(ValueError, match='invalid credentials'):
+        script.login(session, 'admin', 'pw')
+    session.get.side_effect = [MagicMock(status_code=404, text='nope')]
+    with pytest.raises(RuntimeError, match='no CSRF token'):
+        script.login(session, 'admin', 'pw')
+
+
+def test_the_script_base_url_must_be_the_portal_origin():
+    script = _load_script()
+    assert script.portal_origin('https://access.example.coop/') == \
+        'https://access.example.coop'
+    assert script.portal_origin('http://localhost:6543') == \
+        'http://localhost:6543'
+    for bad in ('https://access.example.coop/alirpunkto', 'access.example.coop',
+                'ftp://x', 'https://h/?a=1'):
+        with pytest.raises(ValueError):
+            script.portal_origin(bad)

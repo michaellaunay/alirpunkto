@@ -12,11 +12,14 @@ losing their rights (#267).
 This view is the dedicated write path the script now uses. It is an API,
 not a page: ``POST`` only, JSON in and out, the session of a logged-in
 administrator and the CSRF token of that session required (Pyramid's
-global ``require_csrf``). It accepts exactly the two facts of #75 — any
-other profile field stays read-only, as #149 wants — writes them to the
-directory, which moves the member between the Dynamic Groups of #148 and
-propagates the change to Keycloak (#269), and answers with the member's
-new groups so the caller can see the rights restored.
+global ``require_csrf`` — over HTTPS that also means an ``Origin`` or
+``Referer`` header naming the portal). It accepts exactly the two facts
+of #75 — any other profile field stays read-only, as #149 wants — writes
+them to the directory, which moves the member between the Dynamic Groups
+of #148 and propagates the change to Keycloak (#269), and answers with
+the outcome of each of those three steps and the member's groups, so the
+caller can tell "facts recorded" from "rights restored" (external audit
+of 2026-10-24, A2).
 """
 from __future__ import annotations
 
@@ -33,6 +36,7 @@ from alirpunkto.constants_and_globals import (
 from alirpunkto.models.member import MemberStates, MemberTypes
 from alirpunkto.utils import (
     get_member_by_oid,
+    propagate_member_change,
     update_ldap_member,
     update_member_from_ldap,
 )
@@ -149,14 +153,51 @@ def update_contribution(request):
         member.member_state = MemberStates.DATA_MODIFIED
         log.info(f"update_contribution: {oid} updated by {accessor.oid}: "
                  f"{', '.join(fields_to_update)}")
+        financial_update = 'success'
+        propagation = {key: result.get(key, 'error')
+                       for key in ('groups_sync', 'keycloak_sync')}
+    else:
+        # Nothing to write — but the caller may be RETRYING after a
+        # partial answer: converge the groups and tell Keycloak again,
+        # so a repeat of the same payment can repair the rights.
+        financial_update = 'unchanged'
+        propagation = propagate_member_change(
+            request, oid, f"re-propagation of {oid} (unchanged facts)")
 
-    from alirpunkto.dynamic_groups import get_member_groups
+    return _answer(request, oid, member, fields_to_update, financial_update,
+                   propagation)
+
+
+def _answer(request, oid, member, fields_to_update, financial_update,
+            propagation):
+    """The three outcomes a payment has (external audit of 2026-10-24,
+    A2): the facts in the directory, the Dynamic Groups, the SSO. The
+    overall ``status`` is ``'success'`` only when all three are; it is
+    ``'partial'`` — still HTTP 200, the facts ARE recorded — when the
+    groups or Keycloak lag behind, so a client that only tests for
+    ``'success'`` fails loudly and retries. ``groups`` is ``null``, not
+    ``[]``, when the directory could not be read back.
+    """
+    from alirpunkto.dynamic_groups import read_member_groups
+    try:
+        groups = sorted(read_member_groups(oid))
+    except Exception as exc:
+        log.error(f"update_contribution: cannot read the groups of {oid}: "
+                  f"{exc}")
+        groups = None
+    partial = 'error' in propagation.values() or groups is None
+    if partial:
+        log.warning(f"update_contribution: {oid} partially propagated: "
+                    f"{propagation}, groups={groups}")
     validity = member.data.date_end_validity_yearly_contribution
     return {
-        'status': 'success',
+        'status': 'partial' if partial else 'success',
         'oid': oid,
         'updated_fields': fields_to_update,
+        'financial_update': financial_update,
+        'groups_sync': propagation['groups_sync'],
+        'keycloak_sync': propagation['keycloak_sync'],
         SHARES_FIELD: member.data.number_shares_owned,
         VALIDITY_FIELD: validity.strftime(DATE_FORMAT) if validity else None,
-        'groups': sorted(get_member_groups(oid)),
+        'groups': groups,
     }

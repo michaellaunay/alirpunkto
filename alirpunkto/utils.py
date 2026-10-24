@@ -1176,6 +1176,24 @@ def notify_keycloak_of_directory_change(reason: str) -> bool:
         return False
 
 
+def propagate_member_change(request, member_oid: str, reason: str) -> dict:
+    """Converge the member's Dynamic Groups (#148) and tell Keycloak
+    (#269), and SAY how each step went: ``groups_sync`` and
+    ``keycloak_sync`` are ``'success'`` or ``'error'``. Idempotent, so a
+    caller may run it again to repair an earlier partial outcome. The
+    group synchroniser answers None both on failure and for member
+    types outside the Dynamic Groups (administrators); callers that
+    only deal with Cooperators may read None as an error.
+    """
+    from alirpunkto.dynamic_groups import sync_member_groups
+    target = sync_member_groups(request, member_oid)
+    propagated = notify_keycloak_of_directory_change(reason)
+    return {
+        'groups_sync': 'success' if target is not None else 'error',
+        'keycloak_sync': 'success' if propagated else 'error',
+    }
+
+
 def purge_unsubscribed_members(request, now=None, members=None):
     """Purge unsubscribed members whose Quarantine period has expired.
 
@@ -1702,15 +1720,18 @@ def update_ldap_member(
 
         if success:
             # Shares or yearly-contribution changes move the member between
-            # the dynamic groups of issue #148.
-            from alirpunkto.dynamic_groups import sync_member_groups
-            sync_member_groups(request, member.oid)
-            # Issues #267/#269: the new status reaches the SSO side at
-            # once — a renewed contribution restores the Cooperator's
-            # rights everywhere, immediately.
-            notify_keycloak_of_directory_change(
+            # the dynamic groups of issue #148, and the new status reaches
+            # the SSO side at once (issues #267/#269). Both steps stay best
+            # effort — the directory write is not undone when they fail —
+            # but their outcome is reported (external audit of
+            # 2026-10-24, A2): a caller such as /update_contribution must
+            # be able to tell "facts recorded" from "rights restored".
+            propagation = propagate_member_change(
+                request, member.oid,
                 f"update of {member.oid} ({', '.join(fields_to_update)})")
-            return {'status': 'success', 'message': _('member_update_successful')}
+            return {'status': 'success',
+                    'message': _('member_update_successful'),
+                    **propagation}
         else:
             log.error(f"Error while updating user {member.oid} in LDAP : {conn.result}")
             return {'status': 'error', 'message': _('member_update_failed')}

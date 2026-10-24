@@ -388,6 +388,15 @@ def get_member_groups(member_oid):
     return _current_groups(member_oid)
 
 
+def read_member_groups(member_oid):
+    """The same set, but a directory failure RAISES instead of answering
+    an empty set — for callers that must not mistake "could not read"
+    for "belongs to no group" (external audit of 2026-10-24, A2)."""
+    with get_ldap_connection(ldap_user=LDAP_USER,
+            ldap_password=get_secret(LDAP_PASSWORD)) as conn:
+        return _read_current_groups(conn, member_oid)
+
+
 def _current_groups(member_oid):
     try:
         with get_ldap_connection(ldap_user=LDAP_USER,
