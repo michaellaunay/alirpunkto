@@ -1051,7 +1051,7 @@ msgstr "Een beeld die je voorstelt (je avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Geef een beeld op die jou voorstelt als lid van de Gemeenschap. Om je te beschermen tegen eventuele represailles van je werkgever of klanten, raden we aan dat deze beeld het niet mogelijk maakt om je identiteit in het echte leven te achterhalen. Het moet dus in het algemeen geen foto van jezelf zijn (onthoud dat gezichtsherkenningssoftware massaal wordt gebruikt door zoekrobots). Het beeld mag alleen in JPEG-formaat zijn (extensie .JPG of .JPEG) en mag niet groter zijn dan 5 MB. \n"
+"Geef een beeld op die jou voorstelt als lid van de Gemeenschap. Om je te beschermen tegen eventuele represailles van je werkgever of klanten, raden we aan dat deze beeld het niet mogelijk maakt om je identiteit in het echte leven te achterhalen. Het moet dus in het algemeen geen foto van jezelf zijn (onthoud dat gezichtsherkenningssoftware massaal wordt gebruikt door zoekrobots). Het beeld mag alleen in JPEG-formaat zijn (extensie .JPG of .JPEG) en mag niet groter zijn dan 200 kB. \n"
 "  Wij geloven dat deze informatie nuttig is omdat een beeld het voor de andere leden van de Gemeenschap makkelijker maakt om je te herkennen. Soms zegt een beeld meer dan een lange speech. Met deze afbeelding geef je veel over jezelf weer, in een universele taal. Haal er het beste uit!"
 
 msgid "candidature_mixed"
@@ -1408,15 +1408,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

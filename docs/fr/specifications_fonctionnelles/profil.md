@@ -18,7 +18,7 @@ vierge de toute saisie (aucun accès à l'annuaire avant la redirection).
 
 | Élément | Tout membre | Coopérateur ou assimilé |
 |---|---|---|
-| Texte de présentation, avatar, courriel, langues | voir + modifier | voir + modifier |
+| Texte de présentation, avatar (JPEG, 200 ko au plus — #271), courriel, langues | voir + modifier | voir + modifier |
 | IBAN | — | voir + modifier |
 | Pseudonyme, numéro d'utilisateur·rice, groupes | voir | voir |
 | Identité (prénoms, noms, naissance), nationalité | — | voir |

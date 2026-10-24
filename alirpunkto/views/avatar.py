@@ -6,8 +6,10 @@ inetOrgPerson ``jpegPhoto`` attribute — never in ZODB, so the resignation
 purge erases it with the LDAP entry. The upload is checked three ways:
 the .jpg/.jpeg extension (with the exact error message the ticket
 specifies), the JPEG magic bytes (an extension alone proves nothing), and
-a size ceiling. Any logged-in member can see any member's avatar; only
-the owner can change or remove theirs.
+a size ceiling — 200 kB since issue #271: a larger jpegPhoto breaks the
+LDAP -> Keycloak user synchronisation and the SSO loses the directory.
+Any logged-in member can see any member's avatar; only the owner can
+change or remove theirs.
 """
 from __future__ import annotations
 

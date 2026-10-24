@@ -1053,7 +1053,7 @@ msgstr "Egy kép, amely Önt képviseli (az Ön avatárja)"
 
 msgid "avatar_description"
 msgstr ""
-"Kérjük, adjon meg egy képet, amely Önt képviseli a Közösség tagjaként. Azért, hogy megóvjuk Önt az esetleges megtorlásoktól a munkaadójától vagy ügyfeleitől, javasoljuk, hogy ez a kép ne lehetővé tegye, hogy visszakövessem az Ön valódi életbeli személyazonosságát. Általában tehát ne legyen önarckép (ne feledje, hogy az arcfelismerő szoftvert tömegesen használják keresőrobotok). A kép csak JPEG formátumú lehet (kiterjesztés: .JPG vagy .JPEG), és nem lehet nagyobb 5 MB-nál. \n"
+"Kérjük, adjon meg egy képet, amely Önt képviseli a Közösség tagjaként. Azért, hogy megóvjuk Önt az esetleges megtorlásoktól a munkaadójától vagy ügyfeleitől, javasoljuk, hogy ez a kép ne lehetővé tegye, hogy visszakövessem az Ön valódi életbeli személyazonosságát. Általában tehát ne legyen önarckép (ne feledje, hogy az arcfelismerő szoftvert tömegesen használják keresőrobotok). A kép csak JPEG formátumú lehet (kiterjesztés: .JPG vagy .JPEG), és nem lehet nagyobb 200 kB-nál. \n"
 "Úgy gondoljuk, hogy ez az információ hasznos, mert egy kép megkönnyíti a Közösség többi tagja számára, hogy felismerje Önt. Néha egy kép sokkal többet mond, mint egy hosszú beszéd. Ezzel a képpel sokat kifejez Önmagáról, egy univerzális nyelven. Használja ki ezt a lehetőséget!"
 
 msgid "candidature_mixed"
@@ -1397,15 +1397,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

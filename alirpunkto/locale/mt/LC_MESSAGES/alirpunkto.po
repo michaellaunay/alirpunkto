@@ -1083,7 +1083,7 @@ msgstr "Ritratt biex jirrappreżentak (avatar tiegħek)"
 
 msgid "avatar_description"
 msgstr ""
-"Jekk jogħġbok ipprovdi ritratt li jirrappreżentak bħala membru tal-Komunità. Għal skopijiet ta' protezzjoni minn kull ritorsjoni mill-impjegatur tiegħek jew mill-klijenti tiegħek, nirrakkomandaw li dak ir-ritratt ma jippermetti xejn biex jiddistinga l-identità tiegħek fil-ħajja reali. Għandu għalhekk, f'ġeneral, ma jkunx fotografija tiegħek innifsek (Ftakar li s-software ta' riconoxximent tal-wiċċ qed jintuża massivament mill robot ta' tfittxija). Ir-ritratt għandu jkun f'formatt JPEG biss (estensjoni .JPG jew .JPEG), u mhux akbar minn 5 MB. \n"
+"Jekk jogħġbok ipprovdi ritratt li jirrappreżentak bħala membru tal-Komunità. Għal skopijiet ta' protezzjoni minn kull ritorsjoni mill-impjegatur tiegħek jew mill-klijenti tiegħek, nirrakkomandaw li dak ir-ritratt ma jippermetti xejn biex jiddistinga l-identità tiegħek fil-ħajja reali. Għandu għalhekk, f'ġeneral, ma jkunx fotografija tiegħek innifsek (Ftakar li s-software ta' riconoxximent tal-wiċċ qed jintuża massivament mill robot ta' tfittxija). Ir-ritratt għandu jkun f'formatt JPEG biss (estensjoni .JPG jew .JPEG), u mhux akbar minn 200 kB. \n"
 " Aħna nemmnu li din l-informazzjoni hija utli għaliex ritratt jagħmel aktar faċli għall-membri l-oħra tal-Komunità biex jirrikonoxxu lilek. Kultant ritratt jitkellem ħafna iktar minn diskors twil. B'dan l-immaġini, qed tesprimi ħafna dwar lilek innifsek, f'lingwa universali. Agħmel l-aħjar minn dan!"
 
 msgid "candidature_mixed"
@@ -1430,15 +1430,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

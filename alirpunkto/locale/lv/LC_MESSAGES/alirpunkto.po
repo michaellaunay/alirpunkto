@@ -1048,7 +1048,7 @@ msgstr "Attēls, lai jūs pārstāvētu (jūsu avatars)"
 
 msgid "avatar_description"
 msgstr ""
-"Lūdzu, sniedziet attēlu, kas pārstāv jūs kā kopienas dalībnieku. Lai pasargātu jūs no kādām reprizālijām no jūsu darba devēja vai klientiem, mēs iesakām, lai šis attēls neļautu atpazīt jūsu identitāti reālajā dzīvē. Tāpēc parasti tam nevajadzētu būt pašbildēm (atcerieties, ka sejas atpazīšanas programmatūra tiek masveidā izmantota meklēšanas robotos). Attēlam vajadzētu būt tikai JPEG formātā (paplašinājums .JPG vai .JPEG) un ne lielākam par 5 MB. \n"
+"Lūdzu, sniedziet attēlu, kas pārstāv jūs kā kopienas dalībnieku. Lai pasargātu jūs no kādām reprizālijām no jūsu darba devēja vai klientiem, mēs iesakām, lai šis attēls neļautu atpazīt jūsu identitāti reālajā dzīvē. Tāpēc parasti tam nevajadzētu būt pašbildēm (atcerieties, ka sejas atpazīšanas programmatūra tiek masveidā izmantota meklēšanas robotos). Attēlam vajadzētu būt tikai JPEG formātā (paplašinājums .JPG vai .JPEG) un ne lielākam par 200 kB. \n"
 "Mēs uzskatām, ka šī informācija ir noderīga, jo attēls atvieglo citiem kopienas dalībniekiem jūs atpazīt. Dažreiz attēls runā daudz skaļāk nekā garš runas vārds. Ar šo attēlu jūs izsakāt daudz par sevi, universālā valodā. Izmantojiet to maksimāli!"
 
 msgid "candidature_mixed"
@@ -1392,15 +1392,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

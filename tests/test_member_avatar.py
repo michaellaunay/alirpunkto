@@ -140,8 +140,11 @@ def test_a_jpeg_extension_with_non_jpeg_content_is_refused(config):
 
 
 def test_an_oversized_avatar_is_refused(config):
+    """Issue #271: one byte over 200 kB is refused — a larger jpegPhoto
+    breaks the LDAP -> Keycloak synchronisation."""
     conn, _dn = _mock_member()
-    big = b'\xff\xd8\xff' + b'0' * (4096 * 1024)
+    big = b'\xff\xd8\xff' + b'0' * (200 * 1024 - 3 + 1)
+    assert len(big) == 200 * 1024 + 1
     post = {'avatar': _Upload('big.jpg', big), 'upload': '1'}
     request = _request(config, post=post)
     with patch.object(utils, 'get_ldap_connection', return_value=conn), \
@@ -149,6 +152,64 @@ def test_an_oversized_avatar_is_refused(config):
         avatar_upload(request)
     assert _flash_errors(request) == [_('avatar_too_large_error')]
     setter.assert_not_called()
+
+
+def test_an_avatar_of_exactly_200_kb_is_accepted(config):
+    conn, _dn = _mock_member()
+    exact = b'\xff\xd8\xff' + b'0' * (200 * 1024 - 3)
+    post = {'avatar': _Upload('ok.jpg', exact), 'upload': '1'}
+    request = _request(config, post=post)
+    with patch.object(utils, 'get_ldap_connection', return_value=conn), \
+         patch.object(avatar_module, 'set_member_avatar',
+                      return_value={'status': 'success'}) as setter:
+        avatar_upload(request)
+    assert not _flash_errors(request)
+    setter.assert_called_once()
+    assert len(setter.call_args.args[2]) == 200 * 1024
+
+
+def test_the_ceiling_is_200_kb_and_the_operator_can_only_lower_it():
+    """Issue #271: the limit is a property of the SSO synchronisation,
+    not a tuning knob — AVATAR_MAX_BYTES may lower it, never raise it."""
+    from alirpunkto import constants_and_globals as cg
+    assert cg.AVATAR_HARD_MAX_BYTES == 200 * 1024
+    assert cg.AVATAR_MAX_BYTES <= 200 * 1024
+    assert cg.avatar_ceiling(None) == 200 * 1024
+    assert cg.avatar_ceiling("") == 200 * 1024
+    assert cg.avatar_ceiling("garbage") == 200 * 1024
+    assert cg.avatar_ceiling("0") == 200 * 1024
+    assert cg.avatar_ceiling(str(4096 * 1024)) == 200 * 1024   # the old default
+    assert cg.avatar_ceiling(str(100 * 1024)) == 100 * 1024
+
+
+def test_the_catalogues_tell_members_the_200_kb_limit():
+    """The form hint, the refusal and the profile description all name
+    the figure of the ticket; the historical 5 MB is gone everywhere."""
+    import glob
+    import os
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    locale_dir = os.path.join(root, 'alirpunkto', 'locale')
+    catalogues = [os.path.join(locale_dir, 'alirpunkto.pot')] + glob.glob(
+        os.path.join(locale_dir, '*', 'LC_MESSAGES', 'alirpunkto.po'))
+    assert len(catalogues) >= 30
+    for path in catalogues:
+        text = open(path, encoding='utf-8').read()
+        for stale in ('5 MB', '5 Mo', '5 МБ'):
+            assert stale not in text, (path, stale)
+    en = open(os.path.join(locale_dir, 'en', 'LC_MESSAGES', 'alirpunkto.po'),
+              encoding='utf-8').read()
+    fr = open(os.path.join(locale_dir, 'fr', 'LC_MESSAGES', 'alirpunkto.po'),
+              encoding='utf-8').read()
+    assert 'not larger than 200 kB' in en
+    assert 'too large (200 kB maximum)' in en
+    assert ('msgid "avatar_format_description"\nmsgstr "Your avatar picture '
+            'must be in JPEG format only (extension .JPG or .JPEG) and no '
+            'larger than 200 kB."\n\n') in en
+    assert 'ne doit pas dépasser 200 ko' in fr
+    assert 'trop volumineuse (200 ko maximum)' in fr
+    assert ('msgid "avatar_format_description"\nmsgstr "Ton image d\'avatar '
+            'doit être au format JPEG uniquement (extension .JPG ou .JPEG) et '
+            'ne pas dépasser 200 ko."\n\n') in fr
 
 
 def test_the_upload_targets_only_the_session_owner(config):

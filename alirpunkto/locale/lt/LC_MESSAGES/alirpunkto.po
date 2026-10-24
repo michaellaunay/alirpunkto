@@ -1056,7 +1056,7 @@ msgstr "Jūsų atvaizdas (avataras)"
 
 msgid "avatar_description"
 msgstr ""
-"Prašome pateikti atvaizdą, atspindintį jus kaip bendruomenės narį. Siekdami apsaugoti jus nuo bet kokių atgarsių iš jūsų darbdavio ar klientų, rekomenduojame, kad šis atvaizdas nepateiktų galimybės atsekti jūsų tapatybę realiame gyvenime. Todėl jis paprastai neturėtų būti jūsų nuotrauka (atsiminkite, kad veido atpažinimo programinė įranga plačiai naudojama paieškos robotų). Atvaizdas turėtų būti tik JPEG formate (pratęsimas .JPG arba .JPEG) ir ne didesnis nei 5 MB. \n"
+"Prašome pateikti atvaizdą, atspindintį jus kaip bendruomenės narį. Siekdami apsaugoti jus nuo bet kokių atgarsių iš jūsų darbdavio ar klientų, rekomenduojame, kad šis atvaizdas nepateiktų galimybės atsekti jūsų tapatybę realiame gyvenime. Todėl jis paprastai neturėtų būti jūsų nuotrauka (atsiminkite, kad veido atpažinimo programinė įranga plačiai naudojama paieškos robotų). Atvaizdas turėtų būti tik JPEG formate (pratęsimas .JPG arba .JPEG) ir ne didesnis nei 200 kB. \n"
 "Mes manome, kad ši informacija yra naudinga, nes atvaizdas palengvina kitiems bendruomenės nariams jus atpažinti. Kartais atvaizdas kalba daug aiškiau nei ilgas kalbėjimas. Su šiuo atvaizdu jūs išreiškiate daug apie save visuotiniu kalba. Pasinaudokite ja geriausiai!"
 
 msgid "candidature_mixed"
@@ -1400,15 +1400,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

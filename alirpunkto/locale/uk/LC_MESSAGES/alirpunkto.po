@@ -1054,7 +1054,7 @@ msgstr "Зображення, щоб представляти вас (ваш а�
 
 msgid "avatar_description"
 msgstr ""
-"Будь ласка, надайте зображення, яке представляє вас як члена Спільноти. З метою захисту вас від будь-яких репресій з боку вашого роботодавця або клієнтів, ми рекомендуємо, щоб це зображення не дозволяло відстежити вашу ідентичність у реальному житті. Тому воно зазвичай не повинно бути фотографією вас (пам'ятайте, що програмне забезпечення для розпізнавання облич використовується масово пошуковими роботами). Зображення має бути у форматі JPEG (розширення .JPG або .JPEG) і не перевищувати 5 МБ. \n"
+"Будь ласка, надайте зображення, яке представляє вас як члена Спільноти. З метою захисту вас від будь-яких репресій з боку вашого роботодавця або клієнтів, ми рекомендуємо, щоб це зображення не дозволяло відстежити вашу ідентичність у реальному житті. Тому воно зазвичай не повинно бути фотографією вас (пам'ятайте, що програмне забезпечення для розпізнавання облич використовується масово пошуковими роботами). Зображення має бути у форматі JPEG (розширення .JPG або .JPEG) і не перевищувати 200 КБ. \n"
 "Ми вважаємо, що ця інформація корисна, оскільки зображення полегшує іншим членам Спільноти впізнавати вас. Іноді зображення говорить набагато голосніше, ніж довга промова. З цим зображенням ви виражаєте багато про себе, у універсальній мові. Використовуйте це на повну потужність!"
 
 msgid "candidature_mixed"
@@ -1398,15 +1398,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

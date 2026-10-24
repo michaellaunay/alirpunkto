@@ -18,7 +18,7 @@ of any input (no directory access before the redirect).
 
 | Element | Every member | Cooperator or assimilated |
 |---|---|---|
-| Presentation text, avatar, e-mail, languages | view + edit | view + edit |
+| Presentation text, avatar (JPEG, 200 kB at most — #271), e-mail, languages | view + edit | view + edit |
 | IBAN | — | view + edit |
 | Pseudonym, user number, groups | view | view |
 | Identity (given names, family names, birth), nationality | — | view |

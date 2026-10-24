@@ -1043,7 +1043,7 @@ msgstr "Slika koja vas predstavlja (vaš avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Molimo vas da dostavite sliku koja vas predstavlja kao člana zajednice. U svrhu zaštite od bilo kakvih posljedica od vašeg poslodavca ili klijenata, preporučujemo da ova slika ne omogućava traganje natrag do vaše stvarne identitete. Općenito ne bi trebala biti fotografija vas samih (zapamtite da se softver za prepoznavanje lica masovno koristi od strane pretraživača). Slika treba biti u JPEG formatu (ekstenzija .JPG ili .JPEG) i ne veća od 5 MB. \n"
+"Molimo vas da dostavite sliku koja vas predstavlja kao člana zajednice. U svrhu zaštite od bilo kakvih posljedica od vašeg poslodavca ili klijenata, preporučujemo da ova slika ne omogućava traganje natrag do vaše stvarne identitete. Općenito ne bi trebala biti fotografija vas samih (zapamtite da se softver za prepoznavanje lica masovno koristi od strane pretraživača). Slika treba biti u JPEG formatu (ekstenzija .JPG ili .JPEG) i ne veća od 200 kB. \n"
 "Vjerujemo da su ove informacije korisne jer slika olakšava drugim članovima zajednice da vas prepoznaju. Ponekad slika govori mnogo snažnije od dugačkog govora. S ovom slikom izražavate puno o sebi, na univerzalnom jeziku. Iskoristite to najbolje moguće!"
 
 msgid "candidature_mixed"
@@ -1386,15 +1386,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

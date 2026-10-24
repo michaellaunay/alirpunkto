@@ -1042,7 +1042,7 @@ msgstr "Pilt, mis esindab teid (teie avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Palun andke meile pilt, mis esindab teid kui kogukonna liiget. Et kaitsta teid võimalike tagajärgede eest teie tööandjalt või klientidelt, soovitame, et see pilt ei võimaldaks tuvastada teie identiteeti reaalses elus. Seega ei tohiks see üldjuhul olla teie enda photograph (meelespidamiseks, et näotuvastustarkvara kasutatakse massiliselt otsingurobotite poolt). Pilt peaks olema ainult JPEG formaadis (laiend .JPG või .JPEG) ja mitte suurem kui 5 MB. \n"
+"Palun andke meile pilt, mis esindab teid kui kogukonna liiget. Et kaitsta teid võimalike tagajärgede eest teie tööandjalt või klientidelt, soovitame, et see pilt ei võimaldaks tuvastada teie identiteeti reaalses elus. Seega ei tohiks see üldjuhul olla teie enda photograph (meelespidamiseks, et näotuvastustarkvara kasutatakse massiliselt otsingurobotite poolt). Pilt peaks olema ainult JPEG formaadis (laiend .JPG või .JPEG) ja mitte suurem kui 200 kB. \n"
 "Usume, et see teave on kasulik, kuna pilt lihtsustab teiste kogukonna liikmete teid tuvastada. Mõnikord räägib pilt palju valjemini kui pikk kõne. Selle pildiga väljendate te enda kohta palju, universaalses keeles. Kasutage seda maksimaalselt!"
 
 msgid "candidature_mixed"
@@ -1385,15 +1385,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

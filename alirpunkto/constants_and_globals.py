@@ -93,8 +93,28 @@ ORGANIZATION_DETAILS: Final = os.getenv("ORGANIZATION_DETAILS", "AlirPunkto is a
 # Quarantine period, a Quantitative Parameter Affecting Internal Processes
 # defined by §3.4 of the Cooperative's statutes, 180 days by default — and
 # how long the e-mailed confirmation link stays valid.
-#: Maximum size of the member avatar (issue #150) — jpegPhoto in LDAP.
-AVATAR_MAX_BYTES: Final = int(os.getenv("AVATAR_MAX_BYTES", str(4096 * 1024)))
+#: Hard ceiling of the member avatar (issue #271): above 200 kB the
+#: jpegPhoto breaks the LDAP -> Keycloak user synchronisation and the
+#: SSO loses the directory. The historical 4 MiB of issue #150 is gone.
+AVATAR_HARD_MAX_BYTES: Final = 200 * 1024
+
+
+def avatar_ceiling(raw) -> int:
+    """The effective avatar size limit: the operator may LOWER it
+    through AVATAR_MAX_BYTES, never raise it above the hard ceiling —
+    a larger value would silently break the SSO synchronisation again
+    (issue #271). Unreadable values fall back to the ceiling."""
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        return AVATAR_HARD_MAX_BYTES
+    if value <= 0:
+        return AVATAR_HARD_MAX_BYTES
+    return min(value, AVATAR_HARD_MAX_BYTES)
+
+
+#: Maximum size of the member avatar (issues #150 and #271) — jpegPhoto in LDAP.
+AVATAR_MAX_BYTES: Final = avatar_ceiling(os.getenv("AVATAR_MAX_BYTES"))
 QUARANTINE_PERIOD_DAYS: Final = int(os.getenv("QUARANTINE_PERIOD_DAYS", "180"))
 UNSUBSCRIBE_LINK_VALIDITY_DAYS: Final = int(
     os.getenv("UNSUBSCRIBE_LINK_VALIDITY_DAYS", "7"))

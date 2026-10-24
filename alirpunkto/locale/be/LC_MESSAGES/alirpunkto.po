@@ -1057,7 +1057,7 @@ msgstr "Фота, якое будзе прадстаўляць вас (ваш а
 
 msgid "avatar_description"
 msgstr ""
-"Калі ласка, падайце фота, якое прадстаўляе вас як члена Суполкі. Для таго, каб захаваць вас ад любых рэпрэсій з боку вашага працадаўцы або кліентаў, мы рэкамендуем, каб гэтая фота не дазваляла адсочваць вашу асобу ў рэальным жыцці. Яно, такім чынам, звычайна павінна быць не вашай фотаграфіяй (памятайце, што праграмнае забеспячэнне распазнавання асобаў шырока выкарыстоўваецца няхай для пошукавых робатаў). Фота павінна быць толькі ў фармаце JPEG (расшырэнне .JPG або .JPEG), і не больш чым 5 МБ.\n"
+"Калі ласка, падайце фота, якое прадстаўляе вас як члена Суполкі. Для таго, каб захаваць вас ад любых рэпрэсій з боку вашага працадаўцы або кліентаў, мы рэкамендуем, каб гэтая фота не дазваляла адсочваць вашу асобу ў рэальным жыцці. Яно, такім чынам, звычайна павінна быць не вашай фотаграфіяй (памятайце, што праграмнае забеспячэнне распазнавання асобаў шырока выкарыстоўваецца няхай для пошукавых робатаў). Фота павінна быць толькі ў фармаце JPEG (расшырэнне .JPG або .JPEG), і не больш чым 200 КБ.\n"
 "Мы лічым, што гэтая інфармацыя карысная, таму што фота палягчае іншым членам Суполкі выразна распазнаць вас. Часам фота гаворыць значна гучней за доўгую прамову. З гэтым вобразам вы выказваеце шмат пра сябе на універсальнай мове. Выкарыстоўвайце гэты шанец наўпрост!"
 
 msgid "candidature_mixed"
@@ -1405,15 +1405,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

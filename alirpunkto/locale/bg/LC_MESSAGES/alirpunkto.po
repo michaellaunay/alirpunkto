@@ -1052,7 +1052,7 @@ msgstr "Снимка, която да ви представлява (вашия�
 
 msgid "avatar_description"
 msgstr ""
-"Моля, предоставете снимка, представяща вас като член на Общността. С цел да ви предпазим от всякакви репресии от вашия работодател или клиенти, препоръчваме тази снимка да не позволява свързване с вашата идентичност в реалния живот. Следователно, обикновено не трябва да е ваша снимка (помнете, че софтуерът за разпознаване на лица масово се използва от роботи за търсене). Снимката трябва да бъде само в JPEG формат (разширение .JPG или .JPEG) и да не надвишава 5 MB. \n"
+"Моля, предоставете снимка, представяща вас като член на Общността. С цел да ви предпазим от всякакви репресии от вашия работодател или клиенти, препоръчваме тази снимка да не позволява свързване с вашата идентичност в реалния живот. Следователно, обикновено не трябва да е ваша снимка (помнете, че софтуерът за разпознаване на лица масово се използва от роботи за търсене). Снимката трябва да бъде само в JPEG формат (разширение .JPG или .JPEG) и да не надвишава 200 kB. \n"
 "Смятаме, че тази информация е полезна, тъй като снимката улеснява другите членове на Общността да ви разпознаят. Понякога снимката говори много по-силно от дълга реч. С това изображение изразявате много за себе си, на универсален език. Направете най-доброто от него!"
 
 msgid "candidature_mixed"
@@ -1397,15 +1397,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

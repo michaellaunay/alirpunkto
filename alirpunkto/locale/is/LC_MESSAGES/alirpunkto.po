@@ -1056,7 +1056,7 @@ msgstr "Mynd til að tákna þig (avatar þinn)"
 
 msgid "avatar_description"
 msgstr ""
-"Vinsamlegast gefið upp mynd sem táknar þig sem meðlim í samfélaginu. Til að vernda þig frá hvers konar hefndum frá vinnuveitanda eða viðskiptavinum, mælum við með að þessi mynd vísar ekki hægt til auðkennis þíns í raunveruleikanum. Hún ætti því að vera almennt ekki ljósmynd af þér (mundu að andlitsgreiningarforrit eru víða notuð af sóknarvélar). Myndin ætti að vera einungis í JPEG sniði (viðauki .JPG eða .JPEG), og ekki stærri en 5 MB. \n"
+"Vinsamlegast gefið upp mynd sem táknar þig sem meðlim í samfélaginu. Til að vernda þig frá hvers konar hefndum frá vinnuveitanda eða viðskiptavinum, mælum við með að þessi mynd vísar ekki hægt til auðkennis þíns í raunveruleikanum. Hún ætti því að vera almennt ekki ljósmynd af þér (mundu að andlitsgreiningarforrit eru víða notuð af sóknarvélar). Myndin ætti að vera einungis í JPEG sniði (viðauki .JPG eða .JPEG), og ekki stærri en 200 kB. \n"
 "Við teljum að þessar upplýsingar séu gagnlegar vegna þess að mynd auðveldar öðrum meðlimum samfélagsins að þekkja þig. Stundum segir mynd meira en löng ræða. Með þessari mynd, ertu að tjá mikið um þig, á alheims tungumáli. Nýttu þér það!"
 
 msgid "candidature_mixed"
@@ -1402,15 +1402,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

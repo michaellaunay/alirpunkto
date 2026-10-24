@@ -1074,7 +1074,7 @@ msgstr "Pictiúr chun tú a chur in iúl (do avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Le do thoil, tabhair pictiúr a léiríonn thú mar bhall den Chomhoireacht. Maidir le cosaint a dhéanamh ort ó aon tuairiscí ó do dhíoltóirí nó cliaint, moltar duit nach mbeadh an pictiúr seo in ann ó fhanacht ar do aitheantas i saol na fírinne. Ba cheart dó sin go ginearálta nach mbeadh sé ina phictiúr de do féin (cuimhnigh ar go sinsearacht a úsáidtear ag bogearraí aitheantais comhoiriúnachta). Is é an pictiúr ach amháin i formáid JPEG (sciobadh .JPG nó .JPEG), agus níor cheart dó a bheith níos mó ná 5 MB. \n"
+"Le do thoil, tabhair pictiúr a léiríonn thú mar bhall den Chomhoireacht. Maidir le cosaint a dhéanamh ort ó aon tuairiscí ó do dhíoltóirí nó cliaint, moltar duit nach mbeadh an pictiúr seo in ann ó fhanacht ar do aitheantas i saol na fírinne. Ba cheart dó sin go ginearálta nach mbeadh sé ina phictiúr de do féin (cuimhnigh ar go sinsearacht a úsáidtear ag bogearraí aitheantais comhoiriúnachta). Is é an pictiúr ach amháin i formáid JPEG (sciobadh .JPG nó .JPEG), agus níor cheart dó a bheith níos mó ná 200 kB. \n"
 "Creidimid go bhfuil an t-eolas seo úsáideach toisc go gcabhraíonn pictiúr le baill eile den Chomhoireacht chunn tú a aithint. Uaireanta bíonn pictiúr i bhfad níos neamhchiarálaichte ná caint fhada. Leis an íomhá seo, tá tú ag cur go leor i gcló faoi do chuid féin, i bhfuinneog uilíoch. Déan an chuid is fearr de!"
 
 msgid "candidature_mixed"
@@ -1418,15 +1418,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

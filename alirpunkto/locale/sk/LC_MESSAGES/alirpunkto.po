@@ -1030,7 +1030,7 @@ msgstr "Obrázok, ktorý vás reprezentuje (váš avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Uveďte obrázok, ktorý vás bude reprezentovať ako člena komunity. Aby ste sa ochránili pred možnými dôsledkami zo strany zamestnávateľa alebo klientov, odporúčame, aby obrázok neumožňoval identifikáciu vašej skutočnej identity. Z tohto dôvodu by to spravidla nemala byť vaša fotografia (majte na pamäti, že softvér na rozpoznávanie tváre je masovo používaný vyhľadávacími robotmi). Obrázok musí byť vo formáte JPEG (s príponou .JPG alebo .JPEG) a nesmie presiahnuť veľkosť 5 MB.\n"
+"Uveďte obrázok, ktorý vás bude reprezentovať ako člena komunity. Aby ste sa ochránili pred možnými dôsledkami zo strany zamestnávateľa alebo klientov, odporúčame, aby obrázok neumožňoval identifikáciu vašej skutočnej identity. Z tohto dôvodu by to spravidla nemala byť vaša fotografia (majte na pamäti, že softvér na rozpoznávanie tváre je masovo používaný vyhľadávacími robotmi). Obrázok musí byť vo formáte JPEG (s príponou .JPG alebo .JPEG) a nesmie presiahnuť veľkosť 200 kB.\n"
 "Veríme, že tento údaj je užitočný, pretože obrázok uľahčuje ostatným členom komunity zapamätať si vás. Niekedy obrázok povie viac ako dlhý text. Týmto obrázkom o sebe vyjadrujete veľa, v univerzálnom jazyku. Využite to naplno!"
 
 msgid "candidature_mixed"
@@ -1373,15 +1373,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

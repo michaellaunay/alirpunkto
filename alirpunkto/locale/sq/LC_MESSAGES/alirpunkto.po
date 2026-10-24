@@ -1067,7 +1067,7 @@ msgstr "Një foto për t'ju përfaqësuar (avatareja juaj)"
 
 msgid "avatar_description"
 msgstr ""
-"Ju lutemi sigurohuni një foto që ju përfaqëson si një anëtar të Komunitetit. Për të mbrojtur nga ndëshkimet nga punëdhënësi ose klientët tuaj, rekomandojmë që kjo foto të mos lejojë gjurmimin mbrapa në identitetin tuaj në jetën reale. Për këtë arsye, ajo zakonisht nuk duhet të jetë një fotografi e vetes (mos harroni që softueri i njohjes së fytyrës përdoret masivisht nga robotët e kërkimit). Fotografia duhet të jetë në format JPEG vetëm (zgjerimi .JPG ose .JPEG), dhe jo më e madhe se 5 MB. \n"
+"Ju lutemi sigurohuni një foto që ju përfaqëson si një anëtar të Komunitetit. Për të mbrojtur nga ndëshkimet nga punëdhënësi ose klientët tuaj, rekomandojmë që kjo foto të mos lejojë gjurmimin mbrapa në identitetin tuaj në jetën reale. Për këtë arsye, ajo zakonisht nuk duhet të jetë një fotografi e vetes (mos harroni që softueri i njohjes së fytyrës përdoret masivisht nga robotët e kërkimit). Fotografia duhet të jetë në format JPEG vetëm (zgjerimi .JPG ose .JPEG), dhe jo më e madhe se 200 kB. \n"
 "Ne besojmë se ky informacion është i dobishëm sepse një foto e bën më të lehtë për anëtarët e tjerë të Komunitetit t'ju njohin. Ndonjëherë një foto flet shumë më fort se një jetëgjatësi përshkrimi. Me këtë imazh, po shprehni shumë për veten tuaj, në një gjuhë universale. Shfrytëzoni sa më shumë!"
 
 msgid "candidature_mixed"
@@ -1411,15 +1411,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

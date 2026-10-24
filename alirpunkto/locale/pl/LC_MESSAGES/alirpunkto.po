@@ -1201,7 +1201,7 @@ msgstr "Obrazek reprezentujący użytkownika (awatar)"
 #, fuzzy
 msgid "avatar_description"
 msgstr ""
-"Prosimy o dostarczenie zdjęcia przedstawiającego Ciebie jako członka społeczności. Aby uchronić Cię przed ewentualnymi represjami ze strony pracodawcy lub klientów, zalecamy, aby to zdjęcie nie umożliwiało prześledzenia Twojej tożsamości w prawdziwym życiu. Nie powinno to być zatem zdjęcie przedstawiające ciebie samego (pamiętaj, że oprogramowanie do rozpoznawania twarzy jest masowo wykorzystywane przez roboty wyszukiwarek). Zdjęcie powinno być wyłącznie w formacie JPEG (rozszerzenie .JPG lub .JPEG) i nie większe niż 5 MB. \n"
+"Prosimy o dostarczenie zdjęcia przedstawiającego Ciebie jako członka społeczności. Aby uchronić Cię przed ewentualnymi represjami ze strony pracodawcy lub klientów, zalecamy, aby to zdjęcie nie umożliwiało prześledzenia Twojej tożsamości w prawdziwym życiu. Nie powinno to być zatem zdjęcie przedstawiające ciebie samego (pamiętaj, że oprogramowanie do rozpoznawania twarzy jest masowo wykorzystywane przez roboty wyszukiwarek). Zdjęcie powinno być wyłącznie w formacie JPEG (rozszerzenie .JPG lub .JPEG) i nie większe niż 200 kB. \n"
 "  Uważamy, że ta informacja jest przydatna, ponieważ zdjęcie ułatwia innym członkom społeczności rozpoznanie użytkownika. Czasami obraz przemawia znacznie głośniej niż długie przemówienie. Dzięki temu obrazowi wyrażasz wiele o sobie w uniwersalnym języku. Wykorzystaj to jak najlepiej!"
 
 #, fuzzy
@@ -1578,15 +1578,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

@@ -1057,7 +1057,7 @@ msgstr "En bild som representerar dig (din avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Vänligen ange en bild som representerar dig som medlem av gemenskapen. För att skydda dig från eventuella repressalier från din arbetsgivare eller kunder, rekommenderar vi att denna bild inte möjliggör identifiering av din verkliga identitet. Det bör därför vanligtvis inte vara ett fotografi av dig själv (kom ihåg att ansiktsigenkänningsprogramvara används massivt av sökrobotar). Bilden bör vara i JPEG-format (ändelse .JPG eller .JPEG), och inte större än 5 MB. \n"
+"Vänligen ange en bild som representerar dig som medlem av gemenskapen. För att skydda dig från eventuella repressalier från din arbetsgivare eller kunder, rekommenderar vi att denna bild inte möjliggör identifiering av din verkliga identitet. Det bör därför vanligtvis inte vara ett fotografi av dig själv (kom ihåg att ansiktsigenkänningsprogramvara används massivt av sökrobotar). Bilden bör vara i JPEG-format (ändelse .JPG eller .JPEG), och inte större än 200 kB. \n"
 "Vi anser att denna information är användbar eftersom en bild gör det lättare för de andra medlemmarna i gemenskapen att känna igen dig. Ibland talar en bild mycket högre än ett långt tal. Med denna bild uttrycker du mycket om dig själv, på ett universellt språk. Utnyttja detta till fullo!"
 
 msgid "candidature_mixed"
@@ -1402,15 +1402,14 @@ msgid "erasure_confirmation_email_subject"
 msgstr "Your identity data has been erased"
 
 msgid "avatar_format_description"
-msgstr ""
-"Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
+msgstr "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG) and no larger than 200 kB."
 
 msgid "avatar_format_error"
 msgstr ""
 "Your avatar picture must be in JPEG format only (extension .JPG or .JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Your avatar picture is too large."
+msgstr "Your avatar picture is too large (200 kB maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Your avatar could not be updated. Please try again later."

@@ -1063,7 +1063,7 @@ msgstr "Une image pour te représenter (ton avatar)"
 
 msgid "avatar_description"
 msgstr ""
-"Fournis une image te représentant en tant que membre de la Communauté. Afin de te préserver de toute représaille de la part de ton employeur ou de tes clients, nous te recommandons que cette image ne permette pas de remonter jusqu'à ton identité dans la vie réelle. Elle ne devrait donc généralement pas être une photographie de toi-même (rappelle-toi que les logiciels de reconnaissance faciale sont massivement utilisés par les robots de recherche). L'image doit être uniquement au format JPEG (extension .JPG ou .JPEG), et ne doit pas dépasser 5 Mo. \n"
+"Fournis une image te représentant en tant que membre de la Communauté. Afin de te préserver de toute représaille de la part de ton employeur ou de tes clients, nous te recommandons que cette image ne permette pas de remonter jusqu'à ton identité dans la vie réelle. Elle ne devrait donc généralement pas être une photographie de toi-même (rappelle-toi que les logiciels de reconnaissance faciale sont massivement utilisés par les robots de recherche). L'image doit être uniquement au format JPEG (extension .JPG ou .JPEG), et ne doit pas dépasser 200 ko. \n"
 "Nous pensons que cette information est utile car une image permet aux autres membres de la Communauté de te reconnaître plus facilement. Parfois, une image est plus parlante qu'un long discours. Avec cette image, tu exprimes beaucoup de choses sur toi, dans un langage universel. Profites-en !"
 
 msgid "candidature_mixed"
@@ -1416,9 +1416,7 @@ msgstr ""
 "Quarantaine."
 
 msgid "avatar_format_description"
-msgstr ""
-"Ton image d'avatar doit être au format JPEG uniquement (extension .JPG ou "
-".JPEG)."
+msgstr "Ton image d'avatar doit être au format JPEG uniquement (extension .JPG ou .JPEG) et ne pas dépasser 200 ko."
 
 msgid "avatar_format_error"
 msgstr ""
@@ -1426,7 +1424,7 @@ msgstr ""
 ".JPEG)."
 
 msgid "avatar_too_large_error"
-msgstr "Ton image d'avatar est trop volumineuse."
+msgstr "Ton image d'avatar est trop volumineuse (200 ko maximum)."
 
 msgid "avatar_update_failed_error"
 msgstr "Ton avatar n'a pas pu être mis à jour. Réessaie plus tard."
