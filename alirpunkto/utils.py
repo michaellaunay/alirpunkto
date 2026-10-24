@@ -635,7 +635,10 @@ def send_email(
         extra_headers={'Content-Transfer-Encoding': 'quoted-printable',
             'Content-Type': "text/plain; charset='utf-8'"},
     )
-    log.debug(f"Email {subject} is prepared and will be sent to {recipients} from {sender} and contains {text_body}")
+    # Transversal audit of 2026-10-24 (A12): the body carried action
+    # links and personal data into the DEBUG log; the metadata suffice.
+    log.debug(f"Email {subject!r} prepared for {len(recipients)} recipient(s) "
+              f"from {sender} ({len(text_body)} characters)")
 
     mailer = request.registry['mailer']
     status = mailer.send(message) # Remember the message is not sent until the transaction is committed
@@ -1334,11 +1337,25 @@ def purge_unsubscribed_members(request, now=None, members=None):
         try:
             with get_ldap_connection(ldap_user=LDAP_USER,
                     ldap_password=get_secret(LDAP_PASSWORD)) as conn:
-                conn.delete(dn)
+                deleted = conn.delete(dn)
+                outcome = getattr(conn, 'result', None)
         except Exception as e:
             log.error(f"purge_unsubscribed_members: LDAP delete failed for "
                       f"{oid}: {e}")
             continue
+        if not deleted:
+            # Transversal audit of 2026-10-24 (A06): a refusal without
+            # an exception used to go on to erase the ZODB side while
+            # the directory entry stayed. One refusal is fine to go on
+            # with: noSuchObject (32), the entry is already gone — the
+            # purge is then resuming an interrupted earlier pass.
+            if isinstance(outcome, dict) and outcome.get('result') == 32:
+                log.warning(f"purge_unsubscribed_members: {oid} already "
+                            f"absent from the directory; erasing the rest")
+            else:
+                log.error(f"purge_unsubscribed_members: LDAP refused to "
+                          f"delete {oid}: {outcome}")
+                continue
         pseudonym = member.pseudonym
         # Capture what the farewell message needs before erasing (issue
         # #54): the ticket wants the member informed that the identity
@@ -1346,11 +1363,16 @@ def purge_unsubscribed_members(request, now=None, members=None):
         # gone from our stores.
         recipient = getattr(member, 'email', None)
         language = getattr(getattr(member, 'data', None), 'lang1', None)
-        member.data = MemberDatas(password='')
+        departure_reason = getattr(member, 'departure_reason', 'resignation')
+        if hasattr(member, 'erase_personal_data'):
+            # A real Member: the setters refuse None and keep the old
+            # data in the change history — the model erases itself (A06).
+            member.erase_personal_data()
+        else:
+            member.data = MemberDatas(password='')
+            member.email = ''
         member.member_state = MemberStates.DELETED
-        member.departure_reason = getattr(
-            member, 'departure_reason', 'resignation')
-        member.email = None
+        member.departure_reason = departure_reason
         _send_erasure_confirmation(request, recipient, language, pseudonym)
         log.info(f"purge_unsubscribed_members: {oid} ({pseudonym}) purged")
         purged.append(oid)

@@ -538,7 +538,13 @@ def modify_member(request):
                             # use the error message as it could be overridden
                             message = _('forget_email_send_error',
                                          {'administrator': ADMIN_EMAIL})
-                elif "password" in request.POST and "password" in writable_fields:
+                elif field == "password":
+                    # Transversal audit of 2026-10-24 (A07): the branch
+                    # used to be entered for ANY writable field as soon
+                    # as a password was posted — a language change could
+                    # run the password change, or be refused as
+                    # "password required". It now runs once, for its
+                    # own field.
                     password = request.params['password'] if 'password' in request.params else None
                     password_confirm = request.params['password_confirm'] if 'password_confirm' in request.params else None
                     if password != password_confirm:

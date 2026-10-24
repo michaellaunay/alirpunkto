@@ -26,6 +26,17 @@ the application data:
 - TLS renewal and Postfix supervision also belong to the stack (2026
   Docker audit).
 
+## Pending SSO propagation (transversal audit of 2026-10-24, A10)
+
+A Keycloak propagation that fails — unreachable server, a provider
+answering `failed > 0` or `ignored` — leaves a marker file
+(`var/keycloak_sync_pending`, overridable with
+`KEYCLOAK_SYNC_PENDING_MARKER`). The daily scan calls Keycloak again
+while that marker exists, even on a day when no member changed group;
+a successful propagation removes it. Without it, a directory that had
+converged while Keycloak was down was never re-propagated until the next
+unrelated change.
+
 ## The daily maintenance inside the application (#148, #269)
 
 Issue #148 asks AlirPunkto to **scan the directory every day** (an

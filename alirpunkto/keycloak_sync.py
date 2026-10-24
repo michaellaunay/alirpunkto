@@ -35,6 +35,9 @@ patch :data:`PYTEST_CURRENT_TEST` to ``None`` to exercise the wire.
 """
 from __future__ import annotations
 
+import os
+from datetime import datetime
+
 from alirpunkto.constants_and_globals import (
     KEYCLOAK_CLIENT_ID,
     KEYCLOAK_CLIENT_SECRET,
@@ -62,6 +65,41 @@ ADMIN_TIMEOUT_SECONDS = 15
 #: The LDAP storage component ids, discovered once per process: they
 #: are stable for the life of the realm configuration.
 _storage_ids_cache: list | None = None
+
+#: Transversal audit of 2026-10-24 (A10): a propagation that failed must
+#: be retried even when no new directory delta appears — the daily scan
+#: used to call Keycloak only when a group changed during that very
+#: pass. This marker file survives the process; it is written when a
+#: propagation fails and removed when one succeeds.
+PENDING_MARKER_PATH = os.getenv(
+    'KEYCLOAK_SYNC_PENDING_MARKER',
+    os.path.join('var', 'keycloak_sync_pending'))
+
+
+def propagation_pending() -> bool:
+    """True while a failed propagation awaits a successful retry."""
+    return os.path.exists(PENDING_MARKER_PATH)
+
+
+def _mark_pending(reason: str) -> None:
+    try:
+        directory = os.path.dirname(PENDING_MARKER_PATH)
+        if directory:
+            os.makedirs(directory, exist_ok=True)
+        with open(PENDING_MARKER_PATH, 'a', encoding='utf-8') as handle:
+            handle.write(f"{datetime.now().isoformat()} {reason}\n")
+    except OSError as exc:
+        log.warning(f"keycloak_sync: cannot record the pending propagation: "
+                    f"{exc}")
+
+
+def _clear_pending() -> None:
+    try:
+        os.remove(PENDING_MARKER_PATH)
+    except FileNotFoundError:
+        pass
+    except OSError as exc:
+        log.warning(f"keycloak_sync: cannot clear the pending marker: {exc}")
 
 
 def is_configured() -> bool:
@@ -133,7 +171,8 @@ def propagate_ldap_changes_to_keycloak(reason: str = '') -> bool:
             if sync_failed(result):
                 # Audit 2026-10-24 (second pass, P6): Keycloak answers
                 # 200 with its counters even when some entries failed
-                # to import — that is not a propagation.
+                # to import — that is not a propagation. Nor is an
+                # "ignored" synchronisation (A10).
                 all_clean = False
                 log.warning(f"keycloak_sync: provider {storage_id} "
                             f"reported failures while propagating "
@@ -143,12 +182,18 @@ def propagate_ldap_changes_to_keycloak(reason: str = '') -> bool:
                 log.info(f"keycloak_sync: {reason or 'directory change'} "
                          f"propagated to provider {storage_id}: "
                          f"{_summarise(result)}")
+        if all_clean:
+            _clear_pending()
+        else:
+            _mark_pending(reason or 'directory change')
         return all_clean
     except Exception as exc:
         # Best effort by design: the daily scan (and the next event)
         # will try again; the member can still log in through
-        # AlirPunkto in the meantime.
+        # AlirPunkto in the meantime. The marker makes that retry
+        # happen even on a quiet day (A10).
         reset_cache()
+        _mark_pending(reason or 'directory change')
         log.warning(f"keycloak_sync: could not propagate "
                     f"{reason or 'directory change'}: "
                     f"{exc.__class__.__name__}: {exc}")
@@ -170,6 +215,11 @@ def sync_failed(result) -> bool:
         if int(result.get('failed') or 0) > 0:
             return True
     except (TypeError, ValueError):
+        return True
+    # SynchronizationResult.ignored: the provider did not run the sync
+    # at all (import disabled, period not elapsed). Nothing was
+    # propagated — pending, not success (A10).
+    if result.get('ignored') in (True, 'true', 'True', 1):
         return True
     status = str(result.get('status') or '').lower()
     return any(word in status for word in ('fail', 'error'))

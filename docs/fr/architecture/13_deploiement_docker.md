@@ -34,6 +34,13 @@ Les données vivent dans des volumes nommés (`alirpunkto_ldap_*`,
 `docker/backup.sh` sauvegarde configuration et données ; procédure et
 restauration dans `docker/README.md`.
 
+Depuis l'audit transversal du 24 octobre 2026 (A13), le script prend
+par défaut le chemin du `Data.fs` de `production.ini`
+(`var/filestorage/Data.fs`), échoue quand un magasin manque sauf
+`ALLOW_PARTIAL=1`, écrit un `MANIFEST` avec la taille et le SHA-256 de
+chaque fichier, vérifie l'archive avant d'élaguer les précédentes et
+écrit tout avec `umask 077`.
+
 ## Blocages levés (audits externes, quatrième → onzième passages)
 
 Les trois défauts qui arrêtaient la pile avant `pserve` (contrôle

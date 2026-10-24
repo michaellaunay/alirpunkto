@@ -355,15 +355,21 @@ def daily_group_scan(request, today=None):
         after = sync_member_groups(request, oid, today=today)
         if after is not None and before != after:
             changed.append(oid)
-    if changed:
+    from alirpunkto.keycloak_sync import propagation_pending
+    pending = propagation_pending()
+    if changed or pending:
         # Issue #269, step 2 of the ticket: the members whose Dynamic
         # Group changed reach the SSO infrastructure the same day, not
         # at their next AlirPunkto login. One propagation covers them
         # all: Keycloak re-imports every entry changed since its last
-        # pass.
+        # pass. Transversal audit of 2026-10-24 (A10): a propagation
+        # that failed earlier is retried here too, even when nobody
+        # moved today — the directory may have converged yesterday
+        # while Keycloak was down.
         from alirpunkto.utils import notify_keycloak_of_directory_change
         notify_keycloak_of_directory_change(
-            f"daily group scan ({len(changed)} member(s) moved)")
+            f"daily group scan ({len(changed)} member(s) moved"
+            f"{', pending propagation retried' if pending else ''})")
     return changed
 
 

@@ -104,7 +104,11 @@ def _handle_candidature_state(
     """
     result = None
     if request.method == 'POST':
-        log.debug(f"Handling candidature state: request POST: {request.POST}")
+        # Transversal audit of 2026-10-24 (A12): the whole POST used to
+        # be logged — password and confirmation included under DEBUG.
+        # The field names are all the diagnosis needs.
+        log.debug(f"Handling candidature state: POST fields: "
+                  f"{sorted(request.POST.keys())}")
     else:
         log.debug(f"Handling candidature state: request method: {request.method}")
     log.debug(f"Handling candidature state of id: {id(candidature)}, state:{candidature.candidature_state}, oid:{getattr(candidature,'oid', 'Not defined')}, type: {getattr(candidature, 'type', 'Not defined')}")

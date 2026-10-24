@@ -28,6 +28,17 @@ données applicatives :
 - renouvellement TLS et supervision Postfix relèvent aussi de la pile
   (audit Docker de 2026).
 
+## Propagation SSO en attente (audit transversal du 24 octobre 2026, A10)
+
+Une propagation Keycloak qui échoue — serveur injoignable, fournisseur
+répondant `failed > 0` ou `ignored` — laisse un fichier marqueur
+(`var/keycloak_sync_pending`, surchargeable par
+`KEYCLOAK_SYNC_PENDING_MARKER`). Le scan quotidien rappelle Keycloak
+tant que ce marqueur existe, même un jour où aucun membre n'a changé de
+groupe ; une propagation réussie le retire. Sans lui, un annuaire
+convergé pendant une panne de Keycloak n'était plus propagé avant le
+prochain changement sans rapport.
+
 ## La maintenance quotidienne dans l'application (#148, #269)
 
 Le ticket #148 demande qu'AlirPunkto **scanne l'annuaire chaque jour**

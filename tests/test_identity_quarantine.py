@@ -120,7 +120,9 @@ def test_the_purge_tells_the_member_their_data_was_erased():
     assert 'erasure_confirmation_email' in args[3]
     assert '/fr/' in args[3]                          # the member's language
     assert sender.call_args[0][4]['pseudonym'] == 'p-gone'
-    assert member.email is None                       # address erased after
+    # Address erased after (transversal audit of 2026-10-24, A06: the
+    # real Member's setter refuses None, the erased value is '').
+    assert member.email == ''
 
 
 def test_no_message_when_the_quarantine_is_not_over():

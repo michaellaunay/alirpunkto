@@ -138,6 +138,19 @@ def manage_provider_view(request):
                     "providers": providers,
                     'error': _('member_not_found')
                 }
+            if member.type != MemberTypes.PROVIDER:
+                # Transversal audit of 2026-10-24 (A16): the list shown
+                # is not an authorisation of the POST — this view writes
+                # providers only, never another member's address or
+                # password.
+                log.warning(f"manage_provider: {oid} tried to update "
+                            f"{accessed_provider_oid}, not a provider")
+                return {
+                    "member": user,
+                    "form": None,
+                    "providers": providers,
+                    'error': _('no_permission')
+                }
             fields_to_update = []
             new_email = request.params.get('provider_email', None)
             if new_email and new_email != member.email:

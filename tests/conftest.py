@@ -59,6 +59,21 @@ def app_settings(ini_file):
 
 
 @pytest.fixture(autouse=True)
+def _keycloak_pending_marker_in_tmp(tmp_path, monkeypatch):
+    """The pending-propagation marker (audit A10) is a file under var/;
+    every test gets its own so a leftover never leaks between tests."""
+    try:
+        import alirpunkto.keycloak_sync as ks
+    except Exception:
+        yield
+        return
+    monkeypatch.setattr(ks, "PENDING_MARKER_PATH",
+                        str(tmp_path / "keycloak_sync_pending"),
+                        raising=False)
+    yield
+
+
+@pytest.fixture(autouse=True)
 def reset_model_singletons():
     """Keep persistent singleton state from leaking between tests."""
     try:

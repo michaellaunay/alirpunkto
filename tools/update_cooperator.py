@@ -113,20 +113,52 @@ def parse_args() -> argparse.Namespace:
                         help="OID of the member to modify")
     parser.add_argument("--number-shares", type=str, help="Number of shares to specify")
     parser.add_argument("--validity-date", type=str, help="End date of membership validity (YYYY-MM-DD)")
-    parser.add_argument("--base_url", type=str, default=DOMAINE,)
+    # Transversal audit of 2026-10-24 (A15): no default here — a non-empty
+    # argparse default used to shadow the .env value entirely.
+    parser.add_argument("--base_url", type=str, default=None,
+                        help="Portal origin, https://host (overrides .env)")
+    parser.add_argument("--allow-http", action="store_true",
+                        help="Accept http:// for localhost only (local tests)")
     return parser.parse_args()
 
 
-def portal_origin(base_url: str) -> str:
+#: Hosts for which --allow-http is honoured.
+LOCAL_HOSTS: Final[tuple[str, ...]] = ("localhost", "127.0.0.1", "::1", "[::1]")
+
+
+def portal_origin(base_url: str, allow_http: bool = False) -> str:
     """``scheme://host[:port]`` of the portal — the value of the Origin
     header the CSRF guard compares with the request host. A base URL
-    with a path or no host is refused rather than silently mangled."""
+    with a path or no host is refused rather than silently mangled, and
+    plain http only for a local host with --allow-http: an administrator
+    password travels on this connection (A15)."""
     parts = urlsplit(base_url)
     if parts.scheme not in ("http", "https") or not parts.netloc \
             or parts.path not in ("", "/") or parts.query or parts.fragment:
         raise ValueError(
             f"base_url must be the portal's origin (scheme://host), got {base_url!r}")
+    if parts.scheme != "https" and not (
+            allow_http and parts.hostname in LOCAL_HOSTS):
+        raise ValueError(
+            "base_url must use https (the administrator password travels on it); "
+            "--allow-http is honoured for localhost only.")
     return f"{parts.scheme}://{parts.netloc}"
+
+
+def same_origin(location: str | None, origin: str) -> bool:
+    """True when a redirect Location stays on the portal: relative, or
+    same scheme, host and port."""
+    if not location:
+        return False
+    target = urlsplit(location)
+    if not target.scheme and not target.netloc:
+        return True
+    expected = urlsplit(origin)
+    defaults = {"http": 80, "https": 443}
+    return (target.scheme == expected.scheme
+            and (target.hostname or "").lower() == (expected.hostname or "").lower()
+            and (target.port or defaults.get(target.scheme))
+            == (expected.port or defaults.get(expected.scheme)))
 
 
 def csrf_headers() -> dict[str, str]:
@@ -163,18 +195,31 @@ def login(session: requests.Session, username: str, password: str) -> str:
             "is the base URL right?")
     login_token = extract_csrf_token(login_page.text)
 
+    # A15: the credentials POST is never replayed through a redirect —
+    # the portal's own 302 is recognised, not followed.
     answer = session.post(LOGIN_URL, data={
         "username": username,
         "password": password,
         "csrf_token": login_token,
         "form.submitted": "True"
-    }, headers=csrf_headers(), timeout=TIMEOUT)
+    }, headers=csrf_headers(), timeout=TIMEOUT, allow_redirects=False)
+    if answer.status_code >= 500:
+        raise RuntimeError(
+            f"The portal failed on the login request (HTTP {answer.status_code}).")
     if answer.status_code >= 400:
         # A 400 here is the CSRF guard (token or Origin), never the
         # credentials — say so instead of blaming the password (A7).
         raise RuntimeError(
             f"The portal refused the login request (HTTP {answer.status_code}): "
             "CSRF token or Origin not accepted, or the portal is down.")
+    if answer.status_code >= 300:
+        location = answer.headers.get("Location") if answer.headers else None
+        if not same_origin(location, portal_origin(DOMAINE, allow_http=True)):
+            raise RuntimeError(
+                f"Unexpected redirect away from the portal: {location!r}")
+    else:
+        # 200: the login form came back — the credentials were refused.
+        raise ValueError("Login failed: invalid credentials.")
 
     page = session.get(MODIFY_URL, timeout=TIMEOUT)
     if CSRF_MARKER not in page.text:
@@ -186,9 +231,13 @@ def save_cookies(session: requests.Session, path: Path) -> None:
     """
     Saves session cookies to a text file.
     """
-    with open(path, "w") as f:
+    # A15: the file holds an administrator session — private to this
+    # account, created or truncated with 0600.
+    descriptor = os.open(str(path), os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(descriptor, "w") as f:
         for cookie in session.cookies:
             f.write(f"{cookie.name}={cookie.value}\n")
+    os.chmod(path, 0o600)
 
 
 def check_requested_changes(shares: str | None, validity_date: str | None) -> dict:
@@ -261,7 +310,12 @@ def modify_member(session: requests.Session, oid: str, shares: str | None,
     sent = {k: v for k, v in post_data.items() if k in (SHARES_FIELD, VALIDITY_FIELD)}
 
     update_res = session.post(CONTRIBUTION_URL, data=post_data,
-                              headers=csrf_headers(), timeout=TIMEOUT)
+                              headers=csrf_headers(), timeout=TIMEOUT,
+                              allow_redirects=False)
+    if 300 <= update_res.status_code < 400:
+        raise RuntimeError(
+            f"The portal redirected the update request (HTTP {update_res.status_code}); "
+            "the session is not an administrator's or the base URL is wrong.")
     try:
         answer = update_res.json()
     except ValueError:
@@ -297,7 +351,9 @@ def main() -> None:
     else:
         load_env_file(args.env)
     global DOMAINE          # ruff F823: the fallback read the global,
-    DOMAINE = portal_origin(args.base_url or os.getenv("base_url") or DOMAINE)  # noqa: E501
+    # Priority (A15): command line, then .env, then the built-in default.
+    DOMAINE = portal_origin(args.base_url or os.getenv("base_url") or DOMAINE,
+                            allow_http=args.allow_http)
     global LOGIN_URL
     LOGIN_URL = f"{DOMAINE}/{LOGIN_PATH}"
     global MODIFY_URL

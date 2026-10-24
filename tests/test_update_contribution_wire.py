@@ -41,6 +41,7 @@ class _Response:
     def __init__(self, response):
         self.status_code = response.status_code
         self.text = response.text
+        self.headers = dict(response.headers)
 
     def json(self):
         return self._response_json
@@ -79,7 +80,8 @@ class _WireSession:
                                 extra_environ=self.env, expect_errors=True)
         return _Response.wrap(response)
 
-    def post(self, url, data=None, headers=None, timeout=None):
+    def post(self, url, data=None, headers=None, timeout=None,
+             allow_redirects=True):
         response = self.app.post(self._path(url), data or {},
                                  headers=headers or {},
                                  extra_environ=self.env, expect_errors=True)

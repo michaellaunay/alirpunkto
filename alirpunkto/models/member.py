@@ -711,6 +711,24 @@ class Member(Persistent):
         self._data = value
         self._memorize_changes("data", old_data, value)
 
+    def erase_personal_data(self) -> None:
+        """Forget everything but the pseudonym, the departure date and the
+        departure reason (issue #54; transversal audit of 2026-10-24,
+        A06). The ``data`` and ``email`` setters would refuse the erased
+        values (``None`` is not a str) and would MEMORISE the previous
+        MemberDatas in the change history, so the previous identity kept
+        living in ``_modifications``: this method writes the private
+        fields directly and starts a fresh history whose only event
+        records the erasure itself, without any value."""
+        self._data = MemberDatas(password='')
+        self._email = ''
+        if getattr(self, 'new_email', None) is not None:
+            self.new_email = None
+        self._modifications = []
+        self._email_send_status_history = []
+        self._memorize_changes("erase_personal_data", None, None)
+        self._p_changed = True
+
     @staticmethod
     def generate_unique_oid(
         member_datas:MemberDatas = None,

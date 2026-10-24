@@ -35,6 +35,13 @@ Data live in named volumes (`alirpunkto_ldap_*`, `alirpunkto_pyramid_var`,
 `alirpunkto_postfix_*`, Apache certificates). `docker/backup.sh` saves
 configuration and data; procedure and restore in `docker/README.md`.
 
+Since the transversal audit of 2026-10-24 (A13) the script defaults
+to the `Data.fs` path of `production.ini`
+(`var/filestorage/Data.fs`), fails when a store is missing unless
+`ALLOW_PARTIAL=1`, writes a `MANIFEST` with the size and SHA-256 of
+every file, verifies the archive before pruning the previous ones and
+writes everything with `umask 077`.
+
 ## Blockers lifted (external audits, fourth → eleventh passes)
 
 The three defects that stopped the stack before `pserve` (a check on

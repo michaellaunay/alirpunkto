@@ -530,11 +530,15 @@ def test_the_script_login_posts_the_login_page_token_with_the_origin():
     directory = MagicMock(status_code=200,
                           text='<input name="csrf_token" value="abc123" />')
     session.get.side_effect = [login_page, directory]
-    session.post.return_value = MagicMock(status_code=302)
+    session.post.return_value = MagicMock(
+        status_code=302,
+        headers={'Location': 'https://alirpunkto.cosmopolitical.coop/'})
     assert script.login(session, 'admin', 'pw') == 'abc123'
     data = session.post.call_args.kwargs['data']
     assert data['csrf_token'] == 'login-tok'
     assert data['form.submitted'] == 'True'
+    # A15: the credentials POST is never replayed through a redirect.
+    assert session.post.call_args.kwargs['allow_redirects'] is False
     assert session.post.call_args.kwargs['headers']['Origin'] == \
         'https://alirpunkto.cosmopolitical.coop'
     assert session.get.call_args_list[0].args[0].endswith('/login')
@@ -552,8 +556,14 @@ def test_the_script_login_tells_a_csrf_refusal_from_bad_credentials():
     with pytest.raises(RuntimeError, match='CSRF token or Origin'):
         script.login(session, 'admin', 'pw')
     session.get.side_effect = [login_page, MagicMock(text='<html>home</html>')]
-    session.post.return_value = MagicMock(status_code=302)
+    session.post.return_value = MagicMock(status_code=200, headers={})
     with pytest.raises(ValueError, match='invalid credentials'):
+        script.login(session, 'admin', 'pw')
+    # A15: a redirect to another origin is refused before anything else.
+    session.get.side_effect = [login_page, MagicMock(text='<html>home</html>')]
+    session.post.return_value = MagicMock(
+        status_code=307, headers={'Location': 'https://evil.example/login'})
+    with pytest.raises(RuntimeError, match='away from the portal'):
         script.login(session, 'admin', 'pw')
     session.get.side_effect = [MagicMock(status_code=404, text='nope')]
     with pytest.raises(RuntimeError, match='no CSRF token'):
@@ -564,9 +574,19 @@ def test_the_script_base_url_must_be_the_portal_origin():
     script = _load_script()
     assert script.portal_origin('https://access.example.coop/') == \
         'https://access.example.coop'
-    assert script.portal_origin('http://localhost:6543') == \
+    assert script.portal_origin('http://localhost:6543', allow_http=True) == \
         'http://localhost:6543'
     for bad in ('https://access.example.coop/alirpunkto', 'access.example.coop',
                 'ftp://x', 'https://h/?a=1'):
         with pytest.raises(ValueError):
             script.portal_origin(bad)
+    # A15: plain http needs the flag, and even then only for localhost.
+    with pytest.raises(ValueError, match='https'):
+        script.portal_origin('http://localhost:6543')
+    with pytest.raises(ValueError, match='localhost only'):
+        script.portal_origin('http://access.example.coop', allow_http=True)
+    assert script.same_origin('/home', 'https://p.example') is True
+    assert script.same_origin('https://p.example/home', 'https://p.example')
+    assert not script.same_origin('https://p.example:8443/', 'https://p.example')
+    assert not script.same_origin('https://evil.example/', 'https://p.example')
+    assert not script.same_origin(None, 'https://p.example')
