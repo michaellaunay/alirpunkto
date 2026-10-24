@@ -91,7 +91,12 @@ What the wire wants, and what the script does:
 
 **Exit code 0 means, and only means**: the facts are in the directory
 with the values requested (OID and values checked against the answer),
-the Dynamic Groups are converged and the change reached Keycloak. Any
+the Dynamic Groups are converged and the change reached Keycloak — the
+client requires `financial_update`, `groups_sync` and `keycloak_sync` to
+say so and `groups` to be a list; a bare `success` is not trusted. On
+the server side those indicators are honest since train 0119: a refused
+membership write makes the group synchroniser answer failure, and a
+Keycloak `SynchronizationResult` with `failed > 0` is not a propagation. Any
 refusal, mismatch or `partial` answer exits 1 with the portal's reason —
 a payment that did not restore the rights must never go unnoticed. A
 call that asks for no change at all is an error too, never a silent

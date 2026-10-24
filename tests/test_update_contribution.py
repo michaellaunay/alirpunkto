@@ -446,6 +446,38 @@ def test_the_script_treats_a_partial_answer_as_a_failure_to_retry():
         script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
 
 
+def test_the_script_requires_each_of_the_three_steps_to_be_confirmed():
+    """Second audit pass (P3): a bare ``success``, or a ``success`` that
+    contradicts its own step indicators, is not a confirmation."""
+    script = _load_script()
+    session = MagicMock()
+    session.post.return_value = _answer(status='success', oid='coop-1',
+                                        number_shares_owned=1)
+    with pytest.raises(RuntimeError, match='financial update'):
+        script.modify_member(session, 'coop-1', '1', None, 'tok')
+    session.post.return_value = _answer(**_success(groups_sync='error'))
+    with pytest.raises(RuntimeError, match='groups_sync'):
+        script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
+    session.post.return_value = _answer(**_success(keycloak_sync=None))
+    with pytest.raises(RuntimeError, match='keycloak_sync'):
+        script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
+    session.post.return_value = _answer(**_success(groups=None))
+    with pytest.raises(RuntimeError, match="member's groups"):
+        script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
+    session.post.return_value = _answer(**_success(financial_update='unchanged'))
+    assert script.modify_member(session, 'coop-1', '1', '2027-06-30', 'tok')
+
+
+def test_the_script_refuses_an_absurd_number_of_shares():
+    """Second audit pass (P4): a digit string beyond any business
+    meaning (or any integer range) is a caller bug, not a payment."""
+    script = _load_script()
+    with pytest.raises(ValueError, match='must not exceed'):
+        script.check_requested_changes('99999999999999999999999999999', None)
+    assert script.check_requested_changes(str(script.MAX_SHARES), None) == {
+        'number_shares_owned': str(script.MAX_SHARES)}
+
+
 def test_the_script_refuses_a_non_json_or_non_object_answer():
     script = _load_script()
     session = MagicMock()

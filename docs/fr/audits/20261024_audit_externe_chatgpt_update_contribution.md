@@ -24,6 +24,22 @@
 - Le rouge le plus parlant : `test_the_script_login_posts_the_login_page_token_with_the_origin` et, sur le fil, `test_a_bare_login_post_is_refused_by_the_csrf_guard` (400 « Bad CSRF token ») ; sans en-tête `Origin` en HTTPS, 400 « Bad CSRF Origin », vérifié par sonde WebTest le 24 octobre.
 - Suite complète, ruff, bandit : voir le message de commit du train.
 
+## Second passage (même jour) — PHP 0.4 et train 0117 relus
+
+L'auditeur valide la syntaxe du PHP 0.4 (PHP 8.4.24), l'architecture, le parcours CSRF et le nouveau contrat `success`/`partial`, et relève six points nouveaux.
+
+| Réf. | Constat | Priorité | Disposition |
+|---|---|---|---|
+| P1 | Sous PHP 8, `curl_close()` est sans effet : le cookie jar est réécrit à la destruction du handle, après l'`unlink` | Élevée | **Corrigé** (PHP 0.4.1) : `unset($curl)` avant la suppression, nettoyage dans un `finally` englobant `initCurl`, fichier supprimé si `chmod` échoue |
+| P2 | `assertStayedOnPortal` vérifiait après les redirections suivies ; un 307 externe aurait rejoué le POST d'identifiants | Élevée | **Corrigé** (PHP 0.4.1) : plus aucun suivi automatique ; le 302 du POST de connexion est reconnu sans être suivi, toute autre 3xx est une erreur ; comparaison schéma, hôte et port ; HTTP refusé hors `--allow-http` |
+| P3 | Le client acceptait un `success` sans indicateurs, ou contredit par `groups_sync: error` | Élevée | **Corrigé** dans les deux clients : `financial_update`, `groups_sync`, `keycloak_sync` et une liste `groups` exigés |
+| P4 | `ctype_digit` puis `(int)` saturait silencieusement à `PHP_INT_MAX` | Moyenne | **Corrigé** dans les deux clients : plafond métier d'un million de parts, débordement refusé |
+| P5 | `sync_member_groups` rendait la cible même quand une écriture d'appartenance avait échoué : `groups_sync: success` à tort | Critique | **Corrigé** (train 0119) : chaque échec de `_checked_modify` est mémorisé, la fonction répond `None` ; tests sur grant refusé, révocation refusée et exception |
+| P6 | `propagate_ldap_changes_to_keycloak` rendait `True` sans lire le compteur `failed` du `SynchronizationResult` | Critique | **Corrigé** (train 0119) : `sync_failed` lit `failed` et `status` ; un fournisseur en échec rend la propagation fausse, les autres sont tout de même synchronisés |
+
+Limite rappelée par l'auditeur et maintenue : une propagation réussie prouve que le mécanisme a tourné, pas que chaque application a déjà rafraîchi ses droits.
+
 ## Journal
 
 - 2026-10-24 : réception de l'audit, vérification de A2 dans `utils.py`, `dynamic_groups.py` et `views/update_contribution.py` (confirmé), exécution du train 0117 et de la version 0.4 du script PHP, versement de cette note.
+- 2026-10-24 (second passage) : P5 et P6 confirmés à la lecture, train 0119 et PHP 0.4.1.

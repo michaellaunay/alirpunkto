@@ -176,7 +176,11 @@ def sync_member_groups(request, member_oid, *, today=None,
     by the next pass (losing a grant is safe and re-runnable), while a
     revocation converges until both sides are clean (resurrecting a
     revoked privilege is not). Idempotent; returns the target set, or
-    None if out of scope or on failure."""
+    None if out of scope or on failure — and, since the external audit
+    of 2026-10-24 (second pass, P5), a refused or failed membership
+    write IS a failure: the target used to come back as if every write
+    had landed, and /update_contribution reported ``groups_sync:
+    success`` over a Cooperator still missing from their group."""
     dn = member_dn(member_oid)
     try:
         with get_ldap_connection(ldap_user=LDAP_USER,
@@ -231,20 +235,26 @@ def sync_member_groups(request, member_oid, *, today=None,
             member_add = target - member_side
             member_del = (member_side & set(MANAGED_GROUPS)) - target
 
+            failures = []
+
             def _checked_modify(target_dn, changes, op_id):
                 # Revised audit: half-applied membership used to fail
                 # silently — one side of the group/memberOf pair could
                 # succeed while the other did not. Best-effort remains
                 # (the caller's operation never breaks), but every
-                # failure is now logged with an operation identifier.
+                # failure is now logged with an operation identifier
+                # and remembered: the call then answers None, not the
+                # target (audit 2026-10-24, P5).
                 try:
                     ok = conn.modify(target_dn, changes)
                 except Exception as exc:
                     log.error(f"sync_member_groups {op_id}: {exc}")
+                    failures.append(op_id)
                     return False
                 if not ok:
                     log.error(f"sync_member_groups {op_id}: "
                               f"{getattr(conn, 'result', None)}")
+                    failures.append(op_id)
                 return bool(ok)
 
             # Eighth audit pass (§7): the second write of each pair is
@@ -276,6 +286,11 @@ def sync_member_groups(request, member_oid, *, today=None,
                     f"group side +{sorted(group_add)} -{sorted(group_del)}, "
                     f"member side +{sorted(member_add)} "
                     f"-{sorted(member_del)}")
+            if failures:
+                log.error(f"sync_member_groups: {member_oid} did NOT "
+                          f"converge: {len(failures)} write(s) failed "
+                          f"({'; '.join(failures)})")
+                return None
             return target
     except Exception as e:
         # Best effort by design: the group synchronisation must never break

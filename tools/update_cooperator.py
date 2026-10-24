@@ -73,6 +73,11 @@ CSRF_MARKER: Final[str] = 'name="csrf_token" value="'
 #: (connect, read) seconds — a stuck portal must not stall the shop (A4).
 TIMEOUT: Final[tuple[int, int]] = (10, 30)
 
+#: A business ceiling on one member's shares: anything above is a caller
+#: bug (an overflow, a misplaced amount), refused before it reaches the
+#: directory (second audit pass, P4).
+MAX_SHARES: Final[int] = 1_000_000
+
 
 # Functions
 def load_env_file(env_path: Path) -> None:
@@ -185,7 +190,11 @@ def check_requested_changes(shares: str | None, validity_date: str | None) -> di
     if shares is not None and shares.strip() != "":
         if not shares.strip().isdigit():
             raise ValueError("The number of shares must be a non-negative integer.")
-        post_data[SHARES_FIELD] = str(int(shares.strip()))
+        value = int(shares.strip())
+        if value > MAX_SHARES:
+            raise ValueError(
+                f"The number of shares must not exceed {MAX_SHARES} (second audit pass, P4).")
+        post_data[SHARES_FIELD] = str(value)
     if validity_date is not None and validity_date.strip() != "":
         try:
             datetime.strptime(validity_date.strip(), DATE_FORMAT)
@@ -218,6 +227,16 @@ def check_answer(answer: dict, oid: str, sent: dict) -> None:
             f"groups={answer.get('groups')} — run the same command again.")
     if answer.get("status") != "success":
         raise RuntimeError(f"Unexpected portal status {answer.get('status')!r}.")
+    # Second audit pass (P3): "success" alone is not enough — each of the
+    # three steps must say so, and the groups must be a real list.
+    if answer.get("financial_update") not in ("success", "unchanged"):
+        raise RuntimeError("The portal did not confirm the financial update.")
+    for step in ("groups_sync", "keycloak_sync"):
+        if answer.get(step) != "success":
+            raise RuntimeError(
+                f"The portal did not confirm {step} (got {answer.get(step)!r}).")
+    if not isinstance(answer.get("groups"), list):
+        raise RuntimeError("The portal did not return the member's groups.")
 
 
 def modify_member(session: requests.Session, oid: str, shares: str | None,

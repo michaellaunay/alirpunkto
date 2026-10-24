@@ -127,12 +127,23 @@ def propagate_ldap_changes_to_keycloak(reason: str = '') -> bool:
                         f"realm {KEYCLOAK_REALM}; nothing to propagate "
                         f"({reason})")
             return False
+        all_clean = True
         for storage_id in storage_ids:
             result = admin.sync_users(storage_id, CHANGED_USERS_SYNC)
-            log.info(f"keycloak_sync: {reason or 'directory change'} "
-                     f"propagated to provider {storage_id}: "
-                     f"{_summarise(result)}")
-        return True
+            if sync_failed(result):
+                # Audit 2026-10-24 (second pass, P6): Keycloak answers
+                # 200 with its counters even when some entries failed
+                # to import — that is not a propagation.
+                all_clean = False
+                log.warning(f"keycloak_sync: provider {storage_id} "
+                            f"reported failures while propagating "
+                            f"{reason or 'directory change'}: "
+                            f"{_summarise(result)}")
+            else:
+                log.info(f"keycloak_sync: {reason or 'directory change'} "
+                         f"propagated to provider {storage_id}: "
+                         f"{_summarise(result)}")
+        return all_clean
     except Exception as exc:
         # Best effort by design: the daily scan (and the next event)
         # will try again; the member can still log in through
@@ -142,6 +153,22 @@ def propagate_ldap_changes_to_keycloak(reason: str = '') -> bool:
                     f"{reason or 'directory change'}: "
                     f"{exc.__class__.__name__}: {exc}")
         return False
+
+
+def sync_failed(result) -> bool:
+    """True when a Keycloak SynchronizationResult reports trouble: a
+    non-zero ``failed`` counter, or a ``status`` that says so. A body
+    that is not an object (older Keycloak answering nothing) counts as
+    clean — the call itself did not raise."""
+    if not isinstance(result, dict):
+        return False
+    try:
+        if int(result.get('failed') or 0) > 0:
+            return True
+    except (TypeError, ValueError):
+        return True
+    status = str(result.get('status') or '').lower()
+    return any(word in status for word in ('fail', 'error'))
 
 
 def _summarise(result) -> str:

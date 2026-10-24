@@ -153,12 +153,16 @@ def test_a_failed_group_grant_blocks_the_member_side():
     _veto_modify(conn, (group_dn(COOPERATORS), 'uniqueMember',
                         'MODIFY_ADD'))
     with patch.object(dg, 'get_ldap_connection', return_value=conn):
-        sync_member_groups(SimpleNamespace(), 'grant-f', today=TODAY)
+        target = sync_member_groups(SimpleNamespace(), 'grant-f',
+                                    today=TODAY)
 
     # COMMUNITY went through normally; COOPERATORS must be on NEITHER
     # side — the member side (what the application reads) above all.
     assert _groups_of(conn, 'grant-f') == {COMMUNITY}
     assert not _group_has(conn, COOPERATORS, 'grant-f')
+    # External audit of 2026-10-24 (second pass, P5): the call must SAY
+    # it did not converge — it used to hand back the full target.
+    assert target is None
 
 
 def test_a_failed_member_revocation_keeps_the_group_side():
@@ -171,12 +175,44 @@ def test_a_failed_member_revocation_keeps_the_group_side():
     _veto_modify(conn, (member_dn('revoke-f'), 'uniqueMemberOf',
                         'MODIFY_DELETE'))
     with patch.object(dg, 'get_ldap_connection', return_value=conn):
-        sync_member_groups(SimpleNamespace(), 'revoke-f', today=TODAY)
+        target = sync_member_groups(SimpleNamespace(), 'revoke-f',
+                                    today=TODAY)
 
     # The revocation could not clear the member side, so the group
     # side must NOT have been touched: both sides still agree.
     assert COOPERATORS in _groups_of(conn, 'revoke-f')
     assert _group_has(conn, COOPERATORS, 'revoke-f')
+    assert target is None
+
+
+def test_a_raising_write_is_a_failed_sync_too():
+    """Same finding, the exception path of ``_checked_modify``."""
+    conn = _directory()
+    _add_member_side_only(conn, 'raise-f', member_of=())
+    original = conn.modify
+
+    def exploding(target_dn, changes):
+        if target_dn == group_dn(COOPERATORS):
+            raise OSError("directory hiccup")
+        return original(target_dn, changes)
+
+    conn.modify = exploding
+    with patch.object(dg, 'get_ldap_connection', return_value=conn):
+        target = sync_member_groups(SimpleNamespace(), 'raise-f',
+                                    today=TODAY)
+    assert target is None
+    assert _groups_of(conn, 'raise-f') == {COMMUNITY}
+
+
+def test_a_clean_convergence_still_answers_the_target():
+    """The counterpart: no write refused, the target comes back, and a
+    second run (nothing to write) answers it again."""
+    conn = _directory()
+    _add_member_side_only(conn, 'clean', member_of=())
+    with patch.object(dg, 'get_ldap_connection', return_value=conn):
+        first = sync_member_groups(SimpleNamespace(), 'clean', today=TODAY)
+        second = sync_member_groups(SimpleNamespace(), 'clean', today=TODAY)
+    assert first == second == {COMMUNITY, COOPERATORS}
 
 
 def test_a_half_revoked_board_latch_is_not_resurrected():

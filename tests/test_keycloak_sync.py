@@ -92,6 +92,45 @@ def test_no_ldap_provider_means_nothing_to_propagate():
     admin.sync_users.assert_not_called()
 
 
+def test_a_provider_reporting_failed_entries_is_not_a_propagation():
+    """External audit of 2026-10-24 (second pass, P6): Keycloak answers
+    200 with counters; ``failed`` > 0 used to be logged and then
+    reported as success to /update_contribution."""
+    admin, guards = _wire(sync_result={'added': 0, 'updated': 2,
+                                       'removed': 0, 'failed': 1})
+    with guards[0], guards[1], guards[2], guards[3]:
+        assert ks.propagate_ldap_changes_to_keycloak('payment') is False
+    admin.sync_users.assert_called_once()
+
+
+def test_every_provider_is_still_synchronised_when_one_fails():
+    admin, guards = _wire(components=[
+        {'id': 'ldap-1', 'providerId': 'ldap'},
+        {'id': 'ldap-2', 'providerId': 'ldap'}])
+    admin.sync_users.side_effect = [
+        {'added': 0, 'updated': 0, 'removed': 0, 'failed': 3},
+        {'added': 0, 'updated': 1, 'removed': 0, 'failed': 0}]
+    with guards[0], guards[1], guards[2], guards[3]:
+        assert ks.propagate_ldap_changes_to_keycloak('payment') is False
+    assert admin.sync_users.call_count == 2
+
+
+@pytest.mark.parametrize("result, failed", [
+    ({'added': 1, 'updated': 2, 'removed': 0, 'failed': 0}, False),
+    ({'failed': 1}, True),
+    ({'failed': '2'}, True),
+    ({'failed': 'many'}, True),
+    ({'status': 'FAILED: LDAP unreachable'}, True),
+    ({'status': 'error'}, True),
+    ({'status': '2 imported users, 0 updated users'}, False),
+    ({}, False),
+    (None, False),
+    ('done', False),
+])
+def test_sync_failed_reads_the_keycloak_counters(result, failed):
+    assert ks.sync_failed(result) is failed
+
+
 def test_a_refused_or_unreachable_keycloak_never_raises_and_forgets_the_cache():
     admin, guards = _wire(sync_error=RuntimeError('401 unauthorized'))
     with guards[0], guards[1], guards[2], guards[3]:

@@ -24,6 +24,22 @@
 - The most telling red: `test_the_script_login_posts_the_login_page_token_with_the_origin` and, on the wire, `test_a_bare_login_post_is_refused_by_the_csrf_guard` (400 "Bad CSRF token"); without an `Origin` header over HTTPS, 400 "Bad CSRF Origin", verified by a WebTest probe on 24 October.
 - Full suite, ruff, bandit: see the train's commit message.
 
+## Second pass (same day) — PHP 0.4 and train 0117 re-read
+
+The auditor validates the syntax of PHP 0.4 (PHP 8.4.24), the architecture, the CSRF sequence and the new `success`/`partial` contract, and raises six new points.
+
+| Ref. | Finding | Priority | Disposition |
+|---|---|---|---|
+| P1 | Under PHP 8, `curl_close()` is a no-op: the cookie jar is rewritten when the handle is destroyed, after the `unlink` | High | **Fixed** (PHP 0.4.1): `unset($curl)` before the removal, cleanup in a `finally` that wraps `initCurl`, file removed when `chmod` fails |
+| P2 | `assertStayedOnPortal` checked after redirects had been followed; an external 307 would have replayed the credentials POST | High | **Fixed** (PHP 0.4.1): no automatic following at all; the login POST's 302 is recognised without being followed, any other 3xx is an error; scheme, host and port compared; HTTP refused unless `--allow-http` |
+| P3 | The client accepted a `success` without indicators, or one contradicted by `groups_sync: error` | High | **Fixed** in both clients: `financial_update`, `groups_sync`, `keycloak_sync` and a `groups` list required |
+| P4 | `ctype_digit` then `(int)` silently saturated at `PHP_INT_MAX` | Medium | **Fixed** in both clients: business ceiling of one million shares, overflow refused |
+| P5 | `sync_member_groups` answered the target even when a membership write had failed: `groups_sync: success` wrongly | Critical | **Fixed** (train 0119): every `_checked_modify` failure is remembered, the function answers `None`; tests on refused grant, refused revocation and exception |
+| P6 | `propagate_ldap_changes_to_keycloak` answered `True` without reading the `failed` counter of the `SynchronizationResult` | Critical | **Fixed** (train 0119): `sync_failed` reads `failed` and `status`; a failing provider makes the propagation false, the others are still synchronised |
+
+Limit recalled by the auditor and kept: a successful propagation proves the mechanism ran, not that every application has already refreshed its rights.
+
 ## Log
 
 - 2026-10-24: audit received, A2 verified in `utils.py`, `dynamic_groups.py` and `views/update_contribution.py` (confirmed), train 0117 and PHP script version 0.4 executed, this note filed.
+- 2026-10-24 (second pass): P5 and P6 confirmed by reading, train 0119 and PHP 0.4.1.

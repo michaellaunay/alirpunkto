@@ -95,7 +95,12 @@ Ce que le fil exige, et ce que fait le script :
 **Le code de sortie 0 signifie, et signifie seulement** : les faits sont
 dans l'annuaire avec les valeurs demandées (OID et valeurs vérifiés dans
 la réponse), les groupes dynamiques sont convergés et le changement a
-atteint Keycloak. Tout refus, écart ou réponse `partial` sort en 1 avec
+atteint Keycloak — le client exige que `financial_update`, `groups_sync`
+et `keycloak_sync` le disent et que `groups` soit une liste ; un simple
+`success` n'est pas cru. Côté serveur, ces indicateurs sont honnêtes
+depuis le train 0119 : une écriture d'appartenance refusée fait répondre
+le synchroniseur de groupes en échec, et un `SynchronizationResult`
+Keycloak avec `failed > 0` n'est pas une propagation. Tout refus, écart ou réponse `partial` sort en 1 avec
 le motif du portail — un encaissement qui n'a pas restauré les droits ne
 doit jamais passer inaperçu. Un appel qui ne demande aucun changement
 est aussi une erreur, jamais une sortie 0 silencieuse ; `--base_url`

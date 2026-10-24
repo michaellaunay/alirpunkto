@@ -110,7 +110,11 @@ def test_the_init_script_no_longer_touches_passwords_at_all():
 # ----------------------- D. checked group modifies ------------------------- #
 def test_a_failed_modify_is_logged_and_the_sync_continues(caplog):
     """One failing side of the pair is logged with its operation id and
-    the sync keeps applying the rest (best-effort preserved)."""
+    the sync keeps applying the rest (best-effort preserved). Since the
+    external audit of 2026-10-24 (second pass, P5) the call then SAYS it
+    did not converge — None — instead of handing back the target as if
+    every write had landed; "did not abort" is proven by the call count
+    and the directory, not by the return value."""
     from datetime import date, timedelta
     from tests.test_dynamic_groups import _directory, _add_member
     conn = _directory()
@@ -136,4 +140,5 @@ def test_a_failed_modify_is_logged_and_the_sync_continues(caplog):
             MagicMock(), 'member-1')
     assert 'group side' in caplog.text        # the failure, identified
     assert calls['n'] >= 2                    # best-effort: kept going
-    assert result is not None                 # the sync did not abort
+    assert 'did NOT converge' in caplog.text  # ... and said so (P5)
+    assert result is None                     # a failed write is a failure
