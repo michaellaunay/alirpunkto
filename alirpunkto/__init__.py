@@ -45,6 +45,7 @@ from .constants_and_globals import (
     VERIFIER_REMINDER_MIN_INTERVAL_SECONDS,
 )
 from .secret_manager import get_secret
+from .keycloak_client_check import assert_pkce_capable_client
 
 _reminder_lock = threading.Lock()
 _reminder_last_run = 0.0
@@ -273,6 +274,9 @@ def resolve_mail_sender(settings) -> str:
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
+    # An environment behind the lock must fail here, with one explicit
+    # journal line, not at the first click on Login (2026-10-30).
+    assert_pkce_capable_client()
     with Configurator(settings=settings) as config:
         hash_object = hashlib.sha256()
         hash_object.update(get_secret(SECRET_KEY).encode('utf-8'))

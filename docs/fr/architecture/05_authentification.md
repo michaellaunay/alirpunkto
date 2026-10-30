@@ -32,6 +32,18 @@ sequenceDiagram
     A-->>N: session + cookie auth (remember)
 ```
 
+Le flux OIDC est lié à la session qui l'a lancé (`state` à usage unique,
+vérificateur PKCE S256 ; audit transversal du 24 octobre 2026, A04). Il
+exige python-keycloak 7.1.1, la version que `pyproject.toml` demande et que
+`requirements.lock` épingle. Incident de production du 30 octobre 2026 :
+un venv resté sur une version plus ancienne (sans paramètre
+`code_challenge`) démarrait normalement et répondait 500 à chaque clic sur
+« Se connecter ». Depuis le train 0126, `main()` commence par
+`assert_pkce_capable_client()` (`alirpunkto/keycloak_client_check.py`) :
+une bibliothèque incapable de PKCE arrête le démarrage avec une ligne
+CRITICAL explicite dans le journal (version installée, version requise,
+commande de réinstallation depuis le lock).
+
 ## Contenu de session
 
 La session est un **cookie signé** (`SignedCookieSessionFactory`, `httponly`,
