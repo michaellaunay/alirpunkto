@@ -283,6 +283,9 @@ def main(global_config, **settings):
         config.set_default_csrf_options(require_csrf=True)
 
         config.include('pyramid_chameleon')
+        # Request trace and last-resort exception log, outermost tween
+        # (production diagnosis of 2026-10-30, see request_log.py).
+        config.include('.request_log')
         config.include('pyramid_tm')
         config.include('pyramid_retry')
         config.include('pyramid_zodbconn')

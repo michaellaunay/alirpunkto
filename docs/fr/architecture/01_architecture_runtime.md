@@ -29,7 +29,44 @@ La configuration est centralisée dans `alirpunkto/__init__.py` :
 - `config.set_default_csrf_options(require_csrf=True)` impose la protection
   CSRF à toutes les vues ;
 - un abonné `BeforeRender` (`add_renderer_globals`) injecte les globales de
-  gabarit.
+  gabarit ;
+- `alirpunkto.request_log` installe le tween le plus externe de la chaîne
+  (sous `INGRESS`, au-dessus de `pyramid_tm` et des vues d'exception) :
+  trace de chaque requête et de chaque réponse, et journalisation, avec
+  trace d'appel, de toute exception qui s'échappe de la pile (voir
+  ci-dessous).
+
+## Journalisation
+
+Les fichiers `.ini` séparent deux flux :
+
+- le logger `alirpunkto` (`propagate = 0`) écrit dans
+  `var/log/alirpunkto.log` ; il ne voit que ce que l'application émet ;
+- le logger racine écrit sur `stderr`, c'est-à-dire dans le journal de
+  `systemd` (`journalctl -u alirpunkto`) sur un serveur nu, ou dans
+  `docker logs` dans la pile Docker. C'est là que Waitress signale, sur son
+  propre logger, une exception qui s'échappe de la pile (« Exception while
+  serving … »).
+
+Diagnostic de production du 30 octobre 2026 : un clic sur « Se connecter »
+répondait *Internal Server Error* et le fichier de l'application restait
+vide malgré le niveau `DEBUG` — la trace d'appel n'était que dans le
+journal, et aucune vue ne journalisait la requête. Le tween
+`alirpunkto.request_log` donne désormais au fichier de l'application
+l'histoire complète d'une navigation :
+
+| Événement | Niveau | Ligne |
+|---|---|---|
+| Entrée d'une requête | DEBUG | `request GET /sso_login?code,state from 203.0.113.5` |
+| Réponse rendue | DEBUG (WARNING pour un 5xx construit par la pile) | `response … -> 302 Found route=sso_login user=alice in 12 ms` |
+| Exception qui s'échappe | ERROR, avec la trace d'appel | `unhandled TypeError on GET /sso_login from … after 3 ms: …` |
+
+La chaîne de requête n'est journalisée que par les **noms** de ses
+paramètres (un `code` SSO, un lien `oid` chiffré, un `state` ne sont jamais
+copiés — audit transversal du 24 octobre 2026, A12). Le pseudonyme n'est lu
+que si la vue a elle-même ouvert la session : le tween n'en ouvre jamais
+une (une session à cookie signé est réémise à chaque accès). L'exception est
+relancée telle quelle après journalisation : Waitress la voit toujours.
 
 ## Routes
 

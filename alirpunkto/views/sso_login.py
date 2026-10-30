@@ -120,6 +120,8 @@ def sso_login_view(request):
         code_challenge=challenge,
         code_challenge_method='S256',
     )
+    log.debug("sso departure armed for realm %s, redirecting to %s",
+              KEYCLOAK_REALM, auth_url.split('?', 1)[0])
     return HTTPFound(location=auth_url)
 
 
@@ -226,7 +228,9 @@ def callback_view(request):
         log.warning(f"Invalid sso token: {err}")
         logout(request)
     except Exception as e:
-        log.error(f"Error during sso authentication {e}")
+        # With the traceback: the bare message hid WHERE the exchange
+        # broke (production diagnosis of 2026-10-30).
+        log.exception("Error during sso authentication: %s", e)
         logout(request)
 
     return HTTPFound(location='/')
