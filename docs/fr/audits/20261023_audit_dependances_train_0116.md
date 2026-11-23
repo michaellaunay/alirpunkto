@@ -44,7 +44,22 @@ Le workflow `quality` est retombé au rouge sur `34a224f7` et `38dedcf7` : deux 
 
 `AGENTS.md` cite la nouvelle commande verbatim (`tests/test_agent_harness.py` l'exige) et un test vérifie que chaque ignore porte sa date de revue.
 
+## 6. Suivi du 23 novembre — train 0127
+
+Le workflow `quality` est rouge depuis `dda6b466` et `636eddc2` (30 octobre) sur le seul `pip-audit` ; `Tests`, `smoke` et `test-stack` sont verts. Neuf avis sur trois paquets, tous publiés après le calcul des verrous 0118.
+
+| Paquet | Épingle | Avis | Correctif | Décision |
+|---|---|---|---|---|
+| pyasn1 | 0.6.4 (trois verrous — runtime, via ldap3) | CVE-2026-119194 / 119195 / 119196 / 119197 (temps CPU quadratique dans quatre chemins du décodeur : conteneurs sans schéma à nombreux identifiants de tag longs, OCTET et BIT STRING fragmentés, REAL à grande mantisse) | 0.6.5 | **0.6.5** |
+| soupsieve | 2.9.2 (verrou de test seul, via beautifulsoup4 sous WebTest) | CVE-2026-126190 / 126191 / 126192 / 126193 (temps polynomial ou exponentiel, ou récursion non bornée, sur des sélecteurs hostiles ou des documents très imbriqués) | 4.0.0 pour le dernier | **4.1.3** ; beautifulsoup4 4.15.0 l'accepte sans changement |
+| msgpack | 1.2.2 (verrou qualité seul, via cachecontrol sous pip-audit) | CVE-2026-114613 (l'extension C laisse fuir une valeur de dictionnaire décodée par clé refusée) | 1.2.3 | **1.2.4** |
+
+Exposition réelle : pyasn1 est le seul paquet runtime — ldap3 décode avec lui les réponses de l'annuaire, pair de confiance sur le réseau interne ; soupsieve et msgpack n'atteignent jamais l'image de production. `pip-compile --upgrade-package` par verrou, amorcé avec le précédent : le diff ne contient que ces épingles et leurs empreintes ; le verrou e2e ne porte aucun des trois. `tests/test_november_2026_cve_floors.py` verrouille un plancher par paquet et par verrou (rouge sur les verrous précédents : 5 échecs) et un aller-retour BER d'une requête bind ldap3 sur le pyasn1 relevé. Aucune borne de `pyproject.toml` n'a changé, aucun nouvel ignore.
+
+Le venv de production sur kuneagi01 n'est pas reconstruit par le déploiement : le réinstaller depuis `requirements.lock` avec `--require-hashes` pour recevoir pyasn1 0.6.5.
+
 ## Journal
 
 - 2026-10-23 : diagnostic des deux runs rouges, relevé des trois épingles, test de verrouillage, versement de cette note.
 - 2026-10-24 : suivi (§5) — filelock relevé dans le verrou qualité, second ignore setuptools daté, train 0118.
+- 2026-11-23 : suivi (§6) — pyasn1, soupsieve et msgpack relevés, test de plancher de novembre, train 0127.

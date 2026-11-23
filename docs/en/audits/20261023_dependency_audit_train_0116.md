@@ -44,7 +44,22 @@ The `quality` workflow went red again on `34a224f7` and `38dedcf7`: two new advi
 
 `AGENTS.md` quotes the new command verbatim (`tests/test_agent_harness.py` requires it) and a test checks that each ignore carries its review date.
 
+## 6. Follow-up of 23 November — train 0127
+
+The `quality` workflow has been red since `dda6b466` and `636eddc2` (30 October) on `pip-audit` alone; `Tests`, `smoke` and `test-stack` are green. Nine advisories on three packages, all published after the 0118 locks were computed.
+
+| Package | Pin | Advisory | Fix | Decision |
+|---|---|---|---|---|
+| pyasn1 | 0.6.4 (three locks — runtime, via ldap3) | CVE-2026-119194 / 119195 / 119196 / 119197 (quadratic CPU time in four decoder paths: schemaless containers with many long tag IDs, fragmented OCTET and BIT STRINGs, REAL with a large mantissa) | 0.6.5 | **0.6.5** |
+| soupsieve | 2.9.2 (test lock only, via beautifulsoup4 under WebTest) | CVE-2026-126190 / 126191 / 126192 / 126193 (polynomial or exponential time, or unbounded recursion, on hostile selectors or deeply nested documents) | 4.0.0 for the last one | **4.1.3**; beautifulsoup4 4.15.0 accepts it unchanged |
+| msgpack | 1.2.2 (quality lock only, via cachecontrol under pip-audit) | CVE-2026-114613 (the C extension leaks a decoded map value per rejected key) | 1.2.3 | **1.2.4** |
+
+Actual exposure: pyasn1 is the only runtime package — ldap3 decodes the directory's answers with it, and the directory is a trusted peer on the internal network; soupsieve and msgpack never reach the production image. `pip-compile --upgrade-package` per lock, seeded with the previous one: the diff holds only these pins and their hashes; the e2e lock carries none of the three. `tests/test_november_2026_cve_floors.py` locks one floor per package per lock (red on the previous locks: 5 failures) and a BER round trip of an ldap3 bind request on the raised pyasn1. No bound of `pyproject.toml` changed, no new ignore.
+
+The production venv on kuneagi01 is not rebuilt by the deployment: reinstall it from `requirements.lock` with `--require-hashes` to receive pyasn1 0.6.5.
+
 ## Log
 
 - 2026-10-23: diagnosis of the two red runs, three pins raised, lock test, filing of this note.
 - 2026-10-24: follow-up (§5) — filelock raised in the quality lock, second dated setuptools ignore, train 0118.
+- 2026-11-23: follow-up (§6) — pyasn1, soupsieve and msgpack raised, November floor test, train 0127.
