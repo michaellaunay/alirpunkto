@@ -100,6 +100,8 @@ def _population(conn):
     _add_member(conn, 'cy', mtype='ORDINARY')
     # resigned: must stay out of everything
     _add_member(conn, 'dee', active='False', shares=1, end=VALID)
+    conn.modify(member_dn('dee'), {'dateErasureAllData': [
+        (MODIFY_REPLACE, ['2027-01-01T12:00:00'])]})
 
 
 def test_a_dry_run_writes_nothing(tmp_path, capsys):
@@ -207,7 +209,7 @@ def test_a_failed_convergence_is_a_failed_run(tmp_path, capsys):
     conn = _directory()
     _population(conn)
     members = tool.read_members(conn)
-    dates, _moves, _notes = tool.build_plan(
+    dates, _reactivations, _moves, _notes = tool.build_plan(
         members, [('user-ada', date(2027, 9, 8))], today=TODAY)
 
     failures = tool.apply_plan(
@@ -215,3 +217,86 @@ def test_a_failed_convergence_is_a_failed_run(tmp_path, capsys):
         sync=lambda request, oid: None if oid == 'bob' else {COMMUNITY})
 
     assert failures == ["groups of bob (user-bob) did not converge"]
+
+
+# ----------------------------- the reactivation ---------------------------- #
+def _founders(conn):
+    """The production state behind issue #272: founding members imported
+    with ``isActive: FALSE`` and never activated — one renewed in the
+    shop, one lapsed — next to a member who really resigned."""
+    _add_member(conn, 'gus', active='FALSE', shares=25, end=EXPIRED)
+    _add_member(conn, 'hal', active='FALSE', shares=5, end=EXPIRED)
+    _add_member(conn, 'dee', active='False', shares=1, end=VALID)
+    conn.modify(member_dn('dee'), {'dateErasureAllData': [
+        (MODIFY_REPLACE, ['2027-01-01T12:00:00'])]})
+
+
+def _is_active(conn, oid):
+    conn.search(member_dn(oid), '(objectclass=*)', attributes=['isActive'])
+    return str(dg.entry_values(conn.entries[0], 'isActive')[0])
+
+
+def test_without_the_option_the_dormant_members_are_pointed_out(
+        tmp_path, capsys):
+    conn = _directory()
+    _founders(conn)
+
+    assert _run(conn, _csv(tmp_path, "user-gus,2027-09-08\n"),
+                '--apply') == 0
+
+    assert _is_active(conn, 'gus') == 'FALSE'
+    assert _groups_of(conn, 'gus') == set()
+    out = capsys.readouterr().out
+    assert "2 member(s) are inactive without having resigned" in out
+    assert "user-gus, user-hal" in out
+    assert "never activated; see --reactivate" in out
+
+
+def test_a_dry_run_lists_the_reactivations_and_writes_nothing(
+        tmp_path, capsys):
+    conn = _directory()
+    _founders(conn)
+
+    assert _run(conn, _csv(tmp_path, "user-gus,2027-09-08\n"),
+                '--reactivate') == 0
+
+    assert _is_active(conn, 'gus') == 'FALSE'
+    out = capsys.readouterr().out
+    assert "2 member(s) to reactivate" in out
+    assert "2 member(s) whose groups move" in out
+    assert "will NOT be in" not in out
+
+
+def test_the_never_activated_come_back_and_the_resigned_do_not(
+        tmp_path, capsys):
+    conn = _directory()
+    _founders(conn)
+
+    assert _run(conn, _csv(tmp_path, "user-gus,2027-09-08\n"),
+                '--reactivate', '--apply') == 0
+
+    assert _is_active(conn, 'gus') == 'TRUE'
+    assert _is_active(conn, 'hal') == 'TRUE'
+    assert _groups_of(conn, 'gus') == {COMMUNITY, COOPERATORS}
+    assert _groups_of(conn, 'hal') == {COMMUNITY, MISSING_YEAR}
+    assert _is_active(conn, 'dee') == 'False'
+    assert _groups_of(conn, 'dee') == set()
+    assert "2 member(s) reactivated" in capsys.readouterr().out
+
+
+def test_a_refused_reactivation_is_a_failure_and_grants_nothing():
+    conn = _directory()
+    _founders(conn)
+    members = tool.read_members(conn)
+    dates, reactivations, _moves, _notes = tool.build_plan(
+        members, [('user-gus', date(2027, 9, 8))], today=TODAY,
+        reactivate=True)
+    synced = []
+
+    with patch.object(conn, 'modify', return_value=False):
+        failures = tool.apply_plan(
+            conn, members, dates, reactivations,
+            sync=lambda request, oid: synced.append(oid) or {COMMUNITY})
+
+    assert len(failures) == 3  # one date, two reactivations
+    assert synced == []

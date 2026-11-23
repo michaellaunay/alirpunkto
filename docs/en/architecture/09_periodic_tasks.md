@@ -130,7 +130,16 @@ write (exit 2); a date earlier than the one the directory holds is kept
 unless `--allow-earlier`; a listed member who will still not be a
 Cooperator (no share, `isActive` down, sanction) is pointed out. Exit 1
 means a write or a convergence failed: the run is idempotent, run it
-again. The list holds members' pseudonyms: keep it out of the repository
+again.
+
+`--reactivate` also puts `isActive` back to true on every Ordinary
+Member or Cooperator — listed or not — who is inactive **without having
+resigned**. That was the production cause of #272: the founding members
+had been imported with `isActive: FALSE` (`tools/cooperator_csv_to_ldif.py`)
+and never activated, so the application treated them as resigned —
+no group, no login — whatever they paid. A resignation always records
+`dateErasureAllData`; an entry carrying one is never reactivated.
+Without the option the run only names these members. The list holds members' pseudonyms: keep it out of the repository
 (the gitignored `tmp/`).
 
 ## Known limits and envisaged evolution

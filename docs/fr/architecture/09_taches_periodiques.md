@@ -134,7 +134,17 @@ Coopérateur, ou plusieurs, arrête tout avant la moindre écriture
 `--allow-earlier` ; un membre listé qui ne sera malgré tout pas
 Coopérateur (aucune part, `isActive` à faux, sanction) est signalé. Le
 code 1 signifie qu'une écriture ou une convergence a échoué : le passage
-est idempotent, il suffit de le relancer. La liste contient des
+est idempotent, il suffit de le relancer.
+
+`--reactivate` remet en plus `isActive` à vrai sur tout Membre ordinaire
+ou Coopérateur — listé ou non — inactif **sans avoir démissionné**.
+C'était la cause en production du #272 : les membres fondateurs avaient
+été importés avec `isActive: FALSE` (`tools/cooperator_csv_to_ldif.py`)
+et jamais activés, l'application les traitait donc comme démissionnaires
+— aucun groupe, aucune connexion — quoi qu'ils aient payé. Une démission
+enregistre toujours `dateErasureAllData` ; une entrée qui en porte une
+n'est jamais réactivée. Sans l'option, le passage se contente de nommer
+ces membres. La liste contient des
 pseudonymes de membres : elle reste hors du dépôt (le `tmp/` ignoré par
 git).
 

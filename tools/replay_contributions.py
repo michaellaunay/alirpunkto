@@ -29,6 +29,14 @@ lines starting with ``#`` are ignored:
     pseudonym,date_end_validity_yearly_contribution
     SomePseudonym,2027-09-08
 
+``--reactivate`` also puts ``isActive`` back to true on every Ordinary
+Member or Cooperator of the directory — listed or not — who is inactive
+WITHOUT having resigned: the founding members were imported with
+``isActive: FALSE`` and never activated, so the application treated
+them as resigned and kept them out of every group. A resignation always
+records ``dateErasureAllData``; an entry carrying one is never
+reactivated.
+
 Without ``--apply`` nothing is written: the tool prints what it WOULD
 do — every date to write and every member whose groups would move —
 so the plan can be read before it is run. A pseudonym that matches no
@@ -40,6 +48,7 @@ was drawn up must not be undone.
 Usage:
     .venv/bin/python tools/replay_contributions.py renewals.csv
     .venv/bin/python tools/replay_contributions.py renewals.csv --apply
+    .venv/bin/python tools/replay_contributions.py renewals.csv --reactivate --apply
 
 Exit code 0: the plan is consistent (dry run), or every write landed
 and every member converged (``--apply``). 1: at least one write or
@@ -140,9 +149,11 @@ def read_renewals(path: Path) -> list[tuple[str, date]]:
 
 def read_members(conn) -> list[dict]:
     """Every entry of the directory carrying a ``uid``, with its
-    pseudonym and the facts of the truth table."""
+    pseudonym, the facts of the truth table and ``resigned`` — true
+    when the entry carries the erasure date every resignation records."""
     conn.search(LDAP_BASE_DN, '(uid=*)',
-                attributes=['uid', 'cn', *MEMBER_FACT_ATTRIBUTES])
+                attributes=['uid', 'cn', 'dateErasureAllData',
+                            *MEMBER_FACT_ATTRIBUTES])
     members = []
     for entry in conn.entries:
         uid = dynamic_groups.entry_values(entry, 'uid')
@@ -152,6 +163,8 @@ def read_members(conn) -> list[dict]:
         members.append({
             'oid': str(uid[0]),
             'pseudonym': str(pseudonym[0]) if pseudonym else '',
+            'resigned': bool(dynamic_groups.entry_values(
+                entry, 'dateErasureAllData')),
             **member_facts(entry),
         })
     return members
@@ -161,12 +174,21 @@ def _as_date(value):
     return value.date() if isinstance(value, datetime) else value
 
 
-def build_plan(members, renewals, *, today=None, allow_earlier=False):
+def never_activated(member) -> bool:
+    """An in-scope member who is inactive without having resigned."""
+    return (member['employee_type'] in IN_SCOPE
+            and not member['is_active'] and not member['resigned'])
+
+
+def build_plan(members, renewals, *, today=None, allow_earlier=False,
+               reactivate=False):
     """What a run would do, without touching anything.
 
-    Returns ``(dates, moves, notes)``: ``dates`` maps the oid of each
-    listed Cooperator to the date to write (only when it differs from
-    the directory), ``moves`` lists ``(member, current, target)`` for
+    Returns ``(dates, reactivations, moves, notes)``: ``dates`` maps
+    the oid of each listed Cooperator to the date to write (only when
+    it differs from the directory), ``reactivations`` lists the members
+    whose ``isActive`` would be put back to true (empty unless
+    ``reactivate``), ``moves`` lists ``(member, current, target)`` for
     every in-scope member whose managed groups would change, ``notes``
     are remarks worth a human eye. Raises :class:`UnusableList` when a
     pseudonym cannot be resolved to exactly one Cooperator."""
@@ -211,38 +233,70 @@ def build_plan(members, renewals, *, today=None, allow_earlier=False):
     if problems:
         raise UnusableList('; '.join(problems))
 
+    dormant = [member for member in members if never_activated(member)]
+    reactivations = dormant if reactivate else []
+    if dormant and not reactivate:
+        notes.append(
+            f"{len(dormant)} member(s) are inactive without having "
+            f"resigned and stay out of every group "
+            f"({', '.join(sorted(m['pseudonym'] for m in dormant))}); "
+            "--reactivate to put them back")
+    revived = {member['oid'] for member in reactivations}
+
     managed = set(MANAGED_GROUPS)
     moves = []
     for member in members:
         if member['employee_type'] not in IN_SCOPE:
             continue
         current = member['member_side'] & managed
+        active = member['is_active'] or member['oid'] in revived
         target = compute_target_groups(
-            member['employee_type'], member['is_active'], member['shares'],
+            member['employee_type'], active, member['shares'],
             planned_end.get(member['oid'], member['end']), current, today)
         if target != current:
             moves.append((member, current, target))
         if member['oid'] in listed and COOPERATORS not in (target or ()):
             notes.append(
                 f"{member['pseudonym']}: will NOT be in {COOPERATORS} "
-                f"despite the renewal — {_why_not_cooperator(member)}")
-    return dates, moves, notes
+                f"despite the renewal — "
+                f"{_why_not_cooperator(member, active)}")
+    return dates, reactivations, moves, notes
 
 
-def _why_not_cooperator(member) -> str:
-    if not member['is_active']:
-        return "isActive is false (resigned or never activated)"
+def _why_not_cooperator(member, active) -> str:
+    if not active:
+        if member['resigned']:
+            return ("isActive is false and the entry carries an erasure "
+                    "date: the member resigned")
+        return "isActive is false (never activated; see --reactivate)"
     shares = member['shares']
     if not shares or float(shares) <= 0:
         return "numberSharesOwned is 0 or absent"
     return "sanctioned, or the date is already in the past"
 
 
-def apply_plan(conn, members, dates, *, sync=None) -> list[str]:
-    """Write the dates, then converge the groups of every in-scope
-    member. Returns the failures, empty when everything landed."""
+def apply_plan(conn, members, dates, reactivations=(), *,
+               sync=None) -> list[str]:
+    """Write the dates and the reactivations, then converge the groups
+    of every in-scope member. Returns the failures, empty when
+    everything landed."""
     sync = sync or dynamic_groups.sync_member_groups
     failures = []
+    active_again = set()
+    for member in reactivations:
+        try:
+            written = conn.modify(
+                dynamic_groups.member_dn(member['oid']),
+                {'isActive': [(MODIFY_REPLACE, ['TRUE'])]})
+        except Exception as exc:
+            written = False
+            print(f"[replay] ERROR reactivating {member['oid']}: {exc}")
+        if written:
+            active_again.add(member['oid'])
+        else:
+            failures.append(
+                f"{member['oid']} ({member['pseudonym']}) not "
+                f"reactivated: {getattr(conn, 'result', None)}")
     for oid, end in sorted(dates.items()):
         value = datetime.strptime(
             end.strftime(DATE_FORMAT) + LDAP_DEFAULT_HOUR, LDAP_TIME_FORMAT)
@@ -260,8 +314,9 @@ def apply_plan(conn, members, dates, *, sync=None) -> list[str]:
     for member in members:
         if member['employee_type'] not in IN_SCOPE:
             continue
-        if not member['is_active'] and not member['member_side'] & managed:
-            continue  # resigned and already out of every group
+        active = member['is_active'] or member['oid'] in active_again
+        if not active and not member['member_side'] & managed:
+            continue  # inactive and already out of every group
         if sync(None, member['oid']) is None:
             failures.append(f"groups of {member['oid']} "
                             f"({member['pseudonym']}) did not converge")
@@ -272,7 +327,7 @@ def _names(groups) -> str:
     return ', '.join(sorted(groups)) if groups else '(no group)'
 
 
-def print_plan(members, dates, moves, notes) -> None:
+def print_plan(members, dates, reactivations, moves, notes) -> None:
     by_oid = {member['oid']: member for member in members}
     print(f"[replay] {len(dates)} date(s) to write:")
     for oid, end in sorted(dates.items(),
@@ -280,6 +335,9 @@ def print_plan(members, dates, moves, notes) -> None:
         member = by_oid[oid]
         print(f"  {member['pseudonym']} ({oid}): "
               f"{_as_date(member['end']) or 'no date'} -> {end}")
+    print(f"[replay] {len(reactivations)} member(s) to reactivate:")
+    for member in sorted(reactivations, key=lambda m: m['pseudonym']):
+        print(f"  {member['pseudonym']} ({member['oid']})")
     print(f"[replay] {len(moves)} member(s) whose groups move:")
     for member, current, target in sorted(
             moves, key=lambda move: move[0]['pseudonym']):
@@ -299,6 +357,9 @@ def main(argv=None) -> int:
                         help="write to the directory (default: dry run)")
     parser.add_argument('--allow-earlier', action='store_true',
                         help="overwrite a later date held by the directory")
+    parser.add_argument('--reactivate', action='store_true',
+                        help="put isActive back to true on every member "
+                             "inactive without having resigned")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.WARNING)
 
@@ -312,16 +373,17 @@ def main(argv=None) -> int:
             ldap_password=get_secret(LDAP_PASSWORD)) as conn:
         members = read_members(conn)
         try:
-            dates, moves, notes = build_plan(
-                members, renewals, allow_earlier=args.allow_earlier)
+            dates, reactivations, moves, notes = build_plan(
+                members, renewals, allow_earlier=args.allow_earlier,
+                reactivate=args.reactivate)
         except UnusableList as exc:
             print(f"[replay] unusable list: {exc}")
             return 2
-        print_plan(members, dates, moves, notes)
+        print_plan(members, dates, reactivations, moves, notes)
         if not args.apply:
             print("[replay] dry run: nothing written (--apply to run it)")
             return 0
-        failures = apply_plan(conn, members, dates)
+        failures = apply_plan(conn, members, dates, reactivations)
 
     from alirpunkto import keycloak_sync
     from alirpunkto.utils import notify_keycloak_of_directory_change
@@ -335,6 +397,7 @@ def main(argv=None) -> int:
     for failure in failures:
         print(f"[replay] FAILED {failure}")
     print(f"[replay] done: {len(dates)} date(s) written, "
+          f"{len(reactivations)} member(s) reactivated, "
           f"{len(moves)} member(s) moved, {len(failures)} failure(s)")
     return 1 if failures else 0
 
