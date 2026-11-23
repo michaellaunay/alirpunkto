@@ -73,9 +73,15 @@ Chaque passage (`run_daily_maintenance`) :
    ZODB** (paramètre `members=`) sans relier le singleton `Members`, qui
    appartient aux fils de requêtes, et valide sa transaction lui-même ;
 2. **scan des groupes dynamiques** — `dynamic_groups.daily_group_scan`
-   re-synchronise tous les membres des groupes gérés : c'est lui qui
-   transforme le **temps calendaire** (cotisation annuelle échue ou
-   renouvelée) en transitions (#148) ;
+   re-synchronise tous les membres des groupes gérés **et tout Membre
+   ordinaire ou Coopérateur actif de l'annuaire, même si aucun groupe ne
+   le recense** (#272) : c'est lui qui transforme le **temps
+   calendaire** (cotisation annuelle échue ou renouvelée) en transitions
+   (#148). Être dans un groupe était jusque-là la seule façon d'être
+   scanné : un membre qui les avait tous perdus — révocation passée
+   alors que l'attribution était refusée, annuaire rechargé sans ses
+   appartenances — n'était jamais réparé, et ne gardait aucun droit sur
+   la plateforme, pas même celui de payer sa cotisation ;
 3. **propagation SSO** — si au moins un membre a changé de groupe, le scan
    demande à Keycloak de ré-importer les entrées modifiées
    (`keycloak_sync.propagate_ldap_changes_to_keycloak`, voir
@@ -98,6 +104,39 @@ from alirpunkto.maintenance import run_daily_maintenance
 with bootstrap("production.ini") as env:
     print(run_daily_maintenance(env["registry"]))
 ```
+
+## Rejouer des cotisations annuelles (#272)
+
+Quand des renouvellements facturés par la boutique en ligne n'ont jamais
+atteint l'annuaire, `tools/replay_contributions.py` les rejoue depuis une
+liste CSV et rétablit les groupes en un seul passage. Il ne parle qu'à
+l'annuaire : l'application **continue de tourner** ; le profil en cache
+de chaque membre est rafraîchi à sa prochaine connexion.
+
+```
+pseudonym,date_end_validity_yearly_contribution
+SomePseudonym,2027-09-08
+```
+
+```
+.venv/bin/python tools/replay_contributions.py renewals.csv          # à blanc
+.venv/bin/python tools/replay_contributions.py renewals.csv --apply
+```
+
+Le passage écrit chaque date dans `dateEndValidityYearlyContribution`,
+re-synchronise les groupes dynamiques de **tous** les Membres ordinaires
+et Coopérateurs actifs (les membres listés redeviennent Coopérateurs,
+les autres retrouvent `communityMembersGroup` et leur groupe de
+candidats), puis demande à Keycloak de ré-importer les changements. Sans
+`--apply`, il n'affiche que le plan. Un pseudonyme qui ne désigne aucun
+Coopérateur, ou plusieurs, arrête tout avant la moindre écriture
+(code 2) ; une date antérieure à celle de l'annuaire est conservée sauf
+`--allow-earlier` ; un membre listé qui ne sera malgré tout pas
+Coopérateur (aucune part, `isActive` à faux, sanction) est signalé. Le
+code 1 signifie qu'une écriture ou une convergence a échoué : le passage
+est idempotent, il suffit de le relancer. La liste contient des
+pseudonymes de membres : elle reste hors du dépôt (le `tmp/` ignoré par
+git).
 
 ## Limites connues et évolutions envisagées
 

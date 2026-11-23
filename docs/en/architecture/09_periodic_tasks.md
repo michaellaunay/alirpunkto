@@ -71,9 +71,15 @@ Every pass (`run_daily_maintenance`):
    singleton, which belongs to the request threads, and commits its own
    transaction;
 2. **dynamic-group scan** — `dynamic_groups.daily_group_scan`
-   re-synchronises every member of the managed groups: it is what turns
-   **calendar time** (an expired or renewed yearly contribution) into
-   transitions (#148);
+   re-synchronises every member of the managed groups **and every
+   active Ordinary Member or Cooperator of the directory, even one no
+   group records** (#272): it is what turns **calendar time** (an
+   expired or renewed yearly contribution) into transitions (#148).
+   Being in a group used to be the only way to be scanned, so a member
+   who had lost them all — a revocation that landed while the grant was
+   refused, a directory reloaded without its memberships — was never
+   repaired, and kept no right on the platform, not even the one to pay
+   the contribution;
 3. **SSO propagation** — when at least one member changed group, the scan
    asks Keycloak to re-import the changed entries
    (`keycloak_sync.propagate_ldap_changes_to_keycloak`, see
@@ -95,6 +101,37 @@ from alirpunkto.maintenance import run_daily_maintenance
 with bootstrap("production.ini") as env:
     print(run_daily_maintenance(env["registry"]))
 ```
+
+## Replaying yearly contributions (#272)
+
+When renewals invoiced by the online shop never reached the directory,
+`tools/replay_contributions.py` replays them from a CSV list and
+restores the groups in one run. It talks to the directory only, so the
+application **keeps running**; each member's cached profile is refreshed
+at their next login.
+
+```
+pseudonym,date_end_validity_yearly_contribution
+SomePseudonym,2027-09-08
+```
+
+```
+.venv/bin/python tools/replay_contributions.py renewals.csv          # dry run
+.venv/bin/python tools/replay_contributions.py renewals.csv --apply
+```
+
+The run writes each date into `dateEndValidityYearlyContribution`,
+re-synchronises the Dynamic Groups of **every** active Ordinary Member
+and Cooperator (the listed members become Cooperators again, the others
+get back `communityMembersGroup` and their candidates group), then asks
+Keycloak to re-import the changes. Without `--apply` it only prints the
+plan. A pseudonym matching no Cooperator, or several, aborts before any
+write (exit 2); a date earlier than the one the directory holds is kept
+unless `--allow-earlier`; a listed member who will still not be a
+Cooperator (no share, `isActive` down, sanction) is pointed out. Exit 1
+means a write or a convergence failed: the run is idempotent, run it
+again. The list holds members' pseudonyms: keep it out of the repository
+(the gitignored `tmp/`).
 
 ## Known limits and envisaged evolution
 

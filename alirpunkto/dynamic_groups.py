@@ -9,7 +9,10 @@ case by case against the ticket, and one idempotent applier,
 :func:`sync_member_groups`, called at every event source: successful
 registration, upgrade approval, profile update by an administrator, the
 resignation flow, and the daily scan that turns calendar time (an expired
-yearly contribution) into transitions.
+yearly contribution) into transitions. The scan walks every active
+Ordinary Member and Cooperator of the directory, whatever their current
+groups (issue #272): a member left with no group at all must be found
+again.
 
 The eleven groups of the ticket are already created at startup by
 ``alirpunkto.__init__``; ``ordinaryMembersGroup`` is the legacy name that
@@ -92,6 +95,45 @@ def _names_from_dns(dns) -> set:
         if value.startswith('cn='):
             names.add(value[3:].split(',', 1)[0])
     return names
+
+
+#: The spellings of a true ``isActive`` the directory has carried.
+TRUE_SPELLINGS = ("True", "true", "TRUE", "Y", "y", "YES", "yes", "1")
+
+#: The attributes :func:`member_facts` reads on a member entry.
+MEMBER_FACT_ATTRIBUTES = (
+    'employeeType', 'isActive', 'numberSharesOwned',
+    'dateEndValidityYearlyContribution', 'uniqueMemberOf')
+
+
+def entry_values(entry, name) -> list:
+    """The values of ``name`` on an ldap3 entry, ``[]`` when absent —
+    whether the attribute is missing from the entry (mock directory) or
+    materialised empty (real server)."""
+    try:
+        return list(getattr(entry, name).values)
+    except Exception:
+        return []
+
+
+def member_facts(entry) -> dict:
+    """The facts the truth table needs, read from one directory entry
+    fetched with :data:`MEMBER_FACT_ATTRIBUTES`: ``employee_type`` (a
+    ``MemberTypes`` or None when unknown), ``is_active``, ``shares``,
+    ``end`` (the end of validity of the yearly contribution) and
+    ``member_side`` (every group name of ``uniqueMemberOf``)."""
+    raw_type = str((entry_values(entry, 'employeeType') or [''])[0])
+    active = entry_values(entry, 'isActive')
+    shares = entry_values(entry, 'numberSharesOwned')
+    end = entry_values(entry, 'dateEndValidityYearlyContribution')
+    return {
+        'employee_type': (MemberTypes[raw_type]
+                          if raw_type in MemberTypes.__members__ else None),
+        'is_active': bool(active) and str(active[0]) in TRUE_SPELLINGS,
+        'shares': shares[0] if shares else None,
+        'end': _parse_ldap_date(end[0] if end else None),
+        'member_side': _names_from_dns(entry_values(entry, 'uniqueMemberOf')),
+    }
 
 
 def compute_target_groups(
@@ -188,26 +230,16 @@ def sync_member_groups(request, member_oid, *, today=None,
             conn.search(
                 LDAP_BASE_DN,
                 f'(uid={escape_filter_chars(member_oid)})',
-                attributes=['employeeType', 'isActive', 'numberSharesOwned',
-                            'dateEndValidityYearlyContribution',
-                            'uniqueMemberOf'])
+                attributes=list(MEMBER_FACT_ATTRIBUTES))
             if not conn.entries:
                 log.warning(f"sync_member_groups: {member_oid} not in LDAP")
                 return None
-            entry = conn.entries[0]
-            employee_type = MemberTypes[str(entry.employeeType)] \
-                if str(entry.employeeType or '') in MemberTypes.__members__ \
-                else None
-            is_active = str(entry.isActive) in (
-                "True", "true", "TRUE", "Y", "y", "YES", "yes", "1")
-            shares = entry.numberSharesOwned.value \
-                if 'numberSharesOwned' in entry else None
-            end = _parse_ldap_date(
-                entry.dateEndValidityYearlyContribution.value
-                if 'dateEndValidityYearlyContribution' in entry else None)
-            member_side = _names_from_dns(
-                entry.uniqueMemberOf.values
-                if 'uniqueMemberOf' in entry else ())
+            facts = member_facts(conn.entries[0])
+            employee_type = facts['employee_type']
+            is_active = facts['is_active']
+            shares = facts['shares']
+            end = facts['end']
+            member_side = facts['member_side']
             group_side = _group_side_groups(conn, dn)
             if (member_side & set(MANAGED_GROUPS)) != group_side:
                 log.warning(
@@ -337,7 +369,11 @@ def daily_group_scan(request, today=None):
     EITHER side of the managed relations — a member recorded only in a
     group's ``uniqueMember``, or only in their own ``uniqueMemberOf``
     (a half-applied write), is discovered and repaired too (sixth audit
-    pass, §12.3). Re-synchronises each of them; meant for a periodic
+    pass, §12.3) — and every active Ordinary Member or Cooperator of
+    the directory even when NO group records them (issue #272): being
+    in a group used to be the only way to be scanned, so a member who
+    had lost them all was never repaired.
+    Re-synchronises each of them; meant for a periodic
     caller (cron / console script), alongside purge_unsubscribed_members.
     Returns the oids whose groups changed."""
     changed = []
@@ -346,7 +382,7 @@ def daily_group_scan(request, today=None):
         with get_ldap_connection(ldap_user=LDAP_USER,
                 ldap_password=get_secret(LDAP_PASSWORD)) as conn:
             _collect_group_members(conn, seen)
-            _collect_member_side_members(conn, seen)
+            _collect_member_entries(conn, seen)
     except Exception as e:
         log.error(f"daily_group_scan: cannot read the groups: {e}")
         return changed
@@ -390,25 +426,32 @@ def _collect_group_members(conn, seen):
             if value.startswith('uid='):
                 seen.add(value[4:].split(',', 1)[0])
 
-def _collect_member_side_members(conn, seen):
+def _collect_member_entries(conn, seen):
     """Members whose own ``uniqueMemberOf`` names a managed group — the
-    member side of the relation. Filtering is done client-side so the
-    scan works against directories (and the test mock) regardless of
-    their support for extensible matching on DN-valued attributes."""
+    member side of the relation — and, since issue #272, every active
+    Ordinary Member or Cooperator even without any group: a member who
+    lost all their groups must not become invisible to the scan.
+    Resigned members (``isActive`` down, no group left) and the types
+    outside the Dynamic Groups are not collected. Filtering is done
+    client-side so the scan works against directories (and the test
+    mock) regardless of their support for extensible matching on
+    DN-valued attributes."""
     try:
         conn.search(LDAP_BASE_DN, '(objectClass=*)',
-                    attributes=['uid', 'uniqueMemberOf'])
+                    attributes=['uid', *MEMBER_FACT_ATTRIBUTES])
     except Exception as e:
         log.warning(f"daily_group_scan: cannot read the member side: {e}")
         return
-    managed_dns = {group_dn(name) for name in MANAGED_GROUPS}
+    managed = set(MANAGED_GROUPS)
     for entry in conn.entries:
-        values = (entry.uniqueMemberOf.values
-                  if 'uniqueMemberOf' in entry else ())
-        if not managed_dns & {str(value) for value in values}:
+        uid = entry_values(entry, 'uid')
+        if not uid or not uid[0]:
             continue
-        if 'uid' in entry and entry.uid.value:
-            seen.add(str(entry.uid.value))
+        facts = member_facts(entry)
+        in_scope = facts['is_active'] and facts['employee_type'] in (
+            MemberTypes.ORDINARY, MemberTypes.COOPERATOR)
+        if facts['member_side'] & managed or in_scope:
+            seen.add(str(uid[0]))
 
 
 def get_member_groups(member_oid):
